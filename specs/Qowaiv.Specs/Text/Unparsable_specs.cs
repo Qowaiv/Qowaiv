@@ -18,3 +18,17 @@ public class Communicates
             });
     }
 }
+
+public class Is_serializable
+{
+    internal static readonly Exception Exception = Unparsable.ForValue<int>("fourty-two", "Not a number,").InnerException!;
+
+    [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
+    public void Binary()
+    {
+        var roundtrip = SerializeDeserialize.Binary(Exception);
+        roundtrip.Should().NotBeSameAs(Exception)
+            .And.Subject.Should().BeEquivalentTo(Exception);
+    }
+}

@@ -4,20 +4,24 @@
 /// <remarks>
 /// This child type allows to specify the string value and the target type involved.
 /// </remarks>
+[Serializable]
 public class Unparsable : FormatException
 {
     /// <summary>Initializes a new instance of the <see cref="Unparsable"/> class.</summary>
+    [ExcludeFromCodeCoverage/* Justification = Required for extensibility. */]
     public Unparsable() { }
 
     /// <summary>Initializes a new instance of the <see cref="Unparsable"/> class.</summary>
     public Unparsable(string? message) : base(message) { }
 
-    /// <summary>Initializes a new instance of the <see cref="Unparsable"/> class.</summary>
+    [ExcludeFromCodeCoverage/* Justification = Required for extensibility. */]
     public Unparsable(string? message, Exception? innerException) : base(message, innerException) { }
 
     /// <summary>Initializes a new instance of the <see cref="Unparsable"/> class.</summary>
     protected Unparsable(SerializationInfo info, StreamingContext context) : base(info, context)
     {
+        Guard.NotNull(info);
+
         Type = info.GetString(nameof(Type));
         Value = info.GetString(nameof(Value));
     }
@@ -25,6 +29,8 @@ public class Unparsable : FormatException
     /// <inheritdoc />
     public override void GetObjectData(SerializationInfo info, StreamingContext context)
     {
+        Guard.NotNull(info);
+
         base.GetObjectData(info, context);
         info.AddValue(nameof(Type), Type);
         info.AddValue(nameof(Value), Value);

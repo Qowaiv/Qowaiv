@@ -102,14 +102,15 @@ public class Supports_type_conversion
         => Converting.To<Uuid>().From(Svo.CustomGuid).Should().Be(Svo.Uuid);
 }
 
+#if NET6_0_OR_GREATER
+
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
     [Test]
     public void System_Text_JSON_deserialization_of_dictionary_keys()
     {
         System.Text.Json.JsonSerializer.Deserialize<Dictionary<CustomGuid, int>>(@"{""8a1a8c42-d2ff-e254-e26e-b6abcbf19420"":42}")
-            .Should().BeEquivalentTo(new Dictionary<CustomGuid, int>() 
+            .Should().BeEquivalentTo(new Dictionary<CustomGuid, int>()
             {
                 [Svo.CustomGuid] = 42,
             });
@@ -118,7 +119,7 @@ public class Supports_JSON_serialization
     [Test]
     public void System_Text_JSON_serialization_of_dictionary_keys()
     {
-        var dictionary = new Dictionary<CustomGuid, int>() 
+        var dictionary = new Dictionary<CustomGuid, int>()
         {
             [default] = 17,
             [Svo.CustomGuid] = 42,
@@ -126,8 +127,8 @@ public class Supports_JSON_serialization
         System.Text.Json.JsonSerializer.Serialize(dictionary)
             .Should().Be(@"{"""":17,""8a1a8c42-d2ff-e254-e26e-b6abcbf19420"":42}");
     }
-#endif
 }
+#endif
 
 public class Supports_binary_serialization
 {

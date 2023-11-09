@@ -10,7 +10,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
     <PackageReference Include="NUnit" Version="3.*" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.*"/>
+    <PackageReference Include="NUnit3TestAdapter" Version="4.*" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">

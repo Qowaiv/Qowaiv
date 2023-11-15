@@ -9,8 +9,6 @@ namespace Qowaiv.TestTools;
 /// <summary>Helps with testing serialization code.</summary>
 public static class SerializeDeserialize
 {
-#if NET8_0_OR_GREATER
-#else
     /// <summary>Serializes and deserializes an instance using <see cref="BinaryFormatter"/>.</summary>
     /// <typeparam name="T">
     /// Type of the instance.
@@ -19,7 +17,11 @@ public static class SerializeDeserialize
     /// The instance to serialize and deserialize.
     /// </param>
     [Pure]
+#if NET8_0_OR_GREATER
+    [Obsolete("Usage of the binary formatter is considered harmful and not longer supported.", error: true)]
+#else
     [Obsolete("Usage of the binary formatter is considered harmful.")]
+#endif
     public static T Binary<T>(T instance)
     {
         using var buffer = new MemoryStream();
@@ -28,7 +30,6 @@ public static class SerializeDeserialize
         buffer.Position = 0;
         return (T)formatter.Deserialize(buffer)!;
     }
-#endif
 
     /// <summary>Serializes and deserializes an instance using a <see cref="DataContractSerializer"/>.</summary>
     /// <typeparam name="T">

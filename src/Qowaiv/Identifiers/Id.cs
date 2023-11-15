@@ -182,7 +182,7 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
     {
         Guard.NotNull(reader);
         var xml = reader.ReadElementString();
-        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml);
+        System.Runtime.CompilerServices.Unsafe.AsRef(in this) = Parse(xml);
     }
 
     /// <summary>Writes the identifier to an <see href = "XmlWriter"/>.</summary>

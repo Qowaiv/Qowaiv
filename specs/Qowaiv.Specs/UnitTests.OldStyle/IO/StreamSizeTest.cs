@@ -89,6 +89,8 @@ public class StreamSizeTest
 
     #region (XML) (De)serialization tests
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     public void GetObjectData_SerializationInfo_AreEqual()
     {
@@ -99,8 +101,6 @@ public class StreamSizeTest
         Assert.AreEqual((long)123456789, info.GetInt64("Value"));
     }
 
-#if NET8_0_OR_GREATER
-#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_TestStruct_AreEqual()

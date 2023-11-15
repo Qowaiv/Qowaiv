@@ -68,6 +68,9 @@ public class LocalDateTimeTest
 
     #region (XML) (De)serialization tests
 
+
+#if NET8_0_OR_GREATER
+#else
     [Test]
     public void GetObjectData_SerializationInfo_AreEqual()
     {
@@ -78,8 +81,6 @@ public class LocalDateTimeTest
         info.GetDateTime("Value").Should().Be(new DateTime(1988, 06, 13, 22, 10, 05, 001, DateTimeKind.Local));
     }
 
-#if NET8_0_OR_GREATER
-#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_TestStruct_AreEqual()

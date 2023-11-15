@@ -80,6 +80,8 @@ public class WildcardPatternTest
 
     #region (XML) (De)serialization tests
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     public void GetObjectData_SerializationInfo_AreEqual()
     {
@@ -92,8 +94,6 @@ public class WildcardPatternTest
         Assert.AreEqual((int)StringComparison.Ordinal, info.GetInt32("ComparisonType"));
     }
 
-#if NET8_0_OR_GREATER
-#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_TestStruct_AreEqual()

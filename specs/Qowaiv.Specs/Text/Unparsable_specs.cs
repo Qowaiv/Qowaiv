@@ -19,12 +19,12 @@ public class Communicates
     }
 }
 
+#if NET8_0_OR_GREATER
+#else
 public class Is_serializable
 {
     internal static readonly Exception Exception = Unparsable.ForValue<int>("fourty-two", "Not a number,").InnerException!;
 
-#if NET8_0_OR_GREATER
-#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void Binary()
@@ -33,5 +33,5 @@ public class Is_serializable
         roundtrip.Should().NotBeSameAs(Exception)
             .And.Subject.Should().BeEquivalentTo(Exception);
     }
-#endif
 }
+#endif

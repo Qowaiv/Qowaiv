@@ -17,6 +17,9 @@ public class CurrencyMismatchException : Exception
     public CurrencyMismatchException(Currency cur0, Currency cur1, string operation)
         : this(string.Format(QowaivMessages.CurrencyMismatchException, operation, cur0, cur1)) { }
 
+#if NET8_0_OR_GREATER
+#else
     /// <summary>Initializes a new instance of the <see cref="CurrencyMismatchException"/> class.</summary>
     protected CurrencyMismatchException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+#endif
 }

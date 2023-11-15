@@ -220,6 +220,8 @@ public class HouseNumberTest
 
     #region (XML) (De)serialization tests
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     public void GetObjectData_SerializationInfo_AreEqual()
     {
@@ -230,8 +232,6 @@ public class HouseNumberTest
         Assert.AreEqual(123456789, info.GetInt32("Value"));
     }
 
-#if NET8_0_OR_GREATER
-#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_TestStruct_AreEqual()

@@ -19,6 +19,8 @@ public class FormattingArgumentsTest
 
     #region (De)serialization tests
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     public void GetObjectData_SerializationInfo_AreEqual()
     {
@@ -30,8 +32,6 @@ public class FormattingArgumentsTest
         Assert.AreEqual(new CultureInfo("fr-BE"), info.GetValue("FormatProvider", typeof(IFormatProvider)));
     }
 
-#if NET8_0_OR_GREATER
-#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_Default_AreEqual()

@@ -100,6 +100,8 @@ public class MonthSpanTest
         Assert.AreEqual(MonthSpan.FromMonths(69), ctor);
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     public void GetObjectData_NulSerializationInfo_Throws()
     {
@@ -116,8 +118,6 @@ public class MonthSpanTest
         Assert.AreEqual(69, info.GetValue("Value", typeof(int)));
     }
 
-#if NET8_0_OR_GREATER
-#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_TestStruct_AreEqual()

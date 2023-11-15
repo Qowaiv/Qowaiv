@@ -24,7 +24,7 @@
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Sustainability.EnergyLabelJsonConverter))]
 #endif
-public readonly partial struct EnergyLabel : ISerializable, IXmlSerializable, IEquatable<EnergyLabel>, IComparable, IComparable<EnergyLabel>
+public readonly partial struct EnergyLabel : IXmlSerializable, IEquatable<EnergyLabel>, IComparable, IComparable<EnergyLabel>
 #if NET6_0_OR_GREATER
     , ISpanFormattable
 #else

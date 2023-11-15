@@ -12,7 +12,7 @@ namespace Qowaiv.Financial;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.AmountJsonConverter))]
 #endif
-public readonly partial struct Amount : ISerializable, IXmlSerializable, IFormattable, IEquatable<Amount>, IComparable, IComparable<Amount>
+public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatable<Amount>, IComparable, IComparable<Amount>
 #if NET7_0_OR_GREATER
     , IIncrementOperators<Amount>, IDecrementOperators<Amount>
     , IUnaryPlusOperators<Amount, Amount>, IUnaryNegationOperators<Amount, Amount>

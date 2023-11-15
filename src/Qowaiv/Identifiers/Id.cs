@@ -18,9 +18,13 @@ namespace Qowaiv.Identifiers;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Identifiers.IdJsonConverter))]
 #endif
-public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IFormattable, IEquatable<Id<TIdentifier>>, IComparable, IComparable<Id<TIdentifier>>
+public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquatable<Id<TIdentifier>>, IComparable, IComparable<Id<TIdentifier>>
 #if NET7_0_OR_GREATER
 , IEqualityOperators<Id<TIdentifier>, Id<TIdentifier>, bool>
+#endif
+#if NET8_0_OR_GREATER
+#else
+, ISerializable
 #endif
     where TIdentifier : IIdentifierBehavior, new()
 {
@@ -33,6 +37,8 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
     /// <summary>Initializes a new instance of the <see cref="Id{TIdentifier}"/> struct.</summary>
     private Id(object? value) => m_Value = value;
 
+#if NET8_0_OR_GREATER
+#else
     /// <summary>Initializes a new instance of the <see cref="Id{TIdentifier}"/> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
@@ -41,6 +47,16 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
         Guard.NotNull(info);
         m_Value = info.GetValue("Value", typeof(object));
     }
+
+    /// <summary>Adds the underlying property of the identifier to the serialization info.</summary>
+    /// <param name="info">The serialization info.</param>
+    /// <param name="context">The streaming context.</param>
+    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+    {
+        Guard.NotNull(info);
+        info.AddValue("Value", m_Value);
+    }
+#endif
 
     /// <summary>The inner value of the identifier.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -151,15 +167,6 @@ public readonly struct Id<TIdentifier> : ISerializable, IXmlSerializable, IForma
             return formatted;
         }
         else return IsEmpty() ? string.Empty : behavior.ToString(m_Value, format, formatProvider);
-    }
-
-    /// <summary>Adds the underlying property of the identifier to the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        info.AddValue("Value", m_Value);
     }
 
     /// <summary>Gets the <see href = "XmlSchema"/> to XML (de)serialize the identifier.</summary>

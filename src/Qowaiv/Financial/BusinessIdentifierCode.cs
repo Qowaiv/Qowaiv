@@ -28,7 +28,7 @@ namespace Qowaiv.Financial;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.BusinessIdentifierCodeJsonConverter))]
 #endif
-public readonly partial struct BusinessIdentifierCode : ISerializable, IXmlSerializable, IFormattable, IEquatable<BusinessIdentifierCode>, IComparable, IComparable<BusinessIdentifierCode>
+public readonly partial struct BusinessIdentifierCode : IXmlSerializable, IFormattable, IEquatable<BusinessIdentifierCode>, IComparable, IComparable<BusinessIdentifierCode>
 {
     /// <remarks>
     /// http://www.codeproject.com/KB/recipes/bicRegexValidator.aspx.

@@ -30,7 +30,7 @@ namespace Qowaiv;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.SexJsonConverter))]
 #endif
-public readonly partial struct Sex : ISerializable, IXmlSerializable, IFormattable, IEquatable<Sex>, IComparable, IComparable<Sex>
+public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<Sex>, IComparable, IComparable<Sex>
 {
     /// <summary>Represents an empty/not set Sex.</summary>
     public static readonly Sex Empty;

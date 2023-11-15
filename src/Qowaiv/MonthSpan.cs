@@ -10,7 +10,7 @@
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.MonthSpanJsonConverter))]
 #endif
-public readonly partial struct MonthSpan : ISerializable, IXmlSerializable, IFormattable, IEquatable<MonthSpan>, IComparable, IComparable<MonthSpan>
+public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEquatable<MonthSpan>, IComparable, IComparable<MonthSpan>
 #if NET7_0_OR_GREATER
     , IIncrementOperators<MonthSpan>, IDecrementOperators<MonthSpan>
     , IUnaryPlusOperators<MonthSpan, MonthSpan>, IUnaryNegationOperators<MonthSpan, MonthSpan>

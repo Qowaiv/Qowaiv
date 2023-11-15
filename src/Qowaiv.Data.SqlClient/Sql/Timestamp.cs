@@ -10,7 +10,7 @@
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.TimestampJsonConverter))]
 #endif
-public readonly partial struct Timestamp : ISerializable, IXmlSerializable, IFormattable, IEquatable<Timestamp>, IComparable, IComparable<Timestamp>
+public readonly partial struct Timestamp : IXmlSerializable, IFormattable, IEquatable<Timestamp>, IComparable, IComparable<Timestamp>
 {
     /// <summary>Gets the minimum value of a timestamp.</summary>
     public static readonly Timestamp MinValue;

@@ -21,7 +21,7 @@ namespace Qowaiv.IO;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.IO.StreamSizeJsonConverter))]
 #endif
-public readonly partial struct StreamSize : ISerializable, IXmlSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
+public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
 #if NET7_0_OR_GREATER
     , IIncrementOperators<StreamSize>, IDecrementOperators<StreamSize>
     , IUnaryPlusOperators<StreamSize, StreamSize>, IUnaryNegationOperators<StreamSize, StreamSize>

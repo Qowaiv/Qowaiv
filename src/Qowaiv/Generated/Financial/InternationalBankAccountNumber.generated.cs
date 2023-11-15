@@ -107,6 +107,8 @@ public partial struct InternationalBankAccountNumber : IFormattable
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
+#if NET8_0_OR_GREATER
+#else
 public partial struct InternationalBankAccountNumber : ISerializable
 {
     /// <summary>Initializes a new instance of the IBAN based on the serialization info.</summary>
@@ -124,6 +126,7 @@ public partial struct InternationalBankAccountNumber : ISerializable
     void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         => Guard.NotNull(info).AddValue("Value", m_Value);
 }
+#endif
 
 public partial struct InternationalBankAccountNumber
 {

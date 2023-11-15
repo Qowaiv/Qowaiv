@@ -24,7 +24,7 @@ namespace Qowaiv.Financial;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.InternationalBankAccountNumberJsonConverter))]
 #endif
-public readonly partial struct InternationalBankAccountNumber : ISerializable, IXmlSerializable, IFormattable, IEquatable<InternationalBankAccountNumber>, IComparable, IComparable<InternationalBankAccountNumber>
+public readonly partial struct InternationalBankAccountNumber : IXmlSerializable, IFormattable, IEquatable<InternationalBankAccountNumber>, IComparable, IComparable<InternationalBankAccountNumber>
 {
     /// <summary>Represents the pattern of a (potential) valid IBAN.</summary>
     /// <remarks>

@@ -12,7 +12,7 @@ namespace Qowaiv.Financial;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.MoneyJsonConverter))]
 #endif
-public readonly partial struct Money : ISerializable, IXmlSerializable, IFormattable, IEquatable<Money>, IComparable, IComparable<Money>
+public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatable<Money>, IComparable, IComparable<Money>
 #if NET7_0_OR_GREATER
     , IIncrementOperators<Money>, IDecrementOperators<Money>
     , IUnaryPlusOperators<Money, Money>, IUnaryNegationOperators<Money, Money>
@@ -27,6 +27,10 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
     , IMultiplyOperators<Money, ulong, Money>, IDivisionOperators<Money, ulong, Money>
     , IMultiplyOperators<Money, uint, Money>, IDivisionOperators<Money, uint, Money>
     , IMultiplyOperators<Money, ushort, Money>, IDivisionOperators<Money, ushort, Money>
+#endif
+#if NET8_0_OR_GREATER
+#else
+, ISerializable
 #endif
 {
     /// <summary>Represents an Amount of zero.</summary>
@@ -433,6 +437,8 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
         ? l.Currency
         : throw new CurrencyMismatchException(l.Currency, r.Currency, operation);
 
+#if NET8_0_OR_GREATER
+#else
     /// <summary>Initializes a new instance of the <see cref="Money"/> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
@@ -452,6 +458,7 @@ public readonly partial struct Money : ISerializable, IXmlSerializable, IFormatt
         info.AddValue("Value", m_Value);
         info.AddValue(nameof(Currency), m_Currency.Name);
     }
+#endif
 
     /// <summary>Deserializes the money from a JSON number.</summary>
     /// <param name="json">

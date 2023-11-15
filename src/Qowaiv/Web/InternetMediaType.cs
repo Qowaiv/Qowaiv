@@ -44,7 +44,7 @@ namespace Qowaiv.Web;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Web.InternetMediaTypeJsonConverter))]
 #endif
-public readonly partial struct InternetMediaType : ISerializable, IXmlSerializable, IFormattable, IEquatable<InternetMediaType>, IComparable, IComparable<InternetMediaType>
+public readonly partial struct InternetMediaType : IXmlSerializable, IFormattable, IEquatable<InternetMediaType>, IComparable, IComparable<InternetMediaType>
 {
     /// <summary>Represents the pattern of a (potential) valid Internet media type.</summary>
     private static readonly Regex Pattern = new(

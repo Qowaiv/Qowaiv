@@ -28,7 +28,7 @@ namespace Qowaiv;
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.GenderJsonConverter))]
 #endif
 [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
-public readonly partial struct Gender : ISerializable, IXmlSerializable, IFormattable, IEquatable<Gender>, IComparable, IComparable<Gender>
+public readonly partial struct Gender : IXmlSerializable, IFormattable, IEquatable<Gender>, IComparable, IComparable<Gender>
 {
     /// <summary>Represents an empty/not set Gender.</summary>
     public static readonly Gender Empty;

@@ -10,7 +10,7 @@
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(YearJsonConverter))]
 #endif
-public readonly partial struct Year : ISerializable, IXmlSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
+public readonly partial struct Year : IXmlSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
 {
     /// <summary>Represents an empty/not set year.</summary>
     public static readonly Year Empty;

@@ -14,8 +14,13 @@ public class Implements : SingleValueObjectSpecs
     [TestCaseSource(nameof(AllSvos))]
     public void IFormattable(Type type) => type.Should().Implement<IFormattable>();
 
+
     [TestCaseSource(nameof(AllSvos))]
+#if NET8_0_OR_GREATER
+    public void Not_ISerializable(Type type) => type.Should().NotImplement<ISerializable>();
+#else
     public void ISerializable(Type type) => type.Should().Implement<ISerializable>();
+#endif
 
     [TestCaseSource(nameof(AllSvos))]
     public void IXmlSerializable(Type type) => type.Should().Implement<IXmlSerializable>();

@@ -21,7 +21,7 @@ namespace Qowaiv;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.YesNoJsonConverter))]
 #endif
-public readonly partial struct YesNo : ISerializable, IXmlSerializable, IFormattable, IEquatable<YesNo>, IComparable, IComparable<YesNo>
+public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatable<YesNo>, IComparable, IComparable<YesNo>
 {
     /// <summary>Represents an empty/not set yes-no.</summary>
     public static readonly YesNo Empty;

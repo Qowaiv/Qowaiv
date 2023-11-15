@@ -18,7 +18,7 @@ namespace Qowaiv.Globalization;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Globalization.CountryJsonConverter))]
 #endif
-public readonly partial struct Country : ISerializable, IXmlSerializable, IFormattable, IEquatable<Country>, IComparable, IComparable<Country>
+public readonly partial struct Country : IXmlSerializable, IFormattable, IEquatable<Country>, IComparable, IComparable<Country>
 {
     /// <summary>Represents an empty/not set country.</summary>
     public static readonly Country Empty;

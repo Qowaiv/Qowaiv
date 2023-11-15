@@ -17,10 +17,14 @@ namespace Qowaiv.Customization;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Customization.GenericSvoJsonConverter))]
 #endif
-public readonly struct Svo<TSvoBehavior> : ISerializable, IXmlSerializable, IFormattable, IEquatable<Svo<TSvoBehavior>>, IComparable, IComparable<Svo<TSvoBehavior>>
+public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEquatable<Svo<TSvoBehavior>>, IComparable, IComparable<Svo<TSvoBehavior>>
 #if NET7_0_OR_GREATER
 , IEqualityOperators<Svo<TSvoBehavior>, Svo<TSvoBehavior>, bool>
 , IParsable<Svo<TSvoBehavior>>
+#endif
+#if NET8_0_OR_GREATER
+#else
+, ISerializable
 #endif
     where TSvoBehavior : SvoBehavior, new()
 {
@@ -37,6 +41,8 @@ public readonly struct Svo<TSvoBehavior> : ISerializable, IXmlSerializable, IFor
     /// <summary>Initializes a new instance of the <see cref="Svo{TSvoBehavior}"/> struct.</summary>
     private Svo(string? value) => m_Value = value;
 
+#if NET8_0_OR_GREATER
+#else
     /// <summary>Initializes a new instance of the <see cref="Svo{TSvoBehavior}"/> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
@@ -51,6 +57,7 @@ public readonly struct Svo<TSvoBehavior> : ISerializable, IXmlSerializable, IFor
     /// <param name="context">The streaming context.</param>
     void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         => Guard.NotNull(info).AddValue("Value", m_Value);
+#endif
 
     /// <summary>The inner value of the Single Value Object.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -177,7 +184,7 @@ public readonly struct Svo<TSvoBehavior> : ISerializable, IXmlSerializable, IFor
     {
         Guard.NotNull(reader);
         var xml = reader.ReadElementString();
-        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
+        System.Runtime.CompilerServices.Unsafe.AsRef(in this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the Single Value Object to an <see href="XmlWriter" />.</summary>

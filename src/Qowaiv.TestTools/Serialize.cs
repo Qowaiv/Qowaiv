@@ -13,11 +13,14 @@ public static class Serialize
     /// <param name="instance">
     /// The instance to retrieve the object data from.
     /// </param>
+#if NET8_0_OR_GREATER
+    [Obsolete("Formatter-based serialization is obsolete and should not be used.", error: true)]
+#endif
     [Pure]
     public static SerializationInfo GetInfo<T>(T instance) where T : ISerializable
     {
         ISerializable obj = instance;
-        var info = new SerializationInfo(typeof(YesNo), new FormatterConverter());
+        var info = new SerializationInfo(typeof(T), new FormatterConverter());
         obj.GetObjectData(info, default);
         return info;
     }

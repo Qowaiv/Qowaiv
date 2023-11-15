@@ -70,6 +70,8 @@ public class TimestampTest
 
     #region (XML) (De)serialization tests
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     public void GetObjectData_SerializationInfo_AreEqual()
     {
@@ -83,12 +85,13 @@ public class TimestampTest
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_TestStruct_AreEqual()
-        =>  SerializeDeserialize.Binary(TestStruct).Should().Be(TestStruct);
+        => SerializeDeserialize.Binary(TestStruct).Should().Be(TestStruct);
+#endif
 
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         => SerializeDeserialize.DataContract(TestStruct).Should().Be(TestStruct);
-    
+
     [Test]
     public void XmlSerialize_TestStruct_AreEqual()
     {
@@ -104,6 +107,8 @@ public class TimestampTest
         Assert.AreEqual(TestStruct, act);
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_TimestampSerializeObject_AreEqual()
@@ -125,6 +130,8 @@ public class TimestampTest
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
+
     [Test]
     public void XmlSerializeDeserialize_TimestampSerializeObject_AreEqual()
     {
@@ -166,6 +173,8 @@ public class TimestampTest
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_Default_AreEqual()
@@ -187,6 +196,8 @@ public class TimestampTest
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
+
     [Test]
     public void XmlSerializeDeserialize_Empty_AreEqual()
     {

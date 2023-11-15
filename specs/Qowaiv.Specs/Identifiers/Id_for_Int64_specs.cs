@@ -126,6 +126,8 @@ public class Supports_type_conversion
     }
 }
 
+#if NET8_0_OR_GREATER
+#else
 public class Supports_binary_serialization
 {
     [Test]
@@ -143,6 +145,7 @@ public class Supports_binary_serialization
         info.GetInt64("Value").Should().Be(987654321L);
     }
 }
+#endif
 
 public class Is_Open_API_data_type
 {

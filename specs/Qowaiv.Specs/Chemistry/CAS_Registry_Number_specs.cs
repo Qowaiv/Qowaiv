@@ -461,6 +461,8 @@ public class Is_Open_API_data_type
         => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(CasRegistryNumber))!.Matches(input).Should().BeTrue();
 }
 
+#if NET8_0_OR_GREATER
+#else
 public class Supports_binary_serialization
 {
     [Test]
@@ -478,6 +480,7 @@ public class Supports_binary_serialization
         info.GetInt64("Value").Should().Be(10028_14_5L);
     }
 }
+#endif
 
 public class Debugger
 {

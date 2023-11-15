@@ -19,7 +19,7 @@ namespace Qowaiv.Chemistry;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Chemistry.CasRegistryNumberJsonConverter))]
 #endif
-public readonly partial struct CasRegistryNumber : ISerializable, IXmlSerializable, IFormattable, IEquatable<CasRegistryNumber>, IComparable, IComparable<CasRegistryNumber>
+public readonly partial struct CasRegistryNumber : IXmlSerializable, IFormattable, IEquatable<CasRegistryNumber>, IComparable, IComparable<CasRegistryNumber>
 {
     /// <summary>Represents an empty/not set CAS Registry Number.</summary>
     public static readonly CasRegistryNumber Empty;

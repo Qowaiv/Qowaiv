@@ -169,6 +169,8 @@ public class Supports_JSON_serialization
     }
 }
 
+#if NET8_0_OR_GREATER
+#else
 public class Supports_binary_serialization
 {
     [Test]
@@ -186,3 +188,4 @@ public class Supports_binary_serialization
         info.GetString("Value").Should().Be("VA");
     }
 }
+#endif

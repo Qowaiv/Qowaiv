@@ -81,6 +81,8 @@
 
         #region (XML) (De)serialization tests
 
+#if NET8_0_OR_GREATER
+#else
         [Test]
         public void GetObjectData_SerializationInfo_AreEqual()
         {
@@ -100,6 +102,8 @@
             var act = SerializeDeserialize.Binary(input);
             Assert.AreEqual(exp, act);
         }
+#endif
+
         [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
@@ -120,10 +124,12 @@
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
-            var act =Deserialize.Xml<Elo>("1732.4");
+            var act = Deserialize.Xml<Elo>("1732.4");
             Assert.AreEqual(TestStruct, act);
         }
 
+#if NET8_0_OR_GREATER
+#else
         [Test]
         [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_EloSerializeObject_AreEqual()
@@ -145,6 +151,8 @@
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
+#endif
+
         [Test]
         public void XmlSerializeDeserialize_EloSerializeObject_AreEqual()
         {
@@ -186,6 +194,8 @@
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
 
+#if NET8_0_OR_GREATER
+#else
         [Test]
         [Obsolete("Usage of the binary formatter is considered harmful.")]
         public void SerializeDeserialize_Zero_AreEqual()
@@ -207,6 +217,7 @@
             Assert.AreEqual(exp.Obj, act.Obj, "Obj");
             Assert.AreEqual(exp.Date, act.Date, "Date");
         }
+#endif
 
         [Test]
         public void GetSchema_None_IsNull()
@@ -412,7 +423,7 @@
         #endregion
 
         #region Casting tests
-        
+
         [Test]
         public void Implicit_DoubleToElo_AreEqual()
         {

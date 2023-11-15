@@ -51,12 +51,12 @@ public class WildcardPatternTest
     [TestCase("ge?ks", "geeks", true, WildcardPatternOptions.SingleOrTrailing)]
     [TestCase("gee_ks", "geeks", true, WildcardPatternOptions.SingleOrTrailing | WildcardPatternOptions.SqlWildcards)]
     [TestCase("ge_ks", "geeks", true, WildcardPatternOptions.SingleOrTrailing | WildcardPatternOptions.SqlWildcards)]
-    [TestCase("g*ks", "Geeks", true, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase,  "tr-TR")]
-    [TestCase("g*Ks", "geeks", true, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase,  "tr-TR")]
-    [TestCase("Ig*ks", "iGeeks", true, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase,  "tr-TR")]
-    [TestCase("ig*ks", "IGeeks", true, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase,  "tr-TR")]
-    [TestCase("Ig*ks", "ıGeeks", false, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase,  "tr-TR")]
-    [TestCase("ıg*ks", "IGeeks", false, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase,  "tr-TR")]
+    [TestCase("g*ks", "Geeks", true, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase, "tr-TR")]
+    [TestCase("g*Ks", "geeks", true, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase, "tr-TR")]
+    [TestCase("Ig*ks", "iGeeks", true, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase, "tr-TR")]
+    [TestCase("ig*ks", "IGeeks", true, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase, "tr-TR")]
+    [TestCase("Ig*ks", "ıGeeks", false, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase, "tr-TR")]
+    [TestCase("ıg*ks", "IGeeks", false, WildcardPatternOptions.None, StringComparison.InvariantCultureIgnoreCase, "tr-TR")]
     [TestCase("g*ks", "Geeks", true, WildcardPatternOptions.None, StringComparison.CurrentCultureIgnoreCase, "tr-TR")]
     [TestCase("g*Ks", "geeks", true, WildcardPatternOptions.None, StringComparison.CurrentCultureIgnoreCase, "tr-TR")]
     [TestCase("Ig*ks", "iGeeks", false, WildcardPatternOptions.None, StringComparison.CurrentCultureIgnoreCase, "tr-TR")]
@@ -80,6 +80,8 @@ public class WildcardPatternTest
 
     #region (XML) (De)serialization tests
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     public void GetObjectData_SerializationInfo_AreEqual()
     {
@@ -99,6 +101,8 @@ public class WildcardPatternTest
         var act = SerializeDeserialize.Binary(TestPattern);
         act.Should().HaveDebuggerDisplay("{t?st*}, SingleOrTrailing, Ordinal");
     }
+#endif
+
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {

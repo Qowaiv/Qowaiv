@@ -10,7 +10,7 @@
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.PercentageJsonConverter))]
 #endif
-public readonly partial struct Percentage : ISerializable, IXmlSerializable, IFormattable, IEquatable<Percentage>, IComparable, IComparable<Percentage>
+public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEquatable<Percentage>, IComparable, IComparable<Percentage>
 #if NET7_0_OR_GREATER
     , IIncrementOperators<Percentage>, IDecrementOperators<Percentage>
     , IUnaryPlusOperators<Percentage, Percentage>, IUnaryNegationOperators<Percentage, Percentage>

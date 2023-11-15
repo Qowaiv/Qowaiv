@@ -22,7 +22,7 @@ namespace Qowaiv.Statistics;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Statistics.EloJsonConverter))]
 #endif
-public readonly partial struct Elo : ISerializable, IXmlSerializable, IFormattable, IEquatable<Elo>, IComparable, IComparable<Elo>
+public readonly partial struct Elo : IXmlSerializable, IFormattable, IEquatable<Elo>, IComparable, IComparable<Elo>
 #if NET7_0_OR_GREATER
     , IIncrementOperators<Elo>, IDecrementOperators<Elo>
     , IUnaryPlusOperators<Elo, Elo>, IUnaryNegationOperators<Elo, Elo>

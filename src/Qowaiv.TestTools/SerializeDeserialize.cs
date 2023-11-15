@@ -17,7 +17,11 @@ public static class SerializeDeserialize
     /// The instance to serialize and deserialize.
     /// </param>
     [Pure]
+#if NET8_0_OR_GREATER
+    [Obsolete("Usage of the binary formatter is considered harmful and not longer supported.", error: true)]
+#else
     [Obsolete("Usage of the binary formatter is considered harmful.")]
+#endif
     public static T Binary<T>(T instance)
     {
         using var buffer = new MemoryStream();

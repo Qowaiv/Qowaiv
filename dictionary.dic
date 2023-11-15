@@ -29,6 +29,7 @@ mille
 Mongo
 namespace
 namespaces
+NL
 nr
 nullable
 nullables
@@ -51,6 +52,7 @@ tebibyte
 tebibytes
 terabyte
 terabytes
+unparsable
 UTC
 UUID
 wildcard

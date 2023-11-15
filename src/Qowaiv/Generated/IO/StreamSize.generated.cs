@@ -71,6 +71,8 @@ public partial struct StreamSize : IComparable, IComparable<StreamSize>
     public static bool operator >=(StreamSize l, StreamSize r) => l.CompareTo(r) >= 0;
 }
 
+#if NET8_0_OR_GREATER
+#else
 public partial struct StreamSize : ISerializable
 {
     /// <summary>Initializes a new instance of the stream size based on the serialization info.</summary>
@@ -88,6 +90,7 @@ public partial struct StreamSize : ISerializable
     void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         => Guard.NotNull(info).AddValue("Value", m_Value);
 }
+#endif
 
 public partial struct StreamSize
 {
@@ -117,7 +120,7 @@ public partial struct StreamSize : IXmlSerializable
     {
         Guard.NotNull(reader);
         var xml = reader.ReadElementString();
-        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
+        System.Runtime.CompilerServices.Unsafe.AsRef(in this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the stream size to an <see href="XmlWriter" />.</summary>

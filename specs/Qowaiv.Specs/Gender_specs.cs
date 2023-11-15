@@ -528,6 +528,8 @@ public class Is_Open_API_data_type
     }
 }
 
+#if NET8_0_OR_GREATER
+#else
 [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
 public class Supports_binary_serialization
 {
@@ -545,6 +547,7 @@ public class Supports_binary_serialization
         Assert.AreEqual((byte)4, info.GetByte("Value"));
     }
 }
+#endif
 
 [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
 public class Debugger

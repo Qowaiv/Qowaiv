@@ -15,7 +15,7 @@ namespace Qowaiv;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(PostalCodeJsonConverter))]
 #endif
-public readonly partial struct PostalCode : ISerializable, IXmlSerializable, IFormattable, IEquatable<PostalCode>, IComparable, IComparable<PostalCode>
+public readonly partial struct PostalCode : IXmlSerializable, IFormattable, IEquatable<PostalCode>, IComparable, IComparable<PostalCode>
 {
     /// <summary>Represents an empty/not set postal code.</summary>
     public static readonly PostalCode Empty;

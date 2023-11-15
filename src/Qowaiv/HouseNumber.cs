@@ -10,7 +10,7 @@
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(HouseNumberJsonConverter))]
 #endif
-public readonly partial struct HouseNumber : ISerializable, IXmlSerializable, IFormattable, IEquatable<HouseNumber>, IComparable, IComparable<HouseNumber>
+public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEquatable<HouseNumber>, IComparable, IComparable<HouseNumber>
 {
     /// <summary>Represents an empty/not set house number.</summary>
     public static readonly HouseNumber Empty;

@@ -18,6 +18,8 @@ public class Unparsable : FormatException
     [ExcludeFromCodeCoverage/* Justification = Required for extensibility. */]
     public Unparsable(string? message, Exception? innerException) : base(message, innerException) { }
 
+#if NET8_0_OR_GREATER
+#else
     /// <summary>Initializes a new instance of the <see cref="Unparsable"/> class.</summary>
     protected Unparsable(SerializationInfo info, StreamingContext context) : base(info, context)
     {
@@ -36,6 +38,7 @@ public class Unparsable : FormatException
         info.AddValue(nameof(Type), Type);
         info.AddValue(nameof(Value), Value);
     }
+#endif
 
     /// <summary>The target type.</summary>
     public string? Type { get; init; }

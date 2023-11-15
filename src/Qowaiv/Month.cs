@@ -12,7 +12,7 @@ namespace Qowaiv;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.MonthJsonConverter))]
 #endif
-public readonly partial struct Month : ISerializable, IXmlSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
+public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
 {
     /// <summary>Represents an empty/not set month.</summary>
     public static readonly Month Empty;

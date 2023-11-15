@@ -36,7 +36,11 @@
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.WeekDateJsonConverter))]
 #endif
-public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IFormattable, IEquatable<WeekDate>, IComparable, IComparable<WeekDate>
+public readonly partial struct WeekDate : IXmlSerializable, IFormattable, IEquatable<WeekDate>, IComparable, IComparable<WeekDate>
+#if NET8_0_OR_GREATER
+#else
+, ISerializable
+#endif
 {
     /// <summary>Represents the pattern of a (potential) valid week date.</summary>
     private static readonly Regex Pattern = new(
@@ -140,6 +144,8 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
         return start.AddDays(-adddays);
     }
 
+#if NET8_0_OR_GREATER
+#else
     /// <summary>Initializes a new instance of the <see cref="WeekDate"/> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
@@ -157,6 +163,7 @@ public readonly partial struct WeekDate : ISerializable, IXmlSerializable, IForm
         Guard.NotNull(info);
         info.AddValue("Value", m_Value);
     }
+#endif
 
     /// <summary>Serializes the week date to a JSON node.</summary>
     /// <returns>

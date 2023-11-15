@@ -25,7 +25,7 @@ namespace Qowaiv;
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.UuidJsonConverter))]
 #endif
-public readonly partial struct Uuid : ISerializable, IXmlSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
+public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
 {
     private static readonly UuidBehavior behavior = UuidBehavior.Instance;
 

@@ -85,6 +85,8 @@ public class Supports_type_conversion
         => Converting.To<int>().From(Svo.Int32Id).Should().Be(17);
 }
 
+#if NET8_0_OR_GREATER
+#else
 public class Supports_binary_serialization
 {
     [Test]
@@ -102,6 +104,7 @@ public class Supports_binary_serialization
         info.GetInt32("Value").Should().Be(17);
     }
 }
+#endif
 
 public class Is_Open_API_data_type
 {

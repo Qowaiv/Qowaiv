@@ -19,6 +19,8 @@ public class FormattingArgumentsTest
 
     #region (De)serialization tests
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     public void GetObjectData_SerializationInfo_AreEqual()
     {
@@ -51,6 +53,8 @@ public class FormattingArgumentsTest
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
+
     [Test]
     public void XmlSerializeDeserialize_Empty_AreEqual()
     {
@@ -71,7 +75,6 @@ public class FormattingArgumentsTest
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
-  
 
     #endregion
 

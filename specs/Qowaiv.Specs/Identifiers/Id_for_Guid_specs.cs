@@ -130,6 +130,8 @@ public class Supports_JSON_serialization
 }
 #endif
 
+#if NET8_0_OR_GREATER
+#else
 public class Supports_binary_serialization
 {
     [Test]
@@ -147,6 +149,7 @@ public class Supports_binary_serialization
         info.GetValue("Value", typeof(Guid)).Should().Be(Guid.Parse("8A1A8C42-D2FF-E254-E26E-B6ABCBF19420"));
     }
 }
+#endif
 
 public class Is_Open_API_data_type
 {

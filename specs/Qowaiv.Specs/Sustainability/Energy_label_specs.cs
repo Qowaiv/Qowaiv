@@ -110,7 +110,7 @@ public class Has_constant
 
     [Test]
     public void C() => EnergyLabel.C.Should().Be(EnergyLabel.Parse("C"));
-    
+
     [Test]
     public void D() => EnergyLabel.D.Should().Be(EnergyLabel.Parse("D"));
 
@@ -298,7 +298,7 @@ public class Has_custom_formatting
 
         [Test]
         public void formats_empty() => $"{EnergyLabel.Empty}".Should().BeEmpty();
-        
+
         [Test]
         public void formats_unknown() => $"{EnergyLabel.Unknown}".Should().Be("?");
 
@@ -534,6 +534,8 @@ public class Is_Open_API_data_type
         => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(EnergyLabel))!.Matches(input).Should().BeTrue();
 }
 
+#if NET8_0_OR_GREATER
+#else
 public class Supports_binary_serialization
 {
     [Test]
@@ -551,6 +553,7 @@ public class Supports_binary_serialization
         info.GetInt32("Value").Should().Be(9);
     }
 }
+#endif
 
 public class Debugger
 {

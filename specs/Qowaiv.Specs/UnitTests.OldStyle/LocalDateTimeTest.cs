@@ -68,6 +68,9 @@ public class LocalDateTimeTest
 
     #region (XML) (De)serialization tests
 
+
+#if NET8_0_OR_GREATER
+#else
     [Test]
     public void GetObjectData_SerializationInfo_AreEqual()
     {
@@ -87,6 +90,8 @@ public class LocalDateTimeTest
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp, act);
     }
+#endif
+
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
@@ -107,10 +112,12 @@ public class LocalDateTimeTest
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
-        var act =Deserialize.Xml<LocalDateTime>("1988-06-13 22:10:05.001");
+        var act = Deserialize.Xml<LocalDateTime>("1988-06-13 22:10:05.001");
         Assert.AreEqual(TestStruct, act);
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_LocalDateTimeSerializeObject_AreEqual()
@@ -132,6 +139,8 @@ public class LocalDateTimeTest
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
+
     [Test]
     public void XmlSerializeDeserialize_LocalDateTimeSerializeObject_AreEqual()
     {

@@ -107,6 +107,8 @@ public partial struct Currency : IFormattable
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
+#if NET8_0_OR_GREATER
+#else
 public partial struct Currency : ISerializable
 {
     /// <summary>Initializes a new instance of the currency based on the serialization info.</summary>
@@ -124,6 +126,7 @@ public partial struct Currency : ISerializable
     void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         => Guard.NotNull(info).AddValue("Value", m_Value);
 }
+#endif
 
 public partial struct Currency
 {
@@ -153,7 +156,7 @@ public partial struct Currency : IXmlSerializable
     {
         Guard.NotNull(reader);
         var xml = reader.ReadElementString();
-        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
+        System.Runtime.CompilerServices.Unsafe.AsRef(in this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the currency to an <see href="XmlWriter" />.</summary>

@@ -14,7 +14,7 @@ namespace Qowaiv.Mathematics;
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Mathematics.FractionJsonConverter))]
 #endif
 [StructLayout(LayoutKind.Sequential)]
-public readonly partial struct Fraction : ISerializable, IXmlSerializable, IFormattable, IEquatable<Fraction>, IComparable, IComparable<Fraction>
+public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquatable<Fraction>, IComparable, IComparable<Fraction>
 #if NET7_0_OR_GREATER
     , IAdditionOperators<Fraction, Fraction, Fraction>, ISubtractionOperators<Fraction, Fraction, Fraction>
     , IUnaryPlusOperators<Fraction, Fraction>, IUnaryNegationOperators<Fraction, Fraction>
@@ -22,6 +22,10 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
     , IAdditionOperators<Fraction, int, Fraction>, ISubtractionOperators<Fraction, int, Fraction>
     , IMultiplyOperators<Fraction, long, Fraction>, IDivisionOperators<Fraction, long, Fraction>
     , IMultiplyOperators<Fraction, int, Fraction>, IDivisionOperators<Fraction, int, Fraction>
+#endif
+#if NET8_0_OR_GREATER
+#else
+, ISerializable
 #endif
 {
     /// <summary>Represents the zero (0) <see cref="Fraction"/> value.</summary>
@@ -515,6 +519,8 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
         return self.CompareTo(othr);
     }
 
+#if NET8_0_OR_GREATER
+#else
     /// <summary>Initializes a new instance of the <see cref="Fraction"/> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
@@ -542,6 +548,7 @@ public readonly partial struct Fraction : ISerializable, IXmlSerializable, IForm
         info.AddValue(nameof(numerator), numerator);
         info.AddValue(nameof(denominator), denominator);
     }
+#endif
 
     /// <summary>Gets an XML string representation of the fraction.</summary>
     [Pure]

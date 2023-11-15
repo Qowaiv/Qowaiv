@@ -87,6 +87,8 @@ public partial struct DateSpan : IFormattable
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
+#if NET8_0_OR_GREATER
+#else
 public partial struct DateSpan : ISerializable
 {
     /// <summary>Initializes a new instance of the date span based on the serialization info.</summary>
@@ -104,6 +106,7 @@ public partial struct DateSpan : ISerializable
     void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         => Guard.NotNull(info).AddValue("Value", m_Value);
 }
+#endif
 
 public partial struct DateSpan
 {
@@ -133,7 +136,7 @@ public partial struct DateSpan : IXmlSerializable
     {
         Guard.NotNull(reader);
         var xml = reader.ReadElementString();
-        System.Runtime.CompilerServices.Unsafe.AsRef(this) = Parse(xml, CultureInfo.InvariantCulture);
+        System.Runtime.CompilerServices.Unsafe.AsRef(in this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
     /// <summary>Writes the date span to an <see href="XmlWriter" />.</summary>

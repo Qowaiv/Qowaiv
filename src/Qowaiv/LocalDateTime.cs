@@ -10,7 +10,7 @@
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.LocalDateTimeJsonConverter))]
 #endif
-public readonly partial struct LocalDateTime : ISerializable, IXmlSerializable, IFormattable, IEquatable<LocalDateTime>, IComparable, IComparable<LocalDateTime>
+public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, IEquatable<LocalDateTime>, IComparable, IComparable<LocalDateTime>
 #if NET7_0_OR_GREATER
     , IIncrementOperators<LocalDateTime>, IDecrementOperators<LocalDateTime>
     , IAdditionOperators<LocalDateTime, TimeSpan, LocalDateTime>, ISubtractionOperators<LocalDateTime, TimeSpan, LocalDateTime>

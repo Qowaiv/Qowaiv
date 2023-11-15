@@ -115,6 +115,8 @@ public class InternationalBankAccountNumberTest
 
     #region (XML) (De)serialization tests
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_TestStruct_AreEqual()
@@ -124,6 +126,8 @@ public class InternationalBankAccountNumberTest
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp, act);
     }
+#endif
+
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
@@ -144,10 +148,12 @@ public class InternationalBankAccountNumberTest
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
-        var act =Deserialize.Xml<InternationalBankAccountNumber>("NL20INGB0001234567");
+        var act = Deserialize.Xml<InternationalBankAccountNumber>("NL20INGB0001234567");
         Assert.AreEqual(TestStruct, act);
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_InternationalBankAccountNumberSerializeObject_AreEqual()
@@ -169,6 +175,8 @@ public class InternationalBankAccountNumberTest
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
+
     [Test]
     public void XmlSerializeDeserialize_InternationalBankAccountNumberSerializeObject_AreEqual()
     {
@@ -210,6 +218,8 @@ public class InternationalBankAccountNumberTest
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_Empty_AreEqual()
@@ -231,6 +241,8 @@ public class InternationalBankAccountNumberTest
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
+
     [Test]
     public void XmlSerializeDeserialize_Empty_AreEqual()
     {

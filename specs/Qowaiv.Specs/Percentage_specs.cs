@@ -369,7 +369,7 @@ public class Casts
         var casted = (Percentage)0.1751m;
         Assert.AreEqual(Svo.Percentage, casted);
     }
-   
+
     [Test]
     public void explicitly_to_decimal()
     {
@@ -1190,10 +1190,12 @@ public class Is_Open_API_data_type
     [TestCase("-4.1%")]
     [TestCase("-0.1%")]
     [TestCase("31%")]
-    public void pattern_matches(string input) 
+    public void pattern_matches(string input)
         => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Percentage))!.Matches(input).Should().BeTrue();
 }
 
+#if NET8_0_OR_GREATER
+#else
 public class Supports_binary_serialization
 {
     [Test]
@@ -1211,6 +1213,7 @@ public class Supports_binary_serialization
         Assert.AreEqual(0.1751m, info.GetDecimal("Value"));
     }
 }
+#endif
 
 public class Debugger
 {

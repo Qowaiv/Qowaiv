@@ -18,7 +18,7 @@ public class With_domain_logic
 
     [TestCase(15, "info@qowaiv.org")]
     public void has_length(int length, EmailAddress svo) => svo.Length.Should().Be(length);
-    
+
     [TestCase(false, "info@qowaiv.org")]
     [TestCase(false, "?")]
     [TestCase(true, "")]
@@ -444,6 +444,8 @@ public class Is_Open_API_data_type
            nullable: true));
 }
 
+#if NET8_0_OR_GREATER
+#else
 public class Supports_binary_serialization
 {
     [Test]
@@ -461,6 +463,7 @@ public class Supports_binary_serialization
         Assert.AreEqual("info@qowaiv.org", info.GetString("Value"));
     }
 }
+#endif
 
 public class Debugger
 {

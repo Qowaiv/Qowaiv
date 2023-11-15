@@ -90,6 +90,8 @@ public class DateTest
 
     #region (XML) (De)serialization tests
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     public void GetObjectData_SerializationInfo_AreEqual()
     {
@@ -109,6 +111,8 @@ public class DateTest
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp, act);
     }
+#endif
+
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
@@ -133,6 +137,8 @@ public class DateTest
         Assert.AreEqual(TestStruct, act);
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_DateSerializeObject_AreEqual()
@@ -154,6 +160,8 @@ public class DateTest
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
+
     [Test]
     public void XmlSerializeDeserialize_DateSerializeObject_AreEqual()
     {
@@ -195,6 +203,8 @@ public class DateTest
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_MinValue_AreEqual()
@@ -216,6 +226,8 @@ public class DateTest
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
+
     [Test]
     public void XmlSerializeDeserialize_Empty_AreEqual()
     {
@@ -439,7 +451,7 @@ public class DateTest
     {
         DateTime exp = TestStruct;
         DateTime act = new(1970, 02, 14, 00, 00, 000, DateTimeKind.Local);
-        
+
         Assert.AreEqual(exp, act);
     }
 

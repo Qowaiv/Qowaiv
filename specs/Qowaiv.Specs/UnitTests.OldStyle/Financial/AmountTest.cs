@@ -92,6 +92,8 @@ public class AmountTest
 
     #region (XML) (De)serialization tests
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     public void GetObjectData_SerializationInfo_AreEqual()
     {
@@ -111,6 +113,8 @@ public class AmountTest
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp, act);
     }
+#endif
+
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
@@ -131,11 +135,12 @@ public class AmountTest
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
-        var act =Deserialize.Xml<Amount>("42.17");
+        var act = Deserialize.Xml<Amount>("42.17");
         Assert.AreEqual(TestStruct, act);
     }
 
-
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_AmountSerializeObject_AreEqual()
@@ -157,6 +162,8 @@ public class AmountTest
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
+
     [Test]
     public void XmlSerializeDeserialize_AmountSerializeObject_AreEqual()
     {
@@ -198,6 +205,8 @@ public class AmountTest
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_Default_AreEqual()
@@ -219,6 +228,8 @@ public class AmountTest
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
+
     [Test]
     public void XmlSerializeDeserialize_Empty_AreEqual()
     {
@@ -337,7 +348,7 @@ public class AmountTest
         var exp = "12#345#678*2350";
         Assert.AreEqual(exp, act);
     }
-  
+
     #endregion
 
     #region IEquatable tests
@@ -810,7 +821,7 @@ public class AmountTest
     {
         var amount = (Amount)123.4567m;
         var rounded = amount.Round(1);
-        Assert.AreEqual((Amount)123.5m , rounded);
+        Assert.AreEqual((Amount)123.5m, rounded);
     }
 
     [Test]

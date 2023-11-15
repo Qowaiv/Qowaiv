@@ -371,7 +371,7 @@ public class Supports_JSON_serialization
     [TestCase("QOWAIV", "QOWAIV")]
     public void System_Text_JSON_deserialization(object json, CustomSvo svo)
         => JsonTester.Read_System_Text_JSON<CustomSvo>(json).Should().Be(svo);
-    
+
     [TestCase(null, null)]
     [TestCase("QOWAIV", "QOWAIV")]
     public void System_Text_JSON_serialization(CustomSvo svo, object json)
@@ -389,7 +389,7 @@ public class Supports_JSON_serialization
     public void convention_based_deserialization(object json, CustomSvo svo)
        => JsonTester.Read<CustomSvo>(json).Should().Be(svo);
 
-    
+
     [TestCase(null, null)]
     [TestCase("QOWAIV", "QOWAIV")]
     public void convention_based_serialization(CustomSvo svo, object json)
@@ -457,6 +457,8 @@ public class Is_Open_API_data_type
            pattern: null));
 }
 
+#if NET8_0_OR_GREATER
+#else
 public class Supports_binary_serialization
 {
     [Test]
@@ -466,7 +468,6 @@ public class Supports_binary_serialization
         var round_tripped = SerializeDeserialize.Binary(Svo.CustomSvo);
         Svo.CustomSvo.Should().Be(round_tripped);
     }
-
     [Test]
     public void storing_string_in_SerializationInfo()
     {
@@ -474,7 +475,7 @@ public class Supports_binary_serialization
         info.GetString("Value").Should().Be("QOWAIV");
     }
 }
-
+#endif
 public class Debugger
 {
     [TestCase("{empty}", "")]

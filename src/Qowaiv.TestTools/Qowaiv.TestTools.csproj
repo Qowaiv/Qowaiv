@@ -9,6 +9,7 @@
     <PackageId>Qowaiv.TestTools</PackageId>
     <PackageReleaseNotes>
 Next release
+- No Serializer.Binary for .NET 8.
 - Introduction of the EmptyTestClass attribute.
 v6.4.0
 - Support .NET 7.0. #261

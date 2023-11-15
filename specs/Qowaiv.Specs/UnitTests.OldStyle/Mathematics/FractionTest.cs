@@ -69,6 +69,8 @@ public class FractionTest
         Assert.AreEqual(expected, actual, description);
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_TestStruct_AreEqual()
@@ -78,6 +80,7 @@ public class FractionTest
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp, act);
     }
+#endif
 
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
@@ -99,10 +102,12 @@ public class FractionTest
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
-        var act =Deserialize.Xml<Fraction>("-69/17");
+        var act = Deserialize.Xml<Fraction>("-69/17");
         Assert.AreEqual(TestStruct, act);
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_FractionSerializeObject_AreEqual()
@@ -114,6 +119,7 @@ public class FractionTest
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
 
     [Test]
     public void XmlSerializeDeserialize_FractionSerializeObject_AreEqual()
@@ -137,6 +143,8 @@ public class FractionTest
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_Default_AreEqual()
@@ -148,6 +156,7 @@ public class FractionTest
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
 
     [Test]
     public void XmlSerializeDeserialize_Default_AreEqual()

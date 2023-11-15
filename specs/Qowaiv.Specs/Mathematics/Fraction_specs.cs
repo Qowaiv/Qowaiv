@@ -39,7 +39,7 @@ public class Can_be_parsed
     [TestCase(23, 47, "23/₄₇")]
     public void from_sub_script_denominator(long numerator, long denominator, string subScript)
         => Fraction.Parse(subScript).Should().Be(numerator.DividedBy(denominator));
-   
+
     [TestCase(1, 3, "+1/3")]
     [TestCase(-1, 3, "-1/3")]
     [TestCase(11, 43, "11/43")]
@@ -101,14 +101,14 @@ public class Can_be_created
     [TestCase(1, 1, 0.6, 0.5)]
     public void from_decimals_with_error(long numerator, long denominator, decimal number, decimal error)
         => Fraction.Create(number, error).Should().Be(numerator.DividedBy(denominator));
-    
+
     [TestCase(100)]
     public void from_decimals_without_precision_loss(int runs)
     {
         var rnd = new Random();
         var failures = new List<Fraction>(runs);
 
-        foreach(var fraction in Enumerable.Range(0, runs).Select(i => rnd.Next(int.MinValue, int.MaxValue).DividedBy(rnd.Next(3, int.MaxValue))))
+        foreach (var fraction in Enumerable.Range(0, runs).Select(i => rnd.Next(int.MinValue, int.MaxValue).DividedBy(rnd.Next(3, int.MaxValue))))
         {
             var created = Fraction.Create((decimal)fraction);
             if (created != fraction)
@@ -280,6 +280,8 @@ public class Supports_JSON_serialization
     }
 }
 
+#if NET8_0_OR_GREATER
+#else
 public class Supports_binary_serialization
 {
     [Test]
@@ -298,6 +300,7 @@ public class Supports_binary_serialization
         info.GetInt64("denominator").Should().Be(17);
     }
 }
+#endif
 
 public class Is_Open_API_data_type
 {

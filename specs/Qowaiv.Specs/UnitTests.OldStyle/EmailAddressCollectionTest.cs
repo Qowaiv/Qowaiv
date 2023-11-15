@@ -3,7 +3,7 @@
 [TestFixture]
 public class EmailAddressCollectionTest
 {
-    public static EmailAddressCollection GetTestInstance() 
+    public static EmailAddressCollection GetTestInstance()
         => EmailAddressCollection.Parse("info@qowaiv.org,test@qowaiv.org");
 
     #region (XML) (De)serialization tests
@@ -18,6 +18,8 @@ public class EmailAddressCollectionTest
         Assert.AreEqual("info@qowaiv.org,test@qowaiv.org", info.GetString("Value"));
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_TestStruct_AreEqual()
@@ -27,6 +29,8 @@ public class EmailAddressCollectionTest
         var act = SerializeDeserialize.Binary(input);
         CollectionAssert.AreEqual(exp, act);
     }
+#endif
+
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
@@ -47,11 +51,12 @@ public class EmailAddressCollectionTest
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
-        var act =Deserialize.Xml<EmailAddressCollection>("info@qowaiv.org,test@qowaiv.org");
+        var act = Deserialize.Xml<EmailAddressCollection>("info@qowaiv.org,test@qowaiv.org");
         Assert.AreEqual(GetTestInstance(), act);
     }
 
-
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_EmailAddressSerializeObject_AreEqual()
@@ -73,6 +78,8 @@ public class EmailAddressCollectionTest
         CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
+
     [Test]
     public void XmlSerializeDeserialize_EmailAddressSerializeObject_AreEqual()
     {
@@ -114,6 +121,8 @@ public class EmailAddressCollectionTest
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_Empty_AreEqual()
@@ -135,6 +144,8 @@ public class EmailAddressCollectionTest
         CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
+
     [Test]
     public void XmlSerializeDeserialize_Empty_AreEqual()
     {

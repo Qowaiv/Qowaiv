@@ -6,12 +6,12 @@ public class Communicates
     public void attempted_value_and_type()
     {
         using var _ = TestCultures.En_GB.Scoped();
-        
+
         "no_guid".Invoking(CustomGuid.Parse)
             .Should().Throw<FormatException>()
             .WithMessage("Not a valid identifier.")
             .And.InnerException.Should().BeOfType<Unparsable>()
-            .And.Subject.Should().BeEquivalentTo(new 
+            .And.Subject.Should().BeEquivalentTo(new
             {
                 Value = "no_guid",
                 Type = "Qowaiv.Identifiers.Id<Qowaiv.TestTools.ForGuid>"
@@ -23,6 +23,8 @@ public class Is_serializable
 {
     internal static readonly Exception Exception = Unparsable.ForValue<int>("fourty-two", "Not a number,").InnerException!;
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void Binary()
@@ -31,4 +33,5 @@ public class Is_serializable
         roundtrip.Should().NotBeSameAs(Exception)
             .And.Subject.Should().BeEquivalentTo(Exception);
     }
+#endif
 }

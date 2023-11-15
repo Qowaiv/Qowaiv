@@ -487,6 +487,8 @@ public class Is_Open_API_data_type
             nullable: true));
 }
 
+#if NET8_0_OR_GREATER
+#else
 public class Supports_binary_serialization
 {
     [Test]
@@ -504,6 +506,7 @@ public class Supports_binary_serialization
         Assert.AreEqual("H0H0H0", info.GetString("Value"));
     }
 }
+#endif
 
 public class Not_supported_by
 {

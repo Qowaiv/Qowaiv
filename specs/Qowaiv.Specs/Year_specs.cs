@@ -86,20 +86,20 @@ public class Has_constant
         Assert.AreEqual(default(Year), Year.Empty);
     }
 
-        [Test]
-        public void MinValue_represents_1()
-        {
-            Year min = 1.CE();
-            Assert.AreEqual(min, Year.MinValue);
-        }
-
-        [Test]
-        public void MaxValue_represents_9999()
-        {
-            Year max = 9999.CE();
-            Assert.AreEqual(max, Year.MaxValue);
-        }
+    [Test]
+    public void MinValue_represents_1()
+    {
+        Year min = 1.CE();
+        Assert.AreEqual(min, Year.MinValue);
     }
+
+    [Test]
+    public void MaxValue_represents_9999()
+    {
+        Year max = 9999.CE();
+        Assert.AreEqual(max, Year.MaxValue);
+    }
+}
 
 public class Is_equal_by_value
 {
@@ -115,42 +115,42 @@ public class Is_equal_by_value
         Assert.IsFalse(Svo.Year.Equals(new object()));
     }
 
-        [Test]
-        public void not_equal_to_different_value()
-        {
-            Year other = 2017.CE();
-            Assert.IsFalse(Svo.Year.Equals(other));
-        }
+    [Test]
+    public void not_equal_to_different_value()
+    {
+        Year other = 2017.CE();
+        Assert.IsFalse(Svo.Year.Equals(other));
+    }
 
-        [Test]
-        public void equal_to_same_value()
-        {
-            Assert.IsTrue(Svo.Year.Equals(1979.CE()));
-        }
+    [Test]
+    public void equal_to_same_value()
+    {
+        Assert.IsTrue(Svo.Year.Equals(1979.CE()));
+    }
 
-        [Test]
-        public void equal_operator_returns_true_for_same_values()
-        {
-            Assert.IsTrue(Svo.Year == 1979.CE());
-        }
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+    {
+        Assert.IsTrue(Svo.Year == 1979.CE());
+    }
 
-        [Test]
-        public void equal_operator_returns_false_for_different_values()
-        {
-            Assert.IsFalse(Svo.Year == 2017.CE());
-        }
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+    {
+        Assert.IsFalse(Svo.Year == 2017.CE());
+    }
 
-        [Test]
-        public void not_equal_operator_returns_false_for_same_values()
-        {
-            Assert.IsFalse(Svo.Year != 1979.CE());
-        }
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+    {
+        Assert.IsFalse(Svo.Year != 1979.CE());
+    }
 
-        [Test]
-        public void not_equal_operator_returns_true_for_different_values()
-        {
-            Assert.IsTrue(Svo.Year != 2017.CE());
-        }
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+    {
+        Assert.IsTrue(Svo.Year != 2017.CE());
+    }
 
     [TestCase("", 0)]
     [TestCase("1979", 665629288)]
@@ -319,16 +319,16 @@ public class Is_comparable
                 1972.CE(),
                 Year.Unknown,
             };
-            var list = new List<Year> { sorted[3], sorted[5], sorted[4], sorted[2], sorted[0], sorted[1] };
-            list.Sort();
-            Assert.AreEqual(sorted, list);
-        }
-    
-        [Test]
-        public void by_operators_for_different_values()
-        {
-            Year smaller = 1979.CE();
-            Year bigger = 2017.CE();
+        var list = new List<Year> { sorted[3], sorted[5], sorted[4], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+        Assert.AreEqual(sorted, list);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        Year smaller = 1979.CE();
+        Year bigger = 2017.CE();
 
         Assert.IsTrue(smaller < bigger);
         Assert.IsTrue(smaller <= bigger);
@@ -336,11 +336,11 @@ public class Is_comparable
         Assert.IsFalse(smaller >= bigger);
     }
 
-        [Test]
-        public void by_operators_for_equal_values()
-        {
-            Year left = 2071.CE();
-            Year right = 2071.CE();
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        Year left = 2071.CE();
+        Year right = 2071.CE();
 
         Assert.IsFalse(left < right);
         Assert.IsTrue(left <= right);
@@ -515,12 +515,14 @@ public class Is_Open_API_data_type
       .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
           dataType: typeof(Year),
           description: "Year(-only) notation.",
-          example: 1983, 
+          example: 1983,
           type: "integer",
           format: "year",
           nullable: true));
 }
 
+#if NET8_0_OR_GREATER
+#else
 public class Supports_binary_serialization
 {
     [Test]
@@ -538,6 +540,7 @@ public class Supports_binary_serialization
         Assert.AreEqual((short)1979, info.GetInt16("Value"));
     }
 }
+#endif
 
 public class Debugger
 {

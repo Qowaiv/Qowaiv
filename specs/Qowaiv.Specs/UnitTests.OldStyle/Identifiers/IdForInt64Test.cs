@@ -156,10 +156,12 @@ public class IdForInt64Test
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
-        var act =Deserialize.Xml<Id<ForInt64>>("123456789");
+        var act = Deserialize.Xml<Id<ForInt64>>("123456789");
         Assert.AreEqual(TestStruct, act);
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_IdForInt64SerializeObject_AreEqual()
@@ -185,6 +187,7 @@ public class IdForInt64Test
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
 
     [Test]
     public void XmlSerializeDeserialize_IdForInt64SerializeObject_AreEqual()
@@ -236,6 +239,8 @@ public class IdForInt64Test
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_Default_AreEqual()
@@ -261,6 +266,7 @@ public class IdForInt64Test
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
 
     [Test]
     public void XmlSerializeDeserialize_Default_AreEqual()

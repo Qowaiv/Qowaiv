@@ -115,10 +115,12 @@ public class IdForStringTest
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
-        var act =Deserialize.Xml<Id<ForString>>("Qowaiv-ID");
+        var act = Deserialize.Xml<Id<ForString>>("Qowaiv-ID");
         Assert.AreEqual(TestStruct, act);
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_IdForStringSerializeObject_AreEqual()
@@ -144,6 +146,7 @@ public class IdForStringTest
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
 
     [Test]
     public void XmlSerializeDeserialize_IdForStringSerializeObject_AreEqual()
@@ -195,6 +198,8 @@ public class IdForStringTest
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_Default_AreEqual()
@@ -212,14 +217,14 @@ public class IdForStringTest
             Id = 17,
             Obj = default,
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        }
+        };
 
-        ;
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
 
     [Test]
     public void XmlSerializeDeserialize_Default_AreEqual()
@@ -353,7 +358,7 @@ public class IdForStringTest
     [Test]
     public void Next_NotSupported()
     {
-        Assert.Throws<NotSupportedException>(()=> Id<ForString>.Next());
+        Assert.Throws<NotSupportedException>(() => Id<ForString>.Next());
     }
 
     [TestCase(null)]

@@ -457,6 +457,8 @@ public class Is_Open_API_data_type
            nullable: true));
 }
 
+#if NET8_0_OR_GREATER
+#else
 public class Supports_binary_serialization
 {
     [Test]
@@ -474,6 +476,7 @@ public class Supports_binary_serialization
         info.GetByte("Value").Should().Be((byte)4);
     }
 }
+#endif
 
 public class Debugger
 {

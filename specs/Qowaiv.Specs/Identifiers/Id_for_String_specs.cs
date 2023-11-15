@@ -1,4 +1,4 @@
-﻿    namespace Identifiers.Id_for_String_specs;
+﻿namespace Identifiers.Id_for_String_specs;
 
 public class Is_comparable
 {
@@ -78,6 +78,8 @@ public class Supports_type_conversion
     }
 }
 
+#if NET8_0_OR_GREATER
+#else
 public class Supports_binary_serialization
 {
     [Test]
@@ -95,6 +97,7 @@ public class Supports_binary_serialization
         info.GetString("Value").Should().Be("Qowaiv-ID");
     }
 }
+#endif
 
 public class Is_Open_API_data_type
 {

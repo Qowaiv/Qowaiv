@@ -162,10 +162,12 @@ public class IdForGuidTest
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
-        var act =Deserialize.Xml<Id<ForGuid>>("0F5AB5AB-12CB-4629-878D-B18B88B9A504");
+        var act = Deserialize.Xml<Id<ForGuid>>("0F5AB5AB-12CB-4629-878D-B18B88B9A504");
         Assert.AreEqual(TestStruct, act);
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_IdForGuidSerializeObject_AreEqual()
@@ -175,22 +177,19 @@ public class IdForGuidTest
             Id = 17,
             Obj = TestStruct,
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        }
-
-        ;
+        };
         var exp = new IdForGuidSerializeObject
         {
             Id = 17,
             Obj = TestStruct,
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        }
-
-        ;
+        };
         var act = SerializeDeserialize.Binary(input);
         Assert.AreEqual(exp.Id, act.Id, "Id");
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
 
     [Test]
     public void XmlSerializeDeserialize_IdForGuidSerializeObject_AreEqual()
@@ -242,6 +241,8 @@ public class IdForGuidTest
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
 
+#if NET8_0_OR_GREATER
+#else
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void SerializeDeserialize_Default_AreEqual()
@@ -267,6 +268,7 @@ public class IdForGuidTest
         Assert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
+#endif
 
     [Test]
     public void XmlSerializeDeserialize_Default_AreEqual()

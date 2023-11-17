@@ -250,8 +250,8 @@ public class Supports_JSON_serialization
     [TestCase(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
     {
-        var exception = Assert.Catch(() => JsonTester.Read<MonthSpan>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
+        json.Invoking(JsonTester.Read<MonthSpan>)
+            .Should().Throw<Exception>().Which.Should().BeOfType(exceptionType);
     }
 }
 

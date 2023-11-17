@@ -82,6 +82,27 @@ public class End_date
     public void set_for_inactive() => Country.CSHH.EndDate.Should().Be(new Date(1992, 12, 31));
 }
 
+public class Exists
+{
+    [Test]
+    public void for_country_exiting_on_date()
+        => Country.CSXX.ExistsOnDate(new Date(1993, 01, 01)).Should().BeTrue();
+
+    [Test]
+    public void not_for_country_not_exiting_on_date()
+        => Country.CSXX.ExistsOnDate(new Date(1992, 12, 31)).Should().BeFalse();
+
+#if NET6_0_OR_GREATER
+    [Test]
+    public void for_country_exiting_on_date_only()
+        => Country.CSXX.ExistsOnDate(new DateOnly(1993, 01, 01)).Should().BeTrue();
+
+    [Test]
+    public void not_for_country_not_exiting_on_date_only()
+        => Country.CSXX.ExistsOnDate(new Date(1992, 12, 31)).Should().BeFalse();
+#endif
+}
+
 public class Is_comparable
 {
     [Test]

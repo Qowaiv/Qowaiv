@@ -19,7 +19,7 @@ namespace Qowaiv
     public readonly partial struct LocalDateTime
     {
         /// <summary>Casts a <see cref="LocalDateTime"/> implicitly to a <see cref="DateOnly"/>.</summary>
-        public static implicit operator DateOnly(LocalDateTime date) => new(date.Year, date.Month, date.Day);
+        public static explicit operator DateOnly(LocalDateTime date) => new(date.Year, date.Month, date.Day);
 
         /// <summary>Casts a <see cref="DateOnly"/> explicitly to a <see cref="Date"/>.</summary>
         public static explicit operator LocalDateTime(DateOnly date) => new(date.Year, date.Month, date.Day);
@@ -28,7 +28,7 @@ namespace Qowaiv
     public readonly partial struct WeekDate
     {
         /// <summary>Casts a <see cref="WeekDate"/> implicitly to a <see cref="DateOnly"/>.</summary>
-        public static implicit operator WeekDate(DateOnly date) => date;
+        public static implicit operator WeekDate(DateOnly date) => Create(date);
 
         /// <inheritdoc cref="Create(Date)"/>
         [Pure]
@@ -39,15 +39,15 @@ namespace Qowaiv
     {
         /// <inheritdoc cref="Age(Date, Date)" />
         [Pure]
-        public static DateSpan Age(DateOnly date) => Age(date, Clock.Today());
+        public static DateSpan Age(DateOnly date) => Age((Date)date);
 
         /// <inheritdoc cref="Age(Date, Date)" />
         [Pure]
-        public static DateSpan Age(DateOnly date, DateOnly reference) => Subtract(reference, date, DateSpanSettings.WithoutMonths);
+        public static DateSpan Age(DateOnly date, DateOnly reference) => Age((Date)date, (Date)reference);
 
         /// <inheritdoc cref="Subtract(Date, Date)" />
         [Pure]
-        public static DateSpan Subtract(DateOnly d1, DateOnly d2) => Subtract(d1, d2, DateSpanSettings.Default);
+        public static DateSpan Subtract(DateOnly d1, DateOnly d2) => Subtract((Date)d1, (Date)d2);
 
         /// <inheritdoc cref="Subtract(Date, Date, DateSpanSettings)" />
         [Pure]

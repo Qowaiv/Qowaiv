@@ -222,3 +222,37 @@ public class Supports_JSON_serialization
         Assert.IsInstanceOf(exceptionType, exception);
     }
 }
+
+public class Casts
+{
+#if NET6_0_OR_GREATER
+    [Test]
+    public void explicitly_from_Date_Only()
+    {
+        var casted = (LocalDateTime)Svo.DateOnly;
+        casted.Should().Be(new(2017, 06, 11));
+    }
+
+    [Test]
+    public void explicitly_to_Date_Only()
+    {
+        DateOnly casted = (DateOnly)Svo.LocalDateTime;
+        casted.Should().Be(Svo.DateOnly);
+    }
+#endif
+
+    [Test]
+    public void explicitly_from_Date()
+    {
+        var casted = (LocalDateTime)Svo.Date;
+        casted.Should().Be(new(2017, 06, 11));
+    }
+
+    [Test]
+    public void explicitly_to_Date()
+    {
+        var casted = (Date)Svo.LocalDateTime;
+        casted.Should().Be(Svo.Date);
+    }
+}
+

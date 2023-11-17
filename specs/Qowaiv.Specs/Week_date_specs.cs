@@ -12,6 +12,18 @@ public class Is_invalid
     public void for_garbage() => WeekDate.TryParse("Not a week date").Should().BeNull();
 }
 
+public class Can_be_created
+{
+    [Test]
+    public void from_date()
+        => WeekDate.Create(Svo.Date).Should().Be(Svo.WeekDate);
+
+#if NET6_0_OR_GREATER
+    [Test]
+    public void from_date_only()
+        => WeekDate.Create(Svo.DateOnly).Should().Be(Svo.WeekDate);
+#endif
+}
 public class Can_not_be_created
 {
     [TestCase(0)]
@@ -176,3 +188,15 @@ public class Is_Open_API_data_type
            type: "string",
            format: "date-weekbased"));
 }
+
+#if NET6_0_OR_GREATER
+public class Casts
+{
+    [Test]
+    public void implicitly_from_DateOnly()
+    {
+        WeekDate casted = Svo.DateOnly;
+        casted.Should().Be(Svo.WeekDate);
+    }
+}
+#endif

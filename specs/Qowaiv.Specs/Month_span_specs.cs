@@ -1,4 +1,4 @@
-﻿namespace MonthSpan_specs;
+﻿namespace Month_span_specs;
 
 public class Is_equal_by_value
 {
@@ -88,6 +88,29 @@ public class Can_be_transformed
     
     [Test]
     public void divide_by_decimal() => (Svo.MonthSpan / 4.0588m).Should().Be(MonthSpan.FromMonths(17));
+}
+
+public class Can_subtract
+{
+    [TestCase("2020-04-30", "2020-04-01", 00)]
+    [TestCase("2020-04-30", "2020-03-31", 01)]
+    [TestCase("2020-01-01", "2019-01-02", 11)]
+    [TestCase("2020-01-01", "2019-03-13", 09)]
+    [TestCase("2020-01-01", "2019-03-01", 10)]
+    [TestCase("2020-01-01", "2020-02-20", -1)]
+    public void two_dates(Date d1, Date d2, MonthSpan expected) 
+        => MonthSpan.Subtract(d1, d2).Should().Be(expected);
+
+#if NET6_0_OR_GREATER
+    [TestCase("2020-04-30", "2020-04-01", 00)]
+    [TestCase("2020-04-30", "2020-03-31", 01)]
+    [TestCase("2020-01-01", "2019-01-02", 11)]
+    [TestCase("2020-01-01", "2019-03-13", 09)]
+    [TestCase("2020-01-01", "2019-03-01", 10)]
+    [TestCase("2020-01-01", "2020-02-20", -1)]
+    public void two_date_onlys(Date d1, Date d2, MonthSpan expected)
+        => MonthSpan.Subtract((DateOnly)d1, (DateOnly)d2).Should().Be(expected);
+#endif
 }
 
 public class Is_comparable
@@ -227,8 +250,8 @@ public class Supports_JSON_serialization
     [TestCase(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
     {
-        var exception = Assert.Catch(() => JsonTester.Read<MonthSpan>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
+        json.Invoking(JsonTester.Read<MonthSpan>)
+            .Should().Throw<Exception>().Which.Should().BeOfType(exceptionType);
     }
 }
 

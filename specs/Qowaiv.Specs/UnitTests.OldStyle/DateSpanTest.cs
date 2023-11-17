@@ -519,108 +519,10 @@ public class DateSpanTest
     #region Operations
 
     [Test]
-    public void Negate_TestStruct_Negated()
-    {
-        var negated = -TestStruct;
-        Assert.AreEqual(new DateSpan(-10, -3, +5), negated);
-    }
-    [Test]
-    public void Plus_TestStruct_Unchanged()
-    {
-        var negated = +TestStruct;
-        Assert.AreEqual(TestStruct, negated);
-    }
-
-    [Test]
     public void Mutate_Overflows()
     {
         var x = Assert.Catch<OverflowException>(() => DateSpan.MaxValue.AddDays(1));
         Assert.AreEqual("DateSpan overflowed because the resulting duration is too long.", x.Message);
-    }
-
-    [Test]
-    public void Add_DateSpan_AddsUp()
-    {
-        var l = new DateSpan(12, 3, 4);
-        var r = new DateSpan(-2, 2, 7);
-
-        var exp = new DateSpan(10, 5, 11);
-        var act = l + r;
-
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void Subtract_DateSpan_AddsUp()
-    {
-        var l = new DateSpan(12, 3, 4);
-        var r = new DateSpan(-2, 2, 7);
-
-        var exp = new DateSpan(14, 1, -3);
-        var act = l - r;
-
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void Add_Days_AddsUp()
-    {
-        var span = new DateSpan(12, 3, 4);
-        var exp = new DateSpan(12, 3, 21);
-        var act = span.AddDays(17);
-
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void Add_Months_AddsUp()
-    {
-        var span = new DateSpan(12, 3, 4);
-        var exp = new DateSpan(12, 20, 4);
-        var act = span.AddMonths(17);
-
-        Assert.AreEqual(exp, act);
-    }
-
-    [Test]
-    public void Add_Years_AddsUp()
-    {
-        var span = new DateSpan(12, 3, 4);
-        var exp = new DateSpan(29, 3, 4);
-        var act = span.AddYears(17);
-
-        Assert.AreEqual(exp, act);
-    }
-
-
-    [Test]
-    public void Age_HasNoMonths()
-    {
-        using (Clock.SetTimeForCurrentContext(() => new Date(2019, 10, 10)))
-        {
-            var age = DateSpan.Age(new Date(2017, 06, 11));
-            var exp = new DateSpan(2, 0, 121);
-            Assert.AreEqual(exp, age);
-        }
-    }
-
-    [TestCase(+0, +364, "2018-06-10", "2017-06-11", DateSpanSettings.DaysOnly)]
-    [TestCase(+0, -364, "2017-06-11", "2018-06-10", DateSpanSettings.DaysOnly)]
-    [TestCase(+11, +30, "2018-06-10", "2017-06-11", DateSpanSettings.Default)]
-    [TestCase(+12, -01, "2018-06-10", "2017-06-11", DateSpanSettings.MixedSigns)]
-    [TestCase(+15, +14, "2018-06-10", "2017-02-27", DateSpanSettings.Default)]
-    [TestCase(+15, +11, "2018-06-10", "2017-02-27", DateSpanSettings.DaysFirst)]
-    [TestCase(+24, +119, "2019-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
-    [TestCase(+36, +120, "2020-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
-    [TestCase(+12, +331, "2019-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
-    [TestCase(+24, +332, "2020-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
-    [TestCase(-11, -30, "2017-06-11", "2018-06-10", DateSpanSettings.Default)]
-    [TestCase(-12, +01, "2017-06-11", "2018-06-10", DateSpanSettings.MixedSigns)]
-    public void Subtract(int months, int days, Date d1, Date d2, DateSpanSettings settings)
-    {
-        var span = DateSpan.Subtract(d1, d2, settings);
-        var expected = new DateSpan(0, months, days);
-        Assert.AreEqual(expected, span);
     }
 
     #endregion

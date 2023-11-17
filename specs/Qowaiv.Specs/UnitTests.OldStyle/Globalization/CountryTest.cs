@@ -710,22 +710,6 @@ public class CountryTest
         Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
     }
 
-    [Test]
-    public void ExistsOnDate_SerbiaAndMontenegro1992_IsFalse()
-    {
-        Assert.IsFalse(Country.CSXX.ExistsOnDate(new Date(1992, 12, 31)));
-    }
-    [Test]
-    public void ExistsOnDate_SerbiaAndMontenegro1993_IsTrue()
-    {
-        Assert.IsTrue(Country.CSXX.ExistsOnDate(new Date(1993, 01, 01)));
-    }
-    [Test]
-    public void ExistsOnDate_SerbiaAndMontenegro2012_IsFalse()
-    {
-        Assert.IsFalse(Country.CSXX.ExistsOnDate(new Date(2012, 01, 01)));
-    }
-
     /// <remarks>
     /// On 1980, Burkina Faso did not yet exist.
     /// </remarks>

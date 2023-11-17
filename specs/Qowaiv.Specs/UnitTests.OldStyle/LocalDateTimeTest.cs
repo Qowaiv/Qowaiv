@@ -305,9 +305,6 @@ public class LocalDateTimeTest
 
     #endregion
 
-    #region Properties
-    #endregion
-
     #region Methods
 
     [Test]

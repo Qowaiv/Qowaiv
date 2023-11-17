@@ -64,4 +64,33 @@ public class Can_not_be_related_to
        => new DateOnly(2017, 06, 11).IsIn(Year.Unknown).Should().BeFalse();
 }
 
+public class Method : SingleValueObjectSpecs
+{
+    private static readonly IReadOnlyCollection<MethodInfo> DateMethods = AllSvos
+        .SelectMany(t => t.GetMethods().Where(WithDateParameter))
+        .ToArray();
+
+    [TestCaseSource(nameof(DateMethods))]
+    public void Exist_with_Date_Only_overload(MethodInfo method)
+    {
+        var type = method.DeclaringType!;
+        var methods = type.GetMethods();
+        var overload = methods.SingleOrDefault(overload => IsOverload(method, overload));
+
+        overload.Should().NotBeNull(because: $"Method {method.DeclaringType}.{method} should have an overload for DateOnly");
+    }
+
+    private static bool IsOverload(MethodInfo method, MethodInfo overload)
+        => method.Name == overload.Name
+        && method.ReturnType == overload.ReturnType
+        && IsOverload(method.GetParameters().Select(p => p.ParameterType), overload.GetParameters().Select(p => p.ParameterType));
+
+    private static bool IsOverload(IEnumerable<Type> method, IEnumerable<Type> overload)
+        => method.Select(t => t == typeof(Date) ? typeof(DateOnly) : t).SequenceEqual(overload);
+
+    private static bool WithDateParameter(MethodInfo method) 
+        => method.GetParameters().Exists(p => p.ParameterType == typeof(Date))
+        && method.ReturnType != typeof(Date)
+        && method.DeclaringType != typeof(Date);
+}
 #endif

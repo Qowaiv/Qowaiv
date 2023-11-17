@@ -18,6 +18,7 @@ public class Is_valid
     public void For(string str, string because)
         => DateSpan.TryParse(str).Should().NotBeNull(because);
 }
+
 public class Is_invalid
 {
     [Test]
@@ -106,4 +107,146 @@ public class Is_Open_API_data_type
            type: "string",
            format: "date-span",
            pattern: @"[+-]?[0-9]+Y[+-][0-9]+M[+-][0-9]+D"));
+}
+
+public class Can_be_operated
+{
+    [Test]
+    public void negate_negates_values()
+    {
+        var negated = -Svo.DateSpan;
+        negated.Should().Be(new DateSpan(-10, -3, +5));
+    }
+
+    [Test]
+    public void plus_does_nothing()
+    {
+        var plussed = +Svo.DateSpan;
+        plussed.Should().Be(Svo.DateSpan);
+    }
+}
+
+public class Can_create
+{
+    [Test]
+    public void Age_form_date_without_months()
+    {
+        using (Clock.SetTimeForCurrentContext(() => new Date(2019, 10, 10)))
+        {
+            var age = DateSpan.Age(new Date(2017, 06, 11));
+            age.Should().Be(new DateSpan(years: 2, months: 0, days: 121));
+        }
+    }
+
+#if NET6_0_OR_GREATER
+
+    [Test]
+    public void Age_form_date_only_without_months()
+    {
+        using (Clock.SetTimeForCurrentContext(() => new Date(2019, 10, 10)))
+        {
+            var age = DateSpan.Age(new DateOnly(2017, 06, 11));
+            age.Should().Be(new DateSpan(years: 2, months: 0, days: 121));
+        }
+    }
+
+    [Test]
+    public void Age_for_reference_date()
+    {
+        var age = DateSpan.Age(new DateOnly(2017, 06, 11), new DateOnly(2023, 11, 17));
+        age.Should().Be(new DateSpan(years: 6, months: 0, days: 159));
+    }
+
+#endif
+}
+
+public class Can_add
+{
+    [Test]
+    public void two_date_spans()
+    {
+        var l = new DateSpan(12, 3, 4);
+        var r = new DateSpan(-2, 2, 7);
+        (l + r).Should().Be(new DateSpan(10, 5, 11));
+    }
+
+    [Test]
+    public void days_to_date_span()
+    {
+        var span = new DateSpan(12, 3, 4);
+        span.AddDays(17).Should().Be(new DateSpan(12, 3, 21));
+    }
+
+    [Test]
+    public void months_to_date_span()
+    {
+        var span = new DateSpan(12, 3, 4);
+        span.AddMonths(17).Should().Be(new DateSpan(12, 20, 4));
+    }
+
+    [Test]
+    public void years_to_date_span()
+    {
+        var span = new DateSpan(12, 3, 4);
+        span.AddYears(17).Should().Be(new DateSpan(29, 3, 4));
+    }
+}
+
+public class Can_subtract
+{
+    [Test]
+    public void two_date_spans()
+    {
+        var l = new DateSpan(12, 3, 4);
+        var r = new DateSpan(-2, 2, 7);
+        (l - r).Should().Be(new DateSpan(14, 1, -3));
+    }
+    
+    [Test]
+    public void two_dates()
+        => DateSpan.Subtract(new Date(2023, 11, 17), Svo.Date)
+        .Should().Be(new DateSpan(years: 6, months: 5, days: 6));
+
+    [TestCase(+0, +364, "2018-06-10", "2017-06-11", DateSpanSettings.DaysOnly)]
+    [TestCase(+0, -364, "2017-06-11", "2018-06-10", DateSpanSettings.DaysOnly)]
+    [TestCase(+11, +30, "2018-06-10", "2017-06-11", DateSpanSettings.Default)]
+    [TestCase(+12, -01, "2018-06-10", "2017-06-11", DateSpanSettings.MixedSigns)]
+    [TestCase(+15, +14, "2018-06-10", "2017-02-27", DateSpanSettings.Default)]
+    [TestCase(+15, +11, "2018-06-10", "2017-02-27", DateSpanSettings.DaysFirst)]
+    [TestCase(+24, +119, "2019-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+    [TestCase(+36, +120, "2020-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+    [TestCase(+12, +331, "2019-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+    [TestCase(+24, +332, "2020-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+    [TestCase(-11, -30, "2017-06-11", "2018-06-10", DateSpanSettings.Default)]
+    [TestCase(-12, +01, "2017-06-11", "2018-06-10", DateSpanSettings.MixedSigns)]
+    public void two_dates_based_on_settings(int months, int days, Date d1, Date d2, DateSpanSettings settings)
+    {
+        var expected = new DateSpan(0, months, days);
+        DateSpan.Subtract(d1, d2, settings).Should().Be(expected);
+    }
+
+#if NET6_0_OR_GREATER
+    [Test]
+    public void two_date_onlys()
+        => DateSpan.Subtract(new DateOnly(2023, 11, 17), Svo.DateOnly)
+        .Should().Be(new DateSpan(years: 6, months: 5, days: 6));
+
+    [TestCase(+0, +364, "2018-06-10", "2017-06-11", DateSpanSettings.DaysOnly)]
+    [TestCase(+0, -364, "2017-06-11", "2018-06-10", DateSpanSettings.DaysOnly)]
+    [TestCase(+11, +30, "2018-06-10", "2017-06-11", DateSpanSettings.Default)]
+    [TestCase(+12, -01, "2018-06-10", "2017-06-11", DateSpanSettings.MixedSigns)]
+    [TestCase(+15, +14, "2018-06-10", "2017-02-27", DateSpanSettings.Default)]
+    [TestCase(+15, +11, "2018-06-10", "2017-02-27", DateSpanSettings.DaysFirst)]
+    [TestCase(+24, +119, "2019-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+    [TestCase(+36, +120, "2020-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+    [TestCase(+12, +331, "2019-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+    [TestCase(+24, +332, "2020-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+    [TestCase(-11, -30, "2017-06-11", "2018-06-10", DateSpanSettings.Default)]
+    [TestCase(-12, +01, "2017-06-11", "2018-06-10", DateSpanSettings.MixedSigns)]
+    public void two_date_onlys_based_on_settings(int months, int days, Date d1, Date d2, DateSpanSettings settings)
+    {
+        var expected = new DateSpan(0, months, days);
+        DateSpan.Subtract((DateOnly)d1, (DateOnly)d2, settings).Should().Be(expected);
+    }
+#endif
 }

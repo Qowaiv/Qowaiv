@@ -304,18 +304,6 @@ public class MonthSpanTest
         added.Should().Be(new DateTime(2016, 09, 11, 00, 00, 000, DateTimeKind.Local));
     }
 
-    [TestCase(0, "2020-04-30", "2020-04-01")]
-    [TestCase(1, "2020-04-30", "2020-03-31")]
-    [TestCase(11, "2020-01-01", "2019-01-02")]
-    [TestCase(9, "2020-01-01", "2019-03-13")]
-    [TestCase(10, "2020-01-01", "2019-03-01")]
-    [TestCase(-1, "2020-01-01", "2020-02-20")]
-    public void Subtract_TwoDates(MonthSpan expected, Date d1, Date d2)
-    {
-        var delta = MonthSpan.Subtract(d1, d2);
-        Assert.AreEqual(expected, delta);
-    }
-
     /// <summary>Orders a list of month spans ascending.</summary>
     [Test]
     public void OrderBy_MonthSpan_AreEqual()

@@ -20,7 +20,7 @@ public readonly partial struct Percentage
 
     internal readonly struct FormatInfo
     {
-        private static readonly string[] Befores = new[] { "fr-FR", "fa-IR" };
+        private static readonly string[] Befores = ["fr-FR", "fa-IR"];
 
         public FormatInfo(string format, NumberFormatInfo provider, Symbol symbol, Position position)
         {

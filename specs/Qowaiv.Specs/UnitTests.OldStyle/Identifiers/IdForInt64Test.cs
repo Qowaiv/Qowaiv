@@ -40,7 +40,7 @@ public class IdForInt64Test
     [Test]
     public void FromBytes_Bytes_IsTestStruct()
     {
-        var fromBytes = Id<ForInt64>.FromBytes(new byte[] { 21, 205, 91, 7, 0, 0, 0, 0 });
+        var fromBytes = Id<ForInt64>.FromBytes([21, 205, 91, 7, 0, 0, 0, 0]);
         Assert.AreEqual(TestStruct, fromBytes);
     }
 

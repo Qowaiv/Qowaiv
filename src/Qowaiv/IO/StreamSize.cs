@@ -539,10 +539,10 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
         };
 
     private static readonly Regex FormattedPattern = new("^(?<format>.*)(?<streamSizeMarker> ?[sSfF]i?)$", RegOptions.RightToLeft, RegOptions.Timeout);
-    private static readonly string[] ShortLabels = { "B", "kB", "MB", "GB", "TB", "PB", "EB" };
-    private static readonly string[] FullLabels = { "byte", "kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte" };
-    private static readonly string[] ShortLabels1024 = { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB" };
-    private static readonly string[] FullLabels1024 = { "byte", "kibibyte", "Mebibyte", "Gibibyte", "Tebibyte", "Pebibyte", "Exbibyte" };
+    private static readonly string[] ShortLabels = ["B", "kB", "MB", "GB", "TB", "PB", "EB"];
+    private static readonly string[] FullLabels = ["byte", "kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte"];
+    private static readonly string[] ShortLabels1024 = ["B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB"];
+    private static readonly string[] FullLabels1024 = ["byte", "kibibyte", "Mebibyte", "Gibibyte", "Tebibyte", "Pebibyte", "Exbibyte"];
 
     /// <summary>Casts a stream size to a System.int.</summary>
     public static explicit operator int(StreamSize val) => (int)val.m_Value;

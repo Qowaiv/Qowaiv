@@ -82,7 +82,7 @@ public class README_md
         public string? format { get; init; }
         public string? pattern { get; init; }
         public bool nullable { get; init; }
-        public string[]? @enum { get; init; } = Array.Empty<string>();
+        public string[]? @enum { get; init; } = [];
     }
 }
 #endif

@@ -29,8 +29,7 @@ public class GuidBehavior : IdentifierBehavior
 
     /// <inheritdoc/>
     [Pure]
-    public override byte[] ToByteArray(object? obj)
-        => obj is Guid guid ? guid.ToByteArray() : Array.Empty<byte>();
+    public override byte[] ToByteArray(object? obj) => obj is Guid guid ? guid.ToByteArray() : [];
 
     /// <inheritdoc/>
     [Pure]

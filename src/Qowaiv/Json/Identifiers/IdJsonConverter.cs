@@ -100,7 +100,7 @@ public sealed class IdJsonConverter : JsonConverterFactory
 
             stringParsers[type] = parser;
         }
-        return parser.Invoke(null, new object?[] { str })!;
+        return parser.Invoke(null, [str])!;
     }
 
     [Pure]
@@ -113,7 +113,7 @@ public sealed class IdJsonConverter : JsonConverterFactory
 
             int64Parsers[type] = parser;
         }
-        return parser.Invoke(null, new object?[] { number })!;
+        return parser.Invoke(null, [number])!;
     }
 
     private static readonly ConcurrentDictionary<Type, MethodInfo> stringParsers = new();

@@ -71,8 +71,8 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
         /// short slash    | ̷  |  337
         /// long slash     | ̸  |  338.
         /// </remarks>
-        public static readonly string FractionBars = new(new[]
-        {
+        public static readonly string FractionBars = new(
+        [
             Slash,
             Colon,
             DivisionSign,
@@ -80,7 +80,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
             DivisionSlash,
             ShortSlash,
             LongSlash,
-        });
+        ]);
 
         public static readonly Regex Pattern = new(
             @"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$",

@@ -22,7 +22,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// <remarks>
     /// Both comma and semicolon are supported.
     /// </remarks>
-    private static readonly char[] Separators = new[] { ',', ';' };
+    private static readonly char[] Separators = [',', ';'];
 
     /// <summary>The underlying hash set.</summary>
     /// <remarks>

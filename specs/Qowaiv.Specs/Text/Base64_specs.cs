@@ -8,7 +8,7 @@ public class ToString
 
     [Test]
     public void EmptyArray_StringEmpty()
-        => Base64.ToString(Array.Empty<byte>()).Should().Be(string.Empty);
+        => Base64.ToString([]).Should().Be(string.Empty);
 
     [TestCase("Aao=", 1, 170)]
     [TestCase("Cxct", 11, 23, 45)]

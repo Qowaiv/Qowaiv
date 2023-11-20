@@ -25,9 +25,7 @@ public class Int64IdBehavior : IdentifierBehavior
     /// <inheritdoc/>
     [Pure]
     public override byte[] ToByteArray(object? obj)
-        => obj is long num
-        ? BitConverter.GetBytes(num)
-        : Array.Empty<byte>();
+        => obj is long num ? BitConverter.GetBytes(num) : [];
 
     /// <inheritdoc/>
     [Pure]

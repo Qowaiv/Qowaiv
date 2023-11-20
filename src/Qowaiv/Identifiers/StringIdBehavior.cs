@@ -24,7 +24,7 @@ public class StringIdBehavior : IdentifierBehavior
 
     /// <inheritdoc/>
     [Pure]
-    public override byte[] ToByteArray(object? obj) => obj is string str ? Encoding.ASCII.GetBytes(str) : Array.Empty<byte>();
+    public override byte[] ToByteArray(object? obj) => obj is string str ? Encoding.ASCII.GetBytes(str) : [];
 
     /// <inheritdoc/>
     [Pure]

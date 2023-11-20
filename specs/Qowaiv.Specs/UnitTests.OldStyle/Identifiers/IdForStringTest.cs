@@ -40,7 +40,7 @@ public class IdForStringTest
     [Test]
     public void FromBytes_Bytes_IsTestStruct()
     {
-        var fromBytes = Id<ForString>.FromBytes(new byte[] { 81, 111, 119, 97, 105, 118, 45, 73, 68 });
+        var fromBytes = Id<ForString>.FromBytes([81, 111, 119, 97, 105, 118, 45, 73, 68]);
         Assert.AreEqual(TestStruct, fromBytes);
     }
 

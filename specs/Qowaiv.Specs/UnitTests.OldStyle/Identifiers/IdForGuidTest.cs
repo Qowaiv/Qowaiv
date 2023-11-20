@@ -40,7 +40,7 @@ public class IdForGuidTest
     [Test]
     public void FromBytes_Bytes_IsTestStruct()
     {
-        var fromBytes = Id<ForGuid>.FromBytes(new byte[] { 171, 181, 90, 15, 203, 18, 41, 70, 135, 141, 177, 139, 136, 185, 165, 4 });
+        var fromBytes = Id<ForGuid>.FromBytes([171, 181, 90, 15, 203, 18, 41, 70, 135, 141, 177, 139, 136, 185, 165, 4]);
         Assert.AreEqual(TestStruct, fromBytes);
     }
 

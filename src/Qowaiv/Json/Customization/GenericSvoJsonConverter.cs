@@ -36,7 +36,7 @@ public sealed class GenericSvoJsonConverter : JsonConverterFactory
             parser = type.GetMethod(nameof(FromJson), BindingFlags.Public | BindingFlags.Static)!;
             parsers[type] = parser;
         }
-        return (Svo<TBehavior>)parser.Invoke(null, new object?[] { str })!;
+        return (Svo<TBehavior>)parser.Invoke(null, [str])!;
     }
 
     private static readonly Dictionary<Type, MethodInfo> parsers = new();

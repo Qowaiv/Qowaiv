@@ -34,7 +34,7 @@ public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>
     [Pure]
     public byte[] ToByteArray()
     {
-        if (m_Value is null || m_Value.Length == 0) return Array.Empty<byte>();
+        if (m_Value is null || m_Value.Length == 0) return [];
         else
         {
             var clone = new byte[m_Value.Length];
@@ -121,7 +121,7 @@ public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>
     public static CryptographicSeed Create(params byte[] val)
         => val == null || val.Length == 0
         ? Empty
-        : new CryptographicSeed(val.ToArray());
+        : new CryptographicSeed([.. val]);
 
     /// <summary>Creates a cryptographic seed from a JSON string node.</summary>
     [Pure]

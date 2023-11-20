@@ -61,7 +61,7 @@ public static class JsonTester
 
         try
         {
-            return (T?)fromJson.Invoke(null, new[] { val });
+            return (T?)fromJson.Invoke(null, [val]);
         }
         catch (TargetInvocationException x)
         {
@@ -78,7 +78,7 @@ public static class JsonTester
 
         return toJson is null
             ? throw new InvalidOperationException($"Could not find {typeof(T).Name}.ToJson().")
-            : toJson.Invoke(val, Array.Empty<object>());
+            : toJson.Invoke(val, []);
     }
 
     [Pure]

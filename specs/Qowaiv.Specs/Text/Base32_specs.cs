@@ -8,7 +8,7 @@ public class ToString
 
     [Test]
     public void EmptyArray_StringEmpty()
-        => Base32.ToString(Array.Empty<byte>()).Should().Be(string.Empty);
+        => Base32.ToString([]).Should().Be(string.Empty);
     
     [TestCase("BQ", 12)]
     [TestCase("BQRA", 12, 34)]

@@ -51,8 +51,8 @@ public static class TestCultures
         get
         {
             var culture = new CultureInfo("nl-BE");
-            culture.DateTimeFormat.AbbreviatedMonthNames = new[]
-            {
+            culture.DateTimeFormat.AbbreviatedMonthNames =
+            [
                 "jan.",
                 "feb.",
                 "mrt.",
@@ -66,7 +66,7 @@ public static class TestCultures
                 "nov.",
                 "dec.",
                 string.Empty,
-            };
+            ];
             return culture;
         }
     }

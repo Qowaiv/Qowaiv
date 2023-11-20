@@ -31,7 +31,7 @@ public static class Base64
     {
         if (string.IsNullOrEmpty(s))
         {
-            bytes = Array.Empty<byte>();
+            bytes = [];
             return true;
         }
         try
@@ -41,7 +41,7 @@ public static class Base64
         }
         catch
         {
-            bytes = Array.Empty<byte>();
+            bytes = [];
             return false;
         }
     }

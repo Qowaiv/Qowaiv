@@ -47,7 +47,7 @@ public readonly partial struct BusinessIdentifierCode : IXmlSerializable, IForma
     /// <summary>Gets the institution code or business code.</summary>
     public string Business
         => m_Value is { Length: >= 4 } && !IsUnknown()
-        ? m_Value.Substring(0, 4)
+        ? m_Value[..4]
         : string.Empty;
 
     /// <summary>Gets the country info of the country code.</summary>
@@ -66,7 +66,7 @@ public readonly partial struct BusinessIdentifierCode : IXmlSerializable, IForma
     /// <remarks>
     /// Is optional, XXX for primary office.
     /// </remarks>
-    public string Branch => m_Value is { Length: 11 } && !IsUnknown() ? m_Value.Substring(8) : string.Empty;
+    public string Branch => m_Value is { Length: 11 } && !IsUnknown() ? m_Value[8..] : string.Empty;
 
     /// <summary>Serializes the BIC to a JSON node.</summary>
     /// <returns>

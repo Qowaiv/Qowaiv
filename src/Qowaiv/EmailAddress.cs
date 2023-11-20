@@ -33,10 +33,10 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     public int Length => m_Value is { Length: > 1 } ? m_Value.Length : 0;
 
     /// <summary>Gets the local part of the Email Address.</summary>
-    public string Local => m_Value is { Length: > 1 } ? m_Value.Substring(0, m_Value.IndexOf('@')) : string.Empty;
+    public string Local => m_Value is { Length: > 1 } ? m_Value[..m_Value.IndexOf('@')] : string.Empty;
 
     /// <summary>Gets the domain part of the Email Address.</summary>
-    public string Domain => m_Value is { Length: > 1 } ? m_Value.Substring(m_Value.IndexOf('@') + 1) : string.Empty;
+    public string Domain => m_Value is { Length: > 1 } ? m_Value[(m_Value.IndexOf('@') + 1)..] : string.Empty;
 
     /// <summary>True if the domain part of the Email Address is an IP-address.</summary>
     /// <remarks>
@@ -54,8 +54,8 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
             if (IsIPBased)
             {
                 var ip = Domain.StartsWith("[IPv6:", StringComparison.InvariantCulture)
-                    ? Domain.Substring(6, Domain.Length - 7)
-                    : Domain.Substring(1, Domain.Length - 2);
+                    ? Domain[6..^1]
+                    : Domain[1..^1];
                 return IPAddress.Parse(ip);
             }
             else return IPAddress.None;

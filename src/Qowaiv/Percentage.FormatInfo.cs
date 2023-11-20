@@ -136,13 +136,13 @@ public readonly partial struct Percentage
                 if (format.StartsWith(str))
                 {
                     position = Position.Before;
-                    format = format.Substring(str.Length);
+                    format = format[str.Length..];
                     symbol = match;
                 }
                 else if (format.EndsWith(str))
                 {
                     position = Position.After;
-                    format = format.Substring(0, format.Length - str.Length);
+                    format = format[..^str.Length];
                     symbol = match;
                 }
             }

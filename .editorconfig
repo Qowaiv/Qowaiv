@@ -88,6 +88,7 @@ dotnet_diagnostic.SA1633.severity = none # The file header is missing or not loc
 dotnet_diagnostic.SA1636.severity = none # The file header should contain match copyright from settings.
 dotnet_diagnostic.SA1637.severity = none # The file header should contain file name.
 dotnet_diagnostic.SA1640.severity = none # The copyright tag should contain a non-empty company attribute.
+dotnet_diagnostic.SA1649.severity = none # File name should match first type name.
 
 dotnet_diagnostic.SA1401.severity = suggestion # Fields should be private.
 dotnet_diagnostic.SA1402.severity = suggestion # File may only contain one type.
@@ -95,7 +96,6 @@ dotnet_diagnostic.SA1407.severity = suggestion # Arithmetic expressions should d
 dotnet_diagnostic.SA1501.severity = suggestion # Statement should not be on single line.
 dotnet_diagnostic.SA1512.severity = suggestion # Single-line comment should be followed by blank line.
 dotnet_diagnostic.SA1515.severity = suggestion # Single-line comment should be preceded by blank line.
-dotnet_diagnostic.SA1649.severity = suggestion # File name should match first type name.
 
 dotnet_diagnostic.S100.severity = none  # Properties should be named in PascalCase
 dotnet_diagnostic.S101.severity = none  # Types should be named in PascalCase
@@ -132,3 +132,5 @@ dotnet_diagnostic.S3257.severity = warning # Declarations and initializations sh
 dotnet_diagnostic.S3776.severity = warning # Cognitive Complexity of methods should not be too high
 dotnet_diagnostic.S3925.severity = warning # "ISerializable" should be implemented correctly
 dotnet_diagnostic.S6354.severity = warning # Use a testable (date) time provider instead
+
+dotnet_diagnostic.VSSpell001.severity = silent # Correct spelling

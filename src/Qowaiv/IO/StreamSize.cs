@@ -518,7 +518,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
         if (streamSizeMarker[0] == ' ')
         {
             sb.Append(' ');
-            streamSizeMarker = streamSizeMarker.Substring(1);
+            streamSizeMarker = streamSizeMarker[1..];
         }
         return AppendExtension(sb, streamSizeMarker, order).ToString();
     }
@@ -698,11 +698,11 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
             {
                 if (input.ToUpperInvariant().EndsWith(' ' + marker, StringComparison.Ordinal))
                 {
-                    return input.Substring(length - marker.Length - 1);
+                    return input[(length - marker.Length - 1)..];
                 }
                 else if (input.ToUpperInvariant().EndsWith(marker, StringComparison.Ordinal))
                 {
-                    return input.Substring(length - marker.Length);
+                    return input[(length - marker.Length)..];
                 }
             }
             return string.Empty;
@@ -713,7 +713,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
     [Pure]
     private static string GetWithoutStreamSizeMarker(string? input, string streamSizeMarker)
         => input is { Length: > 0 }
-        ? input.Substring(0, input.Length - streamSizeMarker.Length)
+        ? input[..^streamSizeMarker.Length]
         : string.Empty;
 
     [Pure]

@@ -89,7 +89,7 @@ public class GuidBehavior : IdentifierBehavior
     /// <remarks>Avoids invalid URL characters.</remarks>
     [Pure]
     private static string ToBase64String(Guid id)
-        => Convert.ToBase64String(id.ToByteArray()).Replace('+', '-').Replace('/', '_').Substring(0, 22);
+        => Convert.ToBase64String(id.ToByteArray()).Replace('+', '-').Replace('/', '_')[..22];
 
     /// <inheritdoc/>
     [Pure]

@@ -126,8 +126,8 @@ public sealed class ForInt32 : Int32IdBehavior
        => string.Format(formatProvider, $"PREFIX{{0:{format}}}", obj);
 
     public override bool TryParse(string? str, out object? id)
-        => (str ?? "").StartsWith("PREFIX")
-        ? base.TryParse(str?.Substring(6), out id)
+        => str is { Length: > 6} && str[..6] == "PREFIX"
+        ? base.TryParse(str[6..], out id)
         : base.TryParse(str, out id);
 }
 
@@ -142,8 +142,8 @@ public sealed class ForInt64 : Int64IdBehavior
         && IsValid(number);
 
     public override bool TryParse(string? str, out object? id)
-        => (str ?? "").StartsWith("PREFIX")
-        ? base.TryParse(str?.Substring(6), out id)
+        => str is {Length: > 6 } && str[..6] == "PREFIX"
+        ? base.TryParse(str[6..], out id)
         : base.TryParse(str, out id) && IsValid(id!);
 
     private static bool IsValid(long number) => (number & 1) == 1;

@@ -39,7 +39,7 @@ internal abstract class LocalizedValues<TValue> : Dictionary<CultureInfo, Dictio
         {
             lock (locker)
             {
-                this[culture] = new();
+                this[culture] = [];
                 AddCulture(culture);
             }
         }
@@ -47,5 +47,5 @@ internal abstract class LocalizedValues<TValue> : Dictionary<CultureInfo, Dictio
     }
 
     /// <summary>The locker for adding a culture.</summary>
-    protected readonly object locker = new();
+    private readonly object locker = new();
 }

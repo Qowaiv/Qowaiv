@@ -18,25 +18,17 @@ public readonly partial struct Percentage
         PerTenThousand,
     }
 
-    internal readonly struct FormatInfo
+    internal readonly struct FormatInfo(string format, NumberFormatInfo provider, Symbol symbol, Position position)
     {
+        public string Format { get; } = format;
+
         private static readonly string[] Befores = ["fr-FR", "fa-IR"];
 
-        public FormatInfo(string format, NumberFormatInfo provider, Symbol symbol, Position position)
-        {
-            Format = format;
-            Provider = provider;
-            Symbol = symbol;
-            Position = position;
-        }
+        public NumberFormatInfo Provider { get; } = provider;
 
-        public string Format { get; }
+        public Symbol Symbol { get; } = symbol;
 
-        public NumberFormatInfo Provider { get; }
-
-        public Symbol Symbol { get; }
-
-        public Position Position { get; }
+        public Position Position { get; } = position;
 
         public decimal Factor => Symbol switch
         {

@@ -464,7 +464,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
         }
         else
         {
-            if (sb.Length != 0 && sb[sb.Length - 1] != ' ')
+            if (sb.Length != 0 && sb[^1] != ' ')
             {
                 sb.Append(' ');
             }
@@ -728,19 +728,13 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     /// <remarks>
     /// to pass the two components around during creation.
     /// </remarks>
-    private ref struct Data
+    private ref struct Data(long numerator, long denominator)
     {
-        public long numerator;
-        public long denominator;
-
-        public Data(long numerator, long denominator)
-        {
-            this.numerator = numerator;
-            this.denominator = denominator;
-        }
+        public long numerator = numerator;
+        public long denominator = denominator;
 
         [FluentSyntax]
-        public Data Guard()
+        public readonly Data Guard()
         {
 #pragma warning disable S3928 // Parameter names used into ArgumentException constructors should match an existing one
             if (numerator == long.MinValue)

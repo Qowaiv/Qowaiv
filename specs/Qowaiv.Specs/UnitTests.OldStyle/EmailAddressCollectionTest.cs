@@ -130,13 +130,13 @@ public class EmailAddressCollectionTest
         var input = new EmailAddressCollectionSerializeObject
         {
             Id = 17,
-            Obj = new EmailAddressCollection(),
+            Obj = [],
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new EmailAddressCollectionSerializeObject
         {
             Id = 17,
-            Obj = new EmailAddressCollection(),
+            Obj = [],
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
@@ -152,13 +152,13 @@ public class EmailAddressCollectionTest
         var input = new EmailAddressCollectionSerializeObject
         {
             Id = 17,
-            Obj = new EmailAddressCollection(),
+            Obj = [],
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new EmailAddressCollectionSerializeObject
         {
             Id = 17,
-            Obj = new EmailAddressCollection(),
+            Obj = [],
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
@@ -292,7 +292,7 @@ public class EmailAddressCollectionTest
     [Test]
     public void TryParse_Null_EmptyCollection()
     {
-        EmailAddressCollection exp = new();
+        EmailAddressCollection exp = [];
         Assert.IsTrue(EmailAddressCollection.TryParse(null, out EmailAddressCollection act));
         CollectionAssert.AreEqual(exp, act);
     }
@@ -300,7 +300,7 @@ public class EmailAddressCollectionTest
     [Test]
     public void TryParse_StringEmpty_EmptyCollection()
     {
-        EmailAddressCollection exp = new();
+        EmailAddressCollection exp = [];
         Assert.IsTrue(EmailAddressCollection.TryParse(string.Empty, out EmailAddressCollection act));
         CollectionAssert.AreEqual(exp, act);
     }

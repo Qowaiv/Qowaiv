@@ -62,7 +62,7 @@ public class IFormattable_ToString_extension
 
     [Test]
     public void null_for_null_IFormattable_with_arguments_collection()
-        => Nil.IFormattable.ToString(new FormattingArgumentsCollection()).Should().BeNull();
+        => Nil.IFormattable.ToString([]).Should().BeNull();
 
     [Test]
     public void null_for_null_IFormattable_with_null_arguments_collection()

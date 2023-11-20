@@ -39,7 +39,7 @@ public sealed class GenericSvoJsonConverter : JsonConverterFactory
         return (Svo<TBehavior>)parser.Invoke(null, [str])!;
     }
 
-    private static readonly Dictionary<Type, MethodInfo> parsers = new();
+    private static readonly Dictionary<Type, MethodInfo> parsers = [];
 
     /// <summary>A custom <see cref="JsonConverter{T}"/> for <see cref="Svo{TBehavior}"/>'s.</summary>
     [Obsolete("Use GenericSvoJson<TBehavior> instead.")]

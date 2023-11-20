@@ -55,7 +55,7 @@ public class IdForStringTest
     public void ToByteArray_TestStruct_FilledArray()
     {
         var bytes = TestStruct.ToByteArray();
-        var exepected = new byte[] { 81, 111, 119, 97, 105, 118, 45, 73, 68 };
+        var exepected = "Qowaiv-ID"u8.ToArray();
         Assert.AreEqual(exepected, bytes);
     }
 

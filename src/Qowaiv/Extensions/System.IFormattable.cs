@@ -32,6 +32,6 @@ public static class QowaivFormattableExtensions
     [Pure]
     public static string? ToString(this IFormattable? formattable, FormattingArgumentsCollection? argumentsCollection)
       => formattable is { }
-        ? (argumentsCollection ?? new FormattingArgumentsCollection()).ToString(formattable)
+        ? (argumentsCollection ?? []).ToString(formattable)
         : null;
 }

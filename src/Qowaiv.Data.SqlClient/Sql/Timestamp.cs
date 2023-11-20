@@ -118,7 +118,7 @@ public readonly partial struct Timestamp : IXmlSerializable, IFormattable, IEqua
         result = default;
         if (s is not { Length: > 0 }) { return false; }
         if (s.StartsWith("0x", StringComparison.OrdinalIgnoreCase) &&
-            ulong.TryParse(s.Substring(2), NumberStyles.HexNumber, formatProvider, out var val))
+            ulong.TryParse(s[2..], NumberStyles.HexNumber, formatProvider, out var val))
         {
             result = Create(val);
             return true;

@@ -571,16 +571,10 @@ public class Debugger
         => svo.Should().HaveDebuggerDisplay(display);
 }
 
-internal class PostalCodes
+internal class PostalCodes(Country country, params string[] values)
 {
-    public PostalCodes(Country country, params string[] values)
-    {
-        Country = country;
-        Values = values.Select(v => PostalCode.Parse(v)).ToArray();
-    }
-
-    public Country Country { get; }
-    public PostalCode[] Values { get; }
+    public Country Country { get; } = country;
+    public PostalCode[] Values { get; } = [..values.Select(v => PostalCode.Parse(v))];
 
     public IEnumerable<object[]> ToArrays() => Values.Select(value => new object[] { Country, value });
 

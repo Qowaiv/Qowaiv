@@ -44,7 +44,7 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     /// can simply be checked by checking the last character of the string
     /// value.
     /// </remarks>
-    public bool IsIPBased => m_Value is { Length: > 1 } && m_Value[m_Value.Length - 1] == ']';
+    public bool IsIPBased => m_Value is { Length: > 1 } && m_Value[^1] == ']';
 
     /// <summary>Gets the IP-Address if the Email Address is IP-based, otherwise <see cref="IPAddress.None"/>.</summary>
     public IPAddress IPDomain

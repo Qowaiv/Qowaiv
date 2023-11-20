@@ -34,7 +34,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     }
 
     /// <summary>The underlying dictionary.</summary>
-    private readonly Dictionary<Type, FormattingArguments> dict = new();
+    private readonly Dictionary<Type, FormattingArguments> dict = [];
 
     /// <summary>Gets the default format provider of the collection.</summary>
     public IFormatProvider FormatProvider { get; protected set; }

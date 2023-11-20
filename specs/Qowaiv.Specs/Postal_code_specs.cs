@@ -240,19 +240,19 @@ public class Has_custom_formatting
 
     [Test]
     public void for_58_countries()
-    {
-        Assert.AreEqual(58, PostalCodeCountryInfo.GetCountriesWithFormatting().Count());
-        CollectionAssert.AreEqual(
-            PostalCodeCountryInfo.GetCountriesWithFormatting(),
-            FormattedPostalCodes.Select(record => record[0]));
-    }
+        => PostalCodeCountryInfo.GetCountriesWithFormatting().Should().HaveCount(58);
+
+    [TestCaseSource(nameof(FormattedPostalCodes))]
+    public void with_formatting(Country country, PostalCode code, string formatted)
+        => code.ToString(country).Should().Be(formatted);
+
 
     [Test]
     public void with_current_thread_culture_as_default()
     {
         using (new CultureInfoScope(culture: TestCultures.Nl_NL, cultureUI: TestCultures.En_GB))
         {
-            Assert.AreEqual("H0H0H0", Svo.PostalCode.ToString(provider: null));
+            Svo.PostalCode.ToString(provider: null).Should().Be("H0H0H0");
         }
     }
 
@@ -512,54 +512,111 @@ public class Not_supported_by
 {
     [Test]
     public void _77_countries()
-        => PostalCodeCountryInfo.GetCountriesWithoutPostalCode().Should().BeEquivalentTo(new[]
-        {
-            Country.AE, Country.AG, Country.AO, Country.AQ, Country.AW, Country.BF, Country.BI,
-            Country.BJ, Country.BQ, Country.BS, Country.BV, Country.BW, Country.BZ, Country.CD,
-            Country.CF, Country.CG, Country.CI, Country.CK, Country.CM, Country.CW, Country.DJ,
-            Country.DM, Country.DO, Country.EH, Country.ER, Country.FJ, Country.GD, Country.GH,
-            Country.GM, Country.GN, Country.GQ, Country.GY, Country.HK, Country.IE, Country.JM,
-            Country.KE, Country.KI, Country.KM, Country.KN, Country.KP, Country.KW, Country.LC,
-            Country.ML, Country.MO, Country.MR, Country.MS, Country.MU, Country.MV, Country.MW,
-            Country.NR, Country.NU, Country.QA, Country.RW, Country.SB, Country.SC, Country.SJ,
-            Country.SL, Country.SO, Country.SR, Country.SS, Country.ST, Country.SX, Country.SY,
-            Country.TF, Country.TG, Country.TK, Country.TL, Country.TO, Country.TV, Country.TZ,
-            Country.UG, Country.UM, Country.UZ, Country.VU, Country.WS, Country.YE, Country.ZW
-        });
+        => PostalCodeCountryInfo.GetCountriesWithoutPostalCode().Should().BeEquivalentTo(
+        [
+            Country.AE,
+            Country.AG,
+            Country.AO,
+            Country.AQ,
+            Country.AW,
+            Country.BF,
+            Country.BI,
+            Country.BJ,
+            Country.BQ,
+            Country.BS,
+            Country.BV,
+            Country.BW,
+            Country.BZ,
+            Country.CD,
+            Country.CF,
+            Country.CG,
+            Country.CI,
+            Country.CK,
+            Country.CM,
+            Country.CW,
+            Country.DJ,
+            Country.DM,
+            Country.DO,
+            Country.EH,
+            Country.ER,
+            Country.FJ,
+            Country.GD,
+            Country.GH,
+            Country.GM,
+            Country.GN,
+            Country.GQ,
+            Country.GY,
+            Country.HK,
+            Country.IE,
+            Country.JM,
+            Country.KE,
+            Country.KI,
+            Country.KM,
+            Country.KN,
+            Country.KP,
+            Country.KW,
+            Country.LC,
+            Country.ML,
+            Country.MO,
+            Country.MR,
+            Country.MS,
+            Country.MU,
+            Country.MV,
+            Country.MW,
+            Country.NR,
+            Country.NU,
+            Country.QA,
+            Country.RW,
+            Country.SB,
+            Country.SC,
+            Country.SJ,
+            Country.SL,
+            Country.SO,
+            Country.SR,
+            Country.SS,
+            Country.ST,
+            Country.SX,
+            Country.SY,
+            Country.TF,
+            Country.TG,
+            Country.TK,
+            Country.TL,
+            Country.TO,
+            Country.TV,
+            Country.TZ,
+            Country.UG,
+            Country.UM,
+            Country.UZ,
+            Country.VU,
+            Country.WS,
+            Country.YE,
+            Country.ZW
+        ]);
 }
 
 public class For_10_countries
 {
+    private static readonly Dictionary<Country, string> SingleCodes = new()
+    {
+        [Country.AI] = "AI-2640",
+        [Country.FK] = "FIQQ 1ZZ",
+        [Country.GI] = "GX11 1AA",
+        [Country.GS] = "SIQQ 1ZZ",
+        [Country.IO] = "BBND 1ZZ",
+        [Country.PN] = "PCRN 1ZZ",
+        [Country.SH] = "STHL 1ZZ",
+        [Country.SV] = "01101",
+        [Country.TC] = "TKCA 1ZZ",
+        [Country.VA] = "00120",
+    };
+
     [Test]
     public void only_1_postal_code_exists()
-    {
-        var exp = new Dictionary<Country, string>
-            {
-                { Country.AI, "AI-2640" },
-                { Country.FK, "FIQQ 1ZZ" },
-                { Country.GI, "GX11 1AA" },
-                { Country.GS, "SIQQ 1ZZ" },
-                { Country.IO, "BBND 1ZZ" },
-                { Country.PN, "PCRN 1ZZ" },
-                { Country.SH, "STHL 1ZZ" },
-                { Country.SV, "01101" },
-                { Country.TC, "TKCA 1ZZ" },
-                { Country.VA, "00120" },
+        => PostalCodeCountryInfo.GetCountriesWithSingleValue().Should().BeEquivalentTo(SingleCodes.Keys);
 
-            };
-        var act = PostalCodeCountryInfo.GetCountriesWithSingleValue().ToArray();
-
-        Assert.AreEqual(exp.Keys.Count, act.Length, "act.Length");
-
-        CollectionAssert.AreEqual(exp.Keys, act);
-
-        foreach (var kvp in exp)
-        {
-            var info = PostalCodeCountryInfo.GetInstance(kvp.Key);
-
-            Assert.AreEqual(kvp.Value, info.GetSingleValue(), "GetSingleValue(), {0}.", kvp.Key);
-        }
-    }
+    [TestCaseSource(nameof(SingleCodes))]
+    public void with_single_value(KeyValuePair<Country, string> kvp)
+        => PostalCodeCountryInfo.GetInstance(kvp.Key).GetSingleValue().Should().Be(kvp.Value);
 }
 
 public class Debugger
@@ -574,7 +631,7 @@ public class Debugger
 internal class PostalCodes(Country country, params string[] values)
 {
     public Country Country { get; } = country;
-    public PostalCode[] Values { get; } = [..values.Select(v => PostalCode.Parse(v))];
+    public PostalCode[] Values { get; } = [.. values.Select(v => PostalCode.Parse(v))];
 
     public IEnumerable<object[]> ToArrays() => Values.Select(value => new object[] { Country, value });
 

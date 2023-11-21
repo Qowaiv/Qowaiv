@@ -1,4 +1,7 @@
-﻿namespace Email_address_specs;
+﻿using Microsoft.VisualBasic;
+using System.Net;
+
+namespace Email_address_specs;
 
 public class With_domain_logic
 {
@@ -42,6 +45,12 @@ public class With_domain_logic
     {
         Assert.AreEqual(result, svo.IsUnknown());
     }
+
+    [TestCase("info@qowaiv.org", "255.255.255.255")]
+    [TestCase("info@[192.0.2.1]", "192.0.2.1")]
+    [TestCase("info@[IPv6:2001:0db8:0000:0000:0000:ff00:0042:8329]", "1:db8::ff00:42:8329")]
+    public void IPDomain(EmailAddress email, string address)
+        => email.IPDomain.ToString().Should().Be(address);
 }
 
 public class Has_constant

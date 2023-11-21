@@ -34,6 +34,41 @@ public class Is_comparable
         list.Should().BeEquivalentTo(sorted);
     }
 }
+
+public class Supports_JSON_serialization
+{
+#if NET6_0_OR_GREATER
+    
+    [TestCase("", "")]
+    [TestCase(12345678L, 12345678)]
+    [TestCase("12345678", 12345678)]
+    public void System_Text_JSON_deserialization(object json, Int32Id svo)
+        => JsonTester.Read_System_Text_JSON<Int32Id>(json).Should().Be(svo);
+
+    [TestCase("", null)]
+    [TestCase("12345678", 12345678L)]
+    public void System_Text_JSON_serialization(Int32Id svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
+    [TestCase("", "")]
+    [TestCase(12345678L, 12345678)]
+    [TestCase("12345678", 12345678)]
+    public void convention_based_deserialization(object json, Int32Id svo)
+        => JsonTester.Read<Int32Id>(json).Should().Be(svo);
+
+    [TestCase("", null)]
+    [TestCase("12345678", 12345678L)]
+    public void convention_based_serialization(Int32Id svo, object json)
+        => JsonTester.Write(svo).Should().Be(json);
+
+    [TestCase("Invalid input", typeof(FormatException))]
+    [TestCase(long.MaxValue, typeof(InvalidCastException))]
+    public void throws_for_invalid_json(object json, Type exceptionType)
+        => json.Invoking(JsonTester.Read<Int32Id>)
+            .Should().Throw<Exception>()
+            .Which.Should().BeOfType(exceptionType);
+}
+
 public class Supports_type_conversion
 {
     [Test]

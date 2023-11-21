@@ -300,29 +300,6 @@ public class IdForInt32Test
         obj.GetSchema().Should().BeNull();
     }
 
-    [TestCase("2017-06-11")]
-    public void FromJson_Invalid_Throws(object json)
-    {
-        Assert.Catch<FormatException>(() => JsonTester.Read<Id<ForInt32>>(json));
-    }
-
-    [TestCase("123456789", "123456789")]
-    [TestCase("12345678", 12345678L)]
-    [TestCase("", "")]
-    [TestCase("", 0L)]
-    public void FromJson(Id<ForInt32> expected, object json)
-    {
-        var actual = JsonTester.Read<Id<ForInt32>>(json);
-        Assert.AreEqual(expected, actual);
-    }
-
-    [Test]
-    public void ToJson_TestStruct_LongValue()
-    {
-        var json = TestStruct.ToJson();
-        Assert.AreEqual(123456789L, json);
-    }
-
     [Test]
     public void ToString_Empty_StringEmpty()
     {

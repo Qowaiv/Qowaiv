@@ -97,8 +97,8 @@ public readonly partial struct Fraction
 
         public decimal Denominator;
 
-        public long Value => (long)(Numerator / Denominator);
+        public readonly long Value => (long)(Numerator / Denominator);
 
-        public bool OneOrMore => Numerator >= Denominator;
+        public readonly bool OneOrMore => Numerator >= Denominator;
     }
 }

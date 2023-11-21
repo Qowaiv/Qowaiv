@@ -160,7 +160,7 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
     /// <summary>Casts a <see cref="bool"/> to a yes-no.</summary>
     public static explicit operator YesNo(bool val) => val ? Yes : No;
 
-    private static readonly bool?[] BooleanValues = new bool?[] { null, false, true, null };
+    private static readonly bool?[] BooleanValues = [null, false, true, null];
 
     /// <summary>Converts the string to a yes-no.
     /// A return value indicates whether the conversion succeeded.
@@ -205,8 +205,8 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
     /// <remarks>
     /// Used for both serialization and resource lookups.
     /// </remarks>
-    private static readonly string?[] LookupSuffix = { null, "No", "Yes", "Unknown" };
-    private static readonly string?[] SerializationValues = { null, "no", "yes", "?" };
+    private static readonly string?[] LookupSuffix = [null, "No", "Yes", "Unknown"];
+    private static readonly string?[] SerializationValues = [null, "no", "yes", "?"];
 
     private sealed class YesNoValues : LocalizedValues<byte>
     {

@@ -292,7 +292,7 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
             return default;
         }
 
-        var name = culture.Name.Substring(culture.Name.IndexOf('-') + 1);
+        var name = culture.Name[(culture.Name.IndexOf('-') + 1)..];
 
         return All.FirstOrDefault(c => c.Name == name);
     }

@@ -211,7 +211,7 @@ public readonly partial struct Elo : IXmlSerializable, IFormattable, IEquatable<
         result = Zero;
         if (s is { Length: > 0 })
         {
-            var str = s.EndsWith("*", StringComparison.InvariantCultureIgnoreCase) ? s.Substring(0, s.Length - 1) : s;
+            var str = s[^1] == '*' ? s[..^1] : s;
 
             if (double.TryParse(str, NumberStyles.Number, formatProvider, out var d) && !double.IsNaN(d) && !double.IsInfinity(d))
             {

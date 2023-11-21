@@ -47,7 +47,7 @@ internal static partial class EmailParser
     private static bool IsNonASCII(this char ch) => ch > 127;
 
     [Pure]
-    private static bool IsLocalASCII(this char ch) => "{}|/%$&#~!?*`'^=+".IndexOf(ch) != NotFound;
+    private static bool IsLocalASCII(this char ch) => "{}|/%$&#~!?*`'^=+".Contains(ch);
 
     [Pure]
     private static bool IsGt(this char ch) => ch == '>';

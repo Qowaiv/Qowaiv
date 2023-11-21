@@ -59,49 +59,49 @@ public class Is_equal_by_value
     [Test]
     public void not_equal_to_null()
     {
-        Assert.IsFalse(Svo.Uuid.Equals(null));
+        Svo.Uuid.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_to_other_type()
     {
-        Assert.IsFalse(Svo.Uuid.Equals(new object()));
+        Svo.Uuid.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_to_different_value()
     {
-        Assert.IsFalse(Svo.Uuid.Equals(Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")));
+        Svo.Uuid.Equals(Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeFalse();
     }
 
     [Test]
     public void equal_to_same_value()
     {
-        Assert.IsTrue(Svo.Uuid.Equals(Uuid.Parse("Qowaiv_SVOLibrary_GUIA")));
+        Svo.Uuid.Equals(Uuid.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeTrue();
     }
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
     {
-        Assert.IsTrue(Svo.Uuid == Uuid.Parse("Qowaiv_SVOLibrary_GUIA"));
+        (Svo.Uuid == Uuid.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeTrue();
     }
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
     {
-        Assert.IsFalse(Svo.Uuid == Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC"));
+        (Svo.Uuid == Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
     {
-        Assert.IsFalse(Svo.Uuid != Uuid.Parse("Qowaiv_SVOLibrary_GUIA"));
+        (Svo.Uuid != Uuid.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
     {
-        Assert.IsTrue(Svo.Uuid != Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC"));
+        (Svo.Uuid != Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeTrue();
     }
 
     [TestCase("", 0)]
@@ -153,7 +153,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
     {
-        Assert.IsFalse(Uuid.TryParse("invalid input", out _));
+        Uuid.TryParse("invalid input", out _).Should().BeFalse();
     }
 
     [Test]
@@ -524,7 +524,7 @@ public class Supports_XML_serialization
     public void has_no_custom_XML_schema()
     {
         IXmlSerializable obj = Svo.Uuid;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 }
 

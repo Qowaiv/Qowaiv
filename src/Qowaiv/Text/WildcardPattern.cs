@@ -277,17 +277,11 @@ public class WildcardPattern : ISerializable
         }
     }
 
-    private readonly struct Substring
+    private readonly struct Substring(string str, int pos = 0)
     {
-        public Substring(string str, int pos = 0)
-        {
-            Value = str;
-            Position = pos;
-        }
+        public readonly int Position = pos;
 
-        public readonly int Position;
-
-        public readonly string Value;
+        public readonly string Value = str;
 
         public char Ch => Value[Position];
 

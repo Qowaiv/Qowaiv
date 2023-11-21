@@ -309,7 +309,7 @@ public readonly partial struct Gender : IXmlSerializable, IFormattable, IEquatab
         {
             if (Parsings.ContainsKey(culture)) return;
 
-            Parsings[culture] = new Dictionary<string, byte>();
+            Parsings[culture] = [];
 
             foreach (var gender in All)
             {

@@ -25,9 +25,7 @@ public class Int32IdBehavior : IdentifierBehavior
     /// <inheritdoc/>
     [Pure]
     public override byte[] ToByteArray(object? obj)
-        => obj is int num
-        ? BitConverter.GetBytes(num)
-        : Array.Empty<byte>();
+        => obj is int num ? BitConverter.GetBytes(num) : [];
 
     /// <inheritdoc/>
     [Pure]

@@ -8,7 +8,7 @@ public class StringFormatterTest
     {
         Assert.Catch<FormatException>(() =>
         {
-            StringFormatter.Apply(int.MinValue, "\\", CultureInfo.InvariantCulture, new Dictionary<char, Func<int, IFormatProvider, string>>());
+            StringFormatter.Apply(int.MinValue, "\\", CultureInfo.InvariantCulture, []);
         },
         "Input string was not in a correct format.");
     }

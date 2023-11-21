@@ -40,7 +40,7 @@ public class DateSpanTest
     public void TryParse_StringValue_IsValid()
     {
         string str = "5Y+3M+2D";
-        Assert.IsTrue(DateSpan.TryParse(str, out DateSpan val), "Valid");
+        DateSpan.TryParse(str, out DateSpan val).Should().BeTrue();
         Assert.AreEqual(str, val.ToString(), "Value");
     }
 
@@ -234,7 +234,7 @@ public class DateSpanTest
     public void GetSchema_None_IsNull()
     {
         IXmlSerializable obj = TestStruct;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 
     #endregion
@@ -299,7 +299,7 @@ public class DateSpanTest
     [Test]
     public void Equals_ZeroZero_IsTrue()
     {
-        Assert.IsTrue(DateSpan.Zero.Equals(DateSpan.Zero));
+        DateSpan.Zero.Equals(DateSpan.Zero).Should().BeTrue();
     }
 
     [Test]
@@ -308,43 +308,43 @@ public class DateSpanTest
         var l = DateSpan.Parse("3Y-0M+3D", CultureInfo.InvariantCulture);
         var r = DateSpan.Parse("-0y+36m+3d", CultureInfo.InvariantCulture);
 
-        Assert.IsTrue(l.Equals(r));
+        l.Equals(r).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals(TestStruct));
+        TestStruct.Equals(TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructZero_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(DateSpan.Zero));
+        TestStruct.Equals(DateSpan.Zero).Should().BeFalse();
     }
 
     [Test]
     public void Equals_ZeroTestStruct_IsFalse()
     {
-        Assert.IsFalse(DateSpan.Zero.Equals(TestStruct));
+        DateSpan.Zero.Equals(TestStruct).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObjectTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals((object)TestStruct));
+        TestStruct.Equals((object)TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(null));
+        TestStruct.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObject_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(new object()));
+        TestStruct.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
@@ -352,7 +352,7 @@ public class DateSpanTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsTrue(l == r);
+        (l == r).Should().BeTrue();
     }
 
     [Test]
@@ -360,7 +360,7 @@ public class DateSpanTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsFalse(l != r);
+        (l != r).Should().BeFalse();
     }
 
     #endregion
@@ -431,23 +431,23 @@ public class DateSpanTest
     [Test]
     public void Smaller_LessThan_Bigger_IsTrue()
     {
-        Assert.IsTrue(Smaller < Bigger);
+        (Smaller < Bigger).Should().BeTrue();
     }
     [Test]
     public void Bigger_GreaterThan_Smaller_IsTrue()
     {
-        Assert.IsTrue(Bigger > Smaller);
+        (Bigger > Smaller).Should().BeTrue();
     }
 
     [Test]
     public void Smaller_LessThanOrEqual_Bigger_IsTrue()
     {
-        Assert.IsTrue(Smaller <= Bigger);
+        (Smaller <= Bigger).Should().BeTrue();
     }
     [Test]
     public void Bigger_GreaterThanOrEqual_Smaller_IsTrue()
     {
-        Assert.IsTrue(Bigger >= Smaller);
+       (Bigger >= Smaller).Should().BeTrue();
     }
 
     [Test]
@@ -455,7 +455,7 @@ public class DateSpanTest
     {
         var left = Smaller;
         var right = Smaller;
-        Assert.IsTrue(left <= right);
+        (left <= right).Should().BeTrue();
     }
 
     [Test]
@@ -463,7 +463,7 @@ public class DateSpanTest
     {
         var left = Smaller;
         var right = Smaller;
-        Assert.IsTrue(left >= right);
+        (left >= right).Should().BeTrue();
     }
 
     #endregion

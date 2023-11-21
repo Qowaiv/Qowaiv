@@ -43,21 +43,21 @@ public class Is_not_leap_year_when
     [TestCase("?")]
     public void empty_or_unknown(Year year)
     {
-        Assert.IsFalse(year.IsLeapYear);
+        year.IsLeapYear.Should().BeFalse();
     }
 
     [TestCase(1979)]
     [TestCase(2017)]
     public void not_dividable_by_4(Year year)
     {
-        Assert.IsFalse(year.IsLeapYear);
+        year.IsLeapYear.Should().BeFalse();
     }
 
     [TestCase(1800)]
     [TestCase(1900)]
     public void dividable_by_100_not_by_400(Year year)
     {
-        Assert.IsFalse(year.IsLeapYear);
+        year.IsLeapYear.Should().BeFalse();
     }
 }
 
@@ -67,14 +67,14 @@ public class Is_leap_year
     [TestCase(2004)]
     public void dividable_by_4_not_by_100(Year year)
     {
-        Assert.IsTrue(year.IsLeapYear);
+        year.IsLeapYear.Should().BeTrue();
     }
 
     [TestCase(1600)]
     [TestCase(2000)]
     public void dividable_by_400(Year year)
     {
-        Assert.IsTrue(year.IsLeapYear);
+        year.IsLeapYear.Should().BeTrue();
     }
 }
 
@@ -106,50 +106,50 @@ public class Is_equal_by_value
     [Test]
     public void not_equal_to_null()
     {
-        Assert.IsFalse(Svo.Year.Equals(null));
+        Svo.Year.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_to_other_type()
     {
-        Assert.IsFalse(Svo.Year.Equals(new object()));
+        Svo.Year.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_to_different_value()
     {
         Year other = 2017.CE();
-        Assert.IsFalse(Svo.Year.Equals(other));
+        Svo.Year.Equals(other).Should().BeFalse();
     }
 
     [Test]
     public void equal_to_same_value()
     {
-        Assert.IsTrue(Svo.Year.Equals(1979.CE()));
+        Svo.Year.Equals(1979.CE()).Should().BeTrue();
     }
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
     {
-        Assert.IsTrue(Svo.Year == 1979.CE());
+        (Svo.Year == 1979.CE()).Should().BeTrue();
     }
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
     {
-        Assert.IsFalse(Svo.Year == 2017.CE());
+        (Svo.Year == 2017.CE()).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
     {
-        Assert.IsFalse(Svo.Year != 1979.CE());
+        (Svo.Year != 1979.CE()).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
     {
-        Assert.IsTrue(Svo.Year != 2017.CE());
+        (Svo.Year != 2017.CE()).Should().BeTrue();
     }
 
     [TestCase("", 0)]
@@ -203,7 +203,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
     {
-        Assert.IsFalse(Year.TryParse("invalid input", out _));
+        Year.TryParse("invalid input", out _).Should().BeFalse();
     }
 
     [Test]
@@ -241,7 +241,7 @@ public class Can_be_created_from_int
     [TestCase(10000)]
     public void but_not_outside_1_to_9999(int year)
     {
-        Assert.IsFalse(Year.TryCreate(year, out _));
+        Year.TryCreate(year, out _).Should().BeFalse();
     }
 }
 
@@ -330,10 +330,10 @@ public class Is_comparable
         Year smaller = 1979.CE();
         Year bigger = 2017.CE();
 
-        Assert.IsTrue(smaller < bigger);
-        Assert.IsTrue(smaller <= bigger);
-        Assert.IsFalse(smaller > bigger);
-        Assert.IsFalse(smaller >= bigger);
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
     }
 
     [Test]
@@ -342,10 +342,10 @@ public class Is_comparable
         Year left = 2071.CE();
         Year right = 2071.CE();
 
-        Assert.IsFalse(left < right);
-        Assert.IsTrue(left <= right);
-        Assert.IsFalse(left > right);
-        Assert.IsTrue(left >= right);
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
     }
 
     [TestCase("", 1979)]
@@ -354,10 +354,10 @@ public class Is_comparable
     [TestCase(1979, "?")]
     public void by_operators_for_empty_or_unknown_always_false(Year l, Year r)
     {
-        Assert.IsFalse(l <= r);
-        Assert.IsFalse(l < r);
-        Assert.IsFalse(l > r);
-        Assert.IsFalse(l >= r);
+        (l <= r).Should().BeFalse();
+        (l < r).Should().BeFalse();
+        (l > r).Should().BeFalse();
+        (l >= r).Should().BeFalse();
     }
 }
 
@@ -503,7 +503,7 @@ public class Supports_XML_serialization
     public void has_no_custom_XML_schema()
     {
         IXmlSerializable obj = Svo.Year;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 }
 

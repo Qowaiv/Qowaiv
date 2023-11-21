@@ -63,57 +63,57 @@ public class CurrencyTest
     [Test]
     public void IsEmpty_Default_IsTrue()
     {
-        Assert.IsTrue(default(Currency).IsEmpty());
+        default(Currency).IsEmpty().Should().BeTrue();
     }
     /// <summary>Currency.IsEmpty() should be false for Currency.Unknown.</summary>
     [Test]
     public void IsEmpty_Unknown_IsFalse()
     {
-        Assert.IsFalse(Currency.Unknown.IsEmpty());
+        Currency.Unknown.IsEmpty().Should().BeFalse();
     }
     /// <summary>Currency.IsEmpty() should be false for the TestStruct.</summary>
     [Test]
     public void IsEmpty_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsEmpty());
+        TestStruct.IsEmpty().Should().BeFalse();
     }
 
     /// <summary>Currency.IsUnknown() should be false for the default of currency.</summary>
     [Test]
     public void IsUnknown_Default_IsFalse()
     {
-        Assert.IsFalse(default(Currency).IsUnknown());
+        default(Currency).IsUnknown().Should().BeFalse();
     }
     /// <summary>Currency.IsUnknown() should be true for Currency.Unknown.</summary>
     [Test]
     public void IsUnknown_Unknown_IsTrue()
     {
-        Assert.IsTrue(Currency.Unknown.IsUnknown());
+        Currency.Unknown.IsUnknown().Should().BeTrue();
     }
     /// <summary>Currency.IsUnknown() should be false for the TestStruct.</summary>
     [Test]
     public void IsUnknown_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsUnknown());
+        TestStruct.IsUnknown().Should().BeFalse();
     }
 
     /// <summary>Currency.IsEmptyOrUnknown() should be true for the default of currency.</summary>
     [Test]
     public void IsEmptyOrUnknown_Default_IsFalse()
     {
-        Assert.IsTrue(default(Currency).IsEmptyOrUnknown());
+        default(Currency).IsEmptyOrUnknown().Should().BeTrue();
     }
     /// <summary>Currency.IsEmptyOrUnknown() should be true for Currency.Unknown.</summary>
     [Test]
     public void IsEmptyOrUnknown_Unknown_IsTrue()
     {
-        Assert.IsTrue(Currency.Unknown.IsEmptyOrUnknown());
+        Currency.Unknown.IsEmptyOrUnknown().Should().BeTrue();
     }
     /// <summary>Currency.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
     [Test]
     public void IsEmptyOrUnknown_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
+        TestStruct.IsEmptyOrUnknown().Should().BeFalse();
     }
 
     #endregion
@@ -124,7 +124,7 @@ public class CurrencyTest
     [Test]
     public void TryParse_Null_IsValid()
     {
-        Assert.IsTrue(Currency.TryParse(Nil.String, out Currency val), "Valid");
+        Currency.TryParse(Nil.String, out Currency val).Should().BeTrue();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -133,7 +133,7 @@ public class CurrencyTest
     public void TryParse_StringEmpty_IsValid()
     {
         string str = string.Empty;
-        Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
+        Currency.TryParse(str, out Currency val).Should().BeTrue();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -142,8 +142,8 @@ public class CurrencyTest
     public void TryParse_question_mark_IsValid()
     {
         string str = "?";
-        Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
-        Assert.IsTrue(val.IsUnknown(), "Value");
+        Currency.TryParse(str, out Currency val).Should().BeTrue();
+        val.IsUnknown().Should().BeTrue();
     }
 
     /// <summary>TryParse "¤" should be valid and the result should be Currency.Unknown.</summary>
@@ -151,8 +151,8 @@ public class CurrencyTest
     public void TryParse_UnknownCurrencySymbol_IsValid()
     {
         string str = "¤";
-        Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
-        Assert.IsTrue(val.IsUnknown(), "Value");
+        Currency.TryParse(str, out Currency val).Should().BeTrue();
+        val.IsUnknown().Should().BeTrue();
     }
 
     /// <summary>TryParse with specified string value should be valid.</summary>
@@ -160,7 +160,7 @@ public class CurrencyTest
     public void TryParse_StringValue_IsValid()
     {
         string str = "USD";
-        Assert.IsTrue(Currency.TryParse(str, out Currency val), "Valid");
+        Currency.TryParse(str, out Currency val).Should().BeTrue();
         Assert.AreEqual(str, val.ToString(), "Value");
     }
 
@@ -169,7 +169,7 @@ public class CurrencyTest
     public void TryParse_StringValue_IsNotValid()
     {
         string str = "string";
-        Assert.IsFalse(Currency.TryParse(str, out Currency val), "Valid");
+        Currency.TryParse(str, out Currency val).Should().BeFalse();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -389,7 +389,7 @@ public class CurrencyTest
     public void GetSchema_None_IsNull()
     {
         IXmlSerializable obj = TestStruct;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 
     #endregion
@@ -548,7 +548,7 @@ public class CurrencyTest
     [Test]
     public void Equals_EmptyEmpty_IsTrue()
     {
-        Assert.IsTrue(Currency.Empty.Equals(Currency.Empty));
+        Currency.Empty.Equals(Currency.Empty).Should().BeTrue();
     }
 
     [Test]
@@ -557,43 +557,43 @@ public class CurrencyTest
         var l = Currency.Parse("eur", CultureInfo.InvariantCulture);
         var r = Currency.Parse("EUR", CultureInfo.InvariantCulture);
 
-        Assert.IsTrue(l.Equals(r));
+        l.Equals(r).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructTestStruct_IsTrue()
     {
-        Assert.IsTrue(CurrencyTest.TestStruct.Equals(CurrencyTest.TestStruct));
+        CurrencyTest.TestStruct.Equals(CurrencyTest.TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructEmpty_IsFalse()
     {
-        Assert.IsFalse(CurrencyTest.TestStruct.Equals(Currency.Empty));
+        CurrencyTest.TestStruct.Equals(Currency.Empty).Should().BeFalse();
     }
 
     [Test]
     public void Equals_EmptyTestStruct_IsFalse()
     {
-        Assert.IsFalse(Currency.Empty.Equals(CurrencyTest.TestStruct));
+        Currency.Empty.Equals(CurrencyTest.TestStruct).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObjectTestStruct_IsTrue()
     {
-        Assert.IsTrue(CurrencyTest.TestStruct.Equals((object)CurrencyTest.TestStruct));
+        CurrencyTest.TestStruct.Equals((object)CurrencyTest.TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        Assert.IsFalse(CurrencyTest.TestStruct.Equals(null));
+        CurrencyTest.TestStruct.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObject_IsFalse()
     {
-        Assert.IsFalse(CurrencyTest.TestStruct.Equals(new object()));
+        CurrencyTest.TestStruct.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
@@ -601,7 +601,7 @@ public class CurrencyTest
     {
         var l = CurrencyTest.TestStruct;
         var r = CurrencyTest.TestStruct;
-        Assert.IsTrue(l == r);
+        (l == r).Should().BeTrue();
     }
 
     [Test]
@@ -609,7 +609,7 @@ public class CurrencyTest
     {
         var l = CurrencyTest.TestStruct;
         var r = CurrencyTest.TestStruct;
-        Assert.IsFalse(l != r);
+        (l != r).Should().BeFalse();
     }
 
     #endregion

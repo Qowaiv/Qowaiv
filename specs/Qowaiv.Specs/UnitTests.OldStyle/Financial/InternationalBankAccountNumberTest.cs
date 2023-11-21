@@ -22,14 +22,14 @@ public class InternationalBankAccountNumberTest
     [Test]
     public void IsEmpty_Default_IsTrue()
     {
-        Assert.IsTrue(default(InternationalBankAccountNumber).IsEmpty());
+        default(InternationalBankAccountNumber).IsEmpty().Should().BeTrue();
     }
 
     /// <summary>InternationalBankAccountNumber.IsEmpty() should false for the TestStruct.</summary>
     [Test]
     public void IsEmpty_Default_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsEmpty());
+        TestStruct.IsEmpty().Should().BeFalse();
     }
 
     #endregion
@@ -40,7 +40,7 @@ public class InternationalBankAccountNumberTest
     [Test]
     public void TryParse_Null_IsValid()
     {
-        Assert.IsTrue(InternationalBankAccountNumber.TryParse(Nil.String, out var val), "Valid");
+        InternationalBankAccountNumber.TryParse(Nil.String, out var val).Should().BeTrue();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -49,7 +49,7 @@ public class InternationalBankAccountNumberTest
     public void TryParse_StringEmpty_IsValid()
     {
         string str = string.Empty;
-        Assert.IsTrue(InternationalBankAccountNumber.TryParse(str, out var val), "Valid");
+        InternationalBankAccountNumber.TryParse(str, out var val).Should().BeTrue();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -58,7 +58,7 @@ public class InternationalBankAccountNumberTest
     public void TryParse_StringValue_IsValid()
     {
         string str = "NL20INGB0001234567";
-        Assert.IsTrue(InternationalBankAccountNumber.TryParse(str, out var val), "Valid");
+        InternationalBankAccountNumber.TryParse(str, out var val).Should().BeTrue();
         Assert.AreEqual(str, val.ToString(), "Value");
     }
 
@@ -67,7 +67,7 @@ public class InternationalBankAccountNumberTest
     public void TryParse_QuestionMark_IsValid()
     {
         string str = "?";
-        Assert.IsTrue(InternationalBankAccountNumber.TryParse(str, out var val), "Valid");
+        InternationalBankAccountNumber.TryParse(str, out var val).Should().BeTrue();
         Assert.AreEqual(str, val.ToString(), "Value.ToString()");
         Assert.AreEqual(InternationalBankAccountNumber.Unknown, val, "Value");
     }
@@ -77,7 +77,7 @@ public class InternationalBankAccountNumberTest
     public void TryParse_StringValue_IsNotValid()
     {
         string str = "string";
-        Assert.IsFalse(InternationalBankAccountNumber.TryParse(str, out var val), "Valid");
+        InternationalBankAccountNumber.TryParse(str, out var val).Should().BeFalse();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -268,7 +268,7 @@ public class InternationalBankAccountNumberTest
     public void GetSchema_None_IsNull()
     {
         IXmlSerializable obj = TestStruct;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 
     #endregion
@@ -372,7 +372,7 @@ public class InternationalBankAccountNumberTest
     [Test]
     public void Equals_EmptyEmpty_IsTrue()
     {
-        Assert.IsTrue(InternationalBankAccountNumber.Empty.Equals(InternationalBankAccountNumber.Empty));
+        InternationalBankAccountNumber.Empty.Equals(InternationalBankAccountNumber.Empty).Should().BeTrue();
     }
 
     [Test]
@@ -381,43 +381,43 @@ public class InternationalBankAccountNumberTest
         var l = InternationalBankAccountNumber.Parse("NL20 INGB 0001 2345 67");
         var r = InternationalBankAccountNumber.Parse("nl20ingb0001234567");
 
-        Assert.IsTrue(l.Equals(r));
+        l.Equals(r).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructTestStruct_IsTrue()
     {
-        Assert.IsTrue(InternationalBankAccountNumberTest.TestStruct.Equals(InternationalBankAccountNumberTest.TestStruct));
+        InternationalBankAccountNumberTest.TestStruct.Equals(InternationalBankAccountNumberTest.TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructEmpty_IsFalse()
     {
-        Assert.IsFalse(InternationalBankAccountNumberTest.TestStruct.Equals(InternationalBankAccountNumber.Empty));
+        InternationalBankAccountNumberTest.TestStruct.Equals(InternationalBankAccountNumber.Empty).Should().BeFalse();
     }
 
     [Test]
     public void Equals_EmptyTestStruct_IsFalse()
     {
-        Assert.IsFalse(InternationalBankAccountNumber.Empty.Equals(InternationalBankAccountNumberTest.TestStruct));
+        InternationalBankAccountNumber.Empty.Equals(InternationalBankAccountNumberTest.TestStruct).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObjectTestStruct_IsTrue()
     {
-        Assert.IsTrue(InternationalBankAccountNumberTest.TestStruct.Equals((object)InternationalBankAccountNumberTest.TestStruct));
+        InternationalBankAccountNumberTest.TestStruct.Equals((object)InternationalBankAccountNumberTest.TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        Assert.IsFalse(InternationalBankAccountNumberTest.TestStruct.Equals(null));
+        InternationalBankAccountNumberTest.TestStruct.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObject_IsFalse()
     {
-        Assert.IsFalse(InternationalBankAccountNumberTest.TestStruct.Equals(new object()));
+        InternationalBankAccountNumberTest.TestStruct.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
@@ -425,7 +425,7 @@ public class InternationalBankAccountNumberTest
     {
         var l = InternationalBankAccountNumberTest.TestStruct;
         var r = InternationalBankAccountNumberTest.TestStruct;
-        Assert.IsTrue(l == r);
+        (l == r).Should().BeTrue();
     }
 
     [Test]
@@ -433,7 +433,7 @@ public class InternationalBankAccountNumberTest
     {
         var l = InternationalBankAccountNumberTest.TestStruct;
         var r = InternationalBankAccountNumberTest.TestStruct;
-        Assert.IsFalse(l != r);
+        (l != r).Should().BeFalse();
     }
 
     #endregion

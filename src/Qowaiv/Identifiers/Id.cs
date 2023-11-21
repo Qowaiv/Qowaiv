@@ -75,7 +75,7 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
 
     /// <summary>Gets a <see cref="byte"/> array that represents the identifier.</summary>
     [Pure]
-    public byte[] ToByteArray() => IsEmpty() ? Array.Empty<byte>() : behavior.ToByteArray(m_Value);
+    public byte[] ToByteArray() => IsEmpty() ? [] : behavior.ToByteArray(m_Value);
 
     /// <inheritdoc/>
     [Pure]

@@ -56,7 +56,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
             }
             else
             {
-                return Country.Parse(m_Value.Substring(0, 2), CultureInfo.InvariantCulture);
+                return Country.Parse(m_Value[..2], CultureInfo.InvariantCulture);
             }
         }
     }
@@ -114,7 +114,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
             {
                 yield return str.Length - i > 4
                     ? str.Substring(i, 4)
-                    : str.Substring(i);
+                    : str[i..];
             }
         }
     }
@@ -198,7 +198,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
 
     [Pure]
     private static bool ValidForCountry(string iban)
-        => Country.TryParse(iban.Substring(0, 2), out var country)
+        => Country.TryParse(iban[..2], out var country)
         && !country.IsEmptyOrUnknown()
         && (!LocalizedPatterns.TryGetValue(country, out var localizedPattern)
         || iban.Matches(localizedPattern));

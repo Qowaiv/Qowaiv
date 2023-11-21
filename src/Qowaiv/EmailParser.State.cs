@@ -2,18 +2,11 @@
 
 internal static partial class EmailParser
 {
-    private ref struct State
+    private readonly struct State(string? str)
     {
-        public State(string? str)
-        {
-            Input = str.Buffer().Trim();
-            Buffer = CharBuffer.Empty(EmailAddress.MaxLength);
-            Result = CharBuffer.Empty(EmailAddress.MaxLength);
-        }
-
-        public readonly CharBuffer Input;
-        public readonly CharBuffer Buffer;
-        public readonly CharBuffer Result;
+        public readonly CharBuffer Input = str.Buffer().Trim();
+        public readonly CharBuffer Buffer = CharBuffer.Empty(EmailAddress.MaxLength);
+        public readonly CharBuffer Result = CharBuffer.Empty(EmailAddress.MaxLength);
 
         [Pure]
         public override string ToString() => $"In: {Input}, Buf: {Buffer}, Res:{Result}";

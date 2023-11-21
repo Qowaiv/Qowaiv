@@ -73,7 +73,7 @@ public class Is_not_valid_for
     [TestCase(10)]
     public void numbers(int? number)
     {
-        Assert.IsFalse(Sex.IsValid(number));
+        Sex.IsValid(number).Should().BeFalse();
     }
 }
 
@@ -438,7 +438,7 @@ public class Supports_XML_serialization
     public void has_no_custom_XML_schema()
     {
         IXmlSerializable obj = Svo.Sex;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 }
 

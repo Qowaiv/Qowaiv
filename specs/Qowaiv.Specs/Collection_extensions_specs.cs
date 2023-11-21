@@ -2,8 +2,8 @@
 
 public class Amounts
 {
-    private static readonly Amount[] collection = new[] { (Amount)1, (Amount)23, (Amount)0 };
-    private static readonly Amount?[] nullables = new Amount?[] { (Amount)1, (Amount)23, (Amount)0, null };
+    private static readonly Amount[] collection = [1.Amount(), 23.Amount(), Amount.Zero];
+    private static readonly Amount?[] nullables = [1.Amount(), 23.Amount(), Amount.Zero, null];
 
     [Test]
     public void Average_on_collection_is_calculated()
@@ -80,11 +80,11 @@ public class Amounts
 
 public class Moneys
 {
-    private static readonly Money[] collection = new[] { 1 + Currency.EUR, 23 + Currency.EUR, 0 + Currency.EUR };
-    private static readonly Money?[] nullables = new Money?[] { 1 + Currency.EUR, 23 + Currency.EUR, 0 + Currency.EUR, null };
+    private static readonly Money[] collection = [1 + Currency.EUR, 23 + Currency.EUR, 0 + Currency.EUR];
+    private static readonly Money?[] nullables = [1 + Currency.EUR, 23 + Currency.EUR, 0 + Currency.EUR, null];
 
-    private static readonly Money[] mixed = new[] { 1 + Currency.EUR, 23 + Currency.USD };
-    private static readonly Money?[] mixedNulables = new Money?[] { 1 + Currency.EUR, 23 + Currency.USD };
+    private static readonly Money[] mixed = [1 + Currency.EUR, 23 + Currency.USD];
+    private static readonly Money?[] mixedNulables = [1 + Currency.EUR, 23 + Currency.USD];
 
     [Test]
     public void Average_on_collection_is_calculated()

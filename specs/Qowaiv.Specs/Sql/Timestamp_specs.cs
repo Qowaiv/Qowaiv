@@ -67,7 +67,7 @@ public class Can_be_created
 {
     [Test]
     public void from_byte_arrays_with_length_8()
-        => Timestamp.Create(new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }).Should().Be((Timestamp)578437695752307201L);
+        => Timestamp.Create([1, 2, 3, 4, 5, 6, 7, 8]).Should().Be((Timestamp)578437695752307201L);
 
     [Test]
     public void from_negative_numbers()

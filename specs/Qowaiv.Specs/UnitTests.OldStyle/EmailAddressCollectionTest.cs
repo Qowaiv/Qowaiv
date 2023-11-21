@@ -3,7 +3,7 @@
 [TestFixture]
 public class EmailAddressCollectionTest
 {
-    public static EmailAddressCollection GetTestInstance()
+    private static EmailAddressCollection GetTestInstance()
         => EmailAddressCollection.Parse("info@qowaiv.org,test@qowaiv.org");
 
     #region (XML) (De)serialization tests
@@ -130,13 +130,13 @@ public class EmailAddressCollectionTest
         var input = new EmailAddressCollectionSerializeObject
         {
             Id = 17,
-            Obj = new EmailAddressCollection(),
+            Obj = [],
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new EmailAddressCollectionSerializeObject
         {
             Id = 17,
-            Obj = new EmailAddressCollection(),
+            Obj = [],
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
@@ -152,13 +152,13 @@ public class EmailAddressCollectionTest
         var input = new EmailAddressCollectionSerializeObject
         {
             Id = 17,
-            Obj = new EmailAddressCollection(),
+            Obj = [],
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new EmailAddressCollectionSerializeObject
         {
             Id = 17,
-            Obj = new EmailAddressCollection(),
+            Obj = [],
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
@@ -171,7 +171,7 @@ public class EmailAddressCollectionTest
     public void GetSchema_None_IsNull()
     {
         IXmlSerializable obj = GetTestInstance();
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 
     #endregion
@@ -292,16 +292,16 @@ public class EmailAddressCollectionTest
     [Test]
     public void TryParse_Null_EmptyCollection()
     {
-        EmailAddressCollection exp = new();
-        Assert.IsTrue(EmailAddressCollection.TryParse(null, out EmailAddressCollection act));
+        EmailAddressCollection exp = [];
+        EmailAddressCollection.TryParse(null, out EmailAddressCollection act).Should().BeTrue();
         CollectionAssert.AreEqual(exp, act);
     }
 
     [Test]
     public void TryParse_StringEmpty_EmptyCollection()
     {
-        EmailAddressCollection exp = new();
-        Assert.IsTrue(EmailAddressCollection.TryParse(string.Empty, out EmailAddressCollection act));
+        EmailAddressCollection exp = [];
+        EmailAddressCollection.TryParse(string.Empty, out EmailAddressCollection act).Should().BeTrue();
         CollectionAssert.AreEqual(exp, act);
     }
 

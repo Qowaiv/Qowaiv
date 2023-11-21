@@ -68,7 +68,7 @@ public class ThreadDomain
     /// <remarks>
     /// No public accessor.
     /// </remarks>
-    protected ThreadDomain() => Values = new();
+    protected ThreadDomain() => Values = [];
 
     /// <summary>The underlying dictionary.</summary>
     protected Dictionary<Type, object?> Values { get; private set; }

@@ -14,34 +14,56 @@ public class With_domain_logic
 
     [TestCase("")]
     [TestCase("?")]
-    public void has_length_zero_for_empty_and_unknown(EmailAddress svo) => svo.Length.Should().Be(0);
+    public void has_length_zero_for_empty_and_unknown(EmailAddress svo)
+        => svo.Length.Should().Be(0);
 
     [TestCase(15, "info@qowaiv.org")]
-    public void has_length(int length, EmailAddress svo) => svo.Length.Should().Be(length);
+    public void has_length(int length, EmailAddress svo)
+        => svo.Length.Should().Be(length);
 
     [TestCase(false, "info@qowaiv.org")]
     [TestCase(false, "?")]
     [TestCase(true, "")]
     public void IsEmpty_returns(bool result, EmailAddress svo)
-    {
-        Assert.AreEqual(result, svo.IsEmpty());
-    }
+        => svo.IsEmpty().Should().Be(result);
 
     [TestCase(false, "info@qowaiv.org")]
     [TestCase(true, "?")]
     [TestCase(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, EmailAddress svo)
-    {
-        Assert.AreEqual(result, svo.IsEmptyOrUnknown());
-    }
+            => svo.IsEmptyOrUnknown().Should().Be(result);
 
     [TestCase(false, "info@qowaiv.org")]
     [TestCase(true, "?")]
     [TestCase(false, "")]
     public void IsUnknown_returns(bool result, EmailAddress svo)
-    {
-        Assert.AreEqual(result, svo.IsUnknown());
-    }
+        => svo.IsUnknown().Should().Be(result);
+
+    [TestCase(false, "info@qowaiv.org")]
+    [TestCase(true, "info@[192.0.2.1]")]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void IsIPBased_returns(bool result, EmailAddress svo)
+        => svo.IsIPBased.Should().Be(result);
+
+    [TestCase("info@qowaiv.org", "255.255.255.255")]
+    [TestCase("info@[192.0.2.1]", "192.0.2.1")]
+    [TestCase("info@[IPv6:2001:0db8:0000:0000:0000:ff00:0042:8329]", "1:db8::ff00:42:8329")]
+    public void IP_domain(EmailAddress email, string address)
+        => email.IPDomain.ToString().Should().Be(address);
+
+    [TestCase("info", "info@qowaiv.org")]
+    [TestCase("", "?")]
+    [TestCase("", "")]
+    public void Local_part_returns(string local, EmailAddress email)
+        => email.Local.Should().Be(local);
+
+    [TestCase("qowaiv.org", "info@qowaiv.org")]
+    [TestCase("[192.0.2.1]", "info@192.0.2.1")]
+    [TestCase("", "?")]
+    [TestCase("", "")]
+    public void Domain_part_returns(string local, EmailAddress email)
+        => email.Domain.Should().Be(local);
 }
 
 public class Has_constant
@@ -58,63 +80,59 @@ public class Is_equal_by_value
     [Test]
     public void not_equal_to_null()
     {
-        Assert.IsFalse(Svo.EmailAddress.Equals(null));
+        Svo.EmailAddress.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_to_other_type()
     {
-        Assert.IsFalse(Svo.EmailAddress.Equals(new object()));
+        Svo.EmailAddress.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_to_different_value()
     {
-        Assert.IsFalse(Svo.EmailAddress.Equals(EmailAddress.Parse("no_spam@qowaiv.org")));
+        Svo.EmailAddress.Equals(EmailAddress.Parse("no_spam@qowaiv.org")).Should().BeFalse();
     }
 
     [Test]
     public void equal_to_same_value()
     {
-        Assert.IsTrue(Svo.EmailAddress.Equals(EmailAddress.Parse("info@qowaiv.org")));
+        Svo.EmailAddress.Equals(EmailAddress.Parse("info@qowaiv.org")).Should().BeTrue();
     }
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
     {
-        Assert.IsTrue(Svo.EmailAddress == EmailAddress.Parse("info@qowaiv.org"));
+        (Svo.EmailAddress == EmailAddress.Parse("info@qowaiv.org")).Should().BeTrue();
     }
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
     {
-        Assert.IsFalse(Svo.EmailAddress == EmailAddress.Parse("no_spam@qowaiv.org"));
+        (Svo.EmailAddress == EmailAddress.Parse("no_spam@qowaiv.org")).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
     {
-        Assert.IsFalse(Svo.EmailAddress != EmailAddress.Parse("info@qowaiv.org"));
+        (Svo.EmailAddress != EmailAddress.Parse("info@qowaiv.org")).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
     {
-        Assert.IsTrue(Svo.EmailAddress != EmailAddress.Parse("no_spam@qowaiv.org"));
+        (Svo.EmailAddress != EmailAddress.Parse("no_spam@qowaiv.org")).Should().BeTrue();
     }
 
-    [Test]
-    public void hash_code_is_zero_for_empty()
+    [TestCase("", 0)]
+    [TestCase("info@qowaiv.org", 798543550)]
+    public void hash_code_is_value_based(EmailAddress svo, int hashCode)
     {
-        Assert.That(EmailAddress.Empty.GetHashCode(), Is.EqualTo(0));
-    }
-
-    [Test]
-    public void hash_code_is_not_zero_and_reproducible_for_not_empty()
-    {
-        var hash = Svo.EmailAddress.GetHashCode();
-        Assert.That(hash, Is.Not.EqualTo(0));
-        Assert.That(Svo.EmailAddress.GetHashCode(), Is.EqualTo(hash));
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hashCode);
+        }
     }
 }
 
@@ -161,7 +179,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
     {
-        Assert.IsFalse(EmailAddress.TryParse("invalid input", out _));
+        EmailAddress.TryParse("invalid input", out _).Should().BeFalse();
     }
 
     [Test]
@@ -426,7 +444,7 @@ public class Supports_XML_serialization
     public void has_no_custom_XML_schema()
     {
         IXmlSerializable obj = Svo.EmailAddress;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 }
 

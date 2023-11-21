@@ -36,57 +36,57 @@ public class HouseNumberTest
     [Test]
     public void IsEmpty_Default_IsTrue()
     {
-        Assert.IsTrue(default(HouseNumber).IsEmpty());
+        default(HouseNumber).IsEmpty().Should().BeTrue();
     }
     /// <summary>HouseNumber.IsEmpty() should be false for HouseNumber.Unknown.</summary>
     [Test]
     public void IsEmpty_Unknown_IsFalse()
     {
-        Assert.IsFalse(HouseNumber.Unknown.IsEmpty());
+        HouseNumber.Unknown.IsEmpty().Should().BeFalse();
     }
     /// <summary>HouseNumber.IsEmpty() should be false for the TestStruct.</summary>
     [Test]
     public void IsEmpty_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsEmpty());
+        TestStruct.IsEmpty().Should().BeFalse();
     }
 
     /// <summary>HouseNumber.IsUnknown() should be false for the default of house number.</summary>
     [Test]
     public void IsUnknown_Default_IsFalse()
     {
-        Assert.IsFalse(default(HouseNumber).IsUnknown());
+        default(HouseNumber).IsUnknown().Should().BeFalse();
     }
     /// <summary>HouseNumber.IsUnknown() should be true for HouseNumber.Unknown.</summary>
     [Test]
     public void IsUnknown_Unknown_IsTrue()
     {
-        Assert.IsTrue(HouseNumber.Unknown.IsUnknown());
+        HouseNumber.Unknown.IsUnknown().Should().BeTrue();
     }
     /// <summary>HouseNumber.IsUnknown() should be false for the TestStruct.</summary>
     [Test]
     public void IsUnknown_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsUnknown());
+        TestStruct.IsUnknown().Should().BeFalse();
     }
 
     /// <summary>HouseNumber.IsEmptyOrUnknown() should be true for the default of house number.</summary>
     [Test]
     public void IsEmptyOrUnknown_Default_IsFalse()
     {
-        Assert.IsTrue(default(HouseNumber).IsEmptyOrUnknown());
+        default(HouseNumber).IsEmptyOrUnknown().Should().BeTrue();
     }
     /// <summary>HouseNumber.IsEmptyOrUnknown() should be true for HouseNumber.Unknown.</summary>
     [Test]
     public void IsEmptyOrUnknown_Unknown_IsTrue()
     {
-        Assert.IsTrue(HouseNumber.Unknown.IsEmptyOrUnknown());
+        HouseNumber.Unknown.IsEmptyOrUnknown().Should().BeTrue();
     }
     /// <summary>HouseNumber.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
     [Test]
     public void IsEmptyOrUnknown_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
+        TestStruct.IsEmptyOrUnknown().Should().BeFalse();
     }
 
     #endregion
@@ -97,7 +97,7 @@ public class HouseNumberTest
     [Test]
     public void TryParse_Null_IsValid()
     {
-        Assert.IsTrue(HouseNumber.TryParse(Nil.String, out HouseNumber val), "Valid");
+        HouseNumber.TryParse(Nil.String, out HouseNumber val).Should().BeTrue();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -107,7 +107,7 @@ public class HouseNumberTest
     {
         string str = string.Empty;
 
-        Assert.IsTrue(HouseNumber.TryParse(str, out HouseNumber val), "Valid");
+        HouseNumber.TryParse(str, out HouseNumber val).Should().BeTrue();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -117,8 +117,8 @@ public class HouseNumberTest
     {
         string str = "?";
 
-        Assert.IsTrue(HouseNumber.TryParse(str, out HouseNumber val), "Valid");
-        Assert.IsTrue(val.IsUnknown(), "Value");
+        HouseNumber.TryParse(str, out HouseNumber val).Should().BeTrue();
+        val.IsUnknown().Should().BeTrue();
     }
 
     /// <summary>TryParse with specified string value should be valid.</summary>
@@ -127,7 +127,7 @@ public class HouseNumberTest
     {
         string str = "123";
 
-        Assert.IsTrue(HouseNumber.TryParse(str, out HouseNumber val), "Valid");
+        HouseNumber.TryParse(str, out HouseNumber val).Should().BeTrue();
         Assert.AreEqual(str, val.ToString(), "Value");
     }
 
@@ -137,7 +137,7 @@ public class HouseNumberTest
     {
         string str = "string";
 
-        Assert.IsFalse(HouseNumber.TryParse(str, out HouseNumber val), "Valid");
+        HouseNumber.TryParse(str, out HouseNumber val).Should().BeFalse();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -190,14 +190,14 @@ public class HouseNumberTest
     public void TryCreate_Null_IsEmpty()
     {
         HouseNumber exp = HouseNumber.Empty;
-        Assert.IsTrue(HouseNumber.TryCreate(null, out HouseNumber act));
+        HouseNumber.TryCreate(null, out HouseNumber act).Should().BeTrue();
         Assert.AreEqual(exp, act);
     }
     [Test]
     public void TryCreate_Int32MinValue_IsEmpty()
     {
         HouseNumber exp = HouseNumber.Empty;
-        Assert.IsFalse(HouseNumber.TryCreate(int.MinValue, out HouseNumber act));
+        HouseNumber.TryCreate(int.MinValue, out HouseNumber act).Should().BeFalse();
         Assert.AreEqual(exp, act);
     }
 
@@ -383,7 +383,7 @@ public class HouseNumberTest
     public void GetSchema_None_IsNull()
     {
         IXmlSerializable obj = TestStruct;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 
     #endregion
@@ -512,7 +512,7 @@ public class HouseNumberTest
         HouseNumber l = 17;
         HouseNumber r = 19;
 
-        Assert.IsTrue(l < r);
+        (l < r).Should().BeTrue();
     }
     [Test]
     public void GreaterThan_21LT19_IsTrue()
@@ -520,7 +520,7 @@ public class HouseNumberTest
         HouseNumber l = 21;
         HouseNumber r = 19;
 
-        Assert.IsTrue(l > r);
+        (l > r).Should().BeTrue();
     }
 
     [Test]
@@ -529,7 +529,7 @@ public class HouseNumberTest
         HouseNumber l = 17;
         HouseNumber r = 19;
 
-        Assert.IsTrue(l <= r);
+        (l <= r).Should().BeTrue();
     }
     [Test]
     public void GreaterThanOrEqual_21LT19_IsTrue()
@@ -537,7 +537,7 @@ public class HouseNumberTest
         HouseNumber l = 21;
         HouseNumber r = 19;
 
-        Assert.IsTrue(l >= r);
+        (l >= r).Should().BeTrue();
     }
 
     [Test]
@@ -546,7 +546,7 @@ public class HouseNumberTest
         HouseNumber l = 17;
         HouseNumber r = 17;
 
-        Assert.IsTrue(l <= r);
+        (l <= r).Should().BeTrue();
     }
     [Test]
     public void GreaterThanOrEqual_21LT21_IsTrue()
@@ -554,7 +554,7 @@ public class HouseNumberTest
         HouseNumber l = 21;
         HouseNumber r = 21;
 
-        Assert.IsTrue(l >= r);
+        (l >= r).Should().BeTrue();
     }
     #endregion
 
@@ -583,43 +583,43 @@ public class HouseNumberTest
     [Test]
     public void IsOdd_Empty_IsFalse()
     {
-        Assert.IsFalse(HouseNumber.Empty.IsOdd);
+        HouseNumber.Empty.IsOdd.Should().BeFalse();
     }
 
     [Test]
     public void IsOdd_Unknown_IsFalse()
     {
-        Assert.IsFalse(HouseNumber.Unknown.IsOdd);
+        HouseNumber.Unknown.IsOdd.Should().BeFalse();
     }
 
     [Test]
     public void IsOdd_TestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.IsOdd);
+        TestStruct.IsOdd.Should().BeTrue();
     }
 
     [Test]
     public void IsEven_Empty_IsFalse()
     {
-        Assert.IsFalse(HouseNumber.Empty.IsEven);
+        HouseNumber.Empty.IsEven.Should().BeFalse();
     }
 
     [Test]
     public void IsEven_Unknown_IsFalse()
     {
-        Assert.IsFalse(HouseNumber.Unknown.IsEven);
+        HouseNumber.Unknown.IsEven.Should().BeFalse();
     }
 
     [Test]
     public void IsEven_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsEven);
+        TestStruct.IsEven.Should().BeFalse();
     }
 
     [Test]
     public void IsEven_1234_IsTrue()
     {
-        Assert.IsTrue(HouseNumber.Create(1234).IsEven);
+        HouseNumber.Create(1234).IsEven.Should().BeTrue();
     }
 
 

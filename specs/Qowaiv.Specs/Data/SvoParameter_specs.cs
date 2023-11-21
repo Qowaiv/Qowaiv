@@ -59,10 +59,10 @@ namespace Data.SvoParameter_specs
     }
 
     [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
-    internal readonly struct StructWithoutRequiredCast : IEquatable<StructWithoutRequiredCast>
+    internal readonly struct StructWithoutRequiredCast(string str) : IEquatable<StructWithoutRequiredCast>
     {
-        private readonly string val;
-        public StructWithoutRequiredCast(string str) => val = str;
+        private readonly string val = str;
+
         public override bool Equals(object? obj) => obj is StructWithoutRequiredCast svo && Equals(svo);
         public bool Equals(StructWithoutRequiredCast other) => other.val == val;
         public override int GetHashCode() => (val ?? "").GetHashCode();

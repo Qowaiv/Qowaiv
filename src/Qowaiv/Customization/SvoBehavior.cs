@@ -133,7 +133,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     [Pure]
     public virtual string InvalidFormatMessage(string? str, IFormatProvider? formatProvider)
         => GetType().Name.StartsWith("For")
-        ? $"Not a valid {GetType().Name.Substring(3)}"
+        ? $"Not a valid {GetType().Name[3..]}"
         : $"Not a valid {GetType().Name}";
 
     /// <inheritdoc />

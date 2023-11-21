@@ -6,7 +6,7 @@ public class Computed
     public void from_algorithm()
     {
         var algorithm = MD5.Create();
-        var seed = algorithm.ComputeCryptographicSeed(new byte[] { 0xD4, 0x1D, 0x8C, 0xD9 });
+        var seed = algorithm.ComputeCryptographicSeed([0xD4, 0x1D, 0x8C, 0xD9]);
         seed.Value().Should().Be("t4VYHkd9cKuZGqBn8j2XKw==");
     }
 }
@@ -91,7 +91,7 @@ public class ToByteArray
 
     [Test]
     public void from_empty_array_stays_empty_array()
-        => CryptographicSeed.Create(Array.Empty<byte>())
+        => CryptographicSeed.Create([])
         .ToByteArray().Should().BeEquivalentTo(Array.Empty<byte>());
 }
 

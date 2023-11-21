@@ -18,7 +18,7 @@ public static class TestTimeZones
         displayName: "(UTC: +0:33) Leiden, Leiderdorp, Oegstgeest",
         standardDisplayName: "Leiden Central Time",
         daylightDisplayName: "Leiden Central Time",
-        adjustmentRules: Array.Empty<TimeZoneInfo.AdjustmentRule>(),
+        adjustmentRules: [],
         disableDaylightSavingTime: true);
 
     /// <summary>Creates a custom <see cref="TimeZoneInfo"/>for testing purposes.</summary>
@@ -55,7 +55,7 @@ public static class TestTimeZones
             };
             if (ctor.GetParameters().Length == 8) { args.Add(true); }
 
-            return (TimeZoneInfo)ctor.Invoke(args.ToArray());
+            return (TimeZoneInfo)ctor.Invoke([.. args]);
         }
         catch (TargetInvocationException x) { throw x.InnerException ?? x; }
     }

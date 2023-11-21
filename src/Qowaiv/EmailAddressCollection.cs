@@ -22,7 +22,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// <remarks>
     /// Both comma and semicolon are supported.
     /// </remarks>
-    private static readonly char[] Separators = new[] { ',', ';' };
+    private static readonly char[] Separators = [',', ';'];
 
     /// <summary>The underlying hash set.</summary>
     /// <remarks>
@@ -32,7 +32,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     ///
     /// So this construction is required.
     /// </remarks>
-    private readonly HashSet<EmailAddress> hashset = new();
+    private readonly HashSet<EmailAddress> hashset = [];
 
     /// <summary>Initializes a new instance of the <see cref="EmailAddressCollection"/> class.</summary>
     public EmailAddressCollection() { }
@@ -332,7 +332,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
         {
             return val;
         }
-        return new EmailAddressCollection();
+        return [];
     }
 
     /// <summary>Converts the string to an email address collection.
@@ -369,7 +369,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// </returns>
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out EmailAddressCollection result)
     {
-        result = new EmailAddressCollection();
+        result = [];
         if (s is { Length: > 0 })
         {
             var strs = s.Split(Separators, StringSplitOptions.RemoveEmptyEntries).Select(str => str.Trim());

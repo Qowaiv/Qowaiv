@@ -518,7 +518,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
         if (streamSizeMarker[0] == ' ')
         {
             sb.Append(' ');
-            streamSizeMarker = streamSizeMarker.Substring(1);
+            streamSizeMarker = streamSizeMarker[1..];
         }
         return AppendExtension(sb, streamSizeMarker, order).ToString();
     }
@@ -539,10 +539,10 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
         };
 
     private static readonly Regex FormattedPattern = new("^(?<format>.*)(?<streamSizeMarker> ?[sSfF]i?)$", RegOptions.RightToLeft, RegOptions.Timeout);
-    private static readonly string[] ShortLabels = { "B", "kB", "MB", "GB", "TB", "PB", "EB" };
-    private static readonly string[] FullLabels = { "byte", "kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte" };
-    private static readonly string[] ShortLabels1024 = { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB" };
-    private static readonly string[] FullLabels1024 = { "byte", "kibibyte", "Mebibyte", "Gibibyte", "Tebibyte", "Pebibyte", "Exbibyte" };
+    private static readonly string[] ShortLabels = ["B", "kB", "MB", "GB", "TB", "PB", "EB"];
+    private static readonly string[] FullLabels = ["byte", "kilobyte", "Megabyte", "Gigabyte", "Terabyte", "Petabyte", "Exabyte"];
+    private static readonly string[] ShortLabels1024 = ["B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB"];
+    private static readonly string[] FullLabels1024 = ["byte", "kibibyte", "Mebibyte", "Gibibyte", "Tebibyte", "Pebibyte", "Exbibyte"];
 
     /// <summary>Casts a stream size to a System.int.</summary>
     public static explicit operator int(StreamSize val) => (int)val.m_Value;
@@ -698,11 +698,11 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
             {
                 if (input.ToUpperInvariant().EndsWith(' ' + marker, StringComparison.Ordinal))
                 {
-                    return input.Substring(length - marker.Length - 1);
+                    return input[(length - marker.Length - 1)..];
                 }
                 else if (input.ToUpperInvariant().EndsWith(marker, StringComparison.Ordinal))
                 {
-                    return input.Substring(length - marker.Length);
+                    return input[(length - marker.Length)..];
                 }
             }
             return string.Empty;
@@ -713,7 +713,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
     [Pure]
     private static string GetWithoutStreamSizeMarker(string? input, string streamSizeMarker)
         => input is { Length: > 0 }
-        ? input.Substring(0, input.Length - streamSizeMarker.Length)
+        ? input[..^streamSizeMarker.Length]
         : string.Empty;
 
     [Pure]

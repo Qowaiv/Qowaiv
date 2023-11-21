@@ -6,21 +6,21 @@ public class IdCastTest
     public void CreateString_Null_IsEmpty()
     {
         var fromNull = Id<ForString>.Create(null);
-        Assert.IsTrue(fromNull.IsEmpty());
+        fromNull.IsEmpty().Should().BeTrue();
     }
 
     [Test]
     public void CreateGuid_Null_IsEmpty()
     {
         var fromNull = Id<ForGuid>.Create(null);
-        Assert.IsTrue(fromNull.IsEmpty());
+        fromNull.IsEmpty().Should().BeTrue();
     }
 
     [Test]
     public void CreateInt64_Null_IsEmpty()
     {
         var fromNull = Id<ForInt64>.Create(null);
-        Assert.IsTrue(fromNull.IsEmpty());
+        fromNull.IsEmpty().Should().BeTrue();
     }
 
     [Test]

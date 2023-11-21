@@ -17,7 +17,7 @@ public static class QowaivAssemblyAssertions
     {
         Guard.NotNull(assertions);
 
-        var bytes = assertions.Subject.GetName().GetPublicKey() ?? Array.Empty<byte>();
+        var bytes = assertions.Subject.GetName().GetPublicKey() ?? [];
         var assemblyKey = BitConverter.ToString(bytes).Replace("-", string.Empty);
 
         Execute.Assertion

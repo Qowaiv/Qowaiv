@@ -56,12 +56,12 @@ public sealed class IdTypeConverter : TypeConverter
     {
         if (string.Empty.Equals(value) || value is null)
         {
-            return Ctor.Invoke(new object?[] { null });
+            return Ctor.Invoke([null]);
         }
         else
         {
             var id = BaseConverter.ConvertFrom(context, culture, value);
-            return Ctor.Invoke(new[] { id });
+            return Ctor.Invoke([id]);
         }
     }
 

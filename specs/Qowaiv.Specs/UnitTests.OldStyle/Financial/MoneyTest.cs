@@ -27,7 +27,7 @@ public class MoneyTest
         using (TestCultures.Nl_NL.Scoped())
         {
             Money exp = 42.17 + Currency.EUR;
-            Assert.IsTrue(Money.TryParse("€42,17", out Money act), "Valid");
+            Money.TryParse("€42,17", out Money act).Should().BeTrue();
             Assert.AreEqual(exp, act, "Value");
         }
     }
@@ -37,7 +37,7 @@ public class MoneyTest
     public void TryParse_StringValue_IsNotValid()
     {
         string str = "string";
-        Assert.IsFalse(Money.TryParse(str, out Money val), "Valid");
+        Money.TryParse(str, out Money val).Should().BeFalse();
         Assert.AreEqual(Money.Zero, val, "Value");
     }
 
@@ -261,7 +261,7 @@ public class MoneyTest
     public void GetSchema_None_IsNull()
     {
         IXmlSerializable obj = TestStruct;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 
     #endregion
@@ -385,7 +385,7 @@ public class MoneyTest
     [Test]
     public void Equals_EmptyEmpty_IsTrue()
     {
-        Assert.IsTrue(Money.Zero.Equals(Money.Zero));
+        Money.Zero.Equals(Money.Zero).Should().BeTrue();
     }
 
     [Test]
@@ -394,43 +394,43 @@ public class MoneyTest
         var l = Money.Parse("€1,234,456.789", CultureInfo.InvariantCulture);
         var r = Money.Parse("EUR1234456.789", CultureInfo.InvariantCulture);
 
-        Assert.IsTrue(l.Equals(r));
+        l.Equals(r).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals(TestStruct));
+        TestStruct.Equals(TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructEmpty_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(Money.Zero));
+        TestStruct.Equals(Money.Zero).Should().BeFalse();
     }
 
     [Test]
     public void Equals_EmptyTestStruct_IsFalse()
     {
-        Assert.IsFalse(Money.Zero.Equals(TestStruct));
+        Money.Zero.Equals(TestStruct).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObjectTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals((object)TestStruct));
+        TestStruct.Equals((object)TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(null));
+        TestStruct.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObject_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(new object()));
+        TestStruct.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
@@ -438,7 +438,7 @@ public class MoneyTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsTrue(l == r);
+        (l == r).Should().BeTrue();
     }
 
     [Test]
@@ -446,7 +446,7 @@ public class MoneyTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsFalse(l != r);
+        (l != r).Should().BeFalse();
     }
 
     #endregion
@@ -511,7 +511,7 @@ public class MoneyTest
         var l = 17 + Currency.DKK;
         var r = 19 + Currency.DKK;
 
-        Assert.IsTrue(l < r);
+        (l < r).Should().BeTrue();
     }
     [Test]
     public void GreaterThan_21LT19_IsTrue()
@@ -519,7 +519,7 @@ public class MoneyTest
         var l = 21 + Currency.DKK;
         var r = 19 + Currency.DKK;
 
-        Assert.IsTrue(l > r);
+        (l > r).Should().BeTrue();
     }
 
     [Test]
@@ -528,7 +528,7 @@ public class MoneyTest
         var l = 17 + Currency.DKK;
         var r = 19 + Currency.DKK;
 
-        Assert.IsTrue(l <= r);
+        (l <= r).Should().BeTrue();
     }
     [Test]
     public void GreaterThanOrEqual_21LT19_IsTrue()
@@ -536,7 +536,7 @@ public class MoneyTest
         var l = 21 + Currency.DKK;
         var r = 19 + Currency.DKK;
 
-        Assert.IsTrue(l >= r);
+        (l >= r).Should().BeTrue();
     }
 
     [Test]
@@ -545,7 +545,7 @@ public class MoneyTest
         var l = 17 + Currency.DKK;
         var r = 17 + Currency.DKK;
 
-        Assert.IsTrue(l <= r);
+        (l <= r).Should().BeTrue();
     }
     [Test]
     public void GreaterThanOrEqual_21LT21_IsTrue()
@@ -553,7 +553,7 @@ public class MoneyTest
         var l = 21 + Currency.DKK;
         var r = 21 + Currency.DKK;
 
-        Assert.IsTrue(l >= r);
+        (l >= r).Should().BeTrue();
     }
     #endregion
 

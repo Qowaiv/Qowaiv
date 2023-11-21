@@ -29,7 +29,7 @@ public class LocalDateTimeTest
         using (new CultureInfoScope(TestCultures.Nl_NL))
         {
             string str = "26-4-2015 17:07:13";
-            Assert.IsTrue(LocalDateTime.TryParse(str, out LocalDateTime val), "Valid");
+            LocalDateTime.TryParse(str, out LocalDateTime val).Should().BeTrue();
             Assert.AreEqual(new LocalDateTime(2015, 04, 26, 17, 07, 13, 000), val, "Value");
         }
     }
@@ -207,7 +207,7 @@ public class LocalDateTimeTest
     public void GetSchema_None_IsNull()
     {
         IXmlSerializable obj = TestStruct;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 
     #endregion
@@ -243,7 +243,7 @@ public class LocalDateTimeTest
             var l = LocalDateTime.Parse("14 february 2010", CultureInfo.InvariantCulture);
             var r = LocalDateTime.Parse("2010-02-14", CultureInfo.InvariantCulture);
 
-            Assert.IsTrue(l.Equals(r));
+            l.Equals(r).Should().BeTrue();
         }
     }
 

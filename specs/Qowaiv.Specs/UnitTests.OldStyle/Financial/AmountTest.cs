@@ -44,7 +44,7 @@ public class AmountTest
         using (CultureInfoScope.NewInvariant())
         {
             string str = "14.1804";
-            Assert.IsTrue(Amount.TryParse(str, out Amount val), "Valid");
+            Amount.TryParse(str, out Amount val).Should().BeTrue();
             Assert.AreEqual(str, val.ToString(), "Value");
         }
     }
@@ -255,7 +255,7 @@ public class AmountTest
     public void GetSchema_None_IsNull()
     {
         IXmlSerializable obj = TestStruct;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 
     #endregion
@@ -372,7 +372,7 @@ public class AmountTest
     [Test]
     public void Equals_EmptyEmpty_IsTrue()
     {
-        Assert.IsTrue(Amount.Zero.Equals(Amount.Zero));
+        Amount.Zero.Equals(Amount.Zero).Should().BeTrue();
     }
 
     [Test]
@@ -383,44 +383,44 @@ public class AmountTest
             var l = Amount.Parse("$ 1,451.070");
             var r = Amount.Parse("1451.07");
 
-            Assert.IsTrue(l.Equals(r));
+            l.Equals(r).Should().BeTrue();
         }
     }
 
     [Test]
     public void Equals_TestStructTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals(TestStruct));
+        TestStruct.Equals(TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructEmpty_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(Amount.Zero));
+        TestStruct.Equals(Amount.Zero).Should().BeFalse();
     }
 
     [Test]
     public void Equals_EmptyTestStruct_IsFalse()
     {
-        Assert.IsFalse(Amount.Zero.Equals(TestStruct));
+        Amount.Zero.Equals(TestStruct).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObjectTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals((object)TestStruct));
+        TestStruct.Equals((object)TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(null));
+        TestStruct.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObject_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(new object()));
+        TestStruct.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
@@ -428,7 +428,7 @@ public class AmountTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsTrue(l == r);
+        (l == r).Should().BeTrue();
     }
 
     [Test]
@@ -436,7 +436,7 @@ public class AmountTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsFalse(l != r);
+        (l != r).Should().BeFalse();
     }
 
     #endregion
@@ -501,7 +501,7 @@ public class AmountTest
         Amount l = (Amount)17;
         Amount r = (Amount)19;
 
-        Assert.IsTrue(l < r);
+        (l < r).Should().BeTrue();
     }
     [Test]
     public void GreaterThan_21LT19_IsTrue()
@@ -509,7 +509,7 @@ public class AmountTest
         Amount l = (Amount)21;
         Amount r = (Amount)19;
 
-        Assert.IsTrue(l > r);
+        (l > r).Should().BeTrue();
     }
 
     [Test]
@@ -518,7 +518,7 @@ public class AmountTest
         Amount l = (Amount)17;
         Amount r = (Amount)19;
 
-        Assert.IsTrue(l <= r);
+        (l <= r).Should().BeTrue();
     }
     [Test]
     public void GreaterThanOrEqual_21LT19_IsTrue()
@@ -526,7 +526,7 @@ public class AmountTest
         Amount l = (Amount)21;
         Amount r = (Amount)19;
 
-        Assert.IsTrue(l >= r);
+        (l >= r).Should().BeTrue();
     }
 
     [Test]
@@ -535,7 +535,7 @@ public class AmountTest
         Amount l = (Amount)17;
         Amount r = (Amount)17;
 
-        Assert.IsTrue(l <= r);
+        (l <= r).Should().BeTrue();
     }
     [Test]
     public void GreaterThanOrEqual_21LT21_IsTrue()
@@ -543,7 +543,7 @@ public class AmountTest
         Amount l = (Amount)21;
         Amount r = (Amount)21;
 
-        Assert.IsTrue(l >= r);
+        (l >= r).Should().BeTrue();
     }
     #endregion
 

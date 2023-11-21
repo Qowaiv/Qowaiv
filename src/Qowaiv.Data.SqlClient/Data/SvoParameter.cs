@@ -86,8 +86,8 @@ public static class SvoParameter
         return cast;
     }
 
-    private static readonly Dictionary<Type, SingleValueObjectAttribute?> Attributes = new();
-    private static readonly Dictionary<Type, MethodInfo> Casts = new();
+    private static readonly Dictionary<Type, SingleValueObjectAttribute?> Attributes = [];
+    private static readonly Dictionary<Type, MethodInfo> Casts = [];
 
     /// <summary>The locker for adding a casts and unsupported types.</summary>
     private static readonly object locker = new();

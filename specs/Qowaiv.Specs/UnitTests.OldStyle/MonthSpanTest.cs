@@ -17,7 +17,7 @@ public class MonthSpanTest
     [Test]
     public void TryParse_Null_IsValid()
     {
-        Assert.IsTrue(MonthSpan.TryParse(null, out var val));
+        MonthSpan.TryParse(null, out var val).Should().BeTrue();
         Assert.AreEqual(default(MonthSpan), val);
     }
 
@@ -25,7 +25,7 @@ public class MonthSpanTest
     [Test]
     public void TryParse_StringEmpty_IsValid()
     {
-        Assert.IsTrue(MonthSpan.TryParse(string.Empty, out var val));
+        MonthSpan.TryParse(string.Empty, out var val).Should().BeTrue();
         Assert.AreEqual(default(MonthSpan), val);
     }
 
@@ -34,7 +34,7 @@ public class MonthSpanTest
     public void TryParse_StringValue_IsValid()
     {
         string str = "0Y+0M";
-        Assert.IsTrue(MonthSpan.TryParse(str, out var val));
+        MonthSpan.TryParse(str, out var val).Should().BeTrue();
         Assert.AreEqual(str, val.ToString());
     }
 
@@ -43,7 +43,7 @@ public class MonthSpanTest
     public void TryParse_StringValue_IsNotValid()
     {
         string str = "5Y#9M";
-        Assert.IsFalse(MonthSpan.TryParse(str, out var val));
+        MonthSpan.TryParse(str, out var val).Should().BeFalse();
         Assert.AreEqual(default(MonthSpan), val);
     }
 
@@ -220,7 +220,7 @@ public class MonthSpanTest
     public void GetSchema_None_IsNull()
     {
         IXmlSerializable obj = TestStruct;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 
     [Test]
@@ -259,7 +259,7 @@ public class MonthSpanTest
     {
         var l = MonthSpan.Parse("69", CultureInfo.InvariantCulture);
         var r = MonthSpan.Parse("5Y+9M", CultureInfo.InvariantCulture);
-        Assert.IsTrue(l.Equals(r));
+        l.Equals(r).Should().BeTrue();
     }
 
     [Test]

@@ -20,9 +20,9 @@ public readonly partial struct InternationalBankAccountNumber
         {
             var type = block.Last();
 
-            if (!int.TryParse(block.Substring(0, block.Length - 1), out int length) && type == ']')
+            if (!int.TryParse(block[..^1], out int length) && type == ']')
             {
-                pattern.Append(block.Substring(1, block.Length - 2));
+                pattern.Append(block[1..^1]);
             }
             else
             {

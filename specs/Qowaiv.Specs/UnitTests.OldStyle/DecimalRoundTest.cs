@@ -127,7 +127,7 @@ public class DecimalRoundTest
         for(var i = 0; i < runs; i++)
         {
             var rounded = value.Round(0, DecimalRounding.RandomTieBreaking);
-            Assert.IsTrue(rounded == 17 || rounded == 18);
+            (rounded == 17 || rounded == 18).Should().BeTrue();
             sum += rounded;
         }
 
@@ -148,7 +148,7 @@ public class DecimalRoundTest
         for (var i = 0; i < runs; i++)
         {
             var rounded = value.Round(0, DecimalRounding.StochasticRounding);
-            Assert.IsTrue(rounded == 17 || rounded == 18);
+            (rounded == 17 || rounded == 18).Should().BeTrue();
             sum += rounded;
         }
 

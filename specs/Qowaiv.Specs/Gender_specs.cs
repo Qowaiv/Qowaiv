@@ -78,7 +78,7 @@ public class Is_valid_for
     [TestCase("unknown")]
     public void strings_representing_unknown(string input)
     {
-        Assert.IsTrue(Gender.IsValid(input));
+        Gender.IsValid(input).Should().BeTrue();
     }
 
     [TestCase(1)]
@@ -86,14 +86,14 @@ public class Is_valid_for
     [TestCase(9)]
     public void numbers(int? number)
     {
-        Assert.IsTrue(Gender.IsValid(number));
+        Gender.IsValid(number).Should().BeTrue();
     }
 
     [TestCase("Female", "nl")]
     [TestCase("Female", "nl")]
     public void strings_representing_SVO(string input, CultureInfo culture)
     {
-        Assert.IsTrue(Gender.IsValid(input, culture));
+        Gender.IsValid(input, culture).Should().BeTrue();
     }
 }
 
@@ -103,25 +103,25 @@ public class Is_not_valid_for
     [Test]
     public void string_empty()
     {
-        Assert.IsFalse(Gender.IsValid(string.Empty));
+        Gender.IsValid(string.Empty).Should().BeFalse();
     }
 
     [Test]
     public void string_null()
     {
-        Assert.IsFalse(Gender.IsValid(Nil.String));
+        Gender.IsValid(Nil.String).Should().BeFalse();
     }
 
     [Test]
     public void whitespace()
     {
-        Assert.IsFalse(Gender.IsValid(" "));
+        Gender.IsValid(" ").Should().BeFalse();
     }
 
     [Test]
     public void garbage()
     {
-        Assert.IsFalse(Gender.IsValid("garbage"));
+        Gender.IsValid("garbage").Should().BeFalse();
     }
 
     [TestCase(null)]
@@ -130,7 +130,7 @@ public class Is_not_valid_for
     [TestCase(10)]
     public void numbers(int? number)
     {
-        Assert.IsFalse(Gender.IsValid(number));
+        Gender.IsValid(number).Should().BeFalse();
     }
 }
 
@@ -150,49 +150,49 @@ public class Is_equal_by_value
     [Test]
     public void not_equal_to_null()
     {
-        Assert.IsFalse(Svo.Gender.Equals(null));
+        Svo.Gender.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_to_other_type()
     {
-        Assert.IsFalse(Svo.Gender.Equals(new object()));
+        Svo.Gender.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_to_different_value()
     {
-        Assert.IsFalse(Svo.Gender.Equals(Gender.Male));
+        Svo.Gender.Equals(Gender.Male).Should().BeFalse();
     }
 
     [Test]
     public void equal_to_same_value()
     {
-        Assert.IsTrue(Svo.Gender.Equals(Gender.Female));
+        Svo.Gender.Equals(Gender.Female).Should().BeTrue();
     }
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
     {
-        Assert.IsTrue(Svo.Gender == Gender.Female);
+        (Svo.Gender == Gender.Female).Should().BeTrue();
     }
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
     {
-        Assert.IsFalse(Svo.Gender == Gender.Male);
+        (Svo.Gender == Gender.Male).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
     {
-        Assert.IsFalse(Svo.Gender != Gender.Female);
+        (Svo.Gender != Gender.Female).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
     {
-        Assert.IsTrue(Svo.Gender != Gender.Male);
+        (Svo.Gender != Gender.Male).Should().BeTrue();
     }
 
     [TestCase("", 0)]
@@ -251,7 +251,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
     {
-        Assert.IsFalse(Gender.TryParse("invalid input", out _));
+        Gender.TryParse("invalid input", out _).Should().BeFalse();
     }
 
     [Test]
@@ -488,7 +488,7 @@ public class Supports_XML_serialization
     public void has_no_custom_XML_schema()
     {
         IXmlSerializable obj = Svo.Gender;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 }
 
@@ -524,7 +524,7 @@ public class Is_Open_API_data_type
     [Test]
     public void pattern_is_null()
     {
-        Assert.IsNull(Attribute.Pattern);
+        Attribute.Pattern.Should().BeNull();
     }
 }
 

@@ -9,8 +9,9 @@
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 ToBeReleased
+- TryApplyCustomFormatter should return false if the provider returns null. #340
 - Extend API with overloads for DateOnly. #339
-- Detailed information on failing parsing.
+- Detailed information on failing parsing. #336
 v6.5.4
 - SVO's can be used as keys when applying JSON serialization. #334
 v6.5.3

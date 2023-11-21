@@ -1,7 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using System.Net;
-
-namespace Email_address_specs;
+﻿namespace Email_address_specs;
 
 public class With_domain_logic
 {
@@ -17,40 +14,56 @@ public class With_domain_logic
 
     [TestCase("")]
     [TestCase("?")]
-    public void has_length_zero_for_empty_and_unknown(EmailAddress svo) => svo.Length.Should().Be(0);
+    public void has_length_zero_for_empty_and_unknown(EmailAddress svo)
+        => svo.Length.Should().Be(0);
 
     [TestCase(15, "info@qowaiv.org")]
-    public void has_length(int length, EmailAddress svo) => svo.Length.Should().Be(length);
+    public void has_length(int length, EmailAddress svo)
+        => svo.Length.Should().Be(length);
 
     [TestCase(false, "info@qowaiv.org")]
     [TestCase(false, "?")]
     [TestCase(true, "")]
     public void IsEmpty_returns(bool result, EmailAddress svo)
-    {
-        Assert.AreEqual(result, svo.IsEmpty());
-    }
+        => svo.IsEmpty().Should().Be(result);
 
     [TestCase(false, "info@qowaiv.org")]
     [TestCase(true, "?")]
     [TestCase(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, EmailAddress svo)
-    {
-        Assert.AreEqual(result, svo.IsEmptyOrUnknown());
-    }
+            => svo.IsEmptyOrUnknown().Should().Be(result);
 
     [TestCase(false, "info@qowaiv.org")]
     [TestCase(true, "?")]
     [TestCase(false, "")]
     public void IsUnknown_returns(bool result, EmailAddress svo)
-    {
-        Assert.AreEqual(result, svo.IsUnknown());
-    }
+        => svo.IsUnknown().Should().Be(result);
+
+    [TestCase(false, "info@qowaiv.org")]
+    [TestCase(true, "info@[192.0.2.1]")]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void IsIPBased_returns(bool result, EmailAddress svo)
+        => svo.IsIPBased.Should().Be(result);
 
     [TestCase("info@qowaiv.org", "255.255.255.255")]
     [TestCase("info@[192.0.2.1]", "192.0.2.1")]
     [TestCase("info@[IPv6:2001:0db8:0000:0000:0000:ff00:0042:8329]", "1:db8::ff00:42:8329")]
-    public void IPDomain(EmailAddress email, string address)
+    public void IP_domain(EmailAddress email, string address)
         => email.IPDomain.ToString().Should().Be(address);
+
+    [TestCase("info", "info@qowaiv.org")]
+    [TestCase("", "?")]
+    [TestCase("", "")]
+    public void Local_part_returns(string local, EmailAddress email)
+        => email.Local.Should().Be(local);
+
+    [TestCase("qowaiv.org", "info@qowaiv.org")]
+    [TestCase("[192.0.2.1]", "info@192.0.2.1")]
+    [TestCase("", "?")]
+    [TestCase("", "")]
+    public void Domain_part_returns(string local, EmailAddress email)
+        => email.Domain.Should().Be(local);
 }
 
 public class Has_constant

@@ -20,15 +20,13 @@ public readonly partial struct Percentage
 
     internal readonly struct FormatInfo(string format, NumberFormatInfo provider, Symbol symbol, Position position)
     {
-        public string Format { get; } = format;
+        public readonly string Format = format;
 
-        private static readonly string[] Befores = ["fr-FR", "fa-IR"];
+        public readonly NumberFormatInfo Provider = provider;
 
-        public NumberFormatInfo Provider { get; } = provider;
+        public readonly Symbol Symbol = symbol;
 
-        public Symbol Symbol { get; } = symbol;
-
-        public Position Position { get; } = position;
+        public readonly Position Position = position;
 
         public decimal Factor => Symbol switch
         {
@@ -36,6 +34,8 @@ public readonly partial struct Percentage
             Symbol.PerTenThousand => 0.0001m,
             _ => 0.01m,
         };
+
+        private static readonly string[] Befores = ["fr-FR", "fa-IR"];
 
         [Pure]
         public string ToString(decimal value)
@@ -74,17 +74,17 @@ public readonly partial struct Percentage
         {
             format = WithDefault(format, formatProvider as CultureInfo);
 
-            var position = Position.None;
+            var pos = Position.None;
             var symbol = Symbol.None;
-            var provider = NumberFormat(formatProvider);
+            var prov = NumberFormat(formatProvider);
 
-            Scan(ref format, ref position, ref symbol, provider, Symbol.Percent);
-            Scan(ref format, ref position, ref symbol, provider, Symbol.PerMille);
-            Scan(ref format, ref position, ref symbol, provider, Symbol.PerTenThousand);
+            Scan(ref format, ref pos, ref symbol, prov, Symbol.Percent);
+            Scan(ref format, ref pos, ref symbol, prov, Symbol.PerMille);
+            Scan(ref format, ref pos, ref symbol, prov, Symbol.PerTenThousand);
 
-            if (position != Position.Contains)
+            if (pos != Position.Contains)
             {
-                info = new(format, provider, symbol, position);
+                info = new(format, prov, symbol, pos);
                 return true;
             }
             else

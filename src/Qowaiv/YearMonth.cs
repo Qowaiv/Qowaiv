@@ -78,8 +78,6 @@ public readonly partial struct YearMonth : ISerializable, IXmlSerializable, IFor
     [Pure]
     public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
-    #region (Explicit) casting
-
     /// <summary>Casts a year-month to a date.</summary>
     public static explicit operator Date(YearMonth val) => val.ToDate(01);
 
@@ -97,8 +95,6 @@ public readonly partial struct YearMonth : ISerializable, IXmlSerializable, IFor
 
     /// <summary>Casts a local date time to a year-month.</summary>
     public static explicit operator YearMonth(LocalDateTime val) => new(val.Year, val.Month);
-
-    #endregion
 
     /// <summary>Converts the string to a 
     /// A return value indicates whether the conversion succeeded.

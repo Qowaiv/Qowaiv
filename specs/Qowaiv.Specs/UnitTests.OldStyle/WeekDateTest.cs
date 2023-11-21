@@ -24,7 +24,7 @@ public class WeekDateTest
     public void TryParse_StringValue_IsValid()
     {
         string str = "1234-W50-6";
-        Assert.IsTrue(WeekDate.TryParse(str, out WeekDate val), "Valid");
+        WeekDate.TryParse(str, out WeekDate val).Should().BeTrue();
         Assert.AreEqual(str, val.ToString(), "Value");
     }
 
@@ -58,7 +58,7 @@ public class WeekDateTest
     public void TryParse_Y0000W21D7_DefaultValue()
     {
         WeekDate exp = default;
-        Assert.IsFalse(WeekDate.TryParse("0000-W21-7", out WeekDate act));
+        WeekDate.TryParse("0000-W21-7", out WeekDate act).Should().BeFalse();
         Assert.AreEqual(exp, act);
     }
 
@@ -66,7 +66,7 @@ public class WeekDateTest
     public void TryParse_Y2000W53D7_DefaultValue()
     {
         WeekDate exp = default;
-        Assert.IsFalse(WeekDate.TryParse("2000-W53-7", out WeekDate act));
+        WeekDate.TryParse("2000-W53-7", out WeekDate act).Should().BeFalse();
         Assert.AreEqual(exp, act);
     }
 
@@ -313,43 +313,43 @@ public class WeekDateTest
         var l = WeekDate.Parse("1997-14-6", CultureInfo.InvariantCulture);
         var r = WeekDate.Parse("1997-W14-6", CultureInfo.InvariantCulture);
 
-        Assert.IsTrue(l.Equals(r));
+        l.Equals(r).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals(TestStruct));
+        TestStruct.Equals(TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructEmpty_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(WeekDate.MinValue));
+        TestStruct.Equals(WeekDate.MinValue).Should().BeFalse();
     }
 
     [Test]
     public void Equals_EmptyTestStruct_IsFalse()
     {
-        Assert.IsFalse(WeekDate.MinValue.Equals(TestStruct));
+        WeekDate.MinValue.Equals(TestStruct).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObjectTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals((object)TestStruct));
+        TestStruct.Equals((object)TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(null));
+        TestStruct.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObject_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(new object()));
+        TestStruct.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
@@ -357,7 +357,7 @@ public class WeekDateTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsTrue(l == r);
+        (l == r).Should().BeTrue();
     }
 
     [Test]
@@ -365,7 +365,7 @@ public class WeekDateTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsFalse(l != r);
+        (l != r).Should().BeFalse();
     }
 
     #endregion
@@ -430,7 +430,7 @@ public class WeekDateTest
         WeekDate l = new(1980, 17, 5);
         WeekDate r = new(1980, 19, 5);
 
-        Assert.IsTrue(l < r);
+        (l < r).Should().BeTrue();
     }
     [Test]
     public void GreaterThan_21LT19_IsTrue()
@@ -438,7 +438,7 @@ public class WeekDateTest
         WeekDate l = new(1980, 21, 5);
         WeekDate r = new(1980, 19, 5);
 
-        Assert.IsTrue(l > r);
+        (l > r).Should().BeTrue();
     }
 
     [Test]
@@ -447,7 +447,7 @@ public class WeekDateTest
         WeekDate l = new(1980, 17, 5);
         WeekDate r = new(1980, 19, 5);
 
-        Assert.IsTrue(l <= r);
+        (l <= r).Should().BeTrue();
     }
     [Test]
     public void GreaterThanOrEqual_21LT19_IsTrue()
@@ -455,7 +455,7 @@ public class WeekDateTest
         WeekDate l = new(1980, 21, 5);
         WeekDate r = new(1980, 19, 5);
 
-        Assert.IsTrue(l >= r);
+        (l >= r).Should().BeTrue();
     }
 
     [Test]
@@ -464,7 +464,7 @@ public class WeekDateTest
         WeekDate l = new(1980, 17, 5);
         WeekDate r = new(1980, 17, 5);
 
-        Assert.IsTrue(l <= r);
+        (l <= r).Should().BeTrue();
     }
     [Test]
     public void GreaterThanOrEqual_21LT21_IsTrue()
@@ -472,7 +472,7 @@ public class WeekDateTest
         WeekDate l = new(1980, 21, 5);
         WeekDate r = new(1980, 21, 5);
 
-        Assert.IsTrue(l >= r);
+        (l >= r).Should().BeTrue();
     }
     #endregion
 

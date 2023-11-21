@@ -25,14 +25,14 @@ public class TryGetBytes_from
     [Test]
     public void Null__returns_EmptyArray()
     {
-        Assert.IsTrue(Base64.TryGetBytes(null, out var bytes));
+        Base64.TryGetBytes(null, out var bytes).Should().BeTrue();
         CollectionAssert.AreEqual(Array.Empty<byte>(), bytes);
     }
 
     [Test]
     public void StringEmpty_returns_EmptyArray()
     {
-        Assert.IsTrue(Base64.TryGetBytes(string.Empty, out var bytes));
+        Base64.TryGetBytes(string.Empty, out var bytes).Should().BeTrue();
         CollectionAssert.AreEqual(Array.Empty<byte>(), bytes);
     }
 
@@ -42,14 +42,14 @@ public class TryGetBytes_from
     public void String_returns(string str, params int[] expected)
     {
         var bytes = expected.Select(v => (byte)v).ToArray();
-        Assert.IsTrue(Base64.TryGetBytes(str, out byte[] actualBytes));
+        Base64.TryGetBytes(str, out byte[] actualBytes).Should().BeTrue();
         CollectionAssert.AreEqual(bytes, actualBytes);
     }
 
     [Test]
     public void Not_support_chars_returns_false_with_EmptyArray()
     {
-        Assert.IsFalse(Base64.TryGetBytes("ABC}", out byte[] bytes));
+        Base64.TryGetBytes("ABC}", out byte[] bytes).Should().BeFalse();
         Assert.AreEqual(Array.Empty<byte>(), bytes);
     }
 }

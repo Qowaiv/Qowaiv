@@ -6,7 +6,6 @@ public class NumericSvoTest
     internal const BindingFlags PublicInstance = BindingFlags.Public | BindingFlags.Instance;
     internal const BindingFlags PublicStatic = BindingFlags.Public | BindingFlags.Static;
 
-
     [TestCase(typeof(Amount))]
     [TestCase(typeof(Money))]
     [TestCase(typeof(Percentage))]
@@ -23,7 +22,7 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 0)
             .ToArray();
 
-        Assert.IsTrue(methods?.Length == 1, nameof(methods));
+        methods.Should().HaveCount(1);
     }
 
     [TestCase(typeof(Amount))]
@@ -50,8 +49,8 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 1 && pars[0] == svo)
             .ToArray();
 
-        Assert.IsTrue(methods.Length == 1, nameof(methods));
-        Assert.IsTrue(operators.Length == 1, nameof(operators));
+        methods.Should().HaveCount(1);
+        operators.Should().HaveCount(1);
     }
 
     [TestCase(typeof(Amount))]
@@ -78,8 +77,8 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 1 && pars[0] == svo)
             .ToArray();
 
-        Assert.IsTrue(methods.Length == 1, nameof(methods));
-        Assert.IsTrue(operators.Length == 1, nameof(operators));
+        methods.Should().HaveCount(1);
+        operators.Should().HaveCount(1);
     }
 
     [TestCase(typeof(Amount))]
@@ -106,8 +105,8 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 1 && pars[0] == svo)
             .ToArray();
 
-        Assert.IsTrue(methods.Length == 1, nameof(methods));
-        Assert.IsTrue(operators.Length == 1, nameof(operators));
+        methods.Should().HaveCount(1);
+        operators.Should().HaveCount(1);
     }
 
     [TestCase(typeof(Amount))]
@@ -134,8 +133,8 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 1 && pars[0] == svo)
             .ToArray();
 
-        Assert.IsTrue(methods.Length == 1, nameof(methods));
-        Assert.IsTrue(operators.Length == 1, nameof(operators));
+        methods.Should().HaveCount(1);
+        operators.Should().HaveCount(1);
     }
 
     [TestCase(typeof(Amount), typeof(Amount), typeof(Percentage))]
@@ -224,8 +223,8 @@ public class NumericSvoTest
             .Select(pars => pars[1])
             .ToArray();
 
-        CollectionAssert.AreEquivalent(expected, methods, nameof(methods));
-        CollectionAssert.AreEquivalent(expected, operators, nameof(operators));
+        methods.Should().BeEquivalentTo(expected);
+        operators.Should().BeEquivalentTo(expected);
     }
 
     [TestCase(typeof(Amount), typeof(short), typeof(int), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(float), typeof(double), typeof(decimal), typeof(Percentage))]
@@ -254,8 +253,8 @@ public class NumericSvoTest
             .Select(pars => pars[1])
             .ToArray();
 
-        CollectionAssert.AreEquivalent(expected, methods, nameof(methods));
-        CollectionAssert.AreEquivalent(expected, operators, nameof(operators));
+        methods.Should().BeEquivalentTo(expected);
+        operators.Should().BeEquivalentTo(expected);
     }
 
     [TestCase(typeof(Amount))]
@@ -271,7 +270,7 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 0)
             .ToArray();
 
-        Assert.IsTrue(methods?.Length == 1, nameof(methods));
+        methods.Should().HaveCount(1);
     }
 
     [TestCase(typeof(Amount))]
@@ -287,7 +286,7 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 1 && pars[0] == typeof(int))
             .ToArray();
 
-        Assert.IsTrue(methods?.Length == 1, nameof(methods));
+        methods.Should().HaveCount(1);
     }
 
     [TestCase(typeof(Amount))]
@@ -303,7 +302,7 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 2 && pars[0] == typeof(int) && pars[1] == typeof(DecimalRounding))
             .ToArray();
 
-        Assert.IsTrue(methods?.Length == 1, nameof(methods));
+        methods.Should().HaveCount(1);
     }
 
     [TestCase(typeof(Amount), typeof(decimal))]
@@ -319,7 +318,7 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 1 && pars[0] == multiplier)
             .ToArray();
 
-        Assert.IsTrue(methods?.Length == 1, nameof(methods));
+        methods.Should().HaveCount(1);
     }
 
     [TestCase(typeof(Amount), typeof(decimal))]
@@ -335,7 +334,7 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 2 && pars[0] == multiplier && pars[1] == typeof(DecimalRounding))
             .ToArray();
 
-        Assert.IsTrue(methods?.Length == 1, nameof(methods));
+        methods.Should().HaveCount(1);
     }
 
 }
@@ -353,18 +352,12 @@ internal static class NumericSvoTestExtensions
         }
     }
 
-    public static IEnumerable<MethodInfo> Returns(this IEnumerable<MethodInfo> infos, Type returnType)
-    {
-        return infos.Where(info => info.ReturnType == returnType);
-    }
+    internal static IEnumerable<MethodInfo> Returns(this IEnumerable<MethodInfo> infos, Type returnType)
+        => infos.Where(info => info.ReturnType == returnType);
 
-    public static IEnumerable<MethodInfo> IsOperator(this IEnumerable<MethodInfo> infos, string nameSuffix)
-    {
-        return infos.Where(info => info.IsSpecialName && info.Name == "op_" + nameSuffix);
-    }
+    internal static IEnumerable<MethodInfo> IsOperator(this IEnumerable<MethodInfo> infos, string nameSuffix)
+        => infos.Where(info => info.IsSpecialName && info.Name == "op_" + nameSuffix);
 
-    public static IEnumerable<Type[]> SelectParameters(this IEnumerable<MethodInfo> infos)
-    {
-        return infos.Select(info => info.GetParameters().Select(par => par.ParameterType).ToArray());
-    }
+    internal static IEnumerable<Type[]> SelectParameters(this IEnumerable<MethodInfo> infos)
+        => infos.Select(info => info.GetParameters().Select(par => par.ParameterType).ToArray());
 }

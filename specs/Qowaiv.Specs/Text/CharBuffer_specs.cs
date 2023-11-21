@@ -79,7 +79,7 @@ public class Clear
     [Test]
     public void Empties_the_buffer()
     {
-        Assert.IsTrue("test".Buffer().Clear().IsEmpty());
+        "test".Buffer().Clear().IsEmpty().Should().BeTrue();
     }
 }
 
@@ -143,28 +143,28 @@ public class StartsWith_String
     public void Longer_then_buffer_is_false()
     {
         var buffer = " test".Buffer().RemoveFromEnd(1);
-        Assert.IsFalse(buffer.StartsWithCaseInsensitive("testx"));
+        buffer.StartsWithCaseInsensitive("testx").Should().BeFalse();
     }
 
     [Test]
     public void That_matches_buffer_but_not_al_visible_is_false()
     {
         var buffer = " test".Buffer().Trim().RemoveFromEnd(1);
-        Assert.IsFalse(buffer.StartsWithCaseInsensitive("test"));
+        buffer.StartsWithCaseInsensitive("test").Should().BeFalse();
     }
 
     [Test]
     public void Not_matching_buffer_is_false()
     {
         var buffer = " test".Buffer().Trim();
-        Assert.IsFalse(buffer.StartsWithCaseInsensitive("xe"));
+        buffer.StartsWithCaseInsensitive("xe").Should().BeFalse();
     }
 
     [Test]
     public void Matching_buffer_is_true()
     {
         var buffer = " test".Buffer().Trim();
-        Assert.IsTrue(buffer.StartsWithCaseInsensitive("tes"));
+        buffer.StartsWithCaseInsensitive("tes").Should().BeTrue();
     }
 }
 
@@ -184,6 +184,6 @@ public class IsEmpty
     public void Is_true_for_buffer_without_visible_content()
     {
         var buffer = "   ".Buffer().Trim();
-        Assert.IsTrue(buffer.IsEmpty());
+        buffer.IsEmpty().Should().BeTrue();
     }
 }

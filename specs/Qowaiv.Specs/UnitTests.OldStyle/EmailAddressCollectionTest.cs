@@ -293,7 +293,7 @@ public class EmailAddressCollectionTest
     public void TryParse_Null_EmptyCollection()
     {
         EmailAddressCollection exp = [];
-        Assert.IsTrue(EmailAddressCollection.TryParse(null, out EmailAddressCollection act));
+        EmailAddressCollection.TryParse(null, out EmailAddressCollection act).Should().BeTrue();
         CollectionAssert.AreEqual(exp, act);
     }
 
@@ -301,7 +301,7 @@ public class EmailAddressCollectionTest
     public void TryParse_StringEmpty_EmptyCollection()
     {
         EmailAddressCollection exp = [];
-        Assert.IsTrue(EmailAddressCollection.TryParse(string.Empty, out EmailAddressCollection act));
+        EmailAddressCollection.TryParse(string.Empty, out EmailAddressCollection act).Should().BeTrue();
         CollectionAssert.AreEqual(exp, act);
     }
 

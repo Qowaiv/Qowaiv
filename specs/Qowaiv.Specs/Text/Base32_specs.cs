@@ -9,7 +9,7 @@ public class ToString
     [Test]
     public void EmptyArray_StringEmpty()
         => Base32.ToString([]).Should().Be(string.Empty);
-    
+
     [TestCase("BQ", 12)]
     [TestCase("BQRA", 12, 34)]
     [TestCase("QOWAI", 131, 172, 4)]
@@ -55,14 +55,14 @@ public class TryGetBytes_from
     public void String_returns(string str, params int[] expected)
     {
         var bytes = expected.Select(v => (byte)v).ToArray();
-        Assert.IsTrue(Base32.TryGetBytes(str, out byte[] actualBytes));
+        Base32.TryGetBytes(str, out byte[] actualBytes).Should().BeTrue();
         CollectionAssert.AreEqual(bytes, actualBytes);
     }
 
     [Test]
     public void Not_support_chars_returns_false_with_EmptyArray()
     {
-        Assert.IsFalse(Base32.TryGetBytes("ABC}", out byte[] bytes));
+        Base32.TryGetBytes("ABC}", out byte[] bytes).Should().BeFalse();
         Assert.AreEqual(Array.Empty<byte>(), bytes);
     }
 }

@@ -20,14 +20,14 @@ public class IdForGuidTest
     [Test]
     public void IsEmpty_Default_IsTrue()
     {
-        Assert.IsTrue(default(Id<ForGuid>).IsEmpty());
+        default(Id<ForGuid>).IsEmpty().Should().BeTrue();
     }
 
     /// <summary>Id<ForGuid>.IsEmpty() should be false for the TestStruct.</summary>
     [Test]
     public void IsEmpty_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsEmpty());
+        TestStruct.IsEmpty().Should().BeFalse();
     }
 
     [Test]
@@ -63,7 +63,7 @@ public class IdForGuidTest
     [Test]
     public void TryParse_Null_IsValid()
     {
-        Assert.IsTrue(Id<ForGuid>.TryParse(null, out var val));
+        Id<ForGuid>.TryParse(null, out var val).Should().BeTrue();
         Assert.AreEqual(default(Id<ForGuid>), val);
     }
 
@@ -71,7 +71,7 @@ public class IdForGuidTest
     [Test]
     public void TryParse_StringEmpty_IsValid()
     {
-        Assert.IsTrue(Id<ForGuid>.TryParse(string.Empty, out var val));
+        Id<ForGuid>.TryParse(string.Empty, out var val).Should().BeTrue();
         Assert.AreEqual(default(Id<ForGuid>), val);
     }
 
@@ -80,7 +80,7 @@ public class IdForGuidTest
     public void TryParse_StringValue_IsValid()
     {
         string str = "0f5ab5ab-12cb-4629-878d-b18b88b9a504";
-        Assert.IsTrue(Id<ForGuid>.TryParse(str, out var val));
+        Id<ForGuid>.TryParse(str, out var val).Should().BeTrue();
         Assert.AreEqual(str, val.ToString());
     }
 
@@ -89,7 +89,7 @@ public class IdForGuidTest
     public void TryParse_StringValue_IsNotValid()
     {
         string str = "0F5AB5AB-12CB-4629-878D";
-        Assert.IsFalse(Id<ForGuid>.TryParse(str, out var val));
+        Id<ForGuid>.TryParse(str, out var val).Should().BeFalse();
         Assert.AreEqual(default(Id<ForGuid>), val);
     }
 
@@ -132,13 +132,13 @@ public class IdForGuidTest
     [Test]
     public void TryCreate_Int_NotSuccessful()
     {
-        Assert.IsFalse(Id<ForGuid>.TryCreate(17L, out _));
+        Id<ForGuid>.TryCreate(17L, out _).Should().BeFalse();
     }
 
     [Test]
     public void TryCreate_Guid_Successful()
     {
-        Assert.IsTrue(Id<ForGuid>.TryCreate(Guid.Parse("0F5AB5AB-12CB-4629-878D-B18B88B9A504"), out var id));
+        Id<ForGuid>.TryCreate(Guid.Parse("0F5AB5AB-12CB-4629-878D-B18B88B9A504"), out var id).Should().BeTrue();
         Assert.AreEqual(Id<ForGuid>.Parse("0F5AB5AB-12CB-4629-878D-B18B88B9A504"), id);
     }
 
@@ -356,7 +356,7 @@ public class IdForGuidTest
     [Test]
     public void Equals_EmptyEmpty_IsTrue()
     {
-        Assert.IsTrue(Id<ForGuid>.Empty.Equals(Id<ForGuid>.Empty));
+        Id<ForGuid>.Empty.Equals(Id<ForGuid>.Empty).Should().BeTrue();
     }
 
     [Test]
@@ -364,43 +364,43 @@ public class IdForGuidTest
     {
         var l = Id<ForGuid>.Parse("Qowaiv_SVOLibrary_GUIA");
         var r = Id<ForGuid>.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
-        Assert.IsTrue(l.Equals(r));
+        l.Equals(r).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals(TestStruct));
+        TestStruct.Equals(TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructEmpty_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(Id<ForGuid>.Empty));
+        TestStruct.Equals(Id<ForGuid>.Empty).Should().BeFalse();
     }
 
     [Test]
     public void Equals_EmptyTestStruct_IsFalse()
     {
-        Assert.IsFalse(Id<ForGuid>.Empty.Equals(TestStruct));
+        Id<ForGuid>.Empty.Equals(TestStruct).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObjectTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals((object)TestStruct));
+        TestStruct.Equals((object)TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(null));
+        TestStruct.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObject_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(new object()));
+        TestStruct.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
@@ -408,7 +408,7 @@ public class IdForGuidTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsTrue(l == r);
+        (l == r).Should().BeTrue();
     }
 
     [Test]
@@ -416,7 +416,7 @@ public class IdForGuidTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsFalse(l != r);
+        (l != r).Should().BeFalse();
     }
 
     [Test]
@@ -431,14 +431,14 @@ public class IdForGuidTest
     [TestCase("Complex")]
     public void IsInvalid_String(string str)
     {
-        Assert.IsFalse(Id<ForGuid>.IsValid(str));
+        Id<ForGuid>.IsValid(str).Should().BeFalse();
     }
 
     [TestCase("0F5AB5AB-12CB-4629-878D-B18B88B9A504")]
     [TestCase("Qowaiv_SVOLibrary_GUIA")]
     public void IsValid_String(string str)
     {
-        Assert.IsTrue(Id<ForGuid>.IsValid(str));
+        Id<ForGuid>.IsValid(str).Should().BeTrue();
     }
 }
 

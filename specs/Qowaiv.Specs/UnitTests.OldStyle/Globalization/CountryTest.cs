@@ -58,14 +58,14 @@ public class CountryTest
     [Test]
     public void IsEmpty_Default_IsTrue()
     {
-        Assert.IsTrue(default(Country).IsEmpty());
+        default(Country).IsEmpty().Should().BeTrue();
     }
 
     /// <summary>Country.IsEmpty() should false for the TestStruct.</summary>
     [Test]
     public void IsEmpty_Default_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsEmpty());
+        TestStruct.IsEmpty().Should().BeFalse();
     }
 
     #endregion
@@ -76,7 +76,7 @@ public class CountryTest
     [Test]
     public void TryParse_Null_IsValid()
     {
-        Assert.IsTrue(Country.TryParse(Nil.String, out Country val), "Valid");
+        Country.TryParse(Nil.String, out Country val).Should().BeTrue();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -85,7 +85,7 @@ public class CountryTest
     public void TryParse_StringEmpty_IsValid()
     {
         string str = string.Empty;
-        Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
+        Country.TryParse(str, out Country val).Should().BeTrue();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -94,8 +94,8 @@ public class CountryTest
     public void TryParse_question_mark_IsValid()
     {
         string str = "?";
-        Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
-        Assert.IsTrue(val.IsUnknown(), "Value");
+        Country.TryParse(str, out Country val).Should().BeTrue();
+        val.IsUnknown().Should().BeTrue();
     }
 
     /// <summary>TryParse with specified string value should be valid.</summary>
@@ -103,7 +103,7 @@ public class CountryTest
     public void TryParse_NullCultureStringValue_IsValid()
     {
         string str = "VA";
-        Assert.IsTrue(Country.TryParse(str, null, out Country val), "Valid");
+        Country.TryParse(str, null, out Country val).Should().BeTrue();
         Assert.AreEqual(str, val.ToString(), "Value");
     }
 
@@ -112,7 +112,7 @@ public class CountryTest
     public void TryParse_StringValue_IsValid()
     {
         string str = "VA";
-        Assert.IsTrue(Country.TryParse(str, out Country val), "Valid");
+        Country.TryParse(str, out Country val).Should().BeTrue();
         Assert.AreEqual(str, val.ToString(), "Value");
     }
 
@@ -121,7 +121,7 @@ public class CountryTest
     public void TryParse_StringValue_IsNotValid()
     {
         string str = "string";
-        Assert.IsFalse(Country.TryParse(str, out Country val), "Valid");
+        Country.TryParse(str, out Country val).Should().BeFalse();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -220,7 +220,7 @@ public class CountryTest
     {
         // As the regions available depend on the environment running, we can't
         // predict the outcome.
-        Assert.IsTrue(new[] { true, false }.Contains(country.RegionInfoExists));
+        new[] { true, false }.Contains(country.RegionInfoExists).Should().BeTrue();
     }
 
     #endregion
@@ -466,7 +466,7 @@ public class CountryTest
     [Test]
     public void Equals_EmptyEmpty_IsTrue()
     {
-        Assert.IsTrue(Country.Empty.Equals(Country.Empty));
+        Country.Empty.Equals(Country.Empty).Should().BeTrue();
     }
 
     [Test]
@@ -477,44 +477,44 @@ public class CountryTest
             var l = Country.Parse("België");
             var r = Country.Parse("belgie");
 
-            Assert.IsTrue(l.Equals(r));
+            l.Equals(r).Should().BeTrue();
         }
     }
 
     [Test]
     public void Equals_TestStructTestStruct_IsTrue()
     {
-        Assert.IsTrue(CountryTest.TestStruct.Equals(CountryTest.TestStruct));
+        CountryTest.TestStruct.Equals(CountryTest.TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructEmpty_IsFalse()
     {
-        Assert.IsFalse(CountryTest.TestStruct.Equals(Country.Empty));
+        CountryTest.TestStruct.Equals(Country.Empty).Should().BeFalse();
     }
 
     [Test]
     public void Equals_EmptyTestStruct_IsFalse()
     {
-        Assert.IsFalse(Country.Empty.Equals(CountryTest.TestStruct));
+        Country.Empty.Equals(CountryTest.TestStruct).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObjectTestStruct_IsTrue()
     {
-        Assert.IsTrue(CountryTest.TestStruct.Equals((object)CountryTest.TestStruct));
+        CountryTest.TestStruct.Equals((object)CountryTest.TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        Assert.IsFalse(CountryTest.TestStruct.Equals(Nil.Object));
+        CountryTest.TestStruct.Equals(Nil.Object).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObject_IsFalse()
     {
-        Assert.IsFalse(CountryTest.TestStruct.Equals(new object()));
+        CountryTest.TestStruct.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
@@ -522,7 +522,7 @@ public class CountryTest
     {
         var l = CountryTest.TestStruct;
         var r = CountryTest.TestStruct;
-        Assert.IsTrue(l == r);
+        (l == r).Should().BeTrue();
     }
 
     [Test]
@@ -530,7 +530,7 @@ public class CountryTest
     {
         var l = CountryTest.TestStruct;
         var r = CountryTest.TestStruct;
-        Assert.IsFalse(l != r);
+        (l != r).Should().BeFalse();
     }
 
     #endregion
@@ -695,19 +695,19 @@ public class CountryTest
     [Test]
     public void IsEmptyOrNotKnown_Empty_IsTrue()
     {
-        Assert.IsTrue(Country.Empty.IsEmptyOrUnknown());
+        Country.Empty.IsEmptyOrUnknown().Should().BeTrue();
     }
 
     [Test]
     public void IsEmptyOrNotKnown_NotKnown_IsTrue()
     {
-        Assert.IsTrue(Country.Unknown.IsEmptyOrUnknown());
+        Country.Unknown.IsEmptyOrUnknown().Should().BeTrue();
     }
 
     [Test]
     public void IsEmptyOrNotKnown_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
+        TestStruct.IsEmptyOrUnknown().Should().BeFalse();
     }
 
     /// <remarks>

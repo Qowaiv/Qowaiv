@@ -58,49 +58,49 @@ public class Is_equal_by_value
     [Test]
     public void not_equal_to_null()
     {
-        Assert.IsFalse(Svo.EmailAddress.Equals(null));
+        Svo.EmailAddress.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_to_other_type()
     {
-        Assert.IsFalse(Svo.EmailAddress.Equals(new object()));
+        Svo.EmailAddress.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_to_different_value()
     {
-        Assert.IsFalse(Svo.EmailAddress.Equals(EmailAddress.Parse("no_spam@qowaiv.org")));
+        Svo.EmailAddress.Equals(EmailAddress.Parse("no_spam@qowaiv.org")).Should().BeFalse();
     }
 
     [Test]
     public void equal_to_same_value()
     {
-        Assert.IsTrue(Svo.EmailAddress.Equals(EmailAddress.Parse("info@qowaiv.org")));
+        Svo.EmailAddress.Equals(EmailAddress.Parse("info@qowaiv.org")).Should().BeTrue();
     }
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
     {
-        Assert.IsTrue(Svo.EmailAddress == EmailAddress.Parse("info@qowaiv.org"));
+        (Svo.EmailAddress == EmailAddress.Parse("info@qowaiv.org")).Should().BeTrue();
     }
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
     {
-        Assert.IsFalse(Svo.EmailAddress == EmailAddress.Parse("no_spam@qowaiv.org"));
+        (Svo.EmailAddress == EmailAddress.Parse("no_spam@qowaiv.org")).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
     {
-        Assert.IsFalse(Svo.EmailAddress != EmailAddress.Parse("info@qowaiv.org"));
+        (Svo.EmailAddress != EmailAddress.Parse("info@qowaiv.org")).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
     {
-        Assert.IsTrue(Svo.EmailAddress != EmailAddress.Parse("no_spam@qowaiv.org"));
+        (Svo.EmailAddress != EmailAddress.Parse("no_spam@qowaiv.org")).Should().BeTrue();
     }
 
     [Test]
@@ -161,7 +161,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
     {
-        Assert.IsFalse(EmailAddress.TryParse("invalid input", out _));
+        EmailAddress.TryParse("invalid input", out _).Should().BeFalse();
     }
 
     [Test]

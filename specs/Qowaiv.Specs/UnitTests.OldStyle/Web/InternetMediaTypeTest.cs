@@ -29,57 +29,57 @@ public class InternetMediaTypeTest
     [Test]
     public void IsEmpty_Default_IsTrue()
     {
-        Assert.IsTrue(default(InternetMediaType).IsEmpty());
+        default(InternetMediaType).IsEmpty().Should().BeTrue();
     }
     /// <summary>InternetMediaType.IsEmpty() should be false for InternetMediaType.Unknown.</summary>
     [Test]
     public void IsEmpty_Unknown_IsFalse()
     {
-        Assert.IsFalse(InternetMediaType.Unknown.IsEmpty());
+        InternetMediaType.Unknown.IsEmpty().Should().BeFalse();
     }
     /// <summary>InternetMediaType.IsEmpty() should be false for the TestStruct.</summary>
     [Test]
     public void IsEmpty_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsEmpty());
+        TestStruct.IsEmpty().Should().BeFalse();
     }
 
     /// <summary>InternetMediaType.IsUnknown() should be false for the default of internet media type.</summary>
     [Test]
     public void IsUnknown_Default_IsFalse()
     {
-        Assert.IsFalse(default(InternetMediaType).IsUnknown());
+        default(InternetMediaType).IsUnknown().Should().BeFalse();
     }
     /// <summary>InternetMediaType.IsUnknown() should be true for InternetMediaType.Unknown.</summary>
     [Test]
     public void IsUnknown_Unknown_IsTrue()
     {
-        Assert.IsTrue(InternetMediaType.Unknown.IsUnknown());
+        InternetMediaType.Unknown.IsUnknown().Should().BeTrue();
     }
     /// <summary>InternetMediaType.IsUnknown() should be false for the TestStruct.</summary>
     [Test]
     public void IsUnknown_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsUnknown());
+        TestStruct.IsUnknown().Should().BeFalse();
     }
 
     /// <summary>InternetMediaType.IsEmptyOrUnknown() should be true for the default of internet media type.</summary>
     [Test]
     public void IsEmptyOrUnknown_Default_IsFalse()
     {
-        Assert.IsTrue(default(InternetMediaType).IsEmptyOrUnknown());
+        default(InternetMediaType).IsEmptyOrUnknown().Should().BeTrue();
     }
     /// <summary>InternetMediaType.IsEmptyOrUnknown() should be true for InternetMediaType.Unknown.</summary>
     [Test]
     public void IsEmptyOrUnknown_Unknown_IsTrue()
     {
-        Assert.IsTrue(InternetMediaType.Unknown.IsEmptyOrUnknown());
+        InternetMediaType.Unknown.IsEmptyOrUnknown().Should().BeTrue();
     }
     /// <summary>InternetMediaType.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
     [Test]
     public void IsEmptyOrUnknown_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
+        TestStruct.IsEmptyOrUnknown().Should().BeFalse();
     }
 
     #endregion
@@ -90,7 +90,7 @@ public class InternetMediaTypeTest
     [Test]
     public void TryParse_Null_IsValid()
     {
-        Assert.IsTrue(InternetMediaType.TryParse(Nil.String, out var val), "Valid");
+        InternetMediaType.TryParse(Nil.String, out var val).Should().BeTrue();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -101,7 +101,7 @@ public class InternetMediaTypeTest
 
         string str = string.Empty;
 
-        Assert.IsTrue(InternetMediaType.TryParse(str, out var val), "Valid");
+        InternetMediaType.TryParse(str, out var val).Should().BeTrue();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -111,8 +111,8 @@ public class InternetMediaTypeTest
     {
         string str = "?";
 
-        Assert.IsTrue(InternetMediaType.TryParse(str, out var val), "Valid");
-        Assert.IsTrue(val.IsUnknown(), "Value");
+        InternetMediaType.TryParse(str, out var val).Should().BeTrue();
+        val.IsUnknown().Should().BeTrue();
     }
 
     /// <summary>TryParse with specified string value should be valid.</summary>
@@ -121,7 +121,7 @@ public class InternetMediaTypeTest
     {
         string str = "application/atom+xml";
 
-        Assert.IsTrue(InternetMediaType.TryParse(str, out var val), "Valid");
+        InternetMediaType.TryParse(str, out var val).Should().BeTrue();
         Assert.AreEqual(str, val.ToString(), "Value");
     }
 
@@ -131,7 +131,7 @@ public class InternetMediaTypeTest
     {
         string str = "string";
 
-        Assert.IsFalse(InternetMediaType.TryParse(str, out var val), "Valid");
+        InternetMediaType.TryParse(str, out var val).Should().BeFalse();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -403,7 +403,7 @@ public class InternetMediaTypeTest
     [Test]
     public void Equals_EmptyEmpty_IsTrue()
     {
-        Assert.IsTrue(InternetMediaType.Empty.Equals(InternetMediaType.Empty));
+        InternetMediaType.Empty.Equals(InternetMediaType.Empty).Should().BeTrue();
     }
 
     [Test]
@@ -412,43 +412,43 @@ public class InternetMediaTypeTest
         var l = InternetMediaType.Parse("application/x-chess-pgn");
         var r = InternetMediaType.Parse("application/X-chess-PGN");
 
-        Assert.IsTrue(l.Equals(r));
+        l.Equals(r).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals(TestStruct));
+        TestStruct.Equals(TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructEmpty_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(InternetMediaType.Empty));
+        TestStruct.Equals(InternetMediaType.Empty).Should().BeFalse();
     }
 
     [Test]
     public void Equals_EmptyTestStruct_IsFalse()
     {
-        Assert.IsFalse(InternetMediaType.Empty.Equals(TestStruct));
+        InternetMediaType.Empty.Equals(TestStruct).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObjectTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals((object)TestStruct));
+        TestStruct.Equals((object)TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(null));
+        TestStruct.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObject_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(new object()));
+        TestStruct.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
@@ -456,7 +456,7 @@ public class InternetMediaTypeTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsTrue(l == r);
+        (l == r).Should().BeTrue();
     }
 
     [Test]
@@ -464,7 +464,7 @@ public class InternetMediaTypeTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsFalse(l != r);
+        (l != r).Should().BeFalse();
     }
 
     #endregion

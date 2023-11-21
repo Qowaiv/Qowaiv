@@ -97,44 +97,44 @@ public class FormattingArgumentsTest
     [Test]
     public void Equals_EmptyEmpty_IsTrue()
     {
-        Assert.IsTrue(FormattingArguments.None.Equals(default));
+        FormattingArguments.None.Equals(default).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals(new FormattingArguments("0.000", new CultureInfo("fr-BE"))));
+        TestStruct.Equals(new FormattingArguments("0.000", new CultureInfo("fr-BE"))).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructEmpty_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(FormattingArguments.None));
+        TestStruct.Equals(FormattingArguments.None).Should().BeFalse();
     }
 
     [Test]
     public void Equals_EmptyTestStruct_IsFalse()
     {
-        Assert.IsFalse(FormattingArguments.None.Equals(TestStruct));
+        FormattingArguments.None.Equals(TestStruct).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObjectTestStruct_IsTrue()
     {
         object obj = TestStruct;
-        Assert.IsTrue(TestStruct.Equals(obj));
+        TestStruct.Equals(obj).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(null));
+        TestStruct.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObject_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(new object()));
+        TestStruct.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
@@ -142,7 +142,7 @@ public class FormattingArgumentsTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsTrue(l == r);
+        (l == r).Should().BeTrue();
     }
 
     [Test]
@@ -150,7 +150,7 @@ public class FormattingArgumentsTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsFalse(l != r);
+        (l != r).Should().BeFalse();
     }
 
     #endregion

@@ -20,14 +20,14 @@ public class IdForInt32Test
     [Test]
     public void IsEmpty_Default_IsTrue()
     {
-        Assert.IsTrue(default(Id<ForInt32>).IsEmpty());
+        default(Id<ForInt32>).IsEmpty().Should().BeTrue();
     }
 
     /// <summary>Id<ForInt32>.IsEmpty() should be false for the TestStruct.</summary>
     [Test]
     public void IsEmpty_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsEmpty());
+        TestStruct.IsEmpty().Should().BeFalse();
     }
 
     [Test]
@@ -63,7 +63,7 @@ public class IdForInt32Test
     [Test]
     public void TryParse_Null_IsValid()
     {
-        Assert.IsTrue(Id<ForInt32>.TryParse(null, out var val));
+        Id<ForInt32>.TryParse(null, out var val).Should().BeTrue();
         Assert.AreEqual(default(Id<ForInt32>), val);
     }
 
@@ -71,7 +71,7 @@ public class IdForInt32Test
     [Test]
     public void TryParse_StringEmpty_IsValid()
     {
-        Assert.IsTrue(Id<ForInt32>.TryParse(string.Empty, out var val));
+        Id<ForInt32>.TryParse(string.Empty, out var val).Should().BeTrue();
         Assert.AreEqual(default(Id<ForInt32>), val);
     }
 
@@ -80,7 +80,7 @@ public class IdForInt32Test
     public void TryParse_StringValue_IsValid()
     {
         string str = "123456789";
-        Assert.IsTrue(Id<ForInt32>.TryParse(str, out var val));
+        Id<ForInt32>.TryParse(str, out var val).Should().BeTrue();
         Assert.AreEqual(str, val.ToString());
     }
 
@@ -89,7 +89,7 @@ public class IdForInt32Test
     public void TryParse_StringValue_IsNotValid()
     {
         string str = "ABC";
-        Assert.IsFalse(Id<ForInt32>.TryParse(str, out var val));
+        Id<ForInt32>.TryParse(str, out var val).Should().BeFalse();
         Assert.AreEqual(default(Id<ForInt32>), val);
     }
 
@@ -132,7 +132,7 @@ public class IdForInt32Test
     [Test]
     public void TryCreate_Int_Successful()
     {
-        Assert.IsTrue(Id<ForInt32>.TryCreate(13, out var id));
+        Id<ForInt32>.TryCreate(13, out var id).Should().BeTrue();
         Assert.AreEqual(Id<ForInt32>.Parse("13"), id);
     }
 
@@ -356,7 +356,7 @@ public class IdForInt32Test
     [Test]
     public void Equals_EmptyEmpty_IsTrue()
     {
-        Assert.IsTrue(Id<ForInt32>.Empty.Equals(Id<ForInt32>.Empty));
+        Id<ForInt32>.Empty.Equals(Id<ForInt32>.Empty).Should().BeTrue();
     }
 
     [Test]
@@ -364,43 +364,43 @@ public class IdForInt32Test
     {
         var l = Id<ForInt32>.Parse("123456");
         var r = Id<ForInt32>.Parse("+0000123456");
-        Assert.IsTrue(l.Equals(r));
+        l.Equals(r).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals(TestStruct));
+        TestStruct.Equals(TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructEmpty_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(Id<ForInt32>.Empty));
+        TestStruct.Equals(Id<ForInt32>.Empty).Should().BeFalse();
     }
 
     [Test]
     public void Equals_EmptyTestStruct_IsFalse()
     {
-        Assert.IsFalse(Id<ForInt32>.Empty.Equals(TestStruct));
+        Id<ForInt32>.Empty.Equals(TestStruct).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObjectTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals((object)TestStruct));
+        TestStruct.Equals((object)TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(null));
+        TestStruct.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObject_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(new object()));
+        TestStruct.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
@@ -408,7 +408,7 @@ public class IdForInt32Test
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsTrue(l == r);
+        (l == r).Should().BeTrue();
     }
 
     [Test]
@@ -416,7 +416,7 @@ public class IdForInt32Test
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsFalse(l != r);
+        (l != r).Should().BeFalse();
     }
 
     [Test]
@@ -431,7 +431,7 @@ public class IdForInt32Test
     [TestCase("-1")]
     public void IsInvalid_String(string str)
     {
-        Assert.IsFalse(Id<ForInt32>.IsValid(str));
+        Id<ForInt32>.IsValid(str).Should().BeFalse();
     }
 
     [TestCase("0")]
@@ -439,7 +439,7 @@ public class IdForInt32Test
     [TestCase("+123456")]
     public void IsValid_String(string str)
     {
-        Assert.IsTrue(Id<ForInt32>.IsValid(str));
+        Id<ForInt32>.IsValid(str).Should().BeTrue();
     }
 }
 

@@ -39,7 +39,7 @@ public class DateTest
     {
         string str = "1983-05-02";
 
-        Assert.IsTrue(Date.TryParse(str, out Date val), "Valid");
+        Date.TryParse(str, out Date val).Should().BeTrue();
         Assert.AreEqual(new Date(1983, 05, 02), val, "Value");
     }
 
@@ -51,7 +51,7 @@ public class DateTest
         {
             string str = "not a date";
 
-            Assert.IsFalse(Date.TryParse(str, out Date val), "Valid");
+            Date.TryParse(str, out Date val).Should().BeFalse();
             Assert.AreEqual(Date.MinValue, val, "Value");
         }
     }
@@ -308,7 +308,7 @@ public class DateTest
         var l = Date.Parse("1970-02-14", CultureInfo.InvariantCulture);
         var r = Date.Parse("14 february 1970", CultureInfo.InvariantCulture);
 
-        Assert.IsTrue(l.Equals(r));
+        l.Equals(r).Should().BeTrue();
     }
 
     #endregion
@@ -373,7 +373,7 @@ public class DateTest
         Date l = new(1990, 10, 17);
         Date r = new(1990, 10, 19);
 
-        Assert.IsTrue(l < r);
+        (l < r).Should().BeTrue();
     }
     [Test]
     public void GreaterThan_21LT19_IsTrue()
@@ -381,7 +381,7 @@ public class DateTest
         Date l = new(1990, 10, 21);
         Date r = new(1990, 10, 19);
 
-        Assert.IsTrue(l > r);
+        (l > r).Should().BeTrue();
     }
 
     [Test]
@@ -390,7 +390,7 @@ public class DateTest
         Date l = new(1990, 10, 17);
         Date r = new(1990, 10, 19);
 
-        Assert.IsTrue(l <= r);
+        (l <= r).Should().BeTrue();
     }
     [Test]
     public void GreaterThanOrEqual_21LT19_IsTrue()
@@ -398,7 +398,7 @@ public class DateTest
         Date l = new(1990, 10, 21);
         Date r = new(1990, 10, 19);
 
-        Assert.IsTrue(l >= r);
+        (l >= r).Should().BeTrue();
     }
 
     [Test]
@@ -407,7 +407,7 @@ public class DateTest
         Date l = new(1990, 10, 17);
         Date r = new(1990, 10, 17);
 
-        Assert.IsTrue(l <= r);
+        (l <= r).Should().BeTrue();
     }
     [Test]
     public void GreaterThanOrEqual_21LT21_IsTrue()
@@ -415,7 +415,7 @@ public class DateTest
         Date l = new(1990, 10, 21);
         Date r = new(1990, 10, 21);
 
-        Assert.IsTrue(l >= r);
+        (l >= r).Should().BeTrue();
     }
     #endregion
 

@@ -5,19 +5,19 @@ public class Is_unknown
     [Test]
     public void question_mark_with_culture()
     {
-        Assert.IsTrue(Unknown.IsUnknown("?", new CultureInfo("nl-NL")));
+        Unknown.IsUnknown("?", new CultureInfo("nl-NL")).Should().BeTrue();
     }
 
     [Test]
     public void question_mark_without_culture()
     {
-        Assert.IsTrue(Unknown.IsUnknown("?", null));
+        Unknown.IsUnknown("?", null).Should().BeTrue();
     }
 
     [Test]
     public void language_specific_unknown_for_specific_culture()
     {
-        Assert.IsTrue(Unknown.IsUnknown("Não SABe", new CultureInfo("pt-PT")));
+        Unknown.IsUnknown("Não SABe", new CultureInfo("pt-PT")).Should().BeTrue();
     }
 }
 
@@ -26,19 +26,19 @@ public class Is_not_unknown
     [Test]
     public void Null()
     {
-        Assert.IsFalse(Unknown.IsUnknown(null));
+        Unknown.IsUnknown(null).Should().BeFalse();
     }
 
     [Test]
     public void string_empty()
     {
-        Assert.IsFalse(Unknown.IsUnknown(string.Empty));
+        Unknown.IsUnknown(string.Empty).Should().BeFalse();
     }
 
     [Test]
     public void string_not_representing_unknown_for_specified_culture()
     {
-        Assert.IsFalse(Unknown.IsUnknown("onbekend", CultureInfo.InvariantCulture));
+        Unknown.IsUnknown("onbekend", CultureInfo.InvariantCulture).Should().BeFalse();
     }
 }
 
@@ -54,7 +54,7 @@ public class Can_be_resolved_for
     {
         Assert.AreEqual(ClassWithUnknownValue.Unknown, Unknown.Value(typeof(ClassWithUnknownValue)));
     }
-    
+
     private class ClassWithUnknownValue
     {
         public static ClassWithUnknownValue Unknown { get; } = new ClassWithUnknownValue();

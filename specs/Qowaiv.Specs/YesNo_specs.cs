@@ -85,49 +85,49 @@ public class Is_equal_by_value
     [Test]
     public void not_equal_to_null()
     {
-        Assert.IsFalse(Svo.YesNo.Equals(null));
+        Svo.YesNo.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_to_other_type()
     {
-        Assert.IsFalse(Svo.YesNo.Equals(new object()));
+        Svo.YesNo.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_to_different_value()
     {
-        Assert.IsFalse(Svo.YesNo.Equals(YesNo.Unknown));
+        Svo.YesNo.Equals(YesNo.Unknown).Should().BeFalse();
     }
 
     [Test]
     public void equal_to_same_value()
     {
-        Assert.IsTrue(Svo.YesNo.Equals(YesNo.Yes));
+        Svo.YesNo.Equals(YesNo.Yes).Should().BeTrue();
     }
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
     {
-        Assert.IsTrue(YesNo.Yes == Svo.YesNo);
+        (YesNo.Yes == Svo.YesNo).Should().BeTrue();
     }
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
     {
-        Assert.IsFalse(YesNo.Yes == YesNo.No);
+        (YesNo.Yes == YesNo.No).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
     {
-        Assert.IsFalse(YesNo.Yes != Svo.YesNo);
+        (YesNo.Yes != Svo.YesNo).Should().BeFalse();
     }
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
     {
-        Assert.IsTrue(YesNo.Yes != YesNo.No);
+        (YesNo.Yes != YesNo.No).Should().BeTrue();
     }
 
     [TestCase("", 0)]
@@ -187,7 +187,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
     {
-        Assert.IsFalse(YesNo.TryParse("invalid input", out _));
+        YesNo.TryParse("invalid input", out _).Should().BeFalse();
     }
 
     [Test]

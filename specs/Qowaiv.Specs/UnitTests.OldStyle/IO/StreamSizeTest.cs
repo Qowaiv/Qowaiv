@@ -516,7 +516,7 @@ public class StreamSizeTest
         var l = StreamSize.Parse("12,345 byte", CultureInfo.InvariantCulture);
         var r = StreamSize.Parse("12345", CultureInfo.InvariantCulture);
 
-        Assert.IsTrue(l.Equals(r));
+        l.Equals(r).Should().BeTrue();
     }
 
     #endregion
@@ -581,7 +581,7 @@ public class StreamSizeTest
         StreamSize l = 17;
         StreamSize r = 19;
 
-        Assert.IsTrue(l < r);
+        (l < r).Should().BeTrue();
     }
     [Test]
     public void GreaterThan_21LT19_IsTrue()
@@ -589,7 +589,7 @@ public class StreamSizeTest
         StreamSize l = 21;
         StreamSize r = 19;
 
-        Assert.IsTrue(l > r);
+        (l > r).Should().BeTrue();
     }
 
     [Test]
@@ -598,7 +598,7 @@ public class StreamSizeTest
         StreamSize l = 17;
         StreamSize r = 19;
 
-        Assert.IsTrue(l <= r);
+        (l <= r).Should().BeTrue();
     }
     [Test]
     public void GreaterThanOrEqual_21LT19_IsTrue()
@@ -606,7 +606,7 @@ public class StreamSizeTest
         StreamSize l = 21;
         StreamSize r = 19;
 
-        Assert.IsTrue(l >= r);
+        (l >= r).Should().BeTrue();
     }
 
     [Test]
@@ -615,7 +615,7 @@ public class StreamSizeTest
         StreamSize l = 17;
         StreamSize r = 17;
 
-        Assert.IsTrue(l <= r);
+        (l <= r).Should().BeTrue();
     }
     [Test]
     public void GreaterThanOrEqual_21LT21_IsTrue()
@@ -623,7 +623,7 @@ public class StreamSizeTest
         StreamSize l = 21;
         StreamSize r = 21;
 
-        Assert.IsTrue(l >= r);
+        (l >= r).Should().BeTrue();
     }
     #endregion
 

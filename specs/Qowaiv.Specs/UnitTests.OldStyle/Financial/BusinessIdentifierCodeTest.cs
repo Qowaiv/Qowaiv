@@ -23,57 +23,57 @@ public class BusinessIdentifierCodeTest
     [Test]
     public void IsEmpty_Default_IsTrue()
     {
-        Assert.IsTrue(default(BusinessIdentifierCode).IsEmpty());
+        default(BusinessIdentifierCode).IsEmpty().Should().BeTrue();
     }
     /// <summary>BusinessIdentifierCode.IsEmpty() should be false for BusinessIdentifierCode.Unknown.</summary>
     [Test]
     public void IsEmpty_Unknown_IsFalse()
     {
-        Assert.IsFalse(BusinessIdentifierCode.Unknown.IsEmpty());
+        BusinessIdentifierCode.Unknown.IsEmpty().Should().BeFalse();
     }
     /// <summary>BusinessIdentifierCode.IsEmpty() should be false for the TestStruct.</summary>
     [Test]
     public void IsEmpty_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsEmpty());
+        TestStruct.IsEmpty().Should().BeFalse();
     }
 
     /// <summary>BusinessIdentifierCode.IsUnknown() should be false for the default of BIC.</summary>
     [Test]
     public void IsUnknown_Default_IsFalse()
     {
-        Assert.IsFalse(default(BusinessIdentifierCode).IsUnknown());
+        default(BusinessIdentifierCode).IsUnknown().Should().BeFalse();
     }
     /// <summary>BusinessIdentifierCode.IsUnknown() should be true for BusinessIdentifierCode.Unknown.</summary>
     [Test]
     public void IsUnknown_Unknown_IsTrue()
     {
-        Assert.IsTrue(BusinessIdentifierCode.Unknown.IsUnknown());
+        BusinessIdentifierCode.Unknown.IsUnknown().Should().BeTrue();
     }
     /// <summary>BusinessIdentifierCode.IsUnknown() should be false for the TestStruct.</summary>
     [Test]
     public void IsUnknown_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsUnknown());
+        TestStruct.IsUnknown().Should().BeFalse();
     }
 
     /// <summary>BusinessIdentifierCode.IsEmptyOrUnknown() should be true for the default of BIC.</summary>
     [Test]
     public void IsEmptyOrUnknown_Default_IsFalse()
     {
-        Assert.IsTrue(default(BusinessIdentifierCode).IsEmptyOrUnknown());
+        default(BusinessIdentifierCode).IsEmptyOrUnknown().Should().BeTrue();
     }
     /// <summary>BusinessIdentifierCode.IsEmptyOrUnknown() should be true for BusinessIdentifierCode.Unknown.</summary>
     [Test]
     public void IsEmptyOrUnknown_Unknown_IsTrue()
     {
-        Assert.IsTrue(BusinessIdentifierCode.Unknown.IsEmptyOrUnknown());
+        BusinessIdentifierCode.Unknown.IsEmptyOrUnknown().Should().BeTrue();
     }
     /// <summary>BusinessIdentifierCode.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
     [Test]
     public void IsEmptyOrUnknown_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsEmptyOrUnknown());
+        TestStruct.IsEmptyOrUnknown().Should().BeFalse();
     }
 
     #endregion
@@ -84,7 +84,7 @@ public class BusinessIdentifierCodeTest
     [Test]
     public void TryParse_Null_IsValid()
     {
-        Assert.IsTrue(BusinessIdentifierCode.TryParse(Nil.String, out BusinessIdentifierCode val), "Valid");
+        BusinessIdentifierCode.TryParse(Nil.String, out BusinessIdentifierCode val).Should().BeTrue();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -93,7 +93,7 @@ public class BusinessIdentifierCodeTest
     public void TryParse_StringEmpty_IsValid()
     {
         string str = string.Empty;
-        Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
+        BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val).Should().BeTrue();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -102,8 +102,8 @@ public class BusinessIdentifierCodeTest
     public void TryParse_question_mark_IsValid()
     {
         string str = "?";
-        Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
-        Assert.IsTrue(val.IsUnknown(), "Value");
+        BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val).Should().BeTrue();
+        val.IsUnknown().Should().BeTrue();
     }
 
     /// <summary>TryParse with specified string value should be valid.</summary>
@@ -111,7 +111,7 @@ public class BusinessIdentifierCodeTest
     public void TryParse_StringValue_IsValid()
     {
         string str = "AEGONL2UXXX";
-        Assert.IsTrue(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
+        BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val).Should().BeTrue();
         Assert.AreEqual(str, val.ToString(), "Value");
     }
 
@@ -120,7 +120,7 @@ public class BusinessIdentifierCodeTest
     public void TryParse_StringValue_IsNotValid()
     {
         string str = "string";
-        Assert.IsFalse(BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val), "Valid");
+        BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val).Should().BeFalse();
         Assert.AreEqual(string.Empty, val.ToString(), "Value");
     }
 
@@ -392,7 +392,7 @@ public class BusinessIdentifierCodeTest
     [Test]
     public void Equals_EmptyEmpty_IsTrue()
     {
-        Assert.IsTrue(BusinessIdentifierCode.Empty.Equals(BusinessIdentifierCode.Empty));
+        BusinessIdentifierCode.Empty.Equals(BusinessIdentifierCode.Empty).Should().BeTrue();
     }
 
     [Test]
@@ -401,43 +401,43 @@ public class BusinessIdentifierCodeTest
         var l = BusinessIdentifierCode.Parse("AEGONL2UXXX", CultureInfo.InvariantCulture);
         var r = BusinessIdentifierCode.Parse("AEgonL2Uxxx", CultureInfo.InvariantCulture);
 
-        Assert.IsTrue(l.Equals(r));
+        l.Equals(r).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals(TestStruct));
+        TestStruct.Equals(TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructEmpty_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(BusinessIdentifierCode.Empty));
+        TestStruct.Equals(BusinessIdentifierCode.Empty).Should().BeFalse();
     }
 
     [Test]
     public void Equals_EmptyTestStruct_IsFalse()
     {
-        Assert.IsFalse(BusinessIdentifierCode.Empty.Equals(TestStruct));
+        BusinessIdentifierCode.Empty.Equals(TestStruct).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObjectTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals((object)TestStruct));
+        TestStruct.Equals((object)TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(null));
+        TestStruct.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObject_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(new object()));
+        TestStruct.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
@@ -445,7 +445,7 @@ public class BusinessIdentifierCodeTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsTrue(l == r);
+        (l == r).Should().BeTrue();
     }
 
     [Test]
@@ -453,7 +453,7 @@ public class BusinessIdentifierCodeTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsFalse(l != r);
+        (l != r).Should().BeFalse();
     }
 
     #endregion

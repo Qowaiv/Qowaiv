@@ -17,14 +17,14 @@ public class FractionTest
     [Test]
     public void IsZero_Default_IsTrue()
     {
-        Assert.IsTrue(default(Fraction).IsZero());
+        default(Fraction).IsZero().Should().BeTrue();
     }
 
     /// <summary>Fraction.IsZero() should be false for the TestStruct.</summary>
     [Test]
     public void IsZero_TestStruct_IsFalse()
     {
-        Assert.IsFalse(TestStruct.IsZero());
+        TestStruct.IsZero().Should().BeFalse();
     }
 
     [Test]
@@ -230,7 +230,7 @@ public class FractionTest
     [Test]
     public void Equals_ZeroZero_IsTrue()
     {
-        Assert.IsTrue(Fraction.Zero.Equals(Fraction.Zero));
+        Fraction.Zero.Equals(Fraction.Zero).Should().BeTrue();
     }
 
     [Test]
@@ -238,43 +238,43 @@ public class FractionTest
     {
         var l = Fraction.Parse("-71,234/71,234", CultureInfo.InvariantCulture);
         var r = Fraction.Parse("-1", CultureInfo.InvariantCulture);
-        Assert.IsTrue(l.Equals(r));
+        l.Equals(r).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals(TestStruct));
+        TestStruct.Equals(TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructZero_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(Fraction.Zero));
+        TestStruct.Equals(Fraction.Zero).Should().BeFalse();
     }
 
     [Test]
     public void Equals_ZeroTestStruct_IsFalse()
     {
-        Assert.IsFalse(Fraction.Zero.Equals(TestStruct));
+        Fraction.Zero.Equals(TestStruct).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObjectTestStruct_IsTrue()
     {
-        Assert.IsTrue(TestStruct.Equals((object)TestStruct));
+        TestStruct.Equals((object)TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(null));
+        TestStruct.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObject_IsFalse()
     {
-        Assert.IsFalse(TestStruct.Equals(new object()));
+        TestStruct.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
@@ -282,7 +282,7 @@ public class FractionTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsTrue(l == r);
+        (l == r).Should().BeTrue();
     }
 
     [Test]
@@ -290,7 +290,7 @@ public class FractionTest
     {
         var l = TestStruct;
         var r = TestStruct;
-        Assert.IsFalse(l != r);
+        (l != r).Should().BeFalse();
     }
 
     [Test]

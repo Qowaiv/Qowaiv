@@ -73,7 +73,7 @@ public class Is_not_valid_for
     [TestCase(10)]
     public void numbers(int? number)
     {
-        Assert.IsFalse(Sex.IsValid(number));
+        Sex.IsValid(number).Should().BeFalse();
     }
 }
 

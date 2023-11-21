@@ -47,7 +47,7 @@
         public void TryParse_StringValue_IsValid()
         {
             string str = "1400";
-            Assert.IsTrue(Elo.TryParse(str, out Elo val), "Valid");
+            Elo.TryParse(str, out Elo val).Should().BeTrue();
             Assert.AreEqual(str, val.ToString(), "Value");
         }
 
@@ -311,7 +311,7 @@
             var l = Elo.Parse("1600", CultureInfo.InvariantCulture);
             var r = Elo.Parse("1,600.00*", CultureInfo.InvariantCulture);
 
-            Assert.IsTrue(l.Equals(r));
+            l.Equals(r).Should().BeTrue();
         }
 
         #endregion
@@ -376,7 +376,7 @@
             Elo l = 17;
             Elo r = 19;
 
-            Assert.IsTrue(l < r);
+            (l < r).Should().BeTrue();
         }
         [Test]
         public void GreaterThan_21LT19_IsTrue()
@@ -384,7 +384,7 @@
             Elo l = 21;
             Elo r = 19;
 
-            Assert.IsTrue(l > r);
+            (l > r).Should().BeTrue();
         }
 
         [Test]
@@ -393,7 +393,7 @@
             Elo l = 17;
             Elo r = 19;
 
-            Assert.IsTrue(l <= r);
+            (l <= r).Should().BeTrue();
         }
         [Test]
         public void GreaterThanOrEqual_21LT19_IsTrue()
@@ -401,7 +401,7 @@
             Elo l = 21;
             Elo r = 19;
 
-            Assert.IsTrue(l >= r);
+            (l >= r).Should().BeTrue();
         }
 
         [Test]
@@ -410,7 +410,7 @@
             Elo l = 17;
             Elo r = 17;
 
-            Assert.IsTrue(l <= r);
+            (l <= r).Should().BeTrue();
         }
         [Test]
         public void GreaterThanOrEqual_21LT21_IsTrue()
@@ -418,7 +418,7 @@
             Elo l = 21;
             Elo r = 21;
 
-            Assert.IsTrue(l >= r);
+            (l >= r).Should().BeTrue();
         }
         #endregion
 

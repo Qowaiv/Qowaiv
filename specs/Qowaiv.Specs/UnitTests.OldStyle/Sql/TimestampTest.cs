@@ -13,7 +13,7 @@ public class TimestampTest
     {
         string str = "0x00000000075BCD15";
 
-        Assert.IsTrue(Timestamp.TryParse(str, out Timestamp val), "Valid");
+        Timestamp.TryParse(str, out Timestamp val).Should().BeTrue();
         Assert.AreEqual(TestStruct, val, "Value");
     }
 
@@ -22,7 +22,7 @@ public class TimestampTest
     {
         string str = "123456789";
 
-        Assert.IsTrue(Timestamp.TryParse(str, out Timestamp val), "Valid");
+        Timestamp.TryParse(str, out Timestamp val).Should().BeTrue();
         Assert.AreEqual(TestStruct, val, "Value");
     }
 
@@ -32,7 +32,7 @@ public class TimestampTest
     {
         string str = "0xInvalidTimeStamp";
 
-        Assert.IsFalse(Timestamp.TryParse(str, out Timestamp val), "Valid");
+        Timestamp.TryParse(str, out Timestamp val).Should().BeFalse();
         Assert.AreEqual(Timestamp.MinValue, val, "Value");
     }
 
@@ -313,7 +313,7 @@ public class TimestampTest
         var l = Timestamp.Parse("0x75bcd15", CultureInfo.InvariantCulture);
         var r = Timestamp.Parse("0x00000000075BCD15", CultureInfo.InvariantCulture);
 
-        Assert.IsTrue(l.Equals(r));
+        l.Equals(r).Should().BeTrue();
     }
 
     #endregion
@@ -378,7 +378,7 @@ public class TimestampTest
         Timestamp l = 17;
         Timestamp r = 19;
 
-        Assert.IsTrue(l < r);
+        (l < r).Should().BeTrue();
     }
     [Test]
     public void GreaterThan_21LT19_IsTrue()
@@ -386,7 +386,7 @@ public class TimestampTest
         Timestamp l = 21;
         Timestamp r = 19;
 
-        Assert.IsTrue(l > r);
+        (l > r).Should().BeTrue();
     }
 
     [Test]
@@ -395,7 +395,7 @@ public class TimestampTest
         Timestamp l = 17;
         Timestamp r = 19;
 
-        Assert.IsTrue(l <= r);
+        (l <= r).Should().BeTrue();
     }
     [Test]
     public void GreaterThanOrEqual_21LT19_IsTrue()
@@ -403,7 +403,7 @@ public class TimestampTest
         Timestamp l = 21;
         Timestamp r = 19;
 
-        Assert.IsTrue(l >= r);
+        (l >= r).Should().BeTrue();
     }
 
     [Test]
@@ -412,7 +412,7 @@ public class TimestampTest
         Timestamp l = 17;
         Timestamp r = 17;
 
-        Assert.IsTrue(l <= r);
+        (l <= r).Should().BeTrue();
     }
     [Test]
     public void GreaterThanOrEqual_21LT21_IsTrue()
@@ -420,7 +420,7 @@ public class TimestampTest
         Timestamp l = 21;
         Timestamp r = 21;
 
-        Assert.IsTrue(l >= r);
+        (l >= r).Should().BeTrue();
     }
     #endregion
 

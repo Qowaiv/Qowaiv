@@ -22,7 +22,7 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 0)
             .ToArray();
 
-        methods.Should().HaveCount(1);
+        methods.Should().ContainSingle();
     }
 
     [TestCase(typeof(Amount))]
@@ -49,8 +49,8 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 1 && pars[0] == svo)
             .ToArray();
 
-        methods.Should().HaveCount(1);
-        operators.Should().HaveCount(1);
+        methods.Should().ContainSingle();
+        operators.Should().ContainSingle();
     }
 
     [TestCase(typeof(Amount))]
@@ -77,8 +77,8 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 1 && pars[0] == svo)
             .ToArray();
 
-        methods.Should().HaveCount(1);
-        operators.Should().HaveCount(1);
+        methods.Should().ContainSingle();
+        operators.Should().ContainSingle();
     }
 
     [TestCase(typeof(Amount))]
@@ -105,8 +105,8 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 1 && pars[0] == svo)
             .ToArray();
 
-        methods.Should().HaveCount(1);
-        operators.Should().HaveCount(1);
+        methods.Should().ContainSingle();
+        operators.Should().ContainSingle();
     }
 
     [TestCase(typeof(Amount))]
@@ -133,8 +133,8 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 1 && pars[0] == svo)
             .ToArray();
 
-        methods.Should().HaveCount(1);
-        operators.Should().HaveCount(1);
+        methods.Should().ContainSingle();
+        operators.Should().ContainSingle();
     }
 
     [TestCase(typeof(Amount), typeof(Amount), typeof(Percentage))]
@@ -270,7 +270,7 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 0)
             .ToArray();
 
-        methods.Should().HaveCount(1);
+        methods.Should().ContainSingle();
     }
 
     [TestCase(typeof(Amount))]
@@ -286,7 +286,7 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 1 && pars[0] == typeof(int))
             .ToArray();
 
-        methods.Should().HaveCount(1);
+        methods.Should().ContainSingle();
     }
 
     [TestCase(typeof(Amount))]
@@ -302,7 +302,7 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 2 && pars[0] == typeof(int) && pars[1] == typeof(DecimalRounding))
             .ToArray();
 
-        methods.Should().HaveCount(1);
+        methods.Should().ContainSingle();
     }
 
     [TestCase(typeof(Amount), typeof(decimal))]
@@ -318,7 +318,7 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 1 && pars[0] == multiplier)
             .ToArray();
 
-        methods.Should().HaveCount(1);
+        methods.Should().ContainSingle();
     }
 
     [TestCase(typeof(Amount), typeof(decimal))]
@@ -334,7 +334,7 @@ public class NumericSvoTest
             .Where(pars => pars.Length == 2 && pars[0] == multiplier && pars[1] == typeof(DecimalRounding))
             .ToArray();
 
-        methods.Should().HaveCount(1);
+        methods.Should().ContainSingle();
     }
 
 }

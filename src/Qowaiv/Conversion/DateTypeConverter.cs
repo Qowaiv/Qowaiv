@@ -32,6 +32,13 @@ public class DateTypeConverter : DateTypeConverter<Date>
     protected override Date FromWeekDate(WeekDate weekDate) => weekDate;
 
     /// <inheritdoc />
+    [Pure]
+    protected override Date FromYearMonth(YearMonth yearMonth)
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <inheritdoc />
     [ExcludeFromCodeCoverage]
     [Pure]
     [DoesNotReturn]
@@ -53,4 +60,8 @@ public class DateTypeConverter : DateTypeConverter<Date>
     /// <inheritdoc />
     [Pure]
     protected override WeekDate ToWeekDate(Date date) => date;
+
+    /// <inheritdoc />
+    [Pure]
+    protected override YearMonth ToYearMonth(Date date) => new(date.Year, date.Month);
 }

@@ -109,7 +109,7 @@ public partial struct YearMonth : ISerializable
     private YearMonth(SerializationInfo info, StreamingContext context)
     {
         Guard.NotNull(info, nameof(info));
-        m_Value = info.GetValue("Value", typeof(int)) is int val ? val : default(int);
+        m_Value = info.GetInt32("Value");
     }
 
     /// <summary>Adds the underlying property of the year-month to the serialization info.</summary>

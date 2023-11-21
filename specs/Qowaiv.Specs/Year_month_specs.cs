@@ -258,19 +258,41 @@ public class Is_comparable
 
 public class Casts
 {
-//    [Test]
-//    public void explicitly_from_int()
-//    {
-//        var casted = (YearMonth)null;
-//        casted.Should().Be(Svo.YearMonth);
-//    }
+    [Test]
+    public void explicitly_from_Date()
+        => ((YearMonth)Svo.Date).Should().Be(Svo.YearMonth);
 
-//    [Test]
-//    public void explicitly_to_int()
-//    {
-//        var casted = (int)Svo.YearMonth;
-//        casted.Should().Be(null);
-//    }
+    [Test]
+    public void explicitly_from_DateTime()
+        => ((YearMonth)Svo.DateTime).Should().Be(Svo.YearMonth);
+
+    [Test]
+    public void explicitly_from_LocalDateTime()
+        => ((YearMonth)Svo.LocalDateTime).Should().Be(Svo.YearMonth);
+
+#if NET6_0_OR_GREATER
+    [Test]
+    public void explicitly_from_DateOnly()
+        => ((YearMonth)Svo.DateOnly).Should().Be(Svo.YearMonth);
+#endif
+
+    [Test]
+    public void explicitly_to_Date()
+        => ((Date)Svo.YearMonth).Should().Be(new Date(2017, 06, 01));
+
+    [Test]
+    public void explicitly_to_DateTime()
+        => ((DateTime)Svo.YearMonth).Should().Be(new DateTime(2017, 06, 01));
+
+    [Test]
+    public void explicitly_to_LocalDateTime()
+        => ((LocalDateTime)Svo.YearMonth).Should().Be(new LocalDateTime(2017, 06, 01));
+
+#if NET6_0_OR_GREATER
+    [Test]
+    public void explicitly_to_DateOnly()
+        => ((DateOnly)Svo.YearMonth).Should().Be(new DateOnly(2017, 06, 01));
+#endif
 }
 
 public class Supports_type_conversion

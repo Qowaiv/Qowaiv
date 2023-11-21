@@ -31,8 +31,8 @@ public class TryApplyCustomFormatter
 
     private sealed class CustomFormatter : IFormatProvider, ICustomFormatter
     {
-        public string? Format(string? format, object? arg, IFormatProvider? formatProvider)
-            => arg is int n && n < 0 ? n.ToString() : null;
+        public string Format(string? format, object? arg, IFormatProvider? formatProvider)
+            => arg is int n && n < 0 ? n.ToString() : null!;
 
         public object? GetFormat(Type? formatType)
             => formatType == typeof(ICustomFormatter) ? this : null;

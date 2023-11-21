@@ -3,7 +3,7 @@
 [TestFixture]
 public class EmailAddressCollectionTest
 {
-    public static EmailAddressCollection GetTestInstance()
+    private static EmailAddressCollection GetTestInstance()
         => EmailAddressCollection.Parse("info@qowaiv.org,test@qowaiv.org");
 
     #region (XML) (De)serialization tests

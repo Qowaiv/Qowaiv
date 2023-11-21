@@ -15,68 +15,58 @@ public class With_domain_logic
     [TestCase("")]
     [TestCase("?")]
     public void has_length_zero_for_empty_and_unknown(PostalCode svo)
-    {
-        Assert.AreEqual(0, svo.Length);
-    }
+        => svo.Length.Should().Be(0);
 
+    [TestCase(3, "123")]
+    [TestCase(5, "12345")]
     [TestCase(6, "H0H0H0")]
     public void has_length(int length, PostalCode svo)
-    {
-        Assert.AreEqual(length, svo.Length);
-    }
+        => svo.Length.Should().Be(length);
 
     [TestCase(false, "H0H0H0")]
     [TestCase(false, "?")]
     [TestCase(true, "")]
     public void IsEmpty_returns(bool result, PostalCode svo)
-    {
-        Assert.AreEqual(result, svo.IsEmpty());
-    }
+        => svo.IsEmpty().Should().Be(result);
+    
 
     [TestCase(false, "H0H0H0")]
     [TestCase(true, "?")]
     [TestCase(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, PostalCode svo)
-    {
-        Assert.AreEqual(result, svo.IsEmptyOrUnknown());
-    }
+        => svo.IsEmptyOrUnknown().Should().Be(result);
 
     [TestCase(false, "H0H0H0")]
     [TestCase(true, "?")]
     [TestCase(false, "")]
     public void IsUnknown_returns(bool result, PostalCode svo)
-    {
-        Assert.AreEqual(result, svo.IsUnknown());
-    }
+        => svo.IsUnknown().Should().Be(result);
 }
 
 public class Is_valid_for
 {
+    static readonly IEnumerable<object[]> ValidForCountry = PostalCodes.Valid.SelectMany(codes => codes.ToArrays());
+
     [TestCaseSource(nameof(ValidForCountry))]
     public void country(Country country, PostalCode postalCode)
-    {
-        Assert.IsTrue(postalCode.IsValid(country));
-    }
-    private static readonly IEnumerable<object[]> ValidForCountry = PostalCodes.Valid
-        .SelectMany(codes => codes.ToArrays());
+        => postalCode.IsValid(country).Should().BeTrue();
 
     [Test]
     public void multiple_countries()
     {
         var postalCode = PostalCode.Parse("666");
-        CollectionAssert.AreEqual(new[]
-        {
-                Country.AD,
-                Country.BH,
-                Country.BT,
-                Country.FO,
-                Country.IS,
-                Country.LS,
-                Country.MG,
-                Country.OM,
-                Country.PG,
-            },
-        postalCode.IsValidFor());
+        postalCode.IsValidFor().Should().BeEquivalentTo(
+        [
+            Country.AD,
+            Country.BH,
+            Country.BT,
+            Country.FO,
+            Country.IS,
+            Country.LS,
+            Country.MG,
+            Country.OM,
+            Country.PG,
+        ]);
     }
 }
 
@@ -84,60 +74,42 @@ public class Has_constant
 {
     [Test]
     public void Empty_represent_default_value()
-    {
-        Assert.AreEqual(default(PostalCode), PostalCode.Empty);
-    }
+        => PostalCode.Empty.Should().Be(default);
 }
 
 public class Is_equal_by_value
 {
     [Test]
     public void not_equal_to_null()
-    {
-        Assert.IsFalse(Svo.PostalCode.Equals(null));
-    }
-
+        => Svo.PostalCode.Equals(null).Should().BeFalse();
+    
     [Test]
     public void not_equal_to_other_type()
-    {
-        Assert.IsFalse(Svo.PostalCode.Equals(new object()));
-    }
-
+        => Svo.PostalCode.Equals(new object()).Should().BeFalse();
+    
     [Test]
     public void not_equal_to_different_value()
-    {
-        Assert.IsFalse(Svo.PostalCode.Equals(PostalCode.Parse("different")));
-    }
+        => Svo.PostalCode.Equals(PostalCode.Parse("different")).Should().BeFalse();
 
     [Test]
     public void equal_to_same_value()
-    {
-        Assert.IsTrue(Svo.PostalCode.Equals(PostalCode.Parse("H0H0H0")));
-    }
+        => Svo.PostalCode.Equals(PostalCode.Parse("H0H0H0")).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
-    {
-        Assert.IsTrue(Svo.PostalCode == PostalCode.Parse("H0H0H0"));
-    }
+        => (Svo.PostalCode == PostalCode.Parse("H0H0H0")).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
-    {
-        Assert.IsFalse(Svo.PostalCode == PostalCode.Parse("different"));
-    }
-
+        => (Svo.PostalCode == PostalCode.Parse("different")).Should().BeFalse();
+    
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
-    {
-        Assert.IsFalse(Svo.PostalCode != PostalCode.Parse("H0H0H0"));
-    }
+        => (Svo.PostalCode != PostalCode.Parse("H0H0H0")).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
-    {
-        Assert.IsTrue(Svo.PostalCode != PostalCode.Parse("different"));
-    }
+        => (Svo.PostalCode != PostalCode.Parse("different")).Should().BeTrue();
 
     [TestCase("")]
     [TestCase("H0H0H0")]
@@ -145,7 +117,7 @@ public class Is_equal_by_value
     {
         var first = PostalCode.Parse(svo);
         var second = PostalCode.Parse(svo);
-        Assert.AreEqual(second.GetHashCode(), first.GetHashCode());
+        first.GetHashCode().Should().Be(second.GetHashCode());
     }
 }
 
@@ -153,29 +125,23 @@ public class Can_be_parsed
 {
     [Test]
     public void from_null_string_represents_Empty()
-    {
-        Assert.AreEqual(PostalCode.Empty, PostalCode.Parse(null));
-    }
+        => PostalCode.Parse(null).Should().Be(PostalCode.Empty);
+    
 
     [Test]
     public void from_empty_string_represents_Empty()
-    {
-        Assert.AreEqual(PostalCode.Empty, PostalCode.Parse(string.Empty));
-    }
+        => PostalCode.Parse(string.Empty).Should().Be(PostalCode.Empty);
 
     [Test]
     public void from_question_mark_represents_Unknown()
-    {
-        Assert.AreEqual(PostalCode.Unknown, PostalCode.Parse("?"));
-    }
-
+        => PostalCode.Parse("?").Should().Be(PostalCode.Unknown);
+   
     [TestCase("en", "H0H0H0")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
         {
-            var parsed = PostalCode.Parse(input);
-            Assert.AreEqual(Svo.PostalCode, parsed);
+            PostalCode.Parse(input).Should().Be(Svo.PostalCode);
         }
     }
 
@@ -184,16 +150,16 @@ public class Can_be_parsed
     {
         using (TestCultures.En_GB.Scoped())
         {
-            var exception = Assert.Throws<FormatException>(() => PostalCode.Parse("invalid input"));
-            Assert.AreEqual("Not a valid postal code", exception.Message);
+            "invalid input".Invoking(PostalCode.Parse)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid postal code");
         }
     }
 
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
-    {
-        Assert.IsFalse(PostalCode.TryParse("invalid input", out _));
-    }
+        => PostalCode.TryParse("invalid input", out _).Should().BeFalse();
+        
 
     [Test]
     public void from_invalid_as_null_with_TryParse()
@@ -201,9 +167,7 @@ public class Can_be_parsed
 
     [Test]
     public void with_TryParse_returns_SVO()
-    {
-        Assert.AreEqual(Svo.PostalCode, PostalCode.TryParse("H0H0H0"));
-    }
+        => PostalCode.TryParse("H0H0H0").Should().Be(Svo.PostalCode);
 }
 
 public class Has_custom_formatting
@@ -220,17 +184,17 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.PostalCode.ToString("SomeFormat", FormatProvider.CustomFormatter);
-        Assert.AreEqual("Unit Test Formatter, value: 'H0H0H0', format: 'SomeFormat'", formatted);
+        formatted.Should().Be("Unit Test Formatter, value: 'H0H0H0', format: 'SomeFormat'");
     }
 
     [TestCase("en-GB", null, "H0H0H0", "H0H0H0")]
     [TestCase("nl-BE", "NL", "2624DP", "2624 DP")]
     [TestCase("es-ES", "AD", "765", "AD-765")]
-    public void culture_dependent(CultureInfo culture, string format, PostalCode svo, string expected)
+    public void culture_dependent(CultureInfo culture, string format, PostalCode svo, string formatted)
     {
         using (culture.Scoped())
         {
-            Assert.AreEqual(expected, svo.ToString(format));
+            svo.ToString(format).Should().Be(formatted);
         }
     }
 
@@ -323,22 +287,19 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1()
-    {
-        Assert.AreEqual(1, Svo.PostalCode.CompareTo(null));
-    }
+        => Svo.PostalCode.CompareTo(null).Should().Be(1);
 
     [Test]
     public void to_PostalCode_as_object()
     {
         object obj = Svo.PostalCode;
-        Assert.AreEqual(0, Svo.PostalCode.CompareTo(obj));
+        Svo.PostalCode.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
     public void to_PostalCode_only()
-    {
-        Assert.Throws<ArgumentException>(() => Svo.PostalCode.CompareTo(new object()));
-    }
+        => (new object()).Invoking(Svo.PostalCode.CompareTo)
+            .Should().Throw<ArgumentException>();
 
     [Test]
     public void can_be_sorted_using_compare()
@@ -352,9 +313,10 @@ public class Is_comparable
                 PostalCode.Parse("8904"),
                 PostalCode.Unknown,
             };
-        var list = new List<PostalCode> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        List<PostalCode> list = [sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1]];
         list.Sort();
-        Assert.AreEqual(sorted, list);
+
+        list.Should().BeEquivalentTo(sorted);
     }
 }
 
@@ -428,48 +390,38 @@ public class Supports_JSON_serialization
 
     [TestCase("01234567890", typeof(FormatException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        var exception = Assert.Catch(() => JsonTester.Read<PostalCode>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
-    }
+        => json.Invoking(JsonTester.Read<PostalCode>)
+            .Should().Throw<Exception>()
+            .Which.Should().BeOfType(exceptionType);
 }
 
 public class Supports_XML_serialization
 {
     [Test]
     public void using_XmlSerializer_to_serialize()
-    {
-        var xml = Serialize.Xml(Svo.PostalCode);
-        Assert.AreEqual("H0H0H0", xml);
-    }
+        => Serialize.Xml(Svo.PostalCode).Should().Be("H0H0H0");
 
     [Test]
     public void using_XmlSerializer_to_deserialize()
-    {
-        var svo = Deserialize.Xml<PostalCode>("H0H0H0");
-        Assert.AreEqual(Svo.PostalCode, svo);
-    }
+        => Deserialize.Xml<PostalCode>("H0H0H0").Should().Be(Svo.PostalCode);
 
     [Test]
     public void using_DataContractSerializer()
-    {
-        var round_tripped = SerializeDeserialize.DataContract(Svo.PostalCode);
-        Assert.AreEqual(Svo.PostalCode, round_tripped);
-    }
-
+        => SerializeDeserialize.DataContract(Svo.PostalCode).Should().Be(Svo.PostalCode);
+    
     [Test]
     public void as_part_of_a_structure()
     {
         var structure = XmlStructure.New(Svo.PostalCode);
         var round_tripped = SerializeDeserialize.Xml(structure);
-        Assert.AreEqual(structure, round_tripped);
+        round_tripped.Should().BeEquivalentTo(structure);
     }
 
     [Test]
     public void has_no_custom_XML_schema()
     {
         IXmlSerializable obj = Svo.PostalCode;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 }
 
@@ -494,17 +446,11 @@ public class Supports_binary_serialization
     [Test]
     [Obsolete("Usage of the binary formatter is considered harmful.")]
     public void using_BinaryFormatter()
-    {
-        var round_tripped = SerializeDeserialize.Binary(Svo.PostalCode);
-        Assert.AreEqual(Svo.PostalCode, round_tripped);
-    }
+        => SerializeDeserialize.Binary(Svo.PostalCode).Should().Be(Svo.PostalCode);
 
     [Test]
     public void storing_string_in_SerializationInfo()
-    {
-        var info = Serialize.GetInfo(Svo.PostalCode);
-        Assert.AreEqual("H0H0H0", info.GetString("Value"));
-    }
+        => Serialize.GetInfo(Svo.PostalCode).GetString("Value").Should().Be("H0H0H0");
 }
 #endif
 
@@ -631,6 +577,7 @@ public class Debugger
 internal class PostalCodes(Country country, params string[] values)
 {
     public Country Country { get; } = country;
+
     public PostalCode[] Values { get; } = [.. values.Select(v => PostalCode.Parse(v))];
 
     public IEnumerable<object[]> ToArrays() => Values.Select(value => new object[] { Country, value });

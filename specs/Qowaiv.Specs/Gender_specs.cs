@@ -488,7 +488,7 @@ public class Supports_XML_serialization
     public void has_no_custom_XML_schema()
     {
         IXmlSerializable obj = Svo.Gender;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 }
 
@@ -524,7 +524,7 @@ public class Is_Open_API_data_type
     [Test]
     public void pattern_is_null()
     {
-        Assert.IsNull(Attribute.Pattern);
+        Attribute.Pattern.Should().BeNull();
     }
 }
 

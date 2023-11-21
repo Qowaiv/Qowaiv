@@ -64,19 +64,19 @@ public class Can_not_be_resolved_for
 {
     [Test]
     public void null_type()
-        => Assert.IsNull(Unknown.Value(null));
+        => Unknown.Value(null).Should().BeNull();
 
     [Test]
     public void value_type_without_unknown_value()
-        => Assert.IsNull(Unknown.Value(typeof(Uuid)));
+        => Unknown.Value(typeof(Uuid)).Should().BeNull();
 
     [Test]
     public void value_type_with_unknown_value_of_wrong_type()
-        => Assert.IsNull(Unknown.Value(typeof(ClassWithUnknownValueOfWrongType)));
+        => Unknown.Value(typeof(ClassWithUnknownValueOfWrongType)).Should().BeNull();
 
     [Test]
     public void reference_type_without_unknown_value()
-        => Assert.IsNull(Unknown.Value(typeof(object)));
+        => Unknown.Value(typeof(object)).Should().BeNull();
 
     private class ClassWithUnknownValueOfWrongType
     {

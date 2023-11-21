@@ -220,7 +220,7 @@ public class MonthSpanTest
     public void GetSchema_None_IsNull()
     {
         IXmlSerializable obj = TestStruct;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 
     [Test]

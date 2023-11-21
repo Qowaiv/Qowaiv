@@ -255,7 +255,7 @@ public class IdForStringTest
     public void GetSchema_None_IsNull()
     {
         IXmlSerializable obj = TestStruct;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 
     [TestCase("0F5AB5AB-12CB-4629-878D-B18B88B9A504", "0F5AB5AB-12CB-4629-878D-B18B88B9A504")]

@@ -524,7 +524,7 @@ public class Supports_XML_serialization
     public void has_no_custom_XML_schema()
     {
         IXmlSerializable obj = Svo.Uuid;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 }
 

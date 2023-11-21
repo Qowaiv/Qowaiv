@@ -73,4 +73,4 @@ jobs:
           /p:ThresholdType=branch `
           /p:CoverletOutputFormat=opencover
           
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"

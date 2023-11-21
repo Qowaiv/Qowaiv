@@ -103,18 +103,14 @@ public class Is_equal_by_value
         (Svo.EmailAddress != EmailAddress.Parse("no_spam@qowaiv.org")).Should().BeTrue();
     }
 
-    [Test]
-    public void hash_code_is_zero_for_empty()
+    [TestCase("", 0)]
+    [TestCase("info@qowaiv.org", 798543550)]
+    public void hash_code_is_value_based(EmailAddress svo, int hashCode)
     {
-        Assert.That(EmailAddress.Empty.GetHashCode(), Is.EqualTo(0));
-    }
-
-    [Test]
-    public void hash_code_is_not_zero_and_reproducible_for_not_empty()
-    {
-        var hash = Svo.EmailAddress.GetHashCode();
-        Assert.That(hash, Is.Not.EqualTo(0));
-        Assert.That(Svo.EmailAddress.GetHashCode(), Is.EqualTo(hash));
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hashCode);
+        }
     }
 }
 

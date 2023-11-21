@@ -9,7 +9,7 @@
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 ToBeReleased
-- TryApplyCustomFormatter should return false if the provider returns null. #340
+- TryApplyCustomFormatter should return false if the provider returns null. #341
 - Extend API with overloads for DateOnly. #339
 - Detailed information on failing parsing. #336
 v6.5.4

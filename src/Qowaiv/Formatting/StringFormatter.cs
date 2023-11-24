@@ -118,9 +118,9 @@ public static class StringFormatter
     /// </returns>
     public static bool TryApplyCustomFormatter(string? format, object obj, IFormatProvider? formatProvider, out string formatted)
     {
-        if (formatProvider.TryGetCustomFormatter() is { } customFormatter)
+        if (formatProvider.TryGetCustomFormatter()?.Format(format, obj, formatProvider) is { } customFormatted)
         {
-            formatted = customFormatter.Format(format, obj, formatProvider);
+            formatted = customFormatted;
             return true;
         }
         else

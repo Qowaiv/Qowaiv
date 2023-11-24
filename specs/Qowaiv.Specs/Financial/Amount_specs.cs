@@ -1,5 +1,28 @@
 ﻿namespace Financial.Amount_specs;
 
+public class Min_and_max
+{
+    [TestCase(17, 17)]
+    [TestCase(17, 18)]
+    [TestCase(18, 17)]
+    public void Min_of_two_returns_minimum(Amount a1, Amount a2)
+        => Amount.Min(a1, a2).Should().Be(17.Amount());
+
+    [Test]
+    public void Min_of_collection_returns_minimum()
+        => Amount.Min(700.Amount(), 17.Amount(), 48.Amount()).Should().Be(17.Amount());
+
+    [TestCase(17, 17)]
+    [TestCase(17, 16)]
+    [TestCase(16, 17)]
+    public void Max_of_two_returns_minimum(Amount a1, Amount a2) 
+        => Amount.Max(a1, a2).Should().Be(17.Amount());
+
+    [Test]
+    public void Max_of_collection_returns_maximum()
+        => Amount.Max(7.Amount(), 17.Amount(), -48.Amount()).Should().Be(17.Amount());
+}
+
 public class Is_comparable
 {
     [Test]

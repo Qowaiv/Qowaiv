@@ -299,6 +299,52 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     [Pure]
     public Amount RoundToMultiple(decimal multipleOf, DecimalRounding mode) => (Amount)m_Value.RoundToMultiple(multipleOf, mode);
 
+    /// <summary>Returns the larger of two amounts.</summary>
+    /// <param name="val1">
+    /// The second of the two amounts to compare.
+    /// </param>
+    /// <param name="val2">
+    /// The first of the two amounts to compare.
+    /// </param>
+    /// <returns>
+    /// Parameter val1 or val2, whichever is larger.
+    /// </returns>
+    [Pure]
+    public static Amount Max(Amount val1, Amount val2) => val1 > val2 ? val1 : val2;
+
+    /// <summary>Returns the largest of the amounts.</summary>
+    /// <param name="values">
+    /// The amounts to compare.
+    /// </param>
+    /// <returns>
+    /// The amount with the largest value.
+    /// </returns>
+    [Pure]
+    public static Amount Max(params Amount[] values) => Guard.NotNull(values).Max();
+
+    /// <summary>Returns the smaller of two amounts.</summary>
+    /// <param name="val1">
+    /// The second of the two amounts to compare.
+    /// </param>
+    /// <param name="val2">
+    /// The first of the two amounts to compare.
+    /// </param>
+    /// <returns>
+    /// Parameter val1 or val2, whichever is smaller.
+    /// </returns>
+    [Pure]
+    public static Amount Min(Amount val1, Amount val2) => val1 < val2 ? val1 : val2;
+
+    /// <summary>Returns the smallest of the amounts.</summary>
+    /// <param name="values">
+    /// The amounts to compare.
+    /// </param>
+    /// <returns>
+    /// The amount with the smallest value.
+    /// </returns>
+    [Pure]
+    public static Amount Min(params Amount[] values) => Guard.NotNull(values).Min();
+
     /// <summary>Unitary plusses the amount.</summary>
     public static Amount operator +(Amount amount) => amount.Plus();
 

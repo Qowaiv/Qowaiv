@@ -9,6 +9,7 @@
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 ToBeReleased
+- Add Amount.Min() and Amount.Max(). #342
 - Extend API with overloads for DateOnly. #339
 - Detailed information on failing parsing.
 v6.5.4

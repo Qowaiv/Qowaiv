@@ -15,7 +15,7 @@ public class LocalDateTimeTest
     [Test]
     public void MinValue_None_EqualsDefault()
     {
-        Assert.AreEqual(default(LocalDateTime), LocalDateTime.MinValue);
+        LocalDateTime.MinValue.Should().Be(default(LocalDateTime));
     }
 
     #endregion
@@ -56,7 +56,7 @@ public class LocalDateTimeTest
             var exp = TestStructNoMilliseconds;
             var act = LocalDateTime.TryParse(exp.ToString());
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -88,7 +88,7 @@ public class LocalDateTimeTest
         var input = LocalDateTimeTest.TestStructNoMilliseconds;
         var exp = LocalDateTimeTest.TestStructNoMilliseconds;
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 #endif
 
@@ -98,7 +98,7 @@ public class LocalDateTimeTest
         var input = LocalDateTimeTest.TestStructNoMilliseconds;
         var exp = LocalDateTimeTest.TestStructNoMilliseconds;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -106,14 +106,14 @@ public class LocalDateTimeTest
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "1988-06-13 22:10:05.001";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<LocalDateTime>("1988-06-13 22:10:05.001");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -220,7 +220,7 @@ public class LocalDateTimeTest
         var act = TestStruct.ToString("M:d & h:m", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: '6:13 & 10:10', format: 'M:d & h:m'";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -228,7 +228,7 @@ public class LocalDateTimeTest
     {
         var act = TestStruct.ToString(@"yyyy-MM-dd\THH:mm:ss.FFFFFFF");
         var exp = "1988-06-13T22:10:05.001";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -292,7 +292,7 @@ public class LocalDateTimeTest
         var exp = 0;
         var act = TestStruct.CompareTo(other);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>
@@ -313,7 +313,7 @@ public class LocalDateTimeTest
         var act = TestStruct;
         act++;
         var exp = new LocalDateTime(1988, 06, 14, 22, 10, 05, 001);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Decrement_None_AreEqual()
@@ -321,7 +321,7 @@ public class LocalDateTimeTest
         var act = TestStruct;
         act--;
         var exp = new LocalDateTime(1988, 06, 12, 22, 10, 05, 001);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -329,14 +329,14 @@ public class LocalDateTimeTest
     {
         var act = TestStruct + new TimeSpan(25, 30, 15);
         var exp = new LocalDateTime(1988, 06, 14, 23, 40, 20, 001);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Min_TimeSpan_AreEqual()
     {
         var act = TestStruct - new TimeSpan(25, 30, 15);
         var exp = new LocalDateTime(1988, 06, 12, 20, 39, 50, 001);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -344,7 +344,7 @@ public class LocalDateTimeTest
     {
         var act = TestStruct - new LocalDateTime(1988, 06, 11, 20, 10, 05);
         var exp = new TimeSpan(2, 02, 00, 00, 001);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -353,7 +353,7 @@ public class LocalDateTimeTest
         var act = TestStruct.AddTicks(4000001700000L);
         var exp = new LocalDateTime(1988, 06, 18, 13, 16, 45, 171);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -362,7 +362,7 @@ public class LocalDateTimeTest
         var act = TestStruct.AddMilliseconds(3 * 24 * 60 * 60 * 1003);
         var exp = new LocalDateTime(1988, 06, 16, 22, 23, 02, 601);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void AddSeconds_around3Days_AreEqual()
@@ -370,7 +370,7 @@ public class LocalDateTimeTest
         var act = TestStruct.AddSeconds(3 * 24 * 60 * 64);
         var exp = new LocalDateTime(1988, 06, 17, 02, 58, 05, 001);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void AddMinutes_2280_AreEqual()
@@ -378,7 +378,7 @@ public class LocalDateTimeTest
         var act = TestStruct.AddMinutes(2 * 24 * 60);
         var exp = new LocalDateTime(1988, 06, 15, 22, 10, 05, 001);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -387,7 +387,7 @@ public class LocalDateTimeTest
         var act = TestStruct.AddHours(41);
         var exp = new LocalDateTime(1988, 06, 15, 15, 10, 05, 001);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -396,7 +396,7 @@ public class LocalDateTimeTest
         var act = TestStruct.AddMonths(12);
         var exp = new LocalDateTime(1989, 06, 13, 22, 10, 05, 001);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -405,7 +405,7 @@ public class LocalDateTimeTest
         var act = TestStruct + MonthSpan.FromYears(1);
         var exp = new LocalDateTime(1989, 06, 13, 22, 10, 05, 001);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -414,7 +414,7 @@ public class LocalDateTimeTest
         var act = TestStruct - MonthSpan.FromMonths(1);
         var exp = new LocalDateTime(1988, 05, 13, 22, 10, 05, 001);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -423,7 +423,7 @@ public class LocalDateTimeTest
         var act = TestStruct.AddYears(-12);
         var exp = new LocalDateTime(1976, 06, 13, 22, 10, 05, 001);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion

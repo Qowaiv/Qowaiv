@@ -21,7 +21,7 @@ public class StringFormatterTest
         var exp = Nil.String;
         var act = StringFormatter.ToNonDiacritic(str);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -32,7 +32,7 @@ public class StringFormatterTest
         var exp = string.Empty;
         var act = StringFormatter.ToNonDiacritic(str);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -43,7 +43,7 @@ public class StringFormatterTest
         var exp = "Cafe & Strasze";
         var act = StringFormatter.ToNonDiacritic(str);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -54,6 +54,6 @@ public class StringFormatterTest
         var exp = "Café & Strasze";
         var act = StringFormatter.ToNonDiacritic(str, "é");
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 }

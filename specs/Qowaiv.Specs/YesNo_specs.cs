@@ -76,7 +76,7 @@ public class Has_constant
     [Test]
     public void Empty_represent_default_value()
     {
-        Assert.AreEqual(default(YesNo), YesNo.Empty);
+        YesNo.Empty.Should().Be(default(YesNo));
     }
 }
 
@@ -146,19 +146,19 @@ public class Can_be_parsed
     [Test]
     public void from_null_string_represents_Empty()
     {
-        Assert.AreEqual(YesNo.Empty, YesNo.Parse(null));
+        YesNo.Parse(null).Should().Be(YesNo.Empty);
     }
 
     [Test]
     public void from_empty_string_represents_Empty()
     {
-        Assert.AreEqual(YesNo.Empty, YesNo.Parse(string.Empty));
+        YesNo.Parse(string.Empty).Should().Be(YesNo.Empty);
     }
 
     [Test]
     public void from_question_mark_represents_Unknown()
     {
-        Assert.AreEqual(YesNo.Unknown, YesNo.Parse("?"));
+        YesNo.Parse("?").Should().Be(YesNo.Unknown);
     }
 
     [TestCase("en", "y")]
@@ -170,7 +170,7 @@ public class Can_be_parsed
         using (culture.Scoped())
         {
             var parsed = YesNo.Parse(input);
-            Assert.AreEqual(Svo.YesNo, parsed);
+            parsed.Should().Be(Svo.YesNo);
         }
     }
 
@@ -197,7 +197,7 @@ public class Can_be_parsed
     [Test]
     public void with_TryParse_returns_SVO()
     {
-        Assert.AreEqual(Svo.YesNo, YesNo.TryParse("yes"));
+        YesNo.TryParse("yes").Should().Be(Svo.YesNo);
     }
 }
 
@@ -206,13 +206,13 @@ public class Has_custom_formatting
     [Test]
     public void default_value_is_represented_as_string_empty()
     {
-        Assert.AreEqual(string.Empty, default(YesNo).ToString());
+        default(YesNo).ToString().Should().Be(string.Empty);
     }
 
     [Test]
     public void unknown_value_is_represented_as_unknown()
     {
-        Assert.AreEqual("unknown", YesNo.Unknown.ToString(CultureInfo.InvariantCulture));
+        YesNo.Unknown.ToString(CultureInfo.InvariantCulture).Should().Be("unknown");
     }
 
     [Test]
@@ -252,7 +252,7 @@ public class Has_custom_formatting
     {
         using (culture.Scoped())
         {
-            Assert.AreEqual(expected, svo.ToString(format));
+            svo.ToString(format).Should().Be(expected);
         }
     }
 
@@ -263,7 +263,7 @@ public class Has_custom_formatting
             culture: TestCultures.Nl_NL,
             cultureUI: TestCultures.En_GB))
         {
-            Assert.AreEqual("ja", Svo.YesNo.ToString(provider: null));
+            Svo.YesNo.ToString(provider: null).Should().Be("ja");
         }
     }
 }
@@ -277,7 +277,7 @@ public class Is_comparable
     public void to_YesNo_as_object()
     {
         object obj = Svo.YesNo;
-        Assert.AreEqual(0, Svo.YesNo.CompareTo(obj));
+        Svo.YesNo.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
@@ -300,7 +300,7 @@ public class Is_comparable
         var list = new List<YesNo> { sorted[3], sorted[4], sorted[2], sorted[0], sorted[1] };
         list.Sort();
 
-        Assert.AreEqual(sorted, list);
+        list.Should().BeEquivalentTo(sorted);
     }
 }
 
@@ -310,14 +310,14 @@ public class Casts
     [TestCase("no", false)]
     public void explicitly_from_boolean(YesNo casted, bool boolean)
     {
-        Assert.AreEqual(casted, (YesNo)boolean);
+        ((YesNo)boolean).Should().Be(casted);
     }
 
     [Test]
     public void yes_implicitly_to_true()
     {
         var result = YesNo.Yes ? "passed" : "failed";
-        Assert.AreEqual("passed", result);
+        result.Should().Be("passed");
     }
 
     [Test]
@@ -333,7 +333,7 @@ public class Casts
     public void explicitly_from_nullable_boolean(bool? value, YesNo expected)
     {
         var casted = (YesNo)value;
-        Assert.AreEqual(expected, casted);
+        casted.Should().Be(expected);
     }
 
     [TestCase("", null)]
@@ -343,7 +343,7 @@ public class Casts
     public void explicitly_to_nullable_boolean(YesNo svo, bool? expected)
     {
         var casted = (bool?)svo;
-        Assert.AreEqual(expected, casted);
+        casted.Should().Be(expected);
     }
 
     [TestCase("", null)]
@@ -353,7 +353,7 @@ public class Casts
     public void explicitly_to_boolean(YesNo svo, bool expected)
     {
         var casted = (bool)svo;
-        Assert.AreEqual(expected, casted);
+        casted.Should().Be(expected);
     }
 }
 
@@ -480,21 +480,21 @@ public class Supports_XML_serialization
     public void using_XmlSerializer_to_serialize()
     {
         var xml = Serialize.Xml(Svo.YesNo);
-        Assert.AreEqual("yes", xml);
+        xml.Should().Be("yes");
     }
 
     [Test]
     public void using_XmlSerializer_to_deserialize()
     {
         var svo = Deserialize.Xml<YesNo>("yes");
-        Assert.AreEqual(Svo.YesNo, svo);
+        svo.Should().Be(Svo.YesNo);
     }
 
     [Test]
     public void using_data_contract_serializer()
     {
         var round_tripped = SerializeDeserialize.DataContract(Svo.YesNo);
-        Assert.AreEqual(Svo.YesNo, round_tripped);
+        round_tripped.Should().Be(Svo.YesNo);
     }
 
     [Test]
@@ -503,7 +503,7 @@ public class Supports_XML_serialization
         var structure = XmlStructure.New(Svo.YesNo);
         var round_tripped = SerializeDeserialize.Xml(structure);
 
-        Assert.AreEqual(structure, round_tripped);
+        round_tripped.Should().Be(structure);
     }
 
     [Test]
@@ -545,7 +545,7 @@ public class Supports_binary_serialization
     public void storing_byte_in_SerializationInfo()
     {
         var info = Serialize.GetInfo(Svo.YesNo);
-        Assert.AreEqual((byte)2, info.GetByte("Value"));
+        info.GetByte("Value").Should().Be((byte)2);
     }
 }
 #endif

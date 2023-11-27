@@ -14,21 +14,21 @@ public class DateSpanTest
     [Test]
     public void Zero_None_EqualsDefault()
     {
-        Assert.AreEqual(default(DateSpan), DateSpan.Zero);
+        DateSpan.Zero.Should().Be(default(DateSpan));
     }
 
     [Test]
     public void MaxValue_EqualsDateMaxDateMin()
     {
         var max = DateSpan.Subtract(Date.MaxValue, Date.MinValue);
-        Assert.AreEqual(DateSpan.MaxValue, max);
+        max.Should().Be(DateSpan.MaxValue);
     }
 
     [Test]
     public void MinValue_EqualsDateMinDateMax()
     {
         var min = DateSpan.Subtract(Date.MinValue, Date.MaxValue);
-        Assert.AreEqual(DateSpan.MinValue, min);
+        min.Should().Be(DateSpan.MinValue);
     }
 
     #endregion
@@ -66,7 +66,7 @@ public class DateSpanTest
             var exp = TestStruct;
             var act = DateSpan.TryParse(exp.ToString());
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -84,7 +84,7 @@ public class DateSpanTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void XmlSerializeDeserialize_TestStruct_AreEqual()
@@ -92,7 +92,7 @@ public class DateSpanTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
 #if NET8_0_OR_GREATER
@@ -223,7 +223,7 @@ public class DateSpanTest
     {
         var act = DateSpan.Zero.ToString();
         var exp = "0Y+0M+0D";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -232,7 +232,7 @@ public class DateSpanTest
         var act = TestStruct.ToString("Unit Test Format", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: '10Y+3M-5D', format: 'Unit Test Format'";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [TestCase("0Y+0M+0D", 0, 0)]
@@ -251,7 +251,7 @@ public class DateSpanTest
         using (CultureInfoScope.NewInvariant())
         {
             var span = new DateSpan(months, days);
-            Assert.AreEqual(expected, span.ToString());
+            span.ToString().Should().Be(expected);
         }
     }
 
@@ -263,7 +263,7 @@ public class DateSpanTest
     [Test]
     public void GetHash_Zero_Hash()
     {
-        Assert.AreEqual(0, DateSpan.Zero.GetHashCode());
+        DateSpan.Zero.GetHashCode().Should().Be(0);
     }
 
     /// <summary>GetHash should not fail for the test struct.</summary>
@@ -394,7 +394,7 @@ public class DateSpanTest
         var exp = 0;
         var act = TestStruct.CompareTo(other);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>
@@ -455,7 +455,7 @@ public class DateSpanTest
     public void Days(int years, int months, int days)
     {
         var span = new DateSpan(years, months, days);
-        Assert.AreEqual(days, span.Days);
+        span.Days.Should().Be(days);
     }
 
     [TestCase(1, 2, +3)]
@@ -466,7 +466,7 @@ public class DateSpanTest
     public void Months(int years, int months, int days)
     {
         var span = new DateSpan(years, months, days);
-        Assert.AreEqual(months, span.Months);
+        span.Months.Should().Be(months);
     }
 
     [TestCase(1, 2, +3)]
@@ -477,7 +477,7 @@ public class DateSpanTest
     public void Years(int years, int months, int days)
     {
         var span = new DateSpan(years, months, days);
-        Assert.AreEqual(years, span.Years);
+        span.Years.Should().Be(years);
     }
 
     [TestCase(014, 1, 2, +3)]
@@ -488,7 +488,7 @@ public class DateSpanTest
     public void TotalMonths(int total, int years, int months, int days)
     {
         var span = new DateSpan(years, months, days);
-        Assert.AreEqual(total, span.TotalMonths);
+        span.TotalMonths.Should().Be(total);
     }
 
     #endregion
@@ -499,7 +499,7 @@ public class DateSpanTest
     public void Mutate_Overflows()
     {
         var x = Assert.Catch<OverflowException>(() => DateSpan.MaxValue.AddDays(1));
-        Assert.AreEqual("DateSpan overflowed because the resulting duration is too long.", x.Message);
+        x.Message.Should().Be("DateSpan overflowed because the resulting duration is too long.");
     }
 
     #endregion
@@ -517,7 +517,7 @@ public class DateSpanTest
         var span = DateSpan.FromDays(4);
         var exp = new DateSpan(0, 4);
 
-        Assert.AreEqual(exp, span);
+        span.Should().Be(exp);
     }
 
     [Test]
@@ -526,7 +526,7 @@ public class DateSpanTest
         var span = DateSpan.FromMonths(17);
         var exp = new DateSpan(17, 0);
 
-        Assert.AreEqual(exp, span);
+        span.Should().Be(exp);
     }
 
     [Test]
@@ -535,7 +535,7 @@ public class DateSpanTest
         var span = DateSpan.FromYears(17);
         var exp = new DateSpan(17, 0, 0);
 
-        Assert.AreEqual(exp, span);
+        span.Should().Be(exp);
     }
 }
 

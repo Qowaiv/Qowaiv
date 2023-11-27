@@ -13,7 +13,7 @@ public class IdForInt32Test
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        Assert.AreEqual(default(Id<ForInt32>), Id<ForInt32>.Empty);
+        Id<ForInt32>.Empty.Should().Be(default(Id<ForInt32>));
     }
 
     /// <summary>Id<ForInt32>.IsEmpty() should be true for the default of identifier.</summary>
@@ -34,21 +34,21 @@ public class IdForInt32Test
     public void FromBytes_Null_IsEmpty()
     {
         var fromBytes = Id<ForInt32>.FromBytes(null);
-        Assert.AreEqual(Id<ForInt32>.Empty, fromBytes);
+        fromBytes.Should().Be(Id<ForInt32>.Empty);
     }
 
     [Test]
     public void FromBytes_Bytes_IsTestStruct()
     {
         var fromBytes = Id<ForInt32>.FromBytes([21, 205, 91, 7]);
-        Assert.AreEqual(TestStruct, fromBytes);
+        fromBytes.Should().Be(TestStruct);
     }
 
     [Test]
     public void ToByteArray_Empty_EmptyArray()
     {
         var bytes = Id<ForInt32>.Empty.ToByteArray();
-        Assert.AreEqual(Array.Empty<byte>(), bytes);
+        bytes.Should().BeEmpty();
     }
 
     [Test]
@@ -56,7 +56,7 @@ public class IdForInt32Test
     {
         var bytes = TestStruct.ToByteArray();
         var exepected = new byte[] { 21, 205, 91, 7 };
-        Assert.AreEqual(exepected, bytes);
+        bytes.Should().BeEquivalentTo(exepected);
     }
 
     /// <summary>TryParse null should be valid.</summary>
@@ -64,7 +64,7 @@ public class IdForInt32Test
     public void TryParse_Null_IsValid()
     {
         Id<ForInt32>.TryParse(null, out var val).Should().BeTrue();
-        Assert.AreEqual(default(Id<ForInt32>), val);
+        val.Should().Be(default(Id<ForInt32>));
     }
 
     /// <summary>TryParse string.Empty should be valid.</summary>
@@ -72,7 +72,7 @@ public class IdForInt32Test
     public void TryParse_StringEmpty_IsValid()
     {
         Id<ForInt32>.TryParse(string.Empty, out var val).Should().BeTrue();
-        Assert.AreEqual(default(Id<ForInt32>), val);
+        val.Should().Be(default(Id<ForInt32>));
     }
 
     /// <summary>TryParse with specified string value should be valid.</summary>
@@ -81,7 +81,7 @@ public class IdForInt32Test
     {
         string str = "123456789";
         Id<ForInt32>.TryParse(str, out var val).Should().BeTrue();
-        Assert.AreEqual(str, val.ToString());
+        val.ToString().Should().Be(str);
     }
 
     /// <summary>TryParse with specified string value should be invalid.</summary>
@@ -90,7 +90,7 @@ public class IdForInt32Test
     {
         string str = "ABC";
         Id<ForInt32>.TryParse(str, out var val).Should().BeFalse();
-        Assert.AreEqual(default(Id<ForInt32>), val);
+        val.Should().Be(default(Id<ForInt32>));
     }
 
     [Test]
@@ -114,7 +114,7 @@ public class IdForInt32Test
         {
             var exp = TestStruct;
             var act = Id<ForInt32>.TryParse(exp.ToString());
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -125,7 +125,7 @@ public class IdForInt32Test
         {
             var exp = default(Id<ForInt32>);
             var act = Id<ForInt32>.TryParse("InvalidInput");
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -133,7 +133,7 @@ public class IdForInt32Test
     public void TryCreate_Int_Successful()
     {
         Id<ForInt32>.TryCreate(13, out var id).Should().BeTrue();
-        Assert.AreEqual(Id<ForInt32>.Parse("13"), id);
+        id.Should().Be(Id<ForInt32>.Parse("13"));
     }
 
     [Test]
@@ -142,7 +142,7 @@ public class IdForInt32Test
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -150,14 +150,14 @@ public class IdForInt32Test
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "123456789";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<Id<ForInt32>>("123456789");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -305,7 +305,7 @@ public class IdForInt32Test
     {
         var act = Id<ForInt32>.Empty.ToString(CultureInfo.InvariantCulture);
         var exp = "";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -313,14 +313,14 @@ public class IdForInt32Test
     {
         var act = TestStruct.ToString("#,##0.0", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: '123,456,789.0', format: '#,##0.0'";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <summary>GetHash should not fail for Id<ForInt32>.Empty.</summary>
     [Test]
     public void GetHash_Empty_Hash()
     {
-        Assert.AreEqual(0, Id<ForInt32>.Empty.GetHashCode());
+        Id<ForInt32>.Empty.GetHashCode().Should().Be(0);
     }
 
     /// <summary>GetHash should not fail for the test struct.</summary>

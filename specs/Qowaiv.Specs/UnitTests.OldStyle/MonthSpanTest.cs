@@ -10,7 +10,7 @@ public class MonthSpanTest
     [Test]
     public void Zero_EqualsDefault()
     {
-        Assert.AreEqual(default(MonthSpan), MonthSpan.Zero);
+        MonthSpan.Zero.Should().Be(default(MonthSpan));
     }
 
     /// <summary>TryParse null should be valid.</summary>
@@ -18,7 +18,7 @@ public class MonthSpanTest
     public void TryParse_Null_IsValid()
     {
         MonthSpan.TryParse(null, out var val).Should().BeTrue();
-        Assert.AreEqual(default(MonthSpan), val);
+        val.Should().Be(default(MonthSpan));
     }
 
     /// <summary>TryParse string.Empty should be valid.</summary>
@@ -26,7 +26,7 @@ public class MonthSpanTest
     public void TryParse_StringEmpty_IsValid()
     {
         MonthSpan.TryParse(string.Empty, out var val).Should().BeTrue();
-        Assert.AreEqual(default(MonthSpan), val);
+        val.Should().Be(default(MonthSpan));
     }
 
     /// <summary>TryParse with specified string value should be valid.</summary>
@@ -35,7 +35,7 @@ public class MonthSpanTest
     {
         string str = "0Y+0M";
         MonthSpan.TryParse(str, out var val).Should().BeTrue();
-        Assert.AreEqual(str, val.ToString());
+        val.ToString().Should().Be(str);
     }
 
     /// <summary>TryParse with specified string value should be invalid.</summary>
@@ -44,7 +44,7 @@ public class MonthSpanTest
     {
         string str = "5Y#9M";
         MonthSpan.TryParse(str, out var val).Should().BeFalse();
-        Assert.AreEqual(default(MonthSpan), val);
+        val.Should().Be(default(MonthSpan));
     }
 
     [Test]
@@ -67,7 +67,7 @@ public class MonthSpanTest
         {
             var exp = TestStruct;
             var act = MonthSpan.TryParse(exp.ToString());
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -97,7 +97,7 @@ public class MonthSpanTest
     public void Constructor_5Years9Months_69Months()
     {
         var ctor = new MonthSpan(years: 5, months: 9);
-        Assert.AreEqual(MonthSpan.FromMonths(69), ctor);
+        ctor.Should().Be(MonthSpan.FromMonths(69));
     }
 
 #if NET8_0_OR_GREATER
@@ -125,7 +125,7 @@ public class MonthSpanTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 #endif
 
@@ -135,7 +135,7 @@ public class MonthSpanTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -143,14 +143,14 @@ public class MonthSpanTest
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "5Y+9M";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<MonthSpan>("69");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -227,7 +227,7 @@ public class MonthSpanTest
     public void From_years_3_36M()
     {
         var span = MonthSpan.FromYears(3);
-        Assert.AreEqual(MonthSpan.FromMonths(36), span);
+        span.Should().Be(MonthSpan.FromMonths(36));
     }
 
     [Test]
@@ -235,7 +235,7 @@ public class MonthSpanTest
     {
         var act = MonthSpan.Zero.ToString();
         var exp = "0Y+0M";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -243,7 +243,7 @@ public class MonthSpanTest
     {
         var act = TestStruct.ToString("0.00", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: '69.00', format: '0.00'";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -251,7 +251,7 @@ public class MonthSpanTest
     {
         var act = MonthSpan.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
         var exp = "01700,0";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -266,7 +266,7 @@ public class MonthSpanTest
     public void Plus_TestStruct_Unchanged()
     {
         var plus = +TestStruct;
-        Assert.AreEqual(TestStruct, plus);
+        plus.Should().Be(TestStruct);
     }
 
     [Test]
@@ -280,7 +280,7 @@ public class MonthSpanTest
     public void Add_1Year7Months_19Months()
     {
         var added = MonthSpan.FromYears(1) + MonthSpan.FromMonths(7);
-        Assert.AreEqual(MonthSpan.FromMonths(19), added);
+        added.Should().Be(MonthSpan.FromMonths(19));
     }
 
     [Test]
@@ -294,7 +294,7 @@ public class MonthSpanTest
     public void Subtract_19Months6Months_13Months()
     {
         var subtracted = MonthSpan.FromMonths(19) - MonthSpan.FromMonths(6);
-        Assert.AreEqual(MonthSpan.FromMonths(13), subtracted);
+        subtracted.Should().Be(MonthSpan.FromMonths(13));
     }
 
     [Test]
@@ -337,7 +337,7 @@ public class MonthSpanTest
     {
         var exp = TestStruct;
         var act = (MonthSpan)69;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -345,7 +345,7 @@ public class MonthSpanTest
     {
         var exp = 69;
         var act = (int)TestStruct;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 }
 

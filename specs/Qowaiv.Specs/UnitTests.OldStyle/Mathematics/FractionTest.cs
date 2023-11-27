@@ -10,7 +10,7 @@ public class FractionTest
     [Test]
     public void Zero_None_EqualsDefault()
     {
-        Assert.AreEqual(default(Fraction), Fraction.Zero);
+        Fraction.Zero.Should().Be(default(Fraction));
     }
 
     /// <summary>Fraction.IsZero() should be true for the default of fraction.</summary>
@@ -47,7 +47,7 @@ public class FractionTest
         {
             var exp = TestStruct;
             var act = Fraction.TryParse(exp.ToString());
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -78,7 +78,7 @@ public class FractionTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 #endif
 
@@ -88,7 +88,7 @@ public class FractionTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -96,14 +96,14 @@ public class FractionTest
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "-69/17";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<Fraction>("-69/17");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -181,7 +181,7 @@ public class FractionTest
     {
         var act = Fraction.Zero.ToString();
         var exp = "0/1";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -189,7 +189,7 @@ public class FractionTest
     {
         var act = TestStruct.ToString("[0] 0/000", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: '-4 1/017', format: '[0] 0/000'";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [TestCase("-2:7", "-2/7", "0:0")]
@@ -210,21 +210,21 @@ public class FractionTest
     public void ToString_WithFormat(string expected, Fraction fraction, string format)
     {
         var formatted = fraction.ToString(format, CultureInfo.InvariantCulture);
-        Assert.AreEqual(expected, formatted);
+        formatted.Should().Be(expected);
     }
 
     /// <summary>GetHash should not fail for Fraction.Zero.</summary>
     [Test]
     public void GetHash_Zero_Hash()
     {
-        Assert.AreEqual(0, Fraction.Zero.GetHashCode());
+        Fraction.Zero.GetHashCode().Should().Be(0);
     }
 
     /// <summary>GetHash should not fail for the test struct.</summary>
     [Test]
     public void GetHash_TestStruct_Hash()
     {
-        Assert.AreEqual(132548, TestStruct.GetHashCode());
+        TestStruct.GetHashCode().Should().Be(132548);
     }
 
     [Test]
@@ -298,7 +298,7 @@ public class FractionTest
     {
         var exp = 123456789.DividedBy(1);
         var act = (Fraction)123456789;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]

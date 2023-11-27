@@ -9,7 +9,7 @@ public class CountryTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        Assert.AreEqual(default(Country), Country.Empty);
+        Country.Empty.Should().Be(default(Country));
     }
 
     #region Current
@@ -22,7 +22,7 @@ public class CountryTest
             var act = Country.Current;
             var exp = Country.DE;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -34,7 +34,7 @@ public class CountryTest
             var act = Country.Current;
             var exp = Country.EC;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -46,7 +46,7 @@ public class CountryTest
             var act = Country.Current;
             var exp = Country.Empty;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -147,7 +147,7 @@ public class CountryTest
             var exp = TestStruct;
             var act = Country.TryParse(exp.ToString());
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -164,7 +164,7 @@ public class CountryTest
     {
         var exp = Country.Empty;
         var act = Country.Create((RegionInfo?)null);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -172,7 +172,7 @@ public class CountryTest
     {
         var exp = Country.Empty;
         var act = Country.Create((CultureInfo?)null);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -180,7 +180,7 @@ public class CountryTest
     {
         var exp = Country.NL;
         var act = Country.Create(new RegionInfo("NL"));
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -188,7 +188,7 @@ public class CountryTest
     {
         var exp = Country.Empty;
         var act = Country.Create(CultureInfo.InvariantCulture);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -196,7 +196,7 @@ public class CountryTest
     {
         var exp = Country.Empty;
         var act = Country.Create(new CultureInfo("es"));
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -204,7 +204,7 @@ public class CountryTest
     {
         var exp = Country.EC;
         var act = Country.Create(new CultureInfo("es-EC"));
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -212,7 +212,7 @@ public class CountryTest
     {
         var cs = new RegionInfo("CS");
         var country = Country.Create(cs);
-        Assert.AreEqual(Country.CSXX, country);
+        country.Should().Be(Country.CSXX);
     }
 
     [TestCaseSource(typeof(Country), nameof(Country.All))]
@@ -233,7 +233,7 @@ public class CountryTest
         var input = CountryTest.TestStruct;
         var exp = CountryTest.TestStruct;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -241,14 +241,14 @@ public class CountryTest
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "VA";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<Country>("VA");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -380,7 +380,7 @@ public class CountryTest
         var act = TestStruct.ToString("e (3)", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: 'Holy See (VAT)', format: 'e (3)'";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -388,7 +388,7 @@ public class CountryTest
     {
         var act = Country.Empty.ToString();
         var exp = "";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -396,7 +396,7 @@ public class CountryTest
     {
         var act = Country.Unknown.ToString();
         var exp = "?";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -404,21 +404,21 @@ public class CountryTest
     {
         var exp = "MZ";
         var act = Country.MZ.ToString("2");
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString3_MZ_AreEqual()
     {
         var exp = "MOZ";
         var act = Country.MZ.ToString("3", new CultureInfo("ja-JP"));
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString0_MZ_AreEqual()
     {
         var exp = "508";
         var act = Country.MZ.ToString("0", new CultureInfo("ja-JP"));
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -426,7 +426,7 @@ public class CountryTest
     {
         var exp = "CSHH";
         var act = Country.CSHH.ToString("n", new CultureInfo("ja-JP"));
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -434,7 +434,7 @@ public class CountryTest
     {
         var exp = "Mozambique";
         var act = Country.MZ.ToString("e", new CultureInfo("ja-JP"));
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -442,7 +442,7 @@ public class CountryTest
     {
         var exp = "モザンビーク";
         var act = Country.MZ.ToString("f", new CultureInfo("ja-JP"));
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -453,7 +453,7 @@ public class CountryTest
     [Test]
     public void GetHash_Empty_Hash()
     {
-        Assert.AreEqual(0, Country.Empty.GetHashCode());
+        Country.Empty.GetHashCode().Should().Be(0);
     }
 
     /// <summary>GetHash should not fail for the test struct.</summary>
@@ -578,7 +578,7 @@ public class CountryTest
         var exp = 0;
         var act = TestStruct.CompareTo(other);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>
@@ -598,7 +598,7 @@ public class CountryTest
         Country exp = Country.NL;
         Country act = new RegionInfo("NL");
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Explicit_CountryToRegionInfo_AreEqual()
@@ -606,7 +606,7 @@ public class CountryTest
         var exp = new RegionInfo("NL");
         var act = (RegionInfo)Country.NL;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -618,21 +618,21 @@ public class CountryTest
     {
         var exp = "";
         var act = Country.Empty.CallingCode;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void CallingCode_Unknown_AreEqual()
     {
         var exp = "";
         var act = Country.Unknown.CallingCode;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void CallingCode_TestStruct_AreEqual()
     {
         var exp = "+379";
         var act = TestStruct.CallingCode;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -642,7 +642,7 @@ public class CountryTest
         {
             var exp = "";
             var act = Country.Empty.Name;
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
     [Test]
@@ -652,7 +652,7 @@ public class CountryTest
         {
             var exp = "?";
             var act = Country.Unknown.Name;
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
     [Test]
@@ -662,7 +662,7 @@ public class CountryTest
         {
             var exp = "VA";
             var act = TestStruct.Name;
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -671,21 +671,21 @@ public class CountryTest
     {
         var exp = 0;
         var act = Country.Empty.IsoNumericCode;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void IsoNumericCode_Unknown_AreEqual()
     {
         var exp = 999;
         var act = Country.Unknown.IsoNumericCode;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void IsoNumericCode_TestStruct_AreEqual()
     {
         var exp = 336;
         var act = TestStruct.IsoNumericCode;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -717,7 +717,7 @@ public class CountryTest
     public void GetCurrency_BF1980_Empty()
     {
         var currency = Country.BF.GetCurrency(new Date(1980, 01, 01));
-        Assert.AreEqual(Currency.Empty, currency);
+        currency.Should().Be(Currency.Empty);
     }
 
     [Test]
@@ -726,7 +726,7 @@ public class CountryTest
         var act = Country.NL.GetCurrency(new Date(2001, 12, 31));
         var exp = Currency.NLG;
 
-        Assert.AreEqual(act, exp);
+        exp.Should().Be(act);
     }
 
     [Test]
@@ -735,7 +735,7 @@ public class CountryTest
         var act = Country.NL.GetCurrency(Clock.Today());
         var exp = Currency.EUR;
 
-        Assert.AreEqual(act, exp);
+        exp.Should().Be(act);
     }
 
     #endregion

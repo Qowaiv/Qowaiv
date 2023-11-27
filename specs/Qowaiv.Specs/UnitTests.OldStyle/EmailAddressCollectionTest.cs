@@ -45,14 +45,14 @@ public class EmailAddressCollectionTest
     {
         var act = Serialize.Xml(GetTestInstance());
         var exp = "info@qowaiv.org,test@qowaiv.org";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<EmailAddressCollection>("info@qowaiv.org,test@qowaiv.org");
-        Assert.AreEqual(GetTestInstance(), act);
+        act.Should().BeEquivalentTo(GetTestInstance());
     }
 
 #if NET8_0_OR_GREATER
@@ -186,7 +186,7 @@ public class EmailAddressCollectionTest
         var exp = string.Empty;
         var act = collection.ToString();
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -197,7 +197,7 @@ public class EmailAddressCollectionTest
         var exp = "info@qowaiv.org";
         var act = collection.ToString();
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -208,7 +208,7 @@ public class EmailAddressCollectionTest
         var exp = "info@qowaiv.org,test@qowaiv.org";
         var act = collection.ToString();
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -217,7 +217,7 @@ public class EmailAddressCollectionTest
         var act = GetTestInstance().ToString("U", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: 'INFO@QOWAIV.ORG,TEST@QOWAIV.ORG', format: 'U'";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -225,7 +225,7 @@ public class EmailAddressCollectionTest
     {
         var act = GetTestInstance().ToString(@"mai\lto:f");
         var exp = "mailto:info@qowaiv.org,mailto:test@qowaiv.org";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion

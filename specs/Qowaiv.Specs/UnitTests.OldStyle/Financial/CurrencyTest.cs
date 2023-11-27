@@ -12,7 +12,7 @@ public class CurrencyTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        Assert.AreEqual(default(Currency), Currency.Empty);
+        Currency.Empty.Should().Be(default(Currency));
     }
 
     #endregion
@@ -27,7 +27,7 @@ public class CurrencyTest
             var act = Currency.Current;
             var exp = Currency.EUR;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -39,7 +39,7 @@ public class CurrencyTest
             var act = Currency.Current;
             var exp = Currency.USD;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -51,7 +51,7 @@ public class CurrencyTest
             var act = Currency.Current;
             var exp = Currency.Empty;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -180,7 +180,7 @@ public class CurrencyTest
         {
             var act = Currency.Parse("?");
             var exp = Currency.Unknown;
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -206,7 +206,7 @@ public class CurrencyTest
             var exp = TestStruct;
             var act = Currency.TryParse(exp.ToString());
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -219,7 +219,7 @@ public class CurrencyTest
     {
         var act = Currency.Parse("€");
         var exp = Currency.EUR;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -235,7 +235,7 @@ public class CurrencyTest
         var info = new SerializationInfo(typeof(Currency), new System.Runtime.Serialization.FormatterConverter());
         obj.GetObjectData(info, default);
 
-        Assert.AreEqual("EUR", info.GetString("Value"));
+        info.GetString("Value").Should().Be("EUR");
     }
 
     [Test]
@@ -245,7 +245,7 @@ public class CurrencyTest
         var input = CurrencyTest.TestStruct;
         var exp = CurrencyTest.TestStruct;
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 #endif
 
@@ -255,7 +255,7 @@ public class CurrencyTest
         var input = CurrencyTest.TestStruct;
         var exp = CurrencyTest.TestStruct;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -263,14 +263,14 @@ public class CurrencyTest
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "EUR";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<Currency>("EUR");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -401,7 +401,7 @@ public class CurrencyTest
     {
         var act = Currency.Empty.ToString();
         var exp = "";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -409,7 +409,7 @@ public class CurrencyTest
     {
         var act = Currency.Unknown.ToString();
         var exp = "?";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -418,14 +418,14 @@ public class CurrencyTest
         var act = TestStruct.ToString("$: e", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: '€: Euro', format: '$: e'";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString_TestStruct_ComplexPattern()
     {
         var act = TestStruct.ToString(string.Empty);
         var exp = "EUR";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -435,7 +435,7 @@ public class CurrencyTest
         {
             var act = Currency.Parse("Amerikaanse dollar").ToString();
             var exp = "USD";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -446,7 +446,7 @@ public class CurrencyTest
         {
             var act = Currency.Parse("pound sterling").ToString("f");
             var exp = "Pound sterling";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
     #endregion
@@ -461,7 +461,7 @@ public class CurrencyTest
             Amount number = (Amount)1200.34m;
             var act = number.ToString("C", Currency.BYR);
             var exp = "BYR1,200";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -473,7 +473,7 @@ public class CurrencyTest
             Amount number = (Amount)12.34m;
             var act = number.ToString("C", Currency.ANG);
             var exp = "NAf.12.34";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -485,7 +485,7 @@ public class CurrencyTest
             var number = 12.34m;
             var act = number.ToString("C", Currency.ANG);
             var exp = "NAf.12.34";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -497,7 +497,7 @@ public class CurrencyTest
             var number = 12.34m;
             var act = number.ToString("C", Currency.TND);
             var exp = "TND12.340";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -510,7 +510,7 @@ public class CurrencyTest
             var act = number.ToString("C", Currency.EUR);
             var exp = "€12.34";
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -523,7 +523,7 @@ public class CurrencyTest
             var act = number.ToString("C", Currency.EUR);
             var exp = "€12.34";
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -535,7 +535,7 @@ public class CurrencyTest
     [Test]
     public void GetHash_Empty_0()
     {
-        Assert.AreEqual(0, Currency.Empty.GetHashCode());
+        Currency.Empty.GetHashCode().Should().Be(0);
     }
 
     /// <summary>GetHash should not fail for the test struct.</summary>
@@ -657,7 +657,7 @@ public class CurrencyTest
         var exp = 0;
         var act = TestStruct.CompareTo(other);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>
@@ -676,7 +676,7 @@ public class CurrencyTest
     {
         var act = Currency.AZN.Symbol;
         var exp = "₼";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion

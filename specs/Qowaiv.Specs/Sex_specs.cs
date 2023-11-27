@@ -34,7 +34,7 @@ public class With_domain_logic
     [TestCase(false, "")]
     public void IsUnknown_returns(bool result, Sex svo)
     {
-        Assert.AreEqual(result, svo.IsUnknown());
+        svo.IsUnknown().Should().Be(result);
     }
 
     [TestCase(true, "Male")]
@@ -43,7 +43,7 @@ public class With_domain_logic
     [TestCase(false, "")]
     public void IsMaleOrFemale_returns(bool result, Sex svo)
     {
-        Assert.AreEqual(result, svo.IsMaleOrFemale());
+        svo.IsMaleOrFemale().Should().Be(result);
     }
 }
 
@@ -54,14 +54,14 @@ public class Display_name
     {
         using (TestCultures.Nl_BE.Scoped())
         {
-            Assert.AreEqual("Vrouwelijk", Svo.Sex.DisplayName);
+            Svo.Sex.DisplayName.Should().Be("Vrouwelijk");
         }
     }
 
     [Test]
     public void for_custom_culture_if_specified()
     {
-        Assert.AreEqual("Mujer", Svo.Sex.GetDisplayName(TestCultures.Es_EC));
+        Svo.Sex.GetDisplayName(TestCultures.Es_EC).Should().Be("Mujer");
     }
 }
 
@@ -82,7 +82,7 @@ public class Has_constant
     [Test]
     public void Empty_represent_default_value()
     {
-        Assert.AreEqual(default(Sex), Sex.Empty);
+        Sex.Empty.Should().Be(default(Sex));
     }
 }
 
@@ -195,7 +195,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual(Svo.Sex.ToString(), Svo.Sex.ToString(default(string)));
+            Svo.Sex.ToString(default(string)).Should().Be(Svo.Sex.ToString());
         }
     }
 
@@ -204,14 +204,14 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual(Svo.Sex.ToString(), Svo.Sex.ToString(string.Empty));
+            Svo.Sex.ToString(string.Empty).Should().Be(Svo.Sex.ToString());
         }
     }
 
     [Test]
     public void default_value_is_represented_as_string_empty()
     {
-        Assert.AreEqual(string.Empty, default(Sex).ToString());
+        default(Sex).ToString().Should().Be(string.Empty);
     }
 
     [Test]
@@ -231,7 +231,7 @@ public class Has_custom_formatting
     {
         using (culture.Scoped())
         {
-            Assert.AreEqual(expected, svo.ToString(format));
+            svo.ToString(format).Should().Be(expected);
         }
     }
 
@@ -240,7 +240,7 @@ public class Has_custom_formatting
     {
         using (new CultureInfoScope(culture: TestCultures.Nl_NL, cultureUI: TestCultures.En_GB))
         {
-            Assert.AreEqual("Vrouwelijk", Svo.Sex.ToString(provider: null));
+            Svo.Sex.ToString(provider: null).Should().Be("Vrouwelijk");
         }
     }
 }
@@ -277,7 +277,7 @@ public class Is_comparable
             };
         var list = new List<Sex> { sorted[3], sorted[4], sorted[2], sorted[0], sorted[1] };
         list.Sort();
-        Assert.AreEqual(sorted, list);
+        list.Should().BeEquivalentTo(sorted);
     }
 }
 
@@ -287,21 +287,21 @@ public class Casts
     public void explicitly_to_byte()
     {
         var casted = (byte)Svo.Sex;
-        Assert.AreEqual((byte)2, casted);
+        casted.Should().Be((byte)2);
     }
 
     [Test]
     public void explicitly_to_int()
     {
         var casted = (int)Svo.Sex;
-        Assert.AreEqual(2, casted);
+        casted.Should().Be(2);
     }
 
     [TestCase(2, "Female")]
     [TestCase(null, "?")]
     public void explicitly_to_nullable_int(int casted, Sex sex)
     {
-        Assert.AreEqual(casted, (int?)sex);
+        ((int?)sex).Should().Be(casted);
     }
 
     [TestCase("Female", 2)]
@@ -309,7 +309,7 @@ public class Casts
     public void implicitly_from_nullable_int(Sex casted, int? value)
     {
         Sex sex = value;
-        Assert.AreEqual(casted, sex);
+        sex.Should().Be(casted);
     }
 
     [TestCase("Female", 2)]
@@ -317,7 +317,7 @@ public class Casts
     public void implicitly_from_int(Sex casted, int value)
     {
         Sex sex = value;
-        Assert.AreEqual(casted, sex);
+        sex.Should().Be(casted);
     }
 }
 

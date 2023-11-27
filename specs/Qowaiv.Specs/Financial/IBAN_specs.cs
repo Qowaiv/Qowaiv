@@ -112,8 +112,8 @@ public class Supported
                 Country.XK,
             };
 
-        Assert.AreEqual(supported, InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code));
-        Assert.AreEqual(103, InternationalBankAccountNumber.Supported.Count);
+        InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code).Should().BeEquivalentTo(supported);
+        InternationalBankAccountNumber.Supported.Count.Should().Be(103);
     }
 }
 
@@ -252,7 +252,7 @@ public class Input_is_valid
         {
             Assert.IsTrue(InternationalBankAccountNumber.TryParse(input, out InternationalBankAccountNumber iban),
                 $"{input} is invalid for {country.EnglishName}.");
-            Assert.AreEqual(country, iban.Country);
+            iban.Country.Should().Be(country);
         }
     }
 
@@ -260,7 +260,7 @@ public class Input_is_valid
     public void for_country_has_tests_for_all_supported()
     {
         var supported = ValidForCountry.Select(array => array[0]).Cast<Country>();
-        Assert.AreEqual(supported, InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code));
+        InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code).Should().BeEquivalentTo(supported);
     }
 
     private static readonly object[][] ValidForCountry =

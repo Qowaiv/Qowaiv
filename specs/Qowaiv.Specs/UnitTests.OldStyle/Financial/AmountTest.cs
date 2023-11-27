@@ -22,7 +22,7 @@ public class AmountTest
     [Test]
     public void Zero_None_EqualsDefault()
     {
-        Assert.AreEqual(default(Amount), Amount.Zero);
+        Amount.Zero.Should().Be(default(Amount));
     }
 
     #endregion
@@ -71,7 +71,7 @@ public class AmountTest
             var exp = TestStruct;
             var act = Amount.TryParse(exp.ToString());
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -85,7 +85,7 @@ public class AmountTest
         Amount act = Amount.Parse("5#123*34", GetCustomNumberFormatInfo());
         Amount exp = (Amount)5123.34;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -101,7 +101,7 @@ public class AmountTest
         var info = new SerializationInfo(typeof(Amount), new FormatterConverter());
         obj.GetObjectData(info, default);
 
-        Assert.AreEqual(42.17m, info.GetDecimal("Value"));
+        info.GetDecimal("Value").Should().Be(42.17m);
     }
 
     [Test]
@@ -111,7 +111,7 @@ public class AmountTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 #endif
 
@@ -121,7 +121,7 @@ public class AmountTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -129,14 +129,14 @@ public class AmountTest
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "42.17";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<Amount>("42.17");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -268,14 +268,14 @@ public class AmountTest
         var act = TestStruct.ToString("#.0", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: '42.2', format: '#.0'";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString_TestStruct_ComplexPattern()
     {
         var act = TestStruct.ToString(string.Empty, CultureInfo.InvariantCulture);
         var exp = "42.17";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -285,7 +285,7 @@ public class AmountTest
         {
             var act = Amount.Parse("1600,1").ToString();
             var exp = "1600,1";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -296,7 +296,7 @@ public class AmountTest
         {
             var act = Amount.Parse("1600.1").ToString();
             var exp = "1600.1";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -307,7 +307,7 @@ public class AmountTest
         {
             var act = Amount.Parse("800").ToString("0000");
             var exp = "0800";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -318,7 +318,7 @@ public class AmountTest
         {
             var act = Amount.Parse("800").ToString("0000");
             var exp = "0800";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -327,7 +327,7 @@ public class AmountTest
     {
         var act = Amount.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
         var exp = "01700,0";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -336,7 +336,7 @@ public class AmountTest
         Amount amount = (Amount)170.42;
         var act = amount.ToString("C", new CultureInfo("fr-FR"));
         var exp = "170,42 €";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
 
@@ -346,7 +346,7 @@ public class AmountTest
         Amount amount = (Amount)12345678.235m;
         var act = amount.ToString("#,##0.0000", GetCustomNumberFormatInfo());
         var exp = "12#345#678*2350";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -357,7 +357,7 @@ public class AmountTest
     [Test]
     public void GetHash_Zero_Hash()
     {
-        Assert.AreEqual(0, Amount.Zero.GetHashCode());
+        Amount.Zero.GetHashCode().Should().Be(0);
     }
 
     /// <summary>GetHash should not fail for the test struct.</summary>
@@ -366,7 +366,7 @@ public class AmountTest
     {
         var hash0 = ((Amount)451).GetHashCode();
         var hash1 = ((Amount)451).GetHashCode();
-        Assert.AreEqual(hash1, hash0);
+        hash0.Should().Be(hash1);
     }
 
     [Test]
@@ -484,7 +484,7 @@ public class AmountTest
         var exp = 0;
         var act = TestStruct.CompareTo(other);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>
@@ -553,7 +553,7 @@ public class AmountTest
     public void Sign(int expected, Amount value)
     {
         var actual = value.Sign();
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [TestCase(1234.01, -1234.01)]
@@ -561,7 +561,7 @@ public class AmountTest
     public void Abs(Amount expected, Amount value)
     {
         var abs = value.Abs();
-        Assert.AreEqual(expected, abs);
+        abs.Should().Be(expected);
     }
 
     [TestCase(-1234.01)]
@@ -569,7 +569,7 @@ public class AmountTest
     public void Plus(Amount expected)
     {
         var plus = +expected;
-        Assert.AreEqual(expected, plus);
+        plus.Should().Be(expected);
     }
 
     [TestCase(+1234.01, -1234.01)]
@@ -577,7 +577,7 @@ public class AmountTest
     public void Negate(Amount expected, Amount value)
     {
         var negated = -value;
-        Assert.AreEqual(expected, negated);
+        negated.Should().Be(expected);
     }
 
     [Test]
@@ -585,7 +585,7 @@ public class AmountTest
     {
         Amount amount = (Amount)43.17;
         amount--;
-        Assert.AreEqual(TestStruct, amount);
+        amount.Should().Be(TestStruct);
     }
 
     [Test]
@@ -593,7 +593,7 @@ public class AmountTest
     {
         Amount amount = (Amount)41.17;
         amount++;
-        Assert.AreEqual(TestStruct, amount);
+        amount.Should().Be(TestStruct);
     }
 
     [Test]
@@ -813,7 +813,7 @@ public class AmountTest
     {
         var amount = (Amount)123.4567m;
         var rounded = amount.Round();
-        Assert.AreEqual((Amount)123m, rounded);
+        rounded.Should().Be((Amount)123m);
     }
 
     [Test]
@@ -821,7 +821,7 @@ public class AmountTest
     {
         var amount = (Amount)123.4567m;
         var rounded = amount.Round(1);
-        Assert.AreEqual((Amount)123.5m, rounded);
+        rounded.Should().Be((Amount)123.5m);
     }
 
     [Test]
@@ -829,7 +829,7 @@ public class AmountTest
     {
         var amount = (Amount)123.6567m;
         var rounded = amount.RoundToMultiple(0.25m);
-        Assert.AreEqual((Amount)123.75m, rounded);
+        rounded.Should().Be((Amount)123.75m);
     }
 }
 

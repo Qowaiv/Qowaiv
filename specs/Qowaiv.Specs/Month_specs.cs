@@ -17,7 +17,7 @@ public class With_domain_logic
     [TestCase(true, "")]
     public void IsEmpty_returns(bool result, Month svo)
     {
-        Assert.AreEqual(result, svo.IsEmpty());
+        svo.IsEmpty().Should().Be(result);
     }
 
     [TestCase(false, "February")]
@@ -25,7 +25,7 @@ public class With_domain_logic
     [TestCase(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, Month svo)
     {
-        Assert.AreEqual(result, svo.IsEmptyOrUnknown());
+        svo.IsEmptyOrUnknown().Should().Be(result);
     }
 
     [TestCase(false, "February")]
@@ -33,7 +33,7 @@ public class With_domain_logic
     [TestCase(false, "")]
     public void IsUnknown_returns(bool result, Month svo)
     {
-        Assert.AreEqual(result, svo.IsUnknown());
+        svo.IsUnknown().Should().Be(result);
     }
 }
 
@@ -47,7 +47,7 @@ public class Days
     [TestCase(30, "November", 2020)]
     public void per_year(int days, Month month, Year year)
     {
-        Assert.AreEqual(days, month.Days(year));
+        month.Days(year).Should().Be(days);
     }
 }
 
@@ -56,25 +56,25 @@ public class Short_name
     [Test]
     public void is_string_empty_for_empty()
     {
-        Assert.AreEqual(string.Empty, Month.Empty.ShortName);
+        Month.Empty.ShortName.Should().Be(string.Empty);
     }
     [Test]
     public void is_question_mark_for_unknown()
     {
-        Assert.AreEqual("?", Month.Unknown.ShortName);
+        Month.Unknown.ShortName.Should().Be("?");
     }
     [Test]
     public void picks_current_culture()
     {
         using (TestCultures.Nl_BE.Scoped())
         {
-            Assert.AreEqual("feb.", Svo.Month.ShortName);
+            Svo.Month.ShortName.Should().Be("feb.");
         }
     }
     [Test]
     public void supports_custom_culture()
     {
-        Assert.AreEqual("feb.", Svo.Month.GetShortName(TestCultures.Nl_BE));
+        Svo.Month.GetShortName(TestCultures.Nl_BE).Should().Be("feb.");
     }
 }
 
@@ -83,25 +83,25 @@ public class Full_name
     [Test]
     public void is_string_empty_for_empty()
     {
-        Assert.AreEqual(string.Empty, Month.Empty.FullName);
+        Month.Empty.FullName.Should().Be(string.Empty);
     }
     [Test]
     public void is_question_mark_for_unknown()
     {
-        Assert.AreEqual("?", Month.Unknown.FullName);
+        Month.Unknown.FullName.Should().Be("?");
     }
     [Test]
     public void picks_current_culture()
     {
         using (TestCultures.Nl_BE.Scoped())
         {
-            Assert.AreEqual("februari", Svo.Month.FullName);
+            Svo.Month.FullName.Should().Be("februari");
         }
     }
     [Test]
     public void supports_custom_culture()
     {
-        Assert.AreEqual("februari", Svo.Month.GetFullName(TestCultures.Nl_BE));
+        Svo.Month.GetFullName(TestCultures.Nl_BE).Should().Be("februari");
     }
 }
 
@@ -110,7 +110,7 @@ public class Has_constant
     [Test]
     public void Empty_represent_default_value()
     {
-        Assert.AreEqual(default(Month), Month.Empty);
+        Month.Empty.Should().Be(default(Month));
     }
 }
 
@@ -180,19 +180,19 @@ public class Can_be_parsed
     [Test]
     public void from_null_string_represents_Empty()
     {
-        Assert.AreEqual(Month.Empty, Month.Parse(null));
+        Month.Parse(null).Should().Be(Month.Empty);
     }
 
     [Test]
     public void from_empty_string_represents_Empty()
     {
-        Assert.AreEqual(Month.Empty, Month.Parse(string.Empty));
+        Month.Parse(string.Empty).Should().Be(Month.Empty);
     }
 
     [Test]
     public void from_question_mark_represents_Unknown()
     {
-        Assert.AreEqual(Month.Unknown, Month.Parse("?"));
+        Month.Parse("?").Should().Be(Month.Unknown);
     }
 
     [TestCase("en", "February")]
@@ -203,7 +203,7 @@ public class Can_be_parsed
         using (culture.Scoped())
         {
             var parsed = Month.Parse(input);
-            Assert.AreEqual(Svo.Month, parsed);
+            parsed.Should().Be(Svo.Month);
         }
     }
 
@@ -213,7 +213,7 @@ public class Can_be_parsed
         using (TestCultures.En_GB.Scoped())
         {
             var exception = Assert.Throws<FormatException>(() => Month.Parse("invalid input"));
-            Assert.AreEqual("Not a valid month", exception.Message);
+            exception.Message.Should().Be("Not a valid month");
         }
     }
 
@@ -230,7 +230,7 @@ public class Can_be_parsed
     [Test]
     public void with_TryParse_returns_SVO()
     {
-        Assert.AreEqual(Svo.Month, Month.TryParse("February"));
+        Month.TryParse("February").Should().Be(Svo.Month);
     }
 }
 
@@ -239,12 +239,12 @@ public class Can_be_created
     [Test]
     public void with_TryCreate_returns_SVO()
     {
-        Assert.AreEqual(Svo.Month, Month.TryCreate(2));
+        Month.TryCreate(2).Should().Be(Svo.Month);
     }
     [Test]
     public void with_TryCreate_returns_Empty()
     {
-        Assert.AreEqual(Month.Empty, Month.TryCreate(null));
+        Month.TryCreate(null).Should().Be(Month.Empty);
     }
 }
 public class Has_custom_formatting
@@ -254,7 +254,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual("February", Svo.Month.ToString());
+            Svo.Month.ToString().Should().Be("February");
         }
     }
 
@@ -263,7 +263,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual(Svo.Month.ToString(), Svo.Month.ToString(default(string)));
+            Svo.Month.ToString(default(string)).Should().Be(Svo.Month.ToString());
         }
     }
 
@@ -272,20 +272,20 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual(Svo.Month.ToString(), Svo.Month.ToString(string.Empty));
+            Svo.Month.ToString(string.Empty).Should().Be(Svo.Month.ToString());
         }
     }
 
     [Test]
     public void default_value_is_represented_as_string_empty()
     {
-        Assert.AreEqual(string.Empty, default(Month).ToString());
+        default(Month).ToString().Should().Be(string.Empty);
     }
 
     [Test]
     public void unknown_value_is_represented_as_unknown()
     {
-        Assert.AreEqual("?", Month.Unknown.ToString());
+        Month.Unknown.ToString().Should().Be("?");
     }
 
     [Test]
@@ -306,7 +306,7 @@ public class Has_custom_formatting
     {
         using (culture.Scoped())
         {
-            Assert.AreEqual(expected, svo.ToString(format));
+            svo.ToString(format).Should().Be(expected);
         }
     }
 
@@ -315,7 +315,7 @@ public class Has_custom_formatting
     {
         using (new CultureInfoScope(culture: TestCultures.Nl_NL, cultureUI: TestCultures.En_GB))
         {
-            Assert.AreEqual("februari", Svo.Month.ToString(provider: null));
+            Svo.Month.ToString(provider: null).Should().Be("februari");
         }
     }
 }
@@ -329,7 +329,7 @@ public class Is_comparable
     public void to_Month_as_object()
     {
         object obj = Svo.Month;
-        Assert.AreEqual(0, Svo.Month.CompareTo(obj));
+        Svo.Month.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
@@ -352,7 +352,7 @@ public class Is_comparable
             };
         var list = new List<Month> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
         list.Sort();
-        Assert.AreEqual(sorted, list);
+        list.Should().BeEquivalentTo(sorted);
     }
 
     [Test]
@@ -396,14 +396,14 @@ public class Casts
     public void explicitly_from_byte()
     {
         var casted = (Month)2;
-        Assert.AreEqual(Svo.Month, casted);
+        casted.Should().Be(Svo.Month);
     }
 
     [Test]
     public void explicitly_to_byte()
     {
         var casted = (byte)Svo.Month;
-        Assert.AreEqual(2, casted);
+        casted.Should().Be(2);
     }
 }
 
@@ -518,7 +518,7 @@ public class Supports_XML_serialization
     public void using_DataContractSerializer()
     {
         var round_tripped = SerializeDeserialize.DataContract(Svo.Month);
-        Assert.AreEqual(Svo.Month, round_tripped);
+        round_tripped.Should().Be(Svo.Month);
     }
 
     [Test]
@@ -526,7 +526,7 @@ public class Supports_XML_serialization
     {
         var structure = XmlStructure.New(Svo.Month);
         var round_tripped = SerializeDeserialize.Xml(structure);
-        Assert.AreEqual(structure, round_tripped);
+        round_tripped.Should().Be(structure);
     }
 
     [Test]
@@ -568,7 +568,7 @@ public class Supports_binary_serialization
     public void storing_byte_in_SerializationInfo()
     {
         var info = Serialize.GetInfo(Svo.Month);
-        Assert.AreEqual((byte)2, info.GetByte("Value"));
+        info.GetByte("Value").Should().Be((byte)2);
     }
 }
 #endif

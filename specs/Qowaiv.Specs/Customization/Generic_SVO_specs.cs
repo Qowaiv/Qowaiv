@@ -249,7 +249,7 @@ public class Has_custom_formatting
     {
         using (culture.Scoped())
         {
-            Assert.AreEqual(expected, svo.ToString(format));
+            svo.ToString(format).Should().Be(expected);
         }
     }
 
@@ -260,7 +260,7 @@ public class Has_custom_formatting
             culture: TestCultures.Nl_NL,
             cultureUI: TestCultures.En_GB))
         {
-            Assert.AreEqual("QOWAIV", Svo.CustomSvo.ToString(provider: null));
+            Svo.CustomSvo.ToString(provider: null).Should().Be("QOWAIV");
         }
     }
 }
@@ -274,7 +274,7 @@ public class Is_comparable
     public void to_Svo_as_object()
     {
         object obj = Svo.CustomSvo;
-        Assert.AreEqual(0, Svo.CustomSvo.CompareTo(obj));
+        Svo.CustomSvo.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
@@ -299,7 +299,7 @@ public class Is_comparable
         var list = new List<CustomSvo> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
         list.Sort();
 
-        Assert.AreEqual(sorted, list);
+        list.Should().BeEquivalentTo(sorted);
     }
 }
 

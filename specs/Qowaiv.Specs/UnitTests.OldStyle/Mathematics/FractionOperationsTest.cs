@@ -38,7 +38,7 @@ public class FractionOperationsTest
     [TestCase("-2/3", "-3/2")]
     public void Inverse(Fraction faction, Fraction expected)
     {
-        Assert.AreEqual(expected, faction.Inverse());
+        faction.Inverse().Should().Be(expected);
     }
 
     [Test]
@@ -54,7 +54,7 @@ public class FractionOperationsTest
         var fraction = 19.DividedBy(72);
         var actual = fraction * 48L;
         var expected = 38.DividedBy(3);
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [Test]
@@ -63,7 +63,7 @@ public class FractionOperationsTest
         var fraction = 19.DividedBy(72);
         var actual = fraction * 48;
         var expected = 38.DividedBy(3);
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [TestCase("1/3", "1/4", "1/12")]
@@ -90,7 +90,7 @@ public class FractionOperationsTest
         var fraction = 19.DividedBy(72);
         var actual = fraction / 48L;
         var expected = 19.DividedBy(3456);
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [Test]
@@ -99,7 +99,7 @@ public class FractionOperationsTest
         var fraction = 19.DividedBy(72);
         var actual = fraction / 48;
         var expected = 19.DividedBy(3456);
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [TestCase("1/3", "1/4", "4/3")]
@@ -130,7 +130,7 @@ public class FractionOperationsTest
         var actual = l + r;
         var expected = 3.DividedBy(8_000_000_000L);
 
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [Test]
@@ -139,7 +139,7 @@ public class FractionOperationsTest
         var fraction = 1.DividedBy(3);
         var actual = fraction + 2L;
         var expected = 7.DividedBy(3);
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [Test]
@@ -148,7 +148,7 @@ public class FractionOperationsTest
         var fraction = 1.DividedBy(3);
         var actual = 2L + fraction;
         var expected = 7.DividedBy(3);
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [Test]
@@ -157,7 +157,7 @@ public class FractionOperationsTest
         var fraction = 1.DividedBy(3);
         var actual = fraction + 2;
         var expected = 7.DividedBy(3);
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [Test]
@@ -166,7 +166,7 @@ public class FractionOperationsTest
         var fraction = 1.DividedBy(3);
         var actual = 2 + fraction;
         var expected = 7.DividedBy(3);
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [TestCase("1/4", "0", "1/4")]
@@ -195,7 +195,7 @@ public class FractionOperationsTest
         var fraction = 1.DividedBy(3);
         var actual = fraction - 2L;
         var expected = -5.DividedBy(3);
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [Test]
@@ -204,7 +204,7 @@ public class FractionOperationsTest
         var fraction = 1.DividedBy(3);
         var actual = 2L - fraction;
         var expected = 5.DividedBy(3);
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [Test]
@@ -213,7 +213,7 @@ public class FractionOperationsTest
         var fraction = 1.DividedBy(3);
         var actual = fraction - 2;
         var expected = -5.DividedBy(3);
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [Test]
@@ -222,7 +222,7 @@ public class FractionOperationsTest
         var fraction = 1.DividedBy(3);
         var actual = 2 - fraction;
         var expected = 5.DividedBy(3);
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [TestCase("1/4", "0", "1/4")]

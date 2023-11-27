@@ -27,21 +27,21 @@ public class IdCastTest
     public void Create_StringForInt64_Throws()
     {
         var x = Assert.Catch<InvalidCastException>(() => Id<ForInt64>.Create("NaN"));
-        Assert.AreEqual("Cast from string to Qowaiv.Identifiers.Id<Qowaiv.UnitTests.Identifiers.ForInt64> is not valid.", x.Message);
+        x.Message.Should().Be("Cast from string to Qowaiv.Identifiers.Id<Qowaiv.UnitTests.Identifiers.ForInt64> is not valid.");
     }
 
     [Test]
     public void Create_Int64ForGuid_Throws()
     {
         var x = Assert.Catch<InvalidCastException>(() => Id<ForGuid>.Create(13245L));
-        Assert.AreEqual("Cast from long to Qowaiv.Identifiers.Id<Qowaiv.UnitTests.Identifiers.ForGuid> is not valid.", x.Message);
+        x.Message.Should().Be("Cast from long to Qowaiv.Identifiers.Id<Qowaiv.UnitTests.Identifiers.ForGuid> is not valid.");
     }
 
     [Test]
     public void FromJson_NegativeValue_Throws()
     {
         var x = Assert.Catch<InvalidCastException>(() => Id<ForInt64>.FromJson(-1));
-        Assert.AreEqual("Cast from long to Qowaiv.Identifiers.Id<Qowaiv.UnitTests.Identifiers.ForInt64> is not valid.", x.Message);
+        x.Message.Should().Be("Cast from long to Qowaiv.Identifiers.Id<Qowaiv.UnitTests.Identifiers.ForInt64> is not valid.");
     }
 
     [Test]
@@ -50,7 +50,7 @@ public class IdCastTest
         var guid = Guid.Parse("AD38ECD4-020F-475C-9318-DFF2067DA1D4");
         var casted = (Id<ForGuid>)guid;
         var expected = Id<ForGuid>.Parse("AD38ECD4-020F-475C-9318-DFF2067DA1D4");
-        Assert.AreEqual(expected, casted);
+        casted.Should().Be(expected);
     }
 
     [Test]
@@ -59,7 +59,7 @@ public class IdCastTest
         var guid = Guid.Parse("AD38ECD4-020F-475C-9318-DFF2067DA1D4");
         var casted = (Id<ForString>)guid;
         var expected = Id<ForString>.Parse("ad38ecd4-020f-475c-9318-dff2067da1d4");
-        Assert.AreEqual(expected, casted);
+        casted.Should().Be(expected);
     }
 
     [Test]
@@ -68,7 +68,7 @@ public class IdCastTest
         var number = 12345L;
         var casted = (Id<ForInt64>)number;
         var expected = Id<ForInt64>.Create(12345L);
-        Assert.AreEqual(expected, casted);
+        casted.Should().Be(expected);
     }
 
     [Test]
@@ -77,7 +77,7 @@ public class IdCastTest
         var number = "12345";
         var casted = (Id<ForInt64>)number;
         var expected = Id<ForInt64>.Create(12345L);
-        Assert.AreEqual(expected, casted);
+        casted.Should().Be(expected);
     }
 
     [Test]
@@ -86,7 +86,7 @@ public class IdCastTest
         var number = 12345L;
         var casted = (Id<ForString>)number;
         var expected = Id<ForString>.Parse("12345");
-        Assert.AreEqual(expected, casted);
+        casted.Should().Be(expected);
     }
 
 

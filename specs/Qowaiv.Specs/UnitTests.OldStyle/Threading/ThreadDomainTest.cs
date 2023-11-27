@@ -16,14 +16,14 @@ public class ThreadDomainTest
     public void Get_NullableDecimal_ThrowsNotSupportedException()
     {
         var x = Assert.Catch<NotSupportedException>(() => ThreadDomain.Current.Get<decimal?>());
-        Assert.AreEqual("Type must be a none generic type.", x.Message);
+        x.Message.Should().Be("Type must be a none generic type.");
     }
 
     [Test]
     public void Get_Object_ThrowsNotSupportedException()
     {
         var x = Assert.Catch<NotSupportedException>(() => ThreadDomain.Current.Get<object>());
-        Assert.AreEqual("Converter can not convert from System.String.", x.Message);
+        x.Message.Should().Be("Converter can not convert from System.String.");
     }
 
     [Test]
@@ -34,7 +34,7 @@ public class ThreadDomainTest
             var act = ThreadDomain.Current.Get<Country>();
             var exp = Country.PT;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -44,7 +44,7 @@ public class ThreadDomainTest
         var act = ThreadDomain.Current.Get<InternationalBankAccountNumber>();
         var exp = InternationalBankAccountNumber.Empty;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -55,7 +55,7 @@ public class ThreadDomainTest
         var act = ThreadDomain.Current.Get<Currency>();
         var exp = Currency.ALL;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]

@@ -50,6 +50,6 @@ public class TryGetBytes_from
     public void Not_support_chars_returns_false_with_EmptyArray()
     {
         Base64.TryGetBytes("ABC}", out byte[] bytes).Should().BeFalse();
-        Assert.AreEqual(Array.Empty<byte>(), bytes);
+        bytes.Should().BeEquivalentTo(Array.Empty<byte>());
     }
 }

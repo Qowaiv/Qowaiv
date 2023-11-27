@@ -12,17 +12,17 @@
         [Test]
         public void Zero_None_EqualsDefault()
         {
-            Assert.AreEqual(default(Elo), Elo.Zero);
+            Elo.Zero.Should().Be(default(Elo));
         }
         [Test]
         public void MinValue_None_DoubleMinValue()
         {
-            Assert.AreEqual((Elo)double.MinValue, Elo.MinValue);
+            Elo.MinValue.Should().Be((Elo)double.MinValue);
         }
         [Test]
         public void MaxValue_None_DoubleMaxValue()
         {
-            Assert.AreEqual((Elo)double.MaxValue, Elo.MaxValue);
+            Elo.MaxValue.Should().Be((Elo)double.MaxValue);
         }
 
         #endregion
@@ -73,7 +73,7 @@
                 var exp = TestStruct;
                 var act = Elo.TryParse(exp.ToString());
 
-                Assert.AreEqual(exp, act);
+                act.Should().Be(exp);
             }
         }
 
@@ -90,7 +90,7 @@
             var info = new SerializationInfo(typeof(Elo), new System.Runtime.Serialization.FormatterConverter());
             obj.GetObjectData(info, default);
 
-            Assert.AreEqual(1732.4000000000001, info.GetDouble("Value"));
+            info.GetDouble("Value").Should().Be(1732.4000000000001);
         }
 
         [Test]
@@ -100,7 +100,7 @@
             var input = EloTest.TestStruct;
             var exp = EloTest.TestStruct;
             var act = SerializeDeserialize.Binary(input);
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
 #endif
 
@@ -110,7 +110,7 @@
             var input = EloTest.TestStruct;
             var exp = EloTest.TestStruct;
             var act = SerializeDeserialize.DataContract(input);
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
 
         [Test]
@@ -118,14 +118,14 @@
         {
             var act = Serialize.Xml(TestStruct);
             var exp = "1732.4";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
 
         [Test]
         public void XmlDeserialize_XmlString_AreEqual()
         {
             var act = Deserialize.Xml<Elo>("1732.4");
-            Assert.AreEqual(TestStruct, act);
+            act.Should().Be(TestStruct);
         }
 
 #if NET8_0_OR_GREATER
@@ -236,7 +236,7 @@
             var act = TestStruct.ToString("00000", FormatProvider.CustomFormatter);
             var exp = "Unit Test Formatter, value: '01732', format: '00000'";
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
         [Test]
         public void ToString_TestStruct_ComplexPattern()
@@ -245,7 +245,7 @@
             {
                 var act = TestStruct.ToString(string.Empty);
                 var exp = "1732.4";
-                Assert.AreEqual(exp, act);
+                act.Should().Be(exp);
             }
         }
 
@@ -256,7 +256,7 @@
             {
                 var act = Elo.Parse("1600,1").ToString();
                 var exp = "1600,1";
-                Assert.AreEqual(exp, act);
+                act.Should().Be(exp);
             }
         }
 
@@ -267,7 +267,7 @@
             {
                 var act = Elo.Parse("1600.1").ToString();
                 var exp = "1600.1";
-                Assert.AreEqual(exp, act);
+                act.Should().Be(exp);
             }
         }
 
@@ -278,7 +278,7 @@
             {
                 var act = Elo.Parse("800").ToString("0000");
                 var exp = "0800";
-                Assert.AreEqual(exp, act);
+                act.Should().Be(exp);
             }
         }
 
@@ -289,7 +289,7 @@
             {
                 var act = Elo.Parse("800").ToString("0000");
                 var exp = "0800";
-                Assert.AreEqual(exp, act);
+                act.Should().Be(exp);
             }
         }
 
@@ -298,7 +298,7 @@
         {
             var act = Elo.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
             var exp = "01700,0";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
 
         #endregion
@@ -359,7 +359,7 @@
             var exp = 0;
             var act = TestStruct.CompareTo(other);
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
 
         /// <summary>Compare with a random object should throw an exception.</summary>
@@ -430,7 +430,7 @@
             Elo exp = Elo.Create(1600.1);
             Elo act = 1600.1;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
         [Test]
         public void Explicit_EloToDouble_AreEqual()
@@ -438,7 +438,7 @@
             var exp = 1600.1;
             var act = (double)Elo.Create(1600.1);
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
 
         [Test]
@@ -447,7 +447,7 @@
             Elo exp = Elo.Create(1600.1);
             Elo act = 1600.1m;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
         [Test]
         public void Explicit_EloToDecimal_AreEqual()
@@ -455,7 +455,7 @@
             var exp = 1600.1m;
             var act = (decimal)Elo.Create(1600.1);
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
 
 
@@ -465,7 +465,7 @@
             Elo exp = Elo.Create(1600);
             Elo act = 1600;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
         [Test]
         public void Explicit_EloToInt32_AreEqual()
@@ -473,7 +473,7 @@
             var exp = 1600;
             var act = (int)Elo.Create(1600);
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
 
         #endregion
@@ -492,7 +492,7 @@
             Elo act = l + r;
             Elo exp = 1700;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
 
         [Test]
@@ -504,7 +504,7 @@
             Elo act = l - r;
             Elo exp = 1500;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
 
         [Test]
@@ -516,7 +516,7 @@
 
             Elo exp = 800;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
 
         [Test]
@@ -528,7 +528,7 @@
 
             Elo exp = 3200;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
 
         [Test]
@@ -539,7 +539,7 @@
 
             Elo exp = 1601;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
 
         [Test]
@@ -550,7 +550,7 @@
 
             Elo exp = 1599;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
 
         [Test]
@@ -562,7 +562,7 @@
 
             Elo exp = 1600;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
 
         [Test]
@@ -574,7 +574,7 @@
 
             Elo exp = 1600;
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
         #endregion
     }

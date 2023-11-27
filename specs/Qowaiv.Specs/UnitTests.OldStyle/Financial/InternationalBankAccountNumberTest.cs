@@ -11,7 +11,7 @@ public class InternationalBankAccountNumberTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        Assert.AreEqual(default(InternationalBankAccountNumber), InternationalBankAccountNumber.Empty);
+        InternationalBankAccountNumber.Empty.Should().Be(default(InternationalBankAccountNumber));
     }
 
     #endregion
@@ -103,7 +103,7 @@ public class InternationalBankAccountNumberTest
             var exp = TestStruct;
             var act = InternationalBankAccountNumber.TryParse(exp.ToString());
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -124,7 +124,7 @@ public class InternationalBankAccountNumberTest
         var input = InternationalBankAccountNumberTest.TestStruct;
         var exp = InternationalBankAccountNumberTest.TestStruct;
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 #endif
 
@@ -134,7 +134,7 @@ public class InternationalBankAccountNumberTest
         var input = InternationalBankAccountNumberTest.TestStruct;
         var exp = InternationalBankAccountNumberTest.TestStruct;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -142,14 +142,14 @@ public class InternationalBankAccountNumberTest
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "NL20INGB0001234567";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<InternationalBankAccountNumber>("NL20INGB0001234567");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -280,7 +280,7 @@ public class InternationalBankAccountNumberTest
     {
         var act = InternationalBankAccountNumber.Empty.ToString();
         var exp = "";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -289,7 +289,7 @@ public class InternationalBankAccountNumberTest
         var act = TestStruct.ToString("[f]", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: '[nl20 ingb 0001 2345 67]', format: '[f]'";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -297,7 +297,7 @@ public class InternationalBankAccountNumberTest
     {
         var act = InternationalBankAccountNumber.Unknown.ToString(string.Empty, null);
         var exp = "?";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -305,7 +305,7 @@ public class InternationalBankAccountNumberTest
     {
         var act = TestStruct.ToString();
         var exp = "NL20INGB0001234567";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -313,42 +313,42 @@ public class InternationalBankAccountNumberTest
     {
         var act = TestStruct.ToString("u");
         var exp = "nl20ingb0001234567";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString_TestStructFormatUUpper_AreEqual()
     {
         var act = TestStruct.ToString("U");
         var exp = "NL20INGB0001234567";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString_TestStructFormatFLower_AreEqual()
     {
         var act = TestStruct.ToString("f");
         var exp = "nl20 ingb 0001 2345 67";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString_TestStructFormatFUpper_AreEqual()
     {
         var act = TestStruct.ToString("F");
         var exp = "NL20 INGB 0001 2345 67";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString_EmptyFormatF_AreEqual()
     {
         var act = InternationalBankAccountNumber.Empty.ToString("F");
         var exp = "";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString_UnknownFormatF_AreEqual()
     {
         var act = InternationalBankAccountNumber.Unknown.ToString("F");
         var exp = "?";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -359,7 +359,7 @@ public class InternationalBankAccountNumberTest
     [Test]
     public void GetHash_Empty_Hash()
     {
-        Assert.AreEqual(0, InternationalBankAccountNumber.Empty.GetHashCode());
+        InternationalBankAccountNumber.Empty.GetHashCode().Should().Be(0);
     }
 
     /// <summary>GetHash should not fail for the test struct.</summary>
@@ -481,7 +481,7 @@ public class InternationalBankAccountNumberTest
         var exp = 0;
         var act = TestStruct.CompareTo(other);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>
@@ -500,21 +500,21 @@ public class InternationalBankAccountNumberTest
     {
         var exp = 0;
         var act = InternationalBankAccountNumber.Empty.Length;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Length_Unknown_0()
     {
         var exp = 0;
         var act = InternationalBankAccountNumber.Unknown.Length;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Length_TestStruct_IntValue()
     {
         var exp = 18;
         var act = TestStruct.Length;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
 
@@ -523,21 +523,21 @@ public class InternationalBankAccountNumberTest
     {
         var exp = Country.Empty;
         var act = InternationalBankAccountNumber.Empty.Country;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Country_Unknown_Null()
     {
         var exp = Country.Unknown;
         var act = InternationalBankAccountNumber.Unknown.Country;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Country_TestStruct_Null()
     {
         var exp = Country.NL;
         var act = TestStruct.Country;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion

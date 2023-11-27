@@ -90,8 +90,8 @@ public class WildcardPatternTest
         obj.GetObjectData(info, default);
 
         Assert.AreEqual("t?st*", info.GetString("Pattern"));
-        Assert.AreEqual((int)WildcardPatternOptions.SingleOrTrailing, info.GetInt32("Options"));
-        Assert.AreEqual((int)StringComparison.Ordinal, info.GetInt32("ComparisonType"));
+        info.GetInt32("Options").Should().Be((int)WildcardPatternOptions.SingleOrTrailing);
+        info.GetInt32("ComparisonType").Should().Be((int)StringComparison.Ordinal);
     }
 
     [Test]

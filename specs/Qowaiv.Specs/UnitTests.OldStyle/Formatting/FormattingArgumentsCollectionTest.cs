@@ -369,7 +369,7 @@ public class FormattingArgumentsCollectionTest
         var ienumerable = collection as IEnumerable<KeyValuePair<Type, FormattingArguments>>;
 
         var act = ienumerable.GetEnumerator();
-        Assert.IsNotNull(act);
+        act.Should().NotBeNull();
     }
     [Test]
     public void GetEnumerator_IEnumerable_IsNotNull()
@@ -383,7 +383,7 @@ public class FormattingArgumentsCollectionTest
         var ienumerable = collection as IEnumerable;
 
         var act = ienumerable.GetEnumerator();
-        Assert.IsNotNull(act);
+        act.Should().NotBeNull();
     }
 
     [Test]

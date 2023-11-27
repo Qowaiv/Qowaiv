@@ -538,7 +538,7 @@ public class Supports_binary_serialization
     public void using_BinaryFormatter()
     {
         var round_tripped = SerializeDeserialize.Binary(Svo.YesNo);
-        Assert.AreEqual(Svo.YesNo, round_tripped);
+        round_tripped.Should().Be(Svo.YesNo);
     }
 
     [Test]

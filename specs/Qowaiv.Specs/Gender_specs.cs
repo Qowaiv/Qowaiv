@@ -537,7 +537,7 @@ public class Supports_binary_serialization
     public void using_BinaryFormatter()
     {
         var round_tripped = SerializeDeserialize.Binary(Svo.Gender);
-        Assert.AreEqual(Svo.Gender, round_tripped);
+        round_tripped.Should().Be(Svo.Gender);
     }
 
     [Test]

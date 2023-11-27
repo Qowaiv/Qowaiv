@@ -466,7 +466,7 @@ public class Supports_binary_serialization
     public void using_BinaryFormatter()
     {
         var round_tripped = SerializeDeserialize.Binary(Svo.CustomSvo);
-        Svo.CustomSvo.Should().Be(round_tripped);
+        round_tripped.Should().Be(Svo.CustomSvo);
     }
     [Test]
     public void storing_string_in_SerializationInfo()

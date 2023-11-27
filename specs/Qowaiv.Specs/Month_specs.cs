@@ -561,7 +561,7 @@ public class Supports_binary_serialization
     public void using_BinaryFormatter()
     {
         var round_tripped = SerializeDeserialize.Binary(Svo.Month);
-        Assert.AreEqual(Svo.Month, round_tripped);
+        round_tripped.Should().Be(Svo.Month);
     }
 
     [Test]

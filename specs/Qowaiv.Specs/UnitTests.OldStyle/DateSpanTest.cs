@@ -78,29 +78,6 @@ public class DateSpanTest
 
     #region (XML) (De)serialization tests
 
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    public void GetObjectData_SerializationInfo_AreEqual()
-    {
-        ISerializable obj = TestStruct;
-        var info = new SerializationInfo(typeof(DateSpan), new FormatterConverter());
-        obj.GetObjectData(info, default);
-
-        Assert.AreEqual(532575944699UL, info.GetUInt64("Value"));
-    }
-
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_TestStruct_AreEqual()
-    {
-        var input = TestStruct;
-        var exp = TestStruct;
-        var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
-    }
-#endif
-
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {

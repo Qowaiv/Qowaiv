@@ -471,7 +471,7 @@ public class Supports_binary_serialization
     public void using_BinaryFormatter()
     {
         var round_tripped = SerializeDeserialize.Binary(Svo.EmailAddress);
-        Assert.AreEqual(Svo.EmailAddress, round_tripped);
+        round_tripped.Should().Be(Svo.EmailAddress);
     }
 
     [Test]

@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿#nullable enable
+using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NUnit.Framework;
 using Qowaiv.TestTools.Globalization;

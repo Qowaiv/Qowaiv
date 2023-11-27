@@ -87,12 +87,12 @@ public class ToByteArray
     [Test]
     public void from_empty_is_empty_array()
         => CryptographicSeed.Empty
-        .ToByteArray().Should().BeEquivalentTo(Array.Empty<byte>());
+        .ToByteArray().Should().BeEmpty();
 
     [Test]
     public void from_empty_array_stays_empty_array()
         => CryptographicSeed.Create([])
-        .ToByteArray().Should().BeEquivalentTo(Array.Empty<byte>());
+        .ToByteArray().Should().BeEmpty();
 }
 
 public class Can_be_parsed

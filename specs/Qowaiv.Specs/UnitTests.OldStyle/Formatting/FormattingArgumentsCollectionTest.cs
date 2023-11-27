@@ -354,7 +354,7 @@ public class FormattingArgumentsCollectionTest
         var act = collection.Types;
         var exp = new [] { typeof(int), typeof(Date) };
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]

@@ -473,7 +473,7 @@ public class BusinessIdentifierCodeTest
         var exp = new List<BusinessIdentifierCode> { BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty, item0, item1, item2, item3 };
         var act = inp.OrderBy(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Orders a list of BICs descending.</summary>
@@ -489,7 +489,7 @@ public class BusinessIdentifierCodeTest
         var exp = new List<BusinessIdentifierCode> { item3, item2, item1, item0, BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty };
         var act = inp.OrderByDescending(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Compare with a to object casted instance should be fine.</summary>

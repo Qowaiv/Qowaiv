@@ -536,7 +536,7 @@ public class StreamSizeTest
         var exp = new List<StreamSize> { StreamSize.Zero, StreamSize.Zero, item0, item1, item2, item3 };
         var act = inp.OrderBy(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Orders a list of stream sizes descending.</summary>
@@ -552,7 +552,7 @@ public class StreamSizeTest
         var exp = new List<StreamSize> { item3, item2, item1, item0, StreamSize.Zero, StreamSize.Zero };
         var act = inp.OrderByDescending(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Compare with a to object casted instance should be fine.</summary>

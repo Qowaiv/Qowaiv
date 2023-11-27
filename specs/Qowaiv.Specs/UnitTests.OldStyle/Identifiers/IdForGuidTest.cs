@@ -48,7 +48,7 @@ public class IdForGuidTest
     public void ToByteArray_Empty_EmptyArray()
     {
         var bytes = Id<ForGuid>.Empty.ToByteArray();
-        bytes.Should().BeEquivalentTo(Array.Empty<byte>());
+        bytes.Should().BeEmpty();
     }
 
     [Test]

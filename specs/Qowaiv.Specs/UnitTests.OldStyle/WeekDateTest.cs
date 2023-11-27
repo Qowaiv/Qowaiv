@@ -385,7 +385,7 @@ public class WeekDateTest
         var exp = new List<WeekDate> { WeekDate.MinValue, WeekDate.MinValue, item0, item1, item2, item3 };
         var act = inp.OrderBy(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Orders a list of week dates descending.</summary>
@@ -401,7 +401,7 @@ public class WeekDateTest
         var exp = new List<WeekDate> { item3, item2, item1, item0, WeekDate.MinValue, WeekDate.MinValue };
         var act = inp.OrderByDescending(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Compare with a to object casted instance should be fine.</summary>

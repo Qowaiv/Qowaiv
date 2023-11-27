@@ -333,7 +333,7 @@ public class TimestampTest
         var exp = new List<Timestamp> { Timestamp.MinValue, Timestamp.MinValue, item0, item1, item2, item3 };
         var act = inp.OrderBy(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Orders a list of timestamps descending.</summary>
@@ -349,7 +349,7 @@ public class TimestampTest
         var exp = new List<Timestamp> { item3, item2, item1, item0, Timestamp.MinValue, Timestamp.MinValue };
         var act = inp.OrderByDescending(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Compare with a to object casted instance should be fine.</summary>
@@ -432,7 +432,7 @@ public class TimestampTest
         var act = TestStruct.ToByteArray();
         var exp = new byte[] { 21, 205, 91, 7, 0, 0, 0, 0 };
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     #endregion

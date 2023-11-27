@@ -550,7 +550,7 @@ public class CountryTest
         var exp = new List<Country> { Country.Empty, Country.Empty, item0, item1, item2, item3 };
         var act = inp.OrderBy(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Orders a list of Countrys descending.</summary>
@@ -566,7 +566,7 @@ public class CountryTest
         var exp = new List<Country> { item3, item2, item1, item0, Country.Empty, Country.Empty };
         var act = inp.OrderByDescending(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Compare with a to object casted instance should be fine.</summary>

@@ -467,7 +467,7 @@ public class HouseNumberTest
         var exp = new List<HouseNumber> { HouseNumber.Empty, HouseNumber.Empty, item0, item1, item2, item3 };
         var act = inp.OrderBy(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Orders a list of house numbers descending.</summary>
@@ -483,7 +483,7 @@ public class HouseNumberTest
         var exp = new List<HouseNumber> { item3, item2, item1, item0, HouseNumber.Empty, HouseNumber.Empty };
         var act = inp.OrderByDescending(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Compare with a to object casted instance should be fine.</summary>

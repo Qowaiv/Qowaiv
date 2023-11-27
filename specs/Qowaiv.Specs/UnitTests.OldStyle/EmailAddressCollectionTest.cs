@@ -27,7 +27,7 @@ public class EmailAddressCollectionTest
         var input = GetTestInstance();
         var exp = GetTestInstance();
         var act = SerializeDeserialize.Binary(input);
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 #endif
 
@@ -37,7 +37,7 @@ public class EmailAddressCollectionTest
         var input = GetTestInstance();
         var exp = GetTestInstance();
         var act = SerializeDeserialize.DataContract(input);
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -241,7 +241,7 @@ public class EmailAddressCollectionTest
             EmailAddress.Empty
         };
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -253,7 +253,7 @@ public class EmailAddressCollectionTest
             EmailAddress.Unknown
         };
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -263,7 +263,7 @@ public class EmailAddressCollectionTest
         var act = GetTestInstance();
         act.Add(EmailAddress.Empty);
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -273,7 +273,7 @@ public class EmailAddressCollectionTest
         var act = GetTestInstance();
         act.Add(EmailAddress.Unknown);
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     #endregion
@@ -286,7 +286,7 @@ public class EmailAddressCollectionTest
         var act = EmailAddressCollection.Parse("info@qowaiv.org,test@qowaiv.org,?");
         var exp = GetTestInstance();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -294,7 +294,7 @@ public class EmailAddressCollectionTest
     {
         EmailAddressCollection exp = [];
         EmailAddressCollection.TryParse(null, out EmailAddressCollection act).Should().BeTrue();
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -302,7 +302,7 @@ public class EmailAddressCollectionTest
     {
         EmailAddressCollection exp = [];
         EmailAddressCollection.TryParse(string.Empty, out EmailAddressCollection act).Should().BeTrue();
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -311,7 +311,7 @@ public class EmailAddressCollectionTest
         var act = EmailAddressCollection.TryParse("invalid");
         var exp = new EmailAddressCollection();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -320,7 +320,7 @@ public class EmailAddressCollectionTest
         var act = EmailAddressCollection.TryParse("svo@qowaiv.org");
         var exp = new EmailAddressCollection { EmailAddress.Parse("svo@qowaiv.org") };
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     #endregion
@@ -336,7 +336,7 @@ public class EmailAddressCollectionTest
         var exp = EmailAddressCollection.Parse("mail@qowaiv.org,info@qowaiv.org,test@qowaiv.org");
 
         Assert.AreEqual(typeof(EmailAddressCollection), act.GetType(), "The outcome of to collection should be an email address collection.");
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     #endregion

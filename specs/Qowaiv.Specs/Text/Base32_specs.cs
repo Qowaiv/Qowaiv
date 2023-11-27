@@ -56,14 +56,14 @@ public class TryGetBytes_from
     {
         var bytes = expected.Select(v => (byte)v).ToArray();
         Base32.TryGetBytes(str, out byte[] actualBytes).Should().BeTrue();
-        CollectionAssert.AreEqual(bytes, actualBytes);
+        actualBytes.Should().BeEquivalentTo(bytes);
     }
 
     [Test]
     public void Not_support_chars_returns_false_with_EmptyArray()
     {
         Base32.TryGetBytes("ABC}", out byte[] bytes).Should().BeFalse();
-        bytes.Should().BeEquivalentTo(Array.Empty<byte>());
+        bytes.Should().BeEmpty();
     }
 }
 public class GetBytes
@@ -71,13 +71,13 @@ public class GetBytes
     [Test]
     public void Null__returns_EmptyArray()
     {
-        CollectionAssert.AreEqual(Array.Empty<byte>(), Base32.GetBytes(null));
+        Base32.GetBytes(null).Should().BeEmpty();
     }
 
     [Test]
     public void StringEmpty_returns_EmptyArray()
     {
-        CollectionAssert.AreEqual(Array.Empty<byte>(), Base32.GetBytes(string.Empty));
+        Base32.GetBytes(string.Empty).Should().BeEmpty();
     }
 
     [Test]

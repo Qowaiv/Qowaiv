@@ -328,7 +328,7 @@ public class DateTest
         var exp = new List<Date> { Date.MinValue, Date.MinValue, item0, item1, item2, item3 };
         var act = inp.OrderBy(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Orders a list of Dates descending.</summary>
@@ -344,7 +344,7 @@ public class DateTest
         var exp = new List<Date> { item3, item2, item1, item0, Date.MinValue, Date.MinValue };
         var act = inp.OrderByDescending(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Compare with a to object casted instance should be fine.</summary>

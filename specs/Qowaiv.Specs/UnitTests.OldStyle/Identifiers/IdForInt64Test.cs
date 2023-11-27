@@ -333,7 +333,7 @@ public class IdForInt64Test
     [Test]
     public void GetHash_TestStruct_Hash()
     {
-        Assert.AreNotEqual(0, TestStruct.GetHashCode());
+        TestStruct.GetHashCode().Should().NotBe(0);
     }
 
     [Test]

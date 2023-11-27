@@ -43,6 +43,9 @@ public static class Svo
     /// <summary>info@qowaiv.org</summary>
     public static readonly EmailAddress EmailAddress = EmailAddress.Parse("info@qowaiv.org");
 
+    /// <summary>info@qowaiv.org,test@qowaiv.org"</summary>
+    public static EmailAddressCollection EmailAddressCollection => EmailAddressCollection.Parse("info@qowaiv.org,test@qowaiv.org");
+
     /// <summary>1732.4</summary>
     public static readonly Elo Elo = 1732.4;
 

@@ -171,10 +171,8 @@ public class Can_be_created
 {
     [Test]
     public void with_global_unique_value()
-    {
-        CollectionAssert.AllItemsAreUnique(Enumerable.Range(0, 10_000)
-             .Select(i => Uuid.NewUuid()));
-    }
+        => Enumerable.Range(0, 10_000).Select(i => Uuid.NewUuid()).ToHashSet()
+            .Should().HaveCount(10_000);
 
     [Test]
     public void with_MD5()
@@ -287,7 +285,8 @@ public class Can_be_created_sequential
                 ids.Add(Uuid.NewSequential(comparer));
             }
         }
-        CollectionAssert.IsOrdered(ids, comparer);
+
+        ids.Should().BeInAscendingOrder(comparer);
     }
 
     private static IEnumerable<DateTime> GetTimes()

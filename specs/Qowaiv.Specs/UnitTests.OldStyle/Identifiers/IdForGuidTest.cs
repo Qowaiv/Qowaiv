@@ -421,10 +421,8 @@ public class IdForGuidTest
 
     [Test]
     public void Next_100Items_AllUnique()
-    {
-        var nexts = Enumerable.Range(0, 100).Select(i => Id<ForGuid>.Next()).ToArray();
-        CollectionAssert.AllItemsAreUnique(nexts);
-    }
+        => Enumerable.Range(0, 100).Select(i => Id<ForGuid>.Next())
+        .ToHashSet().Should().HaveCount(100);
 
     [TestCase(null)]
     [TestCase("")]

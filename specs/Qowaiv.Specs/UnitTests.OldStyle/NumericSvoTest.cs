@@ -163,8 +163,8 @@ public class NumericSvoTest
             .Select(pars => pars[1])
             .ToArray();
 
-        CollectionAssert.AreEquivalent(expected, methods, nameof(methods));
-        CollectionAssert.AreEquivalent(expected, operators, nameof(operators));
+        methods.Should().BeEquivalentTo(expected);
+        operators.Should().BeEquivalentTo(expected);
     }
 
     [TestCase(typeof(Amount), typeof(Amount), typeof(Percentage))]
@@ -193,8 +193,8 @@ public class NumericSvoTest
             .Select(pars => pars[1])
             .ToArray();
 
-        CollectionAssert.AreEquivalent(expected, methods, nameof(methods));
-        CollectionAssert.AreEquivalent(expected, operators, nameof(operators));
+        methods.Should().BeEquivalentTo(expected);
+        operators.Should().BeEquivalentTo(expected);
     }
 
     [TestCase(typeof(Amount), typeof(short), typeof(int), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(float), typeof(double), typeof(decimal), typeof(Percentage))]

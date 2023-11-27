@@ -70,9 +70,7 @@ public class Has_constant
 {
     [Test]
     public void Empty_represent_default_value()
-    {
-        EmailAddress.Empty.Should().Be(default(EmailAddress));
-    }
+        => EmailAddress.Empty.Should().Be(default);
 }
 
 public class Is_equal_by_value

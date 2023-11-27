@@ -8,29 +8,6 @@ public class EmailAddressCollectionTest
 
     #region (XML) (De)serialization tests
 
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    public void GetObjectData_SerializationInfo_AreEqual()
-    {
-        ISerializable obj = GetTestInstance();
-        var info = new SerializationInfo(typeof(EmailAddressCollection), new FormatterConverter());
-        obj.GetObjectData(info, default);
-
-        Assert.AreEqual("info@qowaiv.org,test@qowaiv.org", info.GetString("Value"));
-    }
-
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_TestStruct_AreEqual()
-    {
-        var input = GetTestInstance();
-        var exp = GetTestInstance();
-        var act = SerializeDeserialize.Binary(input);
-        act.Should().BeEquivalentTo(exp);
-    }
-#endif
-
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
@@ -55,51 +32,6 @@ public class EmailAddressCollectionTest
         act.Should().BeEquivalentTo(GetTestInstance());
     }
 
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_EmailAddressSerializeObject_AreEqual()
-    {
-        var input = new EmailAddressCollectionSerializeObject
-        {
-            Id = 17,
-            Obj = GetTestInstance(),
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new EmailAddressCollectionSerializeObject
-        {
-            Id = 17,
-            Obj = GetTestInstance(),
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
-    }
-#endif
-
-    [Test]
-    public void XmlSerializeDeserialize_EmailAddressSerializeObject_AreEqual()
-    {
-        var input = new EmailAddressCollectionSerializeObject
-        {
-            Id = 17,
-            Obj = GetTestInstance(),
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new EmailAddressCollectionSerializeObject
-        {
-            Id = 17,
-            Obj = GetTestInstance(),
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
-    }
     [Test]
     public void DataContractSerializeDeserialize_EmailAddressSerializeObject_AreEqual()
     {
@@ -120,31 +52,6 @@ public class EmailAddressCollectionTest
         CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
-
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_Empty_AreEqual()
-    {
-        var input = new EmailAddressCollectionSerializeObject
-        {
-            Id = 17,
-            Obj = [],
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new EmailAddressCollectionSerializeObject
-        {
-            Id = 17,
-            Obj = [],
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
-    }
-#endif
 
     [Test]
     public void XmlSerializeDeserialize_Empty_AreEqual()

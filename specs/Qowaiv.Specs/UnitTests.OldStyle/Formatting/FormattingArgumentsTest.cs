@@ -12,7 +12,7 @@ public class FormattingArgumentsTest
     [Test]
     public void None_None_EqualsDefault()
     {
-        Assert.AreEqual(default(FormattingArguments), FormattingArguments.None);
+        FormattingArguments.None.Should().Be(default(FormattingArguments));
     }
 
     #endregion
@@ -28,7 +28,7 @@ public class FormattingArgumentsTest
         var info = new SerializationInfo(typeof(FormattingArguments), new System.Runtime.Serialization.FormatterConverter());
         obj.GetObjectData(info, default);
 
-        Assert.AreEqual("0.000", info.GetString("Format"));
+        info.GetString("Format").Should().Be("0.000");
         Assert.AreEqual(new CultureInfo("fr-BE"), info.GetValue("FormatProvider", typeof(IFormatProvider)));
     }
 
@@ -84,7 +84,7 @@ public class FormattingArgumentsTest
     [Test]
     public void GetHash_Empty_0()
     {
-        Assert.AreEqual(0, FormattingArguments.None.GetHashCode());
+        FormattingArguments.None.GetHashCode().Should().Be(0);
     }
 
     /// <summary>GetHash should not fail for the test struct.</summary>
@@ -162,14 +162,14 @@ public class FormattingArgumentsTest
     {
         var exp = Nil.String;
         var act = FormattingArguments.None.Format;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Format_TestStruct_FormatString()
     {
         var exp = "0.000";
         var act = TestStruct.Format;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     #endregion
 }

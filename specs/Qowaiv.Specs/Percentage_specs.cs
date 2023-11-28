@@ -41,7 +41,7 @@ public class Has_constant
     [Test]
     public void Zero_represent_default_value()
     {
-        Assert.AreEqual(default(Percentage), Percentage.Zero);
+        Percentage.Zero.Should().Be(default(Percentage));
     }
 
     [Test]
@@ -130,7 +130,7 @@ public class Can_be_parsed
         using (culture.Scoped())
         {
             var parsed = Percentage.Parse(input);
-            Assert.AreEqual(Svo.Percentage, parsed);
+            parsed.Should().Be(Svo.Percentage);
         }
     }
 
@@ -139,7 +139,7 @@ public class Can_be_parsed
     public void with_custom_culture_with_different_symbols(string input, CultureInfo culture)
     {
         var parsed = Percentage.Parse(input, culture.WithPercentageSymbols("#", "<>"));
-        Assert.AreEqual(Svo.Percentage, parsed);
+        parsed.Should().Be(Svo.Percentage);
     }
 
     [Test]
@@ -148,7 +148,7 @@ public class Can_be_parsed
         using (TestCultures.En_GB.Scoped())
         {
             var exception = Assert.Throws<FormatException>(() => Percentage.Parse("invalid input"));
-            Assert.AreEqual("Not a valid percentage", exception.Message);
+            exception.Message.Should().Be("Not a valid percentage");
         }
     }
 
@@ -167,7 +167,7 @@ public class Can_be_parsed
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual(Svo.Percentage, Percentage.TryParse("17.51%"));
+            Percentage.TryParse("17.51%").Should().Be(Svo.Percentage);
         }
     }
 }
@@ -178,21 +178,21 @@ public class Can_be_created_with_percentage_extension
     public void from_int()
     {
         var p = 3.Percent();
-        Assert.AreEqual("3%", p.ToString(CultureInfo.InvariantCulture));
+        p.ToString(CultureInfo.InvariantCulture).Should().Be("3%");
     }
 
     [Test]
     public void from_double()
     {
         var p = 3.14.Percent();
-        Assert.AreEqual("3.14%", p.ToString(CultureInfo.InvariantCulture));
+        p.ToString(CultureInfo.InvariantCulture).Should().Be("3.14%");
     }
 
     [Test]
     public void from_decimal()
     {
         var p = 3.14m.Percent();
-        Assert.AreEqual("3.14%", p.ToString(CultureInfo.InvariantCulture));
+        p.ToString(CultureInfo.InvariantCulture).Should().Be("3.14%");
     }
 }
 
@@ -203,7 +203,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual("17.51%", Svo.Percentage.ToString());
+            Svo.Percentage.ToString().Should().Be("17.51%");
         }
     }
 
@@ -212,7 +212,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual(Svo.Percentage.ToString(), Svo.Percentage.ToString(default(string)));
+            Svo.Percentage.ToString(default(string)).Should().Be(Svo.Percentage.ToString());
         }
     }
 
@@ -221,7 +221,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual(Svo.Percentage.ToString(), Svo.Percentage.ToString(string.Empty));
+            Svo.Percentage.ToString(string.Empty).Should().Be(Svo.Percentage.ToString());
         }
     }
 
@@ -245,7 +245,7 @@ public class Has_custom_formatting
     {
         using (culture.Scoped())
         {
-            Assert.AreEqual(expected, svo.ToString(format));
+            svo.ToString(format).Should().Be(expected);
         }
     }
 
@@ -268,7 +268,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual("175.1‰", Svo.Percentage.ToString("PM"));
+            Svo.Percentage.ToString("PM").Should().Be("175.1‰");
         }
     }
 
@@ -277,7 +277,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual("1751‱", Svo.Percentage.ToString("PT"));
+            Svo.Percentage.ToString("PT").Should().Be("1751‱");
         }
     }
 
@@ -312,7 +312,7 @@ public class Is_comparable
     public void to_Percentage_as_object()
     {
         object obj = Svo.Percentage;
-        Assert.AreEqual(0, Svo.Percentage.CompareTo(obj));
+        Svo.Percentage.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
@@ -335,7 +335,7 @@ public class Is_comparable
             };
         var list = new List<Percentage> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
         list.Sort();
-        Assert.AreEqual(sorted, list);
+        list.Should().BeEquivalentTo(sorted);
     }
 
     [Test]
@@ -367,28 +367,28 @@ public class Casts
     public void explicitly_from_decimal()
     {
         var casted = (Percentage)0.1751m;
-        Assert.AreEqual(Svo.Percentage, casted);
+        casted.Should().Be(Svo.Percentage);
     }
 
     [Test]
     public void explicitly_to_decimal()
     {
         var casted = (decimal)Svo.Percentage;
-        Assert.AreEqual(0.1751m, casted);
+        casted.Should().Be(0.1751m);
     }
 
     [Test]
     public void explicitly_from_double()
     {
         var casted = (Percentage)0.1751;
-        Assert.AreEqual(Svo.Percentage, casted);
+        casted.Should().Be(Svo.Percentage);
     }
 
     [Test]
     public void explicitly_to_double()
     {
         var casted = (double)Svo.Percentage;
-        Assert.AreEqual(0.1751, casted);
+        casted.Should().Be(0.1751);
     }
 }
 
@@ -398,70 +398,70 @@ public class Can_be_multiplied_by
     public void _percentage()
     {
         var multiplied = 17.Percent() * 42.Percent();
-        Assert.AreEqual(7.14.Percent(), multiplied);
+        multiplied.Should().Be(7.14.Percent());
     }
 
     [Test]
     public void _decimal()
     {
         var multiplied = 17.Percent() * 0.42m;
-        Assert.AreEqual(7.14.Percent(), multiplied);
+        multiplied.Should().Be(7.14.Percent());
     }
 
     [Test]
     public void _double()
     {
         var multiplied = 17.Percent() * 0.42;
-        Assert.AreEqual(7.14.Percent(), multiplied);
+        multiplied.Should().Be(7.14.Percent());
     }
 
     [Test]
     public void _float()
     {
         var multiplied = 17.Percent() * 0.42F;
-        Assert.AreEqual(7.14.Percent(), multiplied);
+        multiplied.Should().Be(7.14.Percent());
     }
 
     [Test]
     public void _int()
     {
         var multiplied = 17.Percent() * 2;
-        Assert.AreEqual(34.Percent(), multiplied);
+        multiplied.Should().Be(34.Percent());
     }
 
     [Test]
     public void _uint()
     {
         var multiplied = 17.Percent() * 2U;
-        Assert.AreEqual(34.Percent(), multiplied);
+        multiplied.Should().Be(34.Percent());
     }
 
     [Test]
     public void _long()
     {
         var multiplied = 17.Percent() * 2L;
-        Assert.AreEqual(34.Percent(), multiplied);
+        multiplied.Should().Be(34.Percent());
     }
 
     [Test]
     public void _ulong()
     {
         var multiplied = 17.Percent() * 2UL;
-        Assert.AreEqual(34.Percent(), multiplied);
+        multiplied.Should().Be(34.Percent());
     }
 
     [Test]
     public void _short()
     {
         var multiplied = 17.Percent() * ((short)2);
-        Assert.AreEqual(34.Percent(), multiplied);
+        multiplied.Should().Be(34.Percent());
     }
 
     [Test]
     public void _ushort()
     {
         var multiplied = 17.Percent() * ((ushort)2);
-        Assert.AreEqual(34.Percent(), multiplied);
+        multiplied.Should().Be(34.Percent());
     }
 }
 
@@ -471,70 +471,70 @@ public class Can_be_divided_by
     public void _percentage()
     {
         var multiplied = 17.Percent() / 50.Percent();
-        Assert.AreEqual(34.Percent(), multiplied);
+        multiplied.Should().Be(34.Percent());
     }
 
     [Test]
     public void _decimal()
     {
         var multiplied = 17.Percent() / 0.5m;
-        Assert.AreEqual(34.Percent(), multiplied);
+        multiplied.Should().Be(34.Percent());
     }
 
     [Test]
     public void _double()
     {
         var multiplied = 17.Percent() / 0.5;
-        Assert.AreEqual(34.Percent(), multiplied);
+        multiplied.Should().Be(34.Percent());
     }
 
     [Test]
     public void _float()
     {
         var multiplied = 17.Percent() / 0.5F;
-        Assert.AreEqual(34.Percent(), multiplied);
+        multiplied.Should().Be(34.Percent());
     }
 
     [Test]
     public void _int()
     {
         var multiplied = 17.Percent() / 2;
-        Assert.AreEqual(8.5.Percent(), multiplied);
+        multiplied.Should().Be(8.5.Percent());
     }
 
     [Test]
     public void _uint()
     {
         var multiplied = 17.Percent() / 2U;
-        Assert.AreEqual(8.5.Percent(), multiplied);
+        multiplied.Should().Be(8.5.Percent());
     }
 
     [Test]
     public void _long()
     {
         var multiplied = 17.Percent() / 2L;
-        Assert.AreEqual(8.5.Percent(), multiplied);
+        multiplied.Should().Be(8.5.Percent());
     }
 
     [Test]
     public void _ulong()
     {
         var multiplied = 17.Percent() / 2UL;
-        Assert.AreEqual(8.5.Percent(), multiplied);
+        multiplied.Should().Be(8.5.Percent());
     }
 
     [Test]
     public void _short()
     {
         var multiplied = 17.Percent() / ((short)2);
-        Assert.AreEqual(8.5.Percent(), multiplied);
+        multiplied.Should().Be(8.5.Percent());
     }
 
     [Test]
     public void _ushort()
     {
         var multiplied = 17.Percent() / ((ushort)2);
-        Assert.AreEqual(8.5.Percent(), multiplied);
+        multiplied.Should().Be(8.5.Percent());
     }
 }
 
@@ -544,14 +544,14 @@ public class Can_be_added_to
     public void _percentage()
     {
         var addition = 13.Percent() + 34.Percent();
-        Assert.AreEqual(47.Percent(), addition);
+        addition.Should().Be(47.Percent());
     }
 
     [Test]
     public void _amount()
     {
         var addition = (Amount)44 + 50.Percent();
-        Assert.AreEqual((Amount)66, addition);
+        addition.Should().Be((Amount)66);
     }
 
     [Test]
@@ -565,7 +565,7 @@ public class Can_be_added_to
     public void _decimal()
     {
         var addition = 34.586m + 75.Percent();
-        Assert.AreEqual(60.5255m, addition);
+        addition.Should().Be(60.5255m);
     }
 
     [Test]
@@ -586,42 +586,42 @@ public class Can_be_added_to
     public void _int()
     {
         var addition = 400 + 17.Percent();
-        Assert.AreEqual(468, addition);
+        addition.Should().Be(468);
     }
 
     [Test]
     public void _uint()
     {
         var addition = 400U + 17.Percent();
-        Assert.AreEqual(468U, addition);
+        addition.Should().Be(468U);
     }
 
     [Test]
     public void _long()
     {
         var addition = 400L + 17.Percent();
-        Assert.AreEqual(468L, addition);
+        addition.Should().Be(468L);
     }
 
     [Test]
     public void _ulong()
     {
         var addition = 400UL + 17.Percent();
-        Assert.AreEqual(468UL, addition);
+        addition.Should().Be(468UL);
     }
 
     [Test]
     public void _short()
     {
         var addition = ((short)400) + 17.Percent();
-        Assert.AreEqual((short)468, addition);
+        addition.Should().Be((short)468);
     }
 
     [Test]
     public void _ushort()
     {
         var addition = ((ushort)400) + 17.Percent();
-        Assert.AreEqual((ushort)468, addition);
+        addition.Should().Be((ushort)468);
     }
 }
 
@@ -638,7 +638,7 @@ public class Can_be_subtracted_from
     public void _amount()
     {
         var addition = (Amount)44.6 - 50.Percent();
-        Assert.AreEqual((Amount)22.3, addition);
+        addition.Should().Be((Amount)22.3);
     }
 
     [Test]
@@ -652,7 +652,7 @@ public class Can_be_subtracted_from
     public void _decimal()
     {
         var addition = 34.586m - 75.Percent();
-        Assert.AreEqual(8.6465m, addition);
+        addition.Should().Be(8.6465m);
     }
 
     [Test]
@@ -673,42 +673,42 @@ public class Can_be_subtracted_from
     public void _int()
     {
         var addition = 400 - 17.Percent();
-        Assert.AreEqual(332, addition);
+        addition.Should().Be(332);
     }
 
     [Test]
     public void _uint()
     {
         var addition = 400U - 17.Percent();
-        Assert.AreEqual(332U, addition);
+        addition.Should().Be(332U);
     }
 
     [Test]
     public void _long()
     {
         var addition = 400L - 17.Percent();
-        Assert.AreEqual(332L, addition);
+        addition.Should().Be(332L);
     }
 
     [Test]
     public void _ulong()
     {
         var addition = 400UL - 17.Percent();
-        Assert.AreEqual(332UL, addition);
+        addition.Should().Be(332UL);
     }
 
     [Test]
     public void _short()
     {
         var addition = ((short)400) - 17.Percent();
-        Assert.AreEqual((short)332, addition);
+        addition.Should().Be((short)332);
     }
 
     [Test]
     public void _ushort()
     {
         var addition = ((ushort)400) - 17.Percent();
-        Assert.AreEqual((ushort)332, addition);
+        addition.Should().Be((ushort)332);
     }
 }
 
@@ -718,14 +718,14 @@ public class Can_get_a_percentage_of
     public void _percentage()
     {
         var addition = 13.Percent() * 34.Percent();
-        Assert.AreEqual(4.42.Percent(), addition);
+        addition.Should().Be(4.42.Percent());
     }
 
     [Test]
     public void _amount()
     {
         var addition = (Amount)44.6 * 80.Percent();
-        Assert.AreEqual((Amount)35.68, addition);
+        addition.Should().Be((Amount)35.68);
     }
 
     [Test]
@@ -739,7 +739,7 @@ public class Can_get_a_percentage_of
     public void _decimal()
     {
         var addition = 34.586m * 75.Percent();
-        Assert.AreEqual(25.9395m, addition);
+        addition.Should().Be(25.9395m);
     }
 
     [Test]
@@ -760,42 +760,42 @@ public class Can_get_a_percentage_of
     public void _int()
     {
         var addition = 400 * 17.Percent();
-        Assert.AreEqual(68, addition);
+        addition.Should().Be(68);
     }
 
     [Test]
     public void _uint()
     {
         var addition = 400U * 17.Percent();
-        Assert.AreEqual(68U, addition);
+        addition.Should().Be(68U);
     }
 
     [Test]
     public void _long()
     {
         var addition = 400L * 17.Percent();
-        Assert.AreEqual(68L, addition);
+        addition.Should().Be(68L);
     }
 
     [Test]
     public void _ulong()
     {
         var addition = 400UL * 17.Percent();
-        Assert.AreEqual(68UL, addition);
+        addition.Should().Be(68UL);
     }
 
     [Test]
     public void _short()
     {
         var addition = ((short)400) * 17.Percent();
-        Assert.AreEqual((short)68, addition);
+        addition.Should().Be((short)68);
     }
 
     [Test]
     public void _ushort()
     {
         var addition = ((ushort)400) * 17.Percent();
-        Assert.AreEqual((ushort)68, addition);
+        addition.Should().Be((ushort)68);
     }
 }
 
@@ -805,14 +805,14 @@ public class Can_get_100_percent_based_on_percentage
     public void _percentage()
     {
         var addition = 13.Percent() / 25.Percent();
-        Assert.AreEqual(52.Percent(), addition);
+        addition.Should().Be(52.Percent());
     }
 
     [Test]
     public void _amount()
     {
         var addition = (Amount)44.6 / 80.Percent();
-        Assert.AreEqual((Amount)55.75, addition);
+        addition.Should().Be((Amount)55.75);
     }
 
     [Test]
@@ -847,42 +847,42 @@ public class Can_get_100_percent_based_on_percentage
     public void _int()
     {
         var addition = 400 / 17.Percent();
-        Assert.AreEqual(2352, addition);
+        addition.Should().Be(2352);
     }
 
     [Test]
     public void _uint()
     {
         var addition = 400U / 17.Percent();
-        Assert.AreEqual(2352U, addition);
+        addition.Should().Be(2352U);
     }
 
     [Test]
     public void _long()
     {
         var addition = 400L / 17.Percent();
-        Assert.AreEqual(2352L, addition);
+        addition.Should().Be(2352L);
     }
 
     [Test]
     public void _ulong()
     {
         var addition = 400UL / 17.Percent();
-        Assert.AreEqual(2352UL, addition);
+        addition.Should().Be(2352UL);
     }
 
     [Test]
     public void _short()
     {
         var addition = ((short)400) / 17.Percent();
-        Assert.AreEqual((short)2352, addition);
+        addition.Should().Be((short)2352);
     }
 
     [Test]
     public void _ushort()
     {
         var addition = ((ushort)400) / 17.Percent();
-        Assert.AreEqual((ushort)2352, addition);
+        addition.Should().Be((ushort)2352);
     }
 }
 
@@ -892,35 +892,35 @@ public class Can_be_rounded
     public void zero_decimals()
     {
         var actual = Svo.Percentage.Round();
-        Assert.AreEqual(18.Percent(), actual);
+        actual.Should().Be(18.Percent());
     }
 
     [Test]
     public void one_decimal()
     {
         var actual = Svo.Percentage.Round(1);
-        Assert.AreEqual(17.5.Percent(), actual);
+        actual.Should().Be(17.5.Percent());
     }
 
     [Test]
     public void away_from_zero()
     {
         var actual = 16.5.Percent().Round(0, DecimalRounding.AwayFromZero);
-        Assert.AreEqual(17.Percent(), actual);
+        actual.Should().Be(17.Percent());
     }
 
     [Test]
     public void to_even()
     {
         var actual = 16.5.Percent().Round(0, DecimalRounding.ToEven);
-        Assert.AreEqual(16.Percent(), actual);
+        actual.Should().Be(16.Percent());
     }
 
     [Test]
     public void to_multiple()
     {
         var actual = 16.4.Percent().RoundToMultiple(3.Percent());
-        Assert.AreEqual(15.Percent(), actual);
+        actual.Should().Be(15.Percent());
     }
 
     [Test]
@@ -940,7 +940,7 @@ public class Can_be_rounded
     public void using_system_midpoint_rounding()
     {
         var rounded = Svo.Percentage.Round(0, MidpointRounding.AwayFromZero);
-        Assert.AreEqual(18.Percent(), rounded);
+        rounded.Should().Be(18.Percent());
     }
 }
 
@@ -951,7 +951,7 @@ public class Can_be_increased
     {
         var increased = Svo.Percentage;
         increased++;
-        Assert.AreEqual(18.51.Percent(), increased);
+        increased.Should().Be(18.51.Percent());
     }
 }
 
@@ -962,7 +962,7 @@ public class Can_be_decreased
     {
         var decreased = Svo.Percentage;
         decreased--;
-        Assert.AreEqual(16.51.Percent(), decreased);
+        decreased.Should().Be(16.51.Percent());
     }
 }
 
@@ -995,7 +995,7 @@ public class Can_get
     public void Sign(int expected, Percentage percentage)
     {
         var actual = percentage.Sign();
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [TestCase("3%", "-3%")]
@@ -1004,7 +1004,7 @@ public class Can_get
     public void absolute_value(Percentage expected, Percentage percentage)
     {
         var actual = percentage.Abs();
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 }
 
@@ -1022,7 +1022,7 @@ public class Can_get_maximum_of
     public void multiple_values()
     {
         var max = Percentage.Max(15.Percent(), 66.Percent(), -117.Percent());
-        Assert.AreEqual(66.Percent(), max);
+        max.Should().Be(66.Percent());
     }
 }
 
@@ -1140,21 +1140,21 @@ public class Supports_XML_serialization
     public void using_XmlSerializer_to_serialize()
     {
         var xml = Serialize.Xml(Svo.Percentage);
-        Assert.AreEqual("17.51%", xml);
+        xml.Should().Be("17.51%");
     }
 
     [Test]
     public void using_XmlSerializer_to_deserialize()
     {
         var svo = Deserialize.Xml<Percentage>("17.51%");
-        Assert.AreEqual(Svo.Percentage, svo);
+        svo.Should().Be(Svo.Percentage);
     }
 
     [Test]
     public void using_DataContractSerializer()
     {
         var round_tripped = SerializeDeserialize.DataContract(Svo.Percentage);
-        Assert.AreEqual(Svo.Percentage, round_tripped);
+        round_tripped.Should().Be(Svo.Percentage);
     }
 
     [Test]
@@ -1162,7 +1162,7 @@ public class Supports_XML_serialization
     {
         var structure = XmlStructure.New(Svo.Percentage);
         var round_tripped = SerializeDeserialize.Xml(structure);
-        Assert.AreEqual(structure, round_tripped);
+        round_tripped.Should().Be(structure);
     }
 
     [Test]
@@ -1203,14 +1203,14 @@ public class Supports_binary_serialization
     public void using_BinaryFormatter()
     {
         var round_tripped = SerializeDeserialize.Binary(Svo.Percentage);
-        Assert.AreEqual(Svo.Percentage, round_tripped);
+        round_tripped.Should().Be(Svo.Percentage);
     }
 
     [Test]
     public void storing_decimal_in_SerializationInfo()
     {
         var info = Serialize.GetInfo(Svo.Percentage);
-        Assert.AreEqual(0.1751m, info.GetDecimal("Value"));
+        info.GetDecimal("Value").Should().Be(0.1751m);
     }
 }
 #endif

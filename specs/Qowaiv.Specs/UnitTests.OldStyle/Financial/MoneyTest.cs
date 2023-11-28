@@ -13,7 +13,7 @@ public class MoneyTest
     [Test]
     public void Zero_None_EqualsDefault()
     {
-        Assert.AreEqual(default(Money), Money.Zero);
+        Money.Zero.Should().Be(default(Money));
     }
 
     #endregion
@@ -63,7 +63,7 @@ public class MoneyTest
             var exp = TestStruct;
             var act = Money.TryParse("€42.17");
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -78,7 +78,7 @@ public class MoneyTest
         {
             var exp = 12 + Currency.EUR;
             var act = Money.Parse("€ 12");
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -89,7 +89,7 @@ public class MoneyTest
         {
             var exp = -12.765 + Currency.EUR;
             var act = Money.Parse("-12,765 €");
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -106,8 +106,8 @@ public class MoneyTest
         var info = new SerializationInfo(typeof(Money), new FormatterConverter());
         obj.GetObjectData(info, default);
 
-        Assert.AreEqual(42.17m, info.GetDecimal("Value"));
-        Assert.AreEqual("EUR", info.GetString("Currency"));
+        info.GetDecimal("Value").Should().Be(42.17m);
+        info.GetString("Currency").Should().Be("EUR");
     }
 
     [Test]
@@ -117,7 +117,7 @@ public class MoneyTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 #endif
 
@@ -127,7 +127,7 @@ public class MoneyTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -135,14 +135,14 @@ public class MoneyTest
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "EUR42.17";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<Money>("EUR42.17");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -275,7 +275,7 @@ public class MoneyTest
         {
             var act = Money.Zero.ToString();
             var exp = "0";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -285,7 +285,7 @@ public class MoneyTest
         var act = TestStruct.ToString("0.0", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: '42.2', format: '0.0'";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -295,7 +295,7 @@ public class MoneyTest
         {
             var act = TestStruct.ToString("0.00");
             var exp = "42,17";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -308,7 +308,7 @@ public class MoneyTest
             CultureInfo.CurrentCulture.NumberFormat.CurrencyPositivePattern = 3;
             var act = Money.Parse("ALL 1600,1").ToString();
             var exp = "1.600,10 Lekë";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -319,7 +319,7 @@ public class MoneyTest
         {
             var act = Money.Parse("EUR 1600.1").ToString();
             var exp = "€1,600.10";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -330,7 +330,7 @@ public class MoneyTest
         {
             var act = Money.Parse("AED 1600.1").ToString();
             var exp = "AED1,600.10";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -341,7 +341,7 @@ public class MoneyTest
         {
             var act = Money.Parse("800").ToString("0000");
             var exp = "0800";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -352,7 +352,7 @@ public class MoneyTest
         {
             var act = Money.Parse("800").ToString("0000");
             var exp = "0800";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -361,7 +361,7 @@ public class MoneyTest
     {
         var act = Money.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
         var exp = "01700,0";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -372,7 +372,7 @@ public class MoneyTest
     [Test]
     public void GetHash_Empty_Hash()
     {
-        Assert.AreEqual(0, Money.Zero.GetHashCode());
+        Money.Zero.GetHashCode().Should().Be(0);
     }
 
     /// <summary>GetHash should not fail for the test struct.</summary>
@@ -466,7 +466,7 @@ public class MoneyTest
         var exp = new List<Money> { Money.Zero, Money.Zero, item0, item1, item2, item3 };
         var act = inp.OrderBy(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Orders a list of Moneys descending.</summary>
@@ -482,7 +482,7 @@ public class MoneyTest
         var exp = new List<Money> { item3, item2, item1, item0, Money.Zero, Money.Zero };
         var act = inp.OrderByDescending(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Compare with a to object casted instance should be fine.</summary>
@@ -494,7 +494,7 @@ public class MoneyTest
         var exp = 0;
         var act = TestStruct.CompareTo(other);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>
@@ -563,14 +563,14 @@ public class MoneyTest
     public void Currency_Set()
     {
         var money = 42 + Currency.EUR;
-        Assert.AreEqual(Currency.EUR, money.Currency);
+        money.Currency.Should().Be(Currency.EUR);
     }
 
     [Test]
     public void Amount_Set()
     {
         var money = 42 + Currency.EUR;
-        Assert.AreEqual((Amount)42, money.Amount);
+        money.Amount.Should().Be((Amount)42);
     }
 
     #endregion
@@ -583,7 +583,7 @@ public class MoneyTest
     public void Sign(int expected, Money value)
     {
         var actual = value.Sign();
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [TestCase(23.1234, -23.1234)]
@@ -599,7 +599,7 @@ public class MoneyTest
     public void Plus_TestStruct_SameValue()
     {
         var act = +TestStruct;
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
     [Test]
@@ -607,7 +607,7 @@ public class MoneyTest
     {
         var act = -TestStruct;
         var exp = -42.17 + Currency.EUR;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -616,7 +616,7 @@ public class MoneyTest
         var act = TestStruct;
         act++;
         var exp = 43.17 + Currency.EUR;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -625,7 +625,7 @@ public class MoneyTest
         var act = TestStruct;
         act--;
         var exp = 41.17 + Currency.EUR;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -655,7 +655,7 @@ public class MoneyTest
         var r = 666 + Currency.USD;
 
         var x = Assert.Catch<CurrencyMismatchException>(() => l.Add(r));
-        Assert.AreEqual("The addition operation could not be applied. There is a mismatch between EUR and USD.", x.Message);
+        x.Message.Should().Be("The addition operation could not be applied. There is a mismatch between EUR and USD.");
     }
 
     [Test]
@@ -686,7 +686,7 @@ public class MoneyTest
 
         var x = Assert.Catch<CurrencyMismatchException>(() => l.Subtract(r));
 
-        Assert.AreEqual("The subtraction operation could not be applied. There is a mismatch between EUR and USD.", x.Message);
+        x.Message.Should().Be("The subtraction operation could not be applied. There is a mismatch between EUR and USD.");
     }
 
     [Test]

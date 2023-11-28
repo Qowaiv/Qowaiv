@@ -17,7 +17,7 @@ public class With_domain_logic
     [TestCase(true, "")]
     public void IsEmpty_returns(bool result, Year svo)
     {
-        Assert.AreEqual(result, svo.IsEmpty());
+        svo.IsEmpty().Should().Be(result);
     }
 
     [TestCase(false, 1979)]
@@ -25,7 +25,7 @@ public class With_domain_logic
     [TestCase(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, Year svo)
     {
-        Assert.AreEqual(result, svo.IsEmptyOrUnknown());
+        svo.IsEmptyOrUnknown().Should().Be(result);
     }
 
     [TestCase(false, 1979)]
@@ -33,7 +33,7 @@ public class With_domain_logic
     [TestCase(false, "")]
     public void IsUnknown_returns(bool result, Year svo)
     {
-        Assert.AreEqual(result, svo.IsUnknown());
+        svo.IsUnknown().Should().Be(result);
     }
 }
 
@@ -83,21 +83,21 @@ public class Has_constant
     [Test]
     public void Empty_represent_default_value()
     {
-        Assert.AreEqual(default(Year), Year.Empty);
+        Year.Empty.Should().Be(default(Year));
     }
 
     [Test]
     public void MinValue_represents_1()
     {
         Year min = 1.CE();
-        Assert.AreEqual(min, Year.MinValue);
+        Year.MinValue.Should().Be(min);
     }
 
     [Test]
     public void MaxValue_represents_9999()
     {
         Year max = 9999.CE();
-        Assert.AreEqual(max, Year.MaxValue);
+        Year.MaxValue.Should().Be(max);
     }
 }
 
@@ -168,26 +168,26 @@ public class Can_be_parsed
     [Test]
     public void from_null_string_represents_Empty()
     {
-        Assert.AreEqual(Year.Empty, Year.Parse(null));
+        Year.Parse(null).Should().Be(Year.Empty);
     }
 
     [Test]
     public void from_empty_string_represents_Empty()
     {
-        Assert.AreEqual(Year.Empty, Year.Parse(string.Empty));
+        Year.Parse(string.Empty).Should().Be(Year.Empty);
     }
 
     [Test]
     public void from_question_mark_represents_Unknown()
     {
-        Assert.AreEqual(Year.Unknown, Year.Parse("?"));
+        Year.Parse("?").Should().Be(Year.Unknown);
     }
 
     [Test]
     public void from_string()
     {
         var parsed = Year.Parse("1979");
-        Assert.AreEqual(Svo.Year, parsed);
+        parsed.Should().Be(Svo.Year);
     }
 
     [Test]
@@ -196,7 +196,7 @@ public class Can_be_parsed
         using (TestCultures.En_GB.Scoped())
         {
             var exception = Assert.Throws<FormatException>(() => Year.Parse("invalid input"));
-            Assert.AreEqual("Not a valid year", exception.Message);
+            exception.Message.Should().Be("Not a valid year");
         }
     }
 
@@ -213,7 +213,7 @@ public class Can_be_parsed
     [Test]
     public void with_TryParse_returns_SVO()
     {
-        Assert.AreEqual(Svo.Year, Year.TryParse("1979"));
+        Year.TryParse("1979").Should().Be(Svo.Year);
     }
 }
 
@@ -222,7 +222,7 @@ public class Can_be_created_from_int
     [Test]
     public void empty_for_not_set_int()
     {
-        Assert.AreEqual(Year.Empty, Year.TryCreate(default));
+        Year.TryCreate(default).Should().Be(Year.Empty);
     }
 
     [Test]
@@ -234,7 +234,7 @@ public class Can_be_created_from_int
     [Test]
     public void within_range()
     {
-        Assert.AreEqual(Svo.Year, Year.TryCreate(1979));
+        Year.TryCreate(1979).Should().Be(Svo.Year);
     }
 
     [TestCase(0)]
@@ -250,13 +250,13 @@ public class Has_custom_formatting
     [Test]
     public void default_value_is_represented_as_string_empty()
     {
-        Assert.AreEqual(string.Empty, default(Year).ToString());
+        default(Year).ToString().Should().Be(string.Empty);
     }
 
     [Test]
     public void unknown_value_is_represented_as_unknown()
     {
-        Assert.AreEqual("?", Year.Unknown.ToString());
+        Year.Unknown.ToString().Should().Be("?");
     }
 
     [Test]
@@ -273,7 +273,7 @@ public class Has_custom_formatting
     {
         using (culture.Scoped())
         {
-            Assert.AreEqual(expected, svo.ToString(format));
+            svo.ToString(format).Should().Be(expected);
         }
     }
 
@@ -282,7 +282,7 @@ public class Has_custom_formatting
     {
         using (new CultureInfoScope(culture: TestCultures.Nl_NL, cultureUI: TestCultures.En_GB))
         {
-            Assert.AreEqual("1979", Svo.Year.ToString(provider: null));
+            Svo.Year.ToString(provider: null).Should().Be("1979");
         }
     }
 }
@@ -292,14 +292,14 @@ public class Is_comparable
     [Test]
     public void to_null_is_1()
     {
-        Assert.AreEqual(1, Svo.Year.CompareTo(null));
+        Svo.Year.CompareTo(null).Should().Be(1);
     }
 
     [Test]
     public void to_Year_as_object()
     {
         object obj = Svo.Year;
-        Assert.AreEqual(0, Svo.Year.CompareTo(obj));
+        Svo.Year.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
@@ -321,7 +321,7 @@ public class Is_comparable
             };
         var list = new List<Year> { sorted[3], sorted[5], sorted[4], sorted[2], sorted[0], sorted[1] };
         list.Sort();
-        Assert.AreEqual(sorted, list);
+        list.Should().BeEquivalentTo(sorted);
     }
 
     [Test]
@@ -367,14 +367,14 @@ public class Casts
     public void explicitly_from_short()
     {
         var casted = (Year)1979;
-        Assert.AreEqual(Svo.Year, casted);
+        casted.Should().Be(Svo.Year);
     }
 
     [Test]
     public void explicitly_to_short()
     {
         var casted = (short)Svo.Year;
-        Assert.AreEqual((short)1979, casted);
+        casted.Should().Be((short)1979);
     }
 }
 
@@ -474,21 +474,21 @@ public class Supports_XML_serialization
     public void using_XmlSerializer_to_serialize()
     {
         var xml = Serialize.Xml(Svo.Year);
-        Assert.AreEqual("1979", xml);
+        xml.Should().Be("1979");
     }
 
     [Test]
     public void using_XmlSerializer_to_deserialize()
     {
         var svo = Deserialize.Xml<Year>("1979");
-        Assert.AreEqual(Svo.Year, svo);
+        svo.Should().Be(Svo.Year);
     }
 
     [Test]
     public void using_DataContractSerializer()
     {
         var round_tripped = SerializeDeserialize.DataContract(Svo.Year);
-        Assert.AreEqual(Svo.Year, round_tripped);
+        round_tripped.Should().Be(Svo.Year);
     }
 
     [Test]
@@ -496,7 +496,7 @@ public class Supports_XML_serialization
     {
         var structure = XmlStructure.New(Svo.Year);
         var round_tripped = SerializeDeserialize.Xml(structure);
-        Assert.AreEqual(structure, round_tripped);
+        round_tripped.Should().Be(structure);
     }
 
     [Test]
@@ -530,14 +530,14 @@ public class Supports_binary_serialization
     public void using_BinaryFormatter()
     {
         var round_tripped = SerializeDeserialize.Binary(Svo.Year);
-        Assert.AreEqual(Svo.Year, round_tripped);
+        round_tripped.Should().Be(Svo.Year);
     }
 
     [Test]
     public void storing_short_in_SerializationInfo()
     {
         var info = Serialize.GetInfo(Svo.Year);
-        Assert.AreEqual((short)1979, info.GetInt16("Value"));
+        info.GetInt16("Value").Should().Be((short)1979);
     }
 }
 #endif

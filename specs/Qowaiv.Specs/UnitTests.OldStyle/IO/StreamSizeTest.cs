@@ -12,7 +12,7 @@ public class StreamSizeTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        Assert.AreEqual(default(StreamSize), StreamSize.Zero);
+        StreamSize.Zero.Should().Be(default(StreamSize));
     }
 
     #endregion
@@ -25,7 +25,7 @@ public class StreamSizeTest
         var size = StreamSize.FromKilobytes(2);
         var act = (long)size;
         var exp = 2000L;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void FromMegabytes_3Dot5_3500000()
@@ -33,7 +33,7 @@ public class StreamSizeTest
         var size = StreamSize.FromMegabytes(3.5);
         var act = (long)size;
         var exp = 3500000L;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void FromGigabytes_0Dot8_800000000()
@@ -41,7 +41,7 @@ public class StreamSizeTest
         var size = StreamSize.FromGigabytes(0.8);
         var act = (long)size;
         var exp = 800000000L;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void FromTerabytes_10_10000000000000()
@@ -49,7 +49,7 @@ public class StreamSizeTest
         var size = StreamSize.FromTerabytes(10);
         var act = (long)size;
         var exp = 10000000000000L;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -58,7 +58,7 @@ public class StreamSizeTest
         var size = StreamSize.FromKibibytes(2);
         var act = (long)size;
         var exp = 2048L;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void FromMebibytes_3Dot5_3670016()
@@ -66,7 +66,7 @@ public class StreamSizeTest
         var size = StreamSize.FromMebibytes(3.5);
         var act = (long)size;
         var exp = 3670016L;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void FromGibibytes_0Dot8_858993459()
@@ -74,7 +74,7 @@ public class StreamSizeTest
         var size = StreamSize.FromGibibytes(0.8);
         var act = (long)size;
         var exp = 858993459L;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void FromTebibytes_10_10995116277760()
@@ -82,7 +82,7 @@ public class StreamSizeTest
         var size = StreamSize.FromTebibytes(10);
         var act = (long)size;
         var exp = 10995116277760L;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -98,7 +98,7 @@ public class StreamSizeTest
         var info = new SerializationInfo(typeof(StreamSize), new System.Runtime.Serialization.FormatterConverter());
         obj.GetObjectData(info, default);
 
-        Assert.AreEqual((long)123456789, info.GetInt64("Value"));
+        info.GetInt64("Value").Should().Be((long)123456789);
     }
 
     [Test]
@@ -108,7 +108,7 @@ public class StreamSizeTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 #endif
 
@@ -118,7 +118,7 @@ public class StreamSizeTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -126,14 +126,14 @@ public class StreamSizeTest
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "123456789 byte";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<StreamSize>("123456789 byte");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -264,7 +264,7 @@ public class StreamSizeTest
     {
         var act = StreamSize.Zero.ToString();
         var exp = "0 byte";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -273,7 +273,7 @@ public class StreamSizeTest
         var act = TestStruct.ToString("0.0 F", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: '123.5 Megabyte', format: '0.0 F'";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -281,7 +281,7 @@ public class StreamSizeTest
     {
         var act = TestStruct.ToString(Nil.String);
         var exp = "123456789";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -289,7 +289,7 @@ public class StreamSizeTest
     {
         var act = TestStruct.ToString(string.Empty);
         var exp = "123456789";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -299,7 +299,7 @@ public class StreamSizeTest
         {
             var act = TestStruct.ToString("#,##0b");
             var exp = "123.456.789b";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -310,7 +310,7 @@ public class StreamSizeTest
         {
             var act = TestStruct.ToString("#,##0.00 kB");
             var exp = "123.456,79 kB";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -321,7 +321,7 @@ public class StreamSizeTest
         {
             var act = TestStruct.ToString("0.0 MegaByte");
             var exp = "123,5 MegaByte";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -332,7 +332,7 @@ public class StreamSizeTest
         {
             var act = (-TestStruct).ToString("0.0 F");
             var exp = "-123,5 Megabyte";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -343,7 +343,7 @@ public class StreamSizeTest
         {
             var act = TestStruct.ToString("0.00GB");
             var exp = "0,12GB";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -354,7 +354,7 @@ public class StreamSizeTest
         {
             var act = TestStruct.ToString("0.0000 GiB");
             var exp = "0,1150 GiB";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -365,7 +365,7 @@ public class StreamSizeTest
         {
             var act = StreamSize.PB.ToString("tb");
             var exp = "1000tb";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -376,7 +376,7 @@ public class StreamSizeTest
         {
             var act = StreamSize.TB.ToString(" petabyte");
             var exp = "0,001 petabyte";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -387,7 +387,7 @@ public class StreamSizeTest
         {
             var act = StreamSize.MaxValue.ToString("#,##0.## Exabyte");
             var exp = "9,22 Exabyte";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -398,7 +398,7 @@ public class StreamSizeTest
         {
             var act = TestStruct.ToString("#,##0.## F");
             var exp = "123,46 Megabyte";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
     [Test]
@@ -408,7 +408,7 @@ public class StreamSizeTest
         {
             var act = TestStruct.ToString("0 f");
             var exp = "123 megabyte";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -419,7 +419,7 @@ public class StreamSizeTest
         {
             var act = TestStruct.ToString("0000 S");
             var exp = "0123 MB";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
     [Test]
@@ -429,7 +429,7 @@ public class StreamSizeTest
         {
             var act = TestStruct.ToString("0 s");
             var exp = "123 mb";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
     [Test]
@@ -439,7 +439,7 @@ public class StreamSizeTest
         {
             var act = TestStruct.ToString("0s");
             var exp = "123mb";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -450,7 +450,7 @@ public class StreamSizeTest
         {
             var act = TestStruct.ToString("0.0 si");
             var exp = "117,7 mib";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -461,7 +461,7 @@ public class StreamSizeTest
         {
             var act = StreamSize.Parse("1600,1").ToString();
             var exp = "1600 byte";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -472,7 +472,7 @@ public class StreamSizeTest
         {
             var act = StreamSize.Parse("1600.1").ToString();
             var exp = "1600 byte";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -483,7 +483,7 @@ public class StreamSizeTest
         {
             var act = StreamSize.Parse("800").ToString("0000 byte");
             var exp = "0800 byte";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -494,7 +494,7 @@ public class StreamSizeTest
         {
             var act = StreamSize.Parse("800").ToString("0000");
             var exp = "0800";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -503,7 +503,7 @@ public class StreamSizeTest
     {
         var act = StreamSize.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
         var exp = "01700,0";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -536,7 +536,7 @@ public class StreamSizeTest
         var exp = new List<StreamSize> { StreamSize.Zero, StreamSize.Zero, item0, item1, item2, item3 };
         var act = inp.OrderBy(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Orders a list of stream sizes descending.</summary>
@@ -552,7 +552,7 @@ public class StreamSizeTest
         var exp = new List<StreamSize> { item3, item2, item1, item0, StreamSize.Zero, StreamSize.Zero };
         var act = inp.OrderByDescending(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Compare with a to object casted instance should be fine.</summary>
@@ -564,7 +564,7 @@ public class StreamSizeTest
         var exp = 0;
         var act = TestStruct.CompareTo(other);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>
@@ -635,7 +635,7 @@ public class StreamSizeTest
         StreamSize exp = TestStruct;
         StreamSize act = 123456789;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Explicit_StreamSizeToInt32_AreEqual()
@@ -643,7 +643,7 @@ public class StreamSizeTest
         var exp = 123456789;
         var act = (int)TestStruct;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -652,7 +652,7 @@ public class StreamSizeTest
         var exp = TestStruct;
         StreamSize act = 123456789L;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Explicit_StreamSizeToInt64_AreEqual()
@@ -660,7 +660,7 @@ public class StreamSizeTest
         var exp = 123456789L;
         var act = (long)TestStruct;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -669,7 +669,7 @@ public class StreamSizeTest
         var exp = TestStruct;
         var act = (StreamSize)123456789d;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Explicit_StreamSizeToDouble_AreEqual()
@@ -677,7 +677,7 @@ public class StreamSizeTest
         var exp = 123456789d;
         var act = (double)TestStruct;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -686,7 +686,7 @@ public class StreamSizeTest
         var exp = TestStruct;
         var act = (StreamSize)123456789m;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Explicit_StreamSizeToDecimal_AreEqual()
@@ -694,7 +694,7 @@ public class StreamSizeTest
         var exp = 123456789m;
         var act = (decimal)TestStruct;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
 
@@ -706,7 +706,7 @@ public class StreamSizeTest
     public void Sign(int expected, StreamSize size)
     {
         var actual = size.Sign();
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [TestCase(1234, -1234)]
@@ -714,7 +714,7 @@ public class StreamSizeTest
     public void Abs(StreamSize expected, StreamSize value)
     {
         var abs = value.Abs();
-        Assert.AreEqual(expected, abs);
+        abs.Should().Be(expected);
     }
 
     [Test]
@@ -724,7 +724,7 @@ public class StreamSizeTest
         StreamSize exp = 22;
         act++;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Decrement_21_20()
@@ -733,7 +733,7 @@ public class StreamSizeTest
         StreamSize exp = 20;
         act--;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -742,7 +742,7 @@ public class StreamSizeTest
         StreamSize act = +((StreamSize)21);
         StreamSize exp = 21;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Negate_21_Minus21()
@@ -750,7 +750,7 @@ public class StreamSizeTest
         StreamSize act = -((StreamSize)21);
         StreamSize exp = -21;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -760,7 +760,7 @@ public class StreamSizeTest
         StreamSize exp = 18;
         act += Percentage.Create(0.1);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Addition_17And5_24()
@@ -769,7 +769,7 @@ public class StreamSizeTest
         StreamSize exp = 24;
         act += (StreamSize)7;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -779,7 +779,7 @@ public class StreamSizeTest
         StreamSize exp = 16;
         act -= Percentage.Create(0.1);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Subtraction_17And5_12()
@@ -788,7 +788,7 @@ public class StreamSizeTest
         StreamSize exp = 12;
         act -= (StreamSize)5;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -798,7 +798,7 @@ public class StreamSizeTest
         StreamSize exp = 40;
         act /= (short)2;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Division_81And2Int32_40()
@@ -807,7 +807,7 @@ public class StreamSizeTest
         StreamSize exp = 40;
         act /= 2;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -817,7 +817,7 @@ public class StreamSizeTest
         StreamSize exp = 40;
         act /= (long)2;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Division_81And2UInt16_40()
@@ -826,7 +826,7 @@ public class StreamSizeTest
         StreamSize exp = 40;
         act /= (ushort)2;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Division_81And2UInt32_40()
@@ -835,7 +835,7 @@ public class StreamSizeTest
         StreamSize exp = 40;
         act /= (uint)2;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Division_81And2UInt64_40()
@@ -844,7 +844,7 @@ public class StreamSizeTest
         StreamSize exp = 40;
         act /= (ulong)2;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Division_81And150Percentage_54()
@@ -853,7 +853,7 @@ public class StreamSizeTest
         StreamSize exp = 54;
         act /= (Percentage)1.50;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Division_81And1Point5Single_54()
@@ -862,7 +862,7 @@ public class StreamSizeTest
         StreamSize exp = 54;
         act /= (float)1.5;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Division_81And1Point5Double_54()
@@ -871,7 +871,7 @@ public class StreamSizeTest
         StreamSize exp = 54;
         act /= 1.5;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Division_81And1Point5Decimal_54()
@@ -880,7 +880,7 @@ public class StreamSizeTest
         StreamSize exp = 54;
         act /= 1.5d;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -890,7 +890,7 @@ public class StreamSizeTest
         StreamSize exp = 126;
         act *= (short)3;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Multiply_42And3Int32_126()
@@ -899,7 +899,7 @@ public class StreamSizeTest
         StreamSize exp = 126;
         act *= 3;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Multiply_42And3Int64_126()
@@ -908,7 +908,7 @@ public class StreamSizeTest
         StreamSize exp = 126;
         act *= (long)3;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Multiply_42And3UInt16_126()
@@ -917,7 +917,7 @@ public class StreamSizeTest
         StreamSize exp = 126;
         act *= (ushort)3;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Multiply_42And3UInt32_126()
@@ -926,7 +926,7 @@ public class StreamSizeTest
         StreamSize exp = 126;
         act *= (uint)3;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Multiply_42And3UInt64_126()
@@ -935,7 +935,7 @@ public class StreamSizeTest
         StreamSize exp = 126;
         act *= (ulong)3;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Multiply_42And50Percentage_21()
@@ -944,7 +944,7 @@ public class StreamSizeTest
         StreamSize exp = 21;
         act *= 50.Percent();
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Multiply_42AndHalfSingle_21()
@@ -953,7 +953,7 @@ public class StreamSizeTest
         StreamSize exp = 21;
         act *= (float)0.5;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Multiply_42AndHalfDouble_21()
@@ -962,7 +962,7 @@ public class StreamSizeTest
         StreamSize exp = 21;
         act *= 0.5;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Multiply_42AndHalfDecimal_21()
@@ -971,7 +971,7 @@ public class StreamSizeTest
         StreamSize exp = 21;
         act *= 0.5d;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #region Extension tests
@@ -984,7 +984,7 @@ public class StreamSizeTest
         StreamSize act = stream.GetStreamSize();
         StreamSize exp = 17;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -1001,7 +1001,7 @@ public class StreamSizeTest
         StreamSize act = file.GetStreamSize();
         StreamSize exp = 9;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -1012,7 +1012,7 @@ public class StreamSizeTest
         StreamSize act = arr.Average();
         StreamSize exp = 5;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Sum_ArrayOfStreamSizes_45Byte()
@@ -1022,7 +1022,7 @@ public class StreamSizeTest
         StreamSize act = arr.Sum();
         StreamSize exp = 45;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion

@@ -18,7 +18,7 @@ public class InternetMediaTypeTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        Assert.AreEqual(default(InternetMediaType), InternetMediaType.Empty);
+        InternetMediaType.Empty.Should().Be(default(InternetMediaType));
     }
 
     #endregion
@@ -142,7 +142,7 @@ public class InternetMediaTypeTest
         {
             var act = InternetMediaType.Parse("?");
             var exp = InternetMediaType.Unknown;
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -168,7 +168,7 @@ public class InternetMediaTypeTest
             var exp = TestStruct;
             var act = InternetMediaType.TryParse(exp.ToString());
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -199,7 +199,7 @@ public class InternetMediaTypeTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 #endif
 
@@ -209,7 +209,7 @@ public class InternetMediaTypeTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -217,14 +217,14 @@ public class InternetMediaTypeTest
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "application/x-chess-pgn";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<InternetMediaType>("application/x-chess-pgn");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -355,7 +355,7 @@ public class InternetMediaTypeTest
     {
         var act = InternetMediaType.Empty.ToString();
         var exp = "";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -363,7 +363,7 @@ public class InternetMediaTypeTest
     {
         var act = InternetMediaType.Unknown.ToString();
         var exp = "application/octet-stream";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -372,14 +372,14 @@ public class InternetMediaTypeTest
         var act = TestStruct.ToString("Unit Test Format", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: 'application/x-chess-pgn', format: 'Unit Test Format'";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString_TestStruct_ComplexPattern()
     {
         var act = TestStruct.ToString(string.Empty);
         var exp = "application/x-chess-pgn";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -390,7 +390,7 @@ public class InternetMediaTypeTest
     [Test]
     public void GetHash_Empty_0()
     {
-        Assert.AreEqual(0, InternetMediaType.Empty.GetHashCode());
+        InternetMediaType.Empty.GetHashCode().Should().Be(0);
     }
 
     /// <summary>GetHash should not fail for the test struct.</summary>
@@ -484,7 +484,7 @@ public class InternetMediaTypeTest
         var exp = new List<InternetMediaType> { InternetMediaType.Empty, InternetMediaType.Empty, item0, item1, item2, item3 };
         var act = inp.OrderBy(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Orders a list of internet media types descending.</summary>
@@ -500,7 +500,7 @@ public class InternetMediaTypeTest
         var exp = new List<InternetMediaType> { item3, item2, item1, item0, InternetMediaType.Empty, InternetMediaType.Empty };
         var act = inp.OrderByDescending(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Compare with a to object casted instance should be fine.</summary>
@@ -512,7 +512,7 @@ public class InternetMediaTypeTest
         var exp = 0;
         var act = TestStruct.CompareTo(other);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>
@@ -531,14 +531,14 @@ public class InternetMediaTypeTest
     {
         var exp = 0;
         var act = InternetMediaType.Empty.Length;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Length_TestStruct_23()
     {
         var exp = 23;
         var act = TestStruct.Length;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -546,28 +546,28 @@ public class InternetMediaTypeTest
     {
         var exp = string.Empty;
         var act = InternetMediaType.Empty.TopLevel;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void TopLevel_TextHtml_Text()
     {
         var exp = "text";
         var act = TextHtml.TopLevel;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void TopLevel_XConferenceXCooltalk_XConference()
     {
         var exp = "x-conference";
         var act = XConferenceXCooltalk.TopLevel;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void TopLevel_TestStruct_Application()
     {
         var exp = "application";
         var act = TestStruct.TopLevel;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -575,28 +575,28 @@ public class InternetMediaTypeTest
     {
         var exp = InternetMediaTopLevelType.None;
         var act = InternetMediaType.Empty.TopLevelType;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void TopLevelType_TextHtml_Text()
     {
         var exp = InternetMediaTopLevelType.Text;
         var act = TextHtml.TopLevelType;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void TopLevelType_XConferenceXCooltalk_Unregistered()
     {
         var exp = InternetMediaTopLevelType.Unregistered;
         var act = XConferenceXCooltalk.TopLevelType;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void TopLevelType_TestStruct_Application()
     {
         var exp = InternetMediaTopLevelType.Application;
         var act = TestStruct.TopLevelType;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -604,28 +604,28 @@ public class InternetMediaTypeTest
     {
         var exp = string.Empty;
         var act = InternetMediaType.Empty.Subtype;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Subtype_TextHtml_Html()
     {
         var exp = "html";
         var act = TextHtml.Subtype;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Subtype_XConferenceXCooltalk_XCooltalk()
     {
         var exp = "x-cooltalk";
         var act = XConferenceXCooltalk.Subtype;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Subtype_TestStruct_XChessPgn()
     {
         var exp = "x-chess-pgn";
         var act = TestStruct.Subtype;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -633,28 +633,28 @@ public class InternetMediaTypeTest
     {
         var exp = false;
         var act = InternetMediaType.Empty.IsRegistered;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void IsRegistered_TextHtml_IsTrue()
     {
         var exp = true;
         var act = TextHtml.IsRegistered;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void IsRegistered_XConferenceXCooltalk_IsFalse()
     {
         var exp = false;
         var act = XConferenceXCooltalk.IsRegistered;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void IsRegistered_TestStruct_IsFalse()
     {
         var exp = false;
         var act = TestStruct.IsRegistered;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void IsRegistered_VideoSlashXDotTest_IsFalse()
@@ -662,7 +662,7 @@ public class InternetMediaTypeTest
         var mime = InternetMediaType.Parse("video/x.test");
         var exp = false;
         var act = mime.IsRegistered;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
 
@@ -671,7 +671,7 @@ public class InternetMediaTypeTest
     {
         var exp = InternetMediaSuffixType.None;
         var act = InternetMediaType.Empty.Suffix;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -679,7 +679,7 @@ public class InternetMediaTypeTest
     {
         var exp = InternetMediaSuffixType.None;
         var act = TestStruct.Suffix;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Suffix_ApplicationAtomXml_Xml()
@@ -688,7 +688,7 @@ public class InternetMediaTypeTest
 
         var exp = InternetMediaSuffixType.xml;
         var act = mime.Suffix;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion

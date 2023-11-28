@@ -12,7 +12,7 @@ public class BusinessIdentifierCodeTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        Assert.AreEqual(default(BusinessIdentifierCode), BusinessIdentifierCode.Empty);
+        BusinessIdentifierCode.Empty.Should().Be(default(BusinessIdentifierCode));
     }
 
     #endregion
@@ -131,7 +131,7 @@ public class BusinessIdentifierCodeTest
         {
             var act = BusinessIdentifierCode.Parse("?");
             var exp = BusinessIdentifierCode.Unknown;
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -157,7 +157,7 @@ public class BusinessIdentifierCodeTest
             var exp = TestStruct;
             var act = BusinessIdentifierCode.TryParse(exp.ToString());
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -178,7 +178,7 @@ public class BusinessIdentifierCodeTest
         var info = new SerializationInfo(typeof(BusinessIdentifierCode), new FormatterConverter());
         obj.GetObjectData(info, default);
 
-        Assert.AreEqual(TestStruct.ToString(), info.GetString("Value"));
+        info.GetString("Value").Should().Be(TestStruct.ToString());
     }
 
     [Test]
@@ -188,7 +188,7 @@ public class BusinessIdentifierCodeTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 #endif
 
@@ -198,7 +198,7 @@ public class BusinessIdentifierCodeTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -206,14 +206,14 @@ public class BusinessIdentifierCodeTest
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "AEGONL2UXXX";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<BusinessIdentifierCode>("AEGONL2UXXX");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -344,7 +344,7 @@ public class BusinessIdentifierCodeTest
     {
         var act = BusinessIdentifierCode.Empty.ToString();
         var exp = "";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -352,7 +352,7 @@ public class BusinessIdentifierCodeTest
     {
         var act = BusinessIdentifierCode.Unknown.ToString();
         var exp = "?";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -361,14 +361,14 @@ public class BusinessIdentifierCodeTest
         var act = TestStruct.ToString("Unit Test Format", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: 'AEGONL2UXXX', format: 'Unit Test Format'";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString_TestStruct_ComplexPattern()
     {
         var act = TestStruct.ToString(string.Empty);
         var exp = "AEGONL2UXXX";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -379,7 +379,7 @@ public class BusinessIdentifierCodeTest
     [Test]
     public void GetHash_Empty_Hash()
     {
-        Assert.AreEqual(0, BusinessIdentifierCode.Empty.GetHashCode());
+        BusinessIdentifierCode.Empty.GetHashCode().Should().Be(0);
     }
 
     /// <summary>GetHash should not fail for the test struct.</summary>
@@ -473,7 +473,7 @@ public class BusinessIdentifierCodeTest
         var exp = new List<BusinessIdentifierCode> { BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty, item0, item1, item2, item3 };
         var act = inp.OrderBy(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Orders a list of BICs descending.</summary>
@@ -489,7 +489,7 @@ public class BusinessIdentifierCodeTest
         var exp = new List<BusinessIdentifierCode> { item3, item2, item1, item0, BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty };
         var act = inp.OrderByDescending(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Compare with a to object casted instance should be fine.</summary>
@@ -501,7 +501,7 @@ public class BusinessIdentifierCodeTest
         var exp = 0;
         var act = TestStruct.CompareTo(other);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>
@@ -521,21 +521,21 @@ public class BusinessIdentifierCodeTest
     {
         var exp = 0;
         var act = BusinessIdentifierCode.Empty.Length;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Length_Unknown_0()
     {
         var exp = 0;
         var act = BusinessIdentifierCode.Unknown.Length;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Length_TestStruct_IntValue()
     {
         var exp = 11;
         var act = TestStruct.Length;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -543,14 +543,14 @@ public class BusinessIdentifierCodeTest
     {
         var exp = "";
         var act = BusinessIdentifierCode.Empty.Business;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void BusinessCode_Unknown_StringEmpty()
     {
         var exp = "";
         var act = BusinessIdentifierCode.Unknown.Business;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void BusinessCode_has_length_of_four()
@@ -561,21 +561,21 @@ public class BusinessIdentifierCodeTest
     {
         var exp = Country.Empty;
         var act = BusinessIdentifierCode.Empty.Country;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Country_Unknown_CountryUnknown()
     {
         var exp = Country.Unknown;
         var act = BusinessIdentifierCode.Unknown.Country;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Country_TestStruct_NL()
     {
         var exp = Country.NL;
         var act = TestStruct.Country;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -583,21 +583,21 @@ public class BusinessIdentifierCodeTest
     {
         var exp = "";
         var act = BusinessIdentifierCode.Empty.Location;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void LocationCode_Unknown_StringEmpty()
     {
         var exp = "";
         var act = BusinessIdentifierCode.Unknown.Location;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void LocationCode_TestStruct_NL()
     {
         var exp = "2U";
         var act = TestStruct.Location;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -605,28 +605,28 @@ public class BusinessIdentifierCodeTest
     {
         var exp = "";
         var act = BusinessIdentifierCode.Empty.Branch;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void BranchCode_Unknown_StringEmpty()
     {
         var exp = "";
         var act = BusinessIdentifierCode.Unknown.Branch;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void BranchCode_TestStruct_NL()
     {
         var exp = "XXX";
         var act = TestStruct.Branch;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void BranchCode_empty_for_BIC_without_one()
     {
         var exp = "";
         var act = BusinessIdentifierCode.Parse("AEGONL2U").Branch;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion

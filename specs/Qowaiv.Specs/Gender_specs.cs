@@ -21,7 +21,7 @@ public class With_domain_logic
     [TestCase(true, "")]
     public void IsEmpty_returns(bool result, Gender svo)
     {
-        Assert.AreEqual(result, svo.IsEmpty());
+        svo.IsEmpty().Should().Be(result);
     }
 
     [TestCase(false, "Male")]
@@ -30,7 +30,7 @@ public class With_domain_logic
     [TestCase(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, Gender svo)
     {
-        Assert.AreEqual(result, svo.IsEmptyOrUnknown());
+        svo.IsEmptyOrUnknown().Should().Be(result);
     }
 
     [TestCase(false, "Male")]
@@ -39,7 +39,7 @@ public class With_domain_logic
     [TestCase(false, "")]
     public void IsUnknown_returns(bool result, Gender svo)
     {
-        Assert.AreEqual(result, svo.IsUnknown());
+        svo.IsUnknown().Should().Be(result);
     }
 
     [TestCase(true, "Male")]
@@ -48,7 +48,7 @@ public class With_domain_logic
     [TestCase(false, "")]
     public void IsMaleOrFemale_returns(bool result, Gender svo)
     {
-        Assert.AreEqual(result, svo.IsMaleOrFemale());
+        svo.IsMaleOrFemale().Should().Be(result);
     }
 }
 
@@ -60,14 +60,14 @@ public class Display_name
     {
         using (TestCultures.Nl_BE.Scoped())
         {
-            Assert.AreEqual("Vrouwelijk", Svo.Gender.DisplayName);
+            Svo.Gender.DisplayName.Should().Be("Vrouwelijk");
         }
     }
 
     [Test]
     public void for_custom_culture_if_specified()
     {
-        Assert.AreEqual("Mujer", Svo.Gender.GetDisplayName(TestCultures.Es_EC));
+        Svo.Gender.GetDisplayName(TestCultures.Es_EC).Should().Be("Mujer");
     }
 }
 
@@ -140,7 +140,7 @@ public class Has_constant
     [Test]
     public void Empty_represent_default_value()
     {
-        Assert.AreEqual(default(Gender), Gender.Empty);
+        Gender.Empty.Should().Be(default(Gender));
     }
 }
 
@@ -213,19 +213,19 @@ public class Can_be_parsed
     [Test]
     public void from_null_string_represents_Empty()
     {
-        Assert.AreEqual(Gender.Empty, Gender.Parse(null));
+        Gender.Parse(null).Should().Be(Gender.Empty);
     }
 
     [Test]
     public void from_empty_string_represents_Empty()
     {
-        Assert.AreEqual(Gender.Empty, Gender.Parse(string.Empty));
+        Gender.Parse(string.Empty).Should().Be(Gender.Empty);
     }
 
     [Test]
     public void from_question_mark_represents_Unknown()
     {
-        Assert.AreEqual(Gender.Unknown, Gender.Parse("?"));
+        Gender.Parse("?").Should().Be(Gender.Unknown);
     }
 
     [TestCase("en", "Female")]
@@ -234,7 +234,7 @@ public class Can_be_parsed
         using (culture.Scoped())
         {
             var parsed = Gender.Parse(input);
-            Assert.AreEqual(Svo.Gender, parsed);
+            parsed.Should().Be(Svo.Gender);
         }
     }
 
@@ -244,7 +244,7 @@ public class Can_be_parsed
         using (TestCultures.En_GB.Scoped())
         {
             var exception = Assert.Throws<FormatException>(() => Gender.Parse("invalid input"));
-            Assert.AreEqual("Not a valid gender", exception.Message);
+            exception.Message.Should().Be("Not a valid gender");
         }
     }
 
@@ -261,7 +261,7 @@ public class Can_be_parsed
     [Test]
     public void with_TryParse_returns_SVO()
     {
-        Assert.AreEqual(Svo.Gender, Gender.TryParse("Female"));
+        Gender.TryParse("Female").Should().Be(Svo.Gender);
     }
 }
 
@@ -273,7 +273,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual("Female", Svo.Gender.ToString());
+            Svo.Gender.ToString().Should().Be("Female");
         }
     }
 
@@ -282,7 +282,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual(Svo.Gender.ToString(), Svo.Gender.ToString(default(string)));
+            Svo.Gender.ToString(default(string)).Should().Be(Svo.Gender.ToString());
         }
     }
 
@@ -291,14 +291,14 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual(Svo.Gender.ToString(), Svo.Gender.ToString(string.Empty));
+            Svo.Gender.ToString(string.Empty).Should().Be(Svo.Gender.ToString());
         }
     }
 
     [Test]
     public void default_value_is_represented_as_string_empty()
     {
-        Assert.AreEqual(string.Empty, default(Gender).ToString());
+        default(Gender).ToString().Should().Be(string.Empty);
     }
 
     [Test]
@@ -318,7 +318,7 @@ public class Has_custom_formatting
     {
         using (culture.Scoped())
         {
-            Assert.AreEqual(expected, svo.ToString(format));
+            svo.ToString(format).Should().Be(expected);
         }
     }
 
@@ -327,7 +327,7 @@ public class Has_custom_formatting
     {
         using (new CultureInfoScope(culture: TestCultures.Nl_NL, cultureUI: TestCultures.En_GB))
         {
-            Assert.AreEqual("Vrouwelijk", Svo.Gender.ToString(provider: null));
+            Svo.Gender.ToString(provider: null).Should().Be("Vrouwelijk");
         }
     }
 }
@@ -342,7 +342,7 @@ public class Is_comparable
     public void to_Gender_as_object()
     {
         object obj = Svo.Gender;
-        Assert.AreEqual(0, Svo.Gender.CompareTo(obj));
+        Svo.Gender.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
@@ -364,7 +364,7 @@ public class Is_comparable
             };
         var list = new List<Gender> { sorted[3], sorted[4], sorted[2], sorted[0], sorted[1] };
         list.Sort();
-        Assert.AreEqual(sorted, list);
+        list.Should().BeEquivalentTo(sorted);
     }
 }
 
@@ -375,21 +375,21 @@ public class Casts
     public void explicitly_to_byte()
     {
         var casted = (byte)Svo.Gender;
-        Assert.AreEqual((byte)2, casted);
+        casted.Should().Be((byte)2);
     }
 
     [Test]
     public void explicitly_to_int()
     {
         var casted = (int)Svo.Gender;
-        Assert.AreEqual(2, casted);
+        casted.Should().Be(2);
     }
 
     [TestCase(2, "Female")]
     [TestCase(null, "?")]
     public void explicitly_to_nullable_int(int casted, Gender gender)
     {
-        Assert.AreEqual(casted, (int?)gender);
+        ((int?)gender).Should().Be(casted);
     }
 
     [TestCase("Female", 2)]
@@ -397,7 +397,7 @@ public class Casts
     public void implicitly_from_nullable_int(Gender casted, int? value)
     {
         Gender gender = value;
-        Assert.AreEqual(casted, gender);
+        gender.Should().Be(casted);
     }
 
     [TestCase("Female", 2)]
@@ -405,7 +405,7 @@ public class Casts
     public void implicitly_from_int(Gender casted, int value)
     {
         Gender gender = value;
-        Assert.AreEqual(casted, gender);
+        gender.Should().Be(casted);
     }
 }
 
@@ -430,14 +430,14 @@ public class Supports_JSON_serialization
     public void convention_based_deserialization(Gender expected, object json)
     {
         var actual = JsonTester.Read<Gender>(json);
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [TestCase(null, "")]
     public void convention_based_serialization(object expected, Gender svo)
     {
         var serialized = JsonTester.Write(svo);
-        Assert.AreEqual(expected, serialized);
+        serialized.Should().Be(expected);
     }
 
     [TestCase("Invalid input", typeof(FormatException))]
@@ -459,21 +459,21 @@ public class Supports_XML_serialization
     [TestCase("Female", "F")]
     public void using_XmlSerializer_to_serialize(string xml, Gender gender)
     {
-        Assert.AreEqual(xml, Serialize.Xml(gender));
+        Serialize.Xml(gender).Should().Be(xml);
     }
 
     [Test]
     public void using_XmlSerializer_to_deserialize()
     {
         var svo = Deserialize.Xml<Gender>("Female");
-        Assert.AreEqual(Svo.Gender, svo);
+        svo.Should().Be(Svo.Gender);
     }
 
     [Test]
     public void using_DataContractSerializer()
     {
         var round_tripped = SerializeDeserialize.DataContract(Svo.Gender);
-        Assert.AreEqual(Svo.Gender, round_tripped);
+        round_tripped.Should().Be(Svo.Gender);
     }
 
     [Test]
@@ -481,7 +481,7 @@ public class Supports_XML_serialization
     {
         var structure = XmlStructure.New(Svo.Gender);
         var round_tripped = SerializeDeserialize.Xml(structure);
-        Assert.AreEqual(structure, round_tripped);
+        round_tripped.Should().Be(structure);
     }
 
     [Test]
@@ -506,13 +506,13 @@ public class Is_Open_API_data_type
     [Test]
     public void has_type()
     {
-        Assert.AreEqual("string", Attribute.Type);
+        Attribute.Type.Should().Be("string");
     }
 
     [Test]
     public void has_format()
     {
-        Assert.AreEqual("gender", Attribute.Format);
+        Attribute.Format.Should().Be("gender");
     }
 
     [Test]
@@ -537,14 +537,14 @@ public class Supports_binary_serialization
     public void using_BinaryFormatter()
     {
         var round_tripped = SerializeDeserialize.Binary(Svo.Gender);
-        Assert.AreEqual(Svo.Gender, round_tripped);
+        round_tripped.Should().Be(Svo.Gender);
     }
 
     [Test]
     public void storing_byte_in_SerializationInfo()
     {
         var info = Serialize.GetInfo(Svo.Gender);
-        Assert.AreEqual((byte)4, info.GetByte("Value"));
+        info.GetByte("Value").Should().Be((byte)4);
     }
 }
 #endif

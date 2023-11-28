@@ -8,21 +8,21 @@ public class Add
     public void A_char_can_be_added()
     {
         var buffer = WithCapacity().Add('c');
-        Assert.AreEqual("c", buffer);
+        buffer.Should().BeEquivalentTo("c");
     }
 
     [Test]
     public void A_char_can_be_added_as_lowercase()
     {
         var buffer = WithCapacity().AddLower('C');
-        Assert.AreEqual("c", buffer);
+        buffer.Should().BeEquivalentTo("c");
     }
 
     [Test]
     public void A_string_can_be_added()
     {
         var buffer = WithCapacity().Add("string");
-        Assert.AreEqual("string", buffer);
+        buffer.Should().BeEquivalentTo("string");
     }
 
     [Test]
@@ -30,7 +30,7 @@ public class Add
     {
         var other = " string ".Buffer().Trim();
         var buffer = WithCapacity().Add(other);
-        Assert.AreEqual("string", buffer);
+        buffer.Should().BeEquivalentTo("string");
     }
 }
 
@@ -40,21 +40,21 @@ public class Remove
     public void FromStart_removes_characters_from_the_start()
     {
         var buffer = " test ".Buffer().Trim().RemoveFromStart(2);
-        Assert.AreEqual("st", buffer);
+        buffer.Should().BeEquivalentTo("st");
     }
 
     [Test]
     public void FromEnd_removes_characters_from_the_end()
     {
         var buffer = " test ".Buffer().Trim().RemoveFromEnd(2);
-        Assert.AreEqual("te", buffer);
+        buffer.Should().BeEquivalentTo("te");
     }
 
     [Test]
     public void Range_removes_specified_range()
     {
         var buffer = " test ".Buffer().Trim().RemoveRange(1, 2);
-        Assert.AreEqual("tt", buffer);
+        buffer.Should().BeEquivalentTo("tt");
     }
 
     [TestCase('.')]
@@ -89,21 +89,21 @@ public class Trim
     public void Trims_left_and_right_spaces()
     {
         var buffer = "  content ".Buffer().Trim();
-        Assert.AreEqual("content", buffer);
+        buffer.Should().BeEquivalentTo("content");
     }
 
     [Test]
     public void Left_trims_left_spaces()
     {
         var buffer = "  content ".Buffer().TrimLeft();
-        Assert.AreEqual("content ", buffer);
+        buffer.Should().BeEquivalentTo("content ");
     }
 
     [Test]
     public void Right_trims_right_spaces()
     {
         var buffer = "  content ".Buffer().TrimRight();
-        Assert.AreEqual("  content", buffer);
+        buffer.Should().BeEquivalentTo("  content");
     }
 }
 
@@ -113,7 +113,7 @@ public class Uppercase
     public void Transforms_all_characters_to__uppercase_alternatives()
     {
         var buffer = "abcDeéf".Buffer().Uppercase();
-        Assert.AreEqual("ABCDEÉF", buffer);
+        buffer.Should().BeEquivalentTo("ABCDEÉF");
     }
 }
 
@@ -123,7 +123,7 @@ public class Count
     public void Returns_the_total_of_specified_char()
     {
         var buffer = " let us count this   ".Buffer().Trim();
-        Assert.AreEqual(3, buffer.Count(' '));
+        buffer.Count(' ').Should().Be(3);
     }
 }
 
@@ -133,7 +133,7 @@ public class IndexOf
     public void Last_returns_last_index_of_char()
     {
         var buffer = " 7123456789   ".Buffer().Trim();
-        Assert.AreEqual(7, buffer.LastIndexOf('7'));
+        buffer.LastIndexOf('7').Should().Be(7);
     }
 }
 
@@ -174,7 +174,7 @@ public class Substring
     public void With_start_index_returns_substring()
     {
         var buffer = " test ".Buffer().Trim();
-        Assert.AreEqual("st", buffer.Substring(2));
+        buffer.Substring(2).Should().Be("st");
     }
 }
 

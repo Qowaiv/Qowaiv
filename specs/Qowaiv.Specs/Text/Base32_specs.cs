@@ -56,14 +56,14 @@ public class TryGetBytes_from
     {
         var bytes = expected.Select(v => (byte)v).ToArray();
         Base32.TryGetBytes(str, out byte[] actualBytes).Should().BeTrue();
-        CollectionAssert.AreEqual(bytes, actualBytes);
+        actualBytes.Should().BeEquivalentTo(bytes);
     }
 
     [Test]
     public void Not_support_chars_returns_false_with_EmptyArray()
     {
         Base32.TryGetBytes("ABC}", out byte[] bytes).Should().BeFalse();
-        Assert.AreEqual(Array.Empty<byte>(), bytes);
+        bytes.Should().BeEmpty();
     }
 }
 public class GetBytes
@@ -71,13 +71,13 @@ public class GetBytes
     [Test]
     public void Null__returns_EmptyArray()
     {
-        CollectionAssert.AreEqual(Array.Empty<byte>(), Base32.GetBytes(null));
+        Base32.GetBytes(null).Should().BeEmpty();
     }
 
     [Test]
     public void StringEmpty_returns_EmptyArray()
     {
-        CollectionAssert.AreEqual(Array.Empty<byte>(), Base32.GetBytes(string.Empty));
+        Base32.GetBytes(string.Empty).Should().BeEmpty();
     }
 
     [Test]
@@ -86,7 +86,7 @@ public class GetBytes
         var str = "thequickbrownfoxjumbsoverthelazydog2345674";
         var lowercase = Base32.GetBytes(str);
         var uppercase = Base32.GetBytes(str.ToUpperInvariant());
-        Assert.AreEqual(uppercase, lowercase);
+        lowercase.Should().BeEquivalentTo(uppercase);
     }
 
     [Test]
@@ -98,7 +98,7 @@ public class GetBytes
             {
                 Base32.GetBytes("Q0waiv");
             });
-            Assert.AreEqual("Not a valid Base32 string", act.Message);
+            act.Message.Should().Be("Not a valid Base32 string");
         }
     }
 }

@@ -13,7 +13,7 @@ public class IdForGuidTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        Assert.AreEqual(default(Id<ForGuid>), Id<ForGuid>.Empty);
+        Id<ForGuid>.Empty.Should().Be(default(Id<ForGuid>));
     }
 
     /// <summary>Id<ForGuid>.IsEmpty() should be true for the default of identifier.</summary>
@@ -34,21 +34,21 @@ public class IdForGuidTest
     public void FromBytes_Null_IsEmpty()
     {
         var fromBytes = Id<ForGuid>.FromBytes(null);
-        Assert.AreEqual(Id<ForGuid>.Empty, fromBytes);
+        fromBytes.Should().Be(Id<ForGuid>.Empty);
     }
 
     [Test]
     public void FromBytes_Bytes_IsTestStruct()
     {
         var fromBytes = Id<ForGuid>.FromBytes([171, 181, 90, 15, 203, 18, 41, 70, 135, 141, 177, 139, 136, 185, 165, 4]);
-        Assert.AreEqual(TestStruct, fromBytes);
+        fromBytes.Should().Be(TestStruct);
     }
 
     [Test]
     public void ToByteArray_Empty_EmptyArray()
     {
         var bytes = Id<ForGuid>.Empty.ToByteArray();
-        Assert.AreEqual(Array.Empty<byte>(), bytes);
+        bytes.Should().BeEmpty();
     }
 
     [Test]
@@ -56,7 +56,7 @@ public class IdForGuidTest
     {
         var bytes = TestStruct.ToByteArray();
         var exepected = new byte[] { 171, 181, 90, 15, 203, 18, 41, 70, 135, 141, 177, 139, 136, 185, 165, 4 };
-        Assert.AreEqual(exepected, bytes);
+        bytes.Should().BeEquivalentTo(exepected);
     }
 
     /// <summary>TryParse null should be valid.</summary>
@@ -64,7 +64,7 @@ public class IdForGuidTest
     public void TryParse_Null_IsValid()
     {
         Id<ForGuid>.TryParse(null, out var val).Should().BeTrue();
-        Assert.AreEqual(default(Id<ForGuid>), val);
+        val.Should().Be(default(Id<ForGuid>));
     }
 
     /// <summary>TryParse string.Empty should be valid.</summary>
@@ -72,7 +72,7 @@ public class IdForGuidTest
     public void TryParse_StringEmpty_IsValid()
     {
         Id<ForGuid>.TryParse(string.Empty, out var val).Should().BeTrue();
-        Assert.AreEqual(default(Id<ForGuid>), val);
+        val.Should().Be(default(Id<ForGuid>));
     }
 
     /// <summary>TryParse with specified string value should be valid.</summary>
@@ -81,7 +81,7 @@ public class IdForGuidTest
     {
         string str = "0f5ab5ab-12cb-4629-878d-b18b88b9a504";
         Id<ForGuid>.TryParse(str, out var val).Should().BeTrue();
-        Assert.AreEqual(str, val.ToString());
+        val.ToString().Should().Be(str);
     }
 
     /// <summary>TryParse with specified string value should be invalid.</summary>
@@ -90,7 +90,7 @@ public class IdForGuidTest
     {
         string str = "0F5AB5AB-12CB-4629-878D";
         Id<ForGuid>.TryParse(str, out var val).Should().BeFalse();
-        Assert.AreEqual(default(Id<ForGuid>), val);
+        val.Should().Be(default(Id<ForGuid>));
     }
 
     [Test]
@@ -114,7 +114,7 @@ public class IdForGuidTest
         {
             var exp = TestStruct;
             var act = Id<ForGuid>.TryParse(exp.ToString());
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -125,7 +125,7 @@ public class IdForGuidTest
         {
             var exp = default(Id<ForGuid>);
             var act = Id<ForGuid>.TryParse("InvalidInput");
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -148,7 +148,7 @@ public class IdForGuidTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -156,14 +156,14 @@ public class IdForGuidTest
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "0f5ab5ab-12cb-4629-878d-b18b88b9a504";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<Id<ForGuid>>("0F5AB5AB-12CB-4629-878D-B18B88B9A504");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -313,7 +313,7 @@ public class IdForGuidTest
     public void FromJson(Id<ForGuid> expected, object json)
     {
         var actual = JsonTester.Read<Id<ForGuid>>(json);
-        Assert.AreEqual(expected, actual);
+        actual.Should().Be(expected);
     }
 
     [Test]
@@ -328,7 +328,7 @@ public class IdForGuidTest
     {
         var act = Id<ForGuid>.Empty.ToString();
         var exp = "";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -336,21 +336,21 @@ public class IdForGuidTest
     {
         var act = TestStruct.ToString("S", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: 'q7VaD8sSKUaHjbGLiLmlBA', format: 'S'";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <summary>GetHash should not fail for Id<ForGuid>.Empty.</summary>
     [Test]
     public void GetHash_Empty_Hash()
     {
-        Assert.AreEqual(0, Id<ForGuid>.Empty.GetHashCode());
+        Id<ForGuid>.Empty.GetHashCode().Should().Be(0);
     }
 
     /// <summary>GetHash should not fail for the test struct.</summary>
     [Test]
     public void GetHash_TestStruct_Hash()
     {
-        Assert.AreNotEqual(0, TestStruct.GetHashCode());
+        TestStruct.GetHashCode().Should().NotBe(0);
     }
 
     [Test]
@@ -421,10 +421,8 @@ public class IdForGuidTest
 
     [Test]
     public void Next_100Items_AllUnique()
-    {
-        var nexts = Enumerable.Range(0, 100).Select(i => Id<ForGuid>.Next()).ToArray();
-        CollectionAssert.AllItemsAreUnique(nexts);
-    }
+        => Enumerable.Range(0, 100).Select(i => Id<ForGuid>.Next())
+        .ToHashSet().Should().HaveCount(100);
 
     [TestCase(null)]
     [TestCase("")]

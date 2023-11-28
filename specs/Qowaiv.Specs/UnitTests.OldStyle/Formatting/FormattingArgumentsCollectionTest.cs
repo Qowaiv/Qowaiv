@@ -69,7 +69,7 @@ public class FormattingArgumentsCollectionTest
         var act = collection.Format("Begin {1000000} End", args);
         var exp = "Begin Test End";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Format_InvalidFormat_ThrowsFormatException()
@@ -120,7 +120,7 @@ public class FormattingArgumentsCollectionTest
         var act = collection.Format("Value: '{0}'", args);
         var exp = "Value: ''";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Format_AlignLeft_String()
@@ -130,7 +130,7 @@ public class FormattingArgumentsCollectionTest
         var act = collection.Format("{0,-4}", "a");
         var exp = "a   ";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Format_AlignRight_String()
@@ -140,7 +140,7 @@ public class FormattingArgumentsCollectionTest
         var act = collection.Format("{0,3}", "a");
         var exp = "  a";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Format_EscapeLeft_String()
@@ -150,7 +150,7 @@ public class FormattingArgumentsCollectionTest
         var act = collection.Format("{{");
         var exp = "{";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Format_EscapeRight_String()
@@ -160,7 +160,7 @@ public class FormattingArgumentsCollectionTest
         var act = collection.Format("}}");
         var exp = "}";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Format_ComplexPattern_AreEqual()
@@ -176,7 +176,7 @@ public class FormattingArgumentsCollectionTest
             var act = collection.Format("{0:000.00} - {1} * {1:dd-MM-yyyy} - {2} - {3} - {4}", 3, new Date(2014, 10, 8), 666, 0.8m, 0.9);
             var exp = "003,00 - 2014-10-08 00:00 * 08-10-2014 - 666 - 0,800 - 0,9";
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
     [Test]
@@ -193,7 +193,7 @@ public class FormattingArgumentsCollectionTest
             var act = collection.Format("{0:yyyy-MM-dd} * {0}", new Date(2014, 10, 8));
             var exp = "Unit Test Formatter, value: '2014-10-08', format: 'yyyy-MM-dd' * Unit Test Formatter, value: '10/08/2014', format: ''";
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -218,7 +218,7 @@ public class FormattingArgumentsCollectionTest
         string act = collection.ToString((object)typeof(int));
         string exp = "System.Int32";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString_7_007()
@@ -327,7 +327,7 @@ public class FormattingArgumentsCollectionTest
         var act = collection.Remove(typeof(int));
         var exp = false;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Remove_AddedInt32_Successful()
@@ -339,7 +339,7 @@ public class FormattingArgumentsCollectionTest
         var act = collection.Remove(typeof(int));
         var exp = true;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -354,7 +354,7 @@ public class FormattingArgumentsCollectionTest
         var act = collection.Types;
         var exp = new [] { typeof(int), typeof(Date) };
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -369,7 +369,7 @@ public class FormattingArgumentsCollectionTest
         var ienumerable = collection as IEnumerable<KeyValuePair<Type, FormattingArguments>>;
 
         var act = ienumerable.GetEnumerator();
-        Assert.IsNotNull(act);
+        act.Should().NotBeNull();
     }
     [Test]
     public void GetEnumerator_IEnumerable_IsNotNull()
@@ -383,7 +383,7 @@ public class FormattingArgumentsCollectionTest
         var ienumerable = collection as IEnumerable;
 
         var act = ienumerable.GetEnumerator();
-        Assert.IsNotNull(act);
+        act.Should().NotBeNull();
     }
 
     [Test]
@@ -399,7 +399,7 @@ public class FormattingArgumentsCollectionTest
         var act = collection.Count;
         var exp = 0;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -411,7 +411,7 @@ public class FormattingArgumentsCollectionTest
         };
         var act = collection.Contains(typeof(int));
         var exp = true;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Contains_EmptyCollectionInt32_IsFalse()
@@ -419,7 +419,7 @@ public class FormattingArgumentsCollectionTest
         var collection = new FormattingArgumentsCollection();
         var act = collection.Contains(typeof(int));
         var exp = false;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion

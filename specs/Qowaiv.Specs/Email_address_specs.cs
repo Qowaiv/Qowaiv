@@ -70,9 +70,7 @@ public class Has_constant
 {
     [Test]
     public void Empty_represent_default_value()
-    {
-        Assert.AreEqual(default(EmailAddress), EmailAddress.Empty);
-    }
+        => EmailAddress.Empty.Should().Be(default);
 }
 
 public class Is_equal_by_value
@@ -141,19 +139,19 @@ public class Can_be_parsed
     [Test]
     public void from_null_string_represents_Empty()
     {
-        Assert.AreEqual(EmailAddress.Empty, EmailAddress.Parse(null));
+        EmailAddress.Parse(null).Should().Be(EmailAddress.Empty);
     }
 
     [Test]
     public void from_empty_string_represents_Empty()
     {
-        Assert.AreEqual(EmailAddress.Empty, EmailAddress.Parse(string.Empty));
+        EmailAddress.Parse(string.Empty).Should().Be(EmailAddress.Empty);
     }
 
     [Test]
     public void from_question_mark_represents_Unknown()
     {
-        Assert.AreEqual(EmailAddress.Unknown, EmailAddress.Parse("?"));
+        EmailAddress.Parse("?").Should().Be(EmailAddress.Unknown);
     }
 
     [TestCase("en", "info@qowaiv.org")]
@@ -162,7 +160,7 @@ public class Can_be_parsed
         using (culture.Scoped())
         {
             var parsed = EmailAddress.Parse(input);
-            Assert.AreEqual(Svo.EmailAddress, parsed);
+            parsed.Should().Be(Svo.EmailAddress);
         }
     }
 
@@ -172,7 +170,7 @@ public class Can_be_parsed
         using (TestCultures.En_GB.Scoped())
         {
             var exception = Assert.Throws<FormatException>(() => EmailAddress.Parse("invalid input"));
-            Assert.AreEqual("Not a valid email address", exception.Message);
+            exception.Message.Should().Be("Not a valid email address");
         }
     }
 
@@ -189,7 +187,7 @@ public class Can_be_parsed
     [Test]
     public void with_TryParse_returns_SVO()
     {
-        Assert.AreEqual(Svo.EmailAddress, EmailAddress.TryParse("info@qowaiv.org"));
+        EmailAddress.TryParse("info@qowaiv.org").Should().Be(Svo.EmailAddress);
     }
 }
 
@@ -200,7 +198,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual("info@qowaiv.org", Svo.EmailAddress.ToString());
+            Svo.EmailAddress.ToString().Should().Be("info@qowaiv.org");
         }
     }
 
@@ -209,7 +207,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual(Svo.EmailAddress.ToString(), Svo.EmailAddress.ToString(default(string)));
+            Svo.EmailAddress.ToString(default(string)).Should().Be(Svo.EmailAddress.ToString());
         }
     }
 
@@ -218,20 +216,20 @@ public class Has_custom_formatting
     {
         using (TestCultures.En_GB.Scoped())
         {
-            Assert.AreEqual(Svo.EmailAddress.ToString(), Svo.EmailAddress.ToString(string.Empty));
+            Svo.EmailAddress.ToString(string.Empty).Should().Be(Svo.EmailAddress.ToString());
         }
     }
 
     [Test]
     public void default_value_is_represented_as_string_empty()
     {
-        Assert.AreEqual(string.Empty, default(EmailAddress).ToString());
+        default(EmailAddress).ToString().Should().Be(string.Empty);
     }
 
     [Test]
     public void unknown_value_is_represented_as_unknown()
     {
-        Assert.AreEqual("?", EmailAddress.Unknown.ToString());
+        EmailAddress.Unknown.ToString().Should().Be("?");
     }
 
     [Test]
@@ -247,7 +245,7 @@ public class Has_custom_formatting
     {
         using (culture.Scoped())
         {
-            Assert.AreEqual(expected, svo.ToString(format));
+            svo.ToString(format).Should().Be(expected);
         }
     }
 
@@ -256,7 +254,7 @@ public class Has_custom_formatting
     {
         using (new CultureInfoScope(culture: TestCultures.Nl_NL, cultureUI: TestCultures.En_GB))
         {
-            Assert.AreEqual("info@qowaiv.org", Svo.EmailAddress.ToString(provider: null));
+            Svo.EmailAddress.ToString(provider: null).Should().Be("info@qowaiv.org");
         }
     }
 
@@ -284,7 +282,7 @@ public class Is_comparable
     public void to_EmailAddress_as_object()
     {
         object obj = Svo.EmailAddress;
-        Assert.AreEqual(0, Svo.EmailAddress.CompareTo(obj));
+        Svo.EmailAddress.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
@@ -307,7 +305,7 @@ public class Is_comparable
             };
         var list = new List<EmailAddress> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
         list.Sort();
-        Assert.AreEqual(sorted, list);
+        list.Should().BeEquivalentTo(sorted);
     }
 }
 
@@ -415,21 +413,21 @@ public class Supports_XML_serialization
     public void using_XmlSerializer_to_serialize()
     {
         var xml = Serialize.Xml(Svo.EmailAddress);
-        Assert.AreEqual("info@qowaiv.org", xml);
+        xml.Should().Be("info@qowaiv.org");
     }
 
     [Test]
     public void using_XmlSerializer_to_deserialize()
     {
         var svo = Deserialize.Xml<EmailAddress>("info@qowaiv.org");
-        Assert.AreEqual(Svo.EmailAddress, svo);
+        svo.Should().Be(Svo.EmailAddress);
     }
 
     [Test]
     public void using_DataContractSerializer()
     {
         var round_tripped = SerializeDeserialize.DataContract(Svo.EmailAddress);
-        Assert.AreEqual(Svo.EmailAddress, round_tripped);
+        round_tripped.Should().Be(Svo.EmailAddress);
     }
 
     [Test]
@@ -437,7 +435,7 @@ public class Supports_XML_serialization
     {
         var structure = XmlStructure.New(Svo.EmailAddress);
         var round_tripped = SerializeDeserialize.Xml(structure);
-        Assert.AreEqual(structure, round_tripped);
+        round_tripped.Should().Be(structure);
     }
 
     [Test]
@@ -471,14 +469,14 @@ public class Supports_binary_serialization
     public void using_BinaryFormatter()
     {
         var round_tripped = SerializeDeserialize.Binary(Svo.EmailAddress);
-        Assert.AreEqual(Svo.EmailAddress, round_tripped);
+        round_tripped.Should().Be(Svo.EmailAddress);
     }
 
     [Test]
     public void storing_string_in_SerializationInfo()
     {
         var info = Serialize.GetInfo(Svo.EmailAddress);
-        Assert.AreEqual("info@qowaiv.org", info.GetString("Value"));
+        info.GetString("Value").Should().Be("info@qowaiv.org");
     }
 }
 #endif

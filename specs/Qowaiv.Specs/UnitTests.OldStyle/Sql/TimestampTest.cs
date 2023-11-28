@@ -58,7 +58,7 @@ public class TimestampTest
             var exp = TestStruct;
             var act = Timestamp.TryParse(exp.ToString());
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -79,7 +79,7 @@ public class TimestampTest
         var info = new SerializationInfo(typeof(Timestamp), new FormatterConverter());
         obj.GetObjectData(info, default);
 
-        Assert.AreEqual((long)123456789, info.GetInt64("Value"));
+        info.GetInt64("Value").Should().Be((long)123456789);
     }
 
     [Test]
@@ -97,14 +97,14 @@ public class TimestampTest
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "0x00000000075BCD15";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<Timestamp>("0x00000000075BCD15");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -235,7 +235,7 @@ public class TimestampTest
     {
         var act = Timestamp.MinValue.ToString();
         var exp = "0x0000000000000000";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -243,7 +243,7 @@ public class TimestampTest
     {
         var act = Timestamp.MaxValue.ToString();
         var exp = "0xFFFFFFFFFFFFFFFF";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -252,14 +252,14 @@ public class TimestampTest
         var act = TestStruct.ToString("#,##0", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: '123,456,789', format: '#,##0'";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString_TestStruct_ComplexPattern()
     {
         var act = TestStruct.ToString(string.Empty);
         var exp = "0x00000000075BCD15";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -269,7 +269,7 @@ public class TimestampTest
         {
             var act = Timestamp.Parse("1600").ToString();
             var exp = "0x0000000000000640";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -280,7 +280,7 @@ public class TimestampTest
         {
             var act = Timestamp.Parse("800").ToString("0000");
             var exp = "0800";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -291,7 +291,7 @@ public class TimestampTest
         {
             var act = Timestamp.Parse("800").ToString("0000");
             var exp = "0800";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -300,7 +300,7 @@ public class TimestampTest
     {
         var act = Timestamp.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
         var exp = "01700,0";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -333,7 +333,7 @@ public class TimestampTest
         var exp = new List<Timestamp> { Timestamp.MinValue, Timestamp.MinValue, item0, item1, item2, item3 };
         var act = inp.OrderBy(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Orders a list of timestamps descending.</summary>
@@ -349,7 +349,7 @@ public class TimestampTest
         var exp = new List<Timestamp> { item3, item2, item1, item0, Timestamp.MinValue, Timestamp.MinValue };
         var act = inp.OrderByDescending(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Compare with a to object casted instance should be fine.</summary>
@@ -361,7 +361,7 @@ public class TimestampTest
         var exp = 0;
         var act = TestStruct.CompareTo(other);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>
@@ -432,7 +432,7 @@ public class TimestampTest
         var act = TestStruct.ToByteArray();
         var exp = new byte[] { 21, 205, 91, 7, 0, 0, 0, 0 };
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     #endregion
@@ -445,7 +445,7 @@ public class TimestampTest
         var exp = TestStruct;
         var act = (Timestamp)new byte[] { 21, 205, 91, 7, 0, 0, 0, 0 };
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Explicit_TimestampToByteArray_AreEqual()
@@ -453,7 +453,7 @@ public class TimestampTest
         var exp = new byte[] { 21, 205, 91, 7, 0, 0, 0, 0 };
         var act = (byte[])TestStruct;
 
-        Assert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -462,7 +462,7 @@ public class TimestampTest
         var exp = TestStruct;
         var act = (Timestamp)123456789L;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Explicit_TimestampToInt64_AreEqual()
@@ -470,7 +470,7 @@ public class TimestampTest
         var exp = 123456789L;
         var act = (long)TestStruct;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -479,7 +479,7 @@ public class TimestampTest
         var exp = TestStruct;
         var act = (Timestamp)123456789UL;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Explicit_TimestampToUInt64_AreEqual()
@@ -487,7 +487,7 @@ public class TimestampTest
         var exp = 123456789UL;
         var act = (ulong)TestStruct;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion

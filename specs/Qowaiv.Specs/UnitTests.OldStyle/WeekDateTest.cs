@@ -12,7 +12,7 @@ public class WeekDateTest
     [Test]
     public void MinValue_None_EqualsDefault()
     {
-        Assert.AreEqual(default(WeekDate), WeekDate.MinValue);
+        WeekDate.MinValue.Should().Be(default(WeekDate));
     }
 
     #endregion
@@ -50,7 +50,7 @@ public class WeekDateTest
             var exp = TestStruct;
             var act = WeekDate.TryParse(exp.ToString());
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -59,7 +59,7 @@ public class WeekDateTest
     {
         WeekDate exp = default;
         WeekDate.TryParse("0000-W21-7", out WeekDate act).Should().BeFalse();
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -67,7 +67,7 @@ public class WeekDateTest
     {
         WeekDate exp = default;
         WeekDate.TryParse("2000-W53-7", out WeekDate act).Should().BeFalse();
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -83,7 +83,7 @@ public class WeekDateTest
         var info = new SerializationInfo(typeof(WeekDate), new System.Runtime.Serialization.FormatterConverter());
         obj.GetObjectData(info, default);
 
-        Assert.AreEqual((DateTime)TestStruct, info.GetDateTime("Value"));
+        info.GetDateTime("Value").Should().Be((DateTime)TestStruct);
     }
 
     [Test]
@@ -93,7 +93,7 @@ public class WeekDateTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 #endif
 
@@ -103,7 +103,7 @@ public class WeekDateTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -111,14 +111,14 @@ public class WeekDateTest
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "1997-W14-6";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<WeekDate>("1997-W14-6");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -250,7 +250,7 @@ public class WeekDateTest
         var act = TestStruct.ToString("y#W", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: '1997#14', format: 'y#W'";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -261,7 +261,7 @@ public class WeekDateTest
             var act = TestStruct.ToString(@"y-\WW-d", null);
             var exp = "1997-W14-6";
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -270,7 +270,7 @@ public class WeekDateTest
     {
         var act = TestStruct.ToString(string.Empty);
         var exp = "1997-W14-6";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -278,7 +278,7 @@ public class WeekDateTest
     {
         var act = new WeekDate(1979, 3, 5).ToString(@"y-\WW-d");
         var exp = "1979-W3-5";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -286,7 +286,7 @@ public class WeekDateTest
     {
         var act = new WeekDate(1979, 3, 5).ToString(@"y-\Ww-d");
         var exp = "1979-W03-5";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -297,14 +297,14 @@ public class WeekDateTest
     [Test]
     public void GetHash_Empty_Hash()
     {
-        Assert.AreEqual(0, WeekDate.MinValue.GetHashCode());
+        WeekDate.MinValue.GetHashCode().Should().Be(0);
     }
 
     /// <summary>GetHash should not fail for the test struct.</summary>
     [Test]
     public void GetHash_TestStruct_Hash()
     {
-        Assert.AreEqual(2027589483, TestStruct.GetHashCode());
+        TestStruct.GetHashCode().Should().Be(2027589483);
     }
 
     [Test]
@@ -385,7 +385,7 @@ public class WeekDateTest
         var exp = new List<WeekDate> { WeekDate.MinValue, WeekDate.MinValue, item0, item1, item2, item3 };
         var act = inp.OrderBy(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Orders a list of week dates descending.</summary>
@@ -401,7 +401,7 @@ public class WeekDateTest
         var exp = new List<WeekDate> { item3, item2, item1, item0, WeekDate.MinValue, WeekDate.MinValue };
         var act = inp.OrderByDescending(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Compare with a to object casted instance should be fine.</summary>
@@ -413,7 +413,7 @@ public class WeekDateTest
         var exp = 0;
         var act = TestStruct.CompareTo(other);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>
@@ -484,7 +484,7 @@ public class WeekDateTest
         var exp = TestStruct;
         var act = (WeekDate)new DateTime(1997, 04, 05, 00, 00, 000, DateTimeKind.Local);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Explicit_WeekDateToInt32_AreEqual()
@@ -492,7 +492,7 @@ public class WeekDateTest
         DateTime exp = new(1997, 04, 05, 00, 00, 000, DateTimeKind.Local);
         DateTime act = TestStruct;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     #endregion
 
@@ -504,7 +504,7 @@ public class WeekDateTest
         var exp = new Date(1997, 04, 05);
         var act = TestStruct.Date;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -513,7 +513,7 @@ public class WeekDateTest
         var exp = WeekDate.MinValue.Year;
         var act = 1;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -522,7 +522,7 @@ public class WeekDateTest
         var exp = WeekDate.MaxValue.Year;
         var act = 9999;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -532,7 +532,7 @@ public class WeekDateTest
         var exp = 2010;
         var act = date.Year;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -542,7 +542,7 @@ public class WeekDateTest
         var exp = 2020;
         var act = date.Year;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
 
@@ -554,7 +554,7 @@ public class WeekDateTest
         var exp = 6;
         var act = TestStruct.Day;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -564,7 +564,7 @@ public class WeekDateTest
         var exp = 7;
         var act = date.Day;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -573,7 +573,7 @@ public class WeekDateTest
         var exp = 96;
         var act = TestStruct.DayOfYear;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
 

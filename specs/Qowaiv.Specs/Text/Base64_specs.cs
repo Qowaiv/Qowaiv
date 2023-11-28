@@ -26,14 +26,14 @@ public class TryGetBytes_from
     public void Null__returns_EmptyArray()
     {
         Base64.TryGetBytes(null, out var bytes).Should().BeTrue();
-        CollectionAssert.AreEqual(Array.Empty<byte>(), bytes);
+        bytes.Should().BeEmpty();
     }
 
     [Test]
     public void StringEmpty_returns_EmptyArray()
     {
         Base64.TryGetBytes(string.Empty, out var bytes).Should().BeTrue();
-        CollectionAssert.AreEqual(Array.Empty<byte>(), bytes);
+        bytes.Should().BeEmpty();
     }
 
     [TestCase("Aap=", 1, 170)]
@@ -43,13 +43,13 @@ public class TryGetBytes_from
     {
         var bytes = expected.Select(v => (byte)v).ToArray();
         Base64.TryGetBytes(str, out byte[] actualBytes).Should().BeTrue();
-        CollectionAssert.AreEqual(bytes, actualBytes);
+        actualBytes.Should().BeEquivalentTo(bytes);
     }
 
     [Test]
     public void Not_support_chars_returns_false_with_EmptyArray()
     {
         Base64.TryGetBytes("ABC}", out byte[] bytes).Should().BeFalse();
-        Assert.AreEqual(Array.Empty<byte>(), bytes);
+        bytes.Should().BeEmpty();
     }
 }

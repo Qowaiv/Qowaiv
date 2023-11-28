@@ -256,7 +256,7 @@ public class Is_comparable
     public void to_CasRegistryNumber_as_object()
     {
         object obj = Svo.CasRegistryNumber;
-        Assert.AreEqual(0, Svo.CasRegistryNumber.CompareTo(obj));
+        Svo.CasRegistryNumber.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
@@ -281,7 +281,7 @@ public class Is_comparable
         var list = new List<CasRegistryNumber> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
         list.Sort();
 
-        Assert.AreEqual(sorted, list);
+        list.Should().BeEquivalentTo(sorted);
     }
 }
 
@@ -470,7 +470,7 @@ public class Supports_binary_serialization
     public void using_BinaryFormatter()
     {
         var round_tripped = SerializeDeserialize.Binary(Svo.CasRegistryNumber);
-        Svo.CasRegistryNumber.Should().Be(round_tripped);
+        round_tripped.Should().Be(Svo.CasRegistryNumber);
     }
 
     [Test]

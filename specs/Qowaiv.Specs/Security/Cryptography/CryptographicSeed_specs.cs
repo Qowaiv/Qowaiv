@@ -87,12 +87,12 @@ public class ToByteArray
     [Test]
     public void from_empty_is_empty_array()
         => CryptographicSeed.Empty
-        .ToByteArray().Should().BeEquivalentTo(Array.Empty<byte>());
+        .ToByteArray().Should().BeEmpty();
 
     [Test]
     public void from_empty_array_stays_empty_array()
         => CryptographicSeed.Create([])
-        .ToByteArray().Should().BeEquivalentTo(Array.Empty<byte>());
+        .ToByteArray().Should().BeEmpty();
 }
 
 public class Can_be_parsed
@@ -100,13 +100,13 @@ public class Can_be_parsed
     [Test]
     public void from_null_string_represents_Empty()
     {
-        Assert.AreEqual(CryptographicSeed.Empty, CryptographicSeed.Parse(null));
+        CryptographicSeed.Parse(null).Should().Be(CryptographicSeed.Empty);
     }
 
     [Test]
     public void from_empty_string_represents_Empty()
     {
-        Assert.AreEqual(CryptographicSeed.Empty, CryptographicSeed.Parse(string.Empty));
+        CryptographicSeed.Parse(string.Empty).Should().Be(CryptographicSeed.Empty);
     }
 
     [Test]

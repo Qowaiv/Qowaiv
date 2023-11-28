@@ -10,7 +10,7 @@ public class With_domain_logic
     [TestCase(true, "")]
     public void IsEmpty_returns(bool result, Uuid svo)
     {
-        Assert.AreEqual(result, svo.IsEmpty());
+        svo.IsEmpty().Should().Be(result);
     }
 }
 
@@ -20,28 +20,28 @@ public class Has_version
     public void Random_for_new()
     {
         var id = Uuid.NewUuid();
-        Assert.AreEqual(UuidVersion.Random, id.Version);
+        id.Version.Should().Be(UuidVersion.Random);
     }
 
     [Test]
     public void Sequential_for_new_sequential()
     {
         var id = Uuid.NewSequential();
-        Assert.AreEqual(UuidVersion.Sequential, id.Version);
+        id.Version.Should().Be(UuidVersion.Sequential);
     }
 
     [Test]
     public void MD5_for_generated_with_MD5()
     {
         var id = Uuid.GenerateWithMD5(Encoding.UTF8.GetBytes("Qowaiv"));
-        Assert.AreEqual(UuidVersion.MD5, id.Version);
+        id.Version.Should().Be(UuidVersion.MD5);
     }
 
     [Test]
     public void SHA1_for_generated_with_SHA1()
     {
         var id = Uuid.GenerateWithSHA1(Encoding.UTF8.GetBytes("Qowaiv"));
-        Assert.AreEqual(UuidVersion.SHA1, id.Version);
+        id.Version.Should().Be(UuidVersion.SHA1);
     }
 }
 
@@ -50,7 +50,7 @@ public class Has_constant
     [Test]
     public void Empty_represent_default_value()
     {
-        Assert.AreEqual(default(Uuid), Uuid.Empty);
+        Uuid.Empty.Should().Be(default(Uuid));
     }
 }
 
@@ -120,13 +120,13 @@ public class Can_be_parsed
     [Test]
     public void from_null_string_represents_Empty()
     {
-        Assert.AreEqual(Uuid.Empty, Uuid.Parse(null));
+        Uuid.Parse(null).Should().Be(Uuid.Empty);
     }
 
     [Test]
     public void from_empty_string_represents_Empty()
     {
-        Assert.AreEqual(Uuid.Empty, Uuid.Parse(string.Empty));
+        Uuid.Parse(string.Empty).Should().Be(Uuid.Empty);
     }
 
     [TestCase("en", "Qowaiv_SVOLibrary_GUIA")]
@@ -136,7 +136,7 @@ public class Can_be_parsed
         using (culture.Scoped())
         {
             var parsed = Uuid.Parse(input);
-            Assert.AreEqual(Svo.Uuid, parsed);
+            parsed.Should().Be(Svo.Uuid);
         }
     }
 
@@ -146,7 +146,7 @@ public class Can_be_parsed
         using (TestCultures.En_GB.Scoped())
         {
             var exception = Assert.Throws<FormatException>(() => Uuid.Parse("invalid input"));
-            Assert.AreEqual("Not a valid GUID", exception.Message);
+            exception.Message.Should().Be("Not a valid GUID");
         }
     }
 
@@ -163,7 +163,7 @@ public class Can_be_parsed
     [Test]
     public void with_TryParse_returns_SVO()
     {
-        Assert.AreEqual(Svo.Uuid, Uuid.TryParse("Qowaiv_SVOLibrary_GUIA"));
+        Uuid.TryParse("Qowaiv_SVOLibrary_GUIA").Should().Be(Svo.Uuid);
     }
 }
 
@@ -171,16 +171,14 @@ public class Can_be_created
 {
     [Test]
     public void with_global_unique_value()
-    {
-        CollectionAssert.AllItemsAreUnique(Enumerable.Range(0, 10_000)
-             .Select(i => Uuid.NewUuid()));
-    }
+        => Enumerable.Range(0, 10_000).Select(i => Uuid.NewUuid()).ToHashSet()
+            .Should().HaveCount(10_000);
 
     [Test]
     public void with_MD5()
     {
         var hashed = Uuid.GenerateWithMD5(Encoding.UTF8.GetBytes("Qowaiv"));
-        Assert.AreEqual(Uuid.Parse("lmZO_haEOTCwGsCcbIZFFg"), hashed);
+        hashed.Should().Be(Uuid.Parse("lmZO_haEOTCwGsCcbIZFFg"));
     }
 
     [Test]
@@ -287,7 +285,8 @@ public class Can_be_created_sequential
                 ids.Add(Uuid.NewSequential(comparer));
             }
         }
-        CollectionAssert.IsOrdered(ids, comparer);
+
+        ids.Should().BeInAscendingOrder(comparer);
     }
 
     private static IEnumerable<DateTime> GetTimes()
@@ -309,7 +308,7 @@ public class Has_custom_formatting
     [Test]
     public void default_value_is_represented_as_string_empty()
     {
-        Assert.AreEqual(string.Empty, default(Uuid).ToString());
+        default(Uuid).ToString().Should().Be(string.Empty);
     }
 
     [Test]
@@ -338,7 +337,7 @@ public class Has_custom_formatting
     {
         using (culture.Scoped())
         {
-            Assert.AreEqual(expected, svo.ToString(format));
+            svo.ToString(format).Should().Be(expected);
         }
     }
 
@@ -347,7 +346,7 @@ public class Has_custom_formatting
     {
         using (new CultureInfoScope(culture: TestCultures.Nl_NL, cultureUI: TestCultures.En_GB))
         {
-            Assert.AreEqual("Qowaiv_SVOLibrary_GUIA", Svo.Uuid.ToString(provider: null));
+            Svo.Uuid.ToString(provider: null).Should().Be("Qowaiv_SVOLibrary_GUIA");
         }
     }
 }
@@ -357,14 +356,14 @@ public class Is_comparable
     [Test]
     public void to_null_is_1()
     {
-        Assert.AreEqual(1, Svo.Uuid.CompareTo(null));
+        Svo.Uuid.CompareTo(null).Should().Be(1);
     }
 
     [Test]
     public void to_Uuid_as_object()
     {
         object obj = Svo.Uuid;
-        Assert.AreEqual(0, Svo.Uuid.CompareTo(obj));
+        Svo.Uuid.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
@@ -387,7 +386,7 @@ public class Is_comparable
             };
         var list = new List<Uuid> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
         list.Sort();
-        Assert.AreEqual(sorted, list);
+        list.Should().BeEquivalentTo(sorted);
     }
 }
 
@@ -397,14 +396,14 @@ public class Casts
     public void explicitly_from_Guid()
     {
         var casted = (Uuid)Svo.Guid;
-        Assert.AreEqual(Svo.Uuid, casted);
+        casted.Should().Be(Svo.Uuid);
     }
 
     [Test]
     public void explicitly_to_Guid()
     {
         var casted = (Guid)Svo.Uuid;
-        Assert.AreEqual(Svo.Guid, casted);
+        casted.Should().Be(Svo.Guid);
     }
 }
 
@@ -495,21 +494,21 @@ public class Supports_XML_serialization
     public void using_XmlSerializer_to_serialize()
     {
         var xml = Serialize.Xml(Svo.Uuid);
-        Assert.AreEqual("Qowaiv_SVOLibrary_GUIA", xml);
+        xml.Should().Be("Qowaiv_SVOLibrary_GUIA");
     }
 
     [Test]
     public void using_XmlSerializer_to_deserialize()
     {
         var svo = Deserialize.Xml<Uuid>("Qowaiv_SVOLibrary_GUIA");
-        Assert.AreEqual(Svo.Uuid, svo);
+        svo.Should().Be(Svo.Uuid);
     }
 
     [Test]
     public void using_DataContractSerializer()
     {
         var round_tripped = SerializeDeserialize.DataContract(Svo.Uuid);
-        Assert.AreEqual(Svo.Uuid, round_tripped);
+        round_tripped.Should().Be(Svo.Uuid);
     }
 
     [Test]
@@ -517,7 +516,7 @@ public class Supports_XML_serialization
     {
         var structure = XmlStructure.New(Svo.Uuid);
         var round_tripped = SerializeDeserialize.Xml(structure);
-        Assert.AreEqual(structure, round_tripped);
+        round_tripped.Should().Be(structure);
     }
 
     [Test]
@@ -551,7 +550,7 @@ public class Supports_binary_serialization
     public void using_BinaryFormatter()
     {
         var round_tripped = SerializeDeserialize.Binary(Svo.Uuid);
-        Assert.AreEqual(Svo.Uuid, round_tripped);
+        round_tripped.Should().Be(Svo.Uuid);
     }
 
     [Test]
@@ -565,7 +564,7 @@ public class Supports_binary_serialization
     public void export_to_byte_array_equal_to_GUID_equivalent()
     {
         var bytes = Svo.Uuid.ToByteArray();
-        Assert.AreEqual(((Guid)Svo.Uuid).ToByteArray(), bytes);
+        bytes.Should().BeEquivalentTo(((Guid)Svo.Uuid).ToByteArray());
     }
 }
 #endif

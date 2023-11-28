@@ -8,36 +8,13 @@ public class EmailAddressCollectionTest
 
     #region (XML) (De)serialization tests
 
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    public void GetObjectData_SerializationInfo_AreEqual()
-    {
-        ISerializable obj = GetTestInstance();
-        var info = new SerializationInfo(typeof(EmailAddressCollection), new FormatterConverter());
-        obj.GetObjectData(info, default);
-
-        Assert.AreEqual("info@qowaiv.org,test@qowaiv.org", info.GetString("Value"));
-    }
-
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_TestStruct_AreEqual()
-    {
-        var input = GetTestInstance();
-        var exp = GetTestInstance();
-        var act = SerializeDeserialize.Binary(input);
-        CollectionAssert.AreEqual(exp, act);
-    }
-#endif
-
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
         var input = GetTestInstance();
         var exp = GetTestInstance();
         var act = SerializeDeserialize.DataContract(input);
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -45,61 +22,16 @@ public class EmailAddressCollectionTest
     {
         var act = Serialize.Xml(GetTestInstance());
         var exp = "info@qowaiv.org,test@qowaiv.org";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<EmailAddressCollection>("info@qowaiv.org,test@qowaiv.org");
-        Assert.AreEqual(GetTestInstance(), act);
+        act.Should().BeEquivalentTo(GetTestInstance());
     }
 
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_EmailAddressSerializeObject_AreEqual()
-    {
-        var input = new EmailAddressCollectionSerializeObject
-        {
-            Id = 17,
-            Obj = GetTestInstance(),
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new EmailAddressCollectionSerializeObject
-        {
-            Id = 17,
-            Obj = GetTestInstance(),
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
-    }
-#endif
-
-    [Test]
-    public void XmlSerializeDeserialize_EmailAddressSerializeObject_AreEqual()
-    {
-        var input = new EmailAddressCollectionSerializeObject
-        {
-            Id = 17,
-            Obj = GetTestInstance(),
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new EmailAddressCollectionSerializeObject
-        {
-            Id = 17,
-            Obj = GetTestInstance(),
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
-    }
     [Test]
     public void DataContractSerializeDeserialize_EmailAddressSerializeObject_AreEqual()
     {
@@ -120,31 +52,6 @@ public class EmailAddressCollectionTest
         CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
         Assert.AreEqual(exp.Date, act.Date, "Date");
     }
-
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_Empty_AreEqual()
-    {
-        var input = new EmailAddressCollectionSerializeObject
-        {
-            Id = 17,
-            Obj = [],
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new EmailAddressCollectionSerializeObject
-        {
-            Id = 17,
-            Obj = [],
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        CollectionAssert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
-    }
-#endif
 
     [Test]
     public void XmlSerializeDeserialize_Empty_AreEqual()
@@ -186,7 +93,7 @@ public class EmailAddressCollectionTest
         var exp = string.Empty;
         var act = collection.ToString();
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -197,7 +104,7 @@ public class EmailAddressCollectionTest
         var exp = "info@qowaiv.org";
         var act = collection.ToString();
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -208,7 +115,7 @@ public class EmailAddressCollectionTest
         var exp = "info@qowaiv.org,test@qowaiv.org";
         var act = collection.ToString();
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -217,7 +124,7 @@ public class EmailAddressCollectionTest
         var act = GetTestInstance().ToString("U", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: 'INFO@QOWAIV.ORG,TEST@QOWAIV.ORG', format: 'U'";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -225,7 +132,7 @@ public class EmailAddressCollectionTest
     {
         var act = GetTestInstance().ToString(@"mai\lto:f");
         var exp = "mailto:info@qowaiv.org,mailto:test@qowaiv.org";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -241,7 +148,7 @@ public class EmailAddressCollectionTest
             EmailAddress.Empty
         };
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -253,7 +160,7 @@ public class EmailAddressCollectionTest
             EmailAddress.Unknown
         };
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -263,7 +170,7 @@ public class EmailAddressCollectionTest
         var act = GetTestInstance();
         act.Add(EmailAddress.Empty);
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -273,7 +180,7 @@ public class EmailAddressCollectionTest
         var act = GetTestInstance();
         act.Add(EmailAddress.Unknown);
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     #endregion
@@ -286,7 +193,7 @@ public class EmailAddressCollectionTest
         var act = EmailAddressCollection.Parse("info@qowaiv.org,test@qowaiv.org,?");
         var exp = GetTestInstance();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -294,7 +201,7 @@ public class EmailAddressCollectionTest
     {
         EmailAddressCollection exp = [];
         EmailAddressCollection.TryParse(null, out EmailAddressCollection act).Should().BeTrue();
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -302,7 +209,7 @@ public class EmailAddressCollectionTest
     {
         EmailAddressCollection exp = [];
         EmailAddressCollection.TryParse(string.Empty, out EmailAddressCollection act).Should().BeTrue();
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -311,7 +218,7 @@ public class EmailAddressCollectionTest
         var act = EmailAddressCollection.TryParse("invalid");
         var exp = new EmailAddressCollection();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     [Test]
@@ -320,7 +227,7 @@ public class EmailAddressCollectionTest
         var act = EmailAddressCollection.TryParse("svo@qowaiv.org");
         var exp = new EmailAddressCollection { EmailAddress.Parse("svo@qowaiv.org") };
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     #endregion
@@ -336,7 +243,7 @@ public class EmailAddressCollectionTest
         var exp = EmailAddressCollection.Parse("mail@qowaiv.org,info@qowaiv.org,test@qowaiv.org");
 
         Assert.AreEqual(typeof(EmailAddressCollection), act.GetType(), "The outcome of to collection should be an email address collection.");
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     #endregion

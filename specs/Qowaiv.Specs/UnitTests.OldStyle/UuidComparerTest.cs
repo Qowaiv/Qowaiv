@@ -50,8 +50,7 @@ public class UuidComparerTest
             uuids.Add(Uuid.NewUuid());
         }
         uuids.Sort(UuidComparer.Default);
-
-        CollectionAssert.IsOrdered(uuids, Comparer<Guid>.Default);
+        uuids.Should().BeInAscendingOrder();
     }
 
     [Test]

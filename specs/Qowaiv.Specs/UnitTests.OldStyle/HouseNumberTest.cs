@@ -13,19 +13,19 @@ public class HouseNumberTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        Assert.AreEqual(default(HouseNumber), HouseNumber.Empty);
+        HouseNumber.Empty.Should().Be(default(HouseNumber));
     }
 
     [Test]
     public void MinValue_None_1()
     {
-        Assert.AreEqual(HouseNumber.Create(1), HouseNumber.MinValue);
+        HouseNumber.MinValue.Should().Be(HouseNumber.Create(1));
     }
 
     [Test]
     public void MaxValue_None_999999999()
     {
-        Assert.AreEqual(HouseNumber.Create(999999999), HouseNumber.MaxValue);
+        HouseNumber.MaxValue.Should().Be(HouseNumber.Create(999999999));
     }
 
     #endregion
@@ -148,7 +148,7 @@ public class HouseNumberTest
         {
             var act = HouseNumber.Parse("?");
             var exp = HouseNumber.Unknown;
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -174,7 +174,7 @@ public class HouseNumberTest
             var exp = TestStruct;
             var act = HouseNumber.TryParse(exp.ToString());
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -191,14 +191,14 @@ public class HouseNumberTest
     {
         HouseNumber exp = HouseNumber.Empty;
         HouseNumber.TryCreate(null, out HouseNumber act).Should().BeTrue();
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void TryCreate_Int32MinValue_IsEmpty()
     {
         HouseNumber exp = HouseNumber.Empty;
         HouseNumber.TryCreate(int.MinValue, out HouseNumber act).Should().BeFalse();
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -206,14 +206,14 @@ public class HouseNumberTest
     {
         var exp = HouseNumber.Empty;
         var act = HouseNumber.TryCreate(int.MinValue);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void TryCreate_Value_AreEqual()
     {
         var exp = TestStruct;
         var act = HouseNumber.TryCreate(123456789);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -229,7 +229,7 @@ public class HouseNumberTest
         var info = new SerializationInfo(typeof(HouseNumber), new System.Runtime.Serialization.FormatterConverter());
         obj.GetObjectData(info, default);
 
-        Assert.AreEqual(123456789, info.GetInt32("Value"));
+        info.GetInt32("Value").Should().Be(123456789);
     }
 
     [Test]
@@ -239,7 +239,7 @@ public class HouseNumberTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 #endif
 
@@ -249,7 +249,7 @@ public class HouseNumberTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -257,14 +257,14 @@ public class HouseNumberTest
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "123456789";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<HouseNumber>("123456789");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -395,14 +395,14 @@ public class HouseNumberTest
     {
         var act = HouseNumber.Empty.ToString();
         var exp = "";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString_Unknown_QuestionMark()
     {
         var act = HouseNumber.Unknown.ToString();
         var exp = "?";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString_CustomFormatter_SupportsCustomFormatting()
@@ -410,14 +410,14 @@ public class HouseNumberTest
         var act = TestStruct.ToString("#,##0", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: '123,456,789', format: '#,##0'";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString_TestStruct_ComplexPattern()
     {
         var act = TestStruct.ToString(string.Empty);
         var exp = "123456789";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -427,7 +427,7 @@ public class HouseNumberTest
         {
             var act = HouseNumber.Parse("800").ToString("0000");
             var exp = "0800";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -438,7 +438,7 @@ public class HouseNumberTest
         {
             var act = HouseNumber.Parse("800").ToString("0000");
             var exp = "0800";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -447,7 +447,7 @@ public class HouseNumberTest
     {
         var act = HouseNumber.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
         var exp = "01700,0";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -467,7 +467,7 @@ public class HouseNumberTest
         var exp = new List<HouseNumber> { HouseNumber.Empty, HouseNumber.Empty, item0, item1, item2, item3 };
         var act = inp.OrderBy(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Orders a list of house numbers descending.</summary>
@@ -483,7 +483,7 @@ public class HouseNumberTest
         var exp = new List<HouseNumber> { item3, item2, item1, item0, HouseNumber.Empty, HouseNumber.Empty };
         var act = inp.OrderByDescending(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Compare with a to object casted instance should be fine.</summary>
@@ -495,7 +495,7 @@ public class HouseNumberTest
         var exp = 0;
         var act = TestStruct.CompareTo(other);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>
@@ -566,7 +566,7 @@ public class HouseNumberTest
         var exp = TestStruct;
         var act = (HouseNumber)123456789;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Explicit_HouseNumberToInt32_AreEqual()
@@ -574,7 +574,7 @@ public class HouseNumberTest
         var exp = 123456789;
         var act = (int)TestStruct;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     #endregion
 
@@ -628,7 +628,7 @@ public class HouseNumberTest
     {
         var act = HouseNumber.Empty.Length;
         var exp = 0;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -636,7 +636,7 @@ public class HouseNumberTest
     {
         var act = HouseNumber.Unknown.Length;
         var exp = 0;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -644,7 +644,7 @@ public class HouseNumberTest
     {
         var act = TestStruct.Length;
         var exp = 9;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -652,7 +652,7 @@ public class HouseNumberTest
     {
         var act = HouseNumber.Create(1234).Length;
         var exp = 4;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     #endregion
 }

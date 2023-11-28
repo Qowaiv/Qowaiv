@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿#nullable enable
+using FluentAssertions;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NUnit.Framework;
 using Qowaiv.TestTools.Globalization;
 using System;
@@ -24,12 +26,14 @@ public class TypeConverterModelBinderTest
 
             await binder.BindModelAsync(context);
 
-            Assert.AreEqual(ModelValidationState.Invalid, context.ModelState.ValidationState);
+            context.ModelState.ValidationState.Should().Be(ModelValidationState.Invalid);
 
-            var error = context.ModelState[TheModelName].Errors.FirstOrDefault();
-
-            Assert.AreEqual("Geen geldige datum", error.ErrorMessage);
-            Assert.IsNull(error.Exception);
+            context.ModelState[TheModelName].Errors.FirstOrDefault()
+                .Should().BeEquivalentTo(new
+                {
+                    ErrorMessage = "Geen geldige datum",
+                    Exception = (Exception?)null,
+                });
         }
     }
 
@@ -43,8 +47,8 @@ public class TypeConverterModelBinderTest
 
         await binder.BindModelAsync(context);
 
-        Assert.AreEqual(ModelValidationState.Unvalidated, context.ModelState.ValidationState);
-        Assert.IsNull(context.Result.Model);
+        context.ModelState.ValidationState.Should().Be(ModelValidationState.Unvalidated);
+        context.Result.Model.Should().BeNull();
     }
 
     [Test]
@@ -57,8 +61,8 @@ public class TypeConverterModelBinderTest
 
         await binder.BindModelAsync(context);
 
-        Assert.AreEqual(ModelValidationState.Unvalidated, context.ModelState.ValidationState);
-        Assert.AreEqual(new Date(2017, 06, 11), context.Result.Model);
+        context.ModelState.ValidationState.Should().Be(ModelValidationState.Unvalidated);
+        context.Result.Model.Should().Be(new Date(2017, 06, 11));
     }
 
     private static DefaultModelBindingContext GetBindingContext(Type modelType)

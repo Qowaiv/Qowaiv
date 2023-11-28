@@ -129,7 +129,7 @@ public class Supports_binary_serialization
     public void using_BinaryFormatter()
     {
         var round_tripped = SerializeDeserialize.Binary(Svo.Int32Id);
-        Svo.Int32Id.Should().Be(round_tripped);
+        round_tripped.Should().Be(Svo.Int32Id);
     }
 
     [Test]

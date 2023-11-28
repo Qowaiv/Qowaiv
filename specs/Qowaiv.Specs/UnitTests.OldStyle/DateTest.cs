@@ -13,7 +13,7 @@ public class DateTest
     [Test]
     public void MinValue_None_EqualsDefault()
     {
-        Assert.AreEqual(default(Date), Date.MinValue);
+        Date.MinValue.Should().Be(default(Date));
     }
 
     #endregion
@@ -26,7 +26,7 @@ public class DateTest
         var act = new Date(621393984000000017L);
         var exp = TestStruct;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -78,7 +78,7 @@ public class DateTest
             var exp = TestStruct;
             var act = Date.TryParse(exp.ToString());
 
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -109,7 +109,7 @@ public class DateTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 #endif
 
@@ -119,7 +119,7 @@ public class DateTest
         var input = TestStruct;
         var exp = TestStruct;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
 
@@ -127,14 +127,14 @@ public class DateTest
     {
         var act = Serialize.Xml(TestStruct);
         var exp = "1970-02-14";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
     public void XmlDeserialize_XmlString_AreEqual()
     {
         var act = Deserialize.Xml<Date>("1970-02-14");
-        Assert.AreEqual(TestStruct, act);
+        act.Should().Be(TestStruct);
     }
 
 #if NET8_0_OR_GREATER
@@ -266,7 +266,7 @@ public class DateTest
         var act = TestStruct.ToString("d_M_yy", FormatProvider.CustomFormatter);
         var exp = "Unit Test Formatter, value: '14_2_70', format: 'd_M_yy'";
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void ToString_TestStruct_ComplexPattern()
@@ -275,7 +275,7 @@ public class DateTest
         {
             var act = TestStruct.ToString(string.Empty);
             var exp = "14/02/1970";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -286,7 +286,7 @@ public class DateTest
         {
             var act = new Date(1988, 08, 08).ToString("yy-M-d");
             var exp = "88-8-8";
-            Assert.AreEqual(exp, act);
+            act.Should().Be(exp);
         }
     }
 
@@ -295,7 +295,7 @@ public class DateTest
     {
         var act = new Date(1988, 08, 08).ToString("d", new CultureInfo("es-EC"));
         var exp = "8/8/1988";
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -328,7 +328,7 @@ public class DateTest
         var exp = new List<Date> { Date.MinValue, Date.MinValue, item0, item1, item2, item3 };
         var act = inp.OrderBy(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Orders a list of Dates descending.</summary>
@@ -344,7 +344,7 @@ public class DateTest
         var exp = new List<Date> { item3, item2, item1, item0, Date.MinValue, Date.MinValue };
         var act = inp.OrderByDescending(item => item).ToList();
 
-        CollectionAssert.AreEqual(exp, act);
+        act.Should().BeEquivalentTo(exp);
     }
 
     /// <summary>Compare with a to object casted instance should be fine.</summary>
@@ -356,7 +356,7 @@ public class DateTest
         var exp = 0;
         var act = TestStruct.CompareTo(other);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <summary>Compare with a random object should throw an exception.</summary>
@@ -427,7 +427,7 @@ public class DateTest
         Date exp = new WeekDate(1970, 07, 6);
         Date act = TestStruct;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Implicit_DateToWeekDate_AreEqual()
@@ -435,7 +435,7 @@ public class DateTest
         WeekDate exp = TestStruct;
         WeekDate act = new(1970, 07, 6);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -444,7 +444,7 @@ public class DateTest
         Date exp = (Date)new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local);
         Date act = TestStruct;
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Implicit_DateToDateTime_AreEqual()
@@ -452,7 +452,7 @@ public class DateTest
         DateTime exp = TestStruct;
         DateTime act = new(1970, 02, 14, 00, 00, 000, DateTimeKind.Local);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -464,35 +464,35 @@ public class DateTest
     {
         var act = TestStruct.Year;
         var exp = 1970;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Month_TestStruct_AreEqual()
     {
         var act = TestStruct.Month;
         var exp = 2;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Day_TestStruct_AreEqual()
     {
         var act = TestStruct.Day;
         var exp = 14;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void DayOfWeek_TestStruct_AreEqual()
     {
         var act = TestStruct.DayOfWeek;
         var exp = DayOfWeek.Saturday;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void DayOfYear_TestStruct_AreEqual()
     {
         var act = TestStruct.DayOfYear;
         var exp = 45;
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion
@@ -505,7 +505,7 @@ public class DateTest
         var act = TestStruct;
         act++;
         var exp = new Date(1970, 02, 15);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Decrement_None_AreEqual()
@@ -513,7 +513,7 @@ public class DateTest
         var act = TestStruct;
         act--;
         var exp = new Date(1970, 02, 13);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -521,14 +521,14 @@ public class DateTest
     {
         var act = TestStruct + new TimeSpan(25, 30, 15);
         var exp = new Date(1970, 02, 15);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void Min_TimeSpan_AreEqual()
     {
         var act = TestStruct - new TimeSpan(25, 30, 15);
         var exp = new Date(1970, 02, 12);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -536,7 +536,7 @@ public class DateTest
     {
         var act = TestStruct - new Date(1970, 02, 12);
         var exp = TimeSpan.FromDays(2);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -545,7 +545,7 @@ public class DateTest
         var act = TestStruct.AddTicks(4000000000017L);
         var exp = new Date(1970, 02, 18);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -554,7 +554,7 @@ public class DateTest
         var act = TestStruct.AddMilliseconds(3 * 24 * 60 * 60 * 1003);
         var exp = new Date(1970, 02, 17);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void AddSeconds_around3Days_AreEqual()
@@ -562,7 +562,7 @@ public class DateTest
         var act = TestStruct.AddSeconds(3 * 24 * 60 * 64);
         var exp = new Date(1970, 02, 17);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
     [Test]
     public void AddMinutes_2280_AreEqual()
@@ -570,7 +570,7 @@ public class DateTest
         var act = TestStruct.AddMinutes(2 * 24 * 60);
         var exp = new Date(1970, 02, 16);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -579,7 +579,7 @@ public class DateTest
         var act = TestStruct.AddHours(41);
         var exp = new Date(1970, 02, 15);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -588,7 +588,7 @@ public class DateTest
         var act = TestStruct.AddMonths(12);
         var exp = new Date(1971, 02, 14);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]
@@ -611,7 +611,7 @@ public class DateTest
         var act = TestStruct.AddYears(-12);
         var exp = new Date(1958, 02, 14);
 
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     #endregion

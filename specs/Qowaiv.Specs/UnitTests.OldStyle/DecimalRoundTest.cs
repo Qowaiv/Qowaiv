@@ -8,14 +8,14 @@ public class DecimalRoundTest
         // initializes a decimal with scale of 4, instead of 0.
         var value = decimal.Parse("1000.0000", CultureInfo.InvariantCulture);
         var rounded = value.Round(-2);
-        Assert.AreEqual(1000m, rounded);
+        rounded.Should().Be(1000m);
     }
 
     [Test]
     public void Round_Positive_ShouldRoundToEven()
     {
         var rounded = 24.5m.Round();
-        Assert.AreEqual(24m, rounded);
+        rounded.Should().Be(24m);
     }
     [Test]
     public void Round_Negative_ShouldRoundToEven()
@@ -31,7 +31,7 @@ public class DecimalRoundTest
         var rounded = value.Round(-9);
         var expected = 10_000_000_000m;
 
-        Assert.AreEqual(expected, rounded);
+        rounded.Should().Be(expected);
     }
 
 
@@ -39,7 +39,7 @@ public class DecimalRoundTest
     public void RoundToMultiple_PositiveWithMultipleOf_ShouldRoundToEven()
     {
         var rounded = 24.5m.RoundToMultiple(1m);
-        Assert.AreEqual(24m, rounded);
+        rounded.Should().Be(24m);
     }
     [Test]
     public void RoundToMultiple_NegativeWithMultipleOf_ShouldRoundToEven()
@@ -56,7 +56,7 @@ public class DecimalRoundTest
     public void Round_MultipleOf(decimal exp, decimal value, decimal factor, DecimalRounding mode)
     {
         var act = value.RoundToMultiple(factor, mode);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     /// <remarks>Use strings as doubles lack precision.</remarks>
@@ -83,7 +83,7 @@ public class DecimalRoundTest
     public void Round_Digits(decimal exp, int digits)
     {
         var act = 123456789.123456789m.Round(digits, DecimalRounding.AwayFromZero);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     // Halfway/nearest rounding
@@ -113,7 +113,7 @@ public class DecimalRoundTest
     public void Round_NearestAndDirect(decimal exp, decimal value, DecimalRounding mode)
     {
         var act = value.Round(0, mode);
-        Assert.AreEqual(exp, act);
+        act.Should().Be(exp);
     }
 
     [Test]

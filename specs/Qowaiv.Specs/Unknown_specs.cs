@@ -47,12 +47,12 @@ public class Can_be_resolved_for
     [Test]
     public void value_type_with_unknown_value()
     {
-        Assert.AreEqual(PostalCode.Unknown, Unknown.Value(typeof(PostalCode)));
+        Unknown.Value(typeof(PostalCode)).Should().Be(PostalCode.Unknown);
     }
     [Test]
     public void reference_type_with_unknown_value()
     {
-        Assert.AreEqual(ClassWithUnknownValue.Unknown, Unknown.Value(typeof(ClassWithUnknownValue)));
+        Unknown.Value(typeof(ClassWithUnknownValue)).Should().Be(ClassWithUnknownValue.Unknown);
     }
 
     private class ClassWithUnknownValue

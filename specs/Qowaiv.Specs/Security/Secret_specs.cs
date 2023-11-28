@@ -78,13 +78,13 @@ public class Can_be_parsed
     [Test]
     public void from_null_string_represents_Empty()
     {
-        Assert.AreEqual(Secret.Empty, Secret.Parse(null));
+        Secret.Parse(null).Should().Be(Secret.Empty);
     }
 
     [Test]
     public void from_empty_string_represents_Empty()
     {
-        Assert.AreEqual(Secret.Empty, Secret.Parse(string.Empty));
+        Secret.Parse(string.Empty).Should().Be(Secret.Empty);
     }
 }
 

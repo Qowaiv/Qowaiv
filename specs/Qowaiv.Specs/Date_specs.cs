@@ -202,6 +202,7 @@ public class Supports_JSON_serialization
     [TestCase("2012-04-23", "2012-04-23")]
     [TestCase("2012-04-23T18:25:43.511Z", "2012-04-23")]
     [TestCase("2012-04-23T10:25:43-05:00", "2012-04-23")]
+    [TestCase(636_327_360_000_000_000L, "2017-06-11")]
     public void System_Text_JSON_deserialization(object json, Date svo)
         => JsonTester.Read_System_Text_JSON<Date>(json).Should().Be(svo);
 

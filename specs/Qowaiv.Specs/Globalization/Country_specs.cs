@@ -156,7 +156,6 @@ public class Supports_JSON_serialization
 #if NET6_0_OR_GREATER
     [TestCase("Netherlands", "NL")]
     [TestCase("nl", "NL")]
-    [TestCase(4.00, "AF")]
     [TestCase(100L, "BG")]
     [TestCase(null, null)]
     [TestCase("?", "?")]

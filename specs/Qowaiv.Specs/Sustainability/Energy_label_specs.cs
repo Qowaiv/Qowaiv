@@ -450,6 +450,19 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET6_0_OR_GREATER
+    [TestCase("?", "?")]
+    [TestCase("C", "C")]
+    [TestCase("A++", "A++")]
+    public void System_Text_JSON_deserialization(object json, EnergyLabel svo)
+        => JsonTester.Read_System_Text_JSON<EnergyLabel>(json).Should().Be(svo);
+
+    [TestCase("?", "?")]
+    [TestCase("C", "C")]
+    [TestCase("A++", "A++")]
+    public void System_Text_JSON_serialization(EnergyLabel svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
     [TestCase("?", "unknown")]
     [TestCase("C", "C")]
     [TestCase("A++", "A++")]

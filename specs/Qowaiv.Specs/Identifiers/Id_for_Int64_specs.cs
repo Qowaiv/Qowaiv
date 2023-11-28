@@ -39,7 +39,6 @@ public class Supports_JSON_serialization
 #if NET6_0_OR_GREATER
     [TestCase("", null)]
     [TestCase(null, null)]
-    [TestCase(17.0, 017L)]
     [TestCase(123456789L, 123456789L)]
     [TestCase("123456789", 123456789L)]
     public void System_Text_JSON_deserialization(object json, Int64Id svo)

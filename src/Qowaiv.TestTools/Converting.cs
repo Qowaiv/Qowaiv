@@ -31,11 +31,19 @@ public sealed class ConvertFrom<TFrom>
     /// <summary>Converts the value to the destination type, using its <see cref="TypeConverter"/>.</summary>
     [Pure]
     public To? To<To>()
-#nullable disable // should not be a problem here
-        => typeof(TFrom) == typeof(string)
-        ? (To)Converter<To>().ConvertFromString(Subject as string)
-        : (To)Converter<To>().ConvertFrom(Subject);
-#nullable enable
+    {
+        var converter = Converter<To>();
+
+        if (Subject is { } && !converter.CanConvertFrom(Subject.GetType()))
+        {
+            throw new NotSupportedException($"Converter {converter} can not convert from {Subject}.");
+        }
+        else return typeof(TFrom) == typeof(string)
+            #nullable disable // should not be a problem here
+            ? (To)converter.ConvertFromString(Subject as string)
+            : (To)converter.ConvertFrom(Subject);
+            #nullable enable
+    }
 
     [Pure]
     private static TypeConverter Converter<To>() => TypeDescriptor.GetConverter(typeof(To));

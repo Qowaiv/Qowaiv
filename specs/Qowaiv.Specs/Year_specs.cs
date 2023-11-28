@@ -421,6 +421,10 @@ public class Supports_type_conversion
     }
 
     [Test]
+    public void from_int_0()
+        => Converting.From(0).To<Year>().Should().Be(Year.Empty);
+
+    [Test]
     public void from_int()
         => Converting.From(1979).To<Year>().Should().Be(Svo.Year);
 

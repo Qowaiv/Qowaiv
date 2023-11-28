@@ -21,6 +21,7 @@ public static class JsonTester
             {
                 string str => @$"""{str}""",
                 bool boolean => boolean ? "true" : "false",
+                double dbl => dbl.ToString("0.0###########", CultureInfo.InvariantCulture),
                 IFormattable f => f.ToString(null, CultureInfo.InvariantCulture),
                 null => "null",
                 _ => val.ToString() ?? string.Empty,

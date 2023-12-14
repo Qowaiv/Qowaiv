@@ -102,7 +102,7 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
 
     /// <inheritdoc/>
     [Pure]
-    public override bool Equals(object? obj) => obj is Id<TIdentifier> other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is Id<TIdentifier> other && Equals(other);
 
     /// <summary>Returns true if this instance and the other identifier are equal, otherwise false.</summary>
     /// <param name="other">

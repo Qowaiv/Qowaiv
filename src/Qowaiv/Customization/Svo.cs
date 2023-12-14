@@ -117,7 +117,7 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
 
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is Svo<TSvoBehavior> other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is Svo<TSvoBehavior> other && Equals(other);
 
     /// <summary>Returns true if this instance and the other Single Value Object are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Svo{TSvoBehavior}" /> to compare with.</param>

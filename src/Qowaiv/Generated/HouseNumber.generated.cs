@@ -47,7 +47,7 @@ public partial struct HouseNumber : IEquatable<HouseNumber>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is HouseNumber other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is HouseNumber other && Equals(other);
 
     /// <summary>Returns true if this instance and the other house number are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="HouseNumber" /> to compare with.</param>

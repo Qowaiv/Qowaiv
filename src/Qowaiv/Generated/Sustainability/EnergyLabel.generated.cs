@@ -47,7 +47,7 @@ public partial struct EnergyLabel : IEquatable<EnergyLabel>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is EnergyLabel other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is EnergyLabel other && Equals(other);
 
     /// <summary>Returns true if this instance and the other EU energy label are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="EnergyLabel" /> to compare with.</param>

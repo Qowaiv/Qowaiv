@@ -18,7 +18,7 @@ public partial struct Date : IEquatable<Date>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is Date other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is Date other && Equals(other);
 
     /// <summary>Returns true if this instance and the other date are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Date" /> to compare with.</param>

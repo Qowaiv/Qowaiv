@@ -27,7 +27,7 @@ public partial struct MonthSpan : IEquatable<MonthSpan>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is MonthSpan other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is MonthSpan other && Equals(other);
 
     /// <summary>Returns true if this instance and the other month span are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="MonthSpan" /> to compare with.</param>

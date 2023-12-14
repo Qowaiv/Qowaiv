@@ -47,7 +47,7 @@ public partial struct InternetMediaType : IEquatable<InternetMediaType>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is InternetMediaType other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is InternetMediaType other && Equals(other);
 
     /// <summary>Returns true if this instance and the other Internet media type are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="InternetMediaType" /> to compare with.</param>
@@ -70,6 +70,9 @@ public partial struct InternetMediaType : IEquatable<InternetMediaType>
 }
 
 public partial struct InternetMediaType : IComparable, IComparable<InternetMediaType>
+#if NET7_0_OR_GREATER
+    , IComparisonOperators<InternetMediaType, InternetMediaType, bool>
+#endif
 {
     /// <inheritdoc />
     [Pure]
@@ -84,6 +87,17 @@ public partial struct InternetMediaType : IComparable, IComparable<InternetMedia
 #nullable disable
     public int CompareTo(InternetMediaType other) => Comparer<string>.Default.Compare(m_Value, other.m_Value);
 #nullable enable
+    /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
+    public static bool operator <(InternetMediaType l, InternetMediaType r) => l.CompareTo(r) < 0;
+
+    /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
+    public static bool operator >(InternetMediaType l, InternetMediaType r) => l.CompareTo(r) > 0;
+
+    /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
+    public static bool operator <=(InternetMediaType l, InternetMediaType r) => l.CompareTo(r) <= 0;
+
+    /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
+    public static bool operator >=(InternetMediaType l, InternetMediaType r) => l.CompareTo(r) >= 0;
 }
 
 public partial struct InternetMediaType : IFormattable

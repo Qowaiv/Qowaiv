@@ -47,7 +47,7 @@ public partial struct EmailAddress : IEquatable<EmailAddress>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is EmailAddress other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is EmailAddress other && Equals(other);
 
     /// <summary>Returns true if this instance and the other email address are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="EmailAddress" /> to compare with.</param>

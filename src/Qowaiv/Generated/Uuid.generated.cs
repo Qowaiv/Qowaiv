@@ -35,7 +35,7 @@ public partial struct Uuid : IEquatable<Uuid>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is Uuid other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is Uuid other && Equals(other);
 
     /// <summary>Returns true if this instance and the other UUID are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Uuid" /> to compare with.</param>

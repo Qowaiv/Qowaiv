@@ -27,7 +27,7 @@ public partial struct Amount : IEquatable<Amount>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is Amount other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is Amount other && Equals(other);
 
     /// <summary>Returns true if this instance and the other amount are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Amount" /> to compare with.</param>

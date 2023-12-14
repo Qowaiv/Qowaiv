@@ -47,7 +47,7 @@ public partial struct YesNo : IEquatable<YesNo>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is YesNo other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is YesNo other && Equals(other);
 
     /// <summary>Returns true if this instance and the other yes-no are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="YesNo" /> to compare with.</param>

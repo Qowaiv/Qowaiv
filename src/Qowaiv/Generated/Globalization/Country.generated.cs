@@ -47,7 +47,7 @@ public partial struct Country : IEquatable<Country>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is Country other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is Country other && Equals(other);
 
     /// <summary>Returns true if this instance and the other country are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Country" /> to compare with.</param>

@@ -47,7 +47,7 @@ public partial struct CasRegistryNumber : IEquatable<CasRegistryNumber>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is CasRegistryNumber other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is CasRegistryNumber other && Equals(other);
 
     /// <summary>Returns true if this instance and the other CAS Registry Number are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="CasRegistryNumber" /> to compare with.</param>

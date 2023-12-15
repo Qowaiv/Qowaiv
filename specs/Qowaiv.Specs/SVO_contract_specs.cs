@@ -43,7 +43,25 @@ public class Is_decorated_with : SingleValueObjectSpecs
     [TestCaseSource(nameof(AllSvos))]
     public void Open_API_data_type_Legacy(Type svo)
         => svo.Should().BeDecoratedWith<Qowaiv.Json.OpenApiDataTypeAttribute>();
-    
+
+    [TestCaseSource(nameof(AllSvos))]
+    public void NotNullWhen_attribute_on_Equals_object(Type svo)
+    {
+        var equals_object = svo
+            .GetMethods()
+            .Single(m
+                => m.Name == nameof(Equals)
+                && m.GetParameters() is { Length: 1 } p
+                && p[0].ParameterType == typeof(object));
+
+        var attr = equals_object
+            .GetParameters()[0]
+            .GetCustomAttributes<NotNullWhenAttribute>(false)
+            .Single();
+
+        attr.ReturnValue.Should().BeTrue();
+    }
+
     [TestCaseSource(nameof(AllSvosExceptGeneric))]
     public void Open_API_data_type(Type svo)
         => svo.Should().BeDecoratedWith<Qowaiv.OpenApi.OpenApiDataTypeAttribute>();

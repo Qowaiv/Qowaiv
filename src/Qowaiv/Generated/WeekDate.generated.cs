@@ -18,7 +18,7 @@ public partial struct WeekDate : IEquatable<WeekDate>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is WeekDate other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is WeekDate other && Equals(other);
 
     /// <summary>Returns true if this instance and the other week date are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="WeekDate" /> to compare with.</param>

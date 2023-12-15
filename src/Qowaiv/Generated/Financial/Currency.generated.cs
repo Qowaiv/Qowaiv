@@ -47,7 +47,7 @@ public partial struct Currency : IEquatable<Currency>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is Currency other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is Currency other && Equals(other);
 
     /// <summary>Returns true if this instance and the other currency are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Currency" /> to compare with.</param>

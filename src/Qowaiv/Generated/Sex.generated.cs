@@ -47,7 +47,7 @@ public partial struct Sex : IEquatable<Sex>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is Sex other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is Sex other && Equals(other);
 
     /// <summary>Returns true if this instance and the other sex are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Sex" /> to compare with.</param>

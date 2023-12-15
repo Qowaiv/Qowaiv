@@ -18,7 +18,7 @@ public partial struct Money : IEquatable<Money>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is Money other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is Money other && Equals(other);
 
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>

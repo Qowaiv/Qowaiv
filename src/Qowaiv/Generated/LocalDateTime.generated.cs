@@ -18,7 +18,7 @@ public partial struct LocalDateTime : IEquatable<LocalDateTime>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is LocalDateTime other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is LocalDateTime other && Equals(other);
 
     /// <summary>Returns true if this instance and the other local date time are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="LocalDateTime" /> to compare with.</param>

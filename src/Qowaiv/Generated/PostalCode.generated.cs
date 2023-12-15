@@ -47,7 +47,7 @@ public partial struct PostalCode : IEquatable<PostalCode>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is PostalCode other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is PostalCode other && Equals(other);
 
     /// <summary>Returns true if this instance and the other postal code are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="PostalCode" /> to compare with.</param>

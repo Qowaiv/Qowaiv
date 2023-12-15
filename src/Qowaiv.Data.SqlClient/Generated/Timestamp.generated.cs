@@ -27,7 +27,7 @@ public partial struct Timestamp : IEquatable<Timestamp>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is Timestamp other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is Timestamp other && Equals(other);
 
     /// <summary>Returns true if this instance and the other timestamp are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="Timestamp" /> to compare with.</param>

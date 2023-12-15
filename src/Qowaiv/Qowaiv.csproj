@@ -9,6 +9,7 @@
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 ToBeReleased
+- Decorate bool Equals(object) with [NotNullWhen(true)]. #345
 - TryApplyCustomFormatter should return false if the provider returns null. #341
 - Add Amount.Min() and Amount.Max(). #342
 - Extend API with overloads for DateOnly. #339

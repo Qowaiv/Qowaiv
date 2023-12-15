@@ -18,7 +18,7 @@ public partial struct StreamSize : IEquatable<StreamSize>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool Equals(object? obj) => obj is StreamSize other && Equals(other);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is StreamSize other && Equals(other);
 
     /// <summary>Returns true if this instance and the other stream size are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="StreamSize" /> to compare with.</param>

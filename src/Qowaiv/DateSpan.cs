@@ -17,7 +17,15 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
 #endif
 {
     /// <summary>Represents the pattern of a (potential) valid year.</summary>
-    private static readonly Regex Pattern = new(@"^(?<Years>([+-]?[0-9]{1,4}))Y(?<Months>([+-][0-9]{1,6}))M((?<Days>([+-][0-9]{1,7}))D)?$", RegOptions.IgnoreCase, RegOptions.Timeout);
+    private static readonly Regex Pattern = GetPattern();
+
+#if NET7_0_OR_GREATER
+    [GeneratedRegex(@"^(?<Years>([+-]?[0-9]{1,4}))Y(?<Months>([+-][0-9]{1,6}))M((?<Days>([+-][0-9]{1,7}))D)?$", RegOptions.IgnoreCase, RegOptions.TimeoutMilliseconds)]
+    private static partial Regex GetPattern();
+#else
+    [Pure]
+    private static Regex GetPattern() => new(@"^(?<Years>([+-]?[0-9]{1,4}))Y(?<Months>([+-][0-9]{1,6}))M((?<Days>([+-][0-9]{1,7}))D)?$", RegOptions.IgnoreCase, RegOptions.Timeout);
+#endif
 
     /// <summary>Represents the zero date span.</summary>
     public static readonly DateSpan Zero;

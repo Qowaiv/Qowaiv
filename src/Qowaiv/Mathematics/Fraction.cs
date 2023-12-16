@@ -46,7 +46,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     /// <summary>Represents the smallest possible value of a <see cref="Fraction"/>.</summary>
     public static readonly Fraction MinValue = New(-long.MaxValue, 1);
 
-    internal static class Formatting
+    internal static partial class Formatting
     {
         public const string SuperScript = "⁰¹²³⁴⁵⁶⁷⁸⁹";
         public const string SubScript = "₀₁₂₃₄₅₆₇₈₉";
@@ -82,10 +82,18 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
             LongSlash,
         ]);
 
-        public static readonly Regex Pattern = new(
-            @"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$",
-            RegOptions.Default,
-            RegOptions.Timeout);
+        public static readonly Regex Pattern = GetPattern();
+
+#if NET7_0_OR_GREATER
+        [GeneratedRegex(@"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$", RegOptions.Default, RegOptions.TimeoutMilliseconds)]
+        private static partial Regex GetPattern();
+#else
+    [Pure]
+    private static Regex GetPattern() => new(
+        @"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$",
+        RegOptions.Default,
+        RegOptions.Timeout);;
+#endif
 
         /// <summary>Returns true if the <see cref="char"/> is a supported fraction bar.</summary>
         [Pure]

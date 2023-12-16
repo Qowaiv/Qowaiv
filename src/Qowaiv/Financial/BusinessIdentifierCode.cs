@@ -33,7 +33,15 @@ public readonly partial struct BusinessIdentifierCode : IXmlSerializable, IForma
     /// <remarks>
     /// http://www.codeproject.com/KB/recipes/bicRegexValidator.aspx.
     /// </remarks>
-    private static readonly Regex Pattern = new(@"^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$", RegOptions.IgnoreCase, RegOptions.Timeout);
+    private static readonly Regex Pattern = GetPattern();
+
+#if NET7_0_OR_GREATER
+    [GeneratedRegex(@"^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$", RegOptions.IgnoreCase, RegOptions.TimeoutMilliseconds)]
+    private static partial Regex GetPattern();
+#else
+    [Pure]
+    private static Regex GetPattern() => new(@"^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$", RegOptions.IgnoreCase, RegOptions.Timeout);
+#endif
 
     /// <summary>Represents an empty/not set BIC.</summary>
     public static readonly BusinessIdentifierCode Empty;

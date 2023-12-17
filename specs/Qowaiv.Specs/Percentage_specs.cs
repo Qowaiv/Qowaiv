@@ -229,7 +229,7 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.Percentage.ToString("0.000%", FormatProvider.CustomFormatter);
-        Assert.AreEqual("Unit Test Formatter, value: '17.510%', format: '0.000%'", formatted);
+        formatted.Should().Be("Unit Test Formatter, value: '17.510%', format: '0.000%'");
     }
 
     [TestCase("en-GB", null, "17.51%", "17.51%")]
@@ -923,12 +923,12 @@ public class Can_be_rounded
         actual.Should().Be(15.Percent());
     }
 
-    [Test]
-    public void up_to_26_digits()
-    {
-        var exception = Assert.Catch<ArgumentOutOfRangeException>(() => Svo.Percentage.Round(27));
-        StringAssert.StartsWith("Percentages can only round to between -26 and 26 digits of precision.", exception.Message);
-    }
+    [TestCase(27)]
+    [TestCase(28)]
+    public void up_to_26_digits(int decimals)
+        => decimals.Invoking(Svo.Percentage.Round)
+            .Should().Throw<ArgumentOutOfRangeException>()
+            .WithMessage("Percentages can only round to between -26 and 26 digits of precision.*");
 
     [Test]
     public void up_to_minus_26_digits()
@@ -1128,10 +1128,10 @@ public class Supports_JSON_serialization
 
     [TestCase("Invalid input", typeof(FormatException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        var exception = Assert.Catch(() => JsonTester.Read<Percentage>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
-    }
+        => json
+            .Invoking(JsonTester.Read<Percentage>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 }
 
 public class Supports_XML_serialization

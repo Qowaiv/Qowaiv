@@ -25,7 +25,6 @@
     <ProjectReference Include="..\..\src\Qowaiv\Qowaiv.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.Data.SqlClient\Qowaiv.Data.SqlClient.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.TestTools\Qowaiv.TestTools.csproj" />
-    <ProjectReference Include="..\Qowaiv.Specs\Qowaiv.Specs.csproj" />
   </ItemGroup>
 
 </Project>

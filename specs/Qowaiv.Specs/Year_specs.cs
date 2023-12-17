@@ -263,7 +263,7 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.Year.ToString("#,##0", FormatProvider.CustomFormatter);
-        Assert.AreEqual("Unit Test Formatter, value: '1,979', format: '#,##0'", formatted);
+        formatted.Should().Be("Unit Test Formatter, value: '1,979', format: '#,##0'");
     }
 
     [TestCase("en-GB", null, 1979, "1979")]

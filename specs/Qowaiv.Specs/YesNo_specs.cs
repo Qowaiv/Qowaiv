@@ -219,7 +219,7 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.YesNo.ToString("B", FormatProvider.CustomFormatter);
-        Assert.AreEqual("Unit Test Formatter, value: 'True', format: 'B'", formatted);
+        formatted.Should().Be("Unit Test Formatter, value: 'True', format: 'B'");
     }
 
     [Test]
@@ -468,10 +468,10 @@ public class Supports_JSON_serialization
     [TestCase("2017-06-11", typeof(FormatException))]
     [TestCase(5L, typeof(InvalidCastException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        var exception = Assert.Catch(() => JsonTester.Read<YesNo>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
-    }
+        => json
+            .Invoking(JsonTester.Read<Year>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 }
 
 public class Supports_XML_serialization

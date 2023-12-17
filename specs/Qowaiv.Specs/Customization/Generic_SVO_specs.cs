@@ -240,7 +240,7 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.CustomSvo.ToString("SomeFormat", FormatProvider.CustomFormatter);
-        Assert.AreEqual("Unit Test Formatter, value: 'QOWAIV', format: 'SomeFormat'", formatted);
+        formatted.Should().Be("Unit Test Formatter, value: 'QOWAIV', format: 'SomeFormat'");
     }
 
     [TestCase("en-GB", null, "QOWAIV", "QOWAIV")]

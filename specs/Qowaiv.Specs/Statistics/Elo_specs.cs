@@ -169,10 +169,10 @@ public class Supports_JSON_serialization
     [TestCase("Invalid input", typeof(FormatException))]
     [TestCase(double.NaN, typeof(ArgumentOutOfRangeException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        var exception = Assert.Catch(() => JsonTester.Read<Elo>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
-    }
+        => json
+            .Invoking(JsonTester.Read<Elo>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 }
 public class Is_Open_API_data_type
 {

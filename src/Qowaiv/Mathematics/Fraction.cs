@@ -88,11 +88,11 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
         [GeneratedRegex(@"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$", RegOptions.Default, RegOptions.TimeoutMilliseconds)]
         private static partial Regex GetPattern();
 #else
-    [Pure]
-    private static Regex GetPattern() => new(
-        @"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$",
-        RegOptions.Default,
-        RegOptions.Timeout);;
+        [Pure]
+        private static Regex GetPattern() => new(
+            @"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$",
+            RegOptions.Default,
+            RegOptions.Timeout);
 #endif
 
         /// <summary>Returns true if the <see cref="char"/> is a supported fraction bar.</summary>

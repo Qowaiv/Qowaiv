@@ -62,7 +62,7 @@ public readonly partial struct InternetMediaType : IXmlSerializable, IFormattabl
         @"(?<Subtype>[a-z0-9]+([\-\.][a-z0-9]+)*)" +
         @"(\+(?<Suffix>(xml|json|ber|der|fastinfoset|wbxml|zip|cbor)))?$",
         RegOptions.IgnoreCase,
-        RegOptions.Timeout)
+        RegOptions.Timeout);
 #endif
 
     /// <summary>Represents an empty/not set Internet media type.</summary>

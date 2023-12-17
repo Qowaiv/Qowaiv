@@ -470,7 +470,7 @@ public class Supports_JSON_serialization
     [TestCase(5L, typeof(InvalidCastException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
-            .Invoking(JsonTester.Read<Year>)
+            .Invoking(JsonTester.Read<YesNo>)
             .Should().Throw<Exception>()
             .And.Should().BeOfType(exceptionType);
 }

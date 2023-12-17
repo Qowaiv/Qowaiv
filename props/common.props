@@ -5,9 +5,17 @@
     <IsPublishable>false</IsPublishable>
     <NuGetAudit>true</NuGetAudit>
     <OutputType>library</OutputType>
-    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
   </PropertyGroup>
-  
+
+  <PropertyGroup Label="Diagnostics">
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+    <!--
+      Some warnings can not be configured in the .editor config:
+      SYSLIB1044: The regex generator couldn't generate a complete source implementation for the specified regular expression due to an internal limitation
+    -->
+    <NoWarn>$(NoWarn);SYSLIB1044</NoWarn>
+  </PropertyGroup>
+
   <PropertyGroup>
     <Title>Qowaiv (Single) Value Object library</Title>
     <Description>

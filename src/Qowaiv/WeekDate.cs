@@ -43,10 +43,18 @@ public readonly partial struct WeekDate : IXmlSerializable, IFormattable, IEquat
 #endif
 {
     /// <summary>Represents the pattern of a (potential) valid week date.</summary>
-    private static readonly Regex Pattern = new(
+    private static readonly Regex Pattern = GetPattern();
+
+#if NET7_0_OR_GREATER
+    [GeneratedRegex(@"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$", RegOptions.IgnoreCase, RegOptions.TimeoutMilliseconds)]
+    private static partial Regex GetPattern();
+#else
+    [Pure]
+    private static Regex GetPattern() => new(
         @"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$",
         RegOptions.IgnoreCase,
         RegOptions.Timeout);
+#endif
 
     /// <summary>Represents the minimum value of the week date.</summary>
     public static readonly WeekDate MinValue = new(Date.MinValue);

@@ -47,12 +47,23 @@ namespace Qowaiv.Web;
 public readonly partial struct InternetMediaType : IXmlSerializable, IFormattable, IEquatable<InternetMediaType>, IComparable, IComparable<InternetMediaType>
 {
     /// <summary>Represents the pattern of a (potential) valid Internet media type.</summary>
-    private static readonly Regex Pattern = new(
+    private static readonly Regex Pattern = GetPattern();
+
+#if NET7_0_OR_GREATER
+    [GeneratedRegex(
+        @"^(?<TopLevel>(x\-[a-z]+|application|audio|example|image|message|model|multipart|text|video))/" +
+        @"(?<Subtype>[a-z0-9]+([\-\.][a-z0-9]+)*)" +
+        @"(\+(?<Suffix>(xml|json|ber|der|fastinfoset|wbxml|zip|cbor)))?$", RegOptions.IgnoreCase, RegOptions.TimeoutMilliseconds)]
+    private static partial Regex GetPattern();
+#else
+    [Pure]
+    private static Regex GetPattern() => new(
         @"^(?<TopLevel>(x\-[a-z]+|application|audio|example|image|message|model|multipart|text|video))/" +
         @"(?<Subtype>[a-z0-9]+([\-\.][a-z0-9]+)*)" +
         @"(\+(?<Suffix>(xml|json|ber|der|fastinfoset|wbxml|zip|cbor)))?$",
         RegOptions.IgnoreCase,
         RegOptions.Timeout);
+#endif
 
     /// <summary>Represents an empty/not set Internet media type.</summary>
     public static readonly InternetMediaType Empty;

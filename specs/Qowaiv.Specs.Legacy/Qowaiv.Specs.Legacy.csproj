@@ -7,21 +7,13 @@
     <TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="..\..\src\Qowaiv\Text\CharBuffer.cs" Link="Qowaiv.Text\CharBuffer.cs" />
-    <Compile Include="..\..\src\Qowaiv\Text\CharBuffer.String.cs" Link="Qowaiv.Text\CharBuffer.String.cs" />
-    <Compile Include="..\..\src\Qowaiv\Text\CharBuffer.ToNonDiacritic.cs" Link="Qowaiv.Text\CharBuffer.ToNonDiacritic.cs" />
-    <Compile Include="..\..\src\Qowaiv\Text\CharBuffer.Transform.cs" Link="Qowaiv.Text\CharBuffer.Transform.cs" />
-    <Compile Include="..\..\src\Qowaiv\Text\CharrBufferExtensions.cs" Link="Qowaiv.Text\CharrBufferExtensions.cs" />
-  </ItemGroup>
-
   <ItemGroup Label="TestTools">
     <PackageReference Include="coverlet.collector" Version="*" PrivateAssets="all" />
     <PackageReference Include="coverlet.msbuild" Version="*" PrivateAssets="all" />
     <PackageReference Include="FluentAssertions" Version="6.*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
     <PackageReference Include="NUnit" Version="3.*" />
-    <PackageReference Include="NUnit3TestAdapter" Version="*" PrivateAssets="all" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.*" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">

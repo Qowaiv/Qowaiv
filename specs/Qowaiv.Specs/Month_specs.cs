@@ -290,7 +290,7 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.Month.ToString("f", FormatProvider.CustomFormatter);
-        Assert.AreEqual("Unit Test Formatter, value: 'February', format: 'f'", formatted);
+        formatted.Should().Be("Unit Test Formatter, value: 'February', format: 'f'");
     }
 
     [TestCase("en-GB", null, "February", "February")]
@@ -490,10 +490,10 @@ public class Supports_JSON_serialization
     [TestCase(-1L, typeof(ArgumentOutOfRangeException))]
     [TestCase(long.MaxValue, typeof(ArgumentOutOfRangeException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        var exception = Assert.Catch(() => JsonTester.Read<Month>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
-    }
+        => json
+            .Invoking(JsonTester.Read<Month>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 }
 
 public class Supports_XML_serialization

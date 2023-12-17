@@ -114,8 +114,8 @@ public class Supports_JSON_serialization
     [TestCase("2017-06-11", typeof(FormatException))]
     [TestCase(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        var exception = Assert.Catch(() => JsonTester.Read<BusinessIdentifierCode>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
-    }
+        => json
+            .Invoking(JsonTester.Read<BusinessIdentifierCode>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 }

@@ -171,10 +171,10 @@ public class Supports_JSON_serialization
     [TestCase("yyyy-06-11", typeof(FormatException))]
     [TestCase(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        var exception = Assert.Catch(() => JsonTester.Read<WeekDate>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
-    }
+        => json
+            .Invoking(JsonTester.Read<WeekDate>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 }
 public class Is_Open_API_data_type
 {

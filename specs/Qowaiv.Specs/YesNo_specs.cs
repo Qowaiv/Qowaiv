@@ -179,8 +179,9 @@ public class Can_be_parsed
     {
         using (TestCultures.En_GB.Scoped())
         {
-            var exception = Assert.Throws<FormatException>(() => YesNo.Parse("invalid input"));
-            Assert.AreEqual("Not a valid yes-no value", exception.Message);
+            "invalid input".Invoking(YesNo.Parse)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid yes-no value");
         }
     }
 
@@ -219,7 +220,7 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.YesNo.ToString("B", FormatProvider.CustomFormatter);
-        Assert.AreEqual("Unit Test Formatter, value: 'True', format: 'B'", formatted);
+        formatted.Should().Be("Unit Test Formatter, value: 'True', format: 'B'");
     }
 
     [Test]
@@ -468,10 +469,10 @@ public class Supports_JSON_serialization
     [TestCase("2017-06-11", typeof(FormatException))]
     [TestCase(5L, typeof(InvalidCastException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        var exception = Assert.Catch(() => JsonTester.Read<YesNo>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
-    }
+        => json
+            .Invoking(JsonTester.Read<YesNo>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 }
 
 public class Supports_XML_serialization

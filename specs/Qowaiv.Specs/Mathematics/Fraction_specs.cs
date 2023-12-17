@@ -274,10 +274,10 @@ public class Supports_JSON_serialization
     [TestCase("Invalid input", typeof(FormatException))]
     [TestCase("2017-06-11", typeof(FormatException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        var exception = Assert.Catch(() => JsonTester.Read<Fraction>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
-    }
+        => json
+            .Invoking(JsonTester.Read<Fraction>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 }
 
 #if NET8_0_OR_GREATER

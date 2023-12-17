@@ -232,17 +232,15 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.CasRegistryNumber.ToString("#_00_00_0", FormatProvider.CustomFormatter);
-        Assert.AreEqual("Unit Test Formatter, value: '100_28_14_5', format: '#_00_00_0'", formatted);
+        formatted.Should().Be("Unit Test Formatter, value: '100_28_14_5', format: '#_00_00_0'");
     }
 
     [Test]
     public void with_current_thread_culture_as_default()
     {
-        using (new CultureInfoScope(
-            culture: TestCultures.Nl_NL,
-            cultureUI: TestCultures.En_GB))
+        using (new CultureInfoScope( culture: TestCultures.Nl_NL, cultureUI: TestCultures.En_GB))
         {
-            Assert.AreEqual("10028-14-5", Svo.CasRegistryNumber.ToString(provider: null));
+            Svo.CasRegistryNumber.ToString(provider: null).Should().Be("10028-14-5");
         }
     }
 }
@@ -396,10 +394,10 @@ public class Supports_JSON_serialization
     [TestCase("2017-06-11", typeof(FormatException))]
     [TestCase(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        Func<CasRegistryNumber> read = () => JsonTester.Read<CasRegistryNumber>(json);
-        read.Should().Throw<Exception>().Subject.Single().Should().BeOfType(exceptionType);
-    }
+        => json
+            .Invoking(JsonTester.Read<CasRegistryNumber>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 }
 
 public class Supports_XML_serialization

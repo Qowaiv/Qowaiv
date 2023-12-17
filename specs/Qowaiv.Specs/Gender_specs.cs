@@ -305,7 +305,7 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.Gender.ToString("s", FormatProvider.CustomFormatter);
-        Assert.AreEqual("Unit Test Formatter, value: '♀', format: 's'", formatted);
+        formatted.Should().Be("Unit Test Formatter, value: '♀', format: 's'");
     }
 
     [TestCase("en-GB", null, "Female", "Female")]
@@ -445,10 +445,10 @@ public class Supports_JSON_serialization
     [TestCase(5L, typeof(ArgumentOutOfRangeException))]
     [TestCase(long.MaxValue, typeof(ArgumentOutOfRangeException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        var exception = Assert.Catch(() => JsonTester.Read<Gender>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
-    }
+        => json
+            .Invoking(JsonTester.Read<Gender>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 }
 
 [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
@@ -500,7 +500,7 @@ public class Is_Open_API_data_type
     [Test]
     public void with_description()
     {
-        Assert.AreEqual("Gender as specified by ISO/IEC 5218.", Attribute.Description);
+        Attribute.Description.Should().Be("Gender as specified by ISO/IEC 5218.");
     }
 
     [Test]
@@ -518,7 +518,7 @@ public class Is_Open_API_data_type
     [Test]
     public void has_enum()
     {
-        Assert.AreEqual(new[] { "NotKnown", "Male", "Female", "NotApplicable" }, Attribute.Enum);
+        Attribute.Enum.Should().BeEquivalentTo(["NotKnown", "Male", "Female", "NotApplicable"]);
     }
 
     [Test]

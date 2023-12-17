@@ -65,13 +65,13 @@ public class Will_be_dropped
     public void DateTime_Add_DateSpan(DateTime dateTime, DateTime expected, int months, int days, bool daysFirst)
     {
         var span = new DateSpan(months, days);
-
+        
         var date = (Date)dateTime;
         var local = (LocalDateTime)dateTime;
 
-        Assert.AreEqual(expected, dateTime.Add(span, daysFirst));
-        Assert.AreEqual((Date)expected, date.Add(span, daysFirst));
-        Assert.AreEqual((LocalDateTime)expected, local.Add(span, daysFirst));
+        dateTime.Add(span, daysFirst).Should().Be(expected);
+        date.Add(span, daysFirst).Should().Be((Date)expected);
+        local.Add(span, daysFirst).Should().Be((LocalDateTime)expected);
     }
 }
 

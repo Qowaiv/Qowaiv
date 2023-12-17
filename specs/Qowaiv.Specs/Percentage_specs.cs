@@ -41,20 +41,16 @@ public class Has_constant
     [Test]
     public void Zero_represent_default_value()
     {
-        Percentage.Zero.Should().Be(default(Percentage));
+        Percentage.Zero.Should().Be(default);
     }
 
     [Test]
     public void One_represent_1_percent()
-    {
-        Assert.AreEqual("1%", Percentage.One.ToString("0%", CultureInfo.InvariantCulture));
-    }
+        => Percentage.One.ToString("0%", CultureInfo.InvariantCulture).Should().Be("1%");
 
     [Test]
     public void Hundred_represent_100_percent()
-    {
-        Assert.AreEqual("100%", Percentage.Hundred.ToString("0%", CultureInfo.InvariantCulture));
-    }
+        => Percentage.Hundred.ToString("0%", CultureInfo.InvariantCulture).Should().Be("100%");
 }
 
 public class Is_equal_by_value
@@ -229,7 +225,7 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.Percentage.ToString("0.000%", FormatProvider.CustomFormatter);
-        Assert.AreEqual("Unit Test Formatter, value: '17.510%', format: '0.000%'", formatted);
+        formatted.Should().Be("Unit Test Formatter, value: '17.510%', format: '0.000%'");
     }
 
     [TestCase("en-GB", null, "17.51%", "17.51%")]
@@ -254,7 +250,7 @@ public class Has_custom_formatting
     {
         using (new CultureInfoScope(culture: TestCultures.Nl_NL, cultureUI: TestCultures.En_GB))
         {
-            Assert.AreEqual("17,51%", Svo.Percentage.ToString(provider: null));
+            Svo.Percentage.ToString(provider: null).Should().Be("17,51%");
         }
     }
 
@@ -558,7 +554,7 @@ public class Can_be_added_to
     public void _money()
     {
         var addition = (44.6 + Currency.EUR) + 50.Percent();
-        Assert.AreEqual(66.9 + Currency.EUR, addition);
+        addition.Should().Be(66.9 + Currency.EUR);
     }
 
     [Test]
@@ -572,7 +568,7 @@ public class Can_be_added_to
     public void _double()
     {
         var addition = 34.586 + 75.Percent();
-        Assert.That(addition, Is.EqualTo(60.5255).Within(0.00001));
+        addition.Should().BeApproximately(60.5255, 0.00001);
     }
 
     [Test]
@@ -631,7 +627,7 @@ public class Can_be_subtracted_from
     public void _percentage()
     {
         var addition = 13.Percent() - 34.Percent();
-        Assert.AreEqual(-21.Percent(), addition);
+        addition.Should().Be(-21.Percent());
     }
 
     [Test]
@@ -645,7 +641,7 @@ public class Can_be_subtracted_from
     public void _money()
     {
         var addition = (44.6 + Currency.EUR) - 50.Percent();
-        Assert.AreEqual(22.3 + Currency.EUR, addition);
+        addition.Should().Be(22.3 + Currency.EUR);
     }
 
     [Test]
@@ -732,7 +728,7 @@ public class Can_get_a_percentage_of
     public void _money()
     {
         var addition = (44.6 + Currency.EUR) * 80.Percent();
-        Assert.AreEqual(35.68 + Currency.EUR, addition);
+        addition.Should().Be(35.68 + Currency.EUR);
     }
 
     [Test]
@@ -819,7 +815,7 @@ public class Can_get_100_percent_based_on_percentage
     public void _money()
     {
         var addition = (44.6 + Currency.EUR) / 80.Percent();
-        Assert.AreEqual(55.75 + Currency.EUR, addition);
+        addition.Should().Be(55.75 + Currency.EUR);
     }
 
     [Test]
@@ -923,12 +919,12 @@ public class Can_be_rounded
         actual.Should().Be(15.Percent());
     }
 
-    [Test]
-    public void up_to_26_digits()
-    {
-        var exception = Assert.Catch<ArgumentOutOfRangeException>(() => Svo.Percentage.Round(27));
-        StringAssert.StartsWith("Percentages can only round to between -26 and 26 digits of precision.", exception.Message);
-    }
+    [TestCase(27)]
+    [TestCase(28)]
+    public void up_to_26_digits(int decimals)
+        => decimals.Invoking(Svo.Percentage.Round)
+            .Should().Throw<ArgumentOutOfRangeException>()
+            .WithMessage("Percentages can only round to between -26 and 26 digits of precision.*");
 
     [Test]
     public void up_to_minus_26_digits()
@@ -971,19 +967,15 @@ public class Can_be_negated
     [TestCase("17.51%", "-17.51%")]
     [TestCase("-17.51%", "17.51%")]
     public void negate(Percentage negated, Percentage input)
-    {
-        Assert.AreEqual(negated, -input);
-    }
+        => (-input).Should().Be(negated);
 }
 
 public class Can_be_plussed
 {
     [TestCase("-17.51%", "-17.51%")]
     [TestCase("17.51%", "17.51%")]
-    public void plus(Percentage negated, Percentage input)
-    {
-        Assert.AreEqual(negated, +input);
-    }
+    public void plus(Percentage plussed, Percentage input)
+        => (+input).Should().Be(plussed);
 }
 
 
@@ -1014,9 +1006,7 @@ public class Can_get_maximum_of
     [TestCase("15%", "5%", "15%")]
     [TestCase("12%", "12%", "12%")]
     public void two_values(Percentage max, Percentage p0, Percentage p1)
-    {
-        Assert.AreEqual(max, Percentage.Max(p0, p1));
-    }
+        => Percentage.Max(p0, p1).Should().Be(max);
 
     [Test]
     public void multiple_values()
@@ -1032,15 +1022,13 @@ public class Can_get_minimum_of
     [TestCase("5%", "5%", "15%")]
     [TestCase("5%", "5%", "5%")]
     public void two_values(Percentage min, Percentage p0, Percentage p1)
-    {
-        Assert.AreEqual(min, Percentage.Min(p0, p1));
-    }
+        => Percentage.Min(p0, p1).Should().Be(min);
 
     [Test]
     public void multiple_values()
     {
         var min = Percentage.Min(15.Percent(), 66.Percent(), -117.Percent());
-        Assert.AreEqual(-117.Percent(), min);
+        min.Should().Be(-117.Percent());
     }
 }
 
@@ -1128,10 +1116,10 @@ public class Supports_JSON_serialization
 
     [TestCase("Invalid input", typeof(FormatException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        var exception = Assert.Catch(() => JsonTester.Read<Percentage>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
-    }
+        => json
+            .Invoking(JsonTester.Read<Percentage>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 }
 
 public class Supports_XML_serialization

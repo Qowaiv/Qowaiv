@@ -110,10 +110,10 @@ public class Supports_JSON_serialization
 
     [TestCase("Invalid input", typeof(FormatException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        var exception = Assert.Catch(() => JsonTester.Read<InternetMediaType>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
-    }
+        => json
+            .Invoking(JsonTester.Read<InternetMediaType>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 
     [TestCase("Invalid input")]
     [TestCase("2017-06-11")]

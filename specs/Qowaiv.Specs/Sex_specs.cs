@@ -218,7 +218,7 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.Sex.ToString("s", FormatProvider.CustomFormatter);
-        Assert.AreEqual("Unit Test Formatter, value: '♀', format: 's'", formatted);
+        formatted.Should().Be("Unit Test Formatter, value: '♀', format: 's'");
     }
 
     [TestCase("en-GB", null, "Female", "Female")]
@@ -397,10 +397,10 @@ public class Supports_JSON_serialization
     [TestCase(5L, typeof(ArgumentOutOfRangeException))]
     [TestCase(long.MaxValue, typeof(ArgumentOutOfRangeException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        var exception = Assert.Catch(() => JsonTester.Read<Sex>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
-    }
+        => json
+            .Invoking(JsonTester.Read<Sex>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 }
 
 public class Supports_XML_serialization

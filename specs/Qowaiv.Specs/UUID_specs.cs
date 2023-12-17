@@ -185,7 +185,7 @@ public class Can_be_created
     public void with_SHA1()
     {
         var hashed = Uuid.GenerateWithSHA1(Encoding.UTF8.GetBytes("Qowaiv"));
-        Assert.AreEqual(Uuid.Parse("39h-Y1rR51ym_t78x9h0bA"), hashed);
+        hashed.Should().Be(Uuid.Parse("39h-Y1rR51ym_t78x9h0bA"));
     }
 }
 
@@ -315,7 +315,7 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.Uuid.ToString("B", FormatProvider.CustomFormatter);
-        Assert.AreEqual("Unit Test Formatter, value: '{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}', format: 'B'", formatted);
+        formatted.Should().Be("Unit Test Formatter, value: '{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}', format: 'B'");
     }
 
     [TestCase("en-GB", null, "Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
@@ -482,10 +482,10 @@ public class Supports_JSON_serialization
 
     [TestCase("Invalid input", typeof(FormatException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        var exception = Assert.Catch(() => JsonTester.Read<Uuid>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
-    }
+        => json
+            .Invoking(JsonTester.Read<Uuid>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 }
 
 public class Supports_XML_serialization

@@ -105,10 +105,10 @@ public class Supports_type_conversion
         [TestCase("Invalid input", typeof(FormatException))]
         [TestCase("2017-06-11", typeof(FormatException))]
         public void throws_for_invalid_json(object json, Type exceptionType)
-        {
-            var exception = Assert.Catch(() => JsonTester.Read<Amount>(json));
-            Assert.IsInstanceOf(exceptionType, exception);
-        }
+            => json
+                .Invoking(JsonTester.Read<Amount>)
+                .Should().Throw<Exception>()
+                .And.Should().BeOfType(exceptionType);
     }
 
     public class Has_operators

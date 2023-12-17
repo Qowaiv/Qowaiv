@@ -205,10 +205,10 @@ public class Supports_JSON_serialization
     [TestCase("2017-06-11", typeof(FormatException))]
     [TestCase(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        var exception = Assert.Catch(() => JsonTester.Read<InternationalBankAccountNumber>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
-    }
+        => json
+            .Invoking(JsonTester.Read<InternationalBankAccountNumber>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 }
 
 
@@ -250,8 +250,9 @@ public class Input_is_valid
         }
         else
         {
-            Assert.IsTrue(InternationalBankAccountNumber.TryParse(input, out InternationalBankAccountNumber iban),
-                $"{input} is invalid for {country.EnglishName}.");
+            InternationalBankAccountNumber.TryParse(input, out InternationalBankAccountNumber iban)
+                .Should().BeTrue($"{input} should b valid for {country.EnglishName}.");
+
             iban.Country.Should().Be(country);
         }
     }

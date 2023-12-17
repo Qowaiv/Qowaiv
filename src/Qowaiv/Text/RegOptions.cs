@@ -6,7 +6,7 @@ internal static class RegOptions
 #if DEBUG
     public const int TimeoutMilliseconds = 50;
 #else
-    public const int MatchTimeoutMilliseconds = 100;
+    public const int TimeoutMilliseconds = 100;
 #endif
 
     /// <summary>

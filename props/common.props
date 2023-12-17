@@ -6,7 +6,7 @@
     <NuGetAudit>true</NuGetAudit>
     <OutputType>library</OutputType>
   </PropertyGroup>
-  
+
   <PropertyGroup Label="Diagnostics">
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     <!--
@@ -15,8 +15,7 @@
     -->
     <NoWarn>$(NoWarn);SYSLIB1044</NoWarn>
   </PropertyGroup>
-  
-  
+
   <PropertyGroup>
     <Title>Qowaiv (Single) Value Object library</Title>
     <Description>

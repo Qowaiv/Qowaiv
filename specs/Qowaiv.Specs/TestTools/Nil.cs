@@ -1,6 +1,6 @@
 ﻿namespace Qowaiv.TestTools;
 
-internal static class Nil
+public static class Nil
 {
     public static readonly FileInfo? FileInfo = null;
 

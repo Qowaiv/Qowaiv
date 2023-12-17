@@ -500,7 +500,7 @@ public class Is_Open_API_data_type
     [Test]
     public void with_description()
     {
-        Assert.AreEqual("Gender as specified by ISO/IEC 5218.", Attribute.Description);
+        Attribute.Description.Should().Be("Gender as specified by ISO/IEC 5218.");
     }
 
     [Test]
@@ -518,7 +518,7 @@ public class Is_Open_API_data_type
     [Test]
     public void has_enum()
     {
-        Assert.AreEqual(new[] { "NotKnown", "Male", "Female", "NotApplicable" }, Attribute.Enum);
+        Attribute.Enum.Should().BeEquivalentTo(["NotKnown", "Male", "Female", "NotApplicable"]);
     }
 
     [Test]

@@ -221,15 +221,11 @@ public class Can_be_created_from_int
 {
     [Test]
     public void empty_for_not_set_int()
-    {
-        Year.TryCreate(default).Should().Be(Year.Empty);
-    }
+        => Year.TryCreate(default).Should().Be(Year.Empty);
 
     [Test]
     public void empty_for_not_invalid_int()
-    {
-        Assert.AreEqual(Year.Empty, Year.TryCreate(-10));
-    }
+        => Year.TryCreate(-10).Should().Be(Year.Empty);
 
     [Test]
     public void within_range()
@@ -466,10 +462,10 @@ public class Supports_JSON_serialization
     [TestCase(-5L, typeof(ArgumentOutOfRangeException))]
     [TestCase(-2.3, typeof(ArgumentOutOfRangeException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        var exception = Assert.Catch(() => JsonTester.Read<Year>(json));
-        Assert.IsInstanceOf(exceptionType, exception);
-    }
+        => json
+            .Invoking(JsonTester.Read<Year>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 }
 
 public class Supports_XML_serialization

@@ -394,10 +394,10 @@ public class Supports_JSON_serialization
     [TestCase("2017-06-11", typeof(FormatException))]
     [TestCase(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
-    {
-        Func<CasRegistryNumber> read = () => JsonTester.Read<CasRegistryNumber>(json);
-        read.Should().Throw<Exception>().Subject.Single().Should().BeOfType(exceptionType);
-    }
+        => json
+            .Invoking(JsonTester.Read<CasRegistryNumber>)
+            .Should().Throw<Exception>()
+            .And.Should().BeOfType(exceptionType);
 }
 
 public class Supports_XML_serialization

@@ -179,8 +179,9 @@ public class Can_be_parsed
     {
         using (TestCultures.En_GB.Scoped())
         {
-            var exception = Assert.Throws<FormatException>(() => YesNo.Parse("invalid input"));
-            Assert.AreEqual("Not a valid yes-no value", exception.Message);
+            "invalid input".Invoking(YesNo.Parse)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid yes-no value");
         }
     }
 

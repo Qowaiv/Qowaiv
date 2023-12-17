@@ -70,7 +70,7 @@ public class Remove
     public void Markup_removes_all_markup_chars(char ch)
     {
         var buffer = $"{ch} Hello,{ch}world!  ".Buffer().RemoveMarkup();
-        Assert.AreEqual("Hello,world!", buffer);
+        buffer.Should().BeEquivalentTo("Hello,world!");
     }
 }
 

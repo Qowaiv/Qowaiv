@@ -8,12 +8,14 @@
 public class HashingNotSupported : NotSupportedException
 {
     /// <summary>Initializes a new instance of the <see cref="HashingNotSupported"/> class.</summary>
+    [ExcludeFromCodeCoverage/* Justification = Required for extensibility. */]
     public HashingNotSupported() { }
 
     /// <summary>Initializes a new instance of the <see cref="HashingNotSupported"/> class.</summary>
     public HashingNotSupported(string message) : base(message) { }
 
     /// <summary>Initializes a new instance of the <see cref="HashingNotSupported"/> class.</summary>
+    [ExcludeFromCodeCoverage/* Justification = Required for extensibility. */]
     public HashingNotSupported(string message, Exception innerException) : base(message, innerException) { }
 
 #if NET8_0_OR_GREATER

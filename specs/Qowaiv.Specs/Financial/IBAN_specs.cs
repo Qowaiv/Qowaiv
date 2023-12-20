@@ -1,124 +1,69 @@
-﻿namespace IBAN_specs;
+﻿namespace Financial.IBAN_specs;
 
 public class Supported
 {
+    private static readonly Country[] All =
+    [
+        Country.AD, Country.AE, Country.AL, Country.AO, Country.AT, Country.AZ,
+        Country.BA, Country.BE, Country.BF, Country.BG, Country.BH, Country.BI, Country.BJ, Country.BR, Country.BY,
+        Country.CG, Country.CH,Country.CI, Country.CM, Country.CR, Country.CV, Country.CY, Country.CZ,
+        Country.DE, Country.DJ, Country.DK, Country.DO, Country.DZ,
+        Country.EE, Country.EG, Country.ES,
+        Country.FI, Country.FO, Country.FR,
+        Country.GA, Country.GB, Country.GE, Country.GI, Country.GL, Country.GQ, Country.GR, Country.GT, Country.GW,
+        Country.HN, Country.HR, Country.HU,
+        Country.IE, Country.IL, Country.IQ, Country.IR, Country.IS, Country.IT,
+        Country.JO,
+        Country.KM, Country.KW, Country.KZ,
+        Country.LB, Country.LC, Country.LI, Country.LT, Country.LU, Country.LV, Country.LY,
+        Country.MA, Country.MC, Country.MD, Country.ME, Country.MG, Country.MK, Country.ML, Country.MR, Country.MT, Country.MU,
+        Country.MZ, Country.NE, Country.NI, Country.NL, Country.NO,
+        Country.PK, Country.PL, Country.PS, Country.PT,
+        Country.QA,
+        Country.RO, Country.RS,
+        Country.SA, Country.SC, Country.SE, Country.SI, Country.SK, Country.SM, Country.SN, Country.ST, Country.SV,
+        Country.TD, Country.TG, Country.TL, Country.TN, Country.TR,
+        Country.UA, Country.VA, Country.VG,
+        Country.XK,
+    ];
+
     [Test]
     public void by_103_Countries()
     {
-        var supported = new[]
-        {
-                Country.AD,
-                Country.AE,
-                Country.AL,
-                Country.AO,
-                Country.AT,
-                Country.AZ,
-                Country.BA,
-                Country.BE,
-                Country.BF,
-                Country.BG,
-                Country.BH,
-                Country.BI,
-                Country.BJ,
-                Country.BR,
-                Country.BY,
-                Country.CG,
-                Country.CH,
-                Country.CI,
-                Country.CM,
-                Country.CR,
-                Country.CV,
-                Country.CY,
-                Country.CZ,
-                Country.DE,
-                Country.DJ,
-                Country.DK,
-                Country.DO,
-                Country.DZ,
-                Country.EE,
-                Country.EG,
-                Country.ES,
-                Country.FI,
-                Country.FO,
-                Country.FR,
-                Country.GA,
-                Country.GB,
-                Country.GE,
-                Country.GI,
-                Country.GL,
-                Country.GQ,
-                Country.GR,
-                Country.GT,
-                Country.GW,
-                Country.HN,
-                Country.HR,
-                Country.HU,
-                Country.IE,
-                Country.IL,
-                Country.IQ,
-                Country.IR,
-                Country.IS,
-                Country.IT,
-                Country.JO,
-                Country.KM,
-                Country.KW,
-                Country.KZ,
-                Country.LB,
-                Country.LC,
-                Country.LI,
-                Country.LT,
-                Country.LU,
-                Country.LV,
-                Country.LY,
-                Country.MA,
-                Country.MC,
-                Country.MD,
-                Country.ME,
-                Country.MG,
-                Country.MK,
-                Country.ML,
-                Country.MR,
-                Country.MT,
-                Country.MU,
-                Country.MZ,
-                Country.NE,
-                Country.NI,
-                Country.NL,
-                Country.NO,
-                Country.PK,
-                Country.PL,
-                Country.PS,
-                Country.PT,
-                Country.QA,
-                Country.RO,
-                Country.RS,
-                Country.SA,
-                Country.SC,
-                Country.SE,
-                Country.SI,
-                Country.SK,
-                Country.SM,
-                Country.SN,
-                Country.ST,
-                Country.SV,
-                Country.TD,
-                Country.TG,
-                Country.TL,
-                Country.TN,
-                Country.TR,
-                Country.UA,
-                Country.VA,
-                Country.VG,
-                Country.XK,
-            };
-
-        InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code).Should().BeEquivalentTo(supported);
+        InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code).Should().BeEquivalentTo(All);
         InternationalBankAccountNumber.Supported.Count.Should().Be(103);
     }
 }
 
 public class With_domain_logic
 {
+    [TestCase("")]
+    [TestCase("?")]
+    public void has_length_zero_for_empty_and_unknown(InternationalBankAccountNumber svo)
+      => svo.Length.Should().Be(0);
+
+    [TestCase(18, "NL20INGB0001234567")]
+    public void has_length(int length, InternationalBankAccountNumber svo)
+        => svo.Length.Should().Be(length);
+
+    [TestCase(false, "NL20INGB0001234567")]
+    [TestCase(false, "?")]
+    [TestCase(true, "")]
+    public void IsEmpty_returns(bool result, InternationalBankAccountNumber svo)
+       => svo.IsEmpty().Should().Be(result);
+
+    [TestCase(false, "NL20INGB0001234567")]
+    [TestCase(true, "?")]
+    [TestCase(true, "")]
+    public void IsEmptyOrUnknown_returns(bool result, InternationalBankAccountNumber svo)
+        => svo.IsEmptyOrUnknown().Should().Be(result);
+
+    [TestCase(false, "NL20INGB0001234567")]
+    [TestCase(true, "?")]
+    [TestCase(false, "")]
+    public void IsUnknown_returns(bool result, InternationalBankAccountNumber svo)
+        => svo.IsUnknown().Should().Be(result);
+
     [TestCase(true, "NL20INGB0001234567")]
     [TestCase(true, "?")]
     [TestCase(false, "")]
@@ -128,12 +73,218 @@ public class With_domain_logic
     [TestCase(false, "?")]
     [TestCase(false, "")]
     public void IsKnown_is(bool result, InternationalBankAccountNumber svo) => svo.IsKnown.Should().Be(result);
+
+    [TestCase("", "")]
+    [TestCase("?", "?")]
+    [TestCase("NL", "NL20INGB0001234567")]
+    public void with_county(Country country, InternationalBankAccountNumber svo)
+        => svo.Country.Should().Be(country);
+}
+
+public class Has_constant
+{
+    [Test]
+    public void Empty() => InternationalBankAccountNumber.Empty.Should().Be(default(InternationalBankAccountNumber));
+
+    [Test]
+    public void Unknown() => InternationalBankAccountNumber.Unknown.Should().Be(InternationalBankAccountNumber.Parse("?"));
+}
+
+public class Is_equal_by_value
+{
+    [Test]
+    public void not_equal_to_null()
+        => Svo.Iban.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.Iban.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_DE68210501700012345678_value()
+        => Svo.Iban.Equals(InternationalBankAccountNumber.Parse("DE68210501700012345678")).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.Iban.Equals(InternationalBankAccountNumber.Parse("NL20INGB0001234567")).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (Svo.Iban == InternationalBankAccountNumber.Parse("NL20INGB0001234567")).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_DE68210501700012345678_values()
+        => (Svo.Iban == InternationalBankAccountNumber.Parse("DE68210501700012345678")).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (Svo.Iban != InternationalBankAccountNumber.Parse("NL20INGB0001234567")).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_DE68210501700012345678_values()
+        => (Svo.Iban != InternationalBankAccountNumber.Parse("DE68210501700012345678")).Should().BeTrue();
+
+    [TestCase("", 0)]
+    [TestCase("NL20INGB0001234567", 684896179)]
+    public void hash_code_is_value_based(InternationalBankAccountNumber svo, int hash)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hash);
+        }
+    }
 }
 
 public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.Iban.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_InternationalBankAccountNumber_as_object()
+    {
+        object obj = Svo.Iban;
+        Svo.Iban.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_InternationalBankAccountNumber_only()
+        => Svo.Iban.Invoking(svo => svo.CompareTo(new object()))
+        .Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        InternationalBankAccountNumber[] sorted = 
+        [
+            default,
+            default,
+            InternationalBankAccountNumber.Parse("CG39 3001 1000 1010 1345 1300 019"),
+            InternationalBankAccountNumber.Parse("CH36 0838 7000 0010 8017 3"),
+            InternationalBankAccountNumber.Parse("CI02 N259 9162 9182 8879 7488 1965"),
+            InternationalBankAccountNumber.Unknown,
+        ];
+
+        var list = new List<InternationalBankAccountNumber> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+        list.Should().BeEquivalentTo(sorted);
+    }
+}
+
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Svo.Iban.ToString().Should().Be("NL20INGB0001234567");
+        }
+    }
+
+    [Test]
+    public void with_null_pattern_equal_to_default()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Svo.Iban.ToString().Should().Be(Svo.Iban.ToString(default(string)));
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Svo.Iban.ToString().Should().Be(Svo.Iban.ToString(string.Empty));
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_string_empty()
+        => default(InternationalBankAccountNumber).ToString().Should().BeEmpty();
+
+    [Test]
+    public void unknown_value_is_represented_as_unknown()
+        => InternationalBankAccountNumber.Unknown.ToString().Should().Be("?");
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.Es_EC.Scoped())
+        {
+            Svo.Iban.ToString(FormatProvider.Empty).Should().Be("NL20INGB0001234567");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.Iban.ToString("F", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: 'NL20 INGB 0001 2345 67', format: 'F'");
+    }
+
+    [TestCase(null, "NL20INGB0001234567", "NL20INGB0001234567")]
+    [TestCase("f", "NL20INGB0001234567", "nl20 ingb 0001 2345 67")]
+    [TestCase("F", "NL20INGB0001234567", "NL20 INGB 0001 2345 67")]
+    [TestCase("u", "NL20INGB0001234567", "nl20ingb0001234567")]
+    [TestCase("U", "NL20INGB0001234567", "NL20INGB0001234567")]
+    [TestCase("F", "", "")]
+    [TestCase("F", "?", "?")]
+    public void wiht_format(string format, InternationalBankAccountNumber svo, string formatted)
+        => svo.ToString(format).Should().Be(formatted);
+}
+
+public class Can_be_parsed
+{
+    [Test]
+    public void from_null_string_represents_Empty()
+        => InternationalBankAccountNumber.Parse(null).Should().Be(InternationalBankAccountNumber.Empty);
+
+    [Test]
+    public void from_empty_string_represents_Empty()
+        => InternationalBankAccountNumber.Parse(string.Empty).Should().Be(InternationalBankAccountNumber.Empty);
+
+    [Test]
+    public void from_question_mark_represents_Unknown()
+        => InternationalBankAccountNumber.Parse("?").Should().Be(InternationalBankAccountNumber.Unknown);
+
+    [Test]
+    public void from_valid_input_only_otherwise_throws_on_Parse()
+    {
+        using (TestCultures.En_GB.Scoped())
+        {
+            Func<InternationalBankAccountNumber> parse = () => InternationalBankAccountNumber.Parse("invalid input");
+            parse.Should().Throw<FormatException>()
+                .WithMessage("Not a valid IBAN");
+        }
+    }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => (InternationalBankAccountNumber.TryParse("invalid input", out _)).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => InternationalBankAccountNumber.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+        => InternationalBankAccountNumber.TryParse("NL20INGB0001234567").Should().Be(Svo.Iban);
+
+    [TestCase(' ')]
+    [TestCase((char)160)]
+    [TestCase('\t')]
+    [TestCase('\r')]
+    [TestCase('\n')]
+    [TestCase('-')]
+    [TestCase('_')]
+    [TestCase('.')]
+    public void ignoring_formatting(char ch)
+    {
+        var iban = InternationalBankAccountNumber.Parse($"{ch}NL20{ch}INGB00{ch}0123456{ch}7{ch}");
+        iban.Should().Be(Svo.Iban);
+    }
 }
 
 public class Supports_type_conversion
@@ -211,6 +362,44 @@ public class Supports_JSON_serialization
             .And.Should().BeOfType(exceptionType);
 }
 
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.Iban);
+        xml.Should().Be("NL20INGB0001234567");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<InternationalBankAccountNumber>("NL20INGB0001234567");
+        svo.Should().Be(Svo.Iban);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.Iban);
+        Svo.Iban.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.Iban);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.Iban;
+        obj.GetSchema().Should().BeNull();
+    }
+}
 
 public class Input_is_invalid_when
 {
@@ -237,6 +426,14 @@ public class Input_is_invalid_when
 
 public class Input_is_valid
 {
+    [TestCase("US70 ABCD 1234")]
+    [TestCase("US41 1234 5678 90AB CDEF GHIJ KLMN OPQR")]
+    public void for_countiers_without_IBAN(string str)
+    {
+        var iban = InternationalBankAccountNumber.Parse(str);
+        InternationalBankAccountNumber.Supported.Should().NotContain(iban.Country);
+    }
+
     [Test]
     public void despite_irregular_white_spacing()
         => InternationalBankAccountNumber.Parse("AE950 2100000006  93123456").IsEmptyOrUnknown().Should().BeFalse();
@@ -370,4 +567,53 @@ public class Input_is_valid
         [Country.VG, "VG96 VPVG 0000 0123 4567 8901"],
         [Country.XK, "XK05 1212 0123 4567 8906"],
     ];
+}
+
+public class Is_Open_API_data_type
+{
+    [Test]
+    public void with_info()
+       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(InternationalBankAccountNumber))
+       .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+           dataType : typeof(InternationalBankAccountNumber),
+            description: "International Bank Account Number notation as defined by ISO 13616:2007.",
+            example: "BE71096123456769",
+            type: "string",
+            format: "iban",
+            pattern: "[A-Z]{2}[0-9]{2}[A-Z0-9]{8,28}",
+            nullable: true));
+
+    [TestCase("NL20INGB0001234567")]
+    public void pattern_matches(string input)
+        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(InternationalBankAccountNumber))!.Matches(input).Should().BeTrue();
+}
+
+#if NET8_0_OR_GREATER
+#else
+public class Supports_binary_serialization
+{
+    [Test]
+    [Obsolete("Usage of the binary formatter is considered harmful.")]
+    public void using_BinaryFormatter()
+    {
+        var round_tripped = SerializeDeserialize.Binary(Svo.Iban);
+        Svo.Iban.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void storing_string_in_SerializationInfo()
+    {
+        var info = Serialize.GetInfo(Svo.Iban);
+        info.GetString("Value").Should().Be("NL20INGB0001234567");
+    }
+}
+#endif
+
+public class Debugger
+{
+    [TestCase("{empty}", "")]
+    [TestCase("{unknown}", "?")]
+    [TestCase("NL20 INGB 0001 2345 67", "NL20INGB0001234567")]
+    public void has_custom_display(object display, InternationalBankAccountNumber svo)
+        => svo.Should().HaveDebuggerDisplay(display);
 }

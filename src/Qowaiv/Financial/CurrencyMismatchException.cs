@@ -5,12 +5,14 @@
 public class CurrencyMismatchException : Exception
 {
     /// <summary>Initializes a new instance of the <see cref="CurrencyMismatchException"/> class.</summary>
+    [ExcludeFromCodeCoverage/* Justification = Required for extensibility. */]
     public CurrencyMismatchException() { }
 
     /// <summary>Initializes a new instance of the <see cref="CurrencyMismatchException"/> class.</summary>
     public CurrencyMismatchException(string message) : base(message) { }
 
     /// <summary>Initializes a new instance of the <see cref="CurrencyMismatchException"/> class.</summary>
+    [ExcludeFromCodeCoverage/* Justification = Required for extensibility. */]
     public CurrencyMismatchException(string message, Exception inner) : base(message, inner) { }
 
     /// <summary>Initializes a new instance of the <see cref="CurrencyMismatchException"/> class.</summary>

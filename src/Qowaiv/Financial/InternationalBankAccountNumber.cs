@@ -18,8 +18,8 @@ namespace Qowaiv.Financial;
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
-[OpenApiDataType(description: "International Bank Account Number notation as defined by ISO 13616:2007.", example: "BE71096123456769.", type: "string", format: "iban", nullable: true)]
-[OpenApi.OpenApiDataType(description: "International Bank Account Number notation as defined by ISO 13616:2007.", example: "BE71096123456769.", type: "string", format: "iban", nullable: true)]
+[OpenApiDataType(description: "International Bank Account Number notation as defined by ISO 13616:2007.", example: "BE71096123456769", type: "string", format: "iban", nullable: true, pattern: "[A-Z]{2}[0-9]{2}[A-Z0-9]{8,28}")]
+[OpenApi.OpenApiDataType(description: "International Bank Account Number notation as defined by ISO 13616:2007.", example: "BE71096123456769", type: "string", format: "iban", nullable: true, pattern: "[A-Z]{2}[0-9]{2}[A-Z0-9]{8,28}")]
 [TypeConverter(typeof(InternationalBankAccountNumberTypeConverter))]
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.InternationalBankAccountNumberJsonConverter))]

@@ -149,7 +149,8 @@ public class Is_comparable
 
     [Test]
     public void to_InternationalBankAccountNumber_only()
-        => Assert.Throws<ArgumentException>(() => Svo.Iban.CompareTo(new object()));
+        => Svo.Iban.Invoking(svo => svo.CompareTo(new object()))
+        .Should().Throw<ArgumentException>();
 
     [Test]
     public void can_be_sorted_using_compare()
@@ -220,7 +221,7 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.Iban.ToString("F", FormatProvider.CustomFormatter);
-        Assert.AreEqual("Unit Test Formatter, value: 'NL20 INGB 0001 2345 67', format: 'F'", formatted);
+        formatted.Should().Be("Unit Test Formatter, value: 'NL20 INGB 0001 2345 67', format: 'F'");
     }
 
     [TestCase("en-GB", null, "NL20INGB0001234567", "NL20INGB0001234567")]
@@ -412,7 +413,7 @@ public class Supports_XML_serialization
     public void has_no_custom_XML_schema()
     {
         IXmlSerializable obj = Svo.Iban;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 }
 

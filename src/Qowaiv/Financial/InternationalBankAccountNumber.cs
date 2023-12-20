@@ -215,10 +215,6 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
             mod += index;
             mod = mod.Mod(97);
         }
-        if(mod != 1)
-        {
-
-        }
         return mod == 1;
     }
 }

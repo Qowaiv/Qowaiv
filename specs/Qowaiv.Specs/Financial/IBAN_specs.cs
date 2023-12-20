@@ -224,20 +224,15 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: 'NL20 INGB 0001 2345 67', format: 'F'");
     }
 
-    [TestCase("en-GB", null, "NL20INGB0001234567", "NL20INGB0001234567")]
-    [TestCase("nl-BE", "f", "NL20INGB0001234567", "nl20 ingb 0001 2345 67")]
-    [TestCase("nl-BE", "F", "NL20INGB0001234567", "NL20 INGB 0001 2345 67")]
-    [TestCase("es-ES", "u", "NL20INGB0001234567", "nl20ingb0001234567")]
-    [TestCase("nl-BE", "U", "NL20INGB0001234567", "NL20INGB0001234567")]
-    [TestCase("nl-BE", "F", "", "")]
-    [TestCase("nl-BE", "F", "?", "?")]
-    public void culture_dependent(CultureInfo culture, string format, InternationalBankAccountNumber svo, string formatted)
-    {
-        using (culture.Scoped())
-        {
-            svo.ToString(format).Should().Be(formatted);
-        }
-    }
+    [TestCase(null, "NL20INGB0001234567", "NL20INGB0001234567")]
+    [TestCase("f", "NL20INGB0001234567", "nl20 ingb 0001 2345 67")]
+    [TestCase("F", "NL20INGB0001234567", "NL20 INGB 0001 2345 67")]
+    [TestCase("u", "NL20INGB0001234567", "nl20ingb0001234567")]
+    [TestCase("U", "NL20INGB0001234567", "NL20INGB0001234567")]
+    [TestCase("F", "", "")]
+    [TestCase("F", "?", "?")]
+    public void wiht_format(string format, InternationalBankAccountNumber svo, string formatted)
+        => svo.ToString(format).Should().Be(formatted);
 }
 
 public class Can_be_parsed

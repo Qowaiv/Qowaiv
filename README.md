@@ -318,6 +318,8 @@ iban.Length; // 18
 iban.ToString("F"); // NL20 INGB 0001 2345 67
 ```
 
+An overview with all supported countries and patterns can be found [here](IBAN.md).
+
 ### Money
 Represents the amount and the currency. Technically this is not SVO. However it
 acts identically as a SVO.

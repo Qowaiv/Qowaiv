@@ -228,6 +228,8 @@ public class Has_custom_formatting
     [TestCase("nl-BE", "F", "NL20INGB0001234567", "NL20 INGB 0001 2345 67")]
     [TestCase("es-ES", "u", "NL20INGB0001234567", "nl20ingb0001234567")]
     [TestCase("nl-BE", "U", "NL20INGB0001234567", "NL20INGB0001234567")]
+    [TestCase("nl-BE", "F", "", "")]
+    [TestCase("nl-BE", "F", "?", "?")]
     public void culture_dependent(CultureInfo culture, string format, InternationalBankAccountNumber svo, string formatted)
     {
         using (culture.Scoped())
@@ -284,6 +286,20 @@ public class Can_be_parsed
     [Test]
     public void with_TryParse_returns_SVO()
         => InternationalBankAccountNumber.TryParse("NL20INGB0001234567").Should().Be(Svo.Iban);
+
+    [TestCase(' ')]
+    [TestCase((char)160)]
+    [TestCase('\t')]
+    [TestCase('\r')]
+    [TestCase('\n')]
+    [TestCase('-')]
+    [TestCase('_')]
+    [TestCase('.')]
+    public void ignoring_formatting(char ch)
+    {
+        var iban = InternationalBankAccountNumber.Parse($"{ch}NL20{ch}INGB00{ch}0123456{ch}7{ch}");
+        iban.Should().Be(Svo.Iban);
+    }
 }
 
 public class Supports_type_conversion

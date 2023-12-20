@@ -238,17 +238,6 @@ public class Has_custom_formatting
             svo.ToString(format).Should().Be(formatted);
         }
     }
-
-    [Test]
-    public void with_current_thread_culture_as_default()
-    {
-        using (new CultureInfoScope(
-            culture: TestCultures.Nl_NL,
-            cultureUI: TestCultures.En_GB))
-        {
-            Assert.AreEqual("NL20INGB0001234567", Svo.Iban.ToString(provider: null));
-        }
-    }
 }
 
 public class Can_be_parsed

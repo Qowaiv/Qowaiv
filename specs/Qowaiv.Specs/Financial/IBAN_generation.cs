@@ -12,7 +12,7 @@ public class Markdown_file
     [Test]
     public void Generate_Markdown()
     {
-        foreach(var info in Infos.OrderByDescending(i => i.Official).ThenBy(i => i.Country))
+        foreach (var info in Infos.OrderByDescending(i => i.Official).ThenBy(i => i.Country))
         {
             Console.WriteLine(info.Markdown());
         }
@@ -125,7 +125,7 @@ public sealed record IbanInfo(string CountryName, int Length, string Bban, int? 
     }
 
     public string Markdown()
-        => $"| {Country,-25} | {Length,5} | {Bban,-15} | {CheckSum,5:00} | {Fields,-41} | {Official,-4:f} | {Example,-41} |";
+        => $"| {NoBreak(CountryName),-25} | {Length,5} | {Bban,-15} | {CheckSum,5:00} | {NoBreak(Fields),-41} | {Official,-4:f} | {NoBreak(Example),-41} |";
 
     internal string LocalizedPattern()
         => CheckSum is { } c
@@ -158,5 +158,5 @@ public sealed record IbanInfo(string CountryName, int Length, string Bban, int? 
         }
     }
 
-    
+    static string NoBreak(string s) => s.Replace(' ', (char)160);
 }

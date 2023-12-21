@@ -61,7 +61,7 @@ public readonly partial struct InternationalBankAccountNumber
         Bban(Country.HN, "4a,20n"),
         Bban(Country.HR, "17n"),
         Bban(Country.HU, "24n"),
-        Bban(Country.IE, "4a,6n,8n"),
+        Bban(Country.IE, "4a,14n"),
         Bban(Country.IL, "19n"),
         Bban(Country.IQ, "4a,15n"),
         Bban(Country.IR, "[0],2n,[0],18n"),

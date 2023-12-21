@@ -48,7 +48,7 @@ validator code.
 | Hungary                   |    28 | 24n             |       | HUkk bbbs sssx cccc cccc cccc cccx        | yes  | HU42 1177 3016 1111 1018 0000 0000        |
 | Iceland                   |    26 | 22n             |       | ISkk bbss ttcc cccc iiii iiii ii          | yes  | IS14 0159 2600 7654 5510 7303 39          |
 | Iraq                      |    23 | 4a,15n          |       | IQkk bbbb sssc cccc cccc ccc              | yes  | IQ98 NBIQ 8501 2345 6789 012              |
-| Ireland                   |    22 | 4a,6n,8n        |       | IEkk qqqq bbbb bbcc cccc cc               | yes  | IE29 AIBK 9311 5212 3456 78               |
+| Ireland                   |    22 | 4a,14n          |       | IEkk qqqq bbbb bbcc cccc cc               | yes  | IE29 AIBK 9311 5212 3456 78               |
 | Israel                    |    23 | 19n             |       | ILkk bbbs sscc cccc cccc ccc              | yes  | IL62 0108 0000 0009 9999 999              |
 | Italy                     |    27 | 1a,10n,12c      |       | ITkk xbbb bbss sssc cccc cccc ccc         | yes  | IT60 X054 2811 1010 0000 0123 456         |
 | Jordan                    |    30 | 4a,4n,18c       |       | JOkk bbbb ssss cccc cccc cccc cccc cc     | yes  | JO94 CBJO 0010 0000 0000 0131 0003 02     |

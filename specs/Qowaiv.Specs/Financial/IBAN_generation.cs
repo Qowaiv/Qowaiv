@@ -1,4 +1,4 @@
-﻿namespace Financial.IBAN;
+﻿namespace Financial.IBAN_generation;
 
 public class Markdown_file
 {
@@ -35,6 +35,45 @@ public class Markdown_file
     public void Example_is_valid(IbanInfo info)
         => InternationalBankAccountNumber.TryParse(info.Example).Should().NotBeNull();
 
+    [Test]
+    public void Supported_countries_match_overview()
+    {
+        InternationalBankAccountNumber.Supported
+            .Should().BeEquivalentTo(Infos.Select(i => i.Country));
+    }
+
+    [TestCase("USkk cccc cccc nnnn nnnn nnnn nnnn nnnn nnnn")]
+    [TestCase("SNkk aann nnnn nnnn nnnn nnnn nnnn")]
+    public void Generate_IBAN(string bban)
+    {
+        var rnd = new Random(17);
+        var sb = new StringBuilder();
+        foreach (var ch in bban)
+        {
+            var digit = rnd.Next(0, 10).ToString()[0];
+            var letter = (char)('A' + rnd.Next(0, 26));
+            switch (ch)
+            {
+                case ' ': break;
+                case 'a': sb.Append(letter); break;
+                case 'c': sb.Append(rnd.NextDouble() > 0.5 ? digit : letter); break;
+                case 'n': sb.Append(digit); break;
+                default: sb.Append(ch); break;
+            }
+        }
+
+        var str = sb.ToString();
+
+        var iban = Enumerable.Range(0, 100)
+            .Select(kk => str.Replace("kk", kk.ToString("00")))
+            .Select(InternationalBankAccountNumber.TryParse)
+            .First(i => i.HasValue);
+
+        iban.HasValue.Should().BeTrue();
+
+        Console.WriteLine(iban.GetValueOrDefault().ToString("F"));
+    }
+
     private static readonly IbanInfo[] Infos = Init();
     
     private static IbanInfo[] Init()
@@ -54,8 +93,10 @@ public class Markdown_file
     }
 }
 
-public sealed record IbanInfo(string Country, int Length, string Bban, int? CheckSum, string Fields, YesNo Official, string Example)
+public sealed record IbanInfo(string CountryName, int Length, string Bban, int? CheckSum, string Fields, YesNo Official, string Example)
 {
+    public Country Country => Country.Parse(Example[..2]);
+
     public int BbanLength
     {
         get
@@ -91,7 +132,7 @@ public sealed record IbanInfo(string Country, int Length, string Bban, int? Chec
         {
             int? checksum = parts[3].Trim() is { Length: > 0 } t ? int.Parse(t) : null;
             return new(
-                Country: parts[0].Trim(),
+                CountryName: parts[0].Trim(),
                 Length: int.Parse(parts[1].Trim()),
                 Bban: parts[2].Replace(" ", ""),
                 CheckSum: checksum,

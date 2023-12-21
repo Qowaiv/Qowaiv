@@ -120,7 +120,7 @@ validator code.
 | Mozambique                |    25 | 21n             |       | MZkk nnnn nnnn nnnn nnnn nnnn n           | no   | MZ97 1234 1234 1234 1234 1234 1           |
 | Nicaragua                 |    32 | 4a,24n          |       | NIkk aaaa nnnn nnnn nnnn nnnn nnnn nnnn   | no   | NI92 BAMC 0000 0000 0000 0000 03123 123   |
 | Niger                     |    28 | 2a,22n          |       | NEkk aann nnnn nnnn nnnn nnnn nnnn        | no   | NE58 NE03 8010 0100 1303 0500 0268        |
-| Senegal                   |    28 | 2a,22n          |       | SNkk aann nnnn nnnn nnnn nnnn nnnn        | no   | SN15 A123 1234 1234 1234 1234 1234        |
+| Senegal                   |    28 | 2a,22n          |       | SNkk aann nnnn nnnn nnnn nnnn nnnn        | no   | SN05 TI80 0835 4151 5881 3959 8706        |
 | Togo                      |    28 | 2a,22n          |       | TGkk aann nnnn nnnn nnnn nnnn nnnn        | no   | TG53 TG00 9060 4310 3465 0040 0070        |
 
 Source: [Wikipedia](https://en.wikipedia.org/wiki/International_Bank_Account_Number)

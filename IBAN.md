@@ -15,7 +15,7 @@ validator code.
 
 ## IBAN specifications
 | Country                   | Chars | BBAN Format*    | check | IBAN Fields                               | Off. | Example                                   |
-|---------------------------|------:|-----------------|-------| ------------------------------------------|:----:|-------------------------------------------|
+|---------------------------|:-----:|-----------------|:-----:| ------------------------------------------|:----:|-------------------------------------------|
 | Andorra                   |    24 | 8n,12c          |       | ADkk bbbb ssss cccc cccc cccc             | yes  | AD12 0001 2030 2003 5910 0100             |
 | United Arab Emirates      |    23 | 3n,16n          |       | AEkk bbbc cccc cccc cccc ccc              | yes  | AE95 0210 0000 0069 3123 456              |
 | Albania                   |    28 | 8n,16c          |       | ALkk bbbs sssx cccc cccc cccc cccc        | yes  | AL47 2121 1009 0000 0002 3569 8741        |

@@ -90,7 +90,7 @@ validator code.
 | Sweden                    |    24 | 20n             |       | SEkk bbbc cccc cccc cccc cccx             | yes  | SE35 5000 0000 0549 1000 0003             |
 | Switzerland               |    21 | 5n,12c          |       | CHkk bbbb bccc cccc cccc c                | yes  | CH36 0838 7000 0010 8017 3                |
 | Tunisia                   |    24 | 20n             |    59 | TNkk bbss sccc cccc cccc ccxx             | yes  | TN59 1000 6035 1835 9847 8831             |
-| Turkey                    |    26 | 5n,[0],16c	  |       | TRkk bbbb b0cc cccc cccc cccc cc          | yes  | TR33 0006 1005 1978 6457 8413 26          |
+| Turkey                    |    26 | 5n,[0],16c      |       | TRkk bbbb b0cc cccc cccc cccc cc          | yes  | TR33 0006 1005 1978 6457 8413 26          |
 | Ukraine                   |    29 | 6n,19c          |       | UAkk bbbb bbcc cccc cccc cccc cccc c      | yes  | UA21 3996 2200 0002 6007 2335 6600 1      |
 | United Arab Emirates      |    23 | 3n,16n          |       | AEkk bbbc cccc cccc cccc ccc              | yes  | AE95 0210 0000 0069 3123 456              |
 | United Kingdom            |    22 | 4a,14n          |       | GBkk bbbb ssss sscc cccc cc               | yes  | GB46 BARC 2078 9863 2748 45               |

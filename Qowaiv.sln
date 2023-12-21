@@ -68,8 +68,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{7F291C
 		shared\ProductInfo.cs = shared\ProductInfo.cs
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Specs.Legacy", "specs\Qowaiv.Specs.Legacy\Qowaiv.Specs.Legacy.csproj", "{5125886A-46E5-4B6F-9A1B-D1BD85AEED6D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,10 +102,6 @@ Global
 		{9CCFB684-06FA-48B1-8732-0A520B639E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CCFB684-06FA-48B1-8732-0A520B639E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CCFB684-06FA-48B1-8732-0A520B639E11}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5125886A-46E5-4B6F-9A1B-D1BD85AEED6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5125886A-46E5-4B6F-9A1B-D1BD85AEED6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5125886A-46E5-4B6F-9A1B-D1BD85AEED6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5125886A-46E5-4B6F-9A1B-D1BD85AEED6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,7 +117,6 @@ Global
 		{F74D9EF2-39B5-40EB-8C44-1D6015C38D70} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
 		{9CCFB684-06FA-48B1-8732-0A520B639E11} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 		{7F291C39-7785-41A7-8678-2E79B347E7AD} = {A4C3C9FF-4EED-41FE-8849-C896429254B5}
-		{5125886A-46E5-4B6F-9A1B-D1BD85AEED6D} = {40C1E942-8DB1-4E58-8FB4-71F5EDA66029}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B55A336-E2D3-4656-9840-D519B3E1159B}

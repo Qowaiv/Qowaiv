@@ -113,7 +113,7 @@ validator code.
 | Gabon                     |    27 | 23n             |       | GAkk nnnn nnnn nnnn nnnn nnnn nnn         | no   | GA21 4002 1010 0320 0189 0020 126         |
 | Guinea-Bissau             |    25 | 2c,19n          |       | GWkk ccnn nnnn nnnn nnnn nnnn n           | no   | GW04 GW14 3001 0181 8006 3760 1           |
 | Honduras                  |    28 | 4a,20n          |       | HNkk aaaa nnnn nnnn nnnn nnnn nnnn        | no   | HN54 PISA 0000 0000 0000 0012 3124        |
-| Iran                      |    26 | [0],2n,[0],18n  |       | IRkk nnnn nnnn nnnn nnnn nnnn nn          | no   | IR58 0540 1051 8002 1273 1130 07          |
+| Iran                      |    26 | [0],2n,[0],18n  |       | IRkk 0nn0 nnnn nnnn nnnn nnnn nn          | no   | IR58 0540 1051 8002 1273 1130 07          |
 | Madagascar                |    27 | 23n             |       | MGkk nnnn nnnn nnnn nnnn nnnn nnn         | no   | MG46 0000 5030 0712 8942 1016 045         |
 | Mali                      |    28 | 2c,22n          |       | MLkk annn nnnn nnnn nnnn nnnn nnnn        | no   | ML13 ML01 6012 0102 6001 0066 8497        |
 | Morocco                   |    28 | 24n             |       | MAkk nnnn nnnn nnnn nnnn nnnn nnnn        | no   | MA64 0115 1900 0001 2050 0053 4921        |

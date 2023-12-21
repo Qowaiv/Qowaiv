@@ -1,4 +1,6 @@
-﻿namespace Financial.IBAN_generation;
+﻿using System.Reflection.Metadata;
+
+namespace Financial.IBAN_generation;
 
 public class Markdown_file
 {
@@ -30,6 +32,15 @@ public class Markdown_file
     [TestCaseSource(nameof(Infos))]
     public void BBan_length_equals_length(IbanInfo info)
         => info.BbanLength.Should().Be(info.Length);
+
+    [TestCaseSource(nameof(Infos))]
+    public void Reserved_zeros_match(IbanInfo info)
+    {
+        var fields = Regex.Split(info.Fields, "[^0]").Where(s => s.Any()).ToArray();
+        var bban = new Regex(string.Join(".*", fields.Select(f => $"\\[{f}\\]")));
+
+        bban.IsMatch(info.Bban).Should().BeTrue(because: $"Zero's of {info.Bban} and {info.Fields} should match");
+    }
 
     [TestCaseSource(nameof(Infos))]
     public void Example_is_valid(IbanInfo info)

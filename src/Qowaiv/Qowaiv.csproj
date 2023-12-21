@@ -9,6 +9,7 @@
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 ToBeReleased
+- Added the Central African Republic, Russia, and Sudan's IBAN patterns.
 - Increase regex time-out to 50 ms. #346
 - Decorate bool Equals(object) with [NotNullWhen(true)]. #345
 - TryApplyCustomFormatter should return false if the provider returns null. #341

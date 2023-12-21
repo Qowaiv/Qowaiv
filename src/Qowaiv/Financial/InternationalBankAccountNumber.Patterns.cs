@@ -115,7 +115,7 @@ public readonly partial struct InternationalBankAccountNumber
         Bban(Country.TG, "2a,22n"),
         Bban(Country.TL, "19n", checksum: 38),
         Bban(Country.TN, "20n", checksum: 59),
-        Bban(Country.TR, "5n,1n,16c"),
+        Bban(Country.TR, "5n,[0],16c"),
         Bban(Country.UA, "6n,19c"),
         Bban(Country.VA, "3n,15n"),
         Bban(Country.VG, "4a,16n"),

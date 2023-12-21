@@ -18,8 +18,8 @@ namespace Qowaiv.Financial;
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
-[OpenApiDataType(description: "International Bank Account Number notation as defined by ISO 13616:2007.", example: "BE71096123456769", type: "string", format: "iban", nullable: true, pattern: "[A-Z]{2}[0-9]{2}[A-Z0-9]{8,28}")]
-[OpenApi.OpenApiDataType(description: "International Bank Account Number notation as defined by ISO 13616:2007.", example: "BE71096123456769", type: "string", format: "iban", nullable: true, pattern: "[A-Z]{2}[0-9]{2}[A-Z0-9]{8,28}")]
+[OpenApiDataType(description: "International Bank Account Number notation as defined by ISO 13616:2007.", example: "BE71096123456769", type: "string", format: "iban", nullable: true, pattern: "[A-Z]{2}[0-9]{2}[A-Z0-9]{8,32}")]
+[OpenApi.OpenApiDataType(description: "International Bank Account Number notation as defined by ISO 13616:2007.", example: "BE71096123456769", type: "string", format: "iban", nullable: true, pattern: "[A-Z]{2}[0-9]{2}[A-Z0-9]{8,32}")]
 [TypeConverter(typeof(InternationalBankAccountNumberTypeConverter))]
 #if NET5_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.InternationalBankAccountNumberJsonConverter))]
@@ -30,7 +30,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     /// <remarks>
     /// Pairs of IBAN characters can be divided by maximum 2 spacing characters.
     /// </remarks>
-    private static readonly Regex Pattern = new(@"^[A-Z]\s{0,2}[A-Z]\s{0,2}[0-9]\s{0,2}[0-9](\s{0,2}[0-9A-Z]){8,32}$", RegOptions.IgnoreCase, RegOptions.Timeout);
+    private static readonly Regex Pattern = new(@"^[A-Z]\s{0,2}[A-Z]\s{0,2}[0-9]\s{0,2}[0-9](\s{0,2}[0-9A-Z]){8,36}$", RegOptions.IgnoreCase, RegOptions.Timeout);
 
     /// <summary>Represents an empty/not set IBAN.</summary>
     public static readonly InternationalBankAccountNumber Empty;
@@ -185,7 +185,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
             result = Unknown;
             return true;
         }
-        else if (str.Length.IsInRange(12, 32)
+        else if (str.Length.IsInRange(12, 36)
             && str.Matches(Pattern)
             && ValidForCountry(str)
             && Mod97(str))

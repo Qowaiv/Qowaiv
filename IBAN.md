@@ -1,7 +1,7 @@
 ﻿# International Bank Account Number
-An overview of all IBAN's supported. Note that for countries not mentioned, IBA
-
-ISO 7064 MOD-97-10
+An overview of all IBAN's supported. IBAN's for countries not included are
+considered valid if their length is between 12 and 36, and if they satisfy
+[ISO 7064 MOD-97-10](https://en.wikipedia.org/wiki/ISO/IEC_7064).
 
 # Basic Bank Account Number
 Abbreviated as BBAN, is a way of describing the IBAN (for a specific country).
@@ -10,7 +10,7 @@ Abbreviated as BBAN, is a way of describing the IBAN (for a specific country).
 * n: numeric
 
 In this table, for countries with fixed characters (such as Costa Rica) those
-are displayed as `[?]`. This is strictly not BBAN, but helps when genrating
+are displayed as `[?]`. This is strictly not BBAN, but helps when generating
 validator code.
 
 ## IBAN specifications

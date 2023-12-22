@@ -9,6 +9,7 @@
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 ToBeReleased
+- Rewrite of IBAN parsing/validation. #350
 - Added the Central African Republic, Russia, and Sudan's IBAN patterns. #349
 - Increase regex time-out to 50 ms. #346
 - Decorate bool Equals(object) with [NotNullWhen(true)]. #345
@@ -94,7 +95,7 @@ v5.1.2
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
-    <!--<PackageReference Include="System.Memory" Version="4.5.5" />-->
+    <PackageReference Include="System.Memory" Version="4.5.5" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
   </ItemGroup>
  

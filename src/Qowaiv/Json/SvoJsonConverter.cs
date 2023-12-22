@@ -99,6 +99,10 @@ public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : 
 
     /// <summary>Creates the SVO based on its JSON string representation.</summary>
     [Pure]
+    protected virtual TSvo? FromJson(ReadOnlySpan<byte> json) => null;
+
+    /// <summary>Creates the SVO based on its JSON string representation.</summary>
+    [Pure]
     protected abstract TSvo FromJson(string? json);
 
     /// <summary>Creates the SVO based on its JSON (long) number representation.</summary>

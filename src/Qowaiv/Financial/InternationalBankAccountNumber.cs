@@ -3,6 +3,7 @@
 // See README.md => Sortable
 using Qowaiv.Conversion.Financial;
 using Qowaiv.Globalization;
+using System.Collections.ObjectModel;
 
 namespace Qowaiv.Financial;
 
@@ -26,12 +27,6 @@ namespace Qowaiv.Financial;
 #endif
 public readonly partial struct InternationalBankAccountNumber : IXmlSerializable, IFormattable, IEquatable<InternationalBankAccountNumber>, IComparable, IComparable<InternationalBankAccountNumber>
 {
-    /// <summary>Represents the pattern of a (potential) valid IBAN.</summary>
-    /// <remarks>
-    /// Pairs of IBAN characters can be divided by maximum 2 spacing characters.
-    /// </remarks>
-    private static readonly Regex Pattern = new(@"^[A-Z]\s{0,2}[A-Z]\s{0,2}[0-9]\s{0,2}[0-9](\s{0,2}[0-9A-Z]){8,36}$", RegOptions.IgnoreCase, RegOptions.Timeout);
-
     /// <summary>Represents an empty/not set IBAN.</summary>
     public static readonly InternationalBankAccountNumber Empty;
 
@@ -175,46 +170,36 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out InternationalBankAccountNumber result)
     {
         result = default;
-        var str = s.Unify();
-        if (str.IsEmpty())
+
+        if (s is { Length: >= 12 } && IbanParser.Parse(s) is { } iban)
         {
+            result = new(iban);
             return true;
         }
-        else if (str.IsUnknown(formatProvider))
+        else
         {
-            result = Unknown;
-            return true;
+            var str = s.Unify();
+            if (str.IsEmpty())
+            {
+                return true;
+            }
+            if (str.IsUnknown(formatProvider))
+            {
+                result = Unknown;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        else if (str.Length.IsInRange(12, 36)
-            && str.Matches(Pattern)
-            && ValidForCountry(str)
-            && Mod97(str))
-        {
-            result = new InternationalBankAccountNumber(str);
-            return true;
-        }
-        return false;
     }
 
-    [Pure]
-    private static bool ValidForCountry(string iban)
-        => Country.TryParse(iban[..2], out var country)
-        && !country.IsEmptyOrUnknown()
-        && (!LocalizedPatterns.TryGetValue(country, out var localizedPattern)
-        || iban.Matches(localizedPattern));
-
-    [Pure]
-    private static bool Mod97(string iban)
-    {
-        var mod = 0;
-        for (var i = 0; i < iban.Length; i++)
-        {
-            var digit = iban[(i + 4) % iban.Length]; // Calculate the first 4 characters (country and checksum) last
-            var index = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".IndexOf(digit);
-            mod *= index > 9 ? 100 : 10;
-            mod += index;
-            mod = mod.Mod(97);
-        }
-        return mod == 1;
-    }
+    /// <summary>A list with countries supporting IBAN.</summary>
+    public static readonly IReadOnlyCollection<Country> Supported = new ReadOnlyCollection<Country>(
+        IbanParser.Parsers
+            .OfType<BbanParser>()
+            .Select(p => p.Country)
+            .Where(c => c.IsKnown)
+            .ToList());
 }

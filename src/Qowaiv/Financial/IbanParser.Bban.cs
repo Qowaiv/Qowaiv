@@ -1,19 +1,61 @@
-#pragma warning disable S1210
-// "Equals" and the comparison operators should be overridden when implementing "IComparable"
-// See README.md => Sortable
-using Qowaiv.Globalization;
-using System.Collections.ObjectModel;
+﻿using Qowaiv.Globalization;
 
 namespace Qowaiv.Financial;
 
-public readonly partial struct InternationalBankAccountNumber
+internal static partial class IbanParser
 {
-    /// <summary>Gets the localized patterns.</summary>
-    /// <remarks>
-    /// See http://en.wikipedia.org/wiki/International_Bank_Account_Number.
-    /// </remarks>
-    private static readonly Dictionary<Country, Regex> LocalizedPatterns = new[]
+    internal static readonly BbanParser[] Parsers = Init();
+
+    [Pure]
+    private static BbanParser[] Init()
     {
+        var validators = new BbanParser[26 * 26];
+
+        var generic = new BbanGenericParser();
+
+        foreach (var country in Country.GetExisting())
+        {
+            validators[Id(country)] = generic;
+        }
+
+        foreach (var bban in Bbans)
+        {
+            validators[bban.Index] = bban.Parser;
+        }
+        return validators;
+    }
+
+    [Pure]
+    private static int Id(Country country) => ((country.Name[0] - 'A') * 26) + country.Name[1] - 'A';
+
+    private record struct BbanData(int Index, BbanParser Parser);
+
+    [Pure]
+    private static BbanData Bban(Country country, string bban, int? checksum = null)
+    {
+        var pattern = new StringBuilder(32)
+           .Append(country.IsoAlpha2Code)
+           .Append(checksum.HasValue ? checksum.Value.ToString("00") : "nn");
+
+        foreach (var block in bban.Split(','))
+        {
+            var type = block.Last();
+
+            if (!int.TryParse(block[..^1], out int length) && type == ']')
+            {
+                pattern.Append(block[1..^1]);
+            }
+            else
+            {
+                pattern.Append(new string(type, length));
+            }
+        }
+        return new BbanData(Id(country), new(pattern.ToString()));
+    }
+
+    [Pure]
+    private static BbanData[] Bbans =>
+    [
         Bban(Country.AD, "8n,12c"),
         Bban(Country.AE, "3n,16n"),
         Bban(Country.AL, "8n,16c"),
@@ -120,9 +162,5 @@ public readonly partial struct InternationalBankAccountNumber
         Bban(Country.VA, "3n,15n"),
         Bban(Country.VG, "4a,16n"),
         Bban(Country.XK, "4n,10n,2n"),
-    }
-    .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-
-    /// <summary>A list with countries supporting IBAN.</summary>
-    public static readonly IReadOnlyCollection<Country> Supported = new ReadOnlyCollection<Country>(LocalizedPatterns.Select(kvp => kvp.Key).ToList());
+    ];
 }

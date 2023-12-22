@@ -36,8 +36,8 @@ internal class BbanParser(string pattern)
 
         return IsEndOfString(str, index)
            && CheckLength(buffer, pos) is { } iban
-           && Mod97(iban)
-               ? Validate(new(iban))
+           && IbanValidator.Mod97(iban)
+               ? Validate(iban)
                : null;
     }
 
@@ -51,8 +51,8 @@ internal class BbanParser(string pattern)
     }
 
     [Pure]
-    protected virtual char[]? CheckLength(char[] iban, int length)
-        => length == Length ? iban : null;
+    protected virtual string? CheckLength(char[] iban, int length)
+        => length == Length ? new(iban) : null;
 
     [Pure]
     protected virtual string? Validate(string iban) => iban;
@@ -77,27 +77,6 @@ internal class BbanParser(string pattern)
         else if (pattern == 'a') return ASCII.IsLetter(ch);
         else if (pattern == 'c') return ASCII.IsLetterOrDigit(ch);
         else return ch == pattern;
-    }
-
-    [Pure]
-    private static bool Mod97(char[] iban)
-    {
-        var mod = 0;
-        for (var i = 0; i < iban.Length; i++)
-        {
-            // Calculate the first 4 characters (country and checksum) last
-            var ch = iban[(i + 4) % iban.Length];
-            var index = Index(ch);
-            mod *= index > 9 ? 100 : 10;
-            mod += index;
-            mod %= 97;
-        }
-        return mod == 1;
-
-        static int Index(char ch)
-            => ch <= '9'
-                ? ch - '0'
-                : ch - 'A' + 10;
     }
 
     private string DebuggerDisplay => $"{Pattern} ({Length}), {Country}";

@@ -16,6 +16,19 @@ internal sealed class BbanWithCurrencyCodeParser(string pattern) : BbanParser(pa
             : null;
 }
 
+internal sealed class BbanAlbaniaParser(string pattern) : BbanParser(pattern)
+{
+    [Pure]
+    protected override string? Validate(string iban)
+    {
+        var weighted = IbanValidator.Weighted(iban[4..], 9, 7, 3, 1, 9, 7, 3) % 10;
+        var checksum = ASCII.Digit(iban[11]);
+        return (10 - weighted) == checksum
+            ? iban
+            : null;
+    }
+}
+
 /// <summary>
 /// Extends <see cref="BbanParser"/>'s validation applying the Luhn algorithm.
 /// </summary>
@@ -33,15 +46,14 @@ internal sealed class BbanFinlandParser(string pattern) : BbanParser(pattern)
 
         for (var i = 4; i < iban.Length - 1; i++)
         {
-            var digit = Digit(iban[i]);
+            var digit = ASCII.Digit(iban[i]);
             checksum += Odd(i) ? digit : Sum(digit * 2);
         }
 
-        return 10 - (checksum % 10) == Digit(iban[^1])
+        return 10 - (checksum % 10) == ASCII.Digit(iban[^1])
             ? iban
             : null;
 
-        static int Digit(char c) => c - '0';
         static int Sum(int n) => (n / 10) + (n % 10);
         static bool Odd(int i) => (i & 1) == 1;
     }

@@ -49,9 +49,10 @@ internal class Markdown_file
         => InternationalBankAccountNumber.Supported
             .Should().BeEquivalentTo(Infos.Select(i => i.Country));
 
-    // [TestCase("FIkk 1234 5600 0007 89", "FI but with invalid Luhn checksum.")]
-    // [TestCase("MUkk BOMM nnnn nnnn nnnn nnnn 000Z ZZ", "MU but with a non-existing currency.")]
-    // [TestCase("SCkk BANK nnnn nnnn nnnn nnnn nnnn ZZZ", "SC but with a non-existing currency.")]
+    // [TestCase("ALkk 2121 1007 nnnn nnnn nnnn nnnn", "AL with invalid weighted checksum.")]
+    // [TestCase("FIkk 1234 5600 0007 89", "FI with invalid Luhn checksum.")]
+    // [TestCase("MUkk BOMM nnnn nnnn nnnn nnnn 000Z ZZ", "MU with a non-existing currency.")]
+    // [TestCase("SCkk BANK nnnn nnnn nnnn nnnn nnnn ZZZ", "SC with a non-existing currency.")]
     [TestCase("USkk cccc aann ", "A non IBAN country with length 12.")]
     [TestCase("USkk cccc cccc nnnn nnnn nnnn nnnn nnnn nnnn", "A non IBAN country with length 36.")]
     public void Generate_IBAN(string bban, string? because = null)

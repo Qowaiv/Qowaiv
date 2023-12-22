@@ -14,12 +14,8 @@ internal sealed class BbanGenericParser : BbanParser
     }
 
     [Pure]
-    protected override char[]? CheckLength(char[] iban, int length)
-    {
-        if (length < 12) return null;
-
-        var copy = new char[length];
-        Array.Copy(iban, copy, length);
-        return copy;
-    }
+    protected override string? CheckLength(char[] iban, int length)
+        => length >= 12
+        ? new string(iban, 0, length)
+        : null;
 }

@@ -20,20 +20,24 @@ internal static partial class IbanParser
 
         foreach (var bban in Bbans)
         {
-            validators[bban.Index] = bban.Parser;
+            validators[bban.Index] = bban.Code switch
+            {
+                "AL" => new BbanAlbaniaParser(bban.Pattern),
+                "FI" => new BbanFinlandParser(bban.Pattern),
+                "MU" or "SC" => new BbanWithCurrencyCodeParser(bban.Pattern),
+                _ => new BbanParser(bban.Pattern),
+            };
         }
-
-        validators[Id(Country.FI)] = new BbanFinlandParser(validators[Id(Country.FI)].Pattern);
-        validators[Id(Country.MU)] = new BbanWithCurrencyCodeParser(validators[Id(Country.MU)].Pattern);
-        validators[Id(Country.SC)] = new BbanWithCurrencyCodeParser(validators[Id(Country.SC)].Pattern);
-
         return validators;
     }
 
     [Pure]
     private static int Id(Country country) => ((country.Name[0] - 'A') * 26) + country.Name[1] - 'A';
 
-    private record struct BbanData(int Index, BbanParser Parser);
+    private record struct BbanData(int Index, string Pattern)
+    {
+        public string Code => Pattern[..2];
+    }
 
     [Pure]
     private static BbanData Bban(Country country, string bban, int? checksum = null)
@@ -55,7 +59,7 @@ internal static partial class IbanParser
                 pattern.Append(new string(type, length));
             }
         }
-        return new BbanData(Id(country), new(pattern.ToString()));
+        return new BbanData(Id(country), pattern.ToString());
     }
 
     [Pure]

@@ -1,4 +1,6 @@
-﻿namespace Qowaiv.Text;
+﻿using System.Runtime.CompilerServices;
+
+namespace Qowaiv.Text;
 
 internal static class ASCII
 {
@@ -7,6 +9,14 @@ internal static class ASCII
 
     [Pure]
     public static bool IsDigit(char c) => c >= '0' && c <= '9';
+
+    /// <summary>Returns the digit value of the char.</summary>
+    /// <remarks>
+    /// Assumes that the char represents a digit.
+    /// </remarks>
+    [Pure]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static int Digit(char c) => c - '0';
 
     [Pure]
     public static bool IsLetter(char c) => (Category[c] & Is.Letter) != 0;

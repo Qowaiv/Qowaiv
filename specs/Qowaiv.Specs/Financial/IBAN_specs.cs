@@ -434,6 +434,10 @@ public class Input_is_invalid_when
     public void Finland_does_not_have_matching_Luhn_checksum()
         => InternationalBankAccountNumber.TryParse("FI10 1234 5600 0007 89").Should().BeNull();
 
+    [TestCase("AL82 2121 1007 4151 5881 3959 8706")]
+    public void weighted_checksum_is_wrong(string iban)
+        => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
+
     [TestCase("MU60 BOMM 0835 4151 5881 3959 000A BC")]
     [TestCase("MU53 BOMM 0835 4151 5881 3959 000Z ZZ")]
     public void Mauritius_does_not_end_with_currency_code(string iban)

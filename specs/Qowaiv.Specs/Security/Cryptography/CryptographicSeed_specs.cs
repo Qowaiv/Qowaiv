@@ -91,7 +91,7 @@ public class ToByteArray
 
     [Test]
     public void from_empty_array_stays_empty_array()
-        => CryptographicSeed.Create([])
+        => CryptographicSeed.Create()
         .ToByteArray().Should().BeEmpty();
 }
 

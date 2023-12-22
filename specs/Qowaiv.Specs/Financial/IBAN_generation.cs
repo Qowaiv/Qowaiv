@@ -1,8 +1,6 @@
-﻿using System.Reflection.Metadata;
+﻿namespace Financial.IBAN_generation;
 
-namespace Financial.IBAN_generation;
-
-public class Markdown_file
+internal class Markdown_file
 {
     private static readonly FileInfo Location = new("../../../../../IBAN.md");
 
@@ -36,7 +34,7 @@ public class Markdown_file
     [TestCaseSource(nameof(Infos))]
     public void Reserved_zeros_match(IbanInfo info)
     {
-        var fields = Regex.Split(info.Fields, "[^0]").Where(s => s.Any()).ToArray();
+        var fields = Regex.Split(info.Fields, "[^0]").Where(s => s.Length > 0).ToArray();
         var bban = new Regex(string.Join(".*", fields.Select(f => $"\\[{f}\\]")));
 
         bban.IsMatch(info.Bban).Should().BeTrue(because: $"Zero's of {info.Bban} and {info.Fields} should match");
@@ -104,7 +102,7 @@ public class Markdown_file
     }
 }
 
-public sealed record IbanInfo(string CountryName, int Length, string Bban, int? CheckSum, string Fields, YesNo Official, string Example)
+internal sealed record IbanInfo(string CountryName, int Length, string Bban, int? CheckSum, string Fields, YesNo Official, string Example)
 {
     public Country Country => Country.Parse(Example[..2]);
 

@@ -518,7 +518,7 @@ public class Is_Open_API_data_type
     [Test]
     public void has_enum()
     {
-        Attribute.Enum.Should().BeEquivalentTo(["NotKnown", "Male", "Female", "NotApplicable"]);
+        Attribute.Enum.Should().BeEquivalentTo("NotKnown", "Male", "Female", "NotApplicable");
     }
 
     [Test]

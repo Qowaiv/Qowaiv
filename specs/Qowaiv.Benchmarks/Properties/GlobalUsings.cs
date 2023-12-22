@@ -1,0 +1,12 @@
+﻿global using BenchmarkDotNet.Attributes;
+global using MathNet.Numerics.Random;
+global using Qowaiv.Diagnostics.Contracts;
+global using Qowaiv.Financial;
+global using Qowaiv.Globalization;
+global using Qowaiv.Text;
+global using System.Collections;
+global using System.Diagnostics.CodeAnalysis;
+global using System.Diagnostics.Contracts;
+global using System.Globalization;
+global using System.Text;
+global using System.Text.RegularExpressions;

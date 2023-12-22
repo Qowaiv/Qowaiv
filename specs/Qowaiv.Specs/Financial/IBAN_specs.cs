@@ -84,7 +84,7 @@ public class With_domain_logic
 public class Has_constant
 {
     [Test]
-    public void Empty() => InternationalBankAccountNumber.Empty.Should().Be(default(InternationalBankAccountNumber));
+    public void Empty() => InternationalBankAccountNumber.Empty.Should().Be(default);
 
     [Test]
     public void Unknown() => InternationalBankAccountNumber.Unknown.Should().Be(InternationalBankAccountNumber.Parse("?"));
@@ -282,9 +282,20 @@ public class Can_be_parsed
     [TestCase('.')]
     public void ignoring_formatting(char ch)
     {
-        var iban = InternationalBankAccountNumber.Parse($"{ch}NL20{ch}INGB00{ch}0123456{ch}7{ch}");
+        var iban = InternationalBankAccountNumber.Parse($"{ch}NL{ch}20{ch}INGB00{ch}0123456{ch}7{ch}");
         iban.Should().Be(Svo.Iban);
     }
+}
+
+public class Can_not_be_parsed
+{
+    [Test]
+    public void with_markup_within_the_country_code()
+        => InternationalBankAccountNumber.TryParse("N L20INGB0001234567").Should().BeNull();
+
+    [Test]
+    public void with_markup_within_the_checksum_code()
+        => InternationalBankAccountNumber.TryParse("NL2 0INGB0001234567").Should().BeNull();
 }
 
 public class Supports_type_conversion

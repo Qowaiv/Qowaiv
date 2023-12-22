@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Benchmarks</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\src\Qowaiv\Text\CharBuffer.cs" Link="Qowaiv.Text\CharBuffer.cs" />
+    <Compile Include="..\..\src\Qowaiv\Text\CharBuffer.String.cs" Link="Qowaiv.Text\CharBuffer.String.cs" />
+    <Compile Include="..\..\src\Qowaiv\Text\CharBuffer.ToNonDiacritic.cs" Link="Qowaiv.Text\CharBuffer.ToNonDiacritic.cs" />
+    <Compile Include="..\..\src\Qowaiv\Text\CharBuffer.Transform.cs" Link="Qowaiv.Text\CharBuffer.Transform.cs" />
+    <Compile Include="..\..\src\Qowaiv\Text\CharrBufferExtensions.cs" Link="Qowaiv.Text\CharrBufferExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.11" />
+    <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Qowaiv\Qowaiv.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="nuget.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -419,20 +419,20 @@ public class Input_is_invalid_when
         => InternationalBankAccountNumber.TryParse("XX950210000000693123456").Should().BeNull();
 
     [Test]
-    public void shorter_than_12()
-        => InternationalBankAccountNumber.TryParse("NL20INGB007").Should().BeNull();
+    public void shorter_than_11()
+        => InternationalBankAccountNumber.TryParse("US34 5678 9AB").Should().BeNull();
 
     [Test]
-    public void longer_than_32()
-        => InternationalBankAccountNumber.TryParse("NL20 INGB 0070 3456 7890 1234 5678 9012 1").Should().BeNull();
+    public void longer_than_36()
+        => InternationalBankAccountNumber.TryParse("US00 2222 3333 4444 5555 6666 7777 8888 9999 A").Should().BeNull();
 
     [Test]
     public void other_than_alpha_numeric()
         => InternationalBankAccountNumber.TryParse("AE20 #$12 0070 3456 7890 1234 5678").Should().BeNull();
 
     [Test]
-    public void country_does_not_support_IBAN()
-        => InternationalBankAccountNumber.TryParse("US20INGB0001234567").Should().BeNull();
+    public void Finland_does_not_have_matching_Luhn_checksum()
+        => InternationalBankAccountNumber.TryParse("FI10 1234 5600 0007 89").Should().BeNull();
 
     [TestCase("MU60 BOMM 0835 4151 5881 3959 000A BC")]
     [TestCase("MU53 BOMM 0835 4151 5881 3959 000Z ZZ")]
@@ -443,7 +443,6 @@ public class Input_is_invalid_when
     [TestCase("SC89 BANK 0835 4151 5881 3959 8706 ZZZ")]
     public void Seychelles_does_not_end_with_currency_code(string iban)
         => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
-
 }
 
 public class Input_is_valid

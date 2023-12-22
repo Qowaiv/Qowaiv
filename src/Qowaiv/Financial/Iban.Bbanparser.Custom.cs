@@ -15,3 +15,34 @@ internal sealed class BbanWithCurrencyCodeParser(string pattern) : BbanParser(pa
             ? iban
             : null;
 }
+
+/// <summary>
+/// Extends <see cref="BbanParser"/>'s validation applying the Luhn algorithm.
+/// </summary>
+/// <remarks>
+/// Used by <see cref="Globalization.Country.FI"/>.
+///
+/// See https://en.wikipedia.org/wiki/Luhn_algorithm.
+/// </remarks>
+internal sealed class BbanFinlandParser(string pattern) : BbanParser(pattern)
+{
+    [Pure]
+    protected override string? Validate(string iban)
+    {
+        var checksum = 0;
+
+        for (var i = 4; i < iban.Length - 1; i++)
+        {
+            var digit = Digit(iban[i]);
+            checksum += Odd(i) ? digit : Sum(digit * 2);
+        }
+
+        return 10 - (checksum % 10) == Digit(iban[^1])
+            ? iban
+            : null;
+
+        static int Digit(char c) => c - '0';
+        static int Sum(int n) => (n / 10) + (n % 10);
+        static bool Odd(int i) => (i & 1) == 1;
+    }
+}

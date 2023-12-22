@@ -433,6 +433,17 @@ public class Input_is_invalid_when
     [Test]
     public void country_does_not_support_IBAN()
         => InternationalBankAccountNumber.TryParse("US20INGB0001234567").Should().BeNull();
+
+    [TestCase("MU60 BOMM 0835 4151 5881 3959 000A BC")]
+    [TestCase("MU53 BOMM 0835 4151 5881 3959 000Z ZZ")]
+    public void Mauritius_does_not_end_with_currency_code(string iban)
+        => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
+
+    [TestCase("SC96 BANK 0835 4151 5881 3959 8706 ABC")]
+    [TestCase("SC89 BANK 0835 4151 5881 3959 8706 ZZZ")]
+    public void Seychelles_does_not_end_with_currency_code(string iban)
+        => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
+
 }
 
 public class Input_is_valid

@@ -46,14 +46,14 @@ internal class Markdown_file
 
     [Test]
     public void Supported_countries_match_overview()
-    {
-        InternationalBankAccountNumber.Supported
+        => InternationalBankAccountNumber.Supported
             .Should().BeEquivalentTo(Infos.Select(i => i.Country));
-    }
 
-    [TestCase("USkk cccc cccc nnnn nnnn nnnn nnnn nnnn nnnn")]
-    [TestCase("SNkk aann nnnn nnnn nnnn nnnn nnnn")]
-    public void Generate_IBAN(string bban)
+    // [TestCase("MUkk BOMM nnnn nnnn nnnn nnnn 000Z ZZ", "MU but with a non-existing currency.")]
+    // [TestCase("SCkk BANK nnnn nnnn nnnn nnnn nnnn ZZZ", "SC but with a non-existing currency.")]
+    [TestCase("USkk cccc aann ", "A non IBAN country with length 12.")]
+    [TestCase("USkk cccc cccc nnnn nnnn nnnn nnnn nnnn nnnn", "A non IBAN country with length 36.")]
+    public void Generate_IBAN(string bban, string? because = null)
     {
         var rnd = new Random(17);
         var sb = new StringBuilder();
@@ -78,7 +78,7 @@ internal class Markdown_file
             .Select(InternationalBankAccountNumber.TryParse)
             .First(i => i.HasValue);
 
-        iban.HasValue.Should().BeTrue();
+        iban.HasValue.Should().BeTrue(because);
 
         Console.WriteLine(iban.GetValueOrDefault().ToString("F"));
     }

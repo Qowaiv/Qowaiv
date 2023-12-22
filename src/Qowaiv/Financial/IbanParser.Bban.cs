@@ -22,6 +22,10 @@ internal static partial class IbanParser
         {
             validators[bban.Index] = bban.Parser;
         }
+
+        validators[Id(Country.MU)] = new BbanWithCurrencyCodeParser(validators[Id(Country.MU)].Pattern);
+        validators[Id(Country.SC)] = new BbanWithCurrencyCodeParser(validators[Id(Country.SC)].Pattern);
+
         return validators;
     }
 

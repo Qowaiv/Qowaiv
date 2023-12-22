@@ -6,7 +6,7 @@ namespace Qowaiv.Financial;
 internal class BbanParser(string pattern)
 {
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    protected string Pattern { get; } = pattern;
+    public string Pattern { get; } = pattern;
 
     public int Length => Pattern.Length;
 
@@ -34,10 +34,10 @@ internal class BbanParser(string pattern)
             }
         }
 
-        return ÍsEndOfString(str, index)
+        return IsEndOfString(str, index)
            && CheckLength(buffer, pos) is { } iban
            && Mod97(iban)
-               ? new(iban)
+               ? Validate(new(iban))
                : null;
     }
 
@@ -55,7 +55,10 @@ internal class BbanParser(string pattern)
         => length == Length ? iban : null;
 
     [Pure]
-    private static bool ÍsEndOfString(string str, int index)
+    protected virtual string? Validate(string iban) => iban;
+
+    [Pure]
+    private static bool IsEndOfString(string str, int index)
     {
         while (index < str.Length)
         {

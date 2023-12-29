@@ -29,6 +29,17 @@ internal sealed class BbanAlbaniaParser(string pattern) : BbanParser(pattern)
     }
 }
 
+internal sealed class BbanBelgiumParser(string pattern) : BbanParser(pattern)
+{
+    [Pure]
+    protected override string? Validate(string iban)
+    {
+        var mod97 = IbanValidator.Mod97(iban, 4, iban.Length - 2);
+        var check = IbanValidator.Checksum(iban, iban.Length - 2);
+        return mod97 == check ? iban : null;
+    }
+}
+
 /// <summary>
 /// Extends <see cref="BbanParser"/>'s validation applying the Luhn algorithm.
 /// </summary>

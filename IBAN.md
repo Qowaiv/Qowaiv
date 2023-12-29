@@ -22,7 +22,7 @@ validator code.
 | Austria                   |    20 | 16n             |       | ATkk bbbb bccc cccc cccc                  | yes  | AT61 1904 3002 3457 3201                  |
 | Azerbaijan                |    28 | 4a,20c          |       | AZkk bbbb cccc cccc cccc cccc cccc        | yes  | AZ21 NABZ 0000 0000 1370 1000 1944        |
 | Bosnia and Herzegovina    |    20 | 16n             |    39 | BAkk bbbs sscc cccc ccxx                  | yes  | BA39 1290 0794 0102 8494                  |
-| Belgium                   |    16 | 12n             |       | BEkk bbbc cccc ccxx                       | yes  | BE43 0689 9999 9501                       |
+| Belgium                   |    16 | 12n             |       | BEkk bbbc cccc ccxx                       | yes  | BE68 5390 0754 7034                       |
 | Bulgaria                  |    22 | 4a,6n,8c        |       | BGkk bbbb ssss ttcc cccc cc               | yes  | BG80 BNBG 9661 1020 3456 78               |
 | Bahrain                   |    22 | 4a,14c          |       | BHkk bbbb cccc cccc cccc cc               | yes  | BH29 BMAG 1299 1234 56BH 00               |
 | Brazil                    |    29 | 23n,1a,1c       |       | BRkk bbbb bbbb ssss sccc cccc ccct n      | yes  | BR97 0036 0305 0000 1000 9795 493P 1      |

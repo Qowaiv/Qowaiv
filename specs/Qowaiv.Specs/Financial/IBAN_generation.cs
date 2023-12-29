@@ -50,6 +50,7 @@ internal class Markdown_file
             .Should().BeEquivalentTo(Infos.Select(i => i.Country));
 
     // [TestCase("ALkk 2121 1007 nnnn nnnn nnnn nnnn", "AL with invalid weighted checksum.")]
+    // [TestCase("BEkk nnnn nnnn nnnn", "BE with invalid MOD97 checksum.")]
     // [TestCase("FIkk 1234 5600 0007 89", "FI with invalid Luhn checksum.")]
     // [TestCase("MUkk BOMM nnnn nnnn nnnn nnnn 000Z ZZ", "MU with a non-existing currency.")]
     // [TestCase("SCkk BANK nnnn nnnn nnnn nnnn nnnn ZZZ", "SC with a non-existing currency.")]

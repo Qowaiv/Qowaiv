@@ -231,7 +231,7 @@ public class Has_custom_formatting
     [TestCase("U", "NL20INGB0001234567", "NL20INGB0001234567")]
     [TestCase("F", "", "")]
     [TestCase("F", "?", "?")]
-    public void wiht_format(string format, InternationalBankAccountNumber svo, string formatted)
+    public void with_format(string format, InternationalBankAccountNumber svo, string formatted)
         => svo.ToString(format).Should().Be(formatted);
 }
 
@@ -429,6 +429,10 @@ public class Input_is_invalid_when
     [Test]
     public void other_than_alpha_numeric()
         => InternationalBankAccountNumber.TryParse("AE20 #$12 0070 3456 7890 1234 5678").Should().BeNull();
+
+    [Test]
+    public void Belgium_does_not_have_matching_Mod97_checksum()
+        => InternationalBankAccountNumber.TryParse("BE54 8380 0835 4151").Should().BeNull();
 
     [Test]
     public void Finland_does_not_have_matching_Luhn_checksum()

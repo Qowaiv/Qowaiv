@@ -23,6 +23,7 @@ internal static partial class IbanParser
             validators[bban.Index] = bban.Code switch
             {
                 "AL" => new BbanAlbaniaParser(bban.Pattern),
+                "BE" => new BbanBelgiumParser(bban.Pattern),
                 "FI" => new BbanFinlandParser(bban.Pattern),
                 "MU" or "SC" => new BbanWithCurrencyCodeParser(bban.Pattern),
                 _ => new BbanParser(bban.Pattern),

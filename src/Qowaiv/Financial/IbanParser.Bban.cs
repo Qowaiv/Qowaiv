@@ -22,10 +22,11 @@ internal static partial class IbanParser
         {
             validators[bban.Index] = bban.Code switch
             {
-                "AL" => new BbanAlbaniaParser(bban.Pattern),
-                "BE" => new BbanBelgiumParser(bban.Pattern),
-                "FI" => new BbanFinlandParser(bban.Pattern),
-                "MU" or "SC" => new BbanWithCurrencyCodeParser(bban.Pattern),
+                "AL" => /* Albania    */ new BbanAlbaniaParser(bban.Pattern),
+                "BE" => /* Belgium    */ new BbanBelgiumParser(bban.Pattern),
+                "FI" => /* Finland    */ new BbanFinlandParser(bban.Pattern),
+                "MU" => /* Mauritius  */ new BbanWithCurrencyCodeParser(bban.Pattern),
+                "SC" => /* Seychelles */ new BbanWithCurrencyCodeParser(bban.Pattern),
                 _ => new BbanParser(bban.Pattern),
             };
         }

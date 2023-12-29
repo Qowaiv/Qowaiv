@@ -434,6 +434,10 @@ public class Input_is_invalid_when
     public void Belgium_does_not_have_matching_Mod97_checksum()
         => InternationalBankAccountNumber.TryParse("BE54 8380 0835 4151").Should().BeNull();
 
+    [TestCase("PT50 8480 0835 4151 5881 3959 9")]
+    public void BBAN_Mod97_checksum_is_not_met(string iban)
+        => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
+
     [Test]
     public void Finland_does_not_have_matching_Luhn_checksum()
         => InternationalBankAccountNumber.TryParse("FI10 1234 5600 0007 89").Should().BeNull();

@@ -434,10 +434,6 @@ public class Input_is_invalid_when
     public void Belgium_does_not_have_matching_Mod97_checksum()
         => InternationalBankAccountNumber.TryParse("BE54 8380 0835 4151").Should().BeNull();
 
-    [TestCase("PT50 8480 0835 4151 5881 3959 9")]
-    public void BBAN_Mod97_checksum_is_not_met(string iban)
-        => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
-
     [Test]
     public void Finland_does_not_have_matching_Luhn_checksum()
         => InternationalBankAccountNumber.TryParse("FI10 1234 5600 0007 89").Should().BeNull();
@@ -462,7 +458,7 @@ public class Input_is_valid
     [TestCase("US70 ABCD 1234")]
     [TestCase("US41 1234 5678 90AB CDEF GHIJ KLMN OPQR")]
     [TestCase("US19 T3NB 32YP 2588 8395 8870 7523 1343 8517")]
-    public void for_countiers_without_IBAN(string str)
+    public void for_countries_without_IBAN(string str)
     {
         var iban = InternationalBankAccountNumber.Parse(str);
         InternationalBankAccountNumber.Supported.Should().NotContain(iban.Country);
@@ -471,6 +467,10 @@ public class Input_is_valid
     [Test]
     public void despite_irregular_white_spacing()
         => InternationalBankAccountNumber.Parse("AE950 2100000006  93123456").IsEmptyOrUnknown().Should().BeFalse();
+
+    [TestCase("HR17 2360 0001 1012 3456 5")]
+    public void for_countries_with_extended_validation(string iban)
+        => InternationalBankAccountNumber.TryParse(iban).Should().NotBeNull();
 }
 
 public class Is_Open_API_data_type

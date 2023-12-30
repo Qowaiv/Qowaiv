@@ -15,14 +15,14 @@ internal static class IbanValidator
        + ASCII.Digit(iban[start + 1]);
 
     [Pure]
-    public static int Weighted(string iban, params int[] weights)
+    public static int Weighted(string iban, int start, int mod, params int[] weights)
     {
         var sum = 0;
         for (var i = 0; i < weights.Length; i++)
         {
-            sum += ASCII.Digit(iban[i]) * weights[i];
+            sum += ASCII.Digit(iban[start + i]) * weights[i];
         }
-        return sum;
+        return sum % mod;
     }
 
     [Pure]
@@ -56,7 +56,7 @@ internal static class IbanValidator
     }
 
     [Pure]
-    static int Mod97(char ch)
+    private static int Mod97(char ch)
         => ch <= '9'
             ? ch - '0'
             : ch - 'A' + 10;

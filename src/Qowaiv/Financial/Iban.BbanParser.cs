@@ -54,6 +54,7 @@ internal class BbanParser(string pattern)
     protected virtual string? CheckLength(char[] iban, int length)
         => length == Length ? new(iban) : null;
 
+    /// <summary>Extended validation for specific parsers.</summary>
     [Pure]
     protected virtual string? Validate(string iban) => iban;
 

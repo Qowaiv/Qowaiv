@@ -439,6 +439,14 @@ public class Input_is_invalid_when
         => InternationalBankAccountNumber.TryParse("CZ01 8380 0835 4151 5881 3959").Should().BeNull();
 
     [Test]
+    public void Estonai_does_have_a_bankcode_with_leading_zero()
+        => InternationalBankAccountNumber.TryParse("EE49 0380 0835 4151 5881").Should().BeNull();
+
+    [Test]
+    public void Estonia_does_not_have_matching_weighted_checksum()
+        => InternationalBankAccountNumber.TryParse("EE82 1716 1234 5678 9019").Should().BeNull();
+
+    [Test]
     public void Finland_does_not_have_matching_Luhn_checksum()
         => InternationalBankAccountNumber.TryParse("FI10 1234 5600 0007 89").Should().BeNull();
 
@@ -472,9 +480,9 @@ public class Input_is_valid
     public void despite_irregular_white_spacing()
         => InternationalBankAccountNumber.Parse("AE950 2100000006  93123456").IsEmptyOrUnknown().Should().BeFalse();
 
-    //         CZ65 0800 0000 1920 0014 5399.
     [TestCase("CZ55 0800 0000 0012 3456 7899")]
     [TestCase("CZ65 0800 0000 1920 0014 5399")]
+    [TestCase("EE86 2200 2210 6411 5891")]
     [TestCase("HR17 2360 0001 1012 3456 5")]
     public void for_countries_with_extended_validation(string iban)
         => InternationalBankAccountNumber.TryParse(iban).Should().NotBeNull();

@@ -61,6 +61,29 @@ internal sealed class BbanCzechParser(string pattern) : BbanParser(pattern)
             : null;
 }
 
+internal sealed class BbanEstoniaParser(string pattern) : BbanParser(pattern)
+{
+    /// <inheritdoc />
+    /// <remarks>
+    /// Estonian domestic account number with check digit consists of at least
+    /// 4 and a maximum of 14 numeric digits. All characters in the account
+    /// number structure are numeric. The first two digits are the code of the
+    /// bank holding the account. The first digit of the bank code cannot be 0.
+    /// The check digit is incorporated in the account number. It is always
+    /// the last digit of the string.
+    /// </remarks>
+    [Pure]
+    protected override string? Validate(string iban)
+    {
+        var weighted = IbanValidator.Weighted(iban, start: 6, mod: 10, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7);
+        var checksum = ASCII.Digit(iban[^1]);
+        return iban[4] != '0'
+            && 10 - weighted == checksum
+            ? iban
+            : null;
+    }
+}
+
 /// <summary>
 /// Extends <see cref="BbanParser"/>'s validation applying the Luhn algorithm.
 /// </summary>

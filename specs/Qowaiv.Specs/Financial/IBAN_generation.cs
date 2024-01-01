@@ -53,7 +53,7 @@ internal class Markdown_file
 
     [TestCase("ALkk 2121 1007 nnnn nnnn nnnn nnnn", "AL with invalid weighted checksum.")]
     [TestCase("BEkk nnnn nnnn nnnn", "BE with invalid MOD97 checksum.")]
-    [TestCase("CZkk nnnn nnnn nnnn nnnn nnnn", "CZ with invalid MOD11 10 checksum.")]
+    [TestCase("CZkk nnnn nnnn nnnn nnnn nnnn", "CZ with invalid MOD11 10 checksum.")]
     [TestCase("EEkk 0nnn nnnn nnnn nnnn", "EE bankcode can not start with 0.")]
     [TestCase("EEkk nnnn nnnn nnnn nnnn", "EE with invalid checksum.")]
     [TestCase("FIkk 1234 5600 0007 89", "FI with invalid Luhn checksum.")]
@@ -68,6 +68,7 @@ internal class Markdown_file
     [TestCase("PTkk nnnn nnn nnnn nnnn nnnn n", "PT with non-fixed checksum.")]
     [TestCase("RSkk nnnn nnn nnnn nnnn nn", "RS with non-fixed checksum.")]
     [TestCase("SIkk nnnn nnn nnnn nnn", "SI with non-fixed checksum.")]
+    [TestCase("SKkk nnnn nnnn nnnn nnnn nnnn", "SK with invalid MOD11 10 checksum.")]
     [TestCase("TLkk nnnn nnn nnnn nnnn nnn", "TL with non-fixed checksum.")]
     [TestCase("TNkk nnnn nnn nnnn nnnn nnnn", "TN with non-fixed checksum.")]
     public void Generate_IBAN(string bban, string? because = null)

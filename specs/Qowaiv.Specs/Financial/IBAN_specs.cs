@@ -434,9 +434,10 @@ public class Input_is_invalid_when
     public void Belgium_does_not_have_matching_Mod97_checksum()
         => InternationalBankAccountNumber.TryParse("BE54 8380 0835 4151").Should().BeNull();
 
-    [Test]
-    public void Czech_does_not_have_matching_Mod11_10_checksum()
-        => InternationalBankAccountNumber.TryParse("CZ01 8380 0835 4151 5881 3959").Should().BeNull();
+    [TestCase("CZ01 8380 0835 4151 5881 3959")]
+    [TestCase("SK36 5473 5411 5939 0412 7821")]
+    public void Czech_or_Slovakia_does_not_have_matching_Mod11_10_checksum(string iban)
+        => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
 
     [Test]
     public void Estonai_does_have_a_bankcode_with_leading_zero()

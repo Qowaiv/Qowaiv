@@ -45,7 +45,7 @@ internal sealed class BbanBelgiumParser(string pattern) : BbanParser(pattern)
     }
 }
 
-internal sealed class BbanCzechParser(string pattern) : BbanParser(pattern)
+internal sealed class BbanCzechoslovakianParser(string pattern) : BbanParser(pattern)
 {
     /// <inheritdoc />
     /// <remarks>

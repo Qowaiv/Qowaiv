@@ -463,6 +463,18 @@ public class Input_is_invalid_when
     [TestCase("SC89 BANK 0835 4151 5881 3959 8706 ZZZ")]
     public void Seychelles_does_not_end_with_currency_code(string iban)
         => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
+
+    [TestCase("BA23 1973 0058 1527 443")]
+    [TestCase("ME74 0986 4623 4212 3918 5")]
+    [TestCase("MK14 3935 0032 6437 91")]
+    [TestCase("MR34 8380 0832 4152 5888 3958 87")]
+    [TestCase("PT43 1185 0586 3461 2219 4930")]
+    [TestCase("RS07 8688 9281 0642 3946 9")]
+    [TestCase("SI72 3749 8042 5870 17")]
+    [TestCase("TL96 4551 5574 6824 5444 05")]
+    [TestCase("TN33 6926 5530 1193 5329 855")]
+    public void IBANs_with_fixed_checksum_have_a_different_one(string iban)
+        => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
 }
 
 public class Input_is_valid

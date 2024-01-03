@@ -440,7 +440,7 @@ public class Input_is_invalid_when
         => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
 
     [Test]
-    public void Estonai_does_have_a_bankcode_with_leading_zero()
+    public void Estonia_does_have_a_bankcode_with_leading_zero()
         => InternationalBankAccountNumber.TryParse("EE49 0380 0835 4151 5881").Should().BeNull();
 
     [Test]
@@ -452,6 +452,7 @@ public class Input_is_invalid_when
         => InternationalBankAccountNumber.TryParse("FI10 1234 5600 0007 89").Should().BeNull();
 
     [TestCase("AL82 2121 1007 4151 5881 3959 8706")]
+    [TestCase("PL76 7368 7705 1983 2088 8423 0246")]
     public void weighted_checksum_is_wrong(string iban)
         => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
 
@@ -497,6 +498,10 @@ public class Input_is_valid
     [TestCase("CZ65 0800 0000 1920 0014 5399")]
     [TestCase("EE86 2200 2210 6411 5891")]
     [TestCase("HR17 2360 0001 1012 3456 5")]
+    [TestCase("PL02 2490 0005 0000 4600 8316 8772")]
+    [TestCase("PL16 1160 2202 0000 0002 7718 3060")]
+    [TestCase("PL53 1240 4650 1787 0010 7345 2383")]
+    [TestCase("PL83 2030 0045 1110 0000 0390 3540")]
     public void for_countries_with_extended_validation(string iban)
         => InternationalBankAccountNumber.TryParse(iban).Should().NotBeNull();
 }

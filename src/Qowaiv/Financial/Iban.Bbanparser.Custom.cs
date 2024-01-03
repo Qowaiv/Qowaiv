@@ -23,9 +23,8 @@ internal sealed class BbanAlbaniaParser(string pattern) : BbanParser(pattern)
     [Pure]
     protected override bool Validate(string iban)
     {
-        var weighted = IbanValidator.Weighted(iban, start: 4, mod: 10, 9, 7, 3, 1, 9, 7, 3);
-        var checksum = ASCII.Digit(iban[11]);
-        return (10 - weighted) == checksum;
+        var weighted = Weighted(iban, start: 4, mod: 10, 9, 7, 3, 1, 9, 7, 3);
+        return MinMod(weighted, mod: 10) == Digit(iban[11]);
     }
 }
 
@@ -34,11 +33,7 @@ internal sealed class BbanBelgiumParser(string pattern) : BbanParser(pattern)
     /// <inheritdoc />
     [Pure]
     protected override bool Validate(string iban)
-    {
-        var mod97 = IbanValidator.Mod97(iban, 4, iban.Length - 2);
-        var check = IbanValidator.Checksum(iban, iban.Length - 2);
-        return mod97 == check;
-    }
+        => Mod97(iban, 4, iban.Length - 2) == Checksum(iban, iban.Length - 2);
 }
 
 internal sealed class BbanCzechoslovakianParser(string pattern) : BbanParser(pattern)
@@ -51,8 +46,8 @@ internal sealed class BbanCzechoslovakianParser(string pattern) : BbanParser(pat
     /// </remarks>
     [Pure]
     protected override bool Validate(string iban)
-        => IbanValidator.Weighted(iban, start: 14, mod: 11, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1) == 0
-        && IbanValidator.Weighted(iban, start: 08, mod: 11, /*.......*/ 10, 5, 8, 4, 2, 1) == 0;
+        => Weighted(iban, start: 14, mod: 11, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1) == 0
+        && Weighted(iban, start: 08, mod: 11, /*.......*/ 10, 5, 8, 4, 2, 1) == 0;
 }
 
 internal sealed class BbanEstoniaParser(string pattern) : BbanParser(pattern)
@@ -69,10 +64,9 @@ internal sealed class BbanEstoniaParser(string pattern) : BbanParser(pattern)
     [Pure]
     protected override bool Validate(string iban)
     {
-        var weighted = IbanValidator.Weighted(iban, start: 6, mod: 10, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7);
-        var checksum = ASCII.Digit(iban[^1]);
+        var weighted = Weighted(iban, start: 6, mod: 10, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7);
         return iban[4] != '0'
-            && 10 - weighted == checksum;
+            && MinMod(weighted, mod: 10) == Digit(iban[^1]);
     }
 }
 
@@ -93,13 +87,23 @@ internal sealed class BbanFinlandParser(string pattern) : BbanParser(pattern)
 
         for (var i = 4; i < iban.Length - 1; i++)
         {
-            var digit = ASCII.Digit(iban[i]);
+            var digit = Digit(iban[i]);
             checksum += Odd(i) ? digit : Sum(digit * 2);
         }
 
-        return 10 - (checksum % 10) == ASCII.Digit(iban[^1]);
+        return 10 - (checksum % 10) == Digit(iban[^1]);
 
         static int Sum(int n) => (n / 10) + (n % 10);
         static bool Odd(int i) => (i & 1) == 1;
+    }
+}
+
+internal sealed class BbanPolandParser(string pattern) : BbanParser(pattern)
+{
+    [Pure]
+    protected override bool Validate(string iban)
+    {
+        var weighted = Weighted(iban, start: 4, mod: 10, 3, 9, 7, 1, 3, 9, 7);
+        return MinMod(weighted, mod: 10) == Digit(iban[11]);
     }
 }

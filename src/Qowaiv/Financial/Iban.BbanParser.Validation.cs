@@ -1,6 +1,8 @@
-﻿namespace Qowaiv.Financial;
+﻿using System.Runtime.CompilerServices;
 
-internal static class IbanValidator
+namespace Qowaiv.Financial;
+
+internal partial class BbanParser
 {
     /// <summary>Gets the two digit checksum.</summary>
     /// <param name="iban">
@@ -11,22 +13,19 @@ internal static class IbanValidator
     /// </param>
     [Pure]
     public static int Checksum(string iban, int start)
-       => ASCII.Digit(iban[start]) * 10
-       + ASCII.Digit(iban[start + 1]);
+        => Digit(iban[start]) * 10
+        + Digit(iban[start + 1]);
+
+    /// <summary>Returns the digit value of the char.</summary>
+    /// <remarks>
+    /// Assumes that the char represents a digit.
+    /// </remarks>
+    [Pure]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    protected static int Digit(char c) => c - '0';
 
     [Pure]
-    public static int Weighted(string iban, int start, int mod, params int[] weights)
-    {
-        var sum = 0;
-        for (var i = 0; i < weights.Length; i++)
-        {
-            sum += ASCII.Digit(iban[start + i]) * weights[i];
-        }
-        return sum % mod;
-    }
-
-    [Pure]
-    public static int Mod97(string iban, int start, int end)
+    protected static int Mod97(string iban, int start, int end)
     {
         var mod = 0;
         for (var i = start; i < end; i++)
@@ -40,7 +39,7 @@ internal static class IbanValidator
     }
 
     [Pure]
-    public static bool Mod97(string iban)
+    protected static bool Mod97(string iban)
     {
         var mod = 0;
         for (var i = 0; i < iban.Length; i++)
@@ -53,6 +52,21 @@ internal static class IbanValidator
             mod %= 97;
         }
         return mod == 1;
+    }
+
+    /// <summary>Returns (mod - value) % mod.</summary>
+    [Pure]
+    protected static int MinMod(int value, int mod) => (mod - value) % mod;
+
+    [Pure]
+    protected static int Weighted(string iban, int start, int mod, params int[] weights)
+    {
+        var sum = 0;
+        for (var i = 0; i < weights.Length; i++)
+        {
+            sum += ASCII.Digit(iban[start + i]) * weights[i];
+        }
+        return sum % mod;
     }
 
     [Pure]

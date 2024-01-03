@@ -28,6 +28,7 @@ internal static partial class IbanParser
                 "EE" => /* Estonia    */ new BbanEstoniaParser(bban.Pattern),
                 "FI" => /* Finland    */ new BbanFinlandParser(bban.Pattern),
                 "MU" => /* Mauritius  */ new BbanWithCurrencyCodeParser(bban.Pattern),
+                "PL" => /* Poland     */ new BbanPolandParser(bban.Pattern),
                 "SC" => /* Seychelles */ new BbanWithCurrencyCodeParser(bban.Pattern),
                 "SK" => /* Slovakia   */ new BbanCzechoslovakianParser(bban.Pattern),
                 _ => new BbanParser(bban.Pattern),

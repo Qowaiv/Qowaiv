@@ -3,7 +3,7 @@
 namespace Qowaiv.Financial;
 
 [DebuggerDisplay("{DebuggerDisplay}")]
-internal class BbanParser(string pattern)
+internal partial class BbanParser(string pattern)
 {
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public string Pattern { get; } = pattern;
@@ -39,7 +39,7 @@ internal class BbanParser(string pattern)
             : null;
 
         return iban is { }
-            && IbanValidator.Mod97(iban)
+            && Mod97(iban)
             && Validate(iban)
                ? iban
                : null;

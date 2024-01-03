@@ -34,10 +34,14 @@ internal class BbanParser(string pattern)
             }
         }
 
-        return IsEndOfString(str, index)
-           && CheckLength(buffer, pos) is { } iban
-           && IbanValidator.Mod97(iban)
-               ? Validate(iban)
+        var iban = IsEndOfString(str, index)
+            ? CheckLength(buffer, pos)
+            : null;
+
+        return iban is { }
+            && IbanValidator.Mod97(iban)
+            && Validate(iban)
+               ? iban
                : null;
     }
 
@@ -56,7 +60,7 @@ internal class BbanParser(string pattern)
 
     /// <summary>Extended validation for specific parsers.</summary>
     [Pure]
-    protected virtual string? Validate(string iban) => iban;
+    protected virtual bool Validate(string iban) => true;
 
     [Pure]
     private static bool IsEndOfString(string str, int index)

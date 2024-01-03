@@ -10,10 +10,8 @@
 internal sealed class BbanWithCurrencyCodeParser(string pattern) : BbanParser(pattern)
 {
     [Pure]
-    protected override string? Validate(string iban)
-        => Currency.TryParse(iban[^3..]) is { IsKnown: true }
-            ? iban
-            : null;
+    protected override bool Validate(string iban)
+        => Currency.TryParse(iban[^3..]) is { IsKnown: true };
 }
 
 internal sealed class BbanAlbaniaParser(string pattern) : BbanParser(pattern)
@@ -23,13 +21,11 @@ internal sealed class BbanAlbaniaParser(string pattern) : BbanParser(pattern)
     /// Applies only to the bank code + branch code fields.
     /// </remarks>
     [Pure]
-    protected override string? Validate(string iban)
+    protected override bool Validate(string iban)
     {
         var weighted = IbanValidator.Weighted(iban, start: 4, mod: 10, 9, 7, 3, 1, 9, 7, 3);
         var checksum = ASCII.Digit(iban[11]);
-        return (10 - weighted) == checksum
-            ? iban
-            : null;
+        return (10 - weighted) == checksum;
     }
 }
 
@@ -37,11 +33,11 @@ internal sealed class BbanBelgiumParser(string pattern) : BbanParser(pattern)
 {
     /// <inheritdoc />
     [Pure]
-    protected override string? Validate(string iban)
+    protected override bool Validate(string iban)
     {
         var mod97 = IbanValidator.Mod97(iban, 4, iban.Length - 2);
         var check = IbanValidator.Checksum(iban, iban.Length - 2);
-        return mod97 == check ? iban : null;
+        return mod97 == check;
     }
 }
 
@@ -54,11 +50,9 @@ internal sealed class BbanCzechoslovakianParser(string pattern) : BbanParser(pat
     /// Both should be 0.
     /// </remarks>
     [Pure]
-    protected override string? Validate(string iban)
+    protected override bool Validate(string iban)
         => IbanValidator.Weighted(iban, start: 14, mod: 11, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1) == 0
-        && IbanValidator.Weighted(iban, start: 08, mod: 11, /*.......*/ 10, 5, 8, 4, 2, 1) == 0
-            ? iban
-            : null;
+        && IbanValidator.Weighted(iban, start: 08, mod: 11, /*.......*/ 10, 5, 8, 4, 2, 1) == 0;
 }
 
 internal sealed class BbanEstoniaParser(string pattern) : BbanParser(pattern)
@@ -73,14 +67,12 @@ internal sealed class BbanEstoniaParser(string pattern) : BbanParser(pattern)
     /// the last digit of the string.
     /// </remarks>
     [Pure]
-    protected override string? Validate(string iban)
+    protected override bool Validate(string iban)
     {
         var weighted = IbanValidator.Weighted(iban, start: 6, mod: 10, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7);
         var checksum = ASCII.Digit(iban[^1]);
         return iban[4] != '0'
-            && 10 - weighted == checksum
-            ? iban
-            : null;
+            && 10 - weighted == checksum;
     }
 }
 
@@ -95,7 +87,7 @@ internal sealed class BbanEstoniaParser(string pattern) : BbanParser(pattern)
 internal sealed class BbanFinlandParser(string pattern) : BbanParser(pattern)
 {
     [Pure]
-    protected override string? Validate(string iban)
+    protected override bool Validate(string iban)
     {
         var checksum = 0;
 
@@ -105,9 +97,7 @@ internal sealed class BbanFinlandParser(string pattern) : BbanParser(pattern)
             checksum += Odd(i) ? digit : Sum(digit * 2);
         }
 
-        return 10 - (checksum % 10) == ASCII.Digit(iban[^1])
-            ? iban
-            : null;
+        return 10 - (checksum % 10) == ASCII.Digit(iban[^1]);
 
         static int Sum(int n) => (n / 10) + (n % 10);
         static bool Odd(int i) => (i & 1) == 1;

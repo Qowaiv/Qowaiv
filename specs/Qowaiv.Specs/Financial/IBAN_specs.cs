@@ -430,32 +430,6 @@ public class Input_is_invalid_when
     public void other_than_alpha_numeric()
         => InternationalBankAccountNumber.TryParse("AE20 #$12 0070 3456 7890 1234 5678").Should().BeNull();
 
-    [Test]
-    public void Belgium_does_not_have_matching_Mod97_checksum()
-        => InternationalBankAccountNumber.TryParse("BE54 8380 0835 4151").Should().BeNull();
-
-    [TestCase("CZ01 8380 0835 4151 5881 3959")]
-    [TestCase("SK36 5473 5411 5939 0412 7821")]
-    public void Czech_or_Slovakia_does_not_have_matching_Mod11_10_checksum(string iban)
-        => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
-
-    [Test]
-    public void Estonia_does_have_a_bankcode_with_leading_zero()
-        => InternationalBankAccountNumber.TryParse("EE49 0380 0835 4151 5881").Should().BeNull();
-
-    [Test]
-    public void Estonia_does_not_have_matching_weighted_checksum()
-        => InternationalBankAccountNumber.TryParse("EE82 1716 1234 5678 9019").Should().BeNull();
-
-    [Test]
-    public void Finland_does_not_have_matching_Luhn_checksum()
-        => InternationalBankAccountNumber.TryParse("FI10 1234 5600 0007 89").Should().BeNull();
-
-    [TestCase("AL82 2121 1007 4151 5881 3959 8706")]
-    [TestCase("PL76 7368 7705 1983 2088 8423 0246")]
-    public void weighted_checksum_is_wrong(string iban)
-        => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
-
     [TestCase("MU60 BOMM 0835 4151 5881 3959 000A BC")]
     [TestCase("MU53 BOMM 0835 4151 5881 3959 000Z ZZ")]
     public void Mauritius_does_not_end_with_currency_code(string iban)
@@ -498,6 +472,10 @@ public class Input_is_valid
     [TestCase("CZ65 0800 0000 1920 0014 5399")]
     [TestCase("EE86 2200 2210 6411 5891")]
     [TestCase("HR17 2360 0001 1012 3456 5")]
+    [TestCase("HU13 1176 3842 0065 8885 0000 0000")]
+    [TestCase("HU39 1176 3842 0073 9012 0000 0000")]
+    [TestCase("HU32 1040 5004 0002 6548 0000 0009")]
+    [TestCase("HU32 1170 5008 2046 4565 0000 0000")]
     [TestCase("PL02 2490 0005 0000 4600 8316 8772")]
     [TestCase("PL16 1160 2202 0000 0002 7718 3060")]
     [TestCase("PL53 1240 4650 1787 0010 7345 2383")]

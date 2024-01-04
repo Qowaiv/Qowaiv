@@ -2,6 +2,8 @@
 
 internal static partial class IbanParser
 {
+    private const int IB = (('I' - 'A') * 26) + 'B' - 'A';
+
     /// <summary>Parses a string representing an <see cref="InternationalBankAccountNumber"/>.</summary>
     /// <returns>
     /// A normalized (uppercased without markup) string, or null for invalid input.
@@ -13,23 +15,38 @@ internal static partial class IbanParser
         var pos = 0;
         var id = 0;
 
-        foreach (var ch in str)
+        while (index < str.Length)
         {
-            index++;
+            var ch = str[index++];
 
             if (ASCII.IsAscii(ch) && ASCII.IsLetter(ch))
             {
                 id *= 26;
                 id += ASCII.Upper(ch) - 'A';
 
-                if (++pos == 2)
+                if (++pos == 1) continue;
+
+                if (Parsers[id] is { } bban)
                 {
-                    return Parsers[id] is { } bban
-                        ? bban.Parse(str, index, id)
-                        : null;
+                    return bban.Parse(str, index, id);
                 }
+                else if (HasIbanPrefix(id, str, index))
+                {
+                    pos = 0;
+                    id = 0;
+                    index += 3;
+                }
+                else return null;
             }
-            else if (pos != 0 || !IsMarkup(ch))
+            else if (pos != 0)
+            {
+                return null;
+            }
+            else if (HasIbanPrefix(str, index))
+            {
+                index += 5;
+            }
+            else if (!IsMarkup(ch))
             {
                 return null;
             }
@@ -39,7 +56,17 @@ internal static partial class IbanParser
 
     [Pure]
     internal static bool IsMarkup(char ch)
-       => ASCII.IsAscii(ch)
-           ? ASCII.IsMarkup(ch)
-           : char.IsWhiteSpace(ch);
+        => ASCII.IsAscii(ch)
+            ? ASCII.IsMarkup(ch)
+            : char.IsWhiteSpace(ch);
+
+    [Pure]
+    private static bool HasIbanPrefix(int id, string str, int index)
+        => id == IB
+        && str[(index - 2)..].StartsWith("IBAN", StringComparison.OrdinalIgnoreCase)
+        && (IsMarkup(str[index + 2]) || str[index + 2] == ':');
+
+    [Pure]
+    private static bool HasIbanPrefix(string str, int index)
+        => str[(index - 1)..].StartsWith("(IBAN)", StringComparison.OrdinalIgnoreCase);
 }

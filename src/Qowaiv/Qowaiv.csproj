@@ -9,6 +9,7 @@
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 ToBeReleased
+- Support IBAN prefix while parsing. #353
 - Rewrite of IBAN parsing/validation. #351
 - Added the Central African Republic, Russia, and Sudan's IBAN patterns. #349
 - Increase regex time-out to 50 ms. #346

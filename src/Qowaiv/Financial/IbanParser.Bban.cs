@@ -41,7 +41,7 @@ internal static partial class IbanParser
     [Pure]
     private static BbanData Bban(Country country, string bban, int? checksum = null)
     {
-        var pattern = new StringBuilder(32)
+        var pattern = new StringBuilder(36)
            .Append(country.IsoAlpha2Code)
            .Append(checksum.HasValue ? checksum.Value.ToString("00") : "nn");
 

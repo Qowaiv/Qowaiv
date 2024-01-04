@@ -89,11 +89,21 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     /// expressed in groups of four characters separated by spaces, the last
     /// group being of variable length.
     /// </summary>
+    /// <remarks>
+    /// Uses non-breaking spaces to prevent unintended line-breaks.
+    /// </remarks>
+    [Pure]
+    public string HumanReadable() => HumanReadable((char)0160);
+
+    /// <summary>In order to facilitate reading by humans, an IBAN can be
+    /// expressed in groups of four characters separated by spaces, the last
+    /// group being of variable length.
+    /// </summary>
     /// <param name="space">
-    /// The spacing character to apply, non-breaking space by default.
+    /// The spacing character to apply.
     /// </param>
     [Pure]
-    public string HumanReadable(char space = (char)0160)
+    public string HumanReadable(char space)
     {
         if (m_Value == default)
         {

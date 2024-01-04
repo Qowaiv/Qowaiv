@@ -14,6 +14,7 @@ internal static partial class IbanParser
         var index = 0;
         var pos = 0;
         var id = 0;
+        var prefixed = false;
 
         while (index < str.Length)
         {
@@ -30,11 +31,12 @@ internal static partial class IbanParser
                 {
                     return bban.Parse(str, index, id);
                 }
-                else if (HasIbanPrefix(id, str, index))
+                else if (!prefixed && HasIbanPrefix(id, str, index))
                 {
                     pos = 0;
                     id = 0;
                     index += 3;
+                    prefixed = true;
                 }
                 else return null;
             }
@@ -42,9 +44,10 @@ internal static partial class IbanParser
             {
                 return null;
             }
-            else if (HasIbanPrefix(str, index))
+            else if (!prefixed && HasIbanPrefix(str, index))
             {
                 index += 5;
+                prefixed = true;
             }
             else if (!IsMarkup(ch))
             {

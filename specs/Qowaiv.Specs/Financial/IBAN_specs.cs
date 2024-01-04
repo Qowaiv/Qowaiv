@@ -441,6 +441,9 @@ public class Input_is_invalid_when
     [TestCase("iban : NL20INGB0001234567")]
     [TestCase("(IB AN) NL20INGB0001234567")]
     [TestCase("IBA-N NL20INGB0001234567")]
+    [TestCase("IBAN IBAN NL20INGB0001234567")]
+    [TestCase("(IBAN) IBAN NL20INGB0001234567")]
+    [TestCase("IBAN (IBAN) NL20INGB0001234567")]
     public void string_with_malformed_IBAN_prefix(string str)
         => InternationalBankAccountNumber.TryParse(str).Should().BeNull();
 

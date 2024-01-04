@@ -35,7 +35,7 @@ internal static partial class IbanParser
 
     private record struct BbanData(int Index, string Pattern)
     {
-        public string Code => Pattern[..2];
+        public readonly string Code => Pattern[..2];
     }
 
     [Pure]

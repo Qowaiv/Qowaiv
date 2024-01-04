@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-
-namespace Financial.IBAN_generation;
+﻿namespace Financial.IBAN_generation;
 
 internal class Markdown_file
 {
@@ -58,6 +56,8 @@ internal class Markdown_file
     [TestCase("EEkk nnnn nnnn nnnn nnnn", "EE with invalid checksum.")]
     [TestCase("FIkk 1234 5600 0007 89", "FI with invalid Luhn checksum.")]
     [TestCase("MUkk BOMM nnnn nnnn nnnn nnnn 000Z ZZ", "MU with a non-existing currency.")]
+    [TestCase("NLkk aaaa nnnn nnnn n", "NL too short.")]
+    [TestCase("NLkk aaaa nnnn nnnn nnn", "NL too long.")]
     [TestCase("SCkk BANK nnnn nnnn nnnn nnnn nnnn ZZZ", "SC with a non-existing currency.")]
     [TestCase("USkk cccc aann ", "A non IBAN country with length 12.")]
     [TestCase("USkk cccc cccc nnnn nnnn nnnn nnnn nnnn nnnn", "A non IBAN country with length 36.")]
@@ -120,9 +120,7 @@ internal class Markdown_file
         return [.. infos];
     }
 
-
-    [Pure]
-    public static string? Mod97(string iban)
+    private static string? Mod97(string iban)
     {
         iban = iban.Replace(" ", "");
 

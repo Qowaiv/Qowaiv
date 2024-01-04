@@ -16,7 +16,7 @@ internal static class ASCII
     /// </remarks>
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Digit(char c) => c - '0';
+    public static int Number(char c) => c - '0';
 
     [Pure]
     public static bool IsLetter(char c) => (Category[c] & Is.Letter) != 0;

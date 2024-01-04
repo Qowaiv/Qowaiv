@@ -2,7 +2,7 @@
 
 namespace Qowaiv.Financial;
 
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{Pattern} ({Length}), {Country}")]
 internal partial class BbanParser(string pattern)
 {
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -14,9 +14,16 @@ internal partial class BbanParser(string pattern)
 
     [Pure]
     public string? Parse(string str, int start, int id)
+        => Parse(str, start, Buffer(id)) is { } iban
+        && Mod97(iban)
+        && Validate(iban)
+            ? iban
+            : null;
+
+    [Pure]
+    private string? Parse(string str, int start, char[] buffer)
     {
         var pos = 2;
-        var buffer = Buffer(id);
         var index = start;
 
         while (index < str.Length && pos < Length)
@@ -34,15 +41,9 @@ internal partial class BbanParser(string pattern)
             }
         }
 
-        var iban = IsEndOfString(str, index)
+        return IsEndOfString(str, index)
             ? CheckLength(buffer, pos)
             : null;
-
-        return iban is { }
-            && Mod97(iban)
-            && Validate(iban)
-               ? iban
-               : null;
     }
 
     [Pure]
@@ -83,6 +84,4 @@ internal partial class BbanParser(string pattern)
         else if (pattern == 'c') return ASCII.IsLetterOrDigit(ch);
         else return ch == pattern;
     }
-
-    private string DebuggerDisplay => $"{Pattern} ({Length}), {Country}";
 }

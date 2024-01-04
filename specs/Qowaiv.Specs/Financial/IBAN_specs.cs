@@ -418,13 +418,19 @@ public class Input_is_invalid_when
     public void country_does_not_exist()
         => InternationalBankAccountNumber.TryParse("XX950210000000693123456").Should().BeNull();
 
-    [Test]
-    public void shorter_than_11()
-        => InternationalBankAccountNumber.TryParse("US34 5678 9AB").Should().BeNull();
+    [TestCase("           X")]
+    [TestCase("US34 5678 9AB")]
+    public void shorter_than_12(string iban)
+        => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
 
     [Test]
     public void longer_than_36()
         => InternationalBankAccountNumber.TryParse("US00 2222 3333 4444 5555 6666 7777 8888 9999 A").Should().BeNull();
+
+    [TestCase("NL76 CZHQ 9695 4545 9")]
+    [TestCase("NL45 HEQN 0564 4242 147")]
+    public void length_does_not_match_country_BBAN(string iban)
+        => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
 
     [Test]
     public void other_than_alpha_numeric()

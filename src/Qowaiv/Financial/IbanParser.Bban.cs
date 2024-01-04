@@ -20,7 +20,12 @@ internal static partial class IbanParser
 
         foreach (var bban in Bbans)
         {
-            validators[bban.Index] = bban.Parser;
+            validators[bban.Index] = bban.Code switch
+            {
+                "MU" => /* Mauritius  */ new BbanWithCurrencyCodeParser(bban.Pattern),
+                "SC" => /* Seychelles */ new BbanWithCurrencyCodeParser(bban.Pattern),
+                _ => new BbanParser(bban.Pattern),
+            };
         }
         return validators;
     }
@@ -28,12 +33,15 @@ internal static partial class IbanParser
     [Pure]
     private static int Id(Country country) => ((country.Name[0] - 'A') * 26) + country.Name[1] - 'A';
 
-    private record struct BbanData(int Index, BbanParser Parser);
+    private record struct BbanData(int Index, string Pattern)
+    {
+        public readonly string Code => Pattern[..2];
+    }
 
     [Pure]
     private static BbanData Bban(Country country, string bban, int? checksum = null)
     {
-        var pattern = new StringBuilder(32)
+        var pattern = new StringBuilder(36)
            .Append(country.IsoAlpha2Code)
            .Append(checksum.HasValue ? checksum.Value.ToString("00") : "nn");
 
@@ -50,7 +58,7 @@ internal static partial class IbanParser
                 pattern.Append(new string(type, length));
             }
         }
-        return new BbanData(Id(country), new(pattern.ToString()));
+        return new BbanData(Id(country), pattern.ToString());
     }
 
     [Pure]

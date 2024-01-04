@@ -2,11 +2,11 @@
 
 namespace Qowaiv.Financial;
 
-[DebuggerDisplay("{DebuggerDisplay}")]
-internal class BbanParser(string pattern)
+[DebuggerDisplay("{Pattern} ({Length}), {Country}")]
+internal partial class BbanParser(string pattern)
 {
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    protected string Pattern { get; } = pattern;
+    public string Pattern { get; } = pattern;
 
     public int Length => Pattern.Length;
 
@@ -14,9 +14,16 @@ internal class BbanParser(string pattern)
 
     [Pure]
     public string? Parse(string str, int start, int id)
+        => Parse(str, start, Buffer(id)) is { } iban
+        && Mod97(iban)
+        && Validate(iban)
+            ? iban
+            : null;
+
+    [Pure]
+    private string? Parse(string str, int start, char[] buffer)
     {
         var pos = 2;
-        var buffer = Buffer(id);
         var index = start;
 
         while (index < str.Length && pos < Length)
@@ -34,11 +41,9 @@ internal class BbanParser(string pattern)
             }
         }
 
-        return ÍsEndOfString(str, index)
-           && CheckLength(buffer, pos) is { } iban
-           && Mod97(iban)
-               ? new(iban)
-               : null;
+        return IsEndOfString(str, index)
+            ? CheckLength(buffer, pos)
+            : null;
     }
 
     [Pure]
@@ -51,11 +56,15 @@ internal class BbanParser(string pattern)
     }
 
     [Pure]
-    protected virtual char[]? CheckLength(char[] iban, int length)
-        => length == Length ? iban : null;
+    protected virtual string? CheckLength(char[] iban, int length)
+        => length == Length ? new(iban) : null;
+
+    /// <summary>Extended validation for specific parsers.</summary>
+    [Pure]
+    protected virtual bool Validate(string iban) => true;
 
     [Pure]
-    private static bool ÍsEndOfString(string str, int index)
+    private static bool IsEndOfString(string str, int index)
     {
         while (index < str.Length)
         {
@@ -75,27 +84,4 @@ internal class BbanParser(string pattern)
         else if (pattern == 'c') return ASCII.IsLetterOrDigit(ch);
         else return ch == pattern;
     }
-
-    [Pure]
-    private static bool Mod97(char[] iban)
-    {
-        var mod = 0;
-        for (var i = 0; i < iban.Length; i++)
-        {
-            // Calculate the first 4 characters (country and checksum) last
-            var ch = iban[(i + 4) % iban.Length];
-            var index = Index(ch);
-            mod *= index > 9 ? 100 : 10;
-            mod += index;
-            mod %= 97;
-        }
-        return mod == 1;
-
-        static int Index(char ch)
-            => ch <= '9'
-                ? ch - '0'
-                : ch - 'A' + 10;
-    }
-
-    private string DebuggerDisplay => $"{Pattern} ({Length}), {Country}";
 }

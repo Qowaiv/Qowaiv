@@ -1,7 +1,7 @@
-﻿namespace Email_address_collection_specs;
-
-#if NET8_0_OR_GREATER
+﻿#if NET8_0_OR_GREATER
 #else
+namespace Email_address_collection_specs;
+
 public class Supports_binary_serialization
 {
     [Test]

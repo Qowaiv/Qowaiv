@@ -467,7 +467,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
             }
 
             // use invariant as we want to convert to superscript.
-            var super = remainder.Abs().ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SuperScript[ch - '0']).ToArray();
+            var super = remainder.Abs().ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SuperScript[ASCII.Number(ch)]).ToArray();
             sb.Append(super);
         }
         else
@@ -485,7 +485,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
         if (format == "sub")
         {
             // use invariant as we want to convert to superscript.
-            var super = Denominator.ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SubScript[ch - '0']).ToArray();
+            var super = Denominator.ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SubScript[ASCII.Number(ch)]).ToArray();
             sb.Append(super);
         }
         else

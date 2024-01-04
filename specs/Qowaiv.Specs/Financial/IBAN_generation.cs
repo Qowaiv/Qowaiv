@@ -46,16 +46,35 @@ internal class Markdown_file
 
     [Test]
     public void Supported_countries_match_overview()
-    {
-        InternationalBankAccountNumber.Supported
+        => InternationalBankAccountNumber.Supported
             .Should().BeEquivalentTo(Infos.Select(i => i.Country));
-    }
 
-    [TestCase("USkk cccc cccc nnnn nnnn nnnn nnnn nnnn nnnn")]
-    [TestCase("SNkk aann nnnn nnnn nnnn nnnn nnnn")]
-    public void Generate_IBAN(string bban)
+    [TestCase("ALkk 2121 1007 nnnn nnnn nnnn nnnn", "AL with invalid weighted checksum.")]
+    [TestCase("BEkk nnnn nnnn nnnn", "BE with invalid MOD97 checksum.")]
+    [TestCase("CZkk nnnn nnnn nnnn nnnn nnnn", "CZ with invalid MOD11 10 checksum.")]
+    [TestCase("EEkk 0nnn nnnn nnnn nnnn", "EE bankcode can not start with 0.")]
+    [TestCase("EEkk nnnn nnnn nnnn nnnn", "EE with invalid checksum.")]
+    [TestCase("FIkk 1234 5600 0007 89", "FI with invalid Luhn checksum.")]
+    [TestCase("MUkk BOMM nnnn nnnn nnnn nnnn 000Z ZZ", "MU with a non-existing currency.")]
+    [TestCase("NLkk aaaa nnnn nnnn n", "NL too short.")]
+    [TestCase("NLkk aaaa nnnn nnnn nnn", "NL too long.")]
+    [TestCase("SCkk BANK nnnn nnnn nnnn nnnn nnnn ZZZ", "SC with a non-existing currency.")]
+    [TestCase("USkk cccc aann ", "A non IBAN country with length 12.")]
+    [TestCase("USkk cccc cccc nnnn nnnn nnnn nnnn nnnn nnnn", "A non IBAN country with length 36.")]
+    [TestCase("BAkk nnnn nnnn nnnn nnnn", "BA with non-fixed checksum.")]
+    [TestCase("MEkk nnnn nnnn nnnn nnnn nn", "ME with non-fixed checksum.")]
+    [TestCase("MKkk nnnn nnnn nnnn nnn", "MK with non-fixed checksum.")]
+    [TestCase("MRkk nnnn nnnn nnnn nnnn nnnn nnn", "MR with non-fixed checksum.")]
+    [TestCase("PLkk nnnn nnnn nnnn nnnn nnnn nnnn", "PL with invalid checksum.")]
+    [TestCase("PTkk nnnn nnnn nnnn nnnn nnnn n", "PT with non-fixed checksum.")]
+    [TestCase("RSkk nnnn nnnn nnnn nnnn nn", "RS with non-fixed checksum.")]
+    [TestCase("SIkk nnnn nnnn nnnn nnn", "SI with non-fixed checksum.")]
+    [TestCase("SKkk nnnn nnnn nnnn nnnn nnnn", "SK with invalid MOD11 10 checksum.")]
+    [TestCase("TLkk nnnn nnnn nnnn nnnn nnn", "TL with non-fixed checksum.")]
+    [TestCase("TNkk nnnn nnnn nnnn nnnn nnnn", "TN with non-fixed checksum.")]
+    public void Generate_IBAN(string bban, string? because = null)
     {
-        var rnd = new Random(17);
+        var rnd = new Random(bban.GetHashCode());
         var sb = new StringBuilder();
         foreach (var ch in bban)
         {
@@ -75,12 +94,12 @@ internal class Markdown_file
 
         var iban = Enumerable.Range(0, 100)
             .Select(kk => str.Replace("kk", kk.ToString("00")))
-            .Select(InternationalBankAccountNumber.TryParse)
-            .First(i => i.HasValue);
+            .Select(Mod97)
+            .First(i => i is { });
 
-        iban.HasValue.Should().BeTrue();
+        iban.Should().NotBeNull(because);
 
-        Console.WriteLine(iban.GetValueOrDefault().ToString("F"));
+        Console.WriteLine(iban);
     }
 
     private static readonly IbanInfo[] Infos = Init();
@@ -99,6 +118,39 @@ internal class Markdown_file
             }
         }
         return [.. infos];
+    }
+
+    private static string? Mod97(string iban)
+    {
+        iban = iban.Replace(" ", "");
+
+        var mod = 0;
+        for (var i = 0; i < iban.Length; i++)
+        {
+            // Calculate the first 4 characters (country and checksum) last
+            var ch = iban[(i + 4) % iban.Length];
+            var index = Mod97(ch);
+            mod *= index > 9 ? 100 : 10;
+            mod += index;
+            mod %= 97;
+        }
+        return mod == 1 ? string.Join(" ", Chunk(iban)) : null;
+    }
+
+    [Pure]
+    private static int Mod97(char ch)
+        => ch <= '9'
+            ? ch - '0'
+            : ch - 'A' + 10;
+
+    private static IEnumerable<string> Chunk(string str)
+    {
+        for (var i = 0; i < str.Length; i += 4)
+        {
+            yield return str.Length - i > 4
+                ? str.Substring(i, 4)
+                : str[i..];
+        }
     }
 }
 

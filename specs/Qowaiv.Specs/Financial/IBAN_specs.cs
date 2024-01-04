@@ -231,7 +231,7 @@ public class Has_custom_formatting
     [TestCase("U", "NL20INGB0001234567", "NL20INGB0001234567")]
     [TestCase("F", "", "")]
     [TestCase("F", "?", "?")]
-    public void wiht_format(string format, InternationalBankAccountNumber svo, string formatted)
+    public void with_format(string format, InternationalBankAccountNumber svo, string formatted)
         => svo.ToString(format).Should().Be(formatted);
 }
 
@@ -418,21 +418,45 @@ public class Input_is_invalid_when
     public void country_does_not_exist()
         => InternationalBankAccountNumber.TryParse("XX950210000000693123456").Should().BeNull();
 
-    [Test]
-    public void shorter_than_12()
-        => InternationalBankAccountNumber.TryParse("NL20INGB007").Should().BeNull();
+    [TestCase("           X")]
+    [TestCase("US34 5678 9AB")]
+    public void shorter_than_12(string iban)
+        => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
 
     [Test]
-    public void longer_than_32()
-        => InternationalBankAccountNumber.TryParse("NL20 INGB 0070 3456 7890 1234 5678 9012 1").Should().BeNull();
+    public void longer_than_36()
+        => InternationalBankAccountNumber.TryParse("US00 2222 3333 4444 5555 6666 7777 8888 9999 A").Should().BeNull();
+
+    [TestCase("NL76 CZHQ 9695 4545 9")]
+    [TestCase("NL45 HEQN 0564 4242 147")]
+    public void length_does_not_match_country_BBAN(string iban)
+        => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
 
     [Test]
     public void other_than_alpha_numeric()
         => InternationalBankAccountNumber.TryParse("AE20 #$12 0070 3456 7890 1234 5678").Should().BeNull();
 
-    [Test]
-    public void country_does_not_support_IBAN()
-        => InternationalBankAccountNumber.TryParse("US20INGB0001234567").Should().BeNull();
+    [TestCase("MU60 BOMM 0835 4151 5881 3959 000A BC")]
+    [TestCase("MU53 BOMM 0835 4151 5881 3959 000Z ZZ")]
+    public void Mauritius_does_not_end_with_currency_code(string iban)
+        => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
+
+    [TestCase("SC96 BANK 0835 4151 5881 3959 8706 ABC")]
+    [TestCase("SC89 BANK 0835 4151 5881 3959 8706 ZZZ")]
+    public void Seychelles_does_not_end_with_currency_code(string iban)
+        => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
+
+    [TestCase("BA23 1973 0058 1527 443")]
+    [TestCase("ME74 0986 4623 4212 3918 5")]
+    [TestCase("MK14 3935 0032 6437 91")]
+    [TestCase("MR34 8380 0832 4152 5888 3958 87")]
+    [TestCase("PT43 1185 0586 3461 2219 4930")]
+    [TestCase("RS07 8688 9281 0642 3946 9")]
+    [TestCase("SI72 3749 8042 5870 17")]
+    [TestCase("TL96 4551 5574 6824 5444 05")]
+    [TestCase("TN33 6926 5530 1193 5329 855")]
+    public void IBANs_with_fixed_checksum_have_a_different_one(string iban)
+        => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
 }
 
 public class Input_is_valid
@@ -440,7 +464,7 @@ public class Input_is_valid
     [TestCase("US70 ABCD 1234")]
     [TestCase("US41 1234 5678 90AB CDEF GHIJ KLMN OPQR")]
     [TestCase("US19 T3NB 32YP 2588 8395 8870 7523 1343 8517")]
-    public void for_countiers_without_IBAN(string str)
+    public void for_countries_without_IBAN(string str)
     {
         var iban = InternationalBankAccountNumber.Parse(str);
         InternationalBankAccountNumber.Supported.Should().NotContain(iban.Country);
@@ -449,6 +473,21 @@ public class Input_is_valid
     [Test]
     public void despite_irregular_white_spacing()
         => InternationalBankAccountNumber.Parse("AE950 2100000006  93123456").IsEmptyOrUnknown().Should().BeFalse();
+
+    [TestCase("CZ55 0800 0000 0012 3456 7899")]
+    [TestCase("CZ65 0800 0000 1920 0014 5399")]
+    [TestCase("EE86 2200 2210 6411 5891")]
+    [TestCase("HR17 2360 0001 1012 3456 5")]
+    [TestCase("HU13 1176 3842 0065 8885 0000 0000")]
+    [TestCase("HU39 1176 3842 0073 9012 0000 0000")]
+    [TestCase("HU32 1040 5004 0002 6548 0000 0009")]
+    [TestCase("HU32 1170 5008 2046 4565 0000 0000")]
+    [TestCase("PL02 2490 0005 0000 4600 8316 8772")]
+    [TestCase("PL16 1160 2202 0000 0002 7718 3060")]
+    [TestCase("PL53 1240 4650 1787 0010 7345 2383")]
+    [TestCase("PL83 2030 0045 1110 0000 0390 3540")]
+    public void for_countries_with_extended_validation(string iban)
+        => InternationalBankAccountNumber.TryParse(iban).Should().NotBeNull();
 }
 
 public class Is_Open_API_data_type

@@ -44,6 +44,7 @@ public class Is_decorated_with : SingleValueObjectSpecs
     public void Open_API_data_type_Legacy(Type svo)
         => svo.Should().BeDecoratedWith<Qowaiv.Json.OpenApiDataTypeAttribute>();
 
+#if NET5_0_OR_GREATER
     [TestCaseSource(nameof(AllSvos))]
     public void NotNullWhen_attribute_on_Equals_object(Type svo)
     {
@@ -61,6 +62,7 @@ public class Is_decorated_with : SingleValueObjectSpecs
 
         attr.ReturnValue.Should().BeTrue();
     }
+#endif
 
     [TestCaseSource(nameof(AllSvosExceptGeneric))]
     public void Open_API_data_type(Type svo)

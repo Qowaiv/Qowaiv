@@ -115,9 +115,11 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
         }
         else
         {
-            var buffer = new char[m_Value.Length + (m_Value.Length - 1) / 4];
-            var pointer = 0;
             var index = 0;
+            var pointer = 0;
+            var spacing = (m_Value.Length - 1) / 4;
+            var buffer = new char[m_Value.Length + spacing];
+
             while (index < m_Value.Length)
             {
                 buffer[pointer++] = m_Value[index++];

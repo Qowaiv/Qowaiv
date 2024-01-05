@@ -67,7 +67,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:F}");
 
-    /// <summary>Represents the IBAN a string without formatting.</summary>
+    /// <summary>Represents the IBAN as a <see cref="string"/> without formatting.</summary>
     [Pure]
     public string MachineReadable()
     {
@@ -85,10 +85,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
         }
     }
 
-    /// <summary>In order to facilitate reading by humans, an IBAN can be
-    /// expressed in groups of four characters separated by spaces, the last
-    /// group being of variable length.
-    /// </summary>
+    /// <inheritdoc cref="HumanReadable(char)" />
     /// <remarks>
     /// Uses non-breaking spaces to prevent unintended line-breaks.
     /// </remarks>

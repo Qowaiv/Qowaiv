@@ -61,15 +61,15 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string? ToJson() => m_Value == default ? null : ToUnformattedString();
+    public string? ToJson() => m_Value == default ? null : MachineReadable();
 
     /// <summary>Returns a <see cref="string"/> that represents the current IBAN for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:F}");
 
-    /// <summary>Formats the IBAN without spaces.</summary>
+    /// <summary>Represents the IBAN as a <see cref="string"/> without formatting.</summary>
     [Pure]
-    private string ToUnformattedString()
+    public string MachineReadable()
     {
         if (m_Value == default)
         {
@@ -85,38 +85,49 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
         }
     }
 
-    /// <summary>Formats the IBAN without spaces as lowercase.</summary>
+    /// <inheritdoc cref="HumanReadable(char)" />
+    /// <remarks>
+    /// Uses non-breaking spaces to prevent unintended line-breaks.
+    /// </remarks>
     [Pure]
-    private string ToUnformattedLowercaseString() => ToUnformattedString().ToLowerInvariant();
+    public string HumanReadable() => HumanReadable((char)0160);
 
-    /// <summary>Formats the IBAN with spaces.</summary>
+    /// <summary>In order to facilitate reading by humans, an IBAN can be
+    /// expressed in groups of four characters separated by spaces, the last
+    /// group being of variable length.
+    /// </summary>
+    /// <param name="space">
+    /// The spacing character to apply.
+    /// </param>
     [Pure]
-    private string ToFormattedString()
+    public string HumanReadable(char space)
     {
         if (m_Value == default)
         {
             return string.Empty;
         }
-        if (m_Value == Unknown.m_Value)
+        else if (m_Value == Unknown.m_Value)
         {
             return "?";
         }
-        return string.Join(" ", Chunk(m_Value));
-
-        static IEnumerable<string> Chunk(string str)
+        else
         {
-            for (var i = 0; i < str.Length; i += 4)
+            var index = 0;
+            var pointer = 0;
+            var spacing = (m_Value.Length - 1) / 4;
+            var buffer = new char[m_Value.Length + spacing];
+
+            while (index < m_Value.Length)
             {
-                yield return str.Length - i > 4
-                    ? str.Substring(i, 4)
-                    : str[i..];
+                buffer[pointer++] = m_Value[index++];
+                if ((index % 4) == 0 && pointer < buffer.Length)
+                {
+                    buffer[pointer++] = space;
+                }
             }
+            return new(buffer);
         }
     }
-
-    /// <summary>Formats the IBAN with spaces as lowercase.</summary>
-    [Pure]
-    private string ToFormattedLowercaseString() => ToFormattedString().ToLowerInvariant();
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the current IBAN.</summary>
     /// <param name="format">
@@ -127,9 +138,12 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     /// </param>
     /// <remarks>
     /// The formats:
-    ///
-    /// u: as unformatted lowercase.
-    /// U: as unformatted uppercase.
+    /// m: as machine readable lowercase.
+    /// M: as machine readable.
+    /// u: as unformatted lowercase (equal to machine readable lowercase).
+    /// U: as unformatted uppercase  (equal to machine readable).
+    /// h: as human readable lowercase (with non-breaking spaces).
+    /// H: as human readable (equal to machine readable).
     /// f: as formatted lowercase.
     /// F: as formatted uppercase.
     /// </remarks>
@@ -142,15 +156,19 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     /// <summary>The format token instructions.</summary>
     private static readonly Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>> FormatTokens = new()
     {
-        { 'u', (svo, _) => svo.ToUnformattedLowercaseString() },
-        { 'U', (svo, _) => svo.ToUnformattedString() },
-        { 'f', (svo, _) => svo.ToFormattedLowercaseString() },
-        { 'F', (svo, _) => svo.ToFormattedString() },
+        { 'u', (svo, _) => svo.MachineReadable().ToLowerInvariant() },
+        { 'U', (svo, _) => svo.MachineReadable() },
+        { 'm', (svo, _) => svo.MachineReadable().ToLowerInvariant() },
+        { 'M', (svo, _) => svo.MachineReadable() },
+        { 'h', (svo, _) => svo.HumanReadable(' ').ToLowerInvariant() },
+        { 'H', (svo, _) => svo.HumanReadable(' ') },
+        { 'f', (svo, _) => svo.HumanReadable(' ').ToLowerInvariant() },
+        { 'F', (svo, _) => svo.HumanReadable(' ') },
     };
 
     /// <summary>Gets an XML string representation of the IBAN.</summary>
     [Pure]
-    private string ToXmlString() => ToUnformattedString();
+    private string ToXmlString() => MachineReadable();
 
     /// <summary>Converts the string to an IBAN.
     /// A return value indicates whether the conversion succeeded.

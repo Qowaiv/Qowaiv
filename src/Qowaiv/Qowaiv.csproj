@@ -9,6 +9,7 @@
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 ToBeReleased
+- Add HumanReadable() and MachineReadable() methods to IBAN. #354
 - Support IBAN prefix while parsing. #353
 - Rewrite of IBAN parsing/validation. #351
 - Added the Central African Republic, Russia, and Sudan's IBAN patterns. #349

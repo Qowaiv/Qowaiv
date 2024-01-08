@@ -33,8 +33,12 @@ internal static partial class IbanParser
     [Pure]
     private static int Id(Country country) => ((country.Name[0] - 'A') * 26) + country.Name[1] - 'A';
 
-    private record struct BbanData(int Index, string Pattern)
+    private readonly struct BbanData(int index, string pattern)
     {
+        public readonly int Index = index;
+
+        public readonly string Pattern = pattern;
+
         public readonly string Code => Pattern[..2];
     }
 

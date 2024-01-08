@@ -443,6 +443,17 @@ public class Input_is_invalid_when
     public void other_than_alpha_numeric()
         => InternationalBankAccountNumber.TryParse("AE20 #$12 0070 3456 7890 1234 5678").Should().BeNull();
 
+    [TestCase("ibanNL20INGB0001234567")]
+    [TestCase("iban :NL20INGB0001234567")]
+    [TestCase("iban : NL20INGB0001234567")]
+    [TestCase("(IB AN) NL20INGB0001234567")]
+    [TestCase("IBA-N NL20INGB0001234567")]
+    [TestCase("IBAN IBAN NL20INGB0001234567")]
+    [TestCase("(IBAN) IBAN NL20INGB0001234567")]
+    [TestCase("IBAN (IBAN) NL20INGB0001234567")]
+    public void string_with_malformed_IBAN_prefix(string str)
+        => InternationalBankAccountNumber.TryParse(str).Should().BeNull();
+
     [TestCase("MU60 BOMM 0835 4151 5881 3959 000A BC")]
     [TestCase("MU53 BOMM 0835 4151 5881 3959 000Z ZZ")]
     public void Mauritius_does_not_end_with_currency_code(string iban)
@@ -468,6 +479,22 @@ public class Input_is_invalid_when
 
 public class Input_is_valid
 {
+    [TestCase("iban NL20INGB0001234567")]
+    [TestCase("iban:NL20INGB0001234567")]
+    [TestCase("iban: NL20INGB0001234567")]
+    [TestCase("(iban)NL20INGB0001234567")]
+    [TestCase("(iban) NL20INGB0001234567")]
+    [TestCase("(Iban) NL20INGB0001234567")]
+    [TestCase("(IBAN) NL20INGB0001234567")]
+    [TestCase("Iban-NL20INGB0001234567")]
+    [TestCase("Iban NL20INGB0001234567")]
+    [TestCase("IBAN NL20INGB0001234567")]
+    [TestCase(" IBAN NL20INGB0001234567")]
+    [TestCase(" IBAN\tNL20INGB0001234567")]
+    [TestCase(" IBAN  NL20INGB0001234567")]
+    public void string_with_IBAN_prefix(string str)
+        => InternationalBankAccountNumber.Parse(str).Should().Be(Svo.Iban);
+
     [TestCase("US70 ABCD 1234")]
     [TestCase("US41 1234 5678 90AB CDEF GHIJ KLMN OPQR")]
     [TestCase("US19 T3NB 32YP 2588 8395 8870 7523 1343 8517")]

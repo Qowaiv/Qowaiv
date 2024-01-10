@@ -175,19 +175,19 @@ public static class Numerals
 
     private static readonly Dictionary<string, string[]> Multiplier = new()
     {
-        [NL] = new[] { string.Empty, "duizend ", " miljoen ", " miljard ", " biljoen ", " biljard ", " triljoen ", " triljard " },
-        [EN] = new[] { string.Empty, "thousand ", " million ", " billion ", " trillion ", " quadrillion ", " quintillion ", " sextillion " },
+        [NL] = [string.Empty, "duizend ", " miljoen ", " miljard ", " biljoen ", " biljard ", " triljoen ", " triljard "],
+        [EN] = [string.Empty, "thousand ", " million ", " billion ", " trillion ", " quadrillion ", " quintillion ", " sextillion "],
     };
 
     private static readonly Dictionary<string, string[]> Ten = new()
     {
-        [NL] = new[] { string.Empty, string.Empty, "twintig", "dertig", "veertig", "vijftig", "zestig", "zeventig", "tachtig", "negentig" },
-        [EN] = new[] { string.Empty, string.Empty, "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" },
+        [NL] = [string.Empty, string.Empty, "twintig", "dertig", "veertig", "vijftig", "zestig", "zeventig", "tachtig", "negentig"],
+        [EN] = [string.Empty, string.Empty, "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"],
     };
 
     private static readonly Dictionary<string, string[]> Unit = new()
     {
-        [NL] = new[] { string.Empty, "een", "twee", "drie", "vier", "vijf", "zes", "zeven", "acht", "negen", "tien", "elf", "twaalf", "dertien", "veertien", "vijftien", "zestien", "zeventien", "achttien", "negentien" },
-        [EN] = new[] { string.Empty, "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" },
+        [NL] = [string.Empty, "een", "twee", "drie", "vier", "vijf", "zes", "zeven", "acht", "negen", "tien", "elf", "twaalf", "dertien", "veertien", "vijftien", "zestien", "zeventien", "achttien", "negentien"],
+        [EN] = [string.Empty, "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"],
     };
 }

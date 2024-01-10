@@ -1,14 +1,54 @@
 ﻿#if NET8_0_OR_GREATER
+#if DEBUG
 
 using Qowaiv.Tooling.Resx;
 using Qowaiv.Tooling.Wikipedia;
-using System.Threading.Tasks;
 
-namespace Globalization.Country_generation;
+namespace Globalization.Countries_specs;
+
+public class Display_name
+{
+    private static readonly Country[] Existing = Country.All.ToArray();
+
+    [TestCaseSource(nameof(Existing))]
+    public async Task matches_nl_Wikipedia(Country country)
+    {
+        var display = await Wiki.Scrape(lemma: $"Sjabloon:{country.Name}", language: "nl", s => DisplayName.FromNL(s, country.IsoAlpha2Code));
+
+        display!.Name.Should().Be(country.GetDisplayName(TestCultures.Nl_NL));
+    }
+}
+
+public class Resource_files
+{
+    [Test]
+    public async Task generates_nl()
+    {
+        var resource = new XResourceFile(new XResourceFileData("ZZ_DisplayName", "Onbekend", "Unknown (ZZ)"));
+
+        foreach (var country in Country.All.OrderBy(c => c.Name.Length).ThenBy(c => c.Name))
+        {
+            var name = $"{country.Name}_DisplayName";
+            var comment = $"{country.EnglishName} ({country.IsoAlpha2Code})";
+            var value = country.Name.Length == 2 && (await Wiki.Scrape(lemma: $"Sjabloon:{country.Name}", language: "nl", s => DisplayName.FromNL(s, country.IsoAlpha2Code))) is { } display
+                ? display.Name
+                : country.GetDisplayName(TestCultures.Nl_NL);
+
+            if (value != country.EnglishName)
+            {
+                resource.Add(name, value, comment);
+            }
+        }
+
+        resource.Invoking(r => r.Save(new FileInfo("../../../../../src/Qowaiv/Globalization/CountryLabels.nl.resx")))
+            .Should().NotThrow();
+    }
+
+}
 
 public class Scrape
 {
-    [Test]
+     [Test]
     public async Task Scrape_en()
     {
         var resources = XResourceCollection.Load(new("../../../../../src/Qowaiv/Globalization"));
@@ -85,27 +125,31 @@ public class Scrape
             }
         }
     }
+}
 
-    internal sealed record DisplayName(string A2, string Name)
+internal sealed record DisplayName(string A2, string Name)
+{
+    public static DisplayName? FromNL(string str, string a2)
     {
-        public static DisplayName? FromNL(string str, string a2)
+        var index = str.LastIndexOf($"-VLAG}}}}&nbsp;") + 1;
+        var text = str[index..];
+
+        if(a2 == "DE")
         {
-            if(a2 == "DE")
-            {
 
-            }
-            var index = str.LastIndexOf($"-VLAG}}}}&nbsp;");
-            if(index == -1)
-            {
-                index = 0;
-            }
-
-            var text = str[index..];
-
-            var links = WikiLink.Parse(text).ToArray();
-
-            return new(a2, links[0].Display);
         }
+
+        if (WikiLink.Parse(text).FirstOrDefault() is { } link)
+        {
+
+            var display = link.Display;
+            display = display[(display.IndexOf('|') + 1)..];
+            display = display.Trim('{').Trim('}');
+            return new(a2, display);
+        }
+        else return null;
     }
 }
+
+#endif
 #endif

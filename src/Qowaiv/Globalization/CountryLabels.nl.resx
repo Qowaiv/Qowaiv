@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
-  <resheader name="version"><value>2.0</value></resheader>
-  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
-  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">text/microsoft-resx</resheader>
+  <resheader name="version">2.0</resheader>
+  <resheader name="reader">System.Resources.ResXResourceReader</resheader>
+  <resheader name="writer">System.Resources.ResXResourceWriter</resheader>
   <data name="ZZ_DisplayName">
     <value>Onbekend</value>
     <comment>Unknown (ZZ)</comment>
@@ -71,6 +71,10 @@
   <data name="BN_DisplayName">
     <value>Brunei</value>
     <comment>Brunei Darussalam (BN)</comment>
+  </data>
+  <data name="BQ_DisplayName">
+    <value>Caribisch Nederland</value>
+    <comment>Bonaire (BQ)</comment>
   </data>
   <data name="BR_DisplayName">
     <value>Brazilië</value>
@@ -176,6 +180,10 @@
     <value>Falklandeilanden</value>
     <comment>Falkland Islands (FK)</comment>
   </data>
+  <data name="FM_DisplayName">
+    <value>Micronesië</value>
+    <comment>Micronesia (FM)</comment>
+  </data>
   <data name="FO_DisplayName">
     <value>Faeröer</value>
     <comment>Faroe Islands (FO)</comment>
@@ -265,7 +273,7 @@
     <comment>Iraq (IQ)</comment>
   </data>
   <data name="IS_DisplayName">
-    <value>Ijsland</value>
+    <value>IJsland</value>
     <comment>Iceland (IS)</comment>
   </data>
   <data name="IT_DisplayName">
@@ -349,7 +357,7 @@
     <comment>Moldova (MD)</comment>
   </data>
   <data name="MF_DisplayName">
-    <value>Sint-Maarten</value>
+    <value>Saint-Martin</value>
     <comment>Saint Martin (MF)</comment>
   </data>
   <data name="MG_DisplayName">
@@ -361,7 +369,7 @@
     <comment>Marshall Islands (MH)</comment>
   </data>
   <data name="MK_DisplayName">
-    <value>Macedonië</value>
+    <value>Noord-Macedonië</value>
     <comment>Macedonia (MK)</comment>
   </data>
   <data name="MN_DisplayName">
@@ -381,7 +389,7 @@
     <comment>Mauritania (MR)</comment>
   </data>
   <data name="MV_DisplayName">
-    <value>Maldiven</value>
+    <value>Malediven</value>
     <comment>Maldives (MV)</comment>
   </data>
   <data name="MY_DisplayName">
@@ -437,7 +445,7 @@
     <comment>Pitcairn (PN)</comment>
   </data>
   <data name="PS_DisplayName">
-    <value>Palestijnse Autoriteit</value>
+    <value>Palestina</value>
     <comment>Palestinian Territory (PS)</comment>
   </data>
   <data name="RO_DisplayName">
@@ -473,7 +481,7 @@
     <comment>Sweden (SE)</comment>
   </data>
   <data name="SH_DisplayName">
-    <value>Sint-Helena</value>
+    <value>Sint-Helena, Ascension en Tristan da Cunha</value>
     <comment>Saint Helena (SH)</comment>
   </data>
   <data name="SI_DisplayName">
@@ -513,16 +521,12 @@
     <comment>Chad (TD)</comment>
   </data>
   <data name="TF_DisplayName">
-    <value>Franse Zuidelijke en Antarctische Gebieden</value>
+    <value>Franse Zuidelijke Gebieden</value>
     <comment>French Southern Territories (TF)</comment>
   </data>
   <data name="TJ_DisplayName">
     <value>Tadzjikistan</value>
     <comment>Tajikistan (TJ)</comment>
-  </data>
-  <data name="TK_DisplayName">
-    <value>Tokelau-Eilanden</value>
-    <comment>Tokelau (TK)</comment>
   </data>
   <data name="TL_DisplayName">
     <value>Oost-Timor</value>
@@ -549,7 +553,7 @@
     <comment>Uganda (UG)</comment>
   </data>
   <data name="UM_DisplayName">
-    <value>Kleine Pacifische Eilanden van de Verenigde Staten</value>
+    <value>Kleine afgelegen eilanden van de Verenigde Staten</value>
     <comment>United States Minor Outlying Islands (UM)</comment>
   </data>
   <data name="US_DisplayName">
@@ -593,11 +597,11 @@
     <comment>South Africa (ZA)</comment>
   </data>
   <data name="ANHH_DisplayName">
-    <value>Nederlandse Antillen</value>
+    <value>border|Vlag van Nederlandse Antillen</value>
     <comment>Netherlands Antilles (AN)</comment>
   </data>
   <data name="BQAQ_DisplayName">
-    <value>Brits Antarctisch Territorium</value>
+    <value>Caribisch Nederland</value>
     <comment>British Antarctic Territory (BQ)</comment>
   </data>
   <data name="BUMM_DisplayName">
@@ -613,7 +617,7 @@
     <comment>Serbia And Montenegro (CS)</comment>
   </data>
   <data name="DDDE_DisplayName">
-    <value>Duitse Democratische Republiek</value>
+    <value>DDR</value>
     <comment>German Democratic Republic (DD)</comment>
   </data>
   <data name="HVBF_DisplayName">
@@ -621,11 +625,11 @@
     <comment>Upper Volta (HV)</comment>
   </data>
   <data name="SUHH_DisplayName">
-    <value>Sovjet-Unie</value>
+    <value>Sjabloon:SUHH</value>
     <comment>Soviet Union (SU)</comment>
   </data>
   <data name="YUCS_DisplayName">
-    <value>Joegoslavië</value>
+    <value>Sjabloon:YUCS</value>
     <comment>Yugoslavia (YU)</comment>
   </data>
   <data name="ZRCD_DisplayName">

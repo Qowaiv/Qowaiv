@@ -36,8 +36,12 @@ public static class Wiki
     public static async Task<T?> Scrape<T>(string lemma, string language, Func<string, T?> tryParse) where T: class
     {
         var result = await Query(lemma, language);
-        var content = result.Pages.Values.Single().Revisions.Single().Slots.Values.Single().Content!;
-        return tryParse(content);
+        var content = result.Pages.Values
+            .SingleOrDefault()?
+            .Revisions.SingleOrDefault()?
+            .Slots.Values.SingleOrDefault()?
+            .Content;
+        return content is { } ? tryParse(content) : null;
     }
 
     private static async Task Download(WikiQuery query)

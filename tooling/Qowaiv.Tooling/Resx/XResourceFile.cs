@@ -8,6 +8,8 @@ namespace Qowaiv.Tooling.Resx;
 [Serializable, XmlType("root")]
 public sealed class XResourceFile
 {
+    private XResourceFile() { }
+
     /// <summary>Initializes a new instance of a resource file.</summary>
     public XResourceFile(params XResourceFileData[] data)
     {
@@ -39,7 +41,7 @@ public sealed class XResourceFile
 
     /// <summary>Gets the data.</summary>
     [XmlElement(Type = typeof(XResourceFileData), ElementName = "data")]
-    public List<XResourceFileData> Data { get; set; }
+    public List<XResourceFileData> Data { get; set; } = [];
 
     /// <summary>Gets the first (or default) item with the specified key.</summary>
     /// <param name="key">

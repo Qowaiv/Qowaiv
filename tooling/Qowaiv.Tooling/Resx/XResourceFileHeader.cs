@@ -24,6 +24,8 @@ namespace Qowaiv.Tooling.Resx
         public static readonly XResourceFileHeader Writer = new("writer", "System.Resources.ResXResourceWriter");
 
 
+        private XResourceFileHeader() { }
+
         /// <summary>Initializes a new instance of a resource file header.</summary>
         public XResourceFileHeader(string name, string val)
 		{

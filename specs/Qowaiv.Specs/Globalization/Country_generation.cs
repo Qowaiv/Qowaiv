@@ -1,5 +1,6 @@
 ﻿#if NET8_0_OR_GREATER
 
+using Qowaiv.Tooling.Resx;
 using Qowaiv.Tooling.Wikipedia;
 using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@ public class Scrape
     [Test]
     public async Task Scrape_en()
     {
+        var resources = XResourceCollection.Load(new("../../../../../src/Qowaiv/Globalization"));
+
         var infos = await Wiki.Scrape(lemma: "List of ISO 3166 country codes", language: "en", CountryInfo.FromEN);
 
         var nls = new List<DisplayName>();

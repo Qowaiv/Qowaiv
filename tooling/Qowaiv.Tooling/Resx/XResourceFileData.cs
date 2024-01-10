@@ -8,6 +8,8 @@ namespace Qowaiv.Tooling.Resx;
 [Serializable, XmlType("data")]
 public sealed class XResourceFileData : IComparable, IComparable<XResourceFileData>
 {
+    private XResourceFileData() { }
+
     /// <summary>Initializes a new instance of resource file data.</summary>
     public XResourceFileData(string name, string val) : this(name, val, null) { }
 

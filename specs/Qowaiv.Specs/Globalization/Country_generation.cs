@@ -1,6 +1,6 @@
 ﻿#if NET8_0_OR_GREATER
 
-using Qowaiv.Wikipedia;
+using Qowaiv.Tooling.Wikipedia;
 using System.Threading.Tasks;
 
 namespace Globalization.Country_generation;
@@ -16,10 +16,10 @@ public class Scrape
 
         foreach (var info in infos)
         {
-            var nl = await Wiki.Scrape(lemma: $"Sjabloon:{info.A2}", language: "nl", DisplayName.FromNL);
+            var nl = await Wiki.Scrape(lemma: $"Sjabloon:{info.A2}", language: "nl", s=> DisplayName.FromNL(s, info.A2));
             if (nl is { })
             {
-                nls.Add(nl with { A2 = info.A2 });
+                nls.Add(nl);
             }
         }
 
@@ -85,11 +85,23 @@ public class Scrape
 
     internal sealed record DisplayName(string A2, string Name)
     {
-        public static DisplayName? FromNL(string str)
+        public static DisplayName? FromNL(string str, string a2)
         {
-            var links = WikiLink.Parse(str).ToArray();
+            if(a2 == "DE")
+            {
 
-            return new("", links[0].Display);
+            }
+            var index = str.LastIndexOf($"-VLAG}}}}&nbsp;");
+            if(index == -1)
+            {
+                index = 0;
+            }
+
+            var text = str[index..];
+
+            var links = WikiLink.Parse(text).ToArray();
+
+            return new(a2, links[0].Display);
         }
     }
 }

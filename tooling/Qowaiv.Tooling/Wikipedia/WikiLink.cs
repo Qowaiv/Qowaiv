@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Wikipedia;
+﻿namespace Qowaiv.Tooling.Wikipedia;
 
 public sealed class WikiLink
 {

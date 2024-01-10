@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Qowaiv.Wikipedia;
+namespace Qowaiv.Tooling.Wikipedia;
 
 public static class Wiki
 {

@@ -8,9 +8,9 @@ namespace Globalization.Countries_specs;
 
 public class Display_name
 {
-    private static readonly Country[] Existing = Country.All.ToArray();
+    private static readonly IReadOnlyCollection<Country> All = Country.All;
 
-    [TestCaseSource(nameof(Existing))]
+    [TestCaseSource(nameof(All))]
     public async Task matches_nl_Wikipedia(Country country)
     {
         var display = await Wiki.Scrape(lemma: $"Sjabloon:{country.Name}", language: "nl", s => DisplayName.FromNL(s, country.IsoAlpha2Code));

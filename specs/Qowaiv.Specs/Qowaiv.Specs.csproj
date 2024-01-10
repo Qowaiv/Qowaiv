@@ -34,5 +34,9 @@
     <ProjectReference Include="..\..\src\Qowaiv.Data.SqlClient\Qowaiv.Data.SqlClient.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.TestTools\Qowaiv.TestTools.csproj" />
   </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)'=='net8.0'">
+    <ProjectReference Include="..\Qowaiv.Wikipedia\Qowaiv.Wikipedia.csproj" />
+  </ItemGroup>
 
 </Project>

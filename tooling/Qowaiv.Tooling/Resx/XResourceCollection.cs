@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Qowaiv.Tooling.Resx;
+﻿namespace Qowaiv.Tooling.Resx;
 
 /// <summary>Represents a collection of RESX resource files.</summary>
 public sealed class XResourceCollection : Dictionary<CultureInfo, XResourceFile>
@@ -10,8 +8,6 @@ public sealed class XResourceCollection : Dictionary<CultureInfo, XResourceFile>
     {
         foreach (var file in this)
         {
-            file.Value.Sort();
-
             var filename = $"{name}.{file.Key.Name}.resx".Replace("..", ".");
 
             file.Value.Save(new FileInfo(Path.Combine(directory.FullName, filename)));

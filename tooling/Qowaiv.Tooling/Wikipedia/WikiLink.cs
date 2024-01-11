@@ -13,12 +13,13 @@ public sealed class WikiLink
     public string Display { get; }
 
     /// <inheritdoc />
+    [Pure]
     public override string ToString()
         => Lemma == Display
         ? $"[[{Lemma}]]"
         : $"[[{Lemma}|{Display}]]";
 
-
+    [Pure]
     public static IEnumerable<WikiLink> Parse(string text) => Pattern
         .Matches(text)
         .Where(m => m.Success)

@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.Serialization;
 
 namespace Qowaiv.Tooling.Resx;
@@ -8,9 +7,10 @@ namespace Qowaiv.Tooling.Resx;
 [Serializable, XmlType("root")]
 public sealed class XResourceFile
 {
+    /// <summary>Initializes a new instance of the <see cref="XResourceFile"/> class.</summary>
     private XResourceFile() { }
 
-    /// <summary>Initializes a new instance of a resource file.</summary>
+    /// <summary>Initializes a new instance of the <see cref="XResourceFile"/> class.</summary>
     public XResourceFile(params XResourceFileData[] data)
     {
         Headers =
@@ -23,21 +23,21 @@ public sealed class XResourceFile
         Data = data.ToList();
     }
 
+    /// <summary>Adds a data entry.</summary>
     public void Add(string name, string val)
     {
         Data.Add(new XResourceFileData(name, val));
     }
+
+    /// <inheritdoc cref="Add(string, string)" />
     public void Add(string name, string val, string comment)
     {
         Data.Add(new XResourceFileData(name, val, comment));
     }
 
-    /// <summary>Initializes a new instance of a resource file.</summary>
-    public XResourceFile(IEnumerable<XResourceFileData> data) : this(data.ToArray()) { }
-
     /// <summary>Gets the headers.</summary>
     [XmlElement(Type = typeof(XResourceFileHeader), ElementName = "resheader")]
-    public List<XResourceFileHeader> Headers { get; set; }
+    public List<XResourceFileHeader> Headers { get; set; } = [];
 
     /// <summary>Gets the data.</summary>
     [XmlElement(Type = typeof(XResourceFileData), ElementName = "data")]
@@ -47,19 +47,7 @@ public sealed class XResourceFile
     /// <param name="key">
     /// The key to search for.
     /// </param>
-    public XResourceFileData this[string key]
-    {
-        get
-        {
-            return Data.FirstOrDefault(data => data.Name == key);
-        }
-    }
-
-    /// <summary>Sorts the data.</summary>
-    public void Sort()
-    {
-        Data.Sort();
-    }
+    public XResourceFileData? this[string key] => Data.Find(data => data.Name == key);
 
     /// <summary>Saves the resource file to a file.</summary>
     /// <param name="file">
@@ -85,7 +73,7 @@ public sealed class XResourceFile
 
         if (!string.IsNullOrEmpty(languague))
         {
-            var dir = file.Directory.FullName;
+            var dir = file.Directory!.FullName;
             var name = $"{Path.GetFileNameWithoutExtension(file.Name)}.{languague}{file.Extension}";
             resource = new FileInfo(Path.Combine(dir, name));
         }
@@ -106,15 +94,14 @@ public sealed class XResourceFile
     /// <param name="stream">
     /// The stream to load from.
     /// </param>
-    public static XResourceFile Load(Stream stream)
-    {
-        return (XResourceFile)serializer.Deserialize(stream)!;
-    }
+    [Pure]
+    public static XResourceFile Load(Stream stream) => (XResourceFile)serializer.Deserialize(stream)!;
 
     /// <summary>Loads a resource file from stream.</summary>
     /// <param name="file">
     /// The file to load from.
     /// </param>
+    [Pure]
     public static XResourceFile Load(FileInfo file)
     {
         using var stream = new FileStream(file.FullName, FileMode.Open, FileAccess.Read);
@@ -126,10 +113,8 @@ public sealed class XResourceFile
     /// <param name="file">
     /// The file to load from.
     /// </param>
-    public static XResourceFile Load(string file)
-    {
-        return Load(new FileInfo(file));
-    }
+    [Pure]
+    public static XResourceFile Load(string file) => Load(new FileInfo(file));
 
     /// <summary>The serializer to load and save the resource file.</summary>
     private static readonly XmlSerializer serializer = new(typeof(XResourceFile), string.Empty);

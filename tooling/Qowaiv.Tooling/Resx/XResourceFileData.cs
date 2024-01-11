@@ -1,19 +1,23 @@
-﻿using System.Globalization;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Qowaiv.Tooling.Resx;
 
 /// <summary>Represents data of a resource file.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable, XmlType("data")]
-public sealed class XResourceFileData : IComparable, IComparable<XResourceFileData>
+public sealed class XResourceFileData
 {
-    private XResourceFileData() { }
+    /// <summary>Initializes a new instance of the <see cref="XResourceFileData"/> class.</summary>
+    private XResourceFileData() 
+    {
+        Name = string.Empty;
+        Value = string.Empty;
+    }
 
-    /// <summary>Initializes a new instance of resource file data.</summary>
+    /// <summary>Initializes a new instance of the <see cref="XResourceFileData"/> class.</summary>
     public XResourceFileData(string name, string val) : this(name, val, null) { }
 
-    /// <summary>Initializes a new instance of resource file data.</summary>
+    /// <summary>Initializes a new instance of the <see cref="XResourceFileData"/> class.</summary>
     public XResourceFileData(string name, string val, string? comment)
     {
         Name = name;
@@ -34,30 +38,8 @@ public sealed class XResourceFileData : IComparable, IComparable<XResourceFileDa
     [XmlElement("comment")]
     public string? Comment { get; set; }
 
-    #region IComparable
-
-    public int CompareTo(object obj)
-    {
-        return CompareTo(obj as XResourceFileData);
-    }
-
-    public int CompareTo(XResourceFileData other)
-    {
-        return string.CompareOrdinal(Name, other == null ? null : other.Name);
-    }
-
-    #endregion
-
     /// <summary>Represents the resource file data as debug string.</summary>
-    private string DebuggerDisplay
-    {
-        get
-        {
-            return string.Format(CultureInfo.InvariantCulture,
-                "Data, Name: {0}, Value: '{1}'{2}",
-                Name,
-                Value,
-                string.IsNullOrEmpty(Comment) ? "" : ", Comment: '" + Comment + "'");
-        }
-    }
+    private string DebuggerDisplay => Comment is { }
+        ? $"Data, Name: {Name}, Value: '{Value}' Comment: '{Comment}'"
+        : $"Data, Name: {Name}, Value: '{Value}'";
 }

@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -8,7 +6,8 @@ using System.Xml.Serialization;
 namespace Qowaiv.Tooling.Resx
 {
     /// <summary>Represents a header of a resource file.</summary>
-    [Serializable, DebuggerDisplay("{DebuggerDisplay}")]
+    [Serializable]
+    [DebuggerDisplay("Header, Name: {Name}, Value: '{Value}'")]
 	public sealed class XResourceFileHeader : IXmlSerializable
 	{
 		/// <summary>Gets the Resourse mime type header (text/microsoft-resx).</summary>
@@ -23,27 +22,29 @@ namespace Qowaiv.Tooling.Resx
         /// <summary>Gets the Resourse writer header (System.Resources.ResXResourceWriter).</summary>
         public static readonly XResourceFileHeader Writer = new("writer", "System.Resources.ResXResourceWriter");
 
+        /// <summary>Initializes a new instance of the <see cref="XResourceFileHeader"/> class.</summary>
+        private XResourceFileHeader()
+        {
+            Name = string.Empty;
+            Value = string.Empty;
+        }
 
-        private XResourceFileHeader() { }
-
-        /// <summary>Initializes a new instance of a resource file header.</summary>
+        /// <summary>Initializes a new instance of the <see cref="XResourceFileHeader"/> class.</summary>
         public XResourceFileHeader(string name, string val)
 		{
             Name = name;
 			Value = val;
 		}
 
-		#region IXmlSerializable
-
-		/// <summary>Gets the xml schema to (de) xml serialize a resource file header.</summary>
-		/// <remarks>
-		/// Returns null as no schema is required.
-		/// </remarks>
-		public XmlSchema GetSchema() { return null; }
+        /// <summary>Gets the xml schema to (de) xml serialize a resource file header.</summary>
+        /// <remarks>
+        /// Returns null as no schema is required.
+        /// </remarks>
+        XmlSchema? IXmlSerializable.GetSchema() => null;
 
 		/// <summary>Reads the resource file header from an xml writer.</summary>
 		/// <param name="reader">An xml reader.</param>
-		public void ReadXml(XmlReader reader)
+		void IXmlSerializable.ReadXml(XmlReader reader)
 		{
 			var element = XElement.Parse(reader.ReadOuterXml());
 			Name = element.Attribute("name")?.Value ?? string.Empty;
@@ -52,13 +53,11 @@ namespace Qowaiv.Tooling.Resx
 
 		/// <summary>Writes the resource file header to an xml writer.</summary>
 		/// <param name="writer">An xml writer.</param>
-		public void WriteXml(XmlWriter writer)
+		void IXmlSerializable.WriteXml(XmlWriter writer)
 		{
 			writer.WriteAttributeString("name", Name);
 			writer.WriteString(Value);
 		}
-
-		#endregion
 
 		/// <summary>Gets and set the name.</summary>
 		[XmlAttribute("name")]
@@ -66,18 +65,5 @@ namespace Qowaiv.Tooling.Resx
 
 		/// <summary>Gets and set the value.</summary>
 		public string Value { get; private set; }
-
-		/// <summary>Represents the resource file data as debug string.</summary>
-		[DebuggerBrowsable(DebuggerBrowsableState.Never), SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Called by Debugger.")]
-		private string DebuggerDisplay
-		{
-			get
-			{
-				return string.Format(CultureInfo.InvariantCulture,
-					"Header, Name: {0}, Value: '{1}'",
-					Name,
-					Value);
-			}
-		}
 	}
 }

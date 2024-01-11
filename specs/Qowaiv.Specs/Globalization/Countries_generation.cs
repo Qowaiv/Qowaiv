@@ -1,26 +1,37 @@
 ﻿#if NET8_0_OR_GREATER
 #if DEBUG
 
+using Qowaiv.Tooling;
 using Qowaiv.Tooling.Resx;
 using Qowaiv.Tooling.Wikipedia;
 
 namespace Globalization.Countries_specs;
 
-public class Display_name
-{
-    private static readonly IReadOnlyCollection<Country> All = Country.All;
-
-    [TestCaseSource(nameof(All))]
-    public async Task matches_nl_Wikipedia(Country country)
-    {
-        var display = await Wiki.Scrape(lemma: $"Sjabloon:{country.Name}", language: "nl", s => DisplayName.FromNL(s, country.IsoAlpha2Code));
-
-        display!.Name.Should().Be(country.GetDisplayName(TestCultures.Nl_NL));
-    }
-}
-
 public class Resource_files
 {
+    internal static readonly IReadOnlyCollection<WikiInfo> Infos = new WikiLemma("ISO 3166-1", "en").Transform(WikiInfo.FromEN).Result;
+
+    [TestCaseSource(nameof(Infos))]
+    public void reflect_info_of_Wikipedia(WikiInfo info)
+    {
+        var country = Country.Parse(info.A2);
+        var summary = new WikiInfo(country.EnglishName, country.IsoAlpha2Code, country.IsoAlpha3Code, country.IsoNumericCode);
+        summary.Should().Be(info);
+    }
+
+    public class Display_names
+    {
+        private static readonly IReadOnlyCollection<Country> Exsiting = Country.GetExisting().ToArray();
+
+        [TestCaseSource(nameof(Exsiting))]
+        public async Task match_nl_Wikipedia(Country country)
+        {
+            var lemma = new WikiLemma($"Sjabloon:{country.Name}", "nl");
+            var display = await lemma.Transform(DisplayName.FromNL);
+            display.Should().Be(country.GetDisplayName(TestCultures.Nl_NL));
+        }
+    }
+
     [Test]
     public async Task generates_nl()
     {
@@ -30,8 +41,8 @@ public class Resource_files
         {
             var name = $"{country.Name}_DisplayName";
             var comment = $"{country.EnglishName} ({country.IsoAlpha2Code})";
-            var value = country.Name.Length == 2 && (await Wiki.Scrape(lemma: $"Sjabloon:{country.Name}", language: "nl", s => DisplayName.FromNL(s, country.IsoAlpha2Code))) is { } display
-                ? display.Name
+            var value = country.Name.Length == 2 && await Display(country) is { } display
+                ? display
                 : country.GetDisplayName(TestCultures.Nl_NL);
 
             if (value != country.EnglishName)
@@ -40,112 +51,110 @@ public class Resource_files
             }
         }
 
-        resource.Invoking(r => r.Save(new FileInfo("../../../../../src/Qowaiv/Globalization/CountryLabels.nl.resx")))
+        resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.nl.resx")))
+            .Should().NotThrow();
+
+        Task<string?> Display(Country country)
+        {
+            var lemma = new WikiLemma($"Sjabloon:{country.Name}", "nl");
+            return lemma.Transform(DisplayName.FromNL);
+        }
+    }
+
+    [Test]
+    public void generates_neutral_culture()
+    {
+        var all = Country.All.OrderBy(c => c.Name.Length).ThenBy(c => c.Name).ToArray();
+
+        var resource = new XResourceFile();
+        resource.Add("All", string.Join(';', all.Select(c => c.Name)));
+
+        foreach (var country in new[] { Country.Unknown }.Concat(all))
+        {
+            var pref = country.IsUnknown() ? "ZZ" : country.Name;
+
+            resource.Add($"{pref}_DisplayName", country.DisplayName);
+            resource.Add($"{pref}_ISO", country.IsoNumericCode.ToString("000"));
+            resource.Add($"{pref}_ISO2", country.IsoAlpha2Code);
+            resource.Add($"{pref}_ISO3", country.IsoAlpha3Code);
+            resource.Add($"{pref}_StartDate", country.StartDate.ToString("yyyy-MM-dd"));
+            if (country.EndDate is { } enddate)
+            {
+                resource.Add($"{pref}_EndDate", enddate.ToString("yyyy-MM-dd"));
+            }
+            if (country.CallingCode is { Length: > 0 })
+            {
+                resource.Add($"{pref}_CallingCode", country.CallingCode);
+            }
+        }
+
+        resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.resx")))
             .Should().NotThrow();
     }
-
 }
 
-public class Scrape
+public sealed record WikiInfo(string Name, string A2, string A3, int NC)
 {
-     [Test]
-    public async Task Scrape_en()
+    public override string ToString() => $"{A2}/{A3}: {Name} ({NC:000})";
+
+    // Overrides of Wikipedia: 
+    private static readonly Dictionary<string, string> Shorten = new()
     {
-        var resources = XResourceCollection.Load(new("../../../../../src/Qowaiv/Globalization"));
+        ["Bolivia (Plurinational State of)"] = "Bolivia",
+        ["Bonaire, Sint Eustatius and Saba"] = "Caribbean Netherlands",
+        ["Iran (Islamic Republic of)"] = "Iran",
+        ["Korea (Democratic People's Republic of)"] = "North Korea",
+        ["Korea, Republic of"] = "South Korea",
+        ["Lao People's Democratic Republic"] = "Loas",
+        ["Micronesia (Federated States of)"] = "Micronesia",
+        ["Moldova, Republic of"] = "Moldova",
+        ["Netherlands, Kingdom of the"] = "Netherlands",
+        ["Palestine, State of"] = "Palestine",
+        ["Russian Federation"] = "Russia",
+        ["Taiwan, Province of China"] = "Taiwan",
+        ["Tanzania, United Republic of"] = "Tanzania",
+        ["United Kingdom of Great Britain and Northern Ireland"] = "United Kingdom",
+        ["United States of America"] = "United States",
+        ["Venezuela (Bolivarian Republic of)"] = "Venezuela",
+        ["<!--DO NOT CHANGE-->{{not a typo|Sao Tome and Principe}}<!-- Do not change this to \"São Tomé and Príncipe\" unless https://www.iso.org/obp/ui/#iso:code:3166:ST changes to that spelling. If you disagree with the lack of diacritics, contact the ISO 3166/MA; we must follow the published standard for this article. -->"] = "Sao Tome and Principe",
+    };
 
-        var infos = await Wiki.Scrape(lemma: "List of ISO 3166 country codes", language: "en", CountryInfo.FromEN);
-
-        var nls = new List<DisplayName>();
-
-        foreach (var info in infos)
-        {
-            var nl = await Wiki.Scrape(lemma: $"Sjabloon:{info.A2}", language: "nl", s=> DisplayName.FromNL(s, info.A2));
-            if (nl is { })
-            {
-                nls.Add(nl);
-            }
-        }
-
-        infos.Should().NotBeEmpty();
-
-
-        foreach(var nl  in nls)
-        {
-            var country = Country.Parse(nl.A2);
-
-            var display = country.GetDisplayName(new CultureInfo("nl"));
-
-            if (display != nl.Name)
-            {
-                Console.WriteLine($"{nl.A2}: {nl.Name} [{display}]");
-            }
-        }
-
-        //foreach (var info in infos)
-        //{
-        //    var country = Country.Parse(info.A2);
-
-        //    if (country.EnglishName != info.Name)
-        //    {
-        //        Console.WriteLine($"{info.A2}: {info.Name} [{country.EnglishName}]");
-        //    }
-        //}
-
-        //foreach (var info in infos)
-        //{
-        //    var country = Country.Parse(info.A2);
-
-        //    if (country.EnglishName == info.Name)
-        //    {
-        //        Console.WriteLine($"{info.A2}: {info.Name}");
-        //    }
-        //}
-
-    }
-
-    internal sealed record CountryInfo(string Name, string A2, string A3, int NC, Dictionary<string, string> DisplayNames)
+    public static IEnumerable<WikiInfo> FromEN(string str)
     {
-        public static IEnumerable<CountryInfo> FromEN(string str)
+        foreach (var line in str.Split("{{flagdeco|").Skip(1))
         {
-            foreach (var line in str.Split("| id=").Skip(1))
+            var parts = line.Split("mono|");
+
+            if (parts.Length >= 4)
             {
-                var parts = line.Split("\n");
+                var link = WikiLink.Parse(parts[0]).First();
+                var name = Wiki.RemoveInParentheses(link.Display);
 
-                if (parts.Length >= 6)
-                {
-                    var link = WikiLink.Parse(parts[0]).First();
-                    var name = Wiki.RemoveInParentheses(link.Display);
+                var a2 = parts[1][..2];
+                var a3 = parts[2][..3];
+                var nc = parts[3][..3];
 
-                    var a2 = parts[3].Substring(parts[3].IndexOf("mono|") + 5, 2);
-                    var a3 = parts[4].Substring(parts[4].IndexOf("mono|") + 5, 3);
-                    var nc = parts[5].Substring(parts[5].IndexOf("mono|") + 5, 3);
+                name = Shorten.TryGetValue(name, out var shorten) ? shorten : name;
 
-                    yield return new(name, a2, a3, int.Parse(nc), new() { ["en"] = name });
-                }
+                yield return new(name, a2, a3, int.Parse(nc));
             }
         }
     }
 }
 
-internal sealed record DisplayName(string A2, string Name)
+internal static class DisplayName
 {
-    public static DisplayName? FromNL(string str, string a2)
+    public static string? FromNL(string str)
     {
         var index = str.LastIndexOf($"-VLAG}}}}&nbsp;") + 1;
         var text = str[index..];
 
-        if(a2 == "DE")
-        {
-
-        }
-
         if (WikiLink.Parse(text).FirstOrDefault() is { } link)
         {
-
             var display = link.Display;
             display = display[(display.IndexOf('|') + 1)..];
             display = display.Trim('{').Trim('}');
-            return new(a2, display);
+            return display;
         }
         else return null;
     }

@@ -7,6 +7,10 @@ using Qowaiv.Tooling.Wikipedia;
 
 namespace Globalization.Countries_specs;
 
+/// <remarks>
+/// As fetching data from Wikipedia is time consuming (no benefits from caching)
+/// and therefor not executed on a RELEASE build.
+/// </remarks>
 public class Resource_files
 {
     internal static readonly IReadOnlyCollection<WikiInfo> Infos = new WikiLemma("ISO 3166-1", "en").Transform(WikiInfo.FromEN).Result;

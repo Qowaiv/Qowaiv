@@ -14,7 +14,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Afghanistan (AF).</summary>
     public static readonly Country AF = new("AF");
 
-    /// <summary>Describes the country Antigua And Barbuda (AG).</summary>
+    /// <summary>Describes the country Antigua and Barbuda (AG).</summary>
     public static readonly Country AG = new("AG");
 
     /// <summary>Describes the country Anguilla (AI).</summary>
@@ -53,7 +53,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Azerbaijan (AZ).</summary>
     public static readonly Country AZ = new("AZ");
 
-    /// <summary>Describes the country Bosnia And Herzegovina (BA).</summary>
+    /// <summary>Describes the country Bosnia and Herzegovina (BA).</summary>
     public static readonly Country BA = new("BA");
 
     /// <summary>Describes the country Barbados (BB).</summary>
@@ -92,7 +92,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Bolivia (BO).</summary>
     public static readonly Country BO = new("BO");
 
-    /// <summary>Describes the country Bonaire (BQ).</summary>
+    /// <summary>Describes the country Caribbean Netherlands (BQ).</summary>
     public static readonly Country BQ = new("BQ");
 
     /// <summary>Describes the country Brazil (BR).</summary>
@@ -119,10 +119,10 @@ public readonly partial struct Country
     /// <summary>Describes the country Canada (CA).</summary>
     public static readonly Country CA = new("CA");
 
-    /// <summary>Describes the country Cocos (CC).</summary>
+    /// <summary>Describes the country Cocos Islands (CC).</summary>
     public static readonly Country CC = new("CC");
 
-    /// <summary>Describes the country Congo (CD).</summary>
+    /// <summary>Describes the country Congo, Democratic Republic of the (CD).</summary>
     public static readonly Country CD = new("CD");
 
     /// <summary>Describes the country Central African Republic (CF).</summary>
@@ -134,7 +134,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Switzerland (CH).</summary>
     public static readonly Country CH = new("CH");
 
-    /// <summary>Describes the country Côte D'Ivoire (CI).</summary>
+    /// <summary>Describes the country Côte d'Ivoire (CI).</summary>
     public static readonly Country CI = new("CI");
 
     /// <summary>Describes the country Cook Islands (CK).</summary>
@@ -158,7 +158,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Cuba (CU).</summary>
     public static readonly Country CU = new("CU");
 
-    /// <summary>Describes the country Cape Verde (CV).</summary>
+    /// <summary>Describes the country Cabo Verde (CV).</summary>
     public static readonly Country CV = new("CV");
 
     /// <summary>Describes the country Curaçao (CW).</summary>
@@ -170,7 +170,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Cyprus (CY).</summary>
     public static readonly Country CY = new("CY");
 
-    /// <summary>Describes the country Czech Republic (CZ).</summary>
+    /// <summary>Describes the country Czechia (CZ).</summary>
     public static readonly Country CZ = new("CZ");
 
     /// <summary>Describes the country Germany (DE).</summary>
@@ -272,7 +272,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Greece (GR).</summary>
     public static readonly Country GR = new("GR");
 
-    /// <summary>Describes the country South Georgia And The South Sandwich Islands (GS).</summary>
+    /// <summary>Describes the country South Georgia and the South Sandwich Islands (GS).</summary>
     public static readonly Country GS = new("GS");
 
     /// <summary>Describes the country Guatemala (GT).</summary>
@@ -290,7 +290,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Hong Kong (HK).</summary>
     public static readonly Country HK = new("HK");
 
-    /// <summary>Describes the country Heard Island And Mcdonald Islands (HM).</summary>
+    /// <summary>Describes the country Heard Island and McDonald Islands (HM).</summary>
     public static readonly Country HM = new("HM");
 
     /// <summary>Describes the country Honduras (HN).</summary>
@@ -314,7 +314,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Israel (IL).</summary>
     public static readonly Country IL = new("IL");
 
-    /// <summary>Describes the country Isle Of Man (IM).</summary>
+    /// <summary>Describes the country Isle of Man (IM).</summary>
     public static readonly Country IM = new("IM");
 
     /// <summary>Describes the country India (IN).</summary>
@@ -362,13 +362,13 @@ public readonly partial struct Country
     /// <summary>Describes the country Comoros (KM).</summary>
     public static readonly Country KM = new("KM");
 
-    /// <summary>Describes the country Saint Kitts And Nevis (KN).</summary>
+    /// <summary>Describes the country Saint Kitts and Nevis (KN).</summary>
     public static readonly Country KN = new("KN");
 
     /// <summary>Describes the country Korea (KP).</summary>
     public static readonly Country KP = new("KP");
 
-    /// <summary>Describes the country Korea (KR).</summary>
+    /// <summary>Describes the country South Korea (KR).</summary>
     public static readonly Country KR = new("KR");
 
     /// <summary>Describes the country Kuwait (KW).</summary>
@@ -380,7 +380,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Kazakhstan (KZ).</summary>
     public static readonly Country KZ = new("KZ");
 
-    /// <summary>Describes the country Lao People'S Democratic Republic (LA).</summary>
+    /// <summary>Describes the country Loas (LA).</summary>
     public static readonly Country LA = new("LA");
 
     /// <summary>Describes the country Lebanon (LB).</summary>
@@ -434,7 +434,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Marshall Islands (MH).</summary>
     public static readonly Country MH = new("MH");
 
-    /// <summary>Describes the country Macedonia (MK).</summary>
+    /// <summary>Describes the country North Macedonia (MK).</summary>
     public static readonly Country MK = new("MK");
 
     /// <summary>Describes the country Mali (ML).</summary>
@@ -542,7 +542,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Poland (PL).</summary>
     public static readonly Country PL = new("PL");
 
-    /// <summary>Describes the country Saint Pierre And Miquelon (PM).</summary>
+    /// <summary>Describes the country Saint Pierre and Miquelon (PM).</summary>
     public static readonly Country PM = new("PM");
 
     /// <summary>Describes the country Pitcairn (PN).</summary>
@@ -551,7 +551,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Puerto Rico (PR).</summary>
     public static readonly Country PR = new("PR");
 
-    /// <summary>Describes the country Palestinian Territory (PS).</summary>
+    /// <summary>Describes the country Palestine (PS).</summary>
     public static readonly Country PS = new("PS");
 
     /// <summary>Describes the country Portugal (PT).</summary>
@@ -575,7 +575,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Serbia (RS).</summary>
     public static readonly Country RS = new("RS");
 
-    /// <summary>Describes the country Russian Federation (RU).</summary>
+    /// <summary>Describes the country Russia (RU).</summary>
     public static readonly Country RU = new("RU");
 
     /// <summary>Describes the country Rwanda (RW).</summary>
@@ -599,13 +599,13 @@ public readonly partial struct Country
     /// <summary>Describes the country Singapore (SG).</summary>
     public static readonly Country SG = new("SG");
 
-    /// <summary>Describes the country Saint Helena (SH).</summary>
+    /// <summary>Describes the country Saint Helena, Ascension and Tristan da Cunha (SH).</summary>
     public static readonly Country SH = new("SH");
 
     /// <summary>Describes the country Slovenia (SI).</summary>
     public static readonly Country SI = new("SI");
 
-    /// <summary>Describes the country Svalbard And Jan Mayen (SJ).</summary>
+    /// <summary>Describes the country Svalbard and Jan Mayen (SJ).</summary>
     public static readonly Country SJ = new("SJ");
 
     /// <summary>Describes the country Slovakia (SK).</summary>
@@ -629,7 +629,7 @@ public readonly partial struct Country
     /// <summary>Describes the country South Sudan (SS).</summary>
     public static readonly Country SS = new("SS");
 
-    /// <summary>Describes the country Sao Tome And Principe (ST).</summary>
+    /// <summary>Describes the country Sao Tome and Principe (ST).</summary>
     public static readonly Country ST = new("ST");
 
     /// <summary>Describes the country El Salvador (SV).</summary>
@@ -641,10 +641,10 @@ public readonly partial struct Country
     /// <summary>Describes the country Syrian Arab Republic (SY).</summary>
     public static readonly Country SY = new("SY");
 
-    /// <summary>Describes the country Swaziland (SZ).</summary>
+    /// <summary>Describes the country Eswatini (SZ).</summary>
     public static readonly Country SZ = new("SZ");
 
-    /// <summary>Describes the country Turks And Caicos Islands (TC).</summary>
+    /// <summary>Describes the country Turks and Caicos Islands (TC).</summary>
     public static readonly Country TC = new("TC");
 
     /// <summary>Describes the country Chad (TD).</summary>
@@ -677,10 +677,10 @@ public readonly partial struct Country
     /// <summary>Describes the country Tonga (TO).</summary>
     public static readonly Country TO = new("TO");
 
-    /// <summary>Describes the country Turkey (TR).</summary>
+    /// <summary>Describes the country Türkiye (TR).</summary>
     public static readonly Country TR = new("TR");
 
-    /// <summary>Describes the country Trinidad And Tobago (TT).</summary>
+    /// <summary>Describes the country Trinidad and Tobago (TT).</summary>
     public static readonly Country TT = new("TT");
 
     /// <summary>Describes the country Tuvalu (TV).</summary>
@@ -713,7 +713,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Holy See (VA).</summary>
     public static readonly Country VA = new("VA");
 
-    /// <summary>Describes the country Saint Vincent And The Grenadines (VC).</summary>
+    /// <summary>Describes the country Saint Vincent and the Grenadines (VC).</summary>
     public static readonly Country VC = new("VC");
 
     /// <summary>Describes the country Venezuela (VE).</summary>
@@ -731,7 +731,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Vanuatu (VU).</summary>
     public static readonly Country VU = new("VU");
 
-    /// <summary>Describes the country Wallis And Futuna (WF).</summary>
+    /// <summary>Describes the country Wallis and Futuna (WF).</summary>
     public static readonly Country WF = new("WF");
 
     /// <summary>Describes the country Samoa (WS).</summary>

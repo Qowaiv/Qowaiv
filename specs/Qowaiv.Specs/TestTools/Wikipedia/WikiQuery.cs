@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Tooling.Wikipedia;
+﻿namespace Qowaiv.TestTools.Wikipedia;
 
 public sealed record WikiQuery
 {

@@ -3,7 +3,7 @@ using System.Xml.Linq;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace Qowaiv.Tooling.Resx;
+namespace Qowaiv.TestTools.Resx;
 
 /// <summary>Represents a header of a resource file.</summary>
 [Serializable]

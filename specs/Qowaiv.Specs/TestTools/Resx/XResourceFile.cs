@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 using System.Xml.Serialization;
 
-namespace Qowaiv.Tooling.Resx;
+namespace Qowaiv.TestTools.Resx;
 
 /// <summary>Represents a resource file.</summary>
 [Serializable, XmlType("root")]

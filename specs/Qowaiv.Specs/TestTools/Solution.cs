@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Tooling;
+﻿namespace Qowaiv.TestTools;
 
 public static class Solution
 {

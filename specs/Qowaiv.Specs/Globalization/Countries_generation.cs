@@ -1,9 +1,9 @@
 ﻿#if NET8_0_OR_GREATER
 #if DEBUG
 
-using Qowaiv.Tooling;
-using Qowaiv.Tooling.Resx;
-using Qowaiv.Tooling.Wikipedia;
+using Qowaiv.TestTools;
+using Qowaiv.TestTools.Resx;
+using Qowaiv.TestTools.Wikipedia;
 
 namespace Globalization.Countries_specs;
 
@@ -46,7 +46,7 @@ public class Constants
 /// </remarks>
 public class Resource_files
 {
-    internal static readonly IReadOnlyCollection<WikiInfo> Infos = new WikiLemma("ISO 3166-1", "en").Transform(WikiInfo.FromEN).Result;
+    internal static readonly IReadOnlyCollection<WikiInfo> Infos = new WikiLemma("ISO 3166-1", TestCultures.En).Transform(WikiInfo.FromEN).Result;
 
     [TestCaseSource(nameof(Infos))]
     public void reflect_info_of_Wikipedia(WikiInfo info)
@@ -63,7 +63,7 @@ public class Resource_files
         [TestCaseSource(nameof(Exsiting))]
         public async Task match_nl_Wikipedia(Country country)
         {
-            var lemma = new WikiLemma($"Sjabloon:{country.IsoAlpha2Code}", "nl");
+            var lemma = new WikiLemma($"Sjabloon:{country.IsoAlpha2Code}", TestCultures.Nl);
             var display = await lemma.Transform(DisplayName.FromNL);
             display.Should().Be(country.GetDisplayName(TestCultures.Nl_NL));
         }
@@ -73,7 +73,7 @@ public class Resource_files
         {
             try
             {
-                var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", "de");
+                var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", TestCultures.De);
                 var display = await lemma.Transform(DisplayName.FromDE);
                 display.Should().Be(country.GetDisplayName(TestCultures.De_DE));
             }
@@ -141,7 +141,7 @@ public class Resource_files
             {
                 try
                 {
-                    var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", "de");
+                    var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", TestCultures.De);
                     return await lemma.Transform(DisplayName.FromDE);
                 }
                 catch (UnknownLemma)
@@ -175,7 +175,7 @@ public class Resource_files
 
             Task<string?> Display(Country country)
             {
-                var lemma = new WikiLemma($"Sjabloon:{country.Name}", "nl");
+                var lemma = new WikiLemma($"Sjabloon:{country.Name}", TestCultures.Nl);
                 return lemma.Transform(DisplayName.FromNL);
             }
         }

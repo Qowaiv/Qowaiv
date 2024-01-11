@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Tooling.Resx;
+﻿namespace Qowaiv.TestTools.Resx;
 
 /// <summary>Represents a collection of RESX resource files.</summary>
 public sealed class XResourceCollection : Dictionary<CultureInfo, XResourceFile>

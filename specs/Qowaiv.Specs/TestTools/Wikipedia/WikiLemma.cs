@@ -1,13 +1,15 @@
-﻿using System.Text.Json;
+﻿using System.Net;
+using System.Net.Http;
+using System.Text.Json;
 
-namespace Qowaiv.Tooling.Wikipedia;
+namespace Qowaiv.TestTools.Wikipedia;
 
 public sealed record WikiLemma
 {
-    public WikiLemma(string title, string language)
+    public WikiLemma(string title, CultureInfo language)
     {
         Title = title;
-        Language = new(language);
+        Language = language;
         Url = new Uri($"https://{language}.wikipedia.org/w/api.php?action=query&prop=revisions&titles={title}&rvprop=content&rvslots=*&format=json");
         Cached = new(Path.Combine(Path.GetTempPath(), "WikiCache", $"{ToFile(title)}.{language}.wiki.txt"));
         if (!Cached.Directory!.Exists)
@@ -43,7 +45,7 @@ public sealed record WikiLemma
 
         if (content.StartsWith("#REDIRECT ") && WikiLink.Parse(content).ToArray() is { Length: 1 } link)
         {
-            var redirect = new WikiLemma(link[0].Lemma, Language.Name);
+            var redirect = new WikiLemma(link[0].Lemma, Language);
             content = await redirect.Content();
         }
         return content;
@@ -59,6 +61,7 @@ public sealed record WikiLemma
 
     private async Task Update()
     {
+#if NET8_0_OR_GREATER
         var client = new HttpClient();
         var response = await client.GetAsync(Url);
 
@@ -81,6 +84,9 @@ public sealed record WikiLemma
         {
             throw new InvalidOperationException($"GET {Url} responded with {response.StatusCode}: {body}");
         }
+#else
+        throw new NotSupportedException();
+#endif
     }
 
     public bool HasExpired => !Cached.Exists || (Clock.UtcNow() - Cached.LastWriteTimeUtc) > Expiration;

@@ -12,11 +12,17 @@ public static class TestCultures
         .Select(prop => (CultureInfo)prop.GetValue(null)!)
         .FirstOrDefault(culture => culture.Name == name) ?? new CultureInfo(name);
 
-    /// <summary>Gets the German (de-DE) <see cref="CultureInfo"/>.</summary>
-    public static CultureInfo De_DE => new("de-DE");
+    /// <summary>Gets the German (de) <see cref="CultureInfo"/>.</summary>
+    public static CultureInfo De => new("de");
 
     /// <summary>Gets the English (en) <see cref="CultureInfo"/>.</summary>
     public static CultureInfo En => new("en");
+
+    /// <summary>Gets the Dutch (nl) <see cref="CultureInfo"/>.</summary>
+    public static CultureInfo Nl => new("nl");
+
+    /// <summary>Gets the German (de-DE) <see cref="CultureInfo"/>.</summary>
+    public static CultureInfo De_DE => new("de-DE");
 
     /// <summary>Gets the British (en-GB) <see cref="CultureInfo"/>.</summary>
     public static CultureInfo En_GB => new("en-GB");

@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Tooling.Wikipedia;
+﻿namespace Qowaiv.TestTools.Wikipedia;
 
 public static class Wiki
 {

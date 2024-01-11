@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Qowaiv.Tooling.Resx;
+namespace Qowaiv.TestTools.Resx;
 
 /// <summary>Represents data of a resource file.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]

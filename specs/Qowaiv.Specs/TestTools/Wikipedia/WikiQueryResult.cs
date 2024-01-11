@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Qowaiv.Tooling.Wikipedia;
+namespace Qowaiv.TestTools.Wikipedia;
 
 public sealed class WikiQueryResult
 {

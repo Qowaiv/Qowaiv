@@ -36,10 +36,12 @@ public sealed record WikiLemma
     [Pure]
     public async Task<string> Content()
     {
+#if NET8_0_OR_GREATER
         if (HasExpired)
         {
             await Update();
         }
+#endif
         using var reader = Cached.OpenText();
         var content = await reader.ReadToEndAsync();
 
@@ -59,9 +61,9 @@ public sealed record WikiLemma
     public async Task<IReadOnlyCollection<T>> Transform<T>(Func<string, IEnumerable<T>> tryParse) where T : class
         => tryParse(await Content()).ToArray();
 
+#if NET8_0_OR_GREATER
     private async Task Update()
     {
-#if NET8_0_OR_GREATER
         var client = new HttpClient();
         var response = await client.GetAsync(Url);
 
@@ -84,10 +86,8 @@ public sealed record WikiLemma
         {
             throw new InvalidOperationException($"GET {Url} responded with {response.StatusCode}: {body}");
         }
-#else
-        throw new NotSupportedException();
-#endif
     }
+#endif
 
     public bool HasExpired => !Cached.Exists || (Clock.UtcNow() - Cached.LastWriteTimeUtc) > Expiration;
 

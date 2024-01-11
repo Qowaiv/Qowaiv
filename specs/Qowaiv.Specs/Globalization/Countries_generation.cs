@@ -1,7 +1,6 @@
 ﻿#if NET8_0_OR_GREATER
 #if DEBUG
 
-using Qowaiv.TestTools;
 using Qowaiv.TestTools.Resx;
 using Qowaiv.TestTools.Wikipedia;
 

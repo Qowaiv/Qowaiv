@@ -63,9 +63,17 @@ public class Resource_files
         [TestCaseSource(nameof(Exsiting))]
         public async Task match_nl_Wikipedia(Country country)
         {
-            var lemma = new WikiLemma($"Sjabloon:{country.Name}", "nl");
+            var lemma = new WikiLemma($"Sjabloon:{country.IsoAlpha2Code}", "nl");
             var display = await lemma.Transform(DisplayName.FromNL);
             display.Should().Be(country.GetDisplayName(TestCultures.Nl_NL));
+        }
+
+        [TestCaseSource(nameof(Exsiting))]
+        public async Task match_de_Wikipedia(Country country)
+        {
+            var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", "de");
+            var display = await lemma.Transform(DisplayName.FromDE);
+            display.Should().Be(country.GetDisplayName(TestCultures.De_DE));
         }
     }
 
@@ -101,6 +109,42 @@ public class Resource_files
 
             resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.resx")))
                 .Should().NotThrow();
+        }
+
+        [Test]
+        public async Task de_culture()
+        {
+            var resource = new XResourceFile(new XResourceFileData("ZZ_DisplayName", "Unbekannt", "Unknown (ZZ)"));
+
+            foreach (var country in Country.All.OrderBy(c => c.Name.Length).ThenBy(c => c.Name))
+            {
+                var name = $"{country.Name}_DisplayName";
+                var comment = $"{country.EnglishName} ({country.IsoAlpha2Code})";
+                var value = country.Name.Length == 2 && await Display(country) is { } display
+                    ? display
+                    : country.GetDisplayName(TestCultures.De_DE);
+
+                if (value != country.EnglishName)
+                {
+                    resource.Add(name, value, comment);
+                }
+            }
+
+            resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.de.resx")))
+                .Should().NotThrow();
+
+            async Task<string?> Display(Country country)
+            {
+                try
+                {
+                    var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", "de");
+                    return await lemma.Transform(DisplayName.FromDE);
+                }
+                catch
+                {
+                    return null;
+                }
+            }
         }
 
         [Test]
@@ -185,9 +229,26 @@ public sealed record WikiInfo(string Name, string A2, string A3, int NC)
 
 internal static class DisplayName
 {
+    private const string DE_prefix = "{{{3|";
+
+    public static string? FromDE(string str)
+    {
+        var index = str.LastIndexOf(DE_prefix);
+        if (index != -1)
+        {
+
+            var text = str[(index+DE_prefix.Length)..];
+            return text[..text.IndexOf('}')];
+        }
+        else return null;
+        
+      
+
+    }
+
     public static string? FromNL(string str)
     {
-        var index = str.LastIndexOf($"-VLAG}}}}&nbsp;") + 1;
+        var index = str.LastIndexOf("-VLAG}}&nbsp;") + 1;
         var text = str[index..];
 
         if (WikiLink.Parse(text).FirstOrDefault() is { } link)

@@ -1,9 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <resheader name="resmimetype">text/microsoft-resx</resheader>
-  <resheader name="version">2.0</resheader>
-  <resheader name="reader">System.Resources.ResXResourceReader</resheader>
-  <resheader name="writer">System.Resources.ResXResourceWriter</resheader>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
   <data name="ZZ_DisplayName">
     <value>Onbekend</value>
     <comment>Unknown (ZZ)</comment>
@@ -14,7 +19,7 @@
   </data>
   <data name="AG_DisplayName">
     <value>Antigua en Barbuda</value>
-    <comment>Antigua And Barbuda (AG)</comment>
+    <comment>Antigua and Barbuda (AG)</comment>
   </data>
   <data name="AL_DisplayName">
     <value>Albanië</value>
@@ -50,7 +55,7 @@
   </data>
   <data name="BA_DisplayName">
     <value>Bosnië en Herzegovina</value>
-    <comment>Bosnia And Herzegovina (BA)</comment>
+    <comment>Bosnia and Herzegovina (BA)</comment>
   </data>
   <data name="BE_DisplayName">
     <value>België</value>
@@ -74,7 +79,7 @@
   </data>
   <data name="BQ_DisplayName">
     <value>Caribisch Nederland</value>
-    <comment>Bonaire (BQ)</comment>
+    <comment>Caribbean Netherlands (BQ)</comment>
   </data>
   <data name="BR_DisplayName">
     <value>Brazilië</value>
@@ -94,11 +99,11 @@
   </data>
   <data name="CC_DisplayName">
     <value>Cocoseilanden</value>
-    <comment>Cocos (CC)</comment>
+    <comment>Cocos Islands (CC)</comment>
   </data>
   <data name="CD_DisplayName">
     <value>Congo-Kinshasa</value>
-    <comment>Congo (CD)</comment>
+    <comment>Congo, Democratic Republic of the (CD)</comment>
   </data>
   <data name="CF_DisplayName">
     <value>Centraal-Afrikaanse Republiek</value>
@@ -114,7 +119,7 @@
   </data>
   <data name="CI_DisplayName">
     <value>Ivoorkust</value>
-    <comment>Côte D'Ivoire (CI)</comment>
+    <comment>Côte d'Ivoire (CI)</comment>
   </data>
   <data name="CK_DisplayName">
     <value>Cookeilanden</value>
@@ -130,7 +135,7 @@
   </data>
   <data name="CV_DisplayName">
     <value>Kaapverdië</value>
-    <comment>Cape Verde (CV)</comment>
+    <comment>Cabo Verde (CV)</comment>
   </data>
   <data name="CX_DisplayName">
     <value>Christmaseiland</value>
@@ -138,7 +143,7 @@
   </data>
   <data name="CZ_DisplayName">
     <value>Tsjechië</value>
-    <comment>Czech Republic (CZ)</comment>
+    <comment>Czechia (CZ)</comment>
   </data>
   <data name="DE_DisplayName">
     <value>Duitsland</value>
@@ -222,7 +227,7 @@
   </data>
   <data name="GS_DisplayName">
     <value>Zuid-Georgia en de Zuidelijke Sandwicheilanden</value>
-    <comment>South Georgia And The South Sandwich Islands (GS)</comment>
+    <comment>South Georgia and the South Sandwich Islands (GS)</comment>
   </data>
   <data name="GW_DisplayName">
     <value>Guinee-Bissau</value>
@@ -234,7 +239,7 @@
   </data>
   <data name="HM_DisplayName">
     <value>Heard en McDonaldeilanden</value>
-    <comment>Heard Island And Mcdonald Islands (HM)</comment>
+    <comment>Heard Island and McDonald Islands (HM)</comment>
   </data>
   <data name="HR_DisplayName">
     <value>Kroatië</value>
@@ -262,7 +267,7 @@
   </data>
   <data name="IM_DisplayName">
     <value>Man</value>
-    <comment>Isle Of Man (IM)</comment>
+    <comment>Isle of Man (IM)</comment>
   </data>
   <data name="IO_DisplayName">
     <value>Brits Indische Oceaanterritorium</value>
@@ -302,7 +307,7 @@
   </data>
   <data name="KN_DisplayName">
     <value>Saint Kitts en Nevis</value>
-    <comment>Saint Kitts And Nevis (KN)</comment>
+    <comment>Saint Kitts and Nevis (KN)</comment>
   </data>
   <data name="KP_DisplayName">
     <value>Noord-Korea</value>
@@ -310,7 +315,7 @@
   </data>
   <data name="KR_DisplayName">
     <value>Zuid-Korea</value>
-    <comment>Korea (KR)</comment>
+    <comment>South Korea (KR)</comment>
   </data>
   <data name="KW_DisplayName">
     <value>Koeweit</value>
@@ -326,7 +331,7 @@
   </data>
   <data name="LA_DisplayName">
     <value>Laos</value>
-    <comment>Lao People'S Democratic Republic (LA)</comment>
+    <comment>Loas (LA)</comment>
   </data>
   <data name="LB_DisplayName">
     <value>Libanon</value>
@@ -370,7 +375,7 @@
   </data>
   <data name="MK_DisplayName">
     <value>Noord-Macedonië</value>
-    <comment>Macedonia (MK)</comment>
+    <comment>North Macedonia (MK)</comment>
   </data>
   <data name="MN_DisplayName">
     <value>Mongolië</value>
@@ -438,7 +443,7 @@
   </data>
   <data name="PM_DisplayName">
     <value>Saint-Pierre en Miquelon</value>
-    <comment>Saint Pierre And Miquelon (PM)</comment>
+    <comment>Saint Pierre and Miquelon (PM)</comment>
   </data>
   <data name="PN_DisplayName">
     <value>Pitcairneilanden</value>
@@ -446,7 +451,7 @@
   </data>
   <data name="PS_DisplayName">
     <value>Palestina</value>
-    <comment>Palestinian Territory (PS)</comment>
+    <comment>Palestine (PS)</comment>
   </data>
   <data name="RO_DisplayName">
     <value>Roemenië</value>
@@ -458,7 +463,7 @@
   </data>
   <data name="RU_DisplayName">
     <value>Rusland</value>
-    <comment>Russian Federation (RU)</comment>
+    <comment>Russia (RU)</comment>
   </data>
   <data name="SA_DisplayName">
     <value>Saoedi-Arabië</value>
@@ -482,7 +487,7 @@
   </data>
   <data name="SH_DisplayName">
     <value>Sint-Helena, Ascension en Tristan da Cunha</value>
-    <comment>Saint Helena (SH)</comment>
+    <comment>Saint Helena, Ascension and Tristan da Cunha (SH)</comment>
   </data>
   <data name="SI_DisplayName">
     <value>Slovenië</value>
@@ -490,7 +495,7 @@
   </data>
   <data name="SJ_DisplayName">
     <value>Spitsbergen en Jan Mayen</value>
-    <comment>Svalbard And Jan Mayen (SJ)</comment>
+    <comment>Svalbard and Jan Mayen (SJ)</comment>
   </data>
   <data name="SK_DisplayName">
     <value>Slowakije</value>
@@ -506,15 +511,19 @@
   </data>
   <data name="ST_DisplayName">
     <value>Sao Tomé en Principe</value>
-    <comment>Sao Tome And Principe (ST)</comment>
+    <comment>Sao Tome and Principe (ST)</comment>
   </data>
   <data name="SY_DisplayName">
     <value>Syrië</value>
     <comment>Syrian Arab Republic (SY)</comment>
   </data>
+  <data name="SZ_DisplayName">
+    <value>Swaziland</value>
+    <comment>Eswatini (SZ)</comment>
+  </data>
   <data name="TC_DisplayName">
     <value>Turks- en Caicoseilanden</value>
-    <comment>Turks And Caicos Islands (TC)</comment>
+    <comment>Turks and Caicos Islands (TC)</comment>
   </data>
   <data name="TD_DisplayName">
     <value>Tsjaad</value>
@@ -538,11 +547,11 @@
   </data>
   <data name="TR_DisplayName">
     <value>Turkije</value>
-    <comment>Turkey (TR)</comment>
+    <comment>Türkiye (TR)</comment>
   </data>
   <data name="TT_DisplayName">
     <value>Trinidad en Tobago</value>
-    <comment>Trinidad And Tobago (TT)</comment>
+    <comment>Trinidad and Tobago (TT)</comment>
   </data>
   <data name="UA_DisplayName">
     <value>Oekraïne</value>
@@ -570,7 +579,7 @@
   </data>
   <data name="VC_DisplayName">
     <value>Saint Vincent en de Grenadines</value>
-    <comment>Saint Vincent And The Grenadines (VC)</comment>
+    <comment>Saint Vincent and the Grenadines (VC)</comment>
   </data>
   <data name="VG_DisplayName">
     <value>Britse Maagdeneilanden</value>
@@ -586,7 +595,7 @@
   </data>
   <data name="WF_DisplayName">
     <value>Wallis en Futuna</value>
-    <comment>Wallis And Futuna (WF)</comment>
+    <comment>Wallis and Futuna (WF)</comment>
   </data>
   <data name="YE_DisplayName">
     <value>Jemen</value>

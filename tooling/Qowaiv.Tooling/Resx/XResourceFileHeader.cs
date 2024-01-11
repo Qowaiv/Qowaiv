@@ -48,7 +48,7 @@ namespace Qowaiv.Tooling.Resx
 		{
 			var element = XElement.Parse(reader.ReadOuterXml());
 			Name = element.Attribute("name")?.Value ?? string.Empty;
-			Value = element.Value;
+			Value = element.Element("value")?.Value ?? string.Empty;
 		}
 
 		/// <summary>Writes the resource file header to an xml writer.</summary>
@@ -56,7 +56,7 @@ namespace Qowaiv.Tooling.Resx
 		void IXmlSerializable.WriteXml(XmlWriter writer)
 		{
 			writer.WriteAttributeString("name", Name);
-			writer.WriteString(Value);
+            writer.WriteElementString("value", Value);
 		}
 
 		/// <summary>Gets and set the name.</summary>

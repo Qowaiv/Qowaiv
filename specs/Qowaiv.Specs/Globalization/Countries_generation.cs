@@ -82,8 +82,9 @@ public class Resource_files
             foreach (var country in new[] { Country.Unknown }.Concat(all))
             {
                 var pref = country.IsUnknown() ? "ZZ" : country.Name;
+                var display = Infos.FirstOrDefault(i => i.A2 == country.Name)?.Name ?? country.DisplayName;
 
-                resource.Add($"{pref}_DisplayName", country.DisplayName);
+                resource.Add($"{pref}_DisplayName", display);
                 resource.Add($"{pref}_ISO", country.IsoNumericCode.ToString("000"));
                 resource.Add($"{pref}_ISO2", country.IsoAlpha2Code);
                 resource.Add($"{pref}_ISO3", country.IsoAlpha3Code);
@@ -151,7 +152,7 @@ public sealed record WikiInfo(string Name, string A2, string A3, int NC)
         ["Netherlands, Kingdom of the"] = "Netherlands",
         ["Palestine, State of"] = "Palestine",
         ["Russian Federation"] = "Russia",
-        ["Taiwan, Province of China"] = "Taiwan",
+        ["<!--DO NOT CHANGE-->Taiwan, Province of China<!--This is the name used in ISO 3166: https://www.iso.org/obp/ui/#iso:code:3166:TW. If you disagree with this naming, contact the ISO 3166/MA; we must follow the published standard for this article.-->"] = "Taiwan",
         ["Tanzania, United Republic of"] = "Tanzania",
         ["United Kingdom of Great Britain and Northern Ireland"] = "United Kingdom",
         ["United States of America"] = "United States",

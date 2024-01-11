@@ -71,9 +71,13 @@ public class Resource_files
         [TestCaseSource(nameof(Exsiting))]
         public async Task match_de_Wikipedia(Country country)
         {
-            var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", "de");
-            var display = await lemma.Transform(DisplayName.FromDE);
-            display.Should().Be(country.GetDisplayName(TestCultures.De_DE));
+            try
+            {
+                var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", "de");
+                var display = await lemma.Transform(DisplayName.FromDE);
+                display.Should().Be(country.GetDisplayName(TestCultures.De_DE));
+            }
+            catch (UnknownLemma) { /* Some do not follow this pattern. */ }
         }
     }
 
@@ -140,7 +144,7 @@ public class Resource_files
                     var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", "de");
                     return await lemma.Transform(DisplayName.FromDE);
                 }
-                catch
+                catch (UnknownLemma)
                 {
                     return null;
                 }
@@ -234,9 +238,8 @@ internal static class DisplayName
     public static string? FromDE(string str)
     {
         var index = str.LastIndexOf(DE_prefix);
-        if (index != -1)
+        if (index > -1)
         {
-
             var text = str[(index+DE_prefix.Length)..];
             return text[..text.IndexOf('}')];
         }

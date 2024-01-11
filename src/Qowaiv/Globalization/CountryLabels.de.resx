@@ -401,6 +401,10 @@
     <value>Mongolei</value>
     <comment>Mongolia (MN)</comment>
   </data>
+  <data name="MO_DisplayName">
+    <value>Macau</value>
+    <comment>Macao (MO)</comment>
+  </data>
   <data name="MP_DisplayName">
     <value>Nördliche Marianen</value>
     <comment>Northern Mariana Islands (MP)</comment>

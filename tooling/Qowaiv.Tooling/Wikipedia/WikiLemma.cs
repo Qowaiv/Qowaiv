@@ -39,7 +39,14 @@ public sealed record WikiLemma
             await Update();
         }
         using var reader = Cached.OpenText();
-        return await reader.ReadToEndAsync();
+        var content = await reader.ReadToEndAsync();
+
+        if (content.StartsWith("#REDIRECT ") && WikiLink.Parse(content).ToArray() is { Length: 1 } link)
+        {
+            var redirect = new WikiLemma(link[0].Lemma, Language.Name);
+            content = await redirect.Content();
+        }
+        return content;
     }
 
     [Pure]
@@ -64,7 +71,7 @@ public sealed record WikiLemma
                 .SingleOrDefault()?
                 .Revisions.SingleOrDefault()?
                 .Slots.Values.SingleOrDefault()?
-                .Content ?? throw new InvalidOperationException($"Lemma '{Title}' not available at {Url}.");
+                .Content ?? throw UnknownLemma.For(Title, Language, Url);
 
             using var stream = Cached.Open(new FileStreamOptions { Access = FileAccess.Write, Mode = FileMode.Create });
             using var writer = new StreamWriter(stream);

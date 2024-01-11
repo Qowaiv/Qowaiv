@@ -16,7 +16,6 @@ public sealed class XResourceFile
         Headers =
         [
             XResourceFileHeader.ResMimeType,
-            //XResourceFileHeader.Version,
             XResourceFileHeader.Reader,
             XResourceFileHeader.Writer,
         ];

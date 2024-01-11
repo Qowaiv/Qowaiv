@@ -7,6 +7,39 @@ using Qowaiv.Tooling.Wikipedia;
 
 namespace Globalization.Countries_specs;
 
+public class Constants
+{
+    [Test]
+    public void Generates()
+    {
+        var all = Country.All.OrderBy(c => c.Name.Length).ThenBy(c => c.Name).ToArray();
+
+        using var w = new StreamWriter(Solution.Root.File("src/Qowaiv/Globalization/CountryConstants.cs").FullName);
+        w.WriteLine("#pragma warning disable S1210");
+        w.WriteLine("// \"Equals\" and the comparison operators should be overridden when implementing \"IComparable\"");
+        w.WriteLine("// See README.md => Sortable\r\nnamespace Qowaiv.Globalization;");
+        w.WriteLine();
+        w.WriteLine("public readonly partial struct Country");
+        w.WriteLine("{");
+
+        foreach (var country in all)
+        {
+            if (country != all[0]) w.WriteLine();
+
+            w.WriteLine($"    /// <summary>Describes the country {country.EnglishName} ({country.Name}).</summary>");
+            if (country.EndDate is { } enddate)
+            {
+                w.WriteLine($"    /// <remarks>End date is {enddate:yyyy-MM-dd}.</remarks>");
+            }
+            w.WriteLine($"    public static readonly Country {country.Name} = new(\"{country.Name}\");");
+        }
+        w.WriteLine("}");
+
+
+        w.Invoking(w => w.Flush()).Should().NotThrow();
+    }
+}
+
 /// <remarks>
 /// As fetching data from Wikipedia is time consuming (no benefits from caching)
 /// and therefor not executed on a RELEASE build.
@@ -36,64 +69,67 @@ public class Resource_files
         }
     }
 
-    [Test]
-    public async Task generates_nl()
+    public class Generates
     {
-        var resource = new XResourceFile(new XResourceFileData("ZZ_DisplayName", "Onbekend", "Unknown (ZZ)"));
-
-        foreach (var country in Country.All.OrderBy(c => c.Name.Length).ThenBy(c => c.Name))
+        [Test]
+        public void neutral_culture()
         {
-            var name = $"{country.Name}_DisplayName";
-            var comment = $"{country.EnglishName} ({country.IsoAlpha2Code})";
-            var value = country.Name.Length == 2 && await Display(country) is { } display
-                ? display
-                : country.GetDisplayName(TestCultures.Nl_NL);
+            var all = Country.All.OrderBy(c => c.Name.Length).ThenBy(c => c.Name).ToArray();
 
-            if (value != country.EnglishName)
+            var resource = new XResourceFile();
+            resource.Add("All", string.Join(';', all.Select(c => c.Name)));
+
+            foreach (var country in new[] { Country.Unknown }.Concat(all))
             {
-                resource.Add(name, value, comment);
+                var pref = country.IsUnknown() ? "ZZ" : country.Name;
+
+                resource.Add($"{pref}_DisplayName", country.DisplayName);
+                resource.Add($"{pref}_ISO", country.IsoNumericCode.ToString("000"));
+                resource.Add($"{pref}_ISO2", country.IsoAlpha2Code);
+                resource.Add($"{pref}_ISO3", country.IsoAlpha3Code);
+                resource.Add($"{pref}_StartDate", country.StartDate.ToString("yyyy-MM-dd"));
+                if (country.EndDate is { } enddate)
+                {
+                    resource.Add($"{pref}_EndDate", enddate.ToString("yyyy-MM-dd"));
+                }
+                if (country.CallingCode is { Length: > 0 })
+                {
+                    resource.Add($"{pref}_CallingCode", country.CallingCode);
+                }
             }
+
+            resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.resx")))
+                .Should().NotThrow();
         }
 
-        resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.nl.resx")))
-            .Should().NotThrow();
-
-        Task<string?> Display(Country country)
+        [Test]
+        public async Task nl_culture()
         {
-            var lemma = new WikiLemma($"Sjabloon:{country.Name}", "nl");
-            return lemma.Transform(DisplayName.FromNL);
-        }
-    }
+            var resource = new XResourceFile(new XResourceFileData("ZZ_DisplayName", "Onbekend", "Unknown (ZZ)"));
 
-    [Test]
-    public void generates_neutral_culture()
-    {
-        var all = Country.All.OrderBy(c => c.Name.Length).ThenBy(c => c.Name).ToArray();
-
-        var resource = new XResourceFile();
-        resource.Add("All", string.Join(';', all.Select(c => c.Name)));
-
-        foreach (var country in new[] { Country.Unknown }.Concat(all))
-        {
-            var pref = country.IsUnknown() ? "ZZ" : country.Name;
-
-            resource.Add($"{pref}_DisplayName", country.DisplayName);
-            resource.Add($"{pref}_ISO", country.IsoNumericCode.ToString("000"));
-            resource.Add($"{pref}_ISO2", country.IsoAlpha2Code);
-            resource.Add($"{pref}_ISO3", country.IsoAlpha3Code);
-            resource.Add($"{pref}_StartDate", country.StartDate.ToString("yyyy-MM-dd"));
-            if (country.EndDate is { } enddate)
+            foreach (var country in Country.All.OrderBy(c => c.Name.Length).ThenBy(c => c.Name))
             {
-                resource.Add($"{pref}_EndDate", enddate.ToString("yyyy-MM-dd"));
+                var name = $"{country.Name}_DisplayName";
+                var comment = $"{country.EnglishName} ({country.IsoAlpha2Code})";
+                var value = country.Name.Length == 2 && await Display(country) is { } display
+                    ? display
+                    : country.GetDisplayName(TestCultures.Nl_NL);
+
+                if (value != country.EnglishName)
+                {
+                    resource.Add(name, value, comment);
+                }
             }
-            if (country.CallingCode is { Length: > 0 })
+
+            resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.nl.resx")))
+                .Should().NotThrow();
+
+            Task<string?> Display(Country country)
             {
-                resource.Add($"{pref}_CallingCode", country.CallingCode);
+                var lemma = new WikiLemma($"Sjabloon:{country.Name}", "nl");
+                return lemma.Transform(DisplayName.FromNL);
             }
         }
-
-        resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.resx")))
-            .Should().NotThrow();
     }
 }
 

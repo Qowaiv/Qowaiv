@@ -737,6 +737,9 @@ public readonly partial struct Country
     /// <summary>Describes the country Samoa (WS).</summary>
     public static readonly Country WS = new("WS");
 
+    /// <summary>Describes the country Kosovo (XK).</summary>
+    public static readonly Country XK = new("XK");
+
     /// <summary>Describes the country Yemen (YE).</summary>
     public static readonly Country YE = new("YE");
 
@@ -791,7 +794,4 @@ public readonly partial struct Country
     /// <summary>Describes the country Zaire (ZRCD).</summary>
     /// <remarks>End date is 1996-05-17.</remarks>
     public static readonly Country ZRCD = new("ZRCD");
-
-    /// <summary>Describes the country Kosovo (XK).</summary>
-    public static readonly Country XK = new("XK");
 }

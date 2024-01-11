@@ -2,6 +2,16 @@
 
 public class All
 {
+    private static readonly Country[] all = Country.All.ToArray();
+
+    [TestCaseSource(nameof(all))]
+    public void Has_constant(Country country)
+        => typeof(Country).GetField(country.Name, BindingFlags.Static|BindingFlags.Public)
+        .Should().BeEquivalentTo(new
+        {
+            FieldType = typeof(Country),
+        });
+
     [Test]
     public void _260_Countries()
         => Country.All.Should().HaveCount(260);

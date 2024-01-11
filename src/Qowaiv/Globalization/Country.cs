@@ -339,9 +339,16 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
             foreach (var country in All)
             {
                 var unified = country.GetDisplayName(CultureInfo.InvariantCulture).Unify();
-                this[CultureInfo.InvariantCulture][country.IsoAlpha2Code.ToUpperInvariant()] = country.m_Value;
-                this[CultureInfo.InvariantCulture][country.IsoAlpha3Code.ToUpperInvariant()] = country.m_Value;
-                this[CultureInfo.InvariantCulture][country.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = country.m_Value;
+                if (country.Name.Length == 2)
+                {
+                    this[CultureInfo.InvariantCulture][country.IsoAlpha2Code.ToUpperInvariant()] = country.m_Value;
+                    this[CultureInfo.InvariantCulture][country.IsoAlpha3Code.ToUpperInvariant()] = country.m_Value;
+                    this[CultureInfo.InvariantCulture][country.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = country.m_Value;
+                }
+                else
+                {
+                    this[CultureInfo.InvariantCulture][country.Name] = country.m_Value;
+                }
                 this[CultureInfo.InvariantCulture][unified] = country.m_Value;
             }
         }

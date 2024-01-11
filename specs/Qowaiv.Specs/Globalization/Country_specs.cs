@@ -209,3 +209,14 @@ public class Supports_binary_serialization
     }
 }
 #endif
+
+public class Can_parse
+{
+    [Test]
+    public void prefering_existing_over_former_countries()
+        => Country.Parse("BQ").Should().Be(Country.BQ);
+
+    [Test]
+    public void former_countries_via_ISO_3166_3()
+        => Country.Parse("BQAQ").Should().Be(Country.BQAQ);
+}

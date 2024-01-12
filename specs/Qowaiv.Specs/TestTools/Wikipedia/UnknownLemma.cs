@@ -1,5 +1,4 @@
-﻿
-namespace Qowaiv.TestTools.Wikipedia;
+﻿namespace Qowaiv.TestTools.Wikipedia;
 
 public class UnknownLemma : Exception
 {

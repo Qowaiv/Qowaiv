@@ -57,9 +57,9 @@ public class Resource_files
 
     public class Display_names
     {
-        private static readonly IReadOnlyCollection<Country> Exsiting = Country.GetExisting().ToArray();
+        private static readonly IReadOnlyCollection<Country> Existing = Country.GetExisting().ToArray();
 
-        [TestCaseSource(nameof(Exsiting))]
+        [TestCaseSource(nameof(Existing))]
         public async Task match_nl_Wikipedia(Country country)
         {
             var lemma = new WikiLemma($"Sjabloon:{country.IsoAlpha2Code}", TestCultures.Nl);
@@ -67,7 +67,7 @@ public class Resource_files
             display.Should().Be(country.GetDisplayName(TestCultures.Nl_NL));
         }
 
-        [TestCaseSource(nameof(Exsiting))]
+        [TestCaseSource(nameof(Existing))]
         public async Task match_de_Wikipedia(Country country)
         {
             try

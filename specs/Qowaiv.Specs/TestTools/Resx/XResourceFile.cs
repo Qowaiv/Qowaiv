@@ -1,5 +1,4 @@
 ﻿using System.Xml;
-using System.Xml.Serialization;
 
 namespace Qowaiv.TestTools.Resx;
 
@@ -67,13 +66,13 @@ public sealed class XResourceFile
     /// </param>
     public void Save(FileInfo file, CultureInfo culture)
     {
-        var languague = (culture ?? CultureInfo.InvariantCulture).Name;
+        var language = (culture ?? CultureInfo.InvariantCulture).Name;
         var resource = file;
 
-        if (!string.IsNullOrEmpty(languague))
+        if (!string.IsNullOrEmpty(language))
         {
             var dir = file.Directory!.FullName;
-            var name = $"{Path.GetFileNameWithoutExtension(file.Name)}.{languague}{file.Extension}";
+            var name = $"{Path.GetFileNameWithoutExtension(file.Name)}.{language}{file.Extension}";
             resource = new FileInfo(Path.Combine(dir, name));
         }
         Save(resource);
@@ -81,7 +80,7 @@ public sealed class XResourceFile
 
     /// <summary>Saves the resource file to a stream.</summary>
     /// <param name="stream">
-    /// The stream to safe to.
+    /// The stream to save to.
     /// </param>
     public void Save(Stream stream)
     {
@@ -89,14 +88,14 @@ public sealed class XResourceFile
         serializer.Serialize(writer, this);
     }
 
-    /// <summary>Loads a resource file from stream.</summary>
+    /// <summary>Loads a resource file from a stream.</summary>
     /// <param name="stream">
     /// The stream to load from.
     /// </param>
     [Pure]
     public static XResourceFile Load(Stream stream) => (XResourceFile)serializer.Deserialize(stream)!;
 
-    /// <summary>Loads a resource file from stream.</summary>
+    /// <summary>Loads a resource file from file location.</summary>
     /// <param name="file">
     /// The file to load from.
     /// </param>
@@ -108,7 +107,7 @@ public sealed class XResourceFile
         return Load(stream);
     }
 
-    /// <summary>Loads a resource file from stream.</summary>
+    /// <summary>Loads a resource file from file location.</summary>
     /// <param name="file">
     /// The file to load from.
     /// </param>

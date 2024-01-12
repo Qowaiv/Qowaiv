@@ -22,7 +22,7 @@ public sealed class XResourceFileData
     {
         Name = name;
         Value = val;
-        // not add empty comments.
+        // Do not add empty comments.
         Comment = string.IsNullOrWhiteSpace(comment) ? null : comment;
     }
 

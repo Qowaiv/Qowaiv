@@ -3,7 +3,8 @@
 namespace Qowaiv.TestTools.Resx;
 
 /// <summary>Represents a resource file.</summary>
-[Serializable, XmlType("root")]
+[Serializable]
+[XmlType("root")]
 public sealed class XResourceFile
 {
     /// <summary>Initializes a new instance of the <see cref="XResourceFile"/> class.</summary>

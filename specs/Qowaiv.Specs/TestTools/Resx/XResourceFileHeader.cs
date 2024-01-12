@@ -4,6 +4,7 @@ namespace Qowaiv.TestTools.Resx;
 
 /// <summary>Represents a header of a resource file.</summary>
 [Serializable]
+[XmlType("resheader")]
 [DebuggerDisplay("Header, Name: {Name}, Value: '{Value}'")]
 public sealed class XResourceFileHeader
 {

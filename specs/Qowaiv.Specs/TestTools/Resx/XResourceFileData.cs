@@ -1,10 +1,9 @@
-﻿using System.Xml.Serialization;
-
-namespace Qowaiv.TestTools.Resx;
+﻿namespace Qowaiv.TestTools.Resx;
 
 /// <summary>Represents data of a resource file.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable, XmlType("data")]
+[Serializable]
+[XmlType("data")]
 public sealed class XResourceFileData
 {
     /// <summary>Initializes a new instance of the <see cref="XResourceFileData"/> class.</summary>

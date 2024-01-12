@@ -183,19 +183,17 @@ public class Resource_files
         [Test]
         public async Task de_culture()
         {
-            var resource = new XResourceFile(new XResourceFileData("ZZ_DisplayName", "Unbekannt", "Unknown (ZZ)"));
+            var resource = new XResourceFile(CountryDisplayName.Data("Unbekannt", Country.Unknown));
 
-            foreach (var country in Country.All.OrderBy(c => c.Name.Length).ThenBy(c => c.Name))
+            foreach (var country in Country.All)
             {
-                var name = $"{country.Name}_DisplayName";
-                var comment = $"{country.EnglishName} ({country.IsoAlpha2Code})";
-                var value = country.Name.Length == 2 && await Display(country) is { } display
-                    ? display
-                    : country.GetDisplayName(TestCultures.De_DE);
+                var displayName = country.Name.Length == 2 && await Display(country) is { } display
+                     ? display
+                     : country.GetDisplayName(TestCultures.De);
 
-                if (value != country.EnglishName)
+                if (displayName != country.EnglishName)
                 {
-                    resource.Add(name, value, comment);
+                    resource.Add(CountryDisplayName.Data(displayName, country));
                 }
             }
 
@@ -225,7 +223,7 @@ public class Resource_files
             {
                 var displayName = country.Name.Length == 2 && await Display(country) is { } display
                     ? display
-                    : country.GetDisplayName(TestCultures.Nl_NL);
+                    : country.GetDisplayName(TestCultures.Nl);
 
                 if (displayName != country.EnglishName)
                 {

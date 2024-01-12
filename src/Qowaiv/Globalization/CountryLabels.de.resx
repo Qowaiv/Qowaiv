@@ -643,7 +643,7 @@
   </data>
   <data name="CSXX_DisplayName">
     <value>Serbien Und Montenegro</value>
-    <comment>Serbia And Montenegro (CS)</comment>
+    <comment>Serbia and Montenegro (CS)</comment>
   </data>
   <data name="DDDE_DisplayName">
     <value>Deutsche Demokratische Republik</value>
@@ -655,7 +655,7 @@
   </data>
   <data name="SUHH_DisplayName">
     <value>Sowjetunion</value>
-    <comment>Soviet Union (SU)</comment>
+    <comment>USSR (SU)</comment>
   </data>
   <data name="YUCS_DisplayName">
     <value>Jugoslawien</value>

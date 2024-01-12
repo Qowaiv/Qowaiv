@@ -5,7 +5,7 @@ namespace Qowaiv.TestTools.Resx;
 /// <summary>Represents a header of a resource file.</summary>
 [Serializable]
 [DebuggerDisplay("Header, Name: {Name}, Value: '{Value}'")]
-public sealed class XResourceFileHeader //: IXmlSerializable
+public sealed class XResourceFileHeader
 {
     /// <summary>Gets the Resourse mime type header (text/microsoft-resx).</summary>
     public static readonly XResourceFileHeader ResMimeType = new("resmimetype", "text/microsoft-resx");

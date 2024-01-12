@@ -1,9 +1,17 @@
-<?xml version="1.0"?>
-<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
-  <resheader name="version"><value>2.0</value></resheader>
-  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
-  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="All">
+    <value>AD;AE;AF;AG;AI;AL;AM;AO;AQ;AR;AS;AT;AU;AW;AX;AZ;BA;BB;BD;BE;BF;BG;BH;BI;BJ;BL;BM;BN;BO;BQ;BR;BS;BT;BV;BW;BY;BZ;CA;CC;CD;CF;CG;CH;CI;CK;CL;CM;CN;CO;CR;CU;CV;CW;CX;CY;CZ;DE;DJ;DK;DM;DO;DZ;EC;EE;EG;EH;ER;ES;ET;FI;FJ;FK;FM;FO;FR;GA;GB;GD;GE;GF;GG;GH;GI;GL;GM;GN;GP;GQ;GR;GS;GT;GU;GW;GY;HK;HM;HN;HR;HT;HU;ID;IE;IL;IM;IN;IO;IQ;IR;IS;IT;JE;JM;JO;JP;KE;KG;KH;KI;KM;KN;KP;KR;KW;KY;KZ;LA;LB;LC;LI;LK;LR;LS;LT;LU;LV;LY;MA;MC;MD;ME;MF;MG;MH;MK;ML;MM;MN;MO;MP;MQ;MR;MS;MT;MU;MV;MW;MX;MY;MZ;NA;NC;NE;NF;NG;NI;NL;NO;NP;NR;NU;NZ;OM;PA;PE;PF;PG;PH;PK;PL;PM;PN;PR;PS;PT;PW;PY;QA;RE;RO;RS;RU;RW;SA;SB;SC;SD;SE;SG;SH;SI;SJ;SK;SL;SM;SN;SO;SR;SS;ST;SV;SX;SY;SZ;TC;TD;TF;TG;TH;TJ;TK;TL;TM;TN;TO;TR;TT;TV;TW;TZ;UA;UG;UM;US;UY;UZ;VA;VC;VE;VG;VI;VN;VU;WF;WS;XK;YE;YT;ZA;ZM;ZW;ANHH;BQAQ;BUMM;CSHH;CSXX;DDDE;HVBF;SUHH;YUCS;ZRCD</value>
+  </data>
   <data name="ZZ_DisplayName">
     <value>Unknown</value>
   </data>
@@ -23,7 +31,7 @@
     <value>Andorra</value>
   </data>
   <data name="AD_ISO">
-    <value>20</value>
+    <value>020</value>
   </data>
   <data name="AD_ISO2">
     <value>AD</value>
@@ -59,7 +67,7 @@
     <value>Afghanistan</value>
   </data>
   <data name="AF_ISO">
-    <value>4</value>
+    <value>004</value>
   </data>
   <data name="AF_ISO2">
     <value>AF</value>
@@ -74,10 +82,10 @@
     <value>+93</value>
   </data>
   <data name="AG_DisplayName">
-    <value>Antigua And Barbuda</value>
+    <value>Antigua and Barbuda</value>
   </data>
   <data name="AG_ISO">
-    <value>28</value>
+    <value>028</value>
   </data>
   <data name="AG_ISO2">
     <value>AG</value>
@@ -113,7 +121,7 @@
     <value>Albania</value>
   </data>
   <data name="AL_ISO">
-    <value>8</value>
+    <value>008</value>
   </data>
   <data name="AL_ISO2">
     <value>AL</value>
@@ -131,7 +139,7 @@
     <value>Armenia</value>
   </data>
   <data name="AM_ISO">
-    <value>51</value>
+    <value>051</value>
   </data>
   <data name="AM_ISO2">
     <value>AM</value>
@@ -149,7 +157,7 @@
     <value>Angola</value>
   </data>
   <data name="AO_ISO">
-    <value>24</value>
+    <value>024</value>
   </data>
   <data name="AO_ISO2">
     <value>AO</value>
@@ -167,7 +175,7 @@
     <value>Antarctica</value>
   </data>
   <data name="AQ_ISO">
-    <value>10</value>
+    <value>010</value>
   </data>
   <data name="AQ_ISO2">
     <value>AQ</value>
@@ -182,7 +190,7 @@
     <value>Argentina</value>
   </data>
   <data name="AR_ISO">
-    <value>32</value>
+    <value>032</value>
   </data>
   <data name="AR_ISO2">
     <value>AR</value>
@@ -200,7 +208,7 @@
     <value>American Samoa</value>
   </data>
   <data name="AS_ISO">
-    <value>16</value>
+    <value>016</value>
   </data>
   <data name="AS_ISO2">
     <value>AS</value>
@@ -218,7 +226,7 @@
     <value>Austria</value>
   </data>
   <data name="AT_ISO">
-    <value>40</value>
+    <value>040</value>
   </data>
   <data name="AT_ISO2">
     <value>AT</value>
@@ -236,7 +244,7 @@
     <value>Australia</value>
   </data>
   <data name="AU_ISO">
-    <value>36</value>
+    <value>036</value>
   </data>
   <data name="AU_ISO2">
     <value>AU</value>
@@ -290,7 +298,7 @@
     <value>Azerbaijan</value>
   </data>
   <data name="AZ_ISO">
-    <value>31</value>
+    <value>031</value>
   </data>
   <data name="AZ_ISO2">
     <value>AZ</value>
@@ -305,10 +313,10 @@
     <value>+994</value>
   </data>
   <data name="BA_DisplayName">
-    <value>Bosnia And Herzegovina</value>
+    <value>Bosnia and Herzegovina</value>
   </data>
   <data name="BA_ISO">
-    <value>70</value>
+    <value>070</value>
   </data>
   <data name="BA_ISO2">
     <value>BA</value>
@@ -326,7 +334,7 @@
     <value>Barbados</value>
   </data>
   <data name="BB_ISO">
-    <value>52</value>
+    <value>052</value>
   </data>
   <data name="BB_ISO2">
     <value>BB</value>
@@ -344,7 +352,7 @@
     <value>Bangladesh</value>
   </data>
   <data name="BD_ISO">
-    <value>50</value>
+    <value>050</value>
   </data>
   <data name="BD_ISO2">
     <value>BD</value>
@@ -362,7 +370,7 @@
     <value>Belgium</value>
   </data>
   <data name="BE_ISO">
-    <value>56</value>
+    <value>056</value>
   </data>
   <data name="BE_ISO2">
     <value>BE</value>
@@ -416,7 +424,7 @@
     <value>Bahrain</value>
   </data>
   <data name="BH_ISO">
-    <value>48</value>
+    <value>048</value>
   </data>
   <data name="BH_ISO2">
     <value>BH</value>
@@ -488,7 +496,7 @@
     <value>Bermuda</value>
   </data>
   <data name="BM_ISO">
-    <value>60</value>
+    <value>060</value>
   </data>
   <data name="BM_ISO2">
     <value>BM</value>
@@ -506,7 +514,7 @@
     <value>Brunei Darussalam</value>
   </data>
   <data name="BN_ISO">
-    <value>96</value>
+    <value>096</value>
   </data>
   <data name="BN_ISO2">
     <value>BN</value>
@@ -524,7 +532,7 @@
     <value>Bolivia</value>
   </data>
   <data name="BO_ISO">
-    <value>68</value>
+    <value>068</value>
   </data>
   <data name="BO_ISO2">
     <value>BO</value>
@@ -539,7 +547,7 @@
     <value>+591</value>
   </data>
   <data name="BQ_DisplayName">
-    <value>Bonaire</value>
+    <value>Caribbean Netherlands</value>
   </data>
   <data name="BQ_ISO">
     <value>535</value>
@@ -560,7 +568,7 @@
     <value>Brazil</value>
   </data>
   <data name="BR_ISO">
-    <value>76</value>
+    <value>076</value>
   </data>
   <data name="BR_ISO2">
     <value>BR</value>
@@ -578,7 +586,7 @@
     <value>Bahamas</value>
   </data>
   <data name="BS_ISO">
-    <value>44</value>
+    <value>044</value>
   </data>
   <data name="BS_ISO2">
     <value>BS</value>
@@ -596,7 +604,7 @@
     <value>Bhutan</value>
   </data>
   <data name="BT_ISO">
-    <value>64</value>
+    <value>064</value>
   </data>
   <data name="BT_ISO2">
     <value>BT</value>
@@ -614,7 +622,7 @@
     <value>Bouvet Island</value>
   </data>
   <data name="BV_ISO">
-    <value>74</value>
+    <value>074</value>
   </data>
   <data name="BV_ISO2">
     <value>BV</value>
@@ -632,7 +640,7 @@
     <value>Botswana</value>
   </data>
   <data name="BW_ISO">
-    <value>72</value>
+    <value>072</value>
   </data>
   <data name="BW_ISO2">
     <value>BW</value>
@@ -668,7 +676,7 @@
     <value>Belize</value>
   </data>
   <data name="BZ_ISO">
-    <value>84</value>
+    <value>084</value>
   </data>
   <data name="BZ_ISO2">
     <value>BZ</value>
@@ -701,7 +709,7 @@
     <value>+1</value>
   </data>
   <data name="CC_DisplayName">
-    <value>Cocos</value>
+    <value>Cocos Islands</value>
   </data>
   <data name="CC_ISO">
     <value>166</value>
@@ -719,7 +727,7 @@
     <value>+61 891</value>
   </data>
   <data name="CD_DisplayName">
-    <value>Congo</value>
+    <value>Congo, Democratic Republic of the</value>
   </data>
   <data name="CD_ISO">
     <value>180</value>
@@ -791,7 +799,7 @@
     <value>+41</value>
   </data>
   <data name="CI_DisplayName">
-    <value>Côte D'Ivoire</value>
+    <value>Côte d'Ivoire</value>
   </data>
   <data name="CI_ISO">
     <value>384</value>
@@ -935,7 +943,7 @@
     <value>+53</value>
   </data>
   <data name="CV_DisplayName">
-    <value>Cape Verde</value>
+    <value>Cabo Verde</value>
   </data>
   <data name="CV_ISO">
     <value>132</value>
@@ -1007,7 +1015,7 @@
     <value>+357</value>
   </data>
   <data name="CZ_DisplayName">
-    <value>Czech Republic</value>
+    <value>Czechia</value>
   </data>
   <data name="CZ_ISO">
     <value>203</value>
@@ -1118,7 +1126,7 @@
     <value>Algeria</value>
   </data>
   <data name="DZ_ISO">
-    <value>12</value>
+    <value>012</value>
   </data>
   <data name="DZ_ISO2">
     <value>DZ</value>
@@ -1619,7 +1627,7 @@
     <value>+30</value>
   </data>
   <data name="GS_DisplayName">
-    <value>South Georgia And The South Sandwich Islands</value>
+    <value>South Georgia and the South Sandwich Islands</value>
   </data>
   <data name="GS_ISO">
     <value>239</value>
@@ -1727,7 +1735,7 @@
     <value>+852</value>
   </data>
   <data name="HM_DisplayName">
-    <value>Heard Island And Mcdonald Islands</value>
+    <value>Heard Island and McDonald Islands</value>
   </data>
   <data name="HM_ISO">
     <value>334</value>
@@ -1871,7 +1879,7 @@
     <value>+972</value>
   </data>
   <data name="IM_DisplayName">
-    <value>Isle Of Man</value>
+    <value>Isle of Man</value>
   </data>
   <data name="IM_ISO">
     <value>833</value>
@@ -1910,7 +1918,7 @@
     <value>British Indian Ocean Territory</value>
   </data>
   <data name="IO_ISO">
-    <value>86</value>
+    <value>086</value>
   </data>
   <data name="IO_ISO2">
     <value>IO</value>
@@ -2159,7 +2167,7 @@
     <value>+269</value>
   </data>
   <data name="KN_DisplayName">
-    <value>Saint Kitts And Nevis</value>
+    <value>Saint Kitts and Nevis</value>
   </data>
   <data name="KN_ISO">
     <value>659</value>
@@ -2195,7 +2203,7 @@
     <value>+850</value>
   </data>
   <data name="KR_DisplayName">
-    <value>Korea</value>
+    <value>South Korea</value>
   </data>
   <data name="KR_ISO">
     <value>410</value>
@@ -2267,7 +2275,7 @@
     <value>+7</value>
   </data>
   <data name="LA_DisplayName">
-    <value>Lao People'S Democratic Republic</value>
+    <value>Laos</value>
   </data>
   <data name="LA_ISO">
     <value>418</value>
@@ -2591,7 +2599,7 @@
     <value>+692</value>
   </data>
   <data name="MK_DisplayName">
-    <value>Macedonia</value>
+    <value>North Macedonia</value>
   </data>
   <data name="MK_ISO">
     <value>807</value>
@@ -3239,7 +3247,7 @@
     <value>+48</value>
   </data>
   <data name="PM_DisplayName">
-    <value>Saint Pierre And Miquelon</value>
+    <value>Saint Pierre and Miquelon</value>
   </data>
   <data name="PM_ISO">
     <value>666</value>
@@ -3293,7 +3301,7 @@
     <value>+1 787</value>
   </data>
   <data name="PS_DisplayName">
-    <value>Palestinian Territory</value>
+    <value>Palestine</value>
   </data>
   <data name="PS_ISO">
     <value>275</value>
@@ -3437,7 +3445,7 @@
     <value>+381</value>
   </data>
   <data name="RU_DisplayName">
-    <value>Russian Federation</value>
+    <value>Russia</value>
   </data>
   <data name="RU_ISO">
     <value>643</value>
@@ -3494,7 +3502,7 @@
     <value>Solomon Islands</value>
   </data>
   <data name="SB_ISO">
-    <value>90</value>
+    <value>090</value>
   </data>
   <data name="SB_ISO2">
     <value>SB</value>
@@ -3581,7 +3589,7 @@
     <value>+65</value>
   </data>
   <data name="SH_DisplayName">
-    <value>Saint Helena</value>
+    <value>Saint Helena, Ascension and Tristan da Cunha</value>
   </data>
   <data name="SH_ISO">
     <value>654</value>
@@ -3617,7 +3625,7 @@
     <value>+386</value>
   </data>
   <data name="SJ_DisplayName">
-    <value>Svalbard And Jan Mayen</value>
+    <value>Svalbard and Jan Mayen</value>
   </data>
   <data name="SJ_ISO">
     <value>744</value>
@@ -3761,7 +3769,7 @@
     <value>+211</value>
   </data>
   <data name="ST_DisplayName">
-    <value>Sao Tome And Principe</value>
+    <value>Sao Tome and Principe</value>
   </data>
   <data name="ST_ISO">
     <value>678</value>
@@ -3833,7 +3841,7 @@
     <value>+963</value>
   </data>
   <data name="SZ_DisplayName">
-    <value>Swaziland</value>
+    <value>Eswatini</value>
   </data>
   <data name="SZ_ISO">
     <value>748</value>
@@ -3851,7 +3859,7 @@
     <value>+268</value>
   </data>
   <data name="TC_DisplayName">
-    <value>Turks And Caicos Islands</value>
+    <value>Turks and Caicos Islands</value>
   </data>
   <data name="TC_ISO">
     <value>796</value>
@@ -4049,7 +4057,7 @@
     <value>+676</value>
   </data>
   <data name="TR_DisplayName">
-    <value>Turkey</value>
+    <value>Türkiye</value>
   </data>
   <data name="TR_ISO">
     <value>792</value>
@@ -4067,7 +4075,7 @@
     <value>+90</value>
   </data>
   <data name="TT_DisplayName">
-    <value>Trinidad And Tobago</value>
+    <value>Trinidad and Tobago</value>
   </data>
   <data name="TT_ISO">
     <value>780</value>
@@ -4265,7 +4273,7 @@
     <value>+379</value>
   </data>
   <data name="VC_DisplayName">
-    <value>Saint Vincent And The Grenadines</value>
+    <value>Saint Vincent and the Grenadines</value>
   </data>
   <data name="VC_ISO">
     <value>670</value>
@@ -4304,7 +4312,7 @@
     <value>Virgin Islands</value>
   </data>
   <data name="VG_ISO">
-    <value>92</value>
+    <value>092</value>
   </data>
   <data name="VG_ISO2">
     <value>VG</value>
@@ -4373,7 +4381,7 @@
     <value>+678</value>
   </data>
   <data name="WF_DisplayName">
-    <value>Wallis And Futuna</value>
+    <value>Wallis and Futuna</value>
   </data>
   <data name="WF_ISO">
     <value>876</value>
@@ -4407,6 +4415,24 @@
   </data>
   <data name="WS_CallingCode">
     <value>+685</value>
+  </data>
+  <data name="XK_DisplayName">
+    <value>Kosovo</value>
+  </data>
+  <data name="XK_ISO">
+    <value>000</value>
+  </data>
+  <data name="XK_ISO2">
+    <value>XK</value>
+  </data>
+  <data name="XK_ISO3">
+    <value>XKX</value>
+  </data>
+  <data name="XK_StartDate">
+    <value>2008-02-01</value>
+  </data>
+  <data name="XK_CallingCode">
+    <value>+383</value>
   </data>
   <data name="YE_DisplayName">
     <value>Yemen</value>
@@ -4523,7 +4549,7 @@
     <value>British Antarctic Territory</value>
   </data>
   <data name="BQAQ_ISO">
-    <value>80</value>
+    <value>080</value>
   </data>
   <data name="BQAQ_ISO2">
     <value>BQ</value>
@@ -4704,26 +4730,5 @@
   </data>
   <data name="ZRCD_CallingCode">
     <value>+243</value>
-  </data>
-  <data name="XK_DisplayName">
-    <value>Kosovo</value>
-  </data>
-  <data name="XK_ISO">
-    <value>0</value>
-  </data>
-  <data name="XK_ISO2">
-    <value>XK</value>
-  </data>
-  <data name="XK_ISO3">
-    <value>XKX</value>
-  </data>
-  <data name="XK_StartDate">
-    <value>2008-02-01</value>
-  </data>
-  <data name="XK_CallingCode">
-    <value>+383</value>
-  </data>
-  <data name="All">
-    <value>AD;AE;AF;AG;AI;AL;AM;AO;AQ;AR;AS;AT;AU;AW;AX;AZ;BA;BB;BD;BE;BF;BG;BH;BI;BJ;BL;BM;BN;BO;BQ;BR;BS;BT;BV;BW;BY;BZ;CA;CC;CD;CF;CG;CH;CI;CK;CL;CM;CN;CO;CR;CU;CV;CW;CX;CY;CZ;DE;DJ;DK;DM;DO;DZ;EC;EE;EG;EH;ER;ES;ET;FI;FJ;FK;FM;FO;FR;GA;GB;GD;GE;GF;GG;GH;GI;GL;GM;GN;GP;GQ;GR;GS;GT;GU;GW;GY;HK;HM;HN;HR;HT;HU;ID;IE;IL;IM;IN;IO;IQ;IR;IS;IT;JE;JM;JO;JP;KE;KG;KH;KI;KM;KN;KP;KR;KW;KY;KZ;LA;LB;LC;LI;LK;LR;LS;LT;LU;LV;LY;MA;MC;MD;ME;MF;MG;MH;MK;ML;MM;MN;MO;MP;MQ;MR;MS;MT;MU;MV;MW;MX;MY;MZ;NA;NC;NE;NF;NG;NI;NL;NO;NP;NR;NU;NZ;OM;PA;PE;PF;PG;PH;PK;PL;PM;PN;PR;PS;PT;PW;PY;QA;RE;RO;RS;RU;RW;SA;SB;SC;SD;SE;SG;SH;SI;SJ;SK;SL;SM;SN;SO;SR;SS;ST;SV;SX;SY;SZ;TC;TD;TF;TG;TH;TJ;TK;TL;TM;TN;TO;TR;TT;TV;TW;TZ;UA;UG;UM;US;UY;UZ;VA;VC;VE;VG;VI;VN;VU;WF;WS;YE;YT;ZA;ZM;ZW;ANHH;BQAQ;BUMM;CSHH;CSXX;DDDE;HVBF;SUHH;YUCS;ZRCD;XK</value>
   </data>
 </root>

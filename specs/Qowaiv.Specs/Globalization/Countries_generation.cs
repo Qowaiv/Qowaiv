@@ -227,10 +227,6 @@ public class Resource_files
                     ? display
                     : country.GetDisplayName(TestCultures.Nl_NL);
 
-                if(country == Country.SUHH) 
-                {
-                }
-
                 if (displayName != country.EnglishName)
                 {
                     resource.Add(CountryDisplayName.Data(displayName, country));
@@ -240,10 +236,17 @@ public class Resource_files
             resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.nl.resx")))
                 .Should().NotThrow();
 
-            Task<string?> Display(Country country)
+            async Task<string?> Display(Country country)
             {
-                var lemma = new WikiLemma($"Sjabloon:{country.Name}", TestCultures.Nl);
-                return lemma.Transform(DisplayName.FromNL);
+                try
+                {
+                    var lemma = new WikiLemma($"Sjabloon:{country.Name}", TestCultures.Nl);
+                    return await lemma.Transform(DisplayName.FromNL);
+                }
+                catch (UnknownLemma)
+                {
+                    return null;
+                }
             }
         }
     }

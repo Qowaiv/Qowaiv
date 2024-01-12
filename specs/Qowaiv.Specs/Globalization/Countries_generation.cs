@@ -219,19 +219,21 @@ public class Resource_files
         [Test]
         public async Task nl_culture()
         {
-            var resource = new XResourceFile(new XResourceFileData("ZZ_DisplayName", "Onbekend", "Unknown (ZZ)"));
+            var resource = new XResourceFile(CountryDisplayName.Data("Onbekend", Country.Unknown));
 
-            foreach (var country in Country.All.OrderBy(c => c.Name.Length).ThenBy(c => c.Name))
+            foreach (var country in Country.All)
             {
-                var name = $"{country.Name}_DisplayName";
-                var comment = $"{country.EnglishName} ({country.IsoAlpha2Code})";
-                var value = country.Name.Length == 2 && await Display(country) is { } display
+                var displayName = country.Name.Length == 2 && await Display(country) is { } display
                     ? display
                     : country.GetDisplayName(TestCultures.Nl_NL);
 
-                if (value != country.EnglishName)
+                if(country == Country.SUHH) 
                 {
-                    resource.Add(name, value, comment);
+                }
+
+                if (displayName != country.EnglishName)
+                {
+                    resource.Add(CountryDisplayName.Data(displayName, country));
                 }
             }
 
@@ -246,8 +248,6 @@ public class Resource_files
         }
     }
 }
-
-
 
 public sealed record Iso3166_1(string DisplayName, string A2, string A3, int NC)
 {

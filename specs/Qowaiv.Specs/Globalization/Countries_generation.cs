@@ -53,13 +53,30 @@ public class Constants
 /// </remarks>
 public class Resource_files
 {
-    internal static readonly IReadOnlyCollection<WikiInfo> Infos = new WikiLemma("ISO 3166-1", TestCultures.En).Transform(WikiInfo.FromEN).Result;
+    internal static readonly IReadOnlyCollection<Iso3166_1> Iso3166_1s = new WikiLemma("ISO 3166-1", TestCultures.En).Transform(Iso3166_1.Parse).Result;
+    internal static readonly IReadOnlyCollection<Iso3166_3> Iso3166_3s = new WikiLemma("ISO_3166-3", TestCultures.En).Transform(Iso3166_3.Parse).Result;
 
-    [TestCaseSource(nameof(Infos))]
-    public void reflect_info_of_Wikipedia(WikiInfo info)
+    [TestCaseSource(nameof(Iso3166_1s))]
+    public void exsiting_reflect_info_of_Wikipedia(Iso3166_1 info)
     {
         var country = Country.Parse(info.A2);
-        var summary = new WikiInfo(country.EnglishName, country.IsoAlpha2Code, country.IsoAlpha3Code, country.IsoNumericCode);
+        var summary = new Iso3166_1(country.EnglishName, country.IsoAlpha2Code, country.IsoAlpha3Code, country.IsoNumericCode);
+        summary.Should().Be(info);
+    }
+
+    [TestCaseSource(nameof(Iso3166_3s))]
+    public void former_reflect_info_of_Wikipedia(Iso3166_3 info)
+    {
+        var country = Country.Parse(info.Name);
+        var summary = new Iso3166_3(
+            country.EnglishName, 
+            country.IsoAlpha2Code,
+            country.IsoAlpha3Code,
+            country.IsoNumericCode,
+            country.StartDate.Year,
+            country.EndDate.GetValueOrDefault().Year - 1,
+            country.Name);
+
         summary.Should().Be(info);
     }
 
@@ -93,29 +110,70 @@ public class Resource_files
         [Test]
         public void neutral_culture()
         {
-            var all = Country.All.OrderBy(c => c.Name.Length).ThenBy(c => c.Name).ToArray();
+            var unknown = new CountryData("ZZ")
+            {
+                DisplayName = "Unknown",
+                ISO = 999,
+                ISO2 = "ZZ",
+                ISO3 = "ZZZ"
+            };
+
+            // Including Kosovo, that is till disputed: https://en.wikipedia.org/wiki/XK_(user_assigned_code)
+            var data = new Dictionary<string, CountryData>()
+            { 
+                ["XK"] = new CountryData("XK")
+                {
+                    DisplayName = "Kosovo",
+                    ISO2 = "XK",
+                    ISO3 = "XKK",
+                    StartDate = new(2008, 02, 01),
+                }
+            };
+
+            foreach (var former in Iso3166_3s)
+            {
+                data[former.Name] = new(former.Name)
+                {
+                    DisplayName = former.DisplayName,
+                    ISO = former.Iso,
+                    ISO2 = former.Iso2,
+                    ISO3 = former.Iso3,
+                    StartDate = new(former.Start, 01, 01),
+                    EndDate = new(former.End - 1, 12, 31),
+                };
+            }
+
+            foreach(var c in Iso3166_1s)
+            {
+                data[c.A2] = new(c.A2)
+                {
+                    DisplayName = c.DisplayName,
+                    ISO = c.NC,
+                    ISO2 = c.A2,
+                    ISO3 = c.A3,
+                };
+            }
+
+            foreach (var c in Country.All)
+            {
+                var dat = data[c.Name];
+                var updated = dat with
+                {
+                    StartDate = c.StartDate,
+                    EndDate = c.EndDate,
+                    CallingCode = c.CallingCode,
+                };
+                data[c.Name] = updated;
+            }
 
             var resource = new XResourceFile();
-            resource.Add("All", string.Join(';', all.Select(c => c.Name)));
 
-            foreach (var country in new[] { Country.Unknown }.Concat(all))
+            resource.Add("All", string.Join(';', data.Keys.OrderBy(c => c.Length).ThenBy(c => c)));
+            resource.AddRange(unknown.Data());
+
+            foreach (var info in data.Values.OrderBy(c => c.Name.Length).ThenBy(c => c.Name))
             {
-                var pref = country.IsUnknown() ? "ZZ" : country.Name;
-                var display = Infos.FirstOrDefault(i => i.A2 == country.Name)?.Name ?? country.DisplayName;
-
-                resource.Add($"{pref}_DisplayName", display);
-                resource.Add($"{pref}_ISO", country.IsoNumericCode.ToString("000"));
-                resource.Add($"{pref}_ISO2", country.IsoAlpha2Code);
-                resource.Add($"{pref}_ISO3", country.IsoAlpha3Code);
-                resource.Add($"{pref}_StartDate", country.StartDate.ToString("yyyy-MM-dd"));
-                if (country.EndDate is { } enddate)
-                {
-                    resource.Add($"{pref}_EndDate", enddate.ToString("yyyy-MM-dd"));
-                }
-                if (country.CallingCode is { Length: > 0 })
-                {
-                    resource.Add($"{pref}_CallingCode", country.CallingCode);
-                }
+                resource.AddRange(info.Data());
             }
 
             resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.resx")))
@@ -189,9 +247,11 @@ public class Resource_files
     }
 }
 
-public sealed record WikiInfo(string Name, string A2, string A3, int NC)
+
+
+public sealed record Iso3166_1(string DisplayName, string A2, string A3, int NC)
 {
-    public override string ToString() => $"{A2}/{A3}: {Name} ({NC:000})";
+    public override string ToString() => $"{A2}/{A3}: {DisplayName} ({NC:000})";
 
     // Overrides of Wikipedia: 
     private static readonly Dictionary<string, string> Shorten = new()
@@ -215,7 +275,7 @@ public sealed record WikiInfo(string Name, string A2, string A3, int NC)
         ["<!--DO NOT CHANGE-->{{not a typo|Sao Tome and Principe}}<!-- Do not change this to \"São Tomé and Príncipe\" unless https://www.iso.org/obp/ui/#iso:code:3166:ST changes to that spelling. If you disagree with the lack of diacritics, contact the ISO 3166/MA; we must follow the published standard for this article. -->"] = "Sao Tome and Principe",
     };
 
-    public static IEnumerable<WikiInfo> FromEN(string str)
+    public static IEnumerable<Iso3166_1> Parse(string str)
     {
         foreach (var line in str.Split("{{flagdeco|").Skip(1))
         {
@@ -238,6 +298,36 @@ public sealed record WikiInfo(string Name, string A2, string A3, int NC)
     }
 }
 
+public sealed record Iso3166_3(string DisplayName, string Iso2, string Iso3, int Iso, int Start, int End, string Name)
+{
+    public override string ToString() => $"{Name}/{Iso2}: {DisplayName} ({Start}-{End})";
+
+    public static IEnumerable<Iso3166_3> Parse(string str)
+    {
+        var entries = str.Split("|- ");
+        
+        foreach(var entry in entries.Skip(1))
+        {
+            var name = entry.Substring(entry.IndexOf(@"id=""") + 4, 4);
+
+            if (name.Any(c => c < 'A' || c > 'Z')) continue;
+
+            var display = WikiLink.Parse(entry).First().Display;
+
+            var isos = entry.Split("mono|");
+            var iso2 = isos[1][..2];
+            var iso3 = isos[2][..3];
+            var iso = int.TryParse(isos[3][..3], out var n) ? n : 0;
+
+            var years = Regex.Match(entry, "(?<start>[0-9]{4}).(?<end>[0-9]{4})");
+            var start = int.Parse(years.Groups["start"].Value);
+            var end = int.Parse(years.Groups["end"].Value) - 1;
+
+            yield return new(display, iso2, iso3, iso, start, end, name);
+        }
+    }
+}
+
 internal static class DisplayName
 {
     private const string DE_prefix = "{{{3|";
@@ -251,9 +341,6 @@ internal static class DisplayName
             return text[..text.IndexOf('}')];
         }
         else return null;
-        
-      
-
     }
 
     public static string? FromNL(string str)

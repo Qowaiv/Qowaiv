@@ -761,6 +761,10 @@ public readonly partial struct Country
     /// <summary>Describes the country Zimbabwe (ZW).</summary>
     public static readonly Country ZW = new("ZW");
 
+    /// <summary>Describes the country French Afars and Issas (AIDJ).</summary>
+    /// <remarks>End date is 1975-12-31.</remarks>
+    public static readonly Country AIDJ = new("AIDJ");
+
     /// <summary>Describes the country Netherlands Antilles (ANHH).</summary>
     /// <remarks>End date is 2010-10-10.</remarks>
     public static readonly Country ANHH = new("ANHH");
@@ -773,25 +777,105 @@ public readonly partial struct Country
     /// <remarks>End date is 1988-12-31.</remarks>
     public static readonly Country BUMM = new("BUMM");
 
+    /// <summary>Describes the country Byelorussian SSR (BYAA).</summary>
+    /// <remarks>End date is 1990-12-31.</remarks>
+    public static readonly Country BYAA = new("BYAA");
+
     /// <summary>Describes the country Czechoslovakia (CSHH).</summary>
     /// <remarks>End date is 1992-12-31.</remarks>
     public static readonly Country CSHH = new("CSHH");
 
-    /// <summary>Describes the country Serbia And Montenegro (CSXX).</summary>
+    /// <summary>Describes the country Serbia and Montenegro (CSXX).</summary>
     /// <remarks>End date is 2006-12-31.</remarks>
     public static readonly Country CSXX = new("CSXX");
+
+    /// <summary>Describes the country Canton and Enderbury Islands (CTKI).</summary>
+    /// <remarks>End date is 1982-12-31.</remarks>
+    public static readonly Country CTKI = new("CTKI");
 
     /// <summary>Describes the country German Democratic Republic (DDDE).</summary>
     /// <remarks>End date is 1990-10-03.</remarks>
     public static readonly Country DDDE = new("DDDE");
 
+    /// <summary>Describes the country Dahomey (DYBJ).</summary>
+    /// <remarks>End date is 1975-12-31.</remarks>
+    public static readonly Country DYBJ = new("DYBJ");
+
+    /// <summary>Describes the country French Southern and Antarctic Territories (FQHH).</summary>
+    /// <remarks>End date is 1977-12-31.</remarks>
+    public static readonly Country FQHH = new("FQHH");
+
+    /// <summary>Describes the country France, Metropolitan (FXFR).</summary>
+    /// <remarks>End date is 1995-12-31.</remarks>
+    public static readonly Country FXFR = new("FXFR");
+
+    /// <summary>Describes the country Gilbert Islands (GEHH).</summary>
+    /// <remarks>End date is 1977-12-31.</remarks>
+    public static readonly Country GEHH = new("GEHH");
+
     /// <summary>Describes the country Upper Volta (HVBF).</summary>
     /// <remarks>End date is 1984-08-03.</remarks>
     public static readonly Country HVBF = new("HVBF");
 
-    /// <summary>Describes the country Soviet Union (SUHH).</summary>
+    /// <summary>Describes the country Johnston Island (JTUM).</summary>
+    /// <remarks>End date is 1984-12-31.</remarks>
+    public static readonly Country JTUM = new("JTUM");
+
+    /// <summary>Describes the country Midway Islands (MIUM).</summary>
+    /// <remarks>End date is 1984-12-31.</remarks>
+    public static readonly Country MIUM = new("MIUM");
+
+    /// <summary>Describes the country New Hebrides (NHVU).</summary>
+    /// <remarks>End date is 1978-12-31.</remarks>
+    public static readonly Country NHVU = new("NHVU");
+
+    /// <summary>Describes the country Dronning Maud Land (NQAQ).</summary>
+    /// <remarks>End date is 1981-12-31.</remarks>
+    public static readonly Country NQAQ = new("NQAQ");
+
+    /// <summary>Describes the country Neutral Zone (NTHH).</summary>
+    /// <remarks>End date is 1991-12-31.</remarks>
+    public static readonly Country NTHH = new("NTHH");
+
+    /// <summary>Describes the country Pacific Islands (Trust Territory) (PCHH).</summary>
+    /// <remarks>End date is 1984-12-31.</remarks>
+    public static readonly Country PCHH = new("PCHH");
+
+    /// <summary>Describes the country United States Miscellaneous Pacific Islands (PUUM).</summary>
+    /// <remarks>End date is 1984-12-31.</remarks>
+    public static readonly Country PUUM = new("PUUM");
+
+    /// <summary>Describes the country Panama Canal Zone (PZPA).</summary>
+    /// <remarks>End date is 1978-12-31.</remarks>
+    public static readonly Country PZPA = new("PZPA");
+
+    /// <summary>Describes the country Southern Rhodesia (RHZW).</summary>
+    /// <remarks>End date is 1978-12-31.</remarks>
+    public static readonly Country RHZW = new("RHZW");
+
+    /// <summary>Describes the country Sikkim (SKIN).</summary>
+    /// <remarks>End date is 1973-12-31.</remarks>
+    public static readonly Country SKIN = new("SKIN");
+
+    /// <summary>Describes the country USSR (SUHH).</summary>
     /// <remarks>End date is 1991-12-31.</remarks>
     public static readonly Country SUHH = new("SUHH");
+
+    /// <summary>Describes the country East Timor (TPTL).</summary>
+    /// <remarks>End date is 2000-12-31.</remarks>
+    public static readonly Country TPTL = new("TPTL");
+
+    /// <summary>Describes the country Viet-Nam, Democratic Republic of (VDVN).</summary>
+    /// <remarks>End date is 1975-12-31.</remarks>
+    public static readonly Country VDVN = new("VDVN");
+
+    /// <summary>Describes the country Wake Island (WKUM).</summary>
+    /// <remarks>End date is 1984-12-31.</remarks>
+    public static readonly Country WKUM = new("WKUM");
+
+    /// <summary>Describes the country Yemen, Democratic (YDYE).</summary>
+    /// <remarks>End date is 1988-12-31.</remarks>
+    public static readonly Country YDYE = new("YDYE");
 
     /// <summary>Describes the country Yugoslavia (YUCS).</summary>
     /// <remarks>End date is 2002-12-31.</remarks>

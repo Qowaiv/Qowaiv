@@ -10,7 +10,7 @@
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
   <data name="All">
-    <value>AD;AE;AF;AG;AI;AL;AM;AO;AQ;AR;AS;AT;AU;AW;AX;AZ;BA;BB;BD;BE;BF;BG;BH;BI;BJ;BL;BM;BN;BO;BQ;BR;BS;BT;BV;BW;BY;BZ;CA;CC;CD;CF;CG;CH;CI;CK;CL;CM;CN;CO;CR;CU;CV;CW;CX;CY;CZ;DE;DJ;DK;DM;DO;DZ;EC;EE;EG;EH;ER;ES;ET;FI;FJ;FK;FM;FO;FR;GA;GB;GD;GE;GF;GG;GH;GI;GL;GM;GN;GP;GQ;GR;GS;GT;GU;GW;GY;HK;HM;HN;HR;HT;HU;ID;IE;IL;IM;IN;IO;IQ;IR;IS;IT;JE;JM;JO;JP;KE;KG;KH;KI;KM;KN;KP;KR;KW;KY;KZ;LA;LB;LC;LI;LK;LR;LS;LT;LU;LV;LY;MA;MC;MD;ME;MF;MG;MH;MK;ML;MM;MN;MO;MP;MQ;MR;MS;MT;MU;MV;MW;MX;MY;MZ;NA;NC;NE;NF;NG;NI;NL;NO;NP;NR;NU;NZ;OM;PA;PE;PF;PG;PH;PK;PL;PM;PN;PR;PS;PT;PW;PY;QA;RE;RO;RS;RU;RW;SA;SB;SC;SD;SE;SG;SH;SI;SJ;SK;SL;SM;SN;SO;SR;SS;ST;SV;SX;SY;SZ;TC;TD;TF;TG;TH;TJ;TK;TL;TM;TN;TO;TR;TT;TV;TW;TZ;UA;UG;UM;US;UY;UZ;VA;VC;VE;VG;VI;VN;VU;WF;WS;XK;YE;YT;ZA;ZM;ZW;ANHH;BQAQ;BUMM;CSHH;CSXX;DDDE;HVBF;SUHH;YUCS;ZRCD</value>
+    <value>AD;AE;AF;AG;AI;AL;AM;AO;AQ;AR;AS;AT;AU;AW;AX;AZ;BA;BB;BD;BE;BF;BG;BH;BI;BJ;BL;BM;BN;BO;BQ;BR;BS;BT;BV;BW;BY;BZ;CA;CC;CD;CF;CG;CH;CI;CK;CL;CM;CN;CO;CR;CU;CV;CW;CX;CY;CZ;DE;DJ;DK;DM;DO;DZ;EC;EE;EG;EH;ER;ES;ET;FI;FJ;FK;FM;FO;FR;GA;GB;GD;GE;GF;GG;GH;GI;GL;GM;GN;GP;GQ;GR;GS;GT;GU;GW;GY;HK;HM;HN;HR;HT;HU;ID;IE;IL;IM;IN;IO;IQ;IR;IS;IT;JE;JM;JO;JP;KE;KG;KH;KI;KM;KN;KP;KR;KW;KY;KZ;LA;LB;LC;LI;LK;LR;LS;LT;LU;LV;LY;MA;MC;MD;ME;MF;MG;MH;MK;ML;MM;MN;MO;MP;MQ;MR;MS;MT;MU;MV;MW;MX;MY;MZ;NA;NC;NE;NF;NG;NI;NL;NO;NP;NR;NU;NZ;OM;PA;PE;PF;PG;PH;PK;PL;PM;PN;PR;PS;PT;PW;PY;QA;RE;RO;RS;RU;RW;SA;SB;SC;SD;SE;SG;SH;SI;SJ;SK;SL;SM;SN;SO;SR;SS;ST;SV;SX;SY;SZ;TC;TD;TF;TG;TH;TJ;TK;TL;TM;TN;TO;TR;TT;TV;TW;TZ;UA;UG;UM;US;UY;UZ;VA;VC;VE;VG;VI;VN;VU;WF;WS;XK;YE;YT;ZA;ZM;ZW;AIDJ;ANHH;BQAQ;BUMM;BYAA;CSHH;CSXX;CTKI;DDDE;DYBJ;FQHH;FXFR;GEHH;HVBF;JTUM;MIUM;NHVU;NQAQ;NTHH;PCHH;PUUM;PZPA;RHZW;SKIN;SUHH;TPTL;VDVN;WKUM;YDYE;YUCS;ZRCD</value>
   </data>
   <data name="ZZ_DisplayName">
     <value>Unknown</value>
@@ -25,7 +25,7 @@
     <value>ZZZ</value>
   </data>
   <data name="ZZ_StartDate">
-    <value>0001-01-01</value>
+    <value>1974-01-01</value>
   </data>
   <data name="AD_DisplayName">
     <value>Andorra</value>
@@ -4426,7 +4426,7 @@
     <value>XK</value>
   </data>
   <data name="XK_ISO3">
-    <value>XKX</value>
+    <value>XKK</value>
   </data>
   <data name="XK_StartDate">
     <value>2008-02-01</value>
@@ -4524,6 +4524,24 @@
   <data name="ZW_CallingCode">
     <value>+263</value>
   </data>
+  <data name="AIDJ_DisplayName">
+    <value>French Afars and Issas</value>
+  </data>
+  <data name="AIDJ_ISO">
+    <value>000</value>
+  </data>
+  <data name="AIDJ_ISO2">
+    <value>AI</value>
+  </data>
+  <data name="AIDJ_ISO3">
+    <value>AFI</value>
+  </data>
+  <data name="AIDJ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="AIDJ_EndDate">
+    <value>1977-06-26</value>
+  </data>
   <data name="ANHH_DisplayName">
     <value>Netherlands Antilles</value>
   </data>
@@ -4549,7 +4567,7 @@
     <value>British Antarctic Territory</value>
   </data>
   <data name="BQAQ_ISO">
-    <value>080</value>
+    <value>000</value>
   </data>
   <data name="BQAQ_ISO2">
     <value>BQ</value>
@@ -4584,6 +4602,24 @@
   <data name="BUMM_CallingCode">
     <value>+95</value>
   </data>
+  <data name="BYAA_DisplayName">
+    <value>Byelorussian SSR</value>
+  </data>
+  <data name="BYAA_ISO">
+    <value>112</value>
+  </data>
+  <data name="BYAA_ISO2">
+    <value>BY</value>
+  </data>
+  <data name="BYAA_ISO3">
+    <value>BYS</value>
+  </data>
+  <data name="BYAA_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BYAA_EndDate">
+    <value>1991-12-25</value>
+  </data>
   <data name="CSHH_DisplayName">
     <value>Czechoslovakia</value>
   </data>
@@ -4606,7 +4642,7 @@
     <value>+42</value>
   </data>
   <data name="CSXX_DisplayName">
-    <value>Serbia And Montenegro</value>
+    <value>Serbia and Montenegro</value>
   </data>
   <data name="CSXX_ISO">
     <value>891</value>
@@ -4626,17 +4662,35 @@
   <data name="CSXX_CallingCode">
     <value>+381</value>
   </data>
+  <data name="CTKI_DisplayName">
+    <value>Canton and Enderbury Islands</value>
+  </data>
+  <data name="CTKI_ISO">
+    <value>128</value>
+  </data>
+  <data name="CTKI_ISO2">
+    <value>CT</value>
+  </data>
+  <data name="CTKI_ISO3">
+    <value>CTE</value>
+  </data>
+  <data name="CTKI_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="CTKI_EndDate">
+    <value>1983-09-22</value>
+  </data>
   <data name="DDDE_DisplayName">
     <value>German Democratic Republic</value>
   </data>
   <data name="DDDE_ISO">
-    <value>276</value>
+    <value>278</value>
   </data>
   <data name="DDDE_ISO2">
     <value>DD</value>
   </data>
   <data name="DDDE_ISO3">
-    <value>DEU</value>
+    <value>DDR</value>
   </data>
   <data name="DDDE_StartDate">
     <value>1974-01-01</value>
@@ -4647,11 +4701,83 @@
   <data name="DDDE_CallingCode">
     <value>+37</value>
   </data>
+  <data name="DYBJ_DisplayName">
+    <value>Dahomey</value>
+  </data>
+  <data name="DYBJ_ISO">
+    <value>000</value>
+  </data>
+  <data name="DYBJ_ISO2">
+    <value>DY</value>
+  </data>
+  <data name="DYBJ_ISO3">
+    <value>DHY</value>
+  </data>
+  <data name="DYBJ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="DYBJ_EndDate">
+    <value>1975-11-29</value>
+  </data>
+  <data name="FQHH_DisplayName">
+    <value>French Southern and Antarctic Territories</value>
+  </data>
+  <data name="FQHH_ISO">
+    <value>000</value>
+  </data>
+  <data name="FQHH_ISO2">
+    <value>FQ</value>
+  </data>
+  <data name="FQHH_ISO3">
+    <value>ATF</value>
+  </data>
+  <data name="FQHH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="FQHH_EndDate">
+    <value>1978-12-31</value>
+  </data>
+  <data name="FXFR_DisplayName">
+    <value>France, Metropolitan</value>
+  </data>
+  <data name="FXFR_ISO">
+    <value>249</value>
+  </data>
+  <data name="FXFR_ISO2">
+    <value>FX</value>
+  </data>
+  <data name="FXFR_ISO3">
+    <value>FXX</value>
+  </data>
+  <data name="FXFR_StartDate">
+    <value>1993-01-01</value>
+  </data>
+  <data name="FXFR_EndDate">
+    <value>1996-12-31</value>
+  </data>
+  <data name="GEHH_DisplayName">
+    <value>Gilbert Islands</value>
+  </data>
+  <data name="GEHH_ISO">
+    <value>000</value>
+  </data>
+  <data name="GEHH_ISO2">
+    <value>GE</value>
+  </data>
+  <data name="GEHH_ISO3">
+    <value>GEL</value>
+  </data>
+  <data name="GEHH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GEHH_EndDate">
+    <value>1979-07-11</value>
+  </data>
   <data name="HVBF_DisplayName">
     <value>Upper Volta</value>
   </data>
   <data name="HVBF_ISO">
-    <value>180</value>
+    <value>854</value>
   </data>
   <data name="HVBF_ISO2">
     <value>HV</value>
@@ -4668,8 +4794,188 @@
   <data name="HVBF_CallingCode">
     <value>+226</value>
   </data>
+  <data name="JTUM_DisplayName">
+    <value>Johnston Island</value>
+  </data>
+  <data name="JTUM_ISO">
+    <value>396</value>
+  </data>
+  <data name="JTUM_ISO2">
+    <value>JT</value>
+  </data>
+  <data name="JTUM_ISO3">
+    <value>JTN</value>
+  </data>
+  <data name="JTUM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="JTUM_EndDate">
+    <value>1984-12-31</value>
+  </data>
+  <data name="MIUM_DisplayName">
+    <value>Midway Islands</value>
+  </data>
+  <data name="MIUM_ISO">
+    <value>488</value>
+  </data>
+  <data name="MIUM_ISO2">
+    <value>MI</value>
+  </data>
+  <data name="MIUM_ISO3">
+    <value>MID</value>
+  </data>
+  <data name="MIUM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="MIUM_EndDate">
+    <value>1984-12-31</value>
+  </data>
+  <data name="NHVU_DisplayName">
+    <value>New Hebrides</value>
+  </data>
+  <data name="NHVU_ISO">
+    <value>000</value>
+  </data>
+  <data name="NHVU_ISO2">
+    <value>NH</value>
+  </data>
+  <data name="NHVU_ISO3">
+    <value>NHB</value>
+  </data>
+  <data name="NHVU_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="NHVU_EndDate">
+    <value>1978-12-31</value>
+  </data>
+  <data name="NQAQ_DisplayName">
+    <value>Dronning Maud Land</value>
+  </data>
+  <data name="NQAQ_ISO">
+    <value>216</value>
+  </data>
+  <data name="NQAQ_ISO2">
+    <value>NQ</value>
+  </data>
+  <data name="NQAQ_ISO3">
+    <value>ATN</value>
+  </data>
+  <data name="NQAQ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="NQAQ_EndDate">
+    <value>1981-12-31</value>
+  </data>
+  <data name="NTHH_DisplayName">
+    <value>Neutral Zone</value>
+  </data>
+  <data name="NTHH_ISO">
+    <value>536</value>
+  </data>
+  <data name="NTHH_ISO2">
+    <value>NT</value>
+  </data>
+  <data name="NTHH_ISO3">
+    <value>NTZ</value>
+  </data>
+  <data name="NTHH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="NTHH_EndDate">
+    <value>1991-12-31</value>
+  </data>
+  <data name="PCHH_DisplayName">
+    <value>Pacific Islands (Trust Territory)</value>
+  </data>
+  <data name="PCHH_ISO">
+    <value>582</value>
+  </data>
+  <data name="PCHH_ISO2">
+    <value>PC</value>
+  </data>
+  <data name="PCHH_ISO3">
+    <value>PCI</value>
+  </data>
+  <data name="PCHH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PCHH_EndDate">
+    <value>1984-12-31</value>
+  </data>
+  <data name="PUUM_DisplayName">
+    <value>United States Miscellaneous Pacific Islands</value>
+  </data>
+  <data name="PUUM_ISO">
+    <value>849</value>
+  </data>
+  <data name="PUUM_ISO2">
+    <value>PU</value>
+  </data>
+  <data name="PUUM_ISO3">
+    <value>PUS</value>
+  </data>
+  <data name="PUUM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PUUM_EndDate">
+    <value>1984-12-31</value>
+  </data>
+  <data name="PZPA_DisplayName">
+    <value>Panama Canal Zone</value>
+  </data>
+  <data name="PZPA_ISO">
+    <value>000</value>
+  </data>
+  <data name="PZPA_ISO2">
+    <value>PZ</value>
+  </data>
+  <data name="PZPA_ISO3">
+    <value>PCZ</value>
+  </data>
+  <data name="PZPA_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="PZPA_EndDate">
+    <value>1978-12-31</value>
+  </data>
+  <data name="RHZW_DisplayName">
+    <value>Southern Rhodesia</value>
+  </data>
+  <data name="RHZW_ISO">
+    <value>000</value>
+  </data>
+  <data name="RHZW_ISO2">
+    <value>RH</value>
+  </data>
+  <data name="RHZW_ISO3">
+    <value>RHO</value>
+  </data>
+  <data name="RHZW_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="RHZW_EndDate">
+    <value>1978-12-31</value>
+  </data>
+  <data name="SKIN_DisplayName">
+    <value>Sikkim</value>
+  </data>
+  <data name="SKIN_ISO">
+    <value>000</value>
+  </data>
+  <data name="SKIN_ISO2">
+    <value>SK</value>
+  </data>
+  <data name="SKIN_ISO3">
+    <value>SKM</value>
+  </data>
+  <data name="SKIN_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="SKIN_EndDate">
+    <value>1973-12-31</value>
+  </data>
   <data name="SUHH_DisplayName">
-    <value>Soviet Union</value>
+    <value>USSR</value>
   </data>
   <data name="SUHH_ISO">
     <value>810</value>
@@ -4688,6 +4994,78 @@
   </data>
   <data name="SUHH_CallingCode">
     <value>+7</value>
+  </data>
+  <data name="TPTL_DisplayName">
+    <value>East Timor</value>
+  </data>
+  <data name="TPTL_ISO">
+    <value>626</value>
+  </data>
+  <data name="TPTL_ISO2">
+    <value>TP</value>
+  </data>
+  <data name="TPTL_ISO3">
+    <value>TMP</value>
+  </data>
+  <data name="TPTL_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="TPTL_EndDate">
+    <value>2000-12-31</value>
+  </data>
+  <data name="VDVN_DisplayName">
+    <value>Viet-Nam, Democratic Republic of</value>
+  </data>
+  <data name="VDVN_ISO">
+    <value>000</value>
+  </data>
+  <data name="VDVN_ISO2">
+    <value>VD</value>
+  </data>
+  <data name="VDVN_ISO3">
+    <value>VDR</value>
+  </data>
+  <data name="VDVN_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="VDVN_EndDate">
+    <value>1975-12-31</value>
+  </data>
+  <data name="WKUM_DisplayName">
+    <value>Wake Island</value>
+  </data>
+  <data name="WKUM_ISO">
+    <value>872</value>
+  </data>
+  <data name="WKUM_ISO2">
+    <value>WK</value>
+  </data>
+  <data name="WKUM_ISO3">
+    <value>WAK</value>
+  </data>
+  <data name="WKUM_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="WKUM_EndDate">
+    <value>1984-12-31</value>
+  </data>
+  <data name="YDYE_DisplayName">
+    <value>Yemen, Democratic</value>
+  </data>
+  <data name="YDYE_ISO">
+    <value>720</value>
+  </data>
+  <data name="YDYE_ISO2">
+    <value>YD</value>
+  </data>
+  <data name="YDYE_ISO3">
+    <value>YMD</value>
+  </data>
+  <data name="YDYE_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="YDYE_EndDate">
+    <value>1988-12-31</value>
   </data>
   <data name="YUCS_DisplayName">
     <value>Yugoslavia</value>

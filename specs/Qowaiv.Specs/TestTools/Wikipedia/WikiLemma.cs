@@ -72,7 +72,7 @@ public sealed record WikiLemma
         if (response is { StatusCode: HttpStatusCode.OK })
         {
             var wrapper = JsonSerializer.Deserialize<WikiQueryResult.Wrapper>(body, Options);
-            var content = wrapper?.query.Pages.Values
+            var content = wrapper?.Query.Pages.Values
                 .SingleOrDefault()?
                 .Revisions.SingleOrDefault()?
                 .Slots.Values.SingleOrDefault()?

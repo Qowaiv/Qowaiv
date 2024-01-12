@@ -27,6 +27,6 @@ public sealed class WikiQueryResult
 
     internal sealed class Wrapper
     {
-        public WikiQueryResult query { get; init; } = new();
+        public WikiQueryResult Query { get; init; } = new();
     }
 }

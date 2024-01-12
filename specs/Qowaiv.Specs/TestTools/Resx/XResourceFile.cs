@@ -50,7 +50,7 @@ public sealed class XResourceFile
 
     /// <summary>Saves the resource file to a file.</summary>
     /// <param name="file">
-    /// The file to safe to.
+    /// The file to save to.
     /// </param>
     public void Save(FileInfo file)
     {
@@ -60,10 +60,10 @@ public sealed class XResourceFile
 
     /// <summary>Saves the resource file to a file.</summary>
     /// <param name="file">
-    /// The file to safe to.
+    /// The file to save to.
     /// </param>
     /// <param name="culture">
-    /// The specif culture of the <see cref="XResourceFile"/>.
+    /// The specific culture of the <see cref="XResourceFile"/>.
     /// </param>
     public void Save(FileInfo file, CultureInfo culture)
     {

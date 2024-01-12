@@ -345,10 +345,6 @@
     <value>Kasachstan</value>
     <comment>Kazakhstan (KZ)</comment>
   </data>
-  <data name="LA_DisplayName">
-    <value>Laos</value>
-    <comment>Loas (LA)</comment>
-  </data>
   <data name="LB_DisplayName">
     <value>Libanon</value>
     <comment>Lebanon (LB)</comment>

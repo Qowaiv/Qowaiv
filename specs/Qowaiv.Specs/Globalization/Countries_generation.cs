@@ -193,7 +193,7 @@ public sealed record WikiInfo(string Name, string A2, string A3, int NC)
         ["Iran (Islamic Republic of)"] = "Iran",
         ["Korea (Democratic People's Republic of)"] = "North Korea",
         ["Korea, Republic of"] = "South Korea",
-        ["Lao People's Democratic Republic"] = "Loas",
+        ["Lao People's Democratic Republic"] = "Laos",
         ["Micronesia (Federated States of)"] = "Micronesia",
         ["Moldova, Republic of"] = "Moldova",
         ["Netherlands, Kingdom of the"] = "Netherlands",

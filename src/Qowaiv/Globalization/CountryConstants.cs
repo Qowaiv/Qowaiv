@@ -380,7 +380,7 @@ public readonly partial struct Country
     /// <summary>Describes the country Kazakhstan (KZ).</summary>
     public static readonly Country KZ = new("KZ");
 
-    /// <summary>Describes the country Loas (LA).</summary>
+    /// <summary>Describes the country Laos (LA).</summary>
     public static readonly Country LA = new("LA");
 
     /// <summary>Describes the country Lebanon (LB).</summary>

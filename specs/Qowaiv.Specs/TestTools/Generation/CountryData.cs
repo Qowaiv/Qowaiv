@@ -1,4 +1,6 @@
-﻿namespace Qowaiv.TestTools.Resx;
+﻿using Qowaiv.TestTools.Resx;
+
+namespace Qowaiv.TestTools.Generation;
 
 public sealed record CountryData(string Name)
 {

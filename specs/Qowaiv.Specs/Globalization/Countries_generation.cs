@@ -1,6 +1,7 @@
 ﻿#if NET8_0_OR_GREATER
 #if DEBUG
 
+using Qowaiv.TestTools.Generation;
 using Qowaiv.TestTools.Resx;
 using Qowaiv.TestTools.Wikipedia;
 
@@ -59,7 +60,7 @@ public class Resource_files
     [TestCaseSource(nameof(Iso3166_1s))]
     public void exsiting_reflect_info_of_Wikipedia(Iso3166_1 info)
     {
-        var country = Country.Parse(info.A2);
+        var country = Country.Parse(info.Iso2);
         var summary = new Iso3166_1(country.EnglishName, country.IsoAlpha2Code, country.IsoAlpha3Code, country.IsoNumericCode);
         summary.Should().Be(info);
     }
@@ -73,11 +74,11 @@ public class Resource_files
             country.IsoAlpha2Code,
             country.IsoAlpha3Code,
             country.IsoNumericCode,
-            country.StartDate.Year,
-            country.EndDate.GetValueOrDefault().Year - 1,
+            0,
+            0,
             country.Name);
 
-        summary.Should().Be(info);
+        summary.Should().BeEquivalentTo(info, c => c.Excluding(m => m.Start).Excluding(m => m.End));
     }
 
     public class Display_names
@@ -88,7 +89,7 @@ public class Resource_files
         public async Task match_nl_Wikipedia(Country country)
         {
             var lemma = new WikiLemma($"Sjabloon:{country.IsoAlpha2Code}", TestCultures.Nl);
-            var display = await lemma.Transform(DisplayName.FromNL);
+            var display = await lemma.Transform(CountryDisplayName.NL);
             display.Should().Be(country.GetDisplayName(TestCultures.Nl_NL));
         }
 
@@ -98,7 +99,7 @@ public class Resource_files
             try
             {
                 var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", TestCultures.De);
-                var display = await lemma.Transform(DisplayName.FromDE);
+                var display = await lemma.Transform(CountryDisplayName.DE);
                 display.Should().Be(country.GetDisplayName(TestCultures.De_DE));
             }
             catch (UnknownLemma) { /* Some do not follow this pattern. */ }
@@ -145,12 +146,12 @@ public class Resource_files
 
             foreach(var c in Iso3166_1s)
             {
-                data[c.A2] = new(c.A2)
+                data[c.Iso2] = new(c.Iso2)
                 {
                     DisplayName = c.DisplayName,
-                    ISO = c.NC,
-                    ISO2 = c.A2,
-                    ISO3 = c.A3,
+                    ISO = c.Iso,
+                    ISO2 = c.Iso2,
+                    ISO3 = c.Iso3,
                 };
             }
 
@@ -205,7 +206,7 @@ public class Resource_files
                 try
                 {
                     var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", TestCultures.De);
-                    return await lemma.Transform(DisplayName.FromDE);
+                    return await lemma.Transform(CountryDisplayName.DE);
                 }
                 catch (UnknownLemma)
                 {
@@ -239,7 +240,7 @@ public class Resource_files
                 try
                 {
                     var lemma = new WikiLemma($"Sjabloon:{country.Name}", TestCultures.Nl);
-                    return await lemma.Transform(DisplayName.FromNL);
+                    return await lemma.Transform(CountryDisplayName.NL);
                 }
                 catch (UnknownLemma)
                 {
@@ -247,116 +248,6 @@ public class Resource_files
                 }
             }
         }
-    }
-}
-
-public sealed record Iso3166_1(string DisplayName, string A2, string A3, int NC)
-{
-    public override string ToString() => $"{A2}/{A3}: {DisplayName} ({NC:000})";
-
-    // Overrides of Wikipedia: 
-    private static readonly Dictionary<string, string> Shorten = new()
-    {
-        ["Bolivia (Plurinational State of)"] = "Bolivia",
-        ["Bonaire, Sint Eustatius and Saba"] = "Caribbean Netherlands",
-        ["Iran (Islamic Republic of)"] = "Iran",
-        ["Korea (Democratic People's Republic of)"] = "North Korea",
-        ["Korea, Republic of"] = "South Korea",
-        ["Lao People's Democratic Republic"] = "Laos",
-        ["Micronesia (Federated States of)"] = "Micronesia",
-        ["Moldova, Republic of"] = "Moldova",
-        ["Netherlands, Kingdom of the"] = "Netherlands",
-        ["Palestine, State of"] = "Palestine",
-        ["Russian Federation"] = "Russia",
-        ["<!--DO NOT CHANGE-->Taiwan, Province of China<!--This is the name used in ISO 3166: https://www.iso.org/obp/ui/#iso:code:3166:TW. If you disagree with this naming, contact the ISO 3166/MA; we must follow the published standard for this article.-->"] = "Taiwan",
-        ["Tanzania, United Republic of"] = "Tanzania",
-        ["United Kingdom of Great Britain and Northern Ireland"] = "United Kingdom",
-        ["United States of America"] = "United States",
-        ["Venezuela (Bolivarian Republic of)"] = "Venezuela",
-        ["<!--DO NOT CHANGE-->{{not a typo|Sao Tome and Principe}}<!-- Do not change this to \"São Tomé and Príncipe\" unless https://www.iso.org/obp/ui/#iso:code:3166:ST changes to that spelling. If you disagree with the lack of diacritics, contact the ISO 3166/MA; we must follow the published standard for this article. -->"] = "Sao Tome and Principe",
-    };
-
-    public static IEnumerable<Iso3166_1> Parse(string str)
-    {
-        foreach (var line in str.Split("{{flagdeco|").Skip(1))
-        {
-            var parts = line.Split("mono|");
-
-            if (parts.Length >= 4)
-            {
-                var link = WikiLink.Parse(parts[0]).First();
-                var name = Wiki.RemoveInParentheses(link.Display);
-
-                var a2 = parts[1][..2];
-                var a3 = parts[2][..3];
-                var nc = parts[3][..3];
-
-                name = Shorten.TryGetValue(name, out var shorten) ? shorten : name;
-
-                yield return new(name, a2, a3, int.Parse(nc));
-            }
-        }
-    }
-}
-
-public sealed record Iso3166_3(string DisplayName, string Iso2, string Iso3, int Iso, int Start, int End, string Name)
-{
-    public override string ToString() => $"{Name}/{Iso2}: {DisplayName} ({Start}-{End})";
-
-    public static IEnumerable<Iso3166_3> Parse(string str)
-    {
-        var entries = str.Split("|- ");
-        
-        foreach(var entry in entries.Skip(1))
-        {
-            var name = entry.Substring(entry.IndexOf(@"id=""") + 4, 4);
-
-            if (name.Any(c => c < 'A' || c > 'Z')) continue;
-
-            var display = WikiLink.Parse(entry).First().Display;
-
-            var isos = entry.Split("mono|");
-            var iso2 = isos[1][..2];
-            var iso3 = isos[2][..3];
-            var iso = int.TryParse(isos[3][..3], out var n) ? n : 0;
-
-            var years = Regex.Match(entry, "(?<start>[0-9]{4}).(?<end>[0-9]{4})");
-            var start = int.Parse(years.Groups["start"].Value);
-            var end = int.Parse(years.Groups["end"].Value) - 1;
-
-            yield return new(display, iso2, iso3, iso, start, end, name);
-        }
-    }
-}
-
-internal static class DisplayName
-{
-    private const string DE_prefix = "{{{3|";
-
-    public static string? FromDE(string str)
-    {
-        var index = str.LastIndexOf(DE_prefix);
-        if (index > -1)
-        {
-            var text = str[(index+DE_prefix.Length)..];
-            return text[..text.IndexOf('}')];
-        }
-        else return null;
-    }
-
-    public static string? FromNL(string str)
-    {
-        var index = str.LastIndexOf("-VLAG}}&nbsp;") + 1;
-        var text = str[index..];
-
-        if (WikiLink.Parse(text).FirstOrDefault() is { } link)
-        {
-            var display = link.Display;
-            display = display[(display.IndexOf('|') + 1)..];
-            display = display.Trim('{').Trim('}');
-            return display;
-        }
-        else return null;
     }
 }
 

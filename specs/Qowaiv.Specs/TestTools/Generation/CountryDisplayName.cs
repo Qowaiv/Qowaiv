@@ -1,5 +1,6 @@
 ﻿using Qowaiv.TestTools.Resx;
 using Qowaiv.TestTools.Wikipedia;
+using Qowaiv.UnitTests.Statistics;
 using System.Xml.Linq;
 
 
@@ -34,6 +35,7 @@ public static class CountryDisplayName
             $"{country.EnglishName} ({country.IsoAlpha2Code})");
 
     private const string DE_prefix = "{{{3|";
+    private const string ES_prefix = "{{1|";
 
     public static string? DE(string str)
     {
@@ -44,6 +46,47 @@ public static class CountryDisplayName
             return text[..text.IndexOf('}')];
         }
         else return null;
+    }
+
+    public static async Task<string?> ES(Country country)
+    {
+        var overrides = new Dictionary<Country, string>()
+        {
+            [Country.BQ] = "Caribe Neerlandés",
+            [Country.XK] = "Kósovo",
+        };
+
+        if(country == Country.WF)
+        {
+
+        }
+
+        if (overrides.TryGetValue(country, out var overidden))
+        {
+            return overidden;
+        }
+        else if (country.Name.Length == 2)
+        {
+            var lemma = new WikiLemma($"Plantilla:{country.IsoAlpha3Code}", TestCultures.Es);
+            return await lemma.Transform(DisplayName);
+        }
+        else return null;
+
+        string? DisplayName(string str)
+        {
+            var index = str.LastIndexOf(ES_prefix);
+            if (index > -1)
+            {
+                var text = str[(index + ES_prefix.Length)..];
+                var display = text[..text.IndexOf('}')];
+                if (display.Length > 0)
+                {
+                    return display.Replace(" Y ", " y ");
+                }
+                else return null;
+            }
+            else return null;
+        }
     }
 
     public static string? NL(string str)
@@ -103,5 +146,6 @@ public static class CountryDisplayName
             }
         }
     }
+
     private record Display(string Iso2, string Name);
 }

@@ -100,6 +100,13 @@ public class Resource_files
         }
 
         [TestCaseSource(nameof(Existing))]
+        public async Task es(Country country)
+        {
+            var display = country.GetDisplayName(TestCultures.Es);
+            display.Should().Be(await CountryDisplayName.ES(country));
+        }
+
+        [TestCaseSource(nameof(Existing))]
         public void fr(Country country)
         {
             var display = country.GetDisplayName(TestCultures.Fr);
@@ -213,6 +220,17 @@ public class Resource_files
                     return null;
                 }
             }
+        }
+
+        [Test]
+        public async Task es()
+        {
+            (await CountryDisplayName.Update(
+                "Desconocido",
+                TestCultures.Es,
+                CountryDisplayName.ES)
+            )
+            .Should().NotThrow();
         }
 
         [Test]

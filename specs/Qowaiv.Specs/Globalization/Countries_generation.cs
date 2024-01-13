@@ -182,7 +182,7 @@ public class Resource_files
         }
 
         [Test]
-        public async Task de_culture()
+        public async Task de()
         {
             var resource = new XResourceFile(CountryDisplayName.Data("Unbekannt", Country.Unknown));
 
@@ -216,7 +216,42 @@ public class Resource_files
         }
 
         [Test]
-        public async Task nl_culture()
+        public async Task fr()
+        {
+            var resource = new XResourceFile(CountryDisplayName.Data("Inconnu", Country.Unknown));
+
+            foreach (var country in Country.All)
+            {
+                var displayName = country.GetDisplayName(TestCultures.Fr);
+                //country.Name.Length == 2 && await Display(country) is { } display
+                //     ? display
+                //     : country.GetDisplayName(TestCultures.Fr);
+
+                if (displayName != country.EnglishName)
+                {
+                    resource.Add(CountryDisplayName.Data(displayName, country));
+                }
+            }
+
+            resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.fr.resx")))
+                .Should().NotThrow();
+
+            async Task<string?> Display(Country country)
+            {
+                try
+                {
+                    var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", TestCultures.De);
+                    return await lemma.Transform(CountryDisplayName.DE);
+                }
+                catch (UnknownLemma)
+                {
+                    return null;
+                }
+            }
+        }
+
+        [Test]
+        public async Task nl()
         {
             var resource = new XResourceFile(CountryDisplayName.Data("Onbekend", Country.Unknown));
 

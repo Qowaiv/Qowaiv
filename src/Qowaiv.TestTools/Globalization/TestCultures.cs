@@ -18,6 +18,9 @@ public static class TestCultures
     /// <summary>Gets the English (en) <see cref="CultureInfo"/>.</summary>
     public static CultureInfo En => new("en");
 
+    /// <summary>Gets the French (fr) <see cref="CultureInfo"/>.</summary>
+    public static CultureInfo Fr => new("fr");
+
     /// <summary>Gets the Dutch (nl) <see cref="CultureInfo"/>.</summary>
     public static CultureInfo Nl => new("nl");
 

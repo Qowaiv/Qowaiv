@@ -1,9 +1,14 @@
-<?xml version="1.0"?>
-<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
-  <resheader name="version"><value>2.0</value></resheader>
-  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
-  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
   <data name="ZZ_DisplayName">
     <value>Inconnu</value>
     <comment>Unknown (ZZ)</comment>
@@ -18,7 +23,7 @@
   </data>
   <data name="AG_DisplayName">
     <value>Antigua-Et-Barbuda</value>
-    <comment>Antigua And Barbuda (AG)</comment>
+    <comment>Antigua and Barbuda (AG)</comment>
   </data>
   <data name="AL_DisplayName">
     <value>Albanie</value>
@@ -58,7 +63,7 @@
   </data>
   <data name="BA_DisplayName">
     <value>Bosnie-Herzégovine</value>
-    <comment>Bosnia And Herzegovina (BA)</comment>
+    <comment>Bosnia and Herzegovina (BA)</comment>
   </data>
   <data name="BB_DisplayName">
     <value>Barbade</value>
@@ -114,11 +119,11 @@
   </data>
   <data name="CC_DisplayName">
     <value>Îles Cocos</value>
-    <comment>Cocos (CC)</comment>
+    <comment>Cocos Islands (CC)</comment>
   </data>
   <data name="CD_DisplayName">
     <value>République Démocratique Du Congo</value>
-    <comment>Congo (CD)</comment>
+    <comment>Congo, Democratic Republic of the (CD)</comment>
   </data>
   <data name="CF_DisplayName">
     <value>République Centrafricaine</value>
@@ -154,7 +159,7 @@
   </data>
   <data name="CV_DisplayName">
     <value>Cap-Vert</value>
-    <comment>Cape Verde (CV)</comment>
+    <comment>Cabo Verde (CV)</comment>
   </data>
   <data name="CX_DisplayName">
     <value>Île Christmas</value>
@@ -166,7 +171,7 @@
   </data>
   <data name="CZ_DisplayName">
     <value>République Tchèque</value>
-    <comment>Czech Republic (CZ)</comment>
+    <comment>Czechia (CZ)</comment>
   </data>
   <data name="DE_DisplayName">
     <value>Allemagne</value>
@@ -278,7 +283,7 @@
   </data>
   <data name="GS_DisplayName">
     <value>Géorgie Du Sud-Et-Les Îles Sandwich Du Sud</value>
-    <comment>South Georgia And The South Sandwich Islands (GS)</comment>
+    <comment>South Georgia and the South Sandwich Islands (GS)</comment>
   </data>
   <data name="GW_DisplayName">
     <value>Guinée-Bissau</value>
@@ -286,7 +291,7 @@
   </data>
   <data name="HM_DisplayName">
     <value>Îles Heard-Et-Macdonald</value>
-    <comment>Heard Island And Mcdonald Islands (HM)</comment>
+    <comment>Heard Island and McDonald Islands (HM)</comment>
   </data>
   <data name="HR_DisplayName">
     <value>Croatie</value>
@@ -314,7 +319,7 @@
   </data>
   <data name="IM_DisplayName">
     <value>Île De Man</value>
-    <comment>Isle Of Man (IM)</comment>
+    <comment>Isle of Man (IM)</comment>
   </data>
   <data name="IN_DisplayName">
     <value>Inde</value>
@@ -362,7 +367,7 @@
   </data>
   <data name="KN_DisplayName">
     <value>Saint-Christophe-Et-Niévès</value>
-    <comment>Saint Kitts And Nevis (KN)</comment>
+    <comment>Saint Kitts and Nevis (KN)</comment>
   </data>
   <data name="KP_DisplayName">
     <value>Corée Du Nord</value>
@@ -370,7 +375,7 @@
   </data>
   <data name="KR_DisplayName">
     <value>Corée Du Sud</value>
-    <comment>Korea (KR)</comment>
+    <comment>South Korea (KR)</comment>
   </data>
   <data name="KW_DisplayName">
     <value>Koweït</value>
@@ -379,10 +384,6 @@
   <data name="KY_DisplayName">
     <value>Îles Caïmans</value>
     <comment>Cayman Islands (KY)</comment>
-  </data>
-  <data name="LA_DisplayName">
-    <value>Laos</value>
-    <comment>Lao People'S Democratic Republic (LA)</comment>
   </data>
   <data name="LB_DisplayName">
     <value>Liban</value>
@@ -426,7 +427,7 @@
   </data>
   <data name="MK_DisplayName">
     <value>Macédoine</value>
-    <comment>Macedonia (MK)</comment>
+    <comment>North Macedonia (MK)</comment>
   </data>
   <data name="MM_DisplayName">
     <value>Birmanie</value>
@@ -506,7 +507,7 @@
   </data>
   <data name="PM_DisplayName">
     <value>Saint-Pierre-Et-Miquelon</value>
-    <comment>Saint Pierre And Miquelon (PM)</comment>
+    <comment>Saint Pierre and Miquelon (PM)</comment>
   </data>
   <data name="PN_DisplayName">
     <value>Îles Pitcairn</value>
@@ -518,7 +519,7 @@
   </data>
   <data name="PS_DisplayName">
     <value>Autorité Palestinienne</value>
-    <comment>Palestinian Territory (PS)</comment>
+    <comment>Palestine (PS)</comment>
   </data>
   <data name="PW_DisplayName">
     <value>Palaos</value>
@@ -538,7 +539,7 @@
   </data>
   <data name="RU_DisplayName">
     <value>Russie</value>
-    <comment>Russian Federation (RU)</comment>
+    <comment>Russia (RU)</comment>
   </data>
   <data name="SA_DisplayName">
     <value>Arabie Saoudite</value>
@@ -562,7 +563,7 @@
   </data>
   <data name="SH_DisplayName">
     <value>Sainte-Hélène</value>
-    <comment>Saint Helena (SH)</comment>
+    <comment>Saint Helena, Ascension and Tristan da Cunha (SH)</comment>
   </data>
   <data name="SI_DisplayName">
     <value>Slovénie</value>
@@ -570,7 +571,7 @@
   </data>
   <data name="SJ_DisplayName">
     <value>Svalbard Et Île Jan Mayen</value>
-    <comment>Svalbard And Jan Mayen (SJ)</comment>
+    <comment>Svalbard and Jan Mayen (SJ)</comment>
   </data>
   <data name="SK_DisplayName">
     <value>Slovaquie</value>
@@ -594,7 +595,7 @@
   </data>
   <data name="ST_DisplayName">
     <value>Sao Tomé-Et-Principe</value>
-    <comment>Sao Tome And Principe (ST)</comment>
+    <comment>Sao Tome and Principe (ST)</comment>
   </data>
   <data name="SV_DisplayName">
     <value>Salvador</value>
@@ -610,7 +611,7 @@
   </data>
   <data name="TC_DisplayName">
     <value>Îles Turques-Et-Caïques</value>
-    <comment>Turks And Caicos Islands (TC)</comment>
+    <comment>Turks and Caicos Islands (TC)</comment>
   </data>
   <data name="TD_DisplayName">
     <value>Tchad</value>
@@ -642,11 +643,11 @@
   </data>
   <data name="TR_DisplayName">
     <value>Turquie</value>
-    <comment>Turkey (TR)</comment>
+    <comment>Türkiye (TR)</comment>
   </data>
   <data name="TT_DisplayName">
     <value>Trinité-Et-Tobago</value>
-    <comment>Trinidad And Tobago (TT)</comment>
+    <comment>Trinidad and Tobago (TT)</comment>
   </data>
   <data name="TW_DisplayName">
     <value>Taïwan /</value>
@@ -678,7 +679,7 @@
   </data>
   <data name="VC_DisplayName">
     <value>Saint-Vincent-Et-Les-Grenadines</value>
-    <comment>Saint Vincent And The Grenadines (VC)</comment>
+    <comment>Saint Vincent and the Grenadines (VC)</comment>
   </data>
   <data name="VG_DisplayName">
     <value>Îles Vierges Britanniques</value>
@@ -694,7 +695,7 @@
   </data>
   <data name="WF_DisplayName">
     <value>Wallis-Et-Futuna</value>
-    <comment>Wallis And Futuna (WF)</comment>
+    <comment>Wallis and Futuna (WF)</comment>
   </data>
   <data name="YE_DisplayName">
     <value>Yémen</value>
@@ -708,12 +709,16 @@
     <value>Zambie</value>
     <comment>Zambia (ZM)</comment>
   </data>
+  <data name="AIDJ_DisplayName">
+    <value>Territoire français des Afars et des Issas</value>
+    <comment>French Afars and Issas (AI)</comment>
+  </data>
   <data name="ANHH_DisplayName">
-    <value>Antilles Néerlandaises</value>
+    <value>Antilles néerlandaises</value>
     <comment>Netherlands Antilles (AN)</comment>
   </data>
   <data name="BQAQ_DisplayName">
-    <value>Territoire antarctique britannique</value>
+    <value>Territoire britannique de l'Antarctique</value>
     <comment>British Antarctic Territory (BQ)</comment>
   </data>
   <data name="BUMM_DisplayName">
@@ -725,20 +730,92 @@
     <comment>Czechoslovakia (CS)</comment>
   </data>
   <data name="CSXX_DisplayName">
-    <value>Serbie-Et-Monténégro</value>
-    <comment>Serbia And Montenegro (CS)</comment>
+    <value>Serbie-et-Monténégro</value>
+    <comment>Serbia and Montenegro (CS)</comment>
+  </data>
+  <data name="CTKI_DisplayName">
+    <value>Canton et Enderbury</value>
+    <comment>Canton and Enderbury Islands (CT)</comment>
   </data>
   <data name="DDDE_DisplayName">
     <value>République démocratique allemande</value>
     <comment>German Democratic Republic (DD)</comment>
   </data>
+  <data name="DYBJ_DisplayName">
+    <value>Terres australes et antarctiques françaises</value>
+    <comment>Dahomey (DY)</comment>
+  </data>
+  <data name="FQHH_DisplayName">
+    <value>Terres australes et antarctiques françaises</value>
+    <comment>French Southern and Antarctic Territories (FQ)</comment>
+  </data>
+  <data name="FXFR_DisplayName">
+    <value>France métropolitaine</value>
+    <comment>France, Metropolitan (FX)</comment>
+  </data>
+  <data name="GEHH_DisplayName">
+    <value>Îles Gilbert et Ellice.</value>
+    <comment>Gilbert Islands (GE)</comment>
+  </data>
   <data name="HVBF_DisplayName">
     <value>Haute-Volta</value>
     <comment>Upper Volta (HV)</comment>
   </data>
+  <data name="JTUM_DisplayName">
+    <value>Atoll Johnston</value>
+    <comment>Johnston Island (JT)</comment>
+  </data>
+  <data name="MIUM_DisplayName">
+    <value>Îles Midway</value>
+    <comment>Midway Islands (MI)</comment>
+  </data>
+  <data name="NHVU_DisplayName">
+    <value>Nouvelles-Hébrides</value>
+    <comment>New Hebrides (NH)</comment>
+  </data>
+  <data name="NQAQ_DisplayName">
+    <value>Terre de la Reine-Maud</value>
+    <comment>Dronning Maud Land (NQ)</comment>
+  </data>
+  <data name="NTHH_DisplayName">
+    <value>Zone neutre Irak-Arabie saoudite</value>
+    <comment>Neutral Zone (NT)</comment>
+  </data>
+  <data name="PCHH_DisplayName">
+    <value>Territoire sous tutelle des îles du Pacifique</value>
+    <comment>Pacific Islands (Trust Territory) (PC)</comment>
+  </data>
+  <data name="PUUM_DisplayName">
+    <value> Îles mineures américaines du Pacifique</value>
+    <comment>United States Miscellaneous Pacific Islands (PU)</comment>
+  </data>
+  <data name="PZPA_DisplayName">
+    <value>Zone du canal de Panama</value>
+    <comment>Panama Canal Zone (PZ)</comment>
+  </data>
+  <data name="RHZW_DisplayName">
+    <value>Rhodésie du Sud</value>
+    <comment>Southern Rhodesia (RH)</comment>
+  </data>
   <data name="SUHH_DisplayName">
-    <value>Union Soviétique</value>
-    <comment>Soviet Union (SU)</comment>
+    <value>URSS</value>
+    <comment>USSR (SU)</comment>
+  </data>
+  <data name="TPTL_DisplayName">
+    <value>Timor oriental</value>
+    <comment>East Timor (TP)</comment>
+  </data>
+  <data name="VDVN_DisplayName">
+    <value> République démocratique du Viêt Nam</value>
+    <comment>Viet-Nam, Democratic Republic of (VD)</comment>
+  </data>
+  <data name="WKUM_DisplayName">
+    <value>Wake</value>
+    <comment>Wake Island (WK)</comment>
+  </data>
+  <data name="YDYE_DisplayName">
+    <value>Yémen du Sud</value>
+    <comment>Yemen, Democratic (YD)</comment>
   </data>
   <data name="YUCS_DisplayName">
     <value>Yougoslavie</value>

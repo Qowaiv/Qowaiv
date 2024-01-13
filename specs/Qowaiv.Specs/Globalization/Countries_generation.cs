@@ -81,28 +81,37 @@ public class Resource_files
         summary.Should().BeEquivalentTo(info, c => c.Excluding(m => m.Start).Excluding(m => m.End));
     }
 
-    public class Display_names
+    public class Display_names_match_Wikipedia
     {
         private static readonly IReadOnlyCollection<Country> Existing = Country.GetExisting().ToArray();
 
-        [TestCaseSource(nameof(Existing))]
-        public async Task match_nl_Wikipedia(Country country)
-        {
-            var lemma = new WikiLemma($"Sjabloon:{country.IsoAlpha2Code}", TestCultures.Nl);
-            var display = await lemma.Transform(CountryDisplayName.NL);
-            display.Should().Be(country.GetDisplayName(TestCultures.Nl_NL));
-        }
+        private static readonly Dictionary<string, string> French = CountryDisplayName.FR().Result;
 
         [TestCaseSource(nameof(Existing))]
-        public async Task match_de_Wikipedia(Country country)
+        public async Task de(Country country)
         {
             try
             {
                 var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", TestCultures.De);
                 var display = await lemma.Transform(CountryDisplayName.DE);
-                display.Should().Be(country.GetDisplayName(TestCultures.De_DE));
+                display.Should().Be(country.GetDisplayName(TestCultures.De));
             }
             catch (UnknownLemma) { /* Some do not follow this pattern. */ }
+        }
+
+        [TestCaseSource(nameof(Existing))]
+        public void fr(Country country)
+        {
+            var display = country.GetDisplayName(TestCultures.Fr);
+            display.Should().Be(French[country.IsoAlpha2Code]);
+        }
+
+        [TestCaseSource(nameof(Existing))]
+        public async Task nl(Country country)
+        {
+            var lemma = new WikiLemma($"Sjabloon:{country.IsoAlpha2Code}", TestCultures.Nl);
+            var display = await lemma.Transform(CountryDisplayName.NL);
+            display.Should().Be(country.GetDisplayName(TestCultures.Nl));
         }
     }
 
@@ -119,7 +128,7 @@ public class Resource_files
                 ISO3 = "ZZZ"
             };
 
-            // Including Kosovo, that is till disputed: https://en.wikipedia.org/wiki/XK_(user_assigned_code)
+            // Including Kosovo, that is still disputed: https://en.wikipedia.org/wiki/XK_(user_assigned_code)
             var data = new Dictionary<string, CountryData>()
             { 
                 ["XK"] = new CountryData("XK")
@@ -209,12 +218,22 @@ public class Resource_files
         [Test]
         public async Task fr()
         {
+            var lookup = await CountryDisplayName.FR();
+
             (await CountryDisplayName.Update(
                 "Inconnu",
                 TestCultures.Fr,
-                c => Task.FromResult<string?>(null))
+                GetDisplayName)
             )
             .Should().NotThrow();
+
+            Task<string?> GetDisplayName(Country country)
+            {
+                var display = lookup!.TryGetValue(country.Name, out var name)
+                    ? name : null;
+
+                return Task.FromResult(display);
+            }
         }
 
         [Test]

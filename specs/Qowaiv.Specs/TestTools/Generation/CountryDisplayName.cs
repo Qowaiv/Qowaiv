@@ -1,5 +1,6 @@
 ﻿using Qowaiv.TestTools.Resx;
 using Qowaiv.TestTools.Wikipedia;
+using System.Xml.Linq;
 
 
 namespace Qowaiv.TestTools.Generation;
@@ -59,4 +60,45 @@ public static class CountryDisplayName
         }
         else return null;
     }
+
+    public static async Task<Dictionary<string, string>> FR()
+    {
+        var lemma = new WikiLemma("ISO 3166-1", TestCultures.Fr);
+        var overrides = new Dictionary<string, string>()
+        {
+            ["EH"] = "Sahara occidental",
+            ["MK"] = "Macédoine du Nord",
+            ["SZ"] = "Eswatini",
+            ["TF"] = "Terres australes françaises",
+        };
+
+        return (await lemma.Transform<IEnumerable<Display>>(Display))!.ToDictionary(c => c.Iso2, c => c.Name);
+
+        IEnumerable<Display> Display(string content)
+        {
+            var parts = content.Split("|-");
+
+            foreach(var part in parts.Skip(1))
+            {
+                var codes = part.Split(new[] { "<code>", "</code>" }, StringSplitOptions.None);
+                if (codes.Length >= 7 
+                    && Regex.Match(codes[4], @"id=""(?<iso>[A-Z]{2})""") is { Success: true } iso)
+                {
+                    var iso2 = iso.Groups[nameof(iso)].Value;
+
+                    if (overrides.TryGetValue(iso2, out var @override))
+                    {
+                        yield return new(iso2, @override);
+                    }
+                    else if (Regex.Match(codes[6], "{{(?<match>.+?)}}") is { Success: true } match)
+                    {
+                        var name = match.Groups[nameof(match)].Value;
+
+                        yield return new(iso2, name);
+                    }
+                }
+            }
+        }
+    }
+    private record Display(string Iso2, string Name);
 }

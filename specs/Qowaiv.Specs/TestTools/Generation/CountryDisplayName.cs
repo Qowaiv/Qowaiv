@@ -70,6 +70,7 @@ public static class CountryDisplayName
             ["MK"] = "Macédoine du Nord",
             ["SZ"] = "Eswatini",
             ["TF"] = "Terres australes françaises",
+            ["XK"] = "Kosovo",
         };
 
         return (await lemma.Transform<IEnumerable<Display>>(Display))!.ToDictionary(c => c.Iso2, c => c.Name);
@@ -77,6 +78,11 @@ public static class CountryDisplayName
         IEnumerable<Display> Display(string content)
         {
             var parts = content.Split("|-");
+
+            foreach(var o in overrides)
+            {
+                yield return new(o.Key, o.Value);
+            }
 
             foreach(var part in parts.Skip(1))
             {
@@ -86,11 +92,8 @@ public static class CountryDisplayName
                 {
                     var iso2 = iso.Groups[nameof(iso)].Value;
 
-                    if (overrides.TryGetValue(iso2, out var @override))
-                    {
-                        yield return new(iso2, @override);
-                    }
-                    else if (Regex.Match(codes[6], "{{(?<match>.+?)}}") is { Success: true } match)
+                    if (!overrides.ContainsKey(iso2) 
+                        && Regex.Match(codes[6], "{{(?<match>.+?)}}") is { Success: true } match)
                     {
                         var name = match.Groups[nameof(match)].Value;
 

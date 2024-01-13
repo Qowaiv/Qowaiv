@@ -6,6 +6,26 @@ namespace Qowaiv.TestTools.Generation;
 
 public static class CountryDisplayName
 {
+    public static async Task<Action> Update(
+        string unknown,
+        CultureInfo language,
+        Func<Country, Task<string?>> getDisplay)
+    {
+        var resource = new XResourceFile(Data(unknown, Country.Unknown));
+
+        foreach (var country in Country.All)
+        {
+            var displayName = await getDisplay(country) ?? country.GetDisplayName(language);
+
+            if (displayName != country.EnglishName)
+            {
+                resource.Add(Data(displayName, country));
+            }
+        }
+        return () => resource.Save(Solution.Root.File($"src/Qowaiv/Globalization/CountryLabels.{language}.resx"));
+    }
+
+
     public static XResourceFileData Data(string displayName, Country country)
         => new(
             $"{(country.IsUnknown() ? "ZZ" : country.Name)}_DisplayName",

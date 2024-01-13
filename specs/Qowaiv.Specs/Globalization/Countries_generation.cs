@@ -184,25 +184,16 @@ public class Resource_files
         [Test]
         public async Task de()
         {
-            var resource = new XResourceFile(CountryDisplayName.Data("Unbekannt", Country.Unknown));
+            (await CountryDisplayName.Update(
+              "Unbekannt",
+              TestCultures.De,
+              GetDisplayName)
+          )
+          .Should().NotThrow();
 
-            foreach (var country in Country.All)
+            async Task<string?> GetDisplayName(Country country)
             {
-                var displayName = country.Name.Length == 2 && await Display(country) is { } display
-                     ? display
-                     : country.GetDisplayName(TestCultures.De);
-
-                if (displayName != country.EnglishName)
-                {
-                    resource.Add(CountryDisplayName.Data(displayName, country));
-                }
-            }
-
-            resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.de.resx")))
-                .Should().NotThrow();
-
-            async Task<string?> Display(Country country)
-            {
+                if (country.Name.Length != 2) return null;
                 try
                 {
                     var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", TestCultures.De);
@@ -218,60 +209,27 @@ public class Resource_files
         [Test]
         public async Task fr()
         {
-            var resource = new XResourceFile(CountryDisplayName.Data("Inconnu", Country.Unknown));
-
-            foreach (var country in Country.All)
-            {
-                var displayName = country.GetDisplayName(TestCultures.Fr);
-                //country.Name.Length == 2 && await Display(country) is { } display
-                //     ? display
-                //     : country.GetDisplayName(TestCultures.Fr);
-
-                if (displayName != country.EnglishName)
-                {
-                    resource.Add(CountryDisplayName.Data(displayName, country));
-                }
-            }
-
-            resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.fr.resx")))
-                .Should().NotThrow();
-
-            async Task<string?> Display(Country country)
-            {
-                try
-                {
-                    var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", TestCultures.De);
-                    return await lemma.Transform(CountryDisplayName.DE);
-                }
-                catch (UnknownLemma)
-                {
-                    return null;
-                }
-            }
+            (await CountryDisplayName.Update(
+                "Inconnu",
+                TestCultures.Fr,
+                c => Task.FromResult<string?>(null))
+            )
+            .Should().NotThrow();
         }
 
         [Test]
         public async Task nl()
         {
-            var resource = new XResourceFile(CountryDisplayName.Data("Onbekend", Country.Unknown));
+            (await CountryDisplayName.Update(
+               "Onbekend",
+               TestCultures.Nl,
+               GetDisplayName)
+           )
+           .Should().NotThrow();
 
-            foreach (var country in Country.All)
+            async Task<string?> GetDisplayName(Country country)
             {
-                var displayName = country.Name.Length == 2 && await Display(country) is { } display
-                    ? display
-                    : country.GetDisplayName(TestCultures.Nl);
-
-                if (displayName != country.EnglishName)
-                {
-                    resource.Add(CountryDisplayName.Data(displayName, country));
-                }
-            }
-
-            resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.nl.resx")))
-                .Should().NotThrow();
-
-            async Task<string?> Display(Country country)
-            {
+                if (country.Name.Length != 2) return null;
                 try
                 {
                     var lemma = new WikiLemma($"Sjabloon:{country.Name}", TestCultures.Nl);

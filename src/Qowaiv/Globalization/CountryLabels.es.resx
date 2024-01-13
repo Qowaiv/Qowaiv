@@ -668,36 +668,97 @@
     <value>Zimbabue</value>
     <comment>Zimbabwe (ZW)</comment>
   </data>
+  <data name="AIDJ_DisplayName">
+    <value>Territorio Francés de los Afars y de los Issas</value>
+  </data>
   <data name="ANHH_DisplayName">
     <value>Antillas Neerlandesas</value>
-    <comment>Netherlands Antilles (AN)</comment>
   </data>
   <data name="BQAQ_DisplayName">
     <value>Territorio Antártico Británico</value>
-    <comment>British Antarctic Territory (BQ)</comment>
   </data>
   <data name="BUMM_DisplayName">
     <value>Birmania</value>
-    <comment>Burma (BU)</comment>
+  </data>
+  <data name="BYAA_DisplayName">
+    <value>Bielorrusia RSS</value>
   </data>
   <data name="CSHH_DisplayName">
     <value>Checoslovaquia</value>
-    <comment>Czechoslovakia (CS)</comment>
   </data>
   <data name="CSXX_DisplayName">
-    <value>Serbia Y Montenegro</value>
-    <comment>Serbia And Montenegro (CS)</comment>
+    <value>Serbia y Montenegro</value>
+  </data>
+  <data name="CTKI_DisplayName">
+    <value>Islas Canton y Enderbury</value>
   </data>
   <data name="DDDE_DisplayName">
     <value>República Democrática Alemana</value>
-    <comment>German Democratic Republic (DD)</comment>
+  </data>
+  <data name="DYBJ_DisplayName">
+    <value>Dahomey</value>
+  </data>
+  <data name="FQHH_DisplayName">
+    <value>Tierras Australes y Antárticas Francesas</value>
+  </data>
+  <data name="FXFR_DisplayName">
+    <value>Francia metropolitana</value>
+  </data>
+  <data name="GEHH_DisplayName">
+    <value>Islas Gilbert y Ellice</value>
   </data>
   <data name="HVBF_DisplayName">
     <value>Alto Volta</value>
-    <comment>Upper Volta (HV)</comment>
+  </data>
+  <data name="JTUM_DisplayName">
+    <value>Isla Johnston</value>
+  </data>
+  <data name="MIUM_DisplayName">
+    <value>Islas Midway</value>
+  </data>
+  <data name="NHVU_DisplayName">
+    <value>Nuevas Hébridas</value>
+  </data>
+  <data name="NQAQ_DisplayName">
+    <value>Tierra de la Reina Maud</value>
+  </data>
+  <data name="NTHH_DisplayName">
+    <value>Zona neutral</value>
+  </data>
+  <data name="PCHH_DisplayName">
+    <value>Islas del Pacífico, Territorio en Fideicomiso de las</value>
+  </data>
+  <data name="PUUM_DisplayName">
+    <value>Estados Unidos, Diversas Islas del Pacífico de los</value>
+  </data>
+  <data name="PZPA_DisplayName">
+    <value>Zona del Canal de Panamá</value>
+  </data>
+  <data name="RHZW_DisplayName">
+    <value>Rodesia del Sur</value>
+  </data>
+  <data name="SKIN_DisplayName">
+    <value>Sikkim</value>
   </data>
   <data name="SUHH_DisplayName">
-    <value>Unión Soviética</value>
-    <comment>Soviet Union (SU)</comment>
+    <value>URSS</value>
+  </data>
+  <data name="TPTL_DisplayName">
+    <value>Timor Oriental</value>
+  </data>
+  <data name="VDVN_DisplayName">
+    <value>República Democrática de Viet-Nam</value>
+  </data>
+  <data name="WKUM_DisplayName">
+    <value>Isla Wake</value>
+  </data>
+  <data name="YUCS_DisplayName">
+    <value>Yugoslavia</value>
+  </data>
+  <data name="YDYE_DisplayName">
+    <value>Yemen Democrático</value>
+  </data>
+  <data name="ZRCD_DisplayName">
+    <value>Zaire</value>
   </data>
 </root>

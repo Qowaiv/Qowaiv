@@ -115,7 +115,7 @@ public class Resource_files
         {
             var display = country.GetDisplayName(TestCultures.fr);
             display.Should().MatchWikipedia(await CountryDisplayName.fr(country))
-                .And.BeTrimmed(); ;
+                .And.BeTrimmed();
         }
 
         [TestCaseSource(nameof(Existing))]
@@ -123,8 +123,18 @@ public class Resource_files
         {
             var display = country.GetDisplayName(TestCultures.nl);
             display.Should().MatchWikipedia(await CountryDisplayName.nl(country))
-                .And.BeTrimmed(); ;
+                .And.BeTrimmed();
         }
+
+
+        [TestCaseSource(nameof(Existing))]
+        public async Task pt(Country country)
+        {
+            var display = country.GetDisplayName(TestCultures.pt);
+            display.Should().MatchWikipedia(await CountryDisplayName.pt(country))
+                .And.BeTrimmed();
+        }
+
     }
 
     public class Generates
@@ -253,6 +263,17 @@ public class Resource_files
                "Onbekend",
                TestCultures.nl,
                CountryDisplayName.nl)
+            )
+            .Should().NotThrow();
+        }
+
+        [Test]
+        public async Task pt()
+        {
+            (await CountryDisplayName.Update(
+               "Não sabe",
+               TestCultures.pt,
+               CountryDisplayName.pt)
             )
             .Should().NotThrow();
         }

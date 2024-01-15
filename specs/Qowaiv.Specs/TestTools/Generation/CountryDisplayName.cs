@@ -46,6 +46,7 @@ public static class CountryDisplayName
         return Lookup.AR.TryGetValue(country, out var display)
                   ? display : null;
     }
+    
     private static async Task<IEnumerable<Display>> ar()
     {
         var lemma = new WikiLemma("قائمة_الدول_حسب_المعيار_الدولي_أيزو_3166-1", TestCultures.ar);
@@ -78,7 +79,6 @@ public static class CountryDisplayName
             }
         }
     }
-
 
     public static async Task<string?> de(Country country)
     {
@@ -221,6 +221,51 @@ public static class CountryDisplayName
         }
     }
 
+    public static async Task<string?> pt(Country country)
+    {
+        if (Lookup.PT.Count == 0)
+        {
+            foreach (var item in await pt())
+            {
+                Lookup.PT[Country.Parse(item.Iso2)] = item.Name;
+            }
+        }
+        return Lookup.PT.TryGetValue(country, out var display)
+                  ? display : null;
+    }
+    private static async Task<IEnumerable<Display>> pt()
+    {
+        var lemma = new WikiLemma("Comparação entre códigos de países COI, FIFA, e ISO 3166", TestCultures.pt);
+        var overrides = new Dictionary<string, string>()
+        {
+            ["BQ"] = "Países Baixos Caribenhos",
+            ["XK"] = "Kosovo",
+        };
+
+        return await lemma.TransformRange(Display);
+
+        IEnumerable<Display> Display(string content)
+        {
+            var parts = content.Split("|-");
+
+            foreach (var o in overrides)
+            {
+                yield return new(o.Key, o.Value);
+            }
+
+            foreach (var part in parts.Skip(1).Select(p => p))
+            {
+                var cols = part.Split("||");
+                if (cols.Length >= 6)
+                {
+                    var iso2 = cols[4].Trim();
+                    var name = WikiLink.Parse(cols[5]).First();
+                    yield return new(iso2, name.Display);
+                }
+            }
+        }
+    }
+
     private record Display(string Iso2, string Name);
 
     private static class Prefix
@@ -233,5 +278,6 @@ public static class CountryDisplayName
     {
         public static readonly Dictionary<Country, string> AR = [];
         public static readonly Dictionary<Country, string> FR = [];
+        public static readonly Dictionary<Country, string> PT = [];
     }
 }

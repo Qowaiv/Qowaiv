@@ -5,10 +5,10 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.5.4</Version>
+    <Version>6.6.0</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
-ToBeReleased
+v6.6.0
 - Add former counties. #357
 - Update display names counties (EN, DE, NL). #356
 - Fix parsing (former) countries. #356

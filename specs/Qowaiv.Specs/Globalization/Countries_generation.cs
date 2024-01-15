@@ -138,7 +138,8 @@ public class Resource_files
                 DisplayName = "Unknown",
                 ISO = 999,
                 ISO2 = "ZZ",
-                ISO3 = "ZZZ"
+                ISO3 = "ZZZ",
+                StartDate = Date.MinValue,
             };
 
             // Including Kosovo, that is still disputed: https://en.wikipedia.org/wiki/XK_(user_assigned_code)

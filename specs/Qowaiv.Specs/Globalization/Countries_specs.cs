@@ -13,7 +13,7 @@ public class All
         });
 
     [Test]
-    public void _260_Countries()
+    public void _281_Countries()
         => Country.All.Should().HaveCount(260);
 
     [Test]

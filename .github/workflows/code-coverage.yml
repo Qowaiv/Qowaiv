@@ -15,7 +15,7 @@ jobs:
         with:
           dotnet-version: "8.0.x"
       - name: Generate coverage report
-        run: dotnet test ./specs/Qowaiv.Specs -f net8.0 /p:CollectCoverage=true /p:ThresholdType=branch /p:CoverletOutputFormat=lcov
+        run: dotnet test ./specs/Qowaiv.Specs -f net8.0 /p:CollectCoverage=true /p:ThresholdType=branch /p:CoverletOutputFormat=lcov --configuration Release
       - name: Publish coverage report to coveralls.io
         uses: coverallsapp/github-action@master
         with:

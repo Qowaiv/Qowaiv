@@ -119,13 +119,20 @@ public class Resource_files
         }
 
         [TestCaseSource(nameof(Existing))]
+        public async Task it(Country country)
+        {
+            var display = country.GetDisplayName(TestCultures.it);
+            display.Should().MatchWikipedia(await CountryDisplayName.it(country))
+                .And.BeTrimmed();
+        }
+
+        [TestCaseSource(nameof(Existing))]
         public async Task nl(Country country)
         {
             var display = country.GetDisplayName(TestCultures.nl);
             display.Should().MatchWikipedia(await CountryDisplayName.nl(country))
                 .And.BeTrimmed();
         }
-
 
         [TestCaseSource(nameof(Existing))]
         public async Task pt(Country country)
@@ -135,6 +142,13 @@ public class Resource_files
                 .And.BeTrimmed();
         }
 
+        [TestCaseSource(nameof(Existing))]
+        public async Task ru(Country country)
+        {
+            var display = country.GetDisplayName(TestCultures.ru);
+            display.Should().MatchWikipedia(await CountryDisplayName.ru(country))
+                .And.BeTrimmed();
+        }
     }
 
     public class Generates
@@ -214,69 +228,43 @@ public class Resource_files
 
         [Test]
         public async Task ar()
-        {
-            (await CountryDisplayName.Update(
-              "مجهولة",
-              TestCultures.ar,
-              CountryDisplayName.ar)
-            )
+            => (await CountryDisplayName.Update("مجهولة", TestCultures.ar, CountryDisplayName.ar))
             .Should().NotThrow();
-        }
 
         [Test]
         public async Task de()
-        {
-            (await CountryDisplayName.Update(
-              "Unbekannt",
-              TestCultures.de,
-              CountryDisplayName.de)
-            )
+            => (await CountryDisplayName.Update("Unbekannt", TestCultures.de, CountryDisplayName.de))
             .Should().NotThrow();
-        }
 
         [Test]
         public async Task es()
-        {
-            (await CountryDisplayName.Update(
-                "Desconocido",
-                TestCultures.es,
-                CountryDisplayName.es)
-            )
+            => (await CountryDisplayName.Update("Desconocido", TestCultures.es, CountryDisplayName.es))
             .Should().NotThrow();
-        }
 
         [Test]
         public async Task fr()
-        {
-            (await CountryDisplayName.Update(
-                "Inconnu",
-                TestCultures.fr,
-                CountryDisplayName.fr)
-            )
+            => (await CountryDisplayName.Update("Inconnu", TestCultures.fr, CountryDisplayName.fr))
             .Should().NotThrow();
-        }
+    
+        [Test]
+        public async Task it()
+            => (await CountryDisplayName.Update("Sconosciuto", TestCultures.it, CountryDisplayName.it))
+            .Should().NotThrow();
 
         [Test]
         public async Task nl()
-        {
-            (await CountryDisplayName.Update(
-               "Onbekend",
-               TestCultures.nl,
-               CountryDisplayName.nl)
-            )
+            => (await CountryDisplayName.Update("Onbekend",TestCultures.nl,CountryDisplayName.nl))
             .Should().NotThrow();
-        }
 
         [Test]
         public async Task pt()
-        {
-            (await CountryDisplayName.Update(
-               "Não sabe",
-               TestCultures.pt,
-               CountryDisplayName.pt)
-            )
+            => (await CountryDisplayName.Update("Não sabe", TestCultures.pt, CountryDisplayName.pt))
             .Should().NotThrow();
-        }
+
+        [Test]
+        public async Task ru()
+            => (await CountryDisplayName.Update("неизвестно", TestCultures.ru, CountryDisplayName.ru))
+            .Should().NotThrow();
     }
 }
 

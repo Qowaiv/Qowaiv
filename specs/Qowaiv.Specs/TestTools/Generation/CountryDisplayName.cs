@@ -210,6 +210,11 @@ public static class CountryDisplayName
         }
     }
 
+    public static Task<string?> it(Country country)
+    {
+        return Task.FromResult<string?>(country.GetDisplayName(TestCultures.it));
+    }
+
     public static async Task<string?> nl(Country country)
     {
         if (country.Name.Length == 2)
@@ -278,6 +283,11 @@ public static class CountryDisplayName
                 }
             }
         }
+    }
+
+    public static Task<string?> ru(Country country)
+    {
+       return Task.FromResult<string?>(country.GetDisplayName(TestCultures.ru));
     }
 
     private record Display(string Iso2, string Name);

@@ -1,6 +1,7 @@
 ﻿#if NET8_0_OR_GREATER
 #if DEBUG
 
+using Qowaiv.TestTools.Generation;
 using Qowaiv.TestTools.Resx;
 using Qowaiv.TestTools.Wikipedia;
 
@@ -11,31 +12,8 @@ public class Constants
     [Test]
     public void Generates()
     {
-        var all = Country.All.OrderBy(c => c.Name.Length).ThenBy(c => c.Name).ToArray();
-
-        using var w = new StreamWriter(Solution.Root.File("src/Qowaiv/Globalization/CountryConstants.cs").FullName);
-        w.WriteLine("#pragma warning disable S1210");
-        w.WriteLine("// \"Equals\" and the comparison operators should be overridden when implementing \"IComparable\"");
-        w.WriteLine("// See README.md => Sortable\r\nnamespace Qowaiv.Globalization;");
-        w.WriteLine();
-        w.WriteLine("public readonly partial struct Country");
-        w.WriteLine("{");
-
-        foreach (var country in all)
-        {
-            if (country != all[0]) w.WriteLine();
-
-            w.WriteLine($"    /// <summary>Describes the country {country.EnglishName} ({country.Name}).</summary>");
-            if (country.EndDate is { } enddate)
-            {
-                w.WriteLine($"    /// <remarks>End date is {enddate:yyyy-MM-dd}.</remarks>");
-            }
-            w.WriteLine($"    public static readonly Country {country.Name} = new(\"{country.Name}\");");
-        }
-        w.WriteLine("}");
-
-
-        w.Invoking(w => w.Flush()).Should().NotThrow();
+        Action generate = CountryConstants.Generate;
+        generate.Should().NotThrow();
     }
 }
 
@@ -45,14 +23,31 @@ public class Constants
 /// </remarks>
 public class Resource_files
 {
-    internal static readonly IReadOnlyCollection<WikiInfo> Infos = new WikiLemma("ISO 3166-1", TestCultures.En).Transform(WikiInfo.FromEN).Result;
+    internal static readonly IReadOnlyCollection<Iso3166_1> Iso3166_1s = new WikiLemma("ISO 3166-1", TestCultures.en).TransformRange(Iso3166_1.Parse).Result;
+    internal static readonly IReadOnlyCollection<Iso3166_3> Iso3166_3s = new WikiLemma("ISO_3166-3", TestCultures.en).TransformRange(Iso3166_3.Parse).Result;
 
-    [TestCaseSource(nameof(Infos))]
-    public void reflect_info_of_Wikipedia(WikiInfo info)
+    [TestCaseSource(nameof(Iso3166_1s))]
+    public void existing_reflect_info_of_Wikipedia(Iso3166_1 info)
     {
-        var country = Country.Parse(info.A2);
-        var summary = new WikiInfo(country.EnglishName, country.IsoAlpha2Code, country.IsoAlpha3Code, country.IsoNumericCode);
+        var country = Country.Parse(info.Iso2);
+        var summary = new Iso3166_1(country.EnglishName, country.IsoAlpha2Code, country.IsoAlpha3Code, country.IsoNumericCode);
         summary.Should().Be(info);
+    }
+
+    [TestCaseSource(nameof(Iso3166_3s))]
+    public void former_reflect_info_of_Wikipedia(Iso3166_3 info)
+    {
+        var country = Country.Parse(info.Name);
+        var summary = new Iso3166_3(
+            country.EnglishName, 
+            country.IsoAlpha2Code,
+            country.IsoAlpha3Code,
+            country.IsoNumericCode,
+            0,
+            0,
+            country.Name);
+
+        summary.Should().BeEquivalentTo(info, c => c.Excluding(m => m.Start).Excluding(m => m.End));
     }
 
     public class Display_names
@@ -60,23 +55,76 @@ public class Resource_files
         private static readonly IReadOnlyCollection<Country> Existing = Country.GetExisting().ToArray();
 
         [TestCaseSource(nameof(Existing))]
-        public async Task match_nl_Wikipedia(Country country)
+        public async Task ar(Country country)
         {
-            var lemma = new WikiLemma($"Sjabloon:{country.IsoAlpha2Code}", TestCultures.Nl);
-            var display = await lemma.Transform(DisplayName.FromNL);
-            display.Should().Be(country.GetDisplayName(TestCultures.Nl_NL));
+            var display = country.GetDisplayName(TestCultures.ar);
+            display.Should().MatchWikipedia(await CountryDisplayName.ar(country))
+                .And.BeArabic()
+                .And.BeTrimmed();
         }
 
         [TestCaseSource(nameof(Existing))]
-        public async Task match_de_Wikipedia(Country country)
+        public async Task de(Country country)
         {
-            try
-            {
-                var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", TestCultures.De);
-                var display = await lemma.Transform(DisplayName.FromDE);
-                display.Should().Be(country.GetDisplayName(TestCultures.De_DE));
-            }
-            catch (UnknownLemma) { /* Some do not follow this pattern. */ }
+            var display = country.GetDisplayName(TestCultures.de);
+            display.Should().MatchWikipedia(await CountryDisplayName.de(country))
+                .And.BeTrimmed();
+        }
+
+        [TestCaseSource(nameof(Existing))]
+        public async Task es(Country country)
+        {
+            var display = country.GetDisplayName(TestCultures.es);
+            display.Should().MatchWikipedia(await CountryDisplayName.es(country))
+                .And.BeTrimmed(); 
+        }
+
+        [TestCaseSource(nameof(Existing))]
+        public async Task fr(Country country)
+        {
+            var display = country.GetDisplayName(TestCultures.fr);
+            display.Should().MatchWikipedia(await CountryDisplayName.fr(country))
+                .And.BeTrimmed();
+        }
+
+        [TestCaseSource(nameof(Existing))]
+        public async Task it(Country country)
+        {
+            var display = country.GetDisplayName(TestCultures.it);
+            display.Should().MatchWikipedia(await CountryDisplayName.it(country))
+                .And.BeTrimmed();
+        }
+
+        [TestCaseSource(nameof(Existing))]
+        public async Task ja(Country country)
+        {
+            var display = country.GetDisplayName(TestCultures.ja);
+            display.Should().MatchWikipedia(await CountryDisplayName.ja(country))
+                .And.BeTrimmed();
+        }
+
+        [TestCaseSource(nameof(Existing))]
+        public async Task nl(Country country)
+        {
+            var display = country.GetDisplayName(TestCultures.nl);
+            display.Should().MatchWikipedia(await CountryDisplayName.nl(country))
+                .And.BeTrimmed();
+        }
+
+        [TestCaseSource(nameof(Existing))]
+        public async Task pt(Country country)
+        {
+            var display = country.GetDisplayName(TestCultures.pt);
+            display.Should().MatchWikipedia(await CountryDisplayName.pt(country))
+                .And.BeTrimmed();
+        }
+
+        [TestCaseSource(nameof(Existing))]
+        public async Task ru(Country country)
+        {
+            var display = country.GetDisplayName(TestCultures.ru);
+            display.Should().MatchWikipedia(await CountryDisplayName.ru(country))
+                .And.BeTrimmed();
         }
     }
 
@@ -85,29 +133,71 @@ public class Resource_files
         [Test]
         public void neutral_culture()
         {
-            var all = Country.All.OrderBy(c => c.Name.Length).ThenBy(c => c.Name).ToArray();
+            var unknown = new CountryData("ZZ")
+            {
+                DisplayName = "Unknown",
+                ISO = 999,
+                ISO2 = "ZZ",
+                ISO3 = "ZZZ",
+                StartDate = Date.MinValue,
+            };
+
+            // Including Kosovo, that is still disputed: https://en.wikipedia.org/wiki/XK_(user_assigned_code)
+            var data = new Dictionary<string, CountryData>()
+            { 
+                ["XK"] = new CountryData("XK")
+                {
+                    DisplayName = "Kosovo",
+                    ISO2 = "XK",
+                    ISO3 = "XKK",
+                    StartDate = new(2008, 02, 01),
+                }
+            };
+
+            foreach (var former in Iso3166_3s)
+            {
+                data[former.Name] = new(former.Name)
+                {
+                    DisplayName = former.DisplayName,
+                    ISO = former.Iso,
+                    ISO2 = former.Iso2,
+                    ISO3 = former.Iso3,
+                    StartDate = new(former.Start, 01, 01),
+                    EndDate = new(former.End - 1, 12, 31),
+                };
+            }
+
+            foreach(var c in Iso3166_1s)
+            {
+                data[c.Iso2] = new(c.Iso2)
+                {
+                    DisplayName = c.DisplayName,
+                    ISO = c.Iso,
+                    ISO2 = c.Iso2,
+                    ISO3 = c.Iso3,
+                };
+            }
+
+            foreach (var c in Country.All)
+            {
+                var dat = data[c.Name];
+                var updated = dat with
+                {
+                    StartDate = c.StartDate,
+                    EndDate = c.EndDate,
+                    CallingCode = c.CallingCode,
+                };
+                data[c.Name] = updated;
+            }
 
             var resource = new XResourceFile();
-            resource.Add("All", string.Join(';', all.Select(c => c.Name)));
 
-            foreach (var country in new[] { Country.Unknown }.Concat(all))
+            resource.Add("All", string.Join(';', data.Keys.OrderBy(c => c.Length).ThenBy(c => c)));
+            resource.AddRange(unknown.Data());
+
+            foreach (var info in data.Values.OrderBy(c => c.Name.Length).ThenBy(c => c.Name))
             {
-                var pref = country.IsUnknown() ? "ZZ" : country.Name;
-                var display = Infos.FirstOrDefault(i => i.A2 == country.Name)?.Name ?? country.DisplayName;
-
-                resource.Add($"{pref}_DisplayName", display);
-                resource.Add($"{pref}_ISO", country.IsoNumericCode.ToString("000"));
-                resource.Add($"{pref}_ISO2", country.IsoAlpha2Code);
-                resource.Add($"{pref}_ISO3", country.IsoAlpha3Code);
-                resource.Add($"{pref}_StartDate", country.StartDate.ToString("yyyy-MM-dd"));
-                if (country.EndDate is { } enddate)
-                {
-                    resource.Add($"{pref}_EndDate", enddate.ToString("yyyy-MM-dd"));
-                }
-                if (country.CallingCode is { Length: > 0 })
-                {
-                    resource.Add($"{pref}_CallingCode", country.CallingCode);
-                }
+                resource.AddRange(info.Data());
             }
 
             resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.resx")))
@@ -115,152 +205,54 @@ public class Resource_files
         }
 
         [Test]
-        public async Task de_culture()
-        {
-            var resource = new XResourceFile(new XResourceFileData("ZZ_DisplayName", "Unbekannt", "Unknown (ZZ)"));
-
-            foreach (var country in Country.All.OrderBy(c => c.Name.Length).ThenBy(c => c.Name))
-            {
-                var name = $"{country.Name}_DisplayName";
-                var comment = $"{country.EnglishName} ({country.IsoAlpha2Code})";
-                var value = country.Name.Length == 2 && await Display(country) is { } display
-                    ? display
-                    : country.GetDisplayName(TestCultures.De_DE);
-
-                if (value != country.EnglishName)
-                {
-                    resource.Add(name, value, comment);
-                }
-            }
-
-            resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.de.resx")))
-                .Should().NotThrow();
-
-            async Task<string?> Display(Country country)
-            {
-                try
-                {
-                    var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", TestCultures.De);
-                    return await lemma.Transform(DisplayName.FromDE);
-                }
-                catch (UnknownLemma)
-                {
-                    return null;
-                }
-            }
-        }
+        public async Task ar()
+            => (await CountryDisplayName.Update("مجهولة", TestCultures.ar, CountryDisplayName.ar))
+            .Should().NotThrow();
 
         [Test]
-        public async Task nl_culture()
-        {
-            var resource = new XResourceFile(new XResourceFileData("ZZ_DisplayName", "Onbekend", "Unknown (ZZ)"));
+        public async Task de()
+            => (await CountryDisplayName.Update("Unbekannt", TestCultures.de, CountryDisplayName.de))
+            .Should().NotThrow();
 
-            foreach (var country in Country.All.OrderBy(c => c.Name.Length).ThenBy(c => c.Name))
-            {
-                var name = $"{country.Name}_DisplayName";
-                var comment = $"{country.EnglishName} ({country.IsoAlpha2Code})";
-                var value = country.Name.Length == 2 && await Display(country) is { } display
-                    ? display
-                    : country.GetDisplayName(TestCultures.Nl_NL);
+        [Test]
+        public async Task es()
+            => (await CountryDisplayName.Update("Desconocido", TestCultures.es, CountryDisplayName.es))
+            .Should().NotThrow();
 
-                if (value != country.EnglishName)
-                {
-                    resource.Add(name, value, comment);
-                }
-            }
+        [Test]
+        public async Task fr()
+            => (await CountryDisplayName.Update("Inconnu", TestCultures.fr, CountryDisplayName.fr))
+            .Should().NotThrow();
+    
+        [Test]
+        public async Task it()
+            => (await CountryDisplayName.Update("Sconosciuto", TestCultures.it, CountryDisplayName.it))
+            .Should().NotThrow();
 
-            resource.Invoking(r => r.Save(Solution.Root.File("src/Qowaiv/Globalization/CountryLabels.nl.resx")))
-                .Should().NotThrow();
+        [Test]
+        public async Task ja()
+           => (await CountryDisplayName.Update("不明", TestCultures.ja, CountryDisplayName.ja))
+           .Should().NotThrow();
 
-            Task<string?> Display(Country country)
-            {
-                var lemma = new WikiLemma($"Sjabloon:{country.Name}", TestCultures.Nl);
-                return lemma.Transform(DisplayName.FromNL);
-            }
-        }
-    }
-}
+        [Test]
+        public async Task nl()
+            => (await CountryDisplayName.Update("Onbekend",TestCultures.nl,CountryDisplayName.nl))
+            .Should().NotThrow();
 
-public sealed record WikiInfo(string Name, string A2, string A3, int NC)
-{
-    public override string ToString() => $"{A2}/{A3}: {Name} ({NC:000})";
+        [Test]
+        public async Task pt()
+            => (await CountryDisplayName.Update("Não sabe", TestCultures.pt, CountryDisplayName.pt))
+            .Should().NotThrow();
 
-    // Overrides of Wikipedia: 
-    private static readonly Dictionary<string, string> Shorten = new()
-    {
-        ["Bolivia (Plurinational State of)"] = "Bolivia",
-        ["Bonaire, Sint Eustatius and Saba"] = "Caribbean Netherlands",
-        ["Iran (Islamic Republic of)"] = "Iran",
-        ["Korea (Democratic People's Republic of)"] = "North Korea",
-        ["Korea, Republic of"] = "South Korea",
-        ["Lao People's Democratic Republic"] = "Laos",
-        ["Micronesia (Federated States of)"] = "Micronesia",
-        ["Moldova, Republic of"] = "Moldova",
-        ["Netherlands, Kingdom of the"] = "Netherlands",
-        ["Palestine, State of"] = "Palestine",
-        ["Russian Federation"] = "Russia",
-        ["<!--DO NOT CHANGE-->Taiwan, Province of China<!--This is the name used in ISO 3166: https://www.iso.org/obp/ui/#iso:code:3166:TW. If you disagree with this naming, contact the ISO 3166/MA; we must follow the published standard for this article.-->"] = "Taiwan",
-        ["Tanzania, United Republic of"] = "Tanzania",
-        ["United Kingdom of Great Britain and Northern Ireland"] = "United Kingdom",
-        ["United States of America"] = "United States",
-        ["Venezuela (Bolivarian Republic of)"] = "Venezuela",
-        ["<!--DO NOT CHANGE-->{{not a typo|Sao Tome and Principe}}<!-- Do not change this to \"São Tomé and Príncipe\" unless https://www.iso.org/obp/ui/#iso:code:3166:ST changes to that spelling. If you disagree with the lack of diacritics, contact the ISO 3166/MA; we must follow the published standard for this article. -->"] = "Sao Tome and Principe",
-    };
+        [Test]
+        public async Task ru()
+            => (await CountryDisplayName.Update("неизвестно", TestCultures.ru, CountryDisplayName.ru))
+            .Should().NotThrow();
 
-    public static IEnumerable<WikiInfo> FromEN(string str)
-    {
-        foreach (var line in str.Split("{{flagdeco|").Skip(1))
-        {
-            var parts = line.Split("mono|");
-
-            if (parts.Length >= 4)
-            {
-                var link = WikiLink.Parse(parts[0]).First();
-                var name = Wiki.RemoveInParentheses(link.Display);
-
-                var a2 = parts[1][..2];
-                var a3 = parts[2][..3];
-                var nc = parts[3][..3];
-
-                name = Shorten.TryGetValue(name, out var shorten) ? shorten : name;
-
-                yield return new(name, a2, a3, int.Parse(nc));
-            }
-        }
-    }
-}
-
-internal static class DisplayName
-{
-    private const string DE_prefix = "{{{3|";
-
-    public static string? FromDE(string str)
-    {
-        var index = str.LastIndexOf(DE_prefix);
-        if (index > -1)
-        {
-            var text = str[(index+DE_prefix.Length)..];
-            return text[..text.IndexOf('}')];
-        }
-        else return null;
-        
-      
-
-    }
-
-    public static string? FromNL(string str)
-    {
-        var index = str.LastIndexOf("-VLAG}}&nbsp;") + 1;
-        var text = str[index..];
-
-        if (WikiLink.Parse(text).FirstOrDefault() is { } link)
-        {
-            var display = link.Display;
-            display = display[(display.IndexOf('|') + 1)..];
-            display = display.Trim('{').Trim('}');
-            return display;
-        }
-        else return null;
+        [Test]
+        public async Task zh()
+          => (await CountryDisplayName.Update("未知項", TestCultures.zh, CountryDisplayName.zh))
+          .Should().NotThrow();
     }
 }
 

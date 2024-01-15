@@ -198,7 +198,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Func<EnergyLabel> parse = () => EnergyLabel.Parse("invalid input");
             parse.Should().Throw<FormatException>()
@@ -238,7 +238,7 @@ public class Has_custom_formatting
     [Test]
     public void with_null_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.EnergyLabel.ToString().Should().Be(Svo.EnergyLabel.ToString(default(string)));
         }
@@ -247,7 +247,7 @@ public class Has_custom_formatting
     [Test]
     public void with_string_empty_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.EnergyLabel.ToString().Should().Be(Svo.EnergyLabel.ToString(string.Empty));
         }
@@ -264,7 +264,7 @@ public class Has_custom_formatting
     [Test]
     public void with_empty_format_provider()
     {
-        using (TestCultures.Es_EC.Scoped())
+        using (TestCultures.es_EC.Scoped())
         {
             Svo.EnergyLabel.ToString(FormatProvider.Empty).Should().Be("A++");
         }
@@ -309,7 +309,7 @@ public class Has_custom_formatting
         public void Skips_insufficient_span_sizes()
         {
             Span<char> span = stackalloc char[2];
-            Svo.EnergyLabel.TryFormat(span, out int charsWritten, default, TestCultures.Nl_NL).Should().BeFalse();
+            Svo.EnergyLabel.TryFormat(span, out int charsWritten, default, TestCultures.nl_NL).Should().BeFalse();
             charsWritten.Should().Be(0);
         }
     }
@@ -414,7 +414,7 @@ public class Supports_type_conversion
     [Test]
     public void from_null_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.FromNull<string>().To<EnergyLabel>().Should().Be(EnergyLabel.Empty);
         }
@@ -423,7 +423,7 @@ public class Supports_type_conversion
     [Test]
     public void from_empty_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From(string.Empty).To<EnergyLabel>().Should().Be(EnergyLabel.Empty);
         }
@@ -432,7 +432,7 @@ public class Supports_type_conversion
     [Test]
     public void from_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From("A++").To<EnergyLabel>().Should().Be(Svo.EnergyLabel);
         }
@@ -441,7 +441,7 @@ public class Supports_type_conversion
     [Test]
     public void to_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.ToString().From(Svo.EnergyLabel).Should().Be("A++");
         }

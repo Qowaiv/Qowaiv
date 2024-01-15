@@ -143,7 +143,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exception = Assert.Throws<FormatException>(() => Uuid.Parse("invalid input"));
             exception.Message.Should().Be("Not a valid GUID");
@@ -344,7 +344,7 @@ public class Has_custom_formatting
     [Test]
     public void with_current_thread_culture_as_default()
     {
-        using (new CultureInfoScope(culture: TestCultures.Nl_NL, cultureUI: TestCultures.En_GB))
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
         {
             Svo.Uuid.ToString(provider: null).Should().Be("Qowaiv_SVOLibrary_GUIA");
         }
@@ -416,7 +416,7 @@ public class Supports_type_conversion
     [Test]
     public void from_null_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.FromNull<string>().To<Uuid>().Should().Be(default);
         }
@@ -425,7 +425,7 @@ public class Supports_type_conversion
     [Test]
     public void from_empty_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From(string.Empty).To<Uuid>().Should().Be(default);
         }
@@ -434,7 +434,7 @@ public class Supports_type_conversion
     [Test]
     public void from_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From("Qowaiv_SVOLibrary_GUID").To<Uuid>().Should().Be(Svo.Uuid);
         }
@@ -443,7 +443,7 @@ public class Supports_type_conversion
     [Test]
     public void to_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.ToString().From(Svo.Uuid).Should().Be("Qowaiv_SVOLibrary_GUIA");
         }

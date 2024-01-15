@@ -141,7 +141,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exception = Assert.Throws<FormatException>(() => Percentage.Parse("invalid input"));
             exception.Message.Should().Be("Not a valid percentage");
@@ -161,7 +161,7 @@ public class Can_be_parsed
     [Test]
     public void with_TryParse_returns_SVO()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Percentage.TryParse("17.51%").Should().Be(Svo.Percentage);
         }
@@ -197,7 +197,7 @@ public class Has_custom_formatting
     [Test]
     public void _default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Percentage.ToString().Should().Be("17.51%");
         }
@@ -206,7 +206,7 @@ public class Has_custom_formatting
     [Test]
     public void with_null_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Percentage.ToString(default(string)).Should().Be(Svo.Percentage.ToString());
         }
@@ -215,7 +215,7 @@ public class Has_custom_formatting
     [Test]
     public void with_string_empty_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Percentage.ToString(string.Empty).Should().Be(Svo.Percentage.ToString());
         }
@@ -248,7 +248,7 @@ public class Has_custom_formatting
     [Test]
     public void with_current_thread_culture_as_default()
     {
-        using (new CultureInfoScope(culture: TestCultures.Nl_NL, cultureUI: TestCultures.En_GB))
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
         {
             Svo.Percentage.ToString(provider: null).Should().Be("17,51%");
         }
@@ -262,7 +262,7 @@ public class Has_custom_formatting
     [Test]
     public void using_per_mille_sign()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Percentage.ToString("PM").Should().Be("175.1‰");
         }
@@ -271,7 +271,7 @@ public class Has_custom_formatting
     [Test]
     public void using_per_then_thousand_sign()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Percentage.ToString("PT").Should().Be("1751‱");
         }
@@ -1041,7 +1041,7 @@ public class Supports_type_conversion
     [Test]
     public void from_null_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.FromNull<string>().To<Percentage>().Should().Be(Percentage.Zero);
         }
@@ -1050,7 +1050,7 @@ public class Supports_type_conversion
     [Test]
     public void from_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From("17.51%").To<Percentage>().Should().Be(Svo.Percentage);
         }
@@ -1059,7 +1059,7 @@ public class Supports_type_conversion
     [Test]
     public void to_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.ToString().From(Svo.Percentage).Should().Be("17.51%");
         }

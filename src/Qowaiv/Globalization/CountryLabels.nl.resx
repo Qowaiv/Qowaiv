@@ -601,17 +601,25 @@
     <value>Zuid-Afrika</value>
     <comment>South Africa (ZA)</comment>
   </data>
+  <data name="AIDJ_DisplayName">
+    <value>Afar- en Issaland</value>
+    <comment>French Afars and Issas (AI)</comment>
+  </data>
   <data name="ANHH_DisplayName">
-    <value>border|Vlag van Nederlandse Antillen</value>
+    <value>Nederlandse Antillen</value>
     <comment>Netherlands Antilles (AN)</comment>
   </data>
   <data name="BQAQ_DisplayName">
-    <value>Caribisch Nederland</value>
+    <value>Brits Antarctisch Territorium</value>
     <comment>British Antarctic Territory (BQ)</comment>
   </data>
   <data name="BUMM_DisplayName">
     <value>Birma</value>
     <comment>Burma (BU)</comment>
+  </data>
+  <data name="BYAA_DisplayName">
+    <value>Wit-Russische Socialistische Sovjetrepubliek</value>
+    <comment>Byelorussian SSR (BY)</comment>
   </data>
   <data name="CSHH_DisplayName">
     <value>Tsjecho-Slowakije</value>
@@ -619,22 +627,70 @@
   </data>
   <data name="CSXX_DisplayName">
     <value>Servië en Montenegro</value>
-    <comment>Serbia And Montenegro (CS)</comment>
+    <comment>Serbia and Montenegro (CS)</comment>
+  </data>
+  <data name="CTKI_DisplayName">
+    <value>Canton en Enderbury</value>
+    <comment>Canton and Enderbury Islands (CT)</comment>
   </data>
   <data name="DDDE_DisplayName">
     <value>DDR</value>
     <comment>German Democratic Republic (DD)</comment>
   </data>
+  <data name="GEHH_DisplayName">
+    <value>Gilbert- en Ellice-eilanden</value>
+    <comment>Gilbert Islands (GE)</comment>
+  </data>
   <data name="HVBF_DisplayName">
     <value>Opper-Volta</value>
     <comment>Upper Volta (HV)</comment>
   </data>
+  <data name="JTUM_DisplayName">
+    <value>Johnston</value>
+    <comment>Johnston Island (JT)</comment>
+  </data>
+  <data name="MIUM_DisplayName">
+    <value>Midway</value>
+    <comment>Midway Islands (MI)</comment>
+  </data>
+  <data name="NHVU_DisplayName">
+    <value>Nieuwe Hebriden</value>
+    <comment>New Hebrides (NH)</comment>
+  </data>
+  <data name="NQAQ_DisplayName">
+    <value>Koningin Maudland</value>
+    <comment>Dronning Maud Land (NQ)</comment>
+  </data>
+  <data name="PCHH_DisplayName">
+    <value>Trustschap van de Pacifische Eilanden</value>
+    <comment>Pacific Islands (Trust Territory) (PC)</comment>
+  </data>
+  <data name="PZPA_DisplayName">
+    <value>Panamakanaalzone</value>
+    <comment>Panama Canal Zone (PZ)</comment>
+  </data>
   <data name="SUHH_DisplayName">
-    <value>Sjabloon:SUHH</value>
-    <comment>Soviet Union (SU)</comment>
+    <value>Sovjet-Unie</value>
+    <comment>USSR (SU)</comment>
+  </data>
+  <data name="TPTL_DisplayName">
+    <value>Portugees-Timor</value>
+    <comment>East Timor (TP)</comment>
+  </data>
+  <data name="VDVN_DisplayName">
+    <value>Vietnam</value>
+    <comment>Viet-Nam, Democratic Republic of (VD)</comment>
+  </data>
+  <data name="WKUM_DisplayName">
+    <value>Wake</value>
+    <comment>Wake Island (WK)</comment>
+  </data>
+  <data name="YDYE_DisplayName">
+    <value>Zuid-Jemen</value>
+    <comment>Yemen, Democratic (YD)</comment>
   </data>
   <data name="YUCS_DisplayName">
-    <value>Sjabloon:YUCS</value>
+    <value>Joegoslavië</value>
     <comment>Yugoslavia (YU)</comment>
   </data>
   <data name="ZRCD_DisplayName">

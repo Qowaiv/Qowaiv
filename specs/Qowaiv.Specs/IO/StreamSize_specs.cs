@@ -25,7 +25,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Func<StreamSize> parse = () => StreamSize.Parse("invalid input");
             parse.Should().Throw<FormatException>().WithMessage("Not a valid stream size");
@@ -196,7 +196,7 @@ public class Supports_type_conversion
     [Test]
     public void from_null_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.FromNull<string>().To<StreamSize>().Should().Be(StreamSize.Zero);
         }
@@ -206,7 +206,7 @@ public class Supports_type_conversion
     [TestCase("123456.789 kB")]
     public void from_string(string str)
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From(str).To<StreamSize>().Should().Be(Svo.StreamSize);
         }
@@ -215,7 +215,7 @@ public class Supports_type_conversion
     [Test]
     public void to_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.ToString().From(Svo.StreamSize).Should().Be("123456789 byte");
         }

@@ -5,7 +5,7 @@ public class Communicates
     [Test]
     public void attempted_value_and_type()
     {
-        using var _ = TestCultures.En_GB.Scoped();
+        using var _ = TestCultures.en_GB.Scoped();
 
         "no_guid".Invoking(CustomGuid.Parse)
             .Should().Throw<FormatException>()

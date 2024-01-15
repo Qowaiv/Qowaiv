@@ -22,18 +22,6 @@ public sealed class XResourceFile
         Data = data.ToList();
     }
 
-    /// <summary>Adds a data entry.</summary>
-    public void Add(string name, string val)
-    {
-        Data.Add(new XResourceFileData(name, val));
-    }
-
-    /// <inheritdoc cref="Add(string, string)" />
-    public void Add(string name, string val, string comment)
-    {
-        Data.Add(new XResourceFileData(name, val, comment));
-    }
-
     /// <summary>Gets the headers.</summary>
     [XmlElement(Type = typeof(XResourceFileHeader), ElementName = "resheader")]
     public List<XResourceFileHeader> Headers { get; set; } = [];
@@ -47,6 +35,18 @@ public sealed class XResourceFile
     /// The key to search for.
     /// </param>
     public XResourceFileData? this[string key] => Data.Find(data => data.Name == key);
+
+    /// <summary>Adds a data entries.</summary>
+    public void AddRange(IEnumerable<XResourceFileData> entries) => Data.AddRange(entries);
+
+    /// <summary>Adds a data entry.</summary>
+    public void Add(XResourceFileData entry) => Data.Add(entry);
+
+    /// <summary>Adds a data entry.</summary>
+    public void Add(string name, string val) => Add(new XResourceFileData(name, val));
+
+    /// <inheritdoc cref="Add(string, string)" />
+    public void Add(string name, string val, string comment) => Add(new XResourceFileData(name, val, comment));
 
     /// <summary>Saves the resource file to a file.</summary>
     /// <param name="file">

@@ -58,7 +58,7 @@ public class Display_name
     [Test]
     public void for_current_culture_by_default()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             Svo.Gender.DisplayName.Should().Be("Vrouwelijk");
         }
@@ -67,7 +67,7 @@ public class Display_name
     [Test]
     public void for_custom_culture_if_specified()
     {
-        Svo.Gender.GetDisplayName(TestCultures.Es_EC).Should().Be("Mujer");
+        Svo.Gender.GetDisplayName(TestCultures.es_EC).Should().Be("Mujer");
     }
 }
 
@@ -241,7 +241,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exception = Assert.Throws<FormatException>(() => Gender.Parse("invalid input"));
             exception.Message.Should().Be("Not a valid gender");
@@ -271,7 +271,7 @@ public class Has_custom_formatting
     [Test]
     public void _default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Gender.ToString().Should().Be("Female");
         }
@@ -280,7 +280,7 @@ public class Has_custom_formatting
     [Test]
     public void with_null_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Gender.ToString(default(string)).Should().Be(Svo.Gender.ToString());
         }
@@ -289,7 +289,7 @@ public class Has_custom_formatting
     [Test]
     public void with_string_empty_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Gender.ToString(string.Empty).Should().Be(Svo.Gender.ToString());
         }
@@ -325,7 +325,7 @@ public class Has_custom_formatting
     [Test]
     public void with_current_thread_culture_as_default()
     {
-        using (new CultureInfoScope(culture: TestCultures.Nl_NL, cultureUI: TestCultures.En_GB))
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
         {
             Svo.Gender.ToString(provider: null).Should().Be("Vrouwelijk");
         }

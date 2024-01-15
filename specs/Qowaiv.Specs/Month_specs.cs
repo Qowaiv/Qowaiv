@@ -66,7 +66,7 @@ public class Short_name
     [Test]
     public void picks_current_culture()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             Svo.Month.ShortName.Should().Be("feb.");
         }
@@ -74,7 +74,7 @@ public class Short_name
     [Test]
     public void supports_custom_culture()
     {
-        Svo.Month.GetShortName(TestCultures.Nl_BE).Should().Be("feb.");
+        Svo.Month.GetShortName(TestCultures.nl_BE).Should().Be("feb.");
     }
 }
 
@@ -93,7 +93,7 @@ public class Full_name
     [Test]
     public void picks_current_culture()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             Svo.Month.FullName.Should().Be("februari");
         }
@@ -101,7 +101,7 @@ public class Full_name
     [Test]
     public void supports_custom_culture()
     {
-        Svo.Month.GetFullName(TestCultures.Nl_BE).Should().Be("februari");
+        Svo.Month.GetFullName(TestCultures.nl_BE).Should().Be("februari");
     }
 }
 
@@ -208,7 +208,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exception = Assert.Throws<FormatException>(() => Month.Parse("invalid input"));
             exception.Message.Should().Be("Not a valid month");
@@ -250,7 +250,7 @@ public class Has_custom_formatting
     [Test]
     public void _default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Month.ToString().Should().Be("February");
         }
@@ -259,7 +259,7 @@ public class Has_custom_formatting
     [Test]
     public void with_null_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Month.ToString(default(string)).Should().Be(Svo.Month.ToString());
         }
@@ -268,7 +268,7 @@ public class Has_custom_formatting
     [Test]
     public void with_string_empty_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Month.ToString(string.Empty).Should().Be(Svo.Month.ToString());
         }
@@ -311,7 +311,7 @@ public class Has_custom_formatting
     [Test]
     public void with_current_thread_culture_as_default()
     {
-        using (new CultureInfoScope(culture: TestCultures.Nl_NL, cultureUI: TestCultures.En_GB))
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
         {
             Svo.Month.ToString(provider: null).Should().Be("februari");
         }
@@ -414,7 +414,7 @@ public class Supports_type_conversion
     [Test]
     public void from_null_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.FromNull<string>().To<Month>().Should().Be(default);
         }
@@ -423,7 +423,7 @@ public class Supports_type_conversion
     [Test]
     public void from_empty_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From(string.Empty).To<Month>().Should().Be(default);
         }
@@ -432,7 +432,7 @@ public class Supports_type_conversion
     [Test]
     public void from_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From("February").To<Month>().Should().Be(Svo.Month);
         }
@@ -441,7 +441,7 @@ public class Supports_type_conversion
     [Test]
     public void to_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.ToString().From(Svo.Month).Should().Be("February");
         }

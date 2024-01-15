@@ -17,7 +17,7 @@ public class CountryTest
     [Test]
     public void Current_CurrentCultureDeDE_Germany()
     {
-        using (TestCultures.De_DE.Scoped())
+        using (TestCultures.de_DE.Scoped())
         {
             var act = Country.Current;
             var exp = Country.DE;
@@ -29,7 +29,7 @@ public class CountryTest
     [Test]
     public void Current_CurrentCultureEsEC_Ecuador()
     {
-        using (TestCultures.Es_EC.Scoped())
+        using (TestCultures.es_EC.Scoped())
         {
             var act = Country.Current;
             var exp = Country.EC;
@@ -41,7 +41,7 @@ public class CountryTest
     [Test]
     public void Current_CurrentCultureEn_Empty()
     {
-        using (TestCultures.En.Scoped())
+        using (TestCultures.en.Scoped())
         {
             var act = Country.Current;
             var exp = Country.Empty;
@@ -128,7 +128,7 @@ public class CountryTest
     [Test]
     public void Parse_InvalidInput_ThrowsFormatException()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Assert.Catch<FormatException>
             (() =>
@@ -142,7 +142,7 @@ public class CountryTest
     [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exp = TestStruct;
             var act = Country.TryParse(exp.ToString());
@@ -472,7 +472,7 @@ public class CountryTest
     [Test]
     public void Equals_FormattedAndUnformatted_IsTrue()
     {
-        using (TestCultures.Nl_NL.Scoped())
+        using (TestCultures.nl_NL.Scoped())
         {
             var l = Country.Parse("België");
             var r = Country.Parse("belgie");
@@ -638,7 +638,7 @@ public class CountryTest
     [Test]
     public void Name_Empty_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exp = "";
             var act = Country.Empty.Name;
@@ -648,7 +648,7 @@ public class CountryTest
     [Test]
     public void Name_Unknown_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exp = "?";
             var act = Country.Unknown.Name;
@@ -658,7 +658,7 @@ public class CountryTest
     [Test]
     public void Name_TestStruct_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exp = "VA";
             var act = TestStruct.Name;

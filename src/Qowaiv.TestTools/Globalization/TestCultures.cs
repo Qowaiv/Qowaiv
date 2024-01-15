@@ -12,29 +12,53 @@ public static class TestCultures
         .Select(prop => (CultureInfo)prop.GetValue(null)!)
         .FirstOrDefault(culture => culture.Name == name) ?? new CultureInfo(name);
 
+    /// <summary>Gets the Arabic (ar) <see cref="CultureInfo"/>.</summary>
+    public static CultureInfo ar => new("ar");
+
     /// <summary>Gets the German (de) <see cref="CultureInfo"/>.</summary>
-    public static CultureInfo De => new("de");
+    public static CultureInfo de => new("de");
 
     /// <summary>Gets the English (en) <see cref="CultureInfo"/>.</summary>
-    public static CultureInfo En => new("en");
+    public static CultureInfo en => new("en");
+
+    /// <summary>Gets the Spanish (es) <see cref="CultureInfo"/>.</summary>
+    public static CultureInfo es => new("es");
+
+    /// <summary>Gets the French (fr) <see cref="CultureInfo"/>.</summary>
+    public static CultureInfo fr => new("fr");
+
+    /// <summary>Gets the Italian (it) <see cref="CultureInfo"/>.</summary>
+    public static CultureInfo it => new("it");
+
+    /// <summary>Gets the Japanese (ja) <see cref="CultureInfo"/>.</summary>
+    public static CultureInfo ja => new("ja");
 
     /// <summary>Gets the Dutch (nl) <see cref="CultureInfo"/>.</summary>
-    public static CultureInfo Nl => new("nl");
+    public static CultureInfo nl => new("nl");
+
+    /// <summary>Gets the Portuguese (pt) <see cref="CultureInfo"/>.</summary>
+    public static CultureInfo pt => new("pt");
+
+    /// <summary>Gets the Russian (ru) <see cref="CultureInfo"/>.</summary>
+    public static CultureInfo ru => new("ru");
+
+    /// <summary>Gets the Chinese (zh) <see cref="CultureInfo"/>.</summary>
+    public static CultureInfo zh => new("zh");
 
     /// <summary>Gets the German (de-DE) <see cref="CultureInfo"/>.</summary>
-    public static CultureInfo De_DE => new("de-DE");
+    public static CultureInfo de_DE => new("de-DE");
 
     /// <summary>Gets the British (en-GB) <see cref="CultureInfo"/>.</summary>
-    public static CultureInfo En_GB => new("en-GB");
+    public static CultureInfo en_GB => new("en-GB");
 
     /// <summary>Gets the American (en-US) <see cref="CultureInfo"/>.</summary>
-    public static CultureInfo En_US => new("en-US");
+    public static CultureInfo en_US => new("en-US");
 
     /// <summary>Gets the Ecuadorian (es-EC) <see cref="CultureInfo"/>.</summary>
-    public static CultureInfo Es_EC => new("es-EC");
+    public static CultureInfo es_EC => new("es-EC");
 
     /// <summary>Gets the Iranian (fa-IR) <see cref="CultureInfo"/>.</summary>
-    public static CultureInfo Fa_IR
+    public static CultureInfo fa_IR
     {
         get
         {
@@ -46,13 +70,13 @@ public static class TestCultures
     }
 
     /// <summary>Gets the French (fr-FR) <see cref="CultureInfo"/>.</summary>
-    public static CultureInfo Fr_FR => new("fr-FR");
+    public static CultureInfo fr_FR => new("fr-FR");
 
     /// <summary>Gets the Dutch (nl-NL) <see cref="CultureInfo"/>.</summary>
-    public static CultureInfo Nl_NL => new("nl-NL");
+    public static CultureInfo nl_NL => new("nl-NL");
 
     /// <summary>Gets the Flemish (nl-BE) <see cref="CultureInfo"/>.</summary>
-    public static CultureInfo Nl_BE
+    public static CultureInfo nl_BE
     {
         get
         {

@@ -18,7 +18,7 @@ public class Display_name
     [Test]
     public void string_empty_for_empty_country()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Country.Empty.DisplayName.Should().Be(string.Empty);
         }
@@ -27,7 +27,7 @@ public class Display_name
     [Test]
     public void Unknown_for_unknown_country()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Country.Unknown.DisplayName.Should().Be("Unknown");
         }
@@ -36,7 +36,7 @@ public class Display_name
     [Test]
     public void Culture_dependent()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Country.DisplayName.Should().Be("Holy See");
         }
@@ -45,7 +45,7 @@ public class Display_name
     [Test]
     public void with_fallback_to_current_culture()
     {
-        using (TestCultures.Es_EC.Scoped())
+        using (TestCultures.es_EC.Scoped())
         {
             Svo.Country.GetDisplayName(null).Should().Be("Ciudad Del Vaticano");
         }
@@ -117,7 +117,7 @@ public class Supports_type_conversion
     [Test]
     public void from_null_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.FromNull<string>().To<Country>().Should().Be(default);
         }
@@ -126,7 +126,7 @@ public class Supports_type_conversion
     [Test]
     public void from_empty_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From(string.Empty).To<Country>().Should().Be(default);
         }
@@ -135,7 +135,7 @@ public class Supports_type_conversion
     [Test]
     public void from_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From("VA").To<Country>().Should().Be(Svo.Country);
         }
@@ -144,7 +144,7 @@ public class Supports_type_conversion
     [Test]
     public void to_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.ToString().From(Svo.Country).Should().Be("VA");
         }

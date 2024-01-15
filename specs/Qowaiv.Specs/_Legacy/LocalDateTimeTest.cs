@@ -26,7 +26,7 @@ public class LocalDateTimeTest
     [Test]
     public void TryParse_StringValue_IsValid()
     {
-        using (new CultureInfoScope(TestCultures.Nl_NL))
+        using (new CultureInfoScope(TestCultures.nl_NL))
         {
             string str = "26-4-2015 17:07:13";
             LocalDateTime.TryParse(str, out LocalDateTime val).Should().BeTrue();
@@ -37,7 +37,7 @@ public class LocalDateTimeTest
     [Test]
     public void Parse_InvalidInput_ThrowsFormatException()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Assert.Catch<FormatException>
             (() =>
@@ -51,7 +51,7 @@ public class LocalDateTimeTest
     [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exp = TestStructNoMilliseconds;
             var act = LocalDateTime.TryParse(exp.ToString());
@@ -238,7 +238,7 @@ public class LocalDateTimeTest
     [Test]
     public void Equals_FormattedAndUnformatted_IsTrue()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var l = LocalDateTime.Parse("14 february 2010", CultureInfo.InvariantCulture);
             var r = LocalDateTime.Parse("2010-02-14", CultureInfo.InvariantCulture);

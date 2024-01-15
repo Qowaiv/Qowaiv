@@ -295,7 +295,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_b_AreEqual()
     {
-        using (TestCultures.Nl_NL.Scoped())
+        using (TestCultures.nl_NL.Scoped())
         {
             var act = TestStruct.ToString("#,##0b");
             var exp = "123.456.789b";
@@ -306,7 +306,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_kB_AreEqual()
     {
-        using (TestCultures.Nl_NL.Scoped())
+        using (TestCultures.nl_NL.Scoped())
         {
             var act = TestStruct.ToString("#,##0.00 kB");
             var exp = "123.456,79 kB";
@@ -317,7 +317,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_MegaByte_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = TestStruct.ToString("0.0 MegaByte");
             var exp = "123,5 MegaByte";
@@ -328,7 +328,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_Negative_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = (-TestStruct).ToString("0.0 F");
             var exp = "-123,5 Megabyte";
@@ -339,7 +339,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_GB_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = TestStruct.ToString("0.00GB");
             var exp = "0,12GB";
@@ -350,7 +350,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_GiB_AreEqual()
     {
-        using (TestCultures.De_DE.Scoped())
+        using (TestCultures.de_DE.Scoped())
         {
             var act = TestStruct.ToString("0.0000 GiB");
             var exp = "0,1150 GiB";
@@ -361,7 +361,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_tb_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = StreamSize.PB.ToString("tb");
             var exp = "1000tb";
@@ -372,7 +372,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_pb_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = StreamSize.TB.ToString(" petabyte");
             var exp = "0,001 petabyte";
@@ -383,7 +383,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_Exabyte_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = StreamSize.MaxValue.ToString("#,##0.## Exabyte");
             var exp = "9,22 Exabyte";
@@ -394,7 +394,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_spaceF_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = TestStruct.ToString("#,##0.## F");
             var exp = "123,46 Megabyte";
@@ -404,7 +404,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_spaceFLower_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = TestStruct.ToString("0 f");
             var exp = "123 megabyte";
@@ -415,7 +415,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_spaceS_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = TestStruct.ToString("0000 S");
             var exp = "0123 MB";
@@ -425,7 +425,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_spaceSLower_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = TestStruct.ToString("0 s");
             var exp = "123 mb";
@@ -435,7 +435,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_SLower_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = TestStruct.ToString("0s");
             var exp = "123mb";
@@ -446,7 +446,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_SpaceSiLower_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = TestStruct.ToString("0.0 si");
             var exp = "117,7 mib";
@@ -457,7 +457,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_ValueDutchBelgium_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = StreamSize.Parse("1600,1").ToString();
             var exp = "1600 byte";
@@ -468,7 +468,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_ValueEnglishGreatBritain_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var act = StreamSize.Parse("1600.1").ToString();
             var exp = "1600 byte";
@@ -479,7 +479,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_FormatValueDutchBelgium_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = StreamSize.Parse("800").ToString("0000 byte");
             var exp = "0800 byte";
@@ -490,7 +490,7 @@ public class StreamSizeTest
     [Test]
     public void ToString_FormatValueEnglishGreatBritain_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var act = StreamSize.Parse("800").ToString("0000");
             var exp = "0800";

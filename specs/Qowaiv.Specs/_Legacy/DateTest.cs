@@ -47,7 +47,7 @@ public class DateTest
     [Test]
     public void TryParse_NotADate_IsNotValid()
     {
-        using (new CultureInfoScope(TestCultures.Nl_NL))
+        using (new CultureInfoScope(TestCultures.nl_NL))
         {
             string str = "not a date";
 
@@ -59,7 +59,7 @@ public class DateTest
     [Test]
     public void Parse_InvalidInput_ThrowsFormatException()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Assert.Catch<FormatException>
             (() =>
@@ -73,7 +73,7 @@ public class DateTest
     [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exp = TestStruct;
             var act = Date.TryParse(exp.ToString());
@@ -271,7 +271,7 @@ public class DateTest
     [Test]
     public void ToString_TestStruct_ComplexPattern()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = TestStruct.ToString(string.Empty);
             var exp = "14/02/1970";
@@ -282,7 +282,7 @@ public class DateTest
     [Test]
     public void ToString_FormatValueEnglishGreatBritain_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var act = new Date(1988, 08, 08).ToString("yy-M-d");
             var exp = "88-8-8";

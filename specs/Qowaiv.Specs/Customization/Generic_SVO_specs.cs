@@ -169,7 +169,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Func<CustomSvo> parse = () => CustomSvo.Parse("invalid input!");
             parse.Should().Throw<FormatException>()
@@ -195,7 +195,7 @@ public class Has_custom_formatting
     [Test]
     public void _default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.CustomSvo.ToString().Should().Be("QOWAIV");
         }
@@ -204,7 +204,7 @@ public class Has_custom_formatting
     [Test]
     public void with_null_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.CustomSvo.ToString().Should().Be(Svo.CustomSvo.ToString(default(string)));
         }
@@ -213,7 +213,7 @@ public class Has_custom_formatting
     [Test]
     public void with_string_empty_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.CustomSvo.ToString().Should().Be(Svo.CustomSvo.ToString(string.Empty));
         }
@@ -230,7 +230,7 @@ public class Has_custom_formatting
     [Test]
     public void with_empty_format_provider()
     {
-        using (TestCultures.Es_EC.Scoped())
+        using (TestCultures.es_EC.Scoped())
         {
             Svo.CustomSvo.ToString(FormatProvider.Empty).Should().Be("QOWAIV");
         }
@@ -257,8 +257,8 @@ public class Has_custom_formatting
     public void with_current_thread_culture_as_default()
     {
         using (new CultureInfoScope(
-            culture: TestCultures.Nl_NL,
-            cultureUI: TestCultures.En_GB))
+            culture: TestCultures.nl_NL,
+            cultureUI: TestCultures.en_GB))
         {
             Svo.CustomSvo.ToString(provider: null).Should().Be("QOWAIV");
         }
@@ -329,7 +329,7 @@ public class Supports_type_conversion
     [Test]
     public void from_null_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.FromNull<string>().To<CustomSvo>().Should().Be(CustomSvo.Empty);
         }
@@ -338,7 +338,7 @@ public class Supports_type_conversion
     [Test]
     public void from_empty_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From(string.Empty).To<CustomSvo>().Should().Be(CustomSvo.Empty);
         }
@@ -347,7 +347,7 @@ public class Supports_type_conversion
     [Test]
     public void from_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From("QOWAIV").To<CustomSvo>().Should().Be(Svo.CustomSvo);
         }
@@ -356,7 +356,7 @@ public class Supports_type_conversion
     [Test]
     public void to_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.ToString().From(Svo.CustomSvo).Should().Be("QOWAIV");
         }

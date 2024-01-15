@@ -13,8 +13,8 @@ public class All
         });
 
     [Test]
-    public void _260_Countries()
-        => Country.All.Should().HaveCount(260);
+    public void _281_Countries()
+        => Country.All.Should().HaveCount(281);
 
     [Test]
     public void _250_at_January_2016()

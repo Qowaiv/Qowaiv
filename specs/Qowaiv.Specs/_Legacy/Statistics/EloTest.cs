@@ -54,7 +54,7 @@
         [Test]
         public void Parse_InvalidInput_ThrowsFormatException()
         {
-            using (TestCultures.En_GB.Scoped())
+            using (TestCultures.en_GB.Scoped())
             {
                 Assert.Catch<FormatException>
                 (() =>
@@ -68,7 +68,7 @@
         [Test]
         public void TryParse_TestStructInput_AreEqual()
         {
-            using (TestCultures.En_GB.Scoped())
+            using (TestCultures.en_GB.Scoped())
             {
                 var exp = TestStruct;
                 var act = Elo.TryParse(exp.ToString());
@@ -252,7 +252,7 @@
         [Test]
         public void ToString_ValueDutchBelgium_AreEqual()
         {
-            using (TestCultures.Nl_BE.Scoped())
+            using (TestCultures.nl_BE.Scoped())
             {
                 var act = Elo.Parse("1600,1").ToString();
                 var exp = "1600,1";
@@ -263,7 +263,7 @@
         [Test]
         public void ToString_ValueEnglishGreatBritain_AreEqual()
         {
-            using (TestCultures.En_GB.Scoped())
+            using (TestCultures.en_GB.Scoped())
             {
                 var act = Elo.Parse("1600.1").ToString();
                 var exp = "1600.1";
@@ -274,7 +274,7 @@
         [Test]
         public void ToString_FormatValueDutchBelgium_AreEqual()
         {
-            using (TestCultures.Nl_BE.Scoped())
+            using (TestCultures.nl_BE.Scoped())
             {
                 var act = Elo.Parse("800").ToString("0000");
                 var exp = "0800";
@@ -285,7 +285,7 @@
         [Test]
         public void ToString_FormatValueEnglishGreatBritain_AreEqual()
         {
-            using (TestCultures.En_GB.Scoped())
+            using (TestCultures.en_GB.Scoped())
             {
                 var act = Elo.Parse("800").ToString("0000");
                 var exp = "0800";

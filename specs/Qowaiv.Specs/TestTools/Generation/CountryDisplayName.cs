@@ -295,6 +295,11 @@ public static class CountryDisplayName
        return Task.FromResult<string?>(country.GetDisplayName(TestCultures.ru));
     }
 
+    public static Task<string?> zh(Country country)
+    {
+        return Task.FromResult<string?>(country.GetDisplayName(TestCultures.zh));
+    }
+
     private record Display(string Iso2, string Name);
 
     private static class Prefix

@@ -1,9 +1,14 @@
-<?xml version="1.0"?>
-<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
-  <resheader name="version"><value>2.0</value></resheader>
-  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
-  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
   <data name="ZZ_DisplayName">
     <value>未知項</value>
     <comment>Unknown (ZZ)</comment>
@@ -22,7 +27,7 @@
   </data>
   <data name="AG_DisplayName">
     <value>安提瓜和巴布达</value>
-    <comment>Antigua And Barbuda (AG)</comment>
+    <comment>Antigua and Barbuda (AG)</comment>
   </data>
   <data name="AI_DisplayName">
     <value>安圭拉</value>
@@ -74,7 +79,7 @@
   </data>
   <data name="BA_DisplayName">
     <value>波黑</value>
-    <comment>Bosnia And Herzegovina (BA)</comment>
+    <comment>Bosnia and Herzegovina (BA)</comment>
   </data>
   <data name="BB_DisplayName">
     <value>巴巴多斯</value>
@@ -126,7 +131,7 @@
   </data>
   <data name="BQ_DisplayName">
     <value>荷兰加勒比区</value>
-    <comment>Bonaire (BQ)</comment>
+    <comment>Caribbean Netherlands (BQ)</comment>
   </data>
   <data name="BR_DisplayName">
     <value>巴西</value>
@@ -162,11 +167,11 @@
   </data>
   <data name="CC_DisplayName">
     <value>科科斯群岛</value>
-    <comment>Cocos (CC)</comment>
+    <comment>Cocos Islands (CC)</comment>
   </data>
   <data name="CD_DisplayName">
     <value>刚果（金）</value>
-    <comment>Congo (CD)</comment>
+    <comment>Congo, Democratic Republic of the (CD)</comment>
   </data>
   <data name="CF_DisplayName">
     <value>中非</value>
@@ -182,7 +187,7 @@
   </data>
   <data name="CI_DisplayName">
     <value>科特迪瓦</value>
-    <comment>Côte D'Ivoire (CI)</comment>
+    <comment>Côte d'Ivoire (CI)</comment>
   </data>
   <data name="CK_DisplayName">
     <value>库克群岛</value>
@@ -214,7 +219,7 @@
   </data>
   <data name="CV_DisplayName">
     <value>佛得角</value>
-    <comment>Cape Verde (CV)</comment>
+    <comment>Cabo Verde (CV)</comment>
   </data>
   <data name="CW_DisplayName">
     <value>库拉索</value>
@@ -230,7 +235,7 @@
   </data>
   <data name="CZ_DisplayName">
     <value>捷克</value>
-    <comment>Czech Republic (CZ)</comment>
+    <comment>Czechia (CZ)</comment>
   </data>
   <data name="DE_DisplayName">
     <value>德国</value>
@@ -366,7 +371,7 @@
   </data>
   <data name="GS_DisplayName">
     <value>南乔治亚岛和南桑威奇群岛</value>
-    <comment>South Georgia And The South Sandwich Islands (GS)</comment>
+    <comment>South Georgia and the South Sandwich Islands (GS)</comment>
   </data>
   <data name="GT_DisplayName">
     <value>危地马拉</value>
@@ -390,7 +395,7 @@
   </data>
   <data name="HM_DisplayName">
     <value>赫德岛和麦克唐纳群岛</value>
-    <comment>Heard Island And Mcdonald Islands (HM)</comment>
+    <comment>Heard Island and McDonald Islands (HM)</comment>
   </data>
   <data name="HN_DisplayName">
     <value>洪都拉斯</value>
@@ -422,7 +427,7 @@
   </data>
   <data name="IM_DisplayName">
     <value>马恩岛</value>
-    <comment>Isle Of Man (IM)</comment>
+    <comment>Isle of Man (IM)</comment>
   </data>
   <data name="IN_DisplayName">
     <value>印度</value>
@@ -486,7 +491,7 @@
   </data>
   <data name="KN_DisplayName">
     <value>圣基茨和尼维斯</value>
-    <comment>Saint Kitts And Nevis (KN)</comment>
+    <comment>Saint Kitts and Nevis (KN)</comment>
   </data>
   <data name="KP_DisplayName">
     <value>朝鲜；</value>
@@ -494,7 +499,7 @@
   </data>
   <data name="KR_DisplayName">
     <value>韩国；</value>
-    <comment>Korea (KR)</comment>
+    <comment>South Korea (KR)</comment>
   </data>
   <data name="KW_DisplayName">
     <value>科威特</value>
@@ -510,7 +515,7 @@
   </data>
   <data name="LA_DisplayName">
     <value>老挝</value>
-    <comment>Lao People'S Democratic Republic (LA)</comment>
+    <comment>Laos (LA)</comment>
   </data>
   <data name="LB_DisplayName">
     <value>黎巴嫩</value>
@@ -582,7 +587,7 @@
   </data>
   <data name="MK_DisplayName">
     <value>马其顿</value>
-    <comment>Macedonia (MK)</comment>
+    <comment>North Macedonia (MK)</comment>
   </data>
   <data name="ML_DisplayName">
     <value>马里</value>
@@ -726,7 +731,7 @@
   </data>
   <data name="PM_DisplayName">
     <value>圣皮埃尔和密克隆</value>
-    <comment>Saint Pierre And Miquelon (PM)</comment>
+    <comment>Saint Pierre and Miquelon (PM)</comment>
   </data>
   <data name="PN_DisplayName">
     <value>皮特凯恩群岛</value>
@@ -738,7 +743,7 @@
   </data>
   <data name="PS_DisplayName">
     <value>巴勒斯坦</value>
-    <comment>Palestinian Territory (PS)</comment>
+    <comment>Palestine (PS)</comment>
   </data>
   <data name="PT_DisplayName">
     <value>葡萄牙</value>
@@ -770,7 +775,7 @@
   </data>
   <data name="RU_DisplayName">
     <value>俄罗斯</value>
-    <comment>Russian Federation (RU)</comment>
+    <comment>Russia (RU)</comment>
   </data>
   <data name="RW_DisplayName">
     <value>卢旺达</value>
@@ -802,7 +807,7 @@
   </data>
   <data name="SH_DisplayName">
     <value>圣赫勒拿</value>
-    <comment>Saint Helena (SH)</comment>
+    <comment>Saint Helena, Ascension and Tristan da Cunha (SH)</comment>
   </data>
   <data name="SI_DisplayName">
     <value>斯洛文尼亚</value>
@@ -810,7 +815,7 @@
   </data>
   <data name="SJ_DisplayName">
     <value>斯瓦尔巴群岛和扬马延岛</value>
-    <comment>Svalbard And Jan Mayen (SJ)</comment>
+    <comment>Svalbard and Jan Mayen (SJ)</comment>
   </data>
   <data name="SK_DisplayName">
     <value>斯洛伐克</value>
@@ -842,7 +847,7 @@
   </data>
   <data name="ST_DisplayName">
     <value>圣多美和普林西比</value>
-    <comment>Sao Tome And Principe (ST)</comment>
+    <comment>Sao Tome and Principe (ST)</comment>
   </data>
   <data name="SV_DisplayName">
     <value>萨尔瓦多</value>
@@ -858,11 +863,11 @@
   </data>
   <data name="SZ_DisplayName">
     <value>斯威士兰</value>
-    <comment>Swaziland (SZ)</comment>
+    <comment>Eswatini (SZ)</comment>
   </data>
   <data name="TC_DisplayName">
     <value>特克斯和凯科斯群岛</value>
-    <comment>Turks And Caicos Islands (TC)</comment>
+    <comment>Turks and Caicos Islands (TC)</comment>
   </data>
   <data name="TD_DisplayName">
     <value>乍得</value>
@@ -906,11 +911,11 @@
   </data>
   <data name="TR_DisplayName">
     <value>土耳其</value>
-    <comment>Turkey (TR)</comment>
+    <comment>Türkiye (TR)</comment>
   </data>
   <data name="TT_DisplayName">
     <value>特立尼达和多巴哥</value>
-    <comment>Trinidad And Tobago (TT)</comment>
+    <comment>Trinidad and Tobago (TT)</comment>
   </data>
   <data name="TV_DisplayName">
     <value>图瓦卢</value>
@@ -954,7 +959,7 @@
   </data>
   <data name="VC_DisplayName">
     <value>圣文森特和格林纳丁斯</value>
-    <comment>Saint Vincent And The Grenadines (VC)</comment>
+    <comment>Saint Vincent and the Grenadines (VC)</comment>
   </data>
   <data name="VE_DisplayName">
     <value>委内瑞拉</value>
@@ -978,11 +983,15 @@
   </data>
   <data name="WF_DisplayName">
     <value>瓦利斯和富图纳</value>
-    <comment>Wallis And Futuna (WF)</comment>
+    <comment>Wallis and Futuna (WF)</comment>
   </data>
   <data name="WS_DisplayName">
     <value>萨摩亚</value>
     <comment>Samoa (WS)</comment>
+  </data>
+  <data name="XK_DisplayName">
+    <value>科索沃</value>
+    <comment>Kosovo (XK)</comment>
   </data>
   <data name="YE_DisplayName">
     <value>也门</value>
@@ -1004,6 +1013,10 @@
     <value>津巴布韦</value>
     <comment>Zimbabwe (ZW)</comment>
   </data>
+  <data name="AIDJ_DisplayName">
+    <value>法属阿法尔和伊萨领地</value>
+    <comment>French Afars and Issas (AI)</comment>
+  </data>
   <data name="ANHH_DisplayName">
     <value>荷属安的列斯</value>
     <comment>Netherlands Antilles (AN)</comment>
@@ -1016,25 +1029,105 @@
     <value>缅甸</value>
     <comment>Burma (BU)</comment>
   </data>
+  <data name="BYAA_DisplayName">
+    <value>白俄罗斯苏维埃社会主义共和国</value>
+    <comment>Byelorussian SSR (BY)</comment>
+  </data>
   <data name="CSHH_DisplayName">
     <value>捷克斯洛伐克</value>
     <comment>Czechoslovakia (CS)</comment>
   </data>
   <data name="CSXX_DisplayName">
     <value>塞爾維亞與蒙特內哥羅</value>
-    <comment>Serbia And Montenegro (CS)</comment>
+    <comment>Serbia and Montenegro (CS)</comment>
+  </data>
+  <data name="CTKI_DisplayName">
+    <value>坎顿及恩德伯里群岛</value>
+    <comment>Canton and Enderbury Islands (CT)</comment>
   </data>
   <data name="DDDE_DisplayName">
-    <value>东德</value>
+    <value>德意志民主共和国</value>
     <comment>German Democratic Republic (DD)</comment>
   </data>
+  <data name="DYBJ_DisplayName">
+    <value>達荷美</value>
+    <comment>Dahomey (DY)</comment>
+  </data>
+  <data name="FQHH_DisplayName">
+    <value>法属南部和南极领地</value>
+    <comment>French Southern and Antarctic Territories (FQ)</comment>
+  </data>
+  <data name="FXFR_DisplayName">
+    <value>法國本土</value>
+    <comment>France, Metropolitan (FX)</comment>
+  </data>
+  <data name="GEHH_DisplayName">
+    <value>吉尔伯特和埃利斯群岛</value>
+    <comment>Gilbert Islands (GE)</comment>
+  </data>
   <data name="HVBF_DisplayName">
-    <value>上伏塔</value>
+    <value>上沃尔特</value>
     <comment>Upper Volta (HV)</comment>
   </data>
+  <data name="JTUM_DisplayName">
+    <value>约翰斯顿环礁</value>
+    <comment>Johnston Island (JT)</comment>
+  </data>
+  <data name="MIUM_DisplayName">
+    <value>中途島</value>
+    <comment>Midway Islands (MI)</comment>
+  </data>
+  <data name="NHVU_DisplayName">
+    <value>新赫布里底群島</value>
+    <comment>New Hebrides (NH)</comment>
+  </data>
+  <data name="NQAQ_DisplayName">
+    <value>毛德皇后地</value>
+    <comment>Dronning Maud Land (NQ)</comment>
+  </data>
+  <data name="NTHH_DisplayName">
+    <value>沙特阿拉伯－伊拉克中立区</value>
+    <comment>Neutral Zone (NT)</comment>
+  </data>
+  <data name="PCHH_DisplayName">
+    <value>太平洋群島託管地</value>
+    <comment>Pacific Islands (Trust Territory) (PC)</comment>
+  </data>
+  <data name="PUUM_DisplayName">
+    <value>美国其它太平洋岛屿</value>
+    <comment>United States Miscellaneous Pacific Islands (PU)</comment>
+  </data>
+  <data name="PZPA_DisplayName">
+    <value>巴拿马运河区</value>
+    <comment>Panama Canal Zone (PZ)</comment>
+  </data>
+  <data name="RHZW_DisplayName">
+    <value>南罗德西亚</value>
+    <comment>Southern Rhodesia (RH)</comment>
+  </data>
+  <data name="SKIN_DisplayName">
+    <value>錫金</value>
+    <comment>Sikkim (SK)</comment>
+  </data>
   <data name="SUHH_DisplayName">
-    <value>苏联</value>
-    <comment>Soviet Union (SU)</comment>
+    <value>蘇聯</value>
+    <comment>USSR (SU)</comment>
+  </data>
+  <data name="TPTL_DisplayName">
+    <value>东帝汶</value>
+    <comment>East Timor (TP)</comment>
+  </data>
+  <data name="VDVN_DisplayName">
+    <value>越南民主共和国</value>
+    <comment>Viet-Nam, Democratic Republic of (VD)</comment>
+  </data>
+  <data name="WKUM_DisplayName">
+    <value>威克岛</value>
+    <comment>Wake Island (WK)</comment>
+  </data>
+  <data name="YDYE_DisplayName">
+    <value>也门民主人民共和国</value>
+    <comment>Yemen, Democratic (YD)</comment>
   </data>
   <data name="YUCS_DisplayName">
     <value>南斯拉夫</value>
@@ -1043,9 +1136,5 @@
   <data name="ZRCD_DisplayName">
     <value>扎伊尔</value>
     <comment>Zaire (ZR)</comment>
-  </data>
-  <data name="XK_DisplayName">
-    <value>科索沃</value>
-    <comment>Kosovo (XK)</comment>
   </data>
 </root>

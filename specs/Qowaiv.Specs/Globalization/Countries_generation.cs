@@ -286,6 +286,11 @@ public class Resource_files
         public async Task ru()
             => (await CountryDisplayName.Update("неизвестно", TestCultures.ru, CountryDisplayName.ru))
             .Should().NotThrow();
+
+        [Test]
+        public async Task zh()
+          => (await CountryDisplayName.Update("未知項", TestCultures.zh, CountryDisplayName.zh))
+          .Should().NotThrow();
     }
 }
 

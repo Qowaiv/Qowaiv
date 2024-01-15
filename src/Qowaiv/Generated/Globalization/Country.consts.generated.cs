@@ -762,7 +762,7 @@ public readonly partial struct Country
     public static readonly Country ZW = new("ZW");
 
     /// <summary>Describes the country French Afars and Issas (AIDJ).</summary>
-    /// <remarks>End date is 1975-12-31.</remarks>
+    /// <remarks>End date is 1977-06-26.</remarks>
     public static readonly Country AIDJ = new("AIDJ");
 
     /// <summary>Describes the country Netherlands Antilles (ANHH).</summary>
@@ -778,7 +778,7 @@ public readonly partial struct Country
     public static readonly Country BUMM = new("BUMM");
 
     /// <summary>Describes the country Byelorussian SSR (BYAA).</summary>
-    /// <remarks>End date is 1990-12-31.</remarks>
+    /// <remarks>End date is 1991-12-25.</remarks>
     public static readonly Country BYAA = new("BYAA");
 
     /// <summary>Describes the country Czechoslovakia (CSHH).</summary>
@@ -790,7 +790,7 @@ public readonly partial struct Country
     public static readonly Country CSXX = new("CSXX");
 
     /// <summary>Describes the country Canton and Enderbury Islands (CTKI).</summary>
-    /// <remarks>End date is 1982-12-31.</remarks>
+    /// <remarks>End date is 1983-09-22.</remarks>
     public static readonly Country CTKI = new("CTKI");
 
     /// <summary>Describes the country German Democratic Republic (DDDE).</summary>
@@ -798,19 +798,19 @@ public readonly partial struct Country
     public static readonly Country DDDE = new("DDDE");
 
     /// <summary>Describes the country Dahomey (DYBJ).</summary>
-    /// <remarks>End date is 1975-12-31.</remarks>
+    /// <remarks>End date is 1975-11-29.</remarks>
     public static readonly Country DYBJ = new("DYBJ");
 
     /// <summary>Describes the country French Southern and Antarctic Territories (FQHH).</summary>
-    /// <remarks>End date is 1977-12-31.</remarks>
+    /// <remarks>End date is 1978-12-31.</remarks>
     public static readonly Country FQHH = new("FQHH");
 
     /// <summary>Describes the country France, Metropolitan (FXFR).</summary>
-    /// <remarks>End date is 1995-12-31.</remarks>
+    /// <remarks>End date is 1996-12-31.</remarks>
     public static readonly Country FXFR = new("FXFR");
 
     /// <summary>Describes the country Gilbert Islands (GEHH).</summary>
-    /// <remarks>End date is 1977-12-31.</remarks>
+    /// <remarks>End date is 1979-07-11.</remarks>
     public static readonly Country GEHH = new("GEHH");
 
     /// <summary>Describes the country Upper Volta (HVBF).</summary>

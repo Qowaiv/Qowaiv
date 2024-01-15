@@ -58,7 +58,7 @@ public sealed record WikiLemma
         => tryParse(await Content());
 
     [Pure]
-    public async Task<IReadOnlyCollection<T>> Transform<T>(Func<string, IEnumerable<T>> tryParse) where T : class
+    public async Task<IReadOnlyCollection<T>> TransformRange<T>(Func<string, IEnumerable<T>> tryParse) where T : class
         => tryParse(await Content()).ToArray();
 
 #if NET8_0_OR_GREATER

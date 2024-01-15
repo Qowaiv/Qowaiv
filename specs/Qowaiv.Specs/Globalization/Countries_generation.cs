@@ -54,8 +54,8 @@ public class Constants
 /// </remarks>
 public class Resource_files
 {
-    internal static readonly IReadOnlyCollection<Iso3166_1> Iso3166_1s = new WikiLemma("ISO 3166-1", TestCultures.En).Transform(Iso3166_1.Parse).Result;
-    internal static readonly IReadOnlyCollection<Iso3166_3> Iso3166_3s = new WikiLemma("ISO_3166-3", TestCultures.En).Transform(Iso3166_3.Parse).Result;
+    internal static readonly IReadOnlyCollection<Iso3166_1> Iso3166_1s = new WikiLemma("ISO 3166-1", TestCultures.En).TransformRange(Iso3166_1.Parse).Result;
+    internal static readonly IReadOnlyCollection<Iso3166_3> Iso3166_3s = new WikiLemma("ISO_3166-3", TestCultures.En).TransformRange(Iso3166_3.Parse).Result;
 
     [TestCaseSource(nameof(Iso3166_1s))]
     public void exsiting_reflect_info_of_Wikipedia(Iso3166_1 info)
@@ -85,40 +85,36 @@ public class Resource_files
     {
         private static readonly IReadOnlyCollection<Country> Existing = Country.GetExisting().ToArray();
 
-        private static readonly Dictionary<string, string> French = CountryDisplayName.FR().Result;
-
         [TestCaseSource(nameof(Existing))]
         public async Task de(Country country)
         {
-            try
-            {
-                var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", TestCultures.De);
-                var display = await lemma.Transform(CountryDisplayName.DE);
-                display.Should().Be(country.GetDisplayName(TestCultures.De));
-            }
-            catch (UnknownLemma) { /* Some do not follow this pattern. */ }
+            var display = country.GetDisplayName(TestCultures.De);
+            display.Should().Be(await CountryDisplayName.de(country))
+                .And.BeTrimmed();
         }
 
         [TestCaseSource(nameof(Existing))]
         public async Task es(Country country)
         {
             var display = country.GetDisplayName(TestCultures.Es);
-            display.Should().Be(await CountryDisplayName.ES(country));
+            display.Should().Be(await CountryDisplayName.es(country))
+                .And.BeTrimmed(); 
         }
 
         [TestCaseSource(nameof(Existing))]
-        public void fr(Country country)
+        public async Task fr(Country country)
         {
             var display = country.GetDisplayName(TestCultures.Fr);
-            display.Should().Be(French[country.IsoAlpha2Code]);
+            display.Should().Be(await CountryDisplayName.fr(country))
+                .And.BeTrimmed(); ;
         }
 
         [TestCaseSource(nameof(Existing))]
         public async Task nl(Country country)
         {
-            var lemma = new WikiLemma($"Sjabloon:{country.IsoAlpha2Code}", TestCultures.Nl);
-            var display = await lemma.Transform(CountryDisplayName.NL);
-            display.Should().Be(country.GetDisplayName(TestCultures.Nl));
+            var display = country.GetDisplayName(TestCultures.Nl);
+            display.Should().Be(await CountryDisplayName.nl(country))
+                .And.BeTrimmed(); ;
         }
     }
 
@@ -203,23 +199,9 @@ public class Resource_files
             (await CountryDisplayName.Update(
               "Unbekannt",
               TestCultures.De,
-              GetDisplayName)
-          )
-          .Should().NotThrow();
-
-            async Task<string?> GetDisplayName(Country country)
-            {
-                if (country.Name.Length != 2) return null;
-                try
-                {
-                    var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", TestCultures.De);
-                    return await lemma.Transform(CountryDisplayName.DE);
-                }
-                catch (UnknownLemma)
-                {
-                    return null;
-                }
-            }
+              CountryDisplayName.de)
+            )
+            .Should().NotThrow();
         }
 
         [Test]
@@ -228,7 +210,7 @@ public class Resource_files
             (await CountryDisplayName.Update(
                 "Desconocido",
                 TestCultures.Es,
-                CountryDisplayName.ES)
+                CountryDisplayName.es)
             )
             .Should().NotThrow();
         }
@@ -236,22 +218,12 @@ public class Resource_files
         [Test]
         public async Task fr()
         {
-            var lookup = await CountryDisplayName.FR();
-
             (await CountryDisplayName.Update(
                 "Inconnu",
                 TestCultures.Fr,
-                GetDisplayName)
+                CountryDisplayName.fr)
             )
             .Should().NotThrow();
-
-            Task<string?> GetDisplayName(Country country)
-            {
-                var display = lookup!.TryGetValue(country.Name, out var name)
-                    ? name : null;
-
-                return Task.FromResult(display);
-            }
         }
 
         [Test]
@@ -260,23 +232,9 @@ public class Resource_files
             (await CountryDisplayName.Update(
                "Onbekend",
                TestCultures.Nl,
-               GetDisplayName)
-           )
-           .Should().NotThrow();
-
-            async Task<string?> GetDisplayName(Country country)
-            {
-                if (country.Name.Length != 2) return null;
-                try
-                {
-                    var lemma = new WikiLemma($"Sjabloon:{country.Name}", TestCultures.Nl);
-                    return await lemma.Transform(CountryDisplayName.NL);
-                }
-                catch (UnknownLemma)
-                {
-                    return null;
-                }
-            }
+               CountryDisplayName.nl)
+            )
+            .Should().NotThrow();
         }
     }
 }

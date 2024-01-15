@@ -113,7 +113,7 @@ public class Resource_files
         [TestCaseSource(nameof(Existing))]
         public async Task fr(Country country)
         {
-            var display = country.GetDisplayName(TestCultures.Fr);
+            var display = country.GetDisplayName(TestCultures.fr);
             display.Should().MatchWikipedia(await CountryDisplayName.fr(country))
                 .And.BeTrimmed(); ;
         }
@@ -240,7 +240,7 @@ public class Resource_files
         {
             (await CountryDisplayName.Update(
                 "Inconnu",
-                TestCultures.Fr,
+                TestCultures.fr,
                 CountryDisplayName.fr)
             )
             .Should().NotThrow();

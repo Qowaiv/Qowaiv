@@ -34,11 +34,51 @@ public static class CountryDisplayName
             displayName.Trim(),
             $"{country.EnglishName} ({country.IsoAlpha2Code})");
 
-    public static Task<string?> ar(Country country)
+    public static async Task<string?> ar(Country country)
     {
-        // TODO fetch from Wikipedia.
-        return Task.FromResult<string?>(country.GetDisplayName(TestCultures.ar));
+        if (Lookup.AR.Count == 0)
+        {
+            foreach (var item in await ar())
+            {
+                Lookup.AR[Country.Parse(item.Iso2)] = item.Name;
+            }
+        }
+        return Lookup.AR.TryGetValue(country, out var display)
+                  ? display : null;
     }
+    private static async Task<IEnumerable<Display>> ar()
+    {
+        var lemma = new WikiLemma("قائمة_الدول_حسب_المعيار_الدولي_أيزو_3166-1", TestCultures.ar);
+        var overrides = new Dictionary<string, string>()
+        {
+            ["XK"] = "كوسوفو",
+        };
+
+        return await lemma.TransformRange(Display);
+
+        IEnumerable<Display> Display(string content)
+        {
+            var parts = content.Split("|-");
+
+            foreach (var o in overrides)
+            {
+                yield return new(o.Key, o.Value);
+            }
+
+            foreach (var part in parts.Skip(1).Select(p => p.Trim('\n')))
+            {
+                var cols = part.Split("||");
+                if (cols.Length == 5)
+                {
+                    var iso2 = cols[0].TrimStart('|').Trim();
+                    var name = cols[3].TrimStart('{').TrimEnd('}');
+                    var pipe = name.IndexOf('|');
+                    yield return new(iso2, pipe == -1 ? name : name[..pipe]);
+                }
+            }
+        }
+    }
+
 
     public static async Task<string?> de(Country country)
     {
@@ -115,7 +155,7 @@ public static class CountryDisplayName
 
     private static async Task<IEnumerable<Display>> fr()
     {
-        var lemma = new WikiLemma("ISO 3166-1", TestCultures.Fr);
+        var lemma = new WikiLemma("ISO 3166-1", TestCultures.fr);
         var overrides = new Dictionary<string, string>()
         {
             ["EH"] = "Sahara occidental",
@@ -191,6 +231,7 @@ public static class CountryDisplayName
 
     private static class Lookup
     {
+        public static readonly Dictionary<Country, string> AR = [];
         public static readonly Dictionary<Country, string> FR = [];
     }
 }

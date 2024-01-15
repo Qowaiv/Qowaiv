@@ -30,6 +30,9 @@ public static class TestCultures
     /// <summary>Gets the Italian (it) <see cref="CultureInfo"/>.</summary>
     public static CultureInfo it => new("it");
 
+    /// <summary>Gets the Japanese (ja) <see cref="CultureInfo"/>.</summary>
+    public static CultureInfo ja => new("ja");
+
     /// <summary>Gets the Dutch (nl) <see cref="CultureInfo"/>.</summary>
     public static CultureInfo nl => new("nl");
 

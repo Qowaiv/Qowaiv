@@ -127,6 +127,22 @@ public class Resource_files
         }
 
         [TestCaseSource(nameof(Existing))]
+        public async Task ja(Country country)
+        {
+            var display = country.GetDisplayName(TestCultures.ja);
+            display.Should().MatchWikipedia(await CountryDisplayName.ja(country))
+                .And.BeTrimmed();
+        }
+
+        [TestCaseSource(nameof(Existing))]
+        public async Task jp(Country country)
+        {
+            var display = country.GetDisplayName(TestCultures.ja);
+            display.Should().MatchWikipedia(await CountryDisplayName.ja(country))
+                .And.BeTrimmed();
+        }
+
+        [TestCaseSource(nameof(Existing))]
         public async Task nl(Country country)
         {
             var display = country.GetDisplayName(TestCultures.nl);
@@ -250,6 +266,11 @@ public class Resource_files
         public async Task it()
             => (await CountryDisplayName.Update("Sconosciuto", TestCultures.it, CountryDisplayName.it))
             .Should().NotThrow();
+
+        [Test]
+        public async Task ja()
+           => (await CountryDisplayName.Update("不明", TestCultures.ja, CountryDisplayName.ja))
+           .Should().NotThrow();
 
         [Test]
         public async Task nl()

@@ -215,6 +215,11 @@ public static class CountryDisplayName
         return Task.FromResult<string?>(country.GetDisplayName(TestCultures.it));
     }
 
+    public static Task<string?> ja(Country country)
+    {
+        return Task.FromResult<string?>(country.GetDisplayName(TestCultures.ja));
+    }
+
     public static async Task<string?> nl(Country country)
     {
         if (country.Name.Length == 2)

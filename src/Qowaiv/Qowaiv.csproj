@@ -9,8 +9,8 @@
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 v6.6.0
-- Add former counties. #357
-- Update display names counties (EN, DE, NL). #356
+- Add former countries. #357
+- Update display names countries (EN, DE, NL). #356
 - Fix parsing (former) countries. #356
 - Add HumanReadable() and MachineReadable() methods to IBAN. #354
 - Support IBAN prefix while parsing. #353

@@ -1,8 +1,5 @@
 ﻿using Qowaiv.TestTools.Resx;
 using Qowaiv.TestTools.Wikipedia;
-using Qowaiv.UnitTests.Statistics;
-using System.Xml.Linq;
-
 
 namespace Qowaiv.TestTools.Generation;
 

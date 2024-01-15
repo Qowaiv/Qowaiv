@@ -33,6 +33,9 @@ public static class TestCultures
     /// <summary>Gets the Portuguese (pt) <see cref="CultureInfo"/>.</summary>
     public static CultureInfo pt => new("pt");
 
+    /// <summary>Gets the Russian (ru) <see cref="CultureInfo"/>.</summary>
+    public static CultureInfo ru => new("ru");
+
     /// <summary>Gets the German (de-DE) <see cref="CultureInfo"/>.</summary>
     public static CultureInfo de_DE => new("de-DE");
 

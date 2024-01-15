@@ -31,14 +31,20 @@ public static class CountryDisplayName
     public static XResourceFileData Data(string displayName, Country country)
         => new(
             $"{(country.IsUnknown() ? "ZZ" : country.Name)}_DisplayName",
-            displayName,
+            displayName.Trim(),
             $"{country.EnglishName} ({country.IsoAlpha2Code})");
+
+    public static Task<string?> ar(Country country)
+    {
+        // TODO fetch from Wikipedia.
+        return Task.FromResult<string?>(country.GetDisplayName(TestCultures.ar));
+    }
 
     public static async Task<string?> de(Country country)
     {
         if (country.Name.Length == 2)
         {
-            var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", TestCultures.De);
+            var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", TestCultures.de);
             return await lemma.Transform(DisplayName);
         }
         else return null;
@@ -69,9 +75,9 @@ public static class CountryDisplayName
         }
         else if (country.Name.Length == 2)
         {
-            var all = new WikiLemma("ISO 3166-1", TestCultures.Es);
+            var all = new WikiLemma("ISO 3166-1", TestCultures.es);
             var x = await all.Content();
-            var lemma = new WikiLemma($"Plantilla:{country.IsoAlpha3Code}", TestCultures.Es);
+            var lemma = new WikiLemma($"Plantilla:{country.IsoAlpha3Code}", TestCultures.es);
             return await lemma.Transform(DisplayName);
         }
         else return null;
@@ -154,7 +160,7 @@ public static class CountryDisplayName
     {
         if (country.Name.Length == 2)
         {
-            var lemma = new WikiLemma($"Sjabloon:{country.IsoAlpha2Code}", TestCultures.Nl);
+            var lemma = new WikiLemma($"Sjabloon:{country.IsoAlpha2Code}", TestCultures.nl);
             return await lemma.Transform(DisplayName);
         }
         else return null;

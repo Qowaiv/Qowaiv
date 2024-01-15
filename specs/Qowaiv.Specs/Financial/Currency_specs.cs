@@ -49,7 +49,7 @@ public class Supports_type_conversion
     [Test]
     public void from_null_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.FromNull<string>().To<Currency>().Should().Be(Currency.Empty);
         }
@@ -58,7 +58,7 @@ public class Supports_type_conversion
     [Test]
     public void from_empty_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From(string.Empty).To<Currency>().Should().Be(Currency.Empty);
         }
@@ -67,7 +67,7 @@ public class Supports_type_conversion
     [Test]
     public void from_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From("EUR").To<Currency>().Should().Be(Svo.Currency);
         }
@@ -76,7 +76,7 @@ public class Supports_type_conversion
     [Test]
     public void to_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.ToString().From(Svo.Currency).Should().Be("EUR");
         }

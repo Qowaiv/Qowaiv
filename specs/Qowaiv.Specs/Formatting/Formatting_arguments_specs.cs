@@ -13,7 +13,7 @@ public class ToString
     [Test]
     public void uses_current_culture_when_not_specified()
     {
-        using var _ = TestCultures.En_GB.Scoped();
+        using var _ = TestCultures.en_GB.Scoped();
 
         var arguments = new FormattingArguments("0.000");
         arguments.ToString(7).Should().Be("7.000");
@@ -37,7 +37,7 @@ public class IFormattable_ToString_extension
     [Test]
     public void ToString_DecimalWithFormatCollection_FormattedString()
     {
-        using (TestCultures.Es_EC.Scoped())
+        using (TestCultures.es_EC.Scoped())
         {
             var collection = new FormattingArgumentsCollection
             {
@@ -51,7 +51,7 @@ public class IFormattable_ToString_extension
     [Test]
     public void ToString_DecimalWithNullCollection_FormattedString()
     {
-        using var _ = TestCultures.Es_EC.Scoped();
+        using var _ = TestCultures.es_EC.Scoped();
 
         123.45m.ToString(Nil.FormattingArgumentsCollection).Should().Be("123,45");
     }

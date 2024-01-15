@@ -31,7 +31,7 @@ public class WeekDateTest
     [Test]
     public void Parse_InvalidInput_ThrowsFormatException()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Assert.Catch<FormatException>
             (() =>
@@ -45,7 +45,7 @@ public class WeekDateTest
     [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exp = TestStruct;
             var act = WeekDate.TryParse(exp.ToString());
@@ -256,7 +256,7 @@ public class WeekDateTest
     [Test]
     public void ToString_NullFormatProvider_FormattedString()
     {
-        using (TestCultures.En_US.Scoped())
+        using (TestCultures.en_US.Scoped())
         {
             var act = TestStruct.ToString(@"y-\WW-d", null);
             var exp = "1997-W14-6";

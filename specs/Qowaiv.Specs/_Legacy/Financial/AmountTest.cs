@@ -52,7 +52,7 @@ public class AmountTest
     [Test]
     public void Parse_InvalidInput_ThrowsFormatException()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Assert.Catch<FormatException>
             (() =>
@@ -66,7 +66,7 @@ public class AmountTest
     [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exp = TestStruct;
             var act = Amount.TryParse(exp.ToString());
@@ -281,7 +281,7 @@ public class AmountTest
     [Test]
     public void ToString_ValueDutchBelgium_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = Amount.Parse("1600,1").ToString();
             var exp = "1600,1";
@@ -292,7 +292,7 @@ public class AmountTest
     [Test]
     public void ToString_ValueEnglishGreatBritain_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var act = Amount.Parse("1600.1").ToString();
             var exp = "1600.1";
@@ -303,7 +303,7 @@ public class AmountTest
     [Test]
     public void ToString_FormatValueDutchBelgium_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = Amount.Parse("800").ToString("0000");
             var exp = "0800";
@@ -314,7 +314,7 @@ public class AmountTest
     [Test]
     public void ToString_FormatValueEnglishGreatBritain_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var act = Amount.Parse("800").ToString("0000");
             var exp = "0800";
@@ -378,7 +378,7 @@ public class AmountTest
     [Test]
     public void Equals_FormattedAndUnformatted_IsTrue()
     {
-        using (TestCultures.En_US.Scoped())
+        using (TestCultures.en_US.Scoped())
         {
             var l = Amount.Parse("$ 1,451.070");
             var r = Amount.Parse("1451.07");

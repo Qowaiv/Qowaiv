@@ -22,7 +22,7 @@ public class CurrencyTest
     [Test]
     public void Current_CurrentCultureNlNL_Germany()
     {
-        using (TestCultures.Nl_NL.Scoped())
+        using (TestCultures.nl_NL.Scoped())
         {
             var act = Currency.Current;
             var exp = Currency.EUR;
@@ -34,7 +34,7 @@ public class CurrencyTest
     [Test]
     public void Current_CurrentCultureEsEC_Ecuador()
     {
-        using (TestCultures.Es_EC.Scoped())
+        using (TestCultures.es_EC.Scoped())
         {
             var act = Currency.Current;
             var exp = Currency.USD;
@@ -46,7 +46,7 @@ public class CurrencyTest
     [Test]
     public void Current_CurrentCultureEn_Empty()
     {
-        using (TestCultures.En.Scoped())
+        using (TestCultures.en.Scoped())
         {
             var act = Currency.Current;
             var exp = Currency.Empty;
@@ -176,7 +176,7 @@ public class CurrencyTest
     [Test]
     public void Parse_Unknown_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var act = Currency.Parse("?");
             var exp = Currency.Unknown;
@@ -187,7 +187,7 @@ public class CurrencyTest
     [Test]
     public void Parse_InvalidInput_ThrowsFormatException()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Assert.Catch<FormatException>
             (() =>
@@ -201,7 +201,7 @@ public class CurrencyTest
     [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exp = TestStruct;
             var act = Currency.TryParse(exp.ToString());
@@ -431,7 +431,7 @@ public class CurrencyTest
     [Test]
     public void ToString_ValueDutchBelgium_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = Currency.Parse("Amerikaanse dollar").ToString();
             var exp = "USD";
@@ -442,7 +442,7 @@ public class CurrencyTest
     [Test]
     public void ToString_ValueEnglishGreatBritain_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var act = Currency.Parse("pound sterling").ToString("f");
             var exp = "Pound sterling";
@@ -456,7 +456,7 @@ public class CurrencyTest
     [Test]
     public void FormatAmount_BYR_NAf12Dot34()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Amount number = (Amount)1200.34m;
             var act = number.ToString("C", Currency.BYR);
@@ -468,7 +468,7 @@ public class CurrencyTest
     [Test]
     public void FormatAmount_ANG_NAf12Dot34()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Amount number = (Amount)12.34m;
             var act = number.ToString("C", Currency.ANG);
@@ -480,7 +480,7 @@ public class CurrencyTest
     [Test]
     public void FormatDecimal_ANG_ANG12Dot34()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var number = 12.34m;
             var act = number.ToString("C", Currency.ANG);
@@ -492,7 +492,7 @@ public class CurrencyTest
     [Test]
     public void FormatDecimal_TND_TND12Dot340()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var number = 12.34m;
             var act = number.ToString("C", Currency.TND);
@@ -504,7 +504,7 @@ public class CurrencyTest
     [Test]
     public void FormatDecimal_EUR_E12Dot34()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var number = 12.34m;
             var act = number.ToString("C", Currency.EUR);
@@ -517,7 +517,7 @@ public class CurrencyTest
     [Test]
     public void FormatDouble_EUR_E12Dot34()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var number = 12.34;
             var act = number.ToString("C", Currency.EUR);

@@ -80,7 +80,7 @@ public class ThreadDomainTest
     [Test]
     public void Remove_Country_before_set_and_after()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             Assert.AreEqual(Country.BE, Thread.CurrentThread.GetValue<Country>(), "Before.");
             Thread.CurrentThread.SetValue(Country.PT);

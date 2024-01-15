@@ -39,7 +39,7 @@ public class TimestampTest
     [Test]
     public void Parse_InvalidInput_ThrowsFormatException()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Assert.Catch<FormatException>
             (() =>
@@ -53,7 +53,7 @@ public class TimestampTest
     [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exp = TestStruct;
             var act = Timestamp.TryParse(exp.ToString());
@@ -265,7 +265,7 @@ public class TimestampTest
     [Test]
     public void ToString_ValueDutchBelgium_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = Timestamp.Parse("1600").ToString();
             var exp = "0x0000000000000640";
@@ -276,7 +276,7 @@ public class TimestampTest
     [Test]
     public void ToString_FormatValueDutchBelgium_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = Timestamp.Parse("800").ToString("0000");
             var exp = "0800";
@@ -287,7 +287,7 @@ public class TimestampTest
     [Test]
     public void ToString_FormatValueEnglishGreatBritain_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var act = Timestamp.Parse("800").ToString("0000");
             var exp = "0800";

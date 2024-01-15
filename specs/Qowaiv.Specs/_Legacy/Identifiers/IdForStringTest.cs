@@ -87,7 +87,7 @@ public class IdForStringTest
     [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exp = TestStruct;
             var act = Id<ForString>.TryParse(exp.ToString());

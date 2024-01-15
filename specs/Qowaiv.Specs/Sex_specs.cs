@@ -52,7 +52,7 @@ public class Display_name
     [Test]
     public void for_current_culture_by_default()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             Svo.Sex.DisplayName.Should().Be("Vrouwelijk");
         }
@@ -61,7 +61,7 @@ public class Display_name
     [Test]
     public void for_custom_culture_if_specified()
     {
-        Svo.Sex.GetDisplayName(TestCultures.Es_EC).Should().Be("Mujer");
+        Svo.Sex.GetDisplayName(TestCultures.es_EC).Should().Be("Mujer");
     }
 }
 
@@ -158,7 +158,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Func<Sex> parse = () => Sex.Parse("invalid input");
             parse.Should().Throw<FormatException>()
@@ -184,7 +184,7 @@ public class Has_custom_formatting
     [Test]
     public void _default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Sex.ToString().Should().Be("Female");
         }
@@ -193,7 +193,7 @@ public class Has_custom_formatting
     [Test]
     public void with_null_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Sex.ToString(default(string)).Should().Be(Svo.Sex.ToString());
         }
@@ -202,7 +202,7 @@ public class Has_custom_formatting
     [Test]
     public void with_string_empty_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Sex.ToString(string.Empty).Should().Be(Svo.Sex.ToString());
         }
@@ -238,7 +238,7 @@ public class Has_custom_formatting
     [Test]
     public void with_current_thread_culture_as_default()
     {
-        using (new CultureInfoScope(culture: TestCultures.Nl_NL, cultureUI: TestCultures.En_GB))
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
         {
             Svo.Sex.ToString(provider: null).Should().Be("Vrouwelijk");
         }
@@ -330,7 +330,7 @@ public class Supports_type_conversion
     [Test]
     public void from_null_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.FromNull<string>().To<Sex>().Should().Be(Sex.Empty);
         }
@@ -339,7 +339,7 @@ public class Supports_type_conversion
     [Test]
     public void from_empty_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From(string.Empty).To<Sex>().Should().Be(Sex.Empty);
         }
@@ -348,7 +348,7 @@ public class Supports_type_conversion
     [Test]
     public void from_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From("Female").To<Sex>().Should().Be(Svo.Sex);
         }
@@ -357,7 +357,7 @@ public class Supports_type_conversion
     [Test]
     public void to_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.ToString().From(Svo.Sex).Should().Be("Female");
         }

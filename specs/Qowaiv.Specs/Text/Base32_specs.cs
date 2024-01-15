@@ -92,7 +92,7 @@ public class GetBytes
     [Test]
     public void Throws_on_invalid_input()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var act = Assert.Catch<FormatException>(() =>
             {

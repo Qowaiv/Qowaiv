@@ -127,7 +127,7 @@ public class BusinessIdentifierCodeTest
     [Test]
     public void Parse_Unknown_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var act = BusinessIdentifierCode.Parse("?");
             var exp = BusinessIdentifierCode.Unknown;
@@ -138,7 +138,7 @@ public class BusinessIdentifierCodeTest
     [Test]
     public void Parse_InvalidInput_ThrowsFormatException()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Assert.Catch<FormatException>
             (() =>
@@ -152,7 +152,7 @@ public class BusinessIdentifierCodeTest
     [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exp = TestStruct;
             var act = BusinessIdentifierCode.TryParse(exp.ToString());

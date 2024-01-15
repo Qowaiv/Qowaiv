@@ -28,7 +28,7 @@ public class Supports_type_conversion
     [Test]
     public void from_null_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.FromNull<string>().To<BusinessIdentifierCode>().Should().Be(default);
         }
@@ -37,7 +37,7 @@ public class Supports_type_conversion
     [Test]
     public void from_empty_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From(string.Empty).To<BusinessIdentifierCode>().Should().Be(default);
         }
@@ -46,7 +46,7 @@ public class Supports_type_conversion
     [Test]
     public void from_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From("AEGONL2UXXX").To<BusinessIdentifierCode>().Should().Be(Svo.BusinessIdentifierCode);
         }
@@ -55,7 +55,7 @@ public class Supports_type_conversion
     [Test]
     public void to_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.ToString().From(Svo.BusinessIdentifierCode).Should().Be("AEGONL2UXXX");
         }

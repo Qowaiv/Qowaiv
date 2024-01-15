@@ -78,7 +78,7 @@ public class Supports_type_conversion
     [Test]
     public void from_null_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.FromNull<string>().To<Int32Id>().Should().Be(Int32Id.Empty);
         }
@@ -87,7 +87,7 @@ public class Supports_type_conversion
     [Test]
     public void from_empty_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From(string.Empty).To<Int32Id>().Should().Be(Int32Id.Empty);
         }
@@ -96,7 +96,7 @@ public class Supports_type_conversion
     [Test]
     public void from_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From("PREFIX17").To<Int32Id>().Should().Be(Svo.Int32Id);
         }
@@ -105,7 +105,7 @@ public class Supports_type_conversion
     [Test]
     public void to_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.ToString().From(Svo.Int32Id).Should().Be("17");
         }

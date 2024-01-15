@@ -177,7 +177,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             "invalid input".Invoking(YesNo.Parse)
                 .Should().Throw<FormatException>()
@@ -226,7 +226,7 @@ public class Has_custom_formatting
     [Test]
     public void with_empty_format_provider()
     {
-        using (TestCultures.Es_EC.Scoped())
+        using (TestCultures.es_EC.Scoped())
         {
             Svo.YesNo.ToString(FormatProvider.Empty).Should().Be("si");
         }
@@ -261,8 +261,8 @@ public class Has_custom_formatting
     public void with_current_thread_culture_as_default()
     {
         using (new CultureInfoScope(
-            culture: TestCultures.Nl_NL,
-            cultureUI: TestCultures.En_GB))
+            culture: TestCultures.nl_NL,
+            cultureUI: TestCultures.en_GB))
         {
             Svo.YesNo.ToString(provider: null).Should().Be("ja");
         }
@@ -367,7 +367,7 @@ public class Supports_type_conversion
     [Test]
     public void from_null_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.FromNull<string>().To<YesNo>().Should().Be(YesNo.Empty);
         }
@@ -376,7 +376,7 @@ public class Supports_type_conversion
     [Test]
     public void from_empty_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From(string.Empty).To<YesNo>().Should().Be(YesNo.Empty);
         }
@@ -385,7 +385,7 @@ public class Supports_type_conversion
     [Test]
     public void from_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From("Yes").To<YesNo>().Should().Be(Svo.YesNo);
         }
@@ -394,7 +394,7 @@ public class Supports_type_conversion
     [Test]
     public void to_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.ToString().From(Svo.YesNo).Should().Be("yes");
         }
@@ -404,7 +404,7 @@ public class Supports_type_conversion
     [TestCase(false, "no")]
     public void from_boolean(bool from, YesNo yesNo)
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From(from).To<YesNo>().Should().Be(yesNo);
         }
@@ -414,7 +414,7 @@ public class Supports_type_conversion
     [TestCase("no", false)]
     public void to_boolean(YesNo yesNo, bool boolean)
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.To<bool>().From(yesNo).Should().Be(boolean);
         }

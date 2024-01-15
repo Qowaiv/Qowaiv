@@ -135,7 +135,7 @@ public class Supports_type_conversion
     [Test]
     public void from_null_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.FromNull<string>().To<LocalDateTime>().Should().Be(default);
         }
@@ -144,7 +144,7 @@ public class Supports_type_conversion
     [Test]
     public void from_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From("2017-06-11 06:15:00").To<LocalDateTime>().Should().Be(Svo.LocalDateTime);
         }
@@ -153,7 +153,7 @@ public class Supports_type_conversion
     [Test]
     public void to_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.ToString().From(Svo.LocalDateTime).Should().Be("11/06/2017 06:15:00");
         }

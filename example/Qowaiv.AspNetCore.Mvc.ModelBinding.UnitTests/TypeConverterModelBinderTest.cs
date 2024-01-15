@@ -17,7 +17,7 @@ public class TypeConverterModelBinderTest
     [Test]
     public async Task BindModelAsync_InvalidDate_ErrorMessage()
     {
-        using (TestCultures.Nl_NL.Scoped())
+        using (TestCultures.nl_NL.Scoped())
         {
             var context = GetBindingContext(typeof(Date));
             context.ValueProvider = new SimpleValueProvider { { TheModelName, "Rubbish" } };

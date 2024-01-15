@@ -3,7 +3,7 @@
 internal class Get_Currency
 {
     private static readonly Country[] WithoutCurrency = [Country.AQ];
-    private static IEnumerable<Country> WithCurrency => Country.All.Except(WithoutCurrency);
+    private static IEnumerable<Country> WithCurrency => Country.GetExisting().Except(WithoutCurrency);
 
     [TestCaseSource(nameof(WithCurrency))]
     public void Exists_on_start_date(Country country)

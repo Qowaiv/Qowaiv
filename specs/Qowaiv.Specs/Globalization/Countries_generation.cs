@@ -54,8 +54,8 @@ public class Constants
 /// </remarks>
 public class Resource_files
 {
-    internal static readonly IReadOnlyCollection<Iso3166_1> Iso3166_1s = new WikiLemma("ISO 3166-1", TestCultures.En).TransformRange(Iso3166_1.Parse).Result;
-    internal static readonly IReadOnlyCollection<Iso3166_3> Iso3166_3s = new WikiLemma("ISO_3166-3", TestCultures.En).TransformRange(Iso3166_3.Parse).Result;
+    internal static readonly IReadOnlyCollection<Iso3166_1> Iso3166_1s = new WikiLemma("ISO 3166-1", TestCultures.en).TransformRange(Iso3166_1.Parse).Result;
+    internal static readonly IReadOnlyCollection<Iso3166_3> Iso3166_3s = new WikiLemma("ISO_3166-3", TestCultures.en).TransformRange(Iso3166_3.Parse).Result;
 
     [TestCaseSource(nameof(Iso3166_1s))]
     public void exsiting_reflect_info_of_Wikipedia(Iso3166_1 info)
@@ -81,23 +81,32 @@ public class Resource_files
         summary.Should().BeEquivalentTo(info, c => c.Excluding(m => m.Start).Excluding(m => m.End));
     }
 
-    public class Display_names_match_Wikipedia
+    public class Display_names
     {
         private static readonly IReadOnlyCollection<Country> Existing = Country.GetExisting().ToArray();
 
         [TestCaseSource(nameof(Existing))]
+        public async Task ar(Country country)
+        {
+            var display = country.GetDisplayName(TestCultures.ar);
+            display.Should().MatchWikipedia(await CountryDisplayName.ar(country))
+                .And.BeArabic()
+                .And.BeTrimmed();
+        }
+
+        [TestCaseSource(nameof(Existing))]
         public async Task de(Country country)
         {
-            var display = country.GetDisplayName(TestCultures.De);
-            display.Should().Be(await CountryDisplayName.de(country))
+            var display = country.GetDisplayName(TestCultures.de);
+            display.Should().MatchWikipedia(await CountryDisplayName.de(country))
                 .And.BeTrimmed();
         }
 
         [TestCaseSource(nameof(Existing))]
         public async Task es(Country country)
         {
-            var display = country.GetDisplayName(TestCultures.Es);
-            display.Should().Be(await CountryDisplayName.es(country))
+            var display = country.GetDisplayName(TestCultures.es);
+            display.Should().MatchWikipedia(await CountryDisplayName.es(country))
                 .And.BeTrimmed(); 
         }
 
@@ -105,15 +114,15 @@ public class Resource_files
         public async Task fr(Country country)
         {
             var display = country.GetDisplayName(TestCultures.Fr);
-            display.Should().Be(await CountryDisplayName.fr(country))
+            display.Should().MatchWikipedia(await CountryDisplayName.fr(country))
                 .And.BeTrimmed(); ;
         }
 
         [TestCaseSource(nameof(Existing))]
         public async Task nl(Country country)
         {
-            var display = country.GetDisplayName(TestCultures.Nl);
-            display.Should().Be(await CountryDisplayName.nl(country))
+            var display = country.GetDisplayName(TestCultures.nl);
+            display.Should().MatchWikipedia(await CountryDisplayName.nl(country))
                 .And.BeTrimmed(); ;
         }
     }
@@ -194,11 +203,22 @@ public class Resource_files
         }
 
         [Test]
+        public async Task ar()
+        {
+            (await CountryDisplayName.Update(
+              "مجهولة",
+              TestCultures.ar,
+              CountryDisplayName.ar)
+            )
+            .Should().NotThrow();
+        }
+
+        [Test]
         public async Task de()
         {
             (await CountryDisplayName.Update(
               "Unbekannt",
-              TestCultures.De,
+              TestCultures.de,
               CountryDisplayName.de)
             )
             .Should().NotThrow();
@@ -209,7 +229,7 @@ public class Resource_files
         {
             (await CountryDisplayName.Update(
                 "Desconocido",
-                TestCultures.Es,
+                TestCultures.es,
                 CountryDisplayName.es)
             )
             .Should().NotThrow();
@@ -231,7 +251,7 @@ public class Resource_files
         {
             (await CountryDisplayName.Update(
                "Onbekend",
-               TestCultures.Nl,
+               TestCultures.nl,
                CountryDisplayName.nl)
             )
             .Should().NotThrow();

@@ -176,7 +176,7 @@ public class Has_custom_formatting
     [Test]
     public void _default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Iban.ToString().Should().Be("NL20INGB0001234567");
         }
@@ -185,7 +185,7 @@ public class Has_custom_formatting
     [Test]
     public void with_null_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Iban.ToString().Should().Be(Svo.Iban.ToString(default(string)));
         }
@@ -194,7 +194,7 @@ public class Has_custom_formatting
     [Test]
     public void with_string_empty_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.Iban.ToString().Should().Be(Svo.Iban.ToString(string.Empty));
         }
@@ -211,7 +211,7 @@ public class Has_custom_formatting
     [Test]
     public void with_empty_format_provider()
     {
-        using (TestCultures.Es_EC.Scoped())
+        using (TestCultures.es_EC.Scoped())
         {
             Svo.Iban.ToString(FormatProvider.Empty).Should().Be("NL20INGB0001234567");
         }
@@ -259,7 +259,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Func<InternationalBankAccountNumber> parse = () => InternationalBankAccountNumber.Parse("invalid input");
             parse.Should().Throw<FormatException>()
@@ -314,7 +314,7 @@ public class Supports_type_conversion
     [Test]
     public void from_null_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.FromNull<string>().To<InternationalBankAccountNumber>().Should().Be(InternationalBankAccountNumber.Empty);
         }
@@ -323,7 +323,7 @@ public class Supports_type_conversion
     [Test]
     public void from_empty_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From(string.Empty).To<InternationalBankAccountNumber>().Should().Be(InternationalBankAccountNumber.Empty);
         }
@@ -332,7 +332,7 @@ public class Supports_type_conversion
     [Test]
     public void from_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From("NL20 INGB 0001 2345 67").To<InternationalBankAccountNumber>().Should().Be(Svo.Iban);
         }
@@ -341,7 +341,7 @@ public class Supports_type_conversion
     [Test]
     public void to_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.ToString().From(Svo.Iban).Should().Be("NL20INGB0001234567");
         }

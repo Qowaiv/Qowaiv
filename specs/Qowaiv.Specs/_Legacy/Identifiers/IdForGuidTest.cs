@@ -96,7 +96,7 @@ public class IdForGuidTest
     [Test]
     public void Parse_InvalidInput_ThrowsFormatException()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Assert.Catch<FormatException>(() =>
             {
@@ -110,7 +110,7 @@ public class IdForGuidTest
     [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exp = TestStruct;
             var act = Id<ForGuid>.TryParse(exp.ToString());
@@ -121,7 +121,7 @@ public class IdForGuidTest
     [Test]
     public void TryParse_InvalidInput_DefaultValue()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exp = default(Id<ForGuid>);
             var act = Id<ForGuid>.TryParse("InvalidInput");

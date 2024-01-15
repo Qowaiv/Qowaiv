@@ -24,7 +24,7 @@ public class MoneyTest
     [Test]
     public void TryParse_StringValue_IsValid()
     {
-        using (TestCultures.Nl_NL.Scoped())
+        using (TestCultures.nl_NL.Scoped())
         {
             Money exp = 42.17 + Currency.EUR;
             Money.TryParse("€42,17", out Money act).Should().BeTrue();
@@ -44,7 +44,7 @@ public class MoneyTest
     [Test]
     public void Parse_InvalidInput_ThrowsFormatException()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Assert.Catch<FormatException>
             (() =>
@@ -58,7 +58,7 @@ public class MoneyTest
     [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var exp = TestStruct;
             var act = Money.TryParse("€42.17");
@@ -74,7 +74,7 @@ public class MoneyTest
     [Test]
     public void Parse_EuroSpace12_Parsed()
     {
-        using (TestCultures.Fr_FR.Scoped())
+        using (TestCultures.fr_FR.Scoped())
         {
             var exp = 12 + Currency.EUR;
             var act = Money.Parse("€ 12");
@@ -85,7 +85,7 @@ public class MoneyTest
     [Test]
     public void Parse_Min12Comma765SpaceEuro_Parsed()
     {
-        using (TestCultures.Fr_FR.Scoped())
+        using (TestCultures.fr_FR.Scoped())
         {
             var exp = -12.765 + Currency.EUR;
             var act = Money.Parse("-12,765 €");
@@ -291,7 +291,7 @@ public class MoneyTest
     [Test]
     public void ToString_TestStruct_ComplexPattern()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = TestStruct.ToString("0.00");
             var exp = "42,17";
@@ -302,7 +302,7 @@ public class MoneyTest
     [Test]
     public void ToString_ValueDutchBelgium_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             // 3: n $
             CultureInfo.CurrentCulture.NumberFormat.CurrencyPositivePattern = 3;
@@ -315,7 +315,7 @@ public class MoneyTest
     [Test]
     public void ToString_ValueEnglishGreatBritain_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var act = Money.Parse("EUR 1600.1").ToString();
             var exp = "€1,600.10";
@@ -326,7 +326,7 @@ public class MoneyTest
     [Test]
     public void ToString_AED_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var act = Money.Parse("AED 1600.1").ToString();
             var exp = "AED1,600.10";
@@ -337,7 +337,7 @@ public class MoneyTest
     [Test]
     public void ToString_FormatValueDutchBelgium_AreEqual()
     {
-        using (TestCultures.Nl_BE.Scoped())
+        using (TestCultures.nl_BE.Scoped())
         {
             var act = Money.Parse("800").ToString("0000");
             var exp = "0800";
@@ -348,7 +348,7 @@ public class MoneyTest
     [Test]
     public void ToString_FormatValueEnglishGreatBritain_AreEqual()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             var act = Money.Parse("800").ToString("0000");
             var exp = "0800";

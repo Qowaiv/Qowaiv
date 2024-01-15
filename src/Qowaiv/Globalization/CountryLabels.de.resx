@@ -85,6 +85,10 @@
     <value>Bolivien</value>
     <comment>Bolivia (BO)</comment>
   </data>
+  <data name="BQ_DisplayName">
+    <value>Karibische Niederlande</value>
+    <comment>Caribbean Netherlands (BQ)</comment>
+  </data>
   <data name="BR_DisplayName">
     <value>Brasilien</value>
     <comment>Brazil (BR)</comment>
@@ -262,7 +266,7 @@
     <comment>Hong Kong (HK)</comment>
   </data>
   <data name="HM_DisplayName">
-    <value>Heard Und Mcdonaldinseln</value>
+    <value>Heard und McDonaldinseln</value>
     <comment>Heard Island and McDonald Islands (HM)</comment>
   </data>
   <data name="HR_DisplayName">
@@ -518,7 +522,7 @@
     <comment>Slovenia (SI)</comment>
   </data>
   <data name="SJ_DisplayName">
-    <value>Svalbard Und Jan Mayen</value>
+    <value>Svalbard und Jan Mayen</value>
     <comment>Svalbard and Jan Mayen (SJ)</comment>
   </data>
   <data name="SK_DisplayName">
@@ -634,7 +638,7 @@
     <comment>Netherlands Antilles (AN)</comment>
   </data>
   <data name="BQAQ_DisplayName">
-    <value>Britisches Antarktis-Territorium </value>
+    <value>Britisches Antarktis-Territorium</value>
     <comment>British Antarctic Territory (BQ)</comment>
   </data>
   <data name="CSHH_DisplayName">
@@ -686,7 +690,7 @@
     <comment>Pacific Islands (Trust Territory) (PC)</comment>
   </data>
   <data name="PUUM_DisplayName">
-    <value>Sonstige US-Pazifik-Inseln </value>
+    <value>Sonstige US-Pazifik-Inseln</value>
     <comment>United States Miscellaneous Pacific Islands (PU)</comment>
   </data>
   <data name="PZPA_DisplayName">

@@ -82,7 +82,21 @@ public static class CountryDisplayName
 
     public static async Task<string?> de(Country country)
     {
-        if (country.Name.Length == 2)
+        var overrides = new Dictionary<Country, string>()
+        {
+            [Country.BQ] = "Karibische Niederlande",
+            [Country.BV] = "Bouvetinsel",
+            [Country.HM] = "Heard und McDonaldinseln",
+            [Country.SJ] = "Svalbard und Jan Mayen",
+            [Country.UM] = "United States Minor Outlying Islands",
+            [Country.XK] = "Kosovo",
+        };
+
+        if (overrides.TryGetValue(country, out var display))
+        {
+            return display;
+        }
+        else if (country.Name.Length == 2)
         {
             var lemma = new WikiLemma($"Vorlage:{country.IsoAlpha3Code}", TestCultures.de);
             return await lemma.Transform(DisplayName);

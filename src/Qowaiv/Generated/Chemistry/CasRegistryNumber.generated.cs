@@ -190,7 +190,7 @@ public partial struct CasRegistryNumber
     /// <param name="s">
     /// A string containing the CAS Registry Number to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -200,8 +200,8 @@ public partial struct CasRegistryNumber
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static CasRegistryNumber Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static CasRegistryNumber Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<CasRegistryNumber>(s, QowaivMessages.FormatExceptionCasRegistryNumber);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="CasRegistryNumber"/>.</summary>
@@ -218,14 +218,14 @@ public partial struct CasRegistryNumber
     /// <param name="s">
     /// A string containing the CAS Registry Number to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The CAS Registry Number if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static CasRegistryNumber? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(CasRegistryNumber?);
+    public static CasRegistryNumber? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(CasRegistryNumber?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="CasRegistryNumber"/>.
     /// A return value indicates whether the conversion succeeded.

@@ -190,7 +190,7 @@ public partial struct InternationalBankAccountNumber
     /// <param name="s">
     /// A string containing the IBAN to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -200,8 +200,8 @@ public partial struct InternationalBankAccountNumber
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static InternationalBankAccountNumber Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static InternationalBankAccountNumber Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<InternationalBankAccountNumber>(s, QowaivMessages.FormatExceptionInternationalBankAccountNumber);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="InternationalBankAccountNumber"/>.</summary>
@@ -218,14 +218,14 @@ public partial struct InternationalBankAccountNumber
     /// <param name="s">
     /// A string containing the IBAN to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The IBAN if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static InternationalBankAccountNumber? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(InternationalBankAccountNumber?);
+    public static InternationalBankAccountNumber? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(InternationalBankAccountNumber?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="InternationalBankAccountNumber"/>.
     /// A return value indicates whether the conversion succeeded.

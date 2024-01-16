@@ -184,7 +184,7 @@ public partial struct Timestamp
     /// <param name="s">
     /// A string containing the timestamp to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -194,8 +194,8 @@ public partial struct Timestamp
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Timestamp Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static Timestamp Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<Timestamp>(s, QowaivMessages.FormatExceptionTimestamp);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.</summary>
@@ -212,14 +212,14 @@ public partial struct Timestamp
     /// <param name="s">
     /// A string containing the timestamp to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The timestamp if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Timestamp? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Timestamp?);
+    public static Timestamp? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(Timestamp?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.
     /// A return value indicates whether the conversion succeeded.

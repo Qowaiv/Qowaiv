@@ -104,7 +104,7 @@ public readonly partial struct Timestamp : IXmlSerializable, IFormattable, IEqua
     /// <param name="s">
     /// A string containing a timestamp to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -113,17 +113,17 @@ public readonly partial struct Timestamp : IXmlSerializable, IFormattable, IEqua
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Timestamp result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Timestamp result)
     {
         result = default;
         if (s is not { Length: > 0 }) { return false; }
         if (s.StartsWith("0x", StringComparison.OrdinalIgnoreCase) &&
-            ulong.TryParse(s[2..], NumberStyles.HexNumber, formatProvider, out var val))
+            ulong.TryParse(s[2..], NumberStyles.HexNumber, provider, out var val))
         {
             result = Create(val);
             return true;
         }
-        else if (ulong.TryParse(s, NumberStyles.Number, formatProvider, out val))
+        else if (ulong.TryParse(s, NumberStyles.Number, provider, out val))
         {
             result = new Timestamp(val);
             return true;

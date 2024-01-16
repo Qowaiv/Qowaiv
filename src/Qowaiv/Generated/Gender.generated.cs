@@ -190,7 +190,7 @@ public partial struct Gender
     /// <param name="s">
     /// A string containing the gender to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -200,8 +200,8 @@ public partial struct Gender
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Gender Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static Gender Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<Gender>(s, QowaivMessages.FormatExceptionGender);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Gender"/>.</summary>
@@ -218,14 +218,14 @@ public partial struct Gender
     /// <param name="s">
     /// A string containing the gender to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The gender if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Gender? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Gender?);
+    public static Gender? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(Gender?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Gender"/>.
     /// A return value indicates whether the conversion succeeded.

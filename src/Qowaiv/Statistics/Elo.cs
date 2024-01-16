@@ -197,7 +197,7 @@ public readonly partial struct Elo : IXmlSerializable, IFormattable, IEquatable<
     /// <param name="s">
     /// A string containing an Elo to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <param name="result">
@@ -206,14 +206,14 @@ public readonly partial struct Elo : IXmlSerializable, IFormattable, IEquatable<
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Elo result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Elo result)
     {
         result = Zero;
         if (s is { Length: > 0 })
         {
             var str = s[^1] == '*' ? s[..^1] : s;
 
-            if (double.TryParse(str, NumberStyles.Number, formatProvider, out var d) && !double.IsNaN(d) && !double.IsInfinity(d))
+            if (double.TryParse(str, NumberStyles.Number, provider, out var d) && !double.IsNaN(d) && !double.IsInfinity(d))
             {
                 result = new Elo(d);
                 return true;

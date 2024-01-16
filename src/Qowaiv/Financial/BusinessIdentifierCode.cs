@@ -115,7 +115,7 @@ public readonly partial struct BusinessIdentifierCode : IXmlSerializable, IForma
     /// <param name="s">
     /// A string containing a BIC to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -124,7 +124,7 @@ public readonly partial struct BusinessIdentifierCode : IXmlSerializable, IForma
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out BusinessIdentifierCode result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out BusinessIdentifierCode result)
     {
         result = default;
         var str = s.Unify();
@@ -132,7 +132,7 @@ public readonly partial struct BusinessIdentifierCode : IXmlSerializable, IForma
         {
             return true;
         }
-        else if (str.IsUnknown(formatProvider))
+        else if (str.IsUnknown(provider))
         {
             result = Unknown;
             return true;

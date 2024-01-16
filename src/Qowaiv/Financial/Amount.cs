@@ -523,7 +523,7 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// <param name="s">
     /// A string containing an Amount to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -532,10 +532,10 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Amount result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Amount result)
     {
         result = default;
-        if (Money.TryParse(s, formatProvider, out Money money))
+        if (Money.TryParse(s, provider, out Money money))
         {
             result = (Amount)(decimal)money;
             return true;

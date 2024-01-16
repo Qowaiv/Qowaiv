@@ -184,7 +184,7 @@ public partial struct Percentage
     /// <param name="s">
     /// A string containing the percentage to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -194,8 +194,8 @@ public partial struct Percentage
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Percentage Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static Percentage Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<Percentage>(s, QowaivMessages.FormatExceptionPercentage);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Percentage"/>.</summary>
@@ -212,14 +212,14 @@ public partial struct Percentage
     /// <param name="s">
     /// A string containing the percentage to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The percentage if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Percentage? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Percentage?);
+    public static Percentage? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(Percentage?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Percentage"/>.
     /// A return value indicates whether the conversion succeeded.

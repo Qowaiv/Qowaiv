@@ -141,7 +141,7 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     /// <param name="s">
     /// A string containing an email address to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -150,14 +150,14 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out EmailAddress result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out EmailAddress result)
     {
         result = default;
         if (string.IsNullOrEmpty(s))
         {
             return true;
         }
-        else if (Qowaiv.Unknown.IsUnknown(s, formatProvider as CultureInfo))
+        else if (Qowaiv.Unknown.IsUnknown(s, provider as CultureInfo))
         {
             result = Unknown;
             return true;

@@ -190,7 +190,7 @@ public partial struct Country
     /// <param name="s">
     /// A string containing the country to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -200,8 +200,8 @@ public partial struct Country
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Country Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static Country Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<Country>(s, QowaivMessages.FormatExceptionCountry);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Country"/>.</summary>
@@ -218,14 +218,14 @@ public partial struct Country
     /// <param name="s">
     /// A string containing the country to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The country if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Country? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Country?);
+    public static Country? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(Country?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Country"/>.
     /// A return value indicates whether the conversion succeeded.

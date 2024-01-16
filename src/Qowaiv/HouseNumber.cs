@@ -128,7 +128,7 @@ public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEq
     /// <param name="s">
     /// A string containing a house number to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -137,14 +137,14 @@ public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEq
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out HouseNumber result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out HouseNumber result)
     {
         result = default;
         if (string.IsNullOrEmpty(s))
         {
             return true;
         }
-        var culture = formatProvider as CultureInfo ?? CultureInfo.InvariantCulture;
+        var culture = provider as CultureInfo ?? CultureInfo.InvariantCulture;
         if (Qowaiv.Unknown.IsUnknown(s, culture))
         {
             result = Unknown;

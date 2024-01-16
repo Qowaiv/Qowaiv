@@ -582,7 +582,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
     /// <param name="s">
     /// A string containing a stream size to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -591,7 +591,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out StreamSize result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out StreamSize result)
     {
         result = default;
         if (string.IsNullOrEmpty(s)) return false;
@@ -601,14 +601,14 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
             var size = GetWithoutStreamSizeMarker(s, streamSizeMarker);
             var factor = GetMultiplier(streamSizeMarker);
 
-            if (long.TryParse(size, NumberStyles.Number, formatProvider, out long sizeInt64) &&
+            if (long.TryParse(size, NumberStyles.Number, provider, out long sizeInt64) &&
                 sizeInt64 <= long.MaxValue / factor &&
                 sizeInt64 >= long.MinValue / factor)
             {
                 result = new StreamSize(sizeInt64 * factor);
                 return true;
             }
-            else if (decimal.TryParse(size, NumberStyles.Number, formatProvider, out decimal sizeDecimal) &&
+            else if (decimal.TryParse(size, NumberStyles.Number, provider, out decimal sizeDecimal) &&
                 sizeDecimal <= decimal.MaxValue / factor &&
                 sizeDecimal >= decimal.MinValue / factor)
             {

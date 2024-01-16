@@ -168,7 +168,7 @@ public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<
     /// <param name="s">
     /// A string containing a Sex to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -177,10 +177,10 @@ public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Sex result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Sex result)
     {
         result = Empty;
-        if (ParseValues.TryGetValue(formatProvider, s.Unify(), out var val))
+        if (ParseValues.TryGetValue(provider, s.Unify(), out var val))
         {
             result = new Sex(val);
             return true;

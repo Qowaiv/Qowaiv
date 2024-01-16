@@ -176,7 +176,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     /// <param name="s">
     /// A string containing an IBAN to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -185,7 +185,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out InternationalBankAccountNumber result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out InternationalBankAccountNumber result)
     {
         result = default;
 
@@ -201,7 +201,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
             {
                 return true;
             }
-            if (str.IsUnknown(formatProvider))
+            if (str.IsUnknown(provider))
             {
                 result = Unknown;
                 return true;

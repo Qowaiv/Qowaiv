@@ -190,7 +190,7 @@ public partial struct Currency
     /// <param name="s">
     /// A string containing the currency to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -200,8 +200,8 @@ public partial struct Currency
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Currency Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static Currency Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<Currency>(s, QowaivMessages.FormatExceptionCurrency);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Currency"/>.</summary>
@@ -218,14 +218,14 @@ public partial struct Currency
     /// <param name="s">
     /// A string containing the currency to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The currency if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Currency? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Currency?);
+    public static Currency? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(Currency?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Currency"/>.
     /// A return value indicates whether the conversion succeeded.

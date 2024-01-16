@@ -184,7 +184,7 @@ public partial struct Elo
     /// <param name="s">
     /// A string containing the elo to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -194,8 +194,8 @@ public partial struct Elo
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Elo Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static Elo Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<Elo>(s, QowaivMessages.FormatExceptionElo);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Elo"/>.</summary>
@@ -212,14 +212,14 @@ public partial struct Elo
     /// <param name="s">
     /// A string containing the elo to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The elo if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Elo? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Elo?);
+    public static Elo? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(Elo?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Elo"/>.
     /// A return value indicates whether the conversion succeeded.

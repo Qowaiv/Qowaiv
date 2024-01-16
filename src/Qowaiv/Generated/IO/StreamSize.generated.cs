@@ -154,7 +154,7 @@ public partial struct StreamSize
     /// <param name="s">
     /// A string containing the stream size to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -164,8 +164,8 @@ public partial struct StreamSize
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static StreamSize Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static StreamSize Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<StreamSize>(s, QowaivMessages.FormatExceptionStreamSize);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="StreamSize"/>.</summary>
@@ -182,14 +182,14 @@ public partial struct StreamSize
     /// <param name="s">
     /// A string containing the stream size to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The stream size if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static StreamSize? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(StreamSize?);
+    public static StreamSize? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(StreamSize?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="StreamSize"/>.
     /// A return value indicates whether the conversion succeeded.

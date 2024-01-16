@@ -29,7 +29,7 @@ public partial struct Uuid
 }
 
 public partial struct Uuid : IEquatable<Uuid>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<Uuid, Uuid, bool>
 #endif
 {
@@ -157,7 +157,7 @@ public partial struct Uuid : IXmlSerializable
 }
 
 public partial struct Uuid
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<Uuid>
 #endif
 {

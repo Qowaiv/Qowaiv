@@ -41,7 +41,7 @@ public partial struct EmailAddress
 }
 
 public partial struct EmailAddress : IEquatable<EmailAddress>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<EmailAddress, EmailAddress, bool>
 #endif
 {
@@ -169,7 +169,7 @@ public partial struct EmailAddress : IXmlSerializable
 }
 
 public partial struct EmailAddress
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<EmailAddress>
 #endif
 {

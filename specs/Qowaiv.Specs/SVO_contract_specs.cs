@@ -25,7 +25,7 @@ public class Implements : SingleValueObjectSpecs
     [TestCaseSource(nameof(AllSvos))]
     public void IXmlSerializable(Type type) => type.Should().Implement<IXmlSerializable>();
 
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCaseSource(nameof(AllSvosExceptGeneric))]
     public void IEqualityOperators(Type type) => type.Should().Implement(typeof(System.Numerics.IEqualityOperators<,,>).MakeGenericType(type, type, typeof(bool)));
 
@@ -44,7 +44,7 @@ public class Is_decorated_with : SingleValueObjectSpecs
     public void Open_API_data_type_Legacy(Type svo)
         => svo.Should().BeDecoratedWith<Qowaiv.Json.OpenApiDataTypeAttribute>();
 
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
     [TestCaseSource(nameof(AllSvos))]
     public void NotNullWhen_attribute_on_Equals_object(Type svo)
     {
@@ -68,7 +68,7 @@ public class Is_decorated_with : SingleValueObjectSpecs
     public void Open_API_data_type(Type svo)
         => svo.Should().BeDecoratedWith<Qowaiv.OpenApi.OpenApiDataTypeAttribute>();
 
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
     [TestCaseSource(nameof(AllSvos))]
     public void System_Text_Json_JsonConverter(Type type)
     {

@@ -21,7 +21,7 @@ public partial struct Percentage
 }
 
 public partial struct Percentage : IEquatable<Percentage>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<Percentage, Percentage, bool>
 #endif
 {
@@ -50,7 +50,7 @@ public partial struct Percentage : IEquatable<Percentage>
 }
 
 public partial struct Percentage : IComparable, IComparable<Percentage>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IComparisonOperators<Percentage, Percentage, bool>
 #endif
 {
@@ -163,7 +163,7 @@ public partial struct Percentage : IXmlSerializable
 }
 
 public partial struct Percentage
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<Percentage>
 #endif
 {

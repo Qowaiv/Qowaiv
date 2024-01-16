@@ -21,6 +21,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     , IAdditionOperators<Fraction, int, Fraction>, ISubtractionOperators<Fraction, int, Fraction>
     , IMultiplyOperators<Fraction, long, Fraction>, IDivisionOperators<Fraction, long, Fraction>
     , IMultiplyOperators<Fraction, int, Fraction>, IDivisionOperators<Fraction, int, Fraction>
+    , IMinMaxValue<Fraction>
 #endif
 #if NET8_0_OR_GREATER
 #else
@@ -31,19 +32,19 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     /// <remarks>
     /// Is the default value of <see cref="Fraction"/>.
     /// </remarks>
-    public static readonly Fraction Zero;
+    public static Fraction Zero => default;
 
     /// <summary>Represents the one (1) <see cref="Fraction"/> value.</summary>
-    public static readonly Fraction One = New(1, 1);
+    public static Fraction One => New(1, 1);
 
     /// <summary>Represents the smallest positive <see cref="Fraction"/> value that is greater than zero.</summary>
     public static readonly Fraction Epsilon = New(1, long.MaxValue);
 
     /// <summary>Represents the largest possible value of a <see cref="Fraction"/>.</summary>
-    public static readonly Fraction MaxValue = New(+long.MaxValue, 1);
+    public static Fraction MaxValue => New(+long.MaxValue, 1);
 
     /// <summary>Represents the smallest possible value of a <see cref="Fraction"/>.</summary>
-    public static readonly Fraction MinValue = New(-long.MaxValue, 1);
+    public static Fraction MinValue => New(-long.MaxValue, 1);
 
     internal static partial class Formatting
     {

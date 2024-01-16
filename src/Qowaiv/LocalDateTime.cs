@@ -15,15 +15,16 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     , IAdditionOperators<LocalDateTime, TimeSpan, LocalDateTime>, ISubtractionOperators<LocalDateTime, TimeSpan, LocalDateTime>
     , IAdditionOperators<LocalDateTime, MonthSpan, LocalDateTime>, ISubtractionOperators<LocalDateTime, MonthSpan, LocalDateTime>
     , ISubtractionOperators<LocalDateTime, LocalDateTime, TimeSpan>
+    , IMinMaxValue<LocalDateTime>
 #endif
 {
     private const string SerializableFormat = @"yyyy-MM-dd HH:mm:ss.FFFFFFF";
 
     /// <summary>Represents the smallest possible value of date. This field is read-only.</summary>
-    public static readonly LocalDateTime MinValue = new(DateTime.MinValue);
+    public static LocalDateTime MinValue => new(DateTime.MinValue);
 
     /// <summary>Represents the largest possible value date. This field is read-only.</summary>
-    public static readonly LocalDateTime MaxValue = new(DateTime.MaxValue);
+    public static LocalDateTime MaxValue => new(DateTime.MaxValue);
 
     /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct to a specified number of ticks.</summary>
     /// <param name="ticks">

@@ -12,7 +12,7 @@
 namespace Qowaiv.Financial;
 
 public partial struct Money : IEquatable<Money>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<Money, Money, bool>
 #endif
 {
@@ -32,7 +32,7 @@ public partial struct Money : IEquatable<Money>
 }
 
 public partial struct Money : IComparable, IComparable<Money>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IComparisonOperators<Money, Money, bool>
 #endif
 {
@@ -119,7 +119,7 @@ public partial struct Money : IXmlSerializable
 }
 
 public partial struct Money
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<Money>
 #endif
 {

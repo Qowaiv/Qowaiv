@@ -21,7 +21,7 @@
 [OpenApiDataType(description: "EU energy label", type: "string", format: "energy-label", example: "A++", pattern: @"A\+{1,4}|[A-H]", nullable: true)]
 [OpenApi.OpenApiDataType(description: "EU energy label", type: "string", format: "energy-label", example: "A++", pattern: @"[A-H]|A\+{1,4}", nullable: true)]
 [TypeConverter(typeof(Conversion.Sustainability.EnergyLabelTypeConverter))]
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Sustainability.EnergyLabelJsonConverter))]
 #endif
 public readonly partial struct EnergyLabel : IXmlSerializable, IEquatable<EnergyLabel>, IComparable, IComparable<EnergyLabel>

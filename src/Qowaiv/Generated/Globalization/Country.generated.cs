@@ -41,7 +41,7 @@ public partial struct Country
 }
 
 public partial struct Country : IEquatable<Country>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<Country, Country, bool>
 #endif
 {
@@ -169,7 +169,7 @@ public partial struct Country : IXmlSerializable
 }
 
 public partial struct Country
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<Country>
 #endif
 {

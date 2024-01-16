@@ -41,7 +41,7 @@ public partial struct Month
 }
 
 public partial struct Month : IEquatable<Month>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<Month, Month, bool>
 #endif
 {
@@ -169,7 +169,7 @@ public partial struct Month : IXmlSerializable
 }
 
 public partial struct Month
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<Month>
 #endif
 {

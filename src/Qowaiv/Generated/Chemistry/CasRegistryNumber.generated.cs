@@ -41,7 +41,7 @@ public partial struct CasRegistryNumber
 }
 
 public partial struct CasRegistryNumber : IEquatable<CasRegistryNumber>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<CasRegistryNumber, CasRegistryNumber, bool>
 #endif
 {
@@ -169,7 +169,7 @@ public partial struct CasRegistryNumber : IXmlSerializable
 }
 
 public partial struct CasRegistryNumber
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<CasRegistryNumber>
 #endif
 {

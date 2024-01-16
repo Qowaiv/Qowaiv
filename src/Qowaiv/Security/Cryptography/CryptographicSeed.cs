@@ -5,7 +5,7 @@ namespace Qowaiv.Security.Cryptography;
 /// <summary>Represents a cryptographic seed.</summary>
 [TypeConverter(typeof(CryptographicSeedTypeConverter))]
 [DebuggerDisplay("{DebuggerDisplay}")]
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Security.Cryptography.CryptographicSeedJsonConverter))]
 #endif
 public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>

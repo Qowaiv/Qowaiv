@@ -175,7 +175,7 @@ public partial struct Date
     /// <param name="s">
     /// A string containing the date to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -185,8 +185,8 @@ public partial struct Date
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Date Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static Date Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<Date>(s, QowaivMessages.FormatExceptionDate);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Date"/>.</summary>
@@ -203,14 +203,14 @@ public partial struct Date
     /// <param name="s">
     /// A string containing the date to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The date if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Date? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Date?);
+    public static Date? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(Date?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Date"/>.
     /// A return value indicates whether the conversion succeeded.

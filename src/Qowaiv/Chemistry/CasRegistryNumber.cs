@@ -94,7 +94,7 @@ public readonly partial struct CasRegistryNumber : IXmlSerializable, IFormattabl
     /// <param name="s">
     /// A string containing the CAS Registry Number to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -104,7 +104,7 @@ public readonly partial struct CasRegistryNumber : IXmlSerializable, IFormattabl
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out CasRegistryNumber result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out CasRegistryNumber result)
     {
         result = default;
         var str = s.Unify();
@@ -112,7 +112,7 @@ public readonly partial struct CasRegistryNumber : IXmlSerializable, IFormattabl
         {
             return true;
         }
-        else if (Qowaiv.Unknown.IsUnknown(str, formatProvider as CultureInfo))
+        else if (Qowaiv.Unknown.IsUnknown(str, provider as CultureInfo))
         {
             result = Unknown;
             return true;

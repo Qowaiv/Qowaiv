@@ -361,7 +361,7 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     /// <param name="s">
     /// A string containing a date span to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -370,7 +370,7 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out DateSpan result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out DateSpan result)
     {
         result = default;
 
@@ -383,9 +383,9 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
 
         if (match.Success)
         {
-            var y = IntFromGroup(match, nameof(Years), formatProvider);
-            var m = IntFromGroup(match, nameof(Months), formatProvider);
-            var d = IntFromGroup(match, nameof(Days), formatProvider);
+            var y = IntFromGroup(match, nameof(Years), provider);
+            var m = IntFromGroup(match, nameof(Months), provider);
+            var d = IntFromGroup(match, nameof(Days), provider);
 
             var months = (y * 12) + m;
             var totalDays = d + (months * DaysPerMonth);

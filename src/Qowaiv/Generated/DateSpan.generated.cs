@@ -170,7 +170,7 @@ public partial struct DateSpan
     /// <param name="s">
     /// A string containing the date span to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -180,8 +180,8 @@ public partial struct DateSpan
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static DateSpan Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static DateSpan Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<DateSpan>(s, QowaivMessages.FormatExceptionDateSpan);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="DateSpan"/>.</summary>
@@ -198,14 +198,14 @@ public partial struct DateSpan
     /// <param name="s">
     /// A string containing the date span to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The date span if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static DateSpan? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(DateSpan?);
+    public static DateSpan? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(DateSpan?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="DateSpan"/>.
     /// A return value indicates whether the conversion succeeded.

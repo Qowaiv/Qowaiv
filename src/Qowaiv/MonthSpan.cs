@@ -261,7 +261,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// <param name = "s">
     /// A string containing the month span to convert.
     /// </param>
-    /// <param name = "formatProvider">
+    /// <param name = "provider">
     /// The specified format provider.
     /// </param>
     /// <param name = "result">
@@ -270,19 +270,19 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out MonthSpan result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out MonthSpan result)
     {
         result = default;
         if (string.IsNullOrEmpty(s))
         {
             return true;
         }
-        else if (int.TryParse(s, NumberStyles.Integer, formatProvider, out var months)
+        else if (int.TryParse(s, NumberStyles.Integer, provider, out var months)
             && TryCreate(months, out result))
         {
             return true;
         }
-        else if (DateSpan.TryParse(s, formatProvider, out var dateSpan))
+        else if (DateSpan.TryParse(s, provider, out var dateSpan))
         {
             result = FromMonths(dateSpan.TotalMonths);
             return true;

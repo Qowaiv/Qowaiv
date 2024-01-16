@@ -225,7 +225,7 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     /// <param name="s">
     /// A string containing a Country to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <param name="result">
@@ -234,7 +234,7 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Country result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Country result)
     {
         result = Empty;
         var str = s.Unify();
@@ -242,12 +242,12 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
         {
             return true;
         }
-        else if (str.IsUnknown(formatProvider))
+        else if (str.IsUnknown(provider))
         {
             result = Unknown;
             return true;
         }
-        else if (ParseValues.TryGetValue(formatProvider, str, out var val))
+        else if (ParseValues.TryGetValue(provider, str, out var val))
         {
             result = new Country(val);
             return true;

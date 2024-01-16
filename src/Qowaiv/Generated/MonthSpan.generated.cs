@@ -184,7 +184,7 @@ public partial struct MonthSpan
     /// <param name="s">
     /// A string containing the month span to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -194,8 +194,8 @@ public partial struct MonthSpan
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static MonthSpan Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static MonthSpan Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<MonthSpan>(s, QowaivMessages.FormatExceptionMonthSpan);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="MonthSpan"/>.</summary>
@@ -212,14 +212,14 @@ public partial struct MonthSpan
     /// <param name="s">
     /// A string containing the month span to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The month span if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static MonthSpan? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(MonthSpan?);
+    public static MonthSpan? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(MonthSpan?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="MonthSpan"/>.
     /// A return value indicates whether the conversion succeeded.

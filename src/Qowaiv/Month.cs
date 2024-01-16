@@ -201,7 +201,7 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
     /// <param name="s">
     /// A string containing a month to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -210,7 +210,7 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Month result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Month result)
     {
         result = default;
         var str = s.Unify();
@@ -218,17 +218,17 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
         {
             return true;
         }
-        else if (str.IsUnknown(formatProvider))
+        else if (str.IsUnknown(provider))
         {
             result = Unknown;
             return true;
         }
-        else if (byte.TryParse(s, NumberStyles.None, formatProvider, out var n) && IsValid(n))
+        else if (byte.TryParse(s, NumberStyles.None, provider, out var n) && IsValid(n))
         {
             result = new Month(n);
             return true;
         }
-        else if (ParseValues.TryGetValue(formatProvider, str, out byte m))
+        else if (ParseValues.TryGetValue(provider, str, out byte m))
         {
             result = new Month(m);
             return true;

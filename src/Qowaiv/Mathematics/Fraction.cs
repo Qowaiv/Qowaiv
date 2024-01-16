@@ -638,7 +638,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     /// <param name = "s">
     /// A string containing the fraction to convert.
     /// </param>
-    /// <param name = "formatProvider">
+    /// <param name = "provider">
     /// The specified format provider.
     /// </param>
     /// <param name = "result">
@@ -647,9 +647,9 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Fraction result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Fraction result)
     {
-        if (s is { Length: > 0 } && FractionParser.Parse(s, formatProvider) is { } fraction)
+        if (s is { Length: > 0 } && FractionParser.Parse(s, provider) is { } fraction)
         {
             result = fraction;
             return true;

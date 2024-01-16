@@ -236,7 +236,7 @@ public readonly partial struct WeekDate : IXmlSerializable, IFormattable, IEquat
     /// <param name="s">
     /// A string containing a week date to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -245,15 +245,15 @@ public readonly partial struct WeekDate : IXmlSerializable, IFormattable, IEquat
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out WeekDate result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out WeekDate result)
     {
         result = MinValue;
         var match = Pattern.Match(s ?? string.Empty);
         if (match.Success)
         {
-            var year = int.Parse(match.Groups["year"].Value, formatProvider);
-            var week = int.Parse(match.Groups["week"].Value, formatProvider);
-            var day = int.Parse(match.Groups["day"].Value, formatProvider);
+            var year = int.Parse(match.Groups["year"].Value, provider);
+            var week = int.Parse(match.Groups["week"].Value, provider);
+            var day = int.Parse(match.Groups["day"].Value, provider);
 
             if (TryCreate(year, week, day, out Date dt))
             {

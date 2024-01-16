@@ -190,7 +190,7 @@ public partial struct Month
     /// <param name="s">
     /// A string containing the month to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -200,8 +200,8 @@ public partial struct Month
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Month Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static Month Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<Month>(s, QowaivMessages.FormatExceptionMonth);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Month"/>.</summary>
@@ -218,14 +218,14 @@ public partial struct Month
     /// <param name="s">
     /// A string containing the month to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The month if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Month? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Month?);
+    public static Month? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(Month?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Month"/>.
     /// A return value indicates whether the conversion succeeded.

@@ -190,7 +190,7 @@ public partial struct EmailAddress
     /// <param name="s">
     /// A string containing the email address to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -200,8 +200,8 @@ public partial struct EmailAddress
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static EmailAddress Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static EmailAddress Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<EmailAddress>(s, QowaivMessages.FormatExceptionEmailAddress);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="EmailAddress"/>.</summary>
@@ -218,14 +218,14 @@ public partial struct EmailAddress
     /// <param name="s">
     /// A string containing the email address to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The email address if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static EmailAddress? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(EmailAddress?);
+    public static EmailAddress? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(EmailAddress?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="EmailAddress"/>.
     /// A return value indicates whether the conversion succeeded.

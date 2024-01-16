@@ -14,15 +14,13 @@ namespace Qowaiv.Customization;
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "Single Value Object", type: "Svo", format: "Svo", example: "ABC")]
 [TypeConverter(typeof(SvoTypeConverter))]
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Customization.GenericSvoJsonConverter))]
 #endif
 public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEquatable<Svo<TSvoBehavior>>, IComparable, IComparable<Svo<TSvoBehavior>>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
 , IEqualityOperators<Svo<TSvoBehavior>, Svo<TSvoBehavior>, bool>
 , IParsable<Svo<TSvoBehavior>>
-#endif
-#if NET8_0_OR_GREATER
 #else
 , ISerializable
 #endif
@@ -97,7 +95,7 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
 
     /// <inheritdoc />
     [Pure]
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
     public int CompareTo(Svo<TSvoBehavior> other) => behavior.Compare(m_Value, other.m_Value);
 #else
     public int CompareTo(Svo<TSvoBehavior> other)

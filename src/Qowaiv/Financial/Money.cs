@@ -9,11 +9,11 @@ namespace Qowaiv.Financial;
 [OpenApiDataType(description: "Combined currency and amount notation as defined by ISO 4217.", example: "EUR12.47", type: "string", format: "money", pattern: @"[A-Z]{3} -?[0-9]+(\.[0-9]+)?")]
 [OpenApi.OpenApiDataType(description: "Combined currency and amount notation as defined by ISO 4217.", example: "EUR12.47", type: "string", format: "money", pattern: @"[A-Z]{3} -?[0-9]+(\.[0-9]+)?")]
 [TypeConverter(typeof(MoneyTypeConverter))]
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.MoneyJsonConverter))]
 #endif
 public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatable<Money>, IComparable, IComparable<Money>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IIncrementOperators<Money>, IDecrementOperators<Money>
     , IUnaryPlusOperators<Money, Money>, IUnaryNegationOperators<Money, Money>
     , IAdditionOperators<Money, Money, Money>, ISubtractionOperators<Money, Money, Money>
@@ -27,8 +27,6 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
     , IMultiplyOperators<Money, ulong, Money>, IDivisionOperators<Money, ulong, Money>
     , IMultiplyOperators<Money, uint, Money>, IDivisionOperators<Money, uint, Money>
     , IMultiplyOperators<Money, ushort, Money>, IDivisionOperators<Money, ushort, Money>
-#endif
-#if NET8_0_OR_GREATER
 #else
 , ISerializable
 #endif

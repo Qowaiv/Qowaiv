@@ -21,7 +21,7 @@ public partial struct Elo
 }
 
 public partial struct Elo : IEquatable<Elo>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<Elo, Elo, bool>
 #endif
 {
@@ -50,7 +50,7 @@ public partial struct Elo : IEquatable<Elo>
 }
 
 public partial struct Elo : IComparable, IComparable<Elo>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IComparisonOperators<Elo, Elo, bool>
 #endif
 {
@@ -163,7 +163,7 @@ public partial struct Elo : IXmlSerializable
 }
 
 public partial struct Elo
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<Elo>
 #endif
 {

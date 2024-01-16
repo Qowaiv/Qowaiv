@@ -7,11 +7,11 @@
 [OpenApiDataType(description: "Ratio expressed as a fraction of 100 denoted using the percent sign '%'.", example: "13.76%", type: "string", format: "percentage", pattern: @"-?[0-9]+(\.[0-9]+)?%")]
 [OpenApi.OpenApiDataType(description: "Ratio expressed as a fraction of 100 denoted using the percent sign '%'.", example: "13.76%", type: "string", format: "percentage", pattern: @"-?[0-9]+(\.[0-9]+)?%")]
 [TypeConverter(typeof(PercentageTypeConverter))]
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.PercentageJsonConverter))]
 #endif
 public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEquatable<Percentage>, IComparable, IComparable<Percentage>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IIncrementOperators<Percentage>, IDecrementOperators<Percentage>
     , IUnaryPlusOperators<Percentage, Percentage>, IUnaryNegationOperators<Percentage, Percentage>
     , IAdditionOperators<Percentage, Percentage, Percentage>, ISubtractionOperators<Percentage, Percentage, Percentage>

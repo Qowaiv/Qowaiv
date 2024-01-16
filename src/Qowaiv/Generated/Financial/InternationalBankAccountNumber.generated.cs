@@ -41,7 +41,7 @@ public partial struct InternationalBankAccountNumber
 }
 
 public partial struct InternationalBankAccountNumber : IEquatable<InternationalBankAccountNumber>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<InternationalBankAccountNumber, InternationalBankAccountNumber, bool>
 #endif
 {
@@ -169,7 +169,7 @@ public partial struct InternationalBankAccountNumber : IXmlSerializable
 }
 
 public partial struct InternationalBankAccountNumber
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<InternationalBankAccountNumber>
 #endif
 {

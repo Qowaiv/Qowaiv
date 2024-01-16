@@ -7,11 +7,11 @@
 [OpenApiDataType(description: "Full-date notation as defined by RFC 3339, section 5.6.", example: "2017-06-10", type: "string", format: "date")]
 [OpenApi.OpenApiDataType(description: "Full-date notation as defined by RFC 3339, section 5.6.", example: "2017-06-10", type: "string", format: "date")]
 [TypeConverter(typeof(DateTypeConverter))]
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.DateJsonConverter))]
 #endif
 public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable<Date>, IComparable, IComparable<Date>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IIncrementOperators<Date>, IDecrementOperators<Date>
     , IAdditionOperators<Date, TimeSpan, Date>, ISubtractionOperators<Date, TimeSpan, Date>
     , IAdditionOperators<Date, MonthSpan, Date>, ISubtractionOperators<Date, MonthSpan, Date>

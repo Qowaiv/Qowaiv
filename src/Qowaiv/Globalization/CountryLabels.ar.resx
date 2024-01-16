@@ -14,11 +14,11 @@
     <comment>Unknown (ZZ)</comment>
   </data>
   <data name="AD_DisplayName">
-    <value>أندورا</value>
+    <value>علم أندورا</value>
     <comment>Andorra (AD)</comment>
   </data>
   <data name="AE_DisplayName">
-    <value>الإمارات</value>
+    <value>الإمارات العربية المتحدة</value>
     <comment>United Arab Emirates (AE)</comment>
   </data>
   <data name="AF_DisplayName">
@@ -34,7 +34,7 @@
     <comment>Anguilla (AI)</comment>
   </data>
   <data name="AL_DisplayName">
-    <value>ألبانيا</value>
+    <value>علم ألبانيا</value>
     <comment>Albania (AL)</comment>
   </data>
   <data name="AM_DisplayName">
@@ -42,15 +42,15 @@
     <comment>Armenia (AM)</comment>
   </data>
   <data name="AO_DisplayName">
-    <value>أنغولا</value>
+    <value>علم أنغولا</value>
     <comment>Angola (AO)</comment>
   </data>
   <data name="AQ_DisplayName">
-    <value>أنتاركتيكا</value>
+    <value>القارة القطبية الجنوبية</value>
     <comment>Antarctica (AQ)</comment>
   </data>
   <data name="AR_DisplayName">
-    <value>الأرجنتين</value>
+    <value>علم الأرجنتين</value>
     <comment>Argentina (AR)</comment>
   </data>
   <data name="AS_DisplayName">
@@ -58,7 +58,7 @@
     <comment>American Samoa (AS)</comment>
   </data>
   <data name="AT_DisplayName">
-    <value>النمسا</value>
+    <value>علم النمسا</value>
     <comment>Austria (AT)</comment>
   </data>
   <data name="AU_DisplayName">
@@ -70,11 +70,11 @@
     <comment>Aruba (AW)</comment>
   </data>
   <data name="AX_DisplayName">
-    <value>أولان</value>
+    <value>جزر أولاند</value>
     <comment>Åland Islands (AX)</comment>
   </data>
   <data name="AZ_DisplayName">
-    <value>أذربيجان</value>
+    <value>علم أذربيجان</value>
     <comment>Azerbaijan (AZ)</comment>
   </data>
   <data name="BA_DisplayName">
@@ -82,7 +82,7 @@
     <comment>Bosnia and Herzegovina (BA)</comment>
   </data>
   <data name="BB_DisplayName">
-    <value>بربادوس</value>
+    <value>باربادوس</value>
     <comment>Barbados (BB)</comment>
   </data>
   <data name="BD_DisplayName">
@@ -114,11 +114,11 @@
     <comment>Benin (BJ)</comment>
   </data>
   <data name="BL_DisplayName">
-    <value>سان بارتليمي</value>
+    <value>سان بارتيلمي</value>
     <comment>Saint Barthélemy (BL)</comment>
   </data>
   <data name="BM_DisplayName">
-    <value>جزر برمودا</value>
+    <value>برمودا</value>
     <comment>Bermuda (BM)</comment>
   </data>
   <data name="BN_DisplayName">
@@ -130,7 +130,7 @@
     <comment>Bolivia (BO)</comment>
   </data>
   <data name="BQ_DisplayName">
-    <value>الجزر_الكاريبية_الهولندية</value>
+    <value>الجزر الكاريبية الهولندية</value>
     <comment>Caribbean Netherlands (BQ)</comment>
   </data>
   <data name="BR_DisplayName">
@@ -138,7 +138,7 @@
     <comment>Brazil (BR)</comment>
   </data>
   <data name="BS_DisplayName">
-    <value>البهاما</value>
+    <value>باهاماس</value>
     <comment>Bahamas (BS)</comment>
   </data>
   <data name="BT_DisplayName">
@@ -146,7 +146,7 @@
     <comment>Bhutan (BT)</comment>
   </data>
   <data name="BV_DisplayName">
-    <value>جزيرة_بوفيه</value>
+    <value>جزيرة بوفيه</value>
     <comment>Bouvet Island (BV)</comment>
   </data>
   <data name="BW_DisplayName">
@@ -154,7 +154,7 @@
     <comment>Botswana (BW)</comment>
   </data>
   <data name="BY_DisplayName">
-    <value>بيلاروسيا</value>
+    <value>روسيا البيضاء</value>
     <comment>Belarus (BY)</comment>
   </data>
   <data name="BZ_DisplayName">
@@ -162,7 +162,7 @@
     <comment>Belize (BZ)</comment>
   </data>
   <data name="CA_DisplayName">
-    <value>كندا</value>
+    <value>علم كندا</value>
     <comment>Canada (CA)</comment>
   </data>
   <data name="CC_DisplayName">
@@ -170,7 +170,7 @@
     <comment>Cocos Islands (CC)</comment>
   </data>
   <data name="CD_DisplayName">
-    <value>الكونغو الديمقراطية</value>
+    <value>جمهورية الكونغو الديمقراطية</value>
     <comment>Congo, Democratic Republic of the (CD)</comment>
   </data>
   <data name="CF_DisplayName">
@@ -178,7 +178,7 @@
     <comment>Central African Republic (CF)</comment>
   </data>
   <data name="CG_DisplayName">
-    <value>الكونغو</value>
+    <value>علم جمهورية الكونغو</value>
     <comment>Congo (CG)</comment>
   </data>
   <data name="CH_DisplayName">
@@ -186,7 +186,7 @@
     <comment>Switzerland (CH)</comment>
   </data>
   <data name="CI_DisplayName">
-    <value>ساحل العاج</value>
+    <value>علم ساحل العاج</value>
     <comment>Côte d'Ivoire (CI)</comment>
   </data>
   <data name="CK_DisplayName">
@@ -214,7 +214,7 @@
     <comment>Costa Rica (CR)</comment>
   </data>
   <data name="CU_DisplayName">
-    <value>كوبا</value>
+    <value>علم كوبا</value>
     <comment>Cuba (CU)</comment>
   </data>
   <data name="CV_DisplayName">
@@ -234,19 +234,19 @@
     <comment>Cyprus (CY)</comment>
   </data>
   <data name="CZ_DisplayName">
-    <value>جمهورية التشيك</value>
+    <value>التشيك</value>
     <comment>Czechia (CZ)</comment>
   </data>
   <data name="DE_DisplayName">
-    <value>ألمانيا</value>
+    <value>علم ألمانيا</value>
     <comment>Germany (DE)</comment>
   </data>
   <data name="DJ_DisplayName">
-    <value>جيبوتي</value>
+    <value>علم جيبوتي</value>
     <comment>Djibouti (DJ)</comment>
   </data>
   <data name="DK_DisplayName">
-    <value>الدنمارك</value>
+    <value>علم الدنمارك</value>
     <comment>Denmark (DK)</comment>
   </data>
   <data name="DM_DisplayName">
@@ -254,15 +254,15 @@
     <comment>Dominica (DM)</comment>
   </data>
   <data name="DO_DisplayName">
-    <value>جمهورية الدومينيكان</value>
+    <value>علم جمهورية الدومينيكان</value>
     <comment>Dominican Republic (DO)</comment>
   </data>
   <data name="DZ_DisplayName">
-    <value>الجزائر</value>
+    <value>علم الجزائر</value>
     <comment>Algeria (DZ)</comment>
   </data>
   <data name="EC_DisplayName">
-    <value>إكوادور</value>
+    <value>الإكوادور</value>
     <comment>Ecuador (EC)</comment>
   </data>
   <data name="EE_DisplayName">
@@ -270,7 +270,7 @@
     <comment>Estonia (EE)</comment>
   </data>
   <data name="EG_DisplayName">
-    <value>مصر</value>
+    <value>علم مصر</value>
     <comment>Egypt (EG)</comment>
   </data>
   <data name="EH_DisplayName">
@@ -278,7 +278,7 @@
     <comment>Western Sahara (EH)</comment>
   </data>
   <data name="ER_DisplayName">
-    <value>إرتيريا</value>
+    <value>علم إريتريا</value>
     <comment>Eritrea (ER)</comment>
   </data>
   <data name="ES_DisplayName">
@@ -286,7 +286,7 @@
     <comment>Spain (ES)</comment>
   </data>
   <data name="ET_DisplayName">
-    <value>إثيوبيا</value>
+    <value>علم إثيوبيا</value>
     <comment>Ethiopia (ET)</comment>
   </data>
   <data name="FI_DisplayName">
@@ -322,7 +322,7 @@
     <comment>United Kingdom (GB)</comment>
   </data>
   <data name="GD_DisplayName">
-    <value>جرينادا</value>
+    <value>غرينادا</value>
     <comment>Grenada (GD)</comment>
   </data>
   <data name="GE_DisplayName">
@@ -330,11 +330,11 @@
     <comment>Georgia (GE)</comment>
   </data>
   <data name="GF_DisplayName">
-    <value>جويانا الفرنسية</value>
+    <value>غويانا الفرنسية</value>
     <comment>French Guiana (GF)</comment>
   </data>
   <data name="GG_DisplayName">
-    <value>جزيرة جيرنزي</value>
+    <value>غيرنزي</value>
     <comment>Guernsey (GG)</comment>
   </data>
   <data name="GH_DisplayName">
@@ -358,7 +358,7 @@
     <comment>Guinea (GN)</comment>
   </data>
   <data name="GP_DisplayName">
-    <value>جزر جوادلوب</value>
+    <value>غوادلوب</value>
     <comment>Guadeloupe (GP)</comment>
   </data>
   <data name="GQ_DisplayName">
@@ -366,7 +366,7 @@
     <comment>Equatorial Guinea (GQ)</comment>
   </data>
   <data name="GR_DisplayName">
-    <value>اليونان</value>
+    <value>علم اليونان</value>
     <comment>Greece (GR)</comment>
   </data>
   <data name="GS_DisplayName">
@@ -378,7 +378,7 @@
     <comment>Guatemala (GT)</comment>
   </data>
   <data name="GU_DisplayName">
-    <value>غوام</value>
+    <value>جوام</value>
     <comment>Guam (GU)</comment>
   </data>
   <data name="GW_DisplayName">
@@ -386,7 +386,7 @@
     <comment>Guinea-Bissau (GW)</comment>
   </data>
   <data name="GY_DisplayName">
-    <value>غويانا</value>
+    <value>غيانا</value>
     <comment>Guyana (GY)</comment>
   </data>
   <data name="HK_DisplayName">
@@ -418,7 +418,7 @@
     <comment>Indonesia (ID)</comment>
   </data>
   <data name="IE_DisplayName">
-    <value>أيرلندا</value>
+    <value>علم أيرلندا</value>
     <comment>Ireland (IE)</comment>
   </data>
   <data name="IL_DisplayName">
@@ -442,31 +442,31 @@
     <comment>Iraq (IQ)</comment>
   </data>
   <data name="IR_DisplayName">
-    <value>إيران</value>
+    <value>علم إيران</value>
     <comment>Iran (IR)</comment>
   </data>
   <data name="IS_DisplayName">
-    <value>أيسلندا</value>
+    <value>علم آيسلندا</value>
     <comment>Iceland (IS)</comment>
   </data>
   <data name="IT_DisplayName">
-    <value>إيطاليا</value>
+    <value>علم إيطاليا</value>
     <comment>Italy (IT)</comment>
   </data>
   <data name="JE_DisplayName">
-    <value>جزيرة جيرزي</value>
+    <value>جيرزي</value>
     <comment>Jersey (JE)</comment>
   </data>
   <data name="JM_DisplayName">
-    <value>جامايكا</value>
+    <value>علم جامايكا</value>
     <comment>Jamaica (JM)</comment>
   </data>
   <data name="JO_DisplayName">
-    <value>الأردن</value>
+    <value>علم الأردن</value>
     <comment>Jordan (JO)</comment>
   </data>
   <data name="JP_DisplayName">
-    <value>اليابان</value>
+    <value>علم اليابان</value>
     <comment>Japan (JP)</comment>
   </data>
   <data name="KE_DisplayName">
@@ -474,15 +474,15 @@
     <comment>Kenya (KE)</comment>
   </data>
   <data name="KG_DisplayName">
-    <value>قرغيزستان</value>
+    <value>قيرغيزستان</value>
     <comment>Kyrgyzstan (KG)</comment>
   </data>
   <data name="KH_DisplayName">
-    <value>كمبوديا</value>
+    <value>علم كمبوديا</value>
     <comment>Cambodia (KH)</comment>
   </data>
   <data name="KI_DisplayName">
-    <value>كيريباس</value>
+    <value>كيريباتي</value>
     <comment>Kiribati (KI)</comment>
   </data>
   <data name="KM_DisplayName">
@@ -594,7 +594,7 @@
     <comment>Mali (ML)</comment>
   </data>
   <data name="MM_DisplayName">
-    <value>ميانمار</value>
+    <value>بورما</value>
     <comment>Myanmar (MM)</comment>
   </data>
   <data name="MN_DisplayName">
@@ -630,7 +630,7 @@
     <comment>Mauritius (MU)</comment>
   </data>
   <data name="MV_DisplayName">
-    <value>مالديف</value>
+    <value>جزر المالديف</value>
     <comment>Maldives (MV)</comment>
   </data>
   <data name="MW_DisplayName">
@@ -646,7 +646,7 @@
     <comment>Malaysia (MY)</comment>
   </data>
   <data name="MZ_DisplayName">
-    <value>موزامبيق</value>
+    <value>موزمبيق</value>
     <comment>Mozambique (MZ)</comment>
   </data>
   <data name="NA_DisplayName">
@@ -658,7 +658,7 @@
     <comment>New Caledonia (NC)</comment>
   </data>
   <data name="NE_DisplayName">
-    <value>النيجر</value>
+    <value>علم النيجر</value>
     <comment>Niger (NE)</comment>
   </data>
   <data name="NF_DisplayName">
@@ -678,7 +678,7 @@
     <comment>Netherlands (NL)</comment>
   </data>
   <data name="NO_DisplayName">
-    <value>النرويج</value>
+    <value>علم النرويج</value>
     <comment>Norway (NO)</comment>
   </data>
   <data name="NP_DisplayName">
@@ -698,7 +698,7 @@
     <comment>New Zealand (NZ)</comment>
   </data>
   <data name="OM_DisplayName">
-    <value>عمان</value>
+    <value>سلطنة عمان</value>
     <comment>Oman (OM)</comment>
   </data>
   <data name="PA_DisplayName">
@@ -710,7 +710,7 @@
     <comment>Peru (PE)</comment>
   </data>
   <data name="PF_DisplayName">
-    <value>بولينيزيا الفرنسية</value>
+    <value>بولينزيا الفرنسية</value>
     <comment>French Polynesia (PF)</comment>
   </data>
   <data name="PG_DisplayName">
@@ -722,7 +722,7 @@
     <comment>Philippines (PH)</comment>
   </data>
   <data name="PK_DisplayName">
-    <value>باكستان</value>
+    <value>علم باكستان</value>
     <comment>Pakistan (PK)</comment>
   </data>
   <data name="PL_DisplayName">
@@ -730,7 +730,7 @@
     <comment>Poland (PL)</comment>
   </data>
   <data name="PM_DisplayName">
-    <value>سان بيار وميكلون</value>
+    <value>سان بيير وميكلون</value>
     <comment>Saint Pierre and Miquelon (PM)</comment>
   </data>
   <data name="PN_DisplayName">
@@ -738,7 +738,7 @@
     <comment>Pitcairn (PN)</comment>
   </data>
   <data name="PR_DisplayName">
-    <value>بورتو ريكو</value>
+    <value>بورتوريكو</value>
     <comment>Puerto Rico (PR)</comment>
   </data>
   <data name="PS_DisplayName">
@@ -762,7 +762,7 @@
     <comment>Qatar (QA)</comment>
   </data>
   <data name="RE_DisplayName">
-    <value>ريونيون</value>
+    <value>لا ريونيون</value>
     <comment>Réunion (RE)</comment>
   </data>
   <data name="RO_DisplayName">
@@ -782,7 +782,7 @@
     <comment>Rwanda (RW)</comment>
   </data>
   <data name="SA_DisplayName">
-    <value>السعودية</value>
+    <value>علم السعودية</value>
     <comment>Saudi Arabia (SA)</comment>
   </data>
   <data name="SB_DisplayName">
@@ -790,7 +790,7 @@
     <comment>Solomon Islands (SB)</comment>
   </data>
   <data name="SC_DisplayName">
-    <value>سيشيل</value>
+    <value>سيشل</value>
     <comment>Seychelles (SC)</comment>
   </data>
   <data name="SD_DisplayName">
@@ -798,7 +798,7 @@
     <comment>Sudan (SD)</comment>
   </data>
   <data name="SE_DisplayName">
-    <value>السويد</value>
+    <value>علم السويد</value>
     <comment>Sweden (SE)</comment>
   </data>
   <data name="SG_DisplayName">
@@ -806,7 +806,7 @@
     <comment>Singapore (SG)</comment>
   </data>
   <data name="SH_DisplayName">
-    <value>سانت هيلينا</value>
+    <value>سانت هيلانة وأسينشين وتريستان دا كونا</value>
     <comment>Saint Helena, Ascension and Tristan da Cunha (SH)</comment>
   </data>
   <data name="SI_DisplayName">
@@ -814,7 +814,7 @@
     <comment>Slovenia (SI)</comment>
   </data>
   <data name="SJ_DisplayName">
-    <value>سفالبارد</value>
+    <value>سفالبارد ويان ماين</value>
     <comment>Svalbard and Jan Mayen (SJ)</comment>
   </data>
   <data name="SK_DisplayName">
@@ -830,7 +830,7 @@
     <comment>San Marino (SM)</comment>
   </data>
   <data name="SN_DisplayName">
-    <value>السنغال</value>
+    <value>علم السنغال</value>
     <comment>Senegal (SN)</comment>
   </data>
   <data name="SO_DisplayName">
@@ -842,7 +842,7 @@
     <comment>Suriname (SR)</comment>
   </data>
   <data name="SS_DisplayName">
-    <value>جنوب_السودان</value>
+    <value>جنوب السودان</value>
     <comment>South Sudan (SS)</comment>
   </data>
   <data name="ST_DisplayName">
@@ -850,19 +850,19 @@
     <comment>Sao Tome and Principe (ST)</comment>
   </data>
   <data name="SV_DisplayName">
-    <value>إلسالفادور</value>
+    <value>السلفادور</value>
     <comment>El Salvador (SV)</comment>
   </data>
   <data name="SX_DisplayName">
-    <value>سينت_مارتن</value>
+    <value>سينت مارتن</value>
     <comment>Sint Maarten (SX)</comment>
   </data>
   <data name="SY_DisplayName">
-    <value>سوريا</value>
+    <value>علم سوريا</value>
     <comment>Syrian Arab Republic (SY)</comment>
   </data>
   <data name="SZ_DisplayName">
-    <value>سوازيلاند</value>
+    <value>إسواتيني</value>
     <comment>Eswatini (SZ)</comment>
   </data>
   <data name="TC_DisplayName">
@@ -874,7 +874,7 @@
     <comment>Chad (TD)</comment>
   </data>
   <data name="TF_DisplayName">
-    <value>أراضي فرنسية جنوبية وأنتارتيكية</value>
+    <value>أراض فرنسية جنوبية وأنتارتيكية</value>
     <comment>French Southern Territories (TF)</comment>
   </data>
   <data name="TG_DisplayName">
@@ -890,7 +890,7 @@
     <comment>Tajikistan (TJ)</comment>
   </data>
   <data name="TK_DisplayName">
-    <value>توكلو</value>
+    <value>توكيلاو</value>
     <comment>Tokelau (TK)</comment>
   </data>
   <data name="TL_DisplayName">
@@ -902,7 +902,7 @@
     <comment>Turkmenistan (TM)</comment>
   </data>
   <data name="TN_DisplayName">
-    <value>تونس</value>
+    <value>علم تونس</value>
     <comment>Tunisia (TN)</comment>
   </data>
   <data name="TO_DisplayName">
@@ -914,7 +914,7 @@
     <comment>Türkiye (TR)</comment>
   </data>
   <data name="TT_DisplayName">
-    <value>ترينيداد وتوباغو</value>
+    <value>شعار ترينيداد وتوباغو</value>
     <comment>Trinidad and Tobago (TT)</comment>
   </data>
   <data name="TV_DisplayName">
@@ -926,31 +926,31 @@
     <comment>Taiwan (TW)</comment>
   </data>
   <data name="TZ_DisplayName">
-    <value>تنزانيا</value>
+    <value>علم</value>
     <comment>Tanzania (TZ)</comment>
   </data>
   <data name="UA_DisplayName">
-    <value>أوكرانيا</value>
+    <value>علم أوكرانيا</value>
     <comment>Ukraine (UA)</comment>
   </data>
   <data name="UG_DisplayName">
-    <value>أوغندا</value>
+    <value>علم أوغندا</value>
     <comment>Uganda (UG)</comment>
   </data>
   <data name="UM_DisplayName">
-    <value>جزر_امريكا_البعيده_الصغيره</value>
+    <value>جزر الولايات المتحدة الصغيرة النائية</value>
     <comment>United States Minor Outlying Islands (UM)</comment>
   </data>
   <data name="US_DisplayName">
-    <value>الولايات المتحدة</value>
+    <value>علم الولايات المتحدة</value>
     <comment>United States (US)</comment>
   </data>
   <data name="UY_DisplayName">
-    <value>أوروغواي</value>
+    <value>الأوروغواي</value>
     <comment>Uruguay (UY)</comment>
   </data>
   <data name="UZ_DisplayName">
-    <value>أوزبكستان</value>
+    <value>علم أوزبكستان</value>
     <comment>Uzbekistan (UZ)</comment>
   </data>
   <data name="VA_DisplayName">
@@ -958,7 +958,7 @@
     <comment>Holy See (VA)</comment>
   </data>
   <data name="VC_DisplayName">
-    <value>سانت فينسنت والغرينادينز</value>
+    <value>سانت فينسنت والغرينادين</value>
     <comment>Saint Vincent and the Grenadines (VC)</comment>
   </data>
   <data name="VE_DisplayName">
@@ -966,11 +966,11 @@
     <comment>Venezuela (VE)</comment>
   </data>
   <data name="VG_DisplayName">
-    <value>جزر العذراء البريطانية</value>
+    <value>الجزر العذراء البريطانية</value>
     <comment>Virgin Islands (VG)</comment>
   </data>
   <data name="VI_DisplayName">
-    <value>الجزر العذراء الأمريكية</value>
+    <value>جزر العذراء الأمريكية</value>
     <comment>Virgin Islands (VI)</comment>
   </data>
   <data name="VN_DisplayName">
@@ -994,7 +994,7 @@
     <comment>Kosovo (XK)</comment>
   </data>
   <data name="YE_DisplayName">
-    <value>اليمن</value>
+    <value>علم اليمن</value>
     <comment>Yemen (YE)</comment>
   </data>
   <data name="YT_DisplayName">

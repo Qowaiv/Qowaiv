@@ -168,7 +168,7 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
     /// <param name="s">
     /// A string containing a yes-no to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -177,7 +177,7 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out YesNo result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out YesNo result)
     {
         result = Empty;
         var str = s.Unify();
@@ -186,12 +186,12 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
         {
             return true;
         }
-        else if (str.IsUnknown(formatProvider))
+        else if (str.IsUnknown(provider))
         {
             result = Unknown;
             return true;
         }
-        else if (ParseValues.TryGetValue(formatProvider, str, out var val))
+        else if (ParseValues.TryGetValue(provider, str, out var val))
         {
             result = new YesNo(val);
             return true;

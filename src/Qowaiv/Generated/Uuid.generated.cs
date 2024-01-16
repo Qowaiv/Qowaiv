@@ -178,7 +178,7 @@ public partial struct Uuid
     /// <param name="s">
     /// A string containing the UUID to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -188,8 +188,8 @@ public partial struct Uuid
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Uuid Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static Uuid Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<Uuid>(s, QowaivMessages.FormatExceptionUuid);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Uuid"/>.</summary>
@@ -206,14 +206,14 @@ public partial struct Uuid
     /// <param name="s">
     /// A string containing the UUID to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The UUID if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Uuid? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(Uuid?);
+    public static Uuid? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(Uuid?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Uuid"/>.
     /// A return value indicates whether the conversion succeeded.

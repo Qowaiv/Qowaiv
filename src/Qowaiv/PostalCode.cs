@@ -95,7 +95,7 @@ public readonly partial struct PostalCode : IXmlSerializable, IFormattable, IEqu
     /// <param name="s">
     /// A string containing a postal code to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -104,7 +104,7 @@ public readonly partial struct PostalCode : IXmlSerializable, IFormattable, IEqu
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out PostalCode result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out PostalCode result)
     {
         result = default;
         var str = s.Unify();
@@ -112,7 +112,7 @@ public readonly partial struct PostalCode : IXmlSerializable, IFormattable, IEqu
         {
             return true;
         }
-        else if (str.IsUnknown(formatProvider))
+        else if (str.IsUnknown(provider))
         {
             result = Unknown;
             return true;

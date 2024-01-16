@@ -670,7 +670,7 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     /// <param name="s">
     /// A string containing a Percentage to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The format provider.
     /// </param>
     /// <param name="result">
@@ -679,12 +679,12 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Percentage result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Percentage result)
     {
         result = Zero;
 
         if (s is { Length: > 0 }
-            && FormatInfo.TryParse(s, formatProvider, out var info)
+            && FormatInfo.TryParse(s, provider, out var info)
             && decimal.TryParse(info.Format, NumberStyles.Number, info.Provider, out var dec))
         {
             result = new(dec * info.Factor);

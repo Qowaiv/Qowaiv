@@ -190,7 +190,7 @@ public partial struct EnergyLabel
     /// <param name="s">
     /// A string containing the EU energy label to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -200,8 +200,8 @@ public partial struct EnergyLabel
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static EnergyLabel Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static EnergyLabel Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<EnergyLabel>(s, QowaivMessages.FormatExceptionEnergyLabel);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="EnergyLabel"/>.</summary>
@@ -218,14 +218,14 @@ public partial struct EnergyLabel
     /// <param name="s">
     /// A string containing the EU energy label to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The EU energy label if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static EnergyLabel? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(EnergyLabel?);
+    public static EnergyLabel? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(EnergyLabel?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="EnergyLabel"/>.
     /// A return value indicates whether the conversion succeeded.

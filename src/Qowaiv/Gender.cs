@@ -166,7 +166,7 @@ public readonly partial struct Gender : IXmlSerializable, IFormattable, IEquatab
     /// <param name="s">
     /// A string containing a Gender to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -175,7 +175,7 @@ public readonly partial struct Gender : IXmlSerializable, IFormattable, IEquatab
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Gender result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Gender result)
     {
         result = Empty;
         var str = s.Unify();
@@ -186,7 +186,7 @@ public readonly partial struct Gender : IXmlSerializable, IFormattable, IEquatab
         }
         else
         {
-            var c = formatProvider as CultureInfo ?? CultureInfo.CurrentCulture;
+            var c = provider as CultureInfo ?? CultureInfo.CurrentCulture;
             AddCulture(c);
             if (Parsings[c].TryGetValue(str, out byte val) ||
                 Parsings[CultureInfo.InvariantCulture].TryGetValue(str, out val))

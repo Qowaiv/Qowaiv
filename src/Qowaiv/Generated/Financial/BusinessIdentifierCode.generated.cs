@@ -190,7 +190,7 @@ public partial struct BusinessIdentifierCode
     /// <param name="s">
     /// A string containing the BIC to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -200,8 +200,8 @@ public partial struct BusinessIdentifierCode
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static BusinessIdentifierCode Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static BusinessIdentifierCode Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<BusinessIdentifierCode>(s, QowaivMessages.FormatExceptionBusinessIdentifierCode);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="BusinessIdentifierCode"/>.</summary>
@@ -218,14 +218,14 @@ public partial struct BusinessIdentifierCode
     /// <param name="s">
     /// A string containing the BIC to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The BIC if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static BusinessIdentifierCode? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(BusinessIdentifierCode?);
+    public static BusinessIdentifierCode? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(BusinessIdentifierCode?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="BusinessIdentifierCode"/>.
     /// A return value indicates whether the conversion succeeded.

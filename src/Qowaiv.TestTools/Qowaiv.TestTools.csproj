@@ -9,7 +9,7 @@
     <PackageId>Qowaiv.TestTools</PackageId>
     <PackageReleaseNotes>
 v7.0.0
-- Drop support for .NET 5 and .NET 7 STS's.
+- Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
 - TestCultures properties lowercased. (breaking)
 - No Serializer.Binary for .NET 8. (breaking)
 - Introduction of the EmptyTestClass attribute.

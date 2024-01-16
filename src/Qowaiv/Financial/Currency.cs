@@ -192,7 +192,7 @@ public readonly partial struct Currency : IXmlSerializable, IFormattable, IForma
     /// <param name="s">
     /// A string containing a currency to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -201,7 +201,7 @@ public readonly partial struct Currency : IXmlSerializable, IFormattable, IForma
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out Currency result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Currency result)
     {
         result = Empty;
         var str = s.Unify();
@@ -209,12 +209,12 @@ public readonly partial struct Currency : IXmlSerializable, IFormattable, IForma
         {
             return true;
         }
-        else if (str.IsUnknown(formatProvider) || str.Equals(Unknown.Symbol))
+        else if (str.IsUnknown(provider) || str.Equals(Unknown.Symbol))
         {
             result = Unknown;
             return true;
         }
-        else if (ParseValues.TryGetValue(formatProvider, str, out var val))
+        else if (ParseValues.TryGetValue(provider, str, out var val))
         {
             result = new Currency(val);
             return true;

@@ -190,7 +190,7 @@ public partial struct YesNo
     /// <param name="s">
     /// A string containing the yes-no to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -200,8 +200,8 @@ public partial struct YesNo
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static YesNo Parse(string? s, IFormatProvider? formatProvider) 
-        => TryParse(s, formatProvider) 
+    public static YesNo Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<YesNo>(s, QowaivMessages.FormatExceptionYesNo);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="YesNo"/>.</summary>
@@ -218,14 +218,14 @@ public partial struct YesNo
     /// <param name="s">
     /// A string containing the yes-no to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
     /// The yes-no if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static YesNo? TryParse(string? s, IFormatProvider? formatProvider) => TryParse(s, formatProvider, out var val) ? val : default(YesNo?);
+    public static YesNo? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(YesNo?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="YesNo"/>.
     /// A return value indicates whether the conversion succeeded.

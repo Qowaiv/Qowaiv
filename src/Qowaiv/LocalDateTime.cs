@@ -602,7 +602,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// <param name="s">
     /// A string containing a local date time to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -611,9 +611,9 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out LocalDateTime result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out LocalDateTime result)
     {
-        return TryParse(s, formatProvider, DateTimeStyles.None, out result);
+        return TryParse(s, provider, DateTimeStyles.None, out result);
     }
 
     /// <summary>Converts the string to a local date time.
@@ -622,7 +622,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// <param name="s">
     /// A string containing a local date time to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="styles">
@@ -636,9 +636,9 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, DateTimeStyles styles, out LocalDateTime result)
+    public static bool TryParse(string? s, IFormatProvider? provider, DateTimeStyles styles, out LocalDateTime result)
     {
-        if (DateTime.TryParse(s, formatProvider, styles, out DateTime dt))
+        if (DateTime.TryParse(s, provider, styles, out DateTime dt))
         {
             result = new LocalDateTime(dt);
             return true;

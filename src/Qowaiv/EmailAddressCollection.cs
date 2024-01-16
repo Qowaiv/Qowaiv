@@ -301,7 +301,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// <param name="s">
     /// A string containing an email address to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -311,8 +311,8 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// s is not in the correct format.
     /// </exception>
     [Pure]
-    public static EmailAddressCollection Parse(string? s, IFormatProvider? formatProvider)
-        => TryParse(s, formatProvider, out EmailAddressCollection val)
+    public static EmailAddressCollection Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out EmailAddressCollection val)
         ? val
         : throw Unparsable.ForValue<EmailAddressCollection>(s, QowaivMessages.FormatExceptionEmailAddressCollection);
 
@@ -358,7 +358,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// <param name="s">
     /// A string containing an email address to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -367,7 +367,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
     /// <returns>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out EmailAddressCollection result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out EmailAddressCollection result)
     {
         result = [];
         if (s is { Length: > 0 })
@@ -375,7 +375,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
             var strs = s.Split(Separators, StringSplitOptions.RemoveEmptyEntries).Select(str => str.Trim());
             foreach (var str in strs)
             {
-                if (EmailAddress.TryParse(str, formatProvider, out EmailAddress email))
+                if (EmailAddress.TryParse(str, provider, out EmailAddress email))
                 {
                     result.Add(email);
                 }

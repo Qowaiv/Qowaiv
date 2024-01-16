@@ -50,7 +50,7 @@ public class Has_constant
     [Test]
     public void Empty_represent_default_value()
     {
-        Uuid.Empty.Should().Be(default(Uuid));
+        Uuid.Empty.Should().Be(default);
     }
 }
 

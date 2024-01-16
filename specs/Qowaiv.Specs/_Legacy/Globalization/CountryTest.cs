@@ -9,7 +9,7 @@ public class CountryTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        Country.Empty.Should().Be(default(Country));
+        Country.Empty.Should().Be(default);
     }
 
     #region Current

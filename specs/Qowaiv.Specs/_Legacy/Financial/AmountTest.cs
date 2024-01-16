@@ -6,7 +6,7 @@ public class AmountTest
     /// <summary>The test instance for most tests.</summary>
     public static readonly Amount TestStruct = (Amount)42.17m;
 
-    public static NumberFormatInfo GetCustomNumberFormatInfo()
+    private static NumberFormatInfo GetCustomNumberFormatInfo()
     {
         var info = new NumberFormatInfo
         {

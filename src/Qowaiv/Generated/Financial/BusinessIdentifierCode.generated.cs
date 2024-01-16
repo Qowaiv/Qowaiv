@@ -169,7 +169,7 @@ public partial struct BusinessIdentifierCode : IXmlSerializable
 }
 
 public partial struct BusinessIdentifierCode
-#if NET8_0_OR_GREATER
+#if NET7_0_OR_GREATER
     : IParsable<BusinessIdentifierCode>
 #endif
 {
@@ -241,30 +241,4 @@ public partial struct BusinessIdentifierCode
     /// </returns>
     [Impure]
     public static bool TryParse(string? s, out BusinessIdentifierCode result) => TryParse(s, null, out result);
-}
-
-public partial struct BusinessIdentifierCode
-{
-    /// <summary>Returns true if the value represents a valid BIC.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    [ExcludeFromCodeCoverage]
-    [Obsolete("Use BusinessIdentifierCode.TryParse(str) is { } instead. Will be dropped when the next major version is released.")]
-    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
-
-    /// <summary>Returns true if the value represents a valid BIC.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    /// <param name="formatProvider">
-    /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
-    /// </param>
-    [Pure]
-    [ExcludeFromCodeCoverage]
-    [Obsolete("Use BusinessIdentifierCode.TryParse(str, formatProvider) is { } instead. Will be dropped when the next major version is released.")]
-    public static bool IsValid(string? val, IFormatProvider? formatProvider)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, formatProvider, out _);
 }

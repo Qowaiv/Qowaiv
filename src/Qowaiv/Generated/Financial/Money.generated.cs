@@ -119,7 +119,7 @@ public partial struct Money : IXmlSerializable
 }
 
 public partial struct Money
-#if NET8_0_OR_GREATER
+#if NET7_0_OR_GREATER
     : IParsable<Money>
 #endif
 {
@@ -191,30 +191,4 @@ public partial struct Money
     /// </returns>
     [Impure]
     public static bool TryParse(string? s, out Money result) => TryParse(s, null, out result);
-}
-
-public partial struct Money
-{
-    /// <summary>Returns true if the value represents a valid money.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    [ExcludeFromCodeCoverage]
-    [Obsolete("Use Money.TryParse(str) is { } instead. Will be dropped when the next major version is released.")]
-    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
-
-    /// <summary>Returns true if the value represents a valid money.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    /// <param name="formatProvider">
-    /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
-    /// </param>
-    [Pure]
-    [ExcludeFromCodeCoverage]
-    [Obsolete("Use Money.TryParse(str, formatProvider) is { } instead. Will be dropped when the next major version is released.")]
-    public static bool IsValid(string? val, IFormatProvider? formatProvider)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, formatProvider, out _);
 }

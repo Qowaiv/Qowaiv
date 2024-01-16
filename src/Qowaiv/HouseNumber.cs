@@ -225,7 +225,7 @@ public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEq
 
     /// <summary>Returns true if the val represents a valid house number, otherwise false.</summary>
     [Pure]
-    public static bool IsValid(int? val)
+    private static bool IsValid(int? val)
         => val.HasValue
         && val >= MinValue.m_Value
         && val <= MaxValue.m_Value;

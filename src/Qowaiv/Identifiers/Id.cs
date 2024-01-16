@@ -368,11 +368,4 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
     /// <summary>Creates a new identifier.</summary>
     [Pure]
     public static Id<TIdentifier> Next() => new(behavior.Next());
-
-    /// <summary>Returns true if the value represents a valid identifier.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    public static bool IsValid(string val) => !string.IsNullOrWhiteSpace(val) && TryParse(val, out _);
 }

@@ -237,13 +237,6 @@ public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<
         else { return false; }
     }
 
-    /// <summary>Returns true if the val represents a valid Sex, otherwise false.</summary>
-    [Pure]
-    public static bool IsValid(int? val)
-        => val.HasValue
-        && val != 0
-        && FromInt32s.ContainsKey(val.Value);
-
     private static readonly ResourceManager ResourceManager = new("Qowaiv.SexLabels", typeof(Sex).Assembly);
 
     /// <summary>Get resource string.</summary>

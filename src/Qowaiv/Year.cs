@@ -204,7 +204,7 @@ public readonly partial struct Year : IXmlSerializable, IFormattable, IEquatable
 
     /// <summary>Returns true if the val represents a valid year, otherwise false.</summary>
     [Pure]
-    public static bool IsValid(int? val)
+    private static bool IsValid(int? val)
         => val.HasValue
         && val.Value >= MinValue.m_Value
         && val.Value <= MaxValue.m_Value;

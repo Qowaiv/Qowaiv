@@ -163,7 +163,7 @@ public partial struct Amount : IXmlSerializable
 }
 
 public partial struct Amount
-#if NET8_0_OR_GREATER
+#if NET7_0_OR_GREATER
     : IParsable<Amount>
 #endif
 {
@@ -235,30 +235,4 @@ public partial struct Amount
     /// </returns>
     [Impure]
     public static bool TryParse(string? s, out Amount result) => TryParse(s, null, out result);
-}
-
-public partial struct Amount
-{
-    /// <summary>Returns true if the value represents a valid amount.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    [ExcludeFromCodeCoverage]
-    [Obsolete("Use Amount.TryParse(str) is { } instead. Will be dropped when the next major version is released.")]
-    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
-
-    /// <summary>Returns true if the value represents a valid amount.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    /// <param name="formatProvider">
-    /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
-    /// </param>
-    [Pure]
-    [ExcludeFromCodeCoverage]
-    [Obsolete("Use Amount.TryParse(str, formatProvider) is { } instead. Will be dropped when the next major version is released.")]
-    public static bool IsValid(string? val, IFormatProvider? formatProvider)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, formatProvider, out _);
 }

@@ -183,7 +183,7 @@ public partial struct HouseNumber : IXmlSerializable
 }
 
 public partial struct HouseNumber
-#if NET8_0_OR_GREATER
+#if NET7_0_OR_GREATER
     : IParsable<HouseNumber>
 #endif
 {
@@ -255,30 +255,4 @@ public partial struct HouseNumber
     /// </returns>
     [Impure]
     public static bool TryParse(string? s, out HouseNumber result) => TryParse(s, null, out result);
-}
-
-public partial struct HouseNumber
-{
-    /// <summary>Returns true if the value represents a valid house number.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    [ExcludeFromCodeCoverage]
-    [Obsolete("Use HouseNumber.TryParse(str) is { } instead. Will be dropped when the next major version is released.")]
-    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
-
-    /// <summary>Returns true if the value represents a valid house number.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    /// <param name="formatProvider">
-    /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
-    /// </param>
-    [Pure]
-    [ExcludeFromCodeCoverage]
-    [Obsolete("Use HouseNumber.TryParse(str, formatProvider) is { } instead. Will be dropped when the next major version is released.")]
-    public static bool IsValid(string? val, IFormatProvider? formatProvider)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, formatProvider, out _);
 }

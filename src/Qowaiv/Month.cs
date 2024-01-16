@@ -290,7 +290,7 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
 
     /// <summary>Returns true if the val represents a valid month, otherwise false.</summary>
     [Pure]
-    public static bool IsValid(int? val)
+    private static bool IsValid(int? val)
         => val.HasValue
         && val >= January.m_Value
         && val <= December.m_Value;

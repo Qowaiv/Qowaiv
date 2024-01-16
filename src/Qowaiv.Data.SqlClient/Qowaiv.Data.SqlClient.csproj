@@ -3,11 +3,13 @@
   <Import Project="..\..\props\package.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Version>6.4.0</Version>
     <PackageId>Qowaiv.Data.SqlClient</PackageId>
     <PackageReleaseNotes>
+v7.0.0
+- Drop support for .NET 5 and .NET 7 STS's.
 v6.4.0
 - Support .NET 7.0. #261
 - Regular expressions are culture invariant. #285

@@ -41,7 +41,7 @@ public partial struct Gender
 }
 
 public partial struct Gender : IEquatable<Gender>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<Gender, Gender, bool>
 #endif
 {
@@ -169,7 +169,7 @@ public partial struct Gender : IXmlSerializable
 }
 
 public partial struct Gender
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<Gender>
 #endif
 {

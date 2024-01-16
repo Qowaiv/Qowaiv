@@ -8,7 +8,6 @@ namespace Qowaiv.Mathematics;
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(Tuple<long, long>))]
 [OpenApiDataType(description: "Faction", type: "string", format: "faction", pattern: "-?[0-9]+(/[0-9]+)?", example: "13/42")]
-[OpenApi.OpenApiDataType(description: "Faction", type: "string", format: "faction", pattern: "-?[0-9]+(/[0-9]+)?", example: "13/42")]
 [TypeConverter(typeof(FractionTypeConverter))]
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Mathematics.FractionJsonConverter))]

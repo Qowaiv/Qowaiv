@@ -22,7 +22,6 @@ namespace Qowaiv.Financial;
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "Currency notation as defined by ISO 4217.", example: "EUR", type: "string", format: "currency", nullable: true)]
-[OpenApi.OpenApiDataType(description: "Currency notation as defined by ISO 4217.", example: "EUR", type: "string", format: "currency", nullable: true)]
 [TypeConverter(typeof(CurrencyTypeConverter))]
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.CurrencyJsonConverter))]

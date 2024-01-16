@@ -16,7 +16,6 @@ namespace Qowaiv.IO;
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(long))]
 [OpenApiDataType(description: "Stream size notation (in byte).", example: 1024, type: "integer", format: "stream-size")]
-[OpenApi.OpenApiDataType(description: "Stream size notation (in byte).", example: 1024, type: "integer", format: "stream-size")]
 [TypeConverter(typeof(StreamSizeTypeConverter))]
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.IO.StreamSizeJsonConverter))]

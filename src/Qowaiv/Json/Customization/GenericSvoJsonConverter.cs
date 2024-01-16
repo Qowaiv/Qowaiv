@@ -40,23 +40,6 @@ public sealed class GenericSvoJsonConverter : JsonConverterFactory
     }
 
     private static readonly Dictionary<Type, MethodInfo> parsers = [];
-
-    /// <summary>A custom <see cref="JsonConverter{T}"/> for <see cref="Svo{TBehavior}"/>'s.</summary>
-    [Obsolete("Use GenericSvoJson<TBehavior> instead.")]
-    public sealed class GenericSvoConverter<TBehavior> : JsonConverter<Svo<TBehavior>>
-        where TBehavior : SvoBehavior, new()
-    {
-        private readonly GenericSvoJsonConverter<TBehavior> converter = new();
-
-        /// <inheritdoc />
-        [Pure]
-        public override Svo<TBehavior> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            => converter.Read(ref reader, typeToConvert, options);
-
-        /// <inheritdoc />
-        public override void Write(Utf8JsonWriter writer, Svo<TBehavior> value, JsonSerializerOptions options)
-            => converter.Write(writer, value, options);
-    }
 }
 
 #endif

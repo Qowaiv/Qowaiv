@@ -136,18 +136,6 @@ public static class Clock
     [Impure]
     public static IDisposable SetTimeAndTimeZoneForCurrentContext(Func<DateTime> time, TimeZoneInfo timeZone) => new ClockScope(time, timeZone);
 
-    /// <summary>Sets the <see cref="DateTime"/> function for current thread only.</summary>
-    [Obsolete("Use SetTimeForCurrentContext(time) instead.")]
-    public static IDisposable SetTimeForCurrentThread(Func<DateTime> time) => SetTimeForCurrentContext(time);
-
-    /// <summary>Sets the <see cref="TimeZoneInfo"/> for current thread only.</summary>
-    [Obsolete("Use SetTimeZoneForCurrentContext(timeZone) instead.")]
-    public static IDisposable SetTimeZoneForCurrentThread(TimeZoneInfo timeZone) => SetTimeZoneForCurrentContext(timeZone);
-
-    /// <summary>Sets the <see cref="DateTime"/> function and <see cref="TimeZoneInfo"/> for current thread only.</summary>
-    [Obsolete("Use SetTimeAndTimeZoneForCurrentContext(time, timeZone) instead.")]
-    public static IDisposable SetTimeAndTimeZoneForCurrentThread(Func<DateTime> time, TimeZoneInfo timeZone) => SetTimeAndTimeZoneForCurrentContext(time, timeZone);
-
     private static void SetLocalContextUtcNow(Func<DateTime>? time) => localContextUtcNow.Value = time;
 
     private static void SetLocalContextTimeZone(TimeZoneInfo? timeZone) => localContextTimeZone.Value = timeZone;

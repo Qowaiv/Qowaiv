@@ -14,7 +14,6 @@ namespace Qowaiv.Chemistry;
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(long))]
 [OpenApiDataType(description: "CAS Registry Number", type: "string", format: "cas-nr", example: "7732-18-5", pattern: "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]", nullable: true)]
-[OpenApi.OpenApiDataType(description: "CAS Registry Number", type: "string", format: "cas-nr", example: "7732-18-5", pattern: "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]", nullable: true)]
 [TypeConverter(typeof(Conversion.Chemistry.CasRegistryNumberTypeConverter))]
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Chemistry.CasRegistryNumberJsonConverter))]

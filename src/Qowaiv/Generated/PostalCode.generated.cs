@@ -41,7 +41,7 @@ public partial struct PostalCode
 }
 
 public partial struct PostalCode : IEquatable<PostalCode>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<PostalCode, PostalCode, bool>
 #endif
 {
@@ -169,7 +169,7 @@ public partial struct PostalCode : IXmlSerializable
 }
 
 public partial struct PostalCode
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<PostalCode>
 #endif
 {

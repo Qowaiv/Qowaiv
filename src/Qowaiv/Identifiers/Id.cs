@@ -15,11 +15,11 @@ namespace Qowaiv.Identifiers;
 [SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(object))]
 [OpenApiDataType(description: "identifier", example: "8a1a8c42-d2ff-e254-e26e-b6abcbf19420", type: "any")]
 [TypeConverter(typeof(IdTypeConverter))]
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Identifiers.IdJsonConverter))]
 #endif
 public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquatable<Id<TIdentifier>>, IComparable, IComparable<Id<TIdentifier>>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
 , IEqualityOperators<Id<TIdentifier>, Id<TIdentifier>, bool>
 #endif
 #if NET8_0_OR_GREATER

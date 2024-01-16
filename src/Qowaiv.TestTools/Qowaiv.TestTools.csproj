@@ -3,12 +3,13 @@
   <Import Project="..\..\props\package.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.4.0</Version>
+    <Version>7.0.0</Version>
     <PackageId>Qowaiv.TestTools</PackageId>
     <PackageReleaseNotes>
-Next release
+v7.0.0
+- Drop support for .NET 5 and .NET 7 STS's.
 - TestCultures properties lowercased. (breaking)
 - No Serializer.Binary for .NET 8. (breaking)
 - Introduction of the EmptyTestClass attribute.

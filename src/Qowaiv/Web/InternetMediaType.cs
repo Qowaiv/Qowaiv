@@ -41,7 +41,7 @@ namespace Qowaiv.Web;
 [OpenApiDataType(description: "Media type notation as defined by RFC 6838.", example: "text/html", type: "string", format: "internet-media-type", nullable: true)]
 [OpenApi.OpenApiDataType(description: "Media type notation as defined by RFC 6838.", example: "text/html", type: "string", format: "internet-media-type", nullable: true)]
 [TypeConverter(typeof(InternetMediaTypeTypeConverter))]
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Web.InternetMediaTypeJsonConverter))]
 #endif
 public readonly partial struct InternetMediaType : IXmlSerializable, IFormattable, IEquatable<InternetMediaType>, IComparable, IComparable<InternetMediaType>
@@ -49,7 +49,7 @@ public readonly partial struct InternetMediaType : IXmlSerializable, IFormattabl
     /// <summary>Represents the pattern of a (potential) valid Internet media type.</summary>
     private static readonly Regex Pattern = GetPattern();
 
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [GeneratedRegex(
         @"^(?<TopLevel>(x\-[a-z]+|application|audio|example|image|message|model|multipart|text|video))/" +
         @"(?<Subtype>[a-z0-9]+([\-\.][a-z0-9]+)*)" +

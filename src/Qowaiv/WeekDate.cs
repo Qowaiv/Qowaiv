@@ -33,7 +33,7 @@
 [OpenApiDataType(description: "Full-date notation as defined by ISO 8601.", example: "1997-W14-6", type: "string", format: "date-weekbased")]
 [OpenApi.OpenApiDataType(description: "Full-date notation as defined by ISO 8601.", example: "1997-W14-6", type: "string", format: "date-weekbased")]
 [TypeConverter(typeof(WeekDateTypeConverter))]
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.WeekDateJsonConverter))]
 #endif
 public readonly partial struct WeekDate : IXmlSerializable, IFormattable, IEquatable<WeekDate>, IComparable, IComparable<WeekDate>
@@ -45,7 +45,7 @@ public readonly partial struct WeekDate : IXmlSerializable, IFormattable, IEquat
     /// <summary>Represents the pattern of a (potential) valid week date.</summary>
     private static readonly Regex Pattern = GetPattern();
 
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [GeneratedRegex(@"^(?<year>[0-9]{1,4})[ -]?W?(?<week>(0?[1-9]|[1-4][0-9]|5[0-3]))[ -]?(?<day>[1-7])$", RegOptions.IgnoreCase, RegOptions.TimeoutMilliseconds)]
     private static partial Regex GetPattern();
 #else

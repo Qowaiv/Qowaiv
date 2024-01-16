@@ -12,7 +12,7 @@
 namespace Qowaiv.IO;
 
 public partial struct StreamSize : IEquatable<StreamSize>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<StreamSize, StreamSize, bool>
 #endif
 {
@@ -41,7 +41,7 @@ public partial struct StreamSize : IEquatable<StreamSize>
 }
 
 public partial struct StreamSize : IComparable, IComparable<StreamSize>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IComparisonOperators<StreamSize, StreamSize, bool>
 #endif
 {
@@ -133,7 +133,7 @@ public partial struct StreamSize : IXmlSerializable
 }
 
 public partial struct StreamSize
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<StreamSize>
 #endif
 {

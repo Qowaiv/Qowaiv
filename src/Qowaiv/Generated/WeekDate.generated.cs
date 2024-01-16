@@ -12,7 +12,7 @@
 namespace Qowaiv;
 
 public partial struct WeekDate : IEquatable<WeekDate>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<WeekDate, WeekDate, bool>
 #endif
 {
@@ -41,7 +41,7 @@ public partial struct WeekDate : IEquatable<WeekDate>
 }
 
 public partial struct WeekDate : IComparable, IComparable<WeekDate>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IComparisonOperators<WeekDate, WeekDate, bool>
 #endif
 {
@@ -133,7 +133,7 @@ public partial struct WeekDate : IXmlSerializable
 }
 
 public partial struct WeekDate
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<WeekDate>
 #endif
 {

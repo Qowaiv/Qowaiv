@@ -7,7 +7,7 @@
 [OpenApiDataType(description: "Year(-only) notation.", example: 1983, type: "integer", format: "year", nullable: true)]
 [OpenApi.OpenApiDataType(description: "Year(-only) notation.", example: 1983, type: "integer", format: "year", nullable: true)]
 [TypeConverter(typeof(YearTypeConverter))]
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(YearJsonConverter))]
 #endif
 public readonly partial struct Year : IXmlSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>

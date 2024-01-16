@@ -9,11 +9,11 @@ namespace Qowaiv.Financial;
 [OpenApiDataType(description: "Decimal representation of a currency amount.", example: 15.95, type: "number", format: "amount")]
 [OpenApi.OpenApiDataType(description: "Decimal representation of a currency amount.", example: 15.95, type: "number", format: "amount")]
 [TypeConverter(typeof(AmountTypeConverter))]
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.AmountJsonConverter))]
 #endif
 public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatable<Amount>, IComparable, IComparable<Amount>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IIncrementOperators<Amount>, IDecrementOperators<Amount>
     , IUnaryPlusOperators<Amount, Amount>, IUnaryNegationOperators<Amount, Amount>
     , IAdditionOperators<Amount, Amount, Amount>, ISubtractionOperators<Amount, Amount, Amount>

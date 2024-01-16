@@ -12,7 +12,7 @@ namespace Qowaiv;
 [OpenApiDataType(description: "Postal code notation.", example: "2624DP", type: "string", format: "postal-code", nullable: true)]
 [OpenApi.OpenApiDataType(description: "Postal code notation.", example: "2624DP", type: "string", format: "postal-code", nullable: true)]
 [TypeConverter(typeof(PostalCodeTypeConverter))]
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(PostalCodeJsonConverter))]
 #endif
 public readonly partial struct PostalCode : IXmlSerializable, IFormattable, IEquatable<PostalCode>, IComparable, IComparable<PostalCode>

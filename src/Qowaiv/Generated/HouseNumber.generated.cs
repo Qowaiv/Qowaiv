@@ -41,7 +41,7 @@ public partial struct HouseNumber
 }
 
 public partial struct HouseNumber : IEquatable<HouseNumber>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<HouseNumber, HouseNumber, bool>
 #endif
 {
@@ -70,7 +70,7 @@ public partial struct HouseNumber : IEquatable<HouseNumber>
 }
 
 public partial struct HouseNumber : IComparable, IComparable<HouseNumber>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IComparisonOperators<HouseNumber, HouseNumber, bool>
 #endif
 {
@@ -183,7 +183,7 @@ public partial struct HouseNumber : IXmlSerializable
 }
 
 public partial struct HouseNumber
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<HouseNumber>
 #endif
 {

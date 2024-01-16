@@ -140,7 +140,7 @@ public class Has_constant
     [Test]
     public void Empty_represent_default_value()
     {
-        Gender.Empty.Should().Be(default(Gender));
+        Gender.Empty.Should().Be(default);
     }
 }
 

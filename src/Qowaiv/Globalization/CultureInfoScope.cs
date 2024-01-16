@@ -105,5 +105,7 @@ public class CultureInfoScope : IDisposable
     }
 
     /// <summary>Gets and set if the CultureInfo Scope is disposed.</summary>
+#pragma warning disable SA1401 // Fields should be private
+    // Consider changing this when updating to Qowaiv 7.
     protected bool Disposed;
 }

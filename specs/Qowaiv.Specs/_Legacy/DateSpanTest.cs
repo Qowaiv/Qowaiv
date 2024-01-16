@@ -14,7 +14,7 @@ public class DateSpanTest
     [Test]
     public void Zero_None_EqualsDefault()
     {
-        DateSpan.Zero.Should().Be(default(DateSpan));
+        DateSpan.Zero.Should().Be(default);
     }
 
     [Test]

@@ -126,14 +126,13 @@ public static class CountryDisplayName
         }
         else if (country.Name.Length == 2)
         {
-            var all = new WikiLemma("ISO 3166-1", TestCultures.es);
-            var x = await all.Content();
+            // var all = new WikiLemma("ISO 3166-1", TestCultures.es)
             var lemma = new WikiLemma($"Plantilla:{country.IsoAlpha3Code}", TestCultures.es);
             return await lemma.Transform(DisplayName);
         }
         else return null;
 
-        string? DisplayName(string str)
+        static string? DisplayName(string str)
         {
             var index = str.LastIndexOf(Prefix.ES);
             if (index > -1)

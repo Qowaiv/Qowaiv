@@ -30,7 +30,7 @@ public sealed class XResourceCollection : Dictionary<CultureInfo, XResourceFile>
     {
         var name = Path.GetFileNameWithoutExtension(file.Name);
         var index = name.LastIndexOf('.') + 1;
-        name = index == 0 ? string.Empty : name.Substring(index);
+        name = index == 0 ? string.Empty : name[index..];
         var culture = new CultureInfo(name);
         return culture;
     }

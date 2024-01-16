@@ -385,7 +385,7 @@ public class EmailAddressCollection : ISet<EmailAddress>, ISerializable, IXmlSer
                     return false;
                 }
             }
-            return result.Any();
+            return result.Count != 0;
         }
         else return true;
     }

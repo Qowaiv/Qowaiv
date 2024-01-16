@@ -76,7 +76,7 @@ public class Has_constant
     [Test]
     public void Empty_represent_default_value()
     {
-        YesNo.Empty.Should().Be(default(YesNo));
+        YesNo.Empty.Should().Be(default);
     }
 }
 

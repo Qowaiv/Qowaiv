@@ -25,7 +25,7 @@ namespace Qowaiv.Financial;
 [OpenApiDataType(description: "Business Identifier Code, as defined by ISO 9362.", example: "DEUTDEFF", type: "string", format: "bic", nullable: true)]
 [OpenApi.OpenApiDataType(description: "Business Identifier Code, as defined by ISO 9362.", example: "DEUTDEFF", type: "string", format: "bic", nullable: true)]
 [TypeConverter(typeof(BusinessIdentifierCodeTypeConverter))]
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.BusinessIdentifierCodeJsonConverter))]
 #endif
 public readonly partial struct BusinessIdentifierCode : IXmlSerializable, IFormattable, IEquatable<BusinessIdentifierCode>, IComparable, IComparable<BusinessIdentifierCode>
@@ -35,7 +35,7 @@ public readonly partial struct BusinessIdentifierCode : IXmlSerializable, IForma
     /// </remarks>
     private static readonly Regex Pattern = GetPattern();
 
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [GeneratedRegex(@"^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$", RegOptions.IgnoreCase, RegOptions.TimeoutMilliseconds)]
     private static partial Regex GetPattern();
 #else

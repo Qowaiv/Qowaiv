@@ -18,7 +18,7 @@ public class Will_be_dropped
     [Test]
     public void Amount_Subtraction_with_decimal() => (90.Amount() - 20m).Should().Be(70.Amount());
 
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
     [Test]
     public void GenericSvoConverter() => new Qowaiv.Json.Customization.GenericSvoJsonConverter.GenericSvoConverter<ForCustomSvo>().Should().NotBeNull();
 #endif

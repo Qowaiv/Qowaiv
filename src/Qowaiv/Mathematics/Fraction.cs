@@ -10,12 +10,12 @@ namespace Qowaiv.Mathematics;
 [OpenApiDataType(description: "Faction", type: "string", format: "faction", pattern: "-?[0-9]+(/[0-9]+)?", example: "13/42")]
 [OpenApi.OpenApiDataType(description: "Faction", type: "string", format: "faction", pattern: "-?[0-9]+(/[0-9]+)?", example: "13/42")]
 [TypeConverter(typeof(FractionTypeConverter))]
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Mathematics.FractionJsonConverter))]
 #endif
 [StructLayout(LayoutKind.Sequential)]
 public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquatable<Fraction>, IComparable, IComparable<Fraction>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IAdditionOperators<Fraction, Fraction, Fraction>, ISubtractionOperators<Fraction, Fraction, Fraction>
     , IUnaryPlusOperators<Fraction, Fraction>, IUnaryNegationOperators<Fraction, Fraction>
     , IAdditionOperators<Fraction, long, Fraction>, ISubtractionOperators<Fraction, long, Fraction>
@@ -84,7 +84,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
 
         public static readonly Regex Pattern = GetPattern();
 
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [GeneratedRegex(@"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$", RegOptions.Default, RegOptions.TimeoutMilliseconds)]
         private static partial Regex GetPattern();
 #else

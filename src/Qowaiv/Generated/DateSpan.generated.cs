@@ -21,7 +21,7 @@ public partial struct DateSpan
 }
 
 public partial struct DateSpan : IEquatable<DateSpan>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<DateSpan, DateSpan, bool>
 #endif
 {
@@ -41,7 +41,7 @@ public partial struct DateSpan : IEquatable<DateSpan>
 }
 
 public partial struct DateSpan : IComparable, IComparable<DateSpan>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IComparisonOperators<DateSpan, DateSpan, bool>
 #endif
 {
@@ -149,7 +149,7 @@ public partial struct DateSpan : IXmlSerializable
 }
 
 public partial struct DateSpan
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<DateSpan>
 #endif
 {

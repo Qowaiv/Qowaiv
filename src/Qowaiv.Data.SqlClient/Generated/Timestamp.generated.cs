@@ -21,7 +21,7 @@ public partial struct Timestamp
 }
 
 public partial struct Timestamp : IEquatable<Timestamp>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<Timestamp, Timestamp, bool>
 #endif
 {
@@ -50,7 +50,7 @@ public partial struct Timestamp : IEquatable<Timestamp>
 }
 
 public partial struct Timestamp : IComparable, IComparable<Timestamp>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IComparisonOperators<Timestamp, Timestamp, bool>
 #endif
 {
@@ -163,7 +163,7 @@ public partial struct Timestamp : IXmlSerializable
 }
 
 public partial struct Timestamp
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<Timestamp>
 #endif
 {

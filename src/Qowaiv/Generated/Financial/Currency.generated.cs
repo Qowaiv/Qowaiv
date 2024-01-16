@@ -41,7 +41,7 @@ public partial struct Currency
 }
 
 public partial struct Currency : IEquatable<Currency>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<Currency, Currency, bool>
 #endif
 {
@@ -169,7 +169,7 @@ public partial struct Currency : IXmlSerializable
 }
 
 public partial struct Currency
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<Currency>
 #endif
 {

@@ -41,7 +41,7 @@ public partial struct InternetMediaType
 }
 
 public partial struct InternetMediaType : IEquatable<InternetMediaType>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IEqualityOperators<InternetMediaType, InternetMediaType, bool>
 #endif
 {
@@ -70,7 +70,7 @@ public partial struct InternetMediaType : IEquatable<InternetMediaType>
 }
 
 public partial struct InternetMediaType : IComparable, IComparable<InternetMediaType>
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , IComparisonOperators<InternetMediaType, InternetMediaType, bool>
 #endif
 {
@@ -183,7 +183,7 @@ public partial struct InternetMediaType : IXmlSerializable
 }
 
 public partial struct InternetMediaType
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<InternetMediaType>
 #endif
 {

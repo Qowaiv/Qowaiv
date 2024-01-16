@@ -22,7 +22,7 @@ namespace Qowaiv;
 [OpenApiDataType(description: "Universally unique identifier, Base64 encoded.", example: "lmZO_haEOTCwGsCcbIZFFg", type: "string", format: "uuid-base64", nullable: true)]
 [OpenApi.OpenApiDataType(description: "Universally unique identifier, Base64 encoded.", example: "lmZO_haEOTCwGsCcbIZFFg", type: "string", format: "uuid-base64", nullable: true)]
 [TypeConverter(typeof(UuidTypeConverter))]
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.UuidJsonConverter))]
 #endif
 public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
@@ -38,7 +38,7 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
     /// <summary>Represents the pattern of a (potential) valid GUID.</summary>
     internal static readonly Regex Pattern = GetPattern();
 
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [GeneratedRegex(@"^[a-zA-Z0-9_-]{22}(=){0,2}$", RegOptions.Default, RegOptions.TimeoutMilliseconds)]
     private static partial Regex GetPattern();
 #else

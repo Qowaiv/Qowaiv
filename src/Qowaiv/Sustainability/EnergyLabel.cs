@@ -18,8 +18,7 @@
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(int))]
-[OpenApiDataType(description: "EU energy label", type: "string", format: "energy-label", example: "A++", pattern: @"A\+{1,4}|[A-H]", nullable: true)]
-[OpenApi.OpenApiDataType(description: "EU energy label", type: "string", format: "energy-label", example: "A++", pattern: @"[A-H]|A\+{1,4}", nullable: true)]
+[OpenApiDataType(description: "EU energy label", type: "string", format: "energy-label", example: "A++", pattern: @"[A-H]|A\+{1,4}", nullable: true)]
 [TypeConverter(typeof(Conversion.Sustainability.EnergyLabelTypeConverter))]
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Sustainability.EnergyLabelJsonConverter))]

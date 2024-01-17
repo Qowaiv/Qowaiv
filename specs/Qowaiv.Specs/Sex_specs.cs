@@ -65,18 +65,6 @@ public class Display_name
     }
 }
 
-public class Is_not_valid_for
-{
-    [TestCase(null)]
-    [TestCase(0)]
-    [TestCase(3)]
-    [TestCase(10)]
-    public void numbers(int? number)
-    {
-        Sex.IsValid(number).Should().BeFalse();
-    }
-}
-
 public class Has_constant
 {
     [Test]

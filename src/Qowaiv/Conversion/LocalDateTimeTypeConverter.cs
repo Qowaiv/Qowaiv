@@ -24,8 +24,7 @@ public class LocalDateTimeTypeConverter : DateTypeConverter<LocalDateTime>
     [ExcludeFromCodeCoverage]
     [Pure]
     [DoesNotReturn]
-    [WillBeSealed]
-    protected override LocalDateTime FromLocalDateTime(LocalDateTime local) => throw new NotSupportedException();
+    protected sealed override LocalDateTime FromLocalDateTime(LocalDateTime local) => throw new NotSupportedException();
 
     /// <inheritdoc />
     [Pure]
@@ -44,8 +43,7 @@ public class LocalDateTimeTypeConverter : DateTypeConverter<LocalDateTime>
     [ExcludeFromCodeCoverage]
     [Pure]
     [DoesNotReturn]
-    [WillBeSealed]
-    protected override LocalDateTime ToLocalDateTime(LocalDateTime date) => throw new NotSupportedException();
+    protected sealed override LocalDateTime ToLocalDateTime(LocalDateTime date) => throw new NotSupportedException();
 
     /// <inheritdoc />
     [Pure]

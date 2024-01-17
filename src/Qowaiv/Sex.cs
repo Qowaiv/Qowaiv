@@ -25,7 +25,6 @@ namespace Qowaiv;
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Sex as specified by ISO/IEC 5218.", example: "female", type: "string", format: "sex", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
-[OpenApi.OpenApiDataType(description: "Sex as specified by ISO/IEC 5218.", example: "female", type: "string", format: "sex", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
 [TypeConverter(typeof(SexTypeConverter))]
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.SexJsonConverter))]
@@ -237,13 +236,6 @@ public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<
         }
         else { return false; }
     }
-
-    /// <summary>Returns true if the val represents a valid Sex, otherwise false.</summary>
-    [Pure]
-    public static bool IsValid(int? val)
-        => val.HasValue
-        && val != 0
-        && FromInt32s.ContainsKey(val.Value);
 
     private static readonly ResourceManager ResourceManager = new("Qowaiv.SexLabels", typeof(Sex).Assembly);
 

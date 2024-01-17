@@ -3,7 +3,7 @@
 namespace Qowaiv.Sql.Json;
 
 /// <summary>Provides a JSON conversion for a timestamp.</summary>
-public sealed class TimestampJsonConverter : SvoJsonConverter<Timestamp>
+public sealed class TimestampJsonConverter : Qowaiv.Json.SvoJsonConverter<Timestamp>
 {
     /// <inheritdoc />
     [Pure]

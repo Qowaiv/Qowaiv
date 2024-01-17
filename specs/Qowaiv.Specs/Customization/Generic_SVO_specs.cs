@@ -59,38 +59,6 @@ public class With_domain_logic
         => svo.IsUnknown().Should().Be(result);
 }
 
-public class Is_valid_for
-{
-    [TestCase("QOWAIV", "nl")]
-    [TestCase("QOWAIV", "nl")]
-    public void strings_representing_SVO(string input, CultureInfo culture)
-        => CustomSvo.IsValid(input, culture).Should().BeTrue();
-}
-
-public class Is_not_valid_for
-{
-    [Test]
-    public void string_empty()
-        => CustomSvo.IsValid(string.Empty).Should().BeFalse();
-
-    [Test]
-    public void string_null()
-        => CustomSvo.IsValid(null).Should().BeFalse();
-
-    [Test]
-    public void whitespace()
-        => CustomSvo.IsValid(" ").Should().BeFalse();
-
-    [TestCase("?")]
-    [TestCase("unknown")]
-    public void strings_representing_unknown(string input)
-        => CustomSvo.IsValid(input).Should().BeFalse();
-
-    [Test]
-    public void garbage()
-        => CustomSvo.IsValid("~garbage~").Should().BeFalse();
-}
-
 public class Has_constant
 {
     [Test]

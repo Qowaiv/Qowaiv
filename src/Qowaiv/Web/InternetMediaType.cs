@@ -39,7 +39,6 @@ namespace Qowaiv.Web;
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.AllExcludingCulture, typeof(string))]
 [OpenApiDataType(description: "Media type notation as defined by RFC 6838.", example: "text/html", type: "string", format: "internet-media-type", nullable: true)]
-[OpenApi.OpenApiDataType(description: "Media type notation as defined by RFC 6838.", example: "text/html", type: "string", format: "internet-media-type", nullable: true)]
 [TypeConverter(typeof(InternetMediaTypeTypeConverter))]
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Web.InternetMediaTypeJsonConverter))]

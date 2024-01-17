@@ -154,7 +154,7 @@ public partial struct Date : IXmlSerializable
 }
 
 public partial struct Date
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<Date>
 #endif
 {

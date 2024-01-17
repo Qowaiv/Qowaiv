@@ -169,7 +169,7 @@ public partial struct BusinessIdentifierCode : IXmlSerializable
 }
 
 public partial struct BusinessIdentifierCode
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<BusinessIdentifierCode>
 #endif
 {

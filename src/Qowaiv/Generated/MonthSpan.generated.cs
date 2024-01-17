@@ -163,7 +163,7 @@ public partial struct MonthSpan : IXmlSerializable
 }
 
 public partial struct MonthSpan
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<MonthSpan>
 #endif
 {

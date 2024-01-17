@@ -105,7 +105,7 @@ dotnet_diagnostic.S3376.severity = none # EventArgs, and Exception type names sh
 dotnet_diagnostic.S3376.severity = none # Attribute, EventArgs, and Exception type names should end with the type being extended
 dotnet_diagnostic.S4136.severity = none # Method overloads should be grouped together
 
-# dotnet_diagnostic.S1133.severity = suggestion # Deprecated code should be removed
+dotnet_diagnostic.S1133.severity = suggestion # Deprecated code should be removed
 dotnet_diagnostic.S3900.severity = suggestion # Arguments of public methods should be validated against null
 
 dotnet_diagnostic.S107.severity = warning  # Methods should not have too many parameters

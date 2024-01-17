@@ -119,7 +119,7 @@ public partial struct Fraction : IXmlSerializable
 }
 
 public partial struct Fraction
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<Fraction>
 #endif
 {

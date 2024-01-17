@@ -169,7 +169,7 @@ public partial struct Sex : IXmlSerializable
 }
 
 public partial struct Sex
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<Sex>
 #endif
 {

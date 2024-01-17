@@ -149,7 +149,7 @@ public partial struct DateSpan : IXmlSerializable
 }
 
 public partial struct DateSpan
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<DateSpan>
 #endif
 {

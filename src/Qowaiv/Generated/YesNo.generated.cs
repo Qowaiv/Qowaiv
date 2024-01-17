@@ -169,7 +169,7 @@ public partial struct YesNo : IXmlSerializable
 }
 
 public partial struct YesNo
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<YesNo>
 #endif
 {

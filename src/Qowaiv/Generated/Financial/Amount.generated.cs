@@ -163,7 +163,7 @@ public partial struct Amount : IXmlSerializable
 }
 
 public partial struct Amount
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<Amount>
 #endif
 {

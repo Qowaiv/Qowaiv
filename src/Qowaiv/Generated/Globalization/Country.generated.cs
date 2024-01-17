@@ -169,7 +169,7 @@ public partial struct Country : IXmlSerializable
 }
 
 public partial struct Country
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<Country>
 #endif
 {

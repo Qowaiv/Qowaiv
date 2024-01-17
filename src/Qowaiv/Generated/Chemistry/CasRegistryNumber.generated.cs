@@ -169,7 +169,7 @@ public partial struct CasRegistryNumber : IXmlSerializable
 }
 
 public partial struct CasRegistryNumber
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<CasRegistryNumber>
 #endif
 {

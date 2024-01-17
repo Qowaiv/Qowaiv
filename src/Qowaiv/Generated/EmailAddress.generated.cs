@@ -169,7 +169,7 @@ public partial struct EmailAddress : IXmlSerializable
 }
 
 public partial struct EmailAddress
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<EmailAddress>
 #endif
 {

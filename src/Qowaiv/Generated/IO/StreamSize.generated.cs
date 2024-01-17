@@ -133,7 +133,7 @@ public partial struct StreamSize : IXmlSerializable
 }
 
 public partial struct StreamSize
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<StreamSize>
 #endif
 {

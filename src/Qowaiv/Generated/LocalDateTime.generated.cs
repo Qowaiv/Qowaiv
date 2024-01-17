@@ -154,7 +154,7 @@ public partial struct LocalDateTime : IXmlSerializable
 }
 
 public partial struct LocalDateTime
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<LocalDateTime>
 #endif
 {

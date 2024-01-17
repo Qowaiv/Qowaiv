@@ -163,7 +163,7 @@ public partial struct Timestamp : IXmlSerializable
 }
 
 public partial struct Timestamp
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<Timestamp>
 #endif
 {

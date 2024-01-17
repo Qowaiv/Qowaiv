@@ -169,7 +169,7 @@ public partial struct EnergyLabel : IXmlSerializable
 }
 
 public partial struct EnergyLabel
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<EnergyLabel>
 #endif
 {

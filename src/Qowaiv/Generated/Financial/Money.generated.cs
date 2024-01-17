@@ -119,7 +119,7 @@ public partial struct Money : IXmlSerializable
 }
 
 public partial struct Money
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
     : IParsable<Money>
 #endif
 {

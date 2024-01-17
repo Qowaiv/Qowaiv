@@ -401,23 +401,6 @@ public class IdForInt32Test
     {
         Assert.Throws<NotSupportedException>(() => Id<ForInt32>.Next());
     }
-
-    [TestCase(null)]
-    [TestCase("")]
-    [TestCase("ABC")]
-    [TestCase("-1")]
-    public void IsInvalid_String(string str)
-    {
-        Id<ForInt32>.IsValid(str).Should().BeFalse();
-    }
-
-    [TestCase("0")]
-    [TestCase("1234")]
-    [TestCase("+123456")]
-    public void IsValid_String(string str)
-    {
-        Id<ForInt32>.IsValid(str).Should().BeTrue();
-    }
 }
 
 [Serializable]

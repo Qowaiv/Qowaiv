@@ -5,7 +5,6 @@
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(DateTime))]
 [OpenApiDataType(description: "Full-date notation as defined by RFC 3339, section 5.6.", example: "2017-06-10", type: "string", format: "date")]
-[OpenApi.OpenApiDataType(description: "Full-date notation as defined by RFC 3339, section 5.6.", example: "2017-06-10", type: "string", format: "date")]
 [TypeConverter(typeof(DateTypeConverter))]
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.DateJsonConverter))]
@@ -25,18 +24,6 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
 
     /// <summary>Represents the smallest possible value of date. This field is read-only.</summary>
     public static readonly Date MinValue = new(DateTime.MinValue);
-
-    /// <summary>Gets the day before today.</summary>
-    [Obsolete("Use Clock.Yesterday() instead. Will be dropped when the next major version is released.")]
-    public static Date Yesterday => Clock.Yesterday();
-
-    /// <summary>Gets the current date.</summary>
-    [Obsolete("Use Clock.Today() instead. Will be dropped when the next major version is released.")]
-    public static Date Today => Clock.Today();
-
-    /// <summary>Gets the day after today.</summary>
-    [Obsolete("Use Clock.Tomorrow() instead. Will be dropped when the next major version is released.")]
-    public static Date Tomorrow => Clock.Tomorrow();
 
     /// <summary>Initializes a new instance of the <see cref="Date"/> struct to a specified number of ticks.</summary>
     /// <param name="ticks">

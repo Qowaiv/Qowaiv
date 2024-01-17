@@ -12,8 +12,7 @@ public class DateTypeConverter : DateTypeConverter<Date>
     [ExcludeFromCodeCoverage]
     [Pure]
     [DoesNotReturn]
-    [WillBeSealed]
-    protected override Date FromDate(Date date) => throw new NotSupportedException();
+    protected sealed override Date FromDate(Date date) => throw new NotSupportedException();
 
     /// <inheritdoc />
     [Pure]
@@ -35,8 +34,7 @@ public class DateTypeConverter : DateTypeConverter<Date>
     [ExcludeFromCodeCoverage]
     [Pure]
     [DoesNotReturn]
-    [WillBeSealed]
-    protected override Date ToDate(Date date) => throw new NotSupportedException();
+    protected sealed override Date ToDate(Date date) => throw new NotSupportedException();
 
     /// <inheritdoc />
     [Pure]

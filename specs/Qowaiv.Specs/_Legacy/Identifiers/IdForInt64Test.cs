@@ -407,23 +407,6 @@ public class IdForInt64Test
     {
         Assert.Throws<NotSupportedException>(() => Id<ForInt64>.Next());
     }
-
-    [TestCase(null)]
-    [TestCase("")]
-    [TestCase("ABC")]
-    [TestCase("-1")]
-    public void IsInvalid_String(string str)
-    {
-        Id<ForInt64>.IsValid(str).Should().BeFalse();
-    }
-
-    [TestCase("0")]
-    [TestCase("1234")]
-    [TestCase("+123456")]
-    public void IsValid_String(string str)
-    {
-        Id<ForInt64>.IsValid(str).Should().BeTrue();
-    }
 }
 
 [Serializable]

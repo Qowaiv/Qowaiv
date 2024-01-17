@@ -61,12 +61,6 @@ public abstract class NumericTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo, 
 
     /// <summary>Returns true if the conversion is supported.</summary>
     [Pure]
-    [Obsolete("Use IsConvertible instead.")]
-    protected virtual bool IsConvertable(Type? type)
-        => IsConvertible(type);
-
-    /// <summary>Returns true if the conversion is supported.</summary>
-    [Pure]
     protected virtual bool IsConvertible(Type? type)
         => type is not null
         && type != typeof(TSvo)

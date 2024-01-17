@@ -31,7 +31,6 @@ public readonly struct Hash : IEquatable<Hash>
     [Pure]
     [EditorBrowsable(EditorBrowsableState.Never)]
     [DoesNotReturn]
-    [WillBeSealed]
     public override int GetHashCode() => NotSupportedBy<Hash>();
 
     /// <summary>extends the hash with the added item.</summary>

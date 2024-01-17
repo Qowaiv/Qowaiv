@@ -220,26 +220,6 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
     /// <summary>Casts a <see cref="string"/> to a Single Value Object.</summary>
     public static explicit operator Svo<TSvoBehavior>(string str) => Parse(str, CultureInfo.CurrentCulture);
 
-    /// <summary>Returns true if the value represents a valid month.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    public static bool IsValid(string? val) => IsValid(val, formatProvider: null);
-
-    /// <summary>Returns true if the value represents a valid month.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    /// <param name="formatProvider">
-    /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
-    /// </param>
-    [Pure]
-    public static bool IsValid(string? val, IFormatProvider? formatProvider)
-        => !string.IsNullOrWhiteSpace(val)
-        && !behavior.IsUnknown(val!, formatProvider)
-        && behavior.TryParse(val, formatProvider, out _);
-
     /// <summary>Converts the <see cref="string"/> to <see cref="Svo{TSvoBehavior}"/>.</summary>
     /// <param name="s">
     /// A string containing the Single Value Object to convert.

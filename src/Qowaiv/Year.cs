@@ -5,10 +5,9 @@
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(short))]
 [OpenApiDataType(description: "Year(-only) notation.", example: 1983, type: "integer", format: "year", nullable: true)]
-[OpenApi.OpenApiDataType(description: "Year(-only) notation.", example: 1983, type: "integer", format: "year", nullable: true)]
 [TypeConverter(typeof(YearTypeConverter))]
 #if NET6_0_OR_GREATER
-[System.Text.Json.Serialization.JsonConverter(typeof(YearJsonConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.YearJsonConverter))]
 #endif
 public readonly partial struct Year : IXmlSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
 {
@@ -205,7 +204,7 @@ public readonly partial struct Year : IXmlSerializable, IFormattable, IEquatable
 
     /// <summary>Returns true if the val represents a valid year, otherwise false.</summary>
     [Pure]
-    public static bool IsValid(int? val)
+    private static bool IsValid(int? val)
         => val.HasValue
         && val.Value >= MinValue.m_Value
         && val.Value <= MaxValue.m_Value;

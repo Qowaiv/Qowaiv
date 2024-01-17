@@ -5,10 +5,9 @@
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(int))]
 [OpenApiDataType(description: "House number notation.", example: "13", type: "string", format: "house-number", nullable: true)]
-[OpenApi.OpenApiDataType(description: "House number notation.", example: "13", type: "string", format: "house-number", nullable: true)]
 [TypeConverter(typeof(HouseNumberTypeConverter))]
 #if NET6_0_OR_GREATER
-[System.Text.Json.Serialization.JsonConverter(typeof(HouseNumberJsonConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.HouseNumberJsonConverter))]
 #endif
 public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEquatable<HouseNumber>, IComparable, IComparable<HouseNumber>
 {
@@ -226,7 +225,7 @@ public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEq
 
     /// <summary>Returns true if the val represents a valid house number, otherwise false.</summary>
     [Pure]
-    public static bool IsValid(int? val)
+    private static bool IsValid(int? val)
         => val.HasValue
         && val >= MinValue.m_Value
         && val <= MaxValue.m_Value;

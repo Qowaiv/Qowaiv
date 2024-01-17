@@ -15,15 +15,16 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     , IAdditionOperators<Date, TimeSpan, Date>, ISubtractionOperators<Date, TimeSpan, Date>
     , IAdditionOperators<Date, MonthSpan, Date>, ISubtractionOperators<Date, MonthSpan, Date>
     , ISubtractionOperators<Date, Date, TimeSpan>
+    , IMinMaxValue<Date>
 #endif
 {
     private const string SerializableFormat = "yyyy-MM-dd";
 
     /// <summary>Represents the largest possible value date. This field is read-only.</summary>
-    public static readonly Date MaxValue = new(DateTime.MaxValue);
+    public static Date MaxValue => new(DateTime.MaxValue);
 
     /// <summary>Represents the smallest possible value of date. This field is read-only.</summary>
-    public static readonly Date MinValue = new(DateTime.MinValue);
+    public static Date MinValue => new(DateTime.MinValue);
 
     /// <summary>Initializes a new instance of the <see cref="Date"/> struct to a specified number of ticks.</summary>
     /// <param name="ticks">

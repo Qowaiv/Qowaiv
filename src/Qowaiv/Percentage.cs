@@ -23,6 +23,7 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     , IMultiplyOperators<Percentage, ulong, Percentage>, IDivisionOperators<Percentage, ulong, Percentage>
     , IMultiplyOperators<Percentage, uint, Percentage>, IDivisionOperators<Percentage, uint, Percentage>
     , IMultiplyOperators<Percentage, ushort, Percentage>, IDivisionOperators<Percentage, ushort, Percentage>
+    , IMinMaxValue<Percentage>
 #endif
 {
     /// <summary>The percentage symbol (%).</summary>
@@ -37,19 +38,19 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     private const string DefaultFormat = "0.############################";
 
     /// <summary>Represents 0 percent.</summary>
-    public static readonly Percentage Zero;
+    public static Percentage Zero => default;
 
     /// <summary>Represents 1 percent.</summary>
-    public static readonly Percentage One = 1.Percent();
+    public static Percentage One => 1.Percent();
 
     /// <summary>Represents 100 percent.</summary>
-    public static readonly Percentage Hundred = 100.Percent();
+    public static Percentage Hundred => 100.Percent();
 
     /// <summary>Gets the minimum value of a percentage.</summary>
-    public static readonly Percentage MinValue = new(decimal.MinValue / 10_000);
+    public static Percentage MinValue => new(decimal.MinValue / 10_000);
 
     /// <summary>Gets the maximum value of a percentage.</summary>
-    public static readonly Percentage MaxValue = new(decimal.MaxValue / 10_000);
+    public static Percentage MaxValue => new(decimal.MaxValue / 10_000);
 
     /// <summary>Gets the sign of the percentage.</summary>
     [Pure]

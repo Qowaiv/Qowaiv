@@ -27,16 +27,17 @@ public readonly partial struct Elo : IXmlSerializable, IFormattable, IEquatable<
     , IUnaryPlusOperators<Elo, Elo>, IUnaryNegationOperators<Elo, Elo>
     , IAdditionOperators<Elo, Elo, Elo>, ISubtractionOperators<Elo, Elo, Elo>
     , IMultiplyOperators<Elo, double, Elo>, IDivisionOperators<Elo, double, Elo>
+    , IMinMaxValue<Elo>
 #endif
 {
     /// <summary>Represents the zero value of an Elo.</summary>
     public static readonly Elo Zero;
 
     /// <summary>Represents the minimum value of an Elo.</summary>
-    public static readonly Elo MinValue = new(double.MinValue);
+    public static Elo MinValue => new(double.MinValue);
 
     /// <summary>Represents the maximum value of an Elo.</summary>
-    public static readonly Elo MaxValue = new(double.MaxValue);
+    public static Elo MaxValue => new(double.MaxValue);
 
     /// <summary>Gets an z-score based on the two Elo's.</summary>
     /// <param name="elo0">

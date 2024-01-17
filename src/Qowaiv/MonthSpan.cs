@@ -5,7 +5,6 @@
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.Continuous, underlyingType: typeof(int))]
 [OpenApiDataType(description: "Month span, specified in years and months.", example: "1Y+10M", type: "string", format: "month-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M")]
-[OpenApi.OpenApiDataType(description: "Month span, specified in years and months.", example: "1Y+10M", type: "string", format: "month-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M")]
 [TypeConverter(typeof(MonthSpanTypeConverter))]
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.MonthSpanJsonConverter))]

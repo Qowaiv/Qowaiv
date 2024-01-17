@@ -40,10 +40,6 @@ public class Is_decorated_with : SingleValueObjectSpecs
     public void Type_converter(Type svo)
         => svo.Should().HaveTypeConverterDefined();
 
-    [TestCaseSource(nameof(AllSvos))]
-    public void Open_API_data_type_Legacy(Type svo)
-        => svo.Should().BeDecoratedWith<Qowaiv.Json.OpenApiDataTypeAttribute>();
-
 #if NET6_0_OR_GREATER
     [TestCaseSource(nameof(AllSvos))]
     public void NotNullWhen_attribute_on_Equals_object(Type svo)
@@ -75,7 +71,7 @@ public class Is_decorated_with : SingleValueObjectSpecs
         type.Should().BeDecoratedWith<System.Text.Json.Serialization.JsonConverterAttribute>();
         var converterType = type.GetCustomAttribute<System.Text.Json.Serialization.JsonConverterAttribute>()?.ConverterType;
 
-        typeof(SvoJsonConverter<>).MakeGenericType(type).Should().NotBeAssignableTo(converterType);
+        typeof(Qowaiv.Json.SvoJsonConverter<>).MakeGenericType(type).Should().NotBeAssignableTo(converterType);
     }
 #endif
 }

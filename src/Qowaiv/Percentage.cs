@@ -5,7 +5,6 @@
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(decimal))]
 [OpenApiDataType(description: "Ratio expressed as a fraction of 100 denoted using the percent sign '%'.", example: "13.76%", type: "string", format: "percentage", pattern: @"-?[0-9]+(\.[0-9]+)?%")]
-[OpenApi.OpenApiDataType(description: "Ratio expressed as a fraction of 100 denoted using the percent sign '%'.", example: "13.76%", type: "string", format: "percentage", pattern: @"-?[0-9]+(\.[0-9]+)?%")]
 [TypeConverter(typeof(PercentageTypeConverter))]
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.PercentageJsonConverter))]
@@ -653,7 +652,7 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     private string ToXmlString() => ToString(DefaultFormat + PercentSymbol, CultureInfo.InvariantCulture);
 
     /// <summary>Casts a decimal to a Percentage.</summary>
-    public static implicit operator Percentage(decimal val) => new(val);
+    public static explicit operator Percentage(decimal val) => new(val);
 
     /// <summary>Casts a decimal to a Percentage.</summary>
     public static explicit operator Percentage(double val) => Create(val);

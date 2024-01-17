@@ -360,20 +360,6 @@ public class IdForStringTest
     {
         Assert.Throws<NotSupportedException>(() => Id<ForString>.Next());
     }
-
-    [TestCase(null)]
-    [TestCase("")]
-    public void IsInvalid_String(string str)
-    {
-        Id<ForString>.IsValid(str).Should().BeFalse();
-    }
-
-    [TestCase("0F5AB5AB-12CB-4629-878D-B18B88B9A504")]
-    [TestCase("Qowaiv_SVOLibrary_GUIA")]
-    public void IsValid_String(string str)
-    {
-        Id<ForString>.IsValid(str).Should().BeTrue();
-    }
 }
 
 [Serializable]

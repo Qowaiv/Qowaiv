@@ -423,21 +423,6 @@ public class IdForGuidTest
     public void Next_100Items_AllUnique()
         => Enumerable.Range(0, 100).Select(i => Id<ForGuid>.Next())
         .ToHashSet().Should().HaveCount(100);
-
-    [TestCase(null)]
-    [TestCase("")]
-    [TestCase("Complex")]
-    public void IsInvalid_String(string str)
-    {
-        Id<ForGuid>.IsValid(str).Should().BeFalse();
-    }
-
-    [TestCase("0F5AB5AB-12CB-4629-878D-B18B88B9A504")]
-    [TestCase("Qowaiv_SVOLibrary_GUIA")]
-    public void IsValid_String(string str)
-    {
-        Id<ForGuid>.IsValid(str).Should().BeTrue();
-    }
 }
 
 [Serializable]

@@ -230,29 +230,3 @@ public partial struct Uuid
     [Impure]
     public static bool TryParse(string? s, out Uuid result) => TryParse(s, null, out result);
 }
-
-public partial struct Uuid
-{
-    /// <summary>Returns true if the value represents a valid UUID.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    [Pure]
-    [ExcludeFromCodeCoverage]
-    [Obsolete("Use Uuid.TryParse(str) is { } instead. Will be dropped when the next major version is released.")]
-    public static bool IsValid(string? val) => IsValid(val, (IFormatProvider?)null);
-
-    /// <summary>Returns true if the value represents a valid UUID.</summary>
-    /// <param name="val">
-    /// The <see cref="string"/> to validate.
-    /// </param>
-    /// <param name="formatProvider">
-    /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
-    /// </param>
-    [Pure]
-    [ExcludeFromCodeCoverage]
-    [Obsolete("Use Uuid.TryParse(str, formatProvider) is { } instead. Will be dropped when the next major version is released.")]
-    public static bool IsValid(string? val, IFormatProvider? formatProvider)
-        => !string.IsNullOrWhiteSpace(val)
-        && TryParse(val, formatProvider, out _);
-}

@@ -1,7 +1,7 @@
 ﻿namespace Qowaiv.Identifiers;
 
 /// <summary>Implements <see cref="IIdentifierBehavior"/> for an identifier based on <see cref="long"/>.</summary>
-[OpenApi.OpenApiDataType(description: "Int64 based identifier", example: 17, type: "integer", format: "identifier", nullable: true)]
+[OpenApiDataType(description: "Int64 based identifier", example: 17, type: "integer", format: "identifier", nullable: true)]
 public class Int64IdBehavior : IdentifierBehavior
 {
     /// <summary>Initializes a new instance of the <see cref="Int64IdBehavior"/> class.</summary>

@@ -26,18 +26,19 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
     , IMultiplyOperators<Money, ulong, Money>, IDivisionOperators<Money, ulong, Money>
     , IMultiplyOperators<Money, uint, Money>, IDivisionOperators<Money, uint, Money>
     , IMultiplyOperators<Money, ushort, Money>, IDivisionOperators<Money, ushort, Money>
+    , IMinMaxValue<Money>
 #else
 , ISerializable
 #endif
 {
     /// <summary>Represents an Amount of zero.</summary>
-    public static readonly Money Zero;
+    public static Money Zero => default;
 
     /// <summary>Represents the smallest possible value of <see cref="Money"/>.</summary>
-    public static readonly Money MinValue = decimal.MinValue + Currency.Empty;
+    public static Money MinValue => decimal.MinValue + Currency.Empty;
 
     /// <summary>Represents the biggest possible value of <see cref="Money"/>.</summary>
-    public static readonly Money MaxValue = decimal.MaxValue + Currency.Empty;
+    public static Money MaxValue => decimal.MaxValue + Currency.Empty;
 
     private Money(decimal val, Currency currency)
     {

@@ -14,6 +14,7 @@ v6.6.1
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 v7.0.0
+- Implement IMinMaxValue&lt;TSelf&gt; for SVO's with a min and max value. #362 (breaking)
 - Drop Gender. #361  (breaking)
 - Drop public static IsValid(string) methods. #361 (breaking)
 - Seal all JSON converters. #361 (breaking)

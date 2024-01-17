@@ -35,6 +35,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
     , IMultiplyOperators<StreamSize, ulong, StreamSize>, IDivisionOperators<StreamSize, ulong, StreamSize>
     , IMultiplyOperators<StreamSize, uint, StreamSize>, IDivisionOperators<StreamSize, uint, StreamSize>
     , IMultiplyOperators<StreamSize, ushort, StreamSize>, IDivisionOperators<StreamSize, ushort, StreamSize>
+    , IMinMaxValue<StreamSize>
 #endif
 {
     /// <summary>Represents an empty/not set stream size.</summary>
@@ -74,10 +75,10 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
     public static readonly StreamSize PiB = new(1L << 50);
 
     /// <summary>Represents the minimum stream size that can be represented.</summary>
-    public static readonly StreamSize MinValue = new(long.MinValue);
+    public static StreamSize MinValue => new(long.MinValue);
 
     /// <summary>Represents the maximum stream size that can be represented.</summary>
-    public static readonly StreamSize MaxValue = new(long.MaxValue);
+    public static StreamSize MaxValue => new(long.MaxValue);
 
     /// <summary>Initializes a new instance of the <see cref="StreamSize"/> struct.</summary>
     /// <param name="size">

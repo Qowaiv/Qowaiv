@@ -10,6 +10,9 @@
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.HouseNumberJsonConverter))]
 #endif
 public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEquatable<HouseNumber>, IComparable, IComparable<HouseNumber>
+#if NET8_0_OR_GREATER
+    , IMinMaxValue<HouseNumber>
+#endif
 {
     /// <summary>Represents an empty/not set house number.</summary>
     public static readonly HouseNumber Empty;
@@ -18,10 +21,10 @@ public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEq
     public static readonly HouseNumber Unknown = new(int.MaxValue);
 
     /// <summary>Represents the smallest possible House number 1.</summary>
-    public static readonly HouseNumber MinValue = new(1);
+    public static HouseNumber MinValue => new(1);
 
     /// <summary>Represents the largest possible House number 999999999.</summary>
-    public static readonly HouseNumber MaxValue = new(999_999_999);
+    public static HouseNumber MaxValue => new(999_999_999);
 
     /// <summary>Returns true if the house number is odd, otherwise false.</summary>
     /// <remarks>

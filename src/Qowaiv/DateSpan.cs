@@ -13,6 +13,7 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
 #if NET8_0_OR_GREATER
     , IUnaryPlusOperators<DateSpan, DateSpan>, IUnaryNegationOperators<DateSpan, DateSpan>
     , IAdditionOperators<DateSpan, DateSpan, DateSpan>, ISubtractionOperators<DateSpan, DateSpan, DateSpan>
+    , IMinMaxValue<DateSpan>
 #endif
 {
     /// <summary>Represents the pattern of a (potential) valid year.</summary>
@@ -30,10 +31,10 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     public static readonly DateSpan Zero;
 
     /// <summary>Represents the maximum value of the date span.</summary>
-    public static readonly DateSpan MaxValue = new(AsUInt64((MonthsPerYear * +9998) + 11, +30));
+    public static DateSpan MaxValue => new(AsUInt64((MonthsPerYear * +9998) + 11, +30));
 
     /// <summary>Represents the minimum value of the date span.</summary>
-    public static readonly DateSpan MinValue = new(AsUInt64((MonthsPerYear * -9998) - 11, -30));
+    public static DateSpan MinValue => new(AsUInt64((MonthsPerYear * -9998) - 11, -30));
 
     /// <summary>The average amount of days per month, taken leap years into account.</summary>
     internal const double DaysPerMonth = 30.421625;

@@ -10,6 +10,9 @@
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.YearJsonConverter))]
 #endif
 public readonly partial struct Year : IXmlSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
+#if NET8_0_OR_GREATER
+    , IMinMaxValue<Year>
+#endif
 {
     /// <summary>Represents an empty/not set year.</summary>
     public static readonly Year Empty;
@@ -18,10 +21,10 @@ public readonly partial struct Year : IXmlSerializable, IFormattable, IEquatable
     public static readonly Year Unknown = new(short.MaxValue);
 
     /// <summary>Represents the smallest possible year 1.</summary>
-    public static readonly Year MinValue = new(1);
+    public static Year MinValue => new(1);
 
     /// <summary>Represents the largest possible year 9999.</summary>
-    public static readonly Year MaxValue = new(9999);
+    public static Year MaxValue => new(9999);
 
     /// <summary>Returns an indication whether the specified year is a leap year.</summary>
     /// <returns>

@@ -150,8 +150,8 @@ public partial struct Fraction
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Fraction Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
+    public static Fraction Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider)
         ?? throw Unparsable.ForValue<Fraction>(s, QowaivMessages.FormatExceptionFraction);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.</summary>

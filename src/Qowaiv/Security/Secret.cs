@@ -10,10 +10,10 @@ namespace Qowaiv.Security;
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Security.SecretJsonConverter))]
 #endif
-public readonly struct Secret : IEquatable<Secret>
+public readonly struct Secret : IEquatable<Secret>, IEmpty<Secret>
 {
     /// <summary>Represents an empty/not set secret.</summary>
-    public static readonly Secret Empty;
+    public static Secret Empty => default;
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string m_Value;

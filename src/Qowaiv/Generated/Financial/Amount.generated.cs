@@ -18,6 +18,7 @@ public partial struct Amount
     /// <summary>The inner value of the amount.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly decimal m_Value;
+
 }
 
 public partial struct Amount : IEquatable<Amount>
@@ -194,8 +195,8 @@ public partial struct Amount
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Amount Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
+    public static Amount Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider)
         ?? throw Unparsable.ForValue<Amount>(s, QowaivMessages.FormatExceptionFinancialAmount);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Amount"/>.</summary>

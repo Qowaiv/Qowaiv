@@ -185,8 +185,8 @@ public partial struct LocalDateTime
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static LocalDateTime Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
+    public static LocalDateTime Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider)
         ?? throw Unparsable.ForValue<LocalDateTime>(s, QowaivMessages.FormatExceptionLocalDateTime);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="LocalDateTime"/>.</summary>

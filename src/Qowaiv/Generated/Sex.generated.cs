@@ -19,17 +19,9 @@ public partial struct Sex
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly byte m_Value;
 
-    /// <summary>False if the sex is empty, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool HasValue => m_Value != default;
-
     /// <summary>False if the sex is empty or unknown, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the sex is empty, otherwise false.</summary>
-    [Pure]
-    public bool IsEmpty() => m_Value == default;
 
     /// <summary>Returns true if the sex is unknown, otherwise false.</summary>
     [Pure]
@@ -38,6 +30,20 @@ public partial struct Sex
     /// <summary>Returns true if the sex is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+}
+
+public partial struct Sex : IEmpty<Sex>
+{
+    /// <summary>Represents an empty/not set FullName.</summary>
+    public static Sex Empty => default;
+
+    /// <summary>False if the sex is empty, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool HasValue => m_Value != default;
+
+    /// <summary>Returns true if the  sex is empty, otherwise false.</summary>
+    [Pure]
+    public bool IsEmpty() => !HasValue;
 }
 
 public partial struct Sex : IEquatable<Sex>
@@ -200,8 +206,8 @@ public partial struct Sex
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Sex Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
+    public static Sex Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider)
         ?? throw Unparsable.ForValue<Sex>(s, QowaivMessages.FormatExceptionSex);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Sex"/>.</summary>

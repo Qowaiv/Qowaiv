@@ -18,6 +18,7 @@ public partial struct MonthSpan
     /// <summary>The inner value of the month span.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly int m_Value;
+
 }
 
 public partial struct MonthSpan : IEquatable<MonthSpan>
@@ -194,8 +195,8 @@ public partial struct MonthSpan
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static MonthSpan Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
+    public static MonthSpan Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider)
         ?? throw Unparsable.ForValue<MonthSpan>(s, QowaivMessages.FormatExceptionMonthSpan);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="MonthSpan"/>.</summary>

@@ -164,8 +164,8 @@ public partial struct WeekDate
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static WeekDate Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
+    public static WeekDate Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider)
         ?? throw Unparsable.ForValue<WeekDate>(s, QowaivMessages.FormatExceptionWeekDate);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="WeekDate"/>.</summary>

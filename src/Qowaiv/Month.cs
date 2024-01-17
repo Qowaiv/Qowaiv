@@ -13,9 +13,6 @@ namespace Qowaiv;
 #endif
 public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
 {
-    /// <summary>Represents an empty/not set month.</summary>
-    public static readonly Month Empty;
-
     /// <summary>Represents an unknown (but set) month.</summary>
     public static readonly Month Unknown = new(byte.MaxValue);
 

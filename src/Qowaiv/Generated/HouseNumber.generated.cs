@@ -19,17 +19,9 @@ public partial struct HouseNumber
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly int m_Value;
 
-    /// <summary>False if the house number is empty, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool HasValue => m_Value != default;
-
     /// <summary>False if the house number is empty or unknown, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the house number is empty, otherwise false.</summary>
-    [Pure]
-    public bool IsEmpty() => m_Value == default;
 
     /// <summary>Returns true if the house number is unknown, otherwise false.</summary>
     [Pure]
@@ -38,6 +30,20 @@ public partial struct HouseNumber
     /// <summary>Returns true if the house number is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+}
+
+public partial struct HouseNumber : IEmpty<HouseNumber>
+{
+    /// <summary>Represents an empty/not set FullName.</summary>
+    public static HouseNumber Empty => default;
+
+    /// <summary>False if the house number is empty, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool HasValue => m_Value != default;
+
+    /// <summary>Returns true if the  house number is empty, otherwise false.</summary>
+    [Pure]
+    public bool IsEmpty() => !HasValue;
 }
 
 public partial struct HouseNumber : IEquatable<HouseNumber>
@@ -214,8 +220,8 @@ public partial struct HouseNumber
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static HouseNumber Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
+    public static HouseNumber Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider)
         ?? throw Unparsable.ForValue<HouseNumber>(s, QowaivMessages.FormatExceptionHouseNumber);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="HouseNumber"/>.</summary>

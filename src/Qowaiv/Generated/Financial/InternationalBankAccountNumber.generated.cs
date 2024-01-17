@@ -19,17 +19,9 @@ public partial struct InternationalBankAccountNumber
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? m_Value;
 
-    /// <summary>False if the IBAN is empty, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool HasValue => m_Value != default;
-
     /// <summary>False if the IBAN is empty or unknown, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the IBAN is empty, otherwise false.</summary>
-    [Pure]
-    public bool IsEmpty() => m_Value == default;
 
     /// <summary>Returns true if the IBAN is unknown, otherwise false.</summary>
     [Pure]
@@ -38,6 +30,20 @@ public partial struct InternationalBankAccountNumber
     /// <summary>Returns true if the IBAN is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+}
+
+public partial struct InternationalBankAccountNumber : IEmpty<InternationalBankAccountNumber>
+{
+    /// <summary>Represents an empty/not set FullName.</summary>
+    public static InternationalBankAccountNumber Empty => default;
+
+    /// <summary>False if the IBAN is empty, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool HasValue => m_Value != default;
+
+    /// <summary>Returns true if the  IBAN is empty, otherwise false.</summary>
+    [Pure]
+    public bool IsEmpty() => !HasValue;
 }
 
 public partial struct InternationalBankAccountNumber : IEquatable<InternationalBankAccountNumber>
@@ -200,8 +206,8 @@ public partial struct InternationalBankAccountNumber
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static InternationalBankAccountNumber Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
+    public static InternationalBankAccountNumber Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider)
         ?? throw Unparsable.ForValue<InternationalBankAccountNumber>(s, QowaivMessages.FormatExceptionInternationalBankAccountNumber);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="InternationalBankAccountNumber"/>.</summary>

@@ -19,13 +19,20 @@ public partial struct Uuid
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly Guid m_Value;
 
+}
+
+public partial struct Uuid : IEmpty<Uuid>
+{
+    /// <summary>Represents an empty/not set FullName.</summary>
+    public static Uuid Empty => default;
+
     /// <summary>False if the UUID is empty, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>Returns true if the UUID is empty, otherwise false.</summary>
+    /// <summary>Returns true if the  UUID is empty, otherwise false.</summary>
     [Pure]
-    public bool IsEmpty() => m_Value == default;
+    public bool IsEmpty() => !HasValue;
 }
 
 public partial struct Uuid : IEquatable<Uuid>
@@ -188,8 +195,8 @@ public partial struct Uuid
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Uuid Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
+    public static Uuid Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider)
         ?? throw Unparsable.ForValue<Uuid>(s, QowaivMessages.FormatExceptionUuid);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Uuid"/>.</summary>

@@ -22,9 +22,6 @@ namespace Qowaiv;
 #endif
 public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatable<YesNo>, IComparable, IComparable<YesNo>
 {
-    /// <summary>Represents an empty/not set yes-no.</summary>
-    public static readonly YesNo Empty;
-
     /// <summary>Represents an unknown (but set) yes-no.</summary>
     public static readonly YesNo No = new(1);
 

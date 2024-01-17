@@ -18,6 +18,7 @@ public partial struct Timestamp
     /// <summary>The inner value of the timestamp.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly ulong m_Value;
+
 }
 
 public partial struct Timestamp : IEquatable<Timestamp>
@@ -194,8 +195,8 @@ public partial struct Timestamp
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Timestamp Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
+    public static Timestamp Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider)
         ?? throw Unparsable.ForValue<Timestamp>(s, QowaivMessages.FormatExceptionTimestamp);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.</summary>

@@ -19,17 +19,9 @@ public partial struct BusinessIdentifierCode
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? m_Value;
 
-    /// <summary>False if the BIC is empty, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool HasValue => m_Value != default;
-
     /// <summary>False if the BIC is empty or unknown, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the BIC is empty, otherwise false.</summary>
-    [Pure]
-    public bool IsEmpty() => m_Value == default;
 
     /// <summary>Returns true if the BIC is unknown, otherwise false.</summary>
     [Pure]
@@ -38,6 +30,20 @@ public partial struct BusinessIdentifierCode
     /// <summary>Returns true if the BIC is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+}
+
+public partial struct BusinessIdentifierCode : IEmpty<BusinessIdentifierCode>
+{
+    /// <summary>Represents an empty/not set FullName.</summary>
+    public static BusinessIdentifierCode Empty => default;
+
+    /// <summary>False if the BIC is empty, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool HasValue => m_Value != default;
+
+    /// <summary>Returns true if the  BIC is empty, otherwise false.</summary>
+    [Pure]
+    public bool IsEmpty() => !HasValue;
 }
 
 public partial struct BusinessIdentifierCode : IEquatable<BusinessIdentifierCode>
@@ -200,8 +206,8 @@ public partial struct BusinessIdentifierCode
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static BusinessIdentifierCode Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
+    public static BusinessIdentifierCode Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider)
         ?? throw Unparsable.ForValue<BusinessIdentifierCode>(s, QowaivMessages.FormatExceptionBusinessIdentifierCode);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="BusinessIdentifierCode"/>.</summary>

@@ -17,7 +17,7 @@ namespace Qowaiv.Customization;
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Customization.GenericSvoJsonConverter))]
 #endif
-public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEquatable<Svo<TSvoBehavior>>, IComparable, IComparable<Svo<TSvoBehavior>>
+public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEquatable<Svo<TSvoBehavior>>, IComparable, IComparable<Svo<TSvoBehavior>>, IEmpty<Svo<TSvoBehavior>>
 #if NET8_0_OR_GREATER
 , IEqualityOperators<Svo<TSvoBehavior>, Svo<TSvoBehavior>, bool>
 , IParsable<Svo<TSvoBehavior>>
@@ -31,7 +31,7 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
     private static readonly TSvoBehavior behavior = new();
 
     /// <summary>Represents an empty/not set Single Value Object.</summary>
-    public static readonly Svo<TSvoBehavior> Empty;
+    public static Svo<TSvoBehavior> Empty => default;
 
     /// <summary>Represents an unknown (but set) Single Value Object.</summary>
     public static readonly Svo<TSvoBehavior> Unknown = new(SvoBehavior.unknown);

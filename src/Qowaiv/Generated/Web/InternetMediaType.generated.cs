@@ -19,17 +19,9 @@ public partial struct InternetMediaType
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? m_Value;
 
-    /// <summary>False if the Internet media type is empty, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool HasValue => m_Value != default;
-
     /// <summary>False if the Internet media type is empty or unknown, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the Internet media type is empty, otherwise false.</summary>
-    [Pure]
-    public bool IsEmpty() => m_Value == default;
 
     /// <summary>Returns true if the Internet media type is unknown, otherwise false.</summary>
     [Pure]
@@ -38,6 +30,20 @@ public partial struct InternetMediaType
     /// <summary>Returns true if the Internet media type is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+}
+
+public partial struct InternetMediaType : IEmpty<InternetMediaType>
+{
+    /// <summary>Represents an empty/not set FullName.</summary>
+    public static InternetMediaType Empty => default;
+
+    /// <summary>False if the Internet media type is empty, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool HasValue => m_Value != default;
+
+    /// <summary>Returns true if the  Internet media type is empty, otherwise false.</summary>
+    [Pure]
+    public bool IsEmpty() => !HasValue;
 }
 
 public partial struct InternetMediaType : IEquatable<InternetMediaType>
@@ -214,8 +220,8 @@ public partial struct InternetMediaType
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static InternetMediaType Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
+    public static InternetMediaType Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider)
         ?? throw Unparsable.ForValue<InternetMediaType>(s, QowaivMessages.FormatExceptionInternetMediaType);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="InternetMediaType"/>.</summary>

@@ -18,6 +18,7 @@ public partial struct Percentage
     /// <summary>The inner value of the percentage.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly decimal m_Value;
+
 }
 
 public partial struct Percentage : IEquatable<Percentage>
@@ -194,8 +195,8 @@ public partial struct Percentage
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Percentage Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
+    public static Percentage Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider)
         ?? throw Unparsable.ForValue<Percentage>(s, QowaivMessages.FormatExceptionPercentage);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Percentage"/>.</summary>

@@ -37,8 +37,9 @@
 #endif
 public readonly partial struct WeekDate : IXmlSerializable, IFormattable, IEquatable<WeekDate>, IComparable, IComparable<WeekDate>
 #if NET8_0_OR_GREATER
+    , IMinMaxValue<WeekDate>
 #else
-, ISerializable
+    , ISerializable
 #endif
 {
     /// <summary>Represents the pattern of a (potential) valid week date.</summary>
@@ -56,10 +57,10 @@ public readonly partial struct WeekDate : IXmlSerializable, IFormattable, IEquat
 #endif
 
     /// <summary>Represents the minimum value of the week date.</summary>
-    public static readonly WeekDate MinValue = new(Date.MinValue);
+    public static WeekDate MinValue => new(Date.MinValue);
 
     /// <summary>Represents the maximum value of the week date.</summary>
-    public static readonly WeekDate MaxValue = new(Date.MaxValue);
+    public static WeekDate MaxValue => new(Date.MaxValue);
 
     /// <summary>Initializes a new instance of the <see cref="WeekDate"/> struct based on Week Year, week number, and day of the week.</summary>
     public WeekDate(int year, int week, int day) : this(Create(year, week, day)) { }

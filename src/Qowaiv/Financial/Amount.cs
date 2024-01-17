@@ -7,7 +7,6 @@ namespace Qowaiv.Financial;
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
 [OpenApiDataType(description: "Decimal representation of a currency amount.", example: 15.95, type: "number", format: "amount")]
-[OpenApi.OpenApiDataType(description: "Decimal representation of a currency amount.", example: 15.95, type: "number", format: "amount")]
 [TypeConverter(typeof(AmountTypeConverter))]
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.AmountJsonConverter))]
@@ -508,14 +507,6 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
 
     /// <summary>Casts an Amount to an int.</summary>
     public static explicit operator int(Amount val) => (int)val.m_Value;
-
-    /// <summary>Adds the left and the right amount.</summary>
-    [Obsolete("Explicitly convert the added value to Percentage or Amount.", false)]
-    public static Amount operator +(Amount amount, decimal other) => amount + other.Amount();
-
-    /// <summary>Subtracts the left and the right amount.</summary>
-    [Obsolete("Explicitly convert the subtracted value to Percentage or Amount.", false)]
-    public static Amount operator -(Amount amount, decimal other) => amount - other.Amount();
 
     /// <summary>Converts the string to an amount.
     /// A return value indicates whether the conversion succeeded.

@@ -13,7 +13,6 @@ namespace Qowaiv.Globalization;
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "Country notation as defined by ISO 3166-1 alpha-2.", example: "NL", type: "string", format: "country", nullable: true)]
-[OpenApi.OpenApiDataType(description: "Country notation as defined by ISO 3166-1 alpha-2.", example: "NL", type: "string", format: "country", nullable: true)]
 [TypeConverter(typeof(CountryTypeConverter))]
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Globalization.CountryJsonConverter))]

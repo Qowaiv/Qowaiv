@@ -16,6 +16,9 @@ v6.6.1
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 v7.0.0
+- Drop Gender. #361  (breaking)
+- Drop public static IsValid(string) methods. #361 (breaking)
+- Seal all JSON converters. #361 (breaking)
 - Allign Parse and TryParse provider naming with IParsable. #360 (breaking)
 - Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
 v6.6.0

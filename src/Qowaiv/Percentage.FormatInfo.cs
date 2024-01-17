@@ -75,16 +75,16 @@ public readonly partial struct Percentage
             format = WithDefault(format, formatProvider as CultureInfo);
 
             var pos = Position.None;
-            var symbol = Symbol.None;
+            var sym = Symbol.None;
             var prov = NumberFormat(formatProvider);
 
-            Scan(ref format, ref pos, ref symbol, prov, Symbol.Percent);
-            Scan(ref format, ref pos, ref symbol, prov, Symbol.PerMille);
-            Scan(ref format, ref pos, ref symbol, prov, Symbol.PerTenThousand);
+            Scan(ref format, ref pos, ref sym, prov, Symbol.Percent);
+            Scan(ref format, ref pos, ref sym, prov, Symbol.PerMille);
+            Scan(ref format, ref pos, ref sym, prov, Symbol.PerTenThousand);
 
             if (pos != Position.Contains)
             {
-                info = new(format, prov, symbol, pos);
+                info = new(format, prov, sym, pos);
                 return true;
             }
             else

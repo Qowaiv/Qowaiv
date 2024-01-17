@@ -58,9 +58,9 @@ public static class Svo
     /// <summary>-69/17</summary>
     public static readonly Fraction Fraction = -69.DividedBy(17);
 
-    [Obsolete("Will be dropped in version 7. Use Qowaiv.Sex instead.")]
-    public static readonly Gender Gender = Gender.Female;
+    /// <summary>8a1a8c42-d2ff-e254-e26e-b6abcbf19420</summary>
     public static readonly Guid Guid = Guid.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+
     public static readonly Hash Hash = Hash.Code("QOWAIV");
 
     /// <summary>123.456.789</summary>
@@ -112,7 +112,7 @@ public static class Svo
 
 public sealed class WithDefaultBehavior : SvoBehavior { }
 
-[OpenApi.OpenApiDataType(description: "Custom SVO Example", type: "string", example: "QOWAIV", format: "custom")]
+[OpenApiDataType(description: "Custom SVO Example", type: "string", example: "QOWAIV", format: "custom")]
 public sealed class ForCustomSvo : SvoBehavior
 {
     public override int MinLength => 3;

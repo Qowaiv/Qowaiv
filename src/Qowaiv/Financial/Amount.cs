@@ -26,16 +26,17 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     , IMultiplyOperators<Amount, ulong, Amount>, IDivisionOperators<Amount, ulong, Amount>
     , IMultiplyOperators<Amount, uint, Amount>, IDivisionOperators<Amount, uint, Amount>
     , IMultiplyOperators<Amount, ushort, Amount>, IDivisionOperators<Amount, ushort, Amount>
+    , IMinMaxValue<Amount>
 #endif
 {
     /// <summary>Represents an Amount of zero.</summary>
-    public static readonly Amount Zero;
+    public static Amount Zero => default;
 
     /// <summary>Represents the smallest possible value of the amount.</summary>
-    public static readonly Amount MinValue = new(decimal.MinValue);
+    public static Amount MinValue => new(decimal.MinValue);
 
     /// <summary>Represents the biggest possible value of the amount.</summary>
-    public static readonly Amount MaxValue = new(decimal.MaxValue);
+    public static Amount MaxValue => new(decimal.MaxValue);
 
     /// <summary>Gets the sign of the value of the amount.</summary>
     [Pure]

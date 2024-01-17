@@ -18,16 +18,17 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     , IMultiplyOperators<MonthSpan, double, MonthSpan>, IDivisionOperators<MonthSpan, double, MonthSpan>
     , IMultiplyOperators<MonthSpan, int, MonthSpan>, IDivisionOperators<MonthSpan, int, MonthSpan>
     , IMultiplyOperators<MonthSpan, short, MonthSpan>, IDivisionOperators<MonthSpan, short, MonthSpan>
+    , IMinMaxValue<MonthSpan>
 #endif
 {
     /// <summary>Represents a month span with a zero duration.</summary>
-    public static readonly MonthSpan Zero;
+    public static MonthSpan Zero => default;
 
     /// <summary>Gets the minimum month span (-9998 years).</summary>
-    public static readonly MonthSpan MinValue = new(-9998 * 12);
+    public static MonthSpan MinValue => new(-9998 * 12);
 
     /// <summary>Gets the maximum month span (+9998 years).</summary>
-    public static readonly MonthSpan MaxValue = new(+9998 * 12);
+    public static MonthSpan MaxValue => new(+9998 * 12);
 
     /// <summary>Initializes a new instance of the <see cref="MonthSpan"/> struct.</summary>
     /// <param name="years">

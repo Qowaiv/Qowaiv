@@ -10,12 +10,15 @@
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.TimestampJsonConverter))]
 #endif
 public readonly partial struct Timestamp : IXmlSerializable, IFormattable, IEquatable<Timestamp>, IComparable, IComparable<Timestamp>
+#if NET8_0_OR_GREATER
+    , IMinMaxValue<Timestamp>
+#endif
 {
     /// <summary>Gets the minimum value of a timestamp.</summary>
-    public static readonly Timestamp MinValue;
+    public static Timestamp MinValue => default;
 
     /// <summary>Gets the maximum value of a timestamp.</summary>
-    public static readonly Timestamp MaxValue = new(ulong.MaxValue);
+    public static Timestamp MaxValue => new(ulong.MaxValue);
 
     /// <summary>Represents the timestamp .</summary>
     [Pure]

@@ -86,7 +86,8 @@ public static class Base64
 #else
         return new(chars.ToArray());
 #endif
-        // 01234567 01234567 0123456
+
+        // 01234567 01234567 01234567
         // ..012345 ........ .......
         static char Read0(ReadOnlySpan<byte> bytes, int index)
             => Base64Chars[bytes[index] >> 2];

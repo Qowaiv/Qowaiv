@@ -57,7 +57,7 @@ internal static class GuidParser
 #endif
         return success;
 
-        // 01234567 01234567 0123456
+        // 01234567 01234567 01234567
         // ..012345 ........ .......
         static bool Write0(char ch, Span<byte> bytes, int index)
         {

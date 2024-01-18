@@ -28,3 +28,11 @@ By removing `Regex` for the UUID parsing, durations have been reduced.
 | Base64             | 18.58 ns |  1.19 |
 | Base32             | 27.82 ns |  1.78 |
 | Regex + FromBase64 | 92.76 ns |  5.94 |
+
+The version of a `UUID` is stored in the upper 4 bits of byte 7. By using the
+`GuidLayout` of `ToByteArray()` to retrieve that those bits is a big improvement.
+
+| Method      | Mean       | Ratio |
+|------------ |-----------:|------:|
+| Layout      |   0.584 ns |  1.00 |
+| From byte[] |   3.024 ns |  5.20 |

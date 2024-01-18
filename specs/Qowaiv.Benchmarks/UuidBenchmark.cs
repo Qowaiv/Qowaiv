@@ -1,5 +1,4 @@
-﻿using BenchmarkDotNet.Attributes;
-using Qowaiv;
+﻿using Qowaiv;
 using Qowaiv.Identifiers;
 
 namespace Benchmarks;
@@ -8,12 +7,13 @@ public partial class UuidBenchmark
 {
     public sealed class ForUuid : UuidBehavior { }
 
-    private const int Iterations = 1000;
-    private static readonly Guid[] Guids = new Guid[Iterations];
-    private static readonly Uuid[] Uuids = new Uuid[Iterations];
-    private static readonly Id<ForUuid>[] IDs = new Id<ForUuid>[Iterations];
+    internal const int Iterations = 1000;
+    internal Guid[] Guids = new Guid[Iterations];
+    internal Uuid[] Uuids = new Uuid[Iterations];
+    internal readonly Id<ForUuid>[] IDs = new Id<ForUuid>[Iterations];
+    internal readonly UuidVersion[] Versions = new UuidVersion[Iterations];
 
-    public class Parse: UuidBenchmark
+    public class Parse : UuidBenchmark
     {
         private string[] Strings { get; set; } = [];
         private string[] Base64s { get; set; } = [];
@@ -22,9 +22,10 @@ public partial class UuidBenchmark
         [GlobalSetup]
         public void Setup()
         {
-            Strings = Enumerable.Range(0, Iterations).Select(_ => Guid.NewGuid().ToString()).ToArray();
-            Base64s = Enumerable.Range(0, Iterations).Select(_ => Uuid.NewUuid().ToString()).ToArray();
-            Base32s = Enumerable.Range(0, Iterations).Select(_ => Uuid.NewUuid().ToString("H")).ToArray();
+            Uuids = Enumerable.Range(0, Iterations).Select(_ => Uuid.NewUuid()).ToArray();
+            Strings = Uuids.Select(g => g.ToString("D")).ToArray();
+            Base64s = Uuids.Select(g => g.ToString("S")).ToArray();
+            Base32s = Uuids.Select(g => g.ToString("H")).ToArray();
         }
 
         [Benchmark(Baseline = true)]
@@ -36,7 +37,7 @@ public partial class UuidBenchmark
             }
             return Guids;
         }
-        
+
         [Benchmark]
         public Uuid[] UUID_Parse()
         {
@@ -68,7 +69,7 @@ public partial class UuidBenchmark
         }
 
         [Benchmark]
-        public  Id<ForUuid>[] ID_for_UUID_Parse()
+        public Id<ForUuid>[] ID_for_UUID_Parse()
         {
             for (var i = 0; i < Base64s.Length; i++)
             {
@@ -85,6 +86,29 @@ public partial class UuidBenchmark
                 Uuids[i] = Reference.Convert_FromBase64(Base64s[i]);
             }
             return Uuids;
+        }
+    }
+
+    public class Version : UuidBenchmark
+    {
+        [Benchmark(Baseline = true)]
+        public UuidVersion[] Layout()
+        {
+            for (var i = 0; i < Uuids.Length; i++)
+            {
+                Versions[i] = Uuids[i].Version;
+            }
+            return Versions;
+        }
+
+        [Benchmark]
+        public UuidVersion[] From_byte_array()
+        {
+            for (var i = 0; i < Uuids.Length; i++)
+            {
+                Versions[i] = Reference.GetVersion(Uuids[i]);
+            }
+            return Versions;
         }
     }
 }

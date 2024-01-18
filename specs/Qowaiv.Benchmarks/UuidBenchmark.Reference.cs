@@ -11,8 +11,6 @@ public partial class UuidBenchmark
 
     public static partial class Reference
     {
-
-
         public static Uuid Convert_FromBase64(string s)
         {
             if (behavior.TryParse(s, out var guid))
@@ -20,6 +18,13 @@ public partial class UuidBenchmark
                 return (Uuid)(Guid)guid;
             }
             else throw new FormatException();
+        }
+
+        public static UuidVersion GetVersion(Guid guid)
+        {
+            var bytes = guid.ToByteArray();
+            var version = bytes[7] >> 4;
+            return (UuidVersion)version;
         }
     }
 

@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace Qowaiv.Identifiers;
 
@@ -137,41 +136,4 @@ internal static class GuidParser
         None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None,
         None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None,
     ];
-
-    // This will store the result of the parsing. And it will eventually be used to construct a Guid instance.
-    // We'll eventually reinterpret_cast<> a GuidLayout as a Guid, so we need to give it a sequential
-    // layout and ensure that its early fields match the layout of Guid exactly.
-    [StructLayout(LayoutKind.Explicit)]
-    private struct GuidLayout
-    {
-        [FieldOffset(0)]
-        internal uint _a;
-        [FieldOffset(4)]
-        internal uint _bc;
-        [FieldOffset(4)]
-        internal ushort _b;
-        [FieldOffset(6)]
-        internal ushort _c;
-        [FieldOffset(8)]
-        internal uint _defg;
-        [FieldOffset(8)]
-        internal ushort _de;
-        [FieldOffset(8)]
-        internal byte _d;
-        [FieldOffset(10)]
-        internal ushort _fg;
-        [FieldOffset(12)]
-        internal uint _hijk;
-
-        [FieldOffset(0)]
-        internal ulong lo;
-        [FieldOffset(4)]
-        internal ulong mi;
-        [FieldOffset(8)]
-        internal ulong hi;
-
-        [Pure]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly Guid ToGuid() => Unsafe.As<GuidLayout, Guid>(ref Unsafe.AsRef(in this));
-    }
 }

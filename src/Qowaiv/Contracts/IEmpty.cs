@@ -13,10 +13,6 @@ public interface IEmpty<TSelf> where TSelf : struct, IEmpty<TSelf>
     static abstract TSelf Empty { get; }
 #endif
 
-    /// <summary>Returns true if the <typeparamref name="TSelf"/> is empty, otherwise false.</summary>
-    [Pure]
-    bool IsEmpty();
-
     /// <summary>True if <typeparamref name="TSelf"/> is empty, otherwise true.</summary>
     bool HasValue { get; }
 }

@@ -32,18 +32,7 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
     public static readonly int ArraySize = 16;
 
     /// <summary>The index of the byte containing the version of a UUID is 7.</summary>
-    internal const int IndexOfVersion = 7;
-
-    /// <summary>Represents the pattern of a (potential) valid GUID.</summary>
-    internal static readonly Regex Pattern = GetPattern();
-
-#if NET8_0_OR_GREATER
-    [GeneratedRegex(@"^[a-zA-Z0-9_-]{22}(=){0,2}$", RegOptions.Default, RegOptions.TimeoutMilliseconds)]
-    private static partial Regex GetPattern();
-#else
-    [Pure]
-    private static Regex GetPattern() => new(@"^[a-zA-Z0-9_-]{22}(=){0,2}$", RegOptions.Default, RegOptions.Timeout);
-#endif
+    private const int IndexOfVersion = 7;
 
     /// <summary>Get the version of the UUID.</summary>
     public UuidVersion Version => m_Value.GetVersion();

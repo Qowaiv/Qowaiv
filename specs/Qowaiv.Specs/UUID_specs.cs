@@ -225,6 +225,16 @@ public class Can_be_parsed
     }
 }
 
+public class Can_not_be_parsed
+{
+    public class from_Base64
+    {
+        [Test]
+        public void with_suffix_containing_non_equals_char()
+            => Uuid.TryParse("0123456789012345678901=@").Should().BeNull();
+    }
+}
+
 public class Can_be_created
 {
     [Test]

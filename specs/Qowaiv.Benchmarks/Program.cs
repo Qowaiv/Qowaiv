@@ -6,7 +6,7 @@ public static class Program
 {
     public static void Main()
     {
-        BenchmarkRunner.Run<IbanBenchmark.ParseUnformatted>();
-        BenchmarkRunner.Run<IbanBenchmark.ParseFormatted>();
+        BenchmarkRunner.Run<UuidBenchmark.Parse>();
+        //BenchmarkRunner.Run<IbanBenchmark.ParseFormatted>();
     }
 }

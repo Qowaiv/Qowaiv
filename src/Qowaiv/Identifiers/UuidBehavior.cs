@@ -9,6 +9,34 @@ public class UuidBehavior : GuidBehavior
     /// <summary>Initializes a new instance of the <see cref="UuidBehavior"/> class.</summary>
     protected UuidBehavior() { }
 
-    /// <summary>Gets the default format used to represent the <see cref="System.Guid"/> as <see cref="string"/>.</summary>
+    /// <summary>Gets the default format used to represent the <see cref="Guid"/> as <see cref="string"/>.</summary>
     protected override string DefaultFormat => "S";
+
+    /// <inheritdoc />
+    public override bool TryParse(string? str, out object? id)
+    {
+        id = null;
+        if (str is not { Length: > 0 })
+        {
+            return true;
+        }
+        else if (GuidParser.TryBase64(str, out var base64))
+        {
+            id = NullIfEmpty(base64);
+            return true;
+        }
+        else if (Guid.TryParse(str, out var guid))
+        {
+            id = NullIfEmpty(guid);
+            return true;
+        }
+        else if (GuidParser.TryBase32(str, out var base32))
+        {
+            id = NullIfEmpty(base32);
+            return true;
+        }
+        else return false;
+
+        static object? NullIfEmpty(Guid guid) => guid == Guid.Empty ? null : guid;
+    }
 }

@@ -199,13 +199,28 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
     [Pure]
     public static bool TryParse(string? s, IFormatProvider? provider, out Uuid result)
     {
-        result = default;
-        if (behavior.TryParse(s, out var id))
+        result = Empty;
+
+        if (s is not { Length: > 0 })
         {
-            result = id is Guid guid ? new Uuid(guid) : Empty;
             return true;
         }
-        return false;
+        else if (GuidParser.TryBase64(s, out var base64))
+        {
+            result = base64;
+            return true;
+        }
+        else if (Guid.TryParse(s, out var guid))
+        {
+            result = guid;
+            return true;
+        }
+        else if (GuidParser.TryBase32(s, out var base32))
+        {
+            result = base32;
+            return true;
+        }
+        else return false;
     }
 
     /// <summary>Generates an <see cref="Uuid"/> applying a <see cref="MD5"/> hash on the data.</summary>

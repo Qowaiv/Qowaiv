@@ -99,43 +99,27 @@ public class GuidBehavior : IdentifierBehavior
     [Pure]
     public override bool TryParse(string? str, out object? id)
     {
+        id = null;
         if (str is not { Length: > 0 })
         {
-            id = default;
             return true;
         }
-        else if (Guid.TryParse(str, out Guid guid))
+        else if (Guid.TryParse(str, out var guid))
         {
             id = NullIfEmpty(guid);
             return true;
         }
-        else if (Uuid.Pattern.IsMatch(str))
+        else if (GuidParser.TryBase64(str, out var base64))
         {
-            id = NullIfEmpty(GuidFromBase64(str));
+            id = NullIfEmpty(base64);
             return true;
         }
-        else if (str.Length == 26 && Base32.TryGetBytes(str, out var b32))
+        else if (GuidParser.TryBase32(str, out var base32))
         {
-            id = NullIfEmpty(new Guid(b32));
+            id = NullIfEmpty(base32);
             return true;
         }
-        else
-        {
-            id = default;
-            return false;
-        }
-
-        static Guid GuidFromBase64(string str)
-        {
-            var base64 = new char[24];
-            for (int i = 0; i < 22; i++)
-            {
-                base64[i] = str[i] switch { '-' => '+', '_' => '/', _ => str[i] };
-            }
-            base64[22] = '=';
-            base64[23] = '=';
-            return new Guid(Convert.FromBase64String(new string(base64)));
-        }
+        else return false;
 
         static object? NullIfEmpty(Guid guid) => guid == Guid.Empty ? null : guid;
     }

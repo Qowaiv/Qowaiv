@@ -129,6 +129,64 @@ public class Can_be_parsed
         Uuid.Parse(string.Empty).Should().Be(Uuid.Empty);
     }
 
+    public class from_GUID
+    {
+        [Test]
+        public void LowerCase()
+            => Uuid.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420").Should().Be(Svo.Uuid);
+
+        [Test]
+        public void UpperCase()
+            => Uuid.Parse("8A1A8C42-D2FF-E254-E26E-B6ABCBF19420").Should().Be(Svo.Uuid);
+
+        [Test]
+        public void With_brackets()
+            => Uuid.Parse("(8A1A8C42-D2FF-E254-E26E-B6ABCBF19420)").Should().Be(Svo.Uuid);
+
+        [Test]
+        public void With_curly_brackets()
+            => Uuid.Parse("{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}").Should().Be(Svo.Uuid);
+
+        [Test]
+        public void without_dashes()
+            => Uuid.Parse("8A1A8C42D2FFE254E26EB6ABCBF19420").Should().Be(Svo.Uuid);
+    }
+    
+    public class from_Base64
+    {
+        [TestCase("Qowaiv_SVOLibrary_GUIA=")]
+        [TestCase("Qowaiv_SVOLibrary_GUIA==")]
+        public void with_equal_sign_suffix(string s)
+            => Uuid.Parse(s).Should().Be(Svo.Uuid);
+
+        [Test]
+        public void with_under_scores_equvilent_to_forward_slashes()
+            => Uuid.Parse("Qowaiv/SVOLibrary/GUIA").Should().Be(Uuid.Parse("Qowaiv_SVOLibrary_GUIA"));
+
+        [Test]
+        public void with_dashes_equvilent_to_plusses()
+            => Uuid.Parse("Qowaiv-SVOLibrary-GUIA").Should().Be(Uuid.Parse("Qowaiv+SVOLibrary+GUIA"));
+    }
+
+    public class from_Base32
+    {
+        [Test]
+        public void LowerCase()
+            => Uuid.Parse("ikgbvcx72jkofytow2v4x4muea").Should().Be(Svo.Uuid);
+
+        [Test]
+        public void UpperCase()
+            => Uuid.Parse("IKGBVCX72JKOFYTOW2V4X4MUEA").Should().Be(Svo.Uuid);
+
+        [Test]
+        public void with_0s_equivilent_to_Os()
+            => Uuid.Parse("IKGBVCX72JK0FYT0W2V4X4MUEA").Should().Be(Uuid.Parse("IKGBVCX72JKOFYTOW2V4X4MUEA"));
+
+        [Test]
+        public void with_1s_equivilent_to_Is()
+            => Uuid.Parse("1KGBVCX72JKOFYTOW2V4X4MUEA").Should().Be(Uuid.Parse("IKGBVCX72JKOFYTOW2V4X4MUEA"));
+    }
+    
     [TestCase("en", "Qowaiv_SVOLibrary_GUIA")]
     [TestCase("en", "8A1A8C42-D2FF-E254-E26E-B6ABCBF19420")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)

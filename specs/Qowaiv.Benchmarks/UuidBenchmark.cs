@@ -23,6 +23,7 @@ public partial class UuidBenchmark
         public void Setup()
         {
             Uuids = Enumerable.Range(0, Iterations).Select(_ => Uuid.NewUuid()).ToArray();
+            Guids = Uuids.Select(x => (Guid)x).ToArray();
             Strings = Uuids.Select(g => g.ToString("D")).ToArray();
             Base64s = Uuids.Select(g => g.ToString("S")).ToArray();
             Base32s = Uuids.Select(g => g.ToString("H")).ToArray();
@@ -86,6 +87,58 @@ public partial class UuidBenchmark
                 Uuids[i] = Reference.Convert_FromBase64(Base64s[i]);
             }
             return Uuids;
+        }
+    }
+
+    public class StringOutput : UuidBenchmark
+    {
+        private string[] Strings { get; set; } = new string[Iterations];
+
+        [GlobalSetup]
+        public void Setup()
+        {
+            Uuids = Enumerable.Range(0, Iterations).Select(_ => Uuid.NewUuid()).ToArray();
+            Guids = Uuids.Select(x => (Guid)x).ToArray();
+        }
+
+        [Benchmark(Baseline = true)]
+        public string[] GUID_ToString()
+        {
+            for (var i = 0; i < Guids.Length; i++)
+            {
+                Strings[i] = Guids[i].ToString();
+            }
+            return Strings;
+        }
+
+        [Benchmark]
+        public string[] GUID()
+        {
+            for (var i = 0; i < Uuids.Length; i++)
+            {
+                Strings[i] = Uuids[i].ToString("B");
+            }
+            return Strings;
+        }
+
+        [Benchmark]
+        public string[] Base64()
+        {
+            for (var i = 0; i < Uuids.Length; i++)
+            {
+                Strings[i] = Uuids[i].ToJson()!;
+            }
+            return Strings;
+        }
+
+        [Benchmark]
+        public string[] Convert_ToBase64()
+        {
+            for (var i = 0; i < Uuids.Length; i++)
+            {
+                Strings[i] = Reference.ToString(Uuids[i]);
+            }
+            return Strings;
         }
     }
 

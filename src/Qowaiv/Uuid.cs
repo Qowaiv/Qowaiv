@@ -57,7 +57,7 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string? ToJson() => m_Value == Guid.Empty ? null : ToString(CultureInfo.InvariantCulture);
+    public string? ToJson() => HasValue ? Base64.ToString(m_Value) : null;
 
     /// <summary>Returns a <see cref="string"/> that represents the current UUID for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -109,7 +109,7 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
 
     /// <summary>Gets an XML string representation of the UUID.</summary>
     [Pure]
-    private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
+    private string ToXmlString() => HasValue ? Base64.ToString(m_Value) : string.Empty;
 
     /// <summary>Casts a Qowaiv.UUID to a System.GUID.</summary>
     public static implicit operator Guid(Uuid val) => val.m_Value;

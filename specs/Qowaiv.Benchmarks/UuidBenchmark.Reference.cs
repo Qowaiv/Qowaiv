@@ -26,6 +26,9 @@ public partial class UuidBenchmark
             var version = bytes[7] >> 4;
             return (UuidVersion)version;
         }
+
+        public static string ToString(Guid guid, string format = "S")
+            => behavior.ToString(guid, format, null);
     }
 
     private sealed partial class OldUidBehavior : UuidBehavior
@@ -70,5 +73,20 @@ public partial class UuidBenchmark
                 return new Guid(Convert.FromBase64String(new string(base64)));
             }
         }
+
+        public override string ToString(object? obj, string? format, IFormatProvider? formatProvider)
+            => obj is Guid guid
+            ? ToString(guid, format):
+            base.ToString(obj, format, formatProvider);
+
+        private static string ToString(Guid guid, string? format)
+            => format switch
+            {
+                "S" or "s" => ToBase64(guid),
+                _ => guid.ToString(format),
+            };
+
+        private static string ToBase64(Guid guid)
+            => Convert.ToBase64String(guid.ToByteArray()).Replace('+', '-').Replace('/', '_')[..22];
     }
 }

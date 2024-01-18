@@ -18,6 +18,14 @@ public class ToString
         var bytes = data.Select(v => (byte)v).ToArray();
         Base64.ToString(bytes).Should().Be(base64);
     }
+
+    [Test]
+    public void GUID_ToString()
+    {
+        var uuid = Uuid.Parse("TEtRfRl700uZmeo6XOS2-Q");
+
+        Base64.ToString(uuid).Should().Be(uuid.ToString());
+    }
 }
 
 public class TryGetBytes_from

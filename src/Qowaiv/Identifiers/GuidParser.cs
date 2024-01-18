@@ -67,7 +67,7 @@ internal static class GuidParser
         }
 
         // 01234567 01234567 01234567
-        // 67****** ....0123 ........
+        // 45****** ....0123 ........
         static bool Write1(char ch, Span<byte> bytes, int index)
         {
             var val = Base64Lookup[(byte)ch];
@@ -77,7 +77,7 @@ internal static class GuidParser
         }
 
         // 01234567 01234567 01234567
-        // ******** 234**** ......01
+        // ******** 2345**** ......01
         static bool Write2(char ch, Span<byte> bytes, int index)
         {
             var val = Base64Lookup[(byte)ch];

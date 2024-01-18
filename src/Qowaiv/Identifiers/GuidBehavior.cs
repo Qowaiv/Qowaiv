@@ -77,7 +77,7 @@ public class GuidBehavior : IdentifierBehavior
     private static string Tostring(Guid id, string format, IFormatProvider? formatProvider)
         => format switch
         {
-            "s" or "S" => ToBase64String(id),
+            "s" or "S" => Base64.ToString(id),
             "h" => Base32.ToString(id.ToByteArray(), true),
             "H" => Base32.ToString(id.ToByteArray(), false),
             "N" or "D" or "B" or "P" => id.ToString(format, formatProvider).ToUpperInvariant(),
@@ -86,14 +86,12 @@ public class GuidBehavior : IdentifierBehavior
         };
 #pragma warning restore S1541 // Methods and properties should not be too complex
 
-    /// <remarks>Avoids invalid URL characters.</remarks>
-    [Pure]
-    private static string ToBase64String(Guid id)
-        => Convert.ToBase64String(id.ToByteArray()).Replace('+', '-').Replace('/', '_')[..22];
-
     /// <inheritdoc/>
     [Pure]
-    public override object? ToJson(object? obj) => ToString(obj, DefaultFormat, CultureInfo.InvariantCulture);
+    public override object? ToJson(object? obj)
+        => obj is Guid guid
+            ? guid.ToString()
+            : null;
 
     /// <inheritdoc/>
     [Pure]

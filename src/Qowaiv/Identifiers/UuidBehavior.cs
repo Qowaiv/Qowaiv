@@ -13,6 +13,13 @@ public class UuidBehavior : GuidBehavior
     protected override string DefaultFormat => "S";
 
     /// <inheritdoc />
+    [Pure]
+    public override object? ToJson(object? obj)
+        => obj is Guid id
+            ? Base64.ToString(id)
+            : null;
+
+    /// <inheritdoc />
     public override bool TryParse(string? str, out object? id)
     {
         id = null;

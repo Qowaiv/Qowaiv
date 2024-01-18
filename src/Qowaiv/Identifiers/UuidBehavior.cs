@@ -1,4 +1,5 @@
-﻿namespace Qowaiv.Identifiers;
+﻿
+namespace Qowaiv.Identifiers;
 
 /// <summary>Implements <see cref="IIdentifierBehavior"/> for an identifier based on <see cref="Uuid"/>.</summary>
 [OpenApiDataType(description: "UUID based identifier", example: "lmZO_haEOTCwGsCcbIZFFg", type: "string", format: "uuid-base64", nullable: true)]
@@ -11,6 +12,13 @@ public class UuidBehavior : GuidBehavior
 
     /// <summary>Gets the default format used to represent the <see cref="Guid"/> as <see cref="string"/>.</summary>
     protected override string DefaultFormat => "S";
+
+    /// <inheritdoc />
+    [Pure]
+    public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        => destinationType == typeof(string)
+            ? ToString(value, DefaultFormat, culture)
+            : base.ConvertTo(context, culture, value, destinationType);
 
     /// <inheritdoc />
     [Pure]

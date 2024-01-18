@@ -134,7 +134,10 @@ public partial struct Fraction
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Fraction Parse(string? s) => Parse(s, null);
+    public static Fraction Parse(string? s)
+        => TryParse(s, null, out var svo)
+            ? svo
+            : throw Unparsable.ForValue<Fraction>(s, QowaivMessages.FormatExceptionFraction);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.</summary>
     /// <param name="s">
@@ -150,9 +153,10 @@ public partial struct Fraction
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Fraction Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
-        ?? throw Unparsable.ForValue<Fraction>(s, QowaivMessages.FormatExceptionFraction);
+    public static Fraction Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var svo)
+            ? svo
+            : throw Unparsable.ForValue<Fraction>(s, QowaivMessages.FormatExceptionFraction);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.</summary>
     /// <param name="s">
@@ -162,7 +166,10 @@ public partial struct Fraction
     /// The fraction if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Fraction? TryParse(string? s) => TryParse(s, null);
+    public static Fraction? TryParse(string? s)
+        => TryParse(s, null, out var val)
+            ? val
+            : default(Fraction?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.</summary>
     /// <param name="s">
@@ -175,7 +182,10 @@ public partial struct Fraction
     /// The fraction if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Fraction? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(Fraction?);
+    public static Fraction? TryParse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider, out var val) 
+            ? val 
+            : default(Fraction?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.
     /// A return value indicates whether the conversion succeeded.

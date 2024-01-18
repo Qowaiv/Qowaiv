@@ -178,7 +178,10 @@ public partial struct Amount
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Amount Parse(string? s) => Parse(s, null);
+    public static Amount Parse(string? s)
+        => TryParse(s, null, out var svo)
+            ? svo
+            : throw Unparsable.ForValue<Amount>(s, QowaivMessages.FormatExceptionFinancialAmount);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Amount"/>.</summary>
     /// <param name="s">
@@ -194,9 +197,10 @@ public partial struct Amount
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Amount Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
-        ?? throw Unparsable.ForValue<Amount>(s, QowaivMessages.FormatExceptionFinancialAmount);
+    public static Amount Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var svo)
+            ? svo
+            : throw Unparsable.ForValue<Amount>(s, QowaivMessages.FormatExceptionFinancialAmount);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Amount"/>.</summary>
     /// <param name="s">
@@ -206,7 +210,10 @@ public partial struct Amount
     /// The amount if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Amount? TryParse(string? s) => TryParse(s, null);
+    public static Amount? TryParse(string? s)
+        => TryParse(s, null, out var val)
+            ? val
+            : default(Amount?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Amount"/>.</summary>
     /// <param name="s">
@@ -219,7 +226,10 @@ public partial struct Amount
     /// The amount if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Amount? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(Amount?);
+    public static Amount? TryParse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider, out var val) 
+            ? val 
+            : default(Amount?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Amount"/>.
     /// A return value indicates whether the conversion succeeded.

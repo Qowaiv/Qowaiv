@@ -148,7 +148,10 @@ public partial struct WeekDate
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static WeekDate Parse(string? s) => Parse(s, null);
+    public static WeekDate Parse(string? s)
+        => TryParse(s, null, out var svo)
+            ? svo
+            : throw Unparsable.ForValue<WeekDate>(s, QowaivMessages.FormatExceptionWeekDate);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="WeekDate"/>.</summary>
     /// <param name="s">
@@ -164,9 +167,10 @@ public partial struct WeekDate
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static WeekDate Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
-        ?? throw Unparsable.ForValue<WeekDate>(s, QowaivMessages.FormatExceptionWeekDate);
+    public static WeekDate Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var svo)
+            ? svo
+            : throw Unparsable.ForValue<WeekDate>(s, QowaivMessages.FormatExceptionWeekDate);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="WeekDate"/>.</summary>
     /// <param name="s">
@@ -176,7 +180,10 @@ public partial struct WeekDate
     /// The week date if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static WeekDate? TryParse(string? s) => TryParse(s, null);
+    public static WeekDate? TryParse(string? s)
+        => TryParse(s, null, out var val)
+            ? val
+            : default(WeekDate?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="WeekDate"/>.</summary>
     /// <param name="s">
@@ -189,7 +196,10 @@ public partial struct WeekDate
     /// The week date if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static WeekDate? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(WeekDate?);
+    public static WeekDate? TryParse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider, out var val) 
+            ? val 
+            : default(WeekDate?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="WeekDate"/>.
     /// A return value indicates whether the conversion succeeded.

@@ -18,6 +18,12 @@ public partial struct Uuid
     /// <summary>The inner value of the UUID.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly Guid m_Value;
+}
+
+public partial struct Uuid : IEmpty<Uuid>
+{
+    /// <summary>Represents an empty/not set UUID.</summary>
+    public static Uuid Empty => default;
 
     /// <summary>False if the UUID is empty, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -25,7 +31,7 @@ public partial struct Uuid
 
     /// <summary>Returns true if the UUID is empty, otherwise false.</summary>
     [Pure]
-    public bool IsEmpty() => m_Value == default;
+    public bool IsEmpty() => !HasValue;
 }
 
 public partial struct Uuid : IEquatable<Uuid>

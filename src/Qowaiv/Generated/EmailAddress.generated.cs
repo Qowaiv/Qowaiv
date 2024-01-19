@@ -34,14 +34,14 @@ public partial struct EmailAddress
 
 public partial struct EmailAddress : IEmpty<EmailAddress>
 {
-    /// <summary>Represents an empty/not set FullName.</summary>
+    /// <summary>Represents an empty/not set email address.</summary>
     public static EmailAddress Empty => default;
 
     /// <summary>False if the email address is empty, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>Returns true if the  email address is empty, otherwise false.</summary>
+    /// <summary>Returns true if the email address is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
@@ -206,8 +206,8 @@ public partial struct EmailAddress
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static EmailAddress Parse(string? s, IFormatProvider? provider)
-        => TryParse(s, provider)
+    public static EmailAddress Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<EmailAddress>(s, QowaivMessages.FormatExceptionEmailAddress);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="EmailAddress"/>.</summary>

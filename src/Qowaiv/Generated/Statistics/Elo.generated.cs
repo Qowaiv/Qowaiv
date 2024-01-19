@@ -18,7 +18,6 @@ public partial struct Elo
     /// <summary>The inner value of the elo.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly double m_Value;
-
 }
 
 public partial struct Elo : IEquatable<Elo>
@@ -195,8 +194,8 @@ public partial struct Elo
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Elo Parse(string? s, IFormatProvider? provider)
-        => TryParse(s, provider)
+    public static Elo Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<Elo>(s, QowaivMessages.FormatExceptionElo);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Elo"/>.</summary>

@@ -34,14 +34,14 @@ public partial struct Year
 
 public partial struct Year : IEmpty<Year>
 {
-    /// <summary>Represents an empty/not set FullName.</summary>
+    /// <summary>Represents an empty/not set year.</summary>
     public static Year Empty => default;
 
     /// <summary>False if the year is empty, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>Returns true if the  year is empty, otherwise false.</summary>
+    /// <summary>Returns true if the year is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
@@ -206,8 +206,8 @@ public partial struct Year
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Year Parse(string? s, IFormatProvider? provider)
-        => TryParse(s, provider)
+    public static Year Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<Year>(s, QowaivMessages.FormatExceptionYear);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Year"/>.</summary>

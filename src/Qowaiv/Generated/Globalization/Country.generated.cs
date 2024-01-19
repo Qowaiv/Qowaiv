@@ -34,14 +34,14 @@ public partial struct Country
 
 public partial struct Country : IEmpty<Country>
 {
-    /// <summary>Represents an empty/not set FullName.</summary>
+    /// <summary>Represents an empty/not set country.</summary>
     public static Country Empty => default;
 
     /// <summary>False if the country is empty, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>Returns true if the  country is empty, otherwise false.</summary>
+    /// <summary>Returns true if the country is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
@@ -206,8 +206,8 @@ public partial struct Country
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Country Parse(string? s, IFormatProvider? provider)
-        => TryParse(s, provider)
+    public static Country Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<Country>(s, QowaivMessages.FormatExceptionCountry);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Country"/>.</summary>

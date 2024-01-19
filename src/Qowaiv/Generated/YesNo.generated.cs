@@ -34,14 +34,14 @@ public partial struct YesNo
 
 public partial struct YesNo : IEmpty<YesNo>
 {
-    /// <summary>Represents an empty/not set FullName.</summary>
+    /// <summary>Represents an empty/not set yes-no.</summary>
     public static YesNo Empty => default;
 
     /// <summary>False if the yes-no is empty, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>Returns true if the  yes-no is empty, otherwise false.</summary>
+    /// <summary>Returns true if the yes-no is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
@@ -206,8 +206,8 @@ public partial struct YesNo
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static YesNo Parse(string? s, IFormatProvider? provider)
-        => TryParse(s, provider)
+    public static YesNo Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<YesNo>(s, QowaivMessages.FormatExceptionYesNo);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="YesNo"/>.</summary>

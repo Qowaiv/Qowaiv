@@ -34,14 +34,14 @@ public partial struct EnergyLabel
 
 public partial struct EnergyLabel : IEmpty<EnergyLabel>
 {
-    /// <summary>Represents an empty/not set FullName.</summary>
+    /// <summary>Represents an empty/not set EU energy label.</summary>
     public static EnergyLabel Empty => default;
 
     /// <summary>False if the EU energy label is empty, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>Returns true if the  EU energy label is empty, otherwise false.</summary>
+    /// <summary>Returns true if the EU energy label is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
@@ -206,8 +206,8 @@ public partial struct EnergyLabel
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static EnergyLabel Parse(string? s, IFormatProvider? provider)
-        => TryParse(s, provider)
+    public static EnergyLabel Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<EnergyLabel>(s, QowaivMessages.FormatExceptionEnergyLabel);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="EnergyLabel"/>.</summary>

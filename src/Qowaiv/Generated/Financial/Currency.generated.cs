@@ -34,14 +34,14 @@ public partial struct Currency
 
 public partial struct Currency : IEmpty<Currency>
 {
-    /// <summary>Represents an empty/not set FullName.</summary>
+    /// <summary>Represents an empty/not set currency.</summary>
     public static Currency Empty => default;
 
     /// <summary>False if the currency is empty, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>Returns true if the  currency is empty, otherwise false.</summary>
+    /// <summary>Returns true if the currency is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
@@ -206,8 +206,8 @@ public partial struct Currency
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Currency Parse(string? s, IFormatProvider? provider)
-        => TryParse(s, provider)
+    public static Currency Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<Currency>(s, QowaivMessages.FormatExceptionCurrency);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Currency"/>.</summary>

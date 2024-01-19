@@ -34,14 +34,14 @@ public partial struct Month
 
 public partial struct Month : IEmpty<Month>
 {
-    /// <summary>Represents an empty/not set FullName.</summary>
+    /// <summary>Represents an empty/not set month.</summary>
     public static Month Empty => default;
 
     /// <summary>False if the month is empty, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>Returns true if the  month is empty, otherwise false.</summary>
+    /// <summary>Returns true if the month is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
@@ -206,8 +206,8 @@ public partial struct Month
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Month Parse(string? s, IFormatProvider? provider)
-        => TryParse(s, provider)
+    public static Month Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<Month>(s, QowaivMessages.FormatExceptionMonth);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Month"/>.</summary>

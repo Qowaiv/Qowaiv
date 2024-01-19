@@ -18,7 +18,6 @@ public partial struct DateSpan
     /// <summary>The inner value of the date span.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly ulong m_Value;
-
 }
 
 public partial struct DateSpan : IEquatable<DateSpan>
@@ -181,8 +180,8 @@ public partial struct DateSpan
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static DateSpan Parse(string? s, IFormatProvider? provider)
-        => TryParse(s, provider)
+    public static DateSpan Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<DateSpan>(s, QowaivMessages.FormatExceptionDateSpan);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="DateSpan"/>.</summary>

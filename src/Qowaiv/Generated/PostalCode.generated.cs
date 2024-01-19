@@ -34,14 +34,14 @@ public partial struct PostalCode
 
 public partial struct PostalCode : IEmpty<PostalCode>
 {
-    /// <summary>Represents an empty/not set FullName.</summary>
+    /// <summary>Represents an empty/not set postal code.</summary>
     public static PostalCode Empty => default;
 
     /// <summary>False if the postal code is empty, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>Returns true if the  postal code is empty, otherwise false.</summary>
+    /// <summary>Returns true if the postal code is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
@@ -206,8 +206,8 @@ public partial struct PostalCode
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static PostalCode Parse(string? s, IFormatProvider? provider)
-        => TryParse(s, provider)
+    public static PostalCode Parse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider) 
         ?? throw Unparsable.ForValue<PostalCode>(s, QowaivMessages.FormatExceptionPostalCode);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="PostalCode"/>.</summary>

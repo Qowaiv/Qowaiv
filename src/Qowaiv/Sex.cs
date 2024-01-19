@@ -31,9 +31,6 @@ namespace Qowaiv;
 #endif
 public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<Sex>, IComparable, IComparable<Sex>
 {
-    /// <summary>Represents an empty/not set Sex.</summary>
-    public static readonly Sex Empty;
-
     /// <summary>Represents a not known/unknown sex.</summary>
     public static readonly Sex Unknown = new(1);
 

@@ -22,9 +22,6 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     /// </remarks>
     public const int MaxLength = 254;
 
-    /// <summary>Represents an empty/not set email address.</summary>
-    public static readonly EmailAddress Empty;
-
     /// <summary>Represents an unknown (but set) email address.</summary>
     public static readonly EmailAddress Unknown = new("?");
 

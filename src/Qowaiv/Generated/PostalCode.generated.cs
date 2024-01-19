@@ -18,18 +18,6 @@ public partial struct PostalCode
     /// <summary>The inner value of the postal code.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? m_Value;
-
-    /// <summary>False if the postal code is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the postal code is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the postal code is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct PostalCode : IEmpty<PostalCode>
@@ -44,6 +32,21 @@ public partial struct PostalCode : IEmpty<PostalCode>
     /// <summary>Returns true if the postal code is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => !HasValue;
+}
+
+public partial struct PostalCode : IUnknown<PostalCode>
+{
+    /// <summary>False if the postal code is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the postal code is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the postal code is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct PostalCode : IEquatable<PostalCode>

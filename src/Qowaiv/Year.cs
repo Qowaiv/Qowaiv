@@ -15,7 +15,7 @@ public readonly partial struct Year : IXmlSerializable, IFormattable, IEquatable
 #endif
 {
     /// <summary>Represents an unknown (but set) year.</summary>
-    public static readonly Year Unknown = new(short.MaxValue);
+    public static Year Unknown => new(short.MaxValue);
 
     /// <summary>Represents the smallest possible year 1.</summary>
     public static Year MinValue => new(1);

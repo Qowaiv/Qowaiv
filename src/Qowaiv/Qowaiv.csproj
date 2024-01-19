@@ -9,6 +9,7 @@
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 v7.0.0
+- Introduction of the IEmpty&lt;TSelf&gt; interface. #364
 - Implement IMinMaxValue&lt;TSelf&gt; for SVO's with a min and max value. #362 (breaking)
 - Drop Gender. #361  (breaking)
 - Drop public static IsValid(string) methods. #361 (breaking)

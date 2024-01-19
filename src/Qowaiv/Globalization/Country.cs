@@ -19,9 +19,6 @@ namespace Qowaiv.Globalization;
 #endif
 public readonly partial struct Country : IXmlSerializable, IFormattable, IEquatable<Country>, IComparable, IComparable<Country>
 {
-    /// <summary>Represents an empty/not set country.</summary>
-    public static readonly Country Empty;
-
     /// <summary>Represents an unknown (but set) country.</summary>
     public static readonly Country Unknown = new("ZZ");
 

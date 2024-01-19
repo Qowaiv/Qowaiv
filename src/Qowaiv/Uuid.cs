@@ -45,9 +45,6 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
     private static Regex GetPattern() => new(@"^[a-zA-Z0-9_-]{22}(=){0,2}$", RegOptions.Default, RegOptions.Timeout);
 #endif
 
-    /// <summary>Represents an empty/not set UUID.</summary>
-    public static readonly Uuid Empty;
-
     /// <summary>Get the version of the UUID.</summary>
     public UuidVersion Version => m_Value.GetVersion();
 

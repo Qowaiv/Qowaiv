@@ -8,10 +8,10 @@ namespace Qowaiv.Security.Cryptography;
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Security.Cryptography.CryptographicSeedJsonConverter))]
 #endif
-public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>
+public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>, IEmpty<CryptographicSeed>
 {
     /// <summary>Represents an empty/not set cryptographic seed.</summary>
-    public static readonly CryptographicSeed Empty;
+    public static CryptographicSeed Empty => default;
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly byte[] m_Value;

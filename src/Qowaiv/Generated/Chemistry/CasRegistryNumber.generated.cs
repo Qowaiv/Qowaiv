@@ -19,17 +19,9 @@ public partial struct CasRegistryNumber
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly long m_Value;
 
-    /// <summary>False if the CAS Registry Number is empty, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool HasValue => m_Value != default;
-
     /// <summary>False if the CAS Registry Number is empty or unknown, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the CAS Registry Number is empty, otherwise false.</summary>
-    [Pure]
-    public bool IsEmpty() => m_Value == default;
 
     /// <summary>Returns true if the CAS Registry Number is unknown, otherwise false.</summary>
     [Pure]
@@ -38,6 +30,20 @@ public partial struct CasRegistryNumber
     /// <summary>Returns true if the CAS Registry Number is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+}
+
+public partial struct CasRegistryNumber : IEmpty<CasRegistryNumber>
+{
+    /// <summary>Represents an empty/not set CAS Registry Number.</summary>
+    public static CasRegistryNumber Empty => default;
+
+    /// <summary>False if the CAS Registry Number is empty, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool HasValue => m_Value != default;
+
+    /// <summary>Returns true if the CAS Registry Number is empty, otherwise false.</summary>
+    [Pure]
+    public bool IsEmpty() => !HasValue;
 }
 
 public partial struct CasRegistryNumber : IEquatable<CasRegistryNumber>

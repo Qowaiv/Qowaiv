@@ -14,9 +14,6 @@ public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEq
     , IMinMaxValue<HouseNumber>
 #endif
 {
-    /// <summary>Represents an empty/not set house number.</summary>
-    public static readonly HouseNumber Empty;
-
     /// <summary>Represents an unknown (but set) house number.</summary>
     public static readonly HouseNumber Unknown = new(int.MaxValue);
 

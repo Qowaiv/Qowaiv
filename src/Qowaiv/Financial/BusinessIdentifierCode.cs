@@ -42,9 +42,6 @@ public readonly partial struct BusinessIdentifierCode : IXmlSerializable, IForma
     private static Regex GetPattern() => new(@"^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$", RegOptions.IgnoreCase, RegOptions.Timeout);
 #endif
 
-    /// <summary>Represents an empty/not set BIC.</summary>
-    public static readonly BusinessIdentifierCode Empty;
-
     /// <summary>Represents an unknown (but set) BIC.</summary>
     public static readonly BusinessIdentifierCode Unknown = new("ZZZZZZZZZZZ");
 

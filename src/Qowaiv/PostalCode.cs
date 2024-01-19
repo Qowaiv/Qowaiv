@@ -16,9 +16,6 @@ namespace Qowaiv;
 #endif
 public readonly partial struct PostalCode : IXmlSerializable, IFormattable, IEquatable<PostalCode>, IComparable, IComparable<PostalCode>
 {
-    /// <summary>Represents an empty/not set postal code.</summary>
-    public static readonly PostalCode Empty;
-
     /// <summary>Represents an unknown (but set) postal code.</summary>
     public static readonly PostalCode Unknown = new("ZZZZZZZZZ");
 

@@ -30,9 +30,6 @@ public readonly partial struct EnergyLabel : IXmlSerializable, IEquatable<Energy
     , IFormattable
 #endif
 {
-    /// <summary>Represents an empty/not set EU energy label.</summary>
-    public static readonly EnergyLabel Empty;
-
     private const int MaxPlusses = 4;
 
     /// <summary>Represents EU energy label A/A+/A++/...</summary>

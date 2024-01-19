@@ -26,9 +26,6 @@ namespace Qowaiv.Financial;
 #endif
 public readonly partial struct InternationalBankAccountNumber : IXmlSerializable, IFormattable, IEquatable<InternationalBankAccountNumber>, IComparable, IComparable<InternationalBankAccountNumber>
 {
-    /// <summary>Represents an empty/not set IBAN.</summary>
-    public static readonly InternationalBankAccountNumber Empty;
-
     /// <summary>Represents an unknown (but set) IBAN.</summary>
     public static readonly InternationalBankAccountNumber Unknown = new("ZZ");
 

@@ -28,9 +28,6 @@ namespace Qowaiv.Financial;
 #endif
 public readonly partial struct Currency : IXmlSerializable, IFormattable, IFormatProvider, IEquatable<Currency>, IComparable, IComparable<Currency>
 {
-    /// <summary>Represents an empty/not set currency.</summary>
-    public static readonly Currency Empty;
-
     /// <summary>Represents an unknown (but set) currency.</summary>
     public static readonly Currency Unknown = new("ZZZ");
 

@@ -18,7 +18,7 @@ namespace Qowaiv.Identifiers;
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Identifiers.IdJsonConverter))]
 #endif
-public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquatable<Id<TIdentifier>>, IComparable, IComparable<Id<TIdentifier>>
+public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquatable<Id<TIdentifier>>, IComparable, IComparable<Id<TIdentifier>>, IEmpty<Id<TIdentifier>>
 #if NET8_0_OR_GREATER
 , IEqualityOperators<Id<TIdentifier>, Id<TIdentifier>, bool>
 , IParsable<Id<TIdentifier>>
@@ -33,7 +33,7 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
     private static readonly TIdentifier behavior = new();
 
     /// <summary>Represents an empty/not set identifier.</summary>
-    public static readonly Id<TIdentifier> Empty;
+    public static Id<TIdentifier> Empty => default;
 
     /// <summary>Initializes a new instance of the <see cref="Id{TIdentifier}"/> struct.</summary>
     private Id(object? value) => m_Value = value;

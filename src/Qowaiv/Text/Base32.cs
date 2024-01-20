@@ -10,15 +10,9 @@ public static class Base32
     private const int BitPerChar = 5;
     private const int BitShift = BitPerByte - BitPerChar;
     private const int BitsMask = 31;
-
+    private const byte None = 255;
     private const string UpperCaseBitChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
     private const string LowerCaseBitChars = "abcdefghijklmnopqrstuvwxyz234567";
-
-    /// <summary>A lookup where the index is the <see cref="int"/> representation of the <see cref="char"/>.</summary>
-    private static readonly byte[] CharValues = [255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 26, 27, 28, 29, 30, 31, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 255, 255, 255, 255, 255, 255, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
-
-    /// <summary>The 'z' is the highest <see cref="char"/> that can be found in the <see cref="CharValues"/>.</summary>
-    private const char MaxChar = 'z';
 
     /// <summary>Represents a byte array as a <see cref="string"/>.</summary>
     /// <param name="bytes">
@@ -133,12 +127,14 @@ public static class Base32
         foreach (var ch in s)
         {
             // the char is not a valid base32 char.
-            if (ch > MaxChar)
+
+            var charValue = Lookup[(byte)ch];
+
+            if (charValue == None)
             {
                 bytes = [];
                 return false;
             }
-            var charValue = CharValues[ch];
 
             // the char is not a valid base32 char, although it is in the lookup.
             if (charValue == byte.MaxValue)
@@ -168,4 +164,24 @@ public static class Base32
         }
         return true;
     }
+
+    private static readonly byte[] Lookup =
+    [
+        None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None,
+        None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None,
+        None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, 
+        0x0e, 0x08, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, None, None, None, None, None, None, None, None,
+        None, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 
+        0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, None, None, None, None, None,
+        None, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 
+        0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, None, None, None, None, None,
+        None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None,
+        None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None,
+        None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None,
+        None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None,
+        None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None,
+        None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None,
+        None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None,
+        None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None,
+    ];
 }

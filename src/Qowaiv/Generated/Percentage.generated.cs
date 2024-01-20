@@ -178,7 +178,10 @@ public partial struct Percentage
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Percentage Parse(string? s) => Parse(s, null);
+    public static Percentage Parse(string? s)
+        => TryParse(s, null, out var svo)
+            ? svo
+            : throw Unparsable.ForValue<Percentage>(s, QowaivMessages.FormatExceptionPercentage);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Percentage"/>.</summary>
     /// <param name="s">
@@ -194,9 +197,10 @@ public partial struct Percentage
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Percentage Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
-        ?? throw Unparsable.ForValue<Percentage>(s, QowaivMessages.FormatExceptionPercentage);
+    public static Percentage Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var svo)
+            ? svo
+            : throw Unparsable.ForValue<Percentage>(s, QowaivMessages.FormatExceptionPercentage);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Percentage"/>.</summary>
     /// <param name="s">
@@ -206,7 +210,10 @@ public partial struct Percentage
     /// The percentage if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Percentage? TryParse(string? s) => TryParse(s, null);
+    public static Percentage? TryParse(string? s)
+        => TryParse(s, null, out var val)
+            ? val
+            : default(Percentage?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Percentage"/>.</summary>
     /// <param name="s">
@@ -219,7 +226,10 @@ public partial struct Percentage
     /// The percentage if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Percentage? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(Percentage?);
+    public static Percentage? TryParse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider, out var val) 
+            ? val 
+            : default(Percentage?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Percentage"/>.
     /// A return value indicates whether the conversion succeeded.

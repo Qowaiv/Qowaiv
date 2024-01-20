@@ -84,7 +84,7 @@ public partial struct Elo : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the elo.</summary>
     [Pure]
-    public override string ToString() => ToString(provider: null);
+    public override string ToString() => ToString(format: null, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the elo.</summary>
     /// <param name="format">
@@ -226,9 +226,9 @@ public partial struct Elo
     /// The elo if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Elo? TryParse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider, out var val) 
-            ? val 
+    public static Elo? TryParse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var val)
+            ? val
             : default(Elo?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Elo"/>.

@@ -96,7 +96,7 @@ public partial struct YesNo : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the yes-no.</summary>
     [Pure]
-    public override string ToString() => ToString(provider: null);
+    public override string ToString() => ToString(format: null, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the yes-no.</summary>
     /// <param name="format">
@@ -238,9 +238,9 @@ public partial struct YesNo
     /// The yes-no if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static YesNo? TryParse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider, out var val) 
-            ? val 
+    public static YesNo? TryParse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var val)
+            ? val
             : default(YesNo?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="YesNo"/>.

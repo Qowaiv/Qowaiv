@@ -96,7 +96,7 @@ public partial struct EnergyLabel : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the EU energy label.</summary>
     [Pure]
-    public override string ToString() => ToString(provider: null);
+    public override string ToString() => ToString(format: null, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the EU energy label.</summary>
     /// <param name="format">
@@ -238,9 +238,9 @@ public partial struct EnergyLabel
     /// The EU energy label if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static EnergyLabel? TryParse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider, out var val) 
-            ? val 
+    public static EnergyLabel? TryParse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var val)
+            ? val
             : default(EnergyLabel?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="EnergyLabel"/>.

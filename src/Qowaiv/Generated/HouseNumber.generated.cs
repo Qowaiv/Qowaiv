@@ -110,7 +110,7 @@ public partial struct HouseNumber : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the house number.</summary>
     [Pure]
-    public override string ToString() => ToString(provider: null);
+    public override string ToString() => ToString(format: null, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the house number.</summary>
     /// <param name="format">
@@ -252,9 +252,9 @@ public partial struct HouseNumber
     /// The house number if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static HouseNumber? TryParse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider, out var val) 
-            ? val 
+    public static HouseNumber? TryParse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var val)
+            ? val
             : default(HouseNumber?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="HouseNumber"/>.

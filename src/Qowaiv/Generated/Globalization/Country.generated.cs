@@ -96,7 +96,7 @@ public partial struct Country : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the country.</summary>
     [Pure]
-    public override string ToString() => ToString(provider: null);
+    public override string ToString() => ToString(format: null, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the country.</summary>
     /// <param name="format">
@@ -238,9 +238,9 @@ public partial struct Country
     /// The country if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Country? TryParse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider, out var val) 
-            ? val 
+    public static Country? TryParse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var val)
+            ? val
             : default(Country?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Country"/>.

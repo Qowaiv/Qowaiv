@@ -154,7 +154,7 @@ public class Supports_binary_serialization
     public void storing_value_in_SerializationInfo()
     {
         var info = Serialize.GetInfo(Svo.CustomUuid);
-        info.GetValue("Value", typeof(Guid)).Should().Be(Guid.Parse("Qowaiv_SVOLibrary_GUIA"));
+        info.GetValue("Value", typeof(Guid)).Should().Be(Guid.Parse("8A1A8C42-D2FF-E254-E26E-B6ABCBF19420"));
     }
 }
 #endif

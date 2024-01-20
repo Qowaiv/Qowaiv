@@ -11,6 +11,14 @@ public class With_domain_logic
     [TestCase(false, "?")]
     [TestCase(false, "")]
     public void IsKnown_is(bool result, Country svo) => svo.IsKnown.Should().Be(result);
+
+    /// <remarks>
+    /// As the regions available depend on the environment running, we can't
+    /// predict the outcome.
+    /// </remarks>
+    [TestCaseSource(typeof(Country), nameof(Country.All))]
+    public void RegionInfo_exists_indicates_counterpart_exists(Country country) 
+        => country.Invoking(c => c.RegionInfoExists).Should().NotThrow();
 }
 
 public class Display_name

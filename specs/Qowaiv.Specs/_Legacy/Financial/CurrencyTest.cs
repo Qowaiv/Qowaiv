@@ -125,7 +125,7 @@ public class CurrencyTest
     public void TryParse_Null_IsValid()
     {
         Currency.TryParse(Nil.String, out Currency val).Should().BeTrue();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse string.Empty should be valid.</summary>
@@ -134,7 +134,7 @@ public class CurrencyTest
     {
         string str = string.Empty;
         Currency.TryParse(str, out Currency val).Should().BeTrue();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse "?" should be valid and the result should be Currency.Unknown.</summary>
@@ -170,7 +170,7 @@ public class CurrencyTest
     {
         string str = "string";
         Currency.TryParse(str, out Currency val).Should().BeFalse();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     [Test]

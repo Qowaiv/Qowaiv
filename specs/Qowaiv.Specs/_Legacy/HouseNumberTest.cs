@@ -98,7 +98,7 @@ public class HouseNumberTest
     public void TryParse_Null_IsValid()
     {
         HouseNumber.TryParse(Nil.String, out HouseNumber val).Should().BeTrue();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse string.Empty should be valid.</summary>
@@ -108,7 +108,7 @@ public class HouseNumberTest
         string str = string.Empty;
 
         HouseNumber.TryParse(str, out HouseNumber val).Should().BeTrue();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse "?" should be valid and the result should be HouseNumber.Unknown.</summary>
@@ -138,7 +138,7 @@ public class HouseNumberTest
         string str = "string";
 
         HouseNumber.TryParse(str, out HouseNumber val).Should().BeFalse();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     [Test]

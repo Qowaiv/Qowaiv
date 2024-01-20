@@ -77,7 +77,7 @@ public class CountryTest
     public void TryParse_Null_IsValid()
     {
         Country.TryParse(Nil.String, out Country val).Should().BeTrue();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse string.Empty should be valid.</summary>
@@ -86,7 +86,7 @@ public class CountryTest
     {
         string str = string.Empty;
         Country.TryParse(str, out Country val).Should().BeTrue();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse "?" should be valid and the result should be Country.Unknown.</summary>
@@ -122,7 +122,7 @@ public class CountryTest
     {
         string str = "string";
         Country.TryParse(str, out Country val).Should().BeFalse();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     [Test]
@@ -213,14 +213,6 @@ public class CountryTest
         var cs = new RegionInfo("CS");
         var country = Country.Create(cs);
         country.Should().Be(Country.CSXX);
-    }
-
-    [TestCaseSource(typeof(Country), nameof(Country.All))]
-    public void RegionInfoExists(Country country)
-    {
-        // As the regions available depend on the environment running, we can't
-        // predict the outcome.
-        new[] { true, false }.Contains(country.RegionInfoExists).Should().BeTrue();
     }
 
     #endregion

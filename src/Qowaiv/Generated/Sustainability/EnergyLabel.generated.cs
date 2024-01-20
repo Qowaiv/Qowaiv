@@ -190,7 +190,10 @@ public partial struct EnergyLabel
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static EnergyLabel Parse(string? s) => Parse(s, null);
+    public static EnergyLabel Parse(string? s)
+        => TryParse(s, null, out var svo)
+            ? svo
+            : throw Unparsable.ForValue<EnergyLabel>(s, QowaivMessages.FormatExceptionEnergyLabel);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="EnergyLabel"/>.</summary>
     /// <param name="s">
@@ -206,9 +209,10 @@ public partial struct EnergyLabel
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static EnergyLabel Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
-        ?? throw Unparsable.ForValue<EnergyLabel>(s, QowaivMessages.FormatExceptionEnergyLabel);
+    public static EnergyLabel Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var svo)
+            ? svo
+            : throw Unparsable.ForValue<EnergyLabel>(s, QowaivMessages.FormatExceptionEnergyLabel);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="EnergyLabel"/>.</summary>
     /// <param name="s">
@@ -218,7 +222,10 @@ public partial struct EnergyLabel
     /// The EU energy label if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static EnergyLabel? TryParse(string? s) => TryParse(s, null);
+    public static EnergyLabel? TryParse(string? s)
+        => TryParse(s, null, out var val)
+            ? val
+            : default(EnergyLabel?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="EnergyLabel"/>.</summary>
     /// <param name="s">
@@ -231,7 +238,10 @@ public partial struct EnergyLabel
     /// The EU energy label if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static EnergyLabel? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(EnergyLabel?);
+    public static EnergyLabel? TryParse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider, out var val) 
+            ? val 
+            : default(EnergyLabel?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="EnergyLabel"/>.
     /// A return value indicates whether the conversion succeeded.

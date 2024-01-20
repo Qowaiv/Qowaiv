@@ -237,7 +237,7 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
     /// <param name="s">
     /// A string containing the Single Value Object to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
@@ -247,9 +247,9 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Svo<TSvoBehavior> Parse(string? s, IFormatProvider? formatProvider)
-        => TryParse(s, formatProvider)
-        ?? throw behavior.InvalidFormat(s, formatProvider);
+    public static Svo<TSvoBehavior> Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider)
+        ?? throw behavior.InvalidFormat(s, provider);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Svo{TSvoBehavior}"/>.</summary>
     /// <param name="s">
@@ -296,10 +296,10 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
     /// <summary>Converts the <see cref="string"/> to <see cref="Svo{TSvoBehavior}"/>.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
-    /// <param name="str">
+    /// <param name="s">
     /// A string containing the Single Value Object to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -309,9 +309,9 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string? str, IFormatProvider? formatProvider, out Svo<TSvoBehavior> result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out Svo<TSvoBehavior> result)
     {
-        var success = behavior.TryParse(str, formatProvider, out var parsed);
+        var success = behavior.TryParse(s, provider, out var parsed);
         result = new(parsed);
         return success;
     }

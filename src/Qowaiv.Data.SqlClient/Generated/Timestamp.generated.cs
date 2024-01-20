@@ -84,7 +84,7 @@ public partial struct Timestamp : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the timestamp.</summary>
     [Pure]
-    public override string ToString() => ToString(provider: null);
+    public override string ToString() => ToString(format: null, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the timestamp.</summary>
     /// <param name="format">
@@ -226,9 +226,9 @@ public partial struct Timestamp
     /// The timestamp if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Timestamp? TryParse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider, out var val) 
-            ? val 
+    public static Timestamp? TryParse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var val)
+            ? val
             : default(Timestamp?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.

@@ -61,7 +61,7 @@ public partial struct Money : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the money.</summary>
     [Pure]
-    public override string ToString() => ToString(provider: null);
+    public override string ToString() => ToString(format: null, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the money.</summary>
     /// <param name="format">
@@ -182,9 +182,9 @@ public partial struct Money
     /// The money if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Money? TryParse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider, out var val) 
-            ? val 
+    public static Money? TryParse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var val)
+            ? val
             : default(Money?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Money"/>.

@@ -70,7 +70,7 @@ public partial struct DateSpan : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the date span.</summary>
     [Pure]
-    public override string ToString() => ToString(provider: null);
+    public override string ToString() => ToString(format: null, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the date span.</summary>
     /// <param name="format">
@@ -212,9 +212,9 @@ public partial struct DateSpan
     /// The date span if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static DateSpan? TryParse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider, out var val) 
-            ? val 
+    public static DateSpan? TryParse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var val)
+            ? val
             : default(DateSpan?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="DateSpan"/>.

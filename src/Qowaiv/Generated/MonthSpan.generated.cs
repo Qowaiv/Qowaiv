@@ -84,7 +84,7 @@ public partial struct MonthSpan : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the month span.</summary>
     [Pure]
-    public override string ToString() => ToString(provider: null);
+    public override string ToString() => ToString(format: null, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the month span.</summary>
     /// <param name="format">
@@ -226,9 +226,9 @@ public partial struct MonthSpan
     /// The month span if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static MonthSpan? TryParse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider, out var val) 
-            ? val 
+    public static MonthSpan? TryParse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var val)
+            ? val
             : default(MonthSpan?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="MonthSpan"/>.

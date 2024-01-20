@@ -1,4 +1,5 @@
 ﻿using Qowaiv;
+using Qowaiv.Identifiers;
 
 namespace System;
 
@@ -7,10 +8,5 @@ public static class QowaivGuidExtensions
 {
     /// <summary>Gets the version of the <see cref="Guid"/>.</summary>
     [Pure]
-    public static UuidVersion GetVersion(this Guid guid)
-    {
-        var bytes = guid.ToByteArray();
-        var version = bytes[Uuid.IndexOfVersion] >> 4;
-        return (UuidVersion)version;
-    }
+    public static UuidVersion GetVersion(this Guid guid) => GuidLayout.From(guid).Version;
 }

@@ -32,18 +32,7 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
     public static readonly int ArraySize = 16;
 
     /// <summary>The index of the byte containing the version of a UUID is 7.</summary>
-    internal const int IndexOfVersion = 7;
-
-    /// <summary>Represents the pattern of a (potential) valid GUID.</summary>
-    internal static readonly Regex Pattern = GetPattern();
-
-#if NET8_0_OR_GREATER
-    [GeneratedRegex(@"^[a-zA-Z0-9_-]{22}(=){0,2}$", RegOptions.Default, RegOptions.TimeoutMilliseconds)]
-    private static partial Regex GetPattern();
-#else
-    [Pure]
-    private static Regex GetPattern() => new(@"^[a-zA-Z0-9_-]{22}(=){0,2}$", RegOptions.Default, RegOptions.Timeout);
-#endif
+    private const int IndexOfVersion = 7;
 
     /// <summary>Get the version of the UUID.</summary>
     public UuidVersion Version => m_Value.GetVersion();
@@ -57,7 +46,7 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
     /// The serialized JSON string.
     /// </returns>
     [Pure]
-    public string? ToJson() => m_Value == Guid.Empty ? null : ToString(CultureInfo.InvariantCulture);
+    public string? ToJson() => HasValue ? Base64.ToString(m_Value) : null;
 
     /// <summary>Returns a <see cref="string"/> that represents the current UUID for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -109,7 +98,7 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
 
     /// <summary>Gets an XML string representation of the UUID.</summary>
     [Pure]
-    private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
+    private string ToXmlString() => HasValue ? Base64.ToString(m_Value) : string.Empty;
 
     /// <summary>Casts a Qowaiv.UUID to a System.GUID.</summary>
     public static implicit operator Guid(Uuid val) => val.m_Value;
@@ -199,13 +188,28 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
     [Pure]
     public static bool TryParse(string? s, IFormatProvider? provider, out Uuid result)
     {
-        result = default;
-        if (behavior.TryParse(s, out var id))
+        result = Empty;
+
+        if (s is not { Length: > 0 })
         {
-            result = id is Guid guid ? new Uuid(guid) : Empty;
             return true;
         }
-        return false;
+        else if (GuidParser.TryBase64(s, out var base64))
+        {
+            result = base64;
+            return true;
+        }
+        else if (Guid.TryParse(s, out var guid))
+        {
+            result = guid;
+            return true;
+        }
+        else if (GuidParser.TryBase32(s, out var base32))
+        {
+            result = base32;
+            return true;
+        }
+        else return false;
     }
 
     /// <summary>Generates an <see cref="Uuid"/> applying a <see cref="MD5"/> hash on the data.</summary>

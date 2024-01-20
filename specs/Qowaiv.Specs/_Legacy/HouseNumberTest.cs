@@ -13,7 +13,7 @@ public class HouseNumberTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        HouseNumber.Empty.Should().Be(default(HouseNumber));
+        HouseNumber.Empty.Should().Be(default);
     }
 
     [Test]

@@ -13,7 +13,7 @@ public class MoneyTest
     [Test]
     public void Zero_None_EqualsDefault()
     {
-        Money.Zero.Should().Be(default(Money));
+        Money.Zero.Should().Be(default);
     }
 
     #endregion

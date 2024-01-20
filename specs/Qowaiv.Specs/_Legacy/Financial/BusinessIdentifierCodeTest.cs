@@ -12,7 +12,7 @@ public class BusinessIdentifierCodeTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        BusinessIdentifierCode.Empty.Should().Be(default(BusinessIdentifierCode));
+        BusinessIdentifierCode.Empty.Should().Be(default);
     }
 
     #endregion

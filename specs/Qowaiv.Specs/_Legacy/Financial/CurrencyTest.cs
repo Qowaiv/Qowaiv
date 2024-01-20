@@ -12,7 +12,7 @@ public class CurrencyTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        Currency.Empty.Should().Be(default(Currency));
+        Currency.Empty.Should().Be(default);
     }
 
     #endregion

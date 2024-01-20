@@ -10,7 +10,7 @@ public class FractionTest
     [Test]
     public void Zero_None_EqualsDefault()
     {
-        Fraction.Zero.Should().Be(default(Fraction));
+        Fraction.Zero.Should().Be(default);
     }
 
     /// <summary>Fraction.IsZero() should be true for the default of fraction.</summary>

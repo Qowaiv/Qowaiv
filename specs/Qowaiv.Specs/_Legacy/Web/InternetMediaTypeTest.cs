@@ -18,7 +18,7 @@ public class InternetMediaTypeTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        InternetMediaType.Empty.Should().Be(default(InternetMediaType));
+        InternetMediaType.Empty.Should().Be(default);
     }
 
     #endregion

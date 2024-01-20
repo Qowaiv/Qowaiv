@@ -196,9 +196,9 @@ public partial struct StreamSize
     /// The stream size if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static StreamSize? TryParse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider, out var val) 
-            ? val 
+    public static StreamSize? TryParse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var val)
+            ? val
             : default(StreamSize?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="StreamSize"/>.

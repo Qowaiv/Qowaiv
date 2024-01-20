@@ -61,7 +61,7 @@ public partial struct Fraction : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the fraction.</summary>
     [Pure]
-    public override string ToString() => ToString(provider: null);
+    public override string ToString() => ToString(format: null, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the fraction.</summary>
     /// <param name="format">
@@ -182,9 +182,9 @@ public partial struct Fraction
     /// The fraction if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Fraction? TryParse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider, out var val) 
-            ? val 
+    public static Fraction? TryParse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var val)
+            ? val
             : default(Fraction?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Fraction"/>.

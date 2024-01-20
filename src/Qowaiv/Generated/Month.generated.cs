@@ -96,7 +96,7 @@ public partial struct Month : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the month.</summary>
     [Pure]
-    public override string ToString() => ToString(provider: null);
+    public override string ToString() => ToString(format: null, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the month.</summary>
     /// <param name="format">
@@ -238,9 +238,9 @@ public partial struct Month
     /// The month if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Month? TryParse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider, out var val) 
-            ? val 
+    public static Month? TryParse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var val)
+            ? val
             : default(Month?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Month"/>.

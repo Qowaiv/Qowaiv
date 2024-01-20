@@ -77,7 +77,7 @@ public class GuidBehavior : IdentifierBehavior
     private static string Tostring(Guid id, string format, IFormatProvider? formatProvider)
         => format switch
         {
-            "s" or "S" => ToBase64String(id),
+            "s" or "S" => Base64.ToString(id),
             "h" => Base32.ToString(id.ToByteArray(), true),
             "H" => Base32.ToString(id.ToByteArray(), false),
             "N" or "D" or "B" or "P" => id.ToString(format, formatProvider).ToUpperInvariant(),
@@ -86,56 +86,38 @@ public class GuidBehavior : IdentifierBehavior
         };
 #pragma warning restore S1541 // Methods and properties should not be too complex
 
-    /// <remarks>Avoids invalid URL characters.</remarks>
-    [Pure]
-    private static string ToBase64String(Guid id)
-        => Convert.ToBase64String(id.ToByteArray()).Replace('+', '-').Replace('/', '_')[..22];
-
     /// <inheritdoc/>
     [Pure]
-    public override object? ToJson(object? obj) => ToString(obj, DefaultFormat, CultureInfo.InvariantCulture);
+    public override object? ToJson(object? obj)
+        => obj is Guid guid
+            ? guid.ToString()
+            : null;
 
     /// <inheritdoc/>
     [Pure]
     public override bool TryParse(string? str, out object? id)
     {
+        id = null;
         if (str is not { Length: > 0 })
         {
-            id = default;
             return true;
         }
-        else if (Guid.TryParse(str, out Guid guid))
+        else if (Guid.TryParse(str, out var guid))
         {
             id = NullIfEmpty(guid);
             return true;
         }
-        else if (Uuid.Pattern.IsMatch(str))
+        else if (GuidParser.TryBase64(str, out var base64))
         {
-            id = NullIfEmpty(GuidFromBase64(str));
+            id = NullIfEmpty(base64);
             return true;
         }
-        else if (str.Length == 26 && Base32.TryGetBytes(str, out var b32))
+        else if (GuidParser.TryBase32(str, out var base32))
         {
-            id = NullIfEmpty(new Guid(b32));
+            id = NullIfEmpty(base32);
             return true;
         }
-        else
-        {
-            id = default;
-            return false;
-        }
-
-        static Guid GuidFromBase64(string str)
-        {
-            var base64 = new char[24];
-            for (int i = 0; i < 22; i++)
-            {
-                base64[i] = str[i] switch { '-' => '+', '_' => '/', _ => str[i] };
-            }
-            base64[22] = '=';
-            base64[23] = '=';
-            return new Guid(Convert.FromBase64String(new string(base64)));
-        }
+        else return false;
 
         static object? NullIfEmpty(Guid guid) => guid == Guid.Empty ? null : guid;
     }

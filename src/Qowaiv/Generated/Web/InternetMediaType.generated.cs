@@ -204,7 +204,10 @@ public partial struct InternetMediaType
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static InternetMediaType Parse(string? s) => Parse(s, null);
+    public static InternetMediaType Parse(string? s)
+        => TryParse(s, null, out var svo)
+            ? svo
+            : throw Unparsable.ForValue<InternetMediaType>(s, QowaivMessages.FormatExceptionInternetMediaType);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="InternetMediaType"/>.</summary>
     /// <param name="s">
@@ -220,9 +223,10 @@ public partial struct InternetMediaType
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static InternetMediaType Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
-        ?? throw Unparsable.ForValue<InternetMediaType>(s, QowaivMessages.FormatExceptionInternetMediaType);
+    public static InternetMediaType Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var svo)
+            ? svo
+            : throw Unparsable.ForValue<InternetMediaType>(s, QowaivMessages.FormatExceptionInternetMediaType);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="InternetMediaType"/>.</summary>
     /// <param name="s">
@@ -232,7 +236,10 @@ public partial struct InternetMediaType
     /// The Internet media type if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static InternetMediaType? TryParse(string? s) => TryParse(s, null);
+    public static InternetMediaType? TryParse(string? s)
+        => TryParse(s, null, out var val)
+            ? val
+            : default(InternetMediaType?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="InternetMediaType"/>.</summary>
     /// <param name="s">
@@ -245,7 +252,10 @@ public partial struct InternetMediaType
     /// The Internet media type if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static InternetMediaType? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(InternetMediaType?);
+    public static InternetMediaType? TryParse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider, out var val) 
+            ? val 
+            : default(InternetMediaType?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="InternetMediaType"/>.
     /// A return value indicates whether the conversion succeeded.

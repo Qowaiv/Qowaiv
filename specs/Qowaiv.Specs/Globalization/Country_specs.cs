@@ -210,6 +210,19 @@ public class Supports_binary_serialization
 }
 #endif
 
+public class Is_equal_by_value
+{
+    [TestCase("", 0)]
+    [TestCase("NL", -1174190069)]
+    public void hash_code_is_value_based(Country svo, int hash)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hash);
+        }
+    }
+}
+
 public class Can_parse
 {
     [Test]
@@ -220,3 +233,4 @@ public class Can_parse
     public void former_countries_via_ISO_3166_3()
         => Country.Parse("BQAQ").Should().Be(Country.BQAQ);
 }
+

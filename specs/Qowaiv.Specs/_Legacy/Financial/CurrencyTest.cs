@@ -531,20 +531,6 @@ public class CurrencyTest
 
     #region IEquatable tests
 
-    /// <summary>GetHash should not fail for Currency.Empty.</summary>
-    [Test]
-    public void GetHash_Empty_0()
-    {
-        Currency.Empty.GetHashCode().Should().Be(0);
-    }
-
-    /// <summary>GetHash should not fail for the test struct.</summary>
-    [Test]
-    public void GetHash_TestStruct_NotZero()
-    {
-        Assert.NotZero(TestStruct.GetHashCode());
-    }
-
     [Test]
     public void Equals_EmptyEmpty_IsTrue()
     {

@@ -114,16 +114,7 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
 
     /// <inheritdoc />
     [Pure]
-    public override int GetHashCode()
-    {
-        int hash = (Format == null) ? 0 : Format.GetHashCode();
-
-        if (FormatProvider != null)
-        {
-            hash ^= FormatProvider.GetHashCode();
-        }
-        return hash;
-    }
+    public override int GetHashCode() => Hash.Code(Format).And(FormatProvider);
 
     /// <summary>Returns true if the left and right operand are not equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>

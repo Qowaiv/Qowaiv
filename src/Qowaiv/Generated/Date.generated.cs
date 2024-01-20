@@ -75,7 +75,7 @@ public partial struct Date : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the date.</summary>
     [Pure]
-    public override string ToString() => ToString(provider: null);
+    public override string ToString() => ToString(format: null, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the date.</summary>
     /// <param name="format">
@@ -217,9 +217,9 @@ public partial struct Date
     /// The date if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Date? TryParse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider, out var val) 
-            ? val 
+    public static Date? TryParse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var val)
+            ? val
             : default(Date?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Date"/>.

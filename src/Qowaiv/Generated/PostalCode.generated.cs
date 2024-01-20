@@ -96,7 +96,7 @@ public partial struct PostalCode : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the postal code.</summary>
     [Pure]
-    public override string ToString() => ToString(provider: null);
+    public override string ToString() => ToString(format: null, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the postal code.</summary>
     /// <param name="format">
@@ -238,9 +238,9 @@ public partial struct PostalCode
     /// The postal code if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static PostalCode? TryParse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider, out var val) 
-            ? val 
+    public static PostalCode? TryParse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var val)
+            ? val
             : default(PostalCode?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="PostalCode"/>.

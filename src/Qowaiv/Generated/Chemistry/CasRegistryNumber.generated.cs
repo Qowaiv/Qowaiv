@@ -96,7 +96,7 @@ public partial struct CasRegistryNumber : IFormattable
 {
     /// <summary>Returns a <see cref="string"/> that represents the CAS Registry Number.</summary>
     [Pure]
-    public override string ToString() => ToString(provider: null);
+    public override string ToString() => ToString(format: null, formatProvider: null);
 
     /// <summary>Returns a formatted <see cref="string"/> that represents the CAS Registry Number.</summary>
     /// <param name="format">
@@ -238,9 +238,9 @@ public partial struct CasRegistryNumber
     /// The CAS Registry Number if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static CasRegistryNumber? TryParse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider, out var val) 
-            ? val 
+    public static CasRegistryNumber? TryParse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var val)
+            ? val
             : default(CasRegistryNumber?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="CasRegistryNumber"/>.

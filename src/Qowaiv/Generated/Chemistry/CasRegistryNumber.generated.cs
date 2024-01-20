@@ -190,7 +190,10 @@ public partial struct CasRegistryNumber
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static CasRegistryNumber Parse(string? s) => Parse(s, null);
+    public static CasRegistryNumber Parse(string? s)
+        => TryParse(s, null, out var svo)
+            ? svo
+            : throw Unparsable.ForValue<CasRegistryNumber>(s, QowaivMessages.FormatExceptionCasRegistryNumber);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="CasRegistryNumber"/>.</summary>
     /// <param name="s">
@@ -206,9 +209,10 @@ public partial struct CasRegistryNumber
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static CasRegistryNumber Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
-        ?? throw Unparsable.ForValue<CasRegistryNumber>(s, QowaivMessages.FormatExceptionCasRegistryNumber);
+    public static CasRegistryNumber Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var svo)
+            ? svo
+            : throw Unparsable.ForValue<CasRegistryNumber>(s, QowaivMessages.FormatExceptionCasRegistryNumber);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="CasRegistryNumber"/>.</summary>
     /// <param name="s">
@@ -218,7 +222,10 @@ public partial struct CasRegistryNumber
     /// The CAS Registry Number if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static CasRegistryNumber? TryParse(string? s) => TryParse(s, null);
+    public static CasRegistryNumber? TryParse(string? s)
+        => TryParse(s, null, out var val)
+            ? val
+            : default(CasRegistryNumber?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="CasRegistryNumber"/>.</summary>
     /// <param name="s">
@@ -231,7 +238,10 @@ public partial struct CasRegistryNumber
     /// The CAS Registry Number if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static CasRegistryNumber? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(CasRegistryNumber?);
+    public static CasRegistryNumber? TryParse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider, out var val) 
+            ? val 
+            : default(CasRegistryNumber?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="CasRegistryNumber"/>.
     /// A return value indicates whether the conversion succeeded.

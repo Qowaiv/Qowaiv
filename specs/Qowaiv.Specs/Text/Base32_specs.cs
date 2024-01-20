@@ -96,7 +96,7 @@ public class GetBytes
         {
             var act = Assert.Catch<FormatException>(() =>
             {
-                Base32.GetBytes("Q0waiv");
+                Base32.GetBytes("Q!waiv");
             });
             act.Message.Should().Be("Not a valid Base32 string");
         }

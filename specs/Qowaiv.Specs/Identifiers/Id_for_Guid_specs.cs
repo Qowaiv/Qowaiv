@@ -102,10 +102,18 @@ public class Supports_type_conversion
         => Converting.To<Uuid>().From(Svo.CustomGuid).Should().Be(Svo.Uuid);
 }
 
-#if NET6_0_OR_GREATER
-
 public class Supports_JSON_serialization
 {
+    [Test]
+    public void writes_null_for_default_value()
+        => JsonTester.Write(default(CustomGuid)).Should().BeNull();
+
+    [Test]
+    public void writes_GUID_for_non_default_value()
+        => JsonTester.Write(Svo.CustomGuid).Should().Be("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+
+#if NET6_0_OR_GREATER
+
     [Test]
     public void System_Text_JSON_deserialization_of_dictionary_keys()
     {
@@ -127,8 +135,8 @@ public class Supports_JSON_serialization
         System.Text.Json.JsonSerializer.Serialize(dictionary)
             .Should().Be(@"{"""":17,""8a1a8c42-d2ff-e254-e26e-b6abcbf19420"":42}");
     }
-}
 #endif
+}
 
 #if NET8_0_OR_GREATER
 #else
@@ -155,8 +163,8 @@ public class Is_Open_API_data_type
 {
     [Test]
     public void with_info()
-        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(ForGuid))
-        .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+        => OpenApiDataType.FromType(typeof(ForGuid))
+        .Should().Be(new OpenApiDataType(
             dataType: typeof(CustomGuid),
             description: "GUID based identifier",
             example: "8a1a8c42-d2ff-e254-e26e-b6abcbf19420",

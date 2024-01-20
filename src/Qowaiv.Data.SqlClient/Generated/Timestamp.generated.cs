@@ -178,7 +178,10 @@ public partial struct Timestamp
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Timestamp Parse(string? s) => Parse(s, null);
+    public static Timestamp Parse(string? s)
+        => TryParse(s, null, out var svo)
+            ? svo
+            : throw Unparsable.ForValue<Timestamp>(s, QowaivMessages.FormatExceptionTimestamp);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.</summary>
     /// <param name="s">
@@ -194,9 +197,10 @@ public partial struct Timestamp
     /// <paramref name="s"/> is not in the correct format.
     /// </exception>
     [Pure]
-    public static Timestamp Parse(string? s, IFormatProvider? provider) 
-        => TryParse(s, provider) 
-        ?? throw Unparsable.ForValue<Timestamp>(s, QowaivMessages.FormatExceptionTimestamp);
+    public static Timestamp Parse(string? s, IFormatProvider? provider)
+        => TryParse(s, provider, out var svo)
+            ? svo
+            : throw Unparsable.ForValue<Timestamp>(s, QowaivMessages.FormatExceptionTimestamp);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.</summary>
     /// <param name="s">
@@ -206,7 +210,10 @@ public partial struct Timestamp
     /// The timestamp if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Timestamp? TryParse(string? s) => TryParse(s, null);
+    public static Timestamp? TryParse(string? s)
+        => TryParse(s, null, out var val)
+            ? val
+            : default(Timestamp?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.</summary>
     /// <param name="s">
@@ -219,7 +226,10 @@ public partial struct Timestamp
     /// The timestamp if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
-    public static Timestamp? TryParse(string? s, IFormatProvider? provider) => TryParse(s, provider, out var val) ? val : default(Timestamp?);
+    public static Timestamp? TryParse(string? s, IFormatProvider? provider) 
+        => TryParse(s, provider, out var val) 
+            ? val 
+            : default(Timestamp?);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="Timestamp"/>.
     /// A return value indicates whether the conversion succeeded.

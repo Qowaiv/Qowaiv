@@ -10,7 +10,7 @@ public class MonthSpanTest
     [Test]
     public void Zero_EqualsDefault()
     {
-        MonthSpan.Zero.Should().Be(default(MonthSpan));
+        MonthSpan.Zero.Should().Be(default);
     }
 
     /// <summary>TryParse null should be valid.</summary>
@@ -18,7 +18,7 @@ public class MonthSpanTest
     public void TryParse_Null_IsValid()
     {
         MonthSpan.TryParse(null, out var val).Should().BeTrue();
-        val.Should().Be(default(MonthSpan));
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse string.Empty should be valid.</summary>
@@ -26,7 +26,7 @@ public class MonthSpanTest
     public void TryParse_StringEmpty_IsValid()
     {
         MonthSpan.TryParse(string.Empty, out var val).Should().BeTrue();
-        val.Should().Be(default(MonthSpan));
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse with specified string value should be valid.</summary>
@@ -44,7 +44,7 @@ public class MonthSpanTest
     {
         string str = "5Y#9M";
         MonthSpan.TryParse(str, out var val).Should().BeFalse();
-        val.Should().Be(default(MonthSpan));
+        val.Should().Be(default);
     }
 
     [Test]

@@ -1,8 +1,4 @@
-﻿#if NET6_0_OR_GREATER
-using Newtonsoft.Json;
-#endif
-using Qowaiv.OpenApi;
-using OpenApiDataTypeAttribute = Qowaiv.OpenApi.OpenApiDataTypeAttribute;
+﻿using OpenApiDataTypeAttribute = Qowaiv.OpenApi.OpenApiDataTypeAttribute;
 
 namespace Open_API_specs;
 

@@ -1,5 +1,26 @@
 ﻿namespace Formatting_arguments_specs;
 
+public class Is_equal_by_value
+{
+    [Test]
+    public void hash_code_is_value_based_for_none()
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            FormattingArguments.None.GetHashCode().Should().Be(0);
+        }
+    }
+
+    [Test]
+    public void hash_code_is_value_based_for_value()
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            new FormattingArguments("f", null).GetHashCode().Should().Be(-362413457);
+        }
+    }
+}
+
 public class ToString
 {
     [Test]

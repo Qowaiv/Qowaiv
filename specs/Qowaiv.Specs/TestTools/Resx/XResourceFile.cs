@@ -19,7 +19,7 @@ public sealed class XResourceFile
             XResourceFileHeader.Reader,
             XResourceFileHeader.Writer,
         ];
-        Data = data.ToList();
+        Data = [.. data];
     }
 
     /// <summary>Gets the headers.</summary>

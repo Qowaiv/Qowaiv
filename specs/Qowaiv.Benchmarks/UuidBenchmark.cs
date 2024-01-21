@@ -1,10 +1,12 @@
 ﻿using Qowaiv;
 using Qowaiv.Identifiers;
+using Qowaiv.TestTools;
 
 namespace Benchmarks;
 
 public partial class UuidBenchmark
 {
+    [EmptyTestClass]
     public sealed class ForUuid : UuidBehavior { }
 
     internal const int Iterations = 1000;

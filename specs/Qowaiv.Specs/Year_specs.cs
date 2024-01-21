@@ -195,8 +195,9 @@ public class Can_be_parsed
     {
         using (TestCultures.en_GB.Scoped())
         {
-            var exception = Assert.Throws<FormatException>(() => Year.Parse("invalid input"));
-            exception.Message.Should().Be("Not a valid year");
+            "invalid input".Invoking(Year.Parse)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid year");
         }
     }
 

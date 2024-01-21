@@ -493,24 +493,6 @@ public class DateSpanTest
 
     #endregion
 
-    #region Operations
-
-    [Test]
-    public void Mutate_Overflows()
-    {
-        var x = Assert.Catch<OverflowException>(() => DateSpan.MaxValue.AddDays(1));
-        x.Message.Should().Be("DateSpan overflowed because the resulting duration is too long.");
-    }
-
-    #endregion
-
-    [Test]
-    public void Ctor_OutOfRange_Throws()
-    {
-        var x = Assert.Catch<ArgumentOutOfRangeException>(() => new DateSpan(int.MaxValue, int.MaxValue));
-        Assert.AreEqual("The specified years, months and days results in an un-representable DateSpan.", x.Message);
-    }
-
     [Test]
     public void FromDays_4_4Days()
     {

@@ -210,8 +210,9 @@ public class Can_be_parsed
     {
         using (TestCultures.en_GB.Scoped())
         {
-            var exception = Assert.Throws<FormatException>(() => Month.Parse("invalid input"));
-            exception.Message.Should().Be("Not a valid month");
+            "invalid input".Invoking(Month.Parse)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid month");
         }
     }
 

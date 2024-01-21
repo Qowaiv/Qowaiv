@@ -13,7 +13,7 @@ public class DateTest
     [Test]
     public void MinValue_None_EqualsDefault()
     {
-        Date.MinValue.Should().Be(default(Date));
+        Date.MinValue.Should().Be(default);
     }
 
     #endregion

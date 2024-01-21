@@ -1,16 +1,10 @@
 ﻿namespace Qowaiv.TestTools.Wikipedia;
 
-public sealed class WikiLink
+public sealed class WikiLink(string lemma, string? display)
 {
-    public WikiLink(string lemma, string? display)
-    {
-        Lemma = lemma;
-        Display = display ?? lemma;
-    }
+    public string Lemma { get; } = lemma;
 
-    public string Lemma { get; }
-    
-    public string Display { get; }
+    public string Display { get; } = display ?? lemma;
 
     /// <inheritdoc />
     [Pure]
@@ -26,7 +20,7 @@ public sealed class WikiLink
         .Select(AsLink);
 
     private static WikiLink AsLink(Match m)
-        => new(m.Groups[nameof(Lemma)].Value, m.Groups[nameof(Display)].Value is { Length: > 0 } display ? display : null);
+        => new(m.Groups[nameof(Lemma)].Value, m.Groups[nameof(Display)].Value is { Length: > 0 } dis ? dis : null);
 
     private static readonly Regex Pattern = new(@"\[\[(?<Lemma>.+?)(\|(?<Display>.*?))?\]\]", RegexOptions.None, TimeSpan.FromMinutes(2));
 }

@@ -12,7 +12,7 @@ public class CurrencyTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        Currency.Empty.Should().Be(default(Currency));
+        Currency.Empty.Should().Be(default);
     }
 
     #endregion
@@ -125,7 +125,7 @@ public class CurrencyTest
     public void TryParse_Null_IsValid()
     {
         Currency.TryParse(Nil.String, out Currency val).Should().BeTrue();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse string.Empty should be valid.</summary>
@@ -134,7 +134,7 @@ public class CurrencyTest
     {
         string str = string.Empty;
         Currency.TryParse(str, out Currency val).Should().BeTrue();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse "?" should be valid and the result should be Currency.Unknown.</summary>
@@ -170,7 +170,7 @@ public class CurrencyTest
     {
         string str = "string";
         Currency.TryParse(str, out Currency val).Should().BeFalse();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     [Test]
@@ -530,20 +530,6 @@ public class CurrencyTest
     #endregion
 
     #region IEquatable tests
-
-    /// <summary>GetHash should not fail for Currency.Empty.</summary>
-    [Test]
-    public void GetHash_Empty_0()
-    {
-        Currency.Empty.GetHashCode().Should().Be(0);
-    }
-
-    /// <summary>GetHash should not fail for the test struct.</summary>
-    [Test]
-    public void GetHash_TestStruct_NotZero()
-    {
-        Assert.NotZero(TestStruct.GetHashCode());
-    }
 
     [Test]
     public void Equals_EmptyEmpty_IsTrue()

@@ -12,7 +12,7 @@ public class BusinessIdentifierCodeTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        BusinessIdentifierCode.Empty.Should().Be(default(BusinessIdentifierCode));
+        BusinessIdentifierCode.Empty.Should().Be(default);
     }
 
     #endregion
@@ -85,7 +85,7 @@ public class BusinessIdentifierCodeTest
     public void TryParse_Null_IsValid()
     {
         BusinessIdentifierCode.TryParse(Nil.String, out BusinessIdentifierCode val).Should().BeTrue();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse string.Empty should be valid.</summary>
@@ -94,7 +94,7 @@ public class BusinessIdentifierCodeTest
     {
         string str = string.Empty;
         BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val).Should().BeTrue();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse "?" should be valid and the result should be BusinessIdentifierCode.Unknown.</summary>
@@ -121,7 +121,7 @@ public class BusinessIdentifierCodeTest
     {
         string str = "string";
         BusinessIdentifierCode.TryParse(str, out BusinessIdentifierCode val).Should().BeFalse();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     [Test]

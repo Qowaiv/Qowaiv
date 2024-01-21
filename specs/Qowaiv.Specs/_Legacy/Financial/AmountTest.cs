@@ -22,7 +22,7 @@ public class AmountTest
     [Test]
     public void Zero_None_EqualsDefault()
     {
-        Amount.Zero.Should().Be(default(Amount));
+        Amount.Zero.Should().Be(default);
     }
 
     #endregion

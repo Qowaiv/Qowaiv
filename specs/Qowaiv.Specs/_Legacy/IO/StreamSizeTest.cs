@@ -12,7 +12,7 @@ public class StreamSizeTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        StreamSize.Zero.Should().Be(default(StreamSize));
+        StreamSize.Zero.Should().Be(default);
     }
 
     #endregion

@@ -13,7 +13,7 @@ public class IdForInt64Test
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        Id<ForInt64>.Empty.Should().Be(default(Id<ForInt64>));
+        Id<ForInt64>.Empty.Should().Be(default);
     }
 
     /// <summary>Id<ForInt64>.IsEmpty() should be true for the default of identifier.</summary>
@@ -64,7 +64,7 @@ public class IdForInt64Test
     public void TryParse_Null_IsValid()
     {
         Id<ForInt64>.TryParse(null, out var val).Should().BeTrue();
-        val.Should().Be(default(Id<ForInt64>));
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse string.Empty should be valid.</summary>
@@ -72,7 +72,7 @@ public class IdForInt64Test
     public void TryParse_StringEmpty_IsValid()
     {
         Id<ForInt64>.TryParse(string.Empty, out var val).Should().BeTrue();
-        val.Should().Be(default(Id<ForInt64>));
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse with specified string value should be valid.</summary>
@@ -90,7 +90,7 @@ public class IdForInt64Test
     {
         string str = "ABC";
         Id<ForInt64>.TryParse(str, out var val).Should().BeFalse();
-        val.Should().Be(default(Id<ForInt64>));
+        val.Should().Be(default);
     }
 
     [Test]

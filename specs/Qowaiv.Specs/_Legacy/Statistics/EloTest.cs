@@ -12,7 +12,7 @@
         [Test]
         public void Zero_None_EqualsDefault()
         {
-            Elo.Zero.Should().Be(default(Elo));
+            Elo.Zero.Should().Be(default);
         }
         [Test]
         public void MinValue_None_DoubleMinValue()

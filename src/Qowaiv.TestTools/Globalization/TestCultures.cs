@@ -101,6 +101,9 @@ public static class TestCultures
         }
     }
 
+    /// <summary>Gets the Portuguese (pt-PT) <see cref="CultureInfo"/>.</summary>
+    public static CultureInfo pt_PT => new("pt-PT");
+
     /// <summary>Updates percentage symbols of the culture.</summary>
     [FluentSyntax]
     public static CultureInfo WithPercentageSymbols(this CultureInfo? culture, string percentSymbol, string perMilleSymbol)

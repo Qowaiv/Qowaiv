@@ -13,7 +13,7 @@ public class IdForGuidTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        Id<ForGuid>.Empty.Should().Be(default(Id<ForGuid>));
+        Id<ForGuid>.Empty.Should().Be(default);
     }
 
     /// <summary>Id<ForGuid>.IsEmpty() should be true for the default of identifier.</summary>
@@ -64,7 +64,7 @@ public class IdForGuidTest
     public void TryParse_Null_IsValid()
     {
         Id<ForGuid>.TryParse(null, out var val).Should().BeTrue();
-        val.Should().Be(default(Id<ForGuid>));
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse string.Empty should be valid.</summary>
@@ -72,7 +72,7 @@ public class IdForGuidTest
     public void TryParse_StringEmpty_IsValid()
     {
         Id<ForGuid>.TryParse(string.Empty, out var val).Should().BeTrue();
-        val.Should().Be(default(Id<ForGuid>));
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse with specified string value should be valid.</summary>
@@ -90,7 +90,7 @@ public class IdForGuidTest
     {
         string str = "0F5AB5AB-12CB-4629-878D";
         Id<ForGuid>.TryParse(str, out var val).Should().BeFalse();
-        val.Should().Be(default(Id<ForGuid>));
+        val.Should().Be(default);
     }
 
     [Test]

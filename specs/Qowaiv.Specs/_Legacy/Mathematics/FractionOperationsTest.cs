@@ -42,13 +42,6 @@ public class FractionOperationsTest
     }
 
     [Test]
-    public void Multiply_Overflow()
-    {
-        var fraction = Fraction.Create(long.MaxValue - 3);
-        var x = Assert.Catch<OverflowException>(() => fraction.Multiply(long.MaxValue - 4));
-        StringAssert.StartsWith("Arithmetic operation resulted in an overflow.", x.Message);
-    }
-    [Test]
     public void Multiply_long()
     {
         var fraction = 19.DividedBy(72);
@@ -78,13 +71,6 @@ public class FractionOperationsTest
     }
 
     [Test]
-    public void Divide_Overflow()
-    {
-        var fraction = 1.DividedBy(long.MaxValue - 3);
-        var x = Assert.Catch<OverflowException>(() => fraction.Divide(long.MaxValue - 4));
-        StringAssert.StartsWith("Arithmetic operation resulted in an overflow.", x.Message);
-    }
-    [Test]
     public void Divide_long()
     {
         var fraction = 19.DividedBy(72);
@@ -113,14 +99,6 @@ public class FractionOperationsTest
         Assert.AreEqual(expected, left / right);
     }
 
-    [Test]
-    public void Add_Overflow()
-    {
-        var fraction = Fraction.Create(long.MaxValue - 3);
-        var x = Assert.Catch<OverflowException>(() => fraction.Add(long.MaxValue - 4));
-        StringAssert.StartsWith("Arithmetic operation resulted in an overflow.", x.Message);
-    }
-    
     [Test]
     public void Add_WithPotentialOverflow_ShouldNotOverflow()
     {
@@ -182,13 +160,6 @@ public class FractionOperationsTest
         Assert.AreEqual(expected, left + right);
     }
 
-    [Test]
-    public void Subtract_Overflow()
-    {
-        var fraction = 17.DividedBy(long.MaxValue - 3);
-        var x = Assert.Catch<OverflowException>(() => fraction.Subtract(8.DividedBy(long.MaxValue)));
-        StringAssert.StartsWith("Arithmetic operation resulted in an overflow.", x.Message);
-    }
     [Test]
     public void Subtract_FractionMinLong()
     {

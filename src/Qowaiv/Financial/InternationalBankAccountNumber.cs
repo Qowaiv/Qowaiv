@@ -116,10 +116,13 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
             while (index < m_Value.Length)
             {
                 buffer[pointer++] = m_Value[index++];
+#pragma warning disable S2583 // Conditionally executed code should be reachable
+                // FP. See: https://github.com/SonarSource/sonar-dotnet/issues/8474
                 if ((index % 4) == 0 && pointer < buffer.Length)
                 {
                     buffer[pointer++] = space;
                 }
+#pragma warning restore S2583 // Conditionally executed code should be reachable
             }
             return new(buffer);
         }

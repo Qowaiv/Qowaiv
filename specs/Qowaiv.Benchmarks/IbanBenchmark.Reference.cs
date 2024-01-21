@@ -25,6 +25,8 @@ public partial class IbanBenchmark
                 {
                     var str = buffer.ToString();
 
+#pragma warning disable S1067 // Expressions should not be too complex
+                    // This code is here just for reference purposes.
                     if (Country.TryParse(str[..2], out var country)
                         && !country.IsEmptyOrUnknown()
                         && (LocalizedPatterns.TryGetValue(country, out var localizedPattern)
@@ -38,6 +40,7 @@ public partial class IbanBenchmark
                     {
                         return null;
                     }
+#pragma warning restore S1067 // Expressions should not be too complex
 
                 }
                 else if (Qowaiv.Unknown.IsUnknown(buffer))
@@ -54,6 +57,8 @@ public partial class IbanBenchmark
                 {
                     return null;
                 }
+#pragma warning disable S1067 // Expressions should not be too complex
+                // here for reference only.
                 else if (Qowaiv.Unknown.IsUnknown(str))
                 {
                     return "ZZ";
@@ -65,6 +70,7 @@ public partial class IbanBenchmark
                 {
                     return str;
                 }
+#pragma warning restore S1067 // Expressions should not be too complex
                 return null;
             }
 

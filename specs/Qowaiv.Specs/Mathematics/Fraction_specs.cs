@@ -1,5 +1,52 @@
 ﻿namespace Mathematics.Fraction_specs;
 
+public class Overflows_when
+{
+    [Test]
+    public void multiplication_can_not_be_represented_by_a_long()
+    {
+        var x = (long.MaxValue - 3).DividedBy(1);
+        var y = (long.MaxValue - 4).DividedBy(1);
+
+        x.Invoking(_ => x * y)
+            .Should().Throw<OverflowException>()
+            .WithMessage("Arithmetic operation resulted in an overflow.*");
+    }
+
+    [Test]
+    public void division_can_not_be_represented_by_a_long()
+    {
+        var x = (long.MaxValue - 3).DividedBy(1);
+        var y = (long.MaxValue - 4).DividedBy(long.MaxValue - 7);
+
+        x.Invoking(_ => x / y)
+            .Should().Throw<OverflowException>()
+            .WithMessage("Arithmetic operation resulted in an overflow.*");
+    }
+
+    [Test]
+    public void addition_can_not_be_represented_by_a_long()
+    {
+        var x = 17.DividedBy(long.MaxValue - 3);
+        var y = 13.DividedBy(long.MaxValue - 4);
+
+        x.Invoking(_ => x + y)
+            .Should().Throw<OverflowException>()
+            .WithMessage("Arithmetic operation resulted in an overflow.*");
+    }
+
+    [Test]
+    public void subtraction_can_not_be_represented_by_a_long()
+    {
+        var x = 17.DividedBy(long.MaxValue - 3);
+        var y = 13.DividedBy(long.MaxValue - 4);
+
+        x.Invoking(_ => x - y)
+            .Should().Throw<OverflowException>()
+            .WithMessage("Arithmetic operation resulted in an overflow.*");
+    }
+}
+
 public class Can_be_parsed
 {
     [TestCase(17, 1, "17")]

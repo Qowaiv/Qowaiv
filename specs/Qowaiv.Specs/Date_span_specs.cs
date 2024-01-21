@@ -265,3 +265,18 @@ public class Can_subtract
     }
 #endif
 }
+
+public class Throws_when
+{
+    [Test]
+    public void Mutatation_overflows()
+        => 1.Invoking(DateSpan.MaxValue.AddDays)
+            .Should().Throw<OverflowException>()
+            .WithMessage("DateSpan overflowed because the resulting duration is too long.");
+
+    [Test]
+    public void Ctor_arguments_are_out_of_range()
+        => int.MaxValue.Invoking(n => new DateSpan(n, n))
+            .Should().Throw<ArgumentOutOfRangeException>()
+            .WithMessage("The specified years, months and days results in an un-representable DateSpan.");
+}

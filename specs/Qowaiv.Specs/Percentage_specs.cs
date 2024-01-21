@@ -143,8 +143,9 @@ public class Can_be_parsed
     {
         using (TestCultures.en_GB.Scoped())
         {
-            var exception = Assert.Throws<FormatException>(() => Percentage.Parse("invalid input"));
-            exception.Message.Should().Be("Not a valid percentage");
+            "invalid input".Invoking(Percentage.Parse)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid percentage");
         }
     }
 

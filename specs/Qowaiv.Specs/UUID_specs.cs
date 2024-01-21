@@ -203,8 +203,9 @@ public class Can_be_parsed
     {
         using (TestCultures.en_GB.Scoped())
         {
-            var exception = Assert.Throws<FormatException>(() => Uuid.Parse("invalid input"));
-            exception.Message.Should().Be("Not a valid GUID");
+            "invalid input".Invoking(Uuid.Parse)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid GUID");
         }
     }
 

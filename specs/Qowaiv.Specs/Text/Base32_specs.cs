@@ -94,11 +94,9 @@ public class GetBytes
     {
         using (TestCultures.en_GB.Scoped())
         {
-            var act = Assert.Catch<FormatException>(() =>
-            {
-                Base32.GetBytes("Q!waiv");
-            });
-            act.Message.Should().Be("Not a valid Base32 string");
+            "Q!waiv".Invoking(Base32.GetBytes)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid Base32 string");
         }
     }
 }

@@ -51,13 +51,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="PolySharp" Version="1.*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+    <PackageReference Include="PolySharp" Version="1.*" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">
-    <PackageReference Include="AsyncFixer" Version="*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
-    <PackageReference Include="DotNetProjectFile.Analyzers" Version="*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+    <PackageReference Include="AsyncFixer" Version="*" PrivateAssets="all" />
+    <PackageReference Include="DotNetProjectFile.Analyzers" Version="*" Condition="'$(TargetFramework)'=='net8.0'" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="*" PrivateAssets="all"  />
   </ItemGroup>
 
   <ItemGroup Label="Additional files">

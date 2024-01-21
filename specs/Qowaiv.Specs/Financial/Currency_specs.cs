@@ -117,3 +117,16 @@ public class Supports_JSON_serialization
             .Should().Throw<Exception>()
             .And.Should().BeOfType(exceptionType);
 }
+
+public class Is_equal_by_value
+{
+    [TestCase("", 0)]
+    [TestCase("EUR", -943833935)]
+    public void hash_code_is_value_based(Currency svo, int hash)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hash);
+        }
+    }
+}

@@ -2,7 +2,7 @@
 
 public class All
 {
-    private static readonly Country[] all = Country.All.ToArray();
+    private static readonly Country[] all = [.. Country.All];
 
     [TestCaseSource(nameof(all))]
     public void Has_constant(Country country)

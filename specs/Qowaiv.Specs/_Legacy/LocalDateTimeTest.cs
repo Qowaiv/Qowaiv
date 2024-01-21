@@ -15,7 +15,7 @@ public class LocalDateTimeTest
     [Test]
     public void MinValue_None_EqualsDefault()
     {
-        LocalDateTime.MinValue.Should().Be(default(LocalDateTime));
+        LocalDateTime.MinValue.Should().Be(default);
     }
 
     #endregion

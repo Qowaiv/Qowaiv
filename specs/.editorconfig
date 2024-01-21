@@ -3,6 +3,8 @@
 [*]
 dotnet_diagnostic.CA1861.severity = none # Prefer 'static readonly' fields over constant array arguments
 
+dotnet_diagnostic.S1133.severity = none # Deprecated code should be removed
 dotnet_diagnostic.S3900.severity = none # Arguments of public methods should be validated against null
 
 dotnet_diagnostic.SYSLIB1045.severity = none # Convert to 'GeneratedRegexAttribute'.
+ 

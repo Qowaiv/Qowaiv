@@ -18,7 +18,7 @@ public class InternetMediaTypeTest
     [Test]
     public void Empty_None_EqualsDefault()
     {
-        InternetMediaType.Empty.Should().Be(default(InternetMediaType));
+        InternetMediaType.Empty.Should().Be(default);
     }
 
     #endregion
@@ -91,7 +91,7 @@ public class InternetMediaTypeTest
     public void TryParse_Null_IsValid()
     {
         InternetMediaType.TryParse(Nil.String, out var val).Should().BeTrue();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse string.Empty should be valid.</summary>
@@ -102,7 +102,7 @@ public class InternetMediaTypeTest
         string str = string.Empty;
 
         InternetMediaType.TryParse(str, out var val).Should().BeTrue();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     /// <summary>TryParse "?" should be valid and the result should be InternetMediaType.Unknown.</summary>
@@ -132,7 +132,7 @@ public class InternetMediaTypeTest
         string str = "string";
 
         InternetMediaType.TryParse(str, out var val).Should().BeFalse();
-        Assert.AreEqual(string.Empty, val.ToString(), "Value");
+        val.Should().Be(default);
     }
 
     [Test]

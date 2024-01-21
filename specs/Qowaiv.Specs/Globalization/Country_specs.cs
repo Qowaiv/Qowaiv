@@ -11,6 +11,14 @@ public class With_domain_logic
     [TestCase(false, "?")]
     [TestCase(false, "")]
     public void IsKnown_is(bool result, Country svo) => svo.IsKnown.Should().Be(result);
+
+    /// <remarks>
+    /// As the regions available depend on the environment running, we can't
+    /// predict the outcome.
+    /// </remarks>
+    [TestCaseSource(typeof(Country), nameof(Country.All))]
+    public void RegionInfo_exists_indicates_counterpart_exists(Country country) 
+        => country.Invoking(c => c.RegionInfoExists).Should().NotThrow();
 }
 
 public class Display_name
@@ -210,6 +218,19 @@ public class Supports_binary_serialization
 }
 #endif
 
+public class Is_equal_by_value
+{
+    [TestCase("", 0)]
+    [TestCase("NL", -1174190069)]
+    public void hash_code_is_value_based(Country svo, int hash)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hash);
+        }
+    }
+}
+
 public class Can_parse
 {
     [Test]
@@ -220,3 +241,4 @@ public class Can_parse
     public void former_countries_via_ISO_3166_3()
         => Country.Parse("BQAQ").Should().Be(Country.BQAQ);
 }
+

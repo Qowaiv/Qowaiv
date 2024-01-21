@@ -12,7 +12,7 @@ public class WeekDateTest
     [Test]
     public void MinValue_None_EqualsDefault()
     {
-        WeekDate.MinValue.Should().Be(default(WeekDate));
+        WeekDate.MinValue.Should().Be(default);
     }
 
     #endregion

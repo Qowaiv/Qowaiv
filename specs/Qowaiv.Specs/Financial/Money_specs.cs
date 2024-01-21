@@ -106,3 +106,28 @@ public class Has_operators
         division.Should().Throw<CurrencyMismatchException>();
     }
 }
+
+public class Throws_when
+{
+    [Test]
+    public void adding_multiple_currencies()
+    {
+        var euros = 16 + Currency.EUR;
+        var dollars = 666 + Currency.USD;
+        var operation = () => euros + dollars;
+
+        operation.Should().Throw<CurrencyMismatchException>()
+            .WithMessage("The addition operation could not be applied. There is a mismatch between EUR and USD.");
+    }
+
+    [Test]
+    public void subtracting_multiple_currencies()
+    {
+        var euros = 16 + Currency.EUR;
+        var dollars = 666 + Currency.USD;
+        var operation = () => euros - dollars;
+
+        operation.Should().Throw<CurrencyMismatchException>()
+            .WithMessage("The subtraction operation could not be applied. There is a mismatch between EUR and USD.");
+    }
+}

@@ -649,16 +649,6 @@ public class MoneyTest
     }
 
     [Test]
-    public void Add_DifferentCurrency_Throws()
-    {
-        var l = 16 + Currency.EUR;
-        var r = 666 + Currency.USD;
-
-        var x = Assert.Catch<CurrencyMismatchException>(() => l.Add(r));
-        x.Message.Should().Be("The addition operation could not be applied. There is a mismatch between EUR and USD.");
-    }
-
-    [Test]
     public void Subtract_SameCurrency_Subtracted()
     {
         var l = 69 + Currency.EUR;
@@ -676,17 +666,6 @@ public class MoneyTest
         var a = 12 + Currency.EUR;
 
         Assert.AreEqual(a, l - p);
-    }
-
-    [Test]
-    public void Subtract_DifferentCurrency_Throws()
-    {
-        var l = 16 + Currency.EUR;
-        var r = 666 + Currency.USD;
-
-        var x = Assert.Catch<CurrencyMismatchException>(() => l.Subtract(r));
-
-        x.Message.Should().Be("The subtraction operation could not be applied. There is a mismatch between EUR and USD.");
     }
 
     [Test]

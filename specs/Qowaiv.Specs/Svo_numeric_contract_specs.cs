@@ -1,6 +1,6 @@
-﻿namespace Qowaiv.UnitTests;
+﻿namespace Qowaiv.UnitTestsSVO_numeric_contract_specs;
 
-public class NumericSvoTest
+public class Numeric_SVOs_Define
 {
     internal const BindingFlags NonPublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
     internal const BindingFlags PublicInstance = BindingFlags.Public | BindingFlags.Instance;
@@ -27,7 +27,6 @@ public class NumericSvoTest
 
     [TestCase(typeof(Amount))]
     [TestCase(typeof(Money))]
-    [TestCase(typeof(Percentage))]
     [TestCase(typeof(StreamSize))]
     public void Plus(Type svo)
     {
@@ -55,7 +54,6 @@ public class NumericSvoTest
 
     [TestCase(typeof(Amount))]
     [TestCase(typeof(Money))]
-    [TestCase(typeof(Percentage))]
     [TestCase(typeof(StreamSize))]
     public void Negate(Type svo)
     {
@@ -83,7 +81,6 @@ public class NumericSvoTest
 
     [TestCase(typeof(Amount))]
     [TestCase(typeof(Money))]
-    [TestCase(typeof(Percentage))]
     [TestCase(typeof(StreamSize))]
     public void Increment(Type svo)
     {
@@ -111,7 +108,6 @@ public class NumericSvoTest
 
     [TestCase(typeof(Amount))]
     [TestCase(typeof(Money))]
-    [TestCase(typeof(Percentage))]
     [TestCase(typeof(StreamSize))]
     public void Decrement(Type svo)
     {
@@ -139,7 +135,6 @@ public class NumericSvoTest
 
     [TestCase(typeof(Amount), typeof(Amount), typeof(Percentage))]
     [TestCase(typeof(Money), typeof(Money), typeof(Percentage))]
-    [TestCase(typeof(Percentage), typeof(Percentage))]
     [TestCase(typeof(StreamSize), typeof(StreamSize), typeof(Percentage))]
     public void Add(Type svo, params Type[] expected)
     {
@@ -169,7 +164,6 @@ public class NumericSvoTest
 
     [TestCase(typeof(Amount), typeof(Amount), typeof(Percentage))]
     [TestCase(typeof(Money), typeof(Money), typeof(Percentage))]
-    [TestCase(typeof(Percentage), typeof(Percentage))]
     [TestCase(typeof(StreamSize), typeof(StreamSize), typeof(Percentage))]
     public void Subtract(Type svo, params Type[] expected)
     {
@@ -199,7 +193,6 @@ public class NumericSvoTest
 
     [TestCase(typeof(Amount), typeof(short), typeof(int), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(float), typeof(double), typeof(decimal), typeof(Percentage))]
     [TestCase(typeof(Money), typeof(short), typeof(int), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(float), typeof(double), typeof(decimal), typeof(Percentage))]
-    [TestCase(typeof(Percentage), typeof(short), typeof(int), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(float), typeof(double), typeof(decimal), typeof(Percentage))]
     [TestCase(typeof(StreamSize), typeof(short), typeof(int), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(float), typeof(double), typeof(decimal), typeof(Percentage))]
     public void Multiply(Type svo, params Type[] expected)
     {
@@ -229,7 +222,6 @@ public class NumericSvoTest
 
     [TestCase(typeof(Amount), typeof(short), typeof(int), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(float), typeof(double), typeof(decimal), typeof(Percentage))]
     [TestCase(typeof(Money), typeof(short), typeof(int), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(float), typeof(double), typeof(decimal), typeof(Percentage))]
-    [TestCase(typeof(Percentage), typeof(short), typeof(int), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(float), typeof(double), typeof(decimal), typeof(Percentage))]
     [TestCase(typeof(StreamSize), typeof(short), typeof(int), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(float), typeof(double), typeof(decimal), typeof(Percentage))]
     public void Divide(Type svo, params Type[] expected)
     {

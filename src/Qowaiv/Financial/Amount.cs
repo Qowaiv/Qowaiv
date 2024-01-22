@@ -56,11 +56,11 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
 
     /// <summary>Increases the amount with one.</summary>
     [Pure]
-    internal Amount Increment() => (Amount)(m_Value + 1);
+    internal Amount Increment() => new(m_Value + 1);
 
     /// <summary>Decreases the amount with one.</summary>
     [Pure]
-    internal Amount Decrement() => (Amount)(m_Value - 1);
+    internal Amount Decrement() => new(m_Value - 1);
 
     /// <summary>Decreases the amount with one.</summary>
     /// <summary>Adds a amount to the current amount.</summary>
@@ -68,14 +68,14 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// The amount to add.
     /// </param>
     [Pure]
-    public Amount Add(Amount amount) => (Amount)(m_Value + amount.m_Value);
+    public Amount Add(Amount amount) => new(m_Value + amount.m_Value);
 
     /// <summary>Adds the specified percentage to the amount.</summary>
     /// <param name="p">
     /// The percentage to add.
     /// </param>
     [Pure]
-    public Amount Add(Percentage p) => (Amount)m_Value.Add(p);
+    public Amount Add(Percentage p) => new(m_Value + p);
 
     /// <summary>Subtracts a amount from the current amount.</summary>
     /// <param name="amount">
@@ -89,7 +89,7 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// The percentage to add.
     /// </param>
     [Pure]
-    public Amount Subtract(Percentage p) => (Amount)m_Value.Subtract(p);
+    public Amount Subtract(Percentage p) => new(m_Value - p);
 
     /// <summary>Gets a percentage of the current amount.</summary>
     /// <param name="p">

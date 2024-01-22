@@ -21,7 +21,7 @@ namespace Qowaiv.Chemistry;
 public readonly partial struct CasRegistryNumber : IXmlSerializable, IFormattable, IEquatable<CasRegistryNumber>, IComparable, IComparable<CasRegistryNumber>
 {
     /// <summary>Represents an unknown (but set) CAS Registry Number.</summary>
-    public static readonly CasRegistryNumber Unknown = new(long.MaxValue);
+    public static CasRegistryNumber Unknown => new(long.MaxValue);
 
     /// <summary>Gets the number of characters of CAS Registry Number.</summary>
     public int Length => IsEmptyOrUnknown() ? 0 : (int)Math.Ceiling(Math.Log10(m_Value));

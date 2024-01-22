@@ -32,25 +32,25 @@ namespace Qowaiv;
 public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<Sex>, IComparable, IComparable<Sex>
 {
     /// <summary>Represents a not known/unknown sex.</summary>
-    public static readonly Sex Unknown = new(1);
+    public static Sex Unknown => new(1);
 
     /// <summary>Represents a male.</summary>
-    public static readonly Sex Male = new(2);
+    public static Sex Male => new(2);
 
     /// <summary>Represents a female.</summary>
-    public static readonly Sex Female = new(4);
+    public static Sex Female => new(4);
 
     /// <summary>Represents a not applicable sex.</summary>
-    public static readonly Sex NotApplicable = new(18);
+    public static Sex NotApplicable => new(18);
 
     /// <summary>Contains not known, male, female, not applicable.</summary>
-    public static readonly IReadOnlyCollection<Sex> All = new[] { Male, Female, NotApplicable, Unknown, };
+    public static IReadOnlyCollection<Sex> All { get; } = new[] { Male, Female, NotApplicable, Unknown, };
 
     /// <summary>Contains male and female.</summary>
-    public static readonly IReadOnlyCollection<Sex> MaleAndFemale = new[] { Male, Female, };
+    public static IReadOnlyCollection<Sex> MaleAndFemale { get; } = new[] { Male, Female, };
 
     /// <summary>Contains male, female, not applicable.</summary>
-    public static readonly IReadOnlyCollection<Sex> MaleFemaleAndNotApplicable = new[] { Male, Female, NotApplicable, };
+    public static IReadOnlyCollection<Sex> MaleFemaleAndNotApplicable { get; } = new[] { Male, Female, NotApplicable, };
 
     /// <summary>Gets the display name.</summary>
     public string DisplayName => GetDisplayName(null);

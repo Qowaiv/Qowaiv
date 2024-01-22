@@ -18,18 +18,6 @@ public partial struct EmailAddress
     /// <summary>The inner value of the email address.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? m_Value;
-
-    /// <summary>False if the email address is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the email address is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the email address is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct EmailAddress : IEmpty<EmailAddress>
@@ -44,6 +32,21 @@ public partial struct EmailAddress : IEmpty<EmailAddress>
     /// <summary>Returns true if the email address is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => !HasValue;
+}
+
+public partial struct EmailAddress : IUnknown<EmailAddress>
+{
+    /// <summary>False if the email address is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the email address is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the email address is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct EmailAddress : IEquatable<EmailAddress>

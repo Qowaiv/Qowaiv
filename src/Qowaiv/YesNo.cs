@@ -23,13 +23,13 @@ namespace Qowaiv;
 public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatable<YesNo>, IComparable, IComparable<YesNo>
 {
     /// <summary>Represents an unknown (but set) yes-no.</summary>
-    public static readonly YesNo No = new(1);
+    public static YesNo No => new(1);
 
     /// <summary>Represents an unknown (but set) yes-no.</summary>
-    public static readonly YesNo Yes = new(2);
+    public static YesNo Yes => new(2);
 
     /// <summary>Represents an unknown (but set) yes-no.</summary>
-    public static readonly YesNo Unknown = new(3);
+    public static YesNo Unknown => new(3);
 
     /// <summary>Contains yes and no.</summary>
     public static readonly IReadOnlyCollection<YesNo> YesAndNo = new[] { Yes, No };

@@ -18,18 +18,6 @@ public partial struct EnergyLabel
     /// <summary>The inner value of the EU energy label.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly int m_Value;
-
-    /// <summary>False if the EU energy label is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the EU energy label is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the EU energy label is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct EnergyLabel : IEmpty<EnergyLabel>
@@ -44,6 +32,21 @@ public partial struct EnergyLabel : IEmpty<EnergyLabel>
     /// <summary>Returns true if the EU energy label is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => !HasValue;
+}
+
+public partial struct EnergyLabel : IUnknown<EnergyLabel>
+{
+    /// <summary>False if the EU energy label is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the EU energy label is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the EU energy label is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct EnergyLabel : IEquatable<EnergyLabel>

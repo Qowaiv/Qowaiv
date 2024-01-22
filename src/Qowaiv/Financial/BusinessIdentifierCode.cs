@@ -43,7 +43,7 @@ public readonly partial struct BusinessIdentifierCode : IXmlSerializable, IForma
 #endif
 
     /// <summary>Represents an unknown (but set) BIC.</summary>
-    public static readonly BusinessIdentifierCode Unknown = new("ZZZZZZZZZZZ");
+    public static BusinessIdentifierCode Unknown => new("ZZZZZZZZZZZ");
 
     /// <summary>Gets the number of characters of BIC.</summary>
     public int Length => IsUnknown() ? 0 : m_Value?.Length ?? 0;

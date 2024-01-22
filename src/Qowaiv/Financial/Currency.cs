@@ -29,7 +29,7 @@ namespace Qowaiv.Financial;
 public readonly partial struct Currency : IXmlSerializable, IFormattable, IFormatProvider, IEquatable<Currency>, IComparable, IComparable<Currency>
 {
     /// <summary>Represents an unknown (but set) currency.</summary>
-    public static readonly Currency Unknown = new("ZZZ");
+    public static Currency Unknown => new("ZZZ");
 
     /// <summary>Gets a currency based on the current thread.</summary>
     public static Currency Current => Thread.CurrentThread.GetValue<Currency>();

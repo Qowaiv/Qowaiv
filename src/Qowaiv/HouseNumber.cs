@@ -15,7 +15,7 @@ public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEq
 #endif
 {
     /// <summary>Represents an unknown (but set) house number.</summary>
-    public static readonly HouseNumber Unknown = new(int.MaxValue);
+    public static HouseNumber Unknown => new(int.MaxValue);
 
     /// <summary>Represents the smallest possible House number 1.</summary>
     public static HouseNumber MinValue => new(1);

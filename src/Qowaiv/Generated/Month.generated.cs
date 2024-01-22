@@ -18,18 +18,6 @@ public partial struct Month
     /// <summary>The inner value of the month.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly byte m_Value;
-
-    /// <summary>False if the month is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the month is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the month is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct Month : IEmpty<Month>
@@ -44,6 +32,21 @@ public partial struct Month : IEmpty<Month>
     /// <summary>Returns true if the month is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => !HasValue;
+}
+
+public partial struct Month : IUnknown<Month>
+{
+    /// <summary>False if the month is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the month is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the month is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct Month : IEquatable<Month>

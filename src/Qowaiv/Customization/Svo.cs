@@ -1,4 +1,4 @@
-﻿#pragma warning disable S1210
+#pragma warning disable S1210
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 using Qowaiv.Conversion.Customization;
@@ -17,7 +17,7 @@ namespace Qowaiv.Customization;
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Customization.GenericSvoJsonConverter))]
 #endif
-public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEquatable<Svo<TSvoBehavior>>, IComparable, IComparable<Svo<TSvoBehavior>>, IEmpty<Svo<TSvoBehavior>>
+public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEquatable<Svo<TSvoBehavior>>, IComparable, IComparable<Svo<TSvoBehavior>>, IUnknown<Svo<TSvoBehavior>>
 #if NET8_0_OR_GREATER
 , IEqualityOperators<Svo<TSvoBehavior>, Svo<TSvoBehavior>, bool>
 , IParsable<Svo<TSvoBehavior>>
@@ -34,7 +34,7 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
     public static Svo<TSvoBehavior> Empty => default;
 
     /// <summary>Represents an unknown (but set) Single Value Object.</summary>
-    public static readonly Svo<TSvoBehavior> Unknown = new(SvoBehavior.unknown);
+    public static Svo<TSvoBehavior> Unknown => new(SvoBehavior.unknown);
 
     /// <summary>Initializes a new instance of the <see cref="Svo{TSvoBehavior}"/> struct.</summary>
     private Svo(string? value) => m_Value = value;

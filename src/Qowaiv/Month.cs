@@ -14,46 +14,46 @@ namespace Qowaiv;
 public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
 {
     /// <summary>Represents an unknown (but set) month.</summary>
-    public static readonly Month Unknown = new(byte.MaxValue);
+    public static Month Unknown => new(byte.MaxValue);
 
     /// <summary>Represents January (01).</summary>
-    public static readonly Month January /*...*/ = new(01);
+    public static Month January /*...*/ => new(01);
 
     /// <summary>Represents February (02).</summary>
-    public static readonly Month February /*..*/ = new(02);
+    public static Month February /*..*/ => new(02);
 
     /// <summary>Represents March (03).</summary>
-    public static readonly Month March /*.....*/ = new(03);
+    public static Month March /*.....*/ => new(03);
 
     /// <summary>Represents April (04).</summary>
-    public static readonly Month April /*.....*/ = new(04);
+    public static Month April /*.....*/ => new(04);
 
     /// <summary>Represents May (05).</summary>
-    public static readonly Month May /*.......*/ = new(05);
+    public static Month May /*.......*/ => new(05);
 
     /// <summary>Represents June (06).</summary>
-    public static readonly Month June /*......*/ = new(06);
+    public static Month June /*......*/ => new(06);
 
     /// <summary>Represents July (07).</summary>
-    public static readonly Month July /*......*/ = new(07);
+    public static Month July /*......*/ => new(07);
 
     /// <summary>Represents August (08).</summary>
-    public static readonly Month August /*....*/ = new(08);
+    public static Month August /*....*/ => new(08);
 
     /// <summary>Represents September (09).</summary>
-    public static readonly Month September /*.*/ = new(09);
+    public static Month September /*.*/ => new(09);
 
     /// <summary>Represents October (10).</summary>
-    public static readonly Month October /*..*/ = new(10);
+    public static Month October /*..*/ => new(10);
 
     /// <summary>Represents November (11).</summary>
-    public static readonly Month November /*..*/ = new(11);
+    public static Month November /*..*/ => new(11);
 
     /// <summary>Represents December (12).</summary>
-    public static readonly Month December /*..*/ = new(12);
+    public static Month December /*..*/ => new(12);
 
     /// <summary>Represents all months (January till December).</summary>
-    public static readonly IReadOnlyList<Month> All = new[]
+    public static IReadOnlyList<Month> All { get; } = new[]
     {
         January,
         February,

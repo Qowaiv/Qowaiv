@@ -1,5 +1,14 @@
 ﻿namespace Financial.Amount_specs;
 
+public class Has_constant
+{
+    [Test]
+    public void MinValue_equal_to_decimal_MinValue() => Amount.MinValue.Should().Be(decimal.MinValue.Amount());
+
+    [Test]
+    public void MaxValue_equal_to_decimal_MaxValue() => Amount.MaxValue.Should().Be(decimal.MaxValue.Amount());
+}
+
 public class Min_and_max
 {
     [TestCase(17, 17)]

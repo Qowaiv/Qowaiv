@@ -103,6 +103,7 @@ dotnet_diagnostic.S2328.severity = none # GetHashCode() should not reference mut
 dotnet_diagnostic.S2178.severity = none # Short-circuit logic should be used in boolean contexts - '&' is used instead of && to accommodate expressions with nullable booleans too.
 dotnet_diagnostic.S3376.severity = none # EventArgs, and Exception type names should end with the type being extended
 dotnet_diagnostic.S3376.severity = none # Attribute, EventArgs, and Exception type names should end with the type being extended
+dotnet_diagnostic.S3925.severity = none # "ISerializable" should be implemented correctly
 dotnet_diagnostic.S4136.severity = none # Method overloads should be grouped together
 
 dotnet_diagnostic.S1133.severity = suggestion # Deprecated code should be removed
@@ -130,7 +131,6 @@ dotnet_diagnostic.S3215.severity = warning # Interface instances should not be c
 dotnet_diagnostic.S3218.severity = warning # Inner class members should not shadow outer class "static" or type members
 dotnet_diagnostic.S3257.severity = warning # Declarations and initializations should be as concise as possible
 dotnet_diagnostic.S3776.severity = warning # Cognitive Complexity of methods should not be too high
-dotnet_diagnostic.S3925.severity = warning # "ISerializable" should be implemented correctly
 dotnet_diagnostic.S6354.severity = warning # Use a testable (date) time provider instead
 
 dotnet_diagnostic.VSSpell001.severity = silent # Correct spelling

@@ -23,7 +23,7 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     public const int MaxLength = 254;
 
     /// <summary>Represents an unknown (but set) email address.</summary>
-    public static readonly EmailAddress Unknown = new("?");
+    public static EmailAddress Unknown => new("?");
 
     /// <summary>Gets the number of characters of email address.</summary>
     public int Length => m_Value is { Length: > 1 } ? m_Value.Length : 0;

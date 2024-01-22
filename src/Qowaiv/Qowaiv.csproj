@@ -18,6 +18,7 @@ v7.0.0
 - Improve parsing of UUID's.
 - Improve ToString of UUID's. #365
 - Improve parsing of UUID's. #365
+- Introduction of the IUnknown&lt;TSelf&gt; interface. #366
 - Implement IMinMaxValue&lt;TSelf&gt; for SVO's with a min and max value. #362 (breaking)
 - Drop Gender. #361  (breaking)
 - Drop public static IsValid(string) methods. #361 (breaking)

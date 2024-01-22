@@ -42,25 +42,25 @@ public readonly partial struct EnergyLabel : IXmlSerializable, IEquatable<Energy
         : new(7 + plusses);
 
     /// <summary>Represents EU energy label B.</summary>
-    public static readonly EnergyLabel B = new(6);
+    public static EnergyLabel B => new(6);
 
     /// <summary>Represents EU energy label C.</summary>
-    public static readonly EnergyLabel C = new(5);
+    public static EnergyLabel C => new(5);
 
     /// <summary>Represents EU energy label D.</summary>
-    public static readonly EnergyLabel D = new(4);
+    public static EnergyLabel D => new(4);
 
     /// <summary>Represents EU energy label E.</summary>
-    public static readonly EnergyLabel E = new(3);
+    public static EnergyLabel E => new(3);
 
     /// <summary>Represents EU energy label F.</summary>
-    public static readonly EnergyLabel F = new(2);
+    public static EnergyLabel F => new(2);
 
     /// <summary>Represents EU energy label G.</summary>
-    public static readonly EnergyLabel G = new(1);
+    public static EnergyLabel G => new(1);
 
     /// <summary>Represents an unknown (but set) EU energy label.</summary>
-    public static readonly EnergyLabel Unknown = new(int.MinValue);
+    public static EnergyLabel Unknown => new(int.MinValue);
 
     /// <summary>Returns a <see cref="string" /> that represents the EU energy label for DEBUG purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

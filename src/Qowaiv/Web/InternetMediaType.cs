@@ -65,7 +65,7 @@ public readonly partial struct InternetMediaType : IXmlSerializable, IFormattabl
 #endif
 
     /// <summary>Represents an unknown (but set) Internet media type.</summary>
-    public static readonly InternetMediaType Unknown = new("application/octet-stream");
+    public static InternetMediaType Unknown => new("application/octet-stream");
 
     /// <summary>Gets the number of characters of the Internet media type.</summary>
     public int Length => m_Value?.Length ?? 0;

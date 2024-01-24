@@ -169,6 +169,16 @@ public class Can_be_parsed
     }
 }
 
+public class Can_not_be_parsed
+{
+    [TestCase(NumberStyles.HexNumber)]
+    [TestCase(NumberStyles.AllowExponent)]
+    public void using_a_number_style_other_then_Number(NumberStyles style)
+        => style.Invoking(s => Percentage.TryParse("4.5%", s, CultureInfo.InvariantCulture, out _))
+            .Should().Throw<ArgumentOutOfRangeException>()
+            .WithMessage("The number style '*' is not supported.*");
+}
+
 public class Can_be_created_with_percentage_extension
 {
     [Test]

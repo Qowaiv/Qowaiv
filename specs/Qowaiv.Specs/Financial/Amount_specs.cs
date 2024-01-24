@@ -24,7 +24,7 @@ public class Min_and_max
     [TestCase(17, 17)]
     [TestCase(17, 16)]
     [TestCase(16, 17)]
-    public void Max_of_two_returns_minimum(Amount a1, Amount a2) 
+    public void Max_of_two_returns_minimum(Amount a1, Amount a2)
         => Amount.Max(a1, a2).Should().Be(17.Amount());
 
     [Test]
@@ -142,7 +142,7 @@ public class Supports_type_conversion
         {
             [Test]
             public void Int32() => ((Amount)42).Should().Be(42.Amount());
-            
+
             [Test]
             public void Int64() => ((Amount)42L).Should().Be(42.Amount());
 
@@ -167,8 +167,8 @@ public class Supports_type_conversion
             [Test]
             public void Double() => ((double)42.Amount()).Should().Be(42.0);
         }
-
-        public class Has_operators
+    }
+    public class Has_operators
     {
         [Test]
         public void to_divide_amount_by_amount_as_decimal()

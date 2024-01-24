@@ -1,5 +1,14 @@
 ﻿namespace Local_date_time_specs;
 
+public class Has_constant
+{
+    [Test]
+    public void MinValue_is_0001Y_01M_01D() => LocalDateTime.MinValue.Should().Be(new(0001, 01, 01));
+
+    [Test]
+    public void MaxValue_equal_to_9999Y_12M_31D() => LocalDateTime.MaxValue.Should().Be(new(DateTime.MaxValue.Ticks));
+}
+
 public class Is_invalid
 {
     [Test]

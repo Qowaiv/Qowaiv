@@ -1,4 +1,5 @@
 ﻿using Qowaiv;
+using System.Runtime.CompilerServices;
 
 namespace System;
 
@@ -7,51 +8,13 @@ public static class QowaivDecimalExtensions
 {
     /// <summary>Gets the absolute value of the <paramref name="number"/>.</summary>
     [Pure]
-    public static decimal Abs(this decimal number) => Math.Abs(number);
-
-    /// <summary>Adds the specified percentage to the Decimal.</summary>
-    /// <param name="d">
-    /// The value to add a percentage to.
-    /// </param>
-    /// <param name="p">
-    /// The percentage to add.
-    /// </param>
-    [Pure]
-    public static decimal Add(this decimal d, Percentage p) => d + d.Multiply(p);
-
-    /// <summary>Subtracts the specified percentage to the Decimal.</summary>
-    /// <param name="d">
-    /// The value to Subtract a percentage from.
-    /// </param>
-    /// <param name="p">
-    /// The percentage to Subtract.
-    /// </param>
-    [Pure]
-    public static decimal Subtract(this decimal d, Percentage p) => d - d.Multiply(p);
-
-    /// <summary>Gets the specified percentage of the Decimal.</summary>
-    /// <param name="d">
-    /// The value to get a percentage from.
-    /// </param>
-    /// <param name="p">
-    /// The percentage.
-    /// </param>
-    [Pure]
-    public static decimal Multiply(this decimal d, Percentage p) => d * (decimal)p;
-
-    /// <summary>Divides the Decimal by the specified percentage.</summary>
-    /// <param name="d">
-    /// The value to divide.
-    /// </param>
-    /// <param name="p">
-    /// The percentage to divide to.
-    /// </param>
-    [Pure]
-    public static decimal Divide(this decimal d, Percentage p) => d / (decimal)p;
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal static decimal Abs(this decimal number) => Math.Abs(number);
 
     /// <summary>Gets the sign of the <paramref name="number"/>.</summary>
     [Pure]
-    public static int Sign(this decimal number) => Math.Sign(number);
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal static int Sign(this decimal number) => Math.Sign(number);
 
     /// <summary>Rounds a value to the closed number that is a multiple of the specified factor.</summary>
     /// <param name="value">

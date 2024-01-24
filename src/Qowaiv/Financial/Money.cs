@@ -1,4 +1,4 @@
-﻿using Qowaiv.Conversion.Financial;
+using Qowaiv.Conversion.Financial;
 
 namespace Qowaiv.Financial;
 
@@ -95,7 +95,7 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
     /// The percentage to add.
     /// </param>
     [Pure]
-    public Money Add(Percentage p) => m_Value.Add(p) + Currency;
+    public Money Add(Percentage p) => (m_Value + p) + Currency;
 
     /// <summary>Subtracts a amount from the current amount.</summary>
     /// <param name="money">
@@ -109,7 +109,7 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
     /// The percentage to add.
     /// </param>
     [Pure]
-    public Money Subtract(Percentage p) => m_Value.Subtract(p) + Currency;
+    public Money Subtract(Percentage p) => (m_Value - p) + Currency;
 
     /// <summary>Gets a percentage of the money.</summary>
     /// <param name="p">

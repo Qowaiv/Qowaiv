@@ -16,11 +16,18 @@ v6.6.1
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 v7.0.0
+- Implement INumber&lt;Percentage&gt;. #367
 - Introduction of the IEmpty&lt;TSelf&gt; interface. #364
 - Improve parsing of UUID's.
 - Improve ToString of UUID's. #365
 - Improve parsing of UUID's. #365
 - Introduction of the IUnknown&lt;TSelf&gt; interface. #366
+- Implement IMinMaxValue&lt;TSelf&gt; for SVO's with a min and max value. #362 (breaking)
+- Drop Gender. #361  (breaking)
+- Drop public static IsValid(string) methods. #361 (breaking)
+- Seal all JSON converters. #361 (breaking)
+- Allign Parse and TryParse provider naming with IParsable. #360 (breaking)
+- Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
 - Implement IMinMaxValue&lt;TSelf&gt; for SVO's with a min and max value. #362 (breaking)
 - Drop Gender. #361  (breaking)
 - Drop public static IsValid(string) methods. #361 (breaking)

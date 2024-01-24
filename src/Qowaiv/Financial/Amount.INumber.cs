@@ -133,109 +133,102 @@ public readonly partial struct Amount : INumber<Amount>
     [Pure]
     static Amount INumberBase<Amount>.Abs(Amount value) => value.Abs();
 
-    static bool INumberBase<Amount>.IsCanonical(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Amount>.IsCanonical(Amount value) => decimal.IsCanonical(value.m_Value);
 
-    static bool INumberBase<Amount>.IsComplexNumber(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Amount>.IsComplexNumber(Amount value) => false;
 
-    static bool INumberBase<Amount>.IsEvenInteger(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Amount>.IsFinite(Amount value) => true;
 
-    static bool INumberBase<Amount>.IsFinite(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Amount>.IsImaginaryNumber(Amount value) => false;
 
-    static bool INumberBase<Amount>.IsImaginaryNumber(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Amount>.IsInfinity(Amount value) => false;
 
-    static bool INumberBase<Amount>.IsInfinity(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Amount>.IsNegativeInfinity(Amount value) => false;
 
-    static bool INumberBase<Amount>.IsInteger(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Amount>.IsPositiveInfinity(Amount value) => false;
 
-    static bool INumberBase<Amount>.IsNaN(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Amount>.IsNaN(Amount value) => false;
 
-    static bool INumberBase<Amount>.IsNegative(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Amount>.IsSubnormal(Amount value) => false;
 
-    static bool INumberBase<Amount>.IsNegativeInfinity(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Amount>.IsRealNumber(Amount value) => true;
 
-    static bool INumberBase<Amount>.IsNormal(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Amount>.IsInteger(Amount value) => value.m_Value.Abs() % 1 == 0;
 
-    static bool INumberBase<Amount>.IsOddInteger(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Amount>.IsEvenInteger(Amount value) => value.m_Value.Abs() % 2 == 0;
 
-    static bool INumberBase<Amount>.IsPositive(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+#pragma warning disable S2197 // Modulus results should not be checked for direct equality
+    // modulo of an absolute value is always positive.
+    static bool INumberBase<Amount>.IsOddInteger(Amount value) => value.m_Value.Abs() % 2 == 1;
+#pragma warning restore S2197 // Modulus results should not be checked for direct equality
 
-    static bool INumberBase<Amount>.IsPositiveInfinity(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Amount>.IsNegative(Amount value) => value < Zero;
 
-    static bool INumberBase<Amount>.IsRealNumber(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Amount>.IsZero(Amount value) => value == Zero;
 
-    static bool INumberBase<Amount>.IsSubnormal(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Amount>.IsPositive(Amount value) => value >= Zero;
 
-    static bool INumberBase<Amount>.IsZero(Amount value)
-    {
-        throw new NotImplementedException();
-    }
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Amount>.IsNormal(Amount value) => value.m_Value != 0;
 
+    /// <inheritdoc />
+    [Pure]
     static Amount INumberBase<Amount>.MaxMagnitude(Amount x, Amount y)
-    {
-        throw new NotImplementedException();
-    }
+        => new(decimal.MaxMagnitude(x.m_Value, y.m_Value));
 
+    /// <inheritdoc />
+    [Pure]
     static Amount INumberBase<Amount>.MaxMagnitudeNumber(Amount x, Amount y)
-    {
-        throw new NotImplementedException();
-    }
+        => new(decimal.MaxMagnitude(x.m_Value, y.m_Value));
 
+    /// <inheritdoc />
+    [Pure]
     static Amount INumberBase<Amount>.MinMagnitude(Amount x, Amount y)
-    {
-        throw new NotImplementedException();
-    }
+        => new(decimal.MinMagnitude(x.m_Value, y.m_Value));
 
+    /// <inheritdoc />
+    [Pure]
     static Amount INumberBase<Amount>.MinMagnitudeNumber(Amount x, Amount y)
+        => new(decimal.MinMagnitude(x.m_Value, y.m_Value));
+
+    /// <inheritdoc />
+    bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
     {
-        throw new NotImplementedException();
+        charsWritten = 0;
+        return false;
     }
 
     static Amount INumberBase<Amount>.Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider)
@@ -249,36 +242,6 @@ public readonly partial struct Amount : INumber<Amount>
     }
 
     static Amount ISpanParsable<Amount>.Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
-    {
-        throw new NotImplementedException();
-    }
-
-    static bool INumberBase<Amount>.TryConvertFromChecked<TOther>(TOther value, out Amount result)
-    {
-        throw new NotImplementedException();
-    }
-
-    static bool INumberBase<Amount>.TryConvertFromSaturating<TOther>(TOther value, out Amount result)
-    {
-        throw new NotImplementedException();
-    }
-
-    static bool INumberBase<Amount>.TryConvertFromTruncating<TOther>(TOther value, out Amount result)
-    {
-        throw new NotImplementedException();
-    }
-
-    static bool INumberBase<Amount>.TryConvertToChecked<TOther>(Amount value, out TOther result)
-    {
-        throw new NotImplementedException();
-    }
-
-    static bool INumberBase<Amount>.TryConvertToSaturating<TOther>(Amount value, out TOther result)
-    {
-        throw new NotImplementedException();
-    }
-
-    static bool INumberBase<Amount>.TryConvertToTruncating<TOther>(Amount value, out TOther result)
     {
         throw new NotImplementedException();
     }
@@ -298,16 +261,36 @@ public readonly partial struct Amount : INumber<Amount>
         throw new NotImplementedException();
     }
 
-    bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
-    {
-        throw new NotImplementedException();
-    }
+
 
     static Amount IMultiplyOperators<Amount, Amount, Amount>.operator *(Amount left, Amount right)
         => throw new NotSupportedException();
 
     static Amount IDivisionOperators<Amount, Amount, Amount>.operator /(Amount left, Amount right)
         => throw new NotSupportedException();
- 
+
+    [ExcludeFromCodeCoverage(Justification = "Protected member of the contract that is not supported.")]
+    static bool INumberBase<Amount>.TryConvertFromChecked<TOther>(TOther value, out Amount result)
+        => throw new NotSupportedException();
+
+    [ExcludeFromCodeCoverage(Justification = "Protected member of the contract that is not supported.")]
+    static bool INumberBase<Amount>.TryConvertFromSaturating<TOther>(TOther value, out Amount result)
+        => throw new NotSupportedException();
+
+    [ExcludeFromCodeCoverage(Justification = "Protected member of the contract that is not supported.")]
+    static bool INumberBase<Amount>.TryConvertFromTruncating<TOther>(TOther value, out Amount result)
+        => throw new NotSupportedException();
+
+    [ExcludeFromCodeCoverage(Justification = "Protected member of the contract that is not supported.")]
+    static bool INumberBase<Amount>.TryConvertToChecked<TOther>(Amount value, out TOther result)
+        => throw new NotSupportedException();
+
+    [ExcludeFromCodeCoverage(Justification = "Protected member of the contract that is not supported.")]
+    static bool INumberBase<Amount>.TryConvertToSaturating<TOther>(Amount value, out TOther result)
+        => throw new NotSupportedException();
+
+    [ExcludeFromCodeCoverage(Justification = "Protected member of the contract that is not supported.")]
+    static bool INumberBase<Amount>.TryConvertToTruncating<TOther>(Amount value, out TOther result)
+        => throw new NotSupportedException();
 }
 #endif

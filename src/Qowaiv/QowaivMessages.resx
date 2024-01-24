@@ -204,4 +204,7 @@
   <data name="Unparsable" xml:space="preserve">
     <value>Could not parse '{0}' for {1}.</value>
   </data>
+  <data name="ArgumentOutOfRange_NumberStyleNotSupported" xml:space="preserve">
+    <value>The number style '{0}' is not supported.</value>
+  </data>
 </root>

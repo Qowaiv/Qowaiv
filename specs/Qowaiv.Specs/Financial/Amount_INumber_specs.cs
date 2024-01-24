@@ -164,6 +164,20 @@ public class Amount_as_INumber
         Number.MinMagnitudeNumber((Amount)x_, (Amount)y_).Should().Be((Amount)Number.MinMagnitudeNumber(x_, y_));
     }
 
+    [Test]
+    public void multiplication_is_not_supported()
+    {
+        var multiply = () => Number.Multiply(6.Amount(), 7.Amount());
+        multiply.Should().Throw<NotSupportedException>(because: "Multiplying amounts makes no sense.");
+    }
+
+    [Test]
+    public void division_is_not_supported()
+    {
+        var multiply = () => Number.Divide(6.Amount(), 7.Amount());
+        multiply.Should().Throw<NotSupportedException>(because: "Devision amounts makes no sense (when the result is amount).");
+    }
+
     private const double Min = -79228162514264337593543950335d;
     private const double Max = +79228162514264337593543950335d;
     private const int Count = 8;

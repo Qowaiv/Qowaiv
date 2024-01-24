@@ -130,7 +130,7 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// enough to have a <see cref="string"/> representation of -0.
     /// </remarks>
     [Pure]
-    public double ToJson() => m_Value == decimal.Zero ? 0 : (double)m_Value;
+    public double ToJson() => (double)m_Value;
 
     /// <summary>Returns a <see cref="string"/> that represents the current Amount for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -207,14 +207,69 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     public static bool TryParse(string? s, IFormatProvider? provider, out Amount result)
+        => TryParse(s, NumberStyles.Currency, provider, out result);
+
+    /// <summary>Converts the string to an amount.
+    /// A return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="s">
+    /// A string containing an Amount to convert.
+    /// </param>
+    /// <param name="style">
+    /// The preferred number style.
+    /// </param>
+    /// <param name="provider">
+    /// The specified format provider.
+    /// </param>
+    /// <param name="result">
+    /// The result of the parsing.
+    /// </param>
+    /// <returns>
+    /// True if the string was converted successfully, otherwise false.
+    /// </returns>
+    public static bool TryParse(string? s, NumberStyles style, IFormatProvider? provider, out Amount result)
     {
-        result = default;
-        if (Money.TryParse(s, provider, out Money money))
+        Guard(style);
+
+        return style.HasFlag(NumberStyles.AllowCurrencySymbol)
+            ? ParseMoney(s, provider, out result)
+            : ParseAmount(s, style,provider, out result);
+
+        static bool ParseMoney(string? s, IFormatProvider? provider, out Amount result)
         {
-            result = (Amount)(decimal)money;
-            return true;
+            if (Money.TryParse(s, provider, out Money money))
+            {
+                result = money.Amount;
+                return true;
+            }
+            else
+            {
+                result = default;
+                return false;
+            }
         }
-        return false;
+        static bool ParseAmount(string? s, NumberStyles style, IFormatProvider? provider, out Amount result)
+        {
+            if (decimal.TryParse(s, style, provider, out decimal amount))
+            {
+                result = new(amount);
+                return true;
+            }
+            else
+            {
+                result = default;
+                return false;
+            }
+        }
+
+        static void Guard(NumberStyles style)
+        {
+            var extra = style & ~NumberStyles.Currency;
+            if (extra != NumberStyles.None)
+            {
+                throw new ArgumentOutOfRangeException(nameof(style), string.Format(QowaivMessages.ArgumentOutOfRange_NumberStyleNotSupported, extra));
+            }
+        }
     }
 
     /// <summary>Creates an Amount from a Decimal.</summary >

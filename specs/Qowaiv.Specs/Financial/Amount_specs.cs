@@ -32,6 +32,22 @@ public class Min_and_max
         => Amount.Max(7.Amount(), 17.Amount(), -48.Amount()).Should().Be(17.Amount());
 }
 
+public class Can_not_be_parsed
+{
+    [TestCase(NumberStyles.Number)]
+    [TestCase(NumberStyles.Integer)]
+    public void strings_with_currency_if_style_does_not_allow_currency_sign(NumberStyles style)
+        => Amount.TryParse("42 EUR", style, CultureInfo.InvariantCulture, out _)
+            .Should().BeFalse();
+
+    [TestCase(NumberStyles.HexNumber)]
+    [TestCase(NumberStyles.AllowExponent)]
+    public void using_a_number_style_other_then_Curency(NumberStyles style)
+         => style.Invoking(s => Amount.TryParse("4.50", s, CultureInfo.InvariantCulture, out _))
+             .Should().Throw<ArgumentOutOfRangeException>()
+             .WithMessage("The number style '*' is not supported.*");
+}
+
 public class Is_comparable
 {
     [Test]

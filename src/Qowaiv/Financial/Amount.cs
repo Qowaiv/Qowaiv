@@ -168,16 +168,16 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     public static Amount FromJson(long json) => new(json);
 
     /// <summary>Casts a decimal to an amount.</summary>
-    public static explicit operator Amount(decimal val) => Create(val);
+    public static explicit operator Amount(decimal val) => new(val);
 
     /// <summary>Casts a decimal to an amount.</summary>
     public static explicit operator Amount(double val) => Create(val);
 
     /// <summary>Casts a long to an amount.</summary>
-    public static explicit operator Amount(long val) => Create((decimal)val);
+    public static explicit operator Amount(long val) => new(val);
 
     /// <summary>Casts a int to an amount.</summary>
-    public static explicit operator Amount(int val) => Create((decimal)val);
+    public static explicit operator Amount(int val) => new(val);
 
     /// <summary>Casts an Amount to a decimal.</summary>
     public static explicit operator decimal(Amount val) => val.m_Value;
@@ -233,7 +233,7 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
 
         return style.HasFlag(NumberStyles.AllowCurrencySymbol)
             ? ParseMoney(s, provider, out result)
-            : ParseAmount(s, style,provider, out result);
+            : ParseAmount(s, style, provider, out result);
 
         static bool ParseMoney(string? s, IFormatProvider? provider, out Amount result)
         {

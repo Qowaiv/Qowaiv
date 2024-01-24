@@ -1,4 +1,4 @@
-﻿namespace SVO_contract_specs;
+namespace SVO_contract_specs;
 
 public class Implements : SingleValueObjectSpecs
 {

@@ -125,7 +125,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
     /// The percentage to add.
     /// </param>
     [Pure]
-    public StreamSize Add(Percentage p) => m_Value.Add(p);
+    public StreamSize Add(Percentage p) => new(m_Value + p);
 
     /// <summary>Subtracts a stream size from the current stream size.</summary>
     /// <param name="streamSize">
@@ -139,7 +139,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
     /// The percentage to add.
     /// </param>
     [Pure]
-    public StreamSize Subtract(Percentage p) => m_Value.Subtract(p);
+    public StreamSize Subtract(Percentage p) => new(m_Value - p);
 
     /// <summary>Multiplies the stream size with a specified factor.</summary>
     /// <param name="factor">

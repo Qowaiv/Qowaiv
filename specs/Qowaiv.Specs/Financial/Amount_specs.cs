@@ -136,7 +136,39 @@ public class Supports_type_conversion
                 .And.Should().BeOfType(exceptionType);
     }
 
-    public class Has_operators
+    public class Casts_explicit
+    {
+        public class From
+        {
+            [Test]
+            public void Int32() => ((Amount)42).Should().Be(42.Amount());
+            
+            [Test]
+            public void Int64() => ((Amount)42L).Should().Be(42.Amount());
+
+            [Test]
+            public void Decimal() => ((Amount)42.0m).Should().Be(42.Amount());
+
+            [Test]
+            public void Double() => ((Amount)42.0).Should().Be(42.Amount());
+        }
+
+        public class To
+        {
+            [Test]
+            public void Int32() => ((int)42.Amount()).Should().Be(42);
+
+            [Test]
+            public void Int64() => ((long)42.Amount()).Should().Be(42L);
+
+            [Test]
+            public void Decimal() => ((decimal)42.Amount()).Should().Be(42m);
+
+            [Test]
+            public void Double() => ((double)42.Amount()).Should().Be(42.0);
+        }
+
+        public class Has_operators
     {
         [Test]
         public void to_divide_amount_by_amount_as_decimal()

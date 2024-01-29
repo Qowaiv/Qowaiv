@@ -62,9 +62,10 @@ public class README_md
                     @enum = info.Enum?.ToArray(),
                 });
 #if DEBUG
-        Console.WriteLine(JsonConvert.SerializeObject(all, Formatting.Indented, new JsonSerializerSettings
+        Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(all, new System.Text.Json.JsonSerializerOptions
         {
-            NullValueHandling = NullValueHandling.Ignore,
+            WriteIndented = true,
+            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
         }));
 #endif
         all.Should().NotBeEmpty();

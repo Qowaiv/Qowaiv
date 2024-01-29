@@ -1,5 +1,4 @@
-﻿
-namespace Qowaiv.Financial;
+﻿namespace Qowaiv.Financial;
 
 public readonly partial struct Amount
 {
@@ -266,10 +265,10 @@ public readonly partial struct Amount : INumber<Amount>
         => TryParse(s.ToString(), NumberStyles.Currency, provider, out result);
 
     static Amount IMultiplyOperators<Amount, Amount, Amount>.operator *(Amount left, Amount right)
-        => throw new NotSupportedException();
+        => new(left.m_Value * right.m_Value);
 
     static Amount IDivisionOperators<Amount, Amount, Amount>.operator /(Amount left, Amount right)
-        => throw new NotSupportedException();
+        => new(left.m_Value / right.m_Value);
 
     [ExcludeFromCodeCoverage(Justification = "Protected member of the contract that is not supported.")]
     static bool INumberBase<Amount>.TryConvertFromChecked<TOther>(TOther value, out Amount result)

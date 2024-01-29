@@ -199,4 +199,25 @@ public static class Clock
             SetLocalContextTimeZone(_zone);
         }
     }
+
+#if NET8_0_OR_GREATER
+
+    /// <summary>
+    /// Returns a <see cref="System.TimeProvider"/> implementation depending on
+    /// <see cref="Clock"/>.
+    /// </summary>
+    public static readonly TimeProvider TimeProvider = new ClockProvider();
+
+    private sealed class ClockProvider : TimeProvider
+    {
+        public override TimeZoneInfo LocalTimeZone => TimeZone;
+
+        [Pure]
+        public override DateTimeOffset GetUtcNow() => new(UtcNow(), TimeSpan.Zero);
+
+        [Pure]
+        public override long GetTimestamp() => UtcNow().Ticks;
+    }
+
+#endif
 }

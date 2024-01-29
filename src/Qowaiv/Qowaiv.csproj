@@ -8,6 +8,8 @@
     <Version>6.6.0</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
+v6.6.1
+- Add missing IParsable interface for Id.
 v6.6.0
 - Add former countries. #357
 - Update display names countries (EN, DE, NL). #356

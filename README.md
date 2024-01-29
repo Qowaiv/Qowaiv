@@ -1128,3 +1128,9 @@ public void TestSomething()
     }
 }
 ```
+
+### TimeProvider
+Since .NET 8.0, Microsoft provides a `TimeProvider`. To benefit from both the
+`Qowaiv.Clock` mechanism, and this time provider, the `Clock.TimeProvider`,
+a singleton which provides access to `Clock.UtcNow()` and `Clock.TimeZone` is
+added.

@@ -60,7 +60,7 @@ public class README_md
                     @enum = info.Enum?.ToArray(),
                 });
 #if DEBUG
-        Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(all, new System.Text.Json.JsonSerializerOptions()
+        Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(all, new System.Text.Json.JsonSerializerOptions
         {
             WriteIndented = true,
             DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,

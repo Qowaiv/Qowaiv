@@ -13,25 +13,9 @@ namespace Qowaiv.Financial;
 #endif
 public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatable<Amount>, IComparable, IComparable<Amount>
 #if NET8_0_OR_GREATER
-    , IIncrementOperators<Amount>, IDecrementOperators<Amount>
-    , IUnaryPlusOperators<Amount, Amount>, IUnaryNegationOperators<Amount, Amount>
-    , IAdditionOperators<Amount, Amount, Amount>, ISubtractionOperators<Amount, Amount, Amount>
-    , IAdditionOperators<Amount, Percentage, Amount>, ISubtractionOperators<Amount, Percentage, Amount>
-    , IMultiplyOperators<Amount, Percentage, Amount>, IDivisionOperators<Amount, Percentage, Amount>
-    , IMultiplyOperators<Amount, decimal, Amount>, IDivisionOperators<Amount, decimal, Amount>
-    , IMultiplyOperators<Amount, double, Amount>, IDivisionOperators<Amount, double, Amount>
-    , IMultiplyOperators<Amount, long, Amount>, IDivisionOperators<Amount, long, Amount>
-    , IMultiplyOperators<Amount, int, Amount>, IDivisionOperators<Amount, int, Amount>
-    , IMultiplyOperators<Amount, short, Amount>, IDivisionOperators<Amount, short, Amount>
-    , IMultiplyOperators<Amount, ulong, Amount>, IDivisionOperators<Amount, ulong, Amount>
-    , IMultiplyOperators<Amount, uint, Amount>, IDivisionOperators<Amount, uint, Amount>
-    , IMultiplyOperators<Amount, ushort, Amount>, IDivisionOperators<Amount, ushort, Amount>
     , IMinMaxValue<Amount>
 #endif
 {
-    /// <summary>Represents an Amount of zero.</summary>
-    public static Amount Zero => default;
-
     /// <summary>Represents the smallest possible value of the amount.</summary>
     public static Amount MinValue => new(decimal.MinValue);
 
@@ -44,216 +28,7 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
 
     /// <summary>Returns the absolute value of the amount.</summary>
     [Pure]
-    public Amount Abs() => (Amount)m_Value.Abs();
-
-    /// <summary>Pluses the amount.</summary>
-    [Pure]
-    internal Amount Plus() => (Amount)(+m_Value);
-
-    /// <summary>Negates the amount.</summary>
-    [Pure]
-    internal Amount Negate() => (Amount)(-m_Value);
-
-    /// <summary>Increases the amount with one.</summary>
-    [Pure]
-    internal Amount Increment() => new(m_Value + 1);
-
-    /// <summary>Decreases the amount with one.</summary>
-    [Pure]
-    internal Amount Decrement() => new(m_Value - 1);
-
-    /// <summary>Decreases the amount with one.</summary>
-    /// <summary>Adds a amount to the current amount.</summary>
-    /// <param name="amount">
-    /// The amount to add.
-    /// </param>
-    [Pure]
-    public Amount Add(Amount amount) => new(m_Value + amount.m_Value);
-
-    /// <summary>Adds the specified percentage to the amount.</summary>
-    /// <param name="p">
-    /// The percentage to add.
-    /// </param>
-    [Pure]
-    public Amount Add(Percentage p) => new(m_Value + p);
-
-    /// <summary>Subtracts a amount from the current amount.</summary>
-    /// <param name="amount">
-    /// The amount to Subtract.
-    /// </param>
-    [Pure]
-    public Amount Subtract(Amount amount) => (Amount)(m_Value - amount.m_Value);
-
-    /// <summary>AddsSubtract the specified percentage from the amount.</summary>
-    /// <param name="p">
-    /// The percentage to add.
-    /// </param>
-    [Pure]
-    public Amount Subtract(Percentage p) => new(m_Value - p);
-
-    /// <summary>Gets a percentage of the current amount.</summary>
-    /// <param name="p">
-    /// The percentage to get.
-    /// </param>
-    [Pure]
-    public Amount Multiply(Percentage p) => (Amount)(m_Value * p);
-
-    /// <summary>Multiplies the amount with a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Amount Multiply(decimal factor) => (Amount)(m_Value * factor);
-
-    /// <summary>Multiplies the amount with a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Amount Multiply(double factor) => Multiply((decimal)factor);
-
-    /// <summary>Multiplies the amount with a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Amount Multiply(float factor) => Multiply((decimal)factor);
-
-    /// <summary>Multiplies the amount with a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Amount Multiply(long factor) => Multiply((decimal)factor);
-
-    /// <summary>Multiplies the amount with a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Amount Multiply(int factor) => Multiply((decimal)factor);
-
-    /// <summary>Multiplies the amount with a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Amount Multiply(short factor) => Multiply((decimal)factor);
-
-    /// <summary>Multiplies the amount with a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [CLSCompliant(false)]
-    [Pure]
-    public Amount Multiply(ulong factor) => Multiply((decimal)factor);
-
-    /// <summary>Multiplies the amount with a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [CLSCompliant(false)]
-    [Pure]
-    public Amount Multiply(uint factor) => Multiply((decimal)factor);
-
-    /// <summary>Multiplies the amount with a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [CLSCompliant(false)]
-    [Pure]
-    public Amount Multiply(ushort factor) => Multiply((decimal)factor);
-
-    /// <summary>Divides the amount by a specified amount.</summary>
-    /// <param name="p">
-    /// The amount to divides to..
-    /// </param>
-    [Pure]
-    public Amount Divide(Percentage p) => (Amount)(m_Value / p);
-
-    /// <summary>Divides the amount by a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Amount Divide(decimal factor) => (Amount)(m_Value / factor);
-
-    /// <summary>Divides the amount by a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Amount Divide(double factor) => Divide((decimal)factor);
-
-    /// <summary>Divides the amount by a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Amount Divide(float factor) => Divide((decimal)factor);
-
-    /// <summary>Divides the amount by a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Amount Divide(long factor) => Divide((decimal)factor);
-
-    /// <summary>Divides the amount by a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Amount Divide(int factor) => Divide((decimal)factor);
-
-    /// <summary>Divides the amount by a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Amount Divide(short factor) => Divide((decimal)factor);
-
-    /// <summary>Divides the amount by a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [CLSCompliant(false)]
-    [Pure]
-    public Amount Divide(ulong factor) => Divide((decimal)factor);
-
-    /// <summary>Divides the amount by a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [CLSCompliant(false)]
-    [Pure]
-    public Amount Divide(uint factor) => Divide((decimal)factor);
-
-    /// <summary>Divides the amount by a specified factor.
-    /// </summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [CLSCompliant(false)]
-    [Pure]
-    public Amount Divide(ushort factor) => Divide((decimal)factor);
+    public Amount Abs() => new(m_Value.Abs());
 
     /// <summary>Rounds the amount value to zero decimal places.</summary>
     [Pure]
@@ -345,99 +120,6 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     [Pure]
     public static Amount Min(params Amount[] values) => Guard.NotNull(values).Min();
 
-    /// <summary>Unitary plusses the amount.</summary>
-    public static Amount operator +(Amount amount) => amount.Plus();
-
-    /// <summary>Negates the amount.</summary>
-    public static Amount operator -(Amount amount) => amount.Negate();
-
-    /// <summary>Increases the amount with one.</summary>
-    public static Amount operator ++(Amount amount) => amount.Increment();
-
-    /// <summary>Decreases the amount with one.</summary>
-    public static Amount operator --(Amount amount) => amount.Decrement();
-
-    /// <summary>Adds the left and the right amount.</summary>
-    public static Amount operator +(Amount l, Amount r) => l.Add(r);
-
-    /// <summary>Adds the percentage to the amount.</summary>
-    public static Amount operator +(Amount amount, Percentage p) => amount.Add(p);
-
-    /// <summary>Subtracts the right from the left amount.</summary>
-    public static Amount operator -(Amount l, Amount r) => l.Subtract(r);
-
-    /// <summary>Subtracts the percentage from the amount.</summary>
-    public static Amount operator -(Amount amount, Percentage p) => amount.Subtract(p);
-
-    /// <summary>Multiplies the amount with the factor.</summary>
-    public static Amount operator *(Amount amount, Percentage factor) => amount.Multiply(factor);
-
-    /// <summary>Multiplies the amount with the factor.</summary>
-    public static Amount operator *(Amount amount, decimal factor) => amount.Multiply(factor);
-
-    /// <summary>Multiplies the amount with the factor.</summary>
-    public static Amount operator *(Amount amount, double factor) => amount.Multiply(factor);
-
-    /// <summary>Multiplies the amount with the factor.</summary>
-    public static Amount operator *(Amount amount, float factor) => amount.Multiply(factor);
-
-    /// <summary>Multiplies the amount with the factor.</summary>
-    public static Amount operator *(Amount amount, long factor) => amount.Multiply(factor);
-
-    /// <summary>Multiplies the amount with the factor.</summary>
-    public static Amount operator *(Amount amount, int factor) => amount.Multiply(factor);
-
-    /// <summary>Multiplies the amount with the factor.</summary>
-    public static Amount operator *(Amount amount, short factor) => amount.Multiply(factor);
-
-    /// <summary>Multiplies the amount with the factor.</summary>
-    [CLSCompliant(false)]
-    public static Amount operator *(Amount amount, ulong factor) => amount.Multiply(factor);
-
-    /// <summary>Multiplies the amount with the factor.</summary>
-    [CLSCompliant(false)]
-    public static Amount operator *(Amount amount, uint factor) => amount.Multiply(factor);
-
-    /// <summary>Multiplies the amount with the factor.</summary>
-    [CLSCompliant(false)]
-    public static Amount operator *(Amount amount, ushort factor) => amount.Multiply(factor);
-
-    /// <summary>Divides the amount by an other amount.</summary>
-    public static decimal operator /(Amount numerator, Amount denominator) => numerator.m_Value / denominator.m_Value;
-
-    /// <summary>Divides the amount by the percentage.</summary>
-    public static Amount operator /(Amount amount, Percentage p) => amount.Divide(p);
-
-    /// <summary>Divides the amount by the factor.</summary>
-    public static Amount operator /(Amount amount, decimal factor) => amount.Divide(factor);
-
-    /// <summary>Divides the amount by the factor.</summary>
-    public static Amount operator /(Amount amount, double factor) => amount.Divide(factor);
-
-    /// <summary>Divides the amount by the factor.</summary>
-    public static Amount operator /(Amount amount, float factor) => amount.Divide(factor);
-
-    /// <summary>Divides the amount by the factor.</summary>
-    public static Amount operator /(Amount amount, long factor) => amount.Divide(factor);
-
-    /// <summary>Divides the amount by the factor.</summary>
-    public static Amount operator /(Amount amount, int factor) => amount.Divide(factor);
-
-    /// <summary>Divides the amount by the factor.</summary>
-    public static Amount operator /(Amount amount, short factor) => amount.Divide(factor);
-
-    /// <summary>Divides the amount by the factor.</summary>
-    [CLSCompliant(false)]
-    public static Amount operator /(Amount amount, ulong factor) => amount.Divide(factor);
-
-    /// <summary>Divides the amount by the factor.</summary>
-    [CLSCompliant(false)]
-    public static Amount operator /(Amount amount, uint factor) => amount.Divide(factor);
-
-    /// <summary>Divides the amount by the factor.</summary>
-    [CLSCompliant(false)]
-    public static Amount operator /(Amount amount, ushort factor) => amount.Divide(factor);
-
     /// <summary>Serializes the amount to a JSON node.</summary>
     /// <returns>
     /// The serialized JSON number.
@@ -448,7 +130,7 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// enough to have a <see cref="string"/> representation of -0.
     /// </remarks>
     [Pure]
-    public double ToJson() => m_Value == decimal.Zero ? 0 : (double)m_Value;
+    public double ToJson() => (double)m_Value;
 
     /// <summary>Returns a <see cref="string"/> that represents the current Amount for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -486,16 +168,16 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     public static Amount FromJson(long json) => new(json);
 
     /// <summary>Casts a decimal to an amount.</summary>
-    public static explicit operator Amount(decimal val) => Create(val);
+    public static explicit operator Amount(decimal val) => new(val);
 
     /// <summary>Casts a decimal to an amount.</summary>
     public static explicit operator Amount(double val) => Create(val);
 
     /// <summary>Casts a long to an amount.</summary>
-    public static explicit operator Amount(long val) => Create((decimal)val);
+    public static explicit operator Amount(long val) => new(val);
 
     /// <summary>Casts a int to an amount.</summary>
-    public static explicit operator Amount(int val) => Create((decimal)val);
+    public static explicit operator Amount(int val) => new(val);
 
     /// <summary>Casts an Amount to a decimal.</summary>
     public static explicit operator decimal(Amount val) => val.m_Value;
@@ -525,14 +207,69 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     public static bool TryParse(string? s, IFormatProvider? provider, out Amount result)
+        => TryParse(s, NumberStyles.Currency, provider, out result);
+
+    /// <summary>Converts the string to an amount.
+    /// A return value indicates whether the conversion succeeded.
+    /// </summary>
+    /// <param name="s">
+    /// A string containing an Amount to convert.
+    /// </param>
+    /// <param name="style">
+    /// The preferred number style.
+    /// </param>
+    /// <param name="provider">
+    /// The specified format provider.
+    /// </param>
+    /// <param name="result">
+    /// The result of the parsing.
+    /// </param>
+    /// <returns>
+    /// True if the string was converted successfully, otherwise false.
+    /// </returns>
+    public static bool TryParse(string? s, NumberStyles style, IFormatProvider? provider, out Amount result)
     {
-        result = default;
-        if (Money.TryParse(s, provider, out Money money))
+        Guard(style);
+
+        return style.HasFlag(NumberStyles.AllowCurrencySymbol)
+            ? ParseMoney(s, provider, out result)
+            : ParseAmount(s, style, provider, out result);
+
+        static bool ParseMoney(string? s, IFormatProvider? provider, out Amount result)
         {
-            result = (Amount)(decimal)money;
-            return true;
+            if (Money.TryParse(s, provider, out Money money))
+            {
+                result = money.Amount;
+                return true;
+            }
+            else
+            {
+                result = default;
+                return false;
+            }
         }
-        return false;
+        static bool ParseAmount(string? s, NumberStyles style, IFormatProvider? provider, out Amount result)
+        {
+            if (decimal.TryParse(s, style, provider, out decimal amount))
+            {
+                result = new(amount);
+                return true;
+            }
+            else
+            {
+                result = default;
+                return false;
+            }
+        }
+
+        static void Guard(NumberStyles style)
+        {
+            var extra = style & ~NumberStyles.Currency;
+            if (extra != NumberStyles.None)
+            {
+                throw new ArgumentOutOfRangeException(nameof(style), string.Format(QowaivMessages.ArgumentOutOfRange_NumberStyleNotSupported, extra));
+            }
+        }
     }
 
     /// <summary>Creates an Amount from a Decimal.</summary >

@@ -1,6 +1,4 @@
-﻿using OpenApiDataTypeAttribute = Qowaiv.OpenApi.OpenApiDataTypeAttribute;
-
-namespace Open_API_specs;
+﻿namespace Open_API_specs;
 
 public class Open_API_data_type
 {

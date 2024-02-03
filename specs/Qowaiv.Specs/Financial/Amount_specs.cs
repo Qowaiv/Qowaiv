@@ -24,12 +24,28 @@ public class Min_and_max
     [TestCase(17, 17)]
     [TestCase(17, 16)]
     [TestCase(16, 17)]
-    public void Max_of_two_returns_minimum(Amount a1, Amount a2) 
+    public void Max_of_two_returns_minimum(Amount a1, Amount a2)
         => Amount.Max(a1, a2).Should().Be(17.Amount());
 
     [Test]
     public void Max_of_collection_returns_maximum()
         => Amount.Max(7.Amount(), 17.Amount(), -48.Amount()).Should().Be(17.Amount());
+}
+
+public class Can_not_be_parsed
+{
+    [TestCase(NumberStyles.Number)]
+    [TestCase(NumberStyles.Integer)]
+    public void strings_with_currency_if_style_does_not_allow_currency_sign(NumberStyles style)
+        => Amount.TryParse("42 EUR", style, CultureInfo.InvariantCulture, out _)
+            .Should().BeFalse();
+
+    [TestCase(NumberStyles.HexNumber)]
+    [TestCase(NumberStyles.AllowExponent)]
+    public void using_a_number_style_other_then_Curency(NumberStyles style)
+         => style.Invoking(s => Amount.TryParse("4.50", s, CultureInfo.InvariantCulture, out _))
+             .Should().Throw<ArgumentOutOfRangeException>()
+             .WithMessage("The number style '*' is not supported.*");
 }
 
 public class Is_comparable
@@ -134,6 +150,38 @@ public class Supports_type_conversion
                 .And.Should().BeOfType(exceptionType);
     }
 
+    public class Casts_explicit
+    {
+        public class From
+        {
+            [Test]
+            public void Int32() => ((Amount)42).Should().Be(42.Amount());
+
+            [Test]
+            public void Int64() => ((Amount)42L).Should().Be(42.Amount());
+
+            [Test]
+            public void Decimal() => ((Amount)42.0m).Should().Be(42.Amount());
+
+            [Test]
+            public void Double() => ((Amount)42.0).Should().Be(42.Amount());
+        }
+
+        public class To
+        {
+            [Test]
+            public void Int32() => ((int)42.Amount()).Should().Be(42);
+
+            [Test]
+            public void Int64() => ((long)42.Amount()).Should().Be(42L);
+
+            [Test]
+            public void Decimal() => ((decimal)42.Amount()).Should().Be(42m);
+
+            [Test]
+            public void Double() => ((double)42.Amount()).Should().Be(42.0);
+        }
+    }
     public class Has_operators
     {
         [Test]

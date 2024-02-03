@@ -116,6 +116,16 @@ public static class Number
     public static bool IsImaginaryNumber<T>(T number) where T : INumberBase<T>
         => T.IsImaginaryNumber(number);
 
+    /// <summary>Defines a mechanism for computing the product of two values.</summary>
+    [Pure]
+    public static T Multiply<T>(T x, T y) where T : IMultiplyOperators<T, T, T>
+        => x * y;
+
+    /// <summary>Divides two values together to compute their quotient.</summary>
+    [Pure]
+    public static T Divide<T>(T x, T y) where T : IDivisionOperators<T, T, T>
+        => x / y;
+
     /// <inheritdoc cref="INumberBase{T}.MaxMagnitude(T, T)" />
     [Pure]
     public static T MaxMagnitude<T>(T x, T y) where T : INumberBase<T>

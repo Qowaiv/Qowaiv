@@ -25,7 +25,6 @@ public class Numeric_SVOs_Define
         methods.Should().ContainSingle();
     }
 
-    [TestCase(typeof(Amount))]
     [TestCase(typeof(Money))]
     [TestCase(typeof(StreamSize))]
     public void Plus(Type svo)
@@ -52,7 +51,6 @@ public class Numeric_SVOs_Define
         operators.Should().ContainSingle();
     }
 
-    [TestCase(typeof(Amount))]
     [TestCase(typeof(Money))]
     [TestCase(typeof(StreamSize))]
     public void Negate(Type svo)
@@ -79,7 +77,6 @@ public class Numeric_SVOs_Define
         operators.Should().ContainSingle();
     }
 
-    [TestCase(typeof(Amount))]
     [TestCase(typeof(Money))]
     [TestCase(typeof(StreamSize))]
     public void Increment(Type svo)
@@ -106,7 +103,6 @@ public class Numeric_SVOs_Define
         operators.Should().ContainSingle();
     }
 
-    [TestCase(typeof(Amount))]
     [TestCase(typeof(Money))]
     [TestCase(typeof(StreamSize))]
     public void Decrement(Type svo)
@@ -133,7 +129,6 @@ public class Numeric_SVOs_Define
         operators.Should().ContainSingle();
     }
 
-    [TestCase(typeof(Amount), typeof(Amount), typeof(Percentage))]
     [TestCase(typeof(Money), typeof(Money), typeof(Percentage))]
     [TestCase(typeof(StreamSize), typeof(StreamSize), typeof(Percentage))]
     public void Add(Type svo, params Type[] expected)
@@ -162,7 +157,6 @@ public class Numeric_SVOs_Define
         operators.Should().BeEquivalentTo(expected);
     }
 
-    [TestCase(typeof(Amount), typeof(Amount), typeof(Percentage))]
     [TestCase(typeof(Money), typeof(Money), typeof(Percentage))]
     [TestCase(typeof(StreamSize), typeof(StreamSize), typeof(Percentage))]
     public void Subtract(Type svo, params Type[] expected)
@@ -191,7 +185,6 @@ public class Numeric_SVOs_Define
         operators.Should().BeEquivalentTo(expected);
     }
 
-    [TestCase(typeof(Amount), typeof(short), typeof(int), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(float), typeof(double), typeof(decimal), typeof(Percentage))]
     [TestCase(typeof(Money), typeof(short), typeof(int), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(float), typeof(double), typeof(decimal), typeof(Percentage))]
     [TestCase(typeof(StreamSize), typeof(short), typeof(int), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(float), typeof(double), typeof(decimal), typeof(Percentage))]
     public void Multiply(Type svo, params Type[] expected)
@@ -220,7 +213,6 @@ public class Numeric_SVOs_Define
         operators.Should().BeEquivalentTo(expected);
     }
 
-    [TestCase(typeof(Amount), typeof(short), typeof(int), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(float), typeof(double), typeof(decimal), typeof(Percentage))]
     [TestCase(typeof(Money), typeof(short), typeof(int), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(float), typeof(double), typeof(decimal), typeof(Percentage))]
     [TestCase(typeof(StreamSize), typeof(short), typeof(int), typeof(long), typeof(ushort), typeof(uint), typeof(ulong), typeof(float), typeof(double), typeof(decimal), typeof(Percentage))]
     public void Divide(Type svo, params Type[] expected)
@@ -249,7 +241,6 @@ public class Numeric_SVOs_Define
         operators.Should().BeEquivalentTo(expected);
     }
 
-    [TestCase(typeof(Amount))]
     [TestCase(typeof(Money))]
     [TestCase(typeof(Percentage))]
     public void Round(Type svo)
@@ -265,7 +256,6 @@ public class Numeric_SVOs_Define
         methods.Should().ContainSingle();
     }
 
-    [TestCase(typeof(Amount))]
     [TestCase(typeof(Money))]
     [TestCase(typeof(Percentage))]
     public void Round_Decimals(Type svo)
@@ -281,7 +271,6 @@ public class Numeric_SVOs_Define
         methods.Should().ContainSingle();
     }
 
-    [TestCase(typeof(Amount))]
     [TestCase(typeof(Money))]
     [TestCase(typeof(Percentage))]
     public void Round_Decimals_DecimalRounding(Type svo)

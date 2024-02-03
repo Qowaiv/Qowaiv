@@ -264,6 +264,18 @@ public readonly partial struct Percentage : INumber<Percentage>
 
     /// <inheritdoc />
     [Pure]
+    static bool INumberBase<Percentage>.IsNaN(Percentage value) => false;
+
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Percentage>.IsSubnormal(Percentage value) => false;
+
+    /// <inheritdoc />
+    [Pure]
+    static bool INumberBase<Percentage>.IsRealNumber(Percentage value) => true;
+
+    /// <inheritdoc />
+    [Pure]
     static bool INumberBase<Percentage>.IsInteger(Percentage value) => value.m_Value.Abs() % 0.01m == 0;
 
     /// <inheritdoc />
@@ -276,20 +288,7 @@ public readonly partial struct Percentage : INumber<Percentage>
 
     /// <inheritdoc />
     [Pure]
-    static bool INumberBase<Percentage>.IsNaN(Percentage value) => false;
-
-    /// <inheritdoc />
-    [Pure]
     static bool INumberBase<Percentage>.IsNormal(Percentage value) => value.m_Value != 0;
-
-    /// <inheritdoc />
-    [Pure]
-    static bool INumberBase<Percentage>.IsSubnormal(Percentage value) => false;
-
-    /// <inheritdoc />
-    [Pure]
-    static bool INumberBase<Percentage>.IsRealNumber(Percentage value) => true;
-
 
     /// <inheritdoc />
     [Pure]

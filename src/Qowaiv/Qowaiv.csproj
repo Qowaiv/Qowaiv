@@ -15,6 +15,7 @@ v6.6.1
     <PackageReleaseNotes>
 v7.0.0
 - Implement INumber&lt;Percentage&gt;. #367
+- Implement INumber&lt;Amount&gt;. #370
 - Introduction of the IEmpty&lt;TSelf&gt; interface. #364
 - Improve parsing of UUID's.
 - Improve ToString of UUID's. #365

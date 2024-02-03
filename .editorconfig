@@ -51,6 +51,7 @@ dotnet_diagnostic.NUnit2005.severity = suggestion # Consider using Assert.That(a
 dotnet_diagnostic.NUnit2021.severity = warning    # Incompatible types for EqualTo constraint
 
 dotnet_diagnostic.QW0001.severity = none    # Use a testable Time Provider
+dotnet_diagnostic.QW0010.severity = none    # Use DateOnly instead of Date
 dotnet_diagnostic.QW0003.severity = warning # Decorate Pure functions
 
 dotnet_diagnostic.SA1001.severity = none # Commas should not be preceded by whitespace

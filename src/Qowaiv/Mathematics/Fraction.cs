@@ -15,15 +15,6 @@ namespace Qowaiv.Mathematics;
 [StructLayout(LayoutKind.Sequential)]
 public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquatable<Fraction>, IComparable, IComparable<Fraction>
 #if NET8_0_OR_GREATER
-    , IAdditionOperators<Fraction, Fraction, Fraction>, ISubtractionOperators<Fraction, Fraction, Fraction>
-    , IUnaryPlusOperators<Fraction, Fraction>, IUnaryNegationOperators<Fraction, Fraction>
-    , IAdditionOperators<Fraction, long, Fraction>, ISubtractionOperators<Fraction, long, Fraction>
-    , IAdditionOperators<Fraction, int, Fraction>, ISubtractionOperators<Fraction, int, Fraction>
-    , IMultiplyOperators<Fraction, long, Fraction>, IDivisionOperators<Fraction, long, Fraction>
-    , IMultiplyOperators<Fraction, int, Fraction>, IDivisionOperators<Fraction, int, Fraction>
-    , IMinMaxValue<Fraction>
-#endif
-#if NET8_0_OR_GREATER
 #else
 , ISerializable
 #endif
@@ -160,14 +151,6 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     [Pure]
     public Fraction Abs() => New(numerator.Abs(), denominator);
 
-    /// <summary>Pluses the fraction.</summary>
-    [Pure]
-    internal Fraction Plus() => New(+numerator, denominator);
-
-    /// <summary>Negates the fraction.</summary>
-    [Pure]
-    internal Fraction Negate() => New(-numerator, denominator);
-
     /// <summary>Gets the inverse of a faction.</summary>
     /// <exception cref="DivideByZeroException">
     /// When the fraction is <see cref="Zero"/>.
@@ -177,230 +160,6 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
         => IsZero()
         ? throw new DivideByZeroException()
         : New(Sign() * denominator, numerator.Abs());
-
-    /// <summary>Multiplies the fraction with the factor.</summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Fraction Multiply(Fraction factor)
-    {
-        if (factor.IsZero()) return Zero;
-        else
-        {
-            var sign = Sign() * factor.Sign();
-            long n0 = numerator.Abs();
-            long d0 = denominator;
-            long n1 = factor.numerator.Abs();
-            long d1 = factor.denominator;
-
-            Reduce(ref n0, ref d1);
-            Reduce(ref n1, ref d0);
-
-            return checked(New(sign * n0 * n1, d0 * d1));
-        }
-    }
-
-    /// <summary>Multiplies the fraction with the factor.</summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Fraction Multiply(long factor) => Multiply(Create(factor));
-
-    /// <summary>Multiplies the fraction with the factor.</summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Fraction Multiply(int factor) => Multiply((long)factor);
-
-    /// <summary>Divide the fraction by a specified factor.</summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Fraction Divide(Fraction factor) => Multiply(factor.Inverse());
-
-    /// <summary>Divide the fraction by a specified factor.</summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Fraction Divide(long factor)
-        => factor == 0
-        ? throw new DivideByZeroException()
-        : Multiply(New(1, factor));
-
-    /// <summary>Divide the fraction by a specified factor.</summary>
-    /// <param name="factor">
-    /// The factor to multiply with.
-    /// </param>
-    [Pure]
-    public Fraction Divide(int factor) => Divide((long)factor);
-
-    /// <summary>Adds a fraction to the current fraction.</summary>
-    /// <param name="fraction">
-    /// The fraction to add.
-    /// </param>
-    [Pure]
-    public Fraction Add(Fraction fraction)
-    {
-        if (IsZero()) return fraction;
-        else if (fraction.IsZero()) return this;
-        else
-        {
-            long n0 = numerator.Abs();
-            long d0 = denominator;
-            long n1 = fraction.numerator.Abs();
-            long d1 = fraction.denominator;
-
-            Reduce(ref n0, ref d1);
-            Reduce(ref n1, ref d0);
-
-            checked
-            {
-                long n;
-                long d;
-
-                // Same denominator.
-                if (d0 == d1)
-                {
-                    d = d0;
-                }
-
-                // d0 is a multiple of d1
-                else if (d0 > d1 && d0 % d1 == 0)
-                {
-                    d = d0;
-                    n1 *= d0 / d1;
-                }
-
-                // d1 is a multiple of d0
-                else if (d1 % d0 == 0)
-                {
-                    d = d1;
-                    n0 *= d1 / d0;
-                }
-                else
-                {
-                    d = d0 * d1;
-                    n0 *= d1;
-                    n1 *= d0;
-                }
-
-                n = (n0 * Sign()) + (n1 * fraction.Sign());
-
-                var sign = n.Sign();
-                n = n.Abs();
-
-                Reduce(ref n, ref d);
-
-                return New(n * sign, d);
-            }
-        }
-    }
-
-    /// <summary>Adds a number to the current fraction.</summary>
-    /// <param name="number">
-    /// The number to add.
-    /// </param>
-    [Pure]
-    public Fraction Add(long number) => Add(Create(number));
-
-    /// <summary>Adds a number to the current fraction.</summary>
-    /// <param name="number">
-    /// The number to add.
-    /// </param>
-    [Pure]
-    public Fraction Add(int number) => Add((long)number);
-
-    /// <summary>Subtracts a fraction from the current fraction.</summary>
-    /// <param name="fraction">
-    /// The fraction to subtract.
-    /// </param>
-    [Pure]
-    public Fraction Subtract(Fraction fraction) => Add(fraction.Negate());
-
-    /// <summary>Subtracts a number from the current fraction.</summary>
-    /// <param name="number">
-    /// The number to subtract.
-    /// </param>
-    [Pure]
-    public Fraction Subtract(long number) => Subtract(Create(number));
-
-    /// <summary>Subtracts a number from the current fraction.</summary>
-    /// <param name="number">
-    /// The number to subtract.
-    /// </param>
-    [Pure]
-    public Fraction Subtract(int number) => Subtract((long)number);
-
-    /// <summary>Pluses the fraction.</summary>
-    public static Fraction operator +(Fraction fraction) => fraction.Plus();
-
-    /// <summary>Negates the fraction.</summary>
-    public static Fraction operator -(Fraction fraction) => fraction.Negate();
-
-    /// <summary>Multiplies the left and the right fractions.</summary>
-    public static Fraction operator *(Fraction left, Fraction right) => left.Multiply(right);
-
-    /// <summary>Multiplies the left and the right fractions.</summary>
-    public static Fraction operator *(Fraction left, long right) => left.Multiply(right);
-
-    /// <summary>Multiplies the left and the right fractions.</summary>
-    public static Fraction operator *(Fraction left, int right) => left.Multiply(right);
-
-    /// <summary>Multiplies the left and the right fraction.</summary>
-    public static Fraction operator *(long left, Fraction right) => right.Multiply(left);
-
-    /// <summary>Multiplies the left and the right fraction.</summary>
-    public static Fraction operator *(int left, Fraction right) => right.Multiply(left);
-
-    /// <summary>Divide the fraction by a specified factor.</summary>
-    public static Fraction operator /(Fraction fraction, Fraction factor) => fraction.Divide(factor);
-
-    /// <summary>Divide the fraction by a specified factor.</summary>
-    public static Fraction operator /(Fraction fraction, long factor) => fraction.Divide(factor);
-
-    /// <summary>Divide the fraction by a specified factor.</summary>
-    public static Fraction operator /(Fraction fraction, int factor) => fraction.Divide(factor);
-
-    /// <summary>Divide the fraction by a specified factor.</summary>
-    public static Fraction operator /(long number, Fraction factor) => Create(number).Divide(factor);
-
-    /// <summary>Divide the fraction by a specified factor.</summary>
-    public static Fraction operator /(int number, Fraction factor) => Create(number).Divide(factor);
-
-    /// <summary>Adds the left and the right fraction.</summary>
-    public static Fraction operator +(Fraction left, Fraction right) => left.Add(right);
-
-    /// <summary>Adds the left and the right fraction.</summary>
-    public static Fraction operator +(Fraction left, long right) => left.Add(right);
-
-    /// <summary>Adds the left and the right fraction.</summary>
-    public static Fraction operator +(Fraction left, int right) => left.Add(right);
-
-    /// <summary>Adds the left and the right fraction.</summary>
-    public static Fraction operator +(long left, Fraction right) => right.Add(left);
-
-    /// <summary>Adds the left and the right fraction.</summary>
-    public static Fraction operator +(int left, Fraction right) => right.Add(left);
-
-    /// <summary>Subtracts the left from the right fraction.</summary>
-    public static Fraction operator -(Fraction left, Fraction right) => left.Subtract(right);
-
-    /// <summary>Subtracts the left from the right fraction.</summary>
-    public static Fraction operator -(Fraction left, long right) => left.Subtract(right);
-
-    /// <summary>Subtracts the left from the right fraction.</summary>
-    public static Fraction operator -(Fraction left, int right) => left.Subtract(right);
-
-    /// <summary>Subtracts the left from the right fraction.</summary>
-    public static Fraction operator -(long left, Fraction right) => Create(left).Subtract(right);
-
-    /// <summary>Subtracts the left from the right fraction.</summary>
-    public static Fraction operator -(int left, Fraction right) => Create(left).Subtract(right);
 
     /// <summary>Returns a formatted <see cref = "string "/> that represents the fraction.</summary>
     /// <param name = "format">
@@ -422,7 +181,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
         }
 
         // if no fraction bar character has been provided, format as a decimal.
-        else if (!format.WithDefault().Any(ch => Formatting.IsFractionBar(ch)))
+        else if (!format.WithDefault().Any(Formatting.IsFractionBar))
         {
             return ToDecimal().ToString(format, formatProvider);
         }
@@ -509,7 +268,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
 
     /// <inheritdoc/>
     [Pure]
-    public override int GetHashCode() => unchecked(denominator * 113 * numerator).GetHashCode();
+    public override int GetHashCode() => Hash.Code(denominator).And(numerator);
 
     /// <inheritdoc/>
     [Pure]
@@ -714,8 +473,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     [Pure]
     private static long Gcd(long a, long b)
     {
-        var even = 1;
-        long remainder;
+        long even = 1;
 
         // while both are even.
         while ((a & 1) == 0 && (b & 1) == 0)
@@ -726,9 +484,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
         }
         while (b != 0)
         {
-            remainder = a % b;
-            a = b;
-            b = remainder;
+            (a, b) = (b, a % b);
         }
         return a * even;
     }

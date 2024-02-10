@@ -26,7 +26,7 @@ namespace Qowaiv;
 #endif
 public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
 {
-    private static readonly UuidBehavior behavior = UuidBehavior.Instance;
+    private static readonly UuidBehavior behavior = new();
 
     /// <summary>Gets the size of the <see cref="byte"/> array representation.</summary>
     public static readonly int ArraySize = 16;

@@ -13,7 +13,7 @@ public class FractionTypeConverter : SvoTypeConverter<Fraction>
         || base.CanConvertFrom(context, sourceType);
 
     [Pure]
-    private static bool IsNumber(Type sourceType) 
+    private static bool IsNumber(Type sourceType)
         => sourceType == typeof(decimal)
         || sourceType == typeof(int)
         || sourceType == typeof(long)

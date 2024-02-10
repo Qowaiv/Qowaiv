@@ -4,8 +4,6 @@
 [OpenApiDataType(description: "UUID based identifier", example: "lmZO_haEOTCwGsCcbIZFFg", type: "string", format: "uuid-base64", nullable: true)]
 public class UuidBehavior : GuidBehavior
 {
-    internal static new readonly UuidBehavior Instance = new();
-
     /// <summary>Initializes a new instance of the <see cref="UuidBehavior"/> class.</summary>
     protected UuidBehavior() { }
 

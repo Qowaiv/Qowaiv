@@ -37,18 +37,12 @@ public class Int32IdBehavior : IdentifierBehavior
 
     /// <inheritdoc/>
     [Pure]
-    public override object? FromJson(long obj)
+    public override object? FromJson(long obj) => obj switch
     {
-        if (obj == 0)
-        {
-            return null;
-        }
-        else if (obj > 0 && obj <= int.MaxValue)
-        {
-            return (int)obj;
-        }
-        else throw Exceptions.InvalidCast(typeof(int), typeof(Id<>).MakeGenericType(GetType()));
-    }
+        0 => null,
+        _ when obj > 0 && obj <= int.MaxValue && TryCreate(obj, out var created) && created is int id => id,
+        _ => throw Unparsable.ForValue(obj.ToString(), "Not a valid identifier.", typeof(Id<>).MakeGenericType(GetType())),
+    };
 
     /// <inheritdoc/>
     [Pure]

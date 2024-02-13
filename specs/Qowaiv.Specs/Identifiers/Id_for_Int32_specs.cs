@@ -49,6 +49,37 @@ public class Supports_JSON_serialization
     [TestCase("12345678", 12345678L)]
     public void System_Text_JSON_serialization(Int32Id svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [TestCase(-2)]
+    [TestCase(17)]
+    [TestCase("17")]
+    [TestCase(int.MaxValue + 1L)]
+    public void taking_constrains_into_account(object json)
+    {
+        json.Invoking(JsonTester.Read_System_Text_JSON<Id<ForEven>>)
+            .Should().Throw<System.Text.Json.JsonException>()
+            .WithMessage("Not a valid identifier.");
+    }
+
+    private sealed class ForEven : Int32IdBehavior
+    {
+        public override bool TryCreate(object? obj, out object? id)
+        {
+            if(obj is int even && even % 2 == 0)
+            {
+                id = even;
+                return true;
+            }
+            {
+                id = null;
+                return false;
+            }
+        }
+
+        public override bool TryParse(string? str, out object? id)
+            => TryCreate(int.TryParse(str, out int even) ? even : null, out id);
+    }
+
 #endif
     [TestCase("", "")]
     [TestCase(12345678L, 12345678)]
@@ -60,13 +91,6 @@ public class Supports_JSON_serialization
     [TestCase("12345678", 12345678L)]
     public void convention_based_serialization(Int32Id svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
-
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase(long.MaxValue, typeof(InvalidCastException))]
-    public void throws_for_invalid_json(object json, Type exceptionType)
-        => json.Invoking(JsonTester.Read<Int32Id>)
-            .Should().Throw<Exception>()
-            .Which.Should().BeOfType(exceptionType);
 }
 
 public class Supports_type_conversion

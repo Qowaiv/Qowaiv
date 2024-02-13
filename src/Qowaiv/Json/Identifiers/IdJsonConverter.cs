@@ -48,8 +48,12 @@ public sealed class IdJsonConverter : JsonConverterFactory
             }
             catch (Exception x)
             {
-                if (x is JsonException) throw;
-                else throw new JsonException(x.Message, x);
+                var inner = x;
+                while (inner is TargetInvocationException && inner.InnerException is { })
+                {
+                    inner = inner.InnerException;
+                }
+                throw new JsonException(inner.Message, inner);
             }
         }
 
@@ -77,17 +81,13 @@ public sealed class IdJsonConverter : JsonConverterFactory
             }
         }
 
-#if NET6_0_OR_GREATER
-
         /// <inheritdoc />
-        public override Id<TBehavior> ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+-        public override Id<TBehavior> ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => Id<TBehavior>.FromJson(reader.GetString());
 
         /// <inheritdoc />
         public override void WriteAsPropertyName(Utf8JsonWriter writer, Id<TBehavior> value, JsonSerializerOptions options)
             => writer.WritePropertyName(value.ToJson()?.ToString() ?? string.Empty);
-
-#endif
     }
 
     [Pure]

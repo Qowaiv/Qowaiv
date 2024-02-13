@@ -82,7 +82,7 @@ public sealed class IdJsonConverter : JsonConverterFactory
         }
 
         /// <inheritdoc />
--        public override Id<TBehavior> ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Id<TBehavior> ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => Id<TBehavior>.FromJson(reader.GetString());
 
         /// <inheritdoc />

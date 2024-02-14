@@ -39,12 +39,12 @@ public class Int64IdBehavior : IdentifierBehavior
 
     /// <inheritdoc/>
     [Pure]
-    public sealed override object? FromJson(long obj)
+    public sealed override object? FromJson(long obj) => obj switch
     {
-        if (obj == 0) return null;
-        else if (obj > 0) return obj;
-        else throw Exceptions.InvalidCast(typeof(long), typeof(Id<>).MakeGenericType(GetType()));
-    }
+        0 => null,
+        _ when obj > 0 && TryCreate(obj, out var created) && created is long id => id,
+        _ => throw Unparsable.ForValue(obj.ToString(), "Not a valid identifier.", typeof(Id<>).MakeGenericType(GetType())),
+    };
 
     /// <inheritdoc/>
     [Pure]

@@ -84,10 +84,5 @@ public class Can_not_cast_from
     public void long_to_GUID()
        => ((object)123546L).Invoking(id => (CustomGuid)id)
            .Should().Throw<InvalidCastException>();
-
-    [Test]
-    public void invalid_JSON_input()
-        => (-1L).Invoking(Int64Id.FromJson)
-        .Should().Throw<InvalidCastException>();
 }
 

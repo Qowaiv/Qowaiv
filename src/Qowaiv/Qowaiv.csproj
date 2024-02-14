@@ -29,6 +29,7 @@ v7.0.0
 - Seal all JSON converters. #361 (breaking)
 - Allign Parse and TryParse provider naming with IParsable. #360 (breaking)
 - Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
+- Deserializing ID's from JSON numeric nodes takes constrains into account. #374
 v6.6.0
 - Add former countries. #357
 - Update display names countries (EN, DE, NL). #356

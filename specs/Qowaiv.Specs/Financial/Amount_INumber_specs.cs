@@ -20,21 +20,21 @@ public class Amount_as_INumber
         => Number.Radix<Amount>().Should().Be(10);
 
     [Test]
-    public void Additive_identityIs_1()
+    public void additive_identityIs_1()
     => Number.AdditiveIdentity<Amount>().Should().Be(1.Amount());
 
     [Test]
-    public void Multiplicative_identityis_1()
+    public void multiplicative_identityis_1()
         => Number.MultiplicativeIdentity<Amount>().Should().Be(1.Amount());
 
     [Test]
-    public void Is_canonical_equal_to_decimal([Random(Min, Max, Count)] decimal d)
+    public void is_canonical_equal_to_decimal([Random(Min, Max, Count)] decimal d)
     {
         Number.IsCanonical(d.Amount()).Should().Be(Number.IsCanonical(d));
     }
 
     [Test]
-    public void Abs_equal_to_Amount_Abs([Random(Min, Max, Count)] decimal d)
+    public void abs_equal_to_Amount_Abs([Random(Min, Max, Count)] decimal d)
     {
         Number.Abs(d.Amount()).Should().Be(d.Amount().Abs());
     }
@@ -84,7 +84,7 @@ public class Amount_as_INumber
         => Number.IsImaginaryNumber(d.Amount()).Should().BeFalse();
 
     [Test]
-    public void is_always_finate([Random(Min, Max, Count)] decimal d)
+    public void is_always_finite([Random(Min, Max, Count)] decimal d)
         => Number.IsFinite(d.Amount()).Should().BeTrue();
 
     [Test]
@@ -128,7 +128,7 @@ public class Amount_as_INumber
     }
 
     [Test]
-    public void Is_not_Normal_when_zero()
+    public void is_not_Normal_when_zero()
         => Number.IsNormal(Amount.Zero).Should().BeFalse();
 
     [Test]
@@ -136,13 +136,13 @@ public class Amount_as_INumber
         => Number.IsSubnormal(d.Amount()).Should().BeFalse();
 
     [Test]
-    public void Is_normal_when_not_zero([Random(Min, Max, Count)] decimal d)
+    public void is_normal_when_not_zero([Random(Min, Max, Count)] decimal d)
     {
         Number.IsNormal(d.Amount()).Should().BeTrue();
     }
 
     [Test]
-    public void maxmaginiute_equal_to_decimal([Random(Min, Max, 3)] decimal x, [Random(Min, Max, 3)] decimal y)
+    public void max_magnitude_equal_to_decimal([Random(Min, Max, 3)] decimal x, [Random(Min, Max, 3)] decimal y)
     {
         Number.MaxMagnitude(x.Amount(), y.Amount()).Should().Be(Number.MaxMagnitude(x, y).Amount());
         Number.MaxMagnitudeNumber(x.Amount(), y.Amount()).Should().Be(Number.MaxMagnitudeNumber(x, y).Amount());

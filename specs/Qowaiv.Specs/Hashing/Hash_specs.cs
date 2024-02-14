@@ -69,6 +69,7 @@ public class Get_hash_code
         call.Should().Throw<HashingNotSupported>();
     }
 }
+
 public class Get_hash_code_with_fixed_randomizer
 {
     [Test]
@@ -187,4 +188,17 @@ public class Is_equal_by_value
     [Test]
     public void equal_to_same_value()
         => Svo.Hash.Equals(Hash.Code("QOWAIV")).Should().BeTrue();
+}
+
+public class To_string
+{
+    [Test]
+    public void displays_the_hash()
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            var hash = Hash.Code(12);
+            hash.ToString().Should().Be("12");
+        }
+    }
 }

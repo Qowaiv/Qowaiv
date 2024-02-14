@@ -74,7 +74,7 @@ public class Fraction_as_INumber
         => Number.IsImaginaryNumber(fraction).Should().BeFalse();
 
     [Test]
-    public void is_always_finate([RandomFraction(Count)] Fraction fraction)
+    public void is_always_finite([RandomFraction(Count)] Fraction fraction)
         => Number.IsFinite(fraction).Should().BeTrue();
 
     [Test]
@@ -120,7 +120,7 @@ public class Fraction_as_INumber
         => Number.IsSubnormal(fraction).Should().BeFalse();
 
     [Test]
-    public void maxmaginiute_equal_to_decimal([RandomFraction(3)] Fraction x, [RandomFraction(3)] Fraction y)
+    public void max_magnitude_equal_to_decimal([RandomFraction(3)] Fraction x, [RandomFraction(3)] Fraction y)
     {
         var x_ = (decimal)x.Numerator / x.Denominator;
         var y_ = (decimal)y.Numerator / y.Denominator;

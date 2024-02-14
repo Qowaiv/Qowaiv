@@ -70,6 +70,7 @@ public class Supports_JSON_serialization
                 id = even;
                 return true;
             }
+            else
             {
                 id = null;
                 return false;

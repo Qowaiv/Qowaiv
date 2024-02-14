@@ -86,7 +86,7 @@ public class Percentage_as_INumber
         => Number.IsImaginaryNumber((Percentage)d).Should().BeFalse();
 
     [Test]
-    public void is_always_finate([Random(Min, Max, Count)] double d)
+    public void is_always_finite([Random(Min, Max, Count)] double d)
         => Number.IsFinite((Percentage)d).Should().BeTrue();
 
     [Test]

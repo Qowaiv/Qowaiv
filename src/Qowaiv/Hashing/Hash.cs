@@ -76,15 +76,14 @@ public readonly struct Hash : IEquatable<Hash>
 
     /// <summary>Gets a hash, based on its type.</summary>
     [Pure]
-    private static int HashCode<T>(T obj)
-        => obj switch
-        {
-            null => 0,
-            int int32 => int32,
-            string str => HashCode(str),
-            IEnumerable enumerable => HashCodes(enumerable),
-            _ => obj.GetHashCode(),
-        };
+    private static int HashCode<T>(T obj) => obj switch
+    {
+        null => 0,
+        int int32 => int32,
+        string str => HashCode(str),
+        IEnumerable enumerable => HashCodes(enumerable),
+        _ => obj.GetHashCode(),
+    };
 
     /// <summary>Gets a deterministic hash of a string.</summary>
     [Pure]

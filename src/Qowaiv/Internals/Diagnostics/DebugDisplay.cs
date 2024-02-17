@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Qowaiv.Diagnostics;
+namespace Qowaiv.Internals.Diagnostics;
 
 internal static class DebugDisplay
 {

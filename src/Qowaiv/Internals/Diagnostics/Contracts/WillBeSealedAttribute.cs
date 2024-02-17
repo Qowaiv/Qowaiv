@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Diagnostics.Contracts;
+﻿namespace Qowaiv.Internals.Diagnostics.Contracts;
 
 /// <summary>Indicates the class will be sealed with the next major change.</summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = false)]

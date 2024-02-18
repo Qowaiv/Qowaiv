@@ -39,6 +39,22 @@ changes due to this method call.
 An attribute that inherits from `[Impure]` to indicate that the returned
 instance is equal to self or of the parameters, just to allow a fluent syntax.
 
+## Empty type attributes
+Empty types (classes, enums, interfaces, structs) are generally seen as a bad
+practice, or assumed to be unfinished code. Decorating them with an attribute
+that explains the reason why the type is empty (for test cases for example)
+can help:
+
+* `[EmptyClass(Justification = "")]`
+* `[EmptyEnum(Justification = "")]`
+* `[EmptyInterface(Justification = "")]`
+* `[EmptyStruct(Justification = "")]`
+* `[EmptyTestClass]`
+* `[EmptyTestEnum]`
+* `[EmptyTestInterface]`
+* `[EmptyTestStruct]`
+
+
 ## Inheritable attribute
 The `[Inheritable]` attribute indicates that a class is designed to be
 inheritable although no virtual or protected members have been defined.

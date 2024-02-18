@@ -1,6 +1,6 @@
 ﻿namespace Diagnostics.Contracts.Impure_attribute_specs;
 
-internal class Can_decorate_methods_with
+public class Can_decorate_methods_with
 {
     [Test]
     public void Collection_mutation_attribute()

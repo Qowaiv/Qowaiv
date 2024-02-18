@@ -1,6 +1,31 @@
 # Qowaiv Diagnostics Contracts
 This packages contains attributes to define (expected) behavior on code.
 
+Most likely, you only need this dependency compile time. In that case you
+should add the dependency as follows:
+
+``` XML
+<ItemGroup>
+  <PackageReference
+    Include="Qowaiv.Diagnostics.Contracts"
+    Version="*"
+    PrivateAssets=""all"
+    IncludeAssets="compile" />
+<ItemGroup>
+```
+
+To embed the result of these decorations in the compiled assembly, the `DEFINE`
+constant `CONTRACTS_FULL` has to be set.
+
+``` XML
+<PropertyGroup>
+  <DefineConstants>CONTRACTS_FULL</DefineConstants>
+</PropertyGroup>
+```
+
+If you only use these decorations to enable static code analysis, this constant
+is not needed.
+
 ## Impure attribute
 Opposed to the `[Pure]` attribute, the `[Impure]` attribute indicates that a
 method has side effects. This attribute can help working with static code 

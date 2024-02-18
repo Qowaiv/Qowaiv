@@ -5,4 +5,4 @@
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
 [Conditional("CONTRACTS_FULL")]
-public sealed class FluentSyntaxAttribute : ImpureAttribute { }
+public sealed class FluentSyntaxAttribute(string? justification = null) : ImpureAttribute(justification) { }

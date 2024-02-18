@@ -17,12 +17,12 @@ public class Can_decorate_methods_with
 
 internal class SomeClass
 {
-    [CollectionMutation]
+    [CollectionMutation("It just returns if addition worked.")]
     public bool CollectionMutation(HashSet<SomeClass> set) => set.Add(this);
     
-    [Impure]
+    [Impure("It has side effects.")]
     public static int Impure() => 42;
 
-    [FluentSyntax]
+    [FluentSyntax("We like fluent syntaxes.")]
     public SomeClass FluentSyntax() => this;
 }

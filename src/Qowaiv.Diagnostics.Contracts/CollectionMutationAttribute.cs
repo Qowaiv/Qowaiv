@@ -5,4 +5,4 @@
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
 [Conditional("CONTRACTS_FULL")]
-public sealed class CollectionMutationAttribute : ImpureAttribute { }
+public sealed class CollectionMutationAttribute(string? justification = null) : ImpureAttribute(justification) { }

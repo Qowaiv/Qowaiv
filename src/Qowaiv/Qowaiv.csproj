@@ -144,4 +144,8 @@ v5.1.2
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Qowaiv.Diagnostics.Contracts\Qowaiv.Diagnostics.Contracts.csproj" PrivateAssets="all" IncludeAssets="compiler" />
+  </ItemGroup>
+
 </Project>

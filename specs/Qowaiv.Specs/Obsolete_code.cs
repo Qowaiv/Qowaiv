@@ -1,4 +1,6 @@
-﻿namespace Obsolete_code;
+﻿using Qowaiv.Diagnostics.Contracts;
+
+namespace Obsolete_code;
 
 [Obsolete("Will be dropped when the next major version is released.")]
 public class Will_be_dropped

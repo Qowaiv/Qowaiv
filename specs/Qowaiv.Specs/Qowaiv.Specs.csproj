@@ -5,6 +5,7 @@
   <PropertyGroup>
     <Nullable>enable</Nullable>
     <TargetFrameworks>netcoreapp3.1;net6.0;net8.0</TargetFrameworks>
+    <DefineConstants>CONTRACTS_FULL</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

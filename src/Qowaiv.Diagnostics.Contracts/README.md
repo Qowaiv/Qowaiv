@@ -1,5 +1,5 @@
 # Qowaiv Diagnostics Contracts
-This packages contains attributes to define (expected) behaviour on code.
+This packages contains attributes to define (expected) behavior on code.
 
 ## Impure attribute
 Opposed to the `[Pure]` attribute, the `[Impure]` attribute indicates that a

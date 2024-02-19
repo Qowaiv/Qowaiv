@@ -476,7 +476,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     }
 
     /// <summary>Gets a collection containing the types for the collection.</summary>
-    public ICollection<Type> Types => dict.Keys;
+    public IReadOnlyCollection<Type> Types => dict.Keys;
 
     /// <summary>Returns an enumerator that iterates through the collection.</summary>
     [Pure]

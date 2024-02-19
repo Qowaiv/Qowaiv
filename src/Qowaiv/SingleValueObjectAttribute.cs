@@ -34,5 +34,5 @@ public sealed class SingleValueObjectAttribute : Attribute
     /// <remarks>
     /// Use this if the database type is different from the underlying type.
     /// </remarks>
-    public Type? DatabaseType { get; set; }
+    public Type? DatabaseType { get; init; }
 }

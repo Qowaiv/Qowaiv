@@ -8,7 +8,7 @@ namespace Qowaiv.Threading;
 /// <summary>Represents domain of typed instances that can be used as the
 /// default values based on the current thread.
 /// </summary>
-public class ThreadDomain
+public sealed class ThreadDomain
 {
     /// <summary>Initializes static members of the <see cref="ThreadDomain"/> class.</summary>
     static ThreadDomain()
@@ -68,10 +68,10 @@ public class ThreadDomain
     /// <remarks>
     /// No public accessor.
     /// </remarks>
-    protected ThreadDomain() => Values = [];
+    private ThreadDomain() => Values = [];
 
     /// <summary>The underlying dictionary.</summary>
-    protected Dictionary<Type, object?> Values { get; private set; }
+    private Dictionary<Type, object?> Values { get; set; }
 
     /// <summary>Gets the current value of T.</summary>
     /// <typeparam name="T">

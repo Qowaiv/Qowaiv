@@ -198,7 +198,7 @@ public class To_string
         using (Hash.WithoutRandomizer())
         {
             var hash = Hash.Code(12);
-            hash.ToString().Should().Be("12");
+            hash.ToString().Should().Be("665630175");
         }
     }
 }

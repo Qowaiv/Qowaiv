@@ -12,5 +12,5 @@
 public sealed class EmptyTestClassAttribute : Attribute
 {
     /// <summary>(Optional) justification for having this empty test class.</summary>
-    public string? Justification { get; set; }
+    public string? Justification { get; init; }
 }

@@ -37,7 +37,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     private readonly Dictionary<Type, FormattingArguments> dict = [];
 
     /// <summary>Gets the default format provider of the collection.</summary>
-    public IFormatProvider FormatProvider { get; protected set; }
+    public IFormatProvider FormatProvider { get; }
 
     /// <summary>Formats the object using the formatting arguments from the collection.</summary>
     /// <param name="obj">
@@ -476,7 +476,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     }
 
     /// <summary>Gets a collection containing the types for the collection.</summary>
-    public ICollection<Type> Types => dict.Keys;
+    public IReadOnlyCollection<Type> Types => dict.Keys;
 
     /// <summary>Returns an enumerator that iterates through the collection.</summary>
     [Pure]

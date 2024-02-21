@@ -115,19 +115,19 @@ public class WildcardPattern : ISerializable
     }
 
     /// <summary>The wildcard pattern options.</summary>
-    public WildcardPatternOptions Options { get; private set; }
+    public WildcardPatternOptions Options { get; init; }
 
     /// <summary>The comparison type.</summary>
-    public StringComparison ComparisonType { get; private set; }
+    public StringComparison ComparisonType { get; init; }
 
     /// <summary>The wildcard pattern.</summary>
-    protected string Pattern { get; private set; }
+    protected string Pattern { get; init; }
 
     /// <summary>The wildcard single char.</summary>
-    protected char SingleChar { get; set; }
+    protected char SingleChar { get; init; }
 
     /// <summary>The wildcard multiple chars.</summary>
-    protected char MultipleChars { get; set; }
+    protected char MultipleChars { get; init; }
 
     /// <summary>Returns true if matching is culture independent, otherwise false.</summary>
     /// <remarks>

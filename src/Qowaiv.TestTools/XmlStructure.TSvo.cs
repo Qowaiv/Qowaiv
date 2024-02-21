@@ -7,13 +7,13 @@ public sealed class XmlStructure<TSvo>
     where TSvo : struct
 {
     /// <summary>Gets and sets int property.</summary>
-    public int Id { get; set; } = 17;
+    public int Id { get; init; } = 17;
 
     /// <summary>Gets and sets SVO property.</summary>
-    public TSvo Svo { get; set; }
+    public TSvo Svo { get; init; }
 
     /// <summary>Gets and sets a date (time) property.</summary>
-    public DateTime Date { get; set; } = new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Utc);
+    public DateTime Date { get; init; } = new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Utc);
 
     /// <inheritdoc />
     [Pure]

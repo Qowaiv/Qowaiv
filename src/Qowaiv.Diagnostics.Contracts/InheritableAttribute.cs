@@ -5,6 +5,6 @@
 [Conditional("CONTRACTS_FULL")]
 public class InheritableAttribute(string? justification = null) : Attribute
 {
-    /// <summary>THe justification of this decoration.</summary>
+    /// <summary>The justification of this decoration.</summary>
     public string? Justification { get; init; } = justification;
 }

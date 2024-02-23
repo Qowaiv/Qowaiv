@@ -5,6 +5,6 @@
 [Conditional("CONTRACTS_FULL")]
 public sealed class MutableAttribute(string? justification = null) : Attribute
 {
-    /// <summary>THe justification of this decoration.</summary>
+    /// <summary>The justification of this decoration.</summary>
     public string? Justification { get; init; } = justification;
 }

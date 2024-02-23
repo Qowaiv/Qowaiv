@@ -17,7 +17,7 @@ namespace Qowaiv;
 /// [Test]
 /// public void TestSomething()
 /// {
-///     using(Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local))
+///     using(Clock.SetTimeForCurrentContext(() => new DateTimeOffset(2017, 06, 11, 00, 00, 000, TimeSpan.FromHours(+1))
 ///     {
 ///         // test code.
 ///     }
@@ -47,27 +47,16 @@ public static class Clock
     /// <summary>Gets the time zone of the <see cref="Clock"/>.</summary>
     public static TimeZoneInfo TimeZone => localContextTimeZone.Value ?? globalTimeZone;
 
-    /// <summary>Gets the current <see cref="LocalDateTime"/>.</summary>
-    [Pure]
-    public static LocalDateTime Now() => Now(TimeZone);
-
-    /// <summary>Gets the current <see cref="LocalDateTime"/> for the specified time zone.</summary>
-    /// <param name="timeZone">
-    /// The specified time zone.
-    /// </param>
-    [Pure]
-    public static LocalDateTime Now(TimeZoneInfo timeZone) => TimeZoneInfo.ConvertTimeFromUtc(UtcNow(), Guard.NotNull(timeZone));
-
     /// <summary>Gets the current <see cref="DateTimeOffset"/>.</summary>
     [Pure]
-    public static DateTimeOffset NowWithOffset() => NowWithOffset(TimeZone);
+    public static DateTimeOffset Now() => Now(TimeZone);
 
     /// <summary>Gets the current <see cref="DateTimeOffset"/> for the specified time zone.</summary>
     /// <param name="timeZone">
     /// The specified time zone.
     /// </param>
     [Pure]
-    public static DateTimeOffset NowWithOffset(TimeZoneInfo timeZone)
+    public static DateTimeOffset Now(TimeZoneInfo timeZone)
     {
         Guard.NotNull(timeZone);
         var utcNow = UtcNow();

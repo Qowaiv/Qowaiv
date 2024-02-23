@@ -16,6 +16,9 @@ v6.6.1
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 v7.0.0
+- Clock.Now returns DateTimeOffset. (breaking)
+- Clock.NowWithOffset is dropped. (breaking)
+- Extension methods on DateTimeOffset.
 - Implement INumber&lt;Percentage&gt;. #367
 - Implement INumber&lt;Amount&gt;. #370
 - Introduction of the IEmpty&lt;TSelf&gt; interface. #364

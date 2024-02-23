@@ -5,6 +5,7 @@
   <PropertyGroup>
     <Nullable>enable</Nullable>
     <TargetFrameworks>netcoreapp3.1;net6.0;net8.0</TargetFrameworks>
+    <DefineConstants>CONTRACTS_FULL</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Qowaiv.Diagnostics.Contracts\Qowaiv.Diagnostics.Contracts.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv\Qowaiv.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.Data.SqlClient\Qowaiv.Data.SqlClient.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.TestTools\Qowaiv.TestTools.csproj" />

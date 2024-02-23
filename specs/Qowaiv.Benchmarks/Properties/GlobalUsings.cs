@@ -1,7 +1,7 @@
 ﻿global using BenchmarkDotNet.Attributes;
 global using MathNet.Numerics.Random;
-global using Qowaiv.Diagnostics.Contracts;
 global using Qowaiv.Financial;
+global using Qowaiv.Diagnostics.Contracts;
 global using Qowaiv.Globalization;
 global using Qowaiv.Text;
 global using System;

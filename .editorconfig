@@ -100,6 +100,7 @@ dotnet_diagnostic.SA1515.severity = suggestion # Single-line comment should be p
 
 dotnet_diagnostic.S100.severity = none  # Properties should be named in PascalCase
 dotnet_diagnostic.S101.severity = none  # Types should be named in PascalCase
+dotnet_diagnostic.S1694.severity = none # An abstract class should have both abstract and concrete methods
 dotnet_diagnostic.S2328.severity = none # GetHashCode() should not reference mutable fields
 dotnet_diagnostic.S2178.severity = none # Short-circuit logic should be used in boolean contexts - '&' is used instead of && to accommodate expressions with nullable booleans too.
 dotnet_diagnostic.S3376.severity = none # EventArgs, and Exception type names should end with the type being extended
@@ -122,7 +123,6 @@ dotnet_diagnostic.S1227.severity = warning # break statements should not be used
 dotnet_diagnostic.S1479.severity = warning # Consider reworking this 'switch' to reduce the number of 'case's to at most 30
 dotnet_diagnostic.S1541.severity = warning # Methods and properties should not be too complex
 dotnet_diagnostic.S1858.severity = warning # "ToString()" calls should not be redundant
-dotnet_diagnostic.S1694.severity = warning # An abstract class should have both abstract and concrete methods
 dotnet_diagnostic.S2197.severity = warning # Modulus results should not be checked for direct equa
 dotnet_diagnostic.S2302.severity = warning # "nameof" should be used
 dotnet_diagnostic.S2342.severity = warning # Rename this enumeration to match naming convention

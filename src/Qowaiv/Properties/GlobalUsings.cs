@@ -15,7 +15,9 @@ global using System.Diagnostics.CodeAnalysis;
 global using System.Diagnostics.Contracts;
 global using System.Globalization;
 global using System.Linq;
+#if NET8_0_OR_GREATER
 global using System.Numerics;
+#endif
 global using System.Resources;
 global using System.Runtime.Serialization;
 global using System.Text;

@@ -35,6 +35,7 @@ v7.0.0
 - Allign Parse and TryParse provider naming with IParsable. #360 (breaking)
 - Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
 - Deserializing ID's from JSON numeric nodes takes constrains into account. #374
+- Move Qowaiv.Diagnostics.Contracs to a seperate package. (breaking)
 v6.6.0
 - Add former countries. #357
 - Update display names countries (EN, DE, NL). #356
@@ -146,6 +147,10 @@ v5.1.2
     </EmbeddedResource>
     <EmbeddedResource Update="YesNoLabels.resx">
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Qowaiv.Diagnostics.Contracts\Qowaiv.Diagnostics.Contracts.csproj" PrivateAssets="all" IncludeAssets="compiler" />
   </ItemGroup>
 
 </Project>

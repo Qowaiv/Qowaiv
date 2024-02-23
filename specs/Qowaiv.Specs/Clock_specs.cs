@@ -17,17 +17,17 @@ public class Default_behavior
     {
         using (Clock.SetTimeAndTimeZoneForCurrentContext(() => Svo.DateTime, TestTimeZones.EastAustraliaStandardTime))
         {
-            Clock.Now().Should().Be(new LocalDateTime(2017, 06, 11, 16, 15, 00));
+            Clock.Now().Should().Be(new DateTimeOffset(2017, 06, 11, 16, 15, 00, TimeSpan.FromHours(+10)));
         }
     }
 
     [Test]
-    public void NowWithOffset_equals_UTC_now_with_the_time_zone_offset()
+    public void Now_for_time_zone_equals_UTC_now_with_the_time_zone_offset()
     {
-        using (Clock.SetTimeAndTimeZoneForCurrentContext(() => Svo.DateTime, Svo.TimeZone))
+        using (Clock.SetTimeAndTimeZoneForCurrentContext(() => Svo.DateTime, TestTimeZones.EastAustraliaStandardTime))
         {
-            var date_time_offset = new DateTimeOffset(new DateTime(2017, 06, 11, 16, 15, 0, DateTimeKind.Unspecified), TimeSpan.FromHours(+10));
-            Clock.NowWithOffset().Should().Be(date_time_offset);
+            var now = Clock.Now(TestTimeZones.LeidenTime);
+            now.Should().Be(new DateTimeOffset(2017, 06, 11, 06, 48, 00, TimeSpan.FromMinutes(+33)));
         }
     }
 }

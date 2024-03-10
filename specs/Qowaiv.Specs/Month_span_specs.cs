@@ -92,6 +92,7 @@ public class Can_be_transformed
 
 public class Can_subtract
 {
+    [TestCase("2020-04-30", "1710-02-01", "310Y+2M")]
     [TestCase("2020-04-30", "2020-04-01", 00)]
     [TestCase("2020-04-30", "2020-03-31", 01)]
     [TestCase("2020-01-01", "2019-01-02", 11)]
@@ -102,6 +103,7 @@ public class Can_subtract
         => MonthSpan.Subtract(d1, d2).Should().Be(expected);
 
 #if NET6_0_OR_GREATER
+    [TestCase("2020-04-30", "1710-02-01", "310Y+2M")]
     [TestCase("2020-04-30", "2020-04-01", 00)]
     [TestCase("2020-04-30", "2020-03-31", 01)]
     [TestCase("2020-01-01", "2019-01-02", 11)]

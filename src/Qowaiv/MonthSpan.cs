@@ -332,13 +332,13 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
 
         if (negative)
         {
-            max = d2;
-            min = d1;
+            (min, max) = (max, min);
         }
 
-        var test = min;
+        var years = Math.Max(0, max.Year - min.Year - 1);
+        var months = years * 12;
 
-        var months = 0;
+        var test = min.AddYears(years);
 
         while (test < max)
         {

@@ -15,7 +15,7 @@ public class To_Numeral
     [TestCase(1000, "duizend")]
     [TestCase(2017, "tweeduizend zeventien")]
     [TestCase(long.MinValue, "min negen triljoen tweehonderd drieëntwintig biljard driehonderd tweeënzeventig biljoen zesendertig miljard achthonderd vierenvijftig miljoen zevenhonderd vijfenzeventigduizend achthonderd acht")]
-    public void Dutch(long number, string words) => number.ToNumeral(TestCultures.Nl_NL).Should().Be(words);
+    public void Dutch(long number, string words) => number.ToNumeral(TestCultures.nl_NL).Should().Be(words);
 
     [TestCase(-1, "minus one")]
     [TestCase(0, "zero")]
@@ -30,7 +30,7 @@ public class To_Numeral
     [TestCase(999000, "nine hundred and ninety-nine thousand")]
     [TestCase(2000407123, "two billion four hundred seven thousand one hundred twenty-three")]
     [TestCase(long.MinValue, "minus nine quintillion two hundred twenty-three quadrillion three hundred seventy-two trillion thirty-six billion eight hundred fifty-four million seven hundred seventy-five thousand eight hundred eight")]
-    public void British_English(long number, string words) => number.ToNumeral(TestCultures.En_GB).Should().Be(words);
+    public void British_English(long number, string words) => number.ToNumeral(TestCultures.en_GB).Should().Be(words);
 
     [TestCase(-1, "minus one")]
     [TestCase(0, "zero")]
@@ -45,5 +45,5 @@ public class To_Numeral
     [TestCase(999000, "nine hundred ninety-nine thousand")]
     [TestCase(2000407123, "two billion four hundred seven thousand one hundred twenty-three")]
     [TestCase(long.MinValue, "minus nine quintillion two hundred twenty-three quadrillion three hundred seventy-two trillion thirty-six billion eight hundred fifty-four million seven hundred seventy-five thousand eight hundred eight")]
-    public void American_English(long number, string words) => number.ToNumeral(TestCultures.En_US).Should().Be(words);
+    public void American_English(long number, string words) => number.ToNumeral(TestCultures.en_US).Should().Be(words);
 }

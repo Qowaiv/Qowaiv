@@ -11,11 +11,11 @@ jobs:
           java-version: 1.17
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Setup .NET Core 3.1
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Setup .NET core versions
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: | 
+          dotnet-version: |
             3.1.x
             6.0.x
             8.0.x
@@ -40,14 +40,32 @@ jobs:
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
-      - name: Test & Analyze
+      - name: Start SonarCloud scanner
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
-        run:
+        run: |
+          .\.sonar\scanner\dotnet-sonarscanner begin `
+          /k:"Qowaiv_Qowaiv" `
+          /o:"qowaiv" `
+          /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
+          /d:sonar.host.url="https://sonarcloud.io" `
+          /d:sonar.cs.opencover.reportsPaths="**/coverage.**.opencover.xml" `
+          /d:sonar.cs.vstest.reportsPaths="**/*.trx"
+      - name: Test
+        shell: powershell
+        run: |
           dotnet test specs/Qowaiv.Specs --configuration Release `
           --logger trx `
           /p:CollectCoverage=true `
           /p:ThresholdType=branch `
           /p:CoverletOutputFormat=opencover
+      - name: Stop SonarCloud scanner
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        shell: powershell
+        run: |
+          .\.sonar\scanner\dotnet-sonarscanner end `
+          /d:sonar.token="${{ secrets.SONAR_TOKEN }}"

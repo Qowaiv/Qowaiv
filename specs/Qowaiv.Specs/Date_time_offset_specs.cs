@@ -25,8 +25,8 @@ public class With_local
     [Test]
     public void represents_a_local_date_time()
     {
-        11.June(2017).At(06, 15).WithOffset(TimeSpan.FromHours(+2)).ToLocal()
-            .Should().Be(new LocalDateTime(2017, 06, 11, 06, 15));
+        var date = new DateTimeOffset(year: 2017, month: 06, day: 11, hour: 06, minute: 15, second: 00, TimeSpan.FromHours(+2)); 
+        date.ToLocal().Should().Be(new LocalDateTime(2017, 06, 11, 06, 15));
     }
 }
 

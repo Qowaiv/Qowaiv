@@ -1,9 +1,5 @@
 name: Code coverage
 on:
-  push:
-    branches:
-      - master
-      - improve-pipeline # temporary, remove before merge
   workflow_run:
     workflows: ['Build']
     types:

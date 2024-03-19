@@ -1,5 +1,9 @@
 name: 'Test Report'
-on: [push]
+on:
+  workflow_run:
+    workflows: ['Build']
+    types:
+      - completed
 jobs:
   report:
     runs-on: ubuntu-latest

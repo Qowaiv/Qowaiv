@@ -73,3 +73,14 @@ jobs:
         with:
           name: test-results
           path: '**/test-results.trx'
+  report:
+    runs-on: ubuntu-latest
+    needs: build
+    if: ${{ success() || failure() }}
+    steps:
+      - uses: dorny/test-reporter@v1
+        with:
+          artifact: test-results
+          name: Unit test results
+          path: '**/*.trx'
+          reporter: dotnet-trx

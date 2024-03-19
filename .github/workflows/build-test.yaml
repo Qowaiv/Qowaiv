@@ -39,7 +39,7 @@ jobs:
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
         run: |
-          mkdir ./.sonar/scanner
+          mkdir -p ./.sonar/scanner
           dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
       - name: Start SonarCloud scanner
         env:

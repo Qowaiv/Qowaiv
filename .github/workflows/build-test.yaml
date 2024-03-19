@@ -44,7 +44,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run:
+        run: |
           ./.sonar/scanner/dotnet-sonarscanner begin \
           /k:"Qowaiv_Qowaiv" \
           /o:"qowaiv" \
@@ -53,7 +53,7 @@ jobs:
           /d:sonar.cs.opencover.reportsPaths="**/coverage.**.opencover.xml" \
           /d:sonar.cs.vstest.reportsPaths="**/*.trx"
       - name: Test
-        run:
+        run: |
           dotnet test specs/Qowaiv.Specs --configuration Release \
           --logger trx \
           /p:CollectCoverage=true \
@@ -64,6 +64,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run:
+        run: |
           .\.sonar\scanner\dotnet-sonarscanner end \
           /d:sonar.token="${{ secrets.SONAR_TOKEN }}"

@@ -9,7 +9,7 @@
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 v7.0.0
-- Drop email address collection. EmailAddressCollection will be removed: #382 (breaking)
+- Drop email address collection. #382 (breaking)
 - Clock.Now returns DateTimeOffset. (breaking)
 - Clock.NowWithOffset is dropped. (breaking)
 - Extension methods on DateTimeOffset.

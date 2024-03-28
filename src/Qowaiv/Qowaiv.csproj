@@ -16,6 +16,7 @@ v6.6.1
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 v7.0.0
+- Drop email address collection. #382 (breaking)
 - Clock.Now returns DateTimeOffset. (breaking)
 - Clock.NowWithOffset is dropped. (breaking)
 - Extension methods on DateTimeOffset.
@@ -41,6 +42,8 @@ v7.0.0
 - Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
 - Deserializing ID's from JSON numeric nodes takes constrains into account. #374
 - Move Qowaiv.Diagnostics.Contracs to a seperate package. (breaking)
+v6.6.1
+- Add missing IParsable interface for Id. #372
 v6.6.0
 - Add former countries. #357
 - Update display names countries (EN, DE, NL). #356

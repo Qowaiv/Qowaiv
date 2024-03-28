@@ -32,9 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Qowaiv.Diagnostics.Contracts\Qowaiv.Diagnostics.Contracts.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv\Qowaiv.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.Data.SqlClient\Qowaiv.Data.SqlClient.csproj" />
+    <ProjectReference Include="..\..\src\Qowaiv.Diagnostics.Contracts\Qowaiv.Diagnostics.Contracts.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.TestTools\Qowaiv.TestTools.csproj" />
   </ItemGroup>
 

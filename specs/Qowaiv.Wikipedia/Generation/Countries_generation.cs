@@ -1,7 +1,4 @@
-﻿#if NET8_0_OR_GREATER
-#if DEBUG
-
-using Qowaiv.TestTools.Generation;
+﻿using Qowaiv.TestTools.Generation;
 using Qowaiv.TestTools.Resx;
 using Qowaiv.TestTools.Wikipedia;
 
@@ -255,6 +252,3 @@ public class Resource_files
           .Should().NotThrow();
     }
 }
-
-#endif
-#endif

@@ -46,9 +46,13 @@ dotnet_diagnostic.CA2254.severity = warning # Template should be a static expres
 dotnet_diagnostic.CS8763.severity = warning # A method marked [DoesNotReturn] should not return.
 dotnet_diagnostic.CS8770.severity = warning # Method lacks [DoesNotReturn] annotation to match implemented or overridden member.
 
+dotnet_diagnostic.FAA0004.severity = error  # Replace NUnit assertion with Fluent Assertions equivalent
+
 dotnet_diagnostic.NUnit1001.severity = none       # The individual arguments provided by a TestCaseAttribute must match the type of the corresponding parameter of the method
 dotnet_diagnostic.NUnit2005.severity = suggestion # Consider using Assert.That(actual, Is.EqualTo(expected)) instead of Assert.AreEqual(expected, actual)
 dotnet_diagnostic.NUnit2021.severity = warning    # Incompatible types for EqualTo constraint
+
+
 
 dotnet_diagnostic.QW0001.severity = none    # Use a testable Time Provider
 dotnet_diagnostic.QW0010.severity = none    # Use DateOnly instead of Date

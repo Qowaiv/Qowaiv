@@ -269,8 +269,8 @@ public class Is_Open_API_data_type
 {
     [Test]
     public void with_info()
-        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(StreamSize))
-        .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+        => OpenApiDataType.FromType(typeof(StreamSize))
+        .Should().Be(new OpenApiDataType(
             dataType: typeof(StreamSize),
             description: "Stream size notation (in byte).",
             example: 1024,

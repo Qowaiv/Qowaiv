@@ -118,17 +118,16 @@ public class Supports_JSON_serialization
     [TestCase("Invalid input")]
     [TestCase("2017-06-11")]
     public void FromJson_Invalid_Throws(object json)
-    {
-        Assert.Catch<FormatException>(() => JsonTester.Read<InternetMediaType>(json));
-    }
+        => json.Invoking(JsonTester.Read<InternetMediaType>)
+            .Should().Throw<FormatException>();
 }
 
 public class Is_Open_API_data_type
 {
     [Test]
     public void with_info()
-        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(InternetMediaType))
-        .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+        => OpenApiDataType.FromType(typeof(InternetMediaType))
+        .Should().Be(new OpenApiDataType(
             dataType: typeof(InternetMediaType),
             description: "Media type notation as defined by RFC 6838.",
             example: "text/html",

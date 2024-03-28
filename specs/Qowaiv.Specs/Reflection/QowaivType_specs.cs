@@ -7,19 +7,20 @@ public class NullOrDefault
 {
     [Test]
     public void Is_true_for_null()
-        => Assert.That(QowaivType.IsNullOrDefaultValue(null), Is.True);
+        => QowaivType.IsNullOrDefaultValue(null).Should().BeTrue();
 
     [Test]
     public void Is_true_for_default_primitive()
-        => Assert.That(QowaivType.IsNullOrDefaultValue(0), Is.True);
+        => QowaivType.IsNullOrDefaultValue(0).Should().BeTrue();
 
     [Test]
     public void Is_false_for_object()
-        => Assert.That(QowaivType.IsNullOrDefaultValue(new object()), Is.False);
+        => QowaivType.IsNullOrDefaultValue(new object()).Should().BeFalse();
 
     [Test]
     public void Is_false_for_non_default_primitive()
-        => Assert.That(QowaivType.IsNullOrDefaultValue(17), Is.False);
+
+        => QowaivType.IsNullOrDefaultValue(17).Should().BeFalse();
 }
 
 public class IsNullable
@@ -27,11 +28,11 @@ public class IsNullable
     [TestCase(typeof(string))]
     [TestCase(typeof(int))]
     public void False_for_not_nullable(Type type)
-        => Assert.That(QowaivType.IsNullable(type), Is.False);
+        => QowaivType.IsNullable(type).Should().BeFalse();
 
     [Test]
     public void True_for_nullable()
-        => Assert.That(QowaivType.IsNullable(typeof(int?)), Is.True);
+        => QowaivType.IsNullable(typeof(int?)).Should().BeTrue();
 }
 
 public class NotNullableType
@@ -39,11 +40,11 @@ public class NotNullableType
     [TestCase(typeof(string))]
     [TestCase(typeof(int))]
     public void Returns_type_for_non_nullable(Type type)
-        => Assert.That(QowaivType.GetNotNullableType(type), Is.EqualTo(type));
+        => QowaivType.GetNotNullableType(type).Should().Be(type);
 
     [Test]
     public void Returns_underlying_type_for_nullable()
-        => Assert.That(QowaivType.GetNotNullableType(typeof(int?)), Is.EqualTo(typeof(int)));
+        => QowaivType.GetNotNullableType(typeof(int?)).Should().Be(typeof(int));
 }
 
 public class IsNumeric
@@ -60,7 +61,7 @@ public class IsNumeric
     [TestCase(typeof(double))]
     [TestCase(typeof(decimal))]
     public void Is_true_for_primitive_numerics(Type type)
-        => Assert.That(QowaivType.IsNumeric(type), Is.True);
+        => QowaivType.IsNumeric(type).Should().BeTrue();
 
     [TestCase(typeof(object))]
     [TestCase(typeof(string))]
@@ -70,7 +71,7 @@ public class IsNumeric
     [TestCase(typeof(Amount))]
     [TestCase(typeof(BigInteger))]
     public void Is_false_for_all_other_types(Type type)
-        => Assert.That(QowaivType.IsNumeric(type), Is.False);
+        => QowaivType.IsNumeric(type).Should().BeFalse();
 }
 public class IsDate
 {
@@ -80,7 +81,7 @@ public class IsDate
     [TestCase(typeof(Date))]
     [TestCase(typeof(WeekDate))]
     public void Is_true_for_DateTime_and_Qowaiv_DateTypes(Type type)
-        => Assert.That(QowaivType.IsDate(type), Is.True);
+        => QowaivType.IsDate(type).Should().BeTrue();
 
     [TestCase(typeof(object))]
     [TestCase(typeof(string))]
@@ -90,5 +91,5 @@ public class IsDate
     [TestCase(typeof(Amount))]
     [TestCase(typeof(BigInteger))]
     public void Is_false_for_all_other_types(Type type)
-        => Assert.That(QowaivType.IsDate(type), Is.False);
+        => QowaivType.IsDate(type).Should().BeFalse();
 }

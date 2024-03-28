@@ -234,8 +234,8 @@ public class Is_Open_API_data_type
 {
     [Test]
     public void with_info()
-       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Date))
-       .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+       => OpenApiDataType.FromType(typeof(Date))
+       .Should().Be(new OpenApiDataType(
            dataType: typeof(Date),
            description: "Full-date notation as defined by RFC 3339, section 5.6.",
            example: "2017-06-10",

@@ -38,8 +38,8 @@ v6.0.0
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Qowaiv\Qowaiv.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.Diagnostics.Contracts\Qowaiv.Diagnostics.Contracts.csproj" PrivateAssets="all" IncludeAssets="compiler" />
+    <ProjectReference Include="..\Qowaiv\Qowaiv.csproj" />
   </ItemGroup>
 
 </Project>

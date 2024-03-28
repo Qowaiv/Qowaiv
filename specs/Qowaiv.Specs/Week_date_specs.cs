@@ -180,8 +180,8 @@ public class Is_Open_API_data_type
 {
     [Test]
     public void with_info()
-       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(WeekDate))
-       .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+       => OpenApiDataType.FromType(typeof(WeekDate))
+       .Should().Be(new OpenApiDataType(
            dataType: typeof(WeekDate),
            description: "Full-date notation as defined by ISO 8601.",
            example: "1997-W14-6",

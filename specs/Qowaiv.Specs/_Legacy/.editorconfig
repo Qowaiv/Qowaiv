@@ -1,0 +1,3 @@
+# Static coce analysis
+[*]
+dotnet_diagnostic.FAA0004.severity = suggestion # Replace NUnit assertion with Fluent Assertions equivalent

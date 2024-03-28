@@ -156,8 +156,8 @@ public class Is_Open_API_data_type
 {
     [Test]
     public void with_info()
-       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(HouseNumber))
-       .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+       => OpenApiDataType.FromType(typeof(HouseNumber))
+       .Should().Be(new OpenApiDataType(
            dataType: typeof(HouseNumber),
            description: "House number notation.",
            example: "13",

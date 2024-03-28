@@ -19,6 +19,7 @@ public class NullOrDefault
 
     [Test]
     public void Is_false_for_non_default_primitive()
+
         => Assert.That(QowaivType.IsNullOrDefaultValue(17), Is.False);
 }
 
@@ -39,7 +40,9 @@ public class NotNullableType
     [TestCase(typeof(string))]
     [TestCase(typeof(int))]
     public void Returns_type_for_non_nullable(Type type)
+#pragma warning disable FAA0004 // Replace NUnit assertion with Fluent Assertions equivalent
         => Assert.That(QowaivType.GetNotNullableType(type), Is.EqualTo(type));
+#pragma warning restore FAA0004 // Replace NUnit assertion with Fluent Assertions equivalent
 
     [Test]
     public void Returns_underlying_type_for_nullable()

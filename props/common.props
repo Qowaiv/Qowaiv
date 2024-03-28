@@ -23,7 +23,19 @@
       Value Objects that can be used in a wide variety of modeling scenarios, both
       inside and outside a Domain-driven context.
     </Description>
-    <Authors>Ad van der Hoeven;Corniel Nobel;Erik Ammerlaan;Fons Sonnemans;Jack Kester;Hanif Hafez Nezami;Laura Kramer;Patrick Evers;Vincent Lesierse;Wilko Frieke</Authors>
+    <Authors>
+      Ad van der Hoeven;
+      Corniel Nobel;
+      Erik Ammerlaan;
+      Fons Sonnemans;
+      Jack Kester;
+      Hanif Hafez Nezami;
+      Laura Kramer;
+      Patrick Evers;
+      Renzo Baasdam;
+      Vincent Lesierse;
+      Wilko Frieke
+    </Authors>
     <Owners>Qowaiv community</Owners>
     <PackageTags>
       DDD;

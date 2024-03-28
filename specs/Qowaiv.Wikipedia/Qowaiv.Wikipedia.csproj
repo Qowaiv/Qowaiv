@@ -11,5 +11,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Qowaiv.Specs\Qowaiv.Specs.csproj" />
   </ItemGroup>
+
+  <!-- We do not want to report on this during a PR/Release build. -->
+  <ItemGroup Label="Analyzers" Condition="'$(Configuration)'=='DEBUG'">
+    <PackageReference Include="FluentAssertions.Analyzers" Version="*" PrivateAssets="all" />
+    <PackageReference Include="NUnit.Analyzers" Version="*" PrivateAssets="all" />
+  </ItemGroup>
   
 </Project>

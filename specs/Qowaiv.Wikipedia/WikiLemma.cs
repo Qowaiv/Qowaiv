@@ -87,12 +87,12 @@ public sealed record WikiLemma
             throw new InvalidOperationException($"GET {Url} responded with {response.StatusCode}: {body}");
         }
     }
-#endif
-
-    public bool HasExpired => !Cached.Exists || (Clock.UtcNow() - Cached.LastWriteTimeUtc) > Expiration;
 
     private static readonly JsonSerializerOptions Options = new()
     {
         PropertyNameCaseInsensitive = true,
     };
+#endif
+
+    public bool HasExpired => !Cached.Exists || (Clock.UtcNow() - Cached.LastWriteTimeUtc) > Expiration;
 }

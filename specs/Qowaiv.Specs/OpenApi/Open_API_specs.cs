@@ -60,11 +60,7 @@ public class README_md
                     @enum = info.Enum?.ToArray(),
                 });
 #if DEBUG
-        Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(all, new System.Text.Json.JsonSerializerOptions
-        {
-            WriteIndented = true,
-            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
-        }));
+        Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(all, Options));
 #endif
         all.Should().NotBeEmpty();
     }
@@ -79,5 +75,13 @@ public class README_md
         public bool nullable { get; init; }
         public string[]? @enum { get; init; } = [];
     }
+
+#if DEBUG
+    private static readonly System.Text.Json.JsonSerializerOptions Options = new()
+    {
+        WriteIndented = true,
+        DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
+    };
+#endif
 }
 #endif

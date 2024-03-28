@@ -1,4 +1,6 @@
-﻿namespace Percentage_specs;
+﻿using FluentAssertions;
+
+namespace Percentage_specs;
 
 public class Is_valid_for
 {
@@ -582,7 +584,7 @@ public class Can_be_added_to
 	public void _float()
 	{
 		var addition = 34.586f + 75.Percent();
-		Assert.That(addition, Is.EqualTo(60.5255f).Within(0.00001));
+		addition.Should().BeApproximately(60.5255f, 0.00001f);
 	}
 
 	[Test]
@@ -749,14 +751,14 @@ public class Can_get_a_percentage_of
 	public void _double()
 	{
 		var addition = 34.586 * 75.Percent();
-		Assert.That(addition, Is.EqualTo(25.9395).Within(0.00001));
+		addition.Should().BeApproximately(25.9395, 0.00001);
 	}
 
 	[Test]
 	public void _float()
 	{
 		var addition = 34.586f * 75.Percent();
-		Assert.That(addition, Is.EqualTo(25.9395f).Within(0.00001));
+		addition.Should().BeApproximately(25.9395f, 0.00001f);
 	}
 
 	[Test]
@@ -829,21 +831,21 @@ public class Can_get_100_percent_based_on_percentage
 	public void _decimal()
 	{
 		var addition = 34.586m / 75.Percent();
-		Assert.That(addition, Is.EqualTo(46.11467m).Within(0.00001));
+		addition.Should().BeApproximately(46.11467m, 0.00001m);
 	}
 
 	[Test]
 	public void _double()
 	{
 		var addition = 34.586 / 75.Percent();
-		Assert.That(addition, Is.EqualTo(46.11467).Within(0.00001));
+		addition.Should().BeApproximately(46.11467, 0.00001);
 	}
 
 	[Test]
 	public void _float()
 	{
 		var addition = 34.586f / 75.Percent();
-		Assert.That(addition, Is.EqualTo(46.11467f).Within(0.00001));
+		addition.Should().BeApproximately(46.11467f, 0.00001f);
 	}
 
 	[Test]
@@ -935,9 +937,8 @@ public class Can_be_rounded
 
 	[Test]
 	public void up_to_minus_26_digits()
-	{
-		Assert.Throws<ArgumentOutOfRangeException>(() => Svo.Percentage.Round(-27));
-	}
+		=> (-27).Invoking(Svo.Percentage.Round)
+			.Should().Throw<ArgumentOutOfRangeException>();
 
 	[Test, Obsolete("Only exists for guidance towards decimal rounding methods.")]
 	public void using_system_midpoint_rounding()
@@ -1172,8 +1173,8 @@ public class Is_Open_API_data_type
 {
 	[Test]
 	public void with_info()
-		 => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Percentage))
-		 .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+		 => OpenApiDataType.FromType(typeof(Percentage))
+		 .Should().Be(new OpenApiDataType(
 			 dataType: typeof(Percentage),
 			 description: "Ratio expressed as a fraction of 100 denoted using the percent sign '%'.",
 			 type: "string",
@@ -1186,7 +1187,7 @@ public class Is_Open_API_data_type
 	[TestCase("-0.1%")]
 	[TestCase("31%")]
 	public void pattern_matches(string input)
-		=> Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Percentage))!.Matches(input).Should().BeTrue();
+		=> OpenApiDataType.FromType(typeof(Percentage))!.Matches(input).Should().BeTrue();
 }
 
 #if NET8_0_OR_GREATER

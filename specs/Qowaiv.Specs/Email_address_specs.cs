@@ -447,8 +447,8 @@ public class Is_Open_API_data_type
 {
 	[Test]
 	public void with_info()
-	   => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(EmailAddress))
-	   .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+	   => OpenApiDataType.FromType(typeof(EmailAddress))
+	   .Should().Be(new OpenApiDataType(
 		   dataType: typeof(EmailAddress),
 		   description: "Email notation as defined by RFC 5322.",
 		   type: "string",

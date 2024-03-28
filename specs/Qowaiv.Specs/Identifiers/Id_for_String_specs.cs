@@ -103,8 +103,8 @@ public class Is_Open_API_data_type
 {
 	[Test]
 	public void with_info()
-		=> Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(ForString))
-		.Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+		=> OpenApiDataType.FromType(typeof(ForString))
+		.Should().Be(new OpenApiDataType(
 			dataType: typeof(StringId),
 			description: "String based identifier",
 			example: "Order-UK-2022-215",

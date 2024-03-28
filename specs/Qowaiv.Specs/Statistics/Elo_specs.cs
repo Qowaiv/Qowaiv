@@ -178,8 +178,8 @@ public class Is_Open_API_data_type
 {
     [Test]
     public void with_info()
-        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Elo))
-        .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+        => OpenApiDataType.FromType(typeof(Elo))
+        .Should().Be(new OpenApiDataType(
             dataType: typeof(Elo),
             description: "Elo rating system notation.",
             example: 1600d,

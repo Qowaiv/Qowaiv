@@ -517,8 +517,8 @@ public class Is_Open_API_data_type
 {
 	[Test]
 	public void with_info()
-		=> Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(YesNo))
-		.Should().BeEquivalentTo(new Qowaiv.OpenApi.OpenApiDataType(
+		=> OpenApiDataType.FromType(typeof(YesNo))
+		.Should().BeEquivalentTo(new OpenApiDataType(
 			dataType: typeof(YesNo),
 			description: "Yes-No notation.",
 			example: "yes",

@@ -527,8 +527,8 @@ public class Is_Open_API_data_type
 {
 	[Test]
 	public void with_info()
-	   => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(InternationalBankAccountNumber))
-	   .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+	   => OpenApiDataType.FromType(typeof(InternationalBankAccountNumber))
+	   .Should().Be(new OpenApiDataType(
 		   dataType: typeof(InternationalBankAccountNumber),
 			description: "International Bank Account Number notation as defined by ISO 13616:2007.",
 			example: "BE71096123456769",
@@ -539,7 +539,7 @@ public class Is_Open_API_data_type
 
 	[TestCase("NL20INGB0001234567")]
 	public void pattern_matches(string input)
-		=> Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(InternationalBankAccountNumber))!.Matches(input).Should().BeTrue();
+		=> OpenApiDataType.FromType(typeof(InternationalBankAccountNumber))!.Matches(input).Should().BeTrue();
 }
 
 #if NET8_0_OR_GREATER

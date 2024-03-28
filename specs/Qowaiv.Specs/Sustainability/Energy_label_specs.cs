@@ -528,8 +528,8 @@ public class Is_Open_API_data_type
 {
 	[Test]
 	public void with_info()
-	   => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(EnergyLabel))
-	   .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+	   => OpenApiDataType.FromType(typeof(EnergyLabel))
+	   .Should().Be(new OpenApiDataType(
 		   dataType: typeof(EnergyLabel),
 		   description: "EU energy label",
 		   example: "A++",
@@ -544,7 +544,7 @@ public class Is_Open_API_data_type
 	[TestCase("A+")]
 	[TestCase("A++++")]
 	public void pattern_matches(string input)
-		=> Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(EnergyLabel))!.Matches(input).Should().BeTrue();
+		=> OpenApiDataType.FromType(typeof(EnergyLabel))!.Matches(input).Should().BeTrue();
 }
 
 #if NET8_0_OR_GREATER

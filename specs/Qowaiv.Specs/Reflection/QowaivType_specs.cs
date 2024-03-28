@@ -40,13 +40,11 @@ public class NotNullableType
     [TestCase(typeof(string))]
     [TestCase(typeof(int))]
     public void Returns_type_for_non_nullable(Type type)
-#pragma warning disable FAA0004 // Replace NUnit assertion with Fluent Assertions equivalent
-        => Assert.That(QowaivType.GetNotNullableType(type), Is.EqualTo(type));
-#pragma warning restore FAA0004 // Replace NUnit assertion with Fluent Assertions equivalent
+        => QowaivType.GetNotNullableType(type).Should().Be(type);
 
     [Test]
     public void Returns_underlying_type_for_nullable()
-        => Assert.That(QowaivType.GetNotNullableType(typeof(int?)), Is.EqualTo(typeof(int)));
+        => QowaivType.GetNotNullableType(typeof(int?)).Should().Be(typeof(int));
 }
 
 public class IsNumeric

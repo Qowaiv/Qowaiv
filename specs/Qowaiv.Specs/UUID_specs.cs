@@ -265,7 +265,8 @@ public class Can_be_created_sequential
 	{
 		using (Clock.SetTimeForCurrentContext(() => DateTime.UnixEpoch.AddTicks(-1)))
 		{
-			Assert.Catch<InvalidOperationException>(() => Uuid.NewSequential());
+            Func<Uuid> next = Uuid.NewSequential;
+			next.Should().Throw<InvalidOperationException>();
 		}
 	}
 
@@ -274,7 +275,8 @@ public class Can_be_created_sequential
 	{
 		using (Clock.SetTimeForCurrentContext(() => new DateTime(9276, 12, 04, 00, 00, 000, DateTimeKind.Utc)))
 		{
-			Assert.Catch<InvalidOperationException>(() => Uuid.NewSequential());
+			Func<Uuid> next = Uuid.NewSequential;
+			next.Should().Throw<InvalidOperationException>();
 		}
 	}
 
@@ -598,8 +600,8 @@ public class Is_Open_API_data_type
 {
 	[Test]
 	public void with_info()
-	   => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Uuid))
-	   .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+	   => OpenApiDataType.FromType(typeof(Uuid))
+	   .Should().Be(new OpenApiDataType(
 		   dataType: typeof(Uuid),
 		   description: "Universally unique identifier, Base64 encoded.",
 		   example: "lmZO_haEOTCwGsCcbIZFFg",
@@ -624,7 +626,7 @@ public class Supports_binary_serialization
 	public void storing_Guid_in_SerializationInfo()
 	{
 		var info = Serialize.GetInfo(Svo.Uuid);
-		Assert.AreEqual(Svo.Guid, info.GetValue("Value", typeof(Guid)));
+		info.GetValue("Value", typeof(Guid)).Should().Be(Svo.Guid);
 	}
 
 	[Test]

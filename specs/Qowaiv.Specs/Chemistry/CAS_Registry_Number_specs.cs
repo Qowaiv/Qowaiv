@@ -441,8 +441,8 @@ public class Is_Open_API_data_type
 {
 	[Test]
 	public void with_info()
-	   => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(CasRegistryNumber))
-	   .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+	   => OpenApiDataType.FromType(typeof(CasRegistryNumber))
+	   .Should().Be(new OpenApiDataType(
 		   dataType: typeof(CasRegistryNumber),
 		   description: "CAS Registry Number",
 		   example: "7732-18-5",
@@ -454,7 +454,7 @@ public class Is_Open_API_data_type
 	[TestCase("7732-18-5")]
 	[TestCase("10028-14-5")]
 	public void pattern_matches(string input)
-		=> Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(CasRegistryNumber))!.Matches(input).Should().BeTrue();
+		=> OpenApiDataType.FromType(typeof(CasRegistryNumber))!.Matches(input).Should().BeTrue();
 }
 
 #if NET8_0_OR_GREATER

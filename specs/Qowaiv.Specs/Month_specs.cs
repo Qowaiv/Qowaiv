@@ -538,8 +538,8 @@ public class Is_Open_API_data_type
 {
 	[Test]
 	public void with_info()
-		=> Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(Month))
-		.Should().BeEquivalentTo(new Qowaiv.OpenApi.OpenApiDataType(
+		=> OpenApiDataType.FromType(typeof(Month))
+		.Should().BeEquivalentTo(new OpenApiDataType(
 			dataType: typeof(Month),
 			description: "Month(-only) notation.",
 			type: "string",

@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-
-namespace Percentage_specs;
+﻿namespace Percentage_specs;
 
 public class Is_valid_for
 {

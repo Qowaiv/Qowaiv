@@ -249,7 +249,6 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
     /// The format provider.
     /// </param>
     /// <returns>
-    /// <returns>
     /// The parsed identifier.
     /// </returns>
     /// <exception cref="FormatException">

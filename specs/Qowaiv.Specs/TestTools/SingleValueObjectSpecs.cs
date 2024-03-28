@@ -30,11 +30,11 @@ public class SingleValueObjectSpecs
     public static IEnumerable<Type> JsonSerializable
         => AllSvos
         .Where(IsJsonSerializable)
-        .Except(new[]
-        {
+        .Except(
+        [
             typeof(Secret),
             typeof(CryptographicSeed)
-        });
+        ]);
 
     private static bool IsJsonSerializable(Type type)
         => type

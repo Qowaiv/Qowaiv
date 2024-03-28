@@ -524,7 +524,7 @@ public class Is_Open_API_data_type
 			example: "yes",
 			type: "string",
 			format: "yes-no",
-			@enum: new[] { "yes", "no", "?" },
+			@enum: ["yes", "no", "?"],
 			nullable: true));
 }
 

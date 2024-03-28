@@ -545,7 +545,7 @@ public class Is_Open_API_data_type
 			type: "string",
 			example: "Jun",
 			format: "month",
-			@enum: new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "?" },
+			@enum: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "?"],
 			nullable: true));
 }
 

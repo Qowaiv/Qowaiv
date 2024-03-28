@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\props\nopackage.props" />
+
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <TargetFramework>net8.0</TargetFramework>
+    <DefineConstants>CONTRACTS_FULL</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Qowaiv.Specs\Qowaiv.Specs.csproj" />
+  </ItemGroup>
+  
+</Project>

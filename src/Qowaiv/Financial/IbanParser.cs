@@ -27,8 +27,6 @@ internal static partial class IbanParser
 
                 if (++pos == 1) continue;
 
-#pragma warning disable S2589 // Boolean expressions should not be gratuitous
-                // FP. See: https://github.com/SonarSource/sonar-dotnet/issues/8474
                 if (Parsers[id] is { } bban)
                 {
                     return bban.Parse(str, index, id);
@@ -41,7 +39,6 @@ internal static partial class IbanParser
                     prefixed = true;
                 }
                 else return null;
-#pragma warning restore S2589 // Boolean expressions should not be gratuitous
             }
             else if (pos != 0)
             {

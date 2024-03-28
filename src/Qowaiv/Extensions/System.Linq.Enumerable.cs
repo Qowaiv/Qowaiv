@@ -785,11 +785,6 @@ public static class QowaivEnumerableExtensions
     public static StreamSize Sum(this IEnumerable<StreamSize> streamSizes)
         => new(streamSizes.Sum(streamSize => (long)streamSize));
 
-    /// <summary>Converts the enumeration into an <see cref="EmailAddressCollection"/>.</summary>
-    [Pure]
-    public static EmailAddressCollection ToCollection(this IEnumerable<EmailAddress> adresses)
-        => new(adresses);
-
     [Pure]
     private static InvalidOperationException NoElements() => new(QowaivMessages.InvalidOperationException_NoElements);
 }

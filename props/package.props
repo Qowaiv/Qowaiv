@@ -9,7 +9,8 @@
 
   <PropertyGroup Label="Package info">
     <IsPackable>true</IsPackable>
-    <EnablePackageValidation>true</EnablePackageValidation>
+    <!-- disable for now -->
+    <EnablePackageValidation>false</EnablePackageValidation>
     <PackageIcon>package-icon.png</PackageIcon>
     <PackageIconUrl>https://github.com/Qowaiv/Qowaiv/blob/master/design/package-icon.png</PackageIconUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

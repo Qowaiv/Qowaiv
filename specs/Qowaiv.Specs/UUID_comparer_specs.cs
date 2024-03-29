@@ -1,6 +1,6 @@
-﻿namespace Qowaiv.UnitTests;
+﻿namespace UUID_comparer_specs;
 
-public class UuidComparerTest
+public class Compares
 {
     private readonly Guid guid = Guid.Parse("40E56044-F781-43BD-A4AE-AA08882B4E28");
     private readonly Uuid uuid = Uuid.Parse("BD411BB9-D8C9-4A4F-B739-57F2312E0BC5");
@@ -23,13 +23,13 @@ public class UuidComparerTest
     [TestCase(00, 01)]
     [TestCase(01, 02)]
     [TestCase(02, 03)]
-    public void Compare_SqlServer(int index0, int index1)
+    public void SQL_Server(int index0, int index1)
     {
         var l = Simple(index0, index1, 1, 2);
         var r = Simple(index0, index1, 2, 1);
 
         var compare = UuidComparer.SqlServer.Compare(l, r);
-        Assert.AreEqual(-1, compare);
+        compare.Should().Be(-1);
     }
 
     private static Uuid Simple(int i0, int i1, byte v0, byte v1)
@@ -54,50 +54,35 @@ public class UuidComparerTest
     }
 
     [Test]
-    public void Compare_NullNull_Zero()
-    {
-        Assert.AreEqual(0, UuidComparer.Default.Compare(null, null));
-    }
+    public void Null_with_null_as_zero()
+        => UuidComparer.Default.Compare(null, null).Should().Be(0);
 
     [Test]
-    public void Compare_NullGuid_Minus1()
-    {
-        Assert.AreEqual(-1, UuidComparer.Default.Compare(null, Guid.NewGuid()));
-    }
+    public void Null_with_GUID_as_minus_1()
+        => UuidComparer.Default.Compare(null, Guid.NewGuid()).Should().Be(-1);
 
     [Test]
-    public void Compare_NullUuid_Minus1()
-    {
-        Assert.AreEqual(-1, UuidComparer.Default.Compare(null, Uuid.NewUuid()));
-    }
+    public void Null_with_UUID_as_minus_1()
+	=> UuidComparer.Default.Compare(null, Uuid.NewUuid()).Should().Be(-1);
+
+	[Test]
+    public void GUID_with_null_as_plus_1()
+	    => UuidComparer.Default.Compare(Guid.NewGuid(), null).Should().Be(+1);
+
+	[Test]
+    public void UUID_with_null_as_plus_1()
+	    => UuidComparer.Default.Compare(Uuid.NewUuid(), null).Should().Be(+1);
 
     [Test]
-    public void Compare_GuidNull_Plus1()
-    {
-        Assert.AreEqual(+1, UuidComparer.Default.Compare(Guid.NewGuid(), null));
-    }
+    public void GUID_with_UUID()
+        => UuidComparer.Default.Compare((object)guid, (object)uuid).Should().Be(-1);
 
     [Test]
-    public void Compare_UuidNull_Plus1()
-    {
-        Assert.AreEqual(+1, UuidComparer.Default.Compare(Uuid.NewUuid(), null));
-    }
-
-    [Test]
-    public void Compare_GuidUuid_Minus1()
-    {
-        Assert.AreEqual(-1, UuidComparer.Default.Compare((object)guid, (object)uuid));
-    }
-
-    [Test]
-    public void Compare_UuidGuid_Plus1()
-    {
-        Assert.AreEqual(+1, UuidComparer.Default.Compare((object)uuid, (object)guid));
-    }
+    public void UUID_with_GUIDF()
+        => UuidComparer.Default.Compare((object)uuid, (object)guid).Should().Be(+1);
 
     [Test]
     public void Compare_UuidObject_Throws()
-    {
-        Assert.Throws<NotSupportedException>(() => UuidComparer.Default.Compare((object)uuid, new object()));
-    }
+        => new object().Invoking(o => UuidComparer.Default.Compare((object)uuid, o))
+            .Should().Throw<NotSupportedException>();
 }

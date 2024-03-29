@@ -11,7 +11,7 @@ public class Can_be_constructed
 		};
 
 		var collection = new FormattingArgumentsCollection(TestCultures.nl_BE, parent);
-		collection.Should().HaveCount(1);
+		collection.Should().ContainSingle();
 	}
 }
 

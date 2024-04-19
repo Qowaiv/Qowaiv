@@ -88,6 +88,20 @@ public class Supports_type_conversion
         public void System_Text_JSON_deserialization(object json, Amount svo)
             => JsonTester.Read_System_Text_JSON<Amount>(json).Should().Be(svo);
 
+        [Test]
+        public void System_Text_JSON_deserialization_min_value()
+        {
+            var amount = System.Text.Json.JsonSerializer.Deserialize<Amount>("-7.922816251426434E+28");
+            amount.Should().Be(Amount.MinValue);
+        }
+
+        [Test]
+        public void System_Text_JSON_deserialization_max_value()
+        {
+            var amount = System.Text.Json.JsonSerializer.Deserialize<Amount>("7.922816251426434E+28");
+            amount.Should().Be(Amount.MaxValue);
+        }
+
         [TestCase(1234.56, 1234.56)]
         public void System_Text_JSON_serialization(Amount svo, object json)
             => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);

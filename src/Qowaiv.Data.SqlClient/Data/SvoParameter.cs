@@ -45,7 +45,7 @@ public static class SvoParameter
                 else
                 {
                     MethodInfo cast = GetCast(sourceType, attr);
-                    var casted = cast.Invoke(null, new[] { value });
+                    var casted = cast.Invoke(null, [value]);
                     return new SqlParameter(parameterName, casted);
                 }
             }

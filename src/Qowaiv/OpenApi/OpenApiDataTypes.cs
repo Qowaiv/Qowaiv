@@ -17,7 +17,7 @@ public static class OpenApiDataTypes
     [ExcludeFromCodeCoverage]
     [Pure]
     public static IEnumerable<OpenApiDataType> FromTypes(params Type[] types)
-        => FromTypes(types?.AsEnumerable() ?? Array.Empty<Type>());
+        => FromTypes(types?.AsEnumerable() ?? []);
 
     /// <summary>Gets all <see cref="OpenApiDataTypeAttribute"/>s of the
     /// specified types that are decorated as such.

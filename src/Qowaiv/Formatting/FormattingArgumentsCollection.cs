@@ -484,6 +484,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
 
     /// <summary>Returns an enumerator that iterates through the collection.</summary>
     [Pure]
+    [ExcludeFromCodeCoverage/* Justification = "Legacy non-generic interface." */]
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     /// <summary>Returns an enumerator that iterates through the collection.</summary>

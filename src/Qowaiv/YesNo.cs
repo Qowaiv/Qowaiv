@@ -32,7 +32,7 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
     public static YesNo Unknown => new(3);
 
     /// <summary>Contains yes and no.</summary>
-    public static readonly IReadOnlyCollection<YesNo> YesAndNo = new[] { Yes, No };
+    public static readonly IReadOnlyCollection<YesNo> YesAndNo = [Yes, No];
 
     /// <summary>Returns true if the yes-no value represents no, otherwise false.</summary>
     [Pure]

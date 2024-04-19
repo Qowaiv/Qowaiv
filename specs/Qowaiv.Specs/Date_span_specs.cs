@@ -1,4 +1,6 @@
-﻿namespace Date_span_specs;
+﻿using FluentAssertions.Extensions;
+
+namespace Date_span_specs;
 
 public class Is_comparable
 {
@@ -138,6 +140,16 @@ public class Can_be_operated
     {
         var plussed = +Svo.DateSpan;
         plussed.Should().Be(Svo.DateSpan);
+    }
+}
+
+public class Can_be_added_to
+{
+    [Test]
+    public void Date_times()
+    {
+        var date = 30.January(1999).At(13, 42).AsUtc();
+        date.Add(DateSpan.FromMonths(1)).Should().Be(28.February(1999).At(13, 42).AsUtc());
     }
 }
 

@@ -12,6 +12,12 @@ internal delegate bool TryParseInvariant<TSvo>(string str, out TSvo result);
 /// <summary>Helper class to facilitate <see cref="InvalidCastException"/> on SVO casting.</summary>
 internal static class Cast
 {
+    private static class Dbl
+    {
+        public const double DecimalMin = (double)decimal.MinValue;
+        public const double DecimalMax = (double)decimal.MaxValue;
+    }
+
     /// <summary>Casts from a primitive (not <see cref="string"/>) to a SVO.</summary>
     [Pure]
     public static TSvo Primitive<TPrimitive, TSvo>(TryCreate<TPrimitive, TSvo> tryCreate, TPrimitive? value)
@@ -39,9 +45,17 @@ internal static class Cast
     public static decimal ToDecimal<TSvo>(double value)
         => double.IsNaN(value)
         || double.IsInfinity(value)
-        || !value.IsInRange((double)decimal.MinValue, (double)decimal.MaxValue)
+        || !value.IsInRange(Dbl.DecimalMin, Dbl.DecimalMax)
         ? throw Exceptions.InvalidCast<double, TSvo>()
-        : (decimal)value;
+        : ToDecimal(value);
+
+    [Pure]
+    private static decimal ToDecimal(double value)
+    {
+        if (value >= Dbl.DecimalMax) return decimal.MaxValue;
+        if (value <= Dbl.DecimalMin) return decimal.MinValue;
+        return (decimal)value;
+    }
 
     /// <summary>Casts a <see cref="double"/> to <see cref="int"/> for the SVO.</summary>
     [Pure]

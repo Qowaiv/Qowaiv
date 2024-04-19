@@ -5,9 +5,11 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.6.1</Version>
+    <Version>6.6.2</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
+v6.6.2
+- JSON-deserialization from decimal.MaxValue (as double) should not fail. #380 (fix)
 v6.6.1
 - Add missing IParsable interface for Id. #372
 v6.6.0

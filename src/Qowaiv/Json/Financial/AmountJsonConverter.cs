@@ -18,6 +18,10 @@ public class AmountJsonConverter : SvoJsonConverter<Amount>
 
     /// <inheritdoc />
     [Pure]
+    protected override Amount FromJson(decimal json) => Amount.FromJson(json);
+
+    /// <inheritdoc />
+    [Pure]
     protected override Amount FromJson(double json) => Amount.FromJson(json);
 
     /// <inheritdoc />

@@ -120,16 +120,24 @@ public class Supports_type_conversion
             amount.Should().Be(Amount.MinValue);
         }
 
-        [Test]
-        public void System_Text_JSON_deserialization_max_value()
+        [TestCase("7.922816251426434E+28")]
+        [TestCase("79228162514264337593543950335")]
+        public void System_Text_JSON_deserialization_max_value(string json)
         {
-            var amount = System.Text.Json.JsonSerializer.Deserialize<Amount>("7.922816251426434E+28");
+            var amount = System.Text.Json.JsonSerializer.Deserialize<Amount>(json);
             amount.Should().Be(Amount.MaxValue);
         }
 
         [TestCase(1234.56, 1234.56)]
         public void System_Text_JSON_serialization(Amount svo, object json)
             => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+        [Test]
+        public void System_Text_JSON_serialization_Max_value()
+        {
+           var json = System.Text.Json.JsonSerializer.Serialize(Amount.MaxValue);
+            json.Should().Be("79228162514264337593543950335");
+        }
 #endif
         [TestCase("1234.56", 1234.56)]
         [TestCase(1234.56, 1234.56)]
@@ -140,6 +148,10 @@ public class Supports_type_conversion
         [TestCase(1234.56, 1234.56)]
         public void convention_based_serialization(Amount svo, object json)
             => JsonTester.Write(svo).Should().Be(json);
+
+        [Test]
+        public void convention_based_serialization_max_value()
+            => JsonTester.Write(Amount.MaxValue).Should().Be(79228162514264337593543950335M);
 
         [TestCase("Invalid input", typeof(FormatException))]
         [TestCase("2017-06-11", typeof(FormatException))]

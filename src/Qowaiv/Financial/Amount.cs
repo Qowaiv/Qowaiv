@@ -130,7 +130,7 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// enough to have a <see cref="string"/> representation of -0.
     /// </remarks>
     [Pure]
-    public double ToJson() => (double)m_Value;
+    public decimal ToJson() => m_Value;
 
     /// <summary>Returns a <see cref="string"/> that represents the current Amount for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -146,6 +146,16 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// <summary>Gets an XML string representation of the amount.</summary>
     [Pure]
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
+
+    /// <summary>Deserializes the amount from a JSON number.</summary>
+    /// <param name="json">
+    /// The JSON number to deserialize.
+    /// </param>
+    /// <returns>
+    /// The deserialized amount.
+    /// </returns>
+    [Pure]
+    public static Amount FromJson(decimal json) => new(json);
 
     /// <summary>Deserializes the amount from a JSON number.</summary>
     /// <param name="json">

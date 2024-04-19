@@ -42,7 +42,7 @@ public class Default_value : SingleValueObjectSpecs
 public class Unknown_value : SingleValueObjectSpecs
 {
     public static IEnumerable<Type> SvosWithDefaultUnknown
-        => SvosWithUnknown.Except(new[] { typeof(Sex), typeof(InternetMediaType) });
+        => SvosWithUnknown.Except([typeof(Sex), typeof(InternetMediaType)]);
 
     [TestCaseSource(nameof(SvosWithDefaultUnknown))]
     public void displays_unknown_for(Type svoType)

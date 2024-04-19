@@ -51,8 +51,8 @@ dotnet_diagnostic.FAA0004.severity = error  # Replace NUnit assertion with Fluen
 dotnet_diagnostic.NUnit1001.severity = none       # The individual arguments provided by a TestCaseAttribute must match the type of the corresponding parameter of the method
 dotnet_diagnostic.NUnit2005.severity = suggestion # Consider using Assert.That(actual, Is.EqualTo(expected)) instead of Assert.AreEqual(expected, actual)
 dotnet_diagnostic.NUnit2021.severity = warning    # Incompatible types for EqualTo constraint
-
-
+dotnet_diagnostic.NUnit2005.severity = error      # Consider using Assert.That instead of AreEqual
+dotnet_diagnostic.NUnit2033.severity = error      # Consider using Assert.That instead of NotZero
 
 dotnet_diagnostic.QW0001.severity = none    # Use a testable Time Provider
 dotnet_diagnostic.QW0010.severity = none    # Use DateOnly instead of Date
@@ -113,7 +113,6 @@ dotnet_diagnostic.S3925.severity = none # "ISerializable" should be implemented 
 dotnet_diagnostic.S4136.severity = none # Method overloads should be grouped together
 
 dotnet_diagnostic.S1133.severity = suggestion # Deprecated code should be removed
-dotnet_diagnostic.S3900.severity = suggestion # Arguments of public methods should be validated against null
 
 dotnet_diagnostic.S107.severity = warning  # Methods should not have too many parameters
 dotnet_diagnostic.S127.severity = warning  # Methods should not have too many parameters
@@ -136,6 +135,7 @@ dotnet_diagnostic.S3215.severity = warning # Interface instances should not be c
 dotnet_diagnostic.S3218.severity = warning # Inner class members should not shadow outer class "static" or type members
 dotnet_diagnostic.S3257.severity = warning # Declarations and initializations should be as concise as possible
 dotnet_diagnostic.S3776.severity = warning # Cognitive Complexity of methods should not be too high
+dotnet_diagnostic.S3900.severity = warning # Arguments of public methods should be validated against null
 dotnet_diagnostic.S6354.severity = warning # Use a testable (date) time provider instead
 
 dotnet_diagnostic.VSSpell001.severity = silent # Correct spelling

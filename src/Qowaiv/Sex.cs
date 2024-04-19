@@ -44,13 +44,13 @@ public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<
     public static Sex NotApplicable => new(18);
 
     /// <summary>Contains not known, male, female, not applicable.</summary>
-    public static IReadOnlyCollection<Sex> All { get; } = new[] { Male, Female, NotApplicable, Unknown, };
+    public static IReadOnlyCollection<Sex> All { get; } = [Male, Female, NotApplicable, Unknown];
 
     /// <summary>Contains male and female.</summary>
-    public static IReadOnlyCollection<Sex> MaleAndFemale { get; } = new[] { Male, Female, };
+    public static IReadOnlyCollection<Sex> MaleAndFemale { get; } = [Male, Female];
 
     /// <summary>Contains male, female, not applicable.</summary>
-    public static IReadOnlyCollection<Sex> MaleFemaleAndNotApplicable { get; } = new[] { Male, Female, NotApplicable, };
+    public static IReadOnlyCollection<Sex> MaleFemaleAndNotApplicable { get; } = [Male, Female, NotApplicable];
 
     /// <summary>Gets the display name.</summary>
     public string DisplayName => GetDisplayName(null);

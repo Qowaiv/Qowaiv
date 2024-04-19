@@ -1,3 +1,6 @@
 # Static coce analysis
 [*]
-dotnet_diagnostic.FAA0004.severity = suggestion # Replace NUnit assertion with Fluent Assertions equivalent
+dotnet_diagnostic.FAA0004.severity = suggestion   # Replace NUnit assertion with Fluent Assertions equivalent
+
+dotnet_diagnostic.NUnit2005.severity = suggestion # Consider using Assert.That instead of AreEqual
+dotnet_diagnostic.NUnit2033.severity = suggestion # Consider using Assert.That instead of NotZero

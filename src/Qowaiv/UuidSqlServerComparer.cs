@@ -9,7 +9,7 @@ internal sealed class UuidSqlServerComparer : UuidComparer
     /// 10: the most significant byte in Guid ByteArray [for SQL Server ORDERY BY clause]
     ///  3: the least significant byte in Guid ByteArray [for SQL Server ORDER BY clause].
     /// </remarks>
-    public override IReadOnlyList<int> Priority { get; } = new[] { 10, 11, 12, 13, 14, 15, 8, 9, 6, 7, 4, 5, 0, 1, 2, 3 };
+    public override IReadOnlyList<int> Priority { get; } = [10, 11, 12, 13, 14, 15, 8, 9, 6, 7, 4, 5, 0, 1, 2, 3];
 
     /// <inheritdoc/>
     [Pure]

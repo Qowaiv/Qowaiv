@@ -5,13 +5,6 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>6.6.2</Version>
-    <PackageId>Qowaiv</PackageId>
-    <PackageReleaseNotes>
-v6.6.2
-- JSON-deserialization from decimal.MaxValue (as double) should not fail. #386 (fix)
-v6.6.1
-- Add missing IParsable interface for Id. #372
     <Version>7.0.0</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
@@ -42,6 +35,8 @@ v7.0.0
 - Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
 - Deserializing ID's from JSON numeric nodes takes constrains into account. #374
 - Move Qowaiv.Diagnostics.Contracs to a seperate package. (breaking)
+v6.6.2
+- JSON-deserialization from decimal.MaxValue (as double) should not fail. #386 (fix)
 v6.6.1
 - Add missing IParsable interface for Id. #372
 v6.6.0

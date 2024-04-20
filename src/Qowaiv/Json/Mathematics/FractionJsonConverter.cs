@@ -18,6 +18,10 @@ public class FractionJsonConverter : SvoJsonConverter<Fraction>
 
     /// <inheritdoc />
     [Pure]
+    protected override Fraction FromJson(decimal json) => Fraction.FromJson(json);
+
+    /// <inheritdoc />
+    [Pure]
     protected override Fraction FromJson(double json) => Fraction.FromJson(json);
 
     /// <inheritdoc />

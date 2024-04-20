@@ -109,6 +109,10 @@ public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : 
     [Pure]
     protected virtual TSvo FromJson(long json) => FromJson(json.ToString(CultureInfo.InvariantCulture));
 
+    /// <summary>Creates the SVO based on its JSON (decimal) number representation.</summary>
+    [Pure]
+    protected virtual TSvo FromJson(decimal json) => FromJson((double)json);
+
     /// <summary>Creates the SVO based on its JSON (double) number representation.</summary>
     [Pure]
     protected virtual TSvo FromJson(double json) => FromJson(json.ToString(CultureInfo.InvariantCulture));
@@ -123,9 +127,13 @@ public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : 
         {
             return FromJson(num);
         }
-        else if (reader.TryGetDouble(out double dec))
+        else if (reader.TryGetDecimal(out decimal dec))
         {
             return FromJson(dec);
+        }
+        else if (reader.TryGetDouble(out double dbl))
+        {
+            return FromJson(dbl);
         }
         else throw new JsonException($"QowaivJsonConverter does not support writing from {reader.GetString()}.");
     }

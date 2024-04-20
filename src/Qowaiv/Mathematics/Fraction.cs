@@ -333,6 +333,16 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     /// The deserialized fraction.
     /// </returns>
     [Pure]
+    public static Fraction FromJson(decimal json) => Cast(json);
+
+    /// <summary>Deserializes the fraction from a JSON number.</summary>
+    /// <param name = "json">
+    /// The JSON number to deserialize.
+    /// </param>
+    /// <returns>
+    /// The deserialized fraction.
+    /// </returns>
+    [Pure]
     public static Fraction FromJson(double json) => Cast(json);
 
     /// <summary>Deserializes the fraction from a JSON number.</summary>

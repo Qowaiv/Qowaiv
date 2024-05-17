@@ -47,7 +47,8 @@ public static class QowaivType
             typeof(DateTimeOffset),
             typeof(LocalDateTime),
             typeof(Date),
-            typeof(WeekDate));
+            typeof(WeekDate),
+            typeof(YearMonth));
     }
 
     /// <summary>Gets the not null-able type if it is a null-able, otherwise the provided type.</summary>

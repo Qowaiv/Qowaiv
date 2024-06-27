@@ -5,36 +5,29 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>7.0.0</Version>
+    <Version>7.0.0-rc.1</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 v7.0.0
+- Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
 - Drop email address collection. #382 (breaking)
+- Drop Gender. #361  (breaking)
+- Drop public static IsValid(string) methods. #361 (breaking)
+- Align Parse and TryParse provider naming with IParsable. #360 (breaking)
+- Seal all JSON converters. #361 (breaking)
+- Move Qowaiv.Diagnostics.Contracs to a separate package. (breaking)
 - Clock.Now returns DateTimeOffset. (breaking)
 - Clock.NowWithOffset is dropped. (breaking)
+- Implement IMinMaxValue&lt;TSelf&gt; for SVO's with a min and max value. #362 (breaking)
 - Extension methods on DateTimeOffset.
 - Implement INumber&lt;Percentage&gt;. #367
 - Implement INumber&lt;Amount&gt;. #370
 - Introduction of the IEmpty&lt;TSelf&gt; interface. #364
-- Improve parsing of UUID's.
 - Improve ToString of UUID's. #365
 - Improve parsing of UUID's. #365
 - Introduction of the IUnknown&lt;TSelf&gt; interface. #366
-- Implement IMinMaxValue&lt;TSelf&gt; for SVO's with a min and max value. #362 (breaking)
 - Provide Clock as TimeProvider (.NET 8.0 only). #371
-- Drop Gender. #361  (breaking)
-- Drop public static IsValid(string) methods. #361 (breaking)
-- Seal all JSON converters. #361 (breaking)
-- Allign Parse and TryParse provider naming with IParsable. #360 (breaking)
-- Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
-- Implement IMinMaxValue&lt;TSelf&gt; for SVO's with a min and max value. #362 (breaking)
-- Drop Gender. #361  (breaking)
-- Drop public static IsValid(string) methods. #361 (breaking)
-- Seal all JSON converters. #361 (breaking)
-- Allign Parse and TryParse provider naming with IParsable. #360 (breaking)
-- Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
 - Deserializing ID's from JSON numeric nodes takes constrains into account. #374
-- Move Qowaiv.Diagnostics.Contracs to a seperate package. (breaking)
 v6.6.2
 - JSON-deserialization from decimal.MaxValue (as double) should not fail. #386 (fix)
 v6.6.1

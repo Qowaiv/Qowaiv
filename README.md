@@ -353,7 +353,7 @@ using(new CultureInfo("en-ES").Scoped())
 }
 ```
 
-## Qowaiv mathimatical types
+## Qowaiv mathematical types
 
 ### Fraction
 A fraction (from Latin _fractus_, "broken") represents a part of a whole or, more

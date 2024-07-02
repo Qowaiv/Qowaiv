@@ -9,7 +9,7 @@
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 v7.0.1
-- ISpanFormattable INumbers should be able to provide formatting (.NET 8.0 only). (fix)
+- ISpanFormattable INumbers should be able to provide formatting (.NET 8.0 only). $#393 (fix)
 v7.0.0
 - Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
 - Drop email address collection. #382 (breaking)

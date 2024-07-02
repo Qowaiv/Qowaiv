@@ -225,10 +225,7 @@ public readonly partial struct Amount : INumber<Amount>
 
     /// <inheritdoc />
     bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
-    {
-        charsWritten = 0;
-        return false;
-    }
+        => destination.TryWrite(ToString(format.ToString(), provider), out charsWritten);
 
     /// <inheritdoc />
     [Pure]

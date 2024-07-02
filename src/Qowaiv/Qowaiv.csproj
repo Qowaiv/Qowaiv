@@ -5,9 +5,11 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>7.0.0</Version>
+    <Version>7.0.1</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
+v7.0.1
+- ISpanFormattable INumbers should be able to provide formatting (.NET 8.0 only). (fix)
 v7.0.0
 - Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
 - Drop email address collection. #382 (breaking)

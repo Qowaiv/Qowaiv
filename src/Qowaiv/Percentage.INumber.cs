@@ -324,10 +324,7 @@ public readonly partial struct Percentage : INumber<Percentage>
 
     /// <inheritdoc />
     bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
-    {
-        charsWritten = 0;
-        return false;
-    }
+        => destination.TryWrite(ToString(format.ToString(), provider), out charsWritten);
 
     /// <inheritdoc />
     [Pure]

@@ -290,11 +290,12 @@ public static class DecimalMath
         }
         while (scaleDifference > 0);
 
-        if (remainder != 0 && RoundUp(calc, remainder, divisor, mode))
+        if (ShouldRoundUp(calc.lo, remainder, divisor, mode, !calc.negative))
         {
             calc.Add(1);
         }
 
+        // For negative decimals, this can happen.
         while (calc.scale < 0)
         {
             var diffChunk = (-calc.scale > MaxInt32Scale) ? MaxInt32Scale : -calc.scale;
@@ -304,39 +305,86 @@ public static class DecimalMath
         }
 
         return calc.Value();
-
-        static bool RoundUp(DecCalc calc, ulong remainder, ulong divisor, DecimalRounding mode) => mode switch
-        {
-            DecimalRounding.Truncate or
-            DecimalRounding.DirectTowardsZero => false,
-            DecimalRounding.DirectAwayFromZero => true,
-            DecimalRounding.Ceiling => !calc.negative,
-            DecimalRounding.Floor => calc.negative,
-            DecimalRounding.StochasticRounding => StochasticRounding(remainder, divisor),
-            _ when remainder == (divisor >> 1) => NearestRoundingUp(calc, mode),
-            _ => remainder >= (divisor >> 1),
-        };
-
-        static bool NearestRoundingUp(DecCalc calc, DecimalRounding mode) => mode switch
-        {
-            DecimalRounding.ToEven => (calc.lo & 1) == 0,
-            DecimalRounding.ToOdd => (calc.lo & 1) == 0,
-            DecimalRounding.AwayFromZero => true,
-            DecimalRounding.TowardsZero => false,
-            DecimalRounding.Up => !calc.negative,
-            DecimalRounding.Down => calc.negative,
-
-            // Pick a 50-50 random.
-            // DecimalRounding.RandomTieBreaking
-            _ => (Random().Next() & 1) == 0,
-        };
-
-        static bool StochasticRounding(ulong remainder, ulong divisor)
-        {
-            var ratio = remainder / (double)divisor;
-            return Random().NextDouble() <= ratio;
-        }
     }
+
+    //public static decimal Round(decimal value, int decimals, DecimalRounding mode)
+    //{
+    //    Guard.DefinedEnum(mode);
+
+    //    if ((decimals < -28) || (decimals > 28))
+    //    {
+    //        throw new ArgumentOutOfRangeException(nameof(decimals), QowaivMessages.ArgumentOutOfRange_DecimalRound);
+    //    }
+
+    //    var calc = DecCalc.New(value);
+
+    //    var scaleDifference = calc.scale - decimals;
+
+    //    if (scaleDifference <= 0)
+    //    {
+    //        return value;
+    //    }
+
+    //    ulong remainder;
+    //    uint divisor;
+
+    //    do
+    //    {
+    //        var diffCunck = (scaleDifference > MaxInt32Scale) ? MaxInt32Scale : scaleDifference;
+    //        divisor = Powers10[diffCunck];
+    //        remainder = calc.Divide(divisor);
+    //        scaleDifference -= diffCunck;
+    //        calc.scale -= diffCunck;
+    //    }
+    //    while (scaleDifference > 0);
+
+    //    if (remainder != 0 && RoundUp(calc, remainder, divisor, mode))
+    //    {
+    //        calc.Add(1);
+    //    }
+
+    //    while (calc.scale < 0)
+    //    {
+    //        var diffChunk = (-calc.scale > MaxInt32Scale) ? MaxInt32Scale : -calc.scale;
+    //        var factor = Powers10[diffChunk];
+    //        calc.Multiply(factor);
+    //        calc.scale += diffChunk;
+    //    }
+
+    //    return calc.Value();
+
+    //    static bool RoundUp(DecCalc calc, ulong remainder, ulong divisor, DecimalRounding mode) => mode switch
+    //    {
+    //        DecimalRounding.Truncate or
+    //        DecimalRounding.DirectTowardsZero => false,
+    //        DecimalRounding.DirectAwayFromZero => true,
+    //        DecimalRounding.Ceiling => !calc.negative,
+    //        DecimalRounding.Floor => calc.negative,
+    //        DecimalRounding.StochasticRounding => StochasticRounding(remainder, divisor),
+    //        _ when remainder == (divisor >> 1) => NearestRoundingUp(calc, mode),
+    //        _ => remainder >= (divisor >> 1),
+    //    };
+
+    //    static bool NearestRoundingUp(DecCalc calc, DecimalRounding mode) => mode switch
+    //    {
+    //        DecimalRounding.ToEven => (calc.lo & 1) == 0,
+    //        DecimalRounding.ToOdd => (calc.lo & 1) == 0,
+    //        DecimalRounding.AwayFromZero => true,
+    //        DecimalRounding.TowardsZero => false,
+    //        DecimalRounding.Up => !calc.negative,
+    //        DecimalRounding.Down => calc.negative,
+
+    //        // Pick a 50-50 random.
+    //        // DecimalRounding.RandomTieBreaking
+    //        _ => (Random().Next() & 1) == 0,
+    //    };
+
+    //    static bool StochasticRounding(ulong remainder, ulong divisor)
+    //    {
+    //        var ratio = remainder / (double)divisor;
+    //        return Random().NextDouble() <= ratio;
+    //    }
+    //}
 
     /// <summary>Gets a (thread static) instance of <see cref="Random"/>.</summary>
     /// <remarks>

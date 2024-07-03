@@ -5,7 +5,7 @@ namespace Qowaiv.Mathematics;
 
 [DebuggerDisplay("{Value()}, Scale = {scale}, [{hi}, {mi}, {lo}]")]
 [StructLayout(LayoutKind.Auto)]
-internal struct DecCalc
+internal ref struct DecCalc
 {
     private const uint SignMask = 0x_8000_0000;
 
@@ -42,31 +42,21 @@ internal struct DecCalc
     /// <summary>Multiplies the decimal with an <see cref="uint"/> factor.</summary>
     public void Multiply(uint factor)
     {
-        ulong overflow = 0;
-        ulong n;
-        ulong f = factor;
-
-        if (lo != 0)
+        unchecked
         {
-            n = lo * f;
-            overflow = n >> 32;
+            ulong f = factor;
+            ulong n = lo * f;
             lo = (uint)n;
-        }
-        if (mi != 0 || overflow != 0)
-        {
-            n = overflow + (mi * f);
-            overflow = n >> 32;
+            n = (n >> 32) + (mi * f);
             mi = (uint)n;
-        }
-        if (hi != 0 || overflow != 0)
-        {
-            n = overflow + (hi * f);
-            overflow = n >> 32;
+            n = (n >> 32) + (hi * f);
             hi = (uint)n;
-        }
-        if (overflow != 0)
-        {
-            throw new OverflowException();
+
+            if ((n >> 32) != 0)
+            {
+                // TODO
+                throw new OverflowException(QowaivMessages.OverflowException_DecimalRound);
+            }
         }
     }
 
@@ -74,59 +64,52 @@ internal struct DecCalc
     [Impure]
     public uint Divide(uint divisor)
     {
-        ulong remainder = 0;
-        ulong n;
-
-        if (hi != 0)
+        unchecked
         {
-            (hi, remainder) = Math.DivRem(hi, divisor);
+            ulong remainder = 0;
+            ulong n;
+
+            if (hi != 0)
+            {
+                (hi, remainder) = Math.DivRem(hi, divisor);
+            }
+
+            n = mi | (remainder << 32);
+
+            if (n != 0)
+            {
+                (n, remainder) = Math.DivRem(n, divisor);
+                mi = (uint)n;
+            }
+
+            n = lo | (remainder << 32);
+
+            if (n != 0)
+            {
+                (n, remainder) = Math.DivRem(n, divisor);
+                lo = (uint)n;
+            }
+            return (uint)remainder;
         }
-
-        n = mi | (remainder << 32);
-
-        if (n != 0)
-        {
-            (n, remainder) = Math.DivRem(n, divisor);
-            mi = (uint)n;
-        }
-
-        n = lo | (remainder << 32);
-
-        if (n != 0)
-        {
-            (n, remainder) = Math.DivRem(n, divisor);
-            lo = (uint)n;
-        }
-        return (uint)remainder;
     }
 
     /// <summary>Adds an <see cref="uint"/> to the decimal.</summary>
     public void Add(uint addition)
     {
-        ulong overflow;
-        ulong n;
-
-        n = lo + (ulong)addition;
-        overflow = n >> 32;
-        lo = (uint)n;
-
-        if (overflow != 0)
+        unchecked
         {
-            n = mi + overflow;
-            overflow = n >> 32;
+            ulong n = lo + addition;
+            lo = (uint)n;
+            n = (n >> 32) + mi;
             mi = (uint)n;
+            n = (n >> 32) + hi;
+            hi = (uint)n;
 
-            if (overflow != 0)
+            if ((n >> 32) != 0)
             {
-                n = hi + overflow;
-                overflow = n >> 32;
-                hi = (uint)n;
+                // TODO
+                throw new OverflowException(QowaivMessages.OverflowException_DecimalRound);
             }
-        }
-        if (overflow != 0)
-        {
-            // TODO
-            throw new OverflowException(QowaivMessages.OverflowException_DecimalRound);
         }
     }
 

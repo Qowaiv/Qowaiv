@@ -54,7 +54,6 @@ internal ref struct DecCalc
 
             if ((n >> 32) != 0)
             {
-                // TODO
                 throw new OverflowException(QowaivMessages.OverflowException_DecimalRound);
             }
         }
@@ -107,7 +106,6 @@ internal ref struct DecCalc
 
             if ((n >> 32) != 0)
             {
-                // TODO
                 throw new OverflowException(QowaivMessages.OverflowException_DecimalRound);
             }
         }

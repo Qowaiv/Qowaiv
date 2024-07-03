@@ -2,7 +2,7 @@
 
 /// <summary>Methods of rounding <see cref="decimal"/>s.</summary>
 /// <remarks>
-/// This is an extension on <see cref="System.MidpointRounding"/>.
+/// This is an extension on <see cref="MidpointRounding"/>.
 /// </remarks>
 public enum DecimalRounding
 {

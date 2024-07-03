@@ -15,21 +15,27 @@ public partial class RoundBenchmark
         var rnd = new MersenneTwister();
         for (var i = 0; i < Count; i++)
         {
-            var n = rnd.Next(500, 1000) * rnd.Next(100, 200);
-            var d = (decimal)Math.Pow(10, rnd.Next(1, 6));
-            Unrounded[i] = n / d;
+            decimal n = rnd.Next(0, 100) * rnd.Next(5, 10);
+            var d = rnd.Next(3, 9) * rnd.Next(1, 3);
+            var f = 0.1m;
+            for(var p = 0; p < d; p++)
+            {
+                n += f * rnd.Next(0, 10);
+                f *= 0.1m;
+            }
+            Unrounded[i] = n;
         }
     }
 
     [Params(/*-2, -1, 0, 1, */2)]
     public int Decimals { get; set; }
-
-    [Benchmark]
-    public decimal[] Reference_()
+    
+    [Benchmark(Baseline = true)]
+    public decimal[] Math_Round()
     {
         for (var i = 0; i < Count; i++)
         {
-            Rounded[i] = DecimalMath.Round_Old(Unrounded[i], Decimals, DecimalRounding.ToEven);
+            Rounded[i] = decimal.Round(Unrounded[i], Decimals, MidpointRounding.ToEven);
         }
         return Rounded;
     }
@@ -39,17 +45,7 @@ public partial class RoundBenchmark
     {
         for (var i = 0; i < Count; i++)
         {
-            Rounded[i] = DecimalMath.Round(Unrounded[i], Decimals, DecimalRounding.ToEven);
-        }
-        return Rounded;
-    }
-
-    [Benchmark(Baseline = true)]
-    public decimal[] Math_Round()
-    {
-        for (var i = 0; i < Count; i++)
-        {
-            Rounded[i] = decimal.Round(Unrounded[i], Decimals, MidpointRounding.AwayFromZero);
+            Rounded[i] = Unrounded[i].Round(Decimals, DecimalRounding.ToEven);
         }
         return Rounded;
     }

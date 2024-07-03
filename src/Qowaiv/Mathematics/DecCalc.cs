@@ -19,26 +19,6 @@ internal ref struct DecCalc
         ? (uint)((byte)scale << 16) | SignMask
         : (uint)((byte)scale << 16);
 
-    /// <summary>
-    /// Removes its trailing zero's.
-    /// </summary>
-    public void Trim()
-    {
-        var modulo = 10U;
-        var factor = 1U;
-
-        while (lo % modulo == 0 && factor < DecimalMath.Powers10[DecimalMath.MaxInt32Scale])
-        {
-            factor = modulo;
-            modulo *= 10;
-            scale--;
-        }
-        if (factor != 1)
-        {
-            Divide(factor);
-        }
-    }
-
     /// <summary>Multiplies the decimal with an <see cref="uint"/> factor.</summary>
     public void Multiply(uint factor)
     {

@@ -1,5 +1,4 @@
-﻿#if NET6_0_OR_GREATER
-namespace System;
+﻿namespace System;
 
 internal static class QowaivSpanExtensions
 {
@@ -41,5 +40,14 @@ internal static class QowaivSpanExtensions
             return false;
         }
     }
-}
+
+#if NETSTANDARD2_0
+    [Runtime.CompilerServices.MethodImpl(Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    [Pure]
+    private static bool TryCopyTo(this string str, Span<char> destination)
+    {
+        var span = new Span<char>(str.ToCharArray());
+        return span.TryCopyTo(destination);
+    }
 #endif
+}

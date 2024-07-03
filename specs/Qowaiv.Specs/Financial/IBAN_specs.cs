@@ -239,6 +239,13 @@ public class Has_custom_formatting
 	[TestCase("F", "?", "?")]
 	public void with_format(string format, InternationalBankAccountNumber svo, string formatted)
 		=> svo.ToString(format).Should().Be(formatted);
+
+    [Test]
+    public void with_span_formattable()
+    {
+        var intepolated = $"IBAN: {Svo.Iban:H}";
+        intepolated.Should().Be("IBAN: NL20 INGB 0001 2345 67");
+    }
 }
 
 public class Can_be_parsed

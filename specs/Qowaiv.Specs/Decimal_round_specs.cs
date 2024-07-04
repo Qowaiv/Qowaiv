@@ -2,26 +2,6 @@
 
 public class Rounds
 {
-    private readonly decimal[] Unrounded = new decimal[1000];
-
-    [Test]
-    public void X()
-    {
-        var rnd = new Random();
-        for (var i = 0; i < 1000; i++)
-        {
-            decimal n = rnd.Next(0, 100) * rnd.Next(5, 10);
-            var d = rnd.Next(3, 9) * rnd.Next(1, 3);
-            var f = 0.1m;
-            for (var p = 0; p < d; p++)
-            {
-                n += f * rnd.Next(0, 10);
-                f *= 0.1m;
-            }
-            Unrounded[i] = n;
-        }
-    }
-
     [Test]
     public void To_even_by_default_for_positive()
     {

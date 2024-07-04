@@ -18,6 +18,18 @@ Formatted v.s. umformatted strings have hardly any effect on the durations.
 | Regex               | 2,150.6 ns | 14.19 |
 | Regex (with tweaks) | 1,359.1 ns |  8.98 |
 
+## Decimal round
+Custom rounding is slower than .NET's default implementation. A big part can
+be explained by the fact that MS can compile two separate versions for Big
+and Little Endian architectures. As a result, they can do some bit operation
+tricks we can not rely on.
+
+| Method       | Mean      | Ratio |
+|------------- |----------:|------:|
+| Math_Round   |  5.787 ns |  1.00 |
+| Qowaiv v6    | 29.425 ns |  5.08 |
+| Qowaiv v7    | 26.247 ns |  4.56 |
+
 
 ## UUID
 By removing `Regex` for the UUID parsing, durations have been reduced.

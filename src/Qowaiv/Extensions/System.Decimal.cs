@@ -1,4 +1,5 @@
 ﻿using Qowaiv;
+using Qowaiv.Mathematics;
 using System.Runtime.CompilerServices;
 
 namespace System;
@@ -93,7 +94,7 @@ public static class QowaivDecimalExtensions
     /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
     /// </remarks>
     [Pure]
-    public static decimal Round(this decimal value, int decimals, DecimalRounding mode) => DecimalRound.Round(value, decimals, mode);
+    public static decimal Round(this decimal value, int decimals, DecimalRounding mode) => DecimalMath.Round(value, decimals, mode);
 
     /// <summary>Returns true if the number is in the specified range.</summary>
     [Pure]

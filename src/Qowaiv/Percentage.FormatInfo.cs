@@ -1,4 +1,6 @@
-﻿namespace Qowaiv;
+﻿using Qowaiv.Mathematics;
+
+namespace Qowaiv;
 
 public readonly partial struct Percentage
 {
@@ -28,11 +30,11 @@ public readonly partial struct Percentage
 
         public readonly Position Position = position;
 
-        public decimal Factor => Symbol switch
+        public int ScaleShift => Symbol switch
         {
-            Symbol.PerMille => 0.001m,
-            Symbol.PerTenThousand => 0.0001m,
-            _ => 0.01m,
+            Symbol.PerMille => -3,
+            Symbol.PerTenThousand => -4,
+            _ => -2,
         };
 
         private static readonly string[] Befores = ["fr-FR", "fa-IR"];
@@ -47,7 +49,7 @@ public readonly partial struct Percentage
                 sb.Append(ToString(Symbol, Provider));
             }
 
-            sb.Append((value / Factor).ToString(Format, Provider));
+            sb.Append(DecimalMath.ChangeScale(value, -ScaleShift).ToString(Format, Provider));
 
             if (Position == Position.After)
             {

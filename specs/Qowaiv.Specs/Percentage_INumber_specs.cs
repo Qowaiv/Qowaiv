@@ -167,8 +167,8 @@ public class Percentage_as_INumber
         Number.MinMagnitudeNumber((Percentage)x_, (Percentage)y_).Should().Be((Percentage)Number.MinMagnitudeNumber(x_, y_));
     }
 
-    private const double Min = -79228162514264337593543950335d;
-    private const double Max = +79228162514264337593543950335d;
+    private const double Min = -7922816251426433759354395.0335d;
+    private const double Max = +7922816251426433759354395.0335d;
     private const int Count = 8;
 }
 #endif

@@ -117,6 +117,29 @@ internal static class DecimalMath
         }
     }
 
+    /// <summary>Changes the scale part of the <see cref="decimal"/>.</summary>
+    /// <remarks>
+    /// This is equivalent to multiplying (or dividing) by a power of 10.
+    /// </remarks>
+    [Pure]
+    public static decimal ChangeScale(decimal d, int delta)
+    {
+        var calc = DecCalc.New(d);
+        calc.scale -= delta;
+
+        calc.RemoveTrailingZeros();
+
+        while (calc.scale < 0)
+        {
+            var diffChunk = (-calc.scale > MaxInt32Scale) ? MaxInt32Scale : -calc.scale;
+            var factor = Powers10[diffChunk];
+            calc.Multiply(factor);
+            calc.scale += diffChunk;
+        }
+
+        return calc.Value();
+    }
+
     /// <summary>Gets a (thread static) instance of <see cref="Random"/>.</summary>
     /// <remarks>
     /// creates a new instance if required.

@@ -91,6 +91,24 @@ internal ref struct DecCalc
         }
     }
 
+    /// <summary>Removes its trailing zero's.</summary>
+    public void RemoveTrailingZeros()
+    {
+        var modulo = 10U;
+        var factor = 1U;
+
+        while (lo % modulo == 0 && factor < DecimalMath.Powers10[DecimalMath.MaxInt32Scale])
+        {
+            factor = modulo;
+            modulo *= 10;
+            scale--;
+        }
+        if (factor != 1)
+        {
+            Divide(factor);
+        }
+    }
+
     [Pure]
     public decimal Value()
     {

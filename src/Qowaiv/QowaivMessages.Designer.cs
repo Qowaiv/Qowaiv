@@ -133,6 +133,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Value is either too large or too small for a percentage..
+        /// </summary>
+        public static string ArgumentOutOfRange_Percentage {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRange_Percentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Percentages can only round to between -26 and 26 digits of precision..
         /// </summary>
         public static string ArgumentOutOfRange_PercentageRound {

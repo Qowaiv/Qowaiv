@@ -1,5 +1,35 @@
 ﻿namespace Percentage_specs;
 
+#if NET8_0_OR_GREATER
+public class Decimal_scale
+{
+    [Test]
+    public void _0_for_Percentage_Hudrded()
+    {
+        Scale(Percentage.Hundred).Should().Be(0);
+    }
+
+    [Test]
+    public void _0_for_100_Percent()
+    {
+        Scale(100.Percent()).Should().Be(0);
+        Scale(100d.Percent()).Should().Be(0);
+        Scale(100m.Percent()).Should().Be(0);
+        Scale(100.0m.Percent()).Should().Be(0);
+        Scale(100.00m.Percent()).Should().Be(0);
+    }
+
+    [TestCase("3.14%")]
+    [TestCase("3.140%")]
+    [TestCase("3.1400%")]
+    [TestCase("3.14000%")]
+    public void _minimum_for_parsed(string str)
+        => Scale(Percentage.Parse(str, TestCultures.en)).Should().Be(4);
+
+    private static byte Scale(Percentage p) => ((decimal)p).Scale;
+}
+#endif
+
 public class Is_valid_for
 {
 	[TestCase("1751‱", "en")]
@@ -51,6 +81,14 @@ public class Has_constant
 	[Test]
 	public void Hundred_represent_100_percent()
 		=> Percentage.Hundred.ToString("0%", CultureInfo.InvariantCulture).Should().Be("100%");
+
+    [Test]
+    public void Min_Value()
+        => ((decimal)Percentage.MinValue).Should().Be(decimal.MinValue / 10_000);
+
+    [Test]
+    public void Max_Value()
+        => ((decimal)Percentage.MaxValue).Should().Be(decimal.MaxValue / 10_000);
 }
 
 public class Is_equal_by_value
@@ -177,6 +215,16 @@ public class Can_not_be_parsed
 		=> style.Invoking(s => Percentage.TryParse("4.5%", s, CultureInfo.InvariantCulture, out _))
 			.Should().Throw<ArgumentOutOfRangeException>()
 			.WithMessage("The number style '*' is not supported.*");
+}
+
+public class Can_be_created
+{
+    [TestCase("-7922816251426433759354395.0336")]
+    [TestCase("+7922816251426433759354395.0336")]
+    public void when_within_the_boundries(decimal d)
+        => d.Invoking(Percentage.Create).Should()
+        .Throw<ArgumentOutOfRangeException>()
+        .WithMessage("Value is either too large or too small for a percentage.");
 }
 
 public class Can_be_created_with_percentage_extension

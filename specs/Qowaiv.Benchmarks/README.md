@@ -30,6 +30,16 @@ tricks we can not rely on.
 | Qowaiv v6    | 29.425 ns |  5.08 |
 | Qowaiv v7    | 26.247 ns |  4.56 |
 
+## Percentage
+Apply a divide by 100, the default operation to convert a decimal to a
+percentage. Note that `DecimalMath` and the division trim, but the multiplication
+does not.
+
+| Method            | 3.14     | 23.4326  | 100      |
+|------------------ |---------:|---------:|---------:|
+| DecimalMath.Scale | 11.10 ns | 13.96 ns | 16.05 ns |
+| value / 100m      | 27.63 ns | 31.83 ns | 14.22 ns |
+| value * 0.01m     | 10.31 ns | 12.26 ns | 13.87 ns |
 
 ## UUID
 By removing `Regex` for the UUID parsing, durations have been reduced.

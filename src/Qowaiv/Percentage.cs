@@ -1,4 +1,6 @@
-﻿namespace Qowaiv;
+﻿using Qowaiv.Mathematics;
+
+namespace Qowaiv;
 
 /// <summary>Represents a Percentage.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
@@ -29,16 +31,16 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     public static Percentage Zero => default;
 
     /// <summary>Represents 1 percent.</summary>
-    public static Percentage One => 1.Percent();
+    public static Percentage One => new(0.01m);
 
     /// <summary>Represents 100 percent.</summary>
-    public static Percentage Hundred => 100.Percent();
+    public static Percentage Hundred => new(1);
 
     /// <summary>Gets the minimum value of a percentage.</summary>
-    public static Percentage MinValue => new(decimal.MinValue / 10_000);
+    public static Percentage MinValue => new(-7_922_816_251_426_433_759_354_395.0335m);
 
     /// <summary>Gets the maximum value of a percentage.</summary>
-    public static Percentage MaxValue => new(decimal.MaxValue / 10_000);
+    public static Percentage MaxValue => new(+7_922_816_251_426_433_759_354_395.0335m);
 
     /// <summary>Gets the sign of the percentage.</summary>
     [Pure]
@@ -296,9 +298,10 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
 
         if (s is { Length: > 0 }
             && FormatInfo.TryParse(s, provider, out var info)
-            && decimal.TryParse(info.Format, style, info.Provider, out var dec))
+            && decimal.TryParse(info.Format, style, info.Provider, out var dec)
+            && dec.IsInRange(MinValue.m_Value, MaxValue.m_Value))
         {
-            result = new(dec * info.Factor);
+            result = new(DecimalMath.ChangeScale(dec, info.ScaleShift));
             return true;
         }
         return false;
@@ -318,7 +321,10 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     /// A decimal describing a Percentage.
     /// </param >
     [Pure]
-    public static Percentage Create(decimal val) => new(val);
+    public static Percentage Create(decimal val)
+    => val.IsInRange(MinValue.m_Value, MaxValue.m_Value)
+        ? new(val)
+        : throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRange_Percentage, (Exception?)null);
 
     /// <summary>Creates a Percentage from a Double.</summary >
     /// <param name="val" >

@@ -207,4 +207,7 @@
   <data name="ArgumentOutOfRange_NumberStyleNotSupported" xml:space="preserve">
     <value>The number style '{0}' is not supported.</value>
   </data>
+  <data name="ArgumentOutOfRange_Percentage" xml:space="preserve">
+    <value>Value is either too large or too small for a percentage.</value>
+  </data>
 </root>

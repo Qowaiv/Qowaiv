@@ -6,6 +6,8 @@ public static class Program
 {
     public static void Main()
     {
+        BenchmarkRunner.Run<DecimalBenchmark>();
+
         BenchmarkRunner.Run<IbanBenchmark.ParseUnformatted>();
         BenchmarkRunner.Run<IbanBenchmark.ParseFormatted>();
 

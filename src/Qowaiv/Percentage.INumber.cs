@@ -15,61 +15,61 @@ public readonly partial struct Percentage
     public static Percentage operator -(Percentage p) => new(-p.m_Value);
 
     /// <summary>Multiplies the left and the right percentage.</summary>
-    public static Percentage operator *(Percentage l, Percentage r) => new(l.m_Value * r.m_Value);
+    public static Percentage operator *(Percentage l, Percentage r) => Create(l.m_Value * r.m_Value);
 
     /// <summary>Divides the left by the right percentage.</summary>
-    public static Percentage operator /(Percentage l, Percentage r) => new(l.m_Value / r.m_Value);
+    public static Percentage operator /(Percentage l, Percentage r) => Create(l.m_Value / r.m_Value);
 
     /// <summary>Gets the remainder of the percentage.</summary>
     public static Percentage operator %(Percentage left, Percentage right) => new(left.m_Value % right.m_Value);
 
     /// <summary>Adds the left and the right percentage.</summary>
-    public static Percentage operator +(Percentage l, Percentage r) => new(l.m_Value + r.m_Value);
+    public static Percentage operator +(Percentage l, Percentage r) => Create(l.m_Value + r.m_Value);
 
     /// <summary>Subtracts the right from the left percentage.</summary>
-    public static Percentage operator -(Percentage l, Percentage r) => new(l.m_Value - r.m_Value);
+    public static Percentage operator -(Percentage l, Percentage r) => Create(l.m_Value - r.m_Value);
 
     /// <summary>Multiplies the percentage with the factor.</summary>
-    public static Percentage operator *(Percentage p, decimal factor) => new(p.m_Value * factor);
+    public static Percentage operator *(Percentage p, decimal factor) => Create(p.m_Value * factor);
 
     /// <summary>Multiplies the percentage with the factor.</summary>
-    public static Percentage operator *(Percentage p, double factor) => new(p.m_Value * (decimal)factor);
+    public static Percentage operator *(Percentage p, double factor) => Create(p.m_Value * (decimal)factor);
 
     /// <summary>Multiplies the percentage with the factor.</summary>
-    public static Percentage operator *(Percentage p, float factor) => new(p.m_Value * (decimal)factor);
+    public static Percentage operator *(Percentage p, float factor) => Create(p.m_Value * (decimal)factor);
 
     /// <summary>Multiplies the percentage with the factor.</summary>
-    public static Percentage operator *(Percentage p, long factor) => new(p.m_Value * factor);
+    public static Percentage operator *(Percentage p, long factor) => Create(p.m_Value * factor);
 
     /// <summary>Multiplies the percentage with the factor.</summary>
-    public static Percentage operator *(Percentage p, int factor) => new(p.m_Value * factor);
+    public static Percentage operator *(Percentage p, int factor) => Create(p.m_Value * factor);
 
     /// <summary>Multiplies the percentage with the factor.</summary>
-    public static Percentage operator *(Percentage p, short factor) => new(p.m_Value * factor);
-
-    /// <summary>Multiplies the percentage with the factor.</summary>
-    [CLSCompliant(false)]
-    public static Percentage operator *(Percentage p, ulong factor) => new(p.m_Value * factor);
+    public static Percentage operator *(Percentage p, short factor) => Create(p.m_Value * factor);
 
     /// <summary>Multiplies the percentage with the factor.</summary>
     [CLSCompliant(false)]
-    public static Percentage operator *(Percentage p, uint factor) => new(p.m_Value * factor);
+    public static Percentage operator *(Percentage p, ulong factor) => Create(p.m_Value * factor);
 
     /// <summary>Multiplies the percentage with the factor.</summary>
     [CLSCompliant(false)]
-    public static Percentage operator *(Percentage p, ushort factor) => new(p.m_Value * factor);
+    public static Percentage operator *(Percentage p, uint factor) => Create(p.m_Value * factor);
+
+    /// <summary>Multiplies the percentage with the factor.</summary>
+    [CLSCompliant(false)]
+    public static Percentage operator *(Percentage p, ushort factor) => Create(p.m_Value * factor);
 
     /// <summary>Divides the percentage by the factor.</summary>
-    public static Percentage operator /(Percentage p, decimal factor) => new(p.m_Value / factor);
+    public static Percentage operator /(Percentage p, decimal factor) => Create(p.m_Value / factor);
 
     /// <summary>Divides the percentage by the factor.</summary>
-    public static Percentage operator /(Percentage p, double factor) => new(p.m_Value / (decimal)factor);
+    public static Percentage operator /(Percentage p, double factor) => Create(p.m_Value / (decimal)factor);
 
     /// <summary>Divides the percentage by the factor.</summary>
-    public static Percentage operator /(Percentage p, float factor) => new(p.m_Value / (decimal)factor);
+    public static Percentage operator /(Percentage p, float factor) => Create(p.m_Value / (decimal)factor);
 
     /// <summary>Divides the percentage by the factor.</summary>
-    public static Percentage operator /(Percentage p, long factor) => new(p.m_Value / factor);
+    public static Percentage operator /(Percentage p, long factor) => Create(p.m_Value / factor);
 
     /// <summary>Divides the percentage by the factor.</summary>
     public static Percentage operator /(Percentage p, int factor) => new(p.m_Value / factor);

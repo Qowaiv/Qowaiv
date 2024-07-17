@@ -24,11 +24,18 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
     /// <summary>Gets the char on the specific index.</summary>
     public char this[int index] => m_Value[Start + index];
 
-    [Pure]
-    public bool IsEmpty() => Length <= 0;
+    public char First => m_Value[Start];
+
+    public bool IsEmpty => Length <= 0;
 
     [Pure]
-    public bool NotEmpty() => Length > 0;
+    public bool NotEmpty => Length > 0;
+
+    [Pure]
+    public CharSpan Prev(int steps) => new(m_Value, Start - steps, End);
+
+    [Pure]
+    public CharSpan Next() => new(m_Value, Start + 1, End);
 
     [Pure]
     public CharSpan Last(out char ch)
@@ -105,4 +112,6 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
     [Pure]
     [ExcludeFromCodeCoverage]
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    public static CharSpan operator ++(CharSpan span) => span.Next();
 }

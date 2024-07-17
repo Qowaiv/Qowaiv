@@ -556,12 +556,12 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
         var signs = provider.NegativeSign() + provider.PositiveSign();
         var span = s.CharSpan().TrimLeft(ch => CandidateCurrency(ch, signs), out var candidate);
 
-        if (candidate.IsEmpty())
+        if (candidate.IsEmpty)
         {
             span = span.TrimRight(ch => CandidateCurrency(ch, signs), out candidate);
         }
 
-        if ((candidate.IsEmpty() || Currency.TryParse(candidate.ToString(), out currency))
+        if ((candidate.IsEmpty || Currency.TryParse(candidate.ToString(), out currency))
             && decimal.TryParse(span.ToString(), NumberStyles.Currency, provider, out var amount))
         {
             result = amount + currency;

@@ -5,17 +5,11 @@ internal sealed class BbanGenericParser : BbanParser
     public BbanGenericParser() : base("ZZnncccccccccccccccccccccccccccccccc") { }
 
     [Pure]
-    protected override char[] Buffer(int id)
-    {
-        var buffer = new char[Length];
-        buffer[0] = (char)((id / 26) + 'A');
-        buffer[1] = (char)((id % 26) + 'A');
-        return buffer;
-    }
+    protected override Chars Buffer(int id)
+        => Chars.Init(Length)
+        + (char)((id / 26) + 'A')
+        + (char)((id % 26) + 'A');
 
     [Pure]
-    protected override string? CheckLength(char[] iban, int length)
-        => length >= 12
-        ? new string(iban, 0, length)
-        : null;
+    protected override string? CheckLength(Chars iban) => iban.Length >= 12 ? iban.ToString() : null;
 }

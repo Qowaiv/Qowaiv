@@ -1,5 +1,9 @@
 ﻿namespace Qowaiv.Text;
 
+/// <summary>Lightweight <see cref="char"/> buffer.</summary>
+/// <remarks>
+/// Keep in mind that the char array is shared.
+/// </remarks>
 internal readonly struct Chars(char[] value, int length)
 {
     private readonly char[] m_Value = value;
@@ -9,7 +13,7 @@ internal readonly struct Chars(char[] value, int length)
     public char Last => Length == 0 ? default : m_Value[Length - 1];
 
     [Pure]
-    public Chars Add(char c)
+    private Chars Add(char c)
     {
         var l = Length;
         m_Value[l++] = c;

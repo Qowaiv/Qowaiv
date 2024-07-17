@@ -21,43 +21,39 @@ internal partial class BbanParser(string pattern)
             : null;
 
     [Pure]
-    private string? Parse(string str, int start, char[] buffer)
+    private string? Parse(string str, int start, Chars buffer)
     {
-        var pos = 2;
         var index = start;
 
-        while (index < str.Length && pos < Length)
+        while (index < str.Length && buffer.Length < Length)
         {
             var ch = str[index++];
-            if (ch <= 'Z' && IsMatch(ch, Pattern[pos]))
+            if (ch <= 'Z' && IsMatch(ch, Pattern[buffer.Length]))
             {
-                buffer[pos++] = ASCII.Upper(ch);
+                buffer += ASCII.Upper(ch);
             }
 
             // Markup within the ckecksum is not allowed.
-            else if (pos == 3 || !IbanParser.IsMarkup(ch))
+            else if (buffer.Length == 3 || !IbanParser.IsMarkup(ch))
             {
                 return null;
             }
         }
 
         return IsEndOfString(str, index)
-            ? CheckLength(buffer, pos)
+            ? CheckLength(buffer)
             : null;
     }
 
     [Pure]
-    protected virtual char[] Buffer(int id)
-    {
-        var buffer = new char[Length];
-        buffer[0] = Pattern[0];
-        buffer[1] = Pattern[1];
-        return buffer;
-    }
+    protected virtual Chars Buffer(int id)
+        => Chars.Init(Length)
+        + Pattern[0]
+        + Pattern[1];
 
     [Pure]
-    protected virtual string? CheckLength(char[] iban, int length)
-        => length == Length ? new(iban) : null;
+    protected virtual string? CheckLength(Chars iban)
+        => iban.Length == Length ? iban.ToString() : null;
 
     /// <summary>Extended validation for specific parsers.</summary>
     [Pure]
@@ -77,11 +73,11 @@ internal partial class BbanParser(string pattern)
     }
 
     [Pure]
-    private static bool IsMatch(char ch, char pattern)
+    private static bool IsMatch(char ch, char pattern) => pattern switch
     {
-        if /*.*/(pattern == 'n') return ASCII.IsDigit(ch);
-        else if (pattern == 'a') return ASCII.IsLetter(ch);
-        else if (pattern == 'c') return ASCII.IsLetterOrDigit(ch);
-        else return ch == pattern;
-    }
+        'n' => ASCII.IsDigit(ch),
+        'a' => ASCII.IsLetter(ch),
+        'c' => ASCII.IsLetterOrDigit(ch),
+        _ => pattern == ch,
+    };
 }

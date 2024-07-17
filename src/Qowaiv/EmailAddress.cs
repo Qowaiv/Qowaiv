@@ -149,7 +149,7 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     public static bool TryParse(string? s, IFormatProvider? provider, out EmailAddress result)
     {
         result = default;
-        if (string.IsNullOrEmpty(s))
+        if (s is not { Length: > 0 })
         {
             return true;
         }
@@ -158,11 +158,13 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
             result = Unknown;
             return true;
         }
-        else if (EmailParser.Parse(s) is string email)
+        else if (EmailParser.Parse2(s) is string email)
         {
             result = new EmailAddress(email);
             return true;
         }
         else return false;
     }
+
+    public static EmailAddress Parse2(string str) => new(EmailParser.Parse(str));
 }

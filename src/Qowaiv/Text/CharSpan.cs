@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Text;
+namespace Qowaiv.Text;
 
 internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IEnumerable<char>
 {
@@ -33,12 +33,16 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
     [Pure]
     public bool NotEmpty => Length > 0;
 
+    public bool NotEmpty => Length > 0;
+
+    public char First => m_Value[Start];
+
     [Pure]
     public bool StartsWith(string value, bool ignoreCase = false)
     {
         if (value.Length > Length) return false;
         var start = Start;
-
+    
         return ignoreCase
             ? CaseInsensitive(start, m_Value, value)
             : CaseSensitive(start, m_Value, value);
@@ -67,6 +71,19 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
             return true;
         }
     }
+    
+    public int? LastIndexOf(char c)
+    {
+        int? last = null;
+        for (var i = Start; i < End; i++)
+        {
+            if (m_Value[i] == c)
+            {
+                last = i;
+            }
+        }
+        return last is { } l ? l - Start : null;
+    }
 
     [Pure]
     public CharSpan Prev(int steps) => new(m_Value, Start - steps, End);
@@ -83,6 +100,15 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
         ch = m_Value[End - 1];
         return new(m_Value, Start, End - 1);
     }
+
+    [Pure]
+    public CharSpan Next() => new(m_Value, Start + 1, End);
+
+    [Pure]
+    public CharSpan Next(int skip) => new(m_Value, Start + skip, End);
+
+    [Pure]
+    public CharSpan TrimLeft() => TrimLeft(char.IsWhiteSpace, out _);
 
     [Pure]
     public CharSpan TrimLeft(Func<char, bool> predicate, out CharSpan trimmed)
@@ -115,6 +141,20 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
         }
         trimmed = this;
         return Empty;
+    }
+
+    [Pure]
+    public bool StartsWithCaseInsensitive(string str)
+    {
+        if (str.Length > Length) return false;
+        else
+        {
+            for (var i = 0; i < str.Length; i++)
+            {
+                if (char.ToUpperInvariant(this[i]) != char.ToUpperInvariant(str[i])) { return false; }
+            }
+            return true;
+        }
     }
 
     /// <inheritdoc />

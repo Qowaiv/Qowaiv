@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Text;
+namespace Qowaiv.Text;
 
 /// <summary>Lightweight <see cref="char"/> buffer.</summary>
 /// <remarks>

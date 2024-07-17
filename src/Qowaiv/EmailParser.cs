@@ -67,7 +67,7 @@ internal static partial class EmailParser
     private static State DisplayName(this State state)
     {
         if (state.Input.IsEmpty()) return state.Invalid();
-        else if (state.Input.Last().IsGt())
+        else if (state.Input.Last() == '>')
         {
             var lt = state.Input.LastIndexOf('<');
             if (lt == NotFound)
@@ -241,9 +241,9 @@ internal static partial class EmailParser
     [FluentSyntax]
     private static State IP(this State state)
     {
-        if (state.Buffer.First().IsBracketStart())
+        if (state.Buffer.First() == '[')
         {
-            if (state.Input.Last().IsBracketEnd())
+            if (state.Input.Last() == ']')
             {
                 state.Buffer.RemoveFromStart(1);
                 state.Input.RemoveFromEnd(1);
@@ -282,7 +282,7 @@ internal static partial class EmailParser
             {
                 return state;
             }
-            else if (ch.IsEscape())
+            else if (ch == '\\')
             {
                 escaped = !escaped;
             }

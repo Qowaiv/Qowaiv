@@ -32,23 +32,7 @@ internal static partial class EmailParser
 
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsGt(this char ch) => ch == '>';
-
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static bool IsQuote(this char ch) => ch == '"';
-
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsEscape(this char ch) => ch == '\\';
-
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsBracketStart(this char ch) => ch == '[';
-
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsBracketEnd(this char ch) => ch == ']';
 
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -10,7 +10,7 @@ dramatically.
 | Regex               | 2,138.8 ns | 14.29 |
 | Regex (with tweaks) | 1,425.3 ns |  9.54 |
 
-Formatted v.s. umformatted strings have hardly any effect on the durations.
+Formatted v.s. unformatted strings have hardly any effect on the durations.
 
 | Parse (formatted)   | Mean       | Ratio |
 |-------------------- |-----------:|------:|

@@ -310,5 +310,5 @@ internal static partial class EmailParser
     private static bool IsPunycode(this string str)
         => str.StartsWith("xn--", StringComparison.Ordinal)
         && str.Length > 5
-        && str.All(ch => IsTopDomain(ch) || ch.IsDash() || ch.IsDigit());
+        && str.All(IsPunycode);
 }

@@ -8,6 +8,8 @@ public static class Program
     {
         BenchmarkRunner.Run<DecimalBenchmark>();
 
+        BenchmarkRunner.Run<EmailBenchmark>();
+
         BenchmarkRunner.Run<IbanBenchmark.ParseUnformatted>();
         BenchmarkRunner.Run<IbanBenchmark.ParseFormatted>();
 

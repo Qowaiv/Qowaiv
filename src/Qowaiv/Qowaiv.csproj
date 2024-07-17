@@ -9,6 +9,7 @@
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
 ToBeReleased:
+- Email address parsing performance improvements.
 - Add check for percentage.MaxValue and percentage.MinValue when creating a percentage. (fix)
 - Use DecimalMath.Pow10() to convert decimal values to percentages.
 v7.0.1

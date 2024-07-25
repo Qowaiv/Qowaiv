@@ -13,75 +13,71 @@ internal partial class BbanParser(string pattern)
     public Country Country => Country.Parse(Pattern[..2]);
 
     [Pure]
-    public string? Parse(string str, int start, int id)
-        => Parse(str, start, Buffer(id)) is { } iban
+    public string? Parse(CharSpan str, int id)
+        => Parse(str, Buffer(id)) is { } iban
         && Mod97(iban)
         && Validate(iban)
             ? iban
             : null;
 
     [Pure]
-    private string? Parse(string str, int start, char[] buffer)
+    private string? Parse(CharSpan span, Chars buffer)
     {
-        var pos = 2;
-        var index = start;
-
-        while (index < str.Length && pos < Length)
+        while (span.NotEmpty && buffer.Length < Length)
         {
-            var ch = str[index++];
-            if (ch <= 'Z' && IsMatch(ch, Pattern[pos]))
+            var ch = span.First;
+            if (ch <= 'Z' && IsMatch(ch, Pattern[buffer.Length]))
             {
-                buffer[pos++] = ASCII.Upper(ch);
+                buffer += ASCII.Upper(ch);
             }
 
             // Markup within the ckecksum is not allowed.
-            else if (pos == 3 || !IbanParser.IsMarkup(ch))
+            else if (buffer.Length == 3 || !IbanParser.IsMarkup(ch))
             {
                 return null;
             }
+            span++;
         }
 
-        return IsEndOfString(str, index)
-            ? CheckLength(buffer, pos)
+        return IsEndOfString(span)
+            ? CheckLength(buffer)
             : null;
     }
 
     [Pure]
-    protected virtual char[] Buffer(int id)
-    {
-        var buffer = new char[Length];
-        buffer[0] = Pattern[0];
-        buffer[1] = Pattern[1];
-        return buffer;
-    }
+    protected virtual Chars Buffer(int id)
+        => Chars.Init(Length)
+        + Pattern[0]
+        + Pattern[1];
 
     [Pure]
-    protected virtual string? CheckLength(char[] iban, int length)
-        => length == Length ? new(iban) : null;
+    protected virtual string? CheckLength(Chars iban)
+        => iban.Length == Length ? iban.ToString() : null;
 
     /// <summary>Extended validation for specific parsers.</summary>
     [Pure]
     protected virtual bool Validate(string iban) => true;
 
     [Pure]
-    private static bool IsEndOfString(string str, int index)
+    private static bool IsEndOfString(CharSpan span)
     {
-        while (index < str.Length)
+        while (span.NotEmpty)
         {
-            if (!IbanParser.IsMarkup(str[index++]))
+            if (!IbanParser.IsMarkup(span.First))
             {
                 return false;
             }
+            span++;
         }
         return true;
     }
 
     [Pure]
-    private static bool IsMatch(char ch, char pattern)
+    private static bool IsMatch(char ch, char pattern) => pattern switch
     {
-        if /*.*/(pattern == 'n') return ASCII.IsDigit(ch);
-        else if (pattern == 'a') return ASCII.IsLetter(ch);
-        else if (pattern == 'c') return ASCII.IsLetterOrDigit(ch);
-        else return ch == pattern;
-    }
+        'n' => ASCII.IsDigit(ch),
+        'a' => ASCII.IsLetter(ch),
+        'c' => ASCII.IsLetterOrDigit(ch),
+        _ => pattern == ch,
+    };
 }

@@ -1,4 +1,6 @@
-﻿namespace Qowaiv.Financial;
+﻿using System.Runtime.CompilerServices;
+
+namespace Qowaiv.Financial;
 
 internal static partial class IbanParser
 {
@@ -9,47 +11,43 @@ internal static partial class IbanParser
     /// A normalized (uppercased without markup) string, or null for invalid input.
     /// </returns>
     [Pure]
-    public static string? Parse(string str)
+    public static string? Parse(CharSpan span, bool prefixed = false)
     {
-        var index = 0;
-        var pos = 0;
-        var id = 0;
-        var prefixed = false;
-
-        while (index < str.Length)
+        while (span.Length >= 12)
         {
-            var ch = str[index++];
-
-            if (ASCII.IsAscii(ch) && ASCII.IsLetter(ch))
+            if (IsLetter(span.First))
             {
-                id *= 26;
-                id += ASCII.Upper(ch) - 'A';
+                var id = Id(span++);
 
-                if (++pos == 1) continue;
+                if (!IsLetter(span.First))
+                {
+                    return null;
+                }
+
+                id = (id * 26) + Id(span++);
 
                 if (Parsers[id] is { } bban)
                 {
-                    return bban.Parse(str, index, id);
+                    return bban.Parse(span, id);
                 }
-                else if (!prefixed && HasIbanPrefix(id, str, index))
+                else if (!prefixed && HasIbanPrefix(id, span))
                 {
-                    pos = 0;
-                    id = 0;
-                    index += 3;
-                    prefixed = true;
+                    return Parse(span.Next(3), prefixed: true);
                 }
-                else return null;
+                else
+                {
+                    return null;
+                }
             }
-            else if (pos != 0)
+            else if (IsMarkup(span.First))
             {
-                return null;
+                span++;
             }
-            else if (!prefixed && HasIbanPrefix(str, index))
+            else if (!prefixed && HasIbanPrefix(span))
             {
-                index += 5;
-                prefixed = true;
+                return Parse(span.Next(6), prefixed: true);
             }
-            else if (!IsMarkup(ch))
+            else
             {
                 return null;
             }
@@ -58,18 +56,26 @@ internal static partial class IbanParser
     }
 
     [Pure]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static int Id(CharSpan span) => ASCII.Upper(span.First) - 'A';
+
+    [Pure]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static bool IsLetter(char ch) => ASCII.IsAscii(ch) && ASCII.IsLetter(ch);
+
+    [Pure]
     internal static bool IsMarkup(char ch)
         => ASCII.IsAscii(ch)
             ? ASCII.IsMarkup(ch)
             : char.IsWhiteSpace(ch);
 
     [Pure]
-    private static bool HasIbanPrefix(int id, string str, int index)
+    private static bool HasIbanPrefix(int id, CharSpan span)
         => id == IB
-        && str[(index - 2)..].StartsWith("IBAN", StringComparison.OrdinalIgnoreCase)
-        && (IsMarkup(str[index + 2]) || str[index + 2] == ':');
+        && span.Prev(2).StartsWith("IBAN", ignoreCase: true)
+        && (IsMarkup(span[2]) || span[2] == ':');
 
     [Pure]
-    private static bool HasIbanPrefix(string str, int index)
-        => str[(index - 1)..].StartsWith("(IBAN)", StringComparison.OrdinalIgnoreCase);
+    private static bool HasIbanPrefix(CharSpan span)
+        => span.StartsWith("(IBAN)", ignoreCase: true);
 }

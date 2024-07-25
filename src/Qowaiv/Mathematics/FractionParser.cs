@@ -85,7 +85,7 @@ internal static class FractionParser
             integer *= 10;
             integer += digits.IndexOf(ch);
         }
-        return trimmed.NotEmpty() ? next : null;
+        return trimmed.NotEmpty ? next : null;
     }
 
     private static CharSpan? Integer(CharSpan span, IFormatProvider? provider, out long integer)
@@ -103,7 +103,7 @@ internal static class FractionParser
     public static bool Sign(CharSpan span, IFormatProvider? provider, out int sign)
     {
         sign = span.Equals(provider.NegativeSign()) ? -1 : +1;
-        return sign == -1 || span.IsEmpty() || span.Equals(provider.PositiveSign());
+        return sign == -1 || span.IsEmpty || span.Equals(provider.PositiveSign());
     }
 
     private static bool Calculate(int sign, long integer, long numerator, long denominator, out long result)

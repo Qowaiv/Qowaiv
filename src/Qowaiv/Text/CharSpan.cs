@@ -2,6 +2,8 @@
 
 internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IEnumerable<char>
 {
+    public static readonly CharSpan Empty = new(string.Empty, 0, 0);
+
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string m_Value;
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -32,10 +34,48 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
     public bool NotEmpty => Length > 0;
 
     [Pure]
+    public bool StartsWith(string value, bool ignoreCase = false)
+    {
+        if (value.Length > Length) return false;
+        var start = Start;
+
+        return ignoreCase
+            ? CaseInsensitive(start, m_Value, value)
+            : CaseSensitive(start, m_Value, value);
+
+        static bool CaseInsensitive(int start, string value,  string startsWith)
+        {
+            for (var i = 0; i < startsWith.Length; i++)
+            {
+                if (char.ToUpperInvariant(value[start++]) != char.ToUpperInvariant(startsWith[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        static bool CaseSensitive(int start, string value, string startsWith)
+        {
+            for (var i = 0; i < startsWith.Length; i++)
+            {
+                if (value[start++] != startsWith[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    [Pure]
     public CharSpan Prev(int steps) => new(m_Value, Start - steps, End);
 
     [Pure]
     public CharSpan Next() => new(m_Value, Start + 1, End);
+
+    [Pure]
+    public CharSpan Next(int steps) => new(m_Value, Start + steps, End);
 
     [Pure]
     public CharSpan Last(out char ch)
@@ -56,7 +96,7 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
             }
         }
         trimmed = this;
-        return new(string.Empty);
+        return Empty;
     }
 
     [Pure]
@@ -74,7 +114,7 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
             }
         }
         trimmed = this;
-        return new(string.Empty);
+        return Empty;
     }
 
     /// <inheritdoc />

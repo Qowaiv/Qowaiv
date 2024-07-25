@@ -13,21 +13,19 @@ internal partial class BbanParser(string pattern)
     public Country Country => Country.Parse(Pattern[..2]);
 
     [Pure]
-    public string? Parse(string str, int start, int id)
-        => Parse(str, start, Buffer(id)) is { } iban
+    public string? Parse(CharSpan str, int id)
+        => Parse(str, Buffer(id)) is { } iban
         && Mod97(iban)
         && Validate(iban)
             ? iban
             : null;
 
     [Pure]
-    private string? Parse(string str, int start, Chars buffer)
+    private string? Parse(CharSpan span, Chars buffer)
     {
-        var index = start;
-
-        while (index < str.Length && buffer.Length < Length)
+        while (span.NotEmpty && buffer.Length < Length)
         {
-            var ch = str[index++];
+            var ch = span.First;
             if (ch <= 'Z' && IsMatch(ch, Pattern[buffer.Length]))
             {
                 buffer += ASCII.Upper(ch);
@@ -38,9 +36,10 @@ internal partial class BbanParser(string pattern)
             {
                 return null;
             }
+            span++;
         }
 
-        return IsEndOfString(str, index)
+        return IsEndOfString(span)
             ? CheckLength(buffer)
             : null;
     }
@@ -60,14 +59,15 @@ internal partial class BbanParser(string pattern)
     protected virtual bool Validate(string iban) => true;
 
     [Pure]
-    private static bool IsEndOfString(string str, int index)
+    private static bool IsEndOfString(CharSpan span)
     {
-        while (index < str.Length)
+        while (span.NotEmpty)
         {
-            if (!IbanParser.IsMarkup(str[index++]))
+            if (!IbanParser.IsMarkup(span.First))
             {
                 return false;
             }
+            span++;
         }
         return true;
     }

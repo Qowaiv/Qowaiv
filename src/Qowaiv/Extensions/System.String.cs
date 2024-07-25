@@ -83,5 +83,5 @@ public static class QowaivSystemExtensions
     internal static bool Matches(this string str, Regex pattern) => pattern.IsMatch(str);
 
     [Pure]
-    internal static CharSpan CharSpan(this string? str) => str is null ? new(string.Empty) : new(str);
+    internal static CharSpan CharSpan(this string? str) => new(str ?? string.Empty);
 }

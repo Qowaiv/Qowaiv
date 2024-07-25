@@ -61,7 +61,8 @@ Reduced the function calls, and string replacements.
 | Convert.ToBase64     | 50.71 ns |  4.57 |
 
 The version of a `UUID` is stored in the upper 4 bits of byte 7. By using the
-`GuidLayout` of `ToByteArray()` to retrieve that those bits is a big improvement.
+`GuidLayout` instead of `ToByteArray()` to retrieve that those bits is a big
+improvement.
 
 | Version     | Mean       | Ratio |
 |------------ |-----------:|------:|

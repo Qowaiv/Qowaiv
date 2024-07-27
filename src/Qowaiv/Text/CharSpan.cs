@@ -33,21 +33,17 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
     [Pure]
     public bool NotEmpty => Length > 0;
 
-    public bool NotEmpty => Length > 0;
-
-    public char First => m_Value[Start];
-
     [Pure]
     public bool StartsWith(string value, bool ignoreCase = false)
     {
         if (value.Length > Length) return false;
         var start = Start;
-    
+
         return ignoreCase
             ? CaseInsensitive(start, m_Value, value)
             : CaseSensitive(start, m_Value, value);
 
-        static bool CaseInsensitive(int start, string value,  string startsWith)
+        static bool CaseInsensitive(int start, string value, string startsWith)
         {
             for (var i = 0; i < startsWith.Length; i++)
             {
@@ -71,7 +67,8 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
             return true;
         }
     }
-    
+
+    [Pure]
     public int? LastIndexOf(char c)
     {
         int? last = null;
@@ -100,12 +97,6 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
         ch = m_Value[End - 1];
         return new(m_Value, Start, End - 1);
     }
-
-    [Pure]
-    public CharSpan Next() => new(m_Value, Start + 1, End);
-
-    [Pure]
-    public CharSpan Next(int skip) => new(m_Value, Start + skip, End);
 
     [Pure]
     public CharSpan TrimLeft() => TrimLeft(char.IsWhiteSpace, out _);

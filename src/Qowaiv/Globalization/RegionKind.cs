@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Qowaiv.Globalization;
+﻿namespace Qowaiv.Globalization;
 
 public enum RegionKind
 {

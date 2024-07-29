@@ -36,14 +36,13 @@ internal static partial class EmailParser
     /// </summary>
     private abstract class Grammar
     {
-        private static readonly Grammar at /*...........*/ = new Ch('@', true);
         private static readonly Grammar quote /*........*/ = new Ch('"', true);
         private static readonly Grammar display_name /*.*/ = new DisplayName_();
         private static readonly Grammar mailto /*.......*/ = new MailTo_();
         private static readonly Grammar localpart /*....*/ = new LocalPart_();
         private static readonly Grammar domain /*.......*/ = new Domain_() | new IP_();
-        private static readonly Grammar quoted /*.......*/ = quote + new Quoted_() + quote;
-        private static readonly Grammar local /*........*/ = (localpart | quoted) + at;
+        private static readonly Grammar quoted /*.......*/ = quote + new Quoted_() + quote + new Ch('@', true);
+        private static readonly Grammar local /*........*/ = localpart | quoted;
         private static readonly Grammar email /*........*/ = mailto + local + domain;
 
         public static readonly Grammar root =
@@ -113,17 +112,17 @@ internal static partial class EmailParser
 
                 if (ch == '@')
                 {
-                    return curr.Out.Length.IsInRange(1, LocalMaxLength) && !curr.Out.Last.IsDot()
-                        ? curr
+                    return curr.Out.Last != '.' && curr.Out.Length.IsInRange(1, LocalMaxLength)
+                        ? curr.Next() + '@'
                         : null;
                 }
                 else if (ch.IsLocal())
                 {
-                    if (ch.IsDot() && (curr.Out.Length == 0 || curr.Out.Last.IsDot()))
+                    if (ch == '.' && (curr.Out.Length == 0 || curr.Out.Last == '.'))
                     {
                         return null;
                     }
-                    curr += curr.In.First;
+                    curr += ch;
                     next = curr.Next();
                 }
                 else if (ch == '(')
@@ -199,19 +198,27 @@ internal static partial class EmailParser
             {
                 var ch = curr.In.First;
 
-                if (ch == '@')
+                if (ch == '.')
                 {
-                    return curr.Out.Length.IsInRange(1, LocalMaxLength) && !curr.Out.Last.IsDot()
-                        ? curr
-                        : null;
-                }
-                else if (ch.IsLocal())
-                {
-                    if (ch.IsDot() && (curr.Out.Length == 0 || curr.Out.Last.IsDot()))
+                    if (curr.Out.Last == '@' || curr.Out.Last == '.' || curr.Out.Last == '-')
                     {
                         return null;
                     }
-                    curr += curr.In.First;
+                    curr += ch;
+                    next = curr.Next();
+                }
+                else if (ch == '-')
+                {
+                    if (curr.Out.Last == '@' || curr.Out.Last == '.')
+                    {
+                        return null;
+                    }
+                    curr += ch;
+                    next = curr.Next();
+                }
+                else if (ch.IsDomain())
+                {
+                    curr += char.ToLowerInvariant(ch);
                     next = curr.Next();
                 }
                 else if (ch == '(')
@@ -227,7 +234,11 @@ internal static partial class EmailParser
                     return null;
                 }
             }
-            return null;
+            return next is { } final
+                && final.Out.Last != '.'
+                && final.Out.Last != '-'
+                ? final
+                : null;
         }
     }
 

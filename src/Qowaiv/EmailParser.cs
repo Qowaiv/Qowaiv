@@ -253,6 +253,11 @@ internal static partial class EmailParser
         var isIp6 = state.Input.StartsWithCaseInsensitive("IPv6:");
         if (isIp6) { state.Input.RemoveFromStart(6); }
 
+        while (state.Input.NotEmpty())
+        {
+            state.Buffer.Add(state.NextNoComment());
+        }
+
         state.Buffer.Add(state.Input);
 
         if (IPAddress.TryParse(state.Buffer, out var ip) && ip.IsValid(state.Buffer, isIp6))

@@ -21,10 +21,6 @@ internal static partial class EmailParser
 
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsAt(this char ch) => ch == '@';
-
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static bool IsDot(this char ch) => ch == '.';
 
     [Pure]

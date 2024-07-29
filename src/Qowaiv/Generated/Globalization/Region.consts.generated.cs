@@ -1297,7 +1297,7 @@ public readonly partial struct Region
     public static class BZ
     {
         /// <summary>Describes Belize (BZ) regions.</summary>
-        public static readonly Region BZ = new("BZ-BZ");
+        public static readonly Region _BZ = new("BZ-BZ");
 
         /// <summary>Describes Belize (BZ) regions.</summary>
         public static readonly Region CY = new("BZ-CY");
@@ -2133,7 +2133,7 @@ public readonly partial struct Region
         public static readonly Region DI = new("DJ-DI");
 
         /// <summary>Describes Djibouti (DJ) regions.</summary>
-        public static readonly Region DJ = new("DJ-DJ");
+        public static readonly Region _DJ = new("DJ-DJ");
 
         /// <summary>Describes Djibouti (DJ) regions.</summary>
         public static readonly Region TA = new("DJ-TA");
@@ -5086,7 +5086,7 @@ public readonly partial struct Region
         public static readonly Region GR = new("LU-GR");
 
         /// <summary>Describes Luxembourg (LU) regions.</summary>
-        public static readonly Region LU = new("LU-LU");
+        public static readonly Region _LU = new("LU-LU");
 
         /// <summary>Describes Luxembourg (LU) regions.</summary>
         public static readonly Region ME = new("LU-ME");
@@ -5348,7 +5348,7 @@ public readonly partial struct Region
         public static readonly Region MG = new("MC-MG");
 
         /// <summary>Describes Monaco (MC) regions.</summary>
-        public static readonly Region MC = new("MC-MC");
+        public static readonly Region _MC = new("MC-MC");
 
         /// <summary>Describes Monaco (MC) regions.</summary>
         public static readonly Region SR = new("MC-SR");
@@ -6282,7 +6282,7 @@ public readonly partial struct Region
         public static readonly Region MG = new("MW-MG");
 
         /// <summary>Describes Malawi (MW) regions.</summary>
-        public static readonly Region MW = new("MW-MW");
+        public static readonly Region _MW = new("MW-MW");
 
         /// <summary>Describes Malawi (MW) regions.</summary>
         public static readonly Region MZ = new("MW-MZ");
@@ -9091,7 +9091,7 @@ public readonly partial struct Region
         public static readonly Region SA = new("SO-SA");
 
         /// <summary>Describes Somalia (SO) regions.</summary>
-        public static readonly Region SO = new("SO-SO");
+        public static readonly Region _SO = new("SO-SO");
 
         /// <summary>Describes Somalia (SO) regions.</summary>
         public static readonly Region TO = new("SO-TO");
@@ -9206,7 +9206,7 @@ public readonly partial struct Region
         public static readonly Region SS = new("SV-SS");
 
         /// <summary>Describes El Salvador (SV) regions.</summary>
-        public static readonly Region SV = new("SV-SV");
+        public static readonly Region _SV = new("SV-SV");
 
         /// <summary>Describes El Salvador (SV) regions.</summary>
         public static readonly Region SA = new("SV-SA");

@@ -210,4 +210,7 @@
   <data name="ArgumentOutOfRange_Percentage" xml:space="preserve">
     <value>Value is either too large or too small for a percentage.</value>
   </data>
+  <data name="FormatExceptionRegion" xml:space="preserve">
+    <value>Not a valid region</value>
+  </data>
 </root>

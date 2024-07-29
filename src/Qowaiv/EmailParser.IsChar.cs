@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 
 namespace Qowaiv;
 
@@ -18,10 +18,6 @@ internal static partial class EmailParser
 
     [Pure]
     private static bool IsPunycode(this char ch) => !ASCII.IsAscii(ch) || ASCII.EmailAddress.IsPunycode(ch);
-
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsAt(this char ch) => ch == '@';
 
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

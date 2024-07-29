@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Text;
+namespace Qowaiv.Text;
 
 internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IEnumerable<char>
 {
@@ -43,7 +43,7 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
             ? CaseInsensitive(start, m_Value, value)
             : CaseSensitive(start, m_Value, value);
 
-        static bool CaseInsensitive(int start, string value,  string startsWith)
+        static bool CaseInsensitive(int start, string value, string startsWith)
         {
             for (var i = 0; i < startsWith.Length; i++)
             {
@@ -69,6 +69,20 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
     }
 
     [Pure]
+    public int? LastIndexOf(char c)
+    {
+        int? last = null;
+        for (var i = Start; i < End; i++)
+        {
+            if (m_Value[i] == c)
+            {
+                last = i;
+            }
+        }
+        return last is { } l ? l - Start : null;
+    }
+
+    [Pure]
     public CharSpan Prev(int steps) => new(m_Value, Start - steps, End);
 
     [Pure]
@@ -83,6 +97,9 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
         ch = m_Value[End - 1];
         return new(m_Value, Start, End - 1);
     }
+
+    [Pure]
+    public CharSpan TrimLeft() => TrimLeft(char.IsWhiteSpace, out _);
 
     [Pure]
     public CharSpan TrimLeft(Func<char, bool> predicate, out CharSpan trimmed)
@@ -115,6 +132,20 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
         }
         trimmed = this;
         return Empty;
+    }
+
+    [Pure]
+    public bool StartsWithCaseInsensitive(string str)
+    {
+        if (str.Length > Length) return false;
+        else
+        {
+            for (var i = 0; i < str.Length; i++)
+            {
+                if (char.ToUpperInvariant(this[i]) != char.ToUpperInvariant(str[i])) { return false; }
+            }
+            return true;
+        }
     }
 
     /// <inheritdoc />

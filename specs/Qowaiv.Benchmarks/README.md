@@ -30,6 +30,12 @@ tricks we can not rely on.
 | Qowaiv v6    | 29.425 ns |  5.08 |
 | Qowaiv v7    | 26.247 ns |  4.56 |
 
+## Email address
+The specialized parser (not using any `Regex`) guarantees fast parsing.
+| Method | Mean     |
+|------- |---------:|
+| Parse  | 284.3 ns |
+
 ## Percentage
 Apply a divide by 100, the default operation to convert a decimal to a
 percentage. Note that `DecimalMath` and the division trim, but the multiplication

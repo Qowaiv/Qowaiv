@@ -40,7 +40,7 @@ internal static partial class EmailParser
         if (state.Buffer.NotEmpty() && state.Input.NotEmpty())
         {
             var ch = state.Next();
-            if (ch.IsAt())
+            if (ch == '@')
             {
                 if (state.Buffer.Length < 3 || state.Buffer.Length > LocalMaxLength)
                 {
@@ -127,7 +127,7 @@ internal static partial class EmailParser
         if (state.Quoted().Buffer.NotEmpty() && state.Input.NotEmpty())
         {
             var ch = state.Next();
-            if (ch.IsAt() && state.Buffer.Length <= LocalMaxLength)
+            if (ch == '@' && state.Buffer.Length <= LocalMaxLength)
             {
                 state.Result.Add(state.Buffer).Add(ch);
                 return state;
@@ -143,13 +143,17 @@ internal static partial class EmailParser
         {
             var ch = state.NextNoComment();
 
-            if (ch.IsDot() && (state.Buffer.IsEmpty() || state.Buffer.Last().IsDot()))
+            if (ch == '.' && (state.Buffer.IsEmpty() || state.Buffer.Last() == '.'))
             {
                 return state.Invalid();
             }
-            else if (ch.IsAt())
+            else if (ch.IsLocal())
             {
-                if (state.Buffer.IsEmpty() || state.Buffer.Last().IsDot())
+                state.Buffer.Add(ch);
+            }
+            else if (ch == '@')
+            {
+                if (state.Buffer.IsEmpty() || state.Buffer.Last() == '.')
                 {
                     return state.Invalid();
                 }
@@ -158,10 +162,6 @@ internal static partial class EmailParser
                     state.Result.Add(state.Buffer).Add(ch);
                     return state;
                 }
-            }
-            else if (ch.IsLocal())
-            {
-                state.Buffer.Add(ch);
             }
             else return state.Invalid();
         }
@@ -252,6 +252,11 @@ internal static partial class EmailParser
         }
         var isIp6 = state.Input.StartsWithCaseInsensitive("IPv6:");
         if (isIp6) { state.Input.RemoveFromStart(6); }
+
+        while (state.Input.NotEmpty())
+        {
+            state.Buffer.Add(state.NextNoComment());
+        }
 
         state.Buffer.Add(state.Input);
 

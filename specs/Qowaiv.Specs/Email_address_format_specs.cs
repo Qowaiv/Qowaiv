@@ -247,6 +247,11 @@ public class Comments
     public void are_ignored(string email)
         => EmailAddress.Parse(email).Should().Be(Svo.EmailAddress);
 
+    [TestCase("ipv4.addr@[123.1.7(some comment)2.10]")]
+    [TestCase("ipv4.addr@123.1.7(some comment)2.10")]
+    public void are_ignored_in_ip_based_domain(string email)
+        => EmailAddress.Parse(email).Should().Be(EmailAddress.Parse("ipv4.addr@[123.1.72.10]"));
+
     [Test]
     public void not_nested()
         => Email.ShouldBeInvalid("in( nested(extra) )fo@qowaiv.org");

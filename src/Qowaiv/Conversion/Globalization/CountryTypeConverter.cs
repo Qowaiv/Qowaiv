@@ -2,7 +2,7 @@
 
 namespace Qowaiv.Conversion.Globalization;
 
-/// <summary>Provides a conversion for a Country.</summary>
+/// <summary>Provides a conversion for a country.</summary>
 [Inheritable]
 public class CountryTypeConverter : SvoTypeConverter<Country>
 {

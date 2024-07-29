@@ -43,7 +43,7 @@ public static class RegionConstants
                 f = false;
 
                 var name = region.Code.Split('-')[1];
-                name = ASCII.IsDigit(name[0]) ? $"_{name}" : name;
+                name = name == kvp.Key || ASCII.IsDigit(name[0]) ? $"_{name}" : name;
 
                 w.WriteLine($"        /// <summary>Describes {country.EnglishName} ({country.Name}) regions.</summary>");
                 w.WriteLine($"        public static readonly Region {name} = new(\"{region.Code}\");");

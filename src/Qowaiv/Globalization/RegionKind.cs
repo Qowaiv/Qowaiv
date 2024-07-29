@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Qowaiv.Globalization
+namespace Qowaiv.Globalization;
+
+public enum RegionKind
 {
-    internal class RegionKind
-    {
-    }
+    None = 0,
+    Provence,
+    Unknown = 99,
 }

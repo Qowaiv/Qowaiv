@@ -1,10 +1,56 @@
-﻿namespace Qowaiv.TestTools.Generation;
+﻿using System.Text.Json;
+
+namespace Qowaiv.TestTools.Generation;
 
 public static class RegionConstants
 {
     public static void Generate()
     {
-        var all = Data();
+        var data = new Dictionary<string, CountryData>();
+
+        foreach (var json in Json())
+        {
+            if (!data.TryGetValue(json.Key, out var country))
+            {
+                country = new() { Code = json.Key };
+                data[country.Code] = country;
+            }
+
+            foreach (var kvp in json.Value)
+            {
+                country.Regions.Add(new RegionData()
+                {
+                    Code = kvp.Key,
+                    LocalName = kvp.Value.LocalName,
+                    Name = kvp.Value.Name,
+                    ParentCode = kvp.Value.ParentCode,
+                    Type = kvp.Value.Type,
+                });
+            }
+        }
+
+        foreach (var csv in Csv())
+        {
+            var c = data[csv.Key];
+
+            foreach (var value in csv.Value)
+            {
+                var r = c.Regions.FirstOrDefault(x => x.Code == value.Code);
+
+                if (r is null)
+                {
+                    Console.WriteLine($"{value.Code} does not exist");
+                }
+                else if (r.Name != value.Name)
+                {
+                    Console.WriteLine($"{value.Code} '{value.Name}' != '{r.Name}'");
+                }
+            }
+        }
+
+        var countries = data.Values;
+
+        var types = countries.SelectMany(c => c.Regions).Select(r => r.Type).Distinct().ToArray();
 
         using var w = new StreamWriter(Solution.Root.File("src/Qowaiv/Generated/Globalization/Region.consts.generated.cs").FullName);
 
@@ -24,29 +70,24 @@ public static class RegionConstants
 
         var first = true;
 
-        foreach (var kvp in all)
+        foreach (var country in countries.Where(c => c.Regions.Any()))
         {
             if (!first) w.WriteLine();
             first = false;
 
-            var country = Country.Parse(kvp.Key);
-
-            w.WriteLine($"    /// <summary>Describes {country.EnglishName} ({country.Name}) regions.</summary>");
-            w.WriteLine($"    public static class {kvp.Key}");
+            w.WriteLine($"    /// <summary>Describes {country.Data.EnglishName} ({country.Code}) regions.</summary>");
+            w.WriteLine($"    public static class {country.Code}");
             w.WriteLine(@"    {");
 
             var f = true;
 
-            foreach (var region in kvp.Value)
+            foreach (var region in country.Regions)
             {
                 if (!f) w.WriteLine();
                 f = false;
 
-                var name = region.Code.Split('-')[1];
-                name = name == kvp.Key || ASCII.IsDigit(name[0]) ? $"_{name}" : name;
-
-                w.WriteLine($"        /// <summary>Describes {country.EnglishName} ({country.Name}) regions.</summary>");
-                w.WriteLine($"        public static readonly Region {name} = new(\"{region.Code}\");");
+                w.WriteLine($"        /// <summary>Describes the region {region.Name} ({region.Code}).</summary>");
+                w.WriteLine($"        public static readonly Region {region.Property} = new(\"{region.Code}\");");
             }
 
             w.WriteLine(@"    }");
@@ -55,16 +96,15 @@ public static class RegionConstants
         w.Flush();
     }
 
-
-    private static IReadOnlyDictionary<string, List<RegionData>> Data()
+    private static IReadOnlyDictionary<string, List<RegionCsv>> Csv()
     {
         using var w = new StreamReader(Solution.Root.File("specs/Qowaiv.Specs/TestTools/Generation/ISO-3166-2.csv").FullName);
 
-        var data = new List<RegionData>();
+        var data = new List<RegionCsv>();
 
         while (w.ReadLine() is { } line)
         {
-            data.Add(RegionData.Parse(line));
+            data.Add(RegionCsv.Parse(line));
         }
 
         return data
@@ -75,13 +115,25 @@ public static class RegionConstants
             .ToDictionary(g => g.Key, g => g.ToList());
     }
 
-    private record RegionData
+    private static Dictionary<string, Dictionary<string, RegionJson>> Json()
+    {
+        using var w = new StreamReader(Solution.Root.File("specs/Qowaiv.Specs/TestTools/Generation/ISO-3166-2.json").FullName);
+
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
+        return JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, RegionJson>>>(w.ReadToEnd(), options)!;
+    }
+
+    private sealed record RegionCsv
     {
         public required string Country { get; init; }
         public required string Name { get; init; }
         public required string Code { get; init; }
 
-        public static RegionData Parse(string line)
+        public static RegionCsv Parse(string line)
         {
             var parts = line.Split(@""",""");
             return new()
@@ -90,6 +142,41 @@ public static class RegionConstants
                 Name = parts[1].Trim('"'),
                 Code = parts[2].Trim('"'),
             };
+        }
+    }
+
+    private sealed record RegionJson
+    {
+        public decimal[] latLng { get; init; } = [];
+        public string? LocalName { get; init; }
+        public string? Name { get; init; }
+        public string? ParentCode { get; init; }
+        public string? Type { get; init; }
+    }
+
+    private sealed record CountryData
+    {
+        public required string Code { get; init; }
+        public Country Data => Country.Parse(Code);
+        public List<RegionData> Regions { get; init; } = [];
+    }
+    private sealed record RegionData
+    {
+        public required string Code { get; init; }
+        public string? Name { get; init; }
+        public string? LocalName { get; init; }
+        public string? ParentCode { get; init; }
+        public string? Type { get; init; }
+
+        public string Property
+        {
+            get
+            {
+                var splitted = Code.Split('-');
+                var name = splitted[1];
+                name = name == splitted[0] || ASCII.IsDigit(name[0]) ? $"_{name}" : name;
+                return name;
+            }
         }
     }
 }

@@ -1,77 +1,43 @@
-﻿using Qowaiv;
-using System.Runtime.CompilerServices;
+﻿namespace Benchmarks;
 
-namespace System;
-
-/// <summary>Extensions on <see cref="Type"/>.</summary>
-public static class QowaivTypeExtensions
+[MemoryDiagnoser(true)]
+public class ToCSharpStringBenchmark
 {
-    private static readonly ConditionalWeakTable<Type, string> _shortNameCache = new();
-    private static readonly ConditionalWeakTable<Type, string> _longNameCache = new();
+    private static readonly Type Type = typeof(Dictionary<int, List<LinkedList<string>>>);
 
-    /// <summary>Gets a C# formatted <see cref="string"/> representing the <see cref="Type"/>.</summary>
-    /// <param name="type">
-    /// The type to format as C# string.
-    /// </param>
-    [Pure]
-    public static string ToCSharpString(this Type type) => type.ToCSharpString(false);
+    [Params(1, 10, 100/*, 1000, 10_000*/)]
+    public int Count { get; set; }
 
-    /// <summary>Gets a C# formatted <see cref="string"/> representing the <see cref="Type"/>.</summary>
-    /// <param name="type">
-    /// The type to format as C# string.
-    /// </param>
-    /// <param name="withNamespace">
-    /// Should the namespace be displayed or not.
-    /// </param>
-    [Pure]
-    public static string ToCSharpString(this Type type, bool withNamespace)
+    [Benchmark(Baseline = true)]
+    public string[] No_cache()
     {
-        Guard.NotNull(type);
-        return withNamespace ? type.ToCSharpStringLong() : type.ToCSharpStringShort();
-    }
-
-    [Pure]
-    private static string ToCSharpStringShort(this Type type)
-    {
-        if (_shortNameCache.TryGetValue(type, out var result))
+        var result = new string[Count];
+        for (var i = 0; i < Count; i++)
         {
-            return result;
+            result[i] = Type.OldToCSharpString(true);
         }
-
-        lock (_shortNameCache)
-        {
-            if (!_shortNameCache.TryGetValue(type, out result))
-            {
-                result = new StringBuilder().AppendType(TypeInfo.New(type), false).ToString();
-                _shortNameCache.Add(type, result);
-            }
-        }
-
         return result;
     }
 
-    [Pure]
-    private static string ToCSharpStringLong(this Type type)
+    [Benchmark]
+    public string[] With_cache()
     {
-        if (_longNameCache.TryGetValue(type, out var result))
+        var result = new string[Count];
+        for (var i = 0; i < Count; i++)
         {
-            return result;
+            result[i] = Type.ToCSharpString(true);
         }
-
-        lock (_longNameCache)
-        {
-            if (!_longNameCache.TryGetValue(type, out result))
-            {
-                result = new StringBuilder().AppendType(TypeInfo.New(type), true).ToString();
-                _longNameCache.Add(type, result);
-            }
-        }
-
         return result;
     }
+}
 
+file static class QowaivTypeExtensions
+{
     [Pure]
-    internal static bool IsAnyOf(this Type? type, params Type[] types) => types.Contains(type);
+    public static string OldToCSharpString(this Type type, bool withNamespace)
+    {
+        return new StringBuilder().AppendType(TypeInfo.New(type), withNamespace).ToString();
+    }
 
     [FluentSyntax]
     private static StringBuilder AppendType(this StringBuilder sb, TypeInfo type, bool withNamespace)

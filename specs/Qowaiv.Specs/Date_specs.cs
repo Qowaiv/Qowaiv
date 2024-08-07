@@ -1,4 +1,6 @@
-﻿namespace Date_specs;
+﻿using FluentAssertions.Extensions;
+
+namespace Date_specs;
 
 public class Is_invalid
 {
@@ -155,6 +157,32 @@ public class Supports_type_conversion
     }
 
     [Test]
+    public void from_date_time()
+        => Converting.From(new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local)).To<Date>().Should().Be(Svo.Date);
+
+#if NET6_0_OR_GREATER
+    [Test]
+    public void from_date_only()
+        => Converting.From(Svo.DateOnly).To<Date>().Should().Be(Svo.Date);
+#endif
+
+    [Test]
+    public void from_date_time_offset()
+        => Converting.From(new DateTimeOffset(2017, 06, 11, 00, 00, 00, TimeSpan.Zero)).To<Date>().Should().Be(Svo.Date);
+
+    [Test]
+    public void from_Loca_date_time()
+        => Converting.From(new LocalDateTime(2017, 06, 11)).To<Date>().Should().Be(Svo.Date);
+
+    [Test]
+    public void from_week_date()
+        => Converting.From(new WeekDate(2017, 23, 7)).To<Date>().Should().Be(Svo.Date);
+
+    [Test]
+    public void from_year_month()
+        => Converting.From(Svo.YearMonth).To<Date>().Should().Be(new Date(2017, 06, 01));
+
+    [Test]
     public void to_string()
     {
         using (TestCultures.en_GB.Scoped())
@@ -164,36 +192,30 @@ public class Supports_type_conversion
     }
 
     [Test]
-    public void from_DateTime()
-        => Converting.From(new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local)).To<Date>().Should().Be(Svo.Date);
+    public void to_date_time()
+        => Converting.To<DateTime>().From(Svo.Date).Should().Be(11.June(2017));
+
+#if NET6_0_OR_GREATER
+    [Test]
+    public void to_date_only()
+        => Converting.To<DateOnly>().From(Svo.Date).Should().Be(Svo.DateOnly);
+#endif
 
     [Test]
-    public void from_DateTimeOffset()
-        => Converting.From(new DateTimeOffset(2017, 06, 11, 00, 00, 00, TimeSpan.Zero)).To<Date>().Should().Be(Svo.Date);
-
-    [Test]
-    public void from_LocalDateTime()
-        => Converting.From(new LocalDateTime(2017, 06, 11)).To<Date>().Should().Be(Svo.Date);
-
-    [Test]
-    public void from_WeekDate()
-        => Converting.From(new WeekDate(2017, 23, 7)).To<Date>().Should().Be(Svo.Date);
-
-    [Test]
-    public void to_DateTime()
-        => Converting.To<DateTime>().From(Svo.Date).Should().Be(new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local));
-
-    [Test]
-    public void to_DateTimeOffset()
+    public void to_date_time_offset()
         => Converting.To<DateTimeOffset>().From(Svo.Date).Should().Be(new DateTimeOffset(2017, 06, 11, 00, 00, 00, TimeSpan.Zero));
 
     [Test]
-    public void to_LocalDateTime()
+    public void to_local_date_time()
         => Converting.To<LocalDateTime>().From(Svo.Date).Should().Be(new LocalDateTime(2017, 06, 11));
 
     [Test]
-    public void to_WeekDate()
+    public void to_week_date()
         => Converting.To<WeekDate>().From(Svo.Date).Should().Be(new WeekDate(2017, 23, 7));
+
+    [Test]
+    public void to_Year_Month()
+        => Converting.To<YearMonth>().From(Svo.Date).Should().Be(Svo.YearMonth);
 }
 
 public class Supports_JSON_serialization

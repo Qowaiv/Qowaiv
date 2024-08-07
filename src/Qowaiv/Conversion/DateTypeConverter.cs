@@ -10,7 +10,6 @@ public class DateTypeConverter : DateTypeConverter<Date>
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
-    [Pure]
     [DoesNotReturn]
     protected sealed override Date FromDate(Date date) => throw new NotSupportedException();
 
@@ -39,7 +38,6 @@ public class DateTypeConverter : DateTypeConverter<Date>
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
-    [Pure]
     [DoesNotReturn]
     protected sealed override Date ToDate(Date date) => throw new NotSupportedException();
 

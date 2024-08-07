@@ -22,7 +22,6 @@ public class LocalDateTimeTypeConverter : DateTypeConverter<LocalDateTime>
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
-    [Pure]
     [DoesNotReturn]
     protected sealed override LocalDateTime FromLocalDateTime(LocalDateTime local) => throw new NotSupportedException();
 
@@ -42,9 +41,9 @@ public class LocalDateTimeTypeConverter : DateTypeConverter<LocalDateTime>
     /// <inheritdoc />
     [Pure]
     protected override LocalDateTime FromYearMonth(YearMonth yearMonth) => new(year: yearMonth.Year, month: yearMonth.Month, day: 01);
+
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
-    [Pure]
     [DoesNotReturn]
     protected sealed override LocalDateTime ToLocalDateTime(LocalDateTime date) => throw new NotSupportedException();
 

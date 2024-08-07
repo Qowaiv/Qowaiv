@@ -26,7 +26,6 @@ public class WeekDateTypeConverter : DateTypeConverter<WeekDate>
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
-    [Pure]
     [DoesNotReturn]
     protected sealed override WeekDate FromWeekDate(WeekDate weekDate) => throw new NotSupportedException();
 
@@ -56,7 +55,6 @@ public class WeekDateTypeConverter : DateTypeConverter<WeekDate>
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
-    [Pure]
     [DoesNotReturn]
     protected sealed override WeekDate ToWeekDate(WeekDate date) => throw new NotSupportedException();
 }

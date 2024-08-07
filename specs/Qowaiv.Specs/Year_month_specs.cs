@@ -1,4 +1,6 @@
-﻿namespace Year_month_specs;
+﻿using FluentAssertions.Extensions;
+
+namespace Year_month_specs;
 
 public class With_domain_logic
 {
@@ -382,7 +384,7 @@ public class Casts
 
     [Test]
     public void explicitly_to_DateTime()
-        => ((DateTime)Svo.YearMonth).Should().Be(new DateTime(2017, 06, 01));
+        => ((DateTime)Svo.YearMonth).Should().Be(01.June(2017));
 
     [Test]
     public void explicitly_to_LocalDateTime()
@@ -406,7 +408,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From<string>(null).To<YearMonth>().Should().Be(default);
+            Converting.FromNull<string>().To<YearMonth>().Should().Be(default);
         }
     }
 
@@ -420,6 +422,28 @@ public class Supports_type_conversion
     }
 
     [Test]
+    public void from_date_time()
+        => Converting.From(Svo.DateTime).To<YearMonth>().Should().Be(Svo.YearMonth);
+
+#if NET6_0_OR_GREATER
+    [Test]
+    public void from_date_only()
+        => Converting.From(Svo.DateOnly).To<YearMonth>().Should().Be(Svo.YearMonth);
+#endif
+
+    [Test]
+    public void from_date_time_offset()
+        => Converting.From(Svo.DateTimeOffset).To<YearMonth>().Should().Be(Svo.YearMonth);
+
+    [Test]
+    public void from_local_date_time()
+        => Converting.From(Svo.LocalDateTime).To<YearMonth>().Should().Be(Svo.YearMonth);
+
+    [Test]
+    public void from_date()
+        => Converting.From(Svo.Date).To<YearMonth>().Should().Be(Svo.YearMonth);
+
+    [Test]
     public void to_string()
     {
         using (TestCultures.en_GB.Scoped())
@@ -427,6 +451,29 @@ public class Supports_type_conversion
             Converting.ToString().From(Svo.YearMonth).Should().Be("2017-06");
         }
     }
+
+    [Test]
+    public void to_date_time()
+        => Converting.To<DateTime>().From(Svo.YearMonth).Should().Be(01.June(2017));
+
+
+#if NET6_0_OR_GREATER
+    [Test]
+    public void to_date_only()
+        => Converting.To<DateOnly>().From(Svo.YearMonth).Should().Be(new DateOnly(2017, 06, 01));
+#endif
+
+    [Test]
+    public void to_date_time_offset()
+        => Converting.To<DateTimeOffset>().From(Svo.YearMonth).Should().Be(01.June(2017).WithOffset(TimeSpan.Zero));
+
+    [Test]
+    public void to_local_date_time()
+        => Converting.To<LocalDateTime>().From(Svo.YearMonth).Should().Be(new LocalDateTime(2017, 06, 01));
+
+    [Test]
+    public void to_date()
+        => Converting.To<Date>().From(Svo.YearMonth).Should().Be(new Date(2017, 06, 01));
 }
 
 public class Supports_JSON_serialization

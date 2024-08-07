@@ -26,24 +26,18 @@ public class YearMonthTypeConverter : DateTypeConverter<YearMonth>
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
-    [Pure]
-#if NET5_0_OR_GREATER
     [DoesNotReturn]
-#endif
-    protected override YearMonth FromWeekDate(WeekDate weekDate) => throw new NotImplementedException();
+    protected override YearMonth FromWeekDate(WeekDate weekDate) => throw new NotSupportedException();
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
-    [Pure]
-#if NET5_0_OR_GREATER
     [DoesNotReturn]
-#endif
-    protected override YearMonth FromYearMonth(YearMonth yearMonth) => throw new NotImplementedException();
+    protected override YearMonth FromYearMonth(YearMonth yearMonth) => throw new NotSupportedException();
 
     /// <inheritdoc />
     [Pure]
     protected override Date ToDate(YearMonth date) => (Date)date;
-    
+
     /// <inheritdoc />
     [Pure]
     protected override DateTime ToDateTime(YearMonth date) => (DateTime)date;
@@ -58,17 +52,11 @@ public class YearMonthTypeConverter : DateTypeConverter<YearMonth>
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
-    [Pure]
-#if NET5_0_OR_GREATER
     [DoesNotReturn]
-#endif
-    protected override WeekDate ToWeekDate(YearMonth date) => throw new NotImplementedException();
+    protected override WeekDate ToWeekDate(YearMonth date) => throw new NotSupportedException();
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
-    [Pure]
-#if NET5_0_OR_GREATER
     [DoesNotReturn]
-#endif
-    protected override YearMonth ToYearMonth(YearMonth date) => throw new NotImplementedException();
+    protected override YearMonth ToYearMonth(YearMonth date) => throw new NotSupportedException();
 }

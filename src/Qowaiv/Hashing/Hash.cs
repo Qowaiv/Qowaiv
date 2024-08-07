@@ -28,7 +28,6 @@ public readonly struct Hash : IEquatable<Hash>
     public bool Equals(Hash other) => Value == other.Value;
 
     /// <summary>Throws a <see cref="HashingNotSupported" />.</summary>
-    [Pure]
     [EditorBrowsable(EditorBrowsableState.Never)]
     [DoesNotReturn]
     public override int GetHashCode() => NotSupportedBy<Hash>();
@@ -58,7 +57,6 @@ public readonly struct Hash : IEquatable<Hash>
         : new(Combine(Randomized, HashCode(item)));
 
     /// <summary>Indicates that hashing is not supported by the type.</summary>
-    [Pure]
     [DoesNotReturn]
     public static int NotSupportedBy<T>()
         => throw new HashingNotSupported(string.Format(QowaivMessages.HashingNotSupported, typeof(T)));

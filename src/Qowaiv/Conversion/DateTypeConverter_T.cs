@@ -12,20 +12,27 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
 
     /// <inheritdoc />
     [Pure]
-    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
+    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value) => value switch
     {
-        if (value is null) return Activator.CreateInstance<T>();
-        else if (value is string str) return FromString(str, culture);
-        else if (IsConvertable(value.GetType()))
-        {
-            if (value is DateTime dateTime) return FromDateTime(dateTime);
-            else if (value is DateTimeOffset offset) return FromDateTimeOffset(offset);
-            else if (value is LocalDateTime local) return FromLocalDateTime(local);
-            else if (value is Date date) return FromDate(date);
-            else if (value is WeekDate weekDate) return FromWeekDate(weekDate);
-        }
-        return base.ConvertFrom(context, culture, value);
-    }
+        null => Activator.CreateInstance<T>(),
+        string str => FromString(str, culture),
+        _ when IsConvertable(value.GetType()) => ConvertFromConvertable(value),
+        _ => base.ConvertFrom(context, culture, value),
+    };
+
+    private object ConvertFromConvertable(object value) => value switch
+    {
+        DateTime /*.......*/ date => FromDateTime(date),
+#if NET6_0_OR_GREATER
+        DateOnly /*.......*/ date => FromDate((Date)date),
+#endif
+        DateTimeOffset /*.*/ date => FromDateTimeOffset(date),
+        LocalDateTime /*..*/ date => FromLocalDateTime(date),
+        Date /*...........*/ date => FromDateTime(date),
+        WeekDate /*.......*/ date => FromWeekDate(date),
+        YearMonth /*......*/ date => FromYearMonth(date),
+        _ => throw Exceptions.InvalidCast(value.GetType(), typeof(T)),
+    };
 
     /// <inheritdoc />
     [Pure]
@@ -118,6 +125,9 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
     private static readonly Dictionary<Type, Func<DateTypeConverter<T>, T, object>> ConvertTos = new()
     {
         [typeof(DateTime)] /*.......*/ = (c, d) => c.ToDateTime(d),
+#if NET6_0_OR_GREATER
+        [typeof(DateOnly)] /*.......*/ = (c, d) => (DateOnly)c.ToDate(d),
+#endif
         [typeof(DateTimeOffset)] /*.*/ = (c, d) => c.ToDateTimeOffset(d),
         [typeof(LocalDateTime)] /*..*/ = (c, d) => c.ToLocalDateTime(d),
         [typeof(Date)] /*...........*/ = (c, d) => c.ToDate(d),

@@ -65,6 +65,44 @@ public class Is_equal_by_value
     }
 }
 
+public class Can_be_related_to
+{
+    [Test]
+    public void matching_month()
+        => Svo.YearMonth.IsIn(Month.June).Should().BeTrue();
+
+    [Test]
+    public void none_matching_month()
+       => Svo.YearMonth.IsIn(Month.February).Should().BeFalse();
+
+    [Test]
+    public void matching_year()
+        => Svo.YearMonth.IsIn(2017.CE()).Should().BeTrue();
+
+    [Test]
+    public void none_matching_year()
+       => Svo.YearMonth.IsIn(2018.CE()).Should().BeFalse();
+}
+
+public class Can_not_be_related_to
+{
+    [Test]
+    public void month_empty()
+        => Svo.YearMonth.IsIn(Month.Empty).Should().BeFalse();
+
+    [Test]
+    public void month_unknown()
+       => Svo.YearMonth.IsIn(Month.Unknown).Should().BeFalse();
+
+    [Test]
+    public void year_empty()
+        => Svo.YearMonth.IsIn(Year.Empty).Should().BeFalse();
+
+    [Test]
+    public void year_unknown()
+       => Svo.YearMonth.IsIn(Year.Unknown).Should().BeFalse();
+}
+
 public class Can_not_be_created
 {
     [TestCase(0)]
@@ -92,7 +130,11 @@ public class Can_not_be_parsed
 
     [Test]
     public void from_empty_string()
-        => YearMonth.TryParse(string.Empty).Should().BeNull();
+        => YearMonth.TryParse(string.Empty, CultureInfo.InvariantCulture).Should().BeNull();
+
+    [Test]
+    public void from_invalid_input()
+        => YearMonth.TryParse("invalid input").Should().BeNull();
 }
 
 public class Can_be_parsed
@@ -120,10 +162,6 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
         => (YearMonth.TryParse("invalid input", out _)).Should().BeFalse();
-
-    [Test]
-    public void from_invalid_as_null_with_TryParse()
-        => YearMonth.TryParse("invalid input").Should().BeNull();
 
     [Test]
     public void with_TryParse_returns_SVO()

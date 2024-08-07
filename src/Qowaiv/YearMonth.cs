@@ -52,6 +52,20 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
     [Pure]
     public Date ToDate(int day) => new(Year, Month, day);
 
+    /// <summary>Returns true if the year-month is in the specified month, otherwise false.</summary>
+    /// <param name="month">
+    /// The <see cref="Qowaiv.Month"/> the date should be in.
+    /// </param>
+    [Pure]
+    public bool IsIn(Month month) => month is { HasValue: true } && Month == (int)month;
+
+    /// <summary>Returns true if the  year-month  is in the specified year, otherwise false.</summary>
+    /// <param name="year">
+    /// The <see cref="Qowaiv.Year"/> the date should be in.
+    /// </param>
+    [Pure]
+    public bool IsIn(Year year) => year is { HasValue: true } && Year == (int)year;
+
     /// <summary>Returns a formatted <see cref="string" /> that represents the year-month.</summary>
     /// <param name="format">
     /// The format that this describes the formatting.

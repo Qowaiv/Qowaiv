@@ -249,6 +249,16 @@ bool isLeap = year.IsLeapYear;
 new DateTime(2017, 02, 14).IsIn(year); // true
 ```
 
+### Year-month
+Represent a date with year and month precision.
+
+``` C#
+var date = new YearMonth(2017, 06);
+
+// Querying
+date.IsIn(2017.CE()); // true
+```
+
 ### Yes-no
 A Yes-no is a (bi-)polar that obviously has the values "yes" and "no". It also
 has an "empty"(unset) and "unknown" value. It maps easily with a `boolean`, but

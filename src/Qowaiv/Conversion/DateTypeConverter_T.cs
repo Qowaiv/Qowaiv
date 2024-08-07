@@ -42,27 +42,26 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
 
     /// <inheritdoc />
     [Pure]
-    public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+    public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType) => Guard.NotNull(destinationType) switch
     {
-        Guard.NotNull(destinationType);
+        _ when QowaivType.IsNullOrDefaultValue(value) => ConvertoDefault(destinationType),
+        _ when destinationType == typeof(string) => Guard.IsInstanceOf<T>(value).ToString(string.Empty, culture),
+        _ when IsConvertable(destinationType) => ConvertToConvertable(value, destinationType),
+        _ => base.ConvertTo(context, culture, value, destinationType),
+    };
 
-        // If the value is null or default value.
-        if (QowaivType.IsNullOrDefaultValue(value))
-        {
-            return QowaivType.IsNullable(destinationType) ? null : Activator.CreateInstance(destinationType);
-        }
-        else if (destinationType == typeof(string))
-        {
-            var typed = Guard.IsInstanceOf<T>(value);
-            return typed.ToString(string.Empty, culture);
-        }
-        else if (IsConvertable(destinationType))
-        {
-            var date = Guard.IsInstanceOf<T>(value);
-            var type = QowaivType.GetNotNullableType(destinationType);
-            return ConvertTos[type](this, date);
-        }
-        return base.ConvertTo(context, culture, value, destinationType);
+    [Pure]
+    private static object? ConvertoDefault(Type destinationType)
+        => QowaivType.IsNullable(destinationType)
+        ? null
+        : Activator.CreateInstance(destinationType);
+
+    [Pure]
+    private object ConvertToConvertable(object? value, Type destinationType)
+    {
+        var date = Guard.IsInstanceOf<T>(value);
+        var type = QowaivType.GetNotNullableType(destinationType);
+        return ConvertTos[type](this, date);
     }
 
     /// <summary>Converts from <see cref="string"/>.</summary>

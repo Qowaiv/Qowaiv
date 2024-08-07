@@ -174,6 +174,9 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
     /// <summary>Subtracts a number of months to the year-month.</summary>
     public static YearMonth operator -(YearMonth date, MonthSpan months) => date.Add(-months);
 
+    /// <summary>Determines the duretion between the left and the right year-month.</summary>
+    public static MonthSpan operator -(YearMonth l, YearMonth r) => MonthSpan.FromMonths(l.m_Value - r.m_Value);
+
     /// <summary>Casts a year-month to a date.</summary>
     public static explicit operator Date(YearMonth date) => date.ToDate(01);
 

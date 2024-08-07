@@ -257,7 +257,8 @@ var date = new YearMonth(2017, 06);
 
 // Querying
 date.IsIn(2017.CE()); // true
-var next = date.AddMonths(23); // new YearMonth(2019, 05)
+var addition = date.AddMonths(23); // new YearMonth(2019, 05)
+var next = date++; // new YearMonth(2017, 07)
 MonthSpan age = new YearMonth(2024, 08) - date; // 7 years and 2 months.
 ```
 

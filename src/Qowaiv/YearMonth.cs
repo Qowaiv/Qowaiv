@@ -195,6 +195,12 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
     /// <summary>Casts a local date time to a year-month.</summary>
     public static explicit operator YearMonth(LocalDateTime date) => new(date.Year, date.Month);
 
+    /// <summary>Adds one month to the year-month.</summary>
+    public static YearMonth operator ++(YearMonth date) => date.AddMonths(+1);
+
+    /// <summary>Subtracts one month to the year-month.</summary>
+    public static YearMonth operator --(YearMonth date) => date.AddMonths(-1);
+
     /// <summary>Converts the string to a year-month.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>

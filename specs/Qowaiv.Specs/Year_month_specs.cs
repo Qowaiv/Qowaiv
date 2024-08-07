@@ -77,6 +77,14 @@ public class Can_be_adjusted_with
     [Test]
     public void Years()
         => Svo.YearMonth.AddYears(7).Should().Be(new YearMonth(2024, 06));
+
+    [Test]
+    public void unit()
+    {
+        var date = Svo.YearMonth;
+        date++;
+        date.Should().Be(new YearMonth(2017, 07));
+    }
 }
 
 public class Cannot_be_adjusted_with
@@ -100,6 +108,25 @@ public class Cannot_be_adjusted_with
         .WithMessage("Year, and Month parameters describe an un-representable year-month.*");
 }
 
+public class Can_be_subtracted_by
+{
+    [Test]
+    public void Month_span()
+        => (Svo.YearMonth - MonthSpan.FromMonths(9)).Should().Be(new YearMonth(2016, 09));
+
+    [Test]
+    public void Year_month()
+        => (new YearMonth(2024, 08) - Svo.YearMonth).Should().Be(new MonthSpan(years: 7, months: 02));
+
+    [Test]
+    public void unit()
+    {
+        var date = Svo.YearMonth;
+        date--;
+        date.Should().Be(new YearMonth(2017, 05));
+    }
+}
+
 public class Can_be_related_to
 {
     [Test]
@@ -119,16 +146,6 @@ public class Can_be_related_to
        => Svo.YearMonth.IsIn(2018.CE()).Should().BeFalse();
 }
 
-public class Can_be_subtracted
-{
-    [Test]
-    public void Month_span()
-        => (Svo.YearMonth - MonthSpan.FromMonths(9)).Should().Be(new YearMonth(2016, 09));
-
-    [Test]
-    public void Year_month()
-        => (new YearMonth(2024, 08) - Svo.YearMonth).Should().Be(new MonthSpan(years: 7, months: 02));
-}
 public class Can_not_be_related_to
 {
     [Test]

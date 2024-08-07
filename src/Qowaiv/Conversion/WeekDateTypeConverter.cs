@@ -1,5 +1,3 @@
-using Microsoft.VisualBasic;
-
 namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a week date.</summary>

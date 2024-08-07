@@ -51,8 +51,9 @@ public class WeekDateTypeConverter : DateTypeConverter<WeekDate>
     protected override Date ToDate(WeekDate date) => date;
 
     /// <inheritdoc />
-    [Pure]
-    protected override YearMonth ToYearMonth(WeekDate date) => (YearMonth)(Date)date;
+    [ExcludeFromCodeCoverage]
+    [DoesNotReturn]
+    protected override YearMonth ToYearMonth(WeekDate date) => throw new NotSupportedException();
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]

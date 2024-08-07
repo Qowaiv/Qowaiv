@@ -26,11 +26,11 @@ public static class QowaivType
         return code >= TypeCode.SByte && code <= TypeCode.Decimal;
     }
 
+#if NET6_0_OR_GREATER
     /// <summary>Returns true if the object type is a date (of any kind).</summary>
     /// <param name="objectType">
     /// The type to test for.
     /// </param>
-#if NET6_0_OR_GREATER
     /// <remarks>
     /// Tests on the types:
     /// * <see cref="DateTime"/>
@@ -42,6 +42,10 @@ public static class QowaivType
     /// * <see cref="WeekDate"/>.
     /// </remarks>
 #else
+    /// <summary>Returns true if the object type is a date (of any kind).</summary>
+    /// <param name="objectType">
+    /// The type to test for.
+    /// </param>
     /// <remarks>
     /// Tests on the types:
     /// * <see cref="DateTime"/>

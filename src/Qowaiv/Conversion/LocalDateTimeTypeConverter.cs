@@ -57,5 +57,5 @@ public class LocalDateTimeTypeConverter : DateTypeConverter<LocalDateTime>
 
     /// <inheritdoc />
     [Pure]
-    protected override YearMonth ToYearMonth(LocalDateTime date)=> new(date.Year, date.Month);
+    protected override YearMonth ToYearMonth(LocalDateTime date) => new(date.Year, date.Month);
 }

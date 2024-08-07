@@ -1,6 +1,4 @@
-﻿using Qowaiv.Reflection;
-
-namespace Qowaiv.Conversion;
+﻿namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a Date.</summary>
 [Inheritable]
@@ -71,7 +69,7 @@ public class DateTypeConverter : DateTypeConverter<Date>
     /// <inheritdoc />
     [Pure]
     public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
-        => value is Date date && QowaivType.GetNotNullableType(destinationType) == typeof(DateOnly)
+        => value is Date date && Qowaiv.Reflection.QowaivType.GetNotNullableType(destinationType) == typeof(DateOnly)
         ? (DateOnly)date
         : base.ConvertTo(context, culture, value, destinationType);
 #endif

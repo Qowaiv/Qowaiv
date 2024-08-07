@@ -117,11 +117,11 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
 
     private static readonly Dictionary<Type, Func<DateTypeConverter<T>, T, object>> ConvertTos = new()
     {
-        [typeof(DateTime)] /*      */ = (c, d) => c.ToDateTime(d),
-        [typeof(DateTimeOffset)] /**/ = (c, d) => c.ToDateTimeOffset(d),
-        [typeof(LocalDateTime)] /* */ = (c, d) => c.ToLocalDateTime(d),
-        [typeof(Date)] /*          */ = (c, d) => c.ToDate(d),
-        [typeof(WeekDate)] /*      */ = (c, d) => c.ToWeekDate(d),
-        [typeof(YearMonth)] /*     */ = (c, d) => c.ToYearMonth(d),
+        [typeof(DateTime)] /*.......*/ = (c, d) => c.ToDateTime(d),
+        [typeof(DateTimeOffset)] /*.*/ = (c, d) => c.ToDateTimeOffset(d),
+        [typeof(LocalDateTime)] /*..*/ = (c, d) => c.ToLocalDateTime(d),
+        [typeof(Date)] /*...........*/ = (c, d) => c.ToDate(d),
+        [typeof(WeekDate)] /*.......*/ = (c, d) => c.ToWeekDate(d),
+        [typeof(YearMonth)] /*......*/ = (c, d) => c.ToYearMonth(d),
     };
 }

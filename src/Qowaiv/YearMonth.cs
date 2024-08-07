@@ -5,12 +5,11 @@
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(int))]
 [OpenApiDataType(description: "Date notation with month precision.", example: "2017-06", type: "string", format: "year-month", pattern: "[0-9]{4}-[01][0-9]")]
-[OpenApi.OpenApiDataType(description: "Date notation with month precision.", example: "2017-06", type: "string", format: "year-month", pattern: "[0-9]{4}-[01][0-9]")]
 [TypeConverter(typeof(Conversion.YearMonthTypeConverter))]
-#if NET5_0_OR_GREATER
-[System.Text.Json.Serialization.JsonConverter(typeof(YearMonthJsonConverter))]
+#if NET6_0_OR_GREATER
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.YearMonthJsonConverter))]
 #endif
-public readonly partial struct YearMonth : ISerializable, IXmlSerializable, IFormattable, IEquatable<YearMonth>, IComparable, IComparable<YearMonth>
+public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEquatable<YearMonth>, IComparable, IComparable<YearMonth>
 {
     /// <summary>Represents the smallest possible year-month (0001-01).</summary>
     public static readonly YearMonth MinValue = new(0001, 01);
@@ -21,20 +20,23 @@ public readonly partial struct YearMonth : ISerializable, IXmlSerializable, IFor
     /// <summary>12 months per year.</summary>
     private const int MonthsPerYear = 12;
 
-    /// <summary>Creates a new instance of the <see cref="YearMonth"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="YearMonth"/> struct to the specified year, and month.</summary>
     /// <param name="year">
     /// The year of the year-month.
     /// </param>
     /// <param name="month">
     /// The month of the year-month.
     /// </param>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// When year is not in range [1,9999] or month is not in range [1,12].
+    /// </exception>
     public YearMonth(int year, int month) : this(Create(year, month)) { }
 
     /// <summary>Gets the year component of the date represented by this instance.</summary>
-    public int Year => 1 + m_Value / MonthsPerYear;
+    public int Year => 1 + (m_Value / MonthsPerYear);
 
     /// <summary>Gets the month component of the date represented by this instance.</summary>
-    public int Month => 1 + m_Value % MonthsPerYear;
+    public int Month => 1 + (m_Value % MonthsPerYear);
 
     /// <summary>Returns a <see cref="string" /> that represents the year-month for DEBUG purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -96,7 +98,7 @@ public readonly partial struct YearMonth : ISerializable, IXmlSerializable, IFor
     /// <summary>Casts a local date time to a year-month.</summary>
     public static explicit operator YearMonth(LocalDateTime val) => new(val.Year, val.Month);
 
-    /// <summary>Converts the string to a 
+    /// <summary>Converts the string to a year-month.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">
@@ -114,7 +116,7 @@ public readonly partial struct YearMonth : ISerializable, IXmlSerializable, IFor
     public static bool TryParse(string? s, IFormatProvider? provider, out YearMonth result)
         => TryParse(s, provider, DateTimeStyles.None, out result);
 
-    /// <summary>Converts the string to a 
+    /// <summary>Converts the string to a year-month.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">

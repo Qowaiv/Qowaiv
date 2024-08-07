@@ -109,7 +109,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Func<YearMonth> parse = () => YearMonth.Parse("invalid input");
             parse.Should().Throw<FormatException>()
@@ -135,7 +135,7 @@ public class Has_custom_formatting
     [Test]
     public void _default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.YearMonth.ToString().Should().Be("2017-06");
         }
@@ -144,7 +144,7 @@ public class Has_custom_formatting
     [Test]
     public void with_null_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.YearMonth.ToString().Should().Be(Svo.YearMonth.ToString(default(string)));
         }
@@ -153,7 +153,7 @@ public class Has_custom_formatting
     [Test]
     public void with_string_empty_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.YearMonth.ToString().Should().Be(Svo.YearMonth.ToString(string.Empty));
         }
@@ -162,7 +162,7 @@ public class Has_custom_formatting
     [Test]
     public void with_empty_format_provider()
     {
-        using (TestCultures.Es_EC.Scoped())
+        using (TestCultures.es_EC.Scoped())
         {
             Svo.YearMonth.ToString(FormatProvider.Empty).Should().Be("2017-06");
         }
@@ -172,16 +172,16 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.YearMonth.ToString("yyyy MMM", FormatProvider.CustomFormatter);
-        Assert.AreEqual("Unit Test Formatter, value: '2017 Jun', format: 'yyyy MMM'", formatted);
+        formatted.Should().Be("Unit Test Formatter, value: '2017 Jun', format: 'yyyy MMM'");
     }
 
     [TestCase("en-GB", "yyyy MMMM", "2017-06", "2017 June")]
     [TestCase("nl-BE", "MMMM yyyy", "2017-06", "juni 2017")]
-    public void culture_dependent(CultureInfo culture, string format, YearMonth svo, string expected)
+    public void culture_dependent(CultureInfo culture, string format, YearMonth svo, string formatted)
     {
         using (culture.Scoped())
         {
-            Assert.AreEqual(expected, svo.ToString(format));
+            svo.ToString(format).Should().Be(formatted);
         }
     }
 
@@ -189,10 +189,10 @@ public class Has_custom_formatting
     public void with_current_thread_culture_as_default()
     {
         using (new CultureInfoScope(
-            culture: TestCultures.Nl_NL,
-            cultureUI: TestCultures.En_GB))
+            culture: TestCultures.nl_NL,
+            cultureUI: TestCultures.en_GB))
         {
-            Assert.AreEqual("2017-06", Svo.YearMonth.ToString(provider: null));
+            Svo.YearMonth.ToString(provider: null).Should().Be("2017-06");
         }
     }
 }
@@ -211,7 +211,7 @@ public class Is_comparable
 
     [Test]
     public void to_YearMonth_only()
-        => Assert.Throws<ArgumentException>(() => Svo.YearMonth.CompareTo(new object()));
+        => new object().Invoking(Svo.YearMonth.CompareTo).Should().Throw<ArgumentException>();
 
     [Test]
     public void can_be_sorted_using_compare()
@@ -304,7 +304,7 @@ public class Supports_type_conversion
     [Test]
     public void from_null_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From<string>(null).To<YearMonth>().Should().Be(default);
         }
@@ -313,7 +313,7 @@ public class Supports_type_conversion
     [Test]
     public void from_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From("2017-06").To<YearMonth>().Should().Be(Svo.YearMonth);
         }
@@ -322,7 +322,7 @@ public class Supports_type_conversion
     [Test]
     public void to_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.ToString().From(Svo.YearMonth).Should().Be("2017-06");
         }
@@ -394,7 +394,7 @@ public class Supports_XML_serialization
     public void has_no_custom_XML_schema()
     {
         IXmlSerializable obj = Svo.YearMonth;
-        Assert.IsNull(obj.GetSchema());
+        obj.GetSchema().Should().BeNull();
     }
 }
 
@@ -402,32 +402,14 @@ public class Is_Open_API_data_type
 {
     [Test]
     public void with_info()
-       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(YearMonth))
-       .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+       => OpenApiDataType.FromType(typeof(YearMonth))
+       .Should().Be(new OpenApiDataType(
            dataType: typeof(YearMonth),
            description: "Date notation with month precision.",
            example: "2017-06",
            type: "string",
            format: "year-month",
            pattern: "[0-9]{4}-[01][0-9]"));
-}
-
-public class Supports_binary_serialization
-{
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void using_BinaryFormatter()
-    {
-        var round_tripped = SerializeDeserialize.Binary(Svo.YearMonth);
-        Svo.YearMonth.Should().Be(round_tripped);
-    }
-
-    [Test]
-    public void storing_int_in_SerializationInfo()
-    {
-        var info = Serialize.GetInfo(Svo.YearMonth);
-        info.GetInt32("Value").Should().Be(24197);
-    }
 }
 
 public class Debugger

@@ -1,3 +1,5 @@
+using Microsoft.VisualBasic;
+
 namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a week date.</summary>
@@ -49,6 +51,10 @@ public class WeekDateTypeConverter : DateTypeConverter<WeekDate>
     /// <inheritdoc />
     [Pure]
     protected override Date ToDate(WeekDate date) => date;
+
+    /// <inheritdoc />
+    [Pure]
+    protected override YearMonth ToYearMonth(WeekDate date) => (YearMonth)(Date)date;
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]

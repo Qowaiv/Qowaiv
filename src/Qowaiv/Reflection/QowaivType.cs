@@ -30,26 +30,47 @@ public static class QowaivType
     /// <param name="objectType">
     /// The type to test for.
     /// </param>
+#if NET6_0_OR_GREATER
+    /// <remarks>
+    /// Tests on the types:
+    /// * <see cref="DateTime"/>
+    /// * <see cref="DateOnly"/>
+    /// * <see cref="DateTimeOffset"/>
+    /// * <see cref="LocalDateTime"/>
+    /// * <see cref="Date"/>
+    /// * <see cref="Date"/>
+    /// * <see cref="WeekDate"/>.
+    /// </remarks>
+#else
     /// <remarks>
     /// Tests on the types:
     /// * <see cref="DateTime"/>
     /// * <see cref="DateTimeOffset"/>
     /// * <see cref="LocalDateTime"/>
     /// * <see cref="Date"/>
+    /// * <see cref="Date"/>
     /// * <see cref="WeekDate"/>.
     /// </remarks>
+#endif
     [Pure]
     public static bool IsDate(Type? objectType)
     {
         var type = objectType is null ? null : GetNotNullableType(objectType);
-        return type.IsAnyOf(
-            typeof(DateTime),
-            typeof(DateTimeOffset),
-            typeof(LocalDateTime),
-            typeof(Date),
-            typeof(WeekDate),
-            typeof(YearMonth));
+        return DateTypes.Contains(type);
     }
+
+    private static readonly Type[] DateTypes =
+    [
+        typeof(DateTime),
+#if NET6_0_OR_GREATER
+        typeof(DateOnly),
+#endif
+        typeof(DateTimeOffset),
+        typeof(LocalDateTime),
+        typeof(Date),
+        typeof(WeekDate),
+        typeof(YearMonth)
+    ];
 
     /// <summary>Gets the not null-able type if it is a null-able, otherwise the provided type.</summary>
     /// <param name="objectType">

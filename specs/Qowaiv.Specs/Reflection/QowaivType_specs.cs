@@ -76,11 +76,14 @@ public class IsNumeric
 public class IsDate
 {
     [TestCase(typeof(DateTime))]
+#if NET6_0_OR_GREATER
+    [TestCase(typeof(DateOnly))]
+#endif
     [TestCase(typeof(DateTimeOffset))]
     [TestCase(typeof(LocalDateTime))]
     [TestCase(typeof(Date))]
     [TestCase(typeof(WeekDate))]
-    public void Is_true_for_DateTime_and_Qowaiv_DateTypes(Type type)
+    public void Is_true_for_DateTime_DateOnly_and_Qowaiv_DateTypes(Type type)
         => QowaivType.IsDate(type).Should().BeTrue();
 
     [TestCase(typeof(object))]

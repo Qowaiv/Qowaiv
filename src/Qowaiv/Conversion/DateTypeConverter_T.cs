@@ -20,6 +20,7 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
         _ => base.ConvertFrom(context, culture, value),
     };
 
+    [Pure]
     private object ConvertFromConvertable(object value) => value switch
     {
         DateTime /*.......*/ date => FromDateTime(date),

@@ -42,6 +42,80 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:yyyy-MM}");
 
+    /// <summary>Returns a new year-month that adds the value of the specified <see cref="MonthSpan"/>
+    /// to the value of this instance.
+    /// </summary>
+    /// <param name="months">
+    /// A <see cref="MonthSpan"/> that represents a positive or negative time interval.
+    /// </param>
+    /// <returns>
+    /// A new year-month whose value is the sum of the year-month represented
+    /// by this instance and the time interval represented by <paramref name="months"/>.
+    /// </returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// The resulting date is less than <see cref="MinValue"/> or greater
+    /// than <see cref="MaxValue"/>.
+    /// </exception>
+    [Pure]
+    public YearMonth Add(MonthSpan months)
+    {
+        var value = (long)months.TotalMonths + m_Value;
+
+        return value.IsInRange(MinValue.m_Value, MaxValue.m_Value)
+            ? new((int)value)
+            : throw new ArgumentOutOfRangeException(nameof(months), QowaivMessages.ArgumentOutOfRange_YearMonth);
+    }
+
+    /// <summary>Returns a new year-month that adds the specified number of days to the
+    /// value of this instance.
+    /// </summary>
+    /// <param name="months">
+    /// A number of whole and fractional days. The <paramref name="months"/> parameter can be negative
+    /// or positive.
+    /// </param>
+    /// <returns>
+    /// A date whose value is the sum of the year-month represented
+    /// by this instance and the number of days represented by <paramref name="months"/>.
+    /// </returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// The resulting date is less than <see cref="MinValue"/> or greater
+    /// than <see cref="MaxValue"/>.
+    /// </exception>
+    [Pure]
+    public YearMonth AddMonths(int months)
+    {
+        var value = (long)months + m_Value;
+
+        return value.IsInRange(MinValue.m_Value, MaxValue.m_Value)
+            ? new((int)value)
+            : throw new ArgumentOutOfRangeException(nameof(months), QowaivMessages.ArgumentOutOfRange_YearMonth);
+    }
+
+    /// <summary>Returns a new year-month that adds the specified number of days to the
+    /// value of this instance.
+    /// </summary>
+    /// <param name="years">
+    /// A number of whole and fractional days. The <paramref name="years"/> parameter can be negative
+    /// or positive.
+    /// </param>
+    /// <returns>
+    /// A date whose value is the sum of the year-month represented
+    /// by this instance and the number of days represented by <paramref name="years"/>.
+    /// </returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// The resulting date is less than <see cref="MinValue"/> or greater
+    /// than <see cref="MaxValue"/>.
+    /// </exception>
+    [Pure]
+    public YearMonth AddYears(int years)
+    {
+        var value = (((long)years) * 12) + m_Value;
+
+        return value.IsInRange(MinValue.m_Value, MaxValue.m_Value)
+            ? new((int)value)
+            : throw new ArgumentOutOfRangeException(nameof(years), QowaivMessages.ArgumentOutOfRange_YearMonth);
+    }
+
     /// <summary>
     /// Returns a date that is set to a date with the year and month of this
     /// year-month and the specified day.
@@ -94,23 +168,29 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
     [Pure]
     public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
+    /// <summary>Adds a number of months to the year-month.</summary>
+    public static YearMonth operator +(YearMonth date, MonthSpan months) => date.Add(months);
+
+    /// <summary>Subtracts a number of months to the year-month.</summary>
+    public static YearMonth operator -(YearMonth date, MonthSpan months) => date.Add(-months);
+
     /// <summary>Casts a year-month to a date.</summary>
-    public static explicit operator Date(YearMonth val) => val.ToDate(01);
+    public static explicit operator Date(YearMonth date) => date.ToDate(01);
 
     /// <summary>Casts a year-month to a date time.</summary>
-    public static explicit operator DateTime(YearMonth val) => val.ToDate(01);
+    public static explicit operator DateTime(YearMonth date) => date.ToDate(01);
 
     /// <summary>Casts a year-month to a local date time.</summary>
-    public static explicit operator LocalDateTime(YearMonth val) => (LocalDateTime)val.ToDate(01);
+    public static explicit operator LocalDateTime(YearMonth date) => (LocalDateTime)date.ToDate(01);
 
     /// <summary>Casts a week date to a year-month.</summary>
-    public static explicit operator YearMonth(Date val) => new(val.Year, val.Month);
+    public static explicit operator YearMonth(Date date) => new(date.Year, date.Month);
 
     /// <summary>Casts a date time to a year-month.</summary>
-    public static explicit operator YearMonth(DateTime val) => new(val.Year, val.Month);
+    public static explicit operator YearMonth(DateTime date) => new(date.Year, date.Month);
 
     /// <summary>Casts a local date time to a year-month.</summary>
-    public static explicit operator YearMonth(LocalDateTime val) => new(val.Year, val.Month);
+    public static explicit operator YearMonth(LocalDateTime date) => new(date.Year, date.Month);
 
     /// <summary>Converts the string to a year-month.
     /// A return value indicates whether the conversion succeeded.

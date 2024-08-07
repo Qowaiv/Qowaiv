@@ -64,6 +64,41 @@ public class Is_equal_by_value
         }
     }
 }
+public class Can_be_adjusted_with
+{
+    [Test]
+    public void Month_span()
+        => Svo.YearMonth.Add(MonthSpan.FromMonths(7)).Should().Be(new YearMonth(2018, 01));
+
+    [Test]
+    public void Months()
+        => Svo.YearMonth.AddMonths(7).Should().Be(new YearMonth(2018, 01));
+
+    [Test]
+    public void Years()
+        => Svo.YearMonth.AddYears(7).Should().Be(new YearMonth(2024, 06));
+}
+
+public class Cannot_be_adjusted_with
+{
+    [Test]
+    public void too_big_or_small_Month_span()
+        => MonthSpan.FromYears(1).Invoking(YearMonth.MaxValue.Add)
+        .Should().Throw<ArgumentOutOfRangeException>()
+        .WithMessage("Year, and Month parameters describe an un-representable year-month.*");
+
+    [Test]
+    public void too_big_or_small_Months()
+        => 17.Invoking(YearMonth.MaxValue.AddMonths)
+        .Should().Throw<ArgumentOutOfRangeException>()
+        .WithMessage("Year, and Month parameters describe an un-representable year-month.*");
+
+    [Test]
+    public void too_big_or_small_Years()
+        => 17.Invoking(YearMonth.MaxValue.AddYears)
+        .Should().Throw<ArgumentOutOfRangeException>()
+        .WithMessage("Year, and Month parameters describe an un-representable year-month.*");
+}
 
 public class Can_be_related_to
 {

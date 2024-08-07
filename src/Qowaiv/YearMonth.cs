@@ -264,6 +264,6 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
         {
             throw new ArgumentOutOfRangeException(nameof(month), QowaivMessages.ArgumentOutOfRange_YearMonth);
         }
-        return (year - 1) * MonthsPerYear + month - 1;
+        return ((year - 1) * MonthsPerYear) + month - 1;
     }
 }

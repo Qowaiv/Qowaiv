@@ -30,7 +30,8 @@ public class WeekDateTypeConverter : DateTypeConverter<WeekDate>
     protected sealed override WeekDate FromWeekDate(WeekDate weekDate) => throw new NotSupportedException();
 
     /// <inheritdoc />
-    [Pure]
+    [ExcludeFromCodeCoverage]
+    [DoesNotReturn]
     protected override WeekDate FromYearMonth(YearMonth yearMonth) => throw new NotSupportedException();
 
     /// <inheritdoc />

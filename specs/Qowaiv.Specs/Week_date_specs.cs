@@ -106,6 +106,28 @@ public class Supports_type_conversion
     }
 
     [Test]
+    public void from_date_time()
+        => Converting.From(Svo.DateTime).To<WeekDate>().Should().Be(Svo.WeekDate);
+
+#if NET6_0_OR_GREATER
+    [Test]
+    public void from_date_only()
+        => Converting.From(Svo.DateOnly).To<WeekDate>().Should().Be(Svo.WeekDate);
+#endif
+
+    [Test]
+    public void from_date()
+        => Converting.From(new Date(2017, 06, 11)).To<WeekDate>().Should().Be(Svo.WeekDate);
+
+    [Test]
+    public void from_date_time_offset()
+        => Converting.From(new DateTimeOffset(2017, 06, 11, 00, 00, 00, TimeSpan.Zero)).To<WeekDate>().Should().Be(Svo.WeekDate);
+
+    [Test]
+    public void from_local_date_time()
+        => Converting.From(new LocalDateTime(2017, 06, 11)).To<WeekDate>().Should().Be(Svo.WeekDate);
+
+    [Test]
     public void to_string()
     {
         using (TestCultures.en_GB.Scoped())
@@ -114,36 +136,26 @@ public class Supports_type_conversion
         }
     }
 
+#if NET6_0_OR_GREATER
     [Test]
-    public void from_Date()
-        => Converting.From(new Date(2017, 06, 11)).To<WeekDate>().Should().Be(Svo.WeekDate);
+    public void to_date_only()
+       => Converting.To<DateOnly>().From(Svo.WeekDate).Should().Be(Svo.DateOnly);
+#endif
 
     [Test]
-    public void from_DateTime()
-        => Converting.From(new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local)).To<WeekDate>().Should().Be(Svo.WeekDate);
+    public void to_date()
+        => Converting.To<Date>().From(Svo.WeekDate).Should().Be(Svo.Date);
 
     [Test]
-    public void from_DateTimeOffset()
-        => Converting.From(new DateTimeOffset(2017, 06, 11, 00, 00, 00, TimeSpan.Zero)).To<WeekDate>().Should().Be(Svo.WeekDate);
-
-    [Test]
-    public void from_LocalDateTime()
-        => Converting.From(new LocalDateTime(2017, 06, 11)).To<WeekDate>().Should().Be(Svo.WeekDate);
-
-    [Test]
-    public void to_Date()
-        => Converting.To<Date>().From(Svo.WeekDate).Should().Be(new Date(2017, 06, 11));
-
-    [Test]
-    public void to_DateTime()
+    public void to_date_time()
         => Converting.To<DateTime>().From(Svo.WeekDate).Should().Be(new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local));
 
     [Test]
-    public void to_DateTimeOffset()
+    public void to_date_time_offset()
         => Converting.To<DateTimeOffset>().From(Svo.WeekDate).Should().Be(new DateTimeOffset(2017, 06, 11, 00, 00, 00, TimeSpan.Zero));
 
     [Test]
-    public void to_LocalDateTime()
+    public void to_local_date_time()
         => Converting.To<LocalDateTime>().From(Svo.WeekDate).Should().Be(new LocalDateTime(2017, 06, 11));
 }
 

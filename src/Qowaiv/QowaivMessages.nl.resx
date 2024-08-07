@@ -99,31 +99,10 @@
   <data name="FormatExceptionYear" xml:space="preserve">
     <value>Geen geldig jaartal</value>
   </data>
-  <data name="FormatExceptionYesNo" xml:space="preserve">
-    <value>Geen geldige ja/nee waarde</value>
-  </data>
-  <data name="FormatExceptionInternetMediaType" xml:space="preserve">
-    <value>Geen geldig internet media type</value>
-  </data>
-  <data name="FormatExceptionDateSpan" xml:space="preserve">
-    <value>Geen geldige tijdsduur</value>
-  </data>
-  <data name="FormatExceptionUuid" xml:space="preserve">
-    <value>Geen geldig GUID</value>
-  </data>
-  <data name="FormatExceptionFraction" xml:space="preserve">
-    <value>Geen geldige breuk</value>
-  </data>
-  <data name="FormatExceptionMonthSpan" xml:space="preserve">
-    <value>Geen geldige duur in maanden</value>
-  </data>
-  <data name="FormatExceptionSex" xml:space="preserve">
-    <value>Geen geldig geslacht</value>
-  </data>
-  <data name="FormatExceptionCasRegistryNumber" xml:space="preserve">
-    <value>Geen geldig CAS-nummer</value>
-  </data>
   <data name="FormatExceptionYearMonth" xml:space="preserve">
     <value>Geen geldige jaar/maand combinatie.</value>
+  </data>
+  <data name="FormatExceptionYesNo" xml:space="preserve">
+    <value>Geen geldige ja/nee waarde</value>
   </data>
 </root>

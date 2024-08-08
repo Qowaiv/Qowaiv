@@ -45,14 +45,14 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
     [Pure]
     public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType) => Guard.NotNull(destinationType) switch
     {
-        _ when QowaivType.IsNullOrDefaultValue(value) => ConvertoDefault(destinationType),
+        _ when QowaivType.IsNullOrDefaultValue(value) => ConverToDefault(destinationType),
         _ when destinationType == typeof(string) => Guard.IsInstanceOf<T>(value).ToString(string.Empty, culture),
         _ when IsConvertable(destinationType) => ConvertToConvertable(value, destinationType),
         _ => base.ConvertTo(context, culture, value, destinationType),
     };
 
     [Pure]
-    private static object? ConvertoDefault(Type destinationType)
+    private static object? ConverToDefault(Type destinationType)
         => QowaivType.IsNullable(destinationType)
         ? null
         : Activator.CreateInstance(destinationType);

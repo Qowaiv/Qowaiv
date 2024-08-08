@@ -171,7 +171,7 @@ public class Supports_type_conversion
         => Converting.From(new DateTimeOffset(2017, 06, 11, 00, 00, 00, TimeSpan.Zero)).To<Date>().Should().Be(Svo.Date);
 
     [Test]
-    public void from_Loca_date_time()
+    public void from_local_date_time()
         => Converting.From(new LocalDateTime(2017, 06, 11)).To<Date>().Should().Be(Svo.Date);
 
     [Test]

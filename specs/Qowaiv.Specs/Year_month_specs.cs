@@ -1,4 +1,5 @@
 ﻿using FluentAssertions.Extensions;
+using Qowaiv.Chemistry;
 
 namespace Year_month_specs;
 
@@ -556,7 +557,18 @@ public class Is_Open_API_data_type
            example: "2017-06",
            type: "string",
            format: "year-month",
-           pattern: "[0-9]{4}-[01][0-9]"));
+           pattern: "[0-9]{4}-(0[1-9]|1[0-2])"));
+
+    [TestCase("2017-06")]
+    [TestCase("1900-11")]
+    [TestCase("1979-12")]
+    public void pattern_matches(string input)
+        => OpenApiDataType.FromType(typeof(YearMonth))!.Matches(input).Should().BeTrue();
+
+    [TestCase("1900-00")]
+    [TestCase("1979-13")]
+    public void pattern_does_not_match(string input)
+        => OpenApiDataType.FromType(typeof(YearMonth))!.Matches(input).Should().BeFalse();
 }
 
 public class Debugger

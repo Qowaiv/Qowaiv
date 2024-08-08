@@ -1,5 +1,4 @@
 ﻿using FluentAssertions.Extensions;
-using Qowaiv.Chemistry;
 
 namespace Year_month_specs;
 
@@ -137,7 +136,7 @@ public class Can_be_related_to
         => Svo.YearMonth.IsIn(Month.June).Should().BeTrue();
 
     [Test]
-    public void none_matching_month()
+    public void non_matching_month()
        => Svo.YearMonth.IsIn(Month.February).Should().BeFalse();
 
     [Test]
@@ -145,7 +144,7 @@ public class Can_be_related_to
         => Svo.YearMonth.IsIn(2017.CE()).Should().BeTrue();
 
     [Test]
-    public void none_matching_year()
+    public void non_matching_year()
        => Svo.YearMonth.IsIn(2018.CE()).Should().BeFalse();
 }
 
@@ -190,7 +189,7 @@ public class Can_not_be_created
 public class Can_not_be_parsed
 {
     [Test]
-    public void from_nully()
+    public void from_null()
         => YearMonth.TryParse(null).Should().BeNull();
 
     [Test]

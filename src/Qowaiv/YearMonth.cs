@@ -66,11 +66,11 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
             : throw new ArgumentOutOfRangeException(nameof(months), QowaivMessages.ArgumentOutOfRange_YearMonth);
     }
 
-    /// <summary>Returns a new year-month that adds the specified number of days to the
+    /// <summary>Returns a new year-month that adds the specified number of months to the
     /// value of this instance.
     /// </summary>
     /// <param name="months">
-    /// A number of whole and fractional days. The <paramref name="months"/> parameter can be negative
+    /// A number of months. The <paramref name="months"/> parameter can be negative
     /// or positive.
     /// </param>
     /// <returns>
@@ -91,11 +91,11 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
             : throw new ArgumentOutOfRangeException(nameof(months), QowaivMessages.ArgumentOutOfRange_YearMonth);
     }
 
-    /// <summary>Returns a new year-month that adds the specified number of days to the
+    /// <summary>Returns a new year-month that adds the specified number of years to the
     /// value of this instance.
     /// </summary>
     /// <param name="years">
-    /// A number of whole and fractional days. The <paramref name="years"/> parameter can be negative
+    /// A number of years. The <paramref name="years"/> parameter can be negative
     /// or positive.
     /// </param>
     /// <returns>

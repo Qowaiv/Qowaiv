@@ -83,6 +83,7 @@ public class IsDate
     [TestCase(typeof(LocalDateTime))]
     [TestCase(typeof(Date))]
     [TestCase(typeof(WeekDate))]
+    [TestCase(typeof(YearMonth))]
     public void Is_true_for_DateTime_DateOnly_and_Qowaiv_DateTypes(Type type)
         => QowaivType.IsDate(type).Should().BeTrue();
 

@@ -95,7 +95,7 @@ public class Can_be_related_to
         => new Date(2017, 06, 11).IsIn(Month.June).Should().BeTrue();
 
     [Test]
-    public void none_matching_month()
+    public void non_matching_month()
        => new Date(2017, 06, 11).IsIn(Month.February).Should().BeFalse();
 
     [Test]
@@ -103,7 +103,7 @@ public class Can_be_related_to
         => new Date(2017, 06, 11).IsIn(2017.CE()).Should().BeTrue();
 
     [Test]
-    public void none_matching_year()
+    public void non_matching_year()
        => new Date(2017, 06, 11).IsIn(2018.CE()).Should().BeFalse();
 }
 

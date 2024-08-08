@@ -40,6 +40,7 @@ public static class QowaivType
     /// * <see cref="Date"/>
     /// * <see cref="Date"/>
     /// * <see cref="WeekDate"/>.
+    /// * <see cref="YearMonth"/>.
     /// </remarks>
 #else
     /// <summary>Returns true if the object type is a date (of any kind).</summary>
@@ -54,6 +55,7 @@ public static class QowaivType
     /// * <see cref="Date"/>
     /// * <see cref="Date"/>
     /// * <see cref="WeekDate"/>.
+    /// * <see cref="YearMonth"/>.
     /// </remarks>
 #endif
     [Pure]

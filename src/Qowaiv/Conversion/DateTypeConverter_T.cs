@@ -29,7 +29,7 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
 #endif
         DateTimeOffset /*.*/ date => FromDateTimeOffset(date),
         LocalDateTime /*..*/ date => FromLocalDateTime(date),
-        Date /*...........*/ date => FromDateTime(date),
+        Date /*...........*/ date => FromDate(date),
         WeekDate /*.......*/ date => FromWeekDate(date),
         YearMonth /*......*/ date => FromYearMonth(date),
         _ => throw Exceptions.InvalidCast(value.GetType(), typeof(T)),

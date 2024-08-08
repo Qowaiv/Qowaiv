@@ -760,7 +760,7 @@ and if the data type is nullable, all when applicable.
     "type": "string",
     "format": "month",
     "nullable": true,
-   "enum": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "?"]
+    "enum": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "?"]
   },
   "MonthSpan": {
     "description": "Month span, specified in years and months.",
@@ -837,13 +837,6 @@ and if the data type is nullable, all when applicable.
     "format": "cas-nr",
     "pattern": "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]",
     "nullable": true
-  },
-  "Customization.Svo`1": {
-    "description": "Single Value Object",
-    "example": "ABC",
-    "type": "Svo",
-    "format": "Svo",
-    "nullable": false
   },
   "Financial.Amount": {
     "description": "Decimal representation of a currency amount.",

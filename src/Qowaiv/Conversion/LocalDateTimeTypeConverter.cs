@@ -22,7 +22,6 @@ public class LocalDateTimeTypeConverter : DateTypeConverter<LocalDateTime>
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
-    [Pure]
     [DoesNotReturn]
     protected sealed override LocalDateTime FromLocalDateTime(LocalDateTime local) => throw new NotSupportedException();
 
@@ -40,8 +39,11 @@ public class LocalDateTimeTypeConverter : DateTypeConverter<LocalDateTime>
         => new(new DateTime(date.Ticks, DateTimeKind.Utc), TimeSpan.Zero);
 
     /// <inheritdoc />
-    [ExcludeFromCodeCoverage]
     [Pure]
+    protected override LocalDateTime FromYearMonth(YearMonth yearMonth) => new(year: yearMonth.Year, month: yearMonth.Month, day: 01);
+
+    /// <inheritdoc />
+    [ExcludeFromCodeCoverage]
     [DoesNotReturn]
     protected sealed override LocalDateTime ToLocalDateTime(LocalDateTime date) => throw new NotSupportedException();
 
@@ -52,4 +54,8 @@ public class LocalDateTimeTypeConverter : DateTypeConverter<LocalDateTime>
     /// <inheritdoc />
     [Pure]
     protected override WeekDate ToWeekDate(LocalDateTime date) => ToDate(date);
+
+    /// <inheritdoc />
+    [Pure]
+    protected override YearMonth ToYearMonth(LocalDateTime date) => new(date.Year, date.Month);
 }

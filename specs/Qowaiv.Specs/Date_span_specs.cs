@@ -156,7 +156,7 @@ public class Can_be_added_to
 public class Can_create
 {
     [Test]
-    public void Age_form_date_without_months()
+    public void Age_form_Date_without_months()
     {
         using (Clock.SetTimeForCurrentContext(() => new Date(2019, 10, 10)))
         {
@@ -168,7 +168,7 @@ public class Can_create
 #if NET6_0_OR_GREATER
 
     [Test]
-    public void Age_form_date_only_without_months()
+    public void Age_form_DateOnly_without_months()
     {
         using (Clock.SetTimeForCurrentContext(() => new Date(2019, 10, 10)))
         {
@@ -178,7 +178,7 @@ public class Can_create
     }
 
     [Test]
-    public void Age_for_reference_date()
+    public void Age_for_reference_Date()
     {
         var age = DateSpan.Age(new DateOnly(2017, 06, 11), new DateOnly(2023, 11, 17));
         age.Should().Be(new DateSpan(years: 6, months: 0, days: 159));
@@ -190,7 +190,7 @@ public class Can_create
 public class Can_add
 {
     [Test]
-    public void two_date_spans()
+    public void two_DateSpans()
     {
         var l = new DateSpan(12, 3, 4);
         var r = new DateSpan(-2, 2, 7);
@@ -198,21 +198,21 @@ public class Can_add
     }
 
     [Test]
-    public void days_to_date_span()
+    public void days_to_DateSpan()
     {
         var span = new DateSpan(12, 3, 4);
         span.AddDays(17).Should().Be(new DateSpan(12, 3, 21));
     }
 
     [Test]
-    public void months_to_date_span()
+    public void months_to_DateSpan()
     {
         var span = new DateSpan(12, 3, 4);
         span.AddMonths(17).Should().Be(new DateSpan(12, 20, 4));
     }
 
     [Test]
-    public void years_to_date_span()
+    public void years_to_DateSpan()
     {
         var span = new DateSpan(12, 3, 4);
         span.AddYears(17).Should().Be(new DateSpan(29, 3, 4));
@@ -222,7 +222,7 @@ public class Can_add
 public class Can_subtract
 {
     [Test]
-    public void two_date_spans()
+    public void two_DateSpans()
     {
         var l = new DateSpan(12, 3, 4);
         var r = new DateSpan(-2, 2, 7);
@@ -230,7 +230,7 @@ public class Can_subtract
     }
     
     [Test]
-    public void two_dates()
+    public void two_Dates()
         => DateSpan.Subtract(new Date(2023, 11, 17), Svo.Date)
         .Should().Be(new DateSpan(years: 6, months: 5, days: 6));
 
@@ -246,7 +246,7 @@ public class Can_subtract
     [TestCase(+24, +332, "2020-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
     [TestCase(-11, -30, "2017-06-11", "2018-06-10", DateSpanSettings.Default)]
     [TestCase(-12, +01, "2017-06-11", "2018-06-10", DateSpanSettings.MixedSigns)]
-    public void two_dates_based_on_settings(int months, int days, Date d1, Date d2, DateSpanSettings settings)
+    public void two_Dates_based_on_settings(int months, int days, Date d1, Date d2, DateSpanSettings settings)
     {
         var expected = new DateSpan(0, months, days);
         DateSpan.Subtract(d1, d2, settings).Should().Be(expected);
@@ -254,7 +254,7 @@ public class Can_subtract
 
 #if NET6_0_OR_GREATER
     [Test]
-    public void two_date_onlys()
+    public void two_DateOnlys()
         => DateSpan.Subtract(new DateOnly(2023, 11, 17), Svo.DateOnly)
         .Should().Be(new DateSpan(years: 6, months: 5, days: 6));
 
@@ -270,7 +270,7 @@ public class Can_subtract
     [TestCase(+24, +332, "2020-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
     [TestCase(-11, -30, "2017-06-11", "2018-06-10", DateSpanSettings.Default)]
     [TestCase(-12, +01, "2017-06-11", "2018-06-10", DateSpanSettings.MixedSigns)]
-    public void two_date_onlys_based_on_settings(int months, int days, Date d1, Date d2, DateSpanSettings settings)
+    public void two_DateOnlys_based_on_settings(int months, int days, Date d1, Date d2, DateSpanSettings settings)
     {
         var expected = new DateSpan(0, months, days);
         DateSpan.Subtract((DateOnly)d1, (DateOnly)d2, settings).Should().Be(expected);

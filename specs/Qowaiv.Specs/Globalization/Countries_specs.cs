@@ -26,7 +26,7 @@ public class All
 
 #if NET6_0_OR_GREATER
     [Test]
-    public void get_existing_by_date_only()
+    public void get_existing_by_DateOnly()
         => Country.GetExisting(new DateOnly(2016, 01, 01)).Should().HaveCount(250);
 #endif
 }

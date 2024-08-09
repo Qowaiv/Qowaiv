@@ -52,7 +52,6 @@ public readonly struct Secret : IEquatable<Secret>, IEmpty<Secret>
     public bool Equals(Secret other) => IsEmpty() && other.IsEmpty();
 
     /// <inheritdoc />
-    [Pure]
     [DoesNotReturn]
     public override int GetHashCode() => Hash.NotSupportedBy<Secret>();
 

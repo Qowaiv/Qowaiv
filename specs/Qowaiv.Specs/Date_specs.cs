@@ -1,4 +1,6 @@
-﻿namespace Date_specs;
+﻿using FluentAssertions.Extensions;
+
+namespace Date_specs;
 
 public class Is_invalid
 {
@@ -93,7 +95,7 @@ public class Can_be_related_to
         => new Date(2017, 06, 11).IsIn(Month.June).Should().BeTrue();
 
     [Test]
-    public void none_matching_month()
+    public void non_matching_month()
        => new Date(2017, 06, 11).IsIn(Month.February).Should().BeFalse();
 
     [Test]
@@ -101,7 +103,7 @@ public class Can_be_related_to
         => new Date(2017, 06, 11).IsIn(2017.CE()).Should().BeTrue();
 
     [Test]
-    public void none_matching_year()
+    public void non_matching_year()
        => new Date(2017, 06, 11).IsIn(2018.CE()).Should().BeFalse();
 }
 
@@ -155,17 +157,14 @@ public class Supports_type_conversion
     }
 
     [Test]
-    public void to_string()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            Converting.ToString().From(Svo.Date).Should().Be("11/06/2017");
-        }
-    }
-
-    [Test]
     public void from_DateTime()
         => Converting.From(new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local)).To<Date>().Should().Be(Svo.Date);
+
+#if NET6_0_OR_GREATER
+    [Test]
+    public void from_DateOnly()
+        => Converting.From(Svo.DateOnly).To<Date>().Should().Be(Svo.Date);
+#endif
 
     [Test]
     public void from_DateTimeOffset()
@@ -180,8 +179,27 @@ public class Supports_type_conversion
         => Converting.From(new WeekDate(2017, 23, 7)).To<Date>().Should().Be(Svo.Date);
 
     [Test]
+    public void from_year_month()
+        => Converting.From(Svo.YearMonth).To<Date>().Should().Be(new Date(2017, 06, 01));
+
+    [Test]
+    public void to_string()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Converting.ToString().From(Svo.Date).Should().Be("11/06/2017");
+        }
+    }
+
+    [Test]
     public void to_DateTime()
-        => Converting.To<DateTime>().From(Svo.Date).Should().Be(new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local));
+        => Converting.To<DateTime>().From(Svo.Date).Should().Be(11.June(2017));
+
+#if NET6_0_OR_GREATER
+    [Test]
+    public void to_DateOnly()
+        => Converting.To<DateOnly>().From(Svo.Date).Should().Be(Svo.DateOnly);
+#endif
 
     [Test]
     public void to_DateTimeOffset()
@@ -194,6 +212,10 @@ public class Supports_type_conversion
     [Test]
     public void to_WeekDate()
         => Converting.To<WeekDate>().From(Svo.Date).Should().Be(new WeekDate(2017, 23, 7));
+
+    [Test]
+    public void to_year_month()
+        => Converting.To<YearMonth>().From(Svo.Date).Should().Be(Svo.YearMonth);
 }
 
 public class Supports_JSON_serialization

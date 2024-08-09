@@ -6,6 +6,7 @@ public static class Program
 {
     public static void Main()
     {
+        BenchmarkRunner.Run<ToCSharpStringBenchmark>();
         BenchmarkRunner.Run<DecimalBenchmark>();
 
         BenchmarkRunner.Run<EmailBenchmark>();

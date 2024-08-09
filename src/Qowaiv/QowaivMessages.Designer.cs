@@ -151,6 +151,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Year, and Month parameters describe an un-representable year-month..
+        /// </summary>
+        public static string ArgumentOutOfRange_YearMonth {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRange_YearMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adding a date span only supports &apos;Default&apos; and &apos;DaysFirst&apos;..
         /// </summary>
         public static string ArgumentOutOfRangeException_AddDateSpan {

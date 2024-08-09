@@ -26,6 +26,23 @@ public static class QowaivType
         return code >= TypeCode.SByte && code <= TypeCode.Decimal;
     }
 
+#if NET6_0_OR_GREATER
+    /// <summary>Returns true if the object type is a date (of any kind).</summary>
+    /// <param name="objectType">
+    /// The type to test for.
+    /// </param>
+    /// <remarks>
+    /// Tests on the types:
+    /// * <see cref="DateTime"/>
+    /// * <see cref="DateOnly"/>
+    /// * <see cref="DateTimeOffset"/>
+    /// * <see cref="LocalDateTime"/>
+    /// * <see cref="Date"/>
+    /// * <see cref="Date"/>
+    /// * <see cref="WeekDate"/>.
+    /// * <see cref="YearMonth"/>.
+    /// </remarks>
+#else
     /// <summary>Returns true if the object type is a date (of any kind).</summary>
     /// <param name="objectType">
     /// The type to test for.
@@ -36,19 +53,30 @@ public static class QowaivType
     /// * <see cref="DateTimeOffset"/>
     /// * <see cref="LocalDateTime"/>
     /// * <see cref="Date"/>
+    /// * <see cref="Date"/>
     /// * <see cref="WeekDate"/>.
+    /// * <see cref="YearMonth"/>.
     /// </remarks>
+#endif
     [Pure]
     public static bool IsDate(Type? objectType)
     {
         var type = objectType is null ? null : GetNotNullableType(objectType);
-        return type.IsAnyOf(
-            typeof(DateTime),
-            typeof(DateTimeOffset),
-            typeof(LocalDateTime),
-            typeof(Date),
-            typeof(WeekDate));
+        return DateTypes.Contains(type);
     }
+
+    private static readonly Type[] DateTypes =
+    [
+        typeof(DateTime),
+#if NET6_0_OR_GREATER
+        typeof(DateOnly),
+#endif
+        typeof(DateTimeOffset),
+        typeof(LocalDateTime),
+        typeof(Date),
+        typeof(WeekDate),
+        typeof(YearMonth)
+    ];
 
     /// <summary>Gets the not null-able type if it is a null-able, otherwise the provided type.</summary>
     /// <param name="objectType">

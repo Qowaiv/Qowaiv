@@ -101,6 +101,5 @@ public static class QowaivDateTimeOffsetExtensions
     /// The date time offset.
     /// </param>
     [Pure]
-    public static LocalDateTime ToLocal(this DateTimeOffset d)
-        => new(d.LocalDateTime.Ticks);
+    public static LocalDateTime ToLocal(this DateTimeOffset d) => new(d.Ticks);
 }

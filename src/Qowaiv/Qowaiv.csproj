@@ -13,6 +13,7 @@ v7.0.2:
 - Email address parsing performance improvements.
 - Add check for percentage.MaxValue and percentage.MinValue when creating a percentage. (fix)
 - Use DecimalMath.Pow10() to convert decimal values to percentages.
+- DateTimeOffset.ToLocal() wrongly converted DateTime before creation LocalDateTime. #404 (fix)
 v7.0.1
 - ISpanFormattable INumbers should be able to provide formatting (.NET 8.0 only). #393 (fix)
 v7.0.0

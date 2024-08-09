@@ -1,4 +1,4 @@
-﻿using FluentAssertions.Extensions;
+using FluentAssertions.Extensions;
 
 namespace Date_time_offset_specs;
 
@@ -22,10 +22,11 @@ public class Can_be_adjusted_with
 
 public class With_local
 {
-    [Test, Ignore("Investigate while this fails. It seems to be a bug.")]
-    public void represents_a_LocalDateTime()
+    [TestCase(-234)]
+    [TestCase(+283)]
+    public void represents_a_local_date_time(int offset)
     {
-        var date = new DateTimeOffset(year: 2017, month: 06, day: 11, hour: 06, minute: 15, second: 00, TimeSpan.FromHours(+2)); 
+        var date = new DateTimeOffset(year: 2017, month: 06, day: 11, hour: 06, minute: 15, second: 00, TimeSpan.FromMinutes(offset));
         date.ToLocal().Should().Be(new LocalDateTime(2017, 06, 11, 06, 15));
     }
 }

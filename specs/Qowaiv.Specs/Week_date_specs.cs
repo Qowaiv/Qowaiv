@@ -1,4 +1,4 @@
-﻿namespace Week_date_specs;
+﻿namespace Week_Date_specs;
 
 public class Is_invalid
 {
@@ -15,12 +15,12 @@ public class Is_invalid
 public class Can_be_created
 {
     [Test]
-    public void from_date()
+    public void from_Date()
         => WeekDate.Create(Svo.Date).Should().Be(Svo.WeekDate);
 
 #if NET6_0_OR_GREATER
     [Test]
-    public void from_date_only()
+    public void from_DateOnly()
         => WeekDate.Create(Svo.DateOnly).Should().Be(Svo.WeekDate);
 #endif
 }
@@ -57,7 +57,7 @@ public class Can_not_be_created
     }
 
     [Test]
-    public void for_date_above_week_date_max()
+    public void for_Date_above_WeekDate_max()
     {
         Func<WeekDate> create = () => new WeekDate(9999, 52, 6);
         create.Should()
@@ -66,7 +66,7 @@ public class Can_not_be_created
     }
 
     [Test]
-    public void for_date_above_week_date_max_with_invalid_week_number()
+    public void for_Date_above_WeekDate_max_with_invalid_week_number()
     {
         Func<WeekDate> create = () => new WeekDate(9999, 53, 6);
         create.Should()
@@ -106,25 +106,25 @@ public class Supports_type_conversion
     }
 
     [Test]
-    public void from_date_time()
+    public void from_DateTime()
         => Converting.From(Svo.DateTime).To<WeekDate>().Should().Be(Svo.WeekDate);
 
 #if NET6_0_OR_GREATER
     [Test]
-    public void from_date_only()
+    public void from_DateOnly()
         => Converting.From(Svo.DateOnly).To<WeekDate>().Should().Be(Svo.WeekDate);
 #endif
 
     [Test]
-    public void from_date()
+    public void from_Date()
         => Converting.From(new Date(2017, 06, 11)).To<WeekDate>().Should().Be(Svo.WeekDate);
 
     [Test]
-    public void from_date_time_offset()
+    public void from_DateTimeOffset()
         => Converting.From(new DateTimeOffset(2017, 06, 11, 00, 00, 00, TimeSpan.Zero)).To<WeekDate>().Should().Be(Svo.WeekDate);
 
     [Test]
-    public void from_local_date_time()
+    public void from_LocalDateTime()
         => Converting.From(new LocalDateTime(2017, 06, 11)).To<WeekDate>().Should().Be(Svo.WeekDate);
 
     [Test]
@@ -138,24 +138,24 @@ public class Supports_type_conversion
 
 #if NET6_0_OR_GREATER
     [Test]
-    public void to_date_only()
+    public void to_DateOnly()
        => Converting.To<DateOnly>().From(Svo.WeekDate).Should().Be(Svo.DateOnly);
 #endif
 
     [Test]
-    public void to_date()
+    public void to_Date()
         => Converting.To<Date>().From(Svo.WeekDate).Should().Be(Svo.Date);
 
     [Test]
-    public void to_date_time()
+    public void to_DateTime()
         => Converting.To<DateTime>().From(Svo.WeekDate).Should().Be(new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local));
 
     [Test]
-    public void to_date_time_offset()
+    public void to_DateTimeOffset()
         => Converting.To<DateTimeOffset>().From(Svo.WeekDate).Should().Be(new DateTimeOffset(2017, 06, 11, 00, 00, 00, TimeSpan.Zero));
 
     [Test]
-    public void to_local_date_time()
+    public void to_LocalDateTime()
         => Converting.To<LocalDateTime>().From(Svo.WeekDate).Should().Be(new LocalDateTime(2017, 06, 11));
 }
 

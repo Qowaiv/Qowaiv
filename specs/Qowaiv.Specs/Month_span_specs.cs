@@ -99,7 +99,7 @@ public class Can_subtract
 	[TestCase("2020-01-01", "2019-03-13", 09)]
 	[TestCase("2020-01-01", "2019-03-01", 10)]
 	[TestCase("2020-01-01", "2020-02-20", -1)]
-	public void two_dates(Date d1, Date d2, MonthSpan expected)
+	public void two_Dates(Date d1, Date d2, MonthSpan expected)
 		=> MonthSpan.Subtract(d1, d2).Should().Be(expected);
 
 #if NET6_0_OR_GREATER
@@ -110,7 +110,7 @@ public class Can_subtract
 	[TestCase("2020-01-01", "2019-03-13", 09)]
 	[TestCase("2020-01-01", "2019-03-01", 10)]
 	[TestCase("2020-01-01", "2020-02-20", -1)]
-	public void two_date_onlys(Date d1, Date d2, MonthSpan expected)
+	public void two_DateOnlys(Date d1, Date d2, MonthSpan expected)
 		=> MonthSpan.Subtract((DateOnly)d1, (DateOnly)d2).Should().Be(expected);
 #endif
 }

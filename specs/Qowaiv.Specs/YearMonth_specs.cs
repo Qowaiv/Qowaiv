@@ -1,6 +1,6 @@
 ﻿using FluentAssertions.Extensions;
 
-namespace Year_month_specs;
+namespace YearMonth_specs;
 
 public class With_domain_logic
 {
@@ -426,25 +426,25 @@ public class Supports_type_conversion
     }
 
     [Test]
-    public void from_date_time()
+    public void from_DateTime()
         => Converting.From(Svo.DateTime).To<YearMonth>().Should().Be(Svo.YearMonth);
 
 #if NET6_0_OR_GREATER
     [Test]
-    public void from_date_only()
+    public void from_DateOnly()
         => Converting.From(Svo.DateOnly).To<YearMonth>().Should().Be(Svo.YearMonth);
 #endif
 
     [Test]
-    public void from_date_time_offset()
+    public void from_DateTimeOffset()
         => Converting.From(Svo.DateTimeOffset).To<YearMonth>().Should().Be(Svo.YearMonth);
 
     [Test]
-    public void from_local_date_time()
+    public void from_LocalDateTime()
         => Converting.From(Svo.LocalDateTime).To<YearMonth>().Should().Be(Svo.YearMonth);
 
     [Test]
-    public void from_date()
+    public void from_Date()
         => Converting.From(Svo.Date).To<YearMonth>().Should().Be(Svo.YearMonth);
 
     [Test]
@@ -457,26 +457,26 @@ public class Supports_type_conversion
     }
 
     [Test]
-    public void to_date_time()
+    public void to_DateTime()
         => Converting.To<DateTime>().From(Svo.YearMonth).Should().Be(01.June(2017));
 
 
 #if NET6_0_OR_GREATER
     [Test]
-    public void to_date_only()
+    public void to_DateOnly()
         => Converting.To<DateOnly>().From(Svo.YearMonth).Should().Be(new DateOnly(2017, 06, 01));
 #endif
 
     [Test]
-    public void to_date_time_offset()
+    public void to_DateTimeOffset()
         => Converting.To<DateTimeOffset>().From(Svo.YearMonth).Should().Be(01.June(2017).WithOffset(TimeSpan.Zero));
 
     [Test]
-    public void to_local_date_time()
+    public void to_LocalDateTime()
         => Converting.To<LocalDateTime>().From(Svo.YearMonth).Should().Be(new LocalDateTime(2017, 06, 01));
 
     [Test]
-    public void to_date()
+    public void to_Date()
         => Converting.To<Date>().From(Svo.YearMonth).Should().Be(new Date(2017, 06, 01));
 }
 

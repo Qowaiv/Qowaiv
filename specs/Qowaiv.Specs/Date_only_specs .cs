@@ -71,7 +71,7 @@ public class Method : SingleValueObjectSpecs
         .ToArray();
 
     [TestCaseSource(nameof(DateMethods))]
-    public void Exist_with_Date_Only_overload(MethodInfo method)
+    public void Exist_with_DateOnly_overload(MethodInfo method)
     {
         var type = method.DeclaringType!;
         var methods = type.GetMethods();

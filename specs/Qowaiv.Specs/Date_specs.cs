@@ -157,25 +157,25 @@ public class Supports_type_conversion
     }
 
     [Test]
-    public void from_date_time()
+    public void from_DateTime()
         => Converting.From(new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local)).To<Date>().Should().Be(Svo.Date);
 
 #if NET6_0_OR_GREATER
     [Test]
-    public void from_date_only()
+    public void from_DateOnly()
         => Converting.From(Svo.DateOnly).To<Date>().Should().Be(Svo.Date);
 #endif
 
     [Test]
-    public void from_date_time_offset()
+    public void from_DateTimeOffset()
         => Converting.From(new DateTimeOffset(2017, 06, 11, 00, 00, 00, TimeSpan.Zero)).To<Date>().Should().Be(Svo.Date);
 
     [Test]
-    public void from_local_date_time()
+    public void from_LocalDateTime()
         => Converting.From(new LocalDateTime(2017, 06, 11)).To<Date>().Should().Be(Svo.Date);
 
     [Test]
-    public void from_week_date()
+    public void from_WeekDate()
         => Converting.From(new WeekDate(2017, 23, 7)).To<Date>().Should().Be(Svo.Date);
 
     [Test]
@@ -192,25 +192,25 @@ public class Supports_type_conversion
     }
 
     [Test]
-    public void to_date_time()
+    public void to_DateTime()
         => Converting.To<DateTime>().From(Svo.Date).Should().Be(11.June(2017));
 
 #if NET6_0_OR_GREATER
     [Test]
-    public void to_date_only()
+    public void to_DateOnly()
         => Converting.To<DateOnly>().From(Svo.Date).Should().Be(Svo.DateOnly);
 #endif
 
     [Test]
-    public void to_date_time_offset()
+    public void to_DateTimeOffset()
         => Converting.To<DateTimeOffset>().From(Svo.Date).Should().Be(new DateTimeOffset(2017, 06, 11, 00, 00, 00, TimeSpan.Zero));
 
     [Test]
-    public void to_local_date_time()
+    public void to_LocalDateTime()
         => Converting.To<LocalDateTime>().From(Svo.Date).Should().Be(new LocalDateTime(2017, 06, 11));
 
     [Test]
-    public void to_week_date()
+    public void to_WeekDate()
         => Converting.To<WeekDate>().From(Svo.Date).Should().Be(new WeekDate(2017, 23, 7));
 
     [Test]

@@ -60,7 +60,7 @@ public class Display_name
     }
 }
 
-public class Start_date
+public class Start_Date
 {
     [Test]
     public void min_value_for_empty() => Country.Empty.StartDate.Should().Be(Date.MinValue);
@@ -75,7 +75,7 @@ public class Start_date
     public void set_for_counties_established_after_ISO() => Country.CZ.StartDate.Should().Be(new Date(1993, 01, 01));
 }
 
-public class End_date
+public class End_Date
 {
     [Test]
     public void null_for_empty() => Country.Empty.EndDate.Should().BeNull();
@@ -93,20 +93,20 @@ public class End_date
 public class Exists
 {
     [Test]
-    public void for_country_exiting_on_date()
+    public void for_country_exiting_on_Date()
         => Country.CSXX.ExistsOnDate(new Date(1993, 01, 01)).Should().BeTrue();
 
     [Test]
-    public void not_for_country_not_exiting_on_date()
+    public void not_for_country_not_exiting_on_Date()
         => Country.CSXX.ExistsOnDate(new Date(1992, 12, 31)).Should().BeFalse();
 
 #if NET6_0_OR_GREATER
     [Test]
-    public void for_country_exiting_on_date_only()
+    public void for_country_exiting_on_DateOnly()
         => Country.CSXX.ExistsOnDate(new DateOnly(1993, 01, 01)).Should().BeTrue();
 
     [Test]
-    public void not_for_country_not_exiting_on_date_only()
+    public void not_for_country_not_exiting_on_DateOnly()
         => Country.CSXX.ExistsOnDate(new Date(1992, 12, 31)).Should().BeFalse();
 #endif
 }

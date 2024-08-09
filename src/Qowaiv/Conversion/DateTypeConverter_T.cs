@@ -14,15 +14,9 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
     [Pure]
     public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value) => value switch
     {
-        null => Activator.CreateInstance<T>(),
+        null => default(T),
+        T self => self,
         string str => FromString(str, culture),
-        _ when IsConvertable(value.GetType()) => ConvertFromConvertable(value),
-        _ => base.ConvertFrom(context, culture, value),
-    };
-
-    [Pure]
-    private object ConvertFromConvertable(object value) => value switch
-    {
         DateTime /*.......*/ date => FromDateTime(date),
 #if NET6_0_OR_GREATER
         DateOnly /*.......*/ date => FromDate((Date)date),
@@ -32,7 +26,7 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
         Date /*...........*/ date => FromDate(date),
         WeekDate /*.......*/ date => FromWeekDate(date),
         YearMonth /*......*/ date => FromYearMonth(date),
-        _ => throw Exceptions.InvalidCast(value.GetType(), typeof(T)),
+        _ => base.ConvertFrom(context, culture, value),
     };
 
     /// <inheritdoc />

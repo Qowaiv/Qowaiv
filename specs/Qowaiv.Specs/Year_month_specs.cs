@@ -230,6 +230,10 @@ public class Can_be_parsed
     [Test]
     public void with_TryParse_returns_SVO()
         => YearMonth.TryParse("2017-06").Should().Be(Svo.YearMonth);
+
+    [Test]
+    public void with_TryParse_with_culture_returns_SVO()
+       => YearMonth.TryParse("2017-06", TestCultures.en_GB).Should().Be(Svo.YearMonth);
 }
 
 public class Has_custom_formatting

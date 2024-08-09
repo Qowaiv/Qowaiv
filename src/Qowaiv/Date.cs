@@ -83,6 +83,7 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     public int DayOfYear => m_Value.DayOfYear;
 
     /// <summary>The inner value of the date.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly DateTime m_Value;
 
     /// <summary>Adds one day to the date.</summary>

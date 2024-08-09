@@ -34,7 +34,7 @@ public class Can_be_related_to
         => new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local).IsIn(Month.June).Should().BeTrue();
 
     [Test]
-    public void none_matching_month()
+    public void non_matching_month()
        => new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local).IsIn(Month.February).Should().BeFalse();
 
     [Test]
@@ -42,7 +42,7 @@ public class Can_be_related_to
         => new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local).IsIn(2017.CE()).Should().BeTrue();
 
     [Test]
-    public void none_matching_year()
+    public void non_matching_year()
        => new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local).IsIn(2018.CE()).Should().BeFalse();
 }
 

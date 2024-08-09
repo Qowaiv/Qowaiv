@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -209,5 +209,8 @@
   </data>
   <data name="ArgumentOutOfRange_Percentage" xml:space="preserve">
     <value>Value is either too large or too small for a percentage.</value>
+  </data>
+  <data name="ArgumentOutOfRange_YearMonth" xml:space="preserve">
+    <value>Year, and Month parameters describe an un-representable year-month.</value>
   </data>
 </root>

@@ -87,6 +87,10 @@ public static class Svo
     public static readonly Uuid Uuid = Uuid.Parse("Qowaiv_SVOLibrary_GUIA");
     public static readonly WeekDate WeekDate = new(2017, 23, 7);
     public static readonly Year Year = 1979.CE();
+
+    /// <summary>2017-06</summary>
+    public static readonly YearMonth YearMonth = new(year: 2017, month: 06);
+
     public static readonly YesNo YesNo = YesNo.Yes;
 
     public static readonly CustomSvo CustomSvo = CustomSvo.Parse("QOWAIV");

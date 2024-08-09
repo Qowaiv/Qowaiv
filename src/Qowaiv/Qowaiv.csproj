@@ -5,10 +5,11 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>7.0.1</Version>
+    <Version>7.0.2</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
-ToBeReleased:
+v7.0.2:
+- Introduction of Year-Month. #295
 - Email address parsing performance improvements.
 - Add check for percentage.MaxValue and percentage.MinValue when creating a percentage. (fix)
 - Use DecimalMath.Pow10() to convert decimal values to percentages.

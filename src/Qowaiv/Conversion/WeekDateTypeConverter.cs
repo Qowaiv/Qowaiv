@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Conversion;
+namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a week date.</summary>
 [Inheritable]
@@ -26,9 +26,13 @@ public class WeekDateTypeConverter : DateTypeConverter<WeekDate>
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
-    [Pure]
     [DoesNotReturn]
     protected sealed override WeekDate FromWeekDate(WeekDate weekDate) => throw new NotSupportedException();
+
+    /// <inheritdoc />
+    [ExcludeFromCodeCoverage]
+    [DoesNotReturn]
+    protected override WeekDate FromYearMonth(YearMonth yearMonth) => throw new NotSupportedException();
 
     /// <inheritdoc />
     [Pure]
@@ -48,7 +52,11 @@ public class WeekDateTypeConverter : DateTypeConverter<WeekDate>
 
     /// <inheritdoc />
     [ExcludeFromCodeCoverage]
-    [Pure]
+    [DoesNotReturn]
+    protected override YearMonth ToYearMonth(WeekDate date) => throw new NotSupportedException();
+
+    /// <inheritdoc />
+    [ExcludeFromCodeCoverage]
     [DoesNotReturn]
     protected sealed override WeekDate ToWeekDate(WeekDate date) => throw new NotSupportedException();
 }

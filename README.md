@@ -249,6 +249,19 @@ bool isLeap = year.IsLeapYear;
 new DateTime(2017, 02, 14).IsIn(year); // true
 ```
 
+### Year-month
+Represent a date with year and month precision.
+
+``` C#
+var date = new YearMonth(2017, 06);
+
+// Querying
+date.IsIn(2017.CE()); // true
+var addition = date.AddMonths(23); // new YearMonth(2019, 05)
+var next = date++; // new YearMonth(2017, 07)
+MonthSpan age = new YearMonth(2024, 08) - date; // 7 years and 2 months.
+```
+
 ### Yes-no
 A Yes-no is a (bi-)polar that obviously has the values "yes" and "no". It also
 has an "empty"(unset) and "unknown" value. It maps easily with a `boolean`, but
@@ -710,7 +723,7 @@ and if the data type is nullable, all when applicable.
     "example": "2017-06-10",
     "type": "string",
     "format": "date",
-    "nullabe": false
+    "nullable": false
   },
   "DateSpan": {
     "description": "Date span, specified in years, months and days.",
@@ -718,42 +731,35 @@ and if the data type is nullable, all when applicable.
     "type": "string",
     "format": "date-span",
     "pattern": "[+-]?[0-9]+Y[+-][0-9]+M[+-][0-9]+D",
-    "nullabe": false
+    "nullable": false
   },
   "EmailAddress": {
     "description": "Email notation as defined by RFC 5322.",
     "example": "svo@qowaiv.org",
     "type": "string",
     "format": "email",
-    "nullabe": true
-  },
-  "EmailAddressCollection": {
-    "description": "Comma separated list of email addresses defined by RFC 5322.",
-    "example": "info@qowaiv.org,test@test.com",
-    "type": "string",
-    "format": "email-collection",
-    "nullabe": true
+    "nullable": true
   },
   "HouseNumber": {
     "description": "House number notation.",
     "example": "13",
     "type": "string",
     "format": "house-number",
-    "nullabe": true
+    "nullable": true
   },
   "LocalDateTime": {
     "description": "Date-time notation as defined by RFC 3339, without time zone information.",
     "example": "2017-06-10 15:00",
     "type": "string",
     "format": "local-date-time",
-    "nullabe": false
+    "nullable": false
   },
   "Month": {
     "description": "Month(-only) notation.",
     "example": "Jun",
     "type": "string",
     "format": "month",
-    "nullabe": true,
+    "nullable": true,
     "enum": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "?"]
   },
   "MonthSpan": {
@@ -762,7 +768,7 @@ and if the data type is nullable, all when applicable.
     "type": "string",
     "format": "month-span",
     "pattern": "[+-]?[0-9]+Y[+-][0-9]+M",
-    "nullabe": false
+    "nullable": false
   },
   "Percentage": {
     "description": "Ratio expressed as a fraction of 100 denoted using the percent sign '%'.",
@@ -770,21 +776,21 @@ and if the data type is nullable, all when applicable.
     "type": "string",
     "format": "percentage",
     "pattern": "-?[0-9]+(\\.[0-9]+)?%",
-    "nullabe": false
+    "nullable": false
   },
   "PostalCode": {
     "description": "Postal code notation.",
     "example": "2624DP",
     "type": "string",
     "format": "postal-code",
-    "nullabe": true
+    "nullable": true
   },
   "Sex": {
     "description": "Sex as specified by ISO/IEC 5218.",
     "example": "female",
     "type": "string",
     "format": "sex",
-    "nullabe": true,
+    "nullable": true,
     "enum": ["NotKnown", "Male", "Female", "NotApplicable"]
   },
   "Uuid": {
@@ -792,28 +798,36 @@ and if the data type is nullable, all when applicable.
     "example": "lmZO_haEOTCwGsCcbIZFFg",
     "type": "string",
     "format": "uuid-base64",
-    "nullabe": true
+    "nullable": true
   },
   "WeekDate": {
     "description": "Full-date notation as defined by ISO 8601.",
     "example": "1997-W14-6",
     "type": "string",
     "format": "date-weekbased",
-    "nullabe": false
+    "nullable": false
   },
   "Year": {
     "description": "Year(-only) notation.",
     "example": 1983,
     "type": "integer",
     "format": "year",
-    "nullabe": true
+    "nullable": true
+  },
+  "YearMonth": {
+    "description": "Date notation with month precision.",
+    "example": "2017-06",
+    "type": "string",
+    "format": "year-month",
+    "pattern": "[0-9]{4}-[01][0-9]",
+    "nullable": false
   },
   "YesNo": {
     "description": "Yes-No notation.",
     "example": "yes",
     "type": "string",
     "format": "yes-no",
-    "nullabe": true,
+    "nullable": true,
     "enum": ["yes", "no", "?"]
   },
   "Chemistry.CasRegistryNumber": {
@@ -822,35 +836,36 @@ and if the data type is nullable, all when applicable.
     "type": "string",
     "format": "cas-nr",
     "pattern": "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]",
-    "nullabe": true
+    "nullable": true
   },
   "Financial.Amount": {
     "description": "Decimal representation of a currency amount.",
     "example": 15.95,
     "type": "number",
     "format": "amount",
-    "nullabe": false
+    "nullable": false
   },
   "Financial.BusinessIdentifierCode": {
     "description": "Business Identifier Code, as defined by ISO 9362.",
     "example": "DEUTDEFF",
     "type": "string",
     "format": "bic",
-    "nullabe": true
+    "nullable": true
   },
   "Financial.Currency": {
     "description": "Currency notation as defined by ISO 4217.",
     "example": "EUR",
     "type": "string",
     "format": "currency",
-    "nullabe": true
+    "nullable": true
   },
   "Financial.InternationalBankAccountNumber": {
     "description": "International Bank Account Number notation as defined by ISO 13616:2007.",
-    "example": "BE71096123456769.",
+    "example": "BE71096123456769",
     "type": "string",
     "format": "iban",
-    "nullabe": true
+    "pattern": "[A-Z]{2}[0-9]{2}[A-Z0-9]{8,32}",
+    "nullable": true
   },
   "Financial.Money": {
     "description": "Combined currency and amount notation as defined by ISO 4217.",
@@ -858,56 +873,56 @@ and if the data type is nullable, all when applicable.
     "type": "string",
     "format": "money",
     "pattern": "[A-Z]{3} -?[0-9]+(\\.[0-9]+)?",
-    "nullabe": false
+    "nullable": false
   },
   "Globalization.Country": {
     "description": "Country notation as defined by ISO 3166-1 alpha-2.",
     "example": "NL",
     "type": "string",
     "format": "country",
-    "nullabe": true
+    "nullable": true
   },
   "Identifiers.GuidBehavior": {
     "description": "GUID based identifier",
     "example": "8a1a8c42-d2ff-e254-e26e-b6abcbf19420",
     "type": "string",
     "format": "guid",
-    "nullabe": true
+    "nullable": true
   },
   "Identifiers.Int32IdBehavior": {
     "description": "Int32 based identifier",
     "example": 17,
     "type": "integer",
     "format": "identifier",
-    "nullabe": true
+    "nullable": true
   },
   "Identifiers.Int64IdBehavior": {
     "description": "Int64 based identifier",
     "example": 17,
     "type": "integer",
     "format": "identifier",
-    "nullabe": true
+    "nullable": true
   },
   "Identifiers.StringIdBehavior": {
     "description": "String based identifier",
     "example": "Order-UK-2022-215",
     "type": "string",
     "format": "identifier",
-    "nullabe": true
+    "nullable": true
   },
   "Identifiers.UuidBehavior": {
     "description": "UUID based identifier",
     "example": "lmZO_haEOTCwGsCcbIZFFg",
     "type": "string",
     "format": "uuid-base64",
-    "nullabe": true
+    "nullable": true
   },
   "IO.StreamSize": {
     "description": "Stream size notation (in byte).",
     "example": 1024,
     "type": "integer",
     "format": "stream-size",
-    "nullabe": false
+    "nullable": false
   },
   "Mathematics.Fraction": {
     "description": "Faction",
@@ -915,14 +930,14 @@ and if the data type is nullable, all when applicable.
     "type": "string",
     "format": "faction",
     "pattern": "-?[0-9]+(/[0-9]+)?",
-    "nullabe": false
+    "nullable": false
   },
   "Statistics.Elo": {
     "description": "Elo rating system notation.",
-    "example": 1600.0,
+    "example": 1600,
     "type": "number",
     "format": "elo",
-    "nullabe": false
+    "nullable": false
   },
   "Sustainability.EnergyLabel": {
     "description": "EU energy label",
@@ -930,14 +945,14 @@ and if the data type is nullable, all when applicable.
     "type": "string",
     "format": "energy-label",
     "pattern": "[A-H]|A\\+{1,4}",
-    "nullabe": true
+    "nullable": true
   },
   "Web.InternetMediaType": {
     "description": "Media type notation as defined by RFC 6838.",
     "example": "text/html",
     "type": "string",
     "format": "internet-media-type",
-    "nullabe": true
+    "nullable": true
   }
 }
 ```

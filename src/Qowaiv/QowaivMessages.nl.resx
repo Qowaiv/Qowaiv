@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -98,6 +98,9 @@
   </data>
   <data name="FormatExceptionYear" xml:space="preserve">
     <value>Geen geldig jaartal</value>
+  </data>
+  <data name="FormatExceptionYearMonth" xml:space="preserve">
+    <value>Geen geldige jaar/maand combinatie.</value>
   </data>
   <data name="FormatExceptionYesNo" xml:space="preserve">
     <value>Geen geldige ja/nee waarde</value>

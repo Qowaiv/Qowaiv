@@ -281,7 +281,7 @@ public class Can_be_created_sequential
 	}
 
 	[Test]
-	public void on_min_date_first_6_bytes_are_0_for_default()
+	public void on_min_Date_first_6_bytes_are_0_for_default()
 	{
 		using (Clock.SetTimeForCurrentContext(() => DateTime.UnixEpoch))
 		{
@@ -294,7 +294,7 @@ public class Can_be_created_sequential
 	}
 
 	[Test]
-	public void on_min_date_last_6_bytes_are_0_for_SQL_Server()
+	public void on_min_Date_last_6_bytes_are_0_for_SQL_Server()
 	{
 		using (Clock.SetTimeForCurrentContext(() => DateTime.UnixEpoch))
 		{
@@ -307,7 +307,7 @@ public class Can_be_created_sequential
 	}
 
 	[Test]
-	public void on_max_date_first_6_bytes_are_255_for_default()
+	public void on_max_Date_first_6_bytes_are_255_for_default()
 	{
 		using (Clock.SetTimeForCurrentContext(() => MaxDate))
 		{
@@ -320,7 +320,7 @@ public class Can_be_created_sequential
 	}
 
 	[Test]
-	public void on_max_date_last_6_bytes_are_255_for_SQL_Server()
+	public void on_max_Date_last_6_bytes_are_255_for_SQL_Server()
 	{
 		using (Clock.SetTimeForCurrentContext(() => MaxDate))
 		{

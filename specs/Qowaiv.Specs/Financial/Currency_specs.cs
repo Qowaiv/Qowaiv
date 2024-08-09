@@ -3,20 +3,20 @@
 public class Exists
 {
     [Test]
-    public void for_currency_exiting_on_date()
+    public void for_currency_exiting_on_Date()
         => Currency.EUR.ExistsOnDate(new Date(2003, 01, 01)).Should().BeTrue();
 
     [Test]
-    public void not_for_currency_not_exiting_on_date()
+    public void not_for_currency_not_exiting_on_Date()
         => Currency.EUR.ExistsOnDate(new Date(1992, 12, 31)).Should().BeFalse();
 
 #if NET6_0_OR_GREATER
     [Test]
-    public void for_currency_exiting_on_date_only()
+    public void for_currency_exiting_on_DateOnly()
         => Currency.EUR.ExistsOnDate(new DateOnly(2003, 01, 01)).Should().BeTrue();
 
     [Test]
-    public void not_for_currency_not_exiting_on_date_only()
+    public void not_for_currency_not_exiting_on_DateOnly()
         => Currency.EUR.ExistsOnDate(new Date(1992, 12, 31)).Should().BeFalse();
 #endif
 }
@@ -24,12 +24,12 @@ public class Exists
 public class Get_countries
 {
     [Test]
-    public void on_date()
+    public void on_Date()
         => Currency.EUR.GetCountries(new Date(2003, 01, 01)).Should().HaveCount(25);
 
 #if NET6_0_OR_GREATER
     [Test]
-    public void on_date_only()
+    public void on_DateOnly()
         => Currency.EUR.GetCountries(new DateOnly(2003, 01, 01)).Should().HaveCount(25);
 #endif
 }

@@ -165,6 +165,4 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
         }
         else return false;
     }
-
-    public static EmailAddress Parse2(string str) => new(EmailParser.Parse(str));
 }

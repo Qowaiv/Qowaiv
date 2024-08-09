@@ -55,7 +55,6 @@ public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>, IEmpty
     public bool Equals(CryptographicSeed other) => IsEmpty() && other.IsEmpty();
 
     /// <inheritdoc />
-    [Pure]
     [DoesNotReturn]
     public override int GetHashCode() => Hash.NotSupportedBy<CryptographicSeed>();
 

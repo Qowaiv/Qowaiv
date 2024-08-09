@@ -214,7 +214,7 @@ public class Supports_type_conversion
         => Converting.To<WeekDate>().From(Svo.Date).Should().Be(new WeekDate(2017, 23, 7));
 
     [Test]
-    public void to_Year_Month()
+    public void to_year_month()
         => Converting.To<YearMonth>().From(Svo.Date).Should().Be(Svo.YearMonth);
 }
 

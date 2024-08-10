@@ -5,10 +5,12 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>7.0.2</Version>
+    <Version>7.0.3</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
-v7.0.2:
+v7.0.3
+- DecimalMath.ChangeScale() should have a value between [0.28]. #405 (fix)
+v7.0.2
 - Introduction of Year-Month. #295
 - Email address parsing performance improvements.
 - Add check for percentage.MaxValue and percentage.MinValue when creating a percentage. (fix)

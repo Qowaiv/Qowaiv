@@ -19,6 +19,13 @@ public class Decimal_scale
         Scale(100.00m.Percent()).Should().Be(0);
     }
 
+    [Test]
+    public void not_bigger_than_28()
+    {
+        var p = (100m / 3).Percent();
+        Scale(p).Should().Be(28);
+    }
+
     [TestCase("3.14%")]
     [TestCase("3.140%")]
     [TestCase("3.1400%")]
@@ -26,7 +33,7 @@ public class Decimal_scale
     public void _minimum_for_parsed(string str)
         => Scale(Percentage.Parse(str, TestCultures.en)).Should().Be(4);
 
-    private static byte Scale(Percentage p) => ((decimal)p).Scale;
+    private static int Scale(Percentage p) => ((decimal)p).Scale;
 }
 #endif
 

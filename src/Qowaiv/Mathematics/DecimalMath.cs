@@ -136,7 +136,13 @@ internal static class DecimalMath
             calc.Multiply(factor);
             calc.scale += diffChunk;
         }
-
+        while (calc.scale > 28)
+        {
+            var diffChunk = Math.Min(MaxInt32Scale, calc.scale - 28);
+            var factor = Powers10[diffChunk];
+            calc.Divide(factor);
+            calc.scale -= diffChunk;
+        }
         return calc.Value();
     }
 

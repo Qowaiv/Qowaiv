@@ -212,6 +212,11 @@ public class Can_be_parsed
 			Percentage.TryParse("17.51%").Should().Be(Svo.Percentage);
 		}
 	}
+
+    [Test]
+    public void for_the_max_value()
+       => Percentage.Parse(Percentage.MaxValue.ToJson(), CultureInfo.InvariantCulture)
+       .Should().Be(Percentage.MaxValue);
 }
 
 public class Can_not_be_parsed

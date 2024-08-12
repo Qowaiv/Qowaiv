@@ -298,10 +298,10 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
 
         if (s is { Length: > 0 }
             && FormatInfo.TryParse(s, provider, out var info)
-            && decimal.TryParse(info.Format, style, info.Provider, out var dec)
+            && TryDecimal(info, style, out var dec)
             && dec.IsInRange(MinValue.m_Value, MaxValue.m_Value))
         {
-            result = new(DecimalMath.ChangeScale(dec, info.ScaleShift));
+            result = new(dec);
             return true;
         }
         return false;
@@ -312,6 +312,19 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
             if (extra != NumberStyles.None)
             {
                 throw new ArgumentOutOfRangeException(nameof(style), string.Format(QowaivMessages.ArgumentOutOfRange_NumberStyleNotSupported, extra));
+            }
+        }
+
+        static bool TryDecimal(FormatInfo info, NumberStyles style, out decimal dec)
+        {
+            if (decimal.TryParse(info.Format, style, info.Provider, out dec))
+            {
+                dec = DecimalMath.ChangeScale(dec, info.ScaleShift);
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

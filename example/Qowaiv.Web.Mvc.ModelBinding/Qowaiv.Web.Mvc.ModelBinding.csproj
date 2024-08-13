@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\props\nopackage.props" />
+  <Import Project="../../props/nopackage.props" />
   
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -22,11 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\shared\Guard.cs" Link="Guard.cs" />
+    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Qowaiv\Qowaiv.csproj" />
+    <ProjectReference Include="../../src/Qowaiv/Qowaiv.csproj" />
   </ItemGroup>
 
 </Project>

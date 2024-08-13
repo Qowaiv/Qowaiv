@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\props\nopackage.props" />
+  <Import Project="../../props/nopackage.props" />
 
   <PropertyGroup>
     <Nullable>enable</Nullable>
@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Qowaiv.Specs\Qowaiv.Specs.csproj" />
+    <ProjectReference Include="../Qowaiv.Specs/Qowaiv.Specs.csproj" />
   </ItemGroup>
 
   <!-- We do not want to report on this during a PR/Release build. -->

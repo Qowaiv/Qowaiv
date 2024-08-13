@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\props\package.props" />
+  <Import Project="../../props/package.props" />
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
@@ -30,7 +30,7 @@ v6.0.0
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\shared\Guard.cs" Link="Guard.cs" />
+    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,8 +38,8 @@ v6.0.0
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Qowaiv.Diagnostics.Contracts\Qowaiv.Diagnostics.Contracts.csproj" PrivateAssets="all" IncludeAssets="compiler" />
-    <ProjectReference Include="..\Qowaiv\Qowaiv.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" PrivateAssets="all" IncludeAssets="compiler" />
+    <ProjectReference Include="../Qowaiv/Qowaiv.csproj" />
   </ItemGroup>
 
 </Project>

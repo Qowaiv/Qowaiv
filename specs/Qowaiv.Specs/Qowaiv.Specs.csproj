@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\props\nopackage.props" />
+  <Import Project="../../props/nopackage.props" />
 
   <PropertyGroup>
     <Nullable>enable</Nullable>
@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\src\Qowaiv\Text\ASCII.cs" Link="Qowaiv.Internal\Text\ASCII.cs" />
-    <Compile Include="..\..\src\Qowaiv\Text\CharBuffer.cs" Link="Qowaiv.Internal\Text\CharBuffer.cs" />
-    <Compile Include="..\..\src\Qowaiv\Text\CharBuffer.String.cs" Link="Qowaiv.Internal\Text\CharBuffer.String.cs" />
-    <Compile Include="..\..\src\Qowaiv\Text\CharBuffer.ToNonDiacritic.cs" Link="Qowaiv.Internal\Text\CharBuffer.ToNonDiacritic.cs" />
-    <Compile Include="..\..\src\Qowaiv\Text\CharBuffer.Transform.cs" Link="Qowaiv.Internal\Text\CharBuffer.Transform.cs" />
-    <Compile Include="..\..\src\Qowaiv\Text\CharrBufferExtensions.cs" Link="Qowaiv.Internal\Text\CharrBufferExtensions.cs" />
+    <Compile Include="../../src/Qowaiv/Text/ASCII.cs" Link="Qowaiv.Internal/Text/ASCII.cs" />
+    <Compile Include="../../src/Qowaiv/Text/CharBuffer.cs" Link="Qowaiv.Internal/Text/CharBuffer.cs" />
+    <Compile Include="../../src/Qowaiv/Text/CharBuffer.String.cs" Link="Qowaiv.Internal/Text/CharBuffer.String.cs" />
+    <Compile Include="../../src/Qowaiv/Text/CharBuffer.ToNonDiacritic.cs" Link="Qowaiv.Internal/Text/CharBuffer.ToNonDiacritic.cs" />
+    <Compile Include="../../src/Qowaiv/Text/CharBuffer.Transform.cs" Link="Qowaiv.Internal/Text/CharBuffer.Transform.cs" />
+    <Compile Include="../../src/Qowaiv/Text/CharrBufferExtensions.cs" Link="Qowaiv.Internal/Text/CharrBufferExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup Label="TestTools">
@@ -33,10 +33,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Qowaiv\Qowaiv.csproj" />
-    <ProjectReference Include="..\..\src\Qowaiv.Data.SqlClient\Qowaiv.Data.SqlClient.csproj" />
-    <ProjectReference Include="..\..\src\Qowaiv.Diagnostics.Contracts\Qowaiv.Diagnostics.Contracts.csproj" />
-    <ProjectReference Include="..\..\src\Qowaiv.TestTools\Qowaiv.TestTools.csproj" />
+    <ProjectReference Include="../../src/Qowaiv/Qowaiv.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Data.SqlClient/Qowaiv.Data.SqlClient.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,11 +3,12 @@
 
   <PropertyGroup>
     <IsPublishable>false</IsPublishable>
-    <NuGetAudit>true</NuGetAudit>
     <OutputType>library</OutputType>
   </PropertyGroup>
 
   <PropertyGroup Label="Diagnostics">
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <NuGetAudit>true</NuGetAudit>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     <!--
       Some warnings can not be configured in the .editor config:
@@ -63,6 +64,12 @@
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Label="Signing">
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)../build/Qowaiv.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="PolySharp" Version="1.*" PrivateAssets="all" />
   </ItemGroup>

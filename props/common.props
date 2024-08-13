@@ -3,11 +3,12 @@
 
   <PropertyGroup>
     <IsPublishable>false</IsPublishable>
-    <NuGetAudit>true</NuGetAudit>
     <OutputType>library</OutputType>
   </PropertyGroup>
 
   <PropertyGroup Label="Diagnostics">
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <NuGetAudit>true</NuGetAudit>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
     <!--
       Some warnings can not be configured in the .editor config:

@@ -31,15 +31,9 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package files">
-    <None Include="$(MSBuildThisFileDirectory)..\design\package-icon.png" Pack="true" PackagePath="" />
+    <None Include="$(MSBuildThisFileDirectory)../design/package-icon.png" Pack="true" PackagePath="" />
     <None Include="README.md" Pack="true" PackagePath="" />
   </ItemGroup>
-
-  <PropertyGroup Label="Signing">
-    <SignAssembly>true</SignAssembly>
-    <DelaySign>false</DelaySign>
-    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
 
   <ItemGroup Label="Analyzers">
     <PackageReference Include="Qowaiv.Analyzers.CSharp" Version="*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
@@ -52,7 +46,7 @@
   
   <ItemGroup>
     <!-- Shared assembly tags. -->
-    <Compile Include="$(MSBuildThisFileDirectory)..\shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)../shared/ProductInfo.cs" Link="Properties/ProductInfo.cs" />
   </ItemGroup>
   
 </Project>

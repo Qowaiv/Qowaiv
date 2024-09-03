@@ -1,28 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project>
 
   <PropertyGroup>
     <IsPublishable>false</IsPublishable>
     <OutputType>library</OutputType>
+    <!-- Hardly any dependency let alone shared. -->
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
   </PropertyGroup>
 
   <PropertyGroup Label="Diagnostics">
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <NuGetAudit>true</NuGetAudit>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
-    <!--
-      Some warnings can not be configured in the .editor config:
-      SYSLIB1044: The regex generator couldn't generate a complete source implementation for the specified regular expression due to an internal limitation
-    -->
-    <NoWarn>$(NoWarn);SYSLIB1044</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup>
     <Title>Qowaiv (Single) Value Object library</Title>
     <Description>
-      Qowaiv is a (Single) Value Object library. It aims to model reusable (Single)
-      Value Objects that can be used in a wide variety of modeling scenarios, both
-      inside and outside a Domain-driven context.
+      <![CDATA[
+Qowaiv is a (Single) Value Object library. It aims to model reusable (Single)
+Value Objects that can be used in a wide variety of modeling scenarios, both
+inside and outside a Domain-driven context.
+]]>
     </Description>
     <Authors>
       Ad van der Hoeven;

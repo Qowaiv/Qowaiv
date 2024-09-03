@@ -3,10 +3,12 @@
   <Import Project="../../props/nopackage.props" />
   
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>exe</OutputType>
     <Nullable>enable</Nullable>
     <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Benchmarks</RootNamespace>
+    <!-- We do not care about strong names for benchmarking -->
+    <NoWarn>CS8002</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

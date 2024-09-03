@@ -8,8 +8,9 @@
     <Version>7.0.0</Version>
     <PackageId>Qowaiv.Data.SqlClient</PackageId>
     <PackageReleaseNotes>
+      <![CDATA[
 v7.0.0
-- Implement IMinMaxValue&lt;TSelf&gt; for SVO's with a min and max value. #362 (breaking)
+- Implement IMinMaxValue<TSelf> for SVO's with a min and max value. #362 (breaking)
 - Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
 - Update to System.Data.SqlClient 4.8.6. #363 (security issue)
 v6.4.0
@@ -26,6 +27,7 @@ v6.0.0
 - TryParse(string) returns nullable SVO. #206 (breaking)
 - Drop cast from and to string. #212 (breaking)
 - Non-predictable hash codes. #205 (breaking)
+]]>
     </PackageReleaseNotes>
   </PropertyGroup>
 

@@ -8,8 +8,10 @@
     <Version>1.0.0</Version>
     <PackageId>Qowaiv.Diagnostics.Contracts</PackageId>
     <PackageReleaseNotes>
+      <![CDATA[
 v1.0.0
 - Initial version.
+]]>
     </PackageReleaseNotes>
   </PropertyGroup>
 

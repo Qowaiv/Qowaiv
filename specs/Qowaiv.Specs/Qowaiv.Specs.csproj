@@ -24,7 +24,6 @@
 
   <ItemGroup Label="Build Tools">
     <PackageReference Include="coverlet.collector" Version="*" PrivateAssets="all" />
-    <PackageReference Include="coverlet.msbuild" Version="*" PrivateAssets="all" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="*" PrivateAssets="all" />
     <PackageReference Include="NUnit3TestAdapter" Version="*" PrivateAssets="all" />
   </ItemGroup>

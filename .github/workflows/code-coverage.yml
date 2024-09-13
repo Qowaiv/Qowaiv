@@ -17,11 +17,10 @@ jobs:
           --configuration Release \
           --collect:"XPlat Code Coverage;Format=lcov"
       - name: Get path to lcov file
-        id: get_lcov_path
         shell: bash
-        run: printf '::set-output name=lcov_path::%s\n' TestResults/*/coverage.info
+        run: echo "LCOV_PATH=$(find ./specs/Qowaiv.specs/TestResults -name coverage.info)" >> $GITHUB_ENV
       - name: Publish coverage report to coveralls.io
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ${{ steps.get_lcov_path.outputs.lcov_path }}
+          path-to-lcov: $LCOV_PATH

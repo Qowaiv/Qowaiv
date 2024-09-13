@@ -1,8 +1,5 @@
 name: Code coverage
-on:
-  push:
-    branches:
-      - master
+on: push
 
 jobs:
   build:
@@ -23,4 +20,3 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./specs/Qowaiv.Specs/**/coverage.info

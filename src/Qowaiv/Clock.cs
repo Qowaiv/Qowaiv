@@ -26,12 +26,6 @@ namespace Qowaiv;
 /// </example>
 public static class Clock
 {
-    [Obsolete("Don't merge this")]
-    public static void ThisFunctionGeneratesAWarningAndIsNotCoveredByTests()
-    {
-        var unused = 1;
-    }
-
     /// <summary>Gets the UTC (Coordinated Universal Time) zone of the clock.</summary>
     /// <remarks>
     /// To be able to stub the clock, this simple class can be used.

@@ -6,12 +6,12 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Qowaiv_Qowaiv&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Qowaiv_Qowaiv)
 [![Coverage Status](https://coveralls.io/repos/github/Qowaiv/Qowaiv/badge.svg?branch=master)](https://coveralls.io/github/Qowaiv/Qowaiv?branch=master)
 
-| version                                                                          | downloads                                                        | package                                                                        |
-|----------------------------------------------------------------------------------|------------------------------------------------------------------|--------------------------------------------------------------------------------|
-|![v](https://img.shields.io/nuget/v/Qowaiv?color=18C)                             |![v](https://img.shields.io/nuget/dt/Qowaiv)                      |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                                |
-|![v](https://img.shields.io/nuget/v/Qowaiv.Data.SqlClient?color=18C)              |![v](https://img.shields.io/nuget/dt/Qowaiv.Data.SqlClient)       |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)   |
-|![v](https://img.shields.io/nuget/v/Qowaiv.Qowaiv.Diagnostics.Contracts?color=118)|![v](https://img.shields.io/nuget/dt/Qowaiv.Diagnostics.Contracts)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.Diagnostics.Contracts/)|
-|![v](https://img.shields.io/nuget/v/Qowaiv.TestTools?color=118)                   |![v](https://img.shields.io/nuget/dt/Qowaiv.TestTools)            |[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)            |
+| version                                                                   | downloads                                                        | package                                                                        |
+|---------------------------------------------------------------------------|------------------------------------------------------------------|--------------------------------------------------------------------------------|
+|![v](https://img.shields.io/nuget/v/Qowaiv?color=18C)                      |![v](https://img.shields.io/nuget/dt/Qowaiv)                      |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                                |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Data.SqlClient?color=18C)       |![v](https://img.shields.io/nuget/dt/Qowaiv.Data.SqlClient)       |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)   |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Diagnostics.Contracts?color=118)|![v](https://img.shields.io/nuget/dt/Qowaiv.Diagnostics.Contracts)|[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.Diagnostics.Contracts/)|
+|![v](https://img.shields.io/nuget/v/Qowaiv.TestTools?color=118)            |![v](https://img.shields.io/nuget/dt/Qowaiv.TestTools)            |[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)            |
 
 # Qowaiv
 

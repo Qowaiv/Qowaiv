@@ -19,8 +19,11 @@ jobs:
           dotnet test ./specs/Qowaiv.Specs -f net8.0 \
           --configuration Release \
           --collect:"XPlat Code Coverage;Format=lcov"
+      - name: Get path to lcov file
+        shell: bash
+        run: echo "LCOV_PATH=$(find /home/runner/work/Qowaiv/Qowaiv/specs/Qowaiv.Specs/TestResults -name coverage.info)" >> $GITHUB_ENV
       - name: Publish coverage report to coveralls.io
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./specs/Qowaiv.Specs/**/coverage.info
+          path-to-lcov: ${{ env.LCOV_PATH }}

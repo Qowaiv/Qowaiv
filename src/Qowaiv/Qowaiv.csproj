@@ -5,10 +5,12 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>7.0.4</Version>
+    <Version>7.0.5</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
       <![CDATA[
+v7.0.5
+- Add ZeroIfNull() on INumberBase<TSelf>.
 v7.0.4
 - Percentage.TryParse should first change the scale, before checking the boundaries. (fix)
 v7.0.3

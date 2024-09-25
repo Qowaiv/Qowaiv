@@ -215,3 +215,81 @@ public class Moneys
 
     static T Selection<T>(T value) => value;
 }
+
+public class Percentages
+{
+    private static readonly Percentage[] collection = [1.Percent(), 23.Percent(), Percentage.Zero];
+    private static readonly Percentage?[] nullables = [1.Percent(), 23.Percent(), Percentage.Zero, null];
+
+    [Test]
+    public void Average_on_collection_is_calculated()
+        => collection.Average().Should().Be(8.Percent());
+
+    [Test]
+    public void Average_on_nullables_can_be_calculated()
+        => nullables.Average().Should().Be(8.Percent());
+
+    [Test]
+    public void Average_on_empty_collection_throws()
+    {
+        Func<Percentage> average = () => Array.Empty<Percentage>().Average();
+        average.Should().Throw<InvalidOperationException>();
+    }
+
+    [Test]
+    public void Average_on_selected_collection_is_calculated()
+        => collection.Average(Selection).Should().Be(8.Percent());
+
+    [Test]
+    public void Average_on_selected_nullables_can_be_calculated()
+        => nullables.Average(Selection).Should().Be(8.Percent());
+
+    [Test]
+    public void Average_on_selected_empty_collection_throws()
+    {
+        Func<Percentage> average = () => Array.Empty<Percentage>().Average(Selection);
+        average.Should().Throw<InvalidOperationException>();
+    }
+
+    [Test]
+    public void Average_on_selected_nullable_empty_collection_is_zero()
+        => Array.Empty<Percentage?>().Average(Selection).Should().BeNull();
+
+    [Test]
+    public void Average_on_nullable_empty_collection_is_zero()
+        => Array.Empty<Amount?>().Average().Should().BeNull();
+
+    [Test]
+    public void Sum_on_collection_is_calculated()
+       => collection.Sum().Should().Be(24.Percent());
+
+    [Test]
+    public void Sum_on_nullables_can_be_calculated()
+        => nullables.Sum().Should().Be(24.Percent());
+
+    [Test]
+    public void Sum_on_empty_collection_is_zero()
+        => Array.Empty<Percentage>().Sum().Should().Be(Percentage.Zero);
+
+    [Test]
+    public void Sum_on_nullable_empty_collection_is_zero()
+        => Array.Empty<Percentage?>().Sum().Should().BeNull();
+
+    [Test]
+    public void Sum_on_selected_collection_is_calculated()
+      => collection.Sum(Selection).Should().Be(24.Percent());
+
+    [Test]
+    public void Sum_on_selected_nullables_can_be_calculated()
+        => nullables.Sum(Selection).Should().Be(24.Percent());
+
+    [Test]
+    public void Sum_on_selected_empty_collection_is_zero()
+        => Array.Empty<Percentage>().Sum(Selection).Should().Be(Percentage.Zero);
+
+    [Test]
+    public void Sum_on_selected_nullable_empty_collection_is_zero()
+        => Array.Empty<Percentage?>().Sum(Selection).Should().BeNull();
+
+    static T Selection<T>(T value) => value;
+}

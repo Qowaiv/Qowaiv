@@ -29,9 +29,6 @@ public static class QowaivEnumerableExtensions
     /// <exception cref="InvalidOperationException">
     /// source contains no elements.
     /// </exception>
-    /// <exception cref="CurrencyMismatchException">
-    /// not all amount elements have the same currency.
-    /// </exception>
     [Pure]
     public static Amount Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Amount> selector)
     {
@@ -74,9 +71,6 @@ public static class QowaivEnumerableExtensions
     /// </returns>
     /// <exception cref="ArgumentNullException">
     /// source or selector is null.
-    /// </exception>
-    /// <exception cref="CurrencyMismatchException">
-    /// not all amount elements have the same currency.
     /// </exception>
     [Pure]
     public static Amount? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Amount?> selector)
@@ -121,9 +115,6 @@ public static class QowaivEnumerableExtensions
     /// <exception cref="InvalidOperationException">
     /// source contains no elements.
     /// </exception>
-    /// <exception cref="CurrencyMismatchException">
-    /// not all amount elements have the same currency.
-    /// </exception>
     [Pure]
     public static Amount Average(this IEnumerable<Amount> source)
     {
@@ -155,9 +146,6 @@ public static class QowaivEnumerableExtensions
     /// </returns>
     /// <exception cref="ArgumentNullException">
     /// source or selector is null.
-    /// </exception>
-    /// <exception cref="CurrencyMismatchException">
-    /// not all amount elements have the same currency.
     /// </exception>
     [Pure]
     public static Amount? Average(this IEnumerable<Amount?> source)
@@ -417,6 +405,168 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Elo Average(this IEnumerable<Elo> elos) => elos.Select(elo => (double)elo).Average();
 
+    /// <summary>Computes the average of a sequence of <see cref="Percentage"/> values that are obtained
+    /// by invoking a transform function on each element of the input sequence.
+    /// </summary>
+    /// <param name="source">
+    /// A sequence of values that are used to calculate an average.
+    /// </param>
+    /// <param name="selector">
+    /// A transform function to apply to each element.
+    /// </param>
+    /// <typeparam name="TSource">
+    /// The type of the elements of source.
+    /// </typeparam>
+    /// <returns>
+    /// The average of the sequence of values.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// source or selector is null.
+    /// </exception>
+    /// <exception cref="InvalidOperationException">
+    /// source contains no elements.
+    /// </exception>
+    [Pure]
+    public static Percentage Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Percentage> selector)
+    {
+        Guard.NotNull(source);
+        Guard.NotNull(selector);
+
+        var total = decimal.Zero;
+        var count = 0L;
+
+        foreach (var item in source)
+        {
+            count++;
+            var percentage = selector(item);
+            checked
+            {
+                total += (decimal)percentage;
+            }
+        }
+
+        return count == 0
+            ? throw NoElements()
+            : Percentage.Create(total / count);
+    }
+
+    /// <summary>Computes the average of a sequence of nullable <see cref="Percentage"/> values that are
+    /// obtained by invoking a transform function on each element of the input sequence.
+    /// </summary>
+    /// <param name="source">
+    /// A sequence of values that are used to calculate an average.
+    /// </param>
+    /// <param name="selector">
+    /// A transform function to apply to each element.
+    /// </param>
+    /// <typeparam name="TSource">
+    /// The type of the elements of source.
+    /// </typeparam>
+    /// <returns>
+    /// The average of the sequence of values, or null if the source sequence is empty
+    /// or contains only values that are null.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// source or selector is null.
+    /// </exception>
+    [Pure]
+    public static Percentage? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Percentage?> selector)
+    {
+        Guard.NotNull(source);
+        Guard.NotNull(selector);
+
+        var total = decimal.Zero;
+        var count = 0L;
+
+        foreach (var item in source)
+        {
+            if (selector(item) is Percentage percentage)
+            {
+                count++;
+                checked
+                {
+                    total += (decimal)percentage;
+                }
+            }
+        }
+        if (count == 0)
+        {
+            return null;
+        }
+        return Percentage.Create(total / count);
+    }
+
+    /// <summary>Computes the average of a sequence of <see cref="Percentage"/> values.</summary>
+    /// <param name="source">
+    /// A sequence of values that are used to calculate an average.
+    /// </param>
+    /// <returns>
+    /// The average of the sequence of values.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// source or selector is null.
+    /// </exception>
+    /// <exception cref="InvalidOperationException">
+    /// source contains no elements.
+    /// </exception>
+    [Pure]
+    public static Percentage Average(this IEnumerable<Percentage> source)
+    {
+        Guard.NotNull(source);
+
+        var total = decimal.Zero;
+        var count = 0L;
+
+        foreach (var percentage in source)
+        {
+            count++;
+            checked
+            {
+                total += (decimal)percentage;
+            }
+        }
+        return count == 0
+            ? throw NoElements()
+            : Percentage.Create(total / count);
+    }
+
+    /// <summary>Computes the average of a sequence of nullable <see cref="Percentage"/> values.</summary>
+    /// <param name="source">
+    /// A sequence of values that are used to calculate an average.
+    /// </param>
+    /// <returns>
+    /// The average of the sequence of values, or null if the source sequence is empty
+    /// or contains only values that are null.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// source or selector is null.
+    /// </exception>
+    [Pure]
+    public static Percentage? Average(this IEnumerable<Percentage?> source)
+    {
+        Guard.NotNull(source);
+
+        var total = decimal.Zero;
+        var count = 0L;
+
+        foreach (var value in source)
+        {
+            if (value is Percentage percentage)
+            {
+                count++;
+                checked
+                {
+                    total += (decimal)percentage;
+                }
+            }
+        }
+        if (count == 0)
+        {
+            return null;
+        }
+        return Percentage.Create(total / count);
+    }
+
     /// <summary>Computes the average of a sequence of stream sizes.</summary>
     [Pure]
     public static StreamSize Average(this IEnumerable<StreamSize> streamSizes)
@@ -439,9 +589,6 @@ public static class QowaivEnumerableExtensions
     /// </returns>
     /// <exception cref="ArgumentNullException">
     /// source or selector is null.
-    /// </exception>
-    /// <exception cref="CurrencyMismatchException">
-    /// not all amount elements have the same currency.
     /// </exception>
     [Pure]
     public static Amount Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Amount> selector)
@@ -482,9 +629,6 @@ public static class QowaivEnumerableExtensions
     /// <exception cref="ArgumentNullException">
     /// source or selector is null.
     /// </exception>
-    /// <exception cref="CurrencyMismatchException">
-    /// not all amount elements have the same currency.
-    /// </exception>
     [Pure]
     public static Amount? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Amount?> selector)
     {
@@ -521,9 +665,6 @@ public static class QowaivEnumerableExtensions
     /// <exception cref="ArgumentNullException">
     /// source or selector is null.
     /// </exception>
-    /// <exception cref="CurrencyMismatchException">
-    /// not all amount elements have the same currency.
-    /// </exception>
     [Pure]
     public static Amount Sum(this IEnumerable<Amount> source)
     {
@@ -551,9 +692,6 @@ public static class QowaivEnumerableExtensions
     /// </returns>
     /// <exception cref="ArgumentNullException">
     /// source or selector is null.
-    /// </exception>
-    /// <exception cref="CurrencyMismatchException">
-    /// not all amount elements have the same currency.
     /// </exception>
     [Pure]
     public static Amount? Sum(this IEnumerable<Amount?> source)
@@ -779,6 +917,149 @@ public static class QowaivEnumerableExtensions
         }
         return none ? null : total + currency;
     }
+
+    /// <summary>Computes the sum of a sequence of <see cref="Percentage"/> values that are obtained
+    /// by invoking a transform function on each element of the input sequence.
+    /// </summary>
+    /// <param name="source">
+    /// A sequence of values that are used to calculate an sum.
+    /// </param>
+    /// <param name="selector">
+    /// A transform function to apply to each element.
+    /// </param>
+    /// <typeparam name="TSource">
+    /// The type of the elements of source.
+    /// </typeparam>
+    /// <returns>
+    /// The sum of the sequence of values.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// source or selector is null.
+    /// </exception>
+    [Pure]
+    public static Percentage Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Percentage> selector)
+    {
+        Guard.NotNull(source);
+        Guard.NotNull(selector);
+
+        var total = decimal.Zero;
+
+        foreach (var item in source)
+        {
+            var percentage = selector(item);
+            checked
+            {
+                total += (decimal)percentage;
+            }
+        }
+
+        return Percentage.Create(total);
+    }
+
+    /// <summary>Computes the sum of a sequence of nullable <see cref="Percentage"/> values that are
+    /// obtained by invoking a transform function on each element of the input sequence.
+    /// </summary>
+    /// <param name="source">
+    /// A sequence of values that are used to calculate an sum.
+    /// </param>
+    /// <param name="selector">
+    /// A transform function to apply to each element.
+    /// </param>
+    /// <typeparam name="TSource">
+    /// The type of the elements of source.
+    /// </typeparam>
+    /// <returns>
+    /// The sum of the sequence of values, or null if the source sequence is empty
+    /// or contains only values that are null.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// source or selector is null.
+    /// </exception>
+    [Pure]
+    public static Percentage? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Percentage?> selector)
+    {
+        Guard.NotNull(source);
+        Guard.NotNull(selector);
+
+        var total = decimal.Zero;
+        var none = true;
+
+        foreach (var item in source)
+        {
+            var value = selector(item);
+
+            if (value is Percentage percentage)
+            {
+                none = false;
+                checked
+                {
+                    total += (decimal)percentage;
+                }
+            }
+        }
+        return none ? null : Percentage.Create(total);
+    }
+
+    /// <summary>Computes the sum of a sequence of <see cref="Percentage"/> values.</summary>
+    /// <param name="source">
+    /// A sequence of values that are used to calculate an sum.
+    /// </param>
+    /// <returns>
+    /// The sum of the sequence of values.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// source or selector is null.
+    /// </exception>
+    [Pure]
+    public static Percentage Sum(this IEnumerable<Percentage> source)
+    {
+        Guard.NotNull(source);
+
+        var total = decimal.Zero;
+
+        foreach (var percentage in source)
+        {
+            checked
+            {
+                total += (decimal)percentage;
+            }
+        }
+        return Percentage.Create(total);
+    }
+
+    /// <summary>Computes the sum of a sequence of nullable <see cref="Percentage"/> values.</summary>
+    /// <param name="source">
+    /// A sequence of values that are used to calculate an sum.
+    /// </param>
+    /// <returns>
+    /// The sum of the sequence of values, or null if the source sequence is empty
+    /// or contains only values that are null.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// source or selector is null.
+    /// </exception>
+    [Pure]
+    public static Percentage? Sum(this IEnumerable<Percentage?> source)
+    {
+        Guard.NotNull(source);
+
+        var total = decimal.Zero;
+        var none = true;
+
+        foreach (var value in source)
+        {
+            if (value is Percentage percentage)
+            {
+                none = false;
+                checked
+                {
+                    total += (decimal)percentage;
+                }
+            }
+        }
+        return none ? null : Percentage.Create(total);
+    }
+
 
     /// <summary>Computes the sum of a sequence of stream sizes.</summary>
     [Pure]

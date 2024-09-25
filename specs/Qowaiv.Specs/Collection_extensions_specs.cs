@@ -22,7 +22,7 @@ public class Amounts
 
     [Test]
     public void Average_on_selected_collection_is_calculated()
-    => collection.Average(Selection).Should().Be(8.Amount());
+        => collection.Average(Selection).Should().Be(8.Amount());
 
     [Test]
     public void Average_on_selected_nullables_can_be_calculated()
@@ -45,7 +45,7 @@ public class Amounts
 
     [Test]
     public void Sum_on_collection_is_calculated()
-       => collection.Sum().Should().Be(24.Amount());
+        => collection.Sum().Should().Be(24.Amount());
 
     [Test]
     public void Sum_on_nullables_can_be_calculated()
@@ -61,7 +61,7 @@ public class Amounts
 
     [Test]
     public void Sum_on_selected_collection_is_calculated()
-      => collection.Sum(Selection).Should().Be(24.Amount());
+        => collection.Sum(Selection).Should().Be(24.Amount());
 
     [Test]
     public void Sum_on_selected_nullables_can_be_calculated()
@@ -277,7 +277,7 @@ public class Percentages
 
     [Test]
     public void Sum_on_selected_collection_is_calculated()
-      => collection.Sum(Selection).Should().Be(24.Percent());
+        => collection.Sum(Selection).Should().Be(24.Percent());
 
     [Test]
     public void Sum_on_selected_nullables_can_be_calculated()

@@ -10,7 +10,8 @@
     <PackageReleaseNotes>
       <![CDATA[
 v7.0.5
-- Add ZeroIfNull() on INumberBase<TSelf>.
+- Extensions to calculate the sum and average for multiple percentges. #415
+- Add ZeroIfNull() on INumberBase<TSelf>. #416
 v7.0.4
 - Percentage.TryParse should first change the scale, before checking the boundaries. (fix)
 v7.0.3

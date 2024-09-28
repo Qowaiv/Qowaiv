@@ -10,7 +10,7 @@
     <PackageReleaseNotes>
       <![CDATA[
 ToBeReleased
-- Bug in wildcards with trailing chars at the end.
+- Wildcard patterns with trailing chars at the end. #417 (fix)
 v7.0.5
 - Extensions to calculate the sum and average for multiple percentges. #415
 - Add ZeroIfNull() on INumberBase<TSelf>. #416

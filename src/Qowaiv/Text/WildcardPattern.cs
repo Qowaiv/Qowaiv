@@ -1,4 +1,6 @@
-﻿namespace Qowaiv.Text;
+﻿using System.IO;
+
+namespace Qowaiv.Text;
 
 /// <summary>Represents a wildcard pattern.</summary>
 [Serializable]
@@ -211,13 +213,25 @@ public class WildcardPattern : ISerializable
         // Match if end of pattern or if we only have a '*' left.
         if (input.IsEnd())
         {
-            return pattern.IsEnd() || (pattern.Ch == MultipleChars && pattern.Left == 1);
+            while (!pattern.IsEnd())
+            {
+                if (!IsTrailing(pattern.Ch))
+                {
+                    return false;
+                }
+                pattern = pattern.Next();
+            }
+            return true;
         }
         else if (pattern.IsEnd())
         {
             return false;
         }
         else return MatchChar(pattern, input);
+
+        bool IsTrailing(char ch)
+            => ch == MultipleChars
+            || (ch == SingleChar && Options.HasFlag(WildcardPatternOptions.SingleOrTrailing));
     }
 
     [Pure]

@@ -1,4 +1,4 @@
-﻿# Qowaiv
+# Qowaiv
 ## ASP.NET Core MVC Model Binding
 Model Binding with ASP.NET Core MVC works out-of-the-box with one exception:
 If the binding fails, a generic error message:

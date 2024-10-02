@@ -1,13 +1,13 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 namespace Qowaiv.Identifiers;
 
-/// <summary><see cref="Guid"/> parser for Base64 and Base32 strings.</summary>
+/// <summary><see cref="Guid" /> parser for Base64 and Base32 strings.</summary>
 internal static class GuidParser
 {
     private const byte None = 255;
 
-    /// <summary>Tries to parse a <see cref="Guid"/> from a Base64 string.</summary>
+    /// <summary>Tries to parse a <see cref="Guid" /> from a Base64 string.</summary>
     [Pure]
     public static bool TryBase64(string s, out Guid guid)
     {
@@ -103,7 +103,7 @@ internal static class GuidParser
         }
     }
 
-    /// <summary>Tries to parse a <see cref="Guid"/> from a Base64 string.</summary>
+    /// <summary>Tries to parse a <see cref="Guid" /> from a Base64 string.</summary>
     [Pure]
     public static bool TryBase32(string s, out Guid guid)
     {

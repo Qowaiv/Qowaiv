@@ -1,4 +1,4 @@
-﻿namespace Formatting_arguments_collection_specs;
+namespace Formatting_arguments_collection_specs;
 
 public class Can_be_constructed
 {

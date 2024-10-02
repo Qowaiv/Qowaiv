@@ -1,8 +1,8 @@
-﻿using Qowaiv.Threading;
+using Qowaiv.Threading;
 
 namespace System.Threading;
 
-/// <summary>Extensions on <see cref="Thread"/>.</summary>
+/// <summary>Extensions on <see cref="Thread" />.</summary>
 public static class QowaivThreadExtensions
 {
     /// <summary>Gets the value of T.</summary>

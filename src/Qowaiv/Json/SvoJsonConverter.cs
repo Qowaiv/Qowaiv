@@ -1,11 +1,11 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Qowaiv.Json;
 
-/// <summary>A custom <see cref="JsonConverter{T}"/> for SVO's.</summary>
+/// <summary>A custom <see cref="JsonConverter{T}" /> for SVO's.</summary>
 /// <typeparam name="TSvo">
 /// The type of SVO.
 /// </typeparam>

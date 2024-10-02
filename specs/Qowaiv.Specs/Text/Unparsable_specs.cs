@@ -1,4 +1,4 @@
-﻿namespace Text.Unparsable_specs;
+namespace Text.Unparsable_specs;
 
 public class Communicates
 {

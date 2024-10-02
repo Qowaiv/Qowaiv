@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Diagnostics.Contracts;
+namespace Qowaiv.Diagnostics.Contracts;
 
 /// <summary>Indicates the class is empty by design.</summary>
 /// <remarks>

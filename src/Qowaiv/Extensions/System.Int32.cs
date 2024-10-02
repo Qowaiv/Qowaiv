@@ -1,8 +1,8 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 
 namespace System;
 
-/// <summary>Extensions on <see cref="int"/>.</summary>
+/// <summary>Extensions on <see cref="int" />.</summary>
 internal static class QowaivInt32Extensions
 {
     /// <summary>Returns true if the number is in the specified range.</summary>

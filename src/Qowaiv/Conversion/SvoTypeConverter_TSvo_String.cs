@@ -1,11 +1,11 @@
-﻿namespace Qowaiv.Conversion;
+namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for Single Value Objects.</summary>
 /// <remarks>
-/// The SVO Type Converter supports conversion from and to <see cref="string"/>.
+/// The SVO Type Converter supports conversion from and to <see cref="string" />.
 ///
-/// The conversion to <see cref="string"/> is handled by its base class,
-/// for conversion from <see cref="string"/> the <see cref="FromString(string, CultureInfo)"/>
+/// The conversion to <see cref="string" /> is handled by its base class,
+/// for conversion from <see cref="string" /> the <see cref="FromString(string, CultureInfo)" />
 /// method has to be implemented.
 /// </remarks>
 public abstract class SvoTypeConverter<TSvo> : TypeConverter
@@ -23,7 +23,7 @@ public abstract class SvoTypeConverter<TSvo> : TypeConverter
         ? FromString(value as string, culture)
         : base.ConvertFrom(context, culture, value);
 
-    /// <summary>Converts from <see cref="string"/>.</summary>
+    /// <summary>Converts from <see cref="string" />.</summary>
     [Pure]
     protected abstract TSvo FromString(string? str, CultureInfo? culture);
 }

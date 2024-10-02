@@ -961,7 +961,7 @@ and if the data type is nullable, all when applicable.
 When using [Swagger](https://swagger.io/resources/open-api/) to communicate
 an Open API definition, this could be done like below:
 ``` C#
-/// <summary>Extensions on <see cref="SwaggerGenOptions"/>.</summary>
+/// <summary>Extensions on <see cref="SwaggerGenOptions" />.</summary>
 public static class SwaggerGenOptionsSvoExtensions
 {
     /// <summary>Maps Qowaiv SVO's.</summary>

@@ -1,4 +1,4 @@
-﻿namespace Financial.Currencies_specs;
+namespace Financial.Currencies_specs;
 
 public class All
 {

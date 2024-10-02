@@ -1,4 +1,4 @@
-﻿using Qowaiv.Sql;
+using Qowaiv.Sql;
 
 namespace Qowaiv.Conversion.Sql;
 

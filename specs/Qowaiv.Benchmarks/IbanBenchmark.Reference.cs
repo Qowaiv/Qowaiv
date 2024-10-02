@@ -1,12 +1,12 @@
-﻿namespace Benchmarks;
+namespace Benchmarks;
 
 public partial class IbanBenchmark
 {
     public static class Reference
     {
         /// <summary>
-        /// Implementation of <see cref="InternationalBankAccountNumber"/>
-        /// when still relying on <see cref="Regex"/>es.
+        /// Implementation of <see cref="InternationalBankAccountNumber" />
+        /// when still relying on <see cref="Regex" />es.
         /// </summary>
         public static class RegexBased
         {
@@ -94,7 +94,7 @@ public partial class IbanBenchmark
                 return mod == 1;
             }
 
-            /// <summary>Constructs a <see cref="Regex"/> based on its BBAN pattern.</summary>
+            /// <summary>Constructs a <see cref="Regex" /> based on its BBAN pattern.</summary>
             [Pure]
             private static KeyValuePair<Country, Regex> Bban(Country country, string bban, int? checksum = default)
             {

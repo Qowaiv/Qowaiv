@@ -34,10 +34,10 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
     /// <summary>Represents an Amount of zero.</summary>
     public static Money Zero => default;
 
-    /// <summary>Represents the smallest possible value of <see cref="Money"/>.</summary>
+    /// <summary>Represents the smallest possible value of <see cref="Money" />.</summary>
     public static Money MinValue => decimal.MinValue + Currency.Empty;
 
-    /// <summary>Represents the biggest possible value of <see cref="Money"/>.</summary>
+    /// <summary>Represents the biggest possible value of <see cref="Money" />.</summary>
     public static Money MaxValue => decimal.MaxValue + Currency.Empty;
 
     private Money(decimal val, Currency currency)
@@ -46,10 +46,10 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
         m_Currency = currency;
     }
 
-    /// <summary>The inner value of the <see cref="Money"/>.</summary>
+    /// <summary>The inner value of the <see cref="Money" />.</summary>
     private readonly decimal m_Value;
 
-    /// <summary>The inner value of the <see cref="Currency"/>.</summary>
+    /// <summary>The inner value of the <see cref="Currency" />.</summary>
     private readonly Currency m_Currency;
 
     /// <summary>Gets the amount of the money.</summary>
@@ -296,7 +296,7 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
     /// A value from -28 to 28 that specifies the number of decimal places to round to.
     /// </param>
     /// <remarks>
-    /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
+    /// A negative value for <paramref name="decimals" /> lowers precision to tenfold, hundredfold, and bigger.
     /// </remarks>
     [Pure]
     public Money Round(int decimals) => Round(decimals, DecimalRounding.BankersRound);
@@ -309,7 +309,7 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
     /// The mode of rounding applied.
     /// </param>
     /// <remarks>
-    /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
+    /// A negative value for <paramref name="decimals" /> lowers precision to tenfold, hundredfold, and bigger.
     /// </remarks>
     [Pure]
     public Money Round(int decimals, DecimalRounding mode) => m_Value.Round(decimals, mode) + Currency;
@@ -437,7 +437,7 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
 
 #if NET8_0_OR_GREATER
 #else
-    /// <summary>Initializes a new instance of the <see cref="Money"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Money" /> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     private Money(SerializationInfo info, StreamingContext context)
@@ -485,7 +485,7 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
     [Pure]
     public string ToJson() => Currency.Name + m_Value.ToString(string.Empty, CultureInfo.InvariantCulture);
 
-    /// <summary>Returns a <see cref="string"/> that represents the current Money for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current Money for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0}");
 
@@ -508,8 +508,8 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
     [Pure]
     private string ToXmlString() => Currency.Name + m_Value.ToString(string.Empty, CultureInfo.InvariantCulture);
 
-    /// <summary>Returns true if this instance and the other <see cref="Money"/> are equal, otherwise false.</summary>
-    /// <param name="other">The <see cref="Money"/> to compare with.</param>
+    /// <summary>Returns true if this instance and the other <see cref="Money" /> are equal, otherwise false.</summary>
+    /// <param name="other">The <see cref="Money" /> to compare with.</param>
     [Pure]
     public bool Equals(Money other) => m_Value == other.m_Value && m_Currency == other.m_Currency;
 
@@ -593,12 +593,12 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
     [Pure]
     public static Money Create(decimal val, Currency currency) => new(val, currency);
 
-    /// <summary>Gets a <see cref="NumberFormatInfo"/> based on the <see cref="IFormatProvider"/>.</summary>
+    /// <summary>Gets a <see cref="NumberFormatInfo" /> based on the <see cref="IFormatProvider" />.</summary>
     /// <remarks>
     /// Because the options for formatting and parsing currencies as provided
     /// by the .NET framework are not sufficient, internally we use number
     /// settings. For parsing and formatting however we like to use the
-    /// currency properties of the <see cref="NumberFormatInfo"/> instead of
+    /// currency properties of the <see cref="NumberFormatInfo" /> instead of
     /// the number properties, so we copy them for desired behavior.
     /// </remarks>
     [Pure]

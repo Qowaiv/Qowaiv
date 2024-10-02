@@ -1,4 +1,4 @@
-﻿namespace Qowaiv;
+namespace Qowaiv;
 
 /// <summary>Represents a local date time.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
@@ -26,7 +26,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// <summary>Represents the largest possible value date. This field is read-only.</summary>
     public static LocalDateTime MaxValue => new(DateTime.MaxValue);
 
-    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct to a specified number of ticks.</summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime" /> struct to a specified number of ticks.</summary>
     /// <param name="ticks">
     /// A date expressed in 100-nanosecond units.
     /// </param>
@@ -38,7 +38,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
         m_Value = new DateTime(ticks, DateTimeKind.Local);
     }
 
-    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct based on a System.DateTime.</summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime" /> struct based on a System.DateTime.</summary>
     /// <param name="dt">
     /// A date and time.
     /// </param>
@@ -47,7 +47,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// </remarks>
     private LocalDateTime(DateTime dt) : this(dt.Ticks) { }
 
-    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct based on the specified year, month, and day.</summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime" /> struct based on the specified year, month, and day.</summary>
     /// <param name="year">
     /// The year (1 through 9999).
     /// </param>
@@ -67,7 +67,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// </exception>
     public LocalDateTime(int year, int month, int day) : this(year, month, day, 0, 0) { }
 
-    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct based on the specified year, month, and day.</summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime" /> struct based on the specified year, month, and day.</summary>
     /// <param name="year">
     /// The year (1 through 9999).
     /// </param>
@@ -94,7 +94,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     public LocalDateTime(int year, int month, int day, int hour, int minute)
         : this(year, month, day, hour, minute, 0) { }
 
-    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct based on the specified year, month, and day.</summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime" /> struct based on the specified year, month, and day.</summary>
     /// <param name="year">
     /// The year (1 through 9999).
     /// </param>
@@ -124,7 +124,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     public LocalDateTime(int year, int month, int day, int hour, int minute, int second)
         : this(year, month, day, hour, minute, second, 0) { }
 
-    /// <summary>Initializes a new instance of the <see cref="LocalDateTime"/> struct based on the specified year, month, and day.</summary>
+    /// <summary>Initializes a new instance of the <see cref="LocalDateTime" /> struct based on the specified year, month, and day.</summary>
     /// <param name="year">
     /// The year (1 through 9999).
     /// </param>
@@ -221,45 +221,45 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
         return new LocalDateTime(m_Value.Ticks + value.Ticks);
     }
 
-    /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan"/>
+    /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan" />
     /// to the value of this instance.
     /// </summary>
     /// <param name="value">
-    /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+    /// A <see cref="DateSpan" /> object that represents a positive or negative time interval.
     /// </param>
     /// <returns>
     /// A new date whose value is the sum of the date and time represented
     /// by this instance and the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public LocalDateTime Add(DateSpan value) => Add(value, DateSpanSettings.Default);
 
-    /// <summary>Returns a new local date time that adds the value of the specified <see cref="MonthSpan"/>
+    /// <summary>Returns a new local date time that adds the value of the specified <see cref="MonthSpan" />
     /// to the value of this instance.
     /// </summary>
     /// <param name="value">
-    /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+    /// A <see cref="DateSpan" /> object that represents a positive or negative time interval.
     /// </param>
     /// <returns>
     /// A new date whose value is the sum of the date represented
     /// by this instance and the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public LocalDateTime Add(MonthSpan value) => AddMonths(value.TotalMonths);
 
-    /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan"/>
+    /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan" />
     /// to the value of this instance.
     /// </summary>
     /// <param name="value">
-    /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+    /// A <see cref="DateSpan" /> object that represents a positive or negative time interval.
     /// </param>
     /// <param name="daysFirst">
     /// If true, days are added first, otherwise months are added first.
@@ -269,8 +269,8 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// by this instance and the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     [Obsolete("Use Add(DateSpan, DateSpanSettings) instead. Will be dropped when the next major version is released.")]
     [Pure]
@@ -281,25 +281,25 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
             : AddMonths(value.TotalMonths).AddDays(value.Days);
     }
 
-    /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan"/>
+    /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan" />
     /// to the value of this instance.
     /// </summary>
     /// <param name="value">
-    /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+    /// A <see cref="DateSpan" /> object that represents a positive or negative time interval.
     /// </param>
     /// <param name="settings">
-    /// If <see cref="DateSpanSettings.DaysFirst"/> days are added first, if <see cref="DateSpanSettings.Default"/> days are added second.
+    /// If <see cref="DateSpanSettings.DaysFirst" /> days are added first, if <see cref="DateSpanSettings.Default" /> days are added second.
     /// </param>
     /// <returns>
     /// A new date whose value is the sum of the date represented
     /// by this instance and the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The provided settings have different value then <see cref="DateSpanSettings.DaysFirst"/> or <see cref="DateSpanSettings.Default"/>.
+    /// The provided settings have different value then <see cref="DateSpanSettings.DaysFirst" /> or <see cref="DateSpanSettings.Default" />.
     /// </exception>
     [Pure]
     public LocalDateTime Add(DateSpan value, DateSpanSettings settings) => settings switch
@@ -513,14 +513,14 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
 
     /// <summary>Returns true if the local date time is in the specified month, otherwise false.</summary>
     /// <param name="month">
-    /// The <see cref="Qowaiv.Month"/> the date should be in.
+    /// The <see cref="Qowaiv.Month" /> the date should be in.
     /// </param>
     [Pure]
     public bool IsIn(Month month) => !month.IsEmptyOrUnknown() && Month == (int)month;
 
     /// <summary>Returns true if the local date time is in the specified year, otherwise false.</summary>
     /// <param name="year">
-    /// The <see cref="Qowaiv.Year"/> the date should be in.
+    /// The <see cref="Qowaiv.Year" /> the date should be in.
     /// </param>
     [Pure]
     public bool IsIn(Year year) => !year.IsEmptyOrUnknown() && Year == (int)year;
@@ -542,11 +542,11 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     [Pure]
     public string ToJson() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
-    /// <summary>Returns a <see cref="string"/> that represents the current local date time for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current local date time for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:yyyy-MM-dd hh:mm:ss.FFF}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current local date time.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current local date time.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>

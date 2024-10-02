@@ -1,4 +1,4 @@
-﻿global using BenchmarkDotNet.Attributes;
+global using BenchmarkDotNet.Attributes;
 global using MathNet.Numerics.Random;
 global using Qowaiv.Financial;
 global using Qowaiv.Diagnostics.Contracts;

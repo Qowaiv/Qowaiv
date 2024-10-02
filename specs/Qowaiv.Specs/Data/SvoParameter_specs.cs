@@ -1,4 +1,4 @@
-﻿using FluentAssertions.Primitives;
+using FluentAssertions.Primitives;
 using Qowaiv.Data;
 using System.Data;
 using System.Data.SqlClient;

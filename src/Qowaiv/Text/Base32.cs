@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Text;
+namespace Qowaiv.Text;
 
 /// <summary> is a group of similar binary-to-text encoding schemes that
 /// represent binary data in an ASCII string format by translating it into
@@ -14,7 +14,7 @@ public static class Base32
     private const string UpperCaseBitChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
     private const string LowerCaseBitChars = "abcdefghijklmnopqrstuvwxyz234567";
 
-    /// <summary>Represents a byte array as a <see cref="string"/>.</summary>
+    /// <summary>Represents a byte array as a <see cref="string" />.</summary>
     /// <param name="bytes">
     /// The bytes to represent as Base32 string.
     /// </param>
@@ -24,7 +24,7 @@ public static class Base32
     [Pure]
     public static string ToString(byte[]? bytes) => ToString(bytes, false);
 
-    /// <summary>Represents a byte array as a <see cref="string"/>.</summary>
+    /// <summary>Represents a byte array as a <see cref="string" />.</summary>
     /// <param name="bytes">
     /// The bytes to represent as Base32 string.
     /// </param>

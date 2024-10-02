@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 
 namespace Qowaiv.Financial;
 
@@ -6,7 +6,7 @@ internal static partial class IbanParser
 {
     private const int IB = (('I' - 'A') * 26) + 'B' - 'A';
 
-    /// <summary>Parses a string representing an <see cref="InternationalBankAccountNumber"/>.</summary>
+    /// <summary>Parses a string representing an <see cref="InternationalBankAccountNumber" />.</summary>
     /// <returns>
     /// A normalized (uppercased without markup) string, or null for invalid input.
     /// </returns>

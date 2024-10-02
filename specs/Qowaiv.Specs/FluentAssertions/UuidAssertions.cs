@@ -1,4 +1,4 @@
-﻿using FluentAssertions.Execution;
+using FluentAssertions.Execution;
 using FluentAssertions.Numeric;
 
 namespace FluentAssertions;

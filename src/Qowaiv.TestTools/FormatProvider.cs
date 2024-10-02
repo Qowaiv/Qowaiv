@@ -1,17 +1,17 @@
-﻿namespace Qowaiv.TestTools;
+namespace Qowaiv.TestTools;
 
-/// <summary>Helper class for getting <see cref="IFormatProvider"/>s.</summary>
+/// <summary>Helper class for getting <see cref="IFormatProvider" />s.</summary>
 public static class FormatProvider
 {
-    /// <summary>Gets an empty <see cref="IFormatProvider"/>.</summary>
+    /// <summary>Gets an empty <see cref="IFormatProvider" />.</summary>
     /// <remarks>
-    /// <see cref="IFormatProvider.GetFormat(Type)"/> always returns null.
+    /// <see cref="IFormatProvider.GetFormat(Type)" /> always returns null.
     /// </remarks>
     public static readonly IFormatProvider CustomFormatter = new CustomFormatProvider();
 
-    /// <summary>Gets an empty <see cref="IFormatProvider"/>.</summary>
+    /// <summary>Gets an empty <see cref="IFormatProvider" />.</summary>
     /// <remarks>
-    /// <see cref="IFormatProvider.GetFormat(Type)"/> always returns null.
+    /// <see cref="IFormatProvider.GetFormat(Type)" /> always returns null.
     /// </remarks>
     public static readonly IFormatProvider Empty = new EmptyFormatProvider();
 

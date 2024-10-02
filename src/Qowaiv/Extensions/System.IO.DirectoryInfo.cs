@@ -1,9 +1,9 @@
-﻿using Qowaiv;
+using Qowaiv;
 using Qowaiv.IO;
 
 namespace System.IO;
 
-/// <summary>Extensions on <see cref="DirectoryInfo"/>.</summary>
+/// <summary>Extensions on <see cref="DirectoryInfo" />.</summary>
 public static class QowaivDirectoryInfoExtensions
 {
     /// <summary>Gets the stream size of the current directory.</summary>

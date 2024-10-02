@@ -1,4 +1,4 @@
-﻿using Qowaiv.Mathematics;
+using Qowaiv.Mathematics;
 
 namespace Qowaiv;
 

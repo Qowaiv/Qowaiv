@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Conversion;
+namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for a month.</summary>
 [Inheritable]

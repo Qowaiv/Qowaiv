@@ -1,4 +1,4 @@
-﻿# International Bank Account Number
+# International Bank Account Number
 An overview of all IBAN's supported. IBAN's for countries not included are
 considered valid if their length is between 12 and 36, and if they satisfy
 [ISO 7064 MOD-97-10](https://en.wikipedia.org/wiki/ISO/IEC_7064).

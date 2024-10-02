@@ -1,11 +1,11 @@
-﻿#if NET8_0_OR_GREATER
+#if NET8_0_OR_GREATER
 
 namespace System.Numerics;
 
-/// <summary>Extensions on <see cref="INumberBase{TSelf}"/>.</summary>
+/// <summary>Extensions on <see cref="INumberBase{TSelf}" />.</summary>
 public static class QowaivNumberBaseExtensions
 {
-    /// <summary>Returns zero is the <paramref name="number"/> is null.</summary>
+    /// <summary>Returns zero is the <paramref name="number" /> is null.</summary>
     /// <typeparam name="TSelf">
     /// Type of the number.
     /// </typeparam>

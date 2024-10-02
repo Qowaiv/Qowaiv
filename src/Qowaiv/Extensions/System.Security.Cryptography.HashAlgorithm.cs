@@ -1,9 +1,9 @@
-﻿using Qowaiv;
+using Qowaiv;
 using Qowaiv.Security.Cryptography;
 
 namespace System.Security.Cryptography;
 
-/// <summary>Extensions on <see cref="HashAlgorithm"/>.</summary>
+/// <summary>Extensions on <see cref="HashAlgorithm" />.</summary>
 public static class QowaivHashAlgorithmExtensions
 {
     /// <summary>Computes the hash value for the specified byte array.</summary>

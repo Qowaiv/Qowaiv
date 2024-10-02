@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.TestTools.Generation;
+namespace Qowaiv.TestTools.Generation;
 
 public static class CountryConstants
 {

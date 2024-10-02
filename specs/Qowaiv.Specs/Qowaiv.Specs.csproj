@@ -1,9 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/nopackage.props" />
 
   <PropertyGroup>
     <Nullable>enable</Nullable>
+    <IsTestProject>true</IsTestProject>
     <TargetFrameworks>netcoreapp3.1;net6.0;net8.0</TargetFrameworks>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
   </PropertyGroup>

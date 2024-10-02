@@ -1,4 +1,4 @@
-﻿using Qowaiv.Threading;
+using Qowaiv.Threading;
 using System.Threading;
 
 namespace Threading.Thread_domain_specs;

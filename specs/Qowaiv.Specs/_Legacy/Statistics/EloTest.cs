@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.UnitTests.Statistics
+namespace Qowaiv.UnitTests.Statistics
 {
     /// <summary>Tests the Elo SVO.</summary>
     public class EloTest

@@ -1,4 +1,4 @@
-﻿#if DEBUG
+#if DEBUG
 namespace UUID_generation;
 
 public class Generates

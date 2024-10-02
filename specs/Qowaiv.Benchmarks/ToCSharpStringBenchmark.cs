@@ -1,4 +1,4 @@
-﻿namespace Benchmarks;
+namespace Benchmarks;
 
 [MemoryDiagnoser(true)]
 public class ToCSharpStringBenchmark

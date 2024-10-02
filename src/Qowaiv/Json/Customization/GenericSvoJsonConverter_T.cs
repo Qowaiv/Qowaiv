@@ -1,4 +1,4 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 
 using Qowaiv.Customization;
 using System.Text.Json;
@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace Qowaiv.Json.Customization;
 
-/// <summary>A custom <see cref="JsonConverter{T}"/> for <see cref="Svo{TBehavior}"/>'s.</summary>
+/// <summary>A custom <see cref="JsonConverter{T}" /> for <see cref="Svo{TBehavior}" />'s.</summary>
 internal sealed class GenericSvoJsonConverter<TBehavior> : JsonConverter<Svo<TBehavior>>
         where TBehavior : SvoBehavior, new()
 {

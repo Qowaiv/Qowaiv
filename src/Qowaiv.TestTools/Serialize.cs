@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Xml.Linq;
 
 namespace Qowaiv.TestTools;
@@ -6,7 +6,7 @@ namespace Qowaiv.TestTools;
 /// <summary>Helps with serialization testing.</summary>
 public static class Serialize
 {
-    /// <summary>Get <see cref="SerializationInfo"/> filled by <see cref="ISerializable.GetObjectData(SerializationInfo, StreamingContext)"/>.</summary>
+    /// <summary>Get <see cref="SerializationInfo" /> filled by <see cref="ISerializable.GetObjectData(SerializationInfo, StreamingContext)" />.</summary>
     /// <typeparam name="T">
     /// Type of the instance.
     /// </typeparam>
@@ -25,7 +25,7 @@ public static class Serialize
         return info;
     }
 
-    /// <summary>Serializes an instance using an <see cref="XmlSerializer"/>.</summary>
+    /// <summary>Serializes an instance using an <see cref="XmlSerializer" />.</summary>
     /// <typeparam name="T">
     /// Type of the instance.
     /// </typeparam>

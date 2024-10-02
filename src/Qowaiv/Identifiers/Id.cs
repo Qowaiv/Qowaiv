@@ -1,4 +1,4 @@
-﻿#pragma warning disable S1210
+#pragma warning disable S1210
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 using Qowaiv.Conversion.Identifiers;
@@ -7,7 +7,7 @@ namespace Qowaiv.Identifiers;
 
 /// <summary>Represents a strongly typed identifier.</summary>
 /// <typeparam name="TIdentifier">
-/// The type of the <see cref="IIdentifierBehavior"/> that deals with the
+/// The type of the <see cref="IIdentifierBehavior" /> that deals with the
 /// identifier specific behavior.
 /// </typeparam>
 [DebuggerDisplay("{DebuggerDisplay}")]
@@ -35,12 +35,12 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
     /// <summary>Represents an empty/not set identifier.</summary>
     public static Id<TIdentifier> Empty => default;
 
-    /// <summary>Initializes a new instance of the <see cref="Id{TIdentifier}"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Id{TIdentifier}" /> struct.</summary>
     private Id(object? value) => m_Value = value;
 
 #if NET8_0_OR_GREATER
 #else
-    /// <summary>Initializes a new instance of the <see cref="Id{TIdentifier}"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Id{TIdentifier}" /> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     private Id(SerializationInfo info, StreamingContext context)
@@ -74,7 +74,7 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
         || m_Value.Equals(Guid.Empty)
         || m_Value.Equals(0L);
 
-    /// <summary>Gets a <see cref="byte"/> array that represents the identifier.</summary>
+    /// <summary>Gets a <see cref="byte" /> array that represents the identifier.</summary>
     [Pure]
     public byte[] ToByteArray() => IsEmpty() ? [] : behavior.ToByteArray(m_Value);
 
@@ -129,31 +129,31 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
     /// <param name="right">The right operand.</param>
     public static bool operator ==(Id<TIdentifier> left, Id<TIdentifier> right) => left.Equals(right);
 
-    /// <summary>Returns a <see cref="string"/> that represents the identifier for DEBUG purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the identifier for DEBUG purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => IsEmpty()
         ? $"{DebugDisplay.Empty} ({typeof(TIdentifier).Name})"
         : $"{this} ({typeof(TIdentifier).Name})";
 
-    /// <summary>Returns a <see cref = "string"/> that represents the identifier.</summary>
+    /// <summary>Returns a <see cref = "string" /> that represents the identifier.</summary>
     [Pure]
     public override string ToString() => ToString(CultureInfo.CurrentCulture);
 
-    /// <summary>Returns a formatted <see cref = "string"/> that represents the identifier.</summary>
+    /// <summary>Returns a formatted <see cref = "string" /> that represents the identifier.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
     public string ToString(string format) => ToString(format, CultureInfo.CurrentCulture);
 
-    /// <summary>Returns a formatted <see cref = "string"/> that represents the identifier.</summary>
+    /// <summary>Returns a formatted <see cref = "string" /> that represents the identifier.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
     public string ToString(IFormatProvider provider) => ToString(string.Empty, provider);
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the identifier.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the identifier.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
@@ -170,14 +170,14 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
         else return IsEmpty() ? string.Empty : behavior.ToString(m_Value, format, formatProvider);
     }
 
-    /// <summary>Gets the <see href = "XmlSchema"/> to XML (de)serialize the identifier.</summary>
+    /// <summary>Gets the <see href = "XmlSchema" /> to XML (de)serialize the identifier.</summary>
     /// <remarks>
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
     XmlSchema? IXmlSerializable.GetSchema() => null;
 
-    /// <summary>Reads the identifier from an <see href = "XmlReader"/>.</summary>
+    /// <summary>Reads the identifier from an <see href = "XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
     void IXmlSerializable.ReadXml(XmlReader reader)
     {
@@ -186,7 +186,7 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
         System.Runtime.CompilerServices.Unsafe.AsRef(in this) = Parse(xml);
     }
 
-    /// <summary>Writes the identifier to an <see href = "XmlWriter"/>.</summary>
+    /// <summary>Writes the identifier to an <see href = "XmlWriter" />.</summary>
     /// <param name="writer">An XML writer.</param>
     void IXmlSerializable.WriteXml(XmlWriter writer)
     {
@@ -211,37 +211,37 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
         else throw Exceptions.InvalidCast<Id<TIdentifier>, TTo>();
     }
 
-    /// <summary>Casts the identifier to a <see cref="string"/>.</summary>
+    /// <summary>Casts the identifier to a <see cref="string" />.</summary>
     public static explicit operator string?(Id<TIdentifier> id) => id.CastToPrimitive<string, string>();
 
-    /// <summary>Casts the identifier to a <see cref="int"/>.</summary>
+    /// <summary>Casts the identifier to a <see cref="int" />.</summary>
     public static explicit operator int(Id<TIdentifier> id) => id.CastToPrimitive<int, int>();
 
-    /// <summary>Casts the identifier to a <see cref="long"/>.</summary>
+    /// <summary>Casts the identifier to a <see cref="long" />.</summary>
     public static explicit operator long(Id<TIdentifier> id) => id.CastToPrimitive<long, long>();
 
-    /// <summary>Casts the identifier to a <see cref="Guid"/>.</summary>
+    /// <summary>Casts the identifier to a <see cref="Guid" />.</summary>
     public static explicit operator Guid(Id<TIdentifier> id) => id.CastToPrimitive<Guid, Guid>();
 
-    /// <summary>Casts the identifier to a <see cref="Uuid"/>.</summary>
+    /// <summary>Casts the identifier to a <see cref="Uuid" />.</summary>
     public static explicit operator Uuid(Id<TIdentifier> id) => id.CastToPrimitive<Guid, Uuid>();
 
-    /// <summary>Casts the <see cref="string"/> to an identifier.</summary>
+    /// <summary>Casts the <see cref="string" /> to an identifier.</summary>
     public static explicit operator Id<TIdentifier>(string id) => Create(id);
 
-    /// <summary>Casts the <see cref="int"/> to an identifier.</summary>
+    /// <summary>Casts the <see cref="int" /> to an identifier.</summary>
     public static explicit operator Id<TIdentifier>(int id) => Create(id);
 
-    /// <summary>Casts the <see cref="long"/> to an identifier.</summary>
+    /// <summary>Casts the <see cref="long" /> to an identifier.</summary>
     public static explicit operator Id<TIdentifier>(long id) => Create(id);
 
-    /// <summary>Casts the <see cref="Guid"/> to an identifier.</summary>
+    /// <summary>Casts the <see cref="Guid" /> to an identifier.</summary>
     public static explicit operator Id<TIdentifier>(Guid id) => Create(id);
 
-    /// <summary>Casts the <see cref="Uuid"/> to an identifier.</summary>
+    /// <summary>Casts the <see cref="Uuid" /> to an identifier.</summary>
     public static explicit operator Id<TIdentifier>(Uuid id) => Create(id);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="Id{TIdentifier}"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="Id{TIdentifier}" />.</summary>
     /// <param name="s">
     /// A string containing the identifier to convert.
     /// </param>
@@ -252,13 +252,13 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
     /// The parsed identifier.
     /// </returns>
     /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
+    /// <paramref name="s" /> is not in the correct format.
     /// </exception>
     [Pure]
     public static Id<TIdentifier> Parse(string s, IFormatProvider? provider)
         => Parse(s);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="Id{TIdentifier}"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="Id{TIdentifier}" />.</summary>
     /// <param name="s">
     /// A string containing the identifier to convert.
     /// </param>
@@ -266,7 +266,7 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
     /// The parsed identifier.
     /// </returns>
     /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
+    /// <paramref name="s" /> is not in the correct format.
     /// </exception>
     [Pure]
     public static Id<TIdentifier> Parse(string? s)
@@ -274,7 +274,7 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
         ? val
         : throw Unparsable.ForValue<Id<TIdentifier>>(s, "Not a valid identifier.");
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="Id{TIdentifier}"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="Id{TIdentifier}" />.</summary>
     /// <param name="s">
     /// A string containing the identifier to convert.
     /// </param>
@@ -287,7 +287,7 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
         return TryParse(s, out Id<TIdentifier> val) ? val : default;
     }
 
-    /// <summary>Converts the <see cref="string"/> to <see cref = "Id{TIdentifier}"/>.
+    /// <summary>Converts the <see cref="string" /> to <see cref = "Id{TIdentifier}" />.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">
@@ -305,7 +305,7 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
     public static bool TryParse(string? s, IFormatProvider? provider, out Id<TIdentifier> result)
         => TryParse(s, out result);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref = "Id{TIdentifier}"/>.
+    /// <summary>Converts the <see cref="string" /> to <see cref = "Id{TIdentifier}" />.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">
@@ -350,9 +350,9 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
     [Pure]
     public static Id<TIdentifier> FromJson(long json) => new(behavior.FromJson(json));
 
-    /// <summary>Creates the identfier for the <see cref="byte"/> array.</summary>
+    /// <summary>Creates the identfier for the <see cref="byte" /> array.</summary>
     /// <param name="bytes">
-    /// The <see cref="byte"/> array that represents the underlying value.
+    /// The <see cref="byte" /> array that represents the underlying value.
     /// </param>
     [Pure]
     public static Id<TIdentifier> FromBytes(byte[]? bytes)
@@ -362,12 +362,12 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
             : new Id<TIdentifier>(behavior.FromBytes(bytes));
     }
 
-    /// <summary>Creates an identifier from an <see cref="object"/>.</summary>
+    /// <summary>Creates an identifier from an <see cref="object" />.</summary>
     /// <param name="obj">
-    /// The <see cref="object"/> to create an indentifier from.
+    /// The <see cref="object" /> to create an indentifier from.
     /// </param>
     /// <exception cref="InvalidCastException">
-    /// if the identifier could not be created from the <see cref="object"/>.
+    /// if the identifier could not be created from the <see cref="object" />.
     /// </exception>
     [Pure]
     public static Id<TIdentifier> Create(object? obj)
@@ -375,9 +375,9 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
         ? id
         : throw Exceptions.InvalidCast(obj?.GetType(), typeof(Id<TIdentifier>));
 
-    /// <summary>Tries to create an identifier from an <see cref="object"/>.</summary>
+    /// <summary>Tries to create an identifier from an <see cref="object" />.</summary>
     /// <param name="obj">
-    /// The <see cref="object"/> to create an indentifier from.
+    /// The <see cref="object" /> to create an indentifier from.
     /// </param>
     /// <param name="id">
     /// The created identifier.

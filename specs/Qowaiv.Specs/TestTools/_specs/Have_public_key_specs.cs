@@ -1,4 +1,4 @@
-﻿namespace TestTools.Should.Have_public_key_specs;
+namespace TestTools.Should.Have_public_key_specs;
 
 public class Detects
 {

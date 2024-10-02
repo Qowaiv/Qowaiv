@@ -1,4 +1,4 @@
-﻿namespace UUID_specs;
+namespace UUID_specs;
 
 public class With_domain_logic
 {

@@ -1,4 +1,4 @@
-﻿using Qowaiv.Sustainability;
+using Qowaiv.Sustainability;
 
 namespace Energy_label_specs;
 

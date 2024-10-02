@@ -1,12 +1,12 @@
-﻿namespace Qowaiv.Conversion;
+namespace Qowaiv.Conversion;
 
 /// <summary>Provides a conversion for Single Value Objects.</summary>
 /// <remarks>
-/// The SVO Type Converter supports conversion from and to <see cref="string"/>.
+/// The SVO Type Converter supports conversion from and to <see cref="string" />.
 /// Furthermore it support conversion from and to the underlying 'raw' type.
 ///
-/// The conversion to Raw is handled by <see cref="ToRaw(TSvo)"/>,
-/// for conversion from Raw is handled by <see cref="FromRaw(TRaw)"/>.
+/// The conversion to Raw is handled by <see cref="ToRaw(TSvo)" />,
+/// for conversion from Raw is handled by <see cref="FromRaw(TRaw)" />.
 /// </remarks>
 public abstract class SvoTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo>
     where TSvo : struct, IFormattable

@@ -1,4 +1,4 @@
-﻿namespace Globalization.Country_specs;
+namespace Globalization.Country_specs;
 
 public class With_domain_logic
 {

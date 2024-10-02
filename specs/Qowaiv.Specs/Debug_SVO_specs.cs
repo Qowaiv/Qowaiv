@@ -1,4 +1,4 @@
-﻿namespace Debug_SVO_specs;
+namespace Debug_SVO_specs;
 
 public class All : SingleValueObjectSpecs
 {

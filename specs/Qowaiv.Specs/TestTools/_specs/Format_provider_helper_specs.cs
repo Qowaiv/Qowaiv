@@ -1,4 +1,4 @@
-﻿namespace TestTools.Format_provider_helper_specs;
+namespace TestTools.Format_provider_helper_specs;
 
 public class GetFormat
 {

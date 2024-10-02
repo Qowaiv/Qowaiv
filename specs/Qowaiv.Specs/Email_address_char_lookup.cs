@@ -1,4 +1,4 @@
-﻿namespace Email_address_char_lookup;
+namespace Email_address_char_lookup;
 
 public class Generate
 {

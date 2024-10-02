@@ -1,4 +1,4 @@
-﻿namespace Qowaiv;
+namespace Qowaiv;
 
 /// <summary>The ISO week date system is a leap week calendar system that is part of
 /// the ISO 8601 date and time standard. The system is used (mainly) in
@@ -62,10 +62,10 @@ public readonly partial struct WeekDate : IXmlSerializable, IFormattable, IEquat
     /// <summary>Represents the maximum value of the week date.</summary>
     public static WeekDate MaxValue => new(Date.MaxValue);
 
-    /// <summary>Initializes a new instance of the <see cref="WeekDate"/> struct based on Week Year, week number, and day of the week.</summary>
+    /// <summary>Initializes a new instance of the <see cref="WeekDate" /> struct based on Week Year, week number, and day of the week.</summary>
     public WeekDate(int year, int week, int day) : this(Create(year, week, day)) { }
 
-    /// <summary>Initializes a new instance of the <see cref="WeekDate"/> struct based on a <see cref="Qowaiv.Date"/>.</summary>
+    /// <summary>Initializes a new instance of the <see cref="WeekDate" /> struct based on a <see cref="Qowaiv.Date" />.</summary>
     private WeekDate(Date date) => m_Value = date;
 
     /// <summary>The inner value of the week date.</summary>
@@ -154,7 +154,7 @@ public readonly partial struct WeekDate : IXmlSerializable, IFormattable, IEquat
 
 #if NET8_0_OR_GREATER
 #else
-    /// <summary>Initializes a new instance of the <see cref="WeekDate"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="WeekDate" /> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     private WeekDate(SerializationInfo info, StreamingContext context)
@@ -180,11 +180,11 @@ public readonly partial struct WeekDate : IXmlSerializable, IFormattable, IEquat
     [Pure]
     public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Returns a <see cref="string"/> that represents the current week date for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current week date for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current week date.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current week date.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>

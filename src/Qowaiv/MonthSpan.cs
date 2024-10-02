@@ -1,4 +1,4 @@
-﻿namespace Qowaiv;
+namespace Qowaiv;
 
 /// <summary>Represents a month span.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
@@ -30,7 +30,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// <summary>Gets the maximum month span (+9998 years).</summary>
     public static MonthSpan MaxValue => new(+9998 * 12);
 
-    /// <summary>Initializes a new instance of the <see cref="MonthSpan"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="MonthSpan" /> struct.</summary>
     /// <param name="years">
     /// The total of years of the month span.</param>
     /// <param name="months">
@@ -68,7 +68,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// The month span to add.
     /// </param>
     /// <exception cref="OverflowException">
-    /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The resulting time span is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public MonthSpan Add(MonthSpan other) => FromMonths(m_Value + other.m_Value);
@@ -78,7 +78,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// The month span to subtract.
     /// </param>
     /// <exception cref="OverflowException">
-    /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The resulting time span is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public MonthSpan Subtract(MonthSpan other) => FromMonths(m_Value - other.m_Value);
@@ -88,7 +88,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// The factor to multiply with.
     /// </param>
     /// <exception cref="OverflowException">
-    /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The resulting time span is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public MonthSpan Multiply(int factor) => FromMonths(m_Value * factor);
@@ -98,7 +98,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// The factor to multiply with.
     /// </param>
     /// <exception cref="OverflowException">
-    /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The resulting time span is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public MonthSpan Multiply(decimal factor) => FromMonths(Cast.ToInt<MonthSpan>((long)(m_Value * factor)));
@@ -108,7 +108,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// The factor to multiply with.
     /// </param>
     /// <exception cref="OverflowException">
-    /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The resulting time span is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public MonthSpan Multiply(double factor) => Multiply(Cast.ToDecimal<MonthSpan>(factor));
@@ -118,7 +118,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// The factor to multiply with.
     /// </param>
     /// <exception cref="OverflowException">
-    /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The resulting time span is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public MonthSpan Divide(int factor) => FromMonths(m_Value / factor);
@@ -128,7 +128,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// The factor to multiply with.
     /// </param>
     /// <exception cref="OverflowException">
-    /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The resulting time span is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public MonthSpan Divide(decimal factor) => FromMonths(Cast.ToInt<MonthSpan>((long)(m_Value / factor)));
@@ -138,7 +138,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// The factor to multiply with.
     /// </param>
     /// <exception cref="OverflowException">
-    /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The resulting time span is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public MonthSpan Divide(double factor) => Divide(Cast.ToDecimal<MonthSpan>(factor));
@@ -191,11 +191,11 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// <summary>Subtracts a month span from the date time.</summary>
     public static DateTime operator -(DateTime dt, MonthSpan span) => dt.Add(-span);
 
-    /// <summary>Returns a <see cref = "string "/> that represents the month span for DEBUG purposes.</summary>
+    /// <summary>Returns a <see cref = "string " /> that represents the month span for DEBUG purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:F}");
 
-    /// <summary>Returns a formatted <see cref = "string "/> that represents the month span.</summary>
+    /// <summary>Returns a formatted <see cref = "string " /> that represents the month span.</summary>
     /// <param name = "format">
     /// The format that this describes the formatting.
     /// </param>
@@ -243,19 +243,19 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     [Pure]
     public static MonthSpan FromJson(long json) => Cast.Primitive<long, MonthSpan>(TryCreate, json);
 
-    /// <summary>Casts the month span to a <see cref = "int"/>.</summary>
+    /// <summary>Casts the month span to a <see cref = "int" />.</summary>
     public static explicit operator int(MonthSpan val) => val.m_Value;
 
-    /// <summary>Casts a <see cref = "int "/> to a month span.</summary>
+    /// <summary>Casts a <see cref = "int " /> to a month span.</summary>
     public static explicit operator MonthSpan(int val) => FromMonths(val);
 
-    /// <summary>Casts the month span to a <see cref="DateSpan"/>.</summary>
+    /// <summary>Casts the month span to a <see cref="DateSpan" />.</summary>
     public static implicit operator DateSpan(MonthSpan val) => DateSpan.FromMonths(val.m_Value);
 
-    /// <summary>Casts a <see cref = "DateSpan"/> to a month span.</summary>
+    /// <summary>Casts a <see cref = "DateSpan" /> to a month span.</summary>
     public static explicit operator MonthSpan(DateSpan val) => FromMonths(val.TotalMonths);
 
-    /// <summary>Converts the <see cref = "string "/> to <see cref = "MonthSpan"/>.
+    /// <summary>Converts the <see cref = "string " /> to <see cref = "MonthSpan" />.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name = "s">
@@ -312,7 +312,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
         throw new ArgumentOutOfRangeException(nameof(months), QowaivMessages.FormatExceptionMonthSpan);
     }
 
-    /// <summary>Creates a month span by subtracting <paramref name="d1"/> from <paramref name="d2"/>.</summary>
+    /// <summary>Creates a month span by subtracting <paramref name="d1" /> from <paramref name="d2" />.</summary>
     /// <param name="d1">
     /// The date to subtract from.
     /// </param>
@@ -320,7 +320,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// The date to subtract.
     /// </param>
     /// <returns>
-    /// Returns a month span describing the duration between <paramref name="d1"/> and <paramref name="d2"/>.
+    /// Returns a month span describing the duration between <paramref name="d1" /> and <paramref name="d2" />.
     /// </returns>
     [Pure]
     public static MonthSpan Subtract(Date d1, Date d2)

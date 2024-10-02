@@ -1,4 +1,4 @@
-﻿namespace Globalization.Country_to_currency_specs;
+namespace Globalization.Country_to_currency_specs;
 
 internal class Get_Currency
 {

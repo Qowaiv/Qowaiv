@@ -1,4 +1,4 @@
-﻿namespace Financial.BIC_specs;
+namespace Financial.BIC_specs;
 
 public class With_domain_logic
 {

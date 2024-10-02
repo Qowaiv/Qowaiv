@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Mathematics;
+namespace Qowaiv.Mathematics;
 
 internal static class DecimalMath
 {
@@ -31,10 +31,10 @@ internal static class DecimalMath
     /// The mode of rounding applied.
     /// </param>
     /// <returns>
-    /// The decimal number equivalent to <paramref name="value"/> rounded to <paramref name="decimals"/> number of decimal places.
+    /// The decimal number equivalent to <paramref name="value" /> rounded to <paramref name="decimals" /> number of decimal places.
     /// </returns>
     /// <remarks>
-    /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
+    /// A negative value for <paramref name="decimals" /> lowers precision to tenfold, hundredfold, and bigger.
     /// </remarks>
     [Pure]
     public static decimal Round(decimal value, int decimals, DecimalRounding mode)
@@ -117,7 +117,7 @@ internal static class DecimalMath
         }
     }
 
-    /// <summary>Changes the scale part of the <see cref="decimal"/>.</summary>
+    /// <summary>Changes the scale part of the <see cref="decimal" />.</summary>
     /// <remarks>
     /// This is equivalent to multiplying (or dividing) by a power of 10.
     /// </remarks>
@@ -146,7 +146,7 @@ internal static class DecimalMath
         return calc.Value();
     }
 
-    /// <summary>Gets a (thread static) instance of <see cref="Random"/>.</summary>
+    /// <summary>Gets a (thread static) instance of <see cref="Random" />.</summary>
     /// <remarks>
     /// creates a new instance if required.
     /// </remarks>

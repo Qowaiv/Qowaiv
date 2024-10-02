@@ -39,7 +39,7 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     /// <summary>The average amount of days per month, taken leap years into account.</summary>
     internal const double DaysPerMonth = 30.421625;
 
-    /// <summary>The total of days, that can not be applied on a <see cref="Date"/> or <see cref="DateTime"/>.</summary>
+    /// <summary>The total of days, that can not be applied on a <see cref="Date" /> or <see cref="DateTime" />.</summary>
     internal const int MaxDays = (int)(DaysPerMonth * 120000);
 
     /// <summary>12 months per year.</summary>
@@ -54,7 +54,7 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     /// <summary>The shift position of the total months in the value.</summary>
     internal const int MonthShift = 32;
 
-    /// <summary>Initializes a new instance of the <see cref="DateSpan"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="DateSpan" /> struct.</summary>
     /// <param name="months">
     /// Number of months.
     /// </param>
@@ -63,7 +63,7 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     /// </param>
     public DateSpan(int months, int days) : this(Create(months, days)) { }
 
-    /// <summary>Initializes a new instance of the <see cref="DateSpan"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="DateSpan" /> struct.</summary>
     /// <param name="years">
     /// Number of years.
     /// </param>
@@ -76,7 +76,7 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     public DateSpan(int years, int months, int days)
         : this((years * MonthsPerYear) + months, days) { }
 
-    /// <summary>Converts the combination of months and days to a <see cref="ulong"/>.</summary>
+    /// <summary>Converts the combination of months and days to a <see cref="ulong" />.</summary>
     [Pure]
     private static ulong AsUInt64(long months, long days) => (uint)days | ((ulong)months << MonthShift);
 
@@ -108,7 +108,7 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     /// The date span to add.
     /// </param>
     /// <exception cref="OverflowException">
-    /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The resulting time span is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public DateSpan Add(DateSpan other)
@@ -123,7 +123,7 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     /// The date span to subtract.
     /// </param>
     /// <exception cref="OverflowException">
-    /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The resulting time span is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public DateSpan Subtract(DateSpan other)
@@ -138,7 +138,7 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     /// The days to add.
     /// </param>
     /// <exception cref="OverflowException">
-    /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The resulting time span is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public DateSpan AddDays(int days) => Mutate(TotalMonths, Days + (long)days);
@@ -148,7 +148,7 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     /// The months to add.
     /// </param>
     /// <exception cref="OverflowException">
-    /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The resulting time span is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public DateSpan AddMonths(int months) => Mutate(TotalMonths + (long)months, Days);
@@ -158,14 +158,14 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     /// The years to add.
     /// </param>
     /// <exception cref="OverflowException">
-    /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The resulting time span is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public DateSpan AddYears(int years) => Mutate(TotalMonths + (years * (long)MonthsPerYear), Days);
 
     /// <summary>Mutates the months and days.</summary>
     /// <exception cref="OverflowException">
-    /// The resulting time span is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The resulting time span is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     private static DateSpan Mutate(long months, long days)
@@ -276,7 +276,7 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     [Pure]
     public static DateSpan Age(Date date, Date reference) => Subtract(reference, date, DateSpanSettings.WithoutMonths);
 
-    /// <summary>Creates a date span on by subtracting <paramref name="d1"/> from <paramref name="d2"/>.</summary>
+    /// <summary>Creates a date span on by subtracting <paramref name="d1" /> from <paramref name="d2" />.</summary>
     /// <param name="d1">
     /// The date to subtract from.
     /// </param>
@@ -284,12 +284,12 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     /// The date to subtract.
     /// </param>
     /// <returns>
-    /// Returns a date span describing the duration between <paramref name="d1"/> and <paramref name="d2"/>.
+    /// Returns a date span describing the duration between <paramref name="d1" /> and <paramref name="d2" />.
     /// </returns>
     [Pure]
     public static DateSpan Subtract(Date d1, Date d2) => Subtract(d1, d2, DateSpanSettings.Default);
 
-    /// <summary>Creates a date span on by subtracting <paramref name="d1"/> from <paramref name="d2"/>.</summary>
+    /// <summary>Creates a date span on by subtracting <paramref name="d1" /> from <paramref name="d2" />.</summary>
     /// <param name="d1">
     /// The date to subtract from.
     /// </param>
@@ -300,7 +300,7 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     /// The settings to apply.
     /// </param>
     /// <returns>
-    /// Returns a date span describing the duration between <paramref name="d1"/> and <paramref name="d2"/>.
+    /// Returns a date span describing the duration between <paramref name="d1" /> and <paramref name="d2" />.
     /// </returns>
     [Pure]
     public static DateSpan Subtract(Date d1, Date d2, DateSpanSettings settings)

@@ -1,4 +1,4 @@
-﻿using Qowaiv.Chemistry;
+using Qowaiv.Chemistry;
 
 namespace Chemistry.CAS_Registry_Number_specs;
 

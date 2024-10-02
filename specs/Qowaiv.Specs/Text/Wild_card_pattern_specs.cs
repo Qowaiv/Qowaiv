@@ -1,4 +1,4 @@
-﻿namespace Text.Wild_card_pattern_specs;
+namespace Text.Wild_card_pattern_specs;
 
 public class Is_match
 {

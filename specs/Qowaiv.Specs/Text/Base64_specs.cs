@@ -1,4 +1,4 @@
-﻿namespace Text.Base64_specs;
+namespace Text.Base64_specs;
 
 public class ToString
 {

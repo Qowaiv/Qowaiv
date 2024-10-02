@@ -1,4 +1,4 @@
-﻿using System.Xml;
+using System.Xml;
 
 namespace Qowaiv.TestTools.Resx;
 
@@ -17,14 +17,14 @@ public sealed class XResourceFileHeader
     /// <summary>Gets the Resourse writer header (System.Resources.ResXResourceWriter).</summary>
     public static readonly XResourceFileHeader Writer = new("writer", "System.Resources.ResXResourceWriter");
 
-    /// <summary>Initializes a new instance of the <see cref="XResourceFileHeader"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="XResourceFileHeader" /> class.</summary>
     private XResourceFileHeader()
     {
         Name = string.Empty;
         Value = string.Empty;
     }
 
-    /// <summary>Initializes a new instance of the <see cref="XResourceFileHeader"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="XResourceFileHeader" /> class.</summary>
     public XResourceFileHeader(string name, string val)
     {
         Name = name;

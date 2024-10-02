@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Financial;
+namespace Qowaiv.Financial;
 
 internal sealed class BbanGenericParser : BbanParser
 {

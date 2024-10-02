@@ -1,4 +1,4 @@
-﻿namespace Text.CharBuffer_specs;
+namespace Text.CharBuffer_specs;
 
 public class Add
 {

@@ -1,4 +1,4 @@
-﻿namespace Identifiers.Id_for_String_specs;
+namespace Identifiers.Id_for_String_specs;
 
 public class Is_comparable
 {

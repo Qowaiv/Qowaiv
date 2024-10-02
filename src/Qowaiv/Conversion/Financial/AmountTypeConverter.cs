@@ -1,4 +1,4 @@
-﻿using Qowaiv.Financial;
+using Qowaiv.Financial;
 
 namespace Qowaiv.Conversion.Financial;
 

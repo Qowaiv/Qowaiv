@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Financial;
+namespace Qowaiv.Financial;
 
 public readonly partial struct Amount
 {

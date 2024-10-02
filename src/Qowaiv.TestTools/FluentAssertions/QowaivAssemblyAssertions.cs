@@ -1,13 +1,13 @@
-﻿using FluentAssertions.Execution;
+using FluentAssertions.Execution;
 using FluentAssertions.Reflection;
 using System.Reflection;
 
 namespace FluentAssertions;
 
-/// <summary>Extensions on <see cref="AssemblyAssertions"/>.</summary>
+/// <summary>Extensions on <see cref="AssemblyAssertions" />.</summary>
 public static class QowaivAssemblyAssertions
 {
-    /// <summary>Asserts the <see cref="Assembly"/> to have a specific public key.</summary>
+    /// <summary>Asserts the <see cref="Assembly" /> to have a specific public key.</summary>
     [CLSCompliant(false)]
     [CustomAssertion]
     public static AndConstraint<AssemblyAssertions> HavePublicKey(this AssemblyAssertions assertions, string publicKey, string because = "", params object[] becauseArgs)

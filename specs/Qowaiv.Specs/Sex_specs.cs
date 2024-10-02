@@ -1,4 +1,4 @@
-﻿namespace Sex_specs;
+namespace Sex_specs;
 
 public class With_domain_logic
 {

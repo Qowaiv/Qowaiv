@@ -1,4 +1,4 @@
-﻿using Qowaiv.Diagnostics.Contracts;
+using Qowaiv.Diagnostics.Contracts;
 
 namespace Obsolete_code;
 

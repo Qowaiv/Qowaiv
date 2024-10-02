@@ -1,4 +1,4 @@
-﻿namespace TestTools.Should.Have_type_converter_defined_specs;
+namespace TestTools.Should.Have_type_converter_defined_specs;
 
 public class Discovers
 {

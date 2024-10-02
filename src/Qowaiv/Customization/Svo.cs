@@ -36,12 +36,12 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
     /// <summary>Represents an unknown (but set) Single Value Object.</summary>
     public static Svo<TSvoBehavior> Unknown => new(SvoBehavior.unknown);
 
-    /// <summary>Initializes a new instance of the <see cref="Svo{TSvoBehavior}"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Svo{TSvoBehavior}" /> struct.</summary>
     private Svo(string? value) => m_Value = value;
 
 #if NET8_0_OR_GREATER
 #else
-    /// <summary>Initializes a new instance of the <see cref="Svo{TSvoBehavior}"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Svo{TSvoBehavior}" /> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     private Svo(SerializationInfo info, StreamingContext context)
@@ -140,18 +140,18 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:F}");
 
-    /// <summary>Returns a <see cref="string"/> that represents the Single Value Object.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the Single Value Object.</summary>
     [Pure]
     public override string ToString() => ToString(provider: null);
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the Single Value Object.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the Single Value Object.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
     public string ToString(string? format) => ToString(format, formatProvider: null);
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the Single Value Object.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the Single Value Object.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
@@ -187,7 +187,7 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
 
     /// <summary>Writes the Single Value Object to an <see href="XmlWriter" />.</summary>
     /// <remarks>
-    /// Uses <see cref="ToXmlString()"/>.
+    /// Uses <see cref="ToXmlString()" />.
     /// </remarks>
     /// <param name="writer">An XML writer.</param>
     void IXmlSerializable.WriteXml(XmlWriter writer)
@@ -214,13 +214,13 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
     [Pure]
     public string? ToJson() => behavior.ToJson(m_Value);
 
-    /// <summary>Casts the Single Value Object to a <see cref="string"/>.</summary>
+    /// <summary>Casts the Single Value Object to a <see cref="string" />.</summary>
     public static explicit operator string(Svo<TSvoBehavior> val) => val.ToString(CultureInfo.CurrentCulture);
 
-    /// <summary>Casts a <see cref="string"/> to a Single Value Object.</summary>
+    /// <summary>Casts a <see cref="string" /> to a Single Value Object.</summary>
     public static explicit operator Svo<TSvoBehavior>(string str) => Parse(str, CultureInfo.CurrentCulture);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="Svo{TSvoBehavior}"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="Svo{TSvoBehavior}" />.</summary>
     /// <param name="s">
     /// A string containing the Single Value Object to convert.
     /// </param>
@@ -228,12 +228,12 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
     /// The parsed Single Value Object.
     /// </returns>
     /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
+    /// <paramref name="s" /> is not in the correct format.
     /// </exception>
     [Pure]
     public static Svo<TSvoBehavior> Parse(string? s) => Parse(s, null);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="Svo{TSvoBehavior}"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="Svo{TSvoBehavior}" />.</summary>
     /// <param name="s">
     /// A string containing the Single Value Object to convert.
     /// </param>
@@ -244,14 +244,14 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
     /// The parsed Single Value Object.
     /// </returns>
     /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
+    /// <paramref name="s" /> is not in the correct format.
     /// </exception>
     [Pure]
     public static Svo<TSvoBehavior> Parse(string? s, IFormatProvider? provider)
         => TryParse(s, provider)
         ?? throw behavior.InvalidFormat(s, provider);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="Svo{TSvoBehavior}"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="Svo{TSvoBehavior}" />.</summary>
     /// <param name="s">
     /// A string containing the Single Value Object to convert.
     /// </param>
@@ -261,7 +261,7 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
     [Pure]
     public static Svo<TSvoBehavior>? TryParse(string? s) => TryParse(s, null);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="Svo{TSvoBehavior}"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="Svo{TSvoBehavior}" />.</summary>
     /// <param name="s">
     /// A string containing the Single Value Object to convert.
     /// </param>
@@ -277,7 +277,7 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
         ? val
         : default(Svo<TSvoBehavior>?);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="Svo{TSvoBehavior}"/>.
+    /// <summary>Converts the <see cref="string" /> to <see cref="Svo{TSvoBehavior}" />.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">
@@ -293,7 +293,7 @@ public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEqua
     public static bool TryParse(string? s, out Svo<TSvoBehavior> result)
         => TryParse(s, null, out result);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="Svo{TSvoBehavior}"/>.
+    /// <summary>Converts the <see cref="string" /> to <see cref="Svo{TSvoBehavior}" />.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">

@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.UnitTests.Financial;
+namespace Qowaiv.UnitTests.Financial;
 
 /// <summary>Tests the Money SVO.</summary>
 [TestFixture]

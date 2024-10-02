@@ -1,4 +1,4 @@
-﻿global using Qowaiv.Conversion;
+global using Qowaiv.Conversion;
 global using Qowaiv.Diagnostics;
 global using Qowaiv.Diagnostics.Contracts;
 global using Qowaiv.Formatting;

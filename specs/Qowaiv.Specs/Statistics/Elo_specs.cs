@@ -1,4 +1,4 @@
-﻿namespace Statistics.Elo_specs;
+namespace Statistics.Elo_specs;
 
 public class Is_invalid
 {

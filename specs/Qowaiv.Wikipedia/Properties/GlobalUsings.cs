@@ -1,4 +1,4 @@
-﻿global using FluentAssertions;
+global using FluentAssertions;
 global using NUnit.Framework;
 global using Qowaiv;
 global using Qowaiv.Globalization;

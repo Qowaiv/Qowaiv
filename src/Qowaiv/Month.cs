@@ -1,4 +1,4 @@
-﻿using Qowaiv.Globalization;
+using Qowaiv.Globalization;
 
 namespace Qowaiv;
 
@@ -129,11 +129,11 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
     [Pure]
     public string? ToJson() => m_Value == default ? null : ToString("s", CultureInfo.InvariantCulture);
 
-    /// <summary>Returns a <see cref="string"/> that represents the current month for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current month for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:f (m)}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current month.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current month.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>

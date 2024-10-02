@@ -1,4 +1,4 @@
-﻿namespace IO.StreamSize_specs;
+namespace IO.StreamSize_specs;
 
 public class Is_comparable
 {

@@ -1,8 +1,8 @@
-﻿using Qowaiv;
+using Qowaiv;
 
 namespace System;
 
-/// <summary>Extensions on <see cref="string"/>.</summary>
+/// <summary>Extensions on <see cref="string" />.</summary>
 public static class QowaivSystemExtensions
 {
     /// <summary>Converts the specified string to an uppercase string.</summary>
@@ -62,7 +62,7 @@ public static class QowaivSystemExtensions
         return (TFormat?)provider.GetFormat(typeof(TFormat));
     }
 
-    /// <summary>Returns the provided default if <see cref="string.IsNullOrEmpty(string)"/>,
+    /// <summary>Returns the provided default if <see cref="string.IsNullOrEmpty(string)" />,
     /// otherwise the string value.
     /// </summary>
     [Pure]

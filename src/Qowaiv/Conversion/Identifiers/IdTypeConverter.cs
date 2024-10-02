@@ -1,4 +1,4 @@
-﻿using Qowaiv.Identifiers;
+using Qowaiv.Identifiers;
 using System.Reflection;
 
 namespace Qowaiv.Conversion.Identifiers;
@@ -12,13 +12,13 @@ public sealed class IdTypeConverter : TypeConverter
     /// <summary>Accessor to the private constructor.</summary>
     private readonly ConstructorInfo Ctor;
 
-    /// <summary>The base type according to the <see cref="IIdentifierBehavior"/>.</summary>
+    /// <summary>The base type according to the <see cref="IIdentifierBehavior" />.</summary>
     private readonly Type BaseType;
 
-    /// <summary>The <see cref="TypeConverter"/> of the underlying value.</summary>
+    /// <summary>The <see cref="TypeConverter" /> of the underlying value.</summary>
     private readonly TypeConverter BaseConverter;
 
-    /// <summary>Initializes a new instance of the <see cref="IdTypeConverter"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="IdTypeConverter" /> class.</summary>
     /// <param name="type">
     /// The type to convert for.
     /// </param>

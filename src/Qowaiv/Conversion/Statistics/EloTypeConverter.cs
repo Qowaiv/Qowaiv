@@ -1,4 +1,4 @@
-﻿using Qowaiv.Statistics;
+using Qowaiv.Statistics;
 
 namespace Qowaiv.Conversion.Statistics;
 

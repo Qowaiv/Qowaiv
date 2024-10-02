@@ -1,4 +1,4 @@
-﻿namespace Security.Cryptography.CryptographicSeed_specs;
+namespace Security.Cryptography.CryptographicSeed_specs;
 
 public class Computed
 {

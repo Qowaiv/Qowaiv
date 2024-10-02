@@ -1,8 +1,8 @@
-﻿namespace Qowaiv.Identifiers;
+namespace Qowaiv.Identifiers;
 
-/// <summary>Injectable behavior for strongly typed identifiers (<see cref="Id{TIdentifier}"/>).</summary>
+/// <summary>Injectable behavior for strongly typed identifiers (<see cref="Id{TIdentifier}" />).</summary>
 /// <remarks>
-/// The behavior is not called for <see cref="Id{TIdentifier}.Empty"/>.
+/// The behavior is not called for <see cref="Id{TIdentifier}.Empty" />.
 /// </remarks>
 public interface IIdentifierBehavior : IEqualityComparer<object>, IComparer<object>, IComparer
 {
@@ -18,15 +18,15 @@ public interface IIdentifierBehavior : IEqualityComparer<object>, IComparer<obje
     [Pure]
     new int Compare(object? x, object? y);
 
-    /// <summary>Returns a <see cref="byte"/> that represents the underlying value of the identifier.</summary>
+    /// <summary>Returns a <see cref="byte" /> that represents the underlying value of the identifier.</summary>
     [Pure]
     byte[] ToByteArray(object? obj);
 
-    /// <summary>Returns the underlying value of the identifier represented by a <see cref="byte"/> array.</summary>
+    /// <summary>Returns the underlying value of the identifier represented by a <see cref="byte" /> array.</summary>
     [Pure]
     object? FromBytes(byte[] bytes);
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the underlying value of the identifier.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the underlying value of the identifier.</summary>
     [Pure]
     string ToString(object? obj, string? format, IFormatProvider? formatProvider);
 
@@ -40,26 +40,26 @@ public interface IIdentifierBehavior : IEqualityComparer<object>, IComparer<obje
 
     /// <summary>Tries to parse the underlying value of the identifier.</summary>
     /// <param name="str">
-    /// The <see cref="string"/> to parse.
+    /// The <see cref="string" /> to parse.
     /// </param>
     /// <param name="id">
     /// The parsed identifier.
     /// </param>
     /// <returns>
-    /// True if the <see cref="string"/> could be parsed.
+    /// True if the <see cref="string" /> could be parsed.
     /// </returns>
     [Pure]
     bool TryParse(string? str, out object? id);
 
     /// <summary>Tries to create the underlying value of the identifier.</summary>
     /// <param name="obj">
-    /// The <see cref="object"/> that could represent the underlying value.
+    /// The <see cref="object" /> that could represent the underlying value.
     /// </param>
     /// <param name="id">
     /// The underlying value.
     /// </param>
     /// <returns>
-    /// True if the <see cref="object"/> could represent a valid underlying value.
+    /// True if the <see cref="object" /> could represent a valid underlying value.
     /// </returns>
     bool TryCreate(object? obj, out object? id);
 

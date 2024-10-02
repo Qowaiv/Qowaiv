@@ -1,4 +1,4 @@
-﻿#pragma warning disable S1210
+#pragma warning disable S1210
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 using Qowaiv.Globalization;
@@ -101,13 +101,13 @@ public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<
     [Pure]
     public string? ToJson() => SexLabels[m_Value];
 
-    /// <summary>Returns a <see cref="string"/> that represents the current Sex for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current Sex for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => IsEmpty()
         ? DebugDisplay.Empty
         : GetDisplayName(CultureInfo.InvariantCulture);
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current Sex.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current Sex.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
@@ -143,19 +143,19 @@ public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<
     [Pure]
     private string ToXmlString() => SexLabels[m_Value] ?? string.Empty;
 
-    /// <summary>Casts a Sex to a <see cref="byte"/>.</summary>
+    /// <summary>Casts a Sex to a <see cref="byte" />.</summary>
     public static explicit operator byte(Sex val) => (byte)val.ToInt32();
 
-    /// <summary>Casts a Sex to a <see cref="int"/>.</summary>
+    /// <summary>Casts a Sex to a <see cref="int" />.</summary>
     public static explicit operator int(Sex val) => val.ToInt32();
 
-    /// <summary>Casts an <see cref="int"/> to a Sex.</summary>
+    /// <summary>Casts an <see cref="int" /> to a Sex.</summary>
     public static implicit operator Sex(int val) => Cast.Primitive<int, Sex>(TryCreate, val);
 
-    /// <summary>Casts a Sex to a <see cref="int"/>.</summary>
+    /// <summary>Casts a Sex to a <see cref="int" />.</summary>
     public static explicit operator int?(Sex val) => val.ToNullableInt32();
 
-    /// <summary>Casts an <see cref="int"/> to a Sex.</summary>
+    /// <summary>Casts an <see cref="int" /> to a Sex.</summary>
     public static implicit operator Sex(int? val) => Cast.Primitive<int, Sex>(TryCreate, val);
 
     /// <summary>Converts the string to a Sex.

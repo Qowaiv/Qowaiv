@@ -1,7 +1,7 @@
-﻿namespace Qowaiv.TestTools;
+namespace Qowaiv.TestTools;
 
-/// <summary>Wrapper used by <see cref="Serialize.Xml{T}(T)"/>
-/// and <see cref="SerializeDeserialize.Xml{T}(T)"/>.
+/// <summary>Wrapper used by <see cref="Serialize.Xml{T}(T)" />
+/// and <see cref="SerializeDeserialize.Xml{T}(T)" />.
 /// </summary>
 [Mutable]
 [Serializable]

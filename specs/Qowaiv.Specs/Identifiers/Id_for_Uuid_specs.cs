@@ -1,4 +1,4 @@
-﻿namespace Identifiers.Id_for_Uuid_specs;
+namespace Identifiers.Id_for_Uuid_specs;
 
 public class With_domain_logic
 {

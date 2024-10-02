@@ -1,4 +1,4 @@
-﻿#pragma warning disable S1694 // An abstract class should have both abstract and concrete methods
+#pragma warning disable S1694 // An abstract class should have both abstract and concrete methods
 // Justification: SvoBehavior instances can be created via reflection, this one should then be excluded.
 
 namespace Qowaiv.Customization;
@@ -16,7 +16,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
 
     /// <summary>Defines the maximum length the string representation of the Single Value Object may be.</summary>
     /// <remarks>
-    /// Default is <see cref="int.MaxValue"/>.
+    /// Default is <see cref="int.MaxValue" />.
     /// </remarks>
     public virtual int MaxLength => int.MaxValue;
 
@@ -33,7 +33,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     [Pure]
     public virtual bool IsUnknown(string str, IFormatProvider? formatProvider) => Unknown.IsUnknown(str, formatProvider as CultureInfo);
 
-    /// <summary>Validates if the input <see cref="string"/> is valid given its format provider.</summary>
+    /// <summary>Validates if the input <see cref="string" /> is valid given its format provider.</summary>
     /// <param name="str">
     /// The input string to validate.
     /// </param>
@@ -121,7 +121,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
         else return str;
     }
 
-    /// <summary>Creates a <see cref="FormatException"/> using the <see cref="InvalidFormatMessage(string?, IFormatProvider?)"/>.</summary>
+    /// <summary>Creates a <see cref="FormatException" /> using the <see cref="InvalidFormatMessage(string?, IFormatProvider?)" />.</summary>
     [Pure]
     public virtual FormatException InvalidFormat(string? str, IFormatProvider? formatProvider)
         => new(InvalidFormatMessage(str, formatProvider));
@@ -158,7 +158,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
         => ToString(value?.ToString(), default, culture);
 
-    /// <summary>Converts the <see cref="string"/> to a SVO.
+    /// <summary>Converts the <see cref="string" /> to a SVO.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="str">

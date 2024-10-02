@@ -1,4 +1,4 @@
-﻿namespace Qowaiv;
+namespace Qowaiv;
 
 /// <summary>Describes the available static options of a single value object.</summary>
 [Flags]

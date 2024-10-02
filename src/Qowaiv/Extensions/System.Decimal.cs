@@ -1,18 +1,18 @@
-﻿using Qowaiv;
+using Qowaiv;
 using Qowaiv.Mathematics;
 using System.Runtime.CompilerServices;
 
 namespace System;
 
-/// <summary>Extensions on <see cref="decimal"/>.</summary>
+/// <summary>Extensions on <see cref="decimal" />.</summary>
 public static class QowaivDecimalExtensions
 {
-    /// <summary>Gets the absolute value of the <paramref name="number"/>.</summary>
+    /// <summary>Gets the absolute value of the <paramref name="number" />.</summary>
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static decimal Abs(this decimal number) => Math.Abs(number);
 
-    /// <summary>Gets the sign of the <paramref name="number"/>.</summary>
+    /// <summary>Gets the sign of the <paramref name="number" />.</summary>
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static int Sign(this decimal number) => Math.Sign(number);
@@ -55,7 +55,7 @@ public static class QowaivDecimalExtensions
     /// A decimal number to round.
     /// </param>
     /// <returns>
-    /// The integer that is nearest to the <paramref name="value"/> parameter. If the <paramref name="value"/> is halfway between two integers,
+    /// The integer that is nearest to the <paramref name="value" /> parameter. If the <paramref name="value" /> is halfway between two integers,
     /// it is rounded away from zero.
     /// </returns>
     [Pure]
@@ -69,10 +69,10 @@ public static class QowaivDecimalExtensions
     /// A value from -28 to 28 that specifies the number of decimal places to round to.
     /// </param>
     /// <returns>
-    /// The decimal number equivalent to <paramref name="value"/> rounded to <paramref name="decimals"/> number of decimal places.
+    /// The decimal number equivalent to <paramref name="value" /> rounded to <paramref name="decimals" /> number of decimal places.
     /// </returns>
     /// <remarks>
-    /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
+    /// A negative value for <paramref name="decimals" /> lowers precision to tenfold, hundredfold, and bigger.
     /// </remarks>
     [Pure]
     public static decimal Round(this decimal value, int decimals) => value.Round(decimals, DecimalRounding.ToEven);
@@ -88,10 +88,10 @@ public static class QowaivDecimalExtensions
     /// The mode of rounding applied.
     /// </param>
     /// <returns>
-    /// The decimal number equivalent to <paramref name="value"/> rounded to <paramref name="decimals"/> number of decimal places.
+    /// The decimal number equivalent to <paramref name="value" /> rounded to <paramref name="decimals" /> number of decimal places.
     /// </returns>
     /// <remarks>
-    /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
+    /// A negative value for <paramref name="decimals" /> lowers precision to tenfold, hundredfold, and bigger.
     /// </remarks>
     [Pure]
     public static decimal Round(this decimal value, int decimals, DecimalRounding mode) => DecimalMath.Round(value, decimals, mode);

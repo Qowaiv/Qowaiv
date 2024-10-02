@@ -1,4 +1,4 @@
-﻿namespace Local_DateTime_specs;
+namespace Local_DateTime_specs;
 
 public class Has_constant
 {

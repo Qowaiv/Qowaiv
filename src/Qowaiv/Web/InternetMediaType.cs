@@ -1,4 +1,4 @@
-﻿#pragma warning disable S1210
+#pragma warning disable S1210
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 using Qowaiv.Conversion.Web;
@@ -123,13 +123,13 @@ public readonly partial struct InternetMediaType : IXmlSerializable, IFormattabl
     [Pure]
     public string? ToJson() => m_Value;
 
-    /// <summary>Returns a <see cref="string"/> that represents the current Internet media type for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current Internet media type for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => IsEmpty()
         ? DebugDisplay.Empty
         : ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current Internet media type.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current Internet media type.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>

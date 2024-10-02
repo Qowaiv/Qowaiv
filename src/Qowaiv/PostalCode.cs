@@ -1,4 +1,4 @@
-﻿#pragma warning disable S1210
+#pragma warning disable S1210
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 using Qowaiv.Globalization;
@@ -47,11 +47,11 @@ public readonly partial struct PostalCode : IXmlSerializable, IFormattable, IEqu
     [Pure]
     public string? ToJson() => m_Value;
 
-    /// <summary>Returns a <see cref="string"/> that represents the current postal code for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current postal code for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current postal code.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current postal code.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
@@ -64,7 +64,7 @@ public readonly partial struct PostalCode : IXmlSerializable, IFormattable, IEqu
         ? formatted
         : ToString(Country.TryParse(format) ?? default);
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current postal code.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current postal code.</summary>
     /// <param name="country">
     /// The country to format for.
     /// </param>

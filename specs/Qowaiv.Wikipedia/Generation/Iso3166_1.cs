@@ -1,4 +1,4 @@
-﻿using Qowaiv.TestTools.Wikipedia;
+using Qowaiv.TestTools.Wikipedia;
 
 namespace Qowaiv.TestTools.Generation;
 

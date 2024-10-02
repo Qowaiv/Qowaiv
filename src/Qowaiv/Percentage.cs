@@ -1,4 +1,4 @@
-﻿using Qowaiv.Mathematics;
+using Qowaiv.Mathematics;
 
 namespace Qowaiv;
 
@@ -111,12 +111,12 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     /// </param>
     /// <returns>
     /// The percentage nearest to the percentage that contains a number of
-    /// fractional digits equal to <paramref name="decimals"/>. If the
-    /// percentage has fewer fractional digits than <paramref name="decimals"/>,
+    /// fractional digits equal to <paramref name="decimals" />. If the
+    /// percentage has fewer fractional digits than <paramref name="decimals" />,
     /// the percentage is returned unchanged.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// <paramref name="decimals"/> is less than 0 or greater than 26.
+    /// <paramref name="decimals" /> is less than 0 or greater than 26.
     /// </exception>
     [Pure]
     public Percentage Round(int decimals) => Round(decimals, DecimalRounding.AwayFromZero);
@@ -133,15 +133,15 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     /// </param>
     /// <returns>
     /// The percentage nearest to the percentage that contains a number of
-    /// fractional digits equal to <paramref name="decimals"/>. If the
-    /// percentage has fewer fractional digits than <paramref name="decimals"/>,
+    /// fractional digits equal to <paramref name="decimals" />. If the
+    /// percentage has fewer fractional digits than <paramref name="decimals" />,
     /// the percentage is returned unchanged.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// <paramref name="decimals"/> is less than 0 or greater than 26.
+    /// <paramref name="decimals" /> is less than 0 or greater than 26.
     /// </exception>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// <paramref name="mode"/> is not a valid value of <see cref="MidpointRounding"/>.
+    /// <paramref name="mode" /> is not a valid value of <see cref="MidpointRounding" />.
     /// </exception>
     [Obsolete("Use  Round(decimals, DecimalRounding) instead.")]
     public Percentage Round(int decimals, MidpointRounding mode) => Round(decimals, (DecimalRounding)mode);
@@ -158,15 +158,15 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     /// </param>
     /// <returns>
     /// The percentage nearest to the percentage that contains a number of
-    /// fractional digits equal to <paramref name="decimals"/>. If the
-    /// percentage has fewer fractional digits than <paramref name="decimals"/>,
+    /// fractional digits equal to <paramref name="decimals" />. If the
+    /// percentage has fewer fractional digits than <paramref name="decimals" />,
     /// the percentage is returned unchanged.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// <paramref name="decimals"/> is less than 0 or greater than 26.
+    /// <paramref name="decimals" /> is less than 0 or greater than 26.
     /// </exception>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// <paramref name="mode"/> is not a valid value of <see cref="DecimalRounding"/>.
+    /// <paramref name="mode" /> is not a valid value of <see cref="DecimalRounding" />.
     /// </exception>
     [Pure]
     public Percentage Round(int decimals, DecimalRounding mode)
@@ -190,7 +190,7 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     /// Specification for how to round if it is midway between two other numbers.
     /// </param>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// <paramref name="mode"/> is not a valid value of <see cref="DecimalRounding"/>.
+    /// <paramref name="mode" /> is not a valid value of <see cref="DecimalRounding" />.
     /// </exception>
     [Pure]
     public Percentage RoundToMultiple(Percentage multipleOf, DecimalRounding mode)
@@ -213,11 +213,11 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     [Pure]
     public string ToJson() => ToString(DefaultFormat + PercentSymbol, CultureInfo.InvariantCulture);
 
-    /// <summary>Returns a <see cref="string"/> that represents the current Percentage for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current Percentage for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => ToString("0.00##########################%", CultureInfo.InvariantCulture);
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current Percentage.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current Percentage.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>

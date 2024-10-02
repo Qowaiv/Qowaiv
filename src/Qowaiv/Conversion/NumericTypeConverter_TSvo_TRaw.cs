@@ -1,4 +1,4 @@
-﻿using Qowaiv.Reflection;
+using Qowaiv.Reflection;
 
 namespace Qowaiv.Conversion;
 

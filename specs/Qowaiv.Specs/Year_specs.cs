@@ -1,4 +1,4 @@
-﻿namespace Year_specs;
+namespace Year_specs;
 
 public class With_domain_logic
 {

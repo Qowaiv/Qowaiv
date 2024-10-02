@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Qowaiv.Reflection;
 using System.Collections.Concurrent;
 using System.Reflection;

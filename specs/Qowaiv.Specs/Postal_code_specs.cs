@@ -1,4 +1,4 @@
-﻿namespace Postal_code_specs;
+namespace Postal_code_specs;
 
 public class With_domain_logic
 {

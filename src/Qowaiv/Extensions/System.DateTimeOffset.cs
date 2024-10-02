@@ -1,52 +1,52 @@
-﻿using Qowaiv;
+using Qowaiv;
 
 namespace System;
 
-/// <summary>Extensions on <see cref="DateTimeOffset"/>.</summary>
+/// <summary>Extensions on <see cref="DateTimeOffset" />.</summary>
 public static class QowaivDateTimeOffsetExtensions
 {
-    /// <summary>Returns a new date time offset that adds the value of the specified <see cref="DateSpan"/>
+    /// <summary>Returns a new date time offset that adds the value of the specified <see cref="DateSpan" />
     /// to the value of this instance.
     /// </summary>
     /// <param name="d">
-    /// The date time offset to add a <see cref="DateSpan"/> to.
+    /// The date time offset to add a <see cref="DateSpan" /> to.
     /// </param>
     /// <param name="value">
-    /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+    /// A <see cref="DateSpan" /> object that represents a positive or negative time interval.
     /// </param>
     /// <returns>
     /// A new date whose value is the sum of the date and time represented
     /// by this instance and the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="DateTimeOffset.MinValue"/> or greater
-    /// than <see cref="DateTime.MaxValue"/>.
+    /// The resulting date is less than <see cref="DateTimeOffset.MinValue" /> or greater
+    /// than <see cref="DateTime.MaxValue" />.
     /// </exception>
     [Pure]
     public static DateTimeOffset Add(this DateTimeOffset d, DateSpan value) => d.Add(value, DateSpanSettings.Default);
 
-    /// <summary>Returns a new date time that adds the value of the specified <see cref="DateSpan"/>
+    /// <summary>Returns a new date time that adds the value of the specified <see cref="DateSpan" />
     /// to the value of this instance.
     /// </summary>
     /// <param name="d">
-    /// The date time to offset add a <see cref="MonthSpan"/> to.
+    /// The date time to offset add a <see cref="MonthSpan" /> to.
     /// </param>
     /// <param name="value">
-    /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+    /// A <see cref="DateSpan" /> object that represents a positive or negative time interval.
     /// </param>
     /// <param name="settings">
-    /// If <see cref="DateSpanSettings.DaysFirst"/> days are added first, if <see cref="DateSpanSettings.Default"/> days are added second.
+    /// If <see cref="DateSpanSettings.DaysFirst" /> days are added first, if <see cref="DateSpanSettings.Default" /> days are added second.
     /// </param>
     /// <returns>
     /// A new date whose value is the sum of the date represented
     /// by this instance and the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="DateTimeOffset.MinValue"/> or greater
-    /// than <see cref="DateTimeOffset.MaxValue"/>.
+    /// The resulting date is less than <see cref="DateTimeOffset.MinValue" /> or greater
+    /// than <see cref="DateTimeOffset.MaxValue" />.
     /// </exception>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The provided settings have different value then <see cref="DateSpanSettings.DaysFirst"/> or <see cref="DateSpanSettings.Default"/>.
+    /// The provided settings have different value then <see cref="DateSpanSettings.DaysFirst" /> or <see cref="DateSpanSettings.Default" />.
     /// </exception>
     [Pure]
     public static DateTimeOffset Add(this DateTimeOffset d, DateSpan value, DateSpanSettings settings) => settings switch
@@ -56,22 +56,22 @@ public static class QowaivDateTimeOffsetExtensions
         _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan),
     };
 
-    /// <summary>Returns a new date time that adds the value of the specified <see cref="MonthSpan"/>
+    /// <summary>Returns a new date time that adds the value of the specified <see cref="MonthSpan" />
     /// to the value of this instance.
     /// </summary>
     /// <param name="d">
-    /// The date time offset to add a <see cref="MonthSpan"/> to.
+    /// The date time offset to add a <see cref="MonthSpan" /> to.
     /// </param>
     /// <param name="value">
-    /// A <see cref="MonthSpan"/> object that represents a positive or negative time interval.
+    /// A <see cref="MonthSpan" /> object that represents a positive or negative time interval.
     /// </param>
     /// <returns>
     /// A new date whose value is the sum of the date and time represented
     /// by this instance and the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="DateTimeOffset.MinValue"/> or greater
-    /// than <see cref="DateTimeOffset.MaxValue"/>.
+    /// The resulting date is less than <see cref="DateTimeOffset.MinValue" /> or greater
+    /// than <see cref="DateTimeOffset.MaxValue" />.
     /// </exception>
     [Pure]
     public static DateTimeOffset Add(this DateTimeOffset d, MonthSpan value) => d.AddMonths(value.TotalMonths);
@@ -81,7 +81,7 @@ public static class QowaivDateTimeOffsetExtensions
     /// The date time offset to check.
     /// </param>
     /// <param name="month">
-    /// The <see cref="Month"/> the date should be in.
+    /// The <see cref="Month" /> the date should be in.
     /// </param>
     [Pure]
     public static bool IsIn(this DateTimeOffset d, Month month) => !month.IsEmptyOrUnknown() && d.Month == (int)month;
@@ -91,12 +91,12 @@ public static class QowaivDateTimeOffsetExtensions
     /// The date time offset to check.
     /// </param>
     /// <param name="year">
-    /// The <see cref="Year"/> the date should be in.
+    /// The <see cref="Year" /> the date should be in.
     /// </param>
     [Pure]
     public static bool IsIn(this DateTimeOffset d, Year year) => !year.IsEmptyOrUnknown() && d.Year == (int)year;
 
-    /// <summary>Returns the <see cref="LocalDateTime"/> representation of the date time offset.</summary>
+    /// <summary>Returns the <see cref="LocalDateTime" /> representation of the date time offset.</summary>
     /// <param name="d">
     /// The date time offset.
     /// </param>

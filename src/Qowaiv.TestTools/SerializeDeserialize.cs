@@ -1,4 +1,4 @@
-﻿#pragma warning disable S5773 // Types allowed to be deserialized should be restricted
+#pragma warning disable S5773 // Types allowed to be deserialized should be restricted
 // Test code, so no risk
 
 using System.IO;
@@ -10,7 +10,7 @@ public static class SerializeDeserialize
 {
 #if NET8_0_OR_GREATER
 #else
-    /// <summary>Serializes and deserializes an instance using <see cref="System.Runtime.Serialization.Formatters.Binary.BinaryFormatter"/>.</summary>
+    /// <summary>Serializes and deserializes an instance using <see cref="System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />.</summary>
     /// <typeparam name="T">
     /// Type of the instance.
     /// </typeparam>
@@ -29,7 +29,7 @@ public static class SerializeDeserialize
     }
 #endif
 
-    /// <summary>Serializes and deserializes an instance using a <see cref="DataContractSerializer"/>.</summary>
+    /// <summary>Serializes and deserializes an instance using a <see cref="DataContractSerializer" />.</summary>
     /// <typeparam name="T">
     /// Type of the instance.
     /// </typeparam>
@@ -47,7 +47,7 @@ public static class SerializeDeserialize
         return (T)serializer.ReadObject(stream)!;
     }
 
-    /// <summary>Serializes and deserializes an instance using an <see cref="XmlSerializer"/>.</summary>
+    /// <summary>Serializes and deserializes an instance using an <see cref="XmlSerializer" />.</summary>
     /// <typeparam name="T">
     /// Type of the instance.
     /// </typeparam>

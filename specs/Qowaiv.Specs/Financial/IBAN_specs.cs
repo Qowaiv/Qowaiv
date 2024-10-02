@@ -1,4 +1,4 @@
-﻿namespace Financial.IBAN_specs;
+namespace Financial.IBAN_specs;
 
 public class Supported
 {

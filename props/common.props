@@ -78,7 +78,7 @@ inside and outside a Domain-driven context.
 
   <ItemGroup Label="Analyzers">
     <PackageReference Include="AsyncFixer" Version="*" PrivateAssets="all" />
-    <PackageReference Include="DotNetProjectFile.Analyzers" Version="*" PrivateAssets="all" Condition="'$(TargetFramework)'=='net8.0'" />
+    <PackageReference Include="DotNetProjectFile.Analyzers" Version="*" PrivateAssets="all" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="*" PrivateAssets="all" />
   </ItemGroup>
 

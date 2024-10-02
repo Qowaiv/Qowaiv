@@ -1,4 +1,4 @@
-﻿namespace Cast_specs;
+namespace Cast_specs;
 
 public class Invalid
 {

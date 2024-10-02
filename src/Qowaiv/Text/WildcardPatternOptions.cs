@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Text;
+namespace Qowaiv.Text;
 
 /// <summary>Describes the different wildcard pattern options.</summary>
 [Flags]

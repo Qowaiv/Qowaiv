@@ -1,4 +1,4 @@
-﻿namespace TestTools.Serialize_deserialize_helper_specs;
+namespace TestTools.Serialize_deserialize_helper_specs;
 
 public class Fails_on
 {

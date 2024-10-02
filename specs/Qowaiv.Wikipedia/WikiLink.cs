@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.TestTools.Wikipedia;
+namespace Qowaiv.TestTools.Wikipedia;
 
 public sealed class WikiLink(string lemma, string? display)
 {

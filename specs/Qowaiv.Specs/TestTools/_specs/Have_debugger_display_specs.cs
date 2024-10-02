@@ -1,4 +1,4 @@
-﻿namespace TestTools.Should.Have_debugger_display_specs;
+namespace TestTools.Should.Have_debugger_display_specs;
 
 public class Discovers
 {

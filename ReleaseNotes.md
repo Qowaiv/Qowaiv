@@ -1,4 +1,4 @@
-﻿# Release Notes
+# Release Notes
 
 ## Released 2020-04-01
 ### Qowaiv 5.1.1

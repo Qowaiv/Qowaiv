@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.UnitTests.Identifiers;
+namespace Qowaiv.UnitTests.Identifiers;
 
 [EmptyTestClass]
 public class ForString : StringIdBehavior { }

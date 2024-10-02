@@ -1,4 +1,4 @@
-﻿namespace Diagnostics.Contracts.Conditional_specs;
+namespace Diagnostics.Contracts.Conditional_specs;
 
 public class Is_decorated_with
 {

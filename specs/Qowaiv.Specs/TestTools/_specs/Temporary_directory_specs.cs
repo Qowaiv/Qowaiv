@@ -1,4 +1,4 @@
-﻿namespace TestTools.IO.Temporary_directory_specs;
+namespace TestTools.IO.Temporary_directory_specs;
 
 public  class Implicitly_converts
 {

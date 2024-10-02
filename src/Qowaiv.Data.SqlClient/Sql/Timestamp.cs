@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Sql;
+namespace Qowaiv.Sql;
 
 /// <summary>Represents a timestamp.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
@@ -51,11 +51,11 @@ public readonly partial struct Timestamp : IXmlSerializable, IFormattable, IEqua
     [Pure]
     public string ToJson() => ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Returns a <see cref="string"/> that represents the current timestamp for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current timestamp for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current timestamp.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current timestamp.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>

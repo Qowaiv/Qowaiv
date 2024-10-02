@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Web;
+namespace Qowaiv.Web;
 
 /// <summary>Internet media type suffixes.</summary>
 /// <remarks>

@@ -1,4 +1,4 @@
-﻿namespace Hashing.Hash_specs;
+namespace Hashing.Hash_specs;
 
 public class Get_hash_code
 {

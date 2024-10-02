@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Conversion.Security;
+namespace Qowaiv.Conversion.Security;
 
 /// <summary>Provides a conversion for a cryptographic seed.</summary>
 public sealed class SecretTypeConverter : TypeConverter

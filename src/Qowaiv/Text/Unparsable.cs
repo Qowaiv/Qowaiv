@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Text;
+namespace Qowaiv.Text;
 
 /// <summary>The exception that is thrown when a value could not be parsed.</summary>
 /// <remarks>
@@ -7,20 +7,20 @@
 [Serializable]
 public class Unparsable : FormatException
 {
-    /// <summary>Initializes a new instance of the <see cref="Unparsable"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Unparsable" /> class.</summary>
     [ExcludeFromCodeCoverage/* Justification = Required for extensibility. */]
     public Unparsable() { }
 
-    /// <summary>Initializes a new instance of the <see cref="Unparsable"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Unparsable" /> class.</summary>
     public Unparsable(string? message) : base(message) { }
 
-    /// <summary>Initializes a new instance of the <see cref="Unparsable"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Unparsable" /> class.</summary>
     [ExcludeFromCodeCoverage/* Justification = Required for extensibility. */]
     public Unparsable(string? message, Exception? innerException) : base(message, innerException) { }
 
 #if NET8_0_OR_GREATER
 #else
-    /// <summary>Initializes a new instance of the <see cref="Unparsable"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Unparsable" /> class.</summary>
     protected Unparsable(SerializationInfo info, StreamingContext context) : base(info, context)
     {
         Guard.NotNull(info);
@@ -46,7 +46,7 @@ public class Unparsable : FormatException
     /// <summary>The value that could not be parsed.</summary>
     public string? Value { get; init; }
 
-    /// <summary>Creates an <see cref="Unparsable"/>.</summary>
+    /// <summary>Creates an <see cref="Unparsable" />.</summary>
     /// <typeparam name="TTarget">
     /// The target type.
     /// </typeparam>
@@ -60,7 +60,7 @@ public class Unparsable : FormatException
     public static FormatException ForValue<TTarget>(string? value, string message)
         => ForValue(value, message, typeof(TTarget));
 
-    /// <summary>Creates an <see cref="Unparsable"/>.</summary>
+    /// <summary>Creates an <see cref="Unparsable" />.</summary>
     [Pure]
     internal static FormatException ForValue(string? value, string message, Type type)
     {

@@ -1,4 +1,4 @@
-﻿namespace Qowaiv;
+namespace Qowaiv;
 
 /// <summary>Represents a year-month.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
@@ -20,7 +20,7 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
     /// <summary>12 months per year.</summary>
     private const int MonthsPerYear = 12;
 
-    /// <summary>Initializes a new instance of the <see cref="YearMonth"/> struct to the specified year, and month.</summary>
+    /// <summary>Initializes a new instance of the <see cref="YearMonth" /> struct to the specified year, and month.</summary>
     /// <param name="year">
     /// The year of the year-month.
     /// </param>
@@ -42,19 +42,19 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:yyyy-MM}");
 
-    /// <summary>Returns a new year-month that adds the value of the specified <see cref="MonthSpan"/>
+    /// <summary>Returns a new year-month that adds the value of the specified <see cref="MonthSpan" />
     /// to the value of this instance.
     /// </summary>
     /// <param name="months">
-    /// A <see cref="MonthSpan"/> that represents a positive or negative time interval.
+    /// A <see cref="MonthSpan" /> that represents a positive or negative time interval.
     /// </param>
     /// <returns>
     /// A new year-month whose value is the sum of the year-month represented
-    /// by this instance and the time interval represented by <paramref name="months"/>.
+    /// by this instance and the time interval represented by <paramref name="months" />.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public YearMonth Add(MonthSpan months)
@@ -70,16 +70,16 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
     /// value of this instance.
     /// </summary>
     /// <param name="months">
-    /// A number of months. The <paramref name="months"/> parameter can be negative
+    /// A number of months. The <paramref name="months" /> parameter can be negative
     /// or positive.
     /// </param>
     /// <returns>
     /// A date whose value is the sum of the year-month represented
-    /// by this instance and the number of days represented by <paramref name="months"/>.
+    /// by this instance and the number of days represented by <paramref name="months" />.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public YearMonth AddMonths(int months)
@@ -95,16 +95,16 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
     /// value of this instance.
     /// </summary>
     /// <param name="years">
-    /// A number of years. The <paramref name="years"/> parameter can be negative
+    /// A number of years. The <paramref name="years" /> parameter can be negative
     /// or positive.
     /// </param>
     /// <returns>
     /// A date whose value is the sum of the year-month represented
-    /// by this instance and the number of days represented by <paramref name="years"/>.
+    /// by this instance and the number of days represented by <paramref name="years" />.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public YearMonth AddYears(int years)
@@ -128,14 +128,14 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
 
     /// <summary>Returns true if the year-month is in the specified month, otherwise false.</summary>
     /// <param name="month">
-    /// The <see cref="Qowaiv.Month"/> the date should be in.
+    /// The <see cref="Qowaiv.Month" /> the date should be in.
     /// </param>
     [Pure]
     public bool IsIn(Month month) => month is { HasValue: true } && Month == (int)month;
 
     /// <summary>Returns true if the  year-month  is in the specified year, otherwise false.</summary>
     /// <param name="year">
-    /// The <see cref="Qowaiv.Year"/> the date should be in.
+    /// The <see cref="Qowaiv.Year" /> the date should be in.
     /// </param>
     [Pure]
     public bool IsIn(Year year) => year is { HasValue: true } && Year == (int)year;

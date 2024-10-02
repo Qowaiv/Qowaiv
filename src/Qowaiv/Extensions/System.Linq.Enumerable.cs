@@ -1,14 +1,14 @@
-﻿using Qowaiv;
+using Qowaiv;
 using Qowaiv.Financial;
 using Qowaiv.IO;
 using Qowaiv.Statistics;
 
 namespace System.Linq;
 
-/// <summary>Extensions on <see cref="IEnumerable{T}"/>.</summary>
+/// <summary>Extensions on <see cref="IEnumerable{T}" />.</summary>
 public static class QowaivEnumerableExtensions
 {
-    /// <summary>Computes the average of a sequence of <see cref="Amount"/> values that are obtained
+    /// <summary>Computes the average of a sequence of <see cref="Amount" /> values that are obtained
     /// by invoking a transform function on each element of the input sequence.
     /// </summary>
     /// <param name="source">
@@ -53,7 +53,7 @@ public static class QowaivEnumerableExtensions
             : (total / count).Amount();
     }
 
-    /// <summary>Computes the average of a sequence of nullable <see cref="Amount"/> values that are
+    /// <summary>Computes the average of a sequence of nullable <see cref="Amount" /> values that are
     /// obtained by invoking a transform function on each element of the input sequence.
     /// </summary>
     /// <param name="source">
@@ -102,7 +102,7 @@ public static class QowaivEnumerableExtensions
         return (total / count).Amount();
     }
 
-    /// <summary>Computes the average of a sequence of <see cref="Amount"/> values.</summary>
+    /// <summary>Computes the average of a sequence of <see cref="Amount" /> values.</summary>
     /// <param name="source">
     /// A sequence of values that are used to calculate an average.
     /// </param>
@@ -136,7 +136,7 @@ public static class QowaivEnumerableExtensions
             : (total / count).Amount();
     }
 
-    /// <summary>Computes the average of a sequence of nullable <see cref="Amount"/> values.</summary>
+    /// <summary>Computes the average of a sequence of nullable <see cref="Amount" /> values.</summary>
     /// <param name="source">
     /// A sequence of values that are used to calculate an average.
     /// </param>
@@ -174,7 +174,7 @@ public static class QowaivEnumerableExtensions
         return (total / count).Amount();
     }
 
-    /// <summary>Computes the average of a sequence of <see cref="Money"/> values that are obtained
+    /// <summary>Computes the average of a sequence of <see cref="Money" /> values that are obtained
     /// by invoking a transform function on each element of the input sequence.
     /// </summary>
     /// <param name="source">
@@ -234,7 +234,7 @@ public static class QowaivEnumerableExtensions
             : (total / count) + currency;
     }
 
-    /// <summary>Computes the average of a sequence of nullable <see cref="Money"/> values that are
+    /// <summary>Computes the average of a sequence of nullable <see cref="Money" /> values that are
     /// obtained by invoking a transform function on each element of the input sequence.
     /// </summary>
     /// <param name="source">
@@ -298,7 +298,7 @@ public static class QowaivEnumerableExtensions
         return (total / count) + currency;
     }
 
-    /// <summary>Computes the average of a sequence of <see cref="Money"/> values.</summary>
+    /// <summary>Computes the average of a sequence of <see cref="Money" /> values.</summary>
     /// <param name="source">
     /// A sequence of values that are used to calculate an average.
     /// </param>
@@ -348,7 +348,7 @@ public static class QowaivEnumerableExtensions
             : (total / count) + currency;
     }
 
-    /// <summary>Computes the average of a sequence of nullable <see cref="Money"/> values.</summary>
+    /// <summary>Computes the average of a sequence of nullable <see cref="Money" /> values.</summary>
     /// <param name="source">
     /// A sequence of values that are used to calculate an average.
     /// </param>
@@ -405,7 +405,7 @@ public static class QowaivEnumerableExtensions
     [Pure]
     public static Elo Average(this IEnumerable<Elo> elos) => elos.Select(elo => (double)elo).Average();
 
-    /// <summary>Computes the average of a sequence of <see cref="Percentage"/> values that are obtained
+    /// <summary>Computes the average of a sequence of <see cref="Percentage" /> values that are obtained
     /// by invoking a transform function on each element of the input sequence.
     /// </summary>
     /// <param name="source">
@@ -450,7 +450,7 @@ public static class QowaivEnumerableExtensions
             : Percentage.Create(total / count);
     }
 
-    /// <summary>Computes the average of a sequence of nullable <see cref="Percentage"/> values that are
+    /// <summary>Computes the average of a sequence of nullable <see cref="Percentage" /> values that are
     /// obtained by invoking a transform function on each element of the input sequence.
     /// </summary>
     /// <param name="source">
@@ -496,7 +496,7 @@ public static class QowaivEnumerableExtensions
         return Percentage.Create(total / count);
     }
 
-    /// <summary>Computes the average of a sequence of <see cref="Percentage"/> values.</summary>
+    /// <summary>Computes the average of a sequence of <see cref="Percentage" /> values.</summary>
     /// <param name="source">
     /// A sequence of values that are used to calculate an average.
     /// </param>
@@ -530,7 +530,7 @@ public static class QowaivEnumerableExtensions
             : Percentage.Create(total / count);
     }
 
-    /// <summary>Computes the average of a sequence of nullable <see cref="Percentage"/> values.</summary>
+    /// <summary>Computes the average of a sequence of nullable <see cref="Percentage" /> values.</summary>
     /// <param name="source">
     /// A sequence of values that are used to calculate an average.
     /// </param>
@@ -572,7 +572,7 @@ public static class QowaivEnumerableExtensions
     public static StreamSize Average(this IEnumerable<StreamSize> streamSizes)
         => new((long)streamSizes.Average(streamSize => (long)streamSize));
 
-    /// <summary>Computes the sum of a sequence of <see cref="Amount"/> values that are obtained
+    /// <summary>Computes the sum of a sequence of <see cref="Amount" /> values that are obtained
     /// by invoking a transform function on each element of the input sequence.
     /// </summary>
     /// <param name="source">
@@ -610,7 +610,7 @@ public static class QowaivEnumerableExtensions
         return total.Amount();
     }
 
-    /// <summary>Computes the sum of a sequence of nullable <see cref="Amount"/> values that are
+    /// <summary>Computes the sum of a sequence of nullable <see cref="Amount" /> values that are
     /// obtained by invoking a transform function on each element of the input sequence.
     /// </summary>
     /// <param name="source">
@@ -655,7 +655,7 @@ public static class QowaivEnumerableExtensions
         return none ? null : total.Amount();
     }
 
-    /// <summary>Computes the sum of a sequence of <see cref="Amount"/> values.</summary>
+    /// <summary>Computes the sum of a sequence of <see cref="Amount" /> values.</summary>
     /// <param name="source">
     /// A sequence of values that are used to calculate an sum.
     /// </param>
@@ -682,7 +682,7 @@ public static class QowaivEnumerableExtensions
         return total.Amount();
     }
 
-    /// <summary>Computes the sum of a sequence of nullable <see cref="Amount"/> values.</summary>
+    /// <summary>Computes the sum of a sequence of nullable <see cref="Amount" /> values.</summary>
     /// <param name="source">
     /// A sequence of values that are used to calculate an sum.
     /// </param>
@@ -716,7 +716,7 @@ public static class QowaivEnumerableExtensions
         return none ? null : total.Amount();
     }
 
-    /// <summary>Computes the sum of a sequence of <see cref="Money"/> values that are obtained
+    /// <summary>Computes the sum of a sequence of <see cref="Money" /> values that are obtained
     /// by invoking a transform function on each element of the input sequence.
     /// </summary>
     /// <param name="source">
@@ -768,7 +768,7 @@ public static class QowaivEnumerableExtensions
         return total + currency;
     }
 
-    /// <summary>Computes the sum of a sequence of nullable <see cref="Money"/> values that are
+    /// <summary>Computes the sum of a sequence of nullable <see cref="Money" /> values that are
     /// obtained by invoking a transform function on each element of the input sequence.
     /// </summary>
     /// <param name="source">
@@ -828,7 +828,7 @@ public static class QowaivEnumerableExtensions
         return none ? null : total + currency;
     }
 
-    /// <summary>Computes the sum of a sequence of <see cref="Money"/> values.</summary>
+    /// <summary>Computes the sum of a sequence of <see cref="Money" /> values.</summary>
     /// <param name="source">
     /// A sequence of values that are used to calculate an sum.
     /// </param>
@@ -869,7 +869,7 @@ public static class QowaivEnumerableExtensions
         return total + currency;
     }
 
-    /// <summary>Computes the sum of a sequence of nullable <see cref="Money"/> values.</summary>
+    /// <summary>Computes the sum of a sequence of nullable <see cref="Money" /> values.</summary>
     /// <param name="source">
     /// A sequence of values that are used to calculate an sum.
     /// </param>
@@ -918,7 +918,7 @@ public static class QowaivEnumerableExtensions
         return none ? null : total + currency;
     }
 
-    /// <summary>Computes the sum of a sequence of <see cref="Percentage"/> values that are obtained
+    /// <summary>Computes the sum of a sequence of <see cref="Percentage" /> values that are obtained
     /// by invoking a transform function on each element of the input sequence.
     /// </summary>
     /// <param name="source">
@@ -956,7 +956,7 @@ public static class QowaivEnumerableExtensions
         return Percentage.Create(total);
     }
 
-    /// <summary>Computes the sum of a sequence of nullable <see cref="Percentage"/> values that are
+    /// <summary>Computes the sum of a sequence of nullable <see cref="Percentage" /> values that are
     /// obtained by invoking a transform function on each element of the input sequence.
     /// </summary>
     /// <param name="source">
@@ -1000,7 +1000,7 @@ public static class QowaivEnumerableExtensions
         return none ? null : Percentage.Create(total);
     }
 
-    /// <summary>Computes the sum of a sequence of <see cref="Percentage"/> values.</summary>
+    /// <summary>Computes the sum of a sequence of <see cref="Percentage" /> values.</summary>
     /// <param name="source">
     /// A sequence of values that are used to calculate an sum.
     /// </param>
@@ -1027,7 +1027,7 @@ public static class QowaivEnumerableExtensions
         return Percentage.Create(total);
     }
 
-    /// <summary>Computes the sum of a sequence of nullable <see cref="Percentage"/> values.</summary>
+    /// <summary>Computes the sum of a sequence of nullable <see cref="Percentage" /> values.</summary>
     /// <param name="source">
     /// A sequence of values that are used to calculate an sum.
     /// </param>

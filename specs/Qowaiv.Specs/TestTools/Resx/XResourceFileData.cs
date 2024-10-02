@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.TestTools.Resx;
+namespace Qowaiv.TestTools.Resx;
 
 /// <summary>Represents data of a resource file.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
@@ -6,17 +6,17 @@
 [XmlType("data")]
 public sealed class XResourceFileData
 {
-    /// <summary>Initializes a new instance of the <see cref="XResourceFileData"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="XResourceFileData" /> class.</summary>
     private XResourceFileData() 
     {
         Name = string.Empty;
         Value = string.Empty;
     }
 
-    /// <summary>Initializes a new instance of the <see cref="XResourceFileData"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="XResourceFileData" /> class.</summary>
     public XResourceFileData(string name, string val) : this(name, val, null) { }
 
-    /// <summary>Initializes a new instance of the <see cref="XResourceFileData"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="XResourceFileData" /> class.</summary>
     public XResourceFileData(string name, string val, string? comment)
     {
         Name = name;

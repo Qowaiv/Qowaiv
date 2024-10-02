@@ -1,4 +1,4 @@
-﻿#pragma warning disable S1210
+#pragma warning disable S1210
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 using System.Net;
@@ -36,13 +36,13 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
 
     /// <summary>True if the domain part of the Email Address is an IP-address.</summary>
     /// <remarks>
-    /// As IP-Addresses are normalized by the <see cref="EmailParser"/> it
+    /// As IP-Addresses are normalized by the <see cref="EmailParser" /> it
     /// can simply be checked by checking the last character of the string
     /// value.
     /// </remarks>
     public bool IsIPBased => m_Value is { Length: > 1 } && m_Value[^1] == ']';
 
-    /// <summary>Gets the IP-Address if the Email Address is IP-based, otherwise <see cref="IPAddress.None"/>.</summary>
+    /// <summary>Gets the IP-Address if the Email Address is IP-based, otherwise <see cref="IPAddress.None" />.</summary>
     public IPAddress IPDomain
     {
         get
@@ -89,11 +89,11 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     [Pure]
     public string? ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Returns a <see cref="string"/> that represents the current email address for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current email address for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current email address.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current email address.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>

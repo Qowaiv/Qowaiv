@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NUnit.Framework;

@@ -26,7 +26,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>    
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup Label="Package files">
@@ -35,17 +35,17 @@
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">
-    <PackageReference Include="Qowaiv.Analyzers.CSharp" Version="*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
-    <PackageReference Include="StyleCop.Analyzers" Version="*-*" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+    <PackageReference Include="Qowaiv.Analyzers.CSharp" Version="*" PrivateAssets="all" />
+    <PackageReference Include="StyleCop.Analyzers" Version="*-*" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup Label="Additional files">
     <AdditionalFiles Include="../../props/package.props" Link="Properties/package.props" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <!-- Shared assembly tags. -->
     <Compile Include="$(MSBuildThisFileDirectory)../shared/ProductInfo.cs" Link="Properties/ProductInfo.cs" />
   </ItemGroup>
-  
+
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.UnitTests.Identifiers;
+namespace Qowaiv.UnitTests.Identifiers;
 
 [EmptyTestClass]
 public sealed class ForInt32 : Int32IdBehavior { }

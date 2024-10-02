@@ -1,6 +1,6 @@
-﻿namespace Qowaiv.Reflection;
+namespace Qowaiv.Reflection;
 
-/// <summary>Helper class for some operations on <see cref="Type"/>.</summary>
+/// <summary>Helper class for some operations on <see cref="Type" />.</summary>
 public static class QowaivType
 {
     /// <summary>Returns true if the value is null or equal to the default value.</summary>
@@ -33,14 +33,14 @@ public static class QowaivType
     /// </param>
     /// <remarks>
     /// Tests on the types:
-    /// * <see cref="DateTime"/>
-    /// * <see cref="DateOnly"/>
-    /// * <see cref="DateTimeOffset"/>
-    /// * <see cref="LocalDateTime"/>
-    /// * <see cref="Date"/>
-    /// * <see cref="Date"/>
-    /// * <see cref="WeekDate"/>.
-    /// * <see cref="YearMonth"/>.
+    /// * <see cref="DateTime" />
+    /// * <see cref="DateOnly" />
+    /// * <see cref="DateTimeOffset" />
+    /// * <see cref="LocalDateTime" />
+    /// * <see cref="Date" />
+    /// * <see cref="Date" />
+    /// * <see cref="WeekDate" />.
+    /// * <see cref="YearMonth" />.
     /// </remarks>
 #else
     /// <summary>Returns true if the object type is a date (of any kind).</summary>
@@ -49,13 +49,13 @@ public static class QowaivType
     /// </param>
     /// <remarks>
     /// Tests on the types:
-    /// * <see cref="DateTime"/>
-    /// * <see cref="DateTimeOffset"/>
-    /// * <see cref="LocalDateTime"/>
-    /// * <see cref="Date"/>
-    /// * <see cref="Date"/>
-    /// * <see cref="WeekDate"/>.
-    /// * <see cref="YearMonth"/>.
+    /// * <see cref="DateTime" />
+    /// * <see cref="DateTimeOffset" />
+    /// * <see cref="LocalDateTime" />
+    /// * <see cref="Date" />
+    /// * <see cref="Date" />
+    /// * <see cref="WeekDate" />.
+    /// * <see cref="YearMonth" />.
     /// </remarks>
 #endif
     [Pure]

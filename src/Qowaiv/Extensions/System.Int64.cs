@@ -1,16 +1,16 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 
 namespace System;
 
-/// <summary>Extensions on <see cref="long"/>.</summary>
+/// <summary>Extensions on <see cref="long" />.</summary>
 internal static class QowaivInt64Extensions
 {
-    /// <summary>Gets the absolute value of the <see cref="long"/>.</summary>
+    /// <summary>Gets the absolute value of the <see cref="long" />.</summary>
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static long Abs(this long number) => Math.Abs(number);
 
-    /// <summary>Gets the sign of the <see cref="long"/>.</summary>
+    /// <summary>Gets the sign of the <see cref="long" />.</summary>
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int Sign(this long number) => Math.Sign(number);

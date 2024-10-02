@@ -1,19 +1,19 @@
-﻿using System.Reflection;
+using System.Reflection;
 
 namespace Qowaiv.Data;
 
 /// <summary>Factory class for creating database parameters.</summary>
 public static class SvoParameter
 {
-    /// <summary>Creates a <see cref="SqlParameter"/> based on the single value object.</summary>
+    /// <summary>Creates a <see cref="SqlParameter" /> based on the single value object.</summary>
     /// <param name="parameterName">
     /// The name of the parameter to map.
     /// </param>
     /// <param name="value">
-    /// An <see cref="object"/>that is the value of the <see cref="SqlParameter"/>.
+    /// An <see cref="object" />that is the value of the <see cref="SqlParameter" />.
     /// </param>
     /// <returns>
-    /// A <see cref="SqlParameter"/> with a converted value if the value is a
+    /// A <see cref="SqlParameter" /> with a converted value if the value is a
     /// single value object, otherwise with a non-converted value.
     /// </returns>
     [Pure]
@@ -52,7 +52,7 @@ public static class SvoParameter
         }
     }
 
-    /// <summary>Returns true if the value should be represented by a <see cref="DBNull.Value"/>, otherwise false.</summary>
+    /// <summary>Returns true if the value should be represented by a <see cref="DBNull.Value" />, otherwise false.</summary>
     [Pure]
     private static bool IsDbNullValue(object value, Type sourceType, SingleValueObjectAttribute attr)
     {

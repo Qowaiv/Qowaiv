@@ -1,4 +1,4 @@
-﻿using Qowaiv.Financial;
+using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using System.Collections.Concurrent;
 using System.Threading;
@@ -10,7 +10,7 @@ namespace Qowaiv.Threading;
 /// </summary>
 public sealed class ThreadDomain
 {
-    /// <summary>Initializes static members of the <see cref="ThreadDomain"/> class.</summary>
+    /// <summary>Initializes static members of the <see cref="ThreadDomain" /> class.</summary>
     static ThreadDomain()
     {
         Register(typeof(Country), (thread) => Country.Create(thread.CurrentCulture));
@@ -64,7 +64,7 @@ public sealed class ThreadDomain
 
     private static readonly ConcurrentDictionary<Type, Func<Thread, object>> Creators = new();
 
-    /// <summary>Initializes a new instance of the <see cref="ThreadDomain"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="ThreadDomain" /> class.</summary>
     /// <remarks>
     /// No public accessor.
     /// </remarks>

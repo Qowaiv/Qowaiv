@@ -1,10 +1,10 @@
-﻿namespace Qowaiv.Identifiers;
+namespace Qowaiv.Identifiers;
 
 /// <summary>Base implementation for
-/// <see cref="GuidBehavior"/>,
-/// <see cref="Int32IdBehavior"/>,
-/// <see cref="Int64IdBehavior"/>, and
-/// <see cref="StringIdBehavior"/>
+/// <see cref="GuidBehavior" />,
+/// <see cref="Int32IdBehavior" />,
+/// <see cref="Int64IdBehavior" />, and
+/// <see cref="StringIdBehavior" />
 /// solving the type conversion part.
 /// </summary>
 public abstract class IdentifierBehavior : TypeConverter, IIdentifierBehavior

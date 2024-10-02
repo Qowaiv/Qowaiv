@@ -1,4 +1,4 @@
-﻿namespace Qowaiv;
+namespace Qowaiv;
 
 /// <summary>Represents a house number.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
@@ -82,11 +82,11 @@ public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEq
     [Pure]
     public string? ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Returns a <see cref="string"/> that represents the current house number for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current house number for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current house number.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current house number.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>

@@ -1,4 +1,4 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 
 using Qowaiv.Identifiers;
 using System.Collections.Concurrent;
@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 
 namespace Qowaiv.Json.Identifiers;
 
-/// <summary>A custom <see cref="JsonConverter{T}"/> for <see cref="Id{TIdentifier}"/>'s.</summary>
+/// <summary>A custom <see cref="JsonConverter{T}" /> for <see cref="Id{TIdentifier}" />'s.</summary>
 public sealed class IdJsonConverter : JsonConverterFactory
 {
     /// <inheritdoc />

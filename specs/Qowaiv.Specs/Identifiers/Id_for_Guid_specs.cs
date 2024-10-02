@@ -1,4 +1,4 @@
-﻿namespace Identifiers.Id_for_Guid_specs;
+namespace Identifiers.Id_for_Guid_specs;
 
 public class With_domain_logic
 {

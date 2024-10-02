@@ -1,4 +1,4 @@
-﻿using FluentAssertions.Extensions;
+using FluentAssertions.Extensions;
 
 namespace Date_span_specs;
 

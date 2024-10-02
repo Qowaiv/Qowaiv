@@ -1,4 +1,4 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 
 #pragma warning disable SA1403 // File may only contain a single namespace
 #pragma warning disable S1210 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
@@ -9,28 +9,28 @@ namespace Qowaiv
 {
     public readonly partial struct Date
     {
-        /// <summary>Casts a <see cref="Date"/> implicitly to a <see cref="DateOnly"/>.</summary>
+        /// <summary>Casts a <see cref="Date" /> implicitly to a <see cref="DateOnly" />.</summary>
         public static implicit operator DateOnly(Date date) => new(date.Year, date.Month, date.Day);
 
-        /// <summary>Casts a <see cref="DateOnly"/> explicitly to a <see cref="Date"/>.</summary>
+        /// <summary>Casts a <see cref="DateOnly" /> explicitly to a <see cref="Date" />.</summary>
         public static explicit operator Date(DateOnly date) => new(date.Year, date.Month, date.Day);
     }
 
     public readonly partial struct LocalDateTime
     {
-        /// <summary>Casts a <see cref="LocalDateTime"/> implicitly to a <see cref="DateOnly"/>.</summary>
+        /// <summary>Casts a <see cref="LocalDateTime" /> implicitly to a <see cref="DateOnly" />.</summary>
         public static explicit operator DateOnly(LocalDateTime date) => new(date.Year, date.Month, date.Day);
 
-        /// <summary>Casts a <see cref="DateOnly"/> explicitly to a <see cref="Date"/>.</summary>
+        /// <summary>Casts a <see cref="DateOnly" /> explicitly to a <see cref="Date" />.</summary>
         public static explicit operator LocalDateTime(DateOnly date) => new(date.Year, date.Month, date.Day);
     }
 
     public readonly partial struct WeekDate
     {
-        /// <summary>Casts a <see cref="WeekDate"/> implicitly to a <see cref="DateOnly"/>.</summary>
+        /// <summary>Casts a <see cref="WeekDate" /> implicitly to a <see cref="DateOnly" />.</summary>
         public static implicit operator WeekDate(DateOnly date) => Create(date);
 
-        /// <inheritdoc cref="Create(Date)"/>
+        /// <inheritdoc cref="Create(Date)" />
         [Pure]
         public static WeekDate Create(DateOnly val) => Create((Date)val);
     }

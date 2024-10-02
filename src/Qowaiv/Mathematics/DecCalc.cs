@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace Qowaiv.Mathematics;
@@ -19,7 +19,7 @@ internal ref struct DecCalc
         ? (uint)((byte)scale << 16) | SignMask
         : (uint)((byte)scale << 16);
 
-    /// <summary>Multiplies the decimal with an <see cref="uint"/> factor.</summary>
+    /// <summary>Multiplies the decimal with an <see cref="uint" /> factor.</summary>
     public void Multiply(uint factor)
     {
         unchecked
@@ -39,7 +39,7 @@ internal ref struct DecCalc
         }
     }
 
-    /// <summary>Divides the decimal with an <see cref="uint"/> divisor.</summary>
+    /// <summary>Divides the decimal with an <see cref="uint" /> divisor.</summary>
     [Impure]
     public uint Divide(uint divisor)
     {
@@ -72,7 +72,7 @@ internal ref struct DecCalc
         }
     }
 
-    /// <summary>Adds an <see cref="uint"/> to the decimal.</summary>
+    /// <summary>Adds an <see cref="uint" /> to the decimal.</summary>
     public void Add(uint addition)
     {
         unchecked
@@ -142,7 +142,7 @@ internal ref struct DecCalc
         ? Unsafe.As<decimal, EndianLittle>(ref d).ToCalc()
         : Unsafe.As<decimal, EndianBig>(ref d).ToCalc();
 
-    /// <summary>Maps to a <see cref="decimal"/> with Big Endian architecture.</summary>
+    /// <summary>Maps to a <see cref="decimal" /> with Big Endian architecture.</summary>
     [StructLayout(LayoutKind.Explicit)]
     private struct EndianBig
     {
@@ -187,7 +187,7 @@ internal ref struct DecCalc
     }
 #endif
 
-    /// <summary>Maps to a <see cref="decimal"/> with Little Endian architecture.</summary>
+    /// <summary>Maps to a <see cref="decimal" /> with Little Endian architecture.</summary>
     [StructLayout(LayoutKind.Explicit)]
     private struct EndianLittle
     {

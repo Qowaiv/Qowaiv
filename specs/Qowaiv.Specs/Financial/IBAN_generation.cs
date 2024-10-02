@@ -1,4 +1,4 @@
-﻿namespace Financial.IBAN_generation;
+namespace Financial.IBAN_generation;
 
 internal class Markdown_file
 {

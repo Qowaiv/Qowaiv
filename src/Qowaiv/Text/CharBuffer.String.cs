@@ -1,8 +1,8 @@
-﻿namespace Qowaiv.Text;
+namespace Qowaiv.Text;
 
 internal partial class CharBuffer
 {
-    /// <summary>Counts the occurrences of the <see cref="char"/> in the buffer.</summary>
+    /// <summary>Counts the occurrences of the <see cref="char" /> in the buffer.</summary>
     [Pure]
     public int Count(char ch)
     {
@@ -17,9 +17,9 @@ internal partial class CharBuffer
         return count;
     }
 
-    /// <summary>Gets the last index of the <see cref="char"/> in the buffer.</summary>
+    /// <summary>Gets the last index of the <see cref="char" /> in the buffer.</summary>
     /// <returns>
-    /// -1 if not found, otherwise the index of the <see cref="char"/>.
+    /// -1 if not found, otherwise the index of the <see cref="char" />.
     /// </returns>
     [Pure]
     public int LastIndexOf(char ch)
@@ -57,6 +57,6 @@ internal partial class CharBuffer
     [Pure]
     public override string ToString() => new(buffer, start, Length);
 
-    /// <summary>Implicitly casts a buffer to a <see cref="string"/>.</summary>
+    /// <summary>Implicitly casts a buffer to a <see cref="string" />.</summary>
     public static implicit operator string(CharBuffer buffer) => buffer.ToString();
 }

@@ -1,4 +1,4 @@
-﻿namespace Month_specs;
+namespace Month_specs;
 
 public class With_domain_logic
 {

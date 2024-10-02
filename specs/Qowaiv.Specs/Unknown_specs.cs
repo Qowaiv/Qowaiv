@@ -1,4 +1,4 @@
-﻿namespace Unknown_specs;
+namespace Unknown_specs;
 
 public class Is_unknown
 {

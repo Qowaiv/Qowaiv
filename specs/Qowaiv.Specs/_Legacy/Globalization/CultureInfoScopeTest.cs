@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.UnitTests.Globalization;
+namespace Qowaiv.UnitTests.Globalization;
 
 public class CultureInfoScopeTest
 {

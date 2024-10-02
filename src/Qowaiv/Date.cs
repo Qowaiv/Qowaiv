@@ -1,4 +1,4 @@
-﻿namespace Qowaiv;
+namespace Qowaiv;
 
 /// <summary>Represents a date, so opposed to a date time without time precision.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
@@ -26,7 +26,7 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// <summary>Represents the smallest possible value of date. This field is read-only.</summary>
     public static Date MinValue => new(DateTime.MinValue);
 
-    /// <summary>Initializes a new instance of the <see cref="Date"/> struct to a specified number of ticks.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Date" /> struct to a specified number of ticks.</summary>
     /// <param name="ticks">
     /// A date expressed in 100-nanosecond units.
     /// </param>
@@ -35,7 +35,7 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// </exception>
     public Date(long ticks) : this(new DateTime(ticks, DateTimeKind.Unspecified)) { }
 
-    /// <summary>Initializes a new instance of the <see cref="Date"/> struct to the specified year, month, and day.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Date" /> struct to the specified year, month, and day.</summary>
     /// <param name="year">
     /// The year (1 through 9999).
     /// </param>
@@ -50,12 +50,12 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// than 12.-or- day is less than 1 or greater than the number of days in month.
     /// </exception>
     /// <exception cref="ArgumentException">
-    /// The specified parameters evaluate to less than <see cref="MinValue"/> or
-    /// more than <see cref="MaxValue"/>.
+    /// The specified parameters evaluate to less than <see cref="MinValue" /> or
+    /// more than <see cref="MaxValue" />.
     /// </exception>
     public Date(int year, int month, int day) : this(new DateTime(year, month, day, 00, 00, 000, DateTimeKind.Unspecified)) { }
 
-    /// <summary>Initializes a new instance of the <see cref="Date"/> struct based on a <see cref="DateTime"/>.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Date" /> struct based on a <see cref="DateTime" />.</summary>
     /// <param name="dt">
     /// A date and time.
     /// </param>
@@ -94,7 +94,7 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     [Pure]
     internal Date Decrement() => AddDays(-1);
 
-    /// <summary>Returns a new date that adds the value of the specified <see cref="TimeSpan"/>
+    /// <summary>Returns a new date that adds the value of the specified <see cref="TimeSpan" />
     /// to the value of this instance.
     /// </summary>
     /// <param name="value">
@@ -105,34 +105,34 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// by this instance and the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public Date Add(TimeSpan value) => new(Ticks + value.Ticks);
 
-    /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan"/>
+    /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan" />
     /// to the value of this instance.
     /// </summary>
     /// <param name="value">
-    /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+    /// A <see cref="DateSpan" /> object that represents a positive or negative time interval.
     /// </param>
     /// <returns>
     /// A new date whose value is the sum of the date and time represented
     /// by this instance and the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public Date Add(DateSpan value) => Add(value, DateSpanSettings.Default);
 
-    /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan"/>
+    /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan" />
     /// to the value of this instance.
     /// </summary>
     /// <param name="value">
-    /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+    /// A <see cref="DateSpan" /> object that represents a positive or negative time interval.
     /// </param>
     /// <param name="daysFirst">
     /// If true, days are added first, otherwise months are added first.
@@ -142,8 +142,8 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// by this instance and the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     [Obsolete("Use Add(DateSpan, DateSpanSettings) instead. Will be dropped when the next major version is released.")]
@@ -152,25 +152,25 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
         ? AddDays(value.Days).AddMonths(value.TotalMonths)
         : AddMonths(value.TotalMonths).AddDays(value.Days);
 
-    /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan"/>
+    /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan" />
     /// to the value of this instance.
     /// </summary>
     /// <param name="value">
-    /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+    /// A <see cref="DateSpan" /> object that represents a positive or negative time interval.
     /// </param>
     /// <param name="settings">
-    /// If <see cref="DateSpanSettings.DaysFirst"/> days are added first, if <see cref="DateSpanSettings.Default"/> days are added second.
+    /// If <see cref="DateSpanSettings.DaysFirst" /> days are added first, if <see cref="DateSpanSettings.Default" /> days are added second.
     /// </param>
     /// <returns>
     /// A new date whose value is the sum of the date represented
     /// by this instance and the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The provided settings have different value then <see cref="DateSpanSettings.DaysFirst"/> or <see cref="DateSpanSettings.Default"/>.
+    /// The provided settings have different value then <see cref="DateSpanSettings.DaysFirst" /> or <see cref="DateSpanSettings.Default" />.
     /// </exception>
     [Pure]
     public Date Add(DateSpan value, DateSpanSettings settings) => settings switch
@@ -180,19 +180,19 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
         _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan),
     };
 
-    /// <summary>Returns a new date that adds the value of the specified <see cref="MonthSpan"/>
+    /// <summary>Returns a new date that adds the value of the specified <see cref="MonthSpan" />
     /// to the value of this instance.
     /// </summary>
     /// <param name="value">
-    /// A <see cref="DateSpan"/> object that represents a positive or negative time interval.
+    /// A <see cref="DateSpan" /> object that represents a positive or negative time interval.
     /// </param>
     /// <returns>
     /// A new date whose value is the sum of the date represented
     /// by this instance and the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public Date Add(MonthSpan value) => AddMonths(value.TotalMonths);
@@ -206,35 +206,35 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// instance minus the date represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The result is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The result is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public TimeSpan Subtract(Date value) => new(Ticks - value.Ticks);
 
     /// <summary>Subtracts the specified duration from this instance.</summary>
     /// <param name="value">
-    /// An instance of <see cref="TimeSpan"/>.
+    /// An instance of <see cref="TimeSpan" />.
     /// </param>
     /// <returns>
     /// A date equal to the date represented by this instance
     /// minus the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The result is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The result is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public Date Subtract(TimeSpan value) => new(Ticks - value.Ticks);
 
     /// <summary>Subtracts the specified duration from this instance.</summary>
     /// <param name="value">
-    /// An instance of <see cref="DateSpan"/>.
+    /// An instance of <see cref="DateSpan" />.
     /// </param>
     /// <returns>
     /// A date equal to the date represented by this instance
     /// minus the time interval represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The result is less than <see cref="MinValue"/> or greater than <see cref="MaxValue"/>.
+    /// The result is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public Date Subtract(DateSpan value) => Add(-value);
@@ -251,8 +251,8 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// by this instance and the number of years represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// value or the resulting date is less than <see cref="MinValue"/>
-    /// or greater than <see cref="MaxValue"/>.
+    /// value or the resulting date is less than <see cref="MinValue" />
+    /// or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public Date AddYears(int value) => new(m_Value.AddYears(value));
@@ -268,8 +268,8 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// by this instance and months.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.-or- months is less than -120,000 or greater
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.-or- months is less than -120,000 or greater
     /// than 120,000.
     /// </exception>
     [Pure]
@@ -287,8 +287,8 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// by this instance and the number of days represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public Date AddDays(double value) => new(m_Value.AddDays(value));
@@ -305,8 +305,8 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// by this instance and the time represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public Date AddTicks(long value) => new(Ticks + value);
@@ -323,8 +323,8 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// by this instance and the number of hours represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public Date AddHours(double value) => new(m_Value.AddHours(value));
@@ -341,8 +341,8 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// by this instance and the number of minutes represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public Date AddMinutes(double value) => new(m_Value.AddMinutes(value));
@@ -359,8 +359,8 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// by this instance and the number of seconds represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public Date AddSeconds(double value) => new(m_Value.AddSeconds(value));
@@ -377,22 +377,22 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// by this instance and the number of milliseconds represented by value.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// The resulting date is less than <see cref="MinValue"/> or greater
-    /// than <see cref="MaxValue"/>.
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
     public Date AddMilliseconds(double value) => new(m_Value.AddMilliseconds(value));
 
     /// <summary>Returns true if the date is in the specified month, otherwise false.</summary>
     /// <param name="month">
-    /// The <see cref="Qowaiv.Month"/> the date should be in.
+    /// The <see cref="Qowaiv.Month" /> the date should be in.
     /// </param>
     [Pure]
     public bool IsIn(Month month) => !month.IsEmptyOrUnknown() && Month == (int)month;
 
     /// <summary>Returns true if the date is in the specified year, otherwise false.</summary>
     /// <param name="year">
-    /// The <see cref="Qowaiv.Year"/> the date should be in.
+    /// The <see cref="Qowaiv.Year" /> the date should be in.
     /// </param>
     [Pure]
     public bool IsIn(Year year) => !year.IsEmptyOrUnknown() && Year == (int)year;
@@ -414,11 +414,11 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     [Pure]
     public string ToJson() => ToString(SerializableFormat, CultureInfo.InvariantCulture);
 
-    /// <summary>Returns a <see cref="string"/> that represents the current Date for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current Date for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay($"{{0:{SerializableFormat}}}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>

@@ -1,4 +1,4 @@
-﻿namespace Debug_specs;
+namespace Debug_specs;
 
 public class Type_is
 {

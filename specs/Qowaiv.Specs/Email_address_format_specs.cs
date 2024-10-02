@@ -1,4 +1,4 @@
-﻿namespace Email_address_format_specs;
+namespace Email_address_format_specs;
 
 public class Length
 {

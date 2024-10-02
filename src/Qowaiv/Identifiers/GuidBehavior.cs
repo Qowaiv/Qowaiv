@@ -1,16 +1,16 @@
-﻿namespace Qowaiv.Identifiers;
+namespace Qowaiv.Identifiers;
 
-/// <summary>Implements <see cref="IIdentifierBehavior"/> for an identifier based on <see cref="Guid"/>.</summary>
+/// <summary>Implements <see cref="IIdentifierBehavior" /> for an identifier based on <see cref="Guid" />.</summary>
 [OpenApiDataType(description: "GUID based identifier", example: "8a1a8c42-d2ff-e254-e26e-b6abcbf19420", type: "string", format: "guid", nullable: true)]
 public class GuidBehavior : IdentifierBehavior
 {
-    /// <summary>Initializes a new instance of the <see cref="GuidBehavior"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="GuidBehavior" /> class.</summary>
     protected GuidBehavior() { }
 
-    /// <summary>Returns the type of the underlying value (<see cref="Guid"/>).</summary>
+    /// <summary>Returns the type of the underlying value (<see cref="Guid" />).</summary>
     public sealed override Type BaseType => typeof(Guid);
 
-    /// <summary>Gets the default format used to represent the <see cref="Guid"/> as <see cref="string"/>.</summary>
+    /// <summary>Gets the default format used to represent the <see cref="Guid" /> as <see cref="string" />.</summary>
     protected virtual string DefaultFormat => "d";
 
     /// <inheritdoc/>
@@ -33,9 +33,9 @@ public class GuidBehavior : IdentifierBehavior
     [Pure]
     public override object? FromBytes(byte[] bytes) => new Guid(bytes);
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the <see cref="Guid"/>.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the <see cref="Guid" />.</summary>
     /// <param name="obj">
-    /// The object that is expected to be a <see cref="Guid"/>.
+    /// The object that is expected to be a <see cref="Guid" />.
     /// </param>
     /// <param name="format">
     /// The format that describes the formatting.

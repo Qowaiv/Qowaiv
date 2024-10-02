@@ -1,4 +1,4 @@
-﻿using Qowaiv.Conversion.Statistics;
+using Qowaiv.Conversion.Statistics;
 
 namespace Qowaiv.Statistics;
 
@@ -152,11 +152,11 @@ public readonly partial struct Elo : IXmlSerializable, IFormattable, IEquatable<
     [Pure]
     public double ToJson() => m_Value;
 
-    /// <summary>Returns a <see cref="string"/> that represents the current Elo for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current Elo for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private double DebuggerDisplay => m_Value;
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current Elo.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current Elo.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
@@ -222,12 +222,12 @@ public readonly partial struct Elo : IXmlSerializable, IFormattable, IEquatable<
         return false;
     }
 
-    /// <summary>Creates an <see cref="Elo"/> from a <see cref="double"/>.</summary>
+    /// <summary>Creates an <see cref="Elo" /> from a <see cref="double" />.</summary>
     /// <param name="val">
-    /// A decimal describing an <see cref="Elo"/>.
+    /// A decimal describing an <see cref="Elo" />.
     /// </param>
     /// <exception cref="ArgumentException">
-    /// val is not a valid <see cref="Elo"/>.
+    /// val is not a valid <see cref="Elo" />.
     /// </exception>
     [Pure]
     public static Elo Create(double val)

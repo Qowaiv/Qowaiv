@@ -1,4 +1,4 @@
-﻿namespace Web.Internet_media_type_specs;
+namespace Web.Internet_media_type_specs;
 
 public class With_domain_logic
 {

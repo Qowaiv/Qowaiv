@@ -1,8 +1,8 @@
-﻿namespace Qowaiv.Text;
+namespace Qowaiv.Text;
 
 internal partial class CharBuffer
 {
-    /// <summary>Adds an other <see cref="CharBuffer"/> to the buffer.</summary>
+    /// <summary>Adds an other <see cref="CharBuffer" /> to the buffer.</summary>
     [FluentSyntax]
     public CharBuffer Add(CharBuffer other)
     {
@@ -16,7 +16,7 @@ internal partial class CharBuffer
         return this;
     }
 
-    /// <summary>Adds a <see cref="string"/> to the buffer.</summary>
+    /// <summary>Adds a <see cref="string" /> to the buffer.</summary>
     [FluentSyntax]
     public CharBuffer Add(string str)
     {
@@ -27,7 +27,7 @@ internal partial class CharBuffer
         return this;
     }
 
-    /// <summary>Adds a <see cref="char"/> to the buffer.</summary>
+    /// <summary>Adds a <see cref="char" /> to the buffer.</summary>
     [FluentSyntax]
     public CharBuffer Add(char ch)
     {
@@ -35,7 +35,7 @@ internal partial class CharBuffer
         return this;
     }
 
-    /// <summary>Adds a lowercase <see cref="char"/> to the buffer.</summary>
+    /// <summary>Adds a lowercase <see cref="char" /> to the buffer.</summary>
     [FluentSyntax]
     public CharBuffer AddLower(char ch) => Add(char.ToLowerInvariant(ch));
 
@@ -147,8 +147,8 @@ internal partial class CharBuffer
         return this;
     }
 
-    /// <summary>Unifies the buffer applying <see cref="RemoveMarkup"/>, <see cref="Uppercase"/>
-    /// and <see cref="ToNonDiacritic(string)"/>.
+    /// <summary>Unifies the buffer applying <see cref="RemoveMarkup" />, <see cref="Uppercase" />
+    /// and <see cref="ToNonDiacritic(string)" />.
     /// </summary>
     [Pure]
     public CharBuffer Unify()

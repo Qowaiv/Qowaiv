@@ -1,6 +1,6 @@
-﻿namespace Qowaiv.Text;
+namespace Qowaiv.Text;
 
-/// <summary>Centralized place to define <see cref="Regex"/> options.</summary>
+/// <summary>Centralized place to define <see cref="Regex" /> options.</summary>
 internal static class RegOptions
 {
 #if DEBUG

@@ -1,4 +1,4 @@
-﻿namespace Collection_extensions_specs;
+namespace Collection_extensions_specs;
 
 public class Amounts
 {

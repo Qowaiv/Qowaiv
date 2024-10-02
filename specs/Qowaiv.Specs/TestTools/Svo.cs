@@ -1,4 +1,4 @@
-﻿using Qowaiv.Chemistry;
+using Qowaiv.Chemistry;
 using Qowaiv.Customization;
 using Qowaiv.Sustainability;
 

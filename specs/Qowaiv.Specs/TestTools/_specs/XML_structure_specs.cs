@@ -1,4 +1,4 @@
-﻿namespace TestTools.XML_structure_specs;
+namespace TestTools.XML_structure_specs;
 
 public class Is_equatable
 {

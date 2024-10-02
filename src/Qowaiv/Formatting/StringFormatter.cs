@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Formatting;
+namespace Qowaiv.Formatting;
 
 /// <summary>A string formatter class.</summary>
 public static class StringFormatter
@@ -40,7 +40,7 @@ public static class StringFormatter
     /// The format string.
     /// </param>
     /// <param name="formatProvider">
-    /// The format provider, if null <see cref="CultureInfo.CurrentCulture"/> is used.
+    /// The format provider, if null <see cref="CultureInfo.CurrentCulture" /> is used.
     /// </param>
     /// <param name="tokens">
     /// An dictionary with character based tokens.
@@ -130,7 +130,7 @@ public static class StringFormatter
         }
     }
 
-    /// <summary>Returns the <see cref="ICustomFormatter"/> if available.</summary>
+    /// <summary>Returns the <see cref="ICustomFormatter" /> if available.</summary>
     [Pure]
     public static ICustomFormatter? TryGetCustomFormatter(this IFormatProvider? formatProvider)
         => formatProvider?.GetFormat<ICustomFormatter>();

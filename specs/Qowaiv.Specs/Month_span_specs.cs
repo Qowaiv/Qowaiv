@@ -1,4 +1,4 @@
-﻿namespace Month_span_specs;
+namespace Month_span_specs;
 
 public class Is_equal_by_value
 {

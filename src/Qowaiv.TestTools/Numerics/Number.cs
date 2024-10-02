@@ -1,12 +1,12 @@
-﻿#if NET8_0_OR_GREATER
+#if NET8_0_OR_GREATER
 
 using System.Numerics;
 
 namespace Qowaiv.TestTools.Numerics;
 
-/// <summary>An static helper to call <see cref="INumber{TSelf}"/> methods.</summary>
+/// <summary>An static helper to call <see cref="INumber{TSelf}" /> methods.</summary>
 /// <remarks>
-/// As some implementations of <see cref="INumber{TSelf}"/> are explicit,
+/// As some implementations of <see cref="INumber{TSelf}" /> are explicit,
 /// this helper accesses these methods via the interface.
 /// </remarks>
 public static class Number

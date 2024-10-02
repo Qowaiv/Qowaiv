@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.TestTools;
+namespace Qowaiv.TestTools;
 
 internal static class Nil
 {

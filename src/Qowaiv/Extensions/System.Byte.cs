@@ -1,8 +1,8 @@
-﻿using Qowaiv.IO;
+using Qowaiv.IO;
 
 namespace System;
 
-/// <summary>Extensions on <see cref="byte"/>.</summary>
+/// <summary>Extensions on <see cref="byte" />.</summary>
 public static class QowaivByteExtensions
 {
     /// <summary>Gets the size of the byte array.</summary>

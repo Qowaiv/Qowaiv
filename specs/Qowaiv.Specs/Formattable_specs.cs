@@ -1,4 +1,4 @@
-﻿namespace Formattable_specs;
+namespace Formattable_specs;
 
 public class ToString_with_format_and_provider
 {

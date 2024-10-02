@@ -1,4 +1,4 @@
-﻿# Qowaiv
+# Qowaiv
 ## ASP.NET MVC Model Binding
 Model Binding with ASP.NET MVC works out-of-the-box with one exception:
 It does not handle `null` and `string.Empty` values incorrect. In those

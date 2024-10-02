@@ -1,4 +1,4 @@
-﻿using Qowaiv.Conversion.IO;
+using Qowaiv.Conversion.IO;
 using System.IO;
 
 namespace Qowaiv.IO;
@@ -80,7 +80,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
     /// <summary>Represents the maximum stream size that can be represented.</summary>
     public static StreamSize MaxValue => new(long.MaxValue);
 
-    /// <summary>Initializes a new instance of the <see cref="StreamSize"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="StreamSize" /> struct.</summary>
     /// <param name="size">
     /// The number of bytes.
     /// </param>
@@ -404,29 +404,29 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
     [Pure]
     public long ToJson() => m_Value;
 
-    /// <summary>Returns a <see cref="string"/> that represents the current stream size for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current stream size for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0: F}");
 
-    /// <summary>Returns a <see cref="string"/> that represents the current stream size.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current stream size.</summary>
     [Pure]
     public override string ToString() => ToString(CultureInfo.CurrentCulture);
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current stream size.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
     public string ToString(string? format) => ToString(format, CultureInfo.CurrentCulture);
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current stream size.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString("0 byte", provider);
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current stream size.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current stream size.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>

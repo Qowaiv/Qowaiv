@@ -1,4 +1,4 @@
-﻿namespace Percentage_specs;
+namespace Percentage_specs;
 
 #if NET8_0_OR_GREATER
 public class Decimal_scale

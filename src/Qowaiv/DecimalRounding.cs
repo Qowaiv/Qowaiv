@@ -1,15 +1,15 @@
-﻿namespace Qowaiv;
+namespace Qowaiv;
 
-/// <summary>Methods of rounding <see cref="decimal"/>s.</summary>
+/// <summary>Methods of rounding <see cref="decimal" />s.</summary>
 /// <remarks>
-/// This is an extension on <see cref="MidpointRounding"/>.
+/// This is an extension on <see cref="MidpointRounding" />.
 /// </remarks>
 public enum DecimalRounding
 {
     /// <summary>When a number is halfway between two others, it is rounded toward the nearest even.</summary>
     ToEven = 0,
 
-    /// <summary>Bankers round, also known as <see cref="ToEven"/>.</summary>
+    /// <summary>Bankers round, also known as <see cref="ToEven" />.</summary>
     BankersRound = ToEven,
 
     /// <summary>When a number is halfway between two others, it is rounded toward the nearest number that is away from zero.</summary>

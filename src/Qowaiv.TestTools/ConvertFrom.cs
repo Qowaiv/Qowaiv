@@ -1,6 +1,6 @@
-﻿namespace Qowaiv.TestTools;
+namespace Qowaiv.TestTools;
 
-/// <summary>Type converter builder to apply <see cref="TypeConverter.ConvertFrom(object)"/>.</summary>
+/// <summary>Type converter builder to apply <see cref="TypeConverter.ConvertFrom(object)" />.</summary>
 public sealed class ConvertFrom<TFrom>
 {
     internal ConvertFrom(TFrom? subject) => Subject = subject;
@@ -8,7 +8,7 @@ public sealed class ConvertFrom<TFrom>
     /// <summary>The subject that can be converted to a destination type.</summary>
     public TFrom? Subject { get; }
 
-    /// <summary>Converts the value to the destination type, using its <see cref="TypeConverter"/>.</summary>
+    /// <summary>Converts the value to the destination type, using its <see cref="TypeConverter" />.</summary>
     [Pure]
     public To? To<To>()
     {

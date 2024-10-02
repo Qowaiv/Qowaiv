@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Formatting;
+namespace Qowaiv.Formatting;
 
 /// <summary>Represents formatting arguments.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
@@ -8,7 +8,7 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
     /// <summary>Represents empty/not set formatting arguments.</summary>
     public static readonly FormattingArguments None;
 
-    /// <summary>Initializes a new instance of the <see cref="FormattingArguments"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArguments" /> struct.</summary>
     /// <param name="format">
     /// The format.
     /// </param>
@@ -21,13 +21,13 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
         FormatProvider = formatProvider;
     }
 
-    /// <summary>Initializes a new instance of the <see cref="FormattingArguments"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArguments" /> struct.</summary>
     /// <param name="formatProvider">
     /// The format provider.
     /// </param>
     public FormattingArguments(IFormatProvider? formatProvider) : this(format: null, formatProvider) { }
 
-    /// <summary>Initializes a new instance of the <see cref="FormattingArguments"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArguments" /> struct.</summary>
     /// <param name="format">
     /// The format.
     /// </param>
@@ -68,7 +68,7 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
         ? ToString(formattable)
         : obj?.ToString();
 
-    /// <summary>Initializes a new instance of the <see cref="FormattingArguments"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArguments" /> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     private FormattingArguments(SerializationInfo info, StreamingContext context)
@@ -88,7 +88,7 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
         info.AddValue(nameof(FormatProvider), FormatProvider);
     }
 
-    /// <summary>Returns a <see cref="string"/> that represents the current formatting arguments for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current formatting arguments for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay
         => string.Format(CultureInfo.InvariantCulture, "Format: '{0}', Provider: {1}", Format, FormatProvider);

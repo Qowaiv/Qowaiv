@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Financial.UnitTests;
+namespace Qowaiv.Financial.UnitTests;
 
 /// <summary>Tests the Amount SVO.</summary>
 public class AmountTest

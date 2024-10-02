@@ -1,12 +1,12 @@
-﻿namespace UUID_comparer_specs;
+namespace UUID_comparer_specs;
 
 public class Compares
 {
     private readonly Guid guid = Guid.Parse("40E56044-F781-43BD-A4AE-AA08882B4E28");
     private readonly Uuid uuid = Uuid.Parse("BD411BB9-D8C9-4A4F-B739-57F2312E0BC5");
 
-    /// <summary>Proves that the<paramref name="index0"/> has an higher priority than the paired
-    /// <paramref name="index1"/>.
+    /// <summary>Proves that the<paramref name="index0" /> has an higher priority than the paired
+    /// <paramref name="index1" />.
     /// </summary>
     [TestCase(10, 11)]
     [TestCase(11, 12)]

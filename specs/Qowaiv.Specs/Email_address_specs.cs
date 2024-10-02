@@ -1,4 +1,4 @@
-﻿namespace Email_address_specs;
+namespace Email_address_specs;
 
 public class With_domain_logic
 {

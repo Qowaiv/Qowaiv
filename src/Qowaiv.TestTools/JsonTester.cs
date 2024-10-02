@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 
 #if NET6_0_OR_GREATER
 using System.Text.Json;
@@ -30,7 +30,7 @@ public static class JsonTester
 
     /// <summary>Writes the JSON using System.Text.Json.</summary>
     /// <remarks>
-    /// <see cref="JsonSerializer.SerializeToElement(object?, Type, JsonSerializerOptions?)"/> is only available in .NET 6.0.
+    /// <see cref="JsonSerializer.SerializeToElement(object?, Type, JsonSerializerOptions?)" /> is only available in .NET 6.0.
     /// </remarks>
     [Pure]
     public static object? Write_System_Text_JSON(object? svo)

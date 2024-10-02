@@ -1,4 +1,4 @@
-﻿using Qowaiv.Conversion.Security;
+using Qowaiv.Conversion.Security;
 using Qowaiv.Security.Cryptography;
 using System.Security.Cryptography;
 
@@ -32,7 +32,7 @@ public readonly struct Secret : IEquatable<Secret>, IEmpty<Secret>
     [Pure]
     public string Value() => m_Value ?? string.Empty;
 
-    /// <summary>Computes a <see cref="CryptographicSeed"/> for the secret.</summary>
+    /// <summary>Computes a <see cref="CryptographicSeed" /> for the secret.</summary>
     /// <param name="algorithm">
     /// The algorithm to hash with.
     /// </param>

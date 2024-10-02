@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.UnitTests;
+namespace Qowaiv.UnitTests;
 
 /// <summary>Tests the local date time SVO.</summary>
 public class LocalDateTimeTest

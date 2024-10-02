@@ -1,4 +1,4 @@
-﻿using Qowaiv.Conversion.Financial;
+using Qowaiv.Conversion.Financial;
 
 namespace Qowaiv.Financial;
 
@@ -39,7 +39,7 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// A value from -28 to 28 that specifies the number of decimal places to round to.
     /// </param>
     /// <remarks>
-    /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
+    /// A negative value for <paramref name="decimals" /> lowers precision to tenfold, hundredfold, and bigger.
     /// </remarks>
     [Pure]
     public Amount Round(int decimals) => Round(decimals, DecimalRounding.BankersRound);
@@ -52,7 +52,7 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// The mode of rounding applied.
     /// </param>
     /// <remarks>
-    /// A negative value for <paramref name="decimals"/> lowers precision to tenfold, hundredfold, and bigger.
+    /// A negative value for <paramref name="decimals" /> lowers precision to tenfold, hundredfold, and bigger.
     /// </remarks>
     [Pure]
     public Amount Round(int decimals, DecimalRounding mode) => (Amount)m_Value.Round(decimals, mode);
@@ -125,14 +125,14 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// The serialized JSON number.
     /// </returns>
     /// <remarks>
-    /// Some <see cref="decimal.Zero"/> representations will be cast to a
-    /// <see cref="double"/> value that slightly smaller than 0, at least
-    /// enough to have a <see cref="string"/> representation of -0.
+    /// Some <see cref="decimal.Zero" /> representations will be cast to a
+    /// <see cref="double" /> value that slightly smaller than 0, at least
+    /// enough to have a <see cref="string" /> representation of -0.
     /// </remarks>
     [Pure]
     public decimal ToJson() => m_Value;
 
-    /// <summary>Returns a <see cref="string"/> that represents the current Amount for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current Amount for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("¤{0:0.00########}");
 

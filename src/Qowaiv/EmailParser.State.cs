@@ -1,4 +1,4 @@
-﻿namespace Qowaiv;
+namespace Qowaiv;
 
 internal static partial class EmailParser
 {
@@ -11,7 +11,7 @@ internal static partial class EmailParser
         [Pure]
         public override string ToString() => $"In: {Input}, Buf: {Buffer}, Res:{Result}";
 
-        /// <summary>Gets the first <see cref="char"/> of the buffer, and removes it.</summary>
+        /// <summary>Gets the first <see cref="char" /> of the buffer, and removes it.</summary>
         [Impure]
         public char Next()
         {

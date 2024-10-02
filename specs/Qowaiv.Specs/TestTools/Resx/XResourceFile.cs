@@ -1,4 +1,4 @@
-﻿using System.Xml;
+using System.Xml;
 
 namespace Qowaiv.TestTools.Resx;
 
@@ -7,10 +7,10 @@ namespace Qowaiv.TestTools.Resx;
 [XmlType("root")]
 public sealed class XResourceFile
 {
-    /// <summary>Initializes a new instance of the <see cref="XResourceFile"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="XResourceFile" /> class.</summary>
     private XResourceFile() { }
 
-    /// <summary>Initializes a new instance of the <see cref="XResourceFile"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="XResourceFile" /> class.</summary>
     public XResourceFile(params XResourceFileData[] data)
     {
         Headers =
@@ -63,7 +63,7 @@ public sealed class XResourceFile
     /// The file to save to.
     /// </param>
     /// <param name="culture">
-    /// The specific culture of the <see cref="XResourceFile"/>.
+    /// The specific culture of the <see cref="XResourceFile" />.
     /// </param>
     public void Save(FileInfo file, CultureInfo culture)
     {

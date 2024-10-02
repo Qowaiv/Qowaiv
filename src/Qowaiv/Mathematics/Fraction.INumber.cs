@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Mathematics;
+namespace Qowaiv.Mathematics;
 
 public readonly partial struct Fraction
 {

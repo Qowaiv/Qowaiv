@@ -1,4 +1,4 @@
-﻿using FluentAssertions.Execution;
+using FluentAssertions.Execution;
 using FluentAssertions.Numeric;
 using FluentAssertions.Primitives;
 using System.Reflection;
@@ -8,7 +8,7 @@ namespace FluentAssertions;
 /// <summary>Extensions to assert debugger display behavior.</summary>
 public static class QowaivDebuggerDisplayAssertions
 {
-    /// <summary>Verifies the outcome of the <see cref="DebuggerDisplayAttribute"/> of a certain <see cref="object"/>.</summary>
+    /// <summary>Verifies the outcome of the <see cref="DebuggerDisplayAttribute" /> of a certain <see cref="object" />.</summary>
     [CLSCompliant(false)]
     [CustomAssertion]
     public static AndConstraint<ObjectAssertions> HaveDebuggerDisplay(
@@ -28,7 +28,7 @@ public static class QowaivDebuggerDisplayAssertions
         return new AndConstraint<ObjectAssertions>(assertions);
     }
 
-    /// <summary>Verifies the outcome of the <see cref="DebuggerDisplayAttribute"/> of a certain <see cref="object"/>.</summary>
+    /// <summary>Verifies the outcome of the <see cref="DebuggerDisplayAttribute" /> of a certain <see cref="object" />.</summary>
     [CLSCompliant(false)]
     [CustomAssertion]
     public static AndConstraint<ComparableTypeAssertions<T>> HaveDebuggerDisplay<T>(

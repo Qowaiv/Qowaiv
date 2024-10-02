@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 
 namespace Qowaiv;
 
@@ -33,7 +33,7 @@ public static class Clock
     /// The core if this clock it UTC, see: https://en.wikipedia.org/wiki/Coordinated_Universal_Time)
     ///
     /// To prevent unexpected behaviour, the result is always converted to
-    /// <see cref="DateTimeKind.Utc"/> if needed.
+    /// <see cref="DateTimeKind.Utc" /> if needed.
     /// </remarks>
     [Pure]
     public static DateTime UtcNow()
@@ -44,14 +44,14 @@ public static class Clock
             : new DateTime(utcNow.Ticks, DateTimeKind.Utc);
     }
 
-    /// <summary>Gets the time zone of the <see cref="Clock"/>.</summary>
+    /// <summary>Gets the time zone of the <see cref="Clock" />.</summary>
     public static TimeZoneInfo TimeZone => localContextTimeZone.Value ?? globalTimeZone;
 
-    /// <summary>Gets the current <see cref="DateTimeOffset"/>.</summary>
+    /// <summary>Gets the current <see cref="DateTimeOffset" />.</summary>
     [Pure]
     public static DateTimeOffset Now() => Now(TimeZone);
 
-    /// <summary>Gets the current <see cref="DateTimeOffset"/> for the specified time zone.</summary>
+    /// <summary>Gets the current <see cref="DateTimeOffset" /> for the specified time zone.</summary>
     /// <param name="timeZone">
     /// The specified time zone.
     /// </param>
@@ -64,7 +64,7 @@ public static class Clock
         return new DateTimeOffset(now.Ticks, now - utcNow);
     }
 
-    /// <summary>Gets the yesterday for the local <see cref="DateTime"/>.</summary>
+    /// <summary>Gets the yesterday for the local <see cref="DateTime" />.</summary>
     [Pure]
     public static Date Yesterday() => Yesterday(TimeZone);
 
@@ -75,7 +75,7 @@ public static class Clock
     [Pure]
     public static Date Yesterday(TimeZoneInfo timeZone) => Today(timeZone).AddDays(-1);
 
-    /// <summary>Gets the today for the local <see cref="DateTime"/>.</summary>
+    /// <summary>Gets the today for the local <see cref="DateTime" />.</summary>
     [Pure]
     public static Date Today() => Today(TimeZone);
 
@@ -90,7 +90,7 @@ public static class Clock
         return (Date)TimeZoneInfo.ConvertTimeFromUtc(UtcNow(), timeZone);
     }
 
-    /// <summary>Gets the tomorrow for the local <see cref="DateTime"/>.</summary>
+    /// <summary>Gets the tomorrow for the local <see cref="DateTime" />.</summary>
     [Pure]
     public static Date Tomorrow() => Tomorrow(TimeZone);
 
@@ -101,27 +101,27 @@ public static class Clock
     [Pure]
     public static Date Tomorrow(TimeZoneInfo timeZone) => Today(timeZone).AddDays(+1);
 
-    /// <summary>Sets the <see cref="DateTime"/> function globally (for the full Application Domain).</summary>
+    /// <summary>Sets the <see cref="DateTime" /> function globally (for the full Application Domain).</summary>
     /// <remarks>
-    /// For test purposes use <see cref="SetLocalContextUtcNow(Func{DateTime})"/>.
+    /// For test purposes use <see cref="SetLocalContextUtcNow(Func{DateTime})" />.
     /// </remarks>
     public static void SetTime(Func<DateTime> time) => globalUtcNow = Guard.NotNull(time);
 
-    /// <summary>Sets the <see cref="TimeZoneInfo"/> function globally (for the full Application Domain).</summary>
+    /// <summary>Sets the <see cref="TimeZoneInfo" /> function globally (for the full Application Domain).</summary>
     /// <remarks>
-    /// For test purposes use <see cref="SetTimeZoneForCurrentContext(TimeZoneInfo)"/>.
+    /// For test purposes use <see cref="SetTimeZoneForCurrentContext(TimeZoneInfo)" />.
     /// </remarks>
     public static void SetTimeZone(TimeZoneInfo timeZone) => globalTimeZone = Guard.NotNull(timeZone);
 
-    /// <summary>Sets the <see cref="DateTime"/> function for current (execution) context only.</summary>
+    /// <summary>Sets the <see cref="DateTime" /> function for current (execution) context only.</summary>
     [Impure]
     public static IDisposable SetTimeForCurrentContext(Func<DateTime> time) => new TimeScope(time);
 
-    /// <summary>Sets the <see cref="TimeZoneInfo"/> for current (execution) context only.</summary>
+    /// <summary>Sets the <see cref="TimeZoneInfo" /> for current (execution) context only.</summary>
     [Impure]
     public static IDisposable SetTimeZoneForCurrentContext(TimeZoneInfo timeZone) => new TimeZoneScope(timeZone);
 
-    /// <summary>Sets the <see cref="DateTime"/> function and <see cref="TimeZoneInfo"/> for current (execution) context only.</summary>
+    /// <summary>Sets the <see cref="DateTime" /> function and <see cref="TimeZoneInfo" /> for current (execution) context only.</summary>
     [Impure]
     public static IDisposable SetTimeAndTimeZoneForCurrentContext(Func<DateTime> time, TimeZoneInfo timeZone) => new ClockScope(time, timeZone);
 
@@ -192,8 +192,8 @@ public static class Clock
 #if NET8_0_OR_GREATER
 
     /// <summary>
-    /// Returns a <see cref="System.TimeProvider"/> implementation depending on
-    /// <see cref="Clock"/>.
+    /// Returns a <see cref="System.TimeProvider" /> implementation depending on
+    /// <see cref="Clock" />.
     /// </summary>
     public static readonly TimeProvider TimeProvider = new ClockProvider();
 

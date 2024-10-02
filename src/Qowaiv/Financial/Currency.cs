@@ -1,4 +1,4 @@
-﻿#pragma warning disable S1210
+#pragma warning disable S1210
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 using Qowaiv.Conversion.Financial;
@@ -115,11 +115,11 @@ public readonly partial struct Currency : IXmlSerializable, IFormattable, IForma
     [Pure]
     public string? ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Returns a <see cref="string"/> that represents the current currency for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current currency for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:e (i/0)}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current currency.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current currency.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
@@ -164,12 +164,12 @@ public readonly partial struct Currency : IXmlSerializable, IFormattable, IForma
         ? GetNumberFormatInfo(CultureInfo.CurrentCulture)
         : null;
 
-    /// <summary>Gets a <see cref="NumberFormatInfo"/> based on the <see cref="IFormatProvider"/>.</summary>
+    /// <summary>Gets a <see cref="NumberFormatInfo" /> based on the <see cref="IFormatProvider" />.</summary>
     /// <remarks>
     /// Because the options for formatting and parsing currencies as provided
     /// by the .NET framework are not sufficient, internally we use number
     /// settings. For parsing and formatting however we like to use the
-    /// currency properties of the <see cref="NumberFormatInfo"/> instead of
+    /// currency properties of the <see cref="NumberFormatInfo" /> instead of
     /// the number properties, so we copy them for desired behavior.
     /// </remarks>
     [Pure]

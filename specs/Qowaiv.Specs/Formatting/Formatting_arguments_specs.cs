@@ -1,4 +1,4 @@
-﻿namespace Formatting_arguments_specs;
+namespace Formatting_arguments_specs;
 
 public class Is_equal_by_value
 {

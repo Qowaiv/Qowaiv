@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.UnitTests.IO;
+namespace Qowaiv.UnitTests.IO;
 
 /// <summary>Tests the stream size SVO.</summary>
 public class StreamSizeTest

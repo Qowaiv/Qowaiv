@@ -1,4 +1,4 @@
-﻿namespace Qowaiv;
+namespace Qowaiv;
 
 /// <summary>Represents a year.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
@@ -61,11 +61,11 @@ public readonly partial struct Year : IXmlSerializable, IFormattable, IEquatable
         else return (long)m_Value;
     }
 
-    /// <summary>Returns a <see cref="string"/> that represents the current year for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current year for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current year.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current year.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>

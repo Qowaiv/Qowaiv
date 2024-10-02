@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Diagnostics.Contracts;
+namespace Qowaiv.Diagnostics.Contracts;
 
 /// <summary>Indicates the type is empty by design.</summary>
 [Conditional("CONTRACTS_FULL")]

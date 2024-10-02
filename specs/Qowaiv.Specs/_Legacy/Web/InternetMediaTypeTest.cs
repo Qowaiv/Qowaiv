@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.UnitTests.Web;
+namespace Qowaiv.UnitTests.Web;
 
 /// <summary>Tests the Internet media type SVO.</summary>
 public class InternetMediaTypeTest

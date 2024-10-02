@@ -1,4 +1,4 @@
-﻿using Qowaiv;
+using Qowaiv;
 using Qowaiv.Identifiers;
 
 namespace Benchmarks;

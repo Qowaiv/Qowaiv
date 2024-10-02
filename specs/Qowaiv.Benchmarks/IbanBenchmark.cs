@@ -1,4 +1,4 @@
-﻿using Iban = Qowaiv.Financial.InternationalBankAccountNumber;
+using Iban = Qowaiv.Financial.InternationalBankAccountNumber;
 
 namespace Benchmarks;
 

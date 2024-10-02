@@ -1,4 +1,4 @@
-﻿namespace Extensions.Type_specs;
+namespace Extensions.Type_specs;
 
 public class CSharpString
 {

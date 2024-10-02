@@ -1,4 +1,4 @@
-﻿#pragma warning disable S1210
+#pragma warning disable S1210
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 using Qowaiv.Globalization;
@@ -8,9 +8,9 @@ namespace Qowaiv;
 /// <summary>Represents a yes-no.</summary>
 /// <remarks>
 /// A yes-no is a (bi-)polar that obviously has the values "yes" and "no". It also
-/// has an "empty"(unset) and "unknown" value.It maps easily with a <see cref="bool"/>, but
+/// has an "empty"(unset) and "unknown" value.It maps easily with a <see cref="bool" />, but
 /// Supports all kind of formatting(and both empty and unknown) that can not be
-/// achieved when modeling a property as <see cref="bool"/> instead of an <see cref="YesNo"/>.
+/// achieved when modeling a property as <see cref="bool" /> instead of an <see cref="YesNo" />.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable]
@@ -96,11 +96,11 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
     [Pure]
     public string? ToJson() => SerializationValues[m_Value];
 
-    /// <summary>Returns a <see cref="string"/> that represents the current yes-no for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current yes-no for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:f}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current yes-no.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current yes-no.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
@@ -137,13 +137,13 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
     [Pure]
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Casts a yes-no to a nullable <see cref="bool"/>.</summary>
+    /// <summary>Casts a yes-no to a nullable <see cref="bool" />.</summary>
     public static explicit operator bool?(YesNo val) => BooleanValues[val.m_Value];
 
-    /// <summary>Casts a yes-no to a <see cref="bool"/>.</summary>
+    /// <summary>Casts a yes-no to a <see cref="bool" />.</summary>
     public static implicit operator bool(YesNo val) => val.IsYes();
 
-    /// <summary>Casts a nullable <see cref="bool"/> to a yes-no.</summary>
+    /// <summary>Casts a nullable <see cref="bool" /> to a yes-no.</summary>
     public static explicit operator YesNo(bool? val)
     {
         if (val.HasValue)
@@ -153,7 +153,7 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
         else return Empty;
     }
 
-    /// <summary>Casts a <see cref="bool"/> to a yes-no.</summary>
+    /// <summary>Casts a <see cref="bool" /> to a yes-no.</summary>
     public static explicit operator YesNo(bool val) => val ? Yes : No;
 
     private static readonly bool?[] BooleanValues = [null, false, true, null];

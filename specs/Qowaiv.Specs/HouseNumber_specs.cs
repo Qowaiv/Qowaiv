@@ -1,4 +1,4 @@
-﻿namespace HouseNumber_specs;
+namespace HouseNumber_specs;
 
 public class With_domain_logic
 {

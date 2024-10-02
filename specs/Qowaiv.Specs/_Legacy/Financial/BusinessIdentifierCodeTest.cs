@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.UnitTests.Financial;
+namespace Qowaiv.UnitTests.Financial;
 
 /// <summary>Tests the BIC SVO.</summary>
 public class BusinessIdentifierCodeTest

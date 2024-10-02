@@ -1,4 +1,4 @@
-﻿namespace Globalization.Countries_specs;
+namespace Globalization.Countries_specs;
 
 public class All
 {

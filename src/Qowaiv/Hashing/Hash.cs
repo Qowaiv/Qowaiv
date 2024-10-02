@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Hashing;
+namespace Qowaiv.Hashing;
 
 /// <summary>Helper struct for getting randomized hashcodes.</summary>
 /// <remarks>
@@ -6,13 +6,13 @@
 /// </remarks>
 public readonly struct Hash : IEquatable<Hash>
 {
-    /// <summary>Randomizer hash based on <see cref="string.GetHashCode()"/>.</summary>
+    /// <summary>Randomizer hash based on <see cref="string.GetHashCode()" />.</summary>
     private static int Randomized = "QOWAIV".GetHashCode();
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly int Value;
 
-    /// <summary>Initializes a new instance of the <see cref="Hash"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Hash" /> struct.</summary>
     private Hash(int val) => Value = val;
 
     /// <inheritdoc />
@@ -46,7 +46,7 @@ public readonly struct Hash : IEquatable<Hash>
         ? this
         : new(Combine(Value, HashCode(item)));
 
-    /// <summary>Implicitly casts a <see cref="Hash"/> to an <see cref="int"/>.</summary>
+    /// <summary>Implicitly casts a <see cref="Hash" /> to an <see cref="int" />.</summary>
     public static implicit operator int(Hash hash) => hash.Value;
 
     /// <summary>Gets a randomized hash for the item.</summary>

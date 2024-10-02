@@ -1,6 +1,6 @@
-﻿namespace System;
+namespace System;
 
-/// <summary>Extensions on <see cref="IFormattable"/>.</summary>
+/// <summary>Extensions on <see cref="IFormattable" />.</summary>
 public static class QowaivFormattableExtensions
 {
     /// <summary>Formats the object using the formatting arguments.</summary>

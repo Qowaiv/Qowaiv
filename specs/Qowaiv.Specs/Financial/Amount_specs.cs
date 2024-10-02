@@ -1,4 +1,4 @@
-﻿namespace Financial.Amount_specs;
+namespace Financial.Amount_specs;
 
 public class Has_constant
 {

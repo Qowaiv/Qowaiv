@@ -1,4 +1,4 @@
-﻿namespace Security.Secret_specs;
+namespace Security.Secret_specs;
 
 public class Cryptographic_seed_can_be_created
 {

@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 namespace Qowaiv.Text;
 
@@ -9,7 +9,7 @@ namespace Qowaiv.Text;
 /// </summary>
 public static class Base64
 {
-    /// <summary>Represents a byte array as a <see cref="string"/>.</summary>
+    /// <summary>Represents a byte array as a <see cref="string" />.</summary>
     [Pure]
     public static string ToString(byte[]? bytes)
         => bytes == null || bytes.Length == 0

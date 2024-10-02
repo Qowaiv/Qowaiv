@@ -1,4 +1,4 @@
-﻿namespace Identifiers.Id_for_Int32_specs;
+namespace Identifiers.Id_for_Int32_specs;
 
 public class Is_comparable
 {

@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.UnitTestsSVO_numeric_contract_specs;
+namespace Qowaiv.UnitTestsSVO_numeric_contract_specs;
 
 public class Numeric_SVOs_Define
 {

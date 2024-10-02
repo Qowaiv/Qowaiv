@@ -1,4 +1,4 @@
-﻿#pragma warning disable S3218 // Inner class members should not shadow outer class "static" or type members
+#pragma warning disable S3218 // Inner class members should not shadow outer class "static" or type members
 // leads to easier to read code in this case.
 
 using System.Runtime.CompilerServices;

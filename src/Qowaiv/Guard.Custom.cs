@@ -1,10 +1,10 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 
 namespace Qowaiv;
 
 internal static partial class Guard
 {
-    /// <summary>Guards the parameter implements <see cref="IFormattable"/>,
+    /// <summary>Guards the parameter implements <see cref="IFormattable" />,
     /// otherwise throws an argument (null) exception.
     /// </summary>
     /// <param name="parameter">

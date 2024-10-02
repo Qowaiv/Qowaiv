@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Globalization;
+namespace Qowaiv.Globalization;
 
 public partial class PostalCodeCountryInfo
 {

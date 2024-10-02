@@ -1,4 +1,4 @@
-﻿using Qowaiv.Conversion.Mathematics;
+using Qowaiv.Conversion.Mathematics;
 using System.Runtime.InteropServices;
 
 namespace Qowaiv.Mathematics;
@@ -19,22 +19,22 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
 , ISerializable
 #endif
 {
-    /// <summary>Represents the zero (0) <see cref="Fraction"/> value.</summary>
+    /// <summary>Represents the zero (0) <see cref="Fraction" /> value.</summary>
     /// <remarks>
-    /// Is the default value of <see cref="Fraction"/>.
+    /// Is the default value of <see cref="Fraction" />.
     /// </remarks>
     public static Fraction Zero => default;
 
-    /// <summary>Represents the one (1) <see cref="Fraction"/> value.</summary>
+    /// <summary>Represents the one (1) <see cref="Fraction" /> value.</summary>
     public static Fraction One => New(1, 1);
 
-    /// <summary>Represents the smallest positive <see cref="Fraction"/> value that is greater than zero.</summary>
+    /// <summary>Represents the smallest positive <see cref="Fraction" /> value that is greater than zero.</summary>
     public static readonly Fraction Epsilon = New(1, long.MaxValue);
 
-    /// <summary>Represents the largest possible value of a <see cref="Fraction"/>.</summary>
+    /// <summary>Represents the largest possible value of a <see cref="Fraction" />.</summary>
     public static Fraction MaxValue => New(+long.MaxValue, 1);
 
-    /// <summary>Represents the smallest possible value of a <see cref="Fraction"/>.</summary>
+    /// <summary>Represents the smallest possible value of a <see cref="Fraction" />.</summary>
     public static Fraction MinValue => New(-long.MaxValue, 1);
 
     internal static partial class Formatting
@@ -86,7 +86,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
             RegOptions.Timeout);
 #endif
 
-        /// <summary>Returns true if the <see cref="char"/> is a supported fraction bar.</summary>
+        /// <summary>Returns true if the <see cref="char" /> is a supported fraction bar.</summary>
         [Pure]
         public static bool IsFractionBar(char ch) => FractionBars.Contains(ch);
     }
@@ -96,7 +96,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly long denominator;
 
-    /// <summary>Initializes a new instance of the <see cref="Fraction"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Fraction" /> struct.</summary>
     /// <param name="numerator">
     /// The numerator part of the fraction.
     /// </param>
@@ -104,7 +104,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     /// The denominator part of the fraction.
     /// </param>
     /// <exception cref="DivideByZeroException">
-    /// if the <paramref name="denominator"/> is zero.
+    /// if the <paramref name="denominator" /> is zero.
     /// </exception>
     /// <remarks>
     /// If the fraction is negative, the numerator 'carries' the sign.
@@ -114,7 +114,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     public Fraction(long numerator, long denominator)
         : this(new Data(numerator, denominator).Guard().Simplify()) { }
 
-    /// <summary>Initializes a new instance of the <see cref="Fraction"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Fraction" /> struct.</summary>
     private Fraction(Data data)
     {
         numerator = data.numerator;
@@ -153,7 +153,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
 
     /// <summary>Gets the inverse of a faction.</summary>
     /// <exception cref="DivideByZeroException">
-    /// When the fraction is <see cref="Zero"/>.
+    /// When the fraction is <see cref="Zero" />.
     /// </exception>
     [Pure]
     public Fraction Inverse()
@@ -161,7 +161,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
         ? throw new DivideByZeroException()
         : New(Sign() * denominator, numerator.Abs());
 
-    /// <summary>Returns a formatted <see cref = "string "/> that represents the fraction.</summary>
+    /// <summary>Returns a formatted <see cref = "string " /> that represents the fraction.</summary>
     /// <param name = "format">
     /// The format that this describes the formatting.
     /// </param>
@@ -288,7 +288,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
 
 #if NET8_0_OR_GREATER
 #else
-    /// <summary>Initializes a new instance of the <see cref="Fraction"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Fraction" /> struct.</summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context.</param>
     private Fraction(SerializationInfo info, StreamingContext context)
@@ -355,53 +355,53 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     [Pure]
     public static Fraction FromJson(long json) => New(json, 1);
 
-    /// <summary>Casts the fraction to a <see cref="decimal"/>.</summary>
+    /// <summary>Casts the fraction to a <see cref="decimal" />.</summary>
     [Pure]
     private decimal ToDecimal() => IsZero() ? decimal.Zero : numerator / (decimal)denominator;
 
-    /// <summary>Casts the fraction to a <see cref="double"/>.</summary>
+    /// <summary>Casts the fraction to a <see cref="double" />.</summary>
     [Pure]
     private double ToDouble() => IsZero() ? 0d : numerator / (double)denominator;
 
-    /// <summary>Casts a <see cref="decimal"/> to a fraction.</summary>
+    /// <summary>Casts a <see cref="decimal" /> to a fraction.</summary>
     [Pure]
     private static Fraction Cast(decimal number)
         => number < MinValue.numerator || number > MaxValue.numerator
         ? throw new OverflowException(QowaivMessages.OverflowException_Fraction)
         : Create(number, MinimumError);
 
-    /// <summary>Casts a <see cref="double"/> to a fraction.</summary>
+    /// <summary>Casts a <see cref="double" /> to a fraction.</summary>
     [Pure]
     private static Fraction Cast(double number)
         => number < MinValue.numerator || number > MaxValue.numerator
         ? throw new OverflowException(QowaivMessages.OverflowException_Fraction)
         : Create((decimal)number, MinimumError);
 
-    /// <summary>Casts a <see cref="decimal"/> to a <see cref="Fraction"/>.</summary>
+    /// <summary>Casts a <see cref="decimal" /> to a <see cref="Fraction" />.</summary>
     public static explicit operator Fraction(decimal number) => Cast(number);
 
-    /// <summary>Casts a <see cref="decimal"/> to a <see cref="Fraction"/>.</summary>
+    /// <summary>Casts a <see cref="decimal" /> to a <see cref="Fraction" />.</summary>
     public static explicit operator decimal(Fraction fraction) => fraction.ToDecimal();
 
-    /// <summary>Casts a <see cref="Percentage"/> to a <see cref="Fraction"/>.</summary>
+    /// <summary>Casts a <see cref="Percentage" /> to a <see cref="Fraction" />.</summary>
     public static explicit operator Fraction(Percentage number) => Cast((decimal)number);
 
-    /// <summary>Casts a <see cref="Percentage"/> to a <see cref="Fraction"/>.</summary>
+    /// <summary>Casts a <see cref="Percentage" /> to a <see cref="Fraction" />.</summary>
     public static explicit operator Percentage(Fraction fraction) => Percentage.Create(fraction.ToDecimal());
 
-    /// <summary>Casts a <see cref="double"/> to a <see cref="Fraction"/>.</summary>
+    /// <summary>Casts a <see cref="double" /> to a <see cref="Fraction" />.</summary>
     public static explicit operator Fraction(double number) => Cast(number);
 
-    /// <summary>Casts a <see cref="double"/> to a <see cref="Fraction"/>.</summary>
+    /// <summary>Casts a <see cref="double" /> to a <see cref="Fraction" />.</summary>
     public static explicit operator double(Fraction fraction) => fraction.ToDouble();
 
-    /// <summary>Casts a <see cref="long"/> to a <see cref="Fraction"/>.</summary>
+    /// <summary>Casts a <see cref="long" /> to a <see cref="Fraction" />.</summary>
     public static explicit operator Fraction(long number) => Create(number);
 
-    /// <summary>Casts a <see cref="long"/> to a <see cref="Fraction"/>.</summary>
+    /// <summary>Casts a <see cref="long" /> to a <see cref="Fraction" />.</summary>
     public static explicit operator long(Fraction fraction) => fraction.Whole;
 
-    /// <summary>Converts the <see cref = "string "/> to <see cref = "Fraction"/>.
+    /// <summary>Converts the <see cref = "string " /> to <see cref = "Fraction" />.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name = "s">
@@ -430,14 +430,14 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
         }
     }
 
-    /// <summary>Creates a fraction based on a <see cref="decimal"/>.</summary>
+    /// <summary>Creates a fraction based on a <see cref="decimal" />.</summary>
     /// <param name="number">
     /// The decimal value to represent as a fraction.
     /// </param>
     [Pure]
     public static Fraction Create(decimal number) => Create(number, MinimumError);
 
-    /// <summary>Creates a fraction based on a <see cref="double"/>.</summary>
+    /// <summary>Creates a fraction based on a <see cref="double" />.</summary>
     /// <param name="number">
     /// The double value to represent as a fraction.
     /// </param>
@@ -447,16 +447,16 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
         ? throw new ArgumentOutOfRangeException(nameof(number), QowaivMessages.OverflowException_Fraction)
         : Create((decimal)number, MinimumError);
 
-    /// <summary>Creates a fraction based on a <see cref="long"/>.</summary>
+    /// <summary>Creates a fraction based on a <see cref="long" />.</summary>
     /// <param name="number">
     /// The long value to represent as a fraction.
     /// </param>
     [Pure]
     public static Fraction Create(long number) => number == 0 ? Zero : New(number, 1);
 
-    /// <summary>Initializes a new instance of the <see cref="Fraction"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Fraction" /> class.</summary>
     /// <exception cref="OverflowException">
-    /// If the numerator is <see cref="long.MinValue"/>.
+    /// If the numerator is <see cref="long.MinValue" />.
     /// </exception>
     /// <remarks>
     /// This pseudo constructor differs from the public constructor that it

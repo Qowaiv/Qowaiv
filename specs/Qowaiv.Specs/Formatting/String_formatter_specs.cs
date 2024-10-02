@@ -1,4 +1,4 @@
-﻿namespace String_formatter_specs;
+namespace String_formatter_specs;
 
 public class Try_apply_custom_formatter
 {

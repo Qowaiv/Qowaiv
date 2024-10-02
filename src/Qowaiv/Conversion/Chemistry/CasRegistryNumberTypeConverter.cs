@@ -1,4 +1,4 @@
-﻿using Qowaiv.Chemistry;
+using Qowaiv.Chemistry;
 
 namespace Qowaiv.Conversion.Chemistry;
 

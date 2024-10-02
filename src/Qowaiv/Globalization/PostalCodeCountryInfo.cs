@@ -1,10 +1,10 @@
-﻿namespace Qowaiv.Globalization;
+namespace Qowaiv.Globalization;
 
 /// <summary>Represents country specific postal code information.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
 public sealed partial class PostalCodeCountryInfo
 {
-    /// <summary>Initializes a new instance of the <see cref="PostalCodeCountryInfo"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="PostalCodeCountryInfo" /> class.</summary>
     private PostalCodeCountryInfo(
         Country country,
         Regex? validationPattern,
@@ -85,7 +85,7 @@ public sealed partial class PostalCodeCountryInfo
         ? FormattingReplacePattern
         : string.Empty;
 
-    /// <summary>Returns a <see cref="string"/> that represents the current postal code country info for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current postal code country info for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay
     {

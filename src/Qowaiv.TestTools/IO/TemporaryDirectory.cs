@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 
 namespace Qowaiv.TestTools.IO;
 
@@ -15,7 +15,7 @@ namespace Qowaiv.TestTools.IO;
 /// </remarks>
 public sealed class TemporaryDirectory : IDisposable
 {
-    /// <summary>Initializes a new instance of the <see cref="TemporaryDirectory"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="TemporaryDirectory" /> class.</summary>
     public TemporaryDirectory()
     {
         Root = new DirectoryInfo(Path.Combine(Path.GetTempPath(), Uuid.NewUuid().ToString()));
@@ -25,15 +25,15 @@ public sealed class TemporaryDirectory : IDisposable
     /// <summary>Gets the full name of the directory.</summary>
     public string FullName => Root.FullName;
 
-    /// <summary>Casts the temporary directory to a <see cref="DirectoryInfo"/>.</summary>
+    /// <summary>Casts the temporary directory to a <see cref="DirectoryInfo" />.</summary>
     [return: NotNullIfNotNull(nameof(dir))]
     public static implicit operator DirectoryInfo?(TemporaryDirectory? dir) => dir?.Root;
 
-    /// <summary>Represents the temporary directory as <see cref="string"/>.</summary>
+    /// <summary>Represents the temporary directory as <see cref="string" />.</summary>
     [Pure]
     public override string ToString() => Root.ToString();
 
-    /// <summary>The underlying <see cref="DirectoryInfo"/>.</summary>
+    /// <summary>The underlying <see cref="DirectoryInfo" />.</summary>
     private readonly DirectoryInfo Root;
 
     /// <summary>Creates a file in the temporary directory.</summary>

@@ -1,4 +1,4 @@
-﻿namespace NuGet_packages_specs;
+namespace NuGet_packages_specs;
 
 public class All_NuGet_Packages
 {

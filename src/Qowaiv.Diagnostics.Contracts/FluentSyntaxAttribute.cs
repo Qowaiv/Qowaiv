@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Diagnostics.Contracts;
+namespace Qowaiv.Diagnostics.Contracts;
 
 /// <summary>To mark a method explicitly as impure. Methods decorated with
 /// this attribute return the same instance that was provided as argument.

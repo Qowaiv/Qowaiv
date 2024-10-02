@@ -1,4 +1,4 @@
-﻿# Qowaiv Benchmarks
+# Qowaiv Benchmarks
 
 ## IBAN
 By removing `Regex`'s from IBAN, durations of parsing have been reduced

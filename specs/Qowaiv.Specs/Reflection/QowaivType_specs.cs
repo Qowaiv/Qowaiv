@@ -1,4 +1,4 @@
-﻿using Qowaiv.Reflection;
+using Qowaiv.Reflection;
 using System.Numerics;
 
 namespace Reflection.QowaivType_specs;

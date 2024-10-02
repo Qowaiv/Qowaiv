@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Diagnostics.Contracts;
+namespace Qowaiv.Diagnostics.Contracts;
 
 /// <summary>Indicates the enum is empty by design.</summary>
 [AttributeUsage(AttributeTargets.Enum, AllowMultiple = false)]

@@ -1,4 +1,4 @@
-﻿#pragma warning disable S1210
+#pragma warning disable S1210
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 using Qowaiv.Conversion.Financial;
@@ -79,11 +79,11 @@ public readonly partial struct BusinessIdentifierCode : IXmlSerializable, IForma
     [Pure]
     public string? ToJson() => m_Value;
 
-    /// <summary>Returns a <see cref="string"/> that represents the current BIC for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current BIC for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0}");
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the current BIC.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the current BIC.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>

@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.UnitTests.Formatting;
+namespace Qowaiv.UnitTests.Formatting;
 
 /// <summary>Tests the formatting arguments SVO.</summary>
 public class FormattingArgumentsTest

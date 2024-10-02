@@ -1,4 +1,4 @@
-﻿namespace Diagnostics.Contracts.Mutable_attribute_specs;
+namespace Diagnostics.Contracts.Mutable_attribute_specs;
 
 internal class Can_decorate
 {

@@ -1,6 +1,6 @@
-﻿namespace System;
+namespace System;
 
-/// <summary>Extensions on <see cref="double"/>.</summary>
+/// <summary>Extensions on <see cref="double" />.</summary>
 internal static class QowaivDoubleExtensions
 {
     /// <summary>Returns true if the number is in the specified range.</summary>

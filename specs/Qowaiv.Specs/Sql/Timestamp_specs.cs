@@ -1,4 +1,4 @@
-﻿namespace Sql.Timestamp_specs;
+namespace Sql.Timestamp_specs;
 
 public class Is_invalid
 {

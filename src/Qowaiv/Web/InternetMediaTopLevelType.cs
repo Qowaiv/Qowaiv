@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Web;
+namespace Qowaiv.Web;
 
 /// <summary>Describes Internet media type top levels.</summary>
 public enum InternetMediaTopLevelType

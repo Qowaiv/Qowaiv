@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.UnitTests.Sql;
+namespace Qowaiv.UnitTests.Sql;
 
 /// <summary>Tests the timestamp SVO.</summary>
 public class TimestampTest

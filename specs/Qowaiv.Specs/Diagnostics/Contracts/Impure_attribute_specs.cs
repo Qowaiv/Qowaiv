@@ -1,4 +1,4 @@
-﻿namespace Diagnostics.Contracts.Impure_attribute_specs;
+namespace Diagnostics.Contracts.Impure_attribute_specs;
 
 public class Can_decorate_methods_with
 {

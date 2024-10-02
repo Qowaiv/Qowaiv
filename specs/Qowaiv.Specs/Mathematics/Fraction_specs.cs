@@ -1,4 +1,4 @@
-﻿using Qowaiv.Specs.TestTools;
+using Qowaiv.Specs.TestTools;
 
 namespace Mathematics.Fraction_specs;
 

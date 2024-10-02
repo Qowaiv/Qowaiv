@@ -1,4 +1,4 @@
-﻿namespace Customization.SVO_specs;
+namespace Customization.SVO_specs;
 
 public class Default_behavior
 {

@@ -1,4 +1,4 @@
-﻿namespace Financial.Money_specs;
+namespace Financial.Money_specs;
 
 public class Is_comparable
 {

@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright>
 //    Copyright (c) Corniel Nobel. All rights reserved.
 //    See: https://github.com/Corniel/Grenadiers/blob/master/LICENSE.md
@@ -74,7 +74,7 @@ internal static partial class Guard
         ? throw new ArgumentException(Messages.ArgumentException_IsDefaultValue, paramName)
         : parameter;
 
-    /// <summary>Throws an <see cref="ArgumentOutOfRangeException"/> if the parameter not in not a defined value of the enum, otherwise the parameter is passed.</summary>
+    /// <summary>Throws an <see cref="ArgumentOutOfRangeException" /> if the parameter not in not a defined value of the enum, otherwise the parameter is passed.</summary>
     /// <typeparam name="T">The type to guard; must be a structure (enum).</typeparam>
     /// <param name="parameter">The parameter to guard.</param>
     /// <param name="paramName">The name of the parameter.</param>
@@ -82,7 +82,7 @@ internal static partial class Guard
     /// The guarded parameter.
     /// </returns>
     /// <remarks>
-    /// That <typeparamref name="T"/> is an enum is implicitly guard by <see cref="Enum.IsDefined(Type, object)"/>.
+    /// That <typeparamref name="T" /> is an enum is implicitly guard by <see cref="Enum.IsDefined(Type, object)" />.
     /// </remarks>
     public static T DefinedEnum<T>(T parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         where T : struct
@@ -92,8 +92,8 @@ internal static partial class Guard
 
     /// <summary>
     /// Guards that the parameter is an instance of T, otherwise throws an argument (null) exception.
-    /// It only makes sense to use this function if the original type of the <paramref name="parameter"/>
-    /// is <see cref="object"/>, otherwise one should simply use <see cref="NotNull{T}(T, string)"/>.
+    /// It only makes sense to use this function if the original type of the <paramref name="parameter" />
+    /// is <see cref="object" />, otherwise one should simply use <see cref="NotNull{T}(T, string)" />.
     /// </summary>
     /// <typeparam name="T">The type to guard.</typeparam>
     /// <param name="parameter">The parameter to guard.</param>
@@ -146,7 +146,7 @@ internal static partial class Guard
         ? guarded
         : throw new ArgumentException(Messages.ArgumentException_StringEmpty, paramName);
 
-    /// <summary>Guards that the parameter is not an empty <see cref="Guid"/>, otherwise throws an argument exception.</summary>
+    /// <summary>Guards that the parameter is not an empty <see cref="Guid" />, otherwise throws an argument exception.</summary>
     /// <param name="parameter">The parameter to guard.</param>
     /// <param name="paramName">The name of the parameter.</param>
     /// <returns>
@@ -156,7 +156,7 @@ internal static partial class Guard
     public static Guid NotEmpty(Guid? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => NotEmpty(HasValue(parameter, paramName), paramName);
 
-    /// <summary>Guards that the parameter is not an empty <see cref="Guid"/>, otherwise throws an argument exception.</summary>
+    /// <summary>Guards that the parameter is not an empty <see cref="Guid" />, otherwise throws an argument exception.</summary>
     /// <param name="parameter">The parameter to guard.</param>
     /// <param name="paramName">The name of the parameter.</param>
     /// <returns>

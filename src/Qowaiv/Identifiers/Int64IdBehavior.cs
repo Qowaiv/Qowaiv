@@ -1,13 +1,13 @@
-﻿namespace Qowaiv.Identifiers;
+namespace Qowaiv.Identifiers;
 
-/// <summary>Implements <see cref="IIdentifierBehavior"/> for an identifier based on <see cref="long"/>.</summary>
+/// <summary>Implements <see cref="IIdentifierBehavior" /> for an identifier based on <see cref="long" />.</summary>
 [OpenApiDataType(description: "Int64 based identifier", example: 17, type: "integer", format: "identifier", nullable: true)]
 public class Int64IdBehavior : IdentifierBehavior
 {
-    /// <summary>Initializes a new instance of the <see cref="Int64IdBehavior"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="Int64IdBehavior" /> class.</summary>
     protected Int64IdBehavior() { }
 
-    /// <summary>Returns the type of the underlying value (<see cref="long"/>).</summary>
+    /// <summary>Returns the type of the underlying value (<see cref="long" />).</summary>
     public sealed override Type BaseType => typeof(long);
 
     /// <inheritdoc/>

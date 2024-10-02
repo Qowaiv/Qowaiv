@@ -1,4 +1,4 @@
-﻿namespace Identifiers.Id_specs;
+namespace Identifiers.Id_specs;
 
 public class Create
 {

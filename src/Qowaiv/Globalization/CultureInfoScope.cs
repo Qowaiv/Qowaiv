@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 
 namespace Qowaiv.Globalization;
 
@@ -14,7 +14,7 @@ namespace Qowaiv.Globalization;
 [DebuggerDisplay("{DebuggerDisplay}")]
 public class CultureInfoScope : IDisposable
 {
-    /// <summary>Initializes a new instance of the <see cref="CultureInfoScope"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="CultureInfoScope" /> class.</summary>
     /// <remarks>
     /// No direct access.
     /// </remarks>
@@ -24,7 +24,7 @@ public class CultureInfoScope : IDisposable
         PreviousUI = Thread.CurrentThread.CurrentUICulture;
     }
 
-    /// <summary>Initializes a new instance of the <see cref="CultureInfoScope"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="CultureInfoScope" /> class.</summary>
     /// <param name="culture">
     /// The culture.
     /// </param>
@@ -37,7 +37,7 @@ public class CultureInfoScope : IDisposable
         Thread.CurrentThread.CurrentUICulture = Guard.NotNull(cultureUI);
     }
 
-    /// <summary>Initializes a new instance of the <see cref="CultureInfoScope"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="CultureInfoScope" /> class.</summary>
     /// <param name="name">
     /// Name of the culture.
     /// </param>
@@ -48,13 +48,13 @@ public class CultureInfoScope : IDisposable
         new CultureInfo(Guard.NotNullOrEmpty(name)),
         new CultureInfo(Guard.NotNullOrEmpty(nameUI))) { }
 
-    /// <summary>Initializes a new instance of the <see cref="CultureInfoScope"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="CultureInfoScope" /> class.</summary>
     /// <param name="name">
     /// Name of the culture.
     /// </param>
     public CultureInfoScope(string name) : this(name, name) { }
 
-    /// <summary>Initializes a new instance of the <see cref="CultureInfoScope"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="CultureInfoScope" /> class.</summary>
     /// <param name="culture">
     /// The culture.
     /// </param>
@@ -66,7 +66,7 @@ public class CultureInfoScope : IDisposable
     /// <summary>Gets the previous Current Culture.</summary>
     public CultureInfo Previous { get; }
 
-    /// <summary>Represents the CultureInfo scope as <see cref="string"/>.</summary>
+    /// <summary>Represents the CultureInfo scope as <see cref="string" />.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     protected string DebuggerDisplay
         => string.Format(

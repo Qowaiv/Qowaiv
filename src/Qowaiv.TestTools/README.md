@@ -1,4 +1,4 @@
-﻿# Qowaiv.TestTools
+# Qowaiv.TestTools
 
 ## Domain-driven design bottom up
 Qowaiv is a (Single) Value Object library. It aims to model reusable, immutable,

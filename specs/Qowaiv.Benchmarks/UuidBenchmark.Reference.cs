@@ -1,4 +1,4 @@
-﻿#pragma warning disable CS8605 // Unboxing a possibly null value.
+#pragma warning disable CS8605 // Unboxing a possibly null value.
 
 using Qowaiv;
 using Qowaiv.Identifiers;

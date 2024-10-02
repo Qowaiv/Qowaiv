@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.UnitTests;
+namespace Qowaiv.UnitTests;
 
 /// <summary>Tests the house number SVO.</summary>
 [TestFixture]

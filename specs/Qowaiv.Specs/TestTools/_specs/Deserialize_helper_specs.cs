@@ -1,4 +1,4 @@
-﻿namespace TestTools.Deserialize_helper_specs;
+namespace TestTools.Deserialize_helper_specs;
 
 public class Deserializes
 {

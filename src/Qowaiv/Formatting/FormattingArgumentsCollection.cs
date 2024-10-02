@@ -1,19 +1,19 @@
-﻿namespace Qowaiv.Formatting;
+namespace Qowaiv.Formatting;
 
 /// <summary>Represents a collection of formatting arguments.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
 public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, FormattingArguments>>
 {
-    /// <summary>Initializes a new instance of the <see cref="FormattingArgumentsCollection"/> class based on the current culture.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArgumentsCollection" /> class based on the current culture.</summary>
     public FormattingArgumentsCollection() : this(formatProvider: null) { }
 
-    /// <summary>Initializes a new instance of the <see cref="FormattingArgumentsCollection"/> class based on the specified format provider.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArgumentsCollection" /> class based on the specified format provider.</summary>
     /// <param name="formatProvider">
     /// The default format provider.
     /// </param>
     public FormattingArgumentsCollection(IFormatProvider? formatProvider) : this(formatProvider, parent: null) { }
 
-    /// <summary>Initializes a new instance of the <see cref="FormattingArgumentsCollection"/> class based on the specified format provider.</summary>
+    /// <summary>Initializes a new instance of the <see cref="FormattingArgumentsCollection" /> class based on the specified format provider.</summary>
     /// <param name="formatProvider">
     /// The default format provider.
     /// </param>
@@ -87,7 +87,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// than or equal to the length of the args array.
     /// </exception>
     /// <remarks>
-    /// This implementation is a (tweaked) copy of the implementation of <see cref="string"/>.Format().
+    /// This implementation is a (tweaked) copy of the implementation of <see cref="string" />.Format().
     /// </remarks>
     [Pure]
 #nullable disable
@@ -501,7 +501,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
     /// <summary>Gets the number of formatting arguments in the collection.</summary>
     public int Count => dict.Count;
 
-    /// <summary>Returns a <see cref="string"/> that represents the current formatting arguments collection for debug purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the current formatting arguments collection for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay
         => string.Format(

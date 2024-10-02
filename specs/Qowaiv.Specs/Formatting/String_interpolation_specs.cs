@@ -1,4 +1,4 @@
-﻿namespace Formatting.String_interpolation_specs;
+namespace Formatting.String_interpolation_specs;
 
 [SetCulture("en-US")]
 public class Formats

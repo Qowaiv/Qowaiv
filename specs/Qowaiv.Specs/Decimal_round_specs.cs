@@ -1,4 +1,4 @@
-﻿namespace Decimal_round_specs;
+namespace Decimal_round_specs;
 
 public class Rounds
 {

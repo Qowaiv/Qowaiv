@@ -1,4 +1,4 @@
-﻿#pragma warning disable S1210
+#pragma warning disable S1210
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 namespace Qowaiv.Chemistry;
@@ -78,13 +78,13 @@ public readonly partial struct CasRegistryNumber : IXmlSerializable, IFormattabl
     [Pure]
     public static CasRegistryNumber FromJson(long json) => Create(json);
 
-    /// <summary>Casts the CAS Registry Number to a <see cref="long"/>.</summary>
+    /// <summary>Casts the CAS Registry Number to a <see cref="long" />.</summary>
     public static explicit operator long(CasRegistryNumber val) => val.m_Value;
 
-    /// <summary>Casts a <see cref="long"/> to a CAS Registry Number.</summary>
+    /// <summary>Casts a <see cref="long" /> to a CAS Registry Number.</summary>
     public static explicit operator CasRegistryNumber(long val) => Create(val);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="CasRegistryNumber"/>.
+    /// <summary>Converts the <see cref="string" /> to <see cref="CasRegistryNumber" />.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">

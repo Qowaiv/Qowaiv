@@ -1,4 +1,4 @@
-﻿namespace Financial.Currency_specs;
+namespace Financial.Currency_specs;
 
 public class Exists
 {

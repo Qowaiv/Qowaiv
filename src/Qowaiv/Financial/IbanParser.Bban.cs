@@ -1,4 +1,4 @@
-﻿using Qowaiv.Globalization;
+using Qowaiv.Globalization;
 
 namespace Qowaiv.Financial;
 

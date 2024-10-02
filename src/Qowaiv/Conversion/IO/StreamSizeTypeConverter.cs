@@ -1,4 +1,4 @@
-﻿using Qowaiv.IO;
+using Qowaiv.IO;
 
 namespace Qowaiv.Conversion.IO;
 

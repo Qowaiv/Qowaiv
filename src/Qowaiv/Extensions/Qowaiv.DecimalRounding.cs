@@ -1,6 +1,6 @@
-﻿namespace Qowaiv;
+namespace Qowaiv;
 
-/// <summary>Extensions on <see cref="DecimalRounding"/> rounding.</summary>
+/// <summary>Extensions on <see cref="DecimalRounding" /> rounding.</summary>
 public static class DecimalRoundingExtensions
 {
     /// <summary>Returns true if the rounding is direct; the nearest of the two options is not relevant.</summary>

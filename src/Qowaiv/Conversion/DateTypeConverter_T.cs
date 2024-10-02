@@ -1,4 +1,4 @@
-﻿using Qowaiv.Reflection;
+using Qowaiv.Reflection;
 
 namespace Qowaiv.Conversion;
 
@@ -59,55 +59,55 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
         return ConvertTos[type](this, date);
     }
 
-    /// <summary>Converts from <see cref="string"/>.</summary>
+    /// <summary>Converts from <see cref="string" />.</summary>
     [Pure]
     protected abstract T FromString(string? str, CultureInfo? culture);
 
-    /// <summary>Converts from <see cref="DateTime"/>.</summary>
+    /// <summary>Converts from <see cref="DateTime" />.</summary>
     [Pure]
     protected abstract T FromDateTime(DateTime dateTime);
 
-    /// <summary>Converts from <see cref="DateTimeOffset"/>.</summary>
+    /// <summary>Converts from <see cref="DateTimeOffset" />.</summary>
     [Pure]
     protected abstract T FromDateTimeOffset(DateTimeOffset offset);
 
-    /// <summary>Converts from <see cref="LocalDateTime"/>.</summary>
+    /// <summary>Converts from <see cref="LocalDateTime" />.</summary>
     [Pure]
     protected abstract T FromLocalDateTime(LocalDateTime local);
 
-    /// <summary>Converts from <see cref="Date"/>.</summary>
+    /// <summary>Converts from <see cref="Date" />.</summary>
     [Pure]
     protected abstract T FromDate(Date date);
 
-    /// <summary>Converts from <see cref="WeekDate"/>.</summary>
+    /// <summary>Converts from <see cref="WeekDate" />.</summary>
     [Pure]
     protected abstract T FromWeekDate(WeekDate weekDate);
 
-    /// <summary>Converts from <see cref="YearMonth"/>.</summary>
+    /// <summary>Converts from <see cref="YearMonth" />.</summary>
     [Pure]
     protected abstract T FromYearMonth(YearMonth yearMonth);
 
-    /// <summary>Converts to <see cref="DateTime"/>.</summary>
+    /// <summary>Converts to <see cref="DateTime" />.</summary>
     [Pure]
     protected abstract DateTime ToDateTime(T date);
 
-    /// <summary>Converts to <see cref="DateTimeOffset"/>.</summary>
+    /// <summary>Converts to <see cref="DateTimeOffset" />.</summary>
     [Pure]
     protected abstract DateTimeOffset ToDateTimeOffset(T date);
 
-    /// <summary>Converts to <see cref="LocalDateTime"/>.</summary>
+    /// <summary>Converts to <see cref="LocalDateTime" />.</summary>
     [Pure]
     protected abstract LocalDateTime ToLocalDateTime(T date);
 
-    /// <summary>Converts to <see cref="Date"/>.</summary>
+    /// <summary>Converts to <see cref="Date" />.</summary>
     [Pure]
     protected abstract Date ToDate(T date);
 
-    /// <summary>Converts to <see cref="WeekDate"/>.</summary>
+    /// <summary>Converts to <see cref="WeekDate" />.</summary>
     [Pure]
     protected abstract WeekDate ToWeekDate(T date);
 
-    /// <summary>Converts to <see cref="YearMonth"/>.</summary>
+    /// <summary>Converts to <see cref="YearMonth" />.</summary>
     [Pure]
     protected abstract YearMonth ToYearMonth(T date);
 

@@ -1,4 +1,4 @@
-﻿namespace Diagnostics.Contracts.Empty_type_attribute_specs;
+namespace Diagnostics.Contracts.Empty_type_attribute_specs;
 
 public class Can_decorate_empty
 {

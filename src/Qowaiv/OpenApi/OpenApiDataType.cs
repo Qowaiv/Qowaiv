@@ -1,4 +1,4 @@
-﻿using Qowaiv.Customization;
+using Qowaiv.Customization;
 using Qowaiv.Identifiers;
 using System.Reflection;
 
@@ -8,7 +8,7 @@ namespace Qowaiv.OpenApi;
 [DebuggerDisplay("{DebuggerDisplay}")]
 public sealed record OpenApiDataType
 {
-    /// <summary>Initializes a new instance of the <see cref="OpenApiDataType"/> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="OpenApiDataType" /> class.</summary>
 #pragma warning disable S107 // Methods should not have too many parameters
     // To overcome the lack of the init key word in netstandard2.0.
     public OpenApiDataType(
@@ -92,8 +92,8 @@ public sealed record OpenApiDataType
         => Pattern is null || Regex.IsMatch(str!, Pattern, RegexOptions.None, RegOptions.Timeout);
 
     /// <summary>
-    /// Creates an <see cref="OpenApiDataType"/> based on a type, null if not
-    /// decorated with a <see cref="OpenApiDataTypeAttribute"/>.
+    /// Creates an <see cref="OpenApiDataType" /> based on a type, null if not
+    /// decorated with a <see cref="OpenApiDataTypeAttribute" />.
     /// </summary>
     /// <param name="type">
     /// The type to create an <see cref="OpenApiDataType" /> for.

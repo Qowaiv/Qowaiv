@@ -1,6 +1,6 @@
-﻿namespace Qowaiv;
+namespace Qowaiv;
 
-/// <summary>Implements the <see cref="UuidComparer"/> for SQL Server.</summary>
+/// <summary>Implements the <see cref="UuidComparer" /> for SQL Server.</summary>
 internal sealed class UuidMongoDbComparer : UuidComparer
 {
     /// <inheritdoc/>

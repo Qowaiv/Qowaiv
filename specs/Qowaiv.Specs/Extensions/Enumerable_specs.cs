@@ -1,4 +1,4 @@
-﻿namespace Extensions.Enumerable_specs;
+namespace Extensions.Enumerable_specs;
 
 public class Average
 {

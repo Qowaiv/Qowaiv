@@ -1,6 +1,6 @@
 namespace Qowaiv.Text;
 
-/// <summary>Lightweight <see cref="char"/> buffer.</summary>
+/// <summary>Lightweight <see cref="char" /> buffer.</summary>
 /// <remarks>
 /// Keep in mind that the char array is shared.
 /// </remarks>

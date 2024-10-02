@@ -1,8 +1,8 @@
-﻿using Qowaiv.IO;
+using Qowaiv.IO;
 
 namespace System.IO;
 
-/// <summary>Extensions on <see cref="FileInfo"/>.</summary>
+/// <summary>Extensions on <see cref="FileInfo" />.</summary>
 public static class QowaivFileInfoExtensions
 {
     /// <summary>Gets the size of the current file.</summary>

@@ -1,4 +1,4 @@
-﻿namespace Week_Date_specs;
+namespace Week_Date_specs;
 
 public class Is_invalid
 {

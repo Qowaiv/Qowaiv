@@ -1,4 +1,4 @@
-﻿using Qowaiv.TestTools.Resx;
+using Qowaiv.TestTools.Resx;
 
 namespace Qowaiv.TestTools.Generation;
 

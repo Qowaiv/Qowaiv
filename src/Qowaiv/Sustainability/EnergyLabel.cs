@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Sustainability;
+namespace Qowaiv.Sustainability;
 
 /// <summary>Represents a EU energy label.</summary>
 /// <remarks>
@@ -149,10 +149,10 @@ public readonly partial struct EnergyLabel : IXmlSerializable, IEquatable<Energy
     [Pure]
     public string? ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Casts the EU energy label to a <see cref="string"/>.</summary>
+    /// <summary>Casts the EU energy label to a <see cref="string" />.</summary>
     public static explicit operator string(EnergyLabel val) => val.ToString(CultureInfo.CurrentCulture);
 
-    /// <summary>Casts a <see cref="string"/> to a EU energy label.</summary>
+    /// <summary>Casts a <see cref="string" /> to a EU energy label.</summary>
     public static explicit operator EnergyLabel(string str) => Parse(str, CultureInfo.CurrentCulture);
 
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
@@ -170,7 +170,7 @@ public readonly partial struct EnergyLabel : IXmlSerializable, IEquatable<Energy
     [Pure]
     private static bool AreKnown(EnergyLabel l, EnergyLabel r) => !l.IsUnknown() && !r.IsUnknown();
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="EnergyLabel"/>.
+    /// <summary>Converts the <see cref="string" /> to <see cref="EnergyLabel" />.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">

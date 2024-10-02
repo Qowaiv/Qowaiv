@@ -1,8 +1,8 @@
-﻿#pragma warning disable S2346 // Flags enumerations zero-value members should be named "None"
+#pragma warning disable S2346 // Flags enumerations zero-value members should be named "None"
 
 namespace Qowaiv;
 
-/// <summary>Setting used the calculate a <see cref="DateSpan"/>.</summary>
+/// <summary>Setting used the calculate a <see cref="DateSpan" />.</summary>
 [Flags]
 public enum DateSpanSettings
 {
@@ -14,7 +14,7 @@ public enum DateSpanSettings
 
     /// <summary>Without months (example: +20Y+0M+300D).</summary>
     /// <remarks>
-    /// Used in <see cref="DateSpan.Age(Date)"/>.
+    /// Used in <see cref="DateSpan.Age(Date)" />.
     /// </remarks>
     WithoutMonths = 2,
 

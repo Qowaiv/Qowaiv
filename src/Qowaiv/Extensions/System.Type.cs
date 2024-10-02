@@ -1,22 +1,22 @@
-﻿using Qowaiv;
+using Qowaiv;
 using System.Runtime.CompilerServices;
 
 namespace System;
 
-/// <summary>Extensions on <see cref="Type"/>.</summary>
+/// <summary>Extensions on <see cref="Type" />.</summary>
 public static class QowaivTypeExtensions
 {
     private static readonly ConditionalWeakTable<Type, string> _shortNameCache = new();
     private static readonly ConditionalWeakTable<Type, string> _longNameCache = new();
 
-    /// <summary>Gets a C# formatted <see cref="string"/> representing the <see cref="Type"/>.</summary>
+    /// <summary>Gets a C# formatted <see cref="string" /> representing the <see cref="Type" />.</summary>
     /// <param name="type">
     /// The type to format as C# string.
     /// </param>
     [Pure]
     public static string ToCSharpString(this Type type) => type.ToCSharpString(false);
 
-    /// <summary>Gets a C# formatted <see cref="string"/> representing the <see cref="Type"/>.</summary>
+    /// <summary>Gets a C# formatted <see cref="string" /> representing the <see cref="Type" />.</summary>
     /// <param name="type">
     /// The type to format as C# string.
     /// </param>

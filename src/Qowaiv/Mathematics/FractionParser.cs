@@ -1,4 +1,4 @@
-﻿namespace Qowaiv.Mathematics;
+namespace Qowaiv.Mathematics;
 
 internal static class FractionParser
 {
@@ -120,7 +120,7 @@ internal static class FractionParser
         }
     }
 
-    /// <summary>Parse the fraction, using <see cref="long.Parse(string)"/>, <see cref="decimal.Parse(string)"/>, and <see cref="Percentage.Parse(string)"/>.</summary>
+    /// <summary>Parse the fraction, using <see cref="long.Parse(string)" />, <see cref="decimal.Parse(string)" />, and <see cref="Percentage.Parse(string)" />.</summary>
     [Pure]
     private static Fraction? External(string s, IFormatProvider? formatInfo)
     {
@@ -149,7 +149,7 @@ internal static class FractionParser
         return seperator == " " ? '+' : ' ';
     }
 
-    /// <summary>Only strings containing percentage markers (%, ‰, ‱) should be parsed by <see cref="Percentage.TryParse(string)"/>.</summary>
+    /// <summary>Only strings containing percentage markers (%, ‰, ‱) should be parsed by <see cref="Percentage.TryParse(string)" />.</summary>
     [Pure]
     private static bool PotentialPercentage(string str) => str.Any(ch => "%‰‱".Contains(ch));
 

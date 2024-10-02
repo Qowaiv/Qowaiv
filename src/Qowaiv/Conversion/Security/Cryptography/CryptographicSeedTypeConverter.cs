@@ -1,4 +1,4 @@
-﻿using Qowaiv.Security.Cryptography;
+using Qowaiv.Security.Cryptography;
 
 namespace Qowaiv.Conversion.Security.Cryptography;
 

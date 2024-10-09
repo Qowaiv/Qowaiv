@@ -6,4 +6,7 @@ namespace Qowaiv.Diagnostics.Contracts;
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
 [Conditional("CONTRACTS_FULL")]
 [ExcludeFromCodeCoverage]
-internal sealed class FluentSyntaxAttribute(string? justification = null) : ImpureAttribute(justification) { }
+internal sealed class FluentSyntaxAttribute(string? justification) : ImpureAttribute(justification)
+{
+    public FluentSyntaxAttribute() : this(null) { }
+}

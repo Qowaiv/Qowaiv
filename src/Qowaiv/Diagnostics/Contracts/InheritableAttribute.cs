@@ -4,8 +4,10 @@ namespace Qowaiv.Diagnostics.Contracts;
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
 [Conditional("CONTRACTS_FULL")]
 [ExcludeFromCodeCoverage]
-internal class InheritableAttribute(string? justification = null) : Attribute
+internal class InheritableAttribute(string? justification) : Attribute
 {
+    public InheritableAttribute() : this(null) { }
+
     /// <summary>The justification of this decoration.</summary>
     public string? Justification { get; init; } = justification;
 }

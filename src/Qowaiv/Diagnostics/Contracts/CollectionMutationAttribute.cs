@@ -6,4 +6,7 @@ namespace Qowaiv.Diagnostics.Contracts;
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
 [Conditional("CONTRACTS_FULL")]
 [ExcludeFromCodeCoverage]
-internal sealed class CollectionMutationAttribute(string? justification = null) : ImpureAttribute(justification) { }
+internal sealed class CollectionMutationAttribute(string? justification) : ImpureAttribute(justification)
+{
+    public CollectionMutationAttribute() : this(null) { }
+}

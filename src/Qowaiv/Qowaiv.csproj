@@ -5,11 +5,12 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>7.0.5</Version>
+    <Version>7.1.0</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
       <![CDATA[
-ToBeReleased
+v7.1.0
+- Diagnostics contracts compiled internals.
 - Wildcard patterns with trailing chars at the end. #417 (fix)
 v7.0.5
 - Extensions to calculate the sum and average for multiple percentges. #415
@@ -162,10 +163,6 @@ v5.1.2
     </EmbeddedResource>
     <EmbeddedResource Update="YesNoLabels.resx">
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" PrivateAssets="all" IncludeAssets="compiler" />
   </ItemGroup>
 
 </Project>

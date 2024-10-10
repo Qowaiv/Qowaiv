@@ -15,13 +15,13 @@ public class Generate
             var ch = (char)c;
 
             var cat = 0;
-            cat |= IsLocal(ch) ? 1: 0;
+            cat |= IsLocal(ch) ? 1 : 0;
             cat |= IsDomain(ch) ? 2 : 0;
             cat |= IsTopDomain(ch) ? 4 : 0;
             cat |= IsPunycode(ch) ? 8 : 0;
 
             sb.Append($"0x0{Convert.ToString(cat, 16)},");
-            if(c % 16 == 15)
+            if (c % 16 == 15)
             {
                 sb.AppendLine();
             }

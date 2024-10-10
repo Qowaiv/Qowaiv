@@ -88,7 +88,7 @@ public class Method : SingleValueObjectSpecs
     private static bool IsOverload(IEnumerable<Type> method, IEnumerable<Type> overload)
         => method.Select(t => t == typeof(Date) ? typeof(DateOnly) : t).SequenceEqual(overload);
 
-    private static bool WithDateParameter(MethodInfo method) 
+    private static bool WithDateParameter(MethodInfo method)
         => method.GetParameters().Exists(p => p.ParameterType == typeof(Date))
         && method.ReturnType != typeof(Date)
         && method.DeclaringType != typeof(Date);

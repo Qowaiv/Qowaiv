@@ -209,9 +209,16 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
         public YesNoValues() : base(new()
         {
             [string.Empty] = 0,
-            ["0"] = 1, ["N"] = 1, ["NO"] = 1, ["FALSE"] = 1,
-            ["1"] = 2, ["Y"] = 2, ["YES"] = 2, ["TRUE"] = 2,
-        }) { }
+            ["0"] = 1,
+            ["N"] = 1,
+            ["NO"] = 1,
+            ["FALSE"] = 1,
+            ["1"] = 2,
+            ["Y"] = 2,
+            ["YES"] = 2,
+            ["TRUE"] = 2,
+        })
+        { }
 
         protected override void AddCulture(CultureInfo culture)
         {

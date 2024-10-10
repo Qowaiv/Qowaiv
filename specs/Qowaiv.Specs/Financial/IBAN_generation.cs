@@ -103,7 +103,7 @@ internal class Markdown_file
     }
 
     private static readonly IbanInfo[] Infos = Init();
-    
+
     private static IbanInfo[] Init()
     {
         using var reader = Location.OpenText();

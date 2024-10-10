@@ -237,7 +237,7 @@ public class Supports_JSON_serialization
     [TestCase("2012-04-23T10:25:43-05:00", "2012-04-23")]
     public void convention_based_deserialization(object json, Date svo)
       => JsonTester.Read<Date>(json).Should().Be(svo);
-  
+
     [TestCase("2012-04-23", "2012-04-23")]
     public void convention_based_serialization(Date svo, object json)
         => JsonTester.Write(svo).Should().Be(json);

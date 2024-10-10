@@ -424,7 +424,7 @@ public class DateSpanTest
     [Test]
     public void Bigger_GreaterThanOrEqual_Smaller_IsTrue()
     {
-       (Bigger >= Smaller).Should().BeTrue();
+        (Bigger >= Smaller).Should().BeTrue();
     }
 
     [Test]

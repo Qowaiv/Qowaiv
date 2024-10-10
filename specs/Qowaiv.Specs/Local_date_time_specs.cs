@@ -180,7 +180,7 @@ public class Supports_type_conversion
     [Test]
     public void from_WeekDate()
         => Converting.From(Svo.WeekDate).To<LocalDateTime>().Should().Be(new LocalDateTime(2017, 06, 11));
-    
+
     [Test]
     public void from_year_month()
         => Converting.From(Svo.YearMonth).To<LocalDateTime>().Should().Be(new LocalDateTime(2017, 06, 01));
@@ -208,7 +208,7 @@ public class Supports_type_conversion
     [Test]
     public void to_DateTimeOffset()
         => Converting.To<DateTimeOffset>().From(Svo.LocalDateTime).Should().Be(Svo.DateTimeOffset);
-       
+
     [Test]
     public void to_Date()
         => Converting.To<Date>().From(Svo.LocalDateTime).Should().Be(Svo.Date);

@@ -14,7 +14,7 @@ public static class Svo
 
     /// <summary>10028-14-5 (Nobelium)</summary>
     public static readonly CasRegistryNumber CasRegistryNumber = 10028_14_5.CasNr();
-    
+
     /// <summary>Holy See (VA)</summary>
     public static readonly Country Country = Country.VA;
 
@@ -36,7 +36,7 @@ public static class Svo
 
     /// <summary>2017-06-11 06:15:00U</summary>
     public static readonly DateTime DateTime = new(2017, 06, 11, 06, 15, 00, 000, DateTimeKind.Local);
-    
+
     /// <summary>2017-06-11 06:15:00 +0:00</summary>
     public static readonly DateTimeOffset DateTimeOffset = new(2017, 06, 11, 06, 15, 00, TimeSpan.Zero);
 
@@ -101,7 +101,7 @@ public static class Svo
     /// <summary>PREFIX987654321</summary>
     public static readonly Int64Id Int64Id = Int64Id.Create(987654321L);
     public static readonly StringId StringId = StringId.Parse("Qowaiv-ID");
-    
+
     /// <summary>8A1A8C42-D2FF-E254-E26E-B6ABCBF19420</summary>
     public static readonly CustomGuid CustomGuid = CustomGuid.Parse("8A1A8C42-D2FF-E254-E26E-B6ABCBF19420");
     public static readonly CustomUuid CustomUuid = CustomUuid.Parse("Qowaiv_SVOLibrary_GUIA");
@@ -120,7 +120,7 @@ public sealed class ForCustomSvo : SvoBehavior
     public override int MaxLength => 16;
     public override Regex Pattern => new("^[A-Z]+$", RegexOptions.Compiled, TimeSpan.FromMilliseconds(1));
 
-    public override string NormalizeInput(string? str, IFormatProvider? formatProvider) 
+    public override string NormalizeInput(string? str, IFormatProvider? formatProvider)
         => str?.Replace("-", "").ToUpper(formatProvider ?? CultureInfo.InvariantCulture) ?? string.Empty;
 }
 
@@ -130,7 +130,7 @@ public sealed class ForInt32 : Int32IdBehavior
        => string.Format(formatProvider, $"PREFIX{{0:{format}}}", obj);
 
     public override bool TryParse(string? str, out object? id)
-        => str is { Length: > 6} && str[..6] == "PREFIX"
+        => str is { Length: > 6 } && str[..6] == "PREFIX"
         ? base.TryParse(str[6..], out id)
         : base.TryParse(str, out id);
 }
@@ -146,7 +146,7 @@ public sealed class ForInt64 : Int64IdBehavior
         && IsValid(number);
 
     public override bool TryParse(string? str, out object? id)
-        => str is {Length: > 6 } && str[..6] == "PREFIX"
+        => str is { Length: > 6 } && str[..6] == "PREFIX"
         ? base.TryParse(str[6..], out id)
         : base.TryParse(str, out id) && IsValid(id!);
 

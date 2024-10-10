@@ -1,6 +1,6 @@
 namespace TestTools.IO.Temporary_directory_specs;
 
-public  class Implicitly_converts
+public class Implicitly_converts
 {
     [Test]
     public void To_directory_info_from_instance()

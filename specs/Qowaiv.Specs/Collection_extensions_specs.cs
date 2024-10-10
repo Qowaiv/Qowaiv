@@ -38,7 +38,7 @@ public class Amounts
     [Test]
     public void Average_on_selected_nullable_empty_collection_is_zero()
         => Array.Empty<Amount?>().Average(Selection).Should().BeNull();
-       
+
     [Test]
     public void Average_on_nullable_empty_collection_is_zero()
         => Array.Empty<Amount?>().Average().Should().BeNull();

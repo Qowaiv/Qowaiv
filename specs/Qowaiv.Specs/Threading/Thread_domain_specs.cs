@@ -15,7 +15,7 @@ public class Gets
     }
 
     [Test]
-    public void default_value_for_type_without_registered_factory() 
+    public void default_value_for_type_without_registered_factory()
         => ThreadDomain.Current.Get<InternationalBankAccountNumber>()
             .Should().Be(default);
 

@@ -290,7 +290,8 @@ public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<
                 { "1", 2 },  { "M", 2 },  { "♂", 2 }, { "MALE", 2 },
                 { "2", 4 },  { "F", 4 },  { "♀", 4 }, { "FEMALE", 4 },
                 { "9", 18 }, { "X", 18 }, { "NOTAPPLICABLE", 18 },
-            }) { }
+            })
+        { }
 
         protected override void AddCulture(CultureInfo culture)
         {

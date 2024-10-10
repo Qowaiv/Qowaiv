@@ -3,7 +3,7 @@ namespace TestTools.Should.Have_debugger_display_specs;
 public class Discovers
 {
     [Test]
-    public void DebuggerDisplay_property_on_class() 
+    public void DebuggerDisplay_property_on_class()
         => new SimpleClass().Should().HaveDebuggerDisplay("SimpleClass display");
 
     [Test]

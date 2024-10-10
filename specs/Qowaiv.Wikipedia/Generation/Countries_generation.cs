@@ -36,7 +36,7 @@ public class Resource_files
     {
         var country = Country.Parse(info.Name);
         var summary = new Iso3166_3(
-            country.EnglishName, 
+            country.EnglishName,
             country.IsoAlpha2Code,
             country.IsoAlpha3Code,
             country.IsoNumericCode,
@@ -73,7 +73,7 @@ public class Resource_files
         {
             var display = country.GetDisplayName(TestCultures.es);
             display.Should().MatchWikipedia(await CountryDisplayName.es(country))
-                .And.BeTrimmed(); 
+                .And.BeTrimmed();
         }
 
         [TestCaseSource(nameof(Existing))]
@@ -141,7 +141,7 @@ public class Resource_files
 
             // Including Kosovo, that is still disputed: https://en.wikipedia.org/wiki/XK_(user_assigned_code)
             var data = new Dictionary<string, CountryData>()
-            { 
+            {
                 ["XK"] = new CountryData("XK")
                 {
                     DisplayName = "Kosovo",
@@ -164,7 +164,7 @@ public class Resource_files
                 };
             }
 
-            foreach(var c in Iso3166_1s)
+            foreach (var c in Iso3166_1s)
             {
                 data[c.Iso2] = new(c.Iso2)
                 {
@@ -220,7 +220,7 @@ public class Resource_files
         public async Task fr()
             => (await CountryDisplayName.Update("Inconnu", TestCultures.fr, CountryDisplayName.fr))
             .Should().NotThrow();
-    
+
         [Test]
         public async Task it()
             => (await CountryDisplayName.Update("Sconosciuto", TestCultures.it, CountryDisplayName.it))
@@ -233,7 +233,7 @@ public class Resource_files
 
         [Test]
         public async Task nl()
-            => (await CountryDisplayName.Update("Onbekend",TestCultures.nl,CountryDisplayName.nl))
+            => (await CountryDisplayName.Update("Onbekend", TestCultures.nl, CountryDisplayName.nl))
             .Should().NotThrow();
 
         [Test]

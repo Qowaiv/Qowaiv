@@ -5,10 +5,12 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>7.0.0</Version>
+    <Version>7.0.1</Version>
     <PackageId>Qowaiv.Data.SqlClient</PackageId>
     <PackageReleaseNotes>
       <![CDATA[
+v7.0.1
+- Update Qowaiv.Diagnostics.Contracts to 2.0.0. #418
 v7.0.0
 - Implement IMinMaxValue<TSelf> for SVO's with a min and max value. #362 (breaking)
 - Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
@@ -40,7 +42,7 @@ v6.0.0
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" PrivateAssets="all" IncludeAssets="compiler" />
+    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="../Qowaiv/Qowaiv.csproj" />
   </ItemGroup>
 

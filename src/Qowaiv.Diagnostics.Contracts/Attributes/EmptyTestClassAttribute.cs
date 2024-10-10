@@ -10,4 +10,7 @@ namespace Qowaiv.Diagnostics.Contracts;
 /// </remarks>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 [Conditional("CONTRACTS_FULL")]
-internal sealed class EmptyTestClassAttribute(string? justification = null) : EmptyClassAttribute(justification ?? "For test purposes.") { }
+internal sealed class EmptyTestClassAttribute(string? justification) : EmptyClassAttribute(justification ?? "For test purposes.") 
+{
+    public EmptyTestClassAttribute() : this(null) { }
+}

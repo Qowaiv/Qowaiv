@@ -9,8 +9,7 @@ should add the dependency as follows:
   <PackageReference
     Include="Qowaiv.Diagnostics.Contracts"
     Version="*"
-    PrivateAssets=""all"
-    IncludeAssets="compile" />
+    PrivateAssets=""all" />
 <ItemGroup>
 ```
 

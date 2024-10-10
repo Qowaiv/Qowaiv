@@ -1,3 +1,4 @@
+using System.Resources;
 using System.Runtime.InteropServices;
 
 // If not specified otherwise, the resources are in USA English.

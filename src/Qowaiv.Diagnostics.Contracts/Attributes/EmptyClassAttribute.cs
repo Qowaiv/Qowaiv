@@ -1,3 +1,6 @@
+using System;
+using System.Diagnostics;
+
 namespace Qowaiv.Diagnostics.Contracts;
 
 /// <summary>Indicates the class is empty by design.</summary>
@@ -7,4 +10,4 @@ namespace Qowaiv.Diagnostics.Contracts;
 /// </remarks>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 [Conditional("CONTRACTS_FULL")]
-public sealed class EmptyTestClassAttribute(string? justification = null) : EmptyClassAttribute(justification ?? "For test purposes.") { }
+internal class EmptyClassAttribute(string justification) : EmptyTypeAttribute(justification) { }

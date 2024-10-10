@@ -140,6 +140,10 @@ v5.1.2
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
   </ItemGroup>
   

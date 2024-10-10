@@ -161,6 +161,8 @@ public class Is_equal_by_value
 
 public class Can_be_parsed
 {
+    [TestCase("en", "17.51")]
+    [TestCase("nl", "17,51")]
     [TestCase("en", "175.1‰")]
     [TestCase("en", "175.1‰")]
     [TestCase("en", "1751‱")]

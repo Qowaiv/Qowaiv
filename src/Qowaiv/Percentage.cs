@@ -242,20 +242,45 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     [Pure]
     private string ToXmlString() => ToString(DefaultFormat + PercentSymbol, CultureInfo.InvariantCulture);
 
-    /// <summary>Casts a decimal to a Percentage.</summary>
+    /// <summary>Casts a decimal to a Percentage.
+    /// <example>E.g:
+    /// (Percentage)1.23m => 1.23%
+    /// (Percentage)0.1m => 0.1%
+    /// </example>
+    /// </summary>
     public static explicit operator Percentage(decimal val) => new(val);
 
-    /// <summary>Casts a decimal to a Percentage.</summary>
+    /// <summary>Casts a decimal to a Percentage.
+    /// <example>E.g:
+    /// (Percentage)1.23 => 1.23%
+    /// (Percentage)0.1 => 0.1%
+    /// </example>
+    /// </summary>
     public static explicit operator Percentage(double val) => Create(val);
 
-    /// <summary>Casts a Percentage to a decimal.</summary>
+    /// <summary>Casts a Percentage to a decimal.
+    /// <example>E.g:
+    /// 1.23% => 1.23m
+    /// 0.1% => 0.1m
+    /// </example>
+    /// </summary>
     public static explicit operator decimal(Percentage val) => val.m_Value;
 
-    /// <summary>Casts a Percentage to a double.</summary>
+    /// <summary>Casts a Percentage to a double.
+    /// <example>E.g:
+    /// 1.23% => 1.23
+    /// 0.1% => 0.1
+    /// </example>
+    /// </summary>
     public static explicit operator double(Percentage val) => (double)val.m_Value;
 
     /// <summary>Converts the string to a Percentage.
     /// A return value indicates whether the conversion succeeded.
+    /// <example>E.g:
+    /// "1.23%" => 1.23%
+    /// "175.1‰" => 17.51%
+    /// "0.1" => 0.1%
+    /// </example>
     /// </summary>
     /// <param name="s">
     /// A string containing a Percentage to convert.
@@ -329,7 +354,12 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
         }
     }
 
-    /// <summary>Creates a Percentage from a Decimal.</summary >
+    /// <summary>Creates a Percentage from a Decimal.
+    /// <example>E.g:
+    /// Percentage.Create(1.23m) => 123%
+    /// Percentage.Create(0.1m) => 10%
+    /// </example>
+    /// </summary >
     /// <param name="val" >
     /// A decimal describing a Percentage.
     /// </param >
@@ -339,7 +369,12 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
         ? new(val)
         : throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRange_Percentage, (Exception?)null);
 
-    /// <summary>Creates a Percentage from a Double.</summary >
+    /// <summary>Creates a Percentage from a Double.
+    /// <example>E.g:
+    /// Percentage.Create(1.23) => 123%
+    /// Percentage.Create(0.1) => 10%
+    /// </example>
+    /// </summary >
     /// <param name="val" >
     /// A decimal describing a Percentage.
     /// </param >

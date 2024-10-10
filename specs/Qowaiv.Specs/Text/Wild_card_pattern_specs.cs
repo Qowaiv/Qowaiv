@@ -39,7 +39,7 @@ public class Is_match
     [TestCase("Qowaiv??", "Qowaiv")]
     [TestCase("Qowaiv*", "Qowaiv")]
     [TestCase("Qowaiv*?*", "Qowaiv")]
-    public void with_trailing(string pattern, string input) 
+    public void with_trailing(string pattern, string input)
         => WildcardPattern.IsMatch(pattern, input, WildcardPatternOptions.SingleOrTrailing, StringComparison.Ordinal)
         .Should().BeTrue();
 

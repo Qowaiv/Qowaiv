@@ -43,7 +43,7 @@ public static class QowaivDebuggerDisplayAssertions
             .ForCondition(prop is { })
             .FailWith($"'{assertions.Subject.GetType()}' has no DebuggerDisplay defined"))
         {
-           prop!.GetValue(assertions.Subject).Should().Be(display, because, becauseArgs);
+            prop!.GetValue(assertions.Subject).Should().Be(display, because, becauseArgs);
         }
         return new AndConstraint<ComparableTypeAssertions<T>>(assertions);
     }

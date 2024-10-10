@@ -7,7 +7,7 @@ namespace Qowaiv.TestTools.Resx;
 public sealed class XResourceFileData
 {
     /// <summary>Initializes a new instance of the <see cref="XResourceFileData" /> class.</summary>
-    private XResourceFileData() 
+    private XResourceFileData()
     {
         Name = string.Empty;
         Value = string.Empty;

@@ -1,5 +1,3 @@
-using System.IO;
-
 namespace Qowaiv.Text;
 
 /// <summary>Represents a wildcard pattern.</summary>
@@ -298,8 +296,6 @@ public class WildcardPattern : ISerializable
         public readonly string Value = str;
 
         public char Ch => Value[Position];
-
-        public int Left => Value.Length - Position;
 
         [Pure]
         public bool IsEnd() => Position >= Value.Length;

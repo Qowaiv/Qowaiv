@@ -63,15 +63,15 @@ public class Compares
 
     [Test]
     public void Null_with_UUID_as_minus_1()
-	=> UuidComparer.Default.Compare(null, Uuid.NewUuid()).Should().Be(-1);
+    => UuidComparer.Default.Compare(null, Uuid.NewUuid()).Should().Be(-1);
 
-	[Test]
+    [Test]
     public void GUID_with_null_as_plus_1()
-	    => UuidComparer.Default.Compare(Guid.NewGuid(), null).Should().Be(+1);
+        => UuidComparer.Default.Compare(Guid.NewGuid(), null).Should().Be(+1);
 
-	[Test]
+    [Test]
     public void UUID_with_null_as_plus_1()
-	    => UuidComparer.Default.Compare(Uuid.NewUuid(), null).Should().Be(+1);
+        => UuidComparer.Default.Compare(Uuid.NewUuid(), null).Should().Be(+1);
 
     [Test]
     public void GUID_with_UUID()

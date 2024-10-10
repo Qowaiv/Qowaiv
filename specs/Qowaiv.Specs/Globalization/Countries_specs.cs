@@ -6,7 +6,7 @@ public class All
 
     [TestCaseSource(nameof(all))]
     public void Has_constant(Country country)
-        => typeof(Country).GetField(country.Name, BindingFlags.Static|BindingFlags.Public)
+        => typeof(Country).GetField(country.Name, BindingFlags.Static | BindingFlags.Public)
         .Should().BeEquivalentTo(new
         {
             FieldType = typeof(Country),

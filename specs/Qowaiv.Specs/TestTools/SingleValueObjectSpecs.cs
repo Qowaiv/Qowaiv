@@ -8,20 +8,20 @@ public class SingleValueObjectSpecs
         => AppDomain.CurrentDomain.GetAssemblies()
         .Where(assembly => assembly.FullName!.Contains("Qowaiv"))
         .SelectMany(assembly => assembly.GetExportedTypes())
-        .Where(type 
-            => type.GetCustomAttributes<SingleValueObjectAttribute>().Any() 
+        .Where(type
+            => type.GetCustomAttributes<SingleValueObjectAttribute>().Any()
             && !type.GetCustomAttributes<ObsoleteAttribute>().Any());
 
     public static IEnumerable<Type> AllSvosExceptGeneric
         => AllSvos.Where(svo => !svo.IsGenericType);
 
-    public static IEnumerable<Type> SvosWithEmpty 
+    public static IEnumerable<Type> SvosWithEmpty
         => AllSvos.Where(svo
             => !svo.IsGenericType
             && svo.GetCustomAttribute<SingleValueObjectAttribute>() is { } attr
             && attr.StaticOptions.HasFlag(SingleValueStaticOptions.HasEmptyValue));
 
-    public static IEnumerable<Type> SvosWithUnknown 
+    public static IEnumerable<Type> SvosWithUnknown
         => AllSvos.Where(svo
             => !svo.IsGenericType
             && svo.GetCustomAttribute<SingleValueObjectAttribute>() is { } attr

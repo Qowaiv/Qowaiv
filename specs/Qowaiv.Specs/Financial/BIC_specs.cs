@@ -74,7 +74,7 @@ public class Is_valid
     [TestCase("UNCRIT2B912")]
     [TestCase("DSBACNBXSHA")]
     [TestCase("AAAANLBË")]
-    public void For(string str) 
+    public void For(string str)
         => BusinessIdentifierCode.Parse(str).IsEmptyOrUnknown().Should().BeFalse();
 }
 
@@ -95,7 +95,7 @@ public class Supports_JSON_serialization
     [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
     public void System_Text_JSON_deserialization(object json, BusinessIdentifierCode svo)
         => JsonTester.Read_System_Text_JSON<BusinessIdentifierCode>(json).Should().Be(svo);
-    
+
     [TestCase(null, null)]
     [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
     public void System_Text_JSON_serialization(BusinessIdentifierCode svo, object json)
@@ -104,7 +104,7 @@ public class Supports_JSON_serialization
     [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
     public void convention_based_deserialization(object json, BusinessIdentifierCode svo)
         => JsonTester.Read<BusinessIdentifierCode>(json).Should().Be(svo);
-        
+
     [TestCase(null, null)]
     [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
     public void convention_based_serialization(BusinessIdentifierCode svo, object json)

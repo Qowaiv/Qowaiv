@@ -19,7 +19,7 @@ internal class SomeClass
 {
     [CollectionMutation("It just returns if addition worked.")]
     public bool CollectionMutation(HashSet<SomeClass> set) => set.Add(this);
-    
+
     [Impure("It has side effects.")]
     public static int Impure() => 42;
 

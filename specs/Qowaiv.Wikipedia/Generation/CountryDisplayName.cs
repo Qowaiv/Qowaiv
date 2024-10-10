@@ -43,7 +43,7 @@ public static class CountryDisplayName
         return Lookup.AR.TryGetValue(country, out var display)
                   ? display : null;
     }
-    
+
     private static async Task<IEnumerable<Display>> ar()
     {
         var lemma = new WikiLemma("قائمة_الدول_حسب_المعيار_الدولي_أيزو_3166-1", TestCultures.ar);
@@ -288,7 +288,7 @@ public static class CountryDisplayName
 
     public static Task<string?> ru(Country country)
     {
-       return Task.FromResult<string?>(country.GetDisplayName(TestCultures.ru));
+        return Task.FromResult<string?>(country.GetDisplayName(TestCultures.ru));
     }
 
     public static Task<string?> zh(Country country)

@@ -76,7 +76,7 @@ public partial class UuidBenchmark
 
         public override string ToString(object? obj, string? format, IFormatProvider? formatProvider)
             => obj is Guid guid
-            ? ToString(guid, format):
+            ? ToString(guid, format) :
             base.ToString(obj, format, formatProvider);
 
         private static string ToString(Guid guid, string? format)

@@ -16,7 +16,7 @@ public partial class IbanBenchmark
         {
             Inputs = Unformatted.OrderBy(_ => Rnd.Next()).Take(Iterations).ToArray();
         }
-            
+
         [Benchmark(Baseline = true)]
         public Iban?[] BBAN()
         {

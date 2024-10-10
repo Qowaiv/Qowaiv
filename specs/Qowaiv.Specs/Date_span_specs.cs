@@ -228,7 +228,7 @@ public class Can_subtract
         var r = new DateSpan(-2, 2, 7);
         (l - r).Should().Be(new DateSpan(14, 1, -3));
     }
-    
+
     [Test]
     public void two_Dates()
         => DateSpan.Subtract(new Date(2023, 11, 17), Svo.Date)

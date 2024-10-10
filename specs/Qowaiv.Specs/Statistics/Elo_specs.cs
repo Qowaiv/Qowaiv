@@ -68,7 +68,7 @@ public class Is_Finite_only
     [TestCase(double.NaN)]
     [TestCase(double.PositiveInfinity)]
     [TestCase(double.NegativeInfinity)]
-    public void Can_not_create(double dbl) 
+    public void Can_not_create(double dbl)
         => dbl.Invoking(Elo.Create)
         .Should().Throw<ArgumentException>()
         .WithMessage("The number can not represent an Elo.*");
@@ -161,7 +161,7 @@ public class Supports_JSON_serialization
     [TestCase(1258.9, 1258.9)]
     public void convention_based_deserialization(object json, Elo svo)
        => JsonTester.Read<Elo>(json).Should().Be(svo);
-       
+
     [TestCase(1258.9, 1258.9)]
     public void convention_based_serialization(Elo svo, object json)
         => JsonTester.Write(svo).Should().Be(json);

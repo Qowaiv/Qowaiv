@@ -17,7 +17,7 @@ public class With_domain_logic
     /// predict the outcome.
     /// </remarks>
     [TestCaseSource(typeof(Country), nameof(Country.All))]
-    public void RegionInfo_exists_indicates_counterpart_exists(Country country) 
+    public void RegionInfo_exists_indicates_counterpart_exists(Country country)
         => country.Invoking(c => c.RegionInfoExists).Should().NotThrow();
 }
 

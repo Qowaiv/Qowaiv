@@ -1060,7 +1060,6 @@ public static class QowaivEnumerableExtensions
         return none ? null : Percentage.Create(total);
     }
 
-
     /// <summary>Computes the sum of a sequence of stream sizes.</summary>
     [Pure]
     public static StreamSize Sum(this IEnumerable<StreamSize> streamSizes)

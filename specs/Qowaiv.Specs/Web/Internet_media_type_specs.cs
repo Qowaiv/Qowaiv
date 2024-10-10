@@ -16,7 +16,7 @@ public class With_domain_logic
 public class Created_from_file
 {
     [Test]
-    public void IO_File_info() 
+    public void IO_File_info()
         => InternetMediaType.FromFile(new FileInfo("games.pgn")).Should().Be(Svo.InternetMediaType);
 
     [TestCase(".unknown")]
@@ -93,7 +93,7 @@ public class Supports_JSON_serialization
     [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
     public void System_Text_JSON_deserialization(object json, InternetMediaType svo)
         => JsonTester.Read_System_Text_JSON<InternetMediaType>(json).Should().Be(svo);
-    
+
     [TestCase(null, null)]
     [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
     public void System_Text_JSON_serialization(InternetMediaType svo, object json)

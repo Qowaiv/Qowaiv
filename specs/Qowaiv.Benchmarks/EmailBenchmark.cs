@@ -7,7 +7,7 @@ public class EmailBenchmark
     [Benchmark]
     public EmailAddress[] Parse()
     {
-        for(var i = 0; i < Parsed.Length;i++)
+        for (var i = 0; i < Parsed.Length; i++)
         {
             Parsed[i] = EmailAddress.Parse(Emails[i]);
         }

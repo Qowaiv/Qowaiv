@@ -28,7 +28,7 @@ public class With_domain_logic
     [TestCase(true, "")]
     public void IsEmpty_returns(bool result, PostalCode svo)
         => svo.IsEmpty().Should().Be(result);
-    
+
 
     [TestCase(false, "H0H0H0")]
     [TestCase(true, "?")]
@@ -82,11 +82,11 @@ public class Is_equal_by_value
     [Test]
     public void not_equal_to_null()
         => Svo.PostalCode.Equals(null).Should().BeFalse();
-    
+
     [Test]
     public void not_equal_to_other_type()
         => Svo.PostalCode.Equals(new object()).Should().BeFalse();
-    
+
     [Test]
     public void not_equal_to_different_value()
         => Svo.PostalCode.Equals(PostalCode.Parse("different")).Should().BeFalse();
@@ -102,7 +102,7 @@ public class Is_equal_by_value
     [Test]
     public void equal_operator_returns_false_for_different_values()
         => (Svo.PostalCode == PostalCode.Parse("different")).Should().BeFalse();
-    
+
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
         => (Svo.PostalCode != PostalCode.Parse("H0H0H0")).Should().BeFalse();
@@ -126,7 +126,7 @@ public class Can_be_parsed
     [Test]
     public void from_null_string_represents_Empty()
         => PostalCode.Parse(null).Should().Be(PostalCode.Empty);
-    
+
 
     [Test]
     public void from_empty_string_represents_Empty()
@@ -135,7 +135,7 @@ public class Can_be_parsed
     [Test]
     public void from_question_mark_represents_Unknown()
         => PostalCode.Parse("?").Should().Be(PostalCode.Unknown);
-   
+
     [TestCase("en", "H0H0H0")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
@@ -159,7 +159,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
         => PostalCode.TryParse("invalid input", out _).Should().BeFalse();
-        
+
 
     [Test]
     public void from_invalid_as_null_with_TryParse()
@@ -408,7 +408,7 @@ public class Supports_XML_serialization
     [Test]
     public void using_DataContractSerializer()
         => SerializeDeserialize.DataContract(Svo.PostalCode).Should().Be(Svo.PostalCode);
-    
+
     [Test]
     public void as_part_of_a_structure()
     {

@@ -58,9 +58,9 @@ public class To_non_diacritic
 
     [Test]
     public void string_empty_stays_string_empty()
-	    => StringFormatter.ToNonDiacritic(string.Empty).Should().Be(string.Empty);
+        => StringFormatter.ToNonDiacritic(string.Empty).Should().Be(string.Empty);
 
-	[Test]
+    [Test]
     public void updates_diacritic()
         => StringFormatter.ToNonDiacritic("Café & Straße").Should().Be("Cafe & Strasze");
 

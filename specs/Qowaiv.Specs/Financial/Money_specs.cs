@@ -76,7 +76,7 @@ public class Supports_JSON_serialization
     [TestCase(42.17, "42.17")]
     public void convention_based_deserialization(object json, Money svo)
         => JsonTester.Read<Money>(json).Should().Be(svo);
-    
+
     [TestCase("EUR42.17", "EUR42.17")]
     public void convention_based_serialization(Money svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
@@ -102,7 +102,7 @@ public class Has_operators
     [Test]
     public void to_divide_money_by_money_with_different_currencies_is_not_supported()
     {
-        Func<decimal> division =  () => Svo.Money / (16 + Currency.USD);
+        Func<decimal> division = () => Svo.Money / (16 + Currency.USD);
         division.Should().Throw<CurrencyMismatchException>();
     }
 }

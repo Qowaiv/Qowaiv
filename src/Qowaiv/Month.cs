@@ -310,7 +310,8 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
             { "OCT", 10 }, { "OCTOBER", 10 },
             { "NOV", 11 }, { "NOVEMBER", 11 },
             { "DEC", 12 }, { "DECEMBER", 12 },
-        }) { }
+        })
+        { }
 
         protected override void AddCulture(CultureInfo culture)
         {

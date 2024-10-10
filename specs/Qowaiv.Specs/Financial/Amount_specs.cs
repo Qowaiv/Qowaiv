@@ -135,7 +135,7 @@ public class Supports_type_conversion
         [Test]
         public void System_Text_JSON_serialization_Max_value()
         {
-           var json = System.Text.Json.JsonSerializer.Serialize(Amount.MaxValue);
+            var json = System.Text.Json.JsonSerializer.Serialize(Amount.MaxValue);
             json.Should().Be("79228162514264337593543950335");
         }
 #endif

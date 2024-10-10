@@ -304,7 +304,7 @@ public class MailTo_prefix
     [TestCase("not_at_start_mailto:info@qowaiv.org")]
     [TestCase("at_end_mailto:@qowaiv.org")]
     public void only_once_at_start(string mail)
-       =>Email.ShouldBeInvalid(mail);
+       => Email.ShouldBeInvalid(mail);
 
     [Test]
     public void not_with_comment_within()
@@ -390,7 +390,7 @@ internal static class Email
 {
     public static void ShouldBeValid(string str)
         => EmailAddress.Parse(str).IsEmptyOrUnknown().Should().BeFalse();
-    
+
     public static void ShouldBeInvalid(string str)
         => EmailAddress.TryParse(str).Should().BeNull();
 }

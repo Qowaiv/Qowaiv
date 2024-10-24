@@ -1,0 +1,6 @@
+root = false
+
+# Static code analysis
+[*]
+dotnet_diagnostic.IDE0130.severity = none    # Folder structure does not match namespace. Justification: Files are only emited during code generation.
+dotnet_diagnostic.QW0007.severity  = none    # Use a file-scoped namespace declaration. Justification: Support lower language versions (< C#10).

@@ -1,12 +1,10 @@
-using System;
-using System.Diagnostics;
-
-namespace Qowaiv.Diagnostics.Contracts;
-
-/// <summary>Indicates the class is empty by design.</summary>
-[AttributeUsage(AttributeTargets.Interface, AllowMultiple = false)]
-[Conditional("CONTRACTS_FULL")]
-internal sealed class EmptyTestInterfaceAttribute(string? justification) : EmptyInterfaceAttribute(justification ?? "For test purposes.")
+namespace Qowaiv.Diagnostics.Contracts
 {
-    public EmptyTestInterfaceAttribute() : this(null) { }
+    /// <summary>Indicates the class is empty by design.</summary>
+    [System.AttributeUsage(System.AttributeTargets.Interface, AllowMultiple = false)]
+    [System.Diagnostics.Conditional("CONTRACTS_FULL")]
+    internal sealed class EmptyTestInterfaceAttribute(string? justification) : Qowaiv.Diagnostics.Contracts.EmptyInterfaceAttribute(justification ?? "For test purposes.")
+    {
+        public EmptyTestInterfaceAttribute() : this(null) { }
+    }
 }

@@ -1,6 +1,3 @@
-using System;
-using System.Diagnostics;
-
 namespace Qowaiv.Diagnostics.Contracts;
 
 /// <summary>Indicates the class is empty by design.</summary>
@@ -8,9 +5,9 @@ namespace Qowaiv.Diagnostics.Contracts;
 /// Using this attribute prevents S2094 (Classes should not be empty) from
 /// showing up.
 /// </remarks>
-[AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-[Conditional("CONTRACTS_FULL")]
-internal sealed class EmptyTestClassAttribute(string? justification) : EmptyClassAttribute(justification ?? "For test purposes.")
+[System.AttributeUsage(System.AttributeTargets.Class, AllowMultiple = false)]
+[System.Diagnostics.Conditional("CONTRACTS_FULL")]
+internal sealed class EmptyTestClassAttribute(string? justification) : Qowaiv.Diagnostics.Contracts.EmptyClassAttribute(justification ?? "For test purposes.")
 {
     public EmptyTestClassAttribute() : this(null) { }
 }

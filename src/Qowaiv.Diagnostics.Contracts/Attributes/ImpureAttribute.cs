@@ -1,12 +1,9 @@
-using System;
-using System.Diagnostics;
-
 namespace Qowaiv.Diagnostics.Contracts;
 
 /// <summary>To mark a method explicitly as impure.</summary>
-[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
-[Conditional("CONTRACTS_FULL")]
-internal class ImpureAttribute(string? justification) : Attribute
+[System.AttributeUsage(System.AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
+[System.Diagnostics.Conditional("CONTRACTS_FULL")]
+internal class ImpureAttribute(string? justification) : System.Attribute
 {
     public ImpureAttribute() : this(null) { }
 

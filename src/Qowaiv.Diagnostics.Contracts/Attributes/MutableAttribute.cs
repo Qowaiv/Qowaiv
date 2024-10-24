@@ -1,12 +1,9 @@
-using System;
-using System.Diagnostics;
-
 namespace Qowaiv.Diagnostics.Contracts;
 
 /// <summary>Indicates the class is designed to be mutable.</summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
-[Conditional("CONTRACTS_FULL")]
-internal sealed class MutableAttribute(string? justification) : Attribute
+[System.AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Struct | System.AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
+[System.Diagnostics.Conditional("CONTRACTS_FULL")]
+internal sealed class MutableAttribute(string? justification) : System.Attribute
 {
     public MutableAttribute() : this(null) { }
 

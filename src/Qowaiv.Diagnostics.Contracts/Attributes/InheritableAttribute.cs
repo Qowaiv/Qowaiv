@@ -1,12 +1,9 @@
-using System;
-using System.Diagnostics;
-
 namespace Qowaiv.Diagnostics.Contracts;
 
 /// <summary>Indicates the a class is designed to be inheritable.</summary>
-[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-[Conditional("CONTRACTS_FULL")]
-internal class InheritableAttribute(string? justification) : Attribute
+[System.AttributeUsage(System.AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+[System.Diagnostics.Conditional("CONTRACTS_FULL")]
+internal class InheritableAttribute(string? justification) : System.Attribute
 {
     public InheritableAttribute() : this(null) { }
 

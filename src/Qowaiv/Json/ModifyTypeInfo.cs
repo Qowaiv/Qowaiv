@@ -21,7 +21,7 @@ public static class ModifyTypeInfo
         }
     }
 
-    /// <summary>True when the propValue is different to the empty/default value.</summary>
+    /// <summary>True when the propValue is not equal to the empty/default value.</summary>
     [Pure]
     private static Func<object, object?, bool> ShouldSerialize(object emptyValue) =>
         (_, propValue) => !emptyValue.Equals(propValue);

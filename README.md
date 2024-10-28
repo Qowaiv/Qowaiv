@@ -709,7 +709,7 @@ decorated with the `[JsonConverter]` attribute.
 
 #### Do not serialize empty SVO's
 Since .NET 8.0, it is possible to register modifiers for the `System.Text.Json.TypeInfoResolver`.
-This allows to change serialization behavior. On of the things to change is
+This allows you to change serialization behavior, for example by editing
 `ShouldSerialize(object model, object? prop)`. This can be useful if you do not
 want to serialize empty SVO's (such as `EmailAddress.Empty`). To get this
 (non-default) behavior you have to provide `JsonSerializerOptions` when serializing:

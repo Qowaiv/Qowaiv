@@ -703,7 +703,7 @@ based contract.
 * [Qowaiv.Json.Newtonsoft](https://www.nuget.org/packages/Qowaiv.Json.Newtonsoft/)  
 * [Qowaiv.Text.Json.Serialization](https://www.nuget.org/packages/Qowaiv.Text.Json.Serialization/)  
 
-For the .NET 6.0, and higher versions of the package, when using `System.Text.Json`,
+For .NET 6.0, and higher versions of the package, when using `System.Text.Json`,
 no custom serialization registration is required for Qowaiv SVO's: all have been
 decorated with the `[JsonConverter]` attribute.
 

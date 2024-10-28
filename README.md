@@ -703,11 +703,28 @@ based contract.
 * [Qowaiv.Json.Newtonsoft](https://www.nuget.org/packages/Qowaiv.Json.Newtonsoft/)  
 * [Qowaiv.Text.Json.Serialization](https://www.nuget.org/packages/Qowaiv.Text.Json.Serialization/)  
 
-For the .NET 5.0, and higher versions of the package, when using `System.Text.Json`,
+For the .NET 6.0, and higher versions of the package, when using `System.Text.Json`,
 no custom serialization registration is required for Qowaiv SVO's: all have been
 decorated with the `[JsonConverter]` attribute.
 
-#### OpenAPI Specification
+#### Do not serialize empty SVO's
+Since .NET 8.0, it is possible to register modifiers for the `System.Text.Json.TypeInfoResolver`.
+This allows to change serialization behavior. On of the things to change is
+`ShouldSerialize(object model, object? prop)`. This can be useful if you do not
+want to serialize empty SVO's (such as `EmailAddress.Empty`). To get this
+(non-default) behavior you have to provide `JsonSerializerOptions` when serializing:
+
+``` C#
+var options = new JsonSerializerOptions()
+{
+    TypeInfoResolver = new DefaultJsonTypeInfoResolver()
+    {
+        Modifiers = { Qowaiv.Json.ModifyTypeInfo.IgnoreEmptySvos },
+    },
+};
+```
+
+### OpenAPI Specification
 The [OpenAPI Specification](https://swagger.io/docs/specification/about/)
 (formerly Swagger Specification) is an API description format for REST API's.
 

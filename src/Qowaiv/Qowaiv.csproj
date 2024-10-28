@@ -5,10 +5,12 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>7.1.2</Version>
+    <Version>7.1.3</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
       <![CDATA[
+v7.1.3
+- Provide way to skip the JSON serialization of empty SVO's with ModifyTypeInfo.IgnoreEmptySvos. #427
 v7.1.2
 - Add examples to the intellisense of Percentage.Create(), .Percent() and casts from and to numbers.
 v7.1.1

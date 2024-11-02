@@ -116,13 +116,10 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
             while (index < m_Value.Length)
             {
                 buffer[pointer++] = m_Value[index++];
-#pragma warning disable S2583 // Conditionally executed code should be reachable
-                // FP. See: https://github.com/SonarSource/sonar-dotnet/issues/8474
                 if ((index % 4) == 0 && pointer < buffer.Length)
                 {
                     buffer[pointer++] = space;
                 }
-#pragma warning restore S2583 // Conditionally executed code should be reachable
             }
             return new(buffer);
         }
@@ -142,7 +139,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     /// u: as unformatted lowercase (equal to machine readable lowercase).
     /// U: as unformatted uppercase  (equal to machine readable).
     /// h: as human readable lowercase (with non-breaking spaces).
-    /// H: as human readable (equal to machine readable).
+    /// H: as human readable (with non-breaking spaces).
     /// f: as formatted lowercase.
     /// F: as formatted uppercase.
     /// </remarks>
@@ -150,19 +147,19 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
-        : StringFormatter.Apply(this, format.WithDefault("U"), formatProvider, FormatTokens);
+        : StringFormatter.Apply(this, format.WithDefault("M"), formatProvider, FormatTokens);
 
     /// <summary>The format token instructions.</summary>
     private static readonly Dictionary<char, Func<InternationalBankAccountNumber, IFormatProvider, string>> FormatTokens = new()
     {
-        { 'u', (svo, _) => svo.MachineReadable().ToLowerInvariant() },
-        { 'U', (svo, _) => svo.MachineReadable() },
-        { 'm', (svo, _) => svo.MachineReadable().ToLowerInvariant() },
-        { 'M', (svo, _) => svo.MachineReadable() },
-        { 'h', (svo, _) => svo.HumanReadable(' ').ToLowerInvariant() },
-        { 'H', (svo, _) => svo.HumanReadable(' ') },
-        { 'f', (svo, _) => svo.HumanReadable(' ').ToLowerInvariant() },
-        { 'F', (svo, _) => svo.HumanReadable(' ') },
+        ['u'] = (svo, _) => svo.MachineReadable().ToLowerInvariant(),
+        ['U'] = (svo, _) => svo.MachineReadable(),
+        ['m'] = (svo, _) => svo.MachineReadable().ToLowerInvariant(),
+        ['M'] = (svo, _) => svo.MachineReadable(),
+        ['h'] = (svo, _) => svo.HumanReadable((char)160).ToLowerInvariant(),
+        ['H'] = (svo, _) => svo.HumanReadable((char)160),
+        ['f'] = (svo, _) => svo.HumanReadable(' ').ToLowerInvariant(),
+        ['F'] = (svo, _) => svo.HumanReadable(' '),
     };
 
     /// <summary>Gets an XML string representation of the IBAN.</summary>

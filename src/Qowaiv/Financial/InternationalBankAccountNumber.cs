@@ -125,6 +125,27 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
         }
     }
 
+    [Pure]
+    private static string Obfuscate(string iban, char obfucscator)
+    {
+        var buffer = new char[iban.Length];
+
+        var keep = 0;
+        for (var i = iban.Length - 1; i >= 0; i--)
+        {
+            var ch = iban[i];
+            if (ch < '0' || ch > 'Z' || keep++ < 4)
+            {
+                buffer[i] = ch;
+            }
+            else
+            {
+                buffer[i] = obfucscator;
+            }
+        }
+        return new string(buffer);
+    }
+
     /// <summary>Returns a formatted <see cref="string" /> that represents the current IBAN.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
@@ -142,6 +163,8 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     /// H: as human readable (with non-breaking spaces).
     /// f: as formatted lowercase.
     /// F: as formatted uppercase.
+    /// x: as obfuscated lowercase (with non-breaking spaces).
+    /// X: as obfuscated uppercase (with non-breaking spaces).
     /// </remarks>
     [Pure]
     public string ToString(string? format, IFormatProvider? formatProvider)
@@ -156,11 +179,15 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
         ['U'] = (svo, _) => svo.MachineReadable(),
         ['m'] = (svo, _) => svo.MachineReadable().ToLowerInvariant(),
         ['M'] = (svo, _) => svo.MachineReadable(),
-        ['h'] = (svo, _) => svo.HumanReadable((char)160).ToLowerInvariant(),
-        ['H'] = (svo, _) => svo.HumanReadable((char)160),
+        ['h'] = (svo, _) => svo.HumanReadable(Nbsp).ToLowerInvariant(),
+        ['H'] = (svo, _) => svo.HumanReadable(Nbsp),
         ['f'] = (svo, _) => svo.HumanReadable(' ').ToLowerInvariant(),
         ['F'] = (svo, _) => svo.HumanReadable(' '),
+        ['X'] = (svo, _) => Obfuscate(svo.HumanReadable(Nbsp), 'X'),
+        ['x'] = (svo, _) => Obfuscate(svo.HumanReadable(Nbsp), 'x').ToLowerInvariant(),
     };
+
+    private const char Nbsp = (char)160;
 
     /// <summary>Gets an XML string representation of the IBAN.</summary>
     [Pure]

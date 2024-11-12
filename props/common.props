@@ -15,6 +15,7 @@
 
   <PropertyGroup>
     <Title>Qowaiv (Single) Value Object library</Title>
+    <ProductName>Qowaiv</ProductName>
     <Description>
       <![CDATA[
 Qowaiv is a (Single) Value Object library. It aims to model reusable (Single)

@@ -11,8 +11,11 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <Version>2.0.2</Version>
     <PackageId>Qowaiv.Diagnostics.Contracts</PackageId>
+    <ProductName>Qowaiv Diagnostics Contracts</ProductName>
     <PackageReleaseNotes>
       <![CDATA[
+ToBeReleased
+- Generate with #pragma warning disable headers.
 v2.0.2
 - Fix ambiguous reference issue if consuming project defines types with overlapping names.
 - Fix support for C# language version 9 and lower.

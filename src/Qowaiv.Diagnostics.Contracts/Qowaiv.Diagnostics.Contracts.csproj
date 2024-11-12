@@ -11,6 +11,7 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <Version>2.0.2</Version>
     <PackageId>Qowaiv.Diagnostics.Contracts</PackageId>
+    <ProductName>Qowaiv Diagnostics Contracts</ProductName>
     <PackageReleaseNotes>
       <![CDATA[
 ToBeReleased

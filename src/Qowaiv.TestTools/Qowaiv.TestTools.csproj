@@ -7,6 +7,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Version>7.0.1</Version>
     <PackageId>Qowaiv.TestTools</PackageId>
+    <ProductName>Qowaiv Test Tools</ProductName>
     <PackageReleaseNotes>
       <![CDATA[
 v7.0.1

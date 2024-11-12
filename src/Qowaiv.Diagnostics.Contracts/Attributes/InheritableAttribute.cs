@@ -1,3 +1,5 @@
+#pragma warning disable
+
 namespace Qowaiv.Diagnostics.Contracts
 {
     /// <summary>Indicates the a class is designed to be inheritable.</summary>

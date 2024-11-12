@@ -1,3 +1,5 @@
+#pragma warning disable
+
 namespace Qowaiv.Diagnostics.Contracts
 {
     /// <summary>Indicates the struct is empty by design.</summary>

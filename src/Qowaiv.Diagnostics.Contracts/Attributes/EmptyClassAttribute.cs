@@ -1,3 +1,5 @@
+#pragma warning disable
+
 namespace Qowaiv.Diagnostics.Contracts
 {
     /// <summary>Indicates the class is empty by design.</summary>

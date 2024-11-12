@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Threading;
 
 namespace Qowaiv.Data;
 
@@ -90,5 +91,9 @@ public static class SvoParameter
     private static readonly Dictionary<Type, MethodInfo> Casts = [];
 
     /// <summary>The locker for adding a casts and unsupported types.</summary>
+#if NET9_0_OR_GREATER
+    private static readonly Lock locker = new();
+#else
     private static readonly object locker = new();
+#endif
 }

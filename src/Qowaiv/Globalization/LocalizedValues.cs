@@ -1,3 +1,5 @@
+using System.Threading;
+
 namespace Qowaiv.Globalization;
 
 /// <summary>Helper method to store localized string representations of SVO's.</summary>
@@ -47,5 +49,9 @@ internal abstract class LocalizedValues<TValue> : Dictionary<CultureInfo, Dictio
     }
 
     /// <summary>The locker for adding a culture.</summary>
+#if NET9_0_OR_GREATER
+    private readonly Lock locker = new();
+#else
     private readonly object locker = new();
+#endif
 }

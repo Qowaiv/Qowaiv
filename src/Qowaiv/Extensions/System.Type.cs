@@ -1,11 +1,20 @@
 using Qowaiv;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace System;
 
 /// <summary>Extensions on <see cref="Type" />.</summary>
 public static class QowaivTypeExtensions
 {
+#if NET9_0_OR_GREATER
+    private static readonly Lock _shortNameCacheLocker = new();
+    private static readonly Lock _longNameCacheLocker = new();
+#else
+    private static readonly object _shortNameCacheLocker = new();
+    private static readonly object _longNameCacheLocker = new();
+#endif
+
     private static readonly ConditionalWeakTable<Type, string> _shortNameCache = new();
     private static readonly ConditionalWeakTable<Type, string> _longNameCache = new();
 
@@ -38,7 +47,7 @@ public static class QowaivTypeExtensions
             return result;
         }
 
-        lock (_shortNameCache)
+        lock (_shortNameCacheLocker)
         {
             if (!_shortNameCache.TryGetValue(type, out result))
             {
@@ -58,7 +67,7 @@ public static class QowaivTypeExtensions
             return result;
         }
 
-        lock (_longNameCache)
+        lock (_longNameCacheLocker)
         {
             if (!_longNameCache.TryGetValue(type, out result))
             {

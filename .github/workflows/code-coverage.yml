@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Setup .NET 8.0
+      - name: Setup .NET 9.0
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: "8.0.x"
+          dotnet-version: "9.0.x"
       - name: Generate coverage report
         run: |
-          dotnet test ./specs/Qowaiv.Specs -f net8.0 \
+          dotnet test ./specs/Qowaiv.Specs -f net9.0 \
           --configuration Release \
           --collect:"XPlat Code Coverage;Format=lcov"
       - name: Get path to lcov file

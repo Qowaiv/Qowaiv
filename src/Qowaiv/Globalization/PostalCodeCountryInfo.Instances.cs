@@ -432,7 +432,7 @@ public partial class PostalCodeCountryInfo
         { Country.SE, New(Country.SE, @"^[1-9][0-9]{4}$", "^(...)(..)$", "$1 $2") },
 
         // SG: Singapore, http://en.wikipedia.org/wiki/Postal_codes_in_Singapore
-        { Country.SG, New(Country.SG, @"^[0-9]{5}$") },
+        { Country.SG, New(Country.SG, @"^[0-9]{6}$") },
 
         // SH: Saint Helena, http://en.wikipedia.org/wiki/List_of_postal_codes
         { Country.SH, New(Country.SH, @"^STHL1ZZ$", "^.+$", "STHL 1ZZ", isSingle: true) },

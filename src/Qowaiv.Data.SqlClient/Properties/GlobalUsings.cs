@@ -16,6 +16,7 @@ global using System.Linq;
 global using System.Numerics;
 global using System.Resources;
 global using System.Runtime.Serialization;
+global using System.Threading;
 global using System.Xml;
 global using System.Xml.Schema;
 global using System.Xml.Serialization;

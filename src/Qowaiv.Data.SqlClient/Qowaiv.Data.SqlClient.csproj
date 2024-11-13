@@ -9,6 +9,8 @@
     <PackageId>Qowaiv.Data.SqlClient</PackageId>
     <PackageReleaseNotes>
       <![CDATA[
+ToBeReleased
+- Potentially improved performance of concurrency when generating sql parameters in .NET 9 and up (using new System.Threading.Lock).
 v7.0.1
 - Update Qowaiv.Diagnostics.Contracts to 2.0.0. #418
 v7.0.0

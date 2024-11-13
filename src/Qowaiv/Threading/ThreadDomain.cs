@@ -1,7 +1,6 @@
 using Qowaiv.Financial;
 using Qowaiv.Globalization;
 using System.Collections.Concurrent;
-using System.Threading;
 
 namespace Qowaiv.Threading;
 

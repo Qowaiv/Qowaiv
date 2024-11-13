@@ -4,7 +4,6 @@
 using Qowaiv.Conversion.Financial;
 using Qowaiv.Globalization;
 using System.Collections.ObjectModel;
-using System.Threading;
 
 namespace Qowaiv.Financial;
 

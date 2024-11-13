@@ -1,5 +1,3 @@
-using System.Threading;
-
 namespace Qowaiv.Globalization;
 
 /// <summary>Handles the CultureInfo of a thread during its scope.</summary>

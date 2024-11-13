@@ -22,6 +22,7 @@ global using System.Resources;
 global using System.Runtime.Serialization;
 global using System.Text;
 global using System.Text.RegularExpressions;
+global using System.Threading;
 global using System.Xml;
 global using System.Xml.Schema;
 global using System.Xml.Serialization;

@@ -1,5 +1,3 @@
-using System.Threading;
-
 namespace Qowaiv;
 
 /// <summary>Qowaiv Clock is lightweight solution for having changeable behaviour

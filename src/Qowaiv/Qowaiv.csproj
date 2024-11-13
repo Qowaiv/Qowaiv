@@ -10,6 +10,7 @@
     <PackageReleaseNotes>
       <![CDATA[
 ToBeReleased
+- Singapore postal codes contain 6, not 5 digits. (fix)
 - Potentially improved performance of concurrency when generating C# type names and looking up localized strings in .NET 9 and up (using new System.Threading.Lock).
 v7.1.3
 - Provide way to skip the JSON serialization of empty SVO's with ModifyTypeInfo.IgnoreEmptySvos. #427

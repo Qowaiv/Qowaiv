@@ -5,11 +5,12 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>7.0.1</Version>
+    <Version>7.2.0</Version>
     <PackageId>Qowaiv.Data.SqlClient</PackageId>
     <PackageReleaseNotes>
       <![CDATA[
-ToBeReleased
+v7.2.0
+- Added .NET 9.0 version to the package.
 - Potentially improved performance of concurrency when generating sql parameters in .NET 9 and up (using new System.Threading.Lock).
 v7.0.1
 - Update Qowaiv.Diagnostics.Contracts to 2.0.0. #418

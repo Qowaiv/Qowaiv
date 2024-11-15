@@ -36,7 +36,6 @@ using (var @lock = file.Lock())
 {
      file.OpenRead(); // Throws IOException.
 }
-
 ```
 
 ## Further reading

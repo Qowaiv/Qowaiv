@@ -41,16 +41,11 @@ public sealed class TemporaryDirectory : IDisposable
     public FileInfo CreateFile(string fileName) => new(Path.Combine(FullName, fileName));
 
     /// <summary>Disposes the temporary directory by deleting it and its content.</summary>
-    public void Dispose() => Dispose(true);
-
-    private void Dispose(bool disposing)
+    public void Dispose()
     {
         if (!isDisposed)
         {
-            if (disposing)
-            {
-                Root.Delete(true);
-            }
+            Root.Delete(true);
             isDisposed = true;
         }
     }

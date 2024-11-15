@@ -10,6 +10,8 @@
     <ProductName>Qowaiv Test Tools</ProductName>
     <PackageReleaseNotes>
       <![CDATA[
+ToBeReleased
+- Introduction FileInfo.Lock() to lock files during a test.
 v7.0.1
 - Update Qowaiv.Diagnostics.Contracts to 2.0.0. #418
 v7.0.0

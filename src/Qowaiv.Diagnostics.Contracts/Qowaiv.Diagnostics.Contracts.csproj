@@ -9,12 +9,12 @@
     <DevelopmentDependency>true</DevelopmentDependency>
     <IncludeSymbols>false</IncludeSymbols>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <Version>2.0.2</Version>
+    <Version>2.0.3</Version>
     <PackageId>Qowaiv.Diagnostics.Contracts</PackageId>
     <ProductName>Qowaiv Diagnostics Contracts</ProductName>
     <PackageReleaseNotes>
       <![CDATA[
-ToBeReleased
+v2.0.3
 - Generate with #pragma warning disable headers.
 v2.0.2
 - Fix ambiguous reference issue if consuming project defines types with overlapping names.

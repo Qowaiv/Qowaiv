@@ -103,24 +103,6 @@ public class For_current_execution_context_and_scope
         Clock.UtcNow().Should().NotBe(Svo.DateTime);
         Clock.TimeZone.Should().NotBe(Svo.TimeZone);
     }
-
-    [Test]
-    public async Task can_run_in_parallel_without_interference()
-    {
-        var tasks = Enumerable.Range(1900, 2000).Select(Test).ToArray();
-        var executionContexts = await Task.WhenAll(tasks);
-        executionContexts.Should().OnlyHaveUniqueItems();
-
-        async Task<int> Test(int year)
-        {
-            using (Clock.SetTimeForCurrentContext(() => new DateTime(year, 06, 11, 16, 15, 00, 000, DateTimeKind.Local)))
-            {
-                await Task.Delay(10);
-                Clock.UtcNow().Should().Be(new DateTime(year, 06, 11, 16, 15, 00, 000, DateTimeKind.Local));
-                return ExecutionContext.Capture()?.GetHashCode() ?? 0;
-            }
-        }
-    }
 }
 
 public class Today

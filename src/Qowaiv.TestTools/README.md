@@ -11,7 +11,7 @@ This package contains helpers to make writing unit tests for SVO's easier.
 ## IO
 
 ### Temporary directory
-Testing IO can be clumbersum. The `TemporaryDirectory` can help by creating a
+Testing IO can be cumbersome. The `TemporaryDirectory` can help by creating a
 directory that only exists for the duration of a test:
 
 ``` C#

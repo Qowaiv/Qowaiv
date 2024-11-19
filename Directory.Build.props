@@ -58,9 +58,7 @@ inside and outside a Domain-driven context.
     </PackageTags>
     <Company>Qowaiv community</Company>
     <Copyright>Copyright © Qowaiv community 2013-current</Copyright>
-    <LangVersion>13.0</LangVersion>
-    <!-- We ship package versions for obsolete target frameworks too -->
-    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Signing">
@@ -81,7 +79,6 @@ inside and outside a Domain-driven context.
 
   <ItemGroup Label="Additional files">
     <AdditionalFiles Include="*.csproj" Visible="false" />
-    <AdditionalFiles Include="../../props/common.props" Link="Properties/common.props" />
   </ItemGroup>
 
 </Project>

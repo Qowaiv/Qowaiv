@@ -27,6 +27,7 @@
   <ItemGroup Label="Analyzers">
     <PackageReference Include="FluentAssertions.Analyzers" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
   </ItemGroup>
 
   <ItemGroup>

@@ -62,7 +62,7 @@ jobs:
         if: success() || failure()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Dry run
         run: |
           ./.sonar/scanner/dotnet-sonarscanner end \
           /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
@@ -73,3 +73,4 @@ jobs:
           name: Unit test results
           path: "**/*.trx"
           reporter: dotnet-trx
+

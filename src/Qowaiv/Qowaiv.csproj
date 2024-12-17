@@ -5,10 +5,19 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>7.2.0</Version>
+    <Version>7.2.1</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
       <![CDATA[
+v7.2.1
+- Add Deconstruct to Date.
+- Add Deconstruct to DateSpan.
+- Add Deconstruct to Fraction,
+- Add Deconstruct to FormattingAgurments.
+- Add Deconstruct to Money.
+- Add Deconstruct to MonthSpan.
+- Add Deconstruct to WeekDate.
+- Add Deconstruct to YearMonth.
 v7.2.0
 - Added .NET 9.0 version to the package.
 - Singapore postal codes contain 6, not 5 digits. (fix)

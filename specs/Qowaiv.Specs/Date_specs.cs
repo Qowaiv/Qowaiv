@@ -283,3 +283,15 @@ public class Casts
     }
 }
 #endif
+
+public class Can_be_deconstructed
+{
+    [Test]
+    public void in_year_month_and_day_part()
+    {
+        var (year, month, day) = Svo.Date;
+        year.Should().Be(2017);
+        month.Should().Be(6);
+        day.Should().Be(11);
+    }
+}

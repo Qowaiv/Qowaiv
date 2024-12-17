@@ -130,6 +130,14 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     /// <summary>Get whole of the fraction.</summary>
     public long Whole => IsZero() ? 0 : numerator / denominator;
 
+    /// <summary>Deconstructs the fraction in a numerator and denominator.</summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public void Deconstruct(out long numerator, out long denominator)
+    {
+        numerator = Numerator;
+        denominator = Denominator;
+    }
+
     /// <summary>Gets the remainder of the fraction.</summary>
     /// <remarks>
     /// The remainder is expressed as an absolute value.

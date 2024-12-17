@@ -4,7 +4,7 @@ namespace Qowaiv;
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(int))]
-[OpenApiDataType(description: "Date notation with month precision.", example: "2017-06", type: "string", format: "year-month", pattern: "[0-9]{4}-(0[1-9]|1[0-2])")]
+ [OpenApiDataType(description: "Date notation with month precision.", example: "2017-06", type: "string", format: "year-month", pattern: "[0-9]{4}-(0[1-9]|1[0-2])")]
 [TypeConverter(typeof(YearMonthTypeConverter))]
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.YearMonthJsonConverter))]
@@ -41,6 +41,14 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
     /// <summary>Returns a <see cref="string" /> that represents the year-month for DEBUG purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:yyyy-MM}");
+
+    /// <summary>Deconstructs the date month in a year and month.</summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public void Deconstruct(out int year, out int month)
+    {
+        year = Year;
+        month = Month;
+    }
 
     /// <summary>Returns a new year-month that adds the value of the specified <see cref="MonthSpan" />
     /// to the value of this instance.

@@ -50,7 +50,7 @@ public static class Svo
     public static readonly EnergyLabel EnergyLabel = EnergyLabel.A(2);
 
     /// <summary>0.000 (fr-BE)</summary>
-    public static readonly FormattingArguments FormattingArguments = new("0.000", new CultureInfo("fr-BE"));
+    public static readonly FormattingArguments FormattingArguments = new("0.000", TestCultures.fr_BE);
 
     /// <summary>-69/17</summary>
     public static readonly Fraction Fraction = -69.DividedBy(17);
@@ -85,6 +85,8 @@ public static class Svo
     public static readonly TimeZoneInfo TimeZone = TestTimeZones.EastAustraliaStandardTime;
     public static readonly Timestamp Timestamp = 1234567890L;
     public static readonly Uuid Uuid = Uuid.Parse("Qowaiv_SVOLibrary_GUIA");
+
+    /// <summary>2017-W23-7</summary>
     public static readonly WeekDate WeekDate = new(2017, 23, 7);
     public static readonly Year Year = 1979.CE();
 

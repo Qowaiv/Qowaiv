@@ -47,6 +47,14 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// <summary>Gets the months component of the month span.</summary>
     public int Months => TotalMonths % DateSpan.MonthsPerYear;
 
+    /// <summary>Deconstructs the month span in a years, and months.</summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public void Deconstruct(out int years, out int months)
+    {
+        years = Years;
+        months = Months;
+    }
+
     /// <summary>Unary plus the month span.</summary>
     [Pure]
     internal MonthSpan Plus() => this;

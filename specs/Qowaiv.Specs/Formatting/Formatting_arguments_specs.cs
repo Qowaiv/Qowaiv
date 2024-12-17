@@ -89,3 +89,14 @@ public class IFormattable_ToString_extension
     public void null_for_null_IFormattable_with_null_arguments_collection()
         => Nil.IFormattable.ToString(Nil.FormattingArgumentsCollection).Should().BeNull();
 }
+
+public class Can_be_deconstructed
+{
+    [Test]
+    public void in_format_and_formatProvider_part()
+    {
+        var (format, formatProvider) = Svo.FormattingArguments;
+        format.Should().Be("0.000");
+        formatProvider.Should().Be(TestCultures.fr_BE);
+    }
+}

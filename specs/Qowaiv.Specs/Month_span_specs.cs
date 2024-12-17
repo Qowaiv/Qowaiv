@@ -270,3 +270,14 @@ public class Is_Open_API_data_type
            format: "month-span",
            pattern: @"[+-]?[0-9]+Y[+-][0-9]+M"));
 }
+
+public class Can_be_deconstructed
+{
+    [Test]
+    public void in_years_and_months_part()
+    {
+        var (years, months) = Svo.MonthSpan;
+        years.Should().Be(5);
+        months.Should().Be(9);
+    }
+}

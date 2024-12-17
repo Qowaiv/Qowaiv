@@ -39,6 +39,14 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
     /// <summary>Gets the format provider.</summary>
     public IFormatProvider? FormatProvider { get; }
 
+    /// <summary>Deconstructs the formatting arguments in a format and formatProvider.</summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public void Deconstruct(out string? format, out IFormatProvider? formatProvider)
+    {
+        format = Format;
+        formatProvider = FormatProvider;
+    }
+
     /// <summary>Formats the object using the formatting arguments.</summary>
     /// <param name="obj">
     /// The IFormattable object to get the formatted string representation from.
@@ -120,14 +128,10 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand.</param>
     [Pure]
-    public static bool operator ==(FormattingArguments left, FormattingArguments right)
-        => left.Equals(right);
+    public static bool operator ==(FormattingArguments left, FormattingArguments right) => left.Equals(right);
 
     /// <summary>Returns true if the left and right operand are equal, otherwise false.</summary>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand.</param>
-    public static bool operator !=(FormattingArguments left, FormattingArguments right)
-    {
-        return !(left == right);
-    }
+    public static bool operator !=(FormattingArguments left, FormattingArguments right) => !(left == right);
 }

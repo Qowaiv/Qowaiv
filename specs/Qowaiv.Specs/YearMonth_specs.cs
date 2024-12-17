@@ -560,8 +560,9 @@ public class Is_Open_API_data_type
            example: "2017-06",
            type: "string",
            format: "year-month",
-           pattern: "[0-9]{4}-(0[1-9]|1[0-2])"));
+           pattern: "[0-9]{4}-(0?[1-9]|1[0-2])"));
 
+    [TestCase("2017-6")]
     [TestCase("2017-06")]
     [TestCase("1900-11")]
     [TestCase("1979-12")]

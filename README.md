@@ -836,7 +836,7 @@ and if the data type is nullable, all when applicable.
     "example": "2017-06",
     "type": "string",
     "format": "year-month",
-    "pattern": "[0-9]{4}-[01][0-9]",
+    "pattern": "[0-9]{4}-(0?[1-9]|1[0-2])",
     "nullable": false
   },
   "YesNo": {

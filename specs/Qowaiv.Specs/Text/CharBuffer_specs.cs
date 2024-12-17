@@ -110,7 +110,7 @@ public class Trim
 public class Uppercase
 {
     [Test]
-    public void Transforms_all_characters_to__uppercase_alternatives()
+    public void Transforms_all_characters_to_uppercase_alternatives()
     {
         var buffer = "abcDeéf".Buffer().Uppercase();
         buffer.Should().BeEquivalentTo("ABCDEÉF");

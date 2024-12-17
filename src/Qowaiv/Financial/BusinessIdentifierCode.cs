@@ -57,13 +57,13 @@ public readonly partial struct BusinessIdentifierCode : IXmlSerializable, IForma
     /// <summary>Gets the country info of the country code.</summary>
     public Country Country
         => m_Value is { Length: >= 6 }
-        ? Country.Parse(m_Value.Substring(4, 2), CultureInfo.InvariantCulture)
+        ? Country.Parse(m_Value[4..6], CultureInfo.InvariantCulture)
         : Country.Empty;
 
     /// <summary>Gets the location code.</summary>
     public string Location
         => m_Value is { Length: >= 8 } && !IsUnknown()
-        ? m_Value.Substring(6, 2)
+        ? m_Value[6..8]
         : string.Empty;
 
     /// <summary>Gets the branch code.</summary>

@@ -69,7 +69,7 @@ public class TryGetBytes_from
 public class GetBytes
 {
     [Test]
-    public void Null__returns_EmptyArray()
+    public void Null_returns_EmptyArray()
     {
         Base32.GetBytes(null).Should().BeEmpty();
     }

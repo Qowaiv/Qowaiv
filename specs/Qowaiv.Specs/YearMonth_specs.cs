@@ -564,6 +564,7 @@ public class Is_Open_API_data_type
 
     [TestCase("2017-6")]
     [TestCase("2017-06")]
+    [TestCase("1900-10")]
     [TestCase("1900-11")]
     [TestCase("1979-12")]
     public void pattern_matches(string input)

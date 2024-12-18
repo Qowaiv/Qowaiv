@@ -9,6 +9,8 @@
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
       <![CDATA[
+TOBeReleased:
+- Year-month Open API definition pattern allows months without leading zero. (fix)
 v7.2.0
 - Added .NET 9.0 version to the package.
 - Singapore postal codes contain 6, not 5 digits. (fix)

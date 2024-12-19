@@ -14,6 +14,7 @@ public static class QowaivFormattableExtensions
     /// A formatted string representing the object.
     /// </returns>
     [Pure]
+    [return: NotNullIfNotNull(nameof(formattable))]
     public static string? ToString(this IFormattable? formattable, FormattingArguments arguments)
         => formattable is { }
         ? arguments.ToString(formattable)
@@ -30,8 +31,9 @@ public static class QowaivFormattableExtensions
     /// A formatted string representing the object.
     /// </returns>
     [Pure]
+    [return: NotNullIfNotNull(nameof(formattable))]
     public static string? ToString(this IFormattable? formattable, FormattingArgumentsCollection? argumentsCollection)
-      => formattable is { }
+        => formattable is { }
         ? (argumentsCollection ?? []).ToString(formattable)
         : null;
 }

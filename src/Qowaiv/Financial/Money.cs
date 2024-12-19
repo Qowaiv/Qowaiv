@@ -58,6 +58,14 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
     /// <summary>Gets the currency of the money.</summary>
     public Currency Currency => m_Currency;
 
+    /// <summary>Deconstructs the money in the amount and its currency.</summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public void Deconstruct(out Amount amount, out Currency currency)
+    {
+        amount = Amount;
+        currency = Currency;
+    }
+
     /// <summary>Gets the sign of the value of the money.</summary>
     [Pure]
     public int Sign() => m_Value.Sign();

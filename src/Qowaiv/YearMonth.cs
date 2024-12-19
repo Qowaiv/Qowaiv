@@ -42,6 +42,14 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:yyyy-MM}");
 
+    /// <summary>Deconstructs the date month in a year and month.</summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public void Deconstruct(out int year, out int month)
+    {
+        year = Year;
+        month = Month;
+    }
+
     /// <summary>Returns a new year-month that adds the value of the specified <see cref="MonthSpan" />
     /// to the value of this instance.
     /// </summary>

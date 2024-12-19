@@ -62,10 +62,11 @@ Represents a date, so without hours (minutes, seconds, milliseconds), opposed to
 var date = new Date(2017, 06, 11);
 var next = date++; // 2017-06-12
 var casted = (Date)new DateTime(2017, 06, 11, 06, 15);
+var (year, month, day) = date; // deconstructs.
 ```
 
 As, since .NET 6.0, `System.DateOnly` is available, `Qowaiv.Date` can be casted to (and from)
-this type, if (and only if), the .NET 6.0 version of the package is used.
+this type, if (and only if), the .NET 8.0 version or higher of the package is used.
 
 ### Date span
 Represents a date span. Opposed to a `TimeSpan` its duration is (a bit) resilient;
@@ -80,6 +81,7 @@ var span = new DateSpan(years: 3, months: 2, days: -4);
 var age = DateSpan.Age(new Date(2017, 06, 11)); // 2Y+0M+121D on 2019-10-10
 var duration = DateSpan.Subtract(new Date(2019, 06, 10), new Date(2017, 06, 11)); // 1Y+11M+30D
 var date = new Date(2016, 06, 03).Add(age); // 2018-10-02
+var (years, months, days) = span; // deconstructs.
 ```
 
 ### Email address
@@ -100,11 +102,7 @@ email.ToString(); // test@qowaiv.org
 quoted.ToString(); // email@qowaiv.org
 ip_based.IsIPBased; // true
 ip_based.WithDisplayName("Jimi Hendrix"); // Jimi Hendrix <test@[172.16.254.1]>
-
 ```
-
-### Email address collection
-Represents a collection of unique email addresses, excluding the empty and unknown email address.
 
 ### Stream size
 Represents the size of a file or stream.
@@ -164,6 +162,7 @@ Is a subset of the date span, so without the days precision.
 var ctor = new MonthSpan(years: 5, months: 6); // 69 months.
 var months = MonthSpan.FromMonths(13);
 var years = MonthSpan.FromYears(3); // 35 months.
+var (years, months) = ctor; // deconstructs.
 
 // operations
 var delta = MonthSpan.Subtract(new Date(2020, 04, 01), new Date(2020, 02, 28)); // 1 month.
@@ -232,6 +231,12 @@ sex.ToString("h", new CultureInfo("en-GB")); // Mrs.
 ### Week date
 Represents a week based date.
 
+``` C#
+var date = new WeekDate(2017, 23, 7);
+var next = date++; // 2017-W24-1
+var (year, week, day) = date; // deconstructs.
+```
+
 ### Year
 Represents a year in the range [1-9999].
 
@@ -254,6 +259,7 @@ Represent a date with year and month precision.
 
 ``` C#
 var date = new YearMonth(2017, 06);
+var (year, month) = date; // deconstructs.
 
 // Querying
 date.IsIn(2017.CE()); // true
@@ -343,6 +349,7 @@ acts identically as a SVO.
 Money money = 125.34 + Currency.EUR;
 var sum = (12 + Currency.EUR) + (15 + Currency.USD); // Throws CurrencyMismatchException()
 var rounded = money.Round(0); // EUR 125.00
+var (amount, currency) = money; // deconstructs.
 ```
 
 ## Qowaiv globalization types
@@ -390,6 +397,7 @@ Fraction fromFloating = Fraction.Create(0.3456786754m);
 
 Fraction casted = (Fraction)34;
 Fraction casted = (Fraction)0.3333;
+var (numerator, denominator) = fluent; // deconstructs.
 ```
 
 #### Operations
@@ -1042,7 +1050,7 @@ is good defense against hash flooding.
 
 for test purposes, it is possible to generate a hashcode without using the randomizer:
 ``` C#
-using(Hash.WithoutRandomizer())
+using (Hash.WithoutRandomizer())
 {
     var hash = Hash.Code("QOWAIV string");
     hash.Should().Be(1211348473);
@@ -1059,7 +1067,6 @@ public int GetHashCode()
 
 This works out of the box because `Hash` can be implicitly cast to an `int`.
 Calling `Hash.GetHashCode()` is not allowed, just use the implicit cast.
-
 
 ### Sortable
 SVO's support sorting. So, LINQ expressions like OrderBy() and OrderByDescending()
@@ -1155,7 +1162,7 @@ change the behaviour, in most cases just for the scope of your current
 [Test]
 public void TestSomething()
 {
-    using(Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11))
+    using (Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11))
     {
         // test code.
     }

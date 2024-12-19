@@ -131,3 +131,14 @@ public class Throws_when
             .WithMessage("The subtraction operation could not be applied. There is a mismatch between EUR and USD.");
     }
 }
+
+public class Can_be_deconstructed
+{
+    [Test]
+    public void in_amount_and_currency_part()
+    {
+        var (amount, currency) = Svo.Money;
+        amount.Should().Be(Svo.Amount);
+        currency.Should().Be(Svo.Currency);
+    }
+}

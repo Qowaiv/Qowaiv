@@ -69,6 +69,9 @@ public static class TestCultures
         }
     }
 
+    /// <summary>Gets the French (fr-BE) <see cref="CultureInfo" />.</summary>
+    public static CultureInfo fr_BE => new("fr-BE");
+
     /// <summary>Gets the French (fr-FR) <see cref="CultureInfo" />.</summary>
     public static CultureInfo fr_FR => new("fr-FR");
 

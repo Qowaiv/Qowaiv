@@ -582,3 +582,14 @@ public class Debugger
     public void has_custom_display(object display, YearMonth svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }
+
+public class Can_be_deconstructed
+{
+    [Test]
+    public void in_year_and_month_part()
+    {
+        var (year, month) = Svo.YearMonth;
+        year.Should().Be(2017);
+        month.Should().Be(6);
+    }
+}

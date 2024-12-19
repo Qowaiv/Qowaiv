@@ -23,7 +23,7 @@ public class ToString
 public class TryGetBytes_from
 {
     [Test]
-    public void Null__returns_EmptyArray()
+    public void Null_returns_EmptyArray()
     {
         Base64.TryGetBytes(null, out var bytes).Should().BeTrue();
         bytes.Should().BeEmpty();

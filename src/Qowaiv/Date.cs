@@ -86,6 +86,15 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly DateTime m_Value;
 
+    /// <summary>Deconstructs the date in a year, month and day.</summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public void Deconstruct(out int year, out int month, out int day)
+    {
+        year = Year;
+        month = Month;
+        day = Day;
+    }
+
     /// <summary>Adds one day to the date.</summary>
     [Pure]
     internal Date Increment() => AddDays(+1);

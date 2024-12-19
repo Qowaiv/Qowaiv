@@ -292,3 +292,15 @@ public class Throws_when
             .Should().Throw<ArgumentOutOfRangeException>()
             .WithMessage("The specified years, months and days results in an un-representable DateSpan.");
 }
+
+public class Can_be_deconstructed
+{
+    [Test]
+    public void in_years_months_and_days_part()
+    {
+        var (years, months, days) = Svo.DateSpan;
+        years.Should().Be(10);
+        months.Should().Be(3);
+        days.Should().Be(-5);
+    }
+}

@@ -95,6 +95,15 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     /// <summary>Gets a (approximate) value to sort the date spans by.</summary>
     internal double TotalDays => Days + (TotalMonths * DaysPerMonth);
 
+    /// <summary>Deconstructs the date span in a years, months and days.</summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public void Deconstruct(out int years, out int months, out int days)
+    {
+        years = Years;
+        months = Months;
+        days = Days;
+    }
+
     /// <summary>Unary plus the date span.</summary>
     [Pure]
     internal DateSpan Plus() => this;

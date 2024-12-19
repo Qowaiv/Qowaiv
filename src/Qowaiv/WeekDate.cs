@@ -92,6 +92,15 @@ public readonly partial struct WeekDate : IXmlSerializable, IFormattable, IEquat
     /// <summary>Gets the date time component of this instance.</summary>
     public Date Date => m_Value;
 
+    /// <summary>Deconstructs the week date in a year, week and day.</summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public void Deconstruct(out int year, out int week, out int day)
+    {
+        year = Year;
+        week = Week;
+        day = Day;
+    }
+
     /// <summary>Gets the year of week part of the week date.</summary>
     [Pure]
     private int GetDatePart(int part)

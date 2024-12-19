@@ -212,3 +212,15 @@ public class Casts
     }
 }
 #endif
+
+public class Can_be_deconstructed
+{
+    [Test]
+    public void in_year_week_and_day_part()
+    {
+        var (year, week, day) = Svo.WeekDate;
+        year.Should().Be(2017);
+        week.Should().Be(23);
+        day.Should().Be(7);
+    }
+}

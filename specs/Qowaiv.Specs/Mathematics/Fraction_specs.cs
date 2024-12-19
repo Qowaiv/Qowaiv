@@ -954,3 +954,14 @@ public class Debugger
     public void has_custom_display(object display, Fraction svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }
+
+public class Can_be_deconstructed
+{
+    [Test]
+    public void in_numerator_and_denominator_part()
+    {
+        var (numerator, denominator) = Svo.Fraction;
+        numerator.Should().Be(-69);
+        denominator.Should().Be(17);
+    }
+}

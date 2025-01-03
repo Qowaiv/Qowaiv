@@ -94,6 +94,10 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
         }
     }
 
+    /// <summary>Returns true if the country has a postal code system.</summary>
+    [Pure]
+    public bool HasPostalCodeSystem() => PostalCodeCountryInfo.GetInstance(this).HasPostalCode;
+
     /// <summary>Gets the display name for a specified culture.</summary>
     /// <param name="culture">
     /// The culture of the display name.

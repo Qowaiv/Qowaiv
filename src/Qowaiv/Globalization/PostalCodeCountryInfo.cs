@@ -118,7 +118,7 @@ public sealed partial class PostalCodeCountryInfo
     /// <summary>Gets countries without a postal code system.</summary>
     [Pure]
     public static IEnumerable<Country> GetCountriesWithoutPostalCode()
-        => Country.GetExisting().Where(country => !GetInstance(country).HasPostalCode);
+        => Country.GetExisting().Where(country => country.HasPostalCodeSystem());
 
     /// <summary>Gets countries with postal codes with formatting.</summary>
     [Pure]

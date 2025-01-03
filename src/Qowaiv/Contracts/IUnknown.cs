@@ -1,7 +1,7 @@
 namespace Qowaiv;
 
 /// <summary>
-/// Defines that an SVO has both an empty, a known, and an unknown state.
+/// Defines that a SVO has both an empty, a known, and an unknown state.
 /// </summary>
 /// <remarks>
 /// The unknown state can be used to explicitly state that we know a value not

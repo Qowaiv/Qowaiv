@@ -2,6 +2,7 @@ name: Build
 on: [push]
 env:
   CLR_ICU_VERSION_OVERRIDE: 74
+  CLR_OPENSSL_VERSION_OVERRIDE: 3
 jobs:
   build:
     name: Build
@@ -9,6 +10,8 @@ jobs:
     steps:
       - name: Echo LibICU versions
         run: apt show libicu*
+      - name: Echo LibSSL versions
+        run: apt show libssl*
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:

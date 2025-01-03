@@ -1,5 +1,7 @@
 name: Build
 on: [push]
+env:
+  CLR_ICU_VERSION_OVERRIDE: 72.1
 jobs:
   build:
     name: Build

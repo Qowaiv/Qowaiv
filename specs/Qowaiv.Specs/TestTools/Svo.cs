@@ -78,7 +78,10 @@ public static class Svo
     public static readonly MonthSpan MonthSpan = MonthSpan.FromMonths(69);
 
     public static readonly Percentage Percentage = 17.51.Percent();
+
+    /// <summary>H0H0H0 (Canada)</summary>
     public static readonly PostalCode PostalCode = PostalCode.Parse("H0H0H0");
+
     public static readonly Secret Secret = Secret.Parse("Ken sent me!");
     public static readonly Sex Sex = Sex.Female;
     public static readonly StreamSize StreamSize = 123456789.Bytes();

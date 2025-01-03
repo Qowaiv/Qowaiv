@@ -27,7 +27,7 @@ public readonly partial struct PostalCode : IXmlSerializable, IFormattable, IEqu
     /// The country to valid for.
     /// </param>
     /// <remarks>
-    /// Returns false if the country does not have postal codes.
+    /// Returns false if the country does not have postal codes, unless the postal code is empty.
     /// </remarks>
     [Pure]
     public bool IsValid(Country country) => IsValid(m_Value, country);
@@ -129,7 +129,7 @@ public readonly partial struct PostalCode : IXmlSerializable, IFormattable, IEqu
     /// The country to valid for.
     /// </param>
     /// <remarks>
-    /// Returns false if the country does not have postal codes.
+    /// Returns false if the country does not have postal codes, unless the postal code is empty.
     /// </remarks>
     [Pure]
     public static bool IsValid(string? postalcode, Country country)

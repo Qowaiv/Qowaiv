@@ -45,13 +45,14 @@ public sealed partial class PostalCodeCountryInfo
     /// The postal code to test.
     /// </param>
     /// <remarks>
-    /// Returns false if the country does not have postal codes.
+    /// Returns false if the country does not have postal codes, unless the postal code is empty.
     /// </remarks>
     [Pure]
     public bool IsValid(string? postalcode)
-        => !string.IsNullOrEmpty(postalcode)
-        && ValidationPattern is { }
-        && postalcode.Unify().Matches(ValidationPattern);
+        => HasPostalCode
+        ? !string.IsNullOrEmpty(postalcode)
+            && postalcode.Unify().Matches(ValidationPattern!)
+        : string.IsNullOrEmpty(postalcode);
 
     /// <summary>Formats the postal code.</summary>
     /// <param name="postalcode">
@@ -117,7 +118,7 @@ public sealed partial class PostalCodeCountryInfo
     /// <summary>Gets countries without a postal code system.</summary>
     [Pure]
     public static IEnumerable<Country> GetCountriesWithoutPostalCode()
-        => Country.GetExisting().Where(country => !GetInstance(country).HasPostalCode);
+        => Country.GetExisting().Where(country => !country.HasPostalCodeSystem());
 
     /// <summary>Gets countries with postal codes with formatting.</summary>
     [Pure]

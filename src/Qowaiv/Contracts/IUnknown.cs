@@ -1,8 +1,12 @@
 namespace Qowaiv;
 
 /// <summary>
-/// Defines that the default of an SVO represents the empty/not set state.
+/// Defines that an SVO has both an empty, a known, and an unknown state.
 /// </summary>
+/// <remarks>
+/// The unknown state can be used to explicitly state that we know a value not
+/// to be empty, but currently do not know what value it should have.
+/// </remarks>
 /// <typeparam name="TSelf">
 /// The type of the SVO.
 /// </typeparam>

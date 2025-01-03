@@ -45,7 +45,7 @@ public sealed partial class PostalCodeCountryInfo
     /// The postal code to test.
     /// </param>
     /// <remarks>
-    /// Returns false if the country does not have postal codes.
+    /// Returns false if the country does not have postal codes, unless the postal code is empty.
     /// </remarks>
     [Pure]
     public bool IsValid(string? postalcode)

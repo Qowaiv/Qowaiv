@@ -7,8 +7,8 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Echo versions
-        run: apt-show-versions libicu*
+      - name: Echo LibICU versions
+        run: apt show libicu*
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:

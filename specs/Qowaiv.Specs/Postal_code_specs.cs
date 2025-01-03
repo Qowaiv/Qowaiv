@@ -47,9 +47,15 @@ public class Is_valid_for
 {
     static readonly IEnumerable<object[]> ValidForCountry = PostalCodes.Valid.SelectMany(codes => codes.ToArrays());
 
+    static readonly IEnumerable<Country> CountriesWithoutPostalCodeSystem = PostalCodeCountryInfo.GetCountriesWithoutPostalCode();
+
     [TestCaseSource(nameof(ValidForCountry))]
     public void country(Country country, PostalCode postalCode)
         => postalCode.IsValid(country).Should().BeTrue();
+
+    [TestCaseSource(nameof(CountriesWithoutPostalCodeSystem))]
+    public void countries_without_postal_code_when_empty(Country country)
+        => PostalCode.Empty.IsValid(country).Should().BeTrue();
 
     [Test]
     public void multiple_countries()
@@ -68,6 +74,19 @@ public class Is_valid_for
             Country.PG,
         ]);
     }
+}
+
+public class Is_not_valid_for
+{
+    static readonly IEnumerable<Country> CountriesWithoutPostalCodeSystem = PostalCodeCountryInfo.GetCountriesWithoutPostalCode();
+
+    [Test]
+    public void country_with_different_system()
+        => Svo.PostalCode.IsValid(Country.NL).Should().BeFalse();
+
+    [TestCaseSource(nameof(CountriesWithoutPostalCodeSystem))]
+    public void countries_without_postal_code(Country country)
+        => PostalCode.Parse("1234").IsValid(country).Should().BeFalse();
 }
 
 public class Has_constant

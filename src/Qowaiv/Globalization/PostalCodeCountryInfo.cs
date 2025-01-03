@@ -49,9 +49,10 @@ public sealed partial class PostalCodeCountryInfo
     /// </remarks>
     [Pure]
     public bool IsValid(string? postalcode)
-        => !string.IsNullOrEmpty(postalcode)
-        && ValidationPattern is { }
-        && postalcode.Unify().Matches(ValidationPattern);
+        => HasPostalCode
+        ? !string.IsNullOrEmpty(postalcode)
+            && postalcode.Unify().Matches(ValidationPattern!)
+        : string.IsNullOrEmpty(postalcode);
 
     /// <summary>Formats the postal code.</summary>
     /// <param name="postalcode">

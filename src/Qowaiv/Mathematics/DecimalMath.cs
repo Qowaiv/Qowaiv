@@ -147,6 +147,7 @@ internal static class DecimalMath
     }
 
     /// <summary>Gets a (thread static) instance of <see cref="Random" />.</summary>
+#if NETSTANDARD2_0
     /// <remarks>
     /// creates a new instance if required.
     /// </remarks>
@@ -159,4 +160,11 @@ internal static class DecimalMath
 
     [ThreadStatic]
     private static Random? _rnd;
+#else
+    /// <remarks>
+    /// <see cref="Random.Shared" /> is thread-safe.
+    /// </remarks>
+    [Pure]
+    private static Random Random() => System.Random.Shared;
+#endif
 }

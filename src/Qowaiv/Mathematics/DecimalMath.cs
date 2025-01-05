@@ -151,6 +151,7 @@ internal static class DecimalMath
     /// creates a new instance if required.
     /// </remarks>
     [Pure]
+#if NETSTANDARD2_0
     private static Random Random()
     {
         _rnd ??= new Random();
@@ -159,4 +160,7 @@ internal static class DecimalMath
 
     [ThreadStatic]
     private static Random? _rnd;
+#else
+    private static Random Random() => System.Random.Shared;
+#endif
 }

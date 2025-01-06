@@ -26,6 +26,8 @@ namespace Qowaiv.Financial;
 #endif
 public readonly partial struct InternationalBankAccountNumber : IXmlSerializable, IFormattable, IEquatable<InternationalBankAccountNumber>, IComparable, IComparable<InternationalBankAccountNumber>
 {
+    private const char Nbsp = (char)160;
+
     /// <summary>Represents an unknown (but set) IBAN.</summary>
     public static InternationalBankAccountNumber Unknown => new("ZZ");
 
@@ -65,7 +67,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     /// Uses non-breaking spaces to prevent unintended line-breaks.
     /// </remarks>
     [Pure]
-    public string HumanReadable() => HumanReadable((char)0160);
+    public string HumanReadable() => HumanReadable(Nbsp);
 
     /// <summary>In order to facilitate reading by humans, an IBAN can be
     /// expressed in groups of four characters separated by spaces, the last
@@ -140,8 +142,6 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
         ['f'] = (svo, _) => svo.HumanReadable(' ').ToLowerInvariant(),
         ['F'] = (svo, _) => svo.HumanReadable(' '),
     };
-
-    private const char Nbsp = (char)160;
 
     /// <summary>Gets an XML string representation of the IBAN.</summary>
     [Pure]

@@ -4,6 +4,7 @@
   
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <NoWarn>($NoWarn);NU1701</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

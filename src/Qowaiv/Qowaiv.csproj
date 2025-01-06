@@ -5,11 +5,11 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>7.2.1</Version>
+    <Version>7.2.2</Version>
     <PackageId>Qowaiv</PackageId>
     <PackageReleaseNotes>
       <![CDATA[
-ToBeReleased:
+v7.2.2
 - PostalCode.Empty is valid for countries without a postal code system. (fix) #444
 - Added Country.HasPostalCodeSystem(). #444
 - Use Random.Shared in DecimalMath. #448

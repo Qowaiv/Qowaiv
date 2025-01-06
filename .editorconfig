@@ -26,6 +26,7 @@ dotnet_style_prefer_compound_assignment = true:warning # IDE0054: Use compound a
 csharp_style_unused_value_assignment_preference = discard_variable:warning # IDE0059: Unnecessary assignment of a value
 
 dotnet_diagnostic.IDE0079.severity = none    # Unnecessary suppression
+dotnet_diagnostic.IDE0130.severity = none    # Namespace does not match folder structure
 dotnet_diagnostic.IDE1006.severity = none    # Naming Styles
 dotnet_diagnostic.IDE0005.severity = warning # Using directive unnecessary
 dotnet_diagnostic.IDE0090.severity = warning # Simplify new expression

@@ -33,24 +33,12 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     public int Length => m_Value is { Length: > 2 } ? m_Value.Length : 0;
 
     /// <summary>Gets the country of IBAN.</summary>
-    public Country Country
+    public Country Country => m_Value switch
     {
-        get
-        {
-            if (m_Value == default)
-            {
-                return Country.Empty;
-            }
-            else if (m_Value == Unknown.m_Value)
-            {
-                return Country.Unknown;
-            }
-            else
-            {
-                return Country.Parse(m_Value[..2], CultureInfo.InvariantCulture);
-            }
-        }
-    }
+        null => Country.Empty,
+        var v when v == Unknown.m_Value => Country.Unknown,
+        _ => Country.Parse(m_Value[..2], CultureInfo.InvariantCulture),
+    };
 
     /// <summary>Serializes the IBAN to a JSON node.</summary>
     /// <returns>
@@ -65,21 +53,12 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
 
     /// <summary>Represents the IBAN as a <see cref="string" /> without formatting.</summary>
     [Pure]
-    public string MachineReadable()
+    public string MachineReadable() => m_Value switch
     {
-        if (m_Value == default)
-        {
-            return string.Empty;
-        }
-        else if (m_Value == Unknown.m_Value)
-        {
-            return "?";
-        }
-        else
-        {
-            return m_Value;
-        }
-    }
+        null => string.Empty,
+        var v when v == Unknown.m_Value => "?",
+        _ => m_Value,
+    };
 
     /// <inheritdoc cref="HumanReadable(char)" />
     /// <remarks>
@@ -125,27 +104,6 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
         }
     }
 
-    [Pure]
-    private static string Obfuscate(string iban, char obfucscator)
-    {
-        var buffer = new char[iban.Length];
-
-        var keep = 0;
-        for (var i = iban.Length - 1; i >= 0; i--)
-        {
-            var ch = iban[i];
-            if (ch < '0' || ch > 'Z' || keep++ < 4)
-            {
-                buffer[i] = ch;
-            }
-            else
-            {
-                buffer[i] = obfucscator;
-            }
-        }
-        return new string(buffer);
-    }
-
     /// <summary>Returns a formatted <see cref="string" /> that represents the current IBAN.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
@@ -163,8 +121,6 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     /// H: as human readable (with non-breaking spaces).
     /// f: as formatted lowercase.
     /// F: as formatted uppercase.
-    /// x: as obfuscated lowercase (with non-breaking spaces).
-    /// X: as obfuscated uppercase (with non-breaking spaces).
     /// </remarks>
     [Pure]
     public string ToString(string? format, IFormatProvider? formatProvider)
@@ -183,8 +139,6 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
         ['H'] = (svo, _) => svo.HumanReadable(Nbsp),
         ['f'] = (svo, _) => svo.HumanReadable(' ').ToLowerInvariant(),
         ['F'] = (svo, _) => svo.HumanReadable(' '),
-        ['X'] = (svo, _) => Obfuscate(svo.HumanReadable(Nbsp), 'X'),
-        ['x'] = (svo, _) => Obfuscate(svo.HumanReadable(Nbsp), 'x').ToLowerInvariant(),
     };
 
     private const char Nbsp = (char)160;

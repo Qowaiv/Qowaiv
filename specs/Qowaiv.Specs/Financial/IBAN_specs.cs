@@ -235,11 +235,6 @@ public class Has_custom_formatting
     [TestCase("F", "NL20INGB0001234567", /*..........*/ "NL20 INGB 0001 2345 67")]
     [TestCase("F", "FR1420041010050500013M02606", /*.*/ "FR14 2004 1010 0505 0001 3M02 606")]
     [TestCase("F", "EE382200221020145685", /*........*/ "EE38 2200 2210 2014 5685")]
-    [TestCase("X", "HR1723600001101234565", /*.......*/ "XXXX XXXX XXXX XXXX X456 5")]
-    [TestCase("X", "NL20INGB0001234567", /*..........*/ "XXXX XXXX XXXX XX45 67")]
-    [TestCase("X", "FR1420041010050500013M02606", /*.*/ "XXXX XXXX XXXX XXXX XXXX XXX2 606")]
-    [TestCase("X", "EE382200221020145685", /*........*/ "XXXX XXXX XXXX XXXX 5685")]
-    [TestCase("x", "EE382200221020145685", /*........*/ "xxxx xxxx xxxx xxxx 5685")]
     [TestCase("F", "", "")]
     [TestCase("F", "?", "?")]
     public void with_format(string format, InternationalBankAccountNumber svo, string formatted)

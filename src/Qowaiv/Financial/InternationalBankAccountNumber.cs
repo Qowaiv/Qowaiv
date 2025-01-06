@@ -26,6 +26,8 @@ namespace Qowaiv.Financial;
 #endif
 public readonly partial struct InternationalBankAccountNumber : IXmlSerializable, IFormattable, IEquatable<InternationalBankAccountNumber>, IComparable, IComparable<InternationalBankAccountNumber>
 {
+    private const char Nbsp = (char)160;
+
     /// <summary>Represents an unknown (but set) IBAN.</summary>
     public static InternationalBankAccountNumber Unknown => new("ZZ");
 
@@ -33,24 +35,12 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     public int Length => m_Value is { Length: > 2 } ? m_Value.Length : 0;
 
     /// <summary>Gets the country of IBAN.</summary>
-    public Country Country
+    public Country Country => m_Value switch
     {
-        get
-        {
-            if (m_Value == default)
-            {
-                return Country.Empty;
-            }
-            else if (m_Value == Unknown.m_Value)
-            {
-                return Country.Unknown;
-            }
-            else
-            {
-                return Country.Parse(m_Value[..2], CultureInfo.InvariantCulture);
-            }
-        }
-    }
+        null => Country.Empty,
+        var v when v == Unknown.m_Value => Country.Unknown,
+        _ => Country.Parse(m_Value[..2], CultureInfo.InvariantCulture),
+    };
 
     /// <summary>Serializes the IBAN to a JSON node.</summary>
     /// <returns>
@@ -65,28 +55,19 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
 
     /// <summary>Represents the IBAN as a <see cref="string" /> without formatting.</summary>
     [Pure]
-    public string MachineReadable()
+    public string MachineReadable() => m_Value switch
     {
-        if (m_Value == default)
-        {
-            return string.Empty;
-        }
-        else if (m_Value == Unknown.m_Value)
-        {
-            return "?";
-        }
-        else
-        {
-            return m_Value;
-        }
-    }
+        null => string.Empty,
+        var v when v == Unknown.m_Value => "?",
+        _ => m_Value,
+    };
 
     /// <inheritdoc cref="HumanReadable(char)" />
     /// <remarks>
     /// Uses non-breaking spaces to prevent unintended line-breaks.
     /// </remarks>
     [Pure]
-    public string HumanReadable() => HumanReadable((char)0160);
+    public string HumanReadable() => HumanReadable(Nbsp);
 
     /// <summary>In order to facilitate reading by humans, an IBAN can be
     /// expressed in groups of four characters separated by spaces, the last
@@ -156,8 +137,8 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
         ['U'] = (svo, _) => svo.MachineReadable(),
         ['m'] = (svo, _) => svo.MachineReadable().ToLowerInvariant(),
         ['M'] = (svo, _) => svo.MachineReadable(),
-        ['h'] = (svo, _) => svo.HumanReadable((char)160).ToLowerInvariant(),
-        ['H'] = (svo, _) => svo.HumanReadable((char)160),
+        ['h'] = (svo, _) => svo.HumanReadable(Nbsp).ToLowerInvariant(),
+        ['H'] = (svo, _) => svo.HumanReadable(Nbsp),
         ['f'] = (svo, _) => svo.HumanReadable(' ').ToLowerInvariant(),
         ['F'] = (svo, _) => svo.HumanReadable(' '),
     };

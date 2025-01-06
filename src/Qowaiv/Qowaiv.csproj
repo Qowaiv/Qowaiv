@@ -13,6 +13,7 @@ ToBeReleased:
 - PostalCode.Empty is valid for countries without a postal code system. (fix) #444
 - Added Country.HasPostalCodeSystem(). #444
 - Use Random.Shared in DecimalMath. #448
+- IBAN internals clean-up. #449
 v7.2.1
 - Add Deconstruct to Date.
 - Add Deconstruct to DateSpan.

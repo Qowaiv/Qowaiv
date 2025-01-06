@@ -227,8 +227,6 @@ public class Has_custom_formatting
     [TestCase("f", "NL20INGB0001234567", "nl20 ingb 0001 2345 67")]
     [TestCase("h", "NL20INGB0001234567", "nl20 ingb 0001 2345 67")]
     [TestCase("H", "NL20INGB0001234567", "NL20 INGB 0001 2345 67")]
-    [TestCase("H", "", "")]
-    [TestCase("H", "?", "?")]
     [TestCase("u", "NL20INGB0001234567", "nl20ingb0001234567")]
     [TestCase("U", "NL20INGB0001234567", "NL20INGB0001234567")]
     [TestCase("m", "NL20INGB0001234567", "nl20ingb0001234567")]

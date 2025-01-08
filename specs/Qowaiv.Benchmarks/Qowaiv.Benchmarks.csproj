@@ -36,10 +36,4 @@
     <ProjectReference Include="../../src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="nuget.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

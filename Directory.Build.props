@@ -3,8 +3,6 @@
   <PropertyGroup>
     <IsPublishable>false</IsPublishable>
     <OutputType>library</OutputType>
-    <!-- Hardly any dependency let alone shared. -->
-    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
   </PropertyGroup>
 
   <PropertyGroup Label="Diagnostics">

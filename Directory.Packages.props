@@ -11,7 +11,7 @@
     <PackageVersion Include="coverlet.collector" Version="*" />
     <PackageVersion Include="DotNetProjectFile.Analyzers" Version="*" />
     <PackageVersion Include="DotNetProjectFile.Analyzers.Sdk" Version="*" />
-    <PackageVersion Include="FluentAssertions" Version="7.0.0" />
+    <PackageVersion Include="FluentAssertions" Version="6.12.2" />
     <PackageVersion Include="FluentAssertions.Analyzers" Version="*" />
     <PackageVersion Include="MathNet.Numerics" Version="5.0.0" />
     <PackageVersion Include="Microsoft.AspNet.Mvc" Version="5.*" />

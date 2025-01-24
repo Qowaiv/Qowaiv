@@ -32,13 +32,13 @@ public sealed partial class PostalCodeCountryInfo
     public bool IsSingleValue { get; }
 
     /// <summary>Gets the postal code validation pattern for the country.</summary>
-    private Regex? ValidationPattern { get; }
+    private readonly Regex? ValidationPattern;
 
     /// <summary>Gets the postal code formatting search pattern for the country.</summary>
-    private Regex? FormattingSearchPattern { get; }
+    private readonly Regex? FormattingSearchPattern;
 
     /// <summary>Gets the postal code formatting replace pattern for the country.</summary>
-    private string? FormattingReplacePattern { get; }
+    private readonly string? FormattingReplacePattern;
 
     /// <summary>Returns true if the postal code is valid for the specified country, otherwise false.</summary>
     /// <param name="postalcode">

@@ -24,7 +24,7 @@ public readonly partial struct PostalCode : IXmlSerializable, IFormattable, IEqu
 
     /// <summary>Returns true if the postal code is valid for the specified country, otherwise false.</summary>
     /// <param name="country">
-    /// The country to valid for.
+    /// The country to validate for.
     /// </param>
     /// <remarks>
     /// Returns false if the country does not have postal codes, unless the postal code is empty.

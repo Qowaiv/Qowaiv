@@ -593,6 +593,37 @@ public class Debugger
         => svo.Should().HaveDebuggerDisplay(display);
 }
 
+public class Exports
+{
+    private const BindingFlags Flags = BindingFlags.Instance | BindingFlags.NonPublic;
+    private static readonly FieldInfo ValidationPattern = typeof(PostalCodeCountryInfo).GetField(nameof(ValidationPattern), Flags)!;
+    private static readonly FieldInfo FormattingSearchPattern = typeof(PostalCodeCountryInfo).GetField(nameof(FormattingSearchPattern), Flags)!;
+    private static readonly FieldInfo FormattingReplacePattern = typeof(PostalCodeCountryInfo).GetField(nameof(FormattingReplacePattern), Flags)!;
+
+    [Explicit]
+    [Test]
+    public void TypeScript_code()
+    {
+        var sb = new StringBuilder();
+        foreach(var country in Country.All.Where(c => c.HasPostalCodeSystem()))
+        {
+            var info = PostalCodeCountryInfo.GetInstance(country);
+            var pattern = ValidationPattern.GetValue(info);
+            var search = FormattingSearchPattern.GetValue(info);
+            var replace = FormattingReplacePattern.GetValue(info);
+            sb.Append($"public {country.Name} = new PostalCodeInfo(/{pattern}/");
+
+            if(search is { })
+            {
+                sb.Append($", /{search}/, '{replace}'");
+            }
+            sb.AppendLine(");");
+        }
+
+        Console.WriteLine(sb.ToString());
+    }
+}
+
 internal class PostalCodes(Country country, params string[] values)
 {
     public Country Country { get; } = country;

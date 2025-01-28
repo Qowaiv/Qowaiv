@@ -450,7 +450,7 @@ public partial class PostalCodeCountryInfo
         { Country.SN, New(Country.SN, @"^(CP)?[0-9]{5}$", "^(..)?(.{5})$", "CP$2") },
 
         // SV: El Salvador, http://en.wikipedia.org/wiki/List_of_postal_codes
-        { Country.SV, New(Country.SV, @"^01101$", null, "01101", isSingle: true) },
+        { Country.SV, New(Country.SV, @"^01101$", isSingle: true) },
 
         // SZ: Swaziland, http://en.wikipedia.org/wiki/List_of_postal_codes. The letter identifies one of the country's four districts.
         { Country.SZ, New(Country.SZ, @"^[HLMS][0-9]{3}$") },
@@ -492,7 +492,7 @@ public partial class PostalCodeCountryInfo
         { Country.UY, New(Country.UY, @"^[0-9]{5}$") },
 
         // VA: Holy See, http://en.wikipedia.org/wiki/List_of_postal_codes_in_Italy
-        { Country.VA, New(Country.VA, @"^00120$", null, "00120", isSingle: true) },
+        { Country.VA, New(Country.VA, @"^00120$", isSingle: true) },
 
         // VC: Saint Vincent And The Grenadines, http://www.svgpost.gov.vc/index.php?option=com_content&view=article&id=3&Itemid=7
         { Country.VC, New(Country.VC, @"^(VC)?[0-9]{4}$", "^(VC)?(....)$", "VC$2") },

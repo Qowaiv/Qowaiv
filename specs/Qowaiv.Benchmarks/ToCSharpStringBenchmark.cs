@@ -68,17 +68,17 @@ file static class QowaivTypeExtensions
                 .AppendPrefix(type, withNamespace)
                 .Append(type.Name)
                 .Append('<')
-                .Append(new string(',', type.GetGenericArguments().Count - 1))
+                .Append(new string(',', type.GetGenericArguments().Length - 1))
                 .Append('>');
         }
-        else if (type.GetGenericArguments() is { Count: > 0 } genericArguments)
+        else if (type.GetGenericArguments() is { Length: > 0 } genericArguments)
         {
             sb.AppendPrefix(type, withNamespace)
                .Append(type.Name)
                .Append('<')
                .AppendType(genericArguments[0], withNamespace);
 
-            for (var i = 1; i < genericArguments.Count; i++)
+            for (var i = 1; i < genericArguments.Length; i++)
             {
                 sb.Append(", ").AppendType(genericArguments[i], withNamespace);
             }
@@ -152,7 +152,7 @@ file static class QowaivTypeExtensions
         public bool IsArray => Type.IsArray;
 
         public bool IsGenericTypeDefinition
-            => GetGenericArguments() is { Count: > 0 } args
+            => GetGenericArguments() is { Length: > 0 } args
             && args.All(a => a.Type.IsGenericTypeParameter());
 
         /// <summary>A Nested type but not a generic parameter.</summary>
@@ -166,12 +166,12 @@ file static class QowaivTypeExtensions
         public TypeInfo? ElementType => Type.GetElementType().Info();
 
         [Pure]
-        public IReadOnlyList<TypeInfo> GetGenericArguments()
+        public TypeInfo[] GetGenericArguments()
             => DeclaringType is { } declaring && Type.IsNested
-            ? GenericTypeArguments.Skip(declaring.GenericTypeArguments.Count).ToArray()
+            ? GenericTypeArguments.Skip(declaring.GenericTypeArguments.Length).ToArray()
             : GenericTypeArguments;
 
-        public IReadOnlyList<TypeInfo> GenericTypeArguments { get; }
+        public TypeInfo[] GenericTypeArguments { get; }
 
         public TypeInfo? NotNullable => Nullable.GetUnderlyingType(Type).Info();
 

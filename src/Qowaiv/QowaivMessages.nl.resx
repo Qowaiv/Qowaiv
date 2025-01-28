@@ -103,7 +103,7 @@
     <value>Geen geldig jaartal</value>
   </data>
   <data name="FormatExceptionYearMonth" xml:space="preserve">
-    <value>Geen geldige jaar/maand combinatie.</value>
+    <value>Geen geldige jaar/maand combinatie</value>
   </data>
   <data name="FormatExceptionYesNo" xml:space="preserve">
     <value>Geen geldige ja/nee waarde</value>

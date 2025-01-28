@@ -15,7 +15,11 @@ public static class QowaivAssemblyAssertions
         Guard.NotNull(assertions);
 
         var bytes = assertions.Subject.GetName().GetPublicKey() ?? [];
+
+#pragma warning disable CA1872 // Prefer 'Convert.ToHexString' and 'Convert.ToHexStringLower' over call chains based on 'BitConverter.ToString'
+        // Also targets .NET 5.0 that does not has this implementation.
         var assemblyKey = BitConverter.ToString(bytes).Replace("-", string.Empty);
+#pragma warning restore CA1872
 
         Execute.Assertion
             .BecauseOf(because, becauseArgs)

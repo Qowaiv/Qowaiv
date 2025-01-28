@@ -44,7 +44,7 @@ public class NotNullableType
 
     [Test]
     public void Returns_underlying_type_for_nullable()
-        => QowaivType.GetNotNullableType(typeof(int?)).Should().Be(typeof(int));
+        => QowaivType.GetNotNullableType(typeof(int?)).Should().Be<int>();
 }
 
 public class IsNumeric

@@ -30,7 +30,8 @@ internal static partial class IbanParser
                     return null;
                 }
 
-                id = (id * 26) + Id(span++);
+                id = (id * 26) + Id(span);
+                span++;
 
                 if (Parsers[id] is { } bban)
                 {

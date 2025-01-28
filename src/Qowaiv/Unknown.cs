@@ -96,9 +96,5 @@ public static class Unknown
         { CultureInfo.InvariantCulture, new[] { "?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN" } },
     };
 
-#if NET9_0_OR_GREATER
     private static readonly Lock addCulture = new();
-#else
-    private static readonly object addCulture = new();
-#endif
 }

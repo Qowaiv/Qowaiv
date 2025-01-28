@@ -6,13 +6,8 @@ namespace System;
 /// <summary>Extensions on <see cref="Type" />.</summary>
 public static class QowaivTypeExtensions
 {
-#if NET9_0_OR_GREATER
     private static readonly Lock _shortNameCacheLocker = new();
     private static readonly Lock _longNameCacheLocker = new();
-#else
-    private static readonly object _shortNameCacheLocker = new();
-    private static readonly object _longNameCacheLocker = new();
-#endif
 
     private static readonly ConditionalWeakTable<Type, string> _shortNameCache = new();
     private static readonly ConditionalWeakTable<Type, string> _longNameCache = new();

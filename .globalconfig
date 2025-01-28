@@ -111,6 +111,8 @@ dotnet_diagnostic.S3254.severity    = warning    # Rename this enumeration to ma
 dotnet_diagnostic.S3257.severity    = warning    # Default parameter values should not be passed as arguments
 dotnet_diagnostic.S3776.severity    = warning    # Cognitive Complexity of methods should not be too high
 dotnet_diagnostic.S3900.severity    = warning    # Arguments of public methods should be validated against null
+dotnet_diagnostic.S4055.severity    = warning    # Literals should not be passed as localized parameters
+
 dotnet_diagnostic.S6354.severity    = warning    # Use a testable (date) time provider instead
 
 dotnet_diagnostic.SYSLIB1044.severity = none     # The regex generator couldn't generate a complete source implementation for the specified regular expression due to an internal limitation

@@ -39,9 +39,6 @@
   <data name="FormatExceptionFraction" xml:space="preserve">
     <value>Geen geldige breuk</value>
   </data>
-  <data name="FormatExceptionStreamSize" xml:space="preserve">
-    <value>Geen geldige bestandsgrootte</value>
-  </data>
   <data name="FormatExceptionGender" xml:space="preserve">
     <value>Geen geldig geslacht</value>
   </data>
@@ -56,6 +53,9 @@
   </data>
   <data name="FormatExceptionHouseNumber" xml:space="preserve">
     <value>Geen geldig huisnummer</value>
+  </data>
+  <data name="FormatExceptionIdentifier" xml:space="preserve">
+    <value>Geen geldige identifier</value>
   </data>
   <data name="FormatExceptionInternationalBankAccountNumber" xml:space="preserve">
     <value>Geen geldig IBAN</value>
@@ -86,6 +86,9 @@
   </data>
   <data name="FormatExceptionSex" xml:space="preserve">
     <value>Geen geldig geslacht</value>
+  </data>
+  <data name="FormatExceptionStreamSize" xml:space="preserve">
+    <value>Geen geldige bestandsgrootte</value>
   </data>
   <data name="FormatExceptionTimestamp" xml:space="preserve">
     <value>Geen geldige SQL timestamp</value>

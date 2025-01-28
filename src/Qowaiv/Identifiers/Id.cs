@@ -272,7 +272,7 @@ public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquata
     public static Id<TIdentifier> Parse(string? s)
         => TryParse(s, out Id<TIdentifier> val)
         ? val
-        : throw Unparsable.ForValue<Id<TIdentifier>>(s, "Not a valid identifier.");
+        : throw Unparsable.ForValue<Id<TIdentifier>>(s, QowaivMessages.FormatExceptionIdentifier);
 
     /// <summary>Converts the <see cref="string" /> to <see cref="Id{TIdentifier}" />.</summary>
     /// <param name="s">

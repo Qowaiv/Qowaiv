@@ -43,7 +43,7 @@ public class Int64IdBehavior : IdentifierBehavior
     {
         0 => null,
         _ when obj > 0 && TryCreate(obj, out var created) && created is long id => id,
-        _ => throw Unparsable.ForValue(obj.ToString(), "Not a valid identifier.", typeof(Id<>).MakeGenericType(GetType())),
+        _ => throw Unparsable.ForValue(obj.ToString(), QowaivMessages.FormatExceptionIdentifier, typeof(Id<>).MakeGenericType(GetType())),
     };
 
     /// <inheritdoc/>

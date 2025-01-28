@@ -96,6 +96,9 @@
   <data name="FormatExceptionHouseNumber" xml:space="preserve">
     <value>Not a valid house number</value>
   </data>
+  <data name="FormatExceptionIdentifier" xml:space="preserve">
+    <value>Not a valid identifier</value>
+  </data>
   <data name="FormatExceptionInternationalBankAccountNumber" xml:space="preserve">
     <value>Not a valid IBAN</value>
   </data>

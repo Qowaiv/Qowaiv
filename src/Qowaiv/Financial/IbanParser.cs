@@ -6,13 +6,19 @@ internal static partial class IbanParser
 {
     private const int IB = (('I' - 'A') * 26) + 'B' - 'A';
 
+#pragma warning disable S3776 // Cognitive Complexity of methods should not be too high
+
     /// <summary>Parses a string representing an <see cref="InternationalBankAccountNumber" />.</summary>
     /// <returns>
     /// A normalized (uppercased without markup) string, or null for invalid input.
     /// </returns>
+    /// <remarks>
+    /// This method is optimized for speed, hence some nesting, and inlining.
+    /// </remarks>
     [Pure]
     public static string? Parse(CharSpan span, bool prefixed = false)
     {
+        // The minimum length of an IBAN.
         while (span.Length >= 12)
         {
             if (IsLetter(span.First))
@@ -24,7 +30,8 @@ internal static partial class IbanParser
                     return null;
                 }
 
-                id = (id * 26) + Id(span++);
+                id = (id * 26) + Id(span);
+                span++;
 
                 if (Parsers[id] is { } bban)
                 {
@@ -54,6 +61,7 @@ internal static partial class IbanParser
         }
         return null;
     }
+#pragma warning restore S3776
 
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

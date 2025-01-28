@@ -9,7 +9,7 @@ public class Communicates
 
         "no_guid".Invoking(CustomGuid.Parse)
             .Should().Throw<FormatException>()
-            .WithMessage("Not a valid identifier.")
+            .WithMessage("Not a valid identifier")
             .And.InnerException.Should().BeOfType<Unparsable>()
             .And.Subject.Should().BeEquivalentTo(new
             {

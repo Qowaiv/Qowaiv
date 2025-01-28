@@ -349,6 +349,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid identifier.
+        /// </summary>
+        public static string FormatExceptionIdentifier {
+            get {
+                return ResourceManager.GetString("FormatExceptionIdentifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid IBAN.
         /// </summary>
         public static string FormatExceptionInternationalBankAccountNumber {

@@ -56,7 +56,7 @@ public class Supports_JSON_serialization
     {
         json.Invoking(JsonTester.Read_System_Text_JSON<Id<ForEven>>)
             .Should().Throw<System.Text.Json.JsonException>()
-            .WithMessage("Not a valid identifier.");
+            .WithMessage("Not a valid identifier");
     }
 
     private sealed class ForEven : Int64IdBehavior

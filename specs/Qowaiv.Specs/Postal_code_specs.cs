@@ -621,6 +621,7 @@ public class Exports
         }
 
         Console.WriteLine(sb.ToString());
+        sb.Length.Should().NotBe(0);
     }
 }
 

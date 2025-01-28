@@ -25,6 +25,7 @@ validator code.
 | Belgium                   |    16 | 12n             |       | BEkk bbbc cccc ccxx                       | yes  | BE68 5390 0754 7034                       |
 | Bulgaria                  |    22 | 4a,6n,8c        |       | BGkk bbbb ssss ttcc cccc cc               | yes  | BG80 BNBG 9661 1020 3456 78               |
 | Bahrain                   |    22 | 4a,14c          |       | BHkk bbbb cccc cccc cccc cc               | yes  | BH29 BMAG 1299 1234 56BH 00               |
+| Burundi                   |    27 | 5n,5n,11n,2n    |       | BIkk bbbb bsss sscc cccc cccc ccc         | yes  | BI13 2000 1100 0100 0012 3456 789         |
 | Brazil                    |    29 | 23n,1a,1c       |       | BRkk bbbb bbbb ssss sccc cccc ccct n      | yes  | BR97 0036 0305 0000 1000 9795 493P 1      |
 | Belarus                   |    28 | 4c,4n,16c       |       | BYkk bbbb aaaa cccc cccc cccc cccc        | yes  | BY13 NBRB 3600 9000 0000 2Z00 AB00        |
 | Switzerland               |    21 | 5n,12c          |       | CHkk bbbb bccc cccc cccc c                | yes  | CH36 0838 7000 0010 8017 3                |
@@ -32,6 +33,7 @@ validator code.
 | Cyprus                    |    28 | 8n,16c          |       | CYkk bbbs ssss cccc cccc cccc cccc        | yes  | CY17 0020 0128 0000 0012 0052 7600        |
 | Czech Republic            |    24 | 20n             |       | CZkk bbbb pppp ppcc cccc cccc             | yes  | CZ65 0800 0000 1920 0014 5399             |
 | Germany                   |    22 | 18n             |       | DEkk bbbb bbbb cccc cccc cc               | yes  | DE68 2105 0170 0012 3456 78               |
+| Djibouti                  |    27 | 5n,5n,11n,2n    |       | DJkk bbbb bsss sscc cccc cccc ccc         | yes  | DJ21 1000 2010 0104 0994 3020 008         |
 | Denmark                   |    18 | 14n             |       | DKkk bbbb cccc cccc cx                    | yes  | DK50 0040 0440 1162 43                    |
 | Dominican Republic        |    28 | 4c,20n          |       | DOkk bbbb cccc cccc cccc cccc cccc        | yes  | DO22 ACAU 0000 0000 0001 2345 6789        |
 | Estonia                   |    20 | 16n             |       | EEkk bbss cccc cccc cccx                  | yes  | EE38 2200 2210 2014 5685                  |
@@ -70,6 +72,7 @@ validator code.
 | Mauritania                |    27 | 23n             |    13 | MRkk bbbb bsss sscc cccc cccc cxx         | yes  | MR13 0002 0001 0100 0012 3456 753         |
 | Malta                     |    31 | 4a,5n,18c       |       | MTkk bbbb ssss sccc cccc cccc cccc ccc    | yes  | MT84 MALT 0110 0001 2345 MTLC AST0 01S    |
 | Mauritius                 |    30 | 4a,16n,[000],3a |       | MUkk bbbb bbss cccc cccc cccc 000m mm     | yes  | MU17 BOMM 0101 1010 3030 0200 000M UR     |
+| Nicaragua                 |    28 | 4a,20n          |       | NIkk aaaa cccc cccc cccc cccc cccc        | yes  | NI91 BAMC 0112 0203 0000 0355 8124        |
 | Netherlands               |    18 | 4a,10n          |       | NLkk bbbb cccc cccc cc                    | yes  | NL20 INGB 0001 2345 67                    |
 | Norway                    |    15 | 11n             |       | NOkk bbbb cccc ccx                        | yes  | NO93 8601 1117 947                        |
 | Pakistan                  |    24 | 4a,16c          |       | PKkk bbbb cccc cccc cccc cccc             | yes  | PK36 SCBL 0000 0011 2345 6702             |
@@ -98,14 +101,12 @@ validator code.
 | Kosovo                    |    20 | 4n,10n,2n       |       | XKkk bbbb cccc cccc cccc                  | yes  | XK05 1212 0123 4567 8906                  |
 | Angola                    |    25 | 21n             |       | AOkk nnnn nnnn nnnn nnnn nnnn n           | no   | AO06 0044 0000 6729 5030 1010 2           |
 | Burkina Faso              |    28 | 2c,22n          |       | BFkk ccnn nnnn nnnn nnnn nnnn nnnn        | no   | BF42 BF08 4010 1300 4635 7400 0390        |
-| Burundi                   |    27 | 5n,5n,11n,2n    |       | BIkk nnnn nnnn nnnn nnnn nnnn nnn         | no   | BI13 2000 1100 0100 0012 3456 789         |
 | Benin                     |    28 | 2c,22n          |       | BJkk ccnn nnnn nnnn nnnn nnnn nnnn        | no   | BJ66 BJ06 1010 0100 1443 9000 0769        |
 | Central African Republic  |    27 | 23n             |       | CFkk nnnn nnnn nnnn nnnn nnnn nnn         | no   | CF42 2000 1000 0101 2006 9700 160         |
 | Congo, Republic of the    |    27 | 23n             |       | CGkk nnnn nnnn nnnn nnnn nnnn nnn         | no   | CG39 3001 1000 1010 1345 1300 019         |
-| Côte d'Ivoire             |    28 | 1a,23n          |       | CIkk annn nnnn nnnn nnnn nnnn nnnn        | no   | CI02 N259 9162 9182 8879 7488 1965        |
+| Côte d'Ivoire             |    28 | 2a,22n          |       | CIkk aann nnnn nnnn nnnn nnnn nnnn        | no   | CI15 QO48 7501 9424 6931 1090 1733        |
 | Cameroon                  |    27 | 23n             |       | CMkk nnnn nnnn nnnn nnnn nnnn nnn         | no   | CM21 1000 2000 3002 7797 6315 008         |
 | Cabo Verde                |    25 | 21n             |       | CVkk nnnn nnnn nnnn nnnn nnnn n           | no   | CV64 0005 0000 0020 1082 1514 4           |
-| Djibouti                  |    27 | 23n             |       | DJkk nnnn nnnn nnnn nnnn nnnn nnn         | no   | DJ21 1000 2010 0104 0994 3020 008         |
 | Algeria                   |    26 | 22n             |       | DZkk nnnn nnnn nnnn nnnn nnnn nn          | no   | DZ58 0002 1000 0111 3000 0005 70          |
 | Gabon                     |    27 | 23n             |       | GAkk nnnn nnnn nnnn nnnn nnnn nnn         | no   | GA21 4002 1010 0320 0189 0020 126         |
 | Equatorial Guinea         |    27 | 23n             |       | GQkk nnnn nnnn nnnn nnnn nnnn nnn         | no   | GQ70 5000 2001 0037 1522 8190 196         |
@@ -115,10 +116,9 @@ validator code.
 | Comoros                   |    27 | 23n             |       | KMkk nnnn nnnn nnnn nnnn nnnn nnn         | no   | KM46 0000 5000 0100 1090 4400 137         |
 | Morocco                   |    28 | 24n             |       | MAkk nnnn nnnn nnnn nnnn nnnn nnnn        | no   | MA64 0115 1900 0001 2050 0053 4921        |
 | Madagascar                |    27 | 23n             |       | MGkk nnnn nnnn nnnn nnnn nnnn nnn         | no   | MG46 0000 5030 0712 8942 1016 045         |
-| Mali                      |    28 | 2c,22n          |       | MLkk annn nnnn nnnn nnnn nnnn nnnn        | no   | ML13 ML01 6012 0102 6001 0066 8497        |
+| Mali                      |    28 | 2c,22n          |       | MLkk ccnn nnnn nnnn nnnn nnnn nnnn        | no   | ML13 ML01 6012 0102 6001 0066 8497        |
 | Mozambique                |    25 | 21n             |       | MZkk nnnn nnnn nnnn nnnn nnnn n           | no   | MZ97 1234 1234 1234 1234 1234 1           |
 | Niger                     |    28 | 2a,22n          |       | NEkk aann nnnn nnnn nnnn nnnn nnnn        | no   | NE58 NE03 8010 0100 1303 0500 0268        |
-| Nicaragua                 |    32 | 4a,24n          |       | NIkk aaaa nnnn nnnn nnnn nnnn nnnn nnnn   | no   | NI92 BAMC 0000 0000 0000 0000 03123 123   |
 | Senegal                   |    28 | 2a,22n          |       | SNkk aann nnnn nnnn nnnn nnnn nnnn        | no   | SN05 TI80 0835 4151 5881 3959 8706        |
 | Chad                      |    27 | 23n             |       | TDkk nnnn nnnn nnnn nnnn nnnn nnn         | no   | TD89 6000 2000 0102 7109 1600 153         |
 | Togo                      |    28 | 2a,22n          |       | TGkk aann nnnn nnnn nnnn nnnn nnnn        | no   | TG53 TG00 9060 4310 3465 0040 0070        |

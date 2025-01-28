@@ -160,7 +160,7 @@ public class Is_comparable
             default,
             InternationalBankAccountNumber.Parse("CG39 3001 1000 1010 1345 1300 019"),
             InternationalBankAccountNumber.Parse("CH36 0838 7000 0010 8017 3"),
-            InternationalBankAccountNumber.Parse("CI02 N259 9162 9182 8879 7488 1965"),
+            InternationalBankAccountNumber.Parse("CI15 QO48 7501 9424 6931 1090 1733"),
             InternationalBankAccountNumber.Unknown,
         ];
 

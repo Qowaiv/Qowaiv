@@ -42,7 +42,7 @@ internal class Markdown_file
 
     [TestCaseSource(nameof(Infos))]
     public void Example_is_valid(IbanInfo info)
-        => InternationalBankAccountNumber.TryParse(info.Example).Should().NotBeNull();
+        => InternationalBankAccountNumber.TryParse(info.Example).Should().NotBeNull(because: $"{info.Example} should be valid for {info.CountryName}.");
 
     [Test]
     public void Supported_countries_match_overview()
@@ -72,6 +72,7 @@ internal class Markdown_file
     [TestCase("SKkk nnnn nnnn nnnn nnnn nnnn", "SK with invalid MOD11 10 checksum.")]
     [TestCase("TLkk nnnn nnnn nnnn nnnn nnn", "TL with non-fixed checksum.")]
     [TestCase("TNkk nnnn nnnn nnnn nnnn nnnn", "TN with non-fixed checksum.")]
+    [TestCase("CIkkaannnnnnnnnnnnnnnnnnnnnn")]
     public void Generate_IBAN(string bban, string? because = null)
     {
         var rnd = new Random(bban.GetHashCode());

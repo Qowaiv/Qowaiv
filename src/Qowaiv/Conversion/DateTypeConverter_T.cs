@@ -10,7 +10,13 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
     public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
         => IsConvertable(sourceType) || base.CanConvertFrom(context, sourceType);
 
+#pragma warning disable S1541
+
     /// <inheritdoc />
+    /// <remarks>
+    /// the switch is considered too complex, but I see no way to write it down
+    /// simpler than it is, and will stick to it.
+    /// </remarks>
     [Pure]
     public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value) => value switch
     {
@@ -28,6 +34,7 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
         YearMonth /*......*/ date => FromYearMonth(date),
         _ => base.ConvertFrom(context, culture, value),
     };
+#pragma warning restore S1541
 
     /// <inheritdoc />
     [Pure]

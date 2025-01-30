@@ -195,9 +195,9 @@ internal sealed record IbanInfo(string CountryName, int Length, string Bban, int
 
     public string JsRegex()
     {
-        var sb = new StringBuilder("['");
-
-        sb.Append(Country.IsoAlpha2Code).Append("', /^");
+        var sb = new StringBuilder("['")
+            .Append(Country.IsoAlpha2Code)
+            .Append("', /^");
         
         var first = true;
 
@@ -214,7 +214,7 @@ internal sealed record IbanInfo(string CountryName, int Length, string Bban, int
                 // on a merge, we continue.
                 else if (part[^1] == 'n')
                 {
-                    var n = int.Parse(part[..^1]) + 2; ;
+                    var n = int.Parse(part[..^1]) + 2;
                     sb.Append($"[0-9]{{{n}}}");
                     continue;
                 }
@@ -234,7 +234,11 @@ internal sealed record IbanInfo(string CountryName, int Length, string Bban, int
             });
         }
 
-        return sb.Append("$/],").Replace("{1}", string.Empty).ToString();
+        return sb
+            .Append("$/],")
+            // We do not have to make a single instance that explicit.
+            .Replace("{1}", string.Empty)
+            .ToString();
     }
 
     public override string ToString() => Example;

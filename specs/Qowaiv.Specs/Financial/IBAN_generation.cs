@@ -27,6 +27,16 @@ internal class Markdown_file
         Assert.Inconclusive("Copy output to code file.");
     }
 
+    [Test]
+    public void Generate_JS_RegEx_Pattern()
+    {
+        foreach (var info in Infos.OrderBy(i => i.Example))
+        {
+            Console.WriteLine(info.JsRegex());
+        }
+        Assert.Inconclusive("Copy output to code file.");
+    }
+
     [TestCaseSource(nameof(Infos))]
     public void BBan_length_equals_length(IbanInfo info)
         => info.BbanLength.Should().Be(info.Length);
@@ -182,6 +192,54 @@ internal sealed record IbanInfo(string CountryName, int Length, string Bban, int
         => CheckSum is { } c
         ? $@"Bban(Country.{Example[..2]}, ""{Bban}"", checksum: {c:00}),"
         : $@"Bban(Country.{Example[..2]}, ""{Bban}""),";
+
+    public string JsRegex()
+    {
+        var sb = new StringBuilder("['")
+            .Append(Country.IsoAlpha2Code)
+            .Append("', /^");
+        
+        var first = true;
+
+        foreach (var part in Bban.Split(','))
+        {
+            // put in checksum and/or merge it with the first part.
+            if (first)
+            {
+                first = false;
+                if (CheckSum is { } c)
+                {
+                    sb.Append(c.ToString("00"));
+                }
+                // on a merge, we continue.
+                else if (part[^1] == 'n')
+                {
+                    var n = int.Parse(part[..^1]) + 2;
+                    sb.Append($"[0-9]{{{n}}}");
+                    continue;
+                }
+                else
+                {
+                    sb.Append("[0-9]{2}");
+                }
+            }
+
+
+            sb.Append(part[^1] switch
+            {
+                'n' => $"[0-9]{{{part[..^1]}}}",
+                'a' => $"[A-Z]{{{part[..^1]}}}",
+                'c' => $"[A-Z0-9]{{{part[..^1]}}}",
+                _ => part[1..^1],
+            });
+        }
+
+        return sb
+            .Append("$/],")
+            // We do not have to make a single instance that explicit.
+            .Replace("{1}", string.Empty)
+            .ToString();
+    }
 
     public override string ToString() => Example;
 

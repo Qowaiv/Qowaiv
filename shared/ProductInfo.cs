@@ -11,3 +11,5 @@ using System.Runtime.InteropServices;
 // Classes which are exposed to COM must have a parameterless constructor. That
 // conflicts with the approach of Qowaiv.
 [assembly: ComVisible(false)]
+
+[module: System.Runtime.CompilerServices.SkipLocalsInit]

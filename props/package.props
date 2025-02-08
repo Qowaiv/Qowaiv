@@ -51,4 +51,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)../shared/ProductInfo.cs" Link="Properties/ProductInfo.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Alias="Lock" Include="System.Threading.Lock" />
+    <Using Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Alias="Lock" Include="System.Object" />
+  </ItemGroup>
+
 </Project>

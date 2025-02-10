@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <IsPublishable>false</IsPublishable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <OutputType>library</OutputType>
   </PropertyGroup>
 

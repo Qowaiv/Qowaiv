@@ -9,7 +9,7 @@ public class Length
         => EmailAddress.Parse(max).Length.Should().Be(254);
 
     [TestCase("i234567890_234567890_234567890_234567890_234567890_234567890_234@long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long1")]
-    public void not_more_then_255(string max)
+    public void not_255_or_longer(string max)
     {
         max.Length.Should().BeGreaterThanOrEqualTo(255);
         Email.ShouldBeInvalid(max);

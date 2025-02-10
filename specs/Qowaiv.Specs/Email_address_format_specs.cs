@@ -19,7 +19,8 @@ public class Length
 public class Local_part
 {
     public static IEnumerable<char> WithoutLimitations
-     => "abcdefghijklmnopqrstuvwxyz"
+     => "0123456789"
+     + "abcdefghijklmnopqrstuvwxyz"
      + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
      + "!#$%&'*+-/=?^_`{}|~";
 
@@ -101,6 +102,12 @@ public class Domain_part
     [TestCase(99)]
     public void part_not_above_63(int length)
         => Email.ShouldBeInvalid($"info@{new string('a', length)}.qowaiv.org");
+
+    [TestCase(64)]
+    [TestCase(65)]
+    [TestCase(99)]
+    public void last_part_not_above_63(int length)
+       => Email.ShouldBeInvalid($"info@{new string('a', length)}");
 
     public static IEnumerable<char> Forbidden => "!#$%&'*+/=?^`{}|~";
 

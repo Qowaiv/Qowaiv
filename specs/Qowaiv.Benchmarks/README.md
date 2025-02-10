@@ -59,12 +59,12 @@ By removing `Regex` for the UUID parsing, durations have been reduced.
 
 Reduced the function calls, and string replacements.
 
-| ToString             | Mean     | Ratio |
+| Uuid.ToString()      | Mean     | Ratio |
 |--------------------- |---------:|------:|
-| GUID (Guid.ToString) | 11.10 ns |  1.00 |
-| Base64               | 17.47 ns |  1.57 |
-| GUID                 | 43.03 ns |  3.85 |
-| Convert.ToBase64     | 50.71 ns |  4.57 |
+| GUID (Guid.ToString) | 12.53 us |  1.00 |
+| Base64               | 18.11 us |  1.45 |
+| GUID                 | 50.66 us |  4.04 |
+| Convert.ToBase64     | 59.49 us |  4.75 |
 
 The version of a `UUID` is stored in the upper 4 bits of byte 7. By using the
 `GuidLayout` instead of `ToByteArray()` to retrieve that those bits is a big

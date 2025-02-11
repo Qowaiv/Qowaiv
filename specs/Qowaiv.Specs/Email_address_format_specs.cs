@@ -9,7 +9,7 @@ public class Length
         => EmailAddress.Parse(max).Length.Should().Be(254);
 
     [TestCase("i234567890_234567890_234567890_234567890_234567890_234567890_234@long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long1")]
-    public void not_more_then_255(string max)
+    public void not_255_or_longer(string max)
     {
         max.Length.Should().BeGreaterThanOrEqualTo(255);
         Email.ShouldBeInvalid(max);
@@ -19,7 +19,8 @@ public class Length
 public class Local_part
 {
     public static IEnumerable<char> WithoutLimitations
-     => "abcdefghijklmnopqrstuvwxyz"
+     => "0123456789"
+     + "abcdefghijklmnopqrstuvwxyz"
      + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
      + "!#$%&'*+-/=?^_`{}|~";
 
@@ -27,6 +28,10 @@ public class Local_part
     [TestCase(@"""""")]
     public void not_empty(string empty)
         => Email.ShouldBeInvalid($"{empty}@qowaiv.org");
+
+    [Test]
+    public void can_contain_emoji()
+        => Email.ShouldBeValid("❤️@qowaiv.org");
 
     [TestCase(1)]
     [TestCase(2)]
@@ -102,6 +107,12 @@ public class Domain_part
     public void part_not_above_63(int length)
         => Email.ShouldBeInvalid($"info@{new string('a', length)}.qowaiv.org");
 
+    [TestCase(64)]
+    [TestCase(65)]
+    [TestCase(99)]
+    public void last_part_not_above_63(int length)
+       => Email.ShouldBeInvalid($"info@{new string('a', length)}");
+
     public static IEnumerable<char> Forbidden => "!#$%&'*+/=?^`{}|~";
 
     [TestCaseSource(nameof(Forbidden))]
@@ -127,8 +138,14 @@ public class Domain_part
     [TestCase("xn--bcher-kva8445foa")]
     [TestCase("xn--eckwd4c7cu47r2wf")]
     [TestCase("xn--3e0b707e")]
-    public void can_be_puny_code(string punyCode)
+    public void can_be_punycode(string punyCode)
         => Email.ShouldBeValid($"info@qowaiv.{punyCode}");
+
+    [TestCase("xn-bcher-kva8445foa")]
+    [TestCase("xn--e")]
+    [TestCase("xn--")]
+    public void can_not_be_pseude_punycode(string pseudo)
+         => Email.ShouldBeInvalid($"info@qowaiv.{pseudo}");
 
     [Test]
     public void dots_can_separate_parts()
@@ -183,6 +200,8 @@ public class Address_sign
 public class Display_name
 {
     [TestCase(@"""Joe Smith"" info@qowaiv.org")]
+    [TestCase(@"""Joe Smith""  info@qowaiv.org")]
+    [TestCase("\"Joe Smith\"\tinfo@qowaiv.org")]
     [TestCase(@"""Joe\\tSmith"" info@qowaiv.org")]
     [TestCase(@"""Joe\""Smith"" info@qowaiv.org")]
     public void Quoted(string quoted)

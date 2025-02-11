@@ -18,9 +18,14 @@ public static class Email
     {
         private readonly ReadOnlySpan<char> Input;
         private readonly Span<char> Buffer;
-        public readonly int Length;
+        private readonly int Length;
 
-        public bool Success => Length != NoMatch;
+        private bool Success => Length != NoMatch;
+
+        public string? Result
+            => Success
+            ? Buffer[..Length].ToString()
+            : null;
 
         public Parser(ReadOnlySpan<char> input, Span<char> result, int length)
         {
@@ -180,12 +185,7 @@ public static class Email
         [Pure]
         private Parser None() => new(Input, Buffer, NoMatch);
 
-        [Pure]
-        public string? Result
-            => Success
-            ? Buffer[..Length].ToString()
-            : null;
-
+        
 
         [Pure]
         public override string ToString()

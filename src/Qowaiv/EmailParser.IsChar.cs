@@ -6,11 +6,11 @@ internal static partial class EmailParser
 {
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsLocal(this char ch) => !ASCII.IsAscii(ch) || ASCII.EmailAddress.IsLocal(ch);
+    public static bool IsLocal(this char ch) => !ASCII.IsAscii(ch) || ASCII.EmailAddress.IsLocal(ch);
 
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsDomain(this char ch) => !ASCII.IsAscii(ch) || ASCII.EmailAddress.IsDomain(ch);
+    public static bool IsDomain(this char ch) => !ASCII.IsAscii(ch) || ASCII.EmailAddress.IsDomain(ch);
 
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

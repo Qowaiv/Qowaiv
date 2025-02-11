@@ -158,7 +158,7 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
             result = Unknown;
             return true;
         }
-        else if (EmailParser.Parse(s) is string email)
+        else if (Email.Parse(s.AsSpan()) is string email)
         {
             result = new EmailAddress(email);
             return true;

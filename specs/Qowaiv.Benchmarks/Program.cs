@@ -6,7 +6,7 @@ public static class Program
 {
     public static void Main()
     {
-        BenchmarkRunner.Run<UuidBenchmark.StringOutput>();
+        BenchmarkRunner.Run<EmailBenchmark>();
     }
 
     public static void Other()
@@ -22,6 +22,7 @@ public static class Program
         BenchmarkRunner.Run<RoundBenchmark>();
 
         BenchmarkRunner.Run<UuidBenchmark.Parse>();
+        BenchmarkRunner.Run<UuidBenchmark.StringOutput>();
         BenchmarkRunner.Run<UuidBenchmark.Version>();
     }
 }

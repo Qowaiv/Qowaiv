@@ -29,6 +29,10 @@ public class Local_part
     public void not_empty(string empty)
         => Email.ShouldBeInvalid($"{empty}@qowaiv.org");
 
+    [Test]
+    public void can_contain_emoji()
+        => Email.ShouldBeValid("❤️@qowaiv.org");
+
     [TestCase(1)]
     [TestCase(2)]
     [TestCase(17)]
@@ -134,8 +138,14 @@ public class Domain_part
     [TestCase("xn--bcher-kva8445foa")]
     [TestCase("xn--eckwd4c7cu47r2wf")]
     [TestCase("xn--3e0b707e")]
-    public void can_be_puny_code(string punyCode)
+    public void can_be_punycode(string punyCode)
         => Email.ShouldBeValid($"info@qowaiv.{punyCode}");
+
+    [TestCase("xn-bcher-kva8445foa")]
+    [TestCase("xn--e")]
+    [TestCase("xn--")]
+    public void can_not_be_pseude_punycode(string pseudo)
+         => Email.ShouldBeInvalid($"info@qowaiv.{pseudo}");
 
     [Test]
     public void dots_can_separate_parts()
@@ -190,6 +200,8 @@ public class Address_sign
 public class Display_name
 {
     [TestCase(@"""Joe Smith"" info@qowaiv.org")]
+    [TestCase(@"""Joe Smith""  info@qowaiv.org")]
+    [TestCase("\"Joe Smith\"\tinfo@qowaiv.org")]
     [TestCase(@"""Joe\\tSmith"" info@qowaiv.org")]
     [TestCase(@"""Joe\""Smith"" info@qowaiv.org")]
     public void Quoted(string quoted)

@@ -211,8 +211,7 @@ internal static partial class EmailParser
     {
         if (state.Input.IsEmpty()
             && state.Buffer.Length > 1
-            && (dot == NotFound
-            || state.ValidTopDomain(dot)))
+            && state.ValidTopDomain(dot))
         {
             state.Result.Add(state.Buffer);
             return state;
@@ -300,7 +299,8 @@ internal static partial class EmailParser
     private static bool ValidTopDomain(this State state, int dot)
     {
         var topDomain = state.Buffer.Substring(dot + 1);
-        return topDomain.IsPunycode() || topDomain.All(IsTopDomain);
+        return topDomain.Length <= DomainPartMaxLength
+            && (topDomain.IsPunycode() || topDomain.All(IsTopDomain));
     }
 
     [Pure]

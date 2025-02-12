@@ -87,14 +87,14 @@ public static class Email
         {
             if (Length == NoMatch) return this;
 
-            var index = 0;
+            var (ch, index) = Next(-1);
             var length = 0;
             var comment = false;
             char prev = default;
 
             while (index < Input.Length && length < MaxLength)
             {
-                var ch = Input[index++];
+               
                 if (comment)
                 {
                     // No nesting
@@ -185,7 +185,27 @@ public static class Email
         [Pure]
         private Parser None() => new(Input, Buffer, NoMatch);
 
-        
+        [Pure]
+        private (char, int) Next(int index)
+        {
+            var comment = false;
+
+            while (++index < Input.Length)
+            {
+                var ch = Input[index];
+                switch (ch)
+                {
+                    case '(':
+                        if (comment) return (default, NoMatch);
+                        else comment = true;
+                        break;
+
+                    case ')': comment = false; break;
+                    default: if (!comment) return (ch, index); break;
+                }
+            }
+            return (default, NoMatch);
+        }
 
         [Pure]
         public override string ToString()

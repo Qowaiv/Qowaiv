@@ -262,6 +262,7 @@ public class Comments
     [TestCase("info@qow(domain part)aiv.org")]
     [TestCase("in(with @)fo@qowaiv.org")]
     [TestCase("info@qow(with @)aiv.org")]
+    [TestCase("info(direct)(attached)@qowaiv.org")]
     [TestCase("in(multiple 1)fo@qow(multiple 2)aiv.or(multiple 3)g")]
     public void are_ignored(string email)
         => EmailAddress.Parse(email).Should().Be(Svo.EmailAddress);

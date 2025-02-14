@@ -48,7 +48,7 @@ public class With_domain_logic
 
     [TestCase("info@qowaiv.org", "255.255.255.255")]
     [TestCase("info@[192.0.2.1]", "192.0.2.1")]
-    [TestCase("info@[IPv6:2001:0db8:0000:0000:0000:ff00:0042:8329]", "1:db8::ff00:42:8329")]
+    [TestCase("info@[IPv6:2001:0db8:0000:0000:0000:ff00:0042:8329]", "2001:db8::ff00:42:8329")]
     public void IP_domain(EmailAddress email, string address)
         => email.IPDomain.ToString().Should().Be(address);
 
@@ -137,22 +137,23 @@ public class Is_equal_by_value
 public class Can_be_parsed
 {
     [Test]
-    public void from_null_string_represents_Empty()
-    {
-        EmailAddress.Parse(null).Should().Be(EmailAddress.Empty);
-    }
+    public void from_null_string_represents_Empty() 
+        => EmailAddress.Parse(null).Should().Be(EmailAddress.Empty);
 
     [Test]
     public void from_empty_string_represents_Empty()
-    {
-        EmailAddress.Parse(string.Empty).Should().Be(EmailAddress.Empty);
-    }
+        => EmailAddress.Parse(string.Empty).Should().Be(EmailAddress.Empty);
+
+    [TestCase("  ")]
+    [TestCase("\r")]
+    [TestCase("\t  ")]
+    [TestCase("\t  \n")]
+    public void from_whitespace_represents_Empty(string ws)
+        => EmailAddress.Parse(ws).Should().Be(EmailAddress.Empty);
 
     [Test]
     public void from_question_mark_represents_Unknown()
-    {
-        EmailAddress.Parse("?").Should().Be(EmailAddress.Unknown);
-    }
+        => EmailAddress.Parse("?").Should().Be(EmailAddress.Unknown);
 
     [TestCase("en", "info@qowaiv.org")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)

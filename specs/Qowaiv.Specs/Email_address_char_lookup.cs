@@ -2,9 +2,7 @@ namespace Email_address_char_lookup;
 
 public class Generate
 {
-#if !DEBUG
-    [Ignore("Generates code. Irrelevant for the build.")]
-#endif
+    [Explicit]
     [Test]
     public void Category()
     {
@@ -42,7 +40,7 @@ public class Generate
     private static bool IsLocal(char c)
         => ASCII.IsDigit(c)
         || ASCII.IsLetter(c)
-        || "{}|/%$&#~!?*`'^=+._-".Contains(c);
+        || "{}|/%$&#~!?*`'^=+_-".Contains(c);
 
     private static bool IsDomain(char c)
         => IsTopDomain(c)

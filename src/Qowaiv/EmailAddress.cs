@@ -36,7 +36,7 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
 
     /// <summary>True if the domain part of the Email Address is an IP-address.</summary>
     /// <remarks>
-    /// As IP-Addresses are normalized by the <see cref="EmailParser" /> it
+    /// As IP-Addresses are normalized by the <see cref="Email.Parser" /> it
     /// can simply be checked by checking the last character of the string
     /// value.
     /// </remarks>
@@ -49,7 +49,7 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
         {
             if (IsIPBased)
             {
-                var ip = Domain.StartsWith("[IPv6:", StringComparison.InvariantCulture)
+                var ip = Domain.StartsWith("[IPv6:", StringComparison.Ordinal)
                     ? Domain[6..^1]
                     : Domain[1..^1];
                 return IPAddress.Parse(ip);
@@ -153,14 +153,14 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
         {
             return true;
         }
+        if (Email.Parse(s.AsSpan()) is string email)
+        {
+            result = new EmailAddress(email);
+            return true;
+        }
         else if (Qowaiv.Unknown.IsUnknown(s, provider as CultureInfo))
         {
             result = Unknown;
-            return true;
-        }
-        else if (Email.Parse(s.AsSpan()) is string email)
-        {
-            result = new EmailAddress(email);
             return true;
         }
         else return false;

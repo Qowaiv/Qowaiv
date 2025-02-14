@@ -17,7 +17,7 @@ internal static partial class Email
     public static string? Parse(ReadOnlySpan<char> str)
     {
         Span<char> buffer = stackalloc char[TotalLength + 1];
-        return new Parser(str.Trim(), buffer, 0).Email().Result;
+        return new Parser(str, buffer, 0).Email().Result;
     }
 
     private ref struct Parser

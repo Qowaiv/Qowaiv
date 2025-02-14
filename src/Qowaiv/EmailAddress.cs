@@ -1,6 +1,7 @@
 #pragma warning disable S1210
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
+using System;
 using System.Net;
 
 namespace Qowaiv;
@@ -149,11 +150,14 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     public static bool TryParse(string? s, IFormatProvider? provider, out EmailAddress result)
     {
         result = default;
-        if (s is not { Length: > 0 })
+
+        var span = (s ?? string.Empty).AsSpan().Trim();
+
+        if (span.Length == 0)
         {
             return true;
         }
-        if (Email.Parse(s.AsSpan()) is string email)
+        else if (Email.Parse(span) is string email)
         {
             result = new EmailAddress(email);
             return true;

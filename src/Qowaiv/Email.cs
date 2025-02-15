@@ -16,6 +16,8 @@ internal static partial class Email
     [Pure]
     public static string? Parse(ReadOnlySpan<char> str)
     {
+        // The char is first written than checked for its length, hence the
+        // + 1 for the buffer.
         Span<char> buffer = stackalloc char[TotalLength + 1];
         return new Parser(str, buffer, 0).Email().Result;
     }

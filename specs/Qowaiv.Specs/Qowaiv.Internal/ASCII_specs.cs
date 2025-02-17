@@ -3,13 +3,13 @@ namespace Text.ASCII_specs;
 public class Email
 {
     [Test]
-    public void is_local_contains_82_chars()
+    public void is_local_contains_81_chars()
     {
         var local = new string([.. Enumerable.Range(0, 127)
             .Select(i => (char)i)
             .Where(ASCII.EmailAddress.IsLocal)]);
 
-        local.Should().Be("!#$%&'*+-./0123456789=?ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz{|}~");
+        local.Should().Be("!#$%&'*+-/0123456789=?ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz{|}~");
     }
 
     [Test]

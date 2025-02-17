@@ -34,7 +34,7 @@ tricks we can not rely on.
 The specialized parser (not using any `Regex`) guarantees fast parsing.
 | Method | Mean     |
 |------- |---------:|
-| Parse  | 284.3 ns |
+| Parse  | 74.35 ns |
 
 ## Percentage
 Apply a divide by 100, the default operation to convert a decimal to a

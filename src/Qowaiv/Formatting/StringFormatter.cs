@@ -154,7 +154,7 @@ public static class StringFormatter
     [Pure]
     [return: NotNullIfNotNull(nameof(str))]
     public static string? ToNonDiacritic(string? str, string ignore)
-     => string.IsNullOrEmpty(str)
-        ? str
-        : str.Buffer().ToNonDiacritic(ignore ?? string.Empty);
+     => str is { Length: > 0 }
+        ? str.Buffer().ToNonDiacritic(ignore ?? string.Empty)
+        : str;
 }

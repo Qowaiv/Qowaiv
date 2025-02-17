@@ -1,6 +1,7 @@
 #pragma warning disable S1210
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
+using System;
 using System.Net;
 
 namespace Qowaiv;
@@ -36,7 +37,7 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
 
     /// <summary>True if the domain part of the Email Address is an IP-address.</summary>
     /// <remarks>
-    /// As IP-Addresses are normalized by the <see cref="EmailParser" /> it
+    /// As IP-Addresses are normalized by the <see cref="Email.Parser" /> it
     /// can simply be checked by checking the last character of the string
     /// value.
     /// </remarks>
@@ -49,7 +50,7 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
         {
             if (IsIPBased)
             {
-                var ip = Domain.StartsWith("[IPv6:", StringComparison.InvariantCulture)
+                var ip = Domain.StartsWith("[IPv6:", StringComparison.Ordinal)
                     ? Domain[6..^1]
                     : Domain[1..^1];
                 return IPAddress.Parse(ip);
@@ -149,18 +150,21 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     public static bool TryParse(string? s, IFormatProvider? provider, out EmailAddress result)
     {
         result = default;
-        if (s is not { Length: > 0 })
+
+        var span = (s ?? string.Empty).AsSpan().Trim();
+
+        if (span.Length == 0)
         {
+            return true;
+        }
+        else if (Email.Parse(span) is string email)
+        {
+            result = new EmailAddress(email);
             return true;
         }
         else if (Qowaiv.Unknown.IsUnknown(s, provider as CultureInfo))
         {
             result = Unknown;
-            return true;
-        }
-        else if (EmailParser.Parse(s) is string email)
-        {
-            result = new EmailAddress(email);
             return true;
         }
         else return false;

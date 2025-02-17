@@ -216,4 +216,7 @@
   <data name="ArgumentOutOfRange_YearMonth" xml:space="preserve">
     <value>Year, and Month parameters describe an un-representable year-month.</value>
   </data>
+  <data name="FormatExceptionRegion" xml:space="preserve">
+    <value>Not a valid region</value>
+  </data>
 </root>

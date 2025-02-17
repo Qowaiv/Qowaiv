@@ -439,6 +439,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid region.
+        /// </summary>
+        public static string FormatExceptionRegion {
+            get {
+                return ResourceManager.GetString("FormatExceptionRegion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid sex.
         /// </summary>
         public static string FormatExceptionSex {

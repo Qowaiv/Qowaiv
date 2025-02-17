@@ -84,6 +84,9 @@
   <data name="FormatExceptionQGuid" xml:space="preserve">
     <value>Geen geldig GUID</value>
   </data>
+  <data name="FormatExceptionRegion" xml:space="preserve">
+    <value>Geen geldige regio</value>
+  </data>
   <data name="FormatExceptionSex" xml:space="preserve">
     <value>Geen geldig geslacht</value>
   </data>

@@ -1,19 +1,15 @@
 using FluentAssertions.Execution;
 using FluentAssertions.Reflection;
-using System.Reflection;
 
 namespace FluentAssertions;
 
 /// <summary>Extensions on <see cref="AssemblyAssertions" />.</summary>
-public static class QowaivAssemblyAssertions
+internal static class QowaivAssemblyAssertions
 {
     /// <summary>Asserts the <see cref="Assembly" /> to have a specific public key.</summary>
-    [CLSCompliant(false)]
     [CustomAssertion]
     public static AndConstraint<AssemblyAssertions> HavePublicKey(this AssemblyAssertions assertions, string publicKey, string because = "", params object[] becauseArgs)
     {
-        Guard.NotNull(assertions);
-
         var bytes = assertions.Subject.GetName().GetPublicKey() ?? [];
 
 #pragma warning disable CA1872 // Prefer 'Convert.ToHexString' and 'Convert.ToHexStringLower' over call chains based on 'BitConverter.ToString'

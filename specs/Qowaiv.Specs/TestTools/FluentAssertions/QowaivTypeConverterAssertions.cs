@@ -4,15 +4,12 @@ using FluentAssertions.Types;
 namespace FluentAssertions;
 
 /// <summary>Extensions to assert type converter behavior.</summary>
-public static class QowaivTypeConverterAssertions
+internal static class QowaivTypeConverterAssertions
 {
     /// <summary>Asserts that the type converter exists for the specified type.</summary>
-    [CLSCompliant(false)]
     [CustomAssertion]
     public static AndConstraint<TypeAssertions> HaveTypeConverterDefined(this TypeAssertions assertions, string because = "", params object[] becauseArgs)
     {
-        Guard.NotNull(assertions);
-
         var converter = TypeDescriptor.GetConverter(assertions.Subject);
 
         Execute.Assertion

@@ -5,20 +5,22 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>7.2.0</Version>
+    <Version>8.0.0</Version>
     <PackageId>Qowaiv.TestTools</PackageId>
     <ProductName>Qowaiv Test Tools</ProductName>
     <PackageReleaseNotes>
       <![CDATA[
+v8.0.0
+- Drop FluentAssertion dependency. (BREAKING)
 v7.2.0
 - Added .NET 9.0 version to the package.
 - Introduction FileInfo.Lock() to lock files during a test.
 v7.0.1
 - Update Qowaiv.Diagnostics.Contracts to 2.0.0. #418
 v7.0.0
-- Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
-- TestCultures properties lowercased. (breaking)
-- No Serializer.Binary for .NET 8. (breaking)
+- Drop support for .NET 5 and .NET 7 STS's. #359 (BREAKING)
+- TestCultures properties lowercased. (BREAKING)
+- No Serializer.Binary for .NET 8. (BREAKING)
 - Introduction of the EmptyTestClass attribute.
 v6.4.0
 - Support .NET 7.0. #261
@@ -29,21 +31,13 @@ v6.0.0
 - Added Serialize, SerializeDeserialize, and Converting helpers. #218
 - Added FluentAssertions extensions. #218
 - Decorate nullable types. #228
-- Assert* classes dropped. #218 (breaking)
+- Assert* classes dropped. #218 (BREAKING)
 ]]>
     </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="FluentAssertions" />
-  </ItemGroup>
-
-  <ItemGroup Label="Analyzers">
-    <PackageReference Include="FluentAssertions.Analyzers" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>

@@ -448,5 +448,7 @@ public class Debugger
     [TestCase("{unknown}", "?")]
     [TestCase("QOWAIV", "QOWAIV")]
     public void has_custom_display(object display, CustomSvo svo)
-        => svo.Should().HaveDebuggerDisplay(display);
+    {
+        svo.Should().HaveDebuggerDisplay(display);
+    }
 }

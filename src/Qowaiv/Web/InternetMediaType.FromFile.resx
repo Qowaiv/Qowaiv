@@ -1,871 +1,879 @@
 <?xml version="1.0"?>
-<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
-	<resheader name="version"><value>2.0</value></resheader>
-	<resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
-	<resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
   <data name=".DWG">
-	<value>application/acad</value>
+    <value>application/acad</value>
   </data>
   <data name=".ASD">
-	<value>application/astound</value>
+    <value>application/astound</value>
   </data>
   <data name=".ASN">
-	<value>application/astound</value>
+    <value>application/astound</value>
   </data>
   <data name=".CCAD">
-	<value>application/clariscad</value>
+    <value>application/clariscad</value>
   </data>
   <data name=".DRW">
-	<value>application/drafting</value>
+    <value>application/drafting</value>
   </data>
   <data name=".DXF">
-	<value>application/dxf</value>
+    <value>application/dxf</value>
   </data>
   <data name=".EVY">
-	<value>application/envoy</value>
+    <value>application/envoy</value>
   </data>
   <data name=".FIF">
-	<value>application/fractals</value>
+    <value>application/fractals</value>
   </data>
   <data name=".SPL">
-	<value>application/futuresplash</value>
+    <value>application/futuresplash</value>
   </data>
   <data name=".HTA">
-	<value>application/hta</value>
+    <value>application/hta</value>
   </data>
   <data name=".UNV">
-	<value>application/i-deas</value>
+    <value>application/i-deas</value>
   </data>
   <data name=".IGES">
-	<value>application/iges</value>
+    <value>application/iges</value>
   </data>
   <data name=".IGS">
-	<value>application/iges</value>
+    <value>application/iges</value>
   </data>
   <data name=".ACX">
-	<value>application/internet-property-stream</value>
+    <value>application/internet-property-stream</value>
   </data>
   <data name=".JAR">
-	<value>application/java-archive</value>
+    <value>application/java-archive</value>
   </data>
   <data name=".JS">
-	<value>application/javascript</value>
+    <value>application/javascript</value>
   </data>
   <data name=".HQX">
-	<value>application/mac-binhex40</value>
+    <value>application/mac-binhex40</value>
   </data>
   <data name=".DOC">
-	<value>application/msword</value>
+    <value>application/msword</value>
   </data>
   <data name=".DOT">
-	<value>application/msword</value>
+    <value>application/msword</value>
   </data>
   <data name=".WORD">
-	<value>application/msword</value>
+    <value>application/msword</value>
   </data>
   <data name=".W6W">
-	<value>application/msword</value>
+    <value>application/msword</value>
   </data>
   <data name=".BIN">
-	<value>application/octet-stream</value>
+    <value>application/octet-stream</value>
   </data>
   <data name=".CLASS">
-	<value>application/octet-stream</value>
+    <value>application/octet-stream</value>
   </data>
   <data name=".DMS">
-	<value>application/octet-stream</value>
+    <value>application/octet-stream</value>
   </data>
   <data name=".EXE">
-	<value>application/octet-stream</value>
+    <value>application/octet-stream</value>
   </data>
   <data name=".ODA">
-	<value>application/oda</value>
+    <value>application/oda</value>
   </data>
   <data name=".AXS">
-	<value>application/olescript</value>
+    <value>application/olescript</value>
   </data>
   <data name=".PDF">
-	<value>application/pdf</value>
+    <value>application/pdf</value>
   </data>
   <data name=".PRF">
-	<value>application/pics-rules</value>
+    <value>application/pics-rules</value>
   </data>
   <data name=".P10">
-	<value>application/pkcs10</value>
+    <value>application/pkcs10</value>
   </data>
   <data name=".CRL">
-	<value>application/pkix-crl</value>
+    <value>application/pkix-crl</value>
   </data>
   <data name=".AI">
-	<value>application/postscript</value>
+    <value>application/postscript</value>
   </data>
   <data name=".EPS">
-	<value>application/postscript</value>
+    <value>application/postscript</value>
   </data>
   <data name=".PS">
-	<value>application/postscript</value>
+    <value>application/postscript</value>
   </data>
   <data name=".PART">
-	<value>application/pro_eng</value>
+    <value>application/pro_eng</value>
   </data>
   <data name=".PRT">
-	<value>application/pro_eng</value>
+    <value>application/pro_eng</value>
   </data>
   <data name=".RTF">
-	<value>application/rtf</value>
+    <value>application/rtf</value>
   </data>
   <data name=".SET">
-	<value>application/set</value>
+    <value>application/set</value>
   </data>
   <data name=".SETPAY">
-	<value>application/set-payment-initiation</value>
+    <value>application/set-payment-initiation</value>
   </data>
   <data name=".SETREG">
-	<value>application/set-registration-initiation</value>
+    <value>application/set-registration-initiation</value>
   </data>
   <data name=".SOL">
-	<value>application/solids</value>
+    <value>application/solids</value>
   </data>
   <data name=".VDA">
-	<value>application/vda</value>
+    <value>application/vda</value>
   </data>
   <data name=".APK">
-	<value>application/vnd.android.package-archive</value>
+    <value>application/vnd.android.package-archive</value>
   </data>
   <data name=".CAB">
-	<value>application/vnd.ms-cab-compressed</value>
+    <value>application/vnd.ms-cab-compressed</value>
   </data>
   <data name=".XLA">
-	<value>application/vnd.ms-excel</value>
+    <value>application/vnd.ms-excel</value>
   </data>
   <data name=".XLC">
-	<value>application/vnd.ms-excel</value>
+    <value>application/vnd.ms-excel</value>
   </data>
   <data name=".XLM">
-	<value>application/vnd.ms-excel</value>
+    <value>application/vnd.ms-excel</value>
   </data>
   <data name=".XLS">
-	<value>application/vnd.ms-excel</value>
+    <value>application/vnd.ms-excel</value>
   </data>
   <data name=".XLT">
-	<value>application/vnd.ms-excel</value>
+    <value>application/vnd.ms-excel</value>
   </data>
   <data name=".XLW">
-	<value>application/vnd.ms-excel</value>
+    <value>application/vnd.ms-excel</value>
   </data>
   <data name=".MSG">
-	<value>application/vnd.ms-outlook</value>
+    <value>application/vnd.ms-outlook</value>
   </data>
   <data name=".SST">
-	<value>application/vnd.ms-pkicertstore</value>
+    <value>application/vnd.ms-pkicertstore</value>
   </data>
   <data name=".CAT">
-	<value>application/vnd.ms-pkiseccat</value>
+    <value>application/vnd.ms-pkiseccat</value>
   </data>
   <data name=".STL">
-	<value>application/vnd.ms-pkistl</value>
+    <value>application/vnd.ms-pkistl</value>
   </data>
   <data name=".POT">
-	<value>application/vnd.ms-powerpoint</value>
+    <value>application/vnd.ms-powerpoint</value>
   </data>
   <data name=".PPS">
-	<value>application/vnd.ms-powerpoint</value>
+    <value>application/vnd.ms-powerpoint</value>
   </data>
   <data name=".PPT">
-	<value>application/vnd.ms-powerpoint</value>
+    <value>application/vnd.ms-powerpoint</value>
   </data>
   <data name=".MPP">
-	<value>application/vnd.ms-project</value>
+    <value>application/vnd.ms-project</value>
   </data>
   <data name=".WCM">
-	<value>application/vnd.ms-works</value>
+    <value>application/vnd.ms-works</value>
   </data>
   <data name=".WDB">
-	<value>application/vnd.ms-works</value>
+    <value>application/vnd.ms-works</value>
   </data>
   <data name=".WKS">
-	<value>application/vnd.ms-works</value>
+    <value>application/vnd.ms-works</value>
   </data>
   <data name=".WPS">
-	<value>application/vnd.ms-works</value>
+    <value>application/vnd.ms-works</value>
   </data>
   <data name=".ODC">
-	<value>application/vnd.oasis.opendocument.chart</value>
+    <value>application/vnd.oasis.opendocument.chart</value>
   </data>
   <data name=".ODB">
-	<value>application/vnd.oasis.opendocument.database</value>
+    <value>application/vnd.oasis.opendocument.database</value>
   </data>
   <data name=".ODF">
-	<value>application/vnd.oasis.opendocument.formula</value>
+    <value>application/vnd.oasis.opendocument.formula</value>
   </data>
   <data name=".ODG">
-	<value>application/vnd.oasis.opendocument.graphics</value>
+    <value>application/vnd.oasis.opendocument.graphics</value>
   </data>
   <data name=".OTG">
-	<value>application/vnd.oasis.opendocument.graphics-template</value>
+    <value>application/vnd.oasis.opendocument.graphics-template</value>
   </data>
   <data name=".ODI">
-	<value>application/vnd.oasis.opendocument.image</value>
+    <value>application/vnd.oasis.opendocument.image</value>
   </data>
   <data name=".ODP">
-	<value>application/vnd.oasis.opendocument.presentation</value>
+    <value>application/vnd.oasis.opendocument.presentation</value>
   </data>
   <data name=".OTP">
-	<value>application/vnd.oasis.opendocument.presentation-template</value>
+    <value>application/vnd.oasis.opendocument.presentation-template</value>
   </data>
   <data name=".ODS">
-	<value>application/vnd.oasis.opendocument.spreadsheet</value>
+    <value>application/vnd.oasis.opendocument.spreadsheet</value>
   </data>
   <data name=".OTS">
-	<value>application/vnd.oasis.opendocument.spreadsheet-template</value>
+    <value>application/vnd.oasis.opendocument.spreadsheet-template</value>
   </data>
   <data name=".ODT ">
-	<value>application/vnd.oasis.opendocument.text </value>
+    <value>application/vnd.oasis.opendocument.text </value>
   </data>
   <data name=".ODM">
-	<value>application/vnd.oasis.opendocument.text-master</value>
+    <value>application/vnd.oasis.opendocument.text-master</value>
   </data>
   <data name=".OTT">
-	<value>application/vnd.oasis.opendocument.text-template</value>
+    <value>application/vnd.oasis.opendocument.text-template</value>
   </data>
   <data name=".OTH">
-	<value>application/vnd.oasis.opendocument.text-web</value>
+    <value>application/vnd.oasis.opendocument.text-web</value>
   </data>
   <data name=".OXT">
-	<value>application/vnd.openofficeorg.extension</value>
+    <value>application/vnd.openofficeorg.extension</value>
   </data>
   <data name=".SDC">
-	<value>application/vnd.stardivision.calc</value>
+    <value>application/vnd.stardivision.calc</value>
   </data>
   <data name=".SDS">
-	<value>application/vnd.stardivision.chart</value>
+    <value>application/vnd.stardivision.chart</value>
   </data>
   <data name=".SDA">
-	<value>application/vnd.stardivision.draw</value>
+    <value>application/vnd.stardivision.draw</value>
   </data>
   <data name=".SDD">
-	<value>application/vnd.stardivision.impress</value>
+    <value>application/vnd.stardivision.impress</value>
   </data>
   <data name=".SDP">
-	<value>application/vnd.stardivision.impress-packed</value>
+    <value>application/vnd.stardivision.impress-packed</value>
   </data>
   <data name=".SDM">
-	<value>application/vnd.stardivision.mail</value>
+    <value>application/vnd.stardivision.mail</value>
   </data>
   <data name=".SMF">
-	<value>application/vnd.stardivision.math</value>
+    <value>application/vnd.stardivision.math</value>
   </data>
   <data name=".SDW">
-	<value>application/vnd.stardivision.writer</value>
+    <value>application/vnd.stardivision.writer</value>
   </data>
   <data name=".SGL">
-	<value>application/vnd.stardivision.writer-global</value>
+    <value>application/vnd.stardivision.writer-global</value>
   </data>
   <data name=".SXC">
-	<value>application/vnd.sun.xml.calc</value>
+    <value>application/vnd.sun.xml.calc</value>
   </data>
   <data name=".STC">
-	<value>application/vnd.sun.xml.calc.template</value>
+    <value>application/vnd.sun.xml.calc.template</value>
   </data>
   <data name=".SXD">
-	<value>application/vnd.sun.xml.draw</value>
+    <value>application/vnd.sun.xml.draw</value>
   </data>
   <data name=".STD">
-	<value>application/vnd.sun.xml.draw.template</value>
+    <value>application/vnd.sun.xml.draw.template</value>
   </data>
   <data name=".SXI">
-	<value>application/vnd.sun.xml.impress</value>
+    <value>application/vnd.sun.xml.impress</value>
   </data>
   <data name=".STI">
-	<value>application/vnd.sun.xml.impress.template</value>
+    <value>application/vnd.sun.xml.impress.template</value>
   </data>
   <data name=".SXM">
-	<value>application/vnd.sun.xml.math</value>
+    <value>application/vnd.sun.xml.math</value>
   </data>
   <data name=".SXW">
-	<value>application/vnd.sun.xml.writer</value>
+    <value>application/vnd.sun.xml.writer</value>
   </data>
   <data name=".SXG">
-	<value>application/vnd.sun.xml.writer.global</value>
+    <value>application/vnd.sun.xml.writer.global</value>
   </data>
   <data name=".STW">
-	<value>application/vnd.sun.xml.writer.template</value>
+    <value>application/vnd.sun.xml.writer.template</value>
   </data>
   <data name=".HLP">
-	<value>application/winhlp</value>
+    <value>application/winhlp</value>
   </data>
   <data name=".7Z">
-	<value>application/x-7z-compressed</value>
+    <value>application/x-7z-compressed</value>
   </data>
   <data name=".S7Z">
-	<value>application/x-7z-compressed</value>
+    <value>application/x-7z-compressed</value>
   </data>
   <data name=".ACE">
-	<value>application/x-ace-compressed</value>
+    <value>application/x-ace-compressed</value>
   </data>
   <data name=".ALZ">
-	<value>application/x-alz-compressed</value>
+    <value>application/x-alz-compressed</value>
   </data>
   <data name=".DMG">
-	<value>application/x-apple-diskimage</value>
+    <value>application/x-apple-diskimage</value>
   </data>
   <data name=".ARJ">
-	<value>application/x-arj</value>
+    <value>application/x-arj</value>
   </data>
   <data name=".AFA">
-	<value>application/x-astrotite-afa</value>
+    <value>application/x-astrotite-afa</value>
   </data>
   <data name=".B1">
-	<value>application/x-b1</value>
+    <value>application/x-b1</value>
   </data>
   <data name=".BCPIO">
-	<value>application/x-bcpio</value>
+    <value>application/x-bcpio</value>
   </data>
   <data name=".BZ2">
-	<value>application/x-bzip2</value>
+    <value>application/x-bzip2</value>
   </data>
   <data name=".CDF">
-	<value>application/x-netcdf</value>
+    <value>application/x-netcdf</value>
   </data>
   <data name=".CFS">
-	<value>application/x-cfs-compressed</value>
+    <value>application/x-cfs-compressed</value>
   </data>
   <data name=".PGN">
-	<value>application/x-chess-pgn</value>
+    <value>application/x-chess-pgn</value>
   </data>
   <data name=".Z">
-	<value>application/x-compress</value>
+    <value>application/x-compress</value>
   </data>
   <data name=".CPIO">
-	<value>application/x-cpio</value>
+    <value>application/x-cpio</value>
   </data>
   <data name=".CSH">
-	<value>application/x-csh</value>
+    <value>application/x-csh</value>
   </data>
   <data name=".DAR">
-	<value>application/x-dar</value>
+    <value>application/x-dar</value>
   </data>
   <data name=".DGC">
-	<value>application/x-dgc-compressed</value>
+    <value>application/x-dgc-compressed</value>
   </data>
   <data name=".DCR">
-	<value>application/x-director</value>
+    <value>application/x-director</value>
   </data>
   <data name=".DIR">
-	<value>application/x-director</value>
+    <value>application/x-director</value>
   </data>
   <data name=".DXR">
-	<value>application/x-director</value>
+    <value>application/x-director</value>
   </data>
   <data name=".DVI">
-	<value>application/x-dvi</value>
+    <value>application/x-dvi</value>
   </data>
   <data name=".DWF">
-	<value>application/x-dwf</value>
+    <value>application/x-dwf</value>
   </data>
   <data name=".TTF">
-	<value>application/x-font-ttf</value>
+    <value>application/x-font-ttf</value>
   </data>
   <data name=".GCA">
-	<value>application/x-gca-compressed</value>
+    <value>application/x-gca-compressed</value>
   </data>
   <data name=".TAR.GZ">
-	<value>application/x-gtar</value>
+    <value>application/x-gtar</value>
   </data>
   <data name=".TGZ">
-	<value>application/x-gtar</value>
+    <value>application/x-gtar</value>
   </data>
   <data name=".TAR.Z">
-	<value>application/x-gtar</value>
+    <value>application/x-gtar</value>
   </data>
   <data name=".TAR.BZ2">
-	<value>application/x-gtar</value>
+    <value>application/x-gtar</value>
   </data>
   <data name=".TBZ2">
-	<value>application/x-gtar</value>
+    <value>application/x-gtar</value>
   </data>
   <data name=".TAR.LZMA">
-	<value>application/x-gtar</value>
+    <value>application/x-gtar</value>
   </data>
   <data name=".TLZ">
-	<value>application/x-gtar</value>
+    <value>application/x-gtar</value>
   </data>
   <data name=".GTAR">
-	<value>application/x-gtar</value>
+    <value>application/x-gtar</value>
   </data>
   <data name=".GZ">
-	<value>application/x-gzip</value>
+    <value>application/x-gzip</value>
   </data>
   <data name=".GZIP">
-	<value>application/x-gzip</value>
+    <value>application/x-gzip</value>
   </data>
   <data name=".HDF">
-	<value>application/x-hdf</value>
+    <value>application/x-hdf</value>
   </data>
   <data name=".INS">
-	<value>application/x-internet-signup</value>
+    <value>application/x-internet-signup</value>
   </data>
   <data name=".ISP">
-	<value>application/x-internet-signup</value>
+    <value>application/x-internet-signup</value>
   </data>
   <data name=".III">
-	<value>application/x-iphone</value>
+    <value>application/x-iphone</value>
   </data>
   <data name=".LATEX">
-	<value>application/x-latex</value>
+    <value>application/x-latex</value>
   </data>
   <data name=".TEX">
-	<value>application/x-latex</value>
+    <value>application/x-latex</value>
   </data>
   <data name=".LZH">
-	<value>application/x-lzh</value>
+    <value>application/x-lzh</value>
   </data>
   <data name=".LHA">
-	<value>application/x-lzh</value>
+    <value>application/x-lzh</value>
   </data>
   <data name=".LZ">
-	<value>application/x-lzip</value>
+    <value>application/x-lzip</value>
   </data>
   <data name=".LZMA">
-	<value>application/x-lzma</value>
+    <value>application/x-lzma</value>
   </data>
   <data name=".LZO">
-	<value>application/x-lzop</value>
+    <value>application/x-lzop</value>
   </data>
   <data name=".LZX">
-	<value>application/x-lzx</value>
+    <value>application/x-lzx</value>
   </data>
   <data name=".MIF">
-	<value>application/x-mif</value>
+    <value>application/x-mif</value>
   </data>
   <data name=".MDB">
-	<value>application/x-msaccess</value>
+    <value>application/x-msaccess</value>
   </data>
   <data name=".CRD">
-	<value>application/x-mscardfile</value>
+    <value>application/x-mscardfile</value>
   </data>
   <data name=".CLP">
-	<value>application/x-msclip</value>
+    <value>application/x-msclip</value>
   </data>
   <data name=".DLL">
-	<value>application/x-msdownload</value>
+    <value>application/x-msdownload</value>
   </data>
   <data name=".M13">
-	<value>application/x-msmediaview</value>
+    <value>application/x-msmediaview</value>
   </data>
   <data name=".M14">
-	<value>application/x-msmediaview</value>
+    <value>application/x-msmediaview</value>
   </data>
   <data name=".MVB">
-	<value>application/x-msmediaview</value>
+    <value>application/x-msmediaview</value>
   </data>
   <data name=".WMF">
-	<value>application/x-msmetafile</value>
+    <value>application/x-msmetafile</value>
   </data>
   <data name=".MNY">
-	<value>application/x-msmoney</value>
+    <value>application/x-msmoney</value>
   </data>
   <data name=".PUB">
-	<value>application/x-mspublisher</value>
+    <value>application/x-mspublisher</value>
   </data>
   <data name=".SCD">
-	<value>application/x-msschedule</value>
+    <value>application/x-msschedule</value>
   </data>
   <data name=".TRM">
-	<value>application/x-msterminal</value>
+    <value>application/x-msterminal</value>
   </data>
   <data name=".WRI">
-	<value>application/x-mswrite</value>
+    <value>application/x-mswrite</value>
   </data>
   <data name=".NC">
-	<value>application/x-netcdf</value>
+    <value>application/x-netcdf</value>
   </data>
   <data name=".PAR">
-	<value>application/x-par2</value>
+    <value>application/x-par2</value>
   </data>
   <data name=".PAR2">
-	<value>application/x-par2</value>
+    <value>application/x-par2</value>
   </data>
   <data name=".PMA">
-	<value>application/x-perfmon</value>
+    <value>application/x-perfmon</value>
   </data>
   <data name=".PMC">
-	<value>application/x-perfmon</value>
+    <value>application/x-perfmon</value>
   </data>
   <data name=".PML">
-	<value>application/x-perfmon</value>
+    <value>application/x-perfmon</value>
   </data>
   <data name=".PMR">
-	<value>application/x-perfmon</value>
+    <value>application/x-perfmon</value>
   </data>
   <data name=".PMW">
-	<value>application/x-perfmon</value>
+    <value>application/x-perfmon</value>
   </data>
   <data name=".P12">
-	<value>application/x-pkcs12</value>
+    <value>application/x-pkcs12</value>
   </data>
   <data name=".PFX">
-	<value>application/x-pkcs12</value>
+    <value>application/x-pkcs12</value>
   </data>
   <data name=".P7B">
-	<value>application/x-pkcs7-certificates</value>
+    <value>application/x-pkcs7-certificates</value>
   </data>
   <data name=".SPC">
-	<value>application/x-pkcs7-certificates</value>
+    <value>application/x-pkcs7-certificates</value>
   </data>
   <data name=".P7R">
-	<value>application/x-pkcs7-certreqresp</value>
+    <value>application/x-pkcs7-certreqresp</value>
   </data>
   <data name=".P7C">
-	<value>application/x-pkcs7-mime</value>
+    <value>application/x-pkcs7-mime</value>
   </data>
   <data name=".P7M">
-	<value>application/x-pkcs7-mime</value>
+    <value>application/x-pkcs7-mime</value>
   </data>
   <data name=".P7S">
-	<value>application/x-pkcs7-signature</value>
+    <value>application/x-pkcs7-signature</value>
   </data>
   <data name=".RAR">
-	<value>application/x-rar-compressed</value>
+    <value>application/x-rar-compressed</value>
   </data>
   <data name=".SH">
-	<value>application/x-sh</value>
+    <value>application/x-sh</value>
   </data>
   <data name=".SHAR">
-	<value>application/x-shar</value>
+    <value>application/x-shar</value>
   </data>
   <data name=".SWF">
-	<value>application/x-shockwave-flash</value>
+    <value>application/x-shockwave-flash</value>
   </data>
   <data name=".SIT">
-	<value>application/x-stuffit</value>
+    <value>application/x-stuffit</value>
   </data>
   <data name=".SITX">
-	<value>application/x-stuffitx</value>
+    <value>application/x-stuffitx</value>
   </data>
   <data name=".SV4CPIO">
-	<value>application/x-sv4cpio</value>
+    <value>application/x-sv4cpio</value>
   </data>
   <data name=".SV4CRC">
-	<value>application/x-sv4crc</value>
+    <value>application/x-sv4crc</value>
   </data>
   <data name=".TAR">
-	<value>application/x-tar</value>
+    <value>application/x-tar</value>
   </data>
   <data name=".TCL">
-	<value>application/x-tcl</value>
+    <value>application/x-tcl</value>
   </data>
   <data name=".TEXI">
-	<value>application/x-texinfo</value>
+    <value>application/x-texinfo</value>
   </data>
   <data name=".TEXINFO">
-	<value>application/x-texinfo</value>
+    <value>application/x-texinfo</value>
   </data>
   <data name=".ROFF">
-	<value>application/x-troff</value>
+    <value>application/x-troff</value>
   </data>
   <data name=".T">
-	<value>application/x-troff</value>
+    <value>application/x-troff</value>
   </data>
   <data name=".TR">
-	<value>application/x-troff</value>
+    <value>application/x-troff</value>
   </data>
   <data name=".MAN">
-	<value>application/x-troff-man</value>
+    <value>application/x-troff-man</value>
   </data>
   <data name=".ME">
-	<value>application/x-troff-me</value>
+    <value>application/x-troff-me</value>
   </data>
   <data name=".MS">
-	<value>application/x-troff-ms</value>
+    <value>application/x-troff-ms</value>
   </data>
   <data name=".USTAR">
-	<value>application/x-ustar</value>
+    <value>application/x-ustar</value>
   </data>
   <data name=".SRC">
-	<value>application/x-wais-source</value>
+    <value>application/x-wais-source</value>
   </data>
   <data name=".CER">
-	<value>application/x-x509-ca-cert</value>
+    <value>application/x-x509-ca-cert</value>
   </data>
   <data name=".CRT">
-	<value>application/x-x509-ca-cert</value>
+    <value>application/x-x509-ca-cert</value>
   </data>
   <data name=".DER">
-	<value>application/x-x509-ca-cert</value>
+    <value>application/x-x509-ca-cert</value>
   </data>
   <data name=".XZ">
-	<value>application/x-xz</value>
+    <value>application/x-xz</value>
   </data>
   <data name=".ZOO">
-	<value>application/x-zoo</value>
+    <value>application/x-zoo</value>
   </data>
   <data name=".PKO">
-	<value>application/ynd.ms-pkipko</value>
+    <value>application/ynd.ms-pkipko</value>
   </data>
   <data name=".ZIPX">
-	<value>application/zip</value>
+    <value>application/zip</value>
   </data>
   <data name=".ZIP">
-	<value>application/zip</value>
+    <value>application/zip</value>
   </data>
   <data name=".AU">
-	<value>audio/basic</value>
+    <value>audio/basic</value>
   </data>
   <data name=".SND">
-	<value>audio/basic</value>
+    <value>audio/basic</value>
   </data>
   <data name=".MID">
-	<value>audio/mid</value>
+    <value>audio/mid</value>
   </data>
   <data name=".RMI">
-	<value>audio/mid</value>
+    <value>audio/mid</value>
   </data>
   <data name=",MIDI">
-	<value>audio/midi</value>
+    <value>audio/midi</value>
   </data>
   <data name=".MP3">
-	<value>audio/mpeg</value>
+    <value>audio/mpeg</value>
   </data>
   <data name=".AIF">
-	<value>audio/x-aiff</value>
+    <value>audio/x-aiff</value>
   </data>
   <data name=".AIFC">
-	<value>audio/x-aiff</value>
+    <value>audio/x-aiff</value>
   </data>
   <data name=".AIFF">
-	<value>audio/x-aiff</value>
+    <value>audio/x-aiff</value>
   </data>
   <data name=".M3U">
-	<value>audio/x-mpegurl</value>
+    <value>audio/x-mpegurl</value>
   </data>
   <data name=".RA">
-	<value>audio/x-pn-realaudio</value>
+    <value>audio/x-pn-realaudio</value>
   </data>
   <data name=".RAM">
-	<value>audio/x-pn-realaudio</value>
+    <value>audio/x-pn-realaudio</value>
   </data>
   <data name=".RPM">
-	<value>audio/x-pn-realaudio-plugin</value>
+    <value>audio/x-pn-realaudio-plugin</value>
   </data>
   <data name=".VOC">
-	<value>audio/x-voice</value>
+    <value>audio/x-voice</value>
   </data>
   <data name=".WAV">
-	<value>audio/x-wav</value>
+    <value>audio/x-wav</value>
   </data>
   <data name=".BMP">
-	<value>image/bmp</value>
+    <value>image/bmp</value>
   </data>
   <data name=".COD">
-	<value>image/cis-cod</value>
+    <value>image/cis-cod</value>
   </data>
   <data name=".GIF">
-	<value>image/gif</value>
+    <value>image/gif</value>
   </data>
   <data name=".IEF">
-	<value>image/ief</value>
+    <value>image/ief</value>
   </data>
   <data name=".JPE">
-	<value>image/jpeg</value>
+    <value>image/jpeg</value>
   </data>
   <data name=".JPEG">
-	<value>image/jpeg</value>
+    <value>image/jpeg</value>
   </data>
   <data name=".JPG">
-	<value>image/jpeg</value>
+    <value>image/jpeg</value>
   </data>
   <data name=".PICT">
-	<value>image/pict</value>
+    <value>image/pict</value>
   </data>
   <data name=".JFIF">
-	<value>image/pipeg</value>
+    <value>image/pipeg</value>
   </data>
   <data name=".PNG">
-	<value>image/png</value>
+    <value>image/png</value>
   </data>
   <data name=".SVG">
-	<value>image/svg+xml</value>
+    <value>image/svg+xml</value>
   </data>
   <data name=".TIF">
-	<value>image/tiff</value>
+    <value>image/tiff</value>
   </data>
   <data name=".TIFF">
-	<value>image/tiff</value>
+    <value>image/tiff</value>
   </data>
   <data name=".RAS">
-	<value>image/x-cmu-raster</value>
+    <value>image/x-cmu-raster</value>
   </data>
   <data name=".CMX">
-	<value>image/x-cmx</value>
+    <value>image/x-cmx</value>
   </data>
   <data name=".ICO">
-	<value>image/x-icon</value>
+    <value>image/x-icon</value>
   </data>
   <data name=".PNM">
-	<value>image/x-portable-anymap</value>
+    <value>image/x-portable-anymap</value>
   </data>
   <data name=".PBM">
-	<value>image/x-portable-bitmap</value>
+    <value>image/x-portable-bitmap</value>
   </data>
   <data name=".PGM">
-	<value>image/x-portable-graymap</value>
+    <value>image/x-portable-graymap</value>
   </data>
   <data name=".PPM">
-	<value>image/x-portable-pixmap</value>
+    <value>image/x-portable-pixmap</value>
   </data>
   <data name=".RGB">
-	<value>image/x-rgb</value>
+    <value>image/x-rgb</value>
   </data>
   <data name=".XBM">
-	<value>image/x-xbitmap</value>
+    <value>image/x-xbitmap</value>
   </data>
   <data name=".XPM">
-	<value>image/x-xpixmap</value>
+    <value>image/x-xpixmap</value>
   </data>
   <data name=".XWD">
-	<value>image/x-xwindowdump</value>
+    <value>image/x-xwindowdump</value>
   </data>
   <data name=".MHT">
-	<value>message/rfc822</value>
+    <value>message/rfc822</value>
   </data>
   <data name=".MHTML">
-	<value>message/rfc822</value>
+    <value>message/rfc822</value>
   </data>
   <data name=".NWS">
-	<value>message/rfc822</value>
+    <value>message/rfc822</value>
   </data>
   <data name=".CSS">
-	<value>text/css</value>
+    <value>text/css</value>
   </data>
   <data name=".323">
-	<value>text/h323</value>
+    <value>text/h323</value>
   </data>
   <data name=".HTM">
-	<value>text/html</value>
+    <value>text/html</value>
   </data>
   <data name=".HTML">
-	<value>text/html</value>
+    <value>text/html</value>
   </data>
   <data name=".STM">
-	<value>text/html</value>
+    <value>text/html</value>
   </data>
   <data name=".ULS">
-	<value>text/iuls</value>
+    <value>text/iuls</value>
   </data>
   <data name=".BAS">
-	<value>text/plain</value>
+    <value>text/plain</value>
   </data>
   <data name=".C">
-	<value>text/plain</value>
+    <value>text/plain</value>
   </data>
   <data name=".H">
-	<value>text/plain</value>
+    <value>text/plain</value>
   </data>
   <data name=".TXT">
-	<value>text/plain</value>
+    <value>text/plain</value>
   </data>
   <data name=".RTX">
-	<value>text/richtext</value>
+    <value>text/richtext</value>
   </data>
   <data name=".SCT">
-	<value>text/scriptlet</value>
+    <value>text/scriptlet</value>
   </data>
   <data name=".TSV">
-	<value>text/tab-separated-values</value>
+    <value>text/tab-separated-values</value>
   </data>
   <data name=".HTT">
-	<value>text/webviewhtml</value>
+    <value>text/webviewhtml</value>
   </data>
   <data name=".HTC">
-	<value>text/x-component</value>
+    <value>text/x-component</value>
   </data>
   <data name=".MD">
-	<value>text/x-markdown</value>
+    <value>text/x-markdown</value>
   </data>
   <data name=".ETX">
-	<value>text/x-setext</value>
+    <value>text/x-setext</value>
   </data>
   <data name=".SGM">
-	<value>text/x-sgml</value>
+    <value>text/x-sgml</value>
   </data>
   <data name=".SGML">
-	<value>text/x-sgml</value>
+    <value>text/x-sgml</value>
   </data>
   <data name=".VCF">
-	<value>text/x-vcard</value>
+    <value>text/x-vcard</value>
   </data>
   <data name=".MP2">
-	<value>video/mpeg</value>
+    <value>video/mpeg</value>
   </data>
   <data name=".MPA">
-	<value>video/mpeg</value>
+    <value>video/mpeg</value>
   </data>
   <data name=".MPE">
-	<value>video/mpeg</value>
+    <value>video/mpeg</value>
   </data>
   <data name=".MPEG">
-	<value>video/mpeg</value>
+    <value>video/mpeg</value>
   </data>
   <data name=".MPG">
-	<value>video/mpeg</value>
+    <value>video/mpeg</value>
   </data>
   <data name=".MPV2">
-	<value>video/mpeg</value>
+    <value>video/mpeg</value>
   </data>
   <data name=".MOV">
-	<value>video/quicktime</value>
+    <value>video/quicktime</value>
   </data>
   <data name=".QT">
-	<value>video/quicktime</value>
+    <value>video/quicktime</value>
   </data>
   <data name=".VDO">
-	<value>video/vdo</value>
+    <value>video/vdo</value>
   </data>
   <data name=".VIV">
-	<value>video/vivo</value>
+    <value>video/vivo</value>
   </data>
   <data name=".VIVO">
-	<value>video/vivo</value>
+    <value>video/vivo</value>
   </data>
   <data name=".LSF">
-	<value>video/x-la-asf</value>
+    <value>video/x-la-asf</value>
   </data>
   <data name=".LSX">
-	<value>video/x-la-asf</value>
+    <value>video/x-la-asf</value>
   </data>
   <data name=".ASF">
-	<value>video/x-ms-asf</value>
+    <value>video/x-ms-asf</value>
   </data>
   <data name=".ASR">
-	<value>video/x-ms-asf</value>
+    <value>video/x-ms-asf</value>
   </data>
   <data name=".ASX">
-	<value>video/x-ms-asf</value>
+    <value>video/x-ms-asf</value>
   </data>
   <data name=".AVI">
-	<value>video/x-msvideo</value>
+    <value>video/x-msvideo</value>
   </data>
   <data name=".MOVIE">
-	<value>video/x-sgi-movie</value>
+    <value>video/x-sgi-movie</value>
   </data>
   <data name=".J2K">
-	<value>image/jp2</value>
+    <value>image/jp2</value>
   </data>
   <data name=".JP2">
-	<value>image/jp2</value>
+    <value>image/jp2</value>
   </data>
   <data name=".JPF">
-	<value>image/jpm</value>
+    <value>image/jpm</value>
   </data>
   <data name=".JPM">
-	<value>video/mj2</value>
+    <value>video/mj2</value>
   </data>
   <data name=".JPX">
-	<value>image/jpx</value>
+    <value>image/jpx</value>
   </data>
   <data name=".MJ2">
-	<value>video/mj2</value>
+    <value>video/mj2</value>
   </data>
 </root>

@@ -1,13 +1,17 @@
-<?xml version="1.0"?>
-<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
-  <resheader name="version"><value>2.0</value></resheader>
-  <resheader name="reader"><value>System.Resources.ResXResourceReader</value></resheader>
-  <resheader name="writer"><value>System.Resources.ResXResourceWriter</value></resheader>
-  <data name="ZZ_DisplayName">
-    <value>未知項</value>
-    <comment>Unknown (ZZ)</comment>
-  </data>
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
   <data name="AD_DisplayName">
     <value>安道爾</value>
     <comment>Andorra (AD)</comment>
@@ -35,6 +39,10 @@
   <data name="AM_DisplayName">
     <value>亞美尼亞</value>
     <comment>Armenia (AM)</comment>
+  </data>
+  <data name="ANHH_DisplayName">
+    <value>荷属安的列斯</value>
+    <comment>Netherlands Antilles (AN)</comment>
   </data>
   <data name="AO_DisplayName">
     <value>安哥拉</value>
@@ -128,6 +136,10 @@
     <value>荷蘭加勒比區</value>
     <comment>Bonaire (BQ)</comment>
   </data>
+  <data name="BQAQ_DisplayName">
+    <value>英属南极领地</value>
+    <comment>British Antarctic Territory (BQ)</comment>
+  </data>
   <data name="BR_DisplayName">
     <value>巴西</value>
     <comment>Brazil (BR)</comment>
@@ -139,6 +151,10 @@
   <data name="BT_DisplayName">
     <value>不丹</value>
     <comment>Bhutan (BT)</comment>
+  </data>
+  <data name="BUMM_DisplayName">
+    <value>缅甸</value>
+    <comment>Burma (BU)</comment>
   </data>
   <data name="BV_DisplayName">
     <value>鮑威特島</value>
@@ -208,6 +224,14 @@
     <value>哥斯達黎加</value>
     <comment>Costa Rica (CR)</comment>
   </data>
+  <data name="CSHH_DisplayName">
+    <value>捷克斯洛伐克</value>
+    <comment>Czechoslovakia (CS)</comment>
+  </data>
+  <data name="CSXX_DisplayName">
+    <value>塞爾維亞與蒙特內哥羅</value>
+    <comment>Serbia And Montenegro (CS)</comment>
+  </data>
   <data name="CU_DisplayName">
     <value>古巴</value>
     <comment>Cuba (CU)</comment>
@@ -231,6 +255,10 @@
   <data name="CZ_DisplayName">
     <value>捷克</value>
     <comment>Czech Republic (CZ)</comment>
+  </data>
+  <data name="DDDE_DisplayName">
+    <value>东德</value>
+    <comment>German Democratic Republic (DD)</comment>
   </data>
   <data name="DE_DisplayName">
     <value>德國</value>
@@ -407,6 +435,10 @@
   <data name="HU_DisplayName">
     <value>匈牙利</value>
     <comment>Hungary (HU)</comment>
+  </data>
+  <data name="HVBF_DisplayName">
+    <value>上伏塔</value>
+    <comment>Upper Volta (HV)</comment>
   </data>
   <data name="ID_DisplayName">
     <value>印尼</value>
@@ -844,6 +876,10 @@
     <value>聖多美及普林西比</value>
     <comment>Sao Tome And Principe (ST)</comment>
   </data>
+  <data name="SUHH_DisplayName">
+    <value>苏联</value>
+    <comment>Soviet Union (SU)</comment>
+  </data>
   <data name="SV_DisplayName">
     <value>薩爾瓦多</value>
     <comment>El Salvador (SV)</comment>
@@ -984,6 +1020,10 @@
     <value>薩摩亞</value>
     <comment>Samoa (WS)</comment>
   </data>
+  <data name="XK_DisplayName">
+    <value>科索沃</value>
+    <comment>Kosovo (XK)</comment>
+  </data>
   <data name="YE_DisplayName">
     <value>也門</value>
     <comment>Yemen (YE)</comment>
@@ -991,6 +1031,10 @@
   <data name="YT_DisplayName">
     <value>馬約特</value>
     <comment>Mayotte (YT)</comment>
+  </data>
+  <data name="YUCS_DisplayName">
+    <value>南斯拉夫</value>
+    <comment>Yugoslavia (YU)</comment>
   </data>
   <data name="ZA_DisplayName">
     <value>南非</value>
@@ -1000,52 +1044,16 @@
     <value>贊比亞</value>
     <comment>Zambia (ZM)</comment>
   </data>
-  <data name="ZW_DisplayName">
-    <value>津巴布韋</value>
-    <comment>Zimbabwe (ZW)</comment>
-  </data>
-  <data name="ANHH_DisplayName">
-    <value>荷属安的列斯</value>
-    <comment>Netherlands Antilles (AN)</comment>
-  </data>
-  <data name="BQAQ_DisplayName">
-    <value>英属南极领地</value>
-    <comment>British Antarctic Territory (BQ)</comment>
-  </data>
-  <data name="BUMM_DisplayName">
-    <value>缅甸</value>
-    <comment>Burma (BU)</comment>
-  </data>
-  <data name="CSHH_DisplayName">
-    <value>捷克斯洛伐克</value>
-    <comment>Czechoslovakia (CS)</comment>
-  </data>
-  <data name="CSXX_DisplayName">
-    <value>塞爾維亞與蒙特內哥羅</value>
-    <comment>Serbia And Montenegro (CS)</comment>
-  </data>
-  <data name="DDDE_DisplayName">
-    <value>东德</value>
-    <comment>German Democratic Republic (DD)</comment>
-  </data>
-  <data name="HVBF_DisplayName">
-    <value>上伏塔</value>
-    <comment>Upper Volta (HV)</comment>
-  </data>
-  <data name="SUHH_DisplayName">
-    <value>苏联</value>
-    <comment>Soviet Union (SU)</comment>
-  </data>
-  <data name="YUCS_DisplayName">
-    <value>南斯拉夫</value>
-    <comment>Yugoslavia (YU)</comment>
-  </data>
   <data name="ZRCD_DisplayName">
     <value>扎伊尔</value>
     <comment>Zaire (ZR)</comment>
   </data>
-  <data name="XK_DisplayName">
-    <value>科索沃</value>
-    <comment>Kosovo (XK)</comment>
+  <data name="ZW_DisplayName">
+    <value>津巴布韋</value>
+    <comment>Zimbabwe (ZW)</comment>
+  </data>
+  <data name="ZZ_DisplayName">
+    <value>未知項</value>
+    <comment>Unknown (ZZ)</comment>
   </data>
 </root>

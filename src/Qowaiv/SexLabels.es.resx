@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<root>
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -12,40 +12,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
-  <data name="NotKnown">
-    <value>Desconocido</value>
-    <comment>Not known (default)</comment>
-  </data>
-  <data name="Male">
-    <value>Hombre</value>
-    <comment>Male (default)</comment>
-  </data>
-  <data name="Female">
-    <value>Mujer</value>
-    <comment>Female (default)</comment>
-  </data>
-  <data name="NotApplicable">
-    <value>No aplicable</value>
-    <comment>Not applicable (default)</comment>
+  <data name="char_Female">
+    <value>M</value>
+    <comment>Female (single char)</comment>
   </data>
   <data name="char_Male">
     <value>H</value>
     <comment>Male (single char)</comment>
   </data>
-  <data name="char_Female">
-    <value>M</value>
-    <comment>Female (single char)</comment>
+  <data name="Female">
+    <value>Mujer</value>
+    <comment>Female (default)</comment>
   </data>
-  <data name="honorific_NotKnown">
-    <value>Sr./Sra.</value>
-    <comment>Not known (honorific)</comment>
+  <data name="honorific_Female">
+    <value>Sra.</value>
+    <comment>Female (honorific)</comment>
   </data>
   <data name="honorific_Male">
     <value>Sr.</value>
     <comment>Male (honorific)</comment>
   </data>
-  <data name="honorific_Female">
-    <value>Sra.</value>
-    <comment>Female (honorific)</comment>
+  <data name="honorific_NotKnown">
+    <value>Sr./Sra.</value>
+    <comment>Not known (honorific)</comment>
+  </data>
+  <data name="Male">
+    <value>Hombre</value>
+    <comment>Male (default)</comment>
+  </data>
+  <data name="NotApplicable">
+    <value>No aplicable</value>
+    <comment>Not applicable (default)</comment>
+  </data>
+  <data name="NotKnown">
+    <value>Desconocido</value>
+    <comment>Not known (default)</comment>
   </data>
 </root>

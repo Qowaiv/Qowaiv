@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Test Tools">
-    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="AwesomeAssertions" />
     <PackageReference Include="NUnit" />
   </ItemGroup>
 
@@ -31,7 +31,7 @@
 
   <!-- We do not want to report on this during a PR/Release build. -->
   <ItemGroup Label="Analyzers" Condition="'$(Configuration)' == 'DEBUG'">
-    <PackageReference Include="FluentAssertions.Analyzers" PrivateAssets="all" />
+    <PackageReference Include="AwesomeAssertions.Analyzers" PrivateAssets="all" />
     <PackageReference Include="NUnit.Analyzers" PrivateAssets="all" />
   </ItemGroup>
 

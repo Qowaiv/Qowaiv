@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<root>
-  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
-  <resheader name="version"><value>2.0</value></resheader>
-  <resheader name="reader"><value>System.Resources.ResXResourceReader</value></resheader>
-  <resheader name="writer"><value>System.Resources.ResXResourceWriter</value></resheader>
-  <data name="b_No" xml:space="preserve">
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="b_No">
     <value>خاطئة</value>
   </data>
-  <data name="b_Yes" xml:space="preserve">
+  <data name="b_Yes">
     <value>صحيح</value>
   </data>
-  <data name="f_No" xml:space="preserve">
+  <data name="f_No">
     <value>لا</value>
   </data>
-  <data name="f_Unknown" xml:space="preserve">
+  <data name="f_Unknown">
     <value>غير معروف</value>
   </data>
-  <data name="f_Yes" xml:space="preserve">
+  <data name="f_Yes">
     <value>نعم</value>
   </data>
 </root>

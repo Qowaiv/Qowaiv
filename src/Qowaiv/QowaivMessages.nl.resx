@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<root>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -9,103 +9,103 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
-  <data name="FormatExceptionBusinessIdentifierCode" xml:space="preserve">
+  <data name="FormatExceptionBusinessIdentifierCode">
     <value>Geen geldige BIC</value>
   </data>
-  <data name="FormatExceptionCasRegistryNumber" xml:space="preserve">
+  <data name="FormatExceptionCasRegistryNumber">
     <value>Geen geldig CAS-nummer</value>
   </data>
-  <data name="FormatExceptionCountry" xml:space="preserve">
+  <data name="FormatExceptionCountry">
     <value>Geen geldig land</value>
   </data>
-  <data name="FormatExceptionCryptographicSeed" xml:space="preserve">
+  <data name="FormatExceptionCryptographicSeed">
     <value>Geen geldige cryptografische seed</value>
   </data>
-  <data name="FormatExceptionCurrency" xml:space="preserve">
+  <data name="FormatExceptionCurrency">
     <value>Geen geldige valuta</value>
   </data>
-  <data name="FormatExceptionDate" xml:space="preserve">
+  <data name="FormatExceptionDate">
     <value>Geen geldige datum</value>
   </data>
-  <data name="FormatExceptionDateSpan" xml:space="preserve">
+  <data name="FormatExceptionDateSpan">
     <value>Geen geldige tijdsduur</value>
   </data>
-  <data name="FormatExceptionEmailAddress" xml:space="preserve">
-    <value>Geen geldig e-mailadres</value>
-  </data>
-  <data name="FormatExceptionEmailAddressCollection" xml:space="preserve">
-    <value>Geen geldige email adres(sen)</value>
-  </data>
-  <data name="FormatExceptionFraction" xml:space="preserve">
-    <value>Geen geldige breuk</value>
-  </data>
-  <data name="FormatExceptionGender" xml:space="preserve">
-    <value>Geen geldig geslacht</value>
-  </data>
-  <data name="FormatExceptionEnergyLabel" xml:space="preserve">
-    <value>Geen geldig energielabel</value>
-  </data>
-  <data name="FormatExceptionElo" xml:space="preserve">
+  <data name="FormatExceptionElo">
     <value>Geen geldige Elo-rating</value>
   </data>
-  <data name="FormatExceptionFinancialAmount" xml:space="preserve">
+  <data name="FormatExceptionEmailAddress">
+    <value>Geen geldig e-mailadres</value>
+  </data>
+  <data name="FormatExceptionEmailAddressCollection">
+    <value>Geen geldige email adres(sen)</value>
+  </data>
+  <data name="FormatExceptionEnergyLabel">
+    <value>Geen geldig energielabel</value>
+  </data>
+  <data name="FormatExceptionFinancialAmount">
     <value>Geen geldig bedrag</value>
   </data>
-  <data name="FormatExceptionHouseNumber" xml:space="preserve">
-    <value>Geen geldig huisnummer</value>
+  <data name="FormatExceptionFraction">
+    <value>Geen geldige breuk</value>
   </data>
-  <data name="FormatExceptionIdentifier" xml:space="preserve">
-    <value>Geen geldige identifier</value>
-  </data>
-  <data name="FormatExceptionInternationalBankAccountNumber" xml:space="preserve">
-    <value>Geen geldig IBAN</value>
-  </data>
-  <data name="FormatExceptionInternetMediaType" xml:space="preserve">
-    <value>Geen geldig internet media type</value>
-  </data>
-  <data name="FormatExceptionLocalDateTime" xml:space="preserve">
-    <value>Geen geldige datum</value>
-  </data>
-  <data name="FormatExceptionMoney" xml:space="preserve">
-    <value>Geen geldig bedrag</value>
-  </data>
-  <data name="FormatExceptionMonth" xml:space="preserve">
-    <value>Geen geldige maand</value>
-  </data>
-  <data name="FormatExceptionMonthSpan" xml:space="preserve">
-    <value>Geen geldige duur in maanden</value>
-  </data>
-  <data name="FormatExceptionPercentage" xml:space="preserve">
-    <value>Geen geldig percentage</value>
-  </data>
-  <data name="FormatExceptionPostalCode" xml:space="preserve">
-    <value>Geen geldige postcode</value>
-  </data>
-  <data name="FormatExceptionQGuid" xml:space="preserve">
-    <value>Geen geldig GUID</value>
-  </data>
-  <data name="FormatExceptionSex" xml:space="preserve">
+  <data name="FormatExceptionGender">
     <value>Geen geldig geslacht</value>
   </data>
-  <data name="FormatExceptionStreamSize" xml:space="preserve">
-    <value>Geen geldige bestandsgrootte</value>
+  <data name="FormatExceptionHouseNumber">
+    <value>Geen geldig huisnummer</value>
   </data>
-  <data name="FormatExceptionTimestamp" xml:space="preserve">
-    <value>Geen geldige SQL timestamp</value>
+  <data name="FormatExceptionIdentifier">
+    <value>Geen geldige identifier</value>
   </data>
-  <data name="FormatExceptionUuid" xml:space="preserve">
+  <data name="FormatExceptionInternationalBankAccountNumber">
+    <value>Geen geldig IBAN</value>
+  </data>
+  <data name="FormatExceptionInternetMediaType">
+    <value>Geen geldig internet media type</value>
+  </data>
+  <data name="FormatExceptionLocalDateTime">
+    <value>Geen geldige datum</value>
+  </data>
+  <data name="FormatExceptionMoney">
+    <value>Geen geldig bedrag</value>
+  </data>
+  <data name="FormatExceptionMonth">
+    <value>Geen geldige maand</value>
+  </data>
+  <data name="FormatExceptionMonthSpan">
+    <value>Geen geldige duur in maanden</value>
+  </data>
+  <data name="FormatExceptionPercentage">
+    <value>Geen geldig percentage</value>
+  </data>
+  <data name="FormatExceptionPostalCode">
+    <value>Geen geldige postcode</value>
+  </data>
+  <data name="FormatExceptionQGuid">
     <value>Geen geldig GUID</value>
   </data>
-  <data name="FormatExceptionWeekDate" xml:space="preserve">
+  <data name="FormatExceptionSex">
+    <value>Geen geldig geslacht</value>
+  </data>
+  <data name="FormatExceptionStreamSize">
+    <value>Geen geldige bestandsgrootte</value>
+  </data>
+  <data name="FormatExceptionTimestamp">
+    <value>Geen geldige SQL timestamp</value>
+  </data>
+  <data name="FormatExceptionUuid">
+    <value>Geen geldig GUID</value>
+  </data>
+  <data name="FormatExceptionWeekDate">
     <value>Geen geldige week datum</value>
   </data>
-  <data name="FormatExceptionYear" xml:space="preserve">
+  <data name="FormatExceptionYear">
     <value>Geen geldig jaartal</value>
   </data>
-  <data name="FormatExceptionYearMonth" xml:space="preserve">
+  <data name="FormatExceptionYearMonth">
     <value>Geen geldige jaar/maand combinatie</value>
   </data>
-  <data name="FormatExceptionYesNo" xml:space="preserve">
+  <data name="FormatExceptionYesNo">
     <value>Geen geldige ja/nee waarde</value>
   </data>
 </root>

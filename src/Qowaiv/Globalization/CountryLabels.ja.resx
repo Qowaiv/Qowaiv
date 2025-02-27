@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<root>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -9,10 +9,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
-  <data name="ZZ_DisplayName">
-    <value>不明</value>
-    <comment>Unknown (ZZ)</comment>
-  </data>
   <data name="AD_DisplayName">
     <value>アンドラ</value>
     <comment>Andorra (AD)</comment>
@@ -33,6 +29,10 @@
     <value>アンギラ</value>
     <comment>Anguilla (AI)</comment>
   </data>
+  <data name="AIDJ_DisplayName">
+    <value>フランス領アファル・イッサ</value>
+    <comment>French Afars and Issas (AI)</comment>
+  </data>
   <data name="AL_DisplayName">
     <value>アルバニア</value>
     <comment>Albania (AL)</comment>
@@ -40,6 +40,10 @@
   <data name="AM_DisplayName">
     <value>アルメニア</value>
     <comment>Armenia (AM)</comment>
+  </data>
+  <data name="ANHH_DisplayName">
+    <value>オランダ領アンティル</value>
+    <comment>Netherlands Antilles (AN)</comment>
   </data>
   <data name="AO_DisplayName">
     <value>アンゴラ</value>
@@ -133,6 +137,10 @@
     <value>ボネール、シント・ユースタティウスおよびサバ</value>
     <comment>Caribbean Netherlands (BQ)</comment>
   </data>
+  <data name="BQAQ_DisplayName">
+    <value>イギリス領南極地域</value>
+    <comment>British Antarctic Territory (BQ)</comment>
+  </data>
   <data name="BR_DisplayName">
     <value>ブラジル</value>
     <comment>Brazil (BR)</comment>
@@ -145,6 +153,10 @@
     <value>ブータン</value>
     <comment>Bhutan (BT)</comment>
   </data>
+  <data name="BUMM_DisplayName">
+    <value>ビルマ</value>
+    <comment>Burma (BU)</comment>
+  </data>
   <data name="BV_DisplayName">
     <value>ブーベ島</value>
     <comment>Bouvet Island (BV)</comment>
@@ -156,6 +168,10 @@
   <data name="BY_DisplayName">
     <value>ベラルーシ</value>
     <comment>Belarus (BY)</comment>
+  </data>
+  <data name="BYAA_DisplayName">
+    <value>白ロシア・ソビエト社会主義共和国</value>
+    <comment>Byelorussian SSR (BY)</comment>
   </data>
   <data name="BZ_DisplayName">
     <value>ベリーズ</value>
@@ -213,6 +229,18 @@
     <value>コスタリカ</value>
     <comment>Costa Rica (CR)</comment>
   </data>
+  <data name="CSHH_DisplayName">
+    <value>チェコスロバキア</value>
+    <comment>Czechoslovakia (CS)</comment>
+  </data>
+  <data name="CSXX_DisplayName">
+    <value>セルビア・モンテネグロ</value>
+    <comment>Serbia and Montenegro (CS)</comment>
+  </data>
+  <data name="CTKI_DisplayName">
+    <value>カントン島およびエンダーベリー島</value>
+    <comment>Canton and Enderbury Islands (CT)</comment>
+  </data>
   <data name="CU_DisplayName">
     <value>キューバ</value>
     <comment>Cuba (CU)</comment>
@@ -237,6 +265,10 @@
     <value>チェコ</value>
     <comment>Czechia (CZ)</comment>
   </data>
+  <data name="DDDE_DisplayName">
+    <value>ドイツ民主共和国</value>
+    <comment>German Democratic Republic (DD)</comment>
+  </data>
   <data name="DE_DisplayName">
     <value>ドイツ</value>
     <comment>Germany (DE)</comment>
@@ -256,6 +288,10 @@
   <data name="DO_DisplayName">
     <value>ドミニカ共和国</value>
     <comment>Dominican Republic (DO)</comment>
+  </data>
+  <data name="DYBJ_DisplayName">
+    <value>ダオメー</value>
+    <comment>Dahomey (DY)</comment>
   </data>
   <data name="DZ_DisplayName">
     <value>アルジェリア</value>
@@ -309,9 +345,17 @@
     <value>フェロー諸島</value>
     <comment>Faroe Islands (FO)</comment>
   </data>
+  <data name="FQHH_DisplayName">
+    <value>フランス領南方・南極地域</value>
+    <comment>French Southern and Antarctic Territories (FQ)</comment>
+  </data>
   <data name="FR_DisplayName">
     <value>フランス</value>
     <comment>France (FR)</comment>
+  </data>
+  <data name="FXFR_DisplayName">
+    <value>フランス本国</value>
+    <comment>France, Metropolitan (FX)</comment>
   </data>
   <data name="GA_DisplayName">
     <value>ガボン</value>
@@ -328,6 +372,10 @@
   <data name="GE_DisplayName">
     <value>グルジア</value>
     <comment>Georgia (GE)</comment>
+  </data>
+  <data name="GEHH_DisplayName">
+    <value>ギルバートおよびエリス諸島</value>
+    <comment>Gilbert Islands (GE)</comment>
   </data>
   <data name="GF_DisplayName">
     <value>フランス領ギアナ</value>
@@ -413,6 +461,10 @@
     <value>ハンガリー</value>
     <comment>Hungary (HU)</comment>
   </data>
+  <data name="HVBF_DisplayName">
+    <value>オートボルタ</value>
+    <comment>Upper Volta (HV)</comment>
+  </data>
   <data name="ID_DisplayName">
     <value>インドネシア</value>
     <comment>Indonesia (ID)</comment>
@@ -468,6 +520,10 @@
   <data name="JP_DisplayName">
     <value>日本</value>
     <comment>Japan (JP)</comment>
+  </data>
+  <data name="JTUM_DisplayName">
+    <value>ジョンストン島</value>
+    <comment>Johnston Island (JT)</comment>
   </data>
   <data name="KE_DisplayName">
     <value>ケニア</value>
@@ -585,6 +641,10 @@
     <value>マーシャル諸島</value>
     <comment>Marshall Islands (MH)</comment>
   </data>
+  <data name="MIUM_DisplayName">
+    <value>ミッドウェー島</value>
+    <comment>Midway Islands (MI)</comment>
+  </data>
   <data name="MK_DisplayName">
     <value>マケドニア旧ユーゴスラビア共和国</value>
     <comment>North Macedonia (MK)</comment>
@@ -669,6 +729,10 @@
     <value>ナイジェリア</value>
     <comment>Nigeria (NG)</comment>
   </data>
+  <data name="NHVU_DisplayName">
+    <value>ニューヘブリディーズ諸島</value>
+    <comment>New Hebrides (NH)</comment>
+  </data>
   <data name="NI_DisplayName">
     <value>ニカラグア</value>
     <comment>Nicaragua (NI)</comment>
@@ -685,9 +749,17 @@
     <value>ネパール</value>
     <comment>Nepal (NP)</comment>
   </data>
+  <data name="NQAQ_DisplayName">
+    <value>ドロンニング・モード・ランド</value>
+    <comment>Dronning Maud Land (NQ)</comment>
+  </data>
   <data name="NR_DisplayName">
     <value>ナウル</value>
     <comment>Nauru (NR)</comment>
+  </data>
+  <data name="NTHH_DisplayName">
+    <value>中立地帯</value>
+    <comment>Neutral Zone (NT)</comment>
   </data>
   <data name="NU_DisplayName">
     <value>ニウエ</value>
@@ -704,6 +776,10 @@
   <data name="PA_DisplayName">
     <value>パナマ</value>
     <comment>Panama (PA)</comment>
+  </data>
+  <data name="PCHH_DisplayName">
+    <value>太平洋諸島信託統治領</value>
+    <comment>Pacific Islands (Trust Territory) (PC)</comment>
   </data>
   <data name="PE_DisplayName">
     <value>ペルー</value>
@@ -749,6 +825,10 @@
     <value>ポルトガル</value>
     <comment>Portugal (PT)</comment>
   </data>
+  <data name="PUUM_DisplayName">
+    <value>合衆国領太平洋諸島</value>
+    <comment>United States Miscellaneous Pacific Islands (PU)</comment>
+  </data>
   <data name="PW_DisplayName">
     <value>パラオ</value>
     <comment>Palau (PW)</comment>
@@ -757,6 +837,10 @@
     <value>パラグアイ</value>
     <comment>Paraguay (PY)</comment>
   </data>
+  <data name="PZPA_DisplayName">
+    <value>パナマ運河地帯</value>
+    <comment>Panama Canal Zone (PZ)</comment>
+  </data>
   <data name="QA_DisplayName">
     <value>カタール</value>
     <comment>Qatar (QA)</comment>
@@ -764,6 +848,10 @@
   <data name="RE_DisplayName">
     <value>レユニオン</value>
     <comment>Réunion (RE)</comment>
+  </data>
+  <data name="RHZW_DisplayName">
+    <value>ローデシア</value>
+    <comment>Southern Rhodesia (RH)</comment>
   </data>
   <data name="RO_DisplayName">
     <value>ルーマニア</value>
@@ -821,6 +909,10 @@
     <value>スロバキア</value>
     <comment>Slovakia (SK)</comment>
   </data>
+  <data name="SKIN_DisplayName">
+    <value>シッキム</value>
+    <comment>Sikkim (SK)</comment>
+  </data>
   <data name="SL_DisplayName">
     <value>シエラレオネ</value>
     <comment>Sierra Leone (SL)</comment>
@@ -848,6 +940,10 @@
   <data name="ST_DisplayName">
     <value>サントメ・プリンシペ</value>
     <comment>Sao Tome and Principe (ST)</comment>
+  </data>
+  <data name="SUHH_DisplayName">
+    <value>ソビエト連邦</value>
+    <comment>USSR (SU)</comment>
   </data>
   <data name="SV_DisplayName">
     <value>エルサルバドル</value>
@@ -909,6 +1005,10 @@
     <value>トンガ</value>
     <comment>Tonga (TO)</comment>
   </data>
+  <data name="TPTL_DisplayName">
+    <value>東チモール</value>
+    <comment>East Timor (TP)</comment>
+  </data>
   <data name="TR_DisplayName">
     <value>トルコ</value>
     <comment>Türkiye (TR)</comment>
@@ -961,6 +1061,10 @@
     <value>セントビンセントおよびグレナディーン諸島</value>
     <comment>Saint Vincent and the Grenadines (VC)</comment>
   </data>
+  <data name="VDVN_DisplayName">
+    <value>ベトナム民主共和国</value>
+    <comment>Viet-Nam, Democratic Republic of (VD)</comment>
+  </data>
   <data name="VE_DisplayName">
     <value>ベネズエラ・ボリバル共和国</value>
     <comment>Venezuela (VE)</comment>
@@ -985,6 +1089,10 @@
     <value>ウォリス・フツナ</value>
     <comment>Wallis and Futuna (WF)</comment>
   </data>
+  <data name="WKUM_DisplayName">
+    <value>ウェーク島</value>
+    <comment>Wake Island (WK)</comment>
+  </data>
   <data name="WS_DisplayName">
     <value>サモア</value>
     <comment>Samoa (WS)</comment>
@@ -992,6 +1100,10 @@
   <data name="XK_DisplayName">
     <value>コソボ</value>
     <comment>Kosovo (XK)</comment>
+  </data>
+  <data name="YDYE_DisplayName">
+    <value>イエメン人民民主共和国</value>
+    <comment>Yemen, Democratic (YD)</comment>
   </data>
   <data name="YE_DisplayName">
     <value>イエメン</value>
@@ -1001,6 +1113,10 @@
     <value>マヨット</value>
     <comment>Mayotte (YT)</comment>
   </data>
+  <data name="YUCS_DisplayName">
+    <value>ユーゴスラビア</value>
+    <comment>Yugoslavia (YU)</comment>
+  </data>
   <data name="ZA_DisplayName">
     <value>南アフリカ</value>
     <comment>South Africa (ZA)</comment>
@@ -1009,132 +1125,16 @@
     <value>ザンビア</value>
     <comment>Zambia (ZM)</comment>
   </data>
+  <data name="ZRCD_DisplayName">
+    <value>ザイール</value>
+    <comment>Zaire (ZR)</comment>
+  </data>
   <data name="ZW_DisplayName">
     <value>ジンバブエ</value>
     <comment>Zimbabwe (ZW)</comment>
   </data>
-  <data name="AIDJ_DisplayName">
-    <value>フランス領アファル・イッサ</value>
-    <comment>French Afars and Issas (AI)</comment>
-  </data>
-  <data name="ANHH_DisplayName">
-    <value>オランダ領アンティル</value>
-    <comment>Netherlands Antilles (AN)</comment>
-  </data>
-  <data name="BQAQ_DisplayName">
-    <value>イギリス領南極地域</value>
-    <comment>British Antarctic Territory (BQ)</comment>
-  </data>
-  <data name="BUMM_DisplayName">
-    <value>ビルマ</value>
-    <comment>Burma (BU)</comment>
-  </data>
-  <data name="BYAA_DisplayName">
-    <value>白ロシア・ソビエト社会主義共和国</value>
-    <comment>Byelorussian SSR (BY)</comment>
-  </data>
-  <data name="CSHH_DisplayName">
-    <value>チェコスロバキア</value>
-    <comment>Czechoslovakia (CS)</comment>
-  </data>
-  <data name="CSXX_DisplayName">
-    <value>セルビア・モンテネグロ</value>
-    <comment>Serbia and Montenegro (CS)</comment>
-  </data>
-  <data name="CTKI_DisplayName">
-    <value>カントン島およびエンダーベリー島</value>
-    <comment>Canton and Enderbury Islands (CT)</comment>
-  </data>
-  <data name="DDDE_DisplayName">
-    <value>ドイツ民主共和国</value>
-    <comment>German Democratic Republic (DD)</comment>
-  </data>
-  <data name="DYBJ_DisplayName">
-    <value>ダオメー</value>
-    <comment>Dahomey (DY)</comment>
-  </data>
-  <data name="FQHH_DisplayName">
-    <value>フランス領南方・南極地域</value>
-    <comment>French Southern and Antarctic Territories (FQ)</comment>
-  </data>
-  <data name="FXFR_DisplayName">
-    <value>フランス本国</value>
-    <comment>France, Metropolitan (FX)</comment>
-  </data>
-  <data name="GEHH_DisplayName">
-    <value>ギルバートおよびエリス諸島</value>
-    <comment>Gilbert Islands (GE)</comment>
-  </data>
-  <data name="HVBF_DisplayName">
-    <value>オートボルタ</value>
-    <comment>Upper Volta (HV)</comment>
-  </data>
-  <data name="JTUM_DisplayName">
-    <value>ジョンストン島</value>
-    <comment>Johnston Island (JT)</comment>
-  </data>
-  <data name="MIUM_DisplayName">
-    <value>ミッドウェー島</value>
-    <comment>Midway Islands (MI)</comment>
-  </data>
-  <data name="NHVU_DisplayName">
-    <value>ニューヘブリディーズ諸島</value>
-    <comment>New Hebrides (NH)</comment>
-  </data>
-  <data name="NQAQ_DisplayName">
-    <value>ドロンニング・モード・ランド</value>
-    <comment>Dronning Maud Land (NQ)</comment>
-  </data>
-  <data name="NTHH_DisplayName">
-    <value>中立地帯</value>
-    <comment>Neutral Zone (NT)</comment>
-  </data>
-  <data name="PCHH_DisplayName">
-    <value>太平洋諸島信託統治領</value>
-    <comment>Pacific Islands (Trust Territory) (PC)</comment>
-  </data>
-  <data name="PUUM_DisplayName">
-    <value>合衆国領太平洋諸島</value>
-    <comment>United States Miscellaneous Pacific Islands (PU)</comment>
-  </data>
-  <data name="PZPA_DisplayName">
-    <value>パナマ運河地帯</value>
-    <comment>Panama Canal Zone (PZ)</comment>
-  </data>
-  <data name="RHZW_DisplayName">
-    <value>ローデシア</value>
-    <comment>Southern Rhodesia (RH)</comment>
-  </data>
-  <data name="SKIN_DisplayName">
-    <value>シッキム</value>
-    <comment>Sikkim (SK)</comment>
-  </data>
-  <data name="SUHH_DisplayName">
-    <value>ソビエト連邦</value>
-    <comment>USSR (SU)</comment>
-  </data>
-  <data name="TPTL_DisplayName">
-    <value>東チモール</value>
-    <comment>East Timor (TP)</comment>
-  </data>
-  <data name="VDVN_DisplayName">
-    <value>ベトナム民主共和国</value>
-    <comment>Viet-Nam, Democratic Republic of (VD)</comment>
-  </data>
-  <data name="WKUM_DisplayName">
-    <value>ウェーク島</value>
-    <comment>Wake Island (WK)</comment>
-  </data>
-  <data name="YDYE_DisplayName">
-    <value>イエメン人民民主共和国</value>
-    <comment>Yemen, Democratic (YD)</comment>
-  </data>
-  <data name="YUCS_DisplayName">
-    <value>ユーゴスラビア</value>
-    <comment>Yugoslavia (YU)</comment>
-  </data>
-  <data name="ZRCD_DisplayName">
-    <value>ザイール</value>
-    <comment>Zaire (ZR)</comment>
+  <data name="ZZ_DisplayName">
+    <value>不明</value>
+    <comment>Unknown (ZZ)</comment>
   </data>
 </root>

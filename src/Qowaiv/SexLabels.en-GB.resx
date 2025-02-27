@@ -1,19 +1,27 @@
-<?xml version="1.0"?>
-<root>
-  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
-  <resheader name="version"><value>2.0</value></resheader>
-  <resheader name="reader"><value>System.Resources.ResXResourceReader</value></resheader>
-  <resheader name="writer"><value>System.Resources.ResXResourceWriter</value></resheader>
-  <data name="honorific_NotKnown">
-    <value>Mr./Mrs.</value>
-    <comment>Not known (honorific)</comment>
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="honorific_Female">
+    <value>Mrs.</value>
+    <comment>Female (honorific)</comment>
   </data>
   <data name="honorific_Male">
     <value>Mr.</value>
     <comment>Male (honorific)</comment>
   </data>
-  <data name="honorific_Female">
-    <value>Mrs.</value>
-    <comment>Female (honorific)</comment>
+  <data name="honorific_NotKnown">
+    <value>Mr./Mrs.</value>
+    <comment>Not known (honorific)</comment>
   </data>
 </root>

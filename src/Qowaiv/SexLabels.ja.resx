@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<root>
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -12,20 +12,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
-  <data name="NotKnown">
-    <value>不明</value>
-    <comment>Not known (default)</comment>
+  <data name="Female">
+    <value>女性</value>
+    <comment>Female (default)</comment>
   </data>
   <data name="Male">
     <value>男性</value>
     <comment>Male (default)</comment>
   </data>
-  <data name="Female">
-    <value>女性</value>
-    <comment>Female (default)</comment>
-  </data>
   <data name="NotApplicable">
     <value>適用不能</value>
     <comment>Not applicable (default)</comment>
+  </data>
+  <data name="NotKnown">
+    <value>不明</value>
+    <comment>Not known (default)</comment>
   </data>
 </root>

@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<root>
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -12,32 +12,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
-  <data name="NotKnown">
-    <value>Inconnu</value>
-    <comment>Not known (default)</comment>
-  </data>
-  <data name="Male">
-    <value>Masculin</value>
-    <comment>Male (default)</comment>
-  </data>
   <data name="Female">
     <value>Féminin</value>
     <comment>Female (default)</comment>
   </data>
-  <data name="NotApplicable">
-    <value>Sans objet</value>
-    <comment>Not applicable (default)</comment>
-  </data>
-  <data name="honorific_NotKnown">
-    <value>M/Mme</value>
-    <comment>Not known (honorific)</comment>
+  <data name="honorific_Female">
+    <value>Mme</value>
+    <comment>Female (honorific)</comment>
   </data>
   <data name="honorific_Male">
     <value>M</value>
     <comment>Male (honorific)</comment>
   </data>
-  <data name="honorific_Female">
-    <value>Mme</value>
-    <comment>Female (honorific)</comment>
+  <data name="honorific_NotKnown">
+    <value>M/Mme</value>
+    <comment>Not known (honorific)</comment>
+  </data>
+  <data name="Male">
+    <value>Masculin</value>
+    <comment>Male (default)</comment>
+  </data>
+  <data name="NotApplicable">
+    <value>Sans objet</value>
+    <comment>Not applicable (default)</comment>
+  </data>
+  <data name="NotKnown">
+    <value>Inconnu</value>
+    <comment>Not known (default)</comment>
   </data>
 </root>

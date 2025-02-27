@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<root>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -9,211 +9,211 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
-  <data name="ArgumentException_InvalidWildcardPattern" xml:space="preserve">
+  <data name="ArgumentException_InvalidWildcardPattern">
     <value>The wildcard pattern is invalid.</value>
   </data>
-  <data name="ArgumentException_Must" xml:space="preserve">
+  <data name="ArgumentException_Must">
     <value>Argument must be {0}</value>
   </data>
-  <data name="ArgumentException_NotIFormattable" xml:space="preserve">
+  <data name="ArgumentException_NotIFormattable">
     <value>The argument must implement System.IFormattable.</value>
   </data>
-  <data name="ArgumentException_TimestampArrayShouldHaveSize8" xml:space="preserve">
+  <data name="ArgumentException_TimestampArrayShouldHaveSize8">
     <value>The byte array should have size of 8.</value>
   </data>
-  <data name="ArgumentOutOfRangeException_AddDateSpan" xml:space="preserve">
-    <value>Adding a date span only supports 'Default' and 'DaysFirst'.</value>
-  </data>
-  <data name="ArgumentOutOfRange_DecimalRound" xml:space="preserve">
+  <data name="ArgumentOutOfRange_DecimalRound">
     <value>Decimals can only round to between -28 and 28 digits of precision.</value>
   </data>
-  <data name="ArgumentOutOfRange_FractionError" xml:space="preserve">
-    <value>The allowed error when converting a Decimal to a Fraction should be between Fraction.Epsilon and 1.</value>
-  </data>
-  <data name="ArgumentOutOfRange_PercentageRound" xml:space="preserve">
-    <value>Percentages can only round to between -26 and 26 digits of precision.</value>
-  </data>
-  <data name="ArgumentOutOfRangeException_DateSpan" xml:space="preserve">
-    <value>The specified years, months and days results in an un-representable DateSpan.</value>
-  </data>
-  <data name="ArgumentOutOfRange_Elo" xml:space="preserve">
+  <data name="ArgumentOutOfRange_Elo">
     <value>The number can not represent an Elo.</value>
   </data>
-  <data name="CurrencyMismatchException" xml:space="preserve">
-    <value>The {0} operation could not be applied. There is a mismatch between {1} and {2}.</value>
+  <data name="ArgumentOutOfRange_FractionError">
+    <value>The allowed error when converting a Decimal to a Fraction should be between Fraction.Epsilon and 1.</value>
   </data>
-  <data name="FormatException_IndexOutOfRange" xml:space="preserve">
-    <value>Index (zero based) must be greater than or equal to zero and less than the size of the argument list.</value>
-  </data>
-  <data name="FormatException_InvalidFormat" xml:space="preserve">
-    <value>Input string was not in a correct format.</value>
-  </data>
-  <data name="FormatExceptionBase32" xml:space="preserve">
-    <value>Not a valid Base32 string</value>
-  </data>
-  <data name="FormatExceptionBusinessIdentifierCode" xml:space="preserve">
-    <value>Not a valid BIC</value>
-  </data>
-  <data name="FormatExceptionCasRegistryNumber" xml:space="preserve">
-    <value>Not a valid CAS Registry Number</value>
-  </data>
-  <data name="FormatExceptionCountry" xml:space="preserve">
-    <value>Not a valid country</value>
-  </data>
-  <data name="FormatExceptionCryptographicSeed" xml:space="preserve">
-    <value>Not a valid cryptographic seed</value>
-  </data>
-  <data name="FormatExceptionCurrency" xml:space="preserve">
-    <value>Not a valid currency</value>
-  </data>
-  <data name="FormatExceptionDate" xml:space="preserve">
-    <value>Not a valid date</value>
-  </data>
-  <data name="FormatExceptionDateSpan" xml:space="preserve">
-    <value>Not a valid date span</value>
-  </data>
-  <data name="FormatExceptionElo" xml:space="preserve">
-    <value>Not a valid Elo</value>
-  </data>
-  <data name="FormatExceptionEmailAddress" xml:space="preserve">
-    <value>Not a valid email address</value>
-  </data>
-  <data name="FormatExceptionEmailAddressCollection" xml:space="preserve">
-    <value>Not valid email addresses</value>
-  </data>
-  <data name="FormatExceptionEnergyLabel" xml:space="preserve">
-    <value>Not a valid energy label</value>
-  </data>
-  <data name="FormatExceptionFinancialAmount" xml:space="preserve">
-    <value>Not a valid amount</value>
-  </data>
-  <data name="FormatExceptionFraction" xml:space="preserve">
-    <value>Not a valid fraction</value>
-  </data>
-  <data name="FormatExceptionGender" xml:space="preserve">
-    <value>Not a valid gender</value>
-  </data>
-  <data name="FormatExceptionHouseNumber" xml:space="preserve">
-    <value>Not a valid house number</value>
-  </data>
-  <data name="FormatExceptionIdentifier" xml:space="preserve">
-    <value>Not a valid identifier</value>
-  </data>
-  <data name="FormatExceptionInternationalBankAccountNumber" xml:space="preserve">
-    <value>Not a valid IBAN</value>
-  </data>
-  <data name="FormatExceptionInternetMediaType" xml:space="preserve">
-    <value>Not a valid internet media type</value>
-  </data>
-  <data name="FormatExceptionLocalDateTime" xml:space="preserve">
-    <value>Not valid date</value>
-  </data>
-  <data name="FormatExceptionMoney" xml:space="preserve">
-    <value>Not a valid amount</value>
-  </data>
-  <data name="FormatExceptionMonth" xml:space="preserve">
-    <value>Not a valid month</value>
-  </data>
-  <data name="FormatExceptionMonthSpan" xml:space="preserve">
-    <value>Not a valid month span</value>
-  </data>
-  <data name="FormatExceptionPercentage" xml:space="preserve">
-    <value>Not a valid percentage</value>
-  </data>
-  <data name="FormatExceptionPostalCode" xml:space="preserve">
-    <value>Not a valid postal code</value>
-  </data>
-  <data name="FormatExceptionQGuid" xml:space="preserve">
-    <value>Not a valid GUID</value>
-  </data>
-  <data name="FormatExceptionSex" xml:space="preserve">
-    <value>Not a valid sex</value>
-  </data>
-  <data name="FormatExceptionStreamSize" xml:space="preserve">
-    <value>Not a valid stream size</value>
-  </data>
-  <data name="FormatExceptionTimestamp" xml:space="preserve">
-    <value>Not a valid SQL timestamp</value>
-  </data>
-  <data name="FormatExceptionUuid" xml:space="preserve">
-    <value>Not a valid GUID</value>
-  </data>
-  <data name="FormatExceptionWeekDate" xml:space="preserve">
-    <value>Not a valid week date</value>
-  </data>
-  <data name="FormatExceptionYear" xml:space="preserve">
-    <value>Not a valid year</value>
-  </data>
-  <data name="FormatExceptionYearMonth" xml:space="preserve">
-    <value>Not a valid year-month.</value>
-  </data>
-  <data name="FormatExceptionYesNo" xml:space="preserve">
-    <value>Not a valid yes-no value</value>
-  </data>
-  <data name="HashingNotSupported" xml:space="preserve">
-    <value>Hashing is not supported by {0}.</value>
-  </data>
-  <data name="InvalidCastException_FromTo" xml:space="preserve">
-    <value>Cast from {0} to {1} is not valid.</value>
-  </data>
-  <data name="InvalidOperation_SequentialUUID" xml:space="preserve">
-    <value>Sequential UUID can only be generated between 1970-01-01 and 9276-12-03.</value>
-  </data>
-  <data name="InvalidOperationException_NoElements" xml:space="preserve">
-    <value>Sequence contains no elements.</value>
-  </data>
-  <data name="InvalidOperationException_WithDisplayName" xml:space="preserve">
-    <value>An not set email address can not be shown with a display name.</value>
-  </data>
-  <data name="JsonSerialization_DateTimeNotSupported" xml:space="preserve">
-    <value>JSON deserialization from a date is not supported.</value>
-  </data>
-  <data name="JsonSerialization_DoubleNotSupported" xml:space="preserve">
-    <value>JSON deserialization from a number is not supported.</value>
-  </data>
-  <data name="JsonSerialization_InputNotSupported" xml:space="preserve">
-    <value>Input '{0}' not supported. Expects '{1}'.</value>
-  </data>
-  <data name="JsonSerialization_Int64NotSupported" xml:space="preserve">
-    <value>JSON deserialization from an integer is not supported.</value>
-  </data>
-  <data name="JsonSerialization_NullNotSupported" xml:space="preserve">
-    <value>JSON deserialization from null is not supported.</value>
-  </data>
-  <data name="JsonSerialization_ResultTypeNotSupported" xml:space="preserve">
-    <value>Result type '{0}' not supported. Expects '{1}'.</value>
-  </data>
-  <data name="JsonSerialization_TokenNotSupported" xml:space="preserve">
-    <value>Unexpected token parsing {0}. {1} is not supported.</value>
-  </data>
-  <data name="NotSupportedException_ConverterCanNotConvertFromString" xml:space="preserve">
-    <value>Converter can not convert from System.String.</value>
-  </data>
-  <data name="NotSupportedException_NoGenericType" xml:space="preserve">
-    <value>Type must be a none generic type.</value>
-  </data>
-  <data name="NotSupportedExceptionCountryToRegionInfo" xml:space="preserve">
-    <value>The country '{0} ({1})' is not supported as region info.</value>
-  </data>
-  <data name="OverflowException_DateSpan" xml:space="preserve">
-    <value>DateSpan overflowed because the resulting duration is too long.</value>
-  </data>
-  <data name="OverflowException_DecimalRound" xml:space="preserve">
-    <value>Decimal overflowed while rounding.</value>
-  </data>
-  <data name="OverflowException_Fraction" xml:space="preserve">
-    <value>Value was either too large or too small for a Fraction.</value>
-  </data>
-  <data name="Unparsable" xml:space="preserve">
-    <value>Could not parse '{0}' for {1}.</value>
-  </data>
-  <data name="ArgumentOutOfRange_NumberStyleNotSupported" xml:space="preserve">
+  <data name="ArgumentOutOfRange_NumberStyleNotSupported">
     <value>The number style '{0}' is not supported.</value>
   </data>
-  <data name="ArgumentOutOfRange_Percentage" xml:space="preserve">
+  <data name="ArgumentOutOfRange_Percentage">
     <value>Value is either too large or too small for a percentage.</value>
   </data>
-  <data name="ArgumentOutOfRange_YearMonth" xml:space="preserve">
+  <data name="ArgumentOutOfRange_PercentageRound">
+    <value>Percentages can only round to between -26 and 26 digits of precision.</value>
+  </data>
+  <data name="ArgumentOutOfRange_YearMonth">
     <value>Year, and Month parameters describe an un-representable year-month.</value>
+  </data>
+  <data name="ArgumentOutOfRangeException_AddDateSpan">
+    <value>Adding a date span only supports 'Default' and 'DaysFirst'.</value>
+  </data>
+  <data name="ArgumentOutOfRangeException_DateSpan">
+    <value>The specified years, months and days results in an un-representable DateSpan.</value>
+  </data>
+  <data name="CurrencyMismatchException">
+    <value>The {0} operation could not be applied. There is a mismatch between {1} and {2}.</value>
+  </data>
+  <data name="FormatException_IndexOutOfRange">
+    <value>Index (zero based) must be greater than or equal to zero and less than the size of the argument list.</value>
+  </data>
+  <data name="FormatException_InvalidFormat">
+    <value>Input string was not in a correct format.</value>
+  </data>
+  <data name="FormatExceptionBase32">
+    <value>Not a valid Base32 string</value>
+  </data>
+  <data name="FormatExceptionBusinessIdentifierCode">
+    <value>Not a valid BIC</value>
+  </data>
+  <data name="FormatExceptionCasRegistryNumber">
+    <value>Not a valid CAS Registry Number</value>
+  </data>
+  <data name="FormatExceptionCountry">
+    <value>Not a valid country</value>
+  </data>
+  <data name="FormatExceptionCryptographicSeed">
+    <value>Not a valid cryptographic seed</value>
+  </data>
+  <data name="FormatExceptionCurrency">
+    <value>Not a valid currency</value>
+  </data>
+  <data name="FormatExceptionDate">
+    <value>Not a valid date</value>
+  </data>
+  <data name="FormatExceptionDateSpan">
+    <value>Not a valid date span</value>
+  </data>
+  <data name="FormatExceptionElo">
+    <value>Not a valid Elo</value>
+  </data>
+  <data name="FormatExceptionEmailAddress">
+    <value>Not a valid email address</value>
+  </data>
+  <data name="FormatExceptionEmailAddressCollection">
+    <value>Not valid email addresses</value>
+  </data>
+  <data name="FormatExceptionEnergyLabel">
+    <value>Not a valid energy label</value>
+  </data>
+  <data name="FormatExceptionFinancialAmount">
+    <value>Not a valid amount</value>
+  </data>
+  <data name="FormatExceptionFraction">
+    <value>Not a valid fraction</value>
+  </data>
+  <data name="FormatExceptionGender">
+    <value>Not a valid gender</value>
+  </data>
+  <data name="FormatExceptionHouseNumber">
+    <value>Not a valid house number</value>
+  </data>
+  <data name="FormatExceptionIdentifier">
+    <value>Not a valid identifier</value>
+  </data>
+  <data name="FormatExceptionInternationalBankAccountNumber">
+    <value>Not a valid IBAN</value>
+  </data>
+  <data name="FormatExceptionInternetMediaType">
+    <value>Not a valid internet media type</value>
+  </data>
+  <data name="FormatExceptionLocalDateTime">
+    <value>Not valid date</value>
+  </data>
+  <data name="FormatExceptionMoney">
+    <value>Not a valid amount</value>
+  </data>
+  <data name="FormatExceptionMonth">
+    <value>Not a valid month</value>
+  </data>
+  <data name="FormatExceptionMonthSpan">
+    <value>Not a valid month span</value>
+  </data>
+  <data name="FormatExceptionPercentage">
+    <value>Not a valid percentage</value>
+  </data>
+  <data name="FormatExceptionPostalCode">
+    <value>Not a valid postal code</value>
+  </data>
+  <data name="FormatExceptionQGuid">
+    <value>Not a valid GUID</value>
+  </data>
+  <data name="FormatExceptionSex">
+    <value>Not a valid sex</value>
+  </data>
+  <data name="FormatExceptionStreamSize">
+    <value>Not a valid stream size</value>
+  </data>
+  <data name="FormatExceptionTimestamp">
+    <value>Not a valid SQL timestamp</value>
+  </data>
+  <data name="FormatExceptionUuid">
+    <value>Not a valid GUID</value>
+  </data>
+  <data name="FormatExceptionWeekDate">
+    <value>Not a valid week date</value>
+  </data>
+  <data name="FormatExceptionYear">
+    <value>Not a valid year</value>
+  </data>
+  <data name="FormatExceptionYearMonth">
+    <value>Not a valid year-month.</value>
+  </data>
+  <data name="FormatExceptionYesNo">
+    <value>Not a valid yes-no value</value>
+  </data>
+  <data name="HashingNotSupported">
+    <value>Hashing is not supported by {0}.</value>
+  </data>
+  <data name="InvalidCastException_FromTo">
+    <value>Cast from {0} to {1} is not valid.</value>
+  </data>
+  <data name="InvalidOperation_SequentialUUID">
+    <value>Sequential UUID can only be generated between 1970-01-01 and 9276-12-03.</value>
+  </data>
+  <data name="InvalidOperationException_NoElements">
+    <value>Sequence contains no elements.</value>
+  </data>
+  <data name="InvalidOperationException_WithDisplayName">
+    <value>An not set email address can not be shown with a display name.</value>
+  </data>
+  <data name="JsonSerialization_DateTimeNotSupported">
+    <value>JSON deserialization from a date is not supported.</value>
+  </data>
+  <data name="JsonSerialization_DoubleNotSupported">
+    <value>JSON deserialization from a number is not supported.</value>
+  </data>
+  <data name="JsonSerialization_InputNotSupported">
+    <value>Input '{0}' not supported. Expects '{1}'.</value>
+  </data>
+  <data name="JsonSerialization_Int64NotSupported">
+    <value>JSON deserialization from an integer is not supported.</value>
+  </data>
+  <data name="JsonSerialization_NullNotSupported">
+    <value>JSON deserialization from null is not supported.</value>
+  </data>
+  <data name="JsonSerialization_ResultTypeNotSupported">
+    <value>Result type '{0}' not supported. Expects '{1}'.</value>
+  </data>
+  <data name="JsonSerialization_TokenNotSupported">
+    <value>Unexpected token parsing {0}. {1} is not supported.</value>
+  </data>
+  <data name="NotSupportedException_ConverterCanNotConvertFromString">
+    <value>Converter can not convert from System.String.</value>
+  </data>
+  <data name="NotSupportedException_NoGenericType">
+    <value>Type must be a none generic type.</value>
+  </data>
+  <data name="NotSupportedExceptionCountryToRegionInfo">
+    <value>The country '{0} ({1})' is not supported as region info.</value>
+  </data>
+  <data name="OverflowException_DateSpan">
+    <value>DateSpan overflowed because the resulting duration is too long.</value>
+  </data>
+  <data name="OverflowException_DecimalRound">
+    <value>Decimal overflowed while rounding.</value>
+  </data>
+  <data name="OverflowException_Fraction">
+    <value>Value was either too large or too small for a Fraction.</value>
+  </data>
+  <data name="Unparsable">
+    <value>Could not parse '{0}' for {1}.</value>
   </data>
 </root>

@@ -3,6 +3,7 @@ using System.Xml;
 
 namespace Resources.Normalize_resx;
 
+[Explicit]
 public class All
 {
     private static readonly DirectoryInfo Root = new("../../../../../src");
@@ -28,7 +29,6 @@ public class All
             Encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false),
         });
 
-        resx.Save(write);
-
+        resx.Invoking(_ => resx.Save(write)).Should().NotThrow();
     }
 }

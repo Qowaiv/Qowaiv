@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<root>
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -12,2828 +12,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
-  <data name="ZZZ_DisplayName">
-    <value>Unknown</value>
-  </data>
-  <data name="ZZZ_Num">
-    <value>999</value>
-  </data>
-  <data name="ZZZ_ISO">
-    <value>ZZZ</value>
-  </data>
-  <data name="ZZZ_Digits">
-    <value>2</value>
-  </data>
-  <data name="ZZZ_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="ZZZ_Symbol">
-    <value>¤</value>
-  </data>
-  <data name="AED_DisplayName">
-    <value>United Arab Emirates dirham</value>
-  </data>
-  <data name="AED_Num">
-    <value>784</value>
-  </data>
-  <data name="AED_ISO">
-    <value>AED</value>
-  </data>
-  <data name="AED_Digits">
-    <value>2</value>
-  </data>
-  <data name="AED_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="AFN_DisplayName">
-    <value>Afghan afghani</value>
-  </data>
-  <data name="AFN_Num">
-    <value>971</value>
-  </data>
-  <data name="AFN_ISO">
-    <value>AFN</value>
-  </data>
-  <data name="AFN_Digits">
-    <value>2</value>
-  </data>
-  <data name="AFN_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="AFN_Symbol">
-    <value>؋</value>
-  </data>
-  <data name="ALL_DisplayName">
-    <value>Albanian lek</value>
-  </data>
-  <data name="ALL_Num">
-    <value>008</value>
-  </data>
-  <data name="ALL_ISO">
-    <value>ALL</value>
-  </data>
-  <data name="ALL_Digits">
-    <value>2</value>
-  </data>
-  <data name="ALL_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="ALL_Symbol">
-    <value>Lekë</value>
-  </data>
-  <data name="AMD_DisplayName">
-    <value>Armenian dram</value>
-  </data>
-  <data name="AMD_Num">
-    <value>051</value>
-  </data>
-  <data name="AMD_ISO">
-    <value>AMD</value>
-  </data>
-  <data name="AMD_Digits">
-    <value>2</value>
-  </data>
-  <data name="AMD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="AMD_Symbol">
-    <value>֏</value>
-  </data>
-  <data name="ANG_DisplayName">
-    <value>Netherlands Antillean guilder</value>
-  </data>
-  <data name="ANG_Num">
-    <value>532</value>
-  </data>
-  <data name="ANG_ISO">
-    <value>ANG</value>
-  </data>
-  <data name="ANG_Digits">
-    <value>2</value>
-  </data>
-  <data name="ANG_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="ANG_Symbol">
-    <value>NAf.</value>
-  </data>
-  <data name="AOA_DisplayName">
-    <value>Angolan kwanza</value>
-  </data>
-  <data name="AOA_Num">
-    <value>973</value>
-  </data>
-  <data name="AOA_ISO">
-    <value>AOA</value>
-  </data>
-  <data name="AOA_Digits">
-    <value>2</value>
-  </data>
-  <data name="AOA_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="AOA_Symbol">
-    <value>Kz</value>
-  </data>
-  <data name="ARS_DisplayName">
-    <value>Argentine peso</value>
-  </data>
-  <data name="ARS_Num">
-    <value>032</value>
-  </data>
-  <data name="ARS_ISO">
-    <value>ARS</value>
-  </data>
-  <data name="ARS_Digits">
-    <value>2</value>
-  </data>
-  <data name="ARS_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="AUD_DisplayName">
-    <value>Australian dollar</value>
-  </data>
-  <data name="AUD_Num">
-    <value>036</value>
-  </data>
-  <data name="AUD_ISO">
-    <value>AUD</value>
-  </data>
-  <data name="AUD_Digits">
-    <value>2</value>
-  </data>
-  <data name="AUD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="AUD_Symbol">
-    <value>$</value>
-  </data>
-  <data name="AWG_DisplayName">
-    <value>Aruban florin</value>
-  </data>
-  <data name="AWG_Num">
-    <value>533</value>
-  </data>
-  <data name="AWG_ISO">
-    <value>AWG</value>
-  </data>
-  <data name="AWG_Digits">
-    <value>2</value>
-  </data>
-  <data name="AWG_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="AZN_DisplayName">
-    <value>Azerbaijani manat</value>
-  </data>
-  <data name="AZN_Num">
-    <value>944</value>
-  </data>
-  <data name="AZN_ISO">
-    <value>AZN</value>
-  </data>
-  <data name="AZN_Digits">
-    <value>2</value>
-  </data>
-  <data name="AZN_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="AZN_Symbol">
-    <value>₼</value>
-  </data>
-  <data name="BAM_DisplayName">
-    <value>Bosnia and Herzegovina convertible mark</value>
-  </data>
-  <data name="BAM_Num">
-    <value>977</value>
-  </data>
-  <data name="BAM_ISO">
-    <value>BAM</value>
-  </data>
-  <data name="BAM_Digits">
-    <value>2</value>
-  </data>
-  <data name="BAM_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="BBD_DisplayName">
-    <value>Barbados dollar</value>
-  </data>
-  <data name="BBD_Num">
-    <value>052</value>
-  </data>
-  <data name="BBD_ISO">
-    <value>BBD</value>
-  </data>
-  <data name="BBD_Digits">
-    <value>2</value>
-  </data>
-  <data name="BBD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="BBD_Symbol">
-    <value>$</value>
-  </data>
-  <data name="BDT_DisplayName">
-    <value>Bangladeshi taka</value>
-  </data>
-  <data name="BDT_Num">
-    <value>050</value>
-  </data>
-  <data name="BDT_ISO">
-    <value>BDT</value>
-  </data>
-  <data name="BDT_Digits">
-    <value>2</value>
-  </data>
-  <data name="BDT_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="BDT_Symbol">
-    <value>৳</value>
-  </data>
-  <data name="BGN_DisplayName">
-    <value>Bulgarian lev</value>
-  </data>
-  <data name="BGN_Num">
-    <value>975</value>
-  </data>
-  <data name="BGN_ISO">
-    <value>BGN</value>
-  </data>
-  <data name="BGN_Digits">
-    <value>2</value>
-  </data>
-  <data name="BGN_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="BGN_Symbol">
-    <value>лв.</value>
-  </data>
-  <data name="BHD_DisplayName">
-    <value>Bahraini dinar</value>
-  </data>
-  <data name="BHD_Num">
-    <value>048</value>
-  </data>
-  <data name="BHD_ISO">
-    <value>BHD</value>
-  </data>
-  <data name="BHD_Digits">
-    <value>3</value>
-  </data>
-  <data name="BHD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="BIF_DisplayName">
-    <value>Burundian franc</value>
-  </data>
-  <data name="BIF_Num">
-    <value>108</value>
-  </data>
-  <data name="BIF_ISO">
-    <value>BIF</value>
-  </data>
-  <data name="BIF_Digits">
+  <data name="ADP_Digits">
     <value>0</value>
-  </data>
-  <data name="BIF_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="BMD_DisplayName">
-    <value>Bermudian dollar</value>
-  </data>
-  <data name="BMD_Num">
-    <value>060</value>
-  </data>
-  <data name="BMD_ISO">
-    <value>BMD</value>
-  </data>
-  <data name="BMD_Digits">
-    <value>2</value>
-  </data>
-  <data name="BMD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="BND_DisplayName">
-    <value>Brunei dollar</value>
-  </data>
-  <data name="BND_Num">
-    <value>096</value>
-  </data>
-  <data name="BND_ISO">
-    <value>BND</value>
-  </data>
-  <data name="BND_Digits">
-    <value>2</value>
-  </data>
-  <data name="BND_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="BOB_DisplayName">
-    <value>Boliviano</value>
-  </data>
-  <data name="BOB_Num">
-    <value>068</value>
-  </data>
-  <data name="BOB_ISO">
-    <value>BOB</value>
-  </data>
-  <data name="BOB_Digits">
-    <value>2</value>
-  </data>
-  <data name="BOB_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="BOV_DisplayName">
-    <value>Bolivian Mvdol</value>
-  </data>
-  <data name="BOV_Num">
-    <value>984</value>
-  </data>
-  <data name="BOV_ISO">
-    <value>BOV</value>
-  </data>
-  <data name="BOV_Digits">
-    <value>2</value>
-  </data>
-  <data name="BOV_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="BRL_DisplayName">
-    <value>Brazilian real</value>
-  </data>
-  <data name="BRL_Num">
-    <value>986</value>
-  </data>
-  <data name="BRL_ISO">
-    <value>BRL</value>
-  </data>
-  <data name="BRL_Digits">
-    <value>2</value>
-  </data>
-  <data name="BRL_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="BSD_DisplayName">
-    <value>Bahamian dollar</value>
-  </data>
-  <data name="BSD_Num">
-    <value>044</value>
-  </data>
-  <data name="BSD_ISO">
-    <value>BSD</value>
-  </data>
-  <data name="BSD_Digits">
-    <value>2</value>
-  </data>
-  <data name="BSD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="BTN_DisplayName">
-    <value>Bhutanese ngultrum</value>
-  </data>
-  <data name="BTN_Num">
-    <value>064</value>
-  </data>
-  <data name="BTN_ISO">
-    <value>BTN</value>
-  </data>
-  <data name="BTN_Digits">
-    <value>2</value>
-  </data>
-  <data name="BTN_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="BWP_DisplayName">
-    <value>Botswana pula</value>
-  </data>
-  <data name="BWP_Num">
-    <value>072</value>
-  </data>
-  <data name="BWP_ISO">
-    <value>BWP</value>
-  </data>
-  <data name="BWP_Digits">
-    <value>2</value>
-  </data>
-  <data name="BWP_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="BWP_Symbol">
-    <value>P</value>
-  </data>
-  <data name="BYR_DisplayName">
-    <value>Belarusian ruble</value>
-  </data>
-  <data name="BYR_Num">
-    <value>974</value>
-  </data>
-  <data name="BYR_ISO">
-    <value>BYR</value>
-  </data>
-  <data name="BYR_Digits">
-    <value>0</value>
-  </data>
-  <data name="BYR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="BZD_DisplayName">
-    <value>Belize dollar</value>
-  </data>
-  <data name="BZD_Num">
-    <value>084</value>
-  </data>
-  <data name="BZD_ISO">
-    <value>BZD</value>
-  </data>
-  <data name="BZD_Digits">
-    <value>2</value>
-  </data>
-  <data name="BZD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="CAD_DisplayName">
-    <value>Canadian dollar</value>
-  </data>
-  <data name="CAD_Num">
-    <value>124</value>
-  </data>
-  <data name="CAD_ISO">
-    <value>CAD</value>
-  </data>
-  <data name="CAD_Digits">
-    <value>2</value>
-  </data>
-  <data name="CAD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="CDF_DisplayName">
-    <value>Congolese franc</value>
-  </data>
-  <data name="CDF_Num">
-    <value>976</value>
-  </data>
-  <data name="CDF_ISO">
-    <value>CDF</value>
-  </data>
-  <data name="CDF_Digits">
-    <value>2</value>
-  </data>
-  <data name="CDF_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="CHE_DisplayName">
-    <value>WIR Euro</value>
-  </data>
-  <data name="CHE_Num">
-    <value>947</value>
-  </data>
-  <data name="CHE_ISO">
-    <value>CHE</value>
-  </data>
-  <data name="CHE_Digits">
-    <value>2</value>
-  </data>
-  <data name="CHE_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="CHF_DisplayName">
-    <value>Swiss franc</value>
-  </data>
-  <data name="CHF_Num">
-    <value>756</value>
-  </data>
-  <data name="CHF_ISO">
-    <value>CHF</value>
-  </data>
-  <data name="CHF_Digits">
-    <value>2</value>
-  </data>
-  <data name="CHF_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="CHW_DisplayName">
-    <value>WIR Franc</value>
-  </data>
-  <data name="CHW_Num">
-    <value>948</value>
-  </data>
-  <data name="CHW_ISO">
-    <value>CHW</value>
-  </data>
-  <data name="CHW_Digits">
-    <value>2</value>
-  </data>
-  <data name="CHW_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="CLF_DisplayName">
-    <value>Unidad de Fomento</value>
-  </data>
-  <data name="CLF_Num">
-    <value>990</value>
-  </data>
-  <data name="CLF_ISO">
-    <value>CLF</value>
-  </data>
-  <data name="CLF_Digits">
-    <value>0</value>
-  </data>
-  <data name="CLF_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="CLP_DisplayName">
-    <value>Chilean peso</value>
-  </data>
-  <data name="CLP_Num">
-    <value>152</value>
-  </data>
-  <data name="CLP_ISO">
-    <value>CLP</value>
-  </data>
-  <data name="CLP_Digits">
-    <value>0</value>
-  </data>
-  <data name="CLP_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="CNH_DisplayName">
-    <value>Chinese yuan when traded in Hong Kong</value>
-  </data>
-  <data name="CNH_Num">
-    <value>156</value>
-  </data>
-  <data name="CNH_ISO">
-    <value>CNH</value>
-  </data>
-  <data name="CNH_Digits">
-    <value>2</value>
-  </data>
-  <data name="CNH_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="CNY_DisplayName">
-    <value>Chinese yuan</value>
-  </data>
-  <data name="CNY_Num">
-    <value>156</value>
-  </data>
-  <data name="CNY_ISO">
-    <value>CNY</value>
-  </data>
-  <data name="CNY_Digits">
-    <value>2</value>
-  </data>
-  <data name="CNY_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="CNY_Symbol">
-    <value>¥</value>
-  </data>
-  <data name="COP_DisplayName">
-    <value>Colombian peso</value>
-  </data>
-  <data name="COP_Num">
-    <value>170</value>
-  </data>
-  <data name="COP_ISO">
-    <value>COP</value>
-  </data>
-  <data name="COP_Digits">
-    <value>2</value>
-  </data>
-  <data name="COP_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="COU_DisplayName">
-    <value>Unidad de Valor Real</value>
-  </data>
-  <data name="COU_Num">
-    <value>970</value>
-  </data>
-  <data name="COU_ISO">
-    <value>COU</value>
-  </data>
-  <data name="COU_Digits">
-    <value>4</value>
-  </data>
-  <data name="COU_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="CRC_DisplayName">
-    <value>Costa Rican colon</value>
-  </data>
-  <data name="CRC_Num">
-    <value>188</value>
-  </data>
-  <data name="CRC_ISO">
-    <value>CRC</value>
-  </data>
-  <data name="CRC_Digits">
-    <value>2</value>
-  </data>
-  <data name="CRC_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="CRC_Symbol">
-    <value>₡</value>
-  </data>
-  <data name="CUC_DisplayName">
-    <value>Cuban convertible peso</value>
-  </data>
-  <data name="CUC_Num">
-    <value>931</value>
-  </data>
-  <data name="CUC_ISO">
-    <value>CUC</value>
-  </data>
-  <data name="CUC_Digits">
-    <value>2</value>
-  </data>
-  <data name="CUC_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="CUP_DisplayName">
-    <value>Cuban peso</value>
-  </data>
-  <data name="CUP_Num">
-    <value>192</value>
-  </data>
-  <data name="CUP_ISO">
-    <value>CUP</value>
-  </data>
-  <data name="CUP_Digits">
-    <value>2</value>
-  </data>
-  <data name="CUP_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="CVE_DisplayName">
-    <value>Cape Verde escudo</value>
-  </data>
-  <data name="CVE_Num">
-    <value>132</value>
-  </data>
-  <data name="CVE_ISO">
-    <value>CVE</value>
-  </data>
-  <data name="CVE_Digits">
-    <value>0</value>
-  </data>
-  <data name="CVE_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="CZK_DisplayName">
-    <value>Czech koruna</value>
-  </data>
-  <data name="CZK_Num">
-    <value>203</value>
-  </data>
-  <data name="CZK_ISO">
-    <value>CZK</value>
-  </data>
-  <data name="CZK_Digits">
-    <value>2</value>
-  </data>
-  <data name="CZK_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="CZK_Symbol">
-    <value>Kč</value>
-  </data>
-  <data name="DJF_DisplayName">
-    <value>Djiboutian franc</value>
-  </data>
-  <data name="DJF_Num">
-    <value>262</value>
-  </data>
-  <data name="DJF_ISO">
-    <value>DJF</value>
-  </data>
-  <data name="DJF_Digits">
-    <value>0</value>
-  </data>
-  <data name="DJF_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="DKK_DisplayName">
-    <value>Danish krone</value>
-  </data>
-  <data name="DKK_Num">
-    <value>208</value>
-  </data>
-  <data name="DKK_ISO">
-    <value>DKK</value>
-  </data>
-  <data name="DKK_Digits">
-    <value>2</value>
-  </data>
-  <data name="DKK_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="DOP_DisplayName">
-    <value>Dominican peso</value>
-  </data>
-  <data name="DOP_Num">
-    <value>214</value>
-  </data>
-  <data name="DOP_ISO">
-    <value>DOP</value>
-  </data>
-  <data name="DOP_Digits">
-    <value>2</value>
-  </data>
-  <data name="DOP_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="DZD_DisplayName">
-    <value>Algerian dinar</value>
-  </data>
-  <data name="DZD_Num">
-    <value>012</value>
-  </data>
-  <data name="DZD_ISO">
-    <value>DZD</value>
-  </data>
-  <data name="DZD_Digits">
-    <value>2</value>
-  </data>
-  <data name="DZD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="EGP_DisplayName">
-    <value>Egyptian pound</value>
-  </data>
-  <data name="EGP_Num">
-    <value>818</value>
-  </data>
-  <data name="EGP_ISO">
-    <value>EGP</value>
-  </data>
-  <data name="EGP_Digits">
-    <value>2</value>
-  </data>
-  <data name="EGP_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="ERN_DisplayName">
-    <value>Eritrean nakfa</value>
-  </data>
-  <data name="ERN_Num">
-    <value>232</value>
-  </data>
-  <data name="ERN_ISO">
-    <value>ERN</value>
-  </data>
-  <data name="ERN_Digits">
-    <value>2</value>
-  </data>
-  <data name="ERN_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="ETB_DisplayName">
-    <value>Ethiopian birr</value>
-  </data>
-  <data name="ETB_Num">
-    <value>230</value>
-  </data>
-  <data name="ETB_ISO">
-    <value>ETB</value>
-  </data>
-  <data name="ETB_Digits">
-    <value>2</value>
-  </data>
-  <data name="ETB_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="EUR_DisplayName">
-    <value>Euro</value>
-  </data>
-  <data name="EUR_Num">
-    <value>978</value>
-  </data>
-  <data name="EUR_ISO">
-    <value>EUR</value>
-  </data>
-  <data name="EUR_Digits">
-    <value>2</value>
-  </data>
-  <data name="EUR_StartDate">
-    <value>2002-01-01</value>
-  </data>
-  <data name="EUR_Symbol">
-    <value>€</value>
-  </data>
-  <data name="FJD_DisplayName">
-    <value>Fiji dollar</value>
-  </data>
-  <data name="FJD_Num">
-    <value>242</value>
-  </data>
-  <data name="FJD_ISO">
-    <value>FJD</value>
-  </data>
-  <data name="FJD_Digits">
-    <value>2</value>
-  </data>
-  <data name="FJD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="FKP_DisplayName">
-    <value>Falkland Islands pound</value>
-  </data>
-  <data name="FKP_Num">
-    <value>238</value>
-  </data>
-  <data name="FKP_ISO">
-    <value>FKP</value>
-  </data>
-  <data name="FKP_Digits">
-    <value>2</value>
-  </data>
-  <data name="FKP_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="GBP_DisplayName">
-    <value>Pound sterling</value>
-  </data>
-  <data name="GBP_Num">
-    <value>826</value>
-  </data>
-  <data name="GBP_ISO">
-    <value>GBP</value>
-  </data>
-  <data name="GBP_Digits">
-    <value>2</value>
-  </data>
-  <data name="GBP_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="GBP_Symbol">
-    <value>£</value>
-  </data>
-  <data name="GEL_DisplayName">
-    <value>Georgian lari</value>
-  </data>
-  <data name="GEL_Num">
-    <value>981</value>
-  </data>
-  <data name="GEL_ISO">
-    <value>GEL</value>
-  </data>
-  <data name="GEL_Digits">
-    <value>2</value>
-  </data>
-  <data name="GEL_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="GEL_Symbol">
-    <value>₾</value>
-  </data>
-  <data name="GHS_DisplayName">
-    <value>Ghanaian cedi</value>
-  </data>
-  <data name="GHS_Num">
-    <value>936</value>
-  </data>
-  <data name="GHS_ISO">
-    <value>GHS</value>
-  </data>
-  <data name="GHS_Digits">
-    <value>2</value>
-  </data>
-  <data name="GHS_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="GIP_DisplayName">
-    <value>Gibraltar pound</value>
-  </data>
-  <data name="GIP_Num">
-    <value>292</value>
-  </data>
-  <data name="GIP_ISO">
-    <value>GIP</value>
-  </data>
-  <data name="GIP_Digits">
-    <value>2</value>
-  </data>
-  <data name="GIP_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="GMD_DisplayName">
-    <value>Gambian dalasi</value>
-  </data>
-  <data name="GMD_Num">
-    <value>270</value>
-  </data>
-  <data name="GMD_ISO">
-    <value>GMD</value>
-  </data>
-  <data name="GMD_Digits">
-    <value>2</value>
-  </data>
-  <data name="GMD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="GNF_DisplayName">
-    <value>Guinean franc</value>
-  </data>
-  <data name="GNF_Num">
-    <value>324</value>
-  </data>
-  <data name="GNF_ISO">
-    <value>GNF</value>
-  </data>
-  <data name="GNF_Digits">
-    <value>0</value>
-  </data>
-  <data name="GNF_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="GTQ_DisplayName">
-    <value>Guatemalan quetzal</value>
-  </data>
-  <data name="GTQ_Num">
-    <value>320</value>
-  </data>
-  <data name="GTQ_ISO">
-    <value>GTQ</value>
-  </data>
-  <data name="GTQ_Digits">
-    <value>2</value>
-  </data>
-  <data name="GTQ_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="GYD_DisplayName">
-    <value>Guyanese dollar</value>
-  </data>
-  <data name="GYD_Num">
-    <value>328</value>
-  </data>
-  <data name="GYD_ISO">
-    <value>GYD</value>
-  </data>
-  <data name="GYD_Digits">
-    <value>2</value>
-  </data>
-  <data name="GYD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="HKD_DisplayName">
-    <value>Hong Kong dollar</value>
-  </data>
-  <data name="HKD_Num">
-    <value>344</value>
-  </data>
-  <data name="HKD_ISO">
-    <value>HKD</value>
-  </data>
-  <data name="HKD_Digits">
-    <value>2</value>
-  </data>
-  <data name="HKD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="HNL_DisplayName">
-    <value>Honduran lempira</value>
-  </data>
-  <data name="HNL_Num">
-    <value>340</value>
-  </data>
-  <data name="HNL_ISO">
-    <value>HNL</value>
-  </data>
-  <data name="HNL_Digits">
-    <value>2</value>
-  </data>
-  <data name="HNL_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="HRK_DisplayName">
-    <value>Croatian kuna</value>
-  </data>
-  <data name="HRK_Num">
-    <value>191</value>
-  </data>
-  <data name="HRK_ISO">
-    <value>HRK</value>
-  </data>
-  <data name="HRK_Digits">
-    <value>2</value>
-  </data>
-  <data name="HRK_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="HTG_DisplayName">
-    <value>Haitian gourde</value>
-  </data>
-  <data name="HTG_Num">
-    <value>332</value>
-  </data>
-  <data name="HTG_ISO">
-    <value>HTG</value>
-  </data>
-  <data name="HTG_Digits">
-    <value>2</value>
-  </data>
-  <data name="HTG_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="HUF_DisplayName">
-    <value>Hungarian forint</value>
-  </data>
-  <data name="HUF_Num">
-    <value>348</value>
-  </data>
-  <data name="HUF_ISO">
-    <value>HUF</value>
-  </data>
-  <data name="HUF_Digits">
-    <value>2</value>
-  </data>
-  <data name="HUF_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="IDR_DisplayName">
-    <value>Indonesian rupiah</value>
-  </data>
-  <data name="IDR_Num">
-    <value>360</value>
-  </data>
-  <data name="IDR_ISO">
-    <value>IDR</value>
-  </data>
-  <data name="IDR_Digits">
-    <value>2</value>
-  </data>
-  <data name="IDR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="ILS_DisplayName">
-    <value>Israeli new shekel</value>
-  </data>
-  <data name="ILS_Num">
-    <value>376</value>
-  </data>
-  <data name="ILS_ISO">
-    <value>ILS</value>
-  </data>
-  <data name="ILS_Digits">
-    <value>2</value>
-  </data>
-  <data name="ILS_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="ILS_Symbol">
-    <value>₪</value>
-  </data>
-  <data name="INR_DisplayName">
-    <value>Indian rupee</value>
-  </data>
-  <data name="INR_Num">
-    <value>356</value>
-  </data>
-  <data name="INR_ISO">
-    <value>INR</value>
-  </data>
-  <data name="INR_Digits">
-    <value>2</value>
-  </data>
-  <data name="INR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="INR_Symbol">
-    <value>₹</value>
-  </data>
-  <data name="IQD_DisplayName">
-    <value>Iraqi dinar</value>
-  </data>
-  <data name="IQD_Num">
-    <value>368</value>
-  </data>
-  <data name="IQD_ISO">
-    <value>IQD</value>
-  </data>
-  <data name="IQD_Digits">
-    <value>3</value>
-  </data>
-  <data name="IQD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="IRR_DisplayName">
-    <value>Iranian rial</value>
-  </data>
-  <data name="IRR_Num">
-    <value>364</value>
-  </data>
-  <data name="IRR_ISO">
-    <value>IRR</value>
-  </data>
-  <data name="IRR_Digits">
-    <value>2</value>
-  </data>
-  <data name="IRR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="ISK_DisplayName">
-    <value>Icelandic króna</value>
-  </data>
-  <data name="ISK_Num">
-    <value>352</value>
-  </data>
-  <data name="ISK_ISO">
-    <value>ISK</value>
-  </data>
-  <data name="ISK_Digits">
-    <value>0</value>
-  </data>
-  <data name="ISK_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="JMD_DisplayName">
-    <value>Jamaican dollar</value>
-  </data>
-  <data name="JMD_Num">
-    <value>388</value>
-  </data>
-  <data name="JMD_ISO">
-    <value>JMD</value>
-  </data>
-  <data name="JMD_Digits">
-    <value>2</value>
-  </data>
-  <data name="JMD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="JOD_DisplayName">
-    <value>Jordanian dinar</value>
-  </data>
-  <data name="JOD_Num">
-    <value>400</value>
-  </data>
-  <data name="JOD_ISO">
-    <value>JOD</value>
-  </data>
-  <data name="JOD_Digits">
-    <value>3</value>
-  </data>
-  <data name="JOD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="JPY_DisplayName">
-    <value>Japanese yen</value>
-  </data>
-  <data name="JPY_Num">
-    <value>392</value>
-  </data>
-  <data name="JPY_ISO">
-    <value>JPY</value>
-  </data>
-  <data name="JPY_Digits">
-    <value>0</value>
-  </data>
-  <data name="JPY_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="JPY_Symbol">
-    <value>¥</value>
-  </data>
-  <data name="KES_DisplayName">
-    <value>Kenyan shilling</value>
-  </data>
-  <data name="KES_Num">
-    <value>404</value>
-  </data>
-  <data name="KES_ISO">
-    <value>KES</value>
-  </data>
-  <data name="KES_Digits">
-    <value>2</value>
-  </data>
-  <data name="KES_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="KGS_DisplayName">
-    <value>Kyrgyzstani som</value>
-  </data>
-  <data name="KGS_Num">
-    <value>417</value>
-  </data>
-  <data name="KGS_ISO">
-    <value>KGS</value>
-  </data>
-  <data name="KGS_Digits">
-    <value>2</value>
-  </data>
-  <data name="KGS_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="KHR_DisplayName">
-    <value>Cambodian riel</value>
-  </data>
-  <data name="KHR_Num">
-    <value>116</value>
-  </data>
-  <data name="KHR_ISO">
-    <value>KHR</value>
-  </data>
-  <data name="KHR_Digits">
-    <value>2</value>
-  </data>
-  <data name="KHR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="KHR_Symbol">
-    <value>៛</value>
-  </data>
-  <data name="KMF_DisplayName">
-    <value>Comoro franc</value>
-  </data>
-  <data name="KMF_Num">
-    <value>174</value>
-  </data>
-  <data name="KMF_ISO">
-    <value>KMF</value>
-  </data>
-  <data name="KMF_Digits">
-    <value>0</value>
-  </data>
-  <data name="KMF_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="KPW_DisplayName">
-    <value>North Korean won</value>
-  </data>
-  <data name="KPW_Num">
-    <value>408</value>
-  </data>
-  <data name="KPW_ISO">
-    <value>KPW</value>
-  </data>
-  <data name="KPW_Digits">
-    <value>2</value>
-  </data>
-  <data name="KPW_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="KRW_DisplayName">
-    <value>South Korean won</value>
-  </data>
-  <data name="KRW_Num">
-    <value>410</value>
-  </data>
-  <data name="KRW_ISO">
-    <value>KRW</value>
-  </data>
-  <data name="KRW_Digits">
-    <value>0</value>
-  </data>
-  <data name="KRW_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="KRW_Symbol">
-    <value>₩</value>
-  </data>
-  <data name="KWD_DisplayName">
-    <value>Kuwaiti dinar</value>
-  </data>
-  <data name="KWD_Num">
-    <value>414</value>
-  </data>
-  <data name="KWD_ISO">
-    <value>KWD</value>
-  </data>
-  <data name="KWD_Digits">
-    <value>3</value>
-  </data>
-  <data name="KWD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="KYD_DisplayName">
-    <value>Cayman Islands dollar</value>
-  </data>
-  <data name="KYD_Num">
-    <value>136</value>
-  </data>
-  <data name="KYD_ISO">
-    <value>KYD</value>
-  </data>
-  <data name="KYD_Digits">
-    <value>2</value>
-  </data>
-  <data name="KYD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="KZT_DisplayName">
-    <value>Kazakhstani tenge</value>
-  </data>
-  <data name="KZT_Num">
-    <value>398</value>
-  </data>
-  <data name="KZT_ISO">
-    <value>KZT</value>
-  </data>
-  <data name="KZT_Digits">
-    <value>2</value>
-  </data>
-  <data name="KZT_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="KZT_Symbol">
-    <value>₸</value>
-  </data>
-  <data name="LAK_DisplayName">
-    <value>Lao kip</value>
-  </data>
-  <data name="LAK_Num">
-    <value>418</value>
-  </data>
-  <data name="LAK_ISO">
-    <value>LAK</value>
-  </data>
-  <data name="LAK_Digits">
-    <value>2</value>
-  </data>
-  <data name="LAK_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="LAK_Symbol">
-    <value>₭</value>
-  </data>
-  <data name="LBP_DisplayName">
-    <value>Lebanese pound</value>
-  </data>
-  <data name="LBP_Num">
-    <value>422</value>
-  </data>
-  <data name="LBP_ISO">
-    <value>LBP</value>
-  </data>
-  <data name="LBP_Digits">
-    <value>2</value>
-  </data>
-  <data name="LBP_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="LKR_DisplayName">
-    <value>Sri Lankan rupee</value>
-  </data>
-  <data name="LKR_Num">
-    <value>144</value>
-  </data>
-  <data name="LKR_ISO">
-    <value>LKR</value>
-  </data>
-  <data name="LKR_Digits">
-    <value>2</value>
-  </data>
-  <data name="LKR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="LRD_DisplayName">
-    <value>Liberian dollar</value>
-  </data>
-  <data name="LRD_Num">
-    <value>430</value>
-  </data>
-  <data name="LRD_ISO">
-    <value>LRD</value>
-  </data>
-  <data name="LRD_Digits">
-    <value>2</value>
-  </data>
-  <data name="LRD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="LSL_DisplayName">
-    <value>Lesotho loti</value>
-  </data>
-  <data name="LSL_Num">
-    <value>426</value>
-  </data>
-  <data name="LSL_ISO">
-    <value>LSL</value>
-  </data>
-  <data name="LSL_Digits">
-    <value>2</value>
-  </data>
-  <data name="LSL_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="LYD_DisplayName">
-    <value>Libyan dinar</value>
-  </data>
-  <data name="LYD_Num">
-    <value>434</value>
-  </data>
-  <data name="LYD_ISO">
-    <value>LYD</value>
-  </data>
-  <data name="LYD_Digits">
-    <value>3</value>
-  </data>
-  <data name="LYD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="MAD_DisplayName">
-    <value>Moroccan dirham</value>
-  </data>
-  <data name="MAD_Num">
-    <value>504</value>
-  </data>
-  <data name="MAD_ISO">
-    <value>MAD</value>
-  </data>
-  <data name="MAD_Digits">
-    <value>2</value>
-  </data>
-  <data name="MAD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="MDL_DisplayName">
-    <value>Moldovan leu</value>
-  </data>
-  <data name="MDL_Num">
-    <value>498</value>
-  </data>
-  <data name="MDL_ISO">
-    <value>MDL</value>
-  </data>
-  <data name="MDL_Digits">
-    <value>2</value>
-  </data>
-  <data name="MDL_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="MGA_DisplayName">
-    <value>Malagasy ariary</value>
-  </data>
-  <data name="MGA_Num">
-    <value>969</value>
-  </data>
-  <data name="MGA_ISO">
-    <value>MGA</value>
-  </data>
-  <data name="MGA_Digits">
-    <value>2</value>
-  </data>
-  <data name="MGA_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="MKD_DisplayName">
-    <value>Macedonian denar</value>
-  </data>
-  <data name="MKD_Num">
-    <value>807</value>
-  </data>
-  <data name="MKD_ISO">
-    <value>MKD</value>
-  </data>
-  <data name="MKD_Digits">
-    <value>2</value>
-  </data>
-  <data name="MKD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="MMK_DisplayName">
-    <value>Myanmar kyat</value>
-  </data>
-  <data name="MMK_Num">
-    <value>104</value>
-  </data>
-  <data name="MMK_ISO">
-    <value>MMK</value>
-  </data>
-  <data name="MMK_Digits">
-    <value>2</value>
-  </data>
-  <data name="MMK_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="MNT_DisplayName">
-    <value>Mongolian tugrik</value>
-  </data>
-  <data name="MNT_Num">
-    <value>496</value>
-  </data>
-  <data name="MNT_ISO">
-    <value>MNT</value>
-  </data>
-  <data name="MNT_Digits">
-    <value>2</value>
-  </data>
-  <data name="MNT_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="MNT_Symbol">
-    <value>₮</value>
-  </data>
-  <data name="MOP_DisplayName">
-    <value>Macanese pataca</value>
-  </data>
-  <data name="MOP_Num">
-    <value>446</value>
-  </data>
-  <data name="MOP_ISO">
-    <value>MOP</value>
-  </data>
-  <data name="MOP_Digits">
-    <value>2</value>
-  </data>
-  <data name="MOP_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="MRO_DisplayName">
-    <value>Mauritanian ouguiya</value>
-  </data>
-  <data name="MRO_Num">
-    <value>478</value>
-  </data>
-  <data name="MRO_ISO">
-    <value>MRO</value>
-  </data>
-  <data name="MRO_Digits">
-    <value>2</value>
-  </data>
-  <data name="MRO_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="MUR_DisplayName">
-    <value>Mauritian rupee</value>
-  </data>
-  <data name="MUR_Num">
-    <value>480</value>
-  </data>
-  <data name="MUR_ISO">
-    <value>MUR</value>
-  </data>
-  <data name="MUR_Digits">
-    <value>2</value>
-  </data>
-  <data name="MUR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="MVR_DisplayName">
-    <value>Maldivian rufiyaa</value>
-  </data>
-  <data name="MVR_Num">
-    <value>462</value>
-  </data>
-  <data name="MVR_ISO">
-    <value>MVR</value>
-  </data>
-  <data name="MVR_Digits">
-    <value>2</value>
-  </data>
-  <data name="MVR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="MVR_Symbol">
-    <value>ރ.</value>
-  </data>
-  <data name="MWK_DisplayName">
-    <value>Malawian kwacha</value>
-  </data>
-  <data name="MWK_Num">
-    <value>454</value>
-  </data>
-  <data name="MWK_ISO">
-    <value>MWK</value>
-  </data>
-  <data name="MWK_Digits">
-    <value>2</value>
-  </data>
-  <data name="MWK_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="MXN_DisplayName">
-    <value>Mexican peso</value>
-  </data>
-  <data name="MXN_Num">
-    <value>484</value>
-  </data>
-  <data name="MXN_ISO">
-    <value>MXN</value>
-  </data>
-  <data name="MXN_Digits">
-    <value>2</value>
-  </data>
-  <data name="MXN_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="MXV_DisplayName">
-    <value>Mexican Unidad de Inversion (UDI)</value>
-  </data>
-  <data name="MXV_Num">
-    <value>979</value>
-  </data>
-  <data name="MXV_ISO">
-    <value>MXV</value>
-  </data>
-  <data name="MXV_Digits">
-    <value>2</value>
-  </data>
-  <data name="MXV_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="MYR_DisplayName">
-    <value>Malaysian ringgit</value>
-  </data>
-  <data name="MYR_Num">
-    <value>458</value>
-  </data>
-  <data name="MYR_ISO">
-    <value>MYR</value>
-  </data>
-  <data name="MYR_Digits">
-    <value>2</value>
-  </data>
-  <data name="MYR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="MZN_DisplayName">
-    <value>Mozambican metical</value>
-  </data>
-  <data name="MZN_Num">
-    <value>943</value>
-  </data>
-  <data name="MZN_ISO">
-    <value>MZN</value>
-  </data>
-  <data name="MZN_Digits">
-    <value>2</value>
-  </data>
-  <data name="MZN_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="NAD_DisplayName">
-    <value>Namibian dollar</value>
-  </data>
-  <data name="NAD_Num">
-    <value>516</value>
-  </data>
-  <data name="NAD_ISO">
-    <value>NAD</value>
-  </data>
-  <data name="NAD_Digits">
-    <value>2</value>
-  </data>
-  <data name="NAD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="NGN_DisplayName">
-    <value>Nigerian naira</value>
-  </data>
-  <data name="NGN_Num">
-    <value>566</value>
-  </data>
-  <data name="NGN_ISO">
-    <value>NGN</value>
-  </data>
-  <data name="NGN_Digits">
-    <value>2</value>
-  </data>
-  <data name="NGN_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="NGN_Symbol">
-    <value>₦</value>
-  </data>
-  <data name="NIO_DisplayName">
-    <value>Nicaraguan córdoba</value>
-  </data>
-  <data name="NIO_Num">
-    <value>558</value>
-  </data>
-  <data name="NIO_ISO">
-    <value>NIO</value>
-  </data>
-  <data name="NIO_Digits">
-    <value>2</value>
-  </data>
-  <data name="NIO_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="NOK_DisplayName">
-    <value>Norwegian krone</value>
-  </data>
-  <data name="NOK_Num">
-    <value>578</value>
-  </data>
-  <data name="NOK_ISO">
-    <value>NOK</value>
-  </data>
-  <data name="NOK_Digits">
-    <value>2</value>
-  </data>
-  <data name="NOK_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="NPR_DisplayName">
-    <value>Nepalese rupee</value>
-  </data>
-  <data name="NPR_Num">
-    <value>524</value>
-  </data>
-  <data name="NPR_ISO">
-    <value>NPR</value>
-  </data>
-  <data name="NPR_Digits">
-    <value>2</value>
-  </data>
-  <data name="NPR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="NPR_Symbol">
-    <value>रु</value>
-  </data>
-  <data name="NZD_DisplayName">
-    <value>New Zealand dollar</value>
-  </data>
-  <data name="NZD_Num">
-    <value>554</value>
-  </data>
-  <data name="NZD_ISO">
-    <value>NZD</value>
-  </data>
-  <data name="NZD_Digits">
-    <value>2</value>
-  </data>
-  <data name="NZD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="OMR_DisplayName">
-    <value>Omani rial</value>
-  </data>
-  <data name="OMR_Num">
-    <value>512</value>
-  </data>
-  <data name="OMR_ISO">
-    <value>OMR</value>
-  </data>
-  <data name="OMR_Digits">
-    <value>3</value>
-  </data>
-  <data name="OMR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="PAB_DisplayName">
-    <value>Panamanian balboa</value>
-  </data>
-  <data name="PAB_Num">
-    <value>590</value>
-  </data>
-  <data name="PAB_ISO">
-    <value>PAB</value>
-  </data>
-  <data name="PAB_Digits">
-    <value>2</value>
-  </data>
-  <data name="PAB_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="PEN_DisplayName">
-    <value>Peruvian nuevo sol</value>
-  </data>
-  <data name="PEN_Num">
-    <value>604</value>
-  </data>
-  <data name="PEN_ISO">
-    <value>PEN</value>
-  </data>
-  <data name="PEN_Digits">
-    <value>2</value>
-  </data>
-  <data name="PEN_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="PGK_DisplayName">
-    <value>Papua New Guinean kina</value>
-  </data>
-  <data name="PGK_Num">
-    <value>598</value>
-  </data>
-  <data name="PGK_ISO">
-    <value>PGK</value>
-  </data>
-  <data name="PGK_Digits">
-    <value>2</value>
-  </data>
-  <data name="PGK_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="PHP_DisplayName">
-    <value>Philippine peso</value>
-  </data>
-  <data name="PHP_Num">
-    <value>608</value>
-  </data>
-  <data name="PHP_ISO">
-    <value>PHP</value>
-  </data>
-  <data name="PHP_Digits">
-    <value>2</value>
-  </data>
-  <data name="PHP_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="PHP_Symbol">
-    <value>₱</value>
-  </data>
-  <data name="PKR_DisplayName">
-    <value>Pakistani rupee</value>
-  </data>
-  <data name="PKR_Num">
-    <value>586</value>
-  </data>
-  <data name="PKR_ISO">
-    <value>PKR</value>
-  </data>
-  <data name="PKR_Digits">
-    <value>2</value>
-  </data>
-  <data name="PKR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="PLN_DisplayName">
-    <value>Polish złoty</value>
-  </data>
-  <data name="PLN_Num">
-    <value>985</value>
-  </data>
-  <data name="PLN_ISO">
-    <value>PLN</value>
-  </data>
-  <data name="PLN_Digits">
-    <value>2</value>
-  </data>
-  <data name="PLN_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="PYG_DisplayName">
-    <value>Paraguayan guaraní</value>
-  </data>
-  <data name="PYG_Num">
-    <value>600</value>
-  </data>
-  <data name="PYG_ISO">
-    <value>PYG</value>
-  </data>
-  <data name="PYG_Digits">
-    <value>0</value>
-  </data>
-  <data name="PYG_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="PYG_Symbol">
-    <value>₲</value>
-  </data>
-  <data name="QAR_DisplayName">
-    <value>Qatari riyal</value>
-  </data>
-  <data name="QAR_Num">
-    <value>634</value>
-  </data>
-  <data name="QAR_ISO">
-    <value>QAR</value>
-  </data>
-  <data name="QAR_Digits">
-    <value>2</value>
-  </data>
-  <data name="QAR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="RON_DisplayName">
-    <value>Romanian new leu</value>
-  </data>
-  <data name="RON_Num">
-    <value>946</value>
-  </data>
-  <data name="RON_ISO">
-    <value>RON</value>
-  </data>
-  <data name="RON_Digits">
-    <value>2</value>
-  </data>
-  <data name="RON_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="RSD_DisplayName">
-    <value>Serbian dinar</value>
-  </data>
-  <data name="RSD_Num">
-    <value>941</value>
-  </data>
-  <data name="RSD_ISO">
-    <value>RSD</value>
-  </data>
-  <data name="RSD_Digits">
-    <value>2</value>
-  </data>
-  <data name="RSD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="RUB_DisplayName">
-    <value>Russian ruble</value>
-  </data>
-  <data name="RUB_Num">
-    <value>643</value>
-  </data>
-  <data name="RUB_ISO">
-    <value>RUB</value>
-  </data>
-  <data name="RUB_Digits">
-    <value>2</value>
-  </data>
-  <data name="RUB_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="RUB_Symbol">
-    <value>₽</value>
-  </data>
-  <data name="RWF_DisplayName">
-    <value>Rwandan franc</value>
-  </data>
-  <data name="RWF_Num">
-    <value>646</value>
-  </data>
-  <data name="RWF_ISO">
-    <value>RWF</value>
-  </data>
-  <data name="RWF_Digits">
-    <value>0</value>
-  </data>
-  <data name="RWF_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="SAR_DisplayName">
-    <value>Saudi riyal</value>
-  </data>
-  <data name="SAR_Num">
-    <value>682</value>
-  </data>
-  <data name="SAR_ISO">
-    <value>SAR</value>
-  </data>
-  <data name="SAR_Digits">
-    <value>2</value>
-  </data>
-  <data name="SAR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="SBD_DisplayName">
-    <value>Solomon Islands dollar</value>
-  </data>
-  <data name="SBD_Num">
-    <value>090</value>
-  </data>
-  <data name="SBD_ISO">
-    <value>SBD</value>
-  </data>
-  <data name="SBD_Digits">
-    <value>2</value>
-  </data>
-  <data name="SBD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="SCR_DisplayName">
-    <value>Seychelles rupee</value>
-  </data>
-  <data name="SCR_Num">
-    <value>690</value>
-  </data>
-  <data name="SCR_ISO">
-    <value>SCR</value>
-  </data>
-  <data name="SCR_Digits">
-    <value>2</value>
-  </data>
-  <data name="SCR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="SDG_DisplayName">
-    <value>Sudanese pound</value>
-  </data>
-  <data name="SDG_Num">
-    <value>938</value>
-  </data>
-  <data name="SDG_ISO">
-    <value>SDG</value>
-  </data>
-  <data name="SDG_Digits">
-    <value>2</value>
-  </data>
-  <data name="SDG_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="SEK_DisplayName">
-    <value>Swedish krona/kronor</value>
-  </data>
-  <data name="SEK_Num">
-    <value>752</value>
-  </data>
-  <data name="SEK_ISO">
-    <value>SEK</value>
-  </data>
-  <data name="SEK_Digits">
-    <value>2</value>
-  </data>
-  <data name="SEK_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="SGD_DisplayName">
-    <value>Singapore dollar</value>
-  </data>
-  <data name="SGD_Num">
-    <value>702</value>
-  </data>
-  <data name="SGD_ISO">
-    <value>SGD</value>
-  </data>
-  <data name="SGD_Digits">
-    <value>2</value>
-  </data>
-  <data name="SGD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="SHP_DisplayName">
-    <value>Saint Helena pound</value>
-  </data>
-  <data name="SHP_Num">
-    <value>654</value>
-  </data>
-  <data name="SHP_ISO">
-    <value>SHP</value>
-  </data>
-  <data name="SHP_Digits">
-    <value>2</value>
-  </data>
-  <data name="SHP_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="SLL_DisplayName">
-    <value>Sierra Leonean leone</value>
-  </data>
-  <data name="SLL_Num">
-    <value>694</value>
-  </data>
-  <data name="SLL_ISO">
-    <value>SLL</value>
-  </data>
-  <data name="SLL_Digits">
-    <value>2</value>
-  </data>
-  <data name="SLL_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="SOS_DisplayName">
-    <value>Somali shilling</value>
-  </data>
-  <data name="SOS_Num">
-    <value>706</value>
-  </data>
-  <data name="SOS_ISO">
-    <value>SOS</value>
-  </data>
-  <data name="SOS_Digits">
-    <value>2</value>
-  </data>
-  <data name="SOS_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="SRD_DisplayName">
-    <value>Surinamese dollar</value>
-  </data>
-  <data name="SRD_Num">
-    <value>968</value>
-  </data>
-  <data name="SRD_ISO">
-    <value>SRD</value>
-  </data>
-  <data name="SRD_Digits">
-    <value>2</value>
-  </data>
-  <data name="SRD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="SSP_DisplayName">
-    <value>South Sudanese pound</value>
-  </data>
-  <data name="SSP_Num">
-    <value>728</value>
-  </data>
-  <data name="SSP_ISO">
-    <value>SSP</value>
-  </data>
-  <data name="SSP_Digits">
-    <value>2</value>
-  </data>
-  <data name="SSP_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="STD_DisplayName">
-    <value>São Tomé and Príncipe dobra</value>
-  </data>
-  <data name="STD_Num">
-    <value>678</value>
-  </data>
-  <data name="STD_ISO">
-    <value>STD</value>
-  </data>
-  <data name="STD_Digits">
-    <value>2</value>
-  </data>
-  <data name="STD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="SYP_DisplayName">
-    <value>Syrian pound</value>
-  </data>
-  <data name="SYP_Num">
-    <value>760</value>
-  </data>
-  <data name="SYP_ISO">
-    <value>SYP</value>
-  </data>
-  <data name="SYP_Digits">
-    <value>2</value>
-  </data>
-  <data name="SYP_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="SZL_DisplayName">
-    <value>Swazi lilangeni</value>
-  </data>
-  <data name="SZL_Num">
-    <value>748</value>
-  </data>
-  <data name="SZL_ISO">
-    <value>SZL</value>
-  </data>
-  <data name="SZL_Digits">
-    <value>2</value>
-  </data>
-  <data name="SZL_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="THB_DisplayName">
-    <value>Thai baht</value>
-  </data>
-  <data name="THB_Num">
-    <value>764</value>
-  </data>
-  <data name="THB_ISO">
-    <value>THB</value>
-  </data>
-  <data name="THB_Digits">
-    <value>2</value>
-  </data>
-  <data name="THB_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="THB_Symbol">
-    <value>฿</value>
-  </data>
-  <data name="TJS_DisplayName">
-    <value>Tajikistani somoni</value>
-  </data>
-  <data name="TJS_Num">
-    <value>972</value>
-  </data>
-  <data name="TJS_ISO">
-    <value>TJS</value>
-  </data>
-  <data name="TJS_Digits">
-    <value>2</value>
-  </data>
-  <data name="TJS_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="TMT_DisplayName">
-    <value>Turkmenistani manat</value>
-  </data>
-  <data name="TMT_Num">
-    <value>934</value>
-  </data>
-  <data name="TMT_ISO">
-    <value>TMT</value>
-  </data>
-  <data name="TMT_Digits">
-    <value>2</value>
-  </data>
-  <data name="TMT_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="TND_DisplayName">
-    <value>Tunisian dinar</value>
-  </data>
-  <data name="TND_Num">
-    <value>788</value>
-  </data>
-  <data name="TND_ISO">
-    <value>TND</value>
-  </data>
-  <data name="TND_Digits">
-    <value>3</value>
-  </data>
-  <data name="TND_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="TOP_DisplayName">
-    <value>Tongan paʻanga</value>
-  </data>
-  <data name="TOP_Num">
-    <value>776</value>
-  </data>
-  <data name="TOP_ISO">
-    <value>TOP</value>
-  </data>
-  <data name="TOP_Digits">
-    <value>2</value>
-  </data>
-  <data name="TOP_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="TRY_DisplayName">
-    <value>Turkish lira</value>
-  </data>
-  <data name="TRY_Num">
-    <value>949</value>
-  </data>
-  <data name="TRY_ISO">
-    <value>TRY</value>
-  </data>
-  <data name="TRY_Digits">
-    <value>2</value>
-  </data>
-  <data name="TRY_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="TRY_Symbol">
-    <value>₺</value>
-  </data>
-  <data name="TTD_DisplayName">
-    <value>Trinidad and Tobago dollar</value>
-  </data>
-  <data name="TTD_Num">
-    <value>780</value>
-  </data>
-  <data name="TTD_ISO">
-    <value>TTD</value>
-  </data>
-  <data name="TTD_Digits">
-    <value>2</value>
-  </data>
-  <data name="TTD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="TWD_DisplayName">
-    <value>New Taiwan dollar</value>
-  </data>
-  <data name="TWD_Num">
-    <value>901</value>
-  </data>
-  <data name="TWD_ISO">
-    <value>TWD</value>
-  </data>
-  <data name="TWD_Digits">
-    <value>2</value>
-  </data>
-  <data name="TWD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="TZS_DisplayName">
-    <value>Tanzanian shilling</value>
-  </data>
-  <data name="TZS_Num">
-    <value>834</value>
-  </data>
-  <data name="TZS_ISO">
-    <value>TZS</value>
-  </data>
-  <data name="TZS_Digits">
-    <value>2</value>
-  </data>
-  <data name="TZS_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="UAH_DisplayName">
-    <value>Ukrainian hryvnia</value>
-  </data>
-  <data name="UAH_Num">
-    <value>980</value>
-  </data>
-  <data name="UAH_ISO">
-    <value>UAH</value>
-  </data>
-  <data name="UAH_Digits">
-    <value>2</value>
-  </data>
-  <data name="UAH_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="UAH_Symbol">
-    <value>₴</value>
-  </data>
-  <data name="UGX_DisplayName">
-    <value>Ugandan shilling</value>
-  </data>
-  <data name="UGX_Num">
-    <value>800</value>
-  </data>
-  <data name="UGX_ISO">
-    <value>UGX</value>
-  </data>
-  <data name="UGX_Digits">
-    <value>0</value>
-  </data>
-  <data name="UGX_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="USD_DisplayName">
-    <value>United States dollar</value>
-  </data>
-  <data name="USD_Num">
-    <value>840</value>
-  </data>
-  <data name="USD_ISO">
-    <value>USD</value>
-  </data>
-  <data name="USD_Digits">
-    <value>2</value>
-  </data>
-  <data name="USD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="USD_Symbol">
-    <value>$</value>
-  </data>
-  <data name="USN_DisplayName">
-    <value>United States dollar (next day)</value>
-  </data>
-  <data name="USN_Num">
-    <value>997</value>
-  </data>
-  <data name="USN_ISO">
-    <value>USN</value>
-  </data>
-  <data name="USN_Digits">
-    <value>2</value>
-  </data>
-  <data name="USN_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="USS_DisplayName">
-    <value>United States dollar (same day)</value>
-  </data>
-  <data name="USS_Num">
-    <value>998</value>
-  </data>
-  <data name="USS_ISO">
-    <value>USS</value>
-  </data>
-  <data name="USS_Digits">
-    <value>2</value>
-  </data>
-  <data name="USS_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="UYI_DisplayName">
-    <value>Uruguay Peso en Unidades Indexadas (URUIURUI)</value>
-  </data>
-  <data name="UYI_Num">
-    <value>940</value>
-  </data>
-  <data name="UYI_ISO">
-    <value>UYI</value>
-  </data>
-  <data name="UYI_Digits">
-    <value>0</value>
-  </data>
-  <data name="UYI_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="UYU_DisplayName">
-    <value>Uruguayan peso</value>
-  </data>
-  <data name="UYU_Num">
-    <value>858</value>
-  </data>
-  <data name="UYU_ISO">
-    <value>UYU</value>
-  </data>
-  <data name="UYU_Digits">
-    <value>2</value>
-  </data>
-  <data name="UYU_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="UZS_DisplayName">
-    <value>Uzbekistan som</value>
-  </data>
-  <data name="UZS_Num">
-    <value>860</value>
-  </data>
-  <data name="UZS_ISO">
-    <value>UZS</value>
-  </data>
-  <data name="UZS_Digits">
-    <value>2</value>
-  </data>
-  <data name="UZS_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="VEF_DisplayName">
-    <value>Venezuelan bolívar</value>
-  </data>
-  <data name="VEF_Num">
-    <value>937</value>
-  </data>
-  <data name="VEF_ISO">
-    <value>VEF</value>
-  </data>
-  <data name="VEF_Digits">
-    <value>2</value>
-  </data>
-  <data name="VEF_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="VND_DisplayName">
-    <value>Vietnamese dong</value>
-  </data>
-  <data name="VND_Num">
-    <value>704</value>
-  </data>
-  <data name="VND_ISO">
-    <value>VND</value>
-  </data>
-  <data name="VND_Digits">
-    <value>0</value>
-  </data>
-  <data name="VND_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="VND_Symbol">
-    <value>₫</value>
-  </data>
-  <data name="VUV_DisplayName">
-    <value>Vanuatu vatu</value>
-  </data>
-  <data name="VUV_Num">
-    <value>548</value>
-  </data>
-  <data name="VUV_ISO">
-    <value>VUV</value>
-  </data>
-  <data name="VUV_Digits">
-    <value>0</value>
-  </data>
-  <data name="VUV_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="WST_DisplayName">
-    <value>Samoan tala</value>
-  </data>
-  <data name="WST_Num">
-    <value>882</value>
-  </data>
-  <data name="WST_ISO">
-    <value>WST</value>
-  </data>
-  <data name="WST_Digits">
-    <value>2</value>
-  </data>
-  <data name="WST_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XAF_DisplayName">
-    <value>CFA franc BEAC</value>
-  </data>
-  <data name="XAF_Num">
-    <value>950</value>
-  </data>
-  <data name="XAF_ISO">
-    <value>XAF</value>
-  </data>
-  <data name="XAF_Digits">
-    <value>0</value>
-  </data>
-  <data name="XAF_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XAG_DisplayName">
-    <value>Silver (one troy ounce)</value>
-  </data>
-  <data name="XAG_Num">
-    <value>961</value>
-  </data>
-  <data name="XAG_ISO">
-    <value>XAG</value>
-  </data>
-  <data name="XAG_Digits">
-    <value>0</value>
-  </data>
-  <data name="XAG_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XAU_DisplayName">
-    <value>Gold (one troy ounce)</value>
-  </data>
-  <data name="XAU_Num">
-    <value>959</value>
-  </data>
-  <data name="XAU_ISO">
-    <value>XAU</value>
-  </data>
-  <data name="XAU_Digits">
-    <value>0</value>
-  </data>
-  <data name="XAU_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XBA_DisplayName">
-    <value>European Composite Unit (EURCO) (bond market unit)</value>
-  </data>
-  <data name="XBA_Num">
-    <value>955</value>
-  </data>
-  <data name="XBA_ISO">
-    <value>XBA</value>
-  </data>
-  <data name="XBA_Digits">
-    <value>0</value>
-  </data>
-  <data name="XBA_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XBB_DisplayName">
-    <value>European Monetary Unit (E.M.U.-6) (bond market unit)</value>
-  </data>
-  <data name="XBB_Num">
-    <value>956</value>
-  </data>
-  <data name="XBB_ISO">
-    <value>XBB</value>
-  </data>
-  <data name="XBB_Digits">
-    <value>0</value>
-  </data>
-  <data name="XBB_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XBC_DisplayName">
-    <value>European Unit of Account 9 (E.U.A.-9) (bond market unit)</value>
-  </data>
-  <data name="XBC_Num">
-    <value>957</value>
-  </data>
-  <data name="XBC_ISO">
-    <value>XBC</value>
-  </data>
-  <data name="XBC_Digits">
-    <value>0</value>
-  </data>
-  <data name="XBC_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XBD_DisplayName">
-    <value>European Unit of Account 17(E.U.A.-17) (bond market unit)</value>
-  </data>
-  <data name="XBD_Num">
-    <value>958</value>
-  </data>
-  <data name="XBD_ISO">
-    <value>XBD</value>
-  </data>
-  <data name="XBD_Digits">
-    <value>0</value>
-  </data>
-  <data name="XBD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XCD_DisplayName">
-    <value>East Caribbean dollar</value>
-  </data>
-  <data name="XCD_Num">
-    <value>951</value>
-  </data>
-  <data name="XCD_ISO">
-    <value>XCD</value>
-  </data>
-  <data name="XCD_Digits">
-    <value>2</value>
-  </data>
-  <data name="XCD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XDR_DisplayName">
-    <value>Special drawing rights</value>
-  </data>
-  <data name="XDR_Num">
-    <value>960</value>
-  </data>
-  <data name="XDR_ISO">
-    <value>XDR</value>
-  </data>
-  <data name="XDR_Digits">
-    <value>0</value>
-  </data>
-  <data name="XDR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XFU_DisplayName">
-    <value>UIC franc (special settlement currency)</value>
-  </data>
-  <data name="XFU_Num">
-    <value>000</value>
-  </data>
-  <data name="XFU_ISO">
-    <value>XFU</value>
-  </data>
-  <data name="XFU_Digits">
-    <value>0</value>
-  </data>
-  <data name="XFU_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XOF_DisplayName">
-    <value>CFA franc BCEAO</value>
-  </data>
-  <data name="XOF_Num">
-    <value>952</value>
-  </data>
-  <data name="XOF_ISO">
-    <value>XOF</value>
-  </data>
-  <data name="XOF_Digits">
-    <value>0</value>
-  </data>
-  <data name="XOF_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XPD_DisplayName">
-    <value>Palladium (one troy ounce)</value>
-  </data>
-  <data name="XPD_Num">
-    <value>964</value>
-  </data>
-  <data name="XPD_ISO">
-    <value>XPD</value>
-  </data>
-  <data name="XPD_Digits">
-    <value>0</value>
-  </data>
-  <data name="XPD_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XPF_DisplayName">
-    <value>CFP franc (franc Pacifique)</value>
-  </data>
-  <data name="XPF_Num">
-    <value>953</value>
-  </data>
-  <data name="XPF_ISO">
-    <value>XPF</value>
-  </data>
-  <data name="XPF_Digits">
-    <value>0</value>
-  </data>
-  <data name="XPF_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XPT_DisplayName">
-    <value>Platinum (one troy ounce)</value>
-  </data>
-  <data name="XPT_Num">
-    <value>962</value>
-  </data>
-  <data name="XPT_ISO">
-    <value>XPT</value>
-  </data>
-  <data name="XPT_Digits">
-    <value>0</value>
-  </data>
-  <data name="XPT_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XSU_DisplayName">
-    <value>SUCRE</value>
-  </data>
-  <data name="XSU_Num">
-    <value>994</value>
-  </data>
-  <data name="XSU_ISO">
-    <value>XSU</value>
-  </data>
-  <data name="XSU_Digits">
-    <value>0</value>
-  </data>
-  <data name="XSU_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XTS_DisplayName">
-    <value>Code reserved for testing purposes</value>
-  </data>
-  <data name="XTS_Num">
-    <value>963</value>
-  </data>
-  <data name="XTS_ISO">
-    <value>XTS</value>
-  </data>
-  <data name="XTS_Digits">
-    <value>0</value>
-  </data>
-  <data name="XTS_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XUA_DisplayName">
-    <value>ADB Unit of Account</value>
-  </data>
-  <data name="XUA_Num">
-    <value>965</value>
-  </data>
-  <data name="XUA_ISO">
-    <value>XUA</value>
-  </data>
-  <data name="XUA_Digits">
-    <value>0</value>
-  </data>
-  <data name="XUA_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="XXX_DisplayName">
-    <value>No currency</value>
-  </data>
-  <data name="XXX_Num">
-    <value>999</value>
-  </data>
-  <data name="XXX_ISO">
-    <value>XXX</value>
-  </data>
-  <data name="XXX_Digits">
-    <value>0</value>
-  </data>
-  <data name="XXX_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="YER_DisplayName">
-    <value>Yemeni rial</value>
-  </data>
-  <data name="YER_Num">
-    <value>886</value>
-  </data>
-  <data name="YER_ISO">
-    <value>YER</value>
-  </data>
-  <data name="YER_Digits">
-    <value>2</value>
-  </data>
-  <data name="YER_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="ZAR_DisplayName">
-    <value>South African rand</value>
-  </data>
-  <data name="ZAR_Num">
-    <value>710</value>
-  </data>
-  <data name="ZAR_ISO">
-    <value>ZAR</value>
-  </data>
-  <data name="ZAR_Digits">
-    <value>2</value>
-  </data>
-  <data name="ZAR_StartDate">
-    <value>0001-01-01</value>
-  </data>
-  <data name="ZMW_DisplayName">
-    <value>Zambian kwacha</value>
-  </data>
-  <data name="ZMW_Num">
-    <value>967</value>
-  </data>
-  <data name="ZMW_ISO">
-    <value>ZMW</value>
-  </data>
-  <data name="ZMW_Digits">
-    <value>2</value>
-  </data>
-  <data name="ZMW_StartDate">
-    <value>0001-01-01</value>
   </data>
   <data name="ADP_DisplayName">
     <value>Andorran peseta</value>
   </data>
-  <data name="ADP_Num">
-    <value>000</value>
+  <data name="ADP_EndDate">
+    <value>2001-12-31</value>
   </data>
   <data name="ADP_ISO">
     <value>ADP</value>
   </data>
-  <data name="ADP_Digits">
-    <value>0</value>
+  <data name="ADP_Num">
+    <value>000</value>
   </data>
   <data name="ADP_StartDate">
     <value>0001-01-01</value>
@@ -2841,182 +33,947 @@
   <data name="ADP_Symbol">
     <value>₧</value>
   </data>
-  <data name="ADP_EndDate">
-    <value>2001-12-31</value>
+  <data name="AED_Digits">
+    <value>2</value>
   </data>
-  <data name="ATS_DisplayName">
-    <value>Austrian schilling</value>
+  <data name="AED_DisplayName">
+    <value>United Arab Emirates dirham</value>
   </data>
-  <data name="ATS_Num">
-    <value>000</value>
+  <data name="AED_ISO">
+    <value>AED</value>
   </data>
-  <data name="ATS_ISO">
-    <value>ATS</value>
+  <data name="AED_Num">
+    <value>784</value>
+  </data>
+  <data name="AED_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="AFN_Digits">
+    <value>2</value>
+  </data>
+  <data name="AFN_DisplayName">
+    <value>Afghan afghani</value>
+  </data>
+  <data name="AFN_ISO">
+    <value>AFN</value>
+  </data>
+  <data name="AFN_Num">
+    <value>971</value>
+  </data>
+  <data name="AFN_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="AFN_Symbol">
+    <value>؋</value>
+  </data>
+  <data name="All">
+    <value>AED;AFN;ALL;AMD;ANG;AOA;ARS;AUD;AWG;AZN;BAM;BBD;BDT;BGN;BHD;BIF;BMD;BND;BOB;BOV;BRL;BSD;BTN;BWP;BYR;BZD;CAD;CDF;CHE;CHF;CHW;CLF;CLP;CNH;CNY;COP;COU;CRC;CUC;CUP;CVE;CZK;DJF;DKK;DOP;DZD;EGP;ERN;ETB;EUR;FJD;FKP;GBP;GEL;GHS;GIP;GMD;GNF;GTQ;GYD;HKD;HNL;HRK;HTG;HUF;IDR;ILS;INR;IQD;IRR;ISK;JMD;JOD;JPY;KES;KGS;KHR;KMF;KPW;KRW;KWD;KYD;KZT;LAK;LBP;LKR;LRD;LSL;LYD;MAD;MDL;MGA;MKD;MMK;MNT;MOP;MRO;MUR;MVR;MWK;MXN;MXV;MYR;MZN;NAD;NGN;NIO;NOK;NPR;NZD;OMR;PAB;PEN;PGK;PHP;PKR;PLN;PYG;QAR;RON;RSD;RUB;RWF;SAR;SBD;SCR;SDG;SEK;SGD;SHP;SLL;SOS;SRD;SSP;STD;SYP;SZL;THB;TJS;TMT;TND;TOP;TRY;TTD;TWD;TZS;UAH;UGX;USD;USN;USS;UYI;UYU;UZS;VEF;VND;VUV;WST;XAF;XAG;XAU;XBA;XBB;XBC;XBD;XCD;XDR;XFU;XOF;XPD;XPF;XPT;XSU;XTS;XUA;XXX;YER;ZAR;ZMW;ADP;ATS;BEF;CSD;CSK;CYP;DDM;DEM;ECS;EEK;ESP;FIM;FRF;GRD;IEP;ITL;LTL;LUF;LVL;MCF;MTL;NLG;PTE;SIT;SKK;SML;SUR;VAL;YOU;YUD;YUG;YUM;YUN;YUR;ZRN;ZRZ;ZWC;ZWD;ZWL;ZWN;ZWR</value>
+  </data>
+  <data name="ALL_Digits">
+    <value>2</value>
+  </data>
+  <data name="ALL_DisplayName">
+    <value>Albanian lek</value>
+  </data>
+  <data name="ALL_ISO">
+    <value>ALL</value>
+  </data>
+  <data name="ALL_Num">
+    <value>008</value>
+  </data>
+  <data name="ALL_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="ALL_Symbol">
+    <value>Lekë</value>
+  </data>
+  <data name="AMD_Digits">
+    <value>2</value>
+  </data>
+  <data name="AMD_DisplayName">
+    <value>Armenian dram</value>
+  </data>
+  <data name="AMD_ISO">
+    <value>AMD</value>
+  </data>
+  <data name="AMD_Num">
+    <value>051</value>
+  </data>
+  <data name="AMD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="AMD_Symbol">
+    <value>֏</value>
+  </data>
+  <data name="ANG_Digits">
+    <value>2</value>
+  </data>
+  <data name="ANG_DisplayName">
+    <value>Netherlands Antillean guilder</value>
+  </data>
+  <data name="ANG_ISO">
+    <value>ANG</value>
+  </data>
+  <data name="ANG_Num">
+    <value>532</value>
+  </data>
+  <data name="ANG_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="ANG_Symbol">
+    <value>NAf.</value>
+  </data>
+  <data name="AOA_Digits">
+    <value>2</value>
+  </data>
+  <data name="AOA_DisplayName">
+    <value>Angolan kwanza</value>
+  </data>
+  <data name="AOA_ISO">
+    <value>AOA</value>
+  </data>
+  <data name="AOA_Num">
+    <value>973</value>
+  </data>
+  <data name="AOA_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="AOA_Symbol">
+    <value>Kz</value>
+  </data>
+  <data name="ARS_Digits">
+    <value>2</value>
+  </data>
+  <data name="ARS_DisplayName">
+    <value>Argentine peso</value>
+  </data>
+  <data name="ARS_ISO">
+    <value>ARS</value>
+  </data>
+  <data name="ARS_Num">
+    <value>032</value>
+  </data>
+  <data name="ARS_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="ATS_Digits">
     <value>0</value>
   </data>
-  <data name="ATS_StartDate">
-    <value>0001-01-01</value>
+  <data name="ATS_DisplayName">
+    <value>Austrian schilling</value>
   </data>
   <data name="ATS_EndDate">
     <value>2001-12-31</value>
   </data>
-  <data name="BEF_DisplayName">
-    <value>Belgian franc</value>
+  <data name="ATS_ISO">
+    <value>ATS</value>
   </data>
-  <data name="BEF_Num">
+  <data name="ATS_Num">
     <value>000</value>
   </data>
-  <data name="BEF_ISO">
-    <value>BEF</value>
+  <data name="ATS_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="AUD_Digits">
+    <value>2</value>
+  </data>
+  <data name="AUD_DisplayName">
+    <value>Australian dollar</value>
+  </data>
+  <data name="AUD_ISO">
+    <value>AUD</value>
+  </data>
+  <data name="AUD_Num">
+    <value>036</value>
+  </data>
+  <data name="AUD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="AUD_Symbol">
+    <value>$</value>
+  </data>
+  <data name="AWG_Digits">
+    <value>2</value>
+  </data>
+  <data name="AWG_DisplayName">
+    <value>Aruban florin</value>
+  </data>
+  <data name="AWG_ISO">
+    <value>AWG</value>
+  </data>
+  <data name="AWG_Num">
+    <value>533</value>
+  </data>
+  <data name="AWG_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="AZN_Digits">
+    <value>2</value>
+  </data>
+  <data name="AZN_DisplayName">
+    <value>Azerbaijani manat</value>
+  </data>
+  <data name="AZN_ISO">
+    <value>AZN</value>
+  </data>
+  <data name="AZN_Num">
+    <value>944</value>
+  </data>
+  <data name="AZN_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="AZN_Symbol">
+    <value>₼</value>
+  </data>
+  <data name="BAM_Digits">
+    <value>2</value>
+  </data>
+  <data name="BAM_DisplayName">
+    <value>Bosnia and Herzegovina convertible mark</value>
+  </data>
+  <data name="BAM_ISO">
+    <value>BAM</value>
+  </data>
+  <data name="BAM_Num">
+    <value>977</value>
+  </data>
+  <data name="BAM_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="BBD_Digits">
+    <value>2</value>
+  </data>
+  <data name="BBD_DisplayName">
+    <value>Barbados dollar</value>
+  </data>
+  <data name="BBD_ISO">
+    <value>BBD</value>
+  </data>
+  <data name="BBD_Num">
+    <value>052</value>
+  </data>
+  <data name="BBD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="BBD_Symbol">
+    <value>$</value>
+  </data>
+  <data name="BDT_Digits">
+    <value>2</value>
+  </data>
+  <data name="BDT_DisplayName">
+    <value>Bangladeshi taka</value>
+  </data>
+  <data name="BDT_ISO">
+    <value>BDT</value>
+  </data>
+  <data name="BDT_Num">
+    <value>050</value>
+  </data>
+  <data name="BDT_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="BDT_Symbol">
+    <value>৳</value>
   </data>
   <data name="BEF_Digits">
     <value>0</value>
   </data>
-  <data name="BEF_StartDate">
-    <value>0001-01-01</value>
+  <data name="BEF_DisplayName">
+    <value>Belgian franc</value>
   </data>
   <data name="BEF_EndDate">
     <value>2001-12-31</value>
   </data>
-  <data name="CSD_DisplayName">
-    <value>Serbian dinar</value>
+  <data name="BEF_ISO">
+    <value>BEF</value>
   </data>
-  <data name="CSD_Num">
-    <value>891</value>
+  <data name="BEF_Num">
+    <value>000</value>
   </data>
-  <data name="CSD_ISO">
-    <value>CSD</value>
+  <data name="BEF_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="BGN_Digits">
+    <value>2</value>
+  </data>
+  <data name="BGN_DisplayName">
+    <value>Bulgarian lev</value>
+  </data>
+  <data name="BGN_ISO">
+    <value>BGN</value>
+  </data>
+  <data name="BGN_Num">
+    <value>975</value>
+  </data>
+  <data name="BGN_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="BGN_Symbol">
+    <value>лв.</value>
+  </data>
+  <data name="BHD_Digits">
+    <value>3</value>
+  </data>
+  <data name="BHD_DisplayName">
+    <value>Bahraini dinar</value>
+  </data>
+  <data name="BHD_ISO">
+    <value>BHD</value>
+  </data>
+  <data name="BHD_Num">
+    <value>048</value>
+  </data>
+  <data name="BHD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="BIF_Digits">
+    <value>0</value>
+  </data>
+  <data name="BIF_DisplayName">
+    <value>Burundian franc</value>
+  </data>
+  <data name="BIF_ISO">
+    <value>BIF</value>
+  </data>
+  <data name="BIF_Num">
+    <value>108</value>
+  </data>
+  <data name="BIF_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="BMD_Digits">
+    <value>2</value>
+  </data>
+  <data name="BMD_DisplayName">
+    <value>Bermudian dollar</value>
+  </data>
+  <data name="BMD_ISO">
+    <value>BMD</value>
+  </data>
+  <data name="BMD_Num">
+    <value>060</value>
+  </data>
+  <data name="BMD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="BND_Digits">
+    <value>2</value>
+  </data>
+  <data name="BND_DisplayName">
+    <value>Brunei dollar</value>
+  </data>
+  <data name="BND_ISO">
+    <value>BND</value>
+  </data>
+  <data name="BND_Num">
+    <value>096</value>
+  </data>
+  <data name="BND_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="BOB_Digits">
+    <value>2</value>
+  </data>
+  <data name="BOB_DisplayName">
+    <value>Boliviano</value>
+  </data>
+  <data name="BOB_ISO">
+    <value>BOB</value>
+  </data>
+  <data name="BOB_Num">
+    <value>068</value>
+  </data>
+  <data name="BOB_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="BOV_Digits">
+    <value>2</value>
+  </data>
+  <data name="BOV_DisplayName">
+    <value>Bolivian Mvdol</value>
+  </data>
+  <data name="BOV_ISO">
+    <value>BOV</value>
+  </data>
+  <data name="BOV_Num">
+    <value>984</value>
+  </data>
+  <data name="BOV_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="BRL_Digits">
+    <value>2</value>
+  </data>
+  <data name="BRL_DisplayName">
+    <value>Brazilian real</value>
+  </data>
+  <data name="BRL_ISO">
+    <value>BRL</value>
+  </data>
+  <data name="BRL_Num">
+    <value>986</value>
+  </data>
+  <data name="BRL_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="BSD_Digits">
+    <value>2</value>
+  </data>
+  <data name="BSD_DisplayName">
+    <value>Bahamian dollar</value>
+  </data>
+  <data name="BSD_ISO">
+    <value>BSD</value>
+  </data>
+  <data name="BSD_Num">
+    <value>044</value>
+  </data>
+  <data name="BSD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="BTN_Digits">
+    <value>2</value>
+  </data>
+  <data name="BTN_DisplayName">
+    <value>Bhutanese ngultrum</value>
+  </data>
+  <data name="BTN_ISO">
+    <value>BTN</value>
+  </data>
+  <data name="BTN_Num">
+    <value>064</value>
+  </data>
+  <data name="BTN_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="BWP_Digits">
+    <value>2</value>
+  </data>
+  <data name="BWP_DisplayName">
+    <value>Botswana pula</value>
+  </data>
+  <data name="BWP_ISO">
+    <value>BWP</value>
+  </data>
+  <data name="BWP_Num">
+    <value>072</value>
+  </data>
+  <data name="BWP_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="BWP_Symbol">
+    <value>P</value>
+  </data>
+  <data name="BYR_Digits">
+    <value>0</value>
+  </data>
+  <data name="BYR_DisplayName">
+    <value>Belarusian ruble</value>
+  </data>
+  <data name="BYR_ISO">
+    <value>BYR</value>
+  </data>
+  <data name="BYR_Num">
+    <value>974</value>
+  </data>
+  <data name="BYR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="BZD_Digits">
+    <value>2</value>
+  </data>
+  <data name="BZD_DisplayName">
+    <value>Belize dollar</value>
+  </data>
+  <data name="BZD_ISO">
+    <value>BZD</value>
+  </data>
+  <data name="BZD_Num">
+    <value>084</value>
+  </data>
+  <data name="BZD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="CAD_Digits">
+    <value>2</value>
+  </data>
+  <data name="CAD_DisplayName">
+    <value>Canadian dollar</value>
+  </data>
+  <data name="CAD_ISO">
+    <value>CAD</value>
+  </data>
+  <data name="CAD_Num">
+    <value>124</value>
+  </data>
+  <data name="CAD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="CDF_Digits">
+    <value>2</value>
+  </data>
+  <data name="CDF_DisplayName">
+    <value>Congolese franc</value>
+  </data>
+  <data name="CDF_ISO">
+    <value>CDF</value>
+  </data>
+  <data name="CDF_Num">
+    <value>976</value>
+  </data>
+  <data name="CDF_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="CHE_Digits">
+    <value>2</value>
+  </data>
+  <data name="CHE_DisplayName">
+    <value>WIR Euro</value>
+  </data>
+  <data name="CHE_ISO">
+    <value>CHE</value>
+  </data>
+  <data name="CHE_Num">
+    <value>947</value>
+  </data>
+  <data name="CHE_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="CHF_Digits">
+    <value>2</value>
+  </data>
+  <data name="CHF_DisplayName">
+    <value>Swiss franc</value>
+  </data>
+  <data name="CHF_ISO">
+    <value>CHF</value>
+  </data>
+  <data name="CHF_Num">
+    <value>756</value>
+  </data>
+  <data name="CHF_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="CHW_Digits">
+    <value>2</value>
+  </data>
+  <data name="CHW_DisplayName">
+    <value>WIR Franc</value>
+  </data>
+  <data name="CHW_ISO">
+    <value>CHW</value>
+  </data>
+  <data name="CHW_Num">
+    <value>948</value>
+  </data>
+  <data name="CHW_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="CLF_Digits">
+    <value>0</value>
+  </data>
+  <data name="CLF_DisplayName">
+    <value>Unidad de Fomento</value>
+  </data>
+  <data name="CLF_ISO">
+    <value>CLF</value>
+  </data>
+  <data name="CLF_Num">
+    <value>990</value>
+  </data>
+  <data name="CLF_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="CLP_Digits">
+    <value>0</value>
+  </data>
+  <data name="CLP_DisplayName">
+    <value>Chilean peso</value>
+  </data>
+  <data name="CLP_ISO">
+    <value>CLP</value>
+  </data>
+  <data name="CLP_Num">
+    <value>152</value>
+  </data>
+  <data name="CLP_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="CNH_Digits">
+    <value>2</value>
+  </data>
+  <data name="CNH_DisplayName">
+    <value>Chinese yuan when traded in Hong Kong</value>
+  </data>
+  <data name="CNH_ISO">
+    <value>CNH</value>
+  </data>
+  <data name="CNH_Num">
+    <value>156</value>
+  </data>
+  <data name="CNH_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="CNY_Digits">
+    <value>2</value>
+  </data>
+  <data name="CNY_DisplayName">
+    <value>Chinese yuan</value>
+  </data>
+  <data name="CNY_ISO">
+    <value>CNY</value>
+  </data>
+  <data name="CNY_Num">
+    <value>156</value>
+  </data>
+  <data name="CNY_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="CNY_Symbol">
+    <value>¥</value>
+  </data>
+  <data name="COP_Digits">
+    <value>2</value>
+  </data>
+  <data name="COP_DisplayName">
+    <value>Colombian peso</value>
+  </data>
+  <data name="COP_ISO">
+    <value>COP</value>
+  </data>
+  <data name="COP_Num">
+    <value>170</value>
+  </data>
+  <data name="COP_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="COU_Digits">
+    <value>4</value>
+  </data>
+  <data name="COU_DisplayName">
+    <value>Unidad de Valor Real</value>
+  </data>
+  <data name="COU_ISO">
+    <value>COU</value>
+  </data>
+  <data name="COU_Num">
+    <value>970</value>
+  </data>
+  <data name="COU_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="CRC_Digits">
+    <value>2</value>
+  </data>
+  <data name="CRC_DisplayName">
+    <value>Costa Rican colon</value>
+  </data>
+  <data name="CRC_ISO">
+    <value>CRC</value>
+  </data>
+  <data name="CRC_Num">
+    <value>188</value>
+  </data>
+  <data name="CRC_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="CRC_Symbol">
+    <value>₡</value>
   </data>
   <data name="CSD_Digits">
     <value>2</value>
   </data>
-  <data name="CSD_StartDate">
-    <value>2003-07-03</value>
+  <data name="CSD_DisplayName">
+    <value>Serbian dinar</value>
   </data>
   <data name="CSD_EndDate">
     <value>2005-12-31</value>
   </data>
-  <data name="CSK_DisplayName">
-    <value>Czechoslovak koruna</value>
+  <data name="CSD_ISO">
+    <value>CSD</value>
   </data>
-  <data name="CSK_Num">
-    <value>200</value>
+  <data name="CSD_Num">
+    <value>891</value>
   </data>
-  <data name="CSK_ISO">
-    <value>CSK</value>
+  <data name="CSD_StartDate">
+    <value>2003-07-03</value>
   </data>
   <data name="CSK_Digits">
     <value>0</value>
   </data>
-  <data name="CSK_StartDate">
-    <value>1919-04-10</value>
+  <data name="CSK_DisplayName">
+    <value>Czechoslovak koruna</value>
   </data>
   <data name="CSK_EndDate">
     <value>1993-02-08</value>
   </data>
-  <data name="CYP_DisplayName">
-    <value>Cypriot pound</value>
+  <data name="CSK_ISO">
+    <value>CSK</value>
   </data>
-  <data name="CYP_Num">
-    <value>000</value>
+  <data name="CSK_Num">
+    <value>200</value>
   </data>
-  <data name="CYP_ISO">
-    <value>CYP</value>
+  <data name="CSK_StartDate">
+    <value>1919-04-10</value>
+  </data>
+  <data name="CUC_Digits">
+    <value>2</value>
+  </data>
+  <data name="CUC_DisplayName">
+    <value>Cuban convertible peso</value>
+  </data>
+  <data name="CUC_ISO">
+    <value>CUC</value>
+  </data>
+  <data name="CUC_Num">
+    <value>931</value>
+  </data>
+  <data name="CUC_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="CUP_Digits">
+    <value>2</value>
+  </data>
+  <data name="CUP_DisplayName">
+    <value>Cuban peso</value>
+  </data>
+  <data name="CUP_ISO">
+    <value>CUP</value>
+  </data>
+  <data name="CUP_Num">
+    <value>192</value>
+  </data>
+  <data name="CUP_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="CVE_Digits">
+    <value>0</value>
+  </data>
+  <data name="CVE_DisplayName">
+    <value>Cape Verde escudo</value>
+  </data>
+  <data name="CVE_ISO">
+    <value>CVE</value>
+  </data>
+  <data name="CVE_Num">
+    <value>132</value>
+  </data>
+  <data name="CVE_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="CYP_Digits">
     <value>0</value>
   </data>
-  <data name="CYP_StartDate">
-    <value>0001-01-01</value>
+  <data name="CYP_DisplayName">
+    <value>Cypriot pound</value>
   </data>
   <data name="CYP_EndDate">
     <value>2007-12-31</value>
   </data>
-  <data name="DDM_DisplayName">
-    <value>East German Mark</value>
+  <data name="CYP_ISO">
+    <value>CYP</value>
   </data>
-  <data name="DDM_Num">
-    <value>278</value>
+  <data name="CYP_Num">
+    <value>000</value>
   </data>
-  <data name="DDM_ISO">
-    <value>DDM</value>
+  <data name="CYP_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="CZK_Digits">
+    <value>2</value>
+  </data>
+  <data name="CZK_DisplayName">
+    <value>Czech koruna</value>
+  </data>
+  <data name="CZK_ISO">
+    <value>CZK</value>
+  </data>
+  <data name="CZK_Num">
+    <value>203</value>
+  </data>
+  <data name="CZK_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="CZK_Symbol">
+    <value>Kč</value>
   </data>
   <data name="DDM_Digits">
     <value>0</value>
   </data>
-  <data name="DDM_StartDate">
-    <value>1948-06-21</value>
+  <data name="DDM_DisplayName">
+    <value>East German Mark</value>
   </data>
   <data name="DDM_EndDate">
     <value>1990-06-30</value>
   </data>
-  <data name="DEM_DisplayName">
-    <value>German mark</value>
+  <data name="DDM_ISO">
+    <value>DDM</value>
   </data>
-  <data name="DEM_Num">
-    <value>000</value>
+  <data name="DDM_Num">
+    <value>278</value>
   </data>
-  <data name="DEM_ISO">
-    <value>DEM</value>
+  <data name="DDM_StartDate">
+    <value>1948-06-21</value>
   </data>
   <data name="DEM_Digits">
     <value>2</value>
   </data>
-  <data name="DEM_StartDate">
-    <value>0001-01-01</value>
+  <data name="DEM_DisplayName">
+    <value>German mark</value>
   </data>
   <data name="DEM_EndDate">
     <value>2001-12-31</value>
   </data>
-  <data name="ECS_DisplayName">
-    <value>Ecuadorian sucre</value>
+  <data name="DEM_ISO">
+    <value>DEM</value>
   </data>
-  <data name="ECS_Num">
+  <data name="DEM_Num">
     <value>000</value>
   </data>
-  <data name="ECS_ISO">
-    <value>ECS</value>
+  <data name="DEM_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="DJF_Digits">
+    <value>0</value>
+  </data>
+  <data name="DJF_DisplayName">
+    <value>Djiboutian franc</value>
+  </data>
+  <data name="DJF_ISO">
+    <value>DJF</value>
+  </data>
+  <data name="DJF_Num">
+    <value>262</value>
+  </data>
+  <data name="DJF_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="DKK_Digits">
+    <value>2</value>
+  </data>
+  <data name="DKK_DisplayName">
+    <value>Danish krone</value>
+  </data>
+  <data name="DKK_ISO">
+    <value>DKK</value>
+  </data>
+  <data name="DKK_Num">
+    <value>208</value>
+  </data>
+  <data name="DKK_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="DOP_Digits">
+    <value>2</value>
+  </data>
+  <data name="DOP_DisplayName">
+    <value>Dominican peso</value>
+  </data>
+  <data name="DOP_ISO">
+    <value>DOP</value>
+  </data>
+  <data name="DOP_Num">
+    <value>214</value>
+  </data>
+  <data name="DOP_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="DZD_Digits">
+    <value>2</value>
+  </data>
+  <data name="DZD_DisplayName">
+    <value>Algerian dinar</value>
+  </data>
+  <data name="DZD_ISO">
+    <value>DZD</value>
+  </data>
+  <data name="DZD_Num">
+    <value>012</value>
+  </data>
+  <data name="DZD_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="ECS_Digits">
     <value>0</value>
   </data>
-  <data name="ECS_StartDate">
-    <value>0001-01-01</value>
+  <data name="ECS_DisplayName">
+    <value>Ecuadorian sucre</value>
   </data>
   <data name="ECS_EndDate">
     <value>2000-03-12</value>
   </data>
-  <data name="EEK_DisplayName">
-    <value>Estonian kroon</value>
+  <data name="ECS_ISO">
+    <value>ECS</value>
   </data>
-  <data name="EEK_Num">
+  <data name="ECS_Num">
     <value>000</value>
   </data>
-  <data name="EEK_ISO">
-    <value>EEK</value>
+  <data name="ECS_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="EEK_Digits">
     <value>0</value>
   </data>
-  <data name="EEK_StartDate">
-    <value>0001-01-01</value>
+  <data name="EEK_DisplayName">
+    <value>Estonian kroon</value>
   </data>
   <data name="EEK_EndDate">
     <value>2010-12-13</value>
   </data>
+  <data name="EEK_ISO">
+    <value>EEK</value>
+  </data>
+  <data name="EEK_Num">
+    <value>000</value>
+  </data>
+  <data name="EEK_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="EGP_Digits">
+    <value>2</value>
+  </data>
+  <data name="EGP_DisplayName">
+    <value>Egyptian pound</value>
+  </data>
+  <data name="EGP_ISO">
+    <value>EGP</value>
+  </data>
+  <data name="EGP_Num">
+    <value>818</value>
+  </data>
+  <data name="EGP_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="ERN_Digits">
+    <value>2</value>
+  </data>
+  <data name="ERN_DisplayName">
+    <value>Eritrean nakfa</value>
+  </data>
+  <data name="ERN_ISO">
+    <value>ERN</value>
+  </data>
+  <data name="ERN_Num">
+    <value>232</value>
+  </data>
+  <data name="ERN_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="ESP_Digits">
+    <value>0</value>
+  </data>
   <data name="ESP_DisplayName">
     <value>Spanish peseta</value>
   </data>
-  <data name="ESP_Num">
-    <value>000</value>
+  <data name="ESP_EndDate">
+    <value>2001-12-31</value>
   </data>
   <data name="ESP_ISO">
     <value>ESP</value>
   </data>
-  <data name="ESP_Digits">
-    <value>0</value>
+  <data name="ESP_Num">
+    <value>000</value>
   </data>
   <data name="ESP_StartDate">
     <value>0001-01-01</value>
@@ -3024,200 +981,1124 @@
   <data name="ESP_Symbol">
     <value>₧</value>
   </data>
-  <data name="ESP_EndDate">
-    <value>2001-12-31</value>
+  <data name="ETB_Digits">
+    <value>2</value>
   </data>
-  <data name="FIM_DisplayName">
-    <value>Finnish markka</value>
+  <data name="ETB_DisplayName">
+    <value>Ethiopian birr</value>
   </data>
-  <data name="FIM_Num">
-    <value>000</value>
+  <data name="ETB_ISO">
+    <value>ETB</value>
   </data>
-  <data name="FIM_ISO">
-    <value>FIM</value>
+  <data name="ETB_Num">
+    <value>230</value>
+  </data>
+  <data name="ETB_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="EUR_Digits">
+    <value>2</value>
+  </data>
+  <data name="EUR_DisplayName">
+    <value>Euro</value>
+  </data>
+  <data name="EUR_ISO">
+    <value>EUR</value>
+  </data>
+  <data name="EUR_Num">
+    <value>978</value>
+  </data>
+  <data name="EUR_StartDate">
+    <value>2002-01-01</value>
+  </data>
+  <data name="EUR_Symbol">
+    <value>€</value>
   </data>
   <data name="FIM_Digits">
     <value>0</value>
   </data>
-  <data name="FIM_StartDate">
-    <value>0001-01-01</value>
+  <data name="FIM_DisplayName">
+    <value>Finnish markka</value>
   </data>
   <data name="FIM_EndDate">
     <value>2001-12-31</value>
   </data>
-  <data name="FRF_DisplayName">
-    <value>French franc</value>
+  <data name="FIM_ISO">
+    <value>FIM</value>
   </data>
-  <data name="FRF_Num">
+  <data name="FIM_Num">
     <value>000</value>
   </data>
-  <data name="FRF_ISO">
-    <value>FRF</value>
+  <data name="FIM_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="FJD_Digits">
+    <value>2</value>
+  </data>
+  <data name="FJD_DisplayName">
+    <value>Fiji dollar</value>
+  </data>
+  <data name="FJD_ISO">
+    <value>FJD</value>
+  </data>
+  <data name="FJD_Num">
+    <value>242</value>
+  </data>
+  <data name="FJD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="FKP_Digits">
+    <value>2</value>
+  </data>
+  <data name="FKP_DisplayName">
+    <value>Falkland Islands pound</value>
+  </data>
+  <data name="FKP_ISO">
+    <value>FKP</value>
+  </data>
+  <data name="FKP_Num">
+    <value>238</value>
+  </data>
+  <data name="FKP_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="FRF_Digits">
     <value>0</value>
   </data>
-  <data name="FRF_StartDate">
-    <value>0001-01-01</value>
+  <data name="FRF_DisplayName">
+    <value>French franc</value>
   </data>
   <data name="FRF_EndDate">
     <value>2001-12-31</value>
   </data>
-  <data name="GRD_DisplayName">
-    <value>Greek drachma</value>
+  <data name="FRF_ISO">
+    <value>FRF</value>
   </data>
-  <data name="GRD_Num">
+  <data name="FRF_Num">
     <value>000</value>
   </data>
-  <data name="GRD_ISO">
-    <value>GRD</value>
+  <data name="FRF_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="GBP_Digits">
+    <value>2</value>
+  </data>
+  <data name="GBP_DisplayName">
+    <value>Pound sterling</value>
+  </data>
+  <data name="GBP_ISO">
+    <value>GBP</value>
+  </data>
+  <data name="GBP_Num">
+    <value>826</value>
+  </data>
+  <data name="GBP_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="GBP_Symbol">
+    <value>£</value>
+  </data>
+  <data name="GEL_Digits">
+    <value>2</value>
+  </data>
+  <data name="GEL_DisplayName">
+    <value>Georgian lari</value>
+  </data>
+  <data name="GEL_ISO">
+    <value>GEL</value>
+  </data>
+  <data name="GEL_Num">
+    <value>981</value>
+  </data>
+  <data name="GEL_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="GEL_Symbol">
+    <value>₾</value>
+  </data>
+  <data name="GHS_Digits">
+    <value>2</value>
+  </data>
+  <data name="GHS_DisplayName">
+    <value>Ghanaian cedi</value>
+  </data>
+  <data name="GHS_ISO">
+    <value>GHS</value>
+  </data>
+  <data name="GHS_Num">
+    <value>936</value>
+  </data>
+  <data name="GHS_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="GIP_Digits">
+    <value>2</value>
+  </data>
+  <data name="GIP_DisplayName">
+    <value>Gibraltar pound</value>
+  </data>
+  <data name="GIP_ISO">
+    <value>GIP</value>
+  </data>
+  <data name="GIP_Num">
+    <value>292</value>
+  </data>
+  <data name="GIP_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="GMD_Digits">
+    <value>2</value>
+  </data>
+  <data name="GMD_DisplayName">
+    <value>Gambian dalasi</value>
+  </data>
+  <data name="GMD_ISO">
+    <value>GMD</value>
+  </data>
+  <data name="GMD_Num">
+    <value>270</value>
+  </data>
+  <data name="GMD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="GNF_Digits">
+    <value>0</value>
+  </data>
+  <data name="GNF_DisplayName">
+    <value>Guinean franc</value>
+  </data>
+  <data name="GNF_ISO">
+    <value>GNF</value>
+  </data>
+  <data name="GNF_Num">
+    <value>324</value>
+  </data>
+  <data name="GNF_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="GRD_Digits">
     <value>0</value>
   </data>
-  <data name="GRD_StartDate">
-    <value>0001-01-01</value>
+  <data name="GRD_DisplayName">
+    <value>Greek drachma</value>
   </data>
   <data name="GRD_EndDate">
     <value>2001-12-31</value>
   </data>
-  <data name="IEP_DisplayName">
-    <value>Irish pound</value>
+  <data name="GRD_ISO">
+    <value>GRD</value>
   </data>
-  <data name="IEP_Num">
+  <data name="GRD_Num">
     <value>000</value>
   </data>
-  <data name="IEP_ISO">
-    <value>IEP</value>
+  <data name="GRD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="GTQ_Digits">
+    <value>2</value>
+  </data>
+  <data name="GTQ_DisplayName">
+    <value>Guatemalan quetzal</value>
+  </data>
+  <data name="GTQ_ISO">
+    <value>GTQ</value>
+  </data>
+  <data name="GTQ_Num">
+    <value>320</value>
+  </data>
+  <data name="GTQ_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="GYD_Digits">
+    <value>2</value>
+  </data>
+  <data name="GYD_DisplayName">
+    <value>Guyanese dollar</value>
+  </data>
+  <data name="GYD_ISO">
+    <value>GYD</value>
+  </data>
+  <data name="GYD_Num">
+    <value>328</value>
+  </data>
+  <data name="GYD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="HKD_Digits">
+    <value>2</value>
+  </data>
+  <data name="HKD_DisplayName">
+    <value>Hong Kong dollar</value>
+  </data>
+  <data name="HKD_ISO">
+    <value>HKD</value>
+  </data>
+  <data name="HKD_Num">
+    <value>344</value>
+  </data>
+  <data name="HKD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="HNL_Digits">
+    <value>2</value>
+  </data>
+  <data name="HNL_DisplayName">
+    <value>Honduran lempira</value>
+  </data>
+  <data name="HNL_ISO">
+    <value>HNL</value>
+  </data>
+  <data name="HNL_Num">
+    <value>340</value>
+  </data>
+  <data name="HNL_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="HRK_Digits">
+    <value>2</value>
+  </data>
+  <data name="HRK_DisplayName">
+    <value>Croatian kuna</value>
+  </data>
+  <data name="HRK_ISO">
+    <value>HRK</value>
+  </data>
+  <data name="HRK_Num">
+    <value>191</value>
+  </data>
+  <data name="HRK_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="HTG_Digits">
+    <value>2</value>
+  </data>
+  <data name="HTG_DisplayName">
+    <value>Haitian gourde</value>
+  </data>
+  <data name="HTG_ISO">
+    <value>HTG</value>
+  </data>
+  <data name="HTG_Num">
+    <value>332</value>
+  </data>
+  <data name="HTG_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="HUF_Digits">
+    <value>2</value>
+  </data>
+  <data name="HUF_DisplayName">
+    <value>Hungarian forint</value>
+  </data>
+  <data name="HUF_ISO">
+    <value>HUF</value>
+  </data>
+  <data name="HUF_Num">
+    <value>348</value>
+  </data>
+  <data name="HUF_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="IDR_Digits">
+    <value>2</value>
+  </data>
+  <data name="IDR_DisplayName">
+    <value>Indonesian rupiah</value>
+  </data>
+  <data name="IDR_ISO">
+    <value>IDR</value>
+  </data>
+  <data name="IDR_Num">
+    <value>360</value>
+  </data>
+  <data name="IDR_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="IEP_Digits">
     <value>0</value>
   </data>
-  <data name="IEP_StartDate">
-    <value>0001-01-01</value>
+  <data name="IEP_DisplayName">
+    <value>Irish pound</value>
   </data>
   <data name="IEP_EndDate">
     <value>2001-12-31</value>
   </data>
-  <data name="ITL_DisplayName">
-    <value>Italian lira</value>
+  <data name="IEP_ISO">
+    <value>IEP</value>
   </data>
-  <data name="ITL_Num">
+  <data name="IEP_Num">
     <value>000</value>
   </data>
-  <data name="ITL_ISO">
-    <value>ITL</value>
+  <data name="IEP_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="ILS_Digits">
+    <value>2</value>
+  </data>
+  <data name="ILS_DisplayName">
+    <value>Israeli new shekel</value>
+  </data>
+  <data name="ILS_ISO">
+    <value>ILS</value>
+  </data>
+  <data name="ILS_Num">
+    <value>376</value>
+  </data>
+  <data name="ILS_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="ILS_Symbol">
+    <value>₪</value>
+  </data>
+  <data name="INR_Digits">
+    <value>2</value>
+  </data>
+  <data name="INR_DisplayName">
+    <value>Indian rupee</value>
+  </data>
+  <data name="INR_ISO">
+    <value>INR</value>
+  </data>
+  <data name="INR_Num">
+    <value>356</value>
+  </data>
+  <data name="INR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="INR_Symbol">
+    <value>₹</value>
+  </data>
+  <data name="IQD_Digits">
+    <value>3</value>
+  </data>
+  <data name="IQD_DisplayName">
+    <value>Iraqi dinar</value>
+  </data>
+  <data name="IQD_ISO">
+    <value>IQD</value>
+  </data>
+  <data name="IQD_Num">
+    <value>368</value>
+  </data>
+  <data name="IQD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="IRR_Digits">
+    <value>2</value>
+  </data>
+  <data name="IRR_DisplayName">
+    <value>Iranian rial</value>
+  </data>
+  <data name="IRR_ISO">
+    <value>IRR</value>
+  </data>
+  <data name="IRR_Num">
+    <value>364</value>
+  </data>
+  <data name="IRR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="ISK_Digits">
+    <value>0</value>
+  </data>
+  <data name="ISK_DisplayName">
+    <value>Icelandic króna</value>
+  </data>
+  <data name="ISK_ISO">
+    <value>ISK</value>
+  </data>
+  <data name="ISK_Num">
+    <value>352</value>
+  </data>
+  <data name="ISK_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="ITL_Digits">
     <value>0</value>
   </data>
-  <data name="ITL_StartDate">
-    <value>0001-01-01</value>
+  <data name="ITL_DisplayName">
+    <value>Italian lira</value>
   </data>
   <data name="ITL_EndDate">
     <value>2001-12-31</value>
   </data>
-  <data name="LTL_DisplayName">
-    <value>Lithuanian litas</value>
+  <data name="ITL_ISO">
+    <value>ITL</value>
   </data>
-  <data name="LTL_Num">
-    <value>440</value>
+  <data name="ITL_Num">
+    <value>000</value>
   </data>
-  <data name="LTL_ISO">
-    <value>LTL</value>
+  <data name="ITL_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="JMD_Digits">
+    <value>2</value>
+  </data>
+  <data name="JMD_DisplayName">
+    <value>Jamaican dollar</value>
+  </data>
+  <data name="JMD_ISO">
+    <value>JMD</value>
+  </data>
+  <data name="JMD_Num">
+    <value>388</value>
+  </data>
+  <data name="JMD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="JOD_Digits">
+    <value>3</value>
+  </data>
+  <data name="JOD_DisplayName">
+    <value>Jordanian dinar</value>
+  </data>
+  <data name="JOD_ISO">
+    <value>JOD</value>
+  </data>
+  <data name="JOD_Num">
+    <value>400</value>
+  </data>
+  <data name="JOD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="JPY_Digits">
+    <value>0</value>
+  </data>
+  <data name="JPY_DisplayName">
+    <value>Japanese yen</value>
+  </data>
+  <data name="JPY_ISO">
+    <value>JPY</value>
+  </data>
+  <data name="JPY_Num">
+    <value>392</value>
+  </data>
+  <data name="JPY_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="JPY_Symbol">
+    <value>¥</value>
+  </data>
+  <data name="KES_Digits">
+    <value>2</value>
+  </data>
+  <data name="KES_DisplayName">
+    <value>Kenyan shilling</value>
+  </data>
+  <data name="KES_ISO">
+    <value>KES</value>
+  </data>
+  <data name="KES_Num">
+    <value>404</value>
+  </data>
+  <data name="KES_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="KGS_Digits">
+    <value>2</value>
+  </data>
+  <data name="KGS_DisplayName">
+    <value>Kyrgyzstani som</value>
+  </data>
+  <data name="KGS_ISO">
+    <value>KGS</value>
+  </data>
+  <data name="KGS_Num">
+    <value>417</value>
+  </data>
+  <data name="KGS_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="KHR_Digits">
+    <value>2</value>
+  </data>
+  <data name="KHR_DisplayName">
+    <value>Cambodian riel</value>
+  </data>
+  <data name="KHR_ISO">
+    <value>KHR</value>
+  </data>
+  <data name="KHR_Num">
+    <value>116</value>
+  </data>
+  <data name="KHR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="KHR_Symbol">
+    <value>៛</value>
+  </data>
+  <data name="KMF_Digits">
+    <value>0</value>
+  </data>
+  <data name="KMF_DisplayName">
+    <value>Comoro franc</value>
+  </data>
+  <data name="KMF_ISO">
+    <value>KMF</value>
+  </data>
+  <data name="KMF_Num">
+    <value>174</value>
+  </data>
+  <data name="KMF_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="KPW_Digits">
+    <value>2</value>
+  </data>
+  <data name="KPW_DisplayName">
+    <value>North Korean won</value>
+  </data>
+  <data name="KPW_ISO">
+    <value>KPW</value>
+  </data>
+  <data name="KPW_Num">
+    <value>408</value>
+  </data>
+  <data name="KPW_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="KRW_Digits">
+    <value>0</value>
+  </data>
+  <data name="KRW_DisplayName">
+    <value>South Korean won</value>
+  </data>
+  <data name="KRW_ISO">
+    <value>KRW</value>
+  </data>
+  <data name="KRW_Num">
+    <value>410</value>
+  </data>
+  <data name="KRW_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="KRW_Symbol">
+    <value>₩</value>
+  </data>
+  <data name="KWD_Digits">
+    <value>3</value>
+  </data>
+  <data name="KWD_DisplayName">
+    <value>Kuwaiti dinar</value>
+  </data>
+  <data name="KWD_ISO">
+    <value>KWD</value>
+  </data>
+  <data name="KWD_Num">
+    <value>414</value>
+  </data>
+  <data name="KWD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="KYD_Digits">
+    <value>2</value>
+  </data>
+  <data name="KYD_DisplayName">
+    <value>Cayman Islands dollar</value>
+  </data>
+  <data name="KYD_ISO">
+    <value>KYD</value>
+  </data>
+  <data name="KYD_Num">
+    <value>136</value>
+  </data>
+  <data name="KYD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="KZT_Digits">
+    <value>2</value>
+  </data>
+  <data name="KZT_DisplayName">
+    <value>Kazakhstani tenge</value>
+  </data>
+  <data name="KZT_ISO">
+    <value>KZT</value>
+  </data>
+  <data name="KZT_Num">
+    <value>398</value>
+  </data>
+  <data name="KZT_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="KZT_Symbol">
+    <value>₸</value>
+  </data>
+  <data name="LAK_Digits">
+    <value>2</value>
+  </data>
+  <data name="LAK_DisplayName">
+    <value>Lao kip</value>
+  </data>
+  <data name="LAK_ISO">
+    <value>LAK</value>
+  </data>
+  <data name="LAK_Num">
+    <value>418</value>
+  </data>
+  <data name="LAK_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="LAK_Symbol">
+    <value>₭</value>
+  </data>
+  <data name="LBP_Digits">
+    <value>2</value>
+  </data>
+  <data name="LBP_DisplayName">
+    <value>Lebanese pound</value>
+  </data>
+  <data name="LBP_ISO">
+    <value>LBP</value>
+  </data>
+  <data name="LBP_Num">
+    <value>422</value>
+  </data>
+  <data name="LBP_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="LKR_Digits">
+    <value>2</value>
+  </data>
+  <data name="LKR_DisplayName">
+    <value>Sri Lankan rupee</value>
+  </data>
+  <data name="LKR_ISO">
+    <value>LKR</value>
+  </data>
+  <data name="LKR_Num">
+    <value>144</value>
+  </data>
+  <data name="LKR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="LRD_Digits">
+    <value>2</value>
+  </data>
+  <data name="LRD_DisplayName">
+    <value>Liberian dollar</value>
+  </data>
+  <data name="LRD_ISO">
+    <value>LRD</value>
+  </data>
+  <data name="LRD_Num">
+    <value>430</value>
+  </data>
+  <data name="LRD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="LSL_Digits">
+    <value>2</value>
+  </data>
+  <data name="LSL_DisplayName">
+    <value>Lesotho loti</value>
+  </data>
+  <data name="LSL_ISO">
+    <value>LSL</value>
+  </data>
+  <data name="LSL_Num">
+    <value>426</value>
+  </data>
+  <data name="LSL_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="LTL_Digits">
     <value>2</value>
   </data>
-  <data name="LTL_StartDate">
-    <value>0001-01-01</value>
+  <data name="LTL_DisplayName">
+    <value>Lithuanian litas</value>
   </data>
   <data name="LTL_EndDate">
     <value>2014-12-31</value>
   </data>
-  <data name="LUF_DisplayName">
-    <value>Luxembourgish franc</value>
+  <data name="LTL_ISO">
+    <value>LTL</value>
   </data>
-  <data name="LUF_Num">
-    <value>000</value>
+  <data name="LTL_Num">
+    <value>440</value>
   </data>
-  <data name="LUF_ISO">
-    <value>LUF</value>
+  <data name="LTL_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="LUF_Digits">
     <value>0</value>
   </data>
-  <data name="LUF_StartDate">
-    <value>0001-01-01</value>
+  <data name="LUF_DisplayName">
+    <value>Luxembourgish franc</value>
   </data>
   <data name="LUF_EndDate">
     <value>2001-12-31</value>
   </data>
-  <data name="LVL_DisplayName">
-    <value>Latvian lats</value>
+  <data name="LUF_ISO">
+    <value>LUF</value>
   </data>
-  <data name="LVL_Num">
+  <data name="LUF_Num">
     <value>000</value>
   </data>
-  <data name="LVL_ISO">
-    <value>LVL</value>
+  <data name="LUF_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="LVL_Digits">
     <value>0</value>
   </data>
-  <data name="LVL_StartDate">
-    <value>0001-01-01</value>
+  <data name="LVL_DisplayName">
+    <value>Latvian lats</value>
   </data>
   <data name="LVL_EndDate">
     <value>2014-01-01</value>
   </data>
-  <data name="MCF_DisplayName">
-    <value>Monégasque franc</value>
+  <data name="LVL_ISO">
+    <value>LVL</value>
   </data>
-  <data name="MCF_Num">
+  <data name="LVL_Num">
     <value>000</value>
   </data>
-  <data name="MCF_ISO">
-    <value>MCF</value>
+  <data name="LVL_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="LYD_Digits">
+    <value>3</value>
+  </data>
+  <data name="LYD_DisplayName">
+    <value>Libyan dinar</value>
+  </data>
+  <data name="LYD_ISO">
+    <value>LYD</value>
+  </data>
+  <data name="LYD_Num">
+    <value>434</value>
+  </data>
+  <data name="LYD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="MAD_Digits">
+    <value>2</value>
+  </data>
+  <data name="MAD_DisplayName">
+    <value>Moroccan dirham</value>
+  </data>
+  <data name="MAD_ISO">
+    <value>MAD</value>
+  </data>
+  <data name="MAD_Num">
+    <value>504</value>
+  </data>
+  <data name="MAD_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="MCF_Digits">
     <value>0</value>
   </data>
-  <data name="MCF_StartDate">
-    <value>0001-01-01</value>
+  <data name="MCF_DisplayName">
+    <value>Monégasque franc</value>
   </data>
   <data name="MCF_EndDate">
     <value>2001-12-31</value>
   </data>
-  <data name="MTL_DisplayName">
-    <value>Maltese lira</value>
+  <data name="MCF_ISO">
+    <value>MCF</value>
   </data>
-  <data name="MTL_Num">
+  <data name="MCF_Num">
     <value>000</value>
   </data>
-  <data name="MTL_ISO">
-    <value>MTL</value>
+  <data name="MCF_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="MDL_Digits">
+    <value>2</value>
+  </data>
+  <data name="MDL_DisplayName">
+    <value>Moldovan leu</value>
+  </data>
+  <data name="MDL_ISO">
+    <value>MDL</value>
+  </data>
+  <data name="MDL_Num">
+    <value>498</value>
+  </data>
+  <data name="MDL_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="MGA_Digits">
+    <value>2</value>
+  </data>
+  <data name="MGA_DisplayName">
+    <value>Malagasy ariary</value>
+  </data>
+  <data name="MGA_ISO">
+    <value>MGA</value>
+  </data>
+  <data name="MGA_Num">
+    <value>969</value>
+  </data>
+  <data name="MGA_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="MKD_Digits">
+    <value>2</value>
+  </data>
+  <data name="MKD_DisplayName">
+    <value>Macedonian denar</value>
+  </data>
+  <data name="MKD_ISO">
+    <value>MKD</value>
+  </data>
+  <data name="MKD_Num">
+    <value>807</value>
+  </data>
+  <data name="MKD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="MMK_Digits">
+    <value>2</value>
+  </data>
+  <data name="MMK_DisplayName">
+    <value>Myanmar kyat</value>
+  </data>
+  <data name="MMK_ISO">
+    <value>MMK</value>
+  </data>
+  <data name="MMK_Num">
+    <value>104</value>
+  </data>
+  <data name="MMK_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="MNT_Digits">
+    <value>2</value>
+  </data>
+  <data name="MNT_DisplayName">
+    <value>Mongolian tugrik</value>
+  </data>
+  <data name="MNT_ISO">
+    <value>MNT</value>
+  </data>
+  <data name="MNT_Num">
+    <value>496</value>
+  </data>
+  <data name="MNT_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="MNT_Symbol">
+    <value>₮</value>
+  </data>
+  <data name="MOP_Digits">
+    <value>2</value>
+  </data>
+  <data name="MOP_DisplayName">
+    <value>Macanese pataca</value>
+  </data>
+  <data name="MOP_ISO">
+    <value>MOP</value>
+  </data>
+  <data name="MOP_Num">
+    <value>446</value>
+  </data>
+  <data name="MOP_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="MRO_Digits">
+    <value>2</value>
+  </data>
+  <data name="MRO_DisplayName">
+    <value>Mauritanian ouguiya</value>
+  </data>
+  <data name="MRO_ISO">
+    <value>MRO</value>
+  </data>
+  <data name="MRO_Num">
+    <value>478</value>
+  </data>
+  <data name="MRO_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="MTL_Digits">
     <value>0</value>
   </data>
-  <data name="MTL_StartDate">
-    <value>0001-01-01</value>
+  <data name="MTL_DisplayName">
+    <value>Maltese lira</value>
   </data>
   <data name="MTL_EndDate">
     <value>2007-12-31</value>
   </data>
+  <data name="MTL_ISO">
+    <value>MTL</value>
+  </data>
+  <data name="MTL_Num">
+    <value>000</value>
+  </data>
+  <data name="MTL_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="MUR_Digits">
+    <value>2</value>
+  </data>
+  <data name="MUR_DisplayName">
+    <value>Mauritian rupee</value>
+  </data>
+  <data name="MUR_ISO">
+    <value>MUR</value>
+  </data>
+  <data name="MUR_Num">
+    <value>480</value>
+  </data>
+  <data name="MUR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="MVR_Digits">
+    <value>2</value>
+  </data>
+  <data name="MVR_DisplayName">
+    <value>Maldivian rufiyaa</value>
+  </data>
+  <data name="MVR_ISO">
+    <value>MVR</value>
+  </data>
+  <data name="MVR_Num">
+    <value>462</value>
+  </data>
+  <data name="MVR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="MVR_Symbol">
+    <value>ރ.</value>
+  </data>
+  <data name="MWK_Digits">
+    <value>2</value>
+  </data>
+  <data name="MWK_DisplayName">
+    <value>Malawian kwacha</value>
+  </data>
+  <data name="MWK_ISO">
+    <value>MWK</value>
+  </data>
+  <data name="MWK_Num">
+    <value>454</value>
+  </data>
+  <data name="MWK_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="MXN_Digits">
+    <value>2</value>
+  </data>
+  <data name="MXN_DisplayName">
+    <value>Mexican peso</value>
+  </data>
+  <data name="MXN_ISO">
+    <value>MXN</value>
+  </data>
+  <data name="MXN_Num">
+    <value>484</value>
+  </data>
+  <data name="MXN_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="MXV_Digits">
+    <value>2</value>
+  </data>
+  <data name="MXV_DisplayName">
+    <value>Mexican Unidad de Inversion (UDI)</value>
+  </data>
+  <data name="MXV_ISO">
+    <value>MXV</value>
+  </data>
+  <data name="MXV_Num">
+    <value>979</value>
+  </data>
+  <data name="MXV_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="MYR_Digits">
+    <value>2</value>
+  </data>
+  <data name="MYR_DisplayName">
+    <value>Malaysian ringgit</value>
+  </data>
+  <data name="MYR_ISO">
+    <value>MYR</value>
+  </data>
+  <data name="MYR_Num">
+    <value>458</value>
+  </data>
+  <data name="MYR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="MZN_Digits">
+    <value>2</value>
+  </data>
+  <data name="MZN_DisplayName">
+    <value>Mozambican metical</value>
+  </data>
+  <data name="MZN_ISO">
+    <value>MZN</value>
+  </data>
+  <data name="MZN_Num">
+    <value>943</value>
+  </data>
+  <data name="MZN_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="NAD_Digits">
+    <value>2</value>
+  </data>
+  <data name="NAD_DisplayName">
+    <value>Namibian dollar</value>
+  </data>
+  <data name="NAD_ISO">
+    <value>NAD</value>
+  </data>
+  <data name="NAD_Num">
+    <value>516</value>
+  </data>
+  <data name="NAD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="NGN_Digits">
+    <value>2</value>
+  </data>
+  <data name="NGN_DisplayName">
+    <value>Nigerian naira</value>
+  </data>
+  <data name="NGN_ISO">
+    <value>NGN</value>
+  </data>
+  <data name="NGN_Num">
+    <value>566</value>
+  </data>
+  <data name="NGN_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="NGN_Symbol">
+    <value>₦</value>
+  </data>
+  <data name="NIO_Digits">
+    <value>2</value>
+  </data>
+  <data name="NIO_DisplayName">
+    <value>Nicaraguan córdoba</value>
+  </data>
+  <data name="NIO_ISO">
+    <value>NIO</value>
+  </data>
+  <data name="NIO_Num">
+    <value>558</value>
+  </data>
+  <data name="NIO_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="NLG_Digits">
+    <value>2</value>
+  </data>
   <data name="NLG_DisplayName">
     <value>Dutch guilder</value>
   </data>
-  <data name="NLG_Num">
-    <value>000</value>
+  <data name="NLG_EndDate">
+    <value>2001-12-31</value>
   </data>
   <data name="NLG_ISO">
     <value>NLG</value>
   </data>
-  <data name="NLG_Digits">
-    <value>2</value>
+  <data name="NLG_Num">
+    <value>000</value>
   </data>
   <data name="NLG_StartDate">
     <value>0001-01-01</value>
@@ -3225,352 +2106,1471 @@
   <data name="NLG_Symbol">
     <value>ƒ</value>
   </data>
-  <data name="NLG_EndDate">
-    <value>2001-12-31</value>
+  <data name="NOK_Digits">
+    <value>2</value>
   </data>
-  <data name="PTE_DisplayName">
-    <value>Portuguese escudo</value>
+  <data name="NOK_DisplayName">
+    <value>Norwegian krone</value>
   </data>
-  <data name="PTE_Num">
-    <value>000</value>
+  <data name="NOK_ISO">
+    <value>NOK</value>
   </data>
-  <data name="PTE_ISO">
-    <value>PTE</value>
+  <data name="NOK_Num">
+    <value>578</value>
+  </data>
+  <data name="NOK_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="NPR_Digits">
+    <value>2</value>
+  </data>
+  <data name="NPR_DisplayName">
+    <value>Nepalese rupee</value>
+  </data>
+  <data name="NPR_ISO">
+    <value>NPR</value>
+  </data>
+  <data name="NPR_Num">
+    <value>524</value>
+  </data>
+  <data name="NPR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="NPR_Symbol">
+    <value>रु</value>
+  </data>
+  <data name="NZD_Digits">
+    <value>2</value>
+  </data>
+  <data name="NZD_DisplayName">
+    <value>New Zealand dollar</value>
+  </data>
+  <data name="NZD_ISO">
+    <value>NZD</value>
+  </data>
+  <data name="NZD_Num">
+    <value>554</value>
+  </data>
+  <data name="NZD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="OMR_Digits">
+    <value>3</value>
+  </data>
+  <data name="OMR_DisplayName">
+    <value>Omani rial</value>
+  </data>
+  <data name="OMR_ISO">
+    <value>OMR</value>
+  </data>
+  <data name="OMR_Num">
+    <value>512</value>
+  </data>
+  <data name="OMR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="PAB_Digits">
+    <value>2</value>
+  </data>
+  <data name="PAB_DisplayName">
+    <value>Panamanian balboa</value>
+  </data>
+  <data name="PAB_ISO">
+    <value>PAB</value>
+  </data>
+  <data name="PAB_Num">
+    <value>590</value>
+  </data>
+  <data name="PAB_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="PEN_Digits">
+    <value>2</value>
+  </data>
+  <data name="PEN_DisplayName">
+    <value>Peruvian nuevo sol</value>
+  </data>
+  <data name="PEN_ISO">
+    <value>PEN</value>
+  </data>
+  <data name="PEN_Num">
+    <value>604</value>
+  </data>
+  <data name="PEN_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="PGK_Digits">
+    <value>2</value>
+  </data>
+  <data name="PGK_DisplayName">
+    <value>Papua New Guinean kina</value>
+  </data>
+  <data name="PGK_ISO">
+    <value>PGK</value>
+  </data>
+  <data name="PGK_Num">
+    <value>598</value>
+  </data>
+  <data name="PGK_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="PHP_Digits">
+    <value>2</value>
+  </data>
+  <data name="PHP_DisplayName">
+    <value>Philippine peso</value>
+  </data>
+  <data name="PHP_ISO">
+    <value>PHP</value>
+  </data>
+  <data name="PHP_Num">
+    <value>608</value>
+  </data>
+  <data name="PHP_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="PHP_Symbol">
+    <value>₱</value>
+  </data>
+  <data name="PKR_Digits">
+    <value>2</value>
+  </data>
+  <data name="PKR_DisplayName">
+    <value>Pakistani rupee</value>
+  </data>
+  <data name="PKR_ISO">
+    <value>PKR</value>
+  </data>
+  <data name="PKR_Num">
+    <value>586</value>
+  </data>
+  <data name="PKR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="PLN_Digits">
+    <value>2</value>
+  </data>
+  <data name="PLN_DisplayName">
+    <value>Polish złoty</value>
+  </data>
+  <data name="PLN_ISO">
+    <value>PLN</value>
+  </data>
+  <data name="PLN_Num">
+    <value>985</value>
+  </data>
+  <data name="PLN_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="PTE_Digits">
     <value>0</value>
   </data>
-  <data name="PTE_StartDate">
-    <value>0001-01-01</value>
+  <data name="PTE_DisplayName">
+    <value>Portuguese escudo</value>
   </data>
   <data name="PTE_EndDate">
     <value>2001-12-31</value>
   </data>
-  <data name="SIT_DisplayName">
-    <value>Slovenian tolar</value>
+  <data name="PTE_ISO">
+    <value>PTE</value>
   </data>
-  <data name="SIT_Num">
+  <data name="PTE_Num">
     <value>000</value>
   </data>
-  <data name="SIT_ISO">
-    <value>SIT</value>
+  <data name="PTE_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="PYG_Digits">
+    <value>0</value>
+  </data>
+  <data name="PYG_DisplayName">
+    <value>Paraguayan guaraní</value>
+  </data>
+  <data name="PYG_ISO">
+    <value>PYG</value>
+  </data>
+  <data name="PYG_Num">
+    <value>600</value>
+  </data>
+  <data name="PYG_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="PYG_Symbol">
+    <value>₲</value>
+  </data>
+  <data name="QAR_Digits">
+    <value>2</value>
+  </data>
+  <data name="QAR_DisplayName">
+    <value>Qatari riyal</value>
+  </data>
+  <data name="QAR_ISO">
+    <value>QAR</value>
+  </data>
+  <data name="QAR_Num">
+    <value>634</value>
+  </data>
+  <data name="QAR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="RON_Digits">
+    <value>2</value>
+  </data>
+  <data name="RON_DisplayName">
+    <value>Romanian new leu</value>
+  </data>
+  <data name="RON_ISO">
+    <value>RON</value>
+  </data>
+  <data name="RON_Num">
+    <value>946</value>
+  </data>
+  <data name="RON_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="RSD_Digits">
+    <value>2</value>
+  </data>
+  <data name="RSD_DisplayName">
+    <value>Serbian dinar</value>
+  </data>
+  <data name="RSD_ISO">
+    <value>RSD</value>
+  </data>
+  <data name="RSD_Num">
+    <value>941</value>
+  </data>
+  <data name="RSD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="RUB_Digits">
+    <value>2</value>
+  </data>
+  <data name="RUB_DisplayName">
+    <value>Russian ruble</value>
+  </data>
+  <data name="RUB_ISO">
+    <value>RUB</value>
+  </data>
+  <data name="RUB_Num">
+    <value>643</value>
+  </data>
+  <data name="RUB_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="RUB_Symbol">
+    <value>₽</value>
+  </data>
+  <data name="RWF_Digits">
+    <value>0</value>
+  </data>
+  <data name="RWF_DisplayName">
+    <value>Rwandan franc</value>
+  </data>
+  <data name="RWF_ISO">
+    <value>RWF</value>
+  </data>
+  <data name="RWF_Num">
+    <value>646</value>
+  </data>
+  <data name="RWF_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="SAR_Digits">
+    <value>2</value>
+  </data>
+  <data name="SAR_DisplayName">
+    <value>Saudi riyal</value>
+  </data>
+  <data name="SAR_ISO">
+    <value>SAR</value>
+  </data>
+  <data name="SAR_Num">
+    <value>682</value>
+  </data>
+  <data name="SAR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="SBD_Digits">
+    <value>2</value>
+  </data>
+  <data name="SBD_DisplayName">
+    <value>Solomon Islands dollar</value>
+  </data>
+  <data name="SBD_ISO">
+    <value>SBD</value>
+  </data>
+  <data name="SBD_Num">
+    <value>090</value>
+  </data>
+  <data name="SBD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="SCR_Digits">
+    <value>2</value>
+  </data>
+  <data name="SCR_DisplayName">
+    <value>Seychelles rupee</value>
+  </data>
+  <data name="SCR_ISO">
+    <value>SCR</value>
+  </data>
+  <data name="SCR_Num">
+    <value>690</value>
+  </data>
+  <data name="SCR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="SDG_Digits">
+    <value>2</value>
+  </data>
+  <data name="SDG_DisplayName">
+    <value>Sudanese pound</value>
+  </data>
+  <data name="SDG_ISO">
+    <value>SDG</value>
+  </data>
+  <data name="SDG_Num">
+    <value>938</value>
+  </data>
+  <data name="SDG_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="SEK_Digits">
+    <value>2</value>
+  </data>
+  <data name="SEK_DisplayName">
+    <value>Swedish krona/kronor</value>
+  </data>
+  <data name="SEK_ISO">
+    <value>SEK</value>
+  </data>
+  <data name="SEK_Num">
+    <value>752</value>
+  </data>
+  <data name="SEK_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="SGD_Digits">
+    <value>2</value>
+  </data>
+  <data name="SGD_DisplayName">
+    <value>Singapore dollar</value>
+  </data>
+  <data name="SGD_ISO">
+    <value>SGD</value>
+  </data>
+  <data name="SGD_Num">
+    <value>702</value>
+  </data>
+  <data name="SGD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="SHP_Digits">
+    <value>2</value>
+  </data>
+  <data name="SHP_DisplayName">
+    <value>Saint Helena pound</value>
+  </data>
+  <data name="SHP_ISO">
+    <value>SHP</value>
+  </data>
+  <data name="SHP_Num">
+    <value>654</value>
+  </data>
+  <data name="SHP_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="SIT_Digits">
     <value>0</value>
   </data>
-  <data name="SIT_StartDate">
-    <value>0001-01-01</value>
+  <data name="SIT_DisplayName">
+    <value>Slovenian tolar</value>
   </data>
   <data name="SIT_EndDate">
     <value>2007-01-01</value>
   </data>
-  <data name="SKK_DisplayName">
-    <value>Slovak koruna</value>
+  <data name="SIT_ISO">
+    <value>SIT</value>
   </data>
-  <data name="SKK_Num">
+  <data name="SIT_Num">
     <value>000</value>
   </data>
-  <data name="SKK_ISO">
-    <value>SKK</value>
+  <data name="SIT_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="SKK_Digits">
     <value>0</value>
   </data>
-  <data name="SKK_StartDate">
-    <value>0001-01-01</value>
+  <data name="SKK_DisplayName">
+    <value>Slovak koruna</value>
   </data>
   <data name="SKK_EndDate">
     <value>2009-01-01</value>
   </data>
-  <data name="SML_DisplayName">
-    <value>Sammarinese lira</value>
+  <data name="SKK_ISO">
+    <value>SKK</value>
   </data>
-  <data name="SML_Num">
+  <data name="SKK_Num">
     <value>000</value>
   </data>
-  <data name="SML_ISO">
-    <value>SML</value>
+  <data name="SKK_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="SLL_Digits">
+    <value>2</value>
+  </data>
+  <data name="SLL_DisplayName">
+    <value>Sierra Leonean leone</value>
+  </data>
+  <data name="SLL_ISO">
+    <value>SLL</value>
+  </data>
+  <data name="SLL_Num">
+    <value>694</value>
+  </data>
+  <data name="SLL_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="SML_Digits">
     <value>0</value>
   </data>
-  <data name="SML_StartDate">
-    <value>0001-01-01</value>
+  <data name="SML_DisplayName">
+    <value>Sammarinese lira</value>
   </data>
   <data name="SML_EndDate">
     <value>2001-12-31</value>
   </data>
-  <data name="SUR_DisplayName">
-    <value>Soviet Union ruble</value>
+  <data name="SML_ISO">
+    <value>SML</value>
   </data>
-  <data name="SUR_Num">
+  <data name="SML_Num">
     <value>000</value>
   </data>
-  <data name="SUR_ISO">
-    <value>SUR</value>
+  <data name="SML_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="SOS_Digits">
+    <value>2</value>
+  </data>
+  <data name="SOS_DisplayName">
+    <value>Somali shilling</value>
+  </data>
+  <data name="SOS_ISO">
+    <value>SOS</value>
+  </data>
+  <data name="SOS_Num">
+    <value>706</value>
+  </data>
+  <data name="SOS_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="SRD_Digits">
+    <value>2</value>
+  </data>
+  <data name="SRD_DisplayName">
+    <value>Surinamese dollar</value>
+  </data>
+  <data name="SRD_ISO">
+    <value>SRD</value>
+  </data>
+  <data name="SRD_Num">
+    <value>968</value>
+  </data>
+  <data name="SRD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="SSP_Digits">
+    <value>2</value>
+  </data>
+  <data name="SSP_DisplayName">
+    <value>South Sudanese pound</value>
+  </data>
+  <data name="SSP_ISO">
+    <value>SSP</value>
+  </data>
+  <data name="SSP_Num">
+    <value>728</value>
+  </data>
+  <data name="SSP_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="STD_Digits">
+    <value>2</value>
+  </data>
+  <data name="STD_DisplayName">
+    <value>São Tomé and Príncipe dobra</value>
+  </data>
+  <data name="STD_ISO">
+    <value>STD</value>
+  </data>
+  <data name="STD_Num">
+    <value>678</value>
+  </data>
+  <data name="STD_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="SUR_Digits">
     <value>0</value>
   </data>
-  <data name="SUR_StartDate">
-    <value>0001-01-01</value>
+  <data name="SUR_DisplayName">
+    <value>Soviet Union ruble</value>
   </data>
   <data name="SUR_EndDate">
     <value>1990-12-31</value>
   </data>
-  <data name="VAL_DisplayName">
-    <value>Vatican lira</value>
+  <data name="SUR_ISO">
+    <value>SUR</value>
   </data>
-  <data name="VAL_Num">
+  <data name="SUR_Num">
     <value>000</value>
   </data>
-  <data name="VAL_ISO">
-    <value>VAL</value>
+  <data name="SUR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="SYP_Digits">
+    <value>2</value>
+  </data>
+  <data name="SYP_DisplayName">
+    <value>Syrian pound</value>
+  </data>
+  <data name="SYP_ISO">
+    <value>SYP</value>
+  </data>
+  <data name="SYP_Num">
+    <value>760</value>
+  </data>
+  <data name="SYP_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="SZL_Digits">
+    <value>2</value>
+  </data>
+  <data name="SZL_DisplayName">
+    <value>Swazi lilangeni</value>
+  </data>
+  <data name="SZL_ISO">
+    <value>SZL</value>
+  </data>
+  <data name="SZL_Num">
+    <value>748</value>
+  </data>
+  <data name="SZL_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="THB_Digits">
+    <value>2</value>
+  </data>
+  <data name="THB_DisplayName">
+    <value>Thai baht</value>
+  </data>
+  <data name="THB_ISO">
+    <value>THB</value>
+  </data>
+  <data name="THB_Num">
+    <value>764</value>
+  </data>
+  <data name="THB_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="THB_Symbol">
+    <value>฿</value>
+  </data>
+  <data name="TJS_Digits">
+    <value>2</value>
+  </data>
+  <data name="TJS_DisplayName">
+    <value>Tajikistani somoni</value>
+  </data>
+  <data name="TJS_ISO">
+    <value>TJS</value>
+  </data>
+  <data name="TJS_Num">
+    <value>972</value>
+  </data>
+  <data name="TJS_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="TMT_Digits">
+    <value>2</value>
+  </data>
+  <data name="TMT_DisplayName">
+    <value>Turkmenistani manat</value>
+  </data>
+  <data name="TMT_ISO">
+    <value>TMT</value>
+  </data>
+  <data name="TMT_Num">
+    <value>934</value>
+  </data>
+  <data name="TMT_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="TND_Digits">
+    <value>3</value>
+  </data>
+  <data name="TND_DisplayName">
+    <value>Tunisian dinar</value>
+  </data>
+  <data name="TND_ISO">
+    <value>TND</value>
+  </data>
+  <data name="TND_Num">
+    <value>788</value>
+  </data>
+  <data name="TND_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="TOP_Digits">
+    <value>2</value>
+  </data>
+  <data name="TOP_DisplayName">
+    <value>Tongan paʻanga</value>
+  </data>
+  <data name="TOP_ISO">
+    <value>TOP</value>
+  </data>
+  <data name="TOP_Num">
+    <value>776</value>
+  </data>
+  <data name="TOP_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="TRY_Digits">
+    <value>2</value>
+  </data>
+  <data name="TRY_DisplayName">
+    <value>Turkish lira</value>
+  </data>
+  <data name="TRY_ISO">
+    <value>TRY</value>
+  </data>
+  <data name="TRY_Num">
+    <value>949</value>
+  </data>
+  <data name="TRY_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="TRY_Symbol">
+    <value>₺</value>
+  </data>
+  <data name="TTD_Digits">
+    <value>2</value>
+  </data>
+  <data name="TTD_DisplayName">
+    <value>Trinidad and Tobago dollar</value>
+  </data>
+  <data name="TTD_ISO">
+    <value>TTD</value>
+  </data>
+  <data name="TTD_Num">
+    <value>780</value>
+  </data>
+  <data name="TTD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="TWD_Digits">
+    <value>2</value>
+  </data>
+  <data name="TWD_DisplayName">
+    <value>New Taiwan dollar</value>
+  </data>
+  <data name="TWD_ISO">
+    <value>TWD</value>
+  </data>
+  <data name="TWD_Num">
+    <value>901</value>
+  </data>
+  <data name="TWD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="TZS_Digits">
+    <value>2</value>
+  </data>
+  <data name="TZS_DisplayName">
+    <value>Tanzanian shilling</value>
+  </data>
+  <data name="TZS_ISO">
+    <value>TZS</value>
+  </data>
+  <data name="TZS_Num">
+    <value>834</value>
+  </data>
+  <data name="TZS_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="UAH_Digits">
+    <value>2</value>
+  </data>
+  <data name="UAH_DisplayName">
+    <value>Ukrainian hryvnia</value>
+  </data>
+  <data name="UAH_ISO">
+    <value>UAH</value>
+  </data>
+  <data name="UAH_Num">
+    <value>980</value>
+  </data>
+  <data name="UAH_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="UAH_Symbol">
+    <value>₴</value>
+  </data>
+  <data name="UGX_Digits">
+    <value>0</value>
+  </data>
+  <data name="UGX_DisplayName">
+    <value>Ugandan shilling</value>
+  </data>
+  <data name="UGX_ISO">
+    <value>UGX</value>
+  </data>
+  <data name="UGX_Num">
+    <value>800</value>
+  </data>
+  <data name="UGX_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="USD_Digits">
+    <value>2</value>
+  </data>
+  <data name="USD_DisplayName">
+    <value>United States dollar</value>
+  </data>
+  <data name="USD_ISO">
+    <value>USD</value>
+  </data>
+  <data name="USD_Num">
+    <value>840</value>
+  </data>
+  <data name="USD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="USD_Symbol">
+    <value>$</value>
+  </data>
+  <data name="USN_Digits">
+    <value>2</value>
+  </data>
+  <data name="USN_DisplayName">
+    <value>United States dollar (next day)</value>
+  </data>
+  <data name="USN_ISO">
+    <value>USN</value>
+  </data>
+  <data name="USN_Num">
+    <value>997</value>
+  </data>
+  <data name="USN_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="USS_Digits">
+    <value>2</value>
+  </data>
+  <data name="USS_DisplayName">
+    <value>United States dollar (same day)</value>
+  </data>
+  <data name="USS_ISO">
+    <value>USS</value>
+  </data>
+  <data name="USS_Num">
+    <value>998</value>
+  </data>
+  <data name="USS_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="UYI_Digits">
+    <value>0</value>
+  </data>
+  <data name="UYI_DisplayName">
+    <value>Uruguay Peso en Unidades Indexadas (URUIURUI)</value>
+  </data>
+  <data name="UYI_ISO">
+    <value>UYI</value>
+  </data>
+  <data name="UYI_Num">
+    <value>940</value>
+  </data>
+  <data name="UYI_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="UYU_Digits">
+    <value>2</value>
+  </data>
+  <data name="UYU_DisplayName">
+    <value>Uruguayan peso</value>
+  </data>
+  <data name="UYU_ISO">
+    <value>UYU</value>
+  </data>
+  <data name="UYU_Num">
+    <value>858</value>
+  </data>
+  <data name="UYU_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="UZS_Digits">
+    <value>2</value>
+  </data>
+  <data name="UZS_DisplayName">
+    <value>Uzbekistan som</value>
+  </data>
+  <data name="UZS_ISO">
+    <value>UZS</value>
+  </data>
+  <data name="UZS_Num">
+    <value>860</value>
+  </data>
+  <data name="UZS_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="VAL_Digits">
     <value>0</value>
   </data>
-  <data name="VAL_StartDate">
-    <value>0001-01-01</value>
+  <data name="VAL_DisplayName">
+    <value>Vatican lira</value>
   </data>
   <data name="VAL_EndDate">
     <value>2001-12-31</value>
   </data>
-  <data name="YOU_DisplayName">
-    <value>Yugoslav dinar</value>
+  <data name="VAL_ISO">
+    <value>VAL</value>
   </data>
-  <data name="YOU_Num">
+  <data name="VAL_Num">
     <value>000</value>
   </data>
-  <data name="YOU_ISO">
-    <value>YOU</value>
+  <data name="VAL_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="VEF_Digits">
+    <value>2</value>
+  </data>
+  <data name="VEF_DisplayName">
+    <value>Venezuelan bolívar</value>
+  </data>
+  <data name="VEF_ISO">
+    <value>VEF</value>
+  </data>
+  <data name="VEF_Num">
+    <value>937</value>
+  </data>
+  <data name="VEF_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="VND_Digits">
+    <value>0</value>
+  </data>
+  <data name="VND_DisplayName">
+    <value>Vietnamese dong</value>
+  </data>
+  <data name="VND_ISO">
+    <value>VND</value>
+  </data>
+  <data name="VND_Num">
+    <value>704</value>
+  </data>
+  <data name="VND_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="VND_Symbol">
+    <value>₫</value>
+  </data>
+  <data name="VUV_Digits">
+    <value>0</value>
+  </data>
+  <data name="VUV_DisplayName">
+    <value>Vanuatu vatu</value>
+  </data>
+  <data name="VUV_ISO">
+    <value>VUV</value>
+  </data>
+  <data name="VUV_Num">
+    <value>548</value>
+  </data>
+  <data name="VUV_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="WST_Digits">
+    <value>2</value>
+  </data>
+  <data name="WST_DisplayName">
+    <value>Samoan tala</value>
+  </data>
+  <data name="WST_ISO">
+    <value>WST</value>
+  </data>
+  <data name="WST_Num">
+    <value>882</value>
+  </data>
+  <data name="WST_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XAF_Digits">
+    <value>0</value>
+  </data>
+  <data name="XAF_DisplayName">
+    <value>CFA franc BEAC</value>
+  </data>
+  <data name="XAF_ISO">
+    <value>XAF</value>
+  </data>
+  <data name="XAF_Num">
+    <value>950</value>
+  </data>
+  <data name="XAF_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XAG_Digits">
+    <value>0</value>
+  </data>
+  <data name="XAG_DisplayName">
+    <value>Silver (one troy ounce)</value>
+  </data>
+  <data name="XAG_ISO">
+    <value>XAG</value>
+  </data>
+  <data name="XAG_Num">
+    <value>961</value>
+  </data>
+  <data name="XAG_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XAU_Digits">
+    <value>0</value>
+  </data>
+  <data name="XAU_DisplayName">
+    <value>Gold (one troy ounce)</value>
+  </data>
+  <data name="XAU_ISO">
+    <value>XAU</value>
+  </data>
+  <data name="XAU_Num">
+    <value>959</value>
+  </data>
+  <data name="XAU_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XBA_Digits">
+    <value>0</value>
+  </data>
+  <data name="XBA_DisplayName">
+    <value>European Composite Unit (EURCO) (bond market unit)</value>
+  </data>
+  <data name="XBA_ISO">
+    <value>XBA</value>
+  </data>
+  <data name="XBA_Num">
+    <value>955</value>
+  </data>
+  <data name="XBA_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XBB_Digits">
+    <value>0</value>
+  </data>
+  <data name="XBB_DisplayName">
+    <value>European Monetary Unit (E.M.U.-6) (bond market unit)</value>
+  </data>
+  <data name="XBB_ISO">
+    <value>XBB</value>
+  </data>
+  <data name="XBB_Num">
+    <value>956</value>
+  </data>
+  <data name="XBB_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XBC_Digits">
+    <value>0</value>
+  </data>
+  <data name="XBC_DisplayName">
+    <value>European Unit of Account 9 (E.U.A.-9) (bond market unit)</value>
+  </data>
+  <data name="XBC_ISO">
+    <value>XBC</value>
+  </data>
+  <data name="XBC_Num">
+    <value>957</value>
+  </data>
+  <data name="XBC_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XBD_Digits">
+    <value>0</value>
+  </data>
+  <data name="XBD_DisplayName">
+    <value>European Unit of Account 17(E.U.A.-17) (bond market unit)</value>
+  </data>
+  <data name="XBD_ISO">
+    <value>XBD</value>
+  </data>
+  <data name="XBD_Num">
+    <value>958</value>
+  </data>
+  <data name="XBD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XCD_Digits">
+    <value>2</value>
+  </data>
+  <data name="XCD_DisplayName">
+    <value>East Caribbean dollar</value>
+  </data>
+  <data name="XCD_ISO">
+    <value>XCD</value>
+  </data>
+  <data name="XCD_Num">
+    <value>951</value>
+  </data>
+  <data name="XCD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XDR_Digits">
+    <value>0</value>
+  </data>
+  <data name="XDR_DisplayName">
+    <value>Special drawing rights</value>
+  </data>
+  <data name="XDR_ISO">
+    <value>XDR</value>
+  </data>
+  <data name="XDR_Num">
+    <value>960</value>
+  </data>
+  <data name="XDR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XFU_Digits">
+    <value>0</value>
+  </data>
+  <data name="XFU_DisplayName">
+    <value>UIC franc (special settlement currency)</value>
+  </data>
+  <data name="XFU_ISO">
+    <value>XFU</value>
+  </data>
+  <data name="XFU_Num">
+    <value>000</value>
+  </data>
+  <data name="XFU_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XOF_Digits">
+    <value>0</value>
+  </data>
+  <data name="XOF_DisplayName">
+    <value>CFA franc BCEAO</value>
+  </data>
+  <data name="XOF_ISO">
+    <value>XOF</value>
+  </data>
+  <data name="XOF_Num">
+    <value>952</value>
+  </data>
+  <data name="XOF_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XPD_Digits">
+    <value>0</value>
+  </data>
+  <data name="XPD_DisplayName">
+    <value>Palladium (one troy ounce)</value>
+  </data>
+  <data name="XPD_ISO">
+    <value>XPD</value>
+  </data>
+  <data name="XPD_Num">
+    <value>964</value>
+  </data>
+  <data name="XPD_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XPF_Digits">
+    <value>0</value>
+  </data>
+  <data name="XPF_DisplayName">
+    <value>CFP franc (franc Pacifique)</value>
+  </data>
+  <data name="XPF_ISO">
+    <value>XPF</value>
+  </data>
+  <data name="XPF_Num">
+    <value>953</value>
+  </data>
+  <data name="XPF_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XPT_Digits">
+    <value>0</value>
+  </data>
+  <data name="XPT_DisplayName">
+    <value>Platinum (one troy ounce)</value>
+  </data>
+  <data name="XPT_ISO">
+    <value>XPT</value>
+  </data>
+  <data name="XPT_Num">
+    <value>962</value>
+  </data>
+  <data name="XPT_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XSU_Digits">
+    <value>0</value>
+  </data>
+  <data name="XSU_DisplayName">
+    <value>SUCRE</value>
+  </data>
+  <data name="XSU_ISO">
+    <value>XSU</value>
+  </data>
+  <data name="XSU_Num">
+    <value>994</value>
+  </data>
+  <data name="XSU_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XTS_Digits">
+    <value>0</value>
+  </data>
+  <data name="XTS_DisplayName">
+    <value>Code reserved for testing purposes</value>
+  </data>
+  <data name="XTS_ISO">
+    <value>XTS</value>
+  </data>
+  <data name="XTS_Num">
+    <value>963</value>
+  </data>
+  <data name="XTS_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XUA_Digits">
+    <value>0</value>
+  </data>
+  <data name="XUA_DisplayName">
+    <value>ADB Unit of Account</value>
+  </data>
+  <data name="XUA_ISO">
+    <value>XUA</value>
+  </data>
+  <data name="XUA_Num">
+    <value>965</value>
+  </data>
+  <data name="XUA_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="XXX_Digits">
+    <value>0</value>
+  </data>
+  <data name="XXX_DisplayName">
+    <value>No currency</value>
+  </data>
+  <data name="XXX_ISO">
+    <value>XXX</value>
+  </data>
+  <data name="XXX_Num">
+    <value>999</value>
+  </data>
+  <data name="XXX_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="YER_Digits">
+    <value>2</value>
+  </data>
+  <data name="YER_DisplayName">
+    <value>Yemeni rial</value>
+  </data>
+  <data name="YER_ISO">
+    <value>YER</value>
+  </data>
+  <data name="YER_Num">
+    <value>886</value>
+  </data>
+  <data name="YER_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="YOU_Digits">
     <value>2</value>
   </data>
-  <data name="YOU_StartDate">
-    <value>1993-10-01</value>
+  <data name="YOU_DisplayName">
+    <value>Yugoslav dinar</value>
   </data>
   <data name="YOU_EndDate">
     <value>1993-12-31</value>
   </data>
-  <data name="YUD_DisplayName">
-    <value>Yugoslav dinar</value>
+  <data name="YOU_ISO">
+    <value>YOU</value>
   </data>
-  <data name="YUD_Num">
+  <data name="YOU_Num">
     <value>000</value>
   </data>
-  <data name="YUD_ISO">
-    <value>YUD</value>
+  <data name="YOU_StartDate">
+    <value>1993-10-01</value>
   </data>
   <data name="YUD_Digits">
     <value>2</value>
   </data>
-  <data name="YUD_StartDate">
-    <value>1966-01-01</value>
+  <data name="YUD_DisplayName">
+    <value>Yugoslav dinar</value>
   </data>
   <data name="YUD_EndDate">
     <value>1989-12-31</value>
   </data>
-  <data name="YUG_DisplayName">
-    <value>Yugoslav dinar</value>
+  <data name="YUD_ISO">
+    <value>YUD</value>
   </data>
-  <data name="YUG_Num">
+  <data name="YUD_Num">
     <value>000</value>
   </data>
-  <data name="YUG_ISO">
-    <value>YUG</value>
+  <data name="YUD_StartDate">
+    <value>1966-01-01</value>
   </data>
   <data name="YUG_Digits">
     <value>2</value>
   </data>
-  <data name="YUG_StartDate">
-    <value>1994-01-01</value>
+  <data name="YUG_DisplayName">
+    <value>Yugoslav dinar</value>
   </data>
   <data name="YUG_EndDate">
     <value>1994-01-23</value>
   </data>
-  <data name="YUM_DisplayName">
-    <value>Yugoslav dinar</value>
+  <data name="YUG_ISO">
+    <value>YUG</value>
   </data>
-  <data name="YUM_Num">
-    <value>891</value>
+  <data name="YUG_Num">
+    <value>000</value>
   </data>
-  <data name="YUM_ISO">
-    <value>YUM</value>
+  <data name="YUG_StartDate">
+    <value>1994-01-01</value>
   </data>
   <data name="YUM_Digits">
     <value>2</value>
   </data>
-  <data name="YUM_StartDate">
-    <value>1994-01-24</value>
+  <data name="YUM_DisplayName">
+    <value>Yugoslav dinar</value>
   </data>
   <data name="YUM_EndDate">
     <value>2003-07-02</value>
   </data>
-  <data name="YUN_DisplayName">
-    <value>Yugoslav dinar</value>
+  <data name="YUM_ISO">
+    <value>YUM</value>
   </data>
-  <data name="YUN_Num">
-    <value>000</value>
+  <data name="YUM_Num">
+    <value>891</value>
   </data>
-  <data name="YUN_ISO">
-    <value>YUN</value>
+  <data name="YUM_StartDate">
+    <value>1994-01-24</value>
   </data>
   <data name="YUN_Digits">
     <value>2</value>
   </data>
-  <data name="YUN_StartDate">
-    <value>1990-01-01</value>
+  <data name="YUN_DisplayName">
+    <value>Yugoslav dinar</value>
   </data>
   <data name="YUN_EndDate">
     <value>1992-06-30</value>
   </data>
-  <data name="YUR_DisplayName">
-    <value>Yugoslav dinar</value>
+  <data name="YUN_ISO">
+    <value>YUN</value>
   </data>
-  <data name="YUR_Num">
+  <data name="YUN_Num">
     <value>000</value>
   </data>
-  <data name="YUR_ISO">
-    <value>YUR</value>
+  <data name="YUN_StartDate">
+    <value>1990-01-01</value>
   </data>
   <data name="YUR_Digits">
     <value>2</value>
   </data>
-  <data name="YUR_StartDate">
-    <value>1992-07-01</value>
+  <data name="YUR_DisplayName">
+    <value>Yugoslav dinar</value>
   </data>
   <data name="YUR_EndDate">
     <value>1993-09-30</value>
   </data>
-  <data name="ZRN_DisplayName">
-    <value>Zaïrean new zaïre</value>
+  <data name="YUR_ISO">
+    <value>YUR</value>
   </data>
-  <data name="ZRN_Num">
-    <value>180</value>
+  <data name="YUR_Num">
+    <value>000</value>
   </data>
-  <data name="ZRN_ISO">
-    <value>ZRN</value>
+  <data name="YUR_StartDate">
+    <value>1992-07-01</value>
+  </data>
+  <data name="ZAR_Digits">
+    <value>2</value>
+  </data>
+  <data name="ZAR_DisplayName">
+    <value>South African rand</value>
+  </data>
+  <data name="ZAR_ISO">
+    <value>ZAR</value>
+  </data>
+  <data name="ZAR_Num">
+    <value>710</value>
+  </data>
+  <data name="ZAR_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="ZMW_Digits">
+    <value>2</value>
+  </data>
+  <data name="ZMW_DisplayName">
+    <value>Zambian kwacha</value>
+  </data>
+  <data name="ZMW_ISO">
+    <value>ZMW</value>
+  </data>
+  <data name="ZMW_Num">
+    <value>967</value>
+  </data>
+  <data name="ZMW_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="ZRN_Digits">
     <value>2</value>
   </data>
-  <data name="ZRN_StartDate">
-    <value>1993-01-01</value>
+  <data name="ZRN_DisplayName">
+    <value>Zaïrean new zaïre</value>
   </data>
   <data name="ZRN_EndDate">
     <value>1996-12-31</value>
   </data>
-  <data name="ZRZ_DisplayName">
-    <value>Zaïrean zaïre</value>
+  <data name="ZRN_ISO">
+    <value>ZRN</value>
   </data>
-  <data name="ZRZ_Num">
-    <value>000</value>
+  <data name="ZRN_Num">
+    <value>180</value>
   </data>
-  <data name="ZRZ_ISO">
-    <value>ZRZ</value>
+  <data name="ZRN_StartDate">
+    <value>1993-01-01</value>
   </data>
   <data name="ZRZ_Digits">
     <value>3</value>
   </data>
-  <data name="ZRZ_StartDate">
-    <value>0001-01-01</value>
+  <data name="ZRZ_DisplayName">
+    <value>Zaïrean zaïre</value>
   </data>
   <data name="ZRZ_EndDate">
     <value>1992-12-31</value>
   </data>
-  <data name="ZWC_DisplayName">
-    <value>Zimbabwe dollar</value>
+  <data name="ZRZ_ISO">
+    <value>ZRZ</value>
   </data>
-  <data name="ZWC_Num">
+  <data name="ZRZ_Num">
     <value>000</value>
   </data>
-  <data name="ZWC_ISO">
-    <value>ZWC</value>
+  <data name="ZRZ_StartDate">
+    <value>0001-01-01</value>
   </data>
   <data name="ZWC_Digits">
     <value>2</value>
   </data>
-  <data name="ZWC_StartDate">
-    <value>1970-02-17</value>
+  <data name="ZWC_DisplayName">
+    <value>Zimbabwe dollar</value>
   </data>
   <data name="ZWC_EndDate">
     <value>1980-04-17</value>
   </data>
-  <data name="ZWD_DisplayName">
-    <value>Zimbabwe dollar</value>
+  <data name="ZWC_ISO">
+    <value>ZWC</value>
   </data>
-  <data name="ZWD_Num">
-    <value>716</value>
+  <data name="ZWC_Num">
+    <value>000</value>
   </data>
-  <data name="ZWD_ISO">
-    <value>ZWD</value>
+  <data name="ZWC_StartDate">
+    <value>1970-02-17</value>
   </data>
   <data name="ZWD_Digits">
     <value>2</value>
   </data>
-  <data name="ZWD_StartDate">
-    <value>1980-04-18</value>
+  <data name="ZWD_DisplayName">
+    <value>Zimbabwe dollar</value>
   </data>
   <data name="ZWD_EndDate">
     <value>2006-07-31</value>
   </data>
-  <data name="ZWL_DisplayName">
-    <value>Zimbabwe dollar</value>
+  <data name="ZWD_ISO">
+    <value>ZWD</value>
   </data>
-  <data name="ZWL_Num">
-    <value>933</value>
+  <data name="ZWD_Num">
+    <value>716</value>
   </data>
-  <data name="ZWL_ISO">
-    <value>ZWL</value>
+  <data name="ZWD_StartDate">
+    <value>1980-04-18</value>
   </data>
   <data name="ZWL_Digits">
     <value>2</value>
   </data>
-  <data name="ZWL_StartDate">
-    <value>2009-02-03</value>
+  <data name="ZWL_DisplayName">
+    <value>Zimbabwe dollar</value>
   </data>
   <data name="ZWL_EndDate">
     <value>2009-04-12</value>
   </data>
-  <data name="ZWN_DisplayName">
-    <value>Zimbabwe dollar</value>
+  <data name="ZWL_ISO">
+    <value>ZWL</value>
   </data>
-  <data name="ZWN_Num">
-    <value>942</value>
+  <data name="ZWL_Num">
+    <value>933</value>
   </data>
-  <data name="ZWN_ISO">
-    <value>ZWN</value>
+  <data name="ZWL_StartDate">
+    <value>2009-02-03</value>
   </data>
   <data name="ZWN_Digits">
     <value>2</value>
   </data>
-  <data name="ZWN_StartDate">
-    <value>2006-08-01</value>
+  <data name="ZWN_DisplayName">
+    <value>Zimbabwe dollar</value>
   </data>
   <data name="ZWN_EndDate">
     <value>2008-07-31</value>
   </data>
-  <data name="ZWR_DisplayName">
-    <value>Zimbabwe dollar</value>
+  <data name="ZWN_ISO">
+    <value>ZWN</value>
   </data>
-  <data name="ZWR_Num">
-    <value>935</value>
+  <data name="ZWN_Num">
+    <value>942</value>
   </data>
-  <data name="ZWR_ISO">
-    <value>ZWR</value>
+  <data name="ZWN_StartDate">
+    <value>2006-08-01</value>
   </data>
   <data name="ZWR_Digits">
     <value>2</value>
   </data>
-  <data name="ZWR_StartDate">
-    <value>2008-08-01</value>
+  <data name="ZWR_DisplayName">
+    <value>Zimbabwe dollar</value>
   </data>
   <data name="ZWR_EndDate">
     <value>2009-02-02</value>
   </data>
-  <data name="All">
-    <value>AED;AFN;ALL;AMD;ANG;AOA;ARS;AUD;AWG;AZN;BAM;BBD;BDT;BGN;BHD;BIF;BMD;BND;BOB;BOV;BRL;BSD;BTN;BWP;BYR;BZD;CAD;CDF;CHE;CHF;CHW;CLF;CLP;CNH;CNY;COP;COU;CRC;CUC;CUP;CVE;CZK;DJF;DKK;DOP;DZD;EGP;ERN;ETB;EUR;FJD;FKP;GBP;GEL;GHS;GIP;GMD;GNF;GTQ;GYD;HKD;HNL;HRK;HTG;HUF;IDR;ILS;INR;IQD;IRR;ISK;JMD;JOD;JPY;KES;KGS;KHR;KMF;KPW;KRW;KWD;KYD;KZT;LAK;LBP;LKR;LRD;LSL;LYD;MAD;MDL;MGA;MKD;MMK;MNT;MOP;MRO;MUR;MVR;MWK;MXN;MXV;MYR;MZN;NAD;NGN;NIO;NOK;NPR;NZD;OMR;PAB;PEN;PGK;PHP;PKR;PLN;PYG;QAR;RON;RSD;RUB;RWF;SAR;SBD;SCR;SDG;SEK;SGD;SHP;SLL;SOS;SRD;SSP;STD;SYP;SZL;THB;TJS;TMT;TND;TOP;TRY;TTD;TWD;TZS;UAH;UGX;USD;USN;USS;UYI;UYU;UZS;VEF;VND;VUV;WST;XAF;XAG;XAU;XBA;XBB;XBC;XBD;XCD;XDR;XFU;XOF;XPD;XPF;XPT;XSU;XTS;XUA;XXX;YER;ZAR;ZMW;ADP;ATS;BEF;CSD;CSK;CYP;DDM;DEM;ECS;EEK;ESP;FIM;FRF;GRD;IEP;ITL;LTL;LUF;LVL;MCF;MTL;NLG;PTE;SIT;SKK;SML;SUR;VAL;YOU;YUD;YUG;YUM;YUN;YUR;ZRN;ZRZ;ZWC;ZWD;ZWL;ZWN;ZWR</value>
+  <data name="ZWR_ISO">
+    <value>ZWR</value>
+  </data>
+  <data name="ZWR_Num">
+    <value>935</value>
+  </data>
+  <data name="ZWR_StartDate">
+    <value>2008-08-01</value>
+  </data>
+  <data name="ZZZ_Digits">
+    <value>2</value>
+  </data>
+  <data name="ZZZ_DisplayName">
+    <value>Unknown</value>
+  </data>
+  <data name="ZZZ_ISO">
+    <value>ZZZ</value>
+  </data>
+  <data name="ZZZ_Num">
+    <value>999</value>
+  </data>
+  <data name="ZZZ_StartDate">
+    <value>0001-01-01</value>
+  </data>
+  <data name="ZZZ_Symbol">
+    <value>¤</value>
   </data>
 </root>

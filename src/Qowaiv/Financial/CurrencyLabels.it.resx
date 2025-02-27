@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<root>
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -12,10 +12,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
-  <data name="ZZZ_DisplayName">
-    <value>Sconosciuto</value>
-    <comment>Unknown (ZZZ)</comment>
-  </data>
   <data name="AED_DisplayName">
     <value>Dirham degli Emirati Arabi Uniti</value>
     <comment>United Arab Emirates dirham (AED)</comment>
@@ -363,6 +359,10 @@
   <data name="LSL_DisplayName">
     <value>Loti lesothiano</value>
     <comment>Lesotho loti (LSL)</comment>
+  </data>
+  <data name="LTL_DisplayName">
+    <value>Lita lituano</value>
+    <comment>Lithuanian litas (LTL)</comment>
   </data>
   <data name="LYD_DisplayName">
     <value>Dinaro libico</value>
@@ -728,8 +728,8 @@
     <value>Kwacha zambiano</value>
     <comment>Zambian kwacha (ZMW)</comment>
   </data>
-  <data name="LTL_DisplayName">
-    <value>Lita lituano</value>
-    <comment>Lithuanian litas (LTL)</comment>
+  <data name="ZZZ_DisplayName">
+    <value>Sconosciuto</value>
+    <comment>Unknown (ZZZ)</comment>
   </data>
 </root>

@@ -4,7 +4,7 @@ namespace Qowaiv.TestTools.Resx;
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable]
 [XmlType("data")]
-public sealed class XResourceFileData
+public sealed class XResourceFileData : IComparable<XResourceFileData>
 {
     /// <summary>Initializes a new instance of the <see cref="XResourceFileData" /> class.</summary>
     private XResourceFileData()
@@ -41,4 +41,9 @@ public sealed class XResourceFileData
     private string DebuggerDisplay => Comment is { }
         ? $"Data, Name: {Name}, Value: '{Value}' Comment: '{Comment}'"
         : $"Data, Name: {Name}, Value: '{Value}'";
+
+    public int CompareTo(XResourceFileData? other)
+        => other is null 
+        ? +1
+        : Name.CompareTo(other.Name);
 }

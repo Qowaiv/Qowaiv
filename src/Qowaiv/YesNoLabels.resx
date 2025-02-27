@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<root>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -12,40 +12,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
-  <data name="b_No" xml:space="preserve">
+  <data name="b_No">
     <value>false</value>
   </data>
-  <data name="b_Unknown" xml:space="preserve">
+  <data name="b_Unknown">
     <value />
   </data>
-  <data name="b_Yes" xml:space="preserve">
+  <data name="b_Yes">
     <value>true</value>
   </data>
-  <data name="ch_No" xml:space="preserve">
+  <data name="ch_No">
     <value>n</value>
   </data>
-  <data name="ch_Unknown" xml:space="preserve">
+  <data name="ch_Unknown">
     <value>?</value>
   </data>
-  <data name="ch_Yes" xml:space="preserve">
+  <data name="ch_Yes">
     <value>y</value>
   </data>
-  <data name="f_No" xml:space="preserve">
+  <data name="f_No">
     <value>no</value>
   </data>
-  <data name="f_Unknown" xml:space="preserve">
+  <data name="f_Unknown">
     <value>unknown</value>
   </data>
-  <data name="f_Yes" xml:space="preserve">
+  <data name="f_Yes">
     <value>yes</value>
   </data>
-  <data name="int_No" xml:space="preserve">
+  <data name="int_No">
     <value>0</value>
   </data>
-  <data name="int_Unknown" xml:space="preserve">
+  <data name="int_Unknown">
     <value>?</value>
   </data>
-  <data name="int_Yes" xml:space="preserve">
+  <data name="int_Yes">
     <value>1</value>
   </data>
 </root>

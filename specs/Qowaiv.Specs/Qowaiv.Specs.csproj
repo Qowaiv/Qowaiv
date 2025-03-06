@@ -12,10 +12,6 @@
   <ItemGroup>
     <Compile Include="../../src/Qowaiv/Text/ASCII.cs" Link="Qowaiv.Internal/Text/ASCII.cs" />
     <Compile Include="../../src/Qowaiv/Text/CharBuffer.cs" Link="Qowaiv.Internal/Text/CharBuffer.cs" />
-    <Compile Include="../../src/Qowaiv/Text/CharBuffer.String.cs" Link="Qowaiv.Internal/Text/CharBuffer.String.cs" />
-    <Compile Include="../../src/Qowaiv/Text/CharBuffer.ToNonDiacritic.cs" Link="Qowaiv.Internal/Text/CharBuffer.ToNonDiacritic.cs" />
-    <Compile Include="../../src/Qowaiv/Text/CharBuffer.Transform.cs" Link="Qowaiv.Internal/Text/CharBuffer.Transform.cs" />
-    <Compile Include="../../src/Qowaiv/Text/CharrBufferExtensions.cs" Link="Qowaiv.Internal/Text/CharrBufferExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup Label="Test Tools">

@@ -1,3 +1,5 @@
+using System;
+
 namespace Qowaiv.Formatting;
 
 /// <summary>A string formatter class.</summary>
@@ -154,7 +156,14 @@ public static class StringFormatter
     [Pure]
     [return: NotNullIfNotNull(nameof(str))]
     public static string? ToNonDiacritic(string? str, string ignore)
-     => str is { Length: > 0 }
-        ? str.Buffer().ToNonDiacritic(ignore ?? string.Empty)
-        : str;
+    {
+        if (str is { Length: > 0 })
+        {
+            ReadOnlySpan<char> span = str;
+            Span<char> buffer = stackalloc char[span.BufferSize()];
+            var length = span.ToNonDiacritic(buffer, ignore ?? string.Empty);
+            return buffer[..length].ToString();
+        }
+        else { return str; }
+    }
 }

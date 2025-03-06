@@ -26,26 +26,6 @@ public partial class IbanBenchmark
             }
             return Ibans;
         }
-
-        [Benchmark]
-        public string?[] Regex()
-        {
-            for (var i = 0; i < Inputs.Length; i++)
-            {
-                Outputs[i] = Reference.RegexBased.Parse(Inputs[i]);
-            }
-            return Outputs;
-        }
-
-        [Benchmark]
-        public string?[] Improved()
-        {
-            for (var i = 0; i < Inputs.Length; i++)
-            {
-                Outputs[i] = Reference.RegexBased.Improved(Inputs[i]);
-            }
-            return Outputs;
-        }
     }
 
     public class ParseFormatted : IbanBenchmark
@@ -64,26 +44,6 @@ public partial class IbanBenchmark
                 Ibans[i] = Iban.TryParse(Inputs[i]);
             }
             return Ibans;
-        }
-
-        [Benchmark]
-        public string?[] Regex()
-        {
-            for (var i = 0; i < Inputs.Length; i++)
-            {
-                Outputs[i] = Reference.RegexBased.Parse(Inputs[i]);
-            }
-            return Outputs;
-        }
-
-        [Benchmark]
-        public string?[] Improved()
-        {
-            for (var i = 0; i < Inputs.Length; i++)
-            {
-                Outputs[i] = Reference.RegexBased.Improved(Inputs[i]);
-            }
-            return Outputs;
         }
     }
 
@@ -197,7 +157,7 @@ public partial class IbanBenchmark
         "TG53 TG00 9060 4310 3465 0040 0070"
     ];
 
-    private static string[] Unformatted { get; } = Formatted.Select(f => f.Replace(" ", string.Empty)).ToArray();
+    private static string[] Unformatted { get; } = [.. Formatted.Select(f => f.Replace(" ", string.Empty))];
 
     private static readonly RandomSource Rnd = new MersenneTwister();
 }

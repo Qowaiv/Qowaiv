@@ -1,57 +1,112 @@
-#nullable enable
-
 namespace Qowaiv.Text;
 
-internal sealed partial class CharBuffer : IEnumerable<char>
+internal static class CharBuffer
 {
-    internal static readonly int NotFound = -1;
+    /// <summary>Gets the max length of an array.</summary>
+    /// <remarks>
+    /// Array.MaxLength is not available for .NET standard 2.0.
+    /// </remarks>
+    private const int Array_MaxLength = 0X7FFFFFC7;
 
-    private readonly char[] buffer;
-    private int start;
-    private int end;
+    private const int NotFound = -1;
 
-    /// <summary>Initializes a new instance of the <see cref="CharBuffer" /> class.</summary>
-    private CharBuffer(int capacity) => buffer = new char[capacity];
-
-    /// <summary>Initializes a new instance of the <see cref="CharBuffer" /> class.</summary>
-    public CharBuffer(string str) : this(str.Length) => Add(str);
-
-    /// <summary>Gets the length of the buffer.</summary>
-    public int Length => end - start;
-
-    /// <summary>Gets <see cref="char" /> on the specified index.</summary>
-    public char this[int index]
+    [Pure]
+    public static int BufferSize(this ReadOnlySpan<char> span)
     {
-        get => buffer[index + start];
-        private set => buffer[index + start] = value;
+        var size = span.Length * 2;
+        return (uint)size > Array_MaxLength ? Array_MaxLength : size;
     }
 
-    /// <summary>Returns true if the buffer is empty.</summary>
-    [Pure]
-    public bool IsEmpty() => Length == 0;
+    [CollectionMutation]
+    public static int Unify(this ReadOnlySpan<char> span, Span<char> buffer)
+    {
+        var length = 0;
 
-    /// <summary>Returns true if the buffer is not empty.</summary>
-    [Pure]
-    public bool NotEmpty() => !IsEmpty();
+        foreach (var ch in span)
+        {
+            if (!IsMarkup(ch))
+            {
+                var relace = DiacriticSearch.IndexOf(ch);
 
-    /// <summary>Gets the first <see cref="char" /> of the buffer.</summary>
-    [Pure]
-    public char First() => buffer[start];
+                if (relace != NotFound)
+                {
+                    buffer[length++] = char.ToUpperInvariant(DiacriticReplace[relace]);
+                }
+                else if (DiacriticLookup.TryGetValue(ch, out var chs))
+                {
+                    buffer[length++] = char.ToUpperInvariant(chs[0]);
+                    buffer[length++] = char.ToUpperInvariant(chs[1]);
+                }
+                else
+                {
+                    buffer[length++] = char.ToUpperInvariant(ch);
+                }
+            }
+        }
+        return length;
+    }
 
-    /// <summary>Gets the last <see cref="char" /> of the buffer.</summary>
-    [Pure]
-    public char Last() => buffer[end - 1];
+    [CollectionMutation]
+    public static int ToNonDiacritic(this ReadOnlySpan<char> span, Span<char> buffer, string ignore = "")
+    {
+        var length = 0;
 
-    /// <inheritdoc />
-    [Pure]
-    public IEnumerator<char> GetEnumerator() => buffer.Skip(start).Take(Length).GetEnumerator();
+        foreach (var ch in span)
+        {
+            if (ignore.Contains(ch))
+            {
+                buffer[length++] = ch;
+            }
+            else
+            {
+                var relace = DiacriticSearch.IndexOf(ch);
 
-    /// <inheritdoc />
-    [Pure]
-    [ExcludeFromCodeCoverage]
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+                if (relace != NotFound)
+                {
+                    buffer[length++] = DiacriticReplace[relace];
+                }
+                else if (DiacriticLookup.TryGetValue(ch, out var chs))
+                {
+                    buffer[length++] = chs[0];
+                    buffer[length++] = chs[1];
+                }
+                else
+                {
+                    buffer[length++] = ch;
+                }
+            }
+        }
+        return length;
+    }
 
-    /// <summary>Creates an empty buffer with the specified capacity.</summary>
+    private const string DiacriticSearch = /*..*/ "ÀÁÂÃÄÅĀĂĄǍǺàáâãäåāăąǎǻÇĆĈĊČƠçćĉċčơÐĎďđÈÉÊËĒĔĖĘĚèéêëēĕėęěÌÍÎÏĨĪĬĮİǏìíîïıĩīĭįǐĴĵĜĞĠĢĝğġģĤĦĥħĶķĸĹĻĽĿŁĺļľŀłÑŃŅŇŊñńņňŉŋÒÓÔÕÖØŌŎŐǑǾðòóôõöøōŏőǒǿŔŖŘŕŗřŚŜŞŠśŝşšŢŤŦţťŧÙÚÛÜŨŪŬŮŰŲƯǓǕǗǙǛùúûüũūŭůűųưǔǖǘǚǜŴŵÝŶŸýÿŷŹŻŽźżž";
+    private const string DiacriticReplace = /*.*/ "AAAAAAAAAAAaaaaaaaaaaaCCCCCCccccccDDddEEEEEEEEEeeeeeeeeeIIIIIIIIIIiiiiiiiiiiJjGGGGggggHHhhKkkLLLLLlllllNNNNNnnnnnnOOOOOOOOOOOooooooooooooRRRrrrSSSSssssTTTtttUUUUUUUUUUUUUUUUuuuuuuuuuuuuuuuuWwYYYyyyZZZzzz";
+
+    private static readonly Dictionary<char, string> DiacriticLookup = new()
+    {
+        { 'Æ', "AE" },
+        { 'Ǽ', "AE" },
+        { 'æ', "ae" },
+        { 'ǽ', "ae" },
+        { 'ß', "sz" },
+        { 'Œ', "OE" },
+        { 'œ', "oe" },
+        { 'Ĳ', "IJ" },
+        { 'ĳ', "ij" },
+    };
+
     [Pure]
-    public static CharBuffer Empty(int capacity) => new(capacity);
+    private static bool IsMarkup(char ch)
+        => char.IsWhiteSpace(ch)
+        || ch is '-'
+        or '.'
+        or '_'
+        or (char)0x00B7 // middle dot
+        or (char)0x22C5 // dot operator
+        or (char)0x2202 // bullet
+        or (char)0x2012 // figure dash / minus
+        or (char)0x2013 // en dash
+        or (char)0x2014 // em dash
+        or (char)0x2015 // horizontal bar
+    ;
 }

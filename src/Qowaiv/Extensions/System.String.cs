@@ -70,7 +70,17 @@ public static class QowaivSystemExtensions
         => str is { Length: > 0 } ? str : @default;
 
     [Pure]
-    internal static string Unify(this string? str) => str.Buffer().Unify();
+    internal static string Unify(this string? str)
+    {
+        if (str is { Length: > 0 })
+        {
+            ReadOnlySpan<char> span = str;
+            Span<char> buffer = stackalloc char[span.BufferSize()];
+            var length = span.Unify(buffer);
+            return buffer[..length].ToString();
+        }
+        else { return str ?? string.Empty; }
+    }
 
     [Pure]
     internal static bool IsEmpty(this string? str) => string.IsNullOrEmpty(str);

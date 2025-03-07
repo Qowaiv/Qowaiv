@@ -5,6 +5,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IsAotCompatible>false</IsAotCompatible>
     <Version>8.0.0</Version>
     <PackageId>Qowaiv.TestTools</PackageId>
     <ProductName>Qowaiv Test Tools</ProductName>

@@ -1,3 +1,5 @@
+root = true
+
 dotnet_diagnostic.CA1012.severity   = none       #
 dotnet_diagnostic.CA1845.severity   = none       # Use span-based 'string.Concat'
 dotnet_diagnostic.CA1846.severity   = none       # Prefer 'AsSpan' over 'Substring'
@@ -27,6 +29,7 @@ dotnet_diagnostic.NUnit2021.severity = warning    # Incompatible types for Equal
 dotnet_diagnostic.NUnit2005.severity = error      # Consider using Assert.That instead of AreEqual
 dotnet_diagnostic.NUnit2033.severity = error      # Consider using Assert.That instead of NotZero
 
+dotnet_diagnostic.Proj0006.severity = none       # Add Additional files
 dotnet_diagnostic.Proj0240.severity = none       # Enable package validation [Justification: Disallows extended contracts for newer .NET versions]
 
 dotnet_diagnostic.QW0010.severity   = none       # Use DateOnly instead of Date

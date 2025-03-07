@@ -34,8 +34,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>QowaivMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="YesNoLabels.resx">
-    </EmbeddedResource>
   </ItemGroup>
 
   <PropertyGroup>

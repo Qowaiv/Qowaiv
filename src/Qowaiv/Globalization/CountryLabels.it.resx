@@ -57,13 +57,13 @@
     <value>Brunei</value>
     <comment>Brunei Darussalam (BN)</comment>
   </data>
-  <data name="BQ_DisplayName">
-    <value>Isole Bes</value>
-    <comment>Caribbean Netherlands (BQ)</comment>
-  </data>
   <data name="BQAQ_DisplayName">
     <value>Territorio antartico britannico</value>
     <comment>British Antarctic Territory (BQ)</comment>
+  </data>
+  <data name="BQ_DisplayName">
+    <value>Isole Bes</value>
+    <comment>Caribbean Netherlands (BQ)</comment>
   </data>
   <data name="BR_DisplayName">
     <value>Brasile</value>
@@ -77,13 +77,13 @@
     <value>Isola Bouvet</value>
     <comment>Bouvet Island (BV)</comment>
   </data>
-  <data name="BY_DisplayName">
-    <value>Bielorussia</value>
-    <comment>Belarus (BY)</comment>
-  </data>
   <data name="BYAA_DisplayName">
     <value>RSS Bielorussa</value>
     <comment>Byelorussian SSR (BY)</comment>
+  </data>
+  <data name="BY_DisplayName">
+    <value>Bielorussia</value>
+    <comment>Belarus (BY)</comment>
   </data>
   <data name="CC_DisplayName">
     <value>Isole Cocos E Keeling</value>

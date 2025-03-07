@@ -25,13 +25,13 @@
     <value>Антигуа и Барбуда</value>
     <comment>Antigua and Barbuda (AG)</comment>
   </data>
-  <data name="AI_DisplayName">
-    <value>Ангилья</value>
-    <comment>Anguilla (AI)</comment>
-  </data>
   <data name="AIDJ_DisplayName">
     <value>Французская территория афар и исса</value>
     <comment>French Afars and Issas (AI)</comment>
+  </data>
+  <data name="AI_DisplayName">
+    <value>Ангилья</value>
+    <comment>Anguilla (AI)</comment>
   </data>
   <data name="AL_DisplayName">
     <value>Албания</value>
@@ -133,13 +133,13 @@
     <value>Боливия</value>
     <comment>Bolivia (BO)</comment>
   </data>
-  <data name="BQ_DisplayName">
-    <value>Бонэйр, Синт-Эстатиус и Саба</value>
-    <comment>Caribbean Netherlands (BQ)</comment>
-  </data>
   <data name="BQAQ_DisplayName">
     <value>Британская антарктическая территория</value>
     <comment>British Antarctic Territory (BQ)</comment>
+  </data>
+  <data name="BQ_DisplayName">
+    <value>Бонэйр, Синт-Эстатиус и Саба</value>
+    <comment>Caribbean Netherlands (BQ)</comment>
   </data>
   <data name="BR_DisplayName">
     <value>Бразилия</value>
@@ -165,13 +165,13 @@
     <value>Ботсвана</value>
     <comment>Botswana (BW)</comment>
   </data>
-  <data name="BY_DisplayName">
-    <value>Белоруссия</value>
-    <comment>Belarus (BY)</comment>
-  </data>
   <data name="BYAA_DisplayName">
     <value>Белорусская ССР</value>
     <comment>Byelorussian SSR (BY)</comment>
+  </data>
+  <data name="BY_DisplayName">
+    <value>Белоруссия</value>
+    <comment>Belarus (BY)</comment>
   </data>
   <data name="BZ_DisplayName">
     <value>Белиз</value>
@@ -369,13 +369,13 @@
     <value>Гренада</value>
     <comment>Grenada (GD)</comment>
   </data>
-  <data name="GE_DisplayName">
-    <value>Грузия</value>
-    <comment>Georgia (GE)</comment>
-  </data>
   <data name="GEHH_DisplayName">
     <value>Острова Гилберта и Эллис</value>
     <comment>Gilbert Islands (GE)</comment>
+  </data>
+  <data name="GE_DisplayName">
+    <value>Грузия</value>
+    <comment>Georgia (GE)</comment>
   </data>
   <data name="GF_DisplayName">
     <value>Гвиана</value>
@@ -905,13 +905,13 @@
     <value>Шпицберген и Ян-Майен</value>
     <comment>Svalbard and Jan Mayen (SJ)</comment>
   </data>
-  <data name="SK_DisplayName">
-    <value>Словакия</value>
-    <comment>Slovakia (SK)</comment>
-  </data>
   <data name="SKIN_DisplayName">
     <value>Сикким</value>
     <comment>Sikkim (SK)</comment>
+  </data>
+  <data name="SK_DisplayName">
+    <value>Словакия</value>
+    <comment>Slovakia (SK)</comment>
   </data>
   <data name="SL_DisplayName">
     <value>Сьерра-Леоне</value>

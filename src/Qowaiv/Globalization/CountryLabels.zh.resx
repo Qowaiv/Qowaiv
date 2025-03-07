@@ -25,13 +25,13 @@
     <value>安提瓜和巴布达</value>
     <comment>Antigua and Barbuda (AG)</comment>
   </data>
-  <data name="AI_DisplayName">
-    <value>安圭拉</value>
-    <comment>Anguilla (AI)</comment>
-  </data>
   <data name="AIDJ_DisplayName">
     <value>法属阿法尔和伊萨领地</value>
     <comment>French Afars and Issas (AI)</comment>
+  </data>
+  <data name="AI_DisplayName">
+    <value>安圭拉</value>
+    <comment>Anguilla (AI)</comment>
   </data>
   <data name="AL_DisplayName">
     <value>阿尔巴尼亚</value>
@@ -133,13 +133,13 @@
     <value>玻利维亚</value>
     <comment>Bolivia (BO)</comment>
   </data>
-  <data name="BQ_DisplayName">
-    <value>荷兰加勒比区</value>
-    <comment>Caribbean Netherlands (BQ)</comment>
-  </data>
   <data name="BQAQ_DisplayName">
     <value>英属南极领地</value>
     <comment>British Antarctic Territory (BQ)</comment>
+  </data>
+  <data name="BQ_DisplayName">
+    <value>荷兰加勒比区</value>
+    <comment>Caribbean Netherlands (BQ)</comment>
   </data>
   <data name="BR_DisplayName">
     <value>巴西</value>
@@ -165,13 +165,13 @@
     <value>博茨瓦纳</value>
     <comment>Botswana (BW)</comment>
   </data>
-  <data name="BY_DisplayName">
-    <value>白俄罗斯</value>
-    <comment>Belarus (BY)</comment>
-  </data>
   <data name="BYAA_DisplayName">
     <value>白俄罗斯苏维埃社会主义共和国</value>
     <comment>Byelorussian SSR (BY)</comment>
+  </data>
+  <data name="BY_DisplayName">
+    <value>白俄罗斯</value>
+    <comment>Belarus (BY)</comment>
   </data>
   <data name="BZ_DisplayName">
     <value>伯利兹</value>
@@ -369,13 +369,13 @@
     <value>格林纳达</value>
     <comment>Grenada (GD)</comment>
   </data>
-  <data name="GE_DisplayName">
-    <value>格鲁吉亚</value>
-    <comment>Georgia (GE)</comment>
-  </data>
   <data name="GEHH_DisplayName">
     <value>吉尔伯特和埃利斯群岛</value>
     <comment>Gilbert Islands (GE)</comment>
+  </data>
+  <data name="GE_DisplayName">
+    <value>格鲁吉亚</value>
+    <comment>Georgia (GE)</comment>
   </data>
   <data name="GF_DisplayName">
     <value>法属圭亚那</value>
@@ -905,13 +905,13 @@
     <value>斯瓦尔巴群岛和扬马延岛</value>
     <comment>Svalbard and Jan Mayen (SJ)</comment>
   </data>
-  <data name="SK_DisplayName">
-    <value>斯洛伐克</value>
-    <comment>Slovakia (SK)</comment>
-  </data>
   <data name="SKIN_DisplayName">
     <value>錫金</value>
     <comment>Sikkim (SK)</comment>
+  </data>
+  <data name="SK_DisplayName">
+    <value>斯洛伐克</value>
+    <comment>Slovakia (SK)</comment>
   </data>
   <data name="SL_DisplayName">
     <value>塞拉利昂</value>

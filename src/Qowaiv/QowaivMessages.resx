@@ -21,6 +21,12 @@
   <data name="ArgumentException_TimestampArrayShouldHaveSize8">
     <value>The byte array should have size of 8.</value>
   </data>
+  <data name="ArgumentOutOfRangeException_AddDateSpan">
+    <value>Adding a date span only supports 'Default' and 'DaysFirst'.</value>
+  </data>
+  <data name="ArgumentOutOfRangeException_DateSpan">
+    <value>The specified years, months and days results in an un-representable DateSpan.</value>
+  </data>
   <data name="ArgumentOutOfRange_DecimalRound">
     <value>Decimals can only round to between -28 and 28 digits of precision.</value>
   </data>
@@ -42,20 +48,8 @@
   <data name="ArgumentOutOfRange_YearMonth">
     <value>Year, and Month parameters describe an un-representable year-month.</value>
   </data>
-  <data name="ArgumentOutOfRangeException_AddDateSpan">
-    <value>Adding a date span only supports 'Default' and 'DaysFirst'.</value>
-  </data>
-  <data name="ArgumentOutOfRangeException_DateSpan">
-    <value>The specified years, months and days results in an un-representable DateSpan.</value>
-  </data>
   <data name="CurrencyMismatchException">
     <value>The {0} operation could not be applied. There is a mismatch between {1} and {2}.</value>
-  </data>
-  <data name="FormatException_IndexOutOfRange">
-    <value>Index (zero based) must be greater than or equal to zero and less than the size of the argument list.</value>
-  </data>
-  <data name="FormatException_InvalidFormat">
-    <value>Input string was not in a correct format.</value>
   </data>
   <data name="FormatExceptionBase32">
     <value>Not a valid Base32 string</value>
@@ -159,20 +153,26 @@
   <data name="FormatExceptionYesNo">
     <value>Not a valid yes-no value</value>
   </data>
+  <data name="FormatException_IndexOutOfRange">
+    <value>Index (zero based) must be greater than or equal to zero and less than the size of the argument list.</value>
+  </data>
+  <data name="FormatException_InvalidFormat">
+    <value>Input string was not in a correct format.</value>
+  </data>
   <data name="HashingNotSupported">
     <value>Hashing is not supported by {0}.</value>
   </data>
   <data name="InvalidCastException_FromTo">
     <value>Cast from {0} to {1} is not valid.</value>
   </data>
-  <data name="InvalidOperation_SequentialUUID">
-    <value>Sequential UUID can only be generated between 1970-01-01 and 9276-12-03.</value>
-  </data>
   <data name="InvalidOperationException_NoElements">
     <value>Sequence contains no elements.</value>
   </data>
   <data name="InvalidOperationException_WithDisplayName">
     <value>An not set email address can not be shown with a display name.</value>
+  </data>
+  <data name="InvalidOperation_SequentialUUID">
+    <value>Sequential UUID can only be generated between 1970-01-01 and 9276-12-03.</value>
   </data>
   <data name="JsonSerialization_DateTimeNotSupported">
     <value>JSON deserialization from a date is not supported.</value>
@@ -195,14 +195,14 @@
   <data name="JsonSerialization_TokenNotSupported">
     <value>Unexpected token parsing {0}. {1} is not supported.</value>
   </data>
+  <data name="NotSupportedExceptionCountryToRegionInfo">
+    <value>The country '{0} ({1})' is not supported as region info.</value>
+  </data>
   <data name="NotSupportedException_ConverterCanNotConvertFromString">
     <value>Converter can not convert from System.String.</value>
   </data>
   <data name="NotSupportedException_NoGenericType">
     <value>Type must be a none generic type.</value>
-  </data>
-  <data name="NotSupportedExceptionCountryToRegionInfo">
-    <value>The country '{0} ({1})' is not supported as region info.</value>
   </data>
   <data name="OverflowException_DateSpan">
     <value>DateSpan overflowed because the resulting duration is too long.</value>

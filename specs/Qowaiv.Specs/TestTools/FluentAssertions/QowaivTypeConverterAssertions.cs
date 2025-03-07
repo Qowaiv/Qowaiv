@@ -1,4 +1,3 @@
-using FluentAssertions.Execution;
 using FluentAssertions.Types;
 
 namespace FluentAssertions;
@@ -12,7 +11,7 @@ internal static class QowaivTypeConverterAssertions
     {
         var converter = TypeDescriptor.GetConverter(assertions.Subject);
 
-        Execute.Assertion
+        assertions.CurrentAssertionChain
            .BecauseOf(because, becauseArgs)
            .ForCondition(converter.GetType() != typeof(TypeConverter))
            .FailWith($"There is no type converter defined for '{assertions.Subject}'.");

@@ -81,24 +81,6 @@
   <data name="AG_StartDate">
     <value>1974-01-01</value>
   </data>
-  <data name="AI_CallingCode">
-    <value>+1 264</value>
-  </data>
-  <data name="AI_DisplayName">
-    <value>Anguilla</value>
-  </data>
-  <data name="AI_ISO">
-    <value>660</value>
-  </data>
-  <data name="AI_ISO2">
-    <value>AI</value>
-  </data>
-  <data name="AI_ISO3">
-    <value>AIA</value>
-  </data>
-  <data name="AI_StartDate">
-    <value>1974-01-01</value>
-  </data>
   <data name="AIDJ_DisplayName">
     <value>French Afars and Issas</value>
   </data>
@@ -117,6 +99,27 @@
   <data name="AIDJ_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="AI_CallingCode">
+    <value>+1 264</value>
+  </data>
+  <data name="AI_DisplayName">
+    <value>Anguilla</value>
+  </data>
+  <data name="AI_ISO">
+    <value>660</value>
+  </data>
+  <data name="AI_ISO2">
+    <value>AI</value>
+  </data>
+  <data name="AI_ISO3">
+    <value>AIA</value>
+  </data>
+  <data name="AI_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="All">
+    <value>AD;AE;AF;AG;AI;AL;AM;AO;AQ;AR;AS;AT;AU;AW;AX;AZ;BA;BB;BD;BE;BF;BG;BH;BI;BJ;BL;BM;BN;BO;BQ;BR;BS;BT;BV;BW;BY;BZ;CA;CC;CD;CF;CG;CH;CI;CK;CL;CM;CN;CO;CR;CU;CV;CW;CX;CY;CZ;DE;DJ;DK;DM;DO;DZ;EC;EE;EG;EH;ER;ES;ET;FI;FJ;FK;FM;FO;FR;GA;GB;GD;GE;GF;GG;GH;GI;GL;GM;GN;GP;GQ;GR;GS;GT;GU;GW;GY;HK;HM;HN;HR;HT;HU;ID;IE;IL;IM;IN;IO;IQ;IR;IS;IT;JE;JM;JO;JP;KE;KG;KH;KI;KM;KN;KP;KR;KW;KY;KZ;LA;LB;LC;LI;LK;LR;LS;LT;LU;LV;LY;MA;MC;MD;ME;MF;MG;MH;MK;ML;MM;MN;MO;MP;MQ;MR;MS;MT;MU;MV;MW;MX;MY;MZ;NA;NC;NE;NF;NG;NI;NL;NO;NP;NR;NU;NZ;OM;PA;PE;PF;PG;PH;PK;PL;PM;PN;PR;PS;PT;PW;PY;QA;RE;RO;RS;RU;RW;SA;SB;SC;SD;SE;SG;SH;SI;SJ;SK;SL;SM;SN;SO;SR;SS;ST;SV;SX;SY;SZ;TC;TD;TF;TG;TH;TJ;TK;TL;TM;TN;TO;TR;TT;TV;TW;TZ;UA;UG;UM;US;UY;UZ;VA;VC;VE;VG;VI;VN;VU;WF;WS;XK;YE;YT;ZA;ZM;ZW;AIDJ;ANHH;BQAQ;BUMM;BYAA;CSHH;CSXX;CTKI;DDDE;DYBJ;FQHH;FXFR;GEHH;HVBF;JTUM;MIUM;NHVU;NQAQ;NTHH;PCHH;PUUM;PZPA;RHZW;SKIN;SUHH;TPTL;VDVN;WKUM;YDYE;YUCS;ZRCD</value>
+  </data>
   <data name="AL_CallingCode">
     <value>+355</value>
   </data>
@@ -134,9 +137,6 @@
   </data>
   <data name="AL_StartDate">
     <value>1974-01-01</value>
-  </data>
-  <data name="All">
-    <value>AD;AE;AF;AG;AI;AL;AM;AO;AQ;AR;AS;AT;AU;AW;AX;AZ;BA;BB;BD;BE;BF;BG;BH;BI;BJ;BL;BM;BN;BO;BQ;BR;BS;BT;BV;BW;BY;BZ;CA;CC;CD;CF;CG;CH;CI;CK;CL;CM;CN;CO;CR;CU;CV;CW;CX;CY;CZ;DE;DJ;DK;DM;DO;DZ;EC;EE;EG;EH;ER;ES;ET;FI;FJ;FK;FM;FO;FR;GA;GB;GD;GE;GF;GG;GH;GI;GL;GM;GN;GP;GQ;GR;GS;GT;GU;GW;GY;HK;HM;HN;HR;HT;HU;ID;IE;IL;IM;IN;IO;IQ;IR;IS;IT;JE;JM;JO;JP;KE;KG;KH;KI;KM;KN;KP;KR;KW;KY;KZ;LA;LB;LC;LI;LK;LR;LS;LT;LU;LV;LY;MA;MC;MD;ME;MF;MG;MH;MK;ML;MM;MN;MO;MP;MQ;MR;MS;MT;MU;MV;MW;MX;MY;MZ;NA;NC;NE;NF;NG;NI;NL;NO;NP;NR;NU;NZ;OM;PA;PE;PF;PG;PH;PK;PL;PM;PN;PR;PS;PT;PW;PY;QA;RE;RO;RS;RU;RW;SA;SB;SC;SD;SE;SG;SH;SI;SJ;SK;SL;SM;SN;SO;SR;SS;ST;SV;SX;SY;SZ;TC;TD;TF;TG;TH;TJ;TK;TL;TM;TN;TO;TR;TT;TV;TW;TZ;UA;UG;UM;US;UY;UZ;VA;VC;VE;VG;VI;VN;VU;WF;WS;XK;YE;YT;ZA;ZM;ZW;AIDJ;ANHH;BQAQ;BUMM;BYAA;CSHH;CSXX;CTKI;DDDE;DYBJ;FQHH;FXFR;GEHH;HVBF;JTUM;MIUM;NHVU;NQAQ;NTHH;PCHH;PUUM;PZPA;RHZW;SKIN;SUHH;TPTL;VDVN;WKUM;YDYE;YUCS;ZRCD</value>
   </data>
   <data name="AM_CallingCode">
     <value>+374</value>
@@ -570,24 +570,6 @@
   <data name="BO_StartDate">
     <value>1974-01-01</value>
   </data>
-  <data name="BQ_CallingCode">
-    <value>+599</value>
-  </data>
-  <data name="BQ_DisplayName">
-    <value>Caribbean Netherlands</value>
-  </data>
-  <data name="BQ_ISO">
-    <value>535</value>
-  </data>
-  <data name="BQ_ISO2">
-    <value>BQ</value>
-  </data>
-  <data name="BQ_ISO3">
-    <value>BES</value>
-  </data>
-  <data name="BQ_StartDate">
-    <value>1974-01-01</value>
-  </data>
   <data name="BQAQ_DisplayName">
     <value>British Antarctic Territory</value>
   </data>
@@ -604,6 +586,24 @@
     <value>ATB</value>
   </data>
   <data name="BQAQ_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BQ_CallingCode">
+    <value>+599</value>
+  </data>
+  <data name="BQ_DisplayName">
+    <value>Caribbean Netherlands</value>
+  </data>
+  <data name="BQ_ISO">
+    <value>535</value>
+  </data>
+  <data name="BQ_ISO2">
+    <value>BQ</value>
+  </data>
+  <data name="BQ_ISO3">
+    <value>BES</value>
+  </data>
+  <data name="BQ_StartDate">
     <value>1974-01-01</value>
   </data>
   <data name="BR_CallingCode">
@@ -717,24 +717,6 @@
   <data name="BW_StartDate">
     <value>1974-01-01</value>
   </data>
-  <data name="BY_CallingCode">
-    <value>+375</value>
-  </data>
-  <data name="BY_DisplayName">
-    <value>Belarus</value>
-  </data>
-  <data name="BY_ISO">
-    <value>112</value>
-  </data>
-  <data name="BY_ISO2">
-    <value>BY</value>
-  </data>
-  <data name="BY_ISO3">
-    <value>BLR</value>
-  </data>
-  <data name="BY_StartDate">
-    <value>1974-01-01</value>
-  </data>
   <data name="BYAA_DisplayName">
     <value>Byelorussian SSR</value>
   </data>
@@ -751,6 +733,24 @@
     <value>BYS</value>
   </data>
   <data name="BYAA_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="BY_CallingCode">
+    <value>+375</value>
+  </data>
+  <data name="BY_DisplayName">
+    <value>Belarus</value>
+  </data>
+  <data name="BY_ISO">
+    <value>112</value>
+  </data>
+  <data name="BY_ISO2">
+    <value>BY</value>
+  </data>
+  <data name="BY_ISO3">
+    <value>BLR</value>
+  </data>
+  <data name="BY_StartDate">
     <value>1974-01-01</value>
   </data>
   <data name="BZ_CallingCode">
@@ -1644,24 +1644,6 @@
   <data name="GD_StartDate">
     <value>1974-01-01</value>
   </data>
-  <data name="GE_CallingCode">
-    <value>+995</value>
-  </data>
-  <data name="GE_DisplayName">
-    <value>Georgia</value>
-  </data>
-  <data name="GE_ISO">
-    <value>268</value>
-  </data>
-  <data name="GE_ISO2">
-    <value>GE</value>
-  </data>
-  <data name="GE_ISO3">
-    <value>GEO</value>
-  </data>
-  <data name="GE_StartDate">
-    <value>1974-01-01</value>
-  </data>
   <data name="GEHH_DisplayName">
     <value>Gilbert Islands</value>
   </data>
@@ -1678,6 +1660,24 @@
     <value>GEL</value>
   </data>
   <data name="GEHH_StartDate">
+    <value>1974-01-01</value>
+  </data>
+  <data name="GE_CallingCode">
+    <value>+995</value>
+  </data>
+  <data name="GE_DisplayName">
+    <value>Georgia</value>
+  </data>
+  <data name="GE_ISO">
+    <value>268</value>
+  </data>
+  <data name="GE_ISO2">
+    <value>GE</value>
+  </data>
+  <data name="GE_ISO3">
+    <value>GEO</value>
+  </data>
+  <data name="GE_StartDate">
     <value>1974-01-01</value>
   </data>
   <data name="GF_CallingCode">
@@ -4059,24 +4059,6 @@
   <data name="SJ_StartDate">
     <value>1974-01-01</value>
   </data>
-  <data name="SK_CallingCode">
-    <value>+421</value>
-  </data>
-  <data name="SK_DisplayName">
-    <value>Slovakia</value>
-  </data>
-  <data name="SK_ISO">
-    <value>703</value>
-  </data>
-  <data name="SK_ISO2">
-    <value>SK</value>
-  </data>
-  <data name="SK_ISO3">
-    <value>SVK</value>
-  </data>
-  <data name="SK_StartDate">
-    <value>1993-01-01</value>
-  </data>
   <data name="SKIN_DisplayName">
     <value>Sikkim</value>
   </data>
@@ -4094,6 +4076,24 @@
   </data>
   <data name="SKIN_StartDate">
     <value>1974-01-01</value>
+  </data>
+  <data name="SK_CallingCode">
+    <value>+421</value>
+  </data>
+  <data name="SK_DisplayName">
+    <value>Slovakia</value>
+  </data>
+  <data name="SK_ISO">
+    <value>703</value>
+  </data>
+  <data name="SK_ISO2">
+    <value>SK</value>
+  </data>
+  <data name="SK_ISO3">
+    <value>SVK</value>
+  </data>
+  <data name="SK_StartDate">
+    <value>1993-01-01</value>
   </data>
   <data name="SL_CallingCode">
     <value>+232</value>

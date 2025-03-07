@@ -105,13 +105,13 @@
     <value>Bolivie</value>
     <comment>Bolivia (BO)</comment>
   </data>
-  <data name="BQ_DisplayName">
-    <value>Bonaire, Saint-Eustache et Saba</value>
-    <comment>Caribbean Netherlands (BQ)</comment>
-  </data>
   <data name="BQAQ_DisplayName">
     <value>Territoire britannique de l'Antarctique</value>
     <comment>British Antarctic Territory (BQ)</comment>
+  </data>
+  <data name="BQ_DisplayName">
+    <value>Bonaire, Saint-Eustache et Saba</value>
+    <comment>Caribbean Netherlands (BQ)</comment>
   </data>
   <data name="BR_DisplayName">
     <value>Brésil</value>
@@ -293,13 +293,13 @@
     <value>Grenade</value>
     <comment>Grenada (GD)</comment>
   </data>
-  <data name="GE_DisplayName">
-    <value>Géorgie</value>
-    <comment>Georgia (GE)</comment>
-  </data>
   <data name="GEHH_DisplayName">
     <value>Îles Gilbert et Ellice.</value>
     <comment>Gilbert Islands (GE)</comment>
+  </data>
+  <data name="GE_DisplayName">
+    <value>Géorgie</value>
+    <comment>Georgia (GE)</comment>
   </data>
   <data name="GF_DisplayName">
     <value>Guyane</value>

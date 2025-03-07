@@ -21,13 +21,13 @@
     <value>Antigua y Barbuda</value>
     <comment>Antigua and Barbuda (AG)</comment>
   </data>
-  <data name="AI_DisplayName">
-    <value>Anguila</value>
-    <comment>Anguilla (AI)</comment>
-  </data>
   <data name="AIDJ_DisplayName">
     <value>Territorio Francés de los Afars y de los Issas</value>
     <comment>French Afars and Issas (AI)</comment>
+  </data>
+  <data name="AI_DisplayName">
+    <value>Anguila</value>
+    <comment>Anguilla (AI)</comment>
   </data>
   <data name="ANHH_DisplayName">
     <value>Antillas Neerlandesas</value>
@@ -81,13 +81,13 @@
     <value>Brunéi</value>
     <comment>Brunei Darussalam (BN)</comment>
   </data>
-  <data name="BQ_DisplayName">
-    <value>Caribe Neerlandés</value>
-    <comment>Caribbean Netherlands (BQ)</comment>
-  </data>
   <data name="BQAQ_DisplayName">
     <value>Territorio Antártico Británico</value>
     <comment>British Antarctic Territory (BQ)</comment>
+  </data>
+  <data name="BQ_DisplayName">
+    <value>Caribe Neerlandés</value>
+    <comment>Caribbean Netherlands (BQ)</comment>
   </data>
   <data name="BR_DisplayName">
     <value>Brasil</value>
@@ -109,13 +109,13 @@
     <value>Botsuana</value>
     <comment>Botswana (BW)</comment>
   </data>
-  <data name="BY_DisplayName">
-    <value>Bielorrusia</value>
-    <comment>Belarus (BY)</comment>
-  </data>
   <data name="BYAA_DisplayName">
     <value>Bielorrusia RSS</value>
     <comment>Byelorussian SSR (BY)</comment>
+  </data>
+  <data name="BY_DisplayName">
+    <value>Bielorrusia</value>
+    <comment>Belarus (BY)</comment>
   </data>
   <data name="BZ_DisplayName">
     <value>Belice</value>

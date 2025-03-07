@@ -132,13 +132,13 @@
     <value>玻利維亞</value>
     <comment>Bolivia (BO)</comment>
   </data>
-  <data name="BQ_DisplayName">
-    <value>荷蘭加勒比區</value>
-    <comment>Bonaire (BQ)</comment>
-  </data>
   <data name="BQAQ_DisplayName">
     <value>英属南极领地</value>
     <comment>British Antarctic Territory (BQ)</comment>
+  </data>
+  <data name="BQ_DisplayName">
+    <value>荷蘭加勒比區</value>
+    <comment>Bonaire (BQ)</comment>
   </data>
   <data name="BR_DisplayName">
     <value>巴西</value>

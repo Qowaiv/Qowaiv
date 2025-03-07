@@ -25,13 +25,13 @@
     <value>أنتيغوا وباربودا</value>
     <comment>Antigua and Barbuda (AG)</comment>
   </data>
-  <data name="AI_DisplayName">
-    <value>أنغويلا</value>
-    <comment>Anguilla (AI)</comment>
-  </data>
   <data name="AIDJ_DisplayName">
     <value>إقليم العفر والعيسى الفرنسي</value>
     <comment>French Afars and Issas (AI)</comment>
+  </data>
+  <data name="AI_DisplayName">
+    <value>أنغويلا</value>
+    <comment>Anguilla (AI)</comment>
   </data>
   <data name="AL_DisplayName">
     <value>علم ألبانيا</value>
@@ -133,13 +133,13 @@
     <value>بوليفيا</value>
     <comment>Bolivia (BO)</comment>
   </data>
-  <data name="BQ_DisplayName">
-    <value>الجزر الكاريبية الهولندية</value>
-    <comment>Caribbean Netherlands (BQ)</comment>
-  </data>
   <data name="BQAQ_DisplayName">
     <value>المقاطعة_البريطانية_بالقارة_القطبية_الجنوبية</value>
     <comment>British Antarctic Territory (BQ)</comment>
+  </data>
+  <data name="BQ_DisplayName">
+    <value>الجزر الكاريبية الهولندية</value>
+    <comment>Caribbean Netherlands (BQ)</comment>
   </data>
   <data name="BR_DisplayName">
     <value>البرازيل</value>
@@ -165,13 +165,13 @@
     <value>بوتسوانا</value>
     <comment>Botswana (BW)</comment>
   </data>
-  <data name="BY_DisplayName">
-    <value>روسيا البيضاء</value>
-    <comment>Belarus (BY)</comment>
-  </data>
   <data name="BYAA_DisplayName">
     <value>جمهورية بيلاروس السوفيتية الاشتراكية</value>
     <comment>Byelorussian SSR (BY)</comment>
+  </data>
+  <data name="BY_DisplayName">
+    <value>روسيا البيضاء</value>
+    <comment>Belarus (BY)</comment>
   </data>
   <data name="BZ_DisplayName">
     <value>بليز</value>
@@ -893,13 +893,13 @@
     <value>سفالبارد ويان ماين</value>
     <comment>Svalbard and Jan Mayen (SJ)</comment>
   </data>
-  <data name="SK_DisplayName">
-    <value>سلوفاكيا</value>
-    <comment>Slovakia (SK)</comment>
-  </data>
   <data name="SKIN_DisplayName">
     <value>سيكيم</value>
     <comment>Sikkim (SK)</comment>
+  </data>
+  <data name="SK_DisplayName">
+    <value>سلوفاكيا</value>
+    <comment>Slovakia (SK)</comment>
   </data>
   <data name="SL_DisplayName">
     <value>سيراليون</value>

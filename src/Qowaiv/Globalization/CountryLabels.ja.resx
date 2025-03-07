@@ -25,13 +25,13 @@
     <value>アンティグア・バーブーダ</value>
     <comment>Antigua and Barbuda (AG)</comment>
   </data>
-  <data name="AI_DisplayName">
-    <value>アンギラ</value>
-    <comment>Anguilla (AI)</comment>
-  </data>
   <data name="AIDJ_DisplayName">
     <value>フランス領アファル・イッサ</value>
     <comment>French Afars and Issas (AI)</comment>
+  </data>
+  <data name="AI_DisplayName">
+    <value>アンギラ</value>
+    <comment>Anguilla (AI)</comment>
   </data>
   <data name="AL_DisplayName">
     <value>アルバニア</value>
@@ -133,13 +133,13 @@
     <value>ボリビア多民族国</value>
     <comment>Bolivia (BO)</comment>
   </data>
-  <data name="BQ_DisplayName">
-    <value>ボネール、シント・ユースタティウスおよびサバ</value>
-    <comment>Caribbean Netherlands (BQ)</comment>
-  </data>
   <data name="BQAQ_DisplayName">
     <value>イギリス領南極地域</value>
     <comment>British Antarctic Territory (BQ)</comment>
+  </data>
+  <data name="BQ_DisplayName">
+    <value>ボネール、シント・ユースタティウスおよびサバ</value>
+    <comment>Caribbean Netherlands (BQ)</comment>
   </data>
   <data name="BR_DisplayName">
     <value>ブラジル</value>
@@ -165,13 +165,13 @@
     <value>ボツワナ</value>
     <comment>Botswana (BW)</comment>
   </data>
-  <data name="BY_DisplayName">
-    <value>ベラルーシ</value>
-    <comment>Belarus (BY)</comment>
-  </data>
   <data name="BYAA_DisplayName">
     <value>白ロシア・ソビエト社会主義共和国</value>
     <comment>Byelorussian SSR (BY)</comment>
+  </data>
+  <data name="BY_DisplayName">
+    <value>ベラルーシ</value>
+    <comment>Belarus (BY)</comment>
   </data>
   <data name="BZ_DisplayName">
     <value>ベリーズ</value>
@@ -369,13 +369,13 @@
     <value>グレナダ</value>
     <comment>Grenada (GD)</comment>
   </data>
-  <data name="GE_DisplayName">
-    <value>グルジア</value>
-    <comment>Georgia (GE)</comment>
-  </data>
   <data name="GEHH_DisplayName">
     <value>ギルバートおよびエリス諸島</value>
     <comment>Gilbert Islands (GE)</comment>
+  </data>
+  <data name="GE_DisplayName">
+    <value>グルジア</value>
+    <comment>Georgia (GE)</comment>
   </data>
   <data name="GF_DisplayName">
     <value>フランス領ギアナ</value>
@@ -905,13 +905,13 @@
     <value>スヴァールバル諸島およびヤンマイエン島</value>
     <comment>Svalbard and Jan Mayen (SJ)</comment>
   </data>
-  <data name="SK_DisplayName">
-    <value>スロバキア</value>
-    <comment>Slovakia (SK)</comment>
-  </data>
   <data name="SKIN_DisplayName">
     <value>シッキム</value>
     <comment>Sikkim (SK)</comment>
+  </data>
+  <data name="SK_DisplayName">
+    <value>スロバキア</value>
+    <comment>Slovakia (SK)</comment>
   </data>
   <data name="SL_DisplayName">
     <value>シエラレオネ</value>

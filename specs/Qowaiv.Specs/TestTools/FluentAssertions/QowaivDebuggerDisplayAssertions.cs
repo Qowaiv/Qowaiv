@@ -1,4 +1,3 @@
-using FluentAssertions.Execution;
 using FluentAssertions.Numeric;
 using FluentAssertions.Primitives;
 
@@ -17,12 +16,13 @@ internal static class QowaivDebuggerDisplayAssertions
     {
         var prop = DebuggerDisplay(assertions.Subject.GetType());
 
-        if (Execute.Assertion
+        assertions.CurrentAssertionChain
             .ForCondition(prop is { })
-            .FailWith($"'{assertions.Subject.GetType()}' has no DebuggerDisplay defined."))
-        {
-            prop!.GetValue(assertions.Subject).Should().Be(display, because, becauseArgs);
-        }
+            .FailWith($"'{assertions.Subject.GetType()}' has no DebuggerDisplay defined.");
+
+
+        prop!.GetValue(assertions.Subject).Should().Be(display, because, becauseArgs);
+       
         return new AndConstraint<ObjectAssertions>(assertions);
     }
 
@@ -34,14 +34,14 @@ internal static class QowaivDebuggerDisplayAssertions
         string because = "",
         params object[] becauseArgs)
     {
-        var prop = DebuggerDisplay(/*Guard.NotNull(assertions)*/assertions.Subject.GetType());
+        var prop = DebuggerDisplay(assertions.Subject.GetType());
 
-        if (Execute.Assertion
+        assertions.CurrentAssertionChain
             .ForCondition(prop is { })
-            .FailWith($"'{assertions.Subject.GetType()}' has no DebuggerDisplay defined"))
-        {
-            prop!.GetValue(assertions.Subject).Should().Be(display, because, becauseArgs);
-        }
+            .FailWith($"'{assertions.Subject.GetType()}' has no DebuggerDisplay defined");
+
+        prop!.GetValue(assertions.Subject).Should().Be(display, because, becauseArgs);
+
         return new AndConstraint<ComparableTypeAssertions<T>>(assertions);
     }
 

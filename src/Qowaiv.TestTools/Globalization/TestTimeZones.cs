@@ -35,7 +35,7 @@ public static class TestTimeZones
         TimeZoneInfo.AdjustmentRule[] adjustmentRules,
         bool disableDaylightSavingTime)
     {
-        var ctor = typeof(TimeZoneInfo).GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance)
+        var ctor = typeof(TimeZoneInfo).GetConstructors(NonPublicInstance)
             .Find(ct => ct.GetParameters() is { Length: >= 7 } pars
                 && pars[0].ParameterType == typeof(string)
                 && pars[1].ParameterType == typeof(TimeSpan)
@@ -59,4 +59,8 @@ public static class TestTimeZones
         }
         catch (TargetInvocationException x) { throw x.InnerException ?? x; }
     }
+
+#pragma warning disable S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields
+    // We need access and have exception handling in place once this fails.
+    private const BindingFlags NonPublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
 }

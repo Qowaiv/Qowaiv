@@ -1,4 +1,3 @@
-using FluentAssertions.Execution;
 using FluentAssertions.Numeric;
 
 namespace FluentAssertions;
@@ -40,10 +39,10 @@ internal static class UuidAssertions
             }
         }
 
-        Execute.Assertion
+        assertions.CurrentAssertionChain
             .ForCondition(!fail)
             .WithExpectation($@"Expected: [{(string.Join(", ", exp))}]
-Actual:   [{(string.Join(", ", act))}]");
+Actual:   [{(string.Join(", ", act))}]", _ => { });
 
         subject.Version.Should().Be(UuidVersion.Sequential);
 

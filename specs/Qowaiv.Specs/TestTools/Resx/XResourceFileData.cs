@@ -43,7 +43,7 @@ public sealed class XResourceFileData : IComparable<XResourceFileData>
         : $"Data, Name: {Name}, Value: '{Value}'";
 
     public int CompareTo(XResourceFileData? other)
-        => other is null 
+        => other is null
         ? +1
-        : Name.CompareTo(other.Name);
+        : Name.CompareTo(other.Name, StringComparison.OrdinalIgnoreCase);
 }

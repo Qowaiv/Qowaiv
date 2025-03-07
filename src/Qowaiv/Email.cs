@@ -261,8 +261,16 @@ internal static partial class Email
                 var ch = Input[index];
                 switch (ch)
                 {
-                    case '(': if (comment) return (default, index, NoMatch); else comment = true; break;
-                    case ')': if (!comment) return (default, index, NoMatch); else comment = false; break;
+                    case '(':
+                        if (comment) return (default, index, NoMatch);
+                        else { comment = true; }
+                        break;
+
+                    case ')':
+                        if (!comment) return (default, index, NoMatch);
+                        else { comment = false; }
+                        break;
+
                     default:
                         if (!comment)
                         {

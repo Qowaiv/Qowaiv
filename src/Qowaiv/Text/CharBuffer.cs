@@ -22,18 +22,17 @@ internal static class CharBuffer
 
         foreach (var ch in span)
         {
-            if (!IsMarkup(ch))
-            {
-                if (!ASCII.IsAscii(ch) && DiacriticLookup.TryGetValue(ch, out var chs))
-                {
-                    buffer[length++] = char.ToUpperInvariant(chs[0]);
+            if (IsMarkup(ch)) continue;
 
-                    if (chs.Length == 2) buffer[length++] = char.ToUpperInvariant(chs[1]);
-                }
-                else
-                {
-                    buffer[length++] = char.ToUpperInvariant(ch);
-                }
+            if (!ASCII.IsAscii(ch) && DiacriticLookup.TryGetValue(ch, out var chs))
+            {
+                buffer[length++] = char.ToUpperInvariant(chs[0]);
+
+                if (chs.Length == 2) buffer[length++] = char.ToUpperInvariant(chs[1]);
+            }
+            else
+            {
+                buffer[length++] = char.ToUpperInvariant(ch);
             }
         }
         return length;
@@ -49,18 +48,17 @@ internal static class CharBuffer
             if (ignore.Contains(ch))
             {
                 buffer[length++] = ch;
+                continue;
+            }
+
+            if (!ASCII.IsAscii(ch) && DiacriticLookup.TryGetValue(ch, out var chs))
+            {
+                buffer[length++] = chs[0];
+                if (chs.Length == 2) buffer[length++] = chs[1];
             }
             else
             {
-                if (!ASCII.IsAscii(ch) && DiacriticLookup.TryGetValue(ch, out var chs))
-                {
-                    buffer[length++] = chs[0];
-                    if (chs.Length == 2) buffer[length++] = chs[1];
-                }
-                else
-                {
-                    buffer[length++] = ch;
-                }
+                buffer[length++] = ch;
             }
         }
         return length;

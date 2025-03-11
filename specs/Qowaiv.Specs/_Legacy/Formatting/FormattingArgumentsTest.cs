@@ -29,7 +29,7 @@ public class FormattingArgumentsTest
         obj.GetObjectData(info, default);
 
         info.GetString("Format").Should().Be("0.000");
-        Assert.AreEqual(new CultureInfo("fr-BE"), info.GetValue("FormatProvider", typeof(IFormatProvider)));
+        Should.BeEqual(new CultureInfo("fr-BE"), info.GetValue("FormatProvider", typeof(IFormatProvider)));
     }
 
     [Test]
@@ -49,9 +49,9 @@ public class FormattingArgumentsTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 #endif
 
@@ -71,9 +71,9 @@ public class FormattingArgumentsTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
     #endregion

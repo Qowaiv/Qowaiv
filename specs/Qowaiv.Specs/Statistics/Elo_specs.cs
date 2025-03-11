@@ -1,5 +1,15 @@
 namespace Statistics.Elo_specs;
 
+public class Z_score
+{
+    [Test]
+    public void calculates()
+    {
+        var z = Elo.GetZScore(1600, 1500);
+        z.Should().BeApproximately(0.64, 0.01);
+    }
+}
+
 public class Is_invalid
 {
     [Test]

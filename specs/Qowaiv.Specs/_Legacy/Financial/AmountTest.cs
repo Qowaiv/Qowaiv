@@ -45,7 +45,7 @@ public class AmountTest
         {
             string str = "14.1804";
             Amount.TryParse(str, out Amount val).Should().BeTrue();
-            Assert.AreEqual(str, val.ToString(), "Value");
+            Should.BeEqual(str, val.ToString(), "Value");
         }
     }
 
@@ -158,9 +158,9 @@ public class AmountTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 #endif
 
@@ -180,9 +180,9 @@ public class AmountTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
     [Test]
     public void DataContractSerializeDeserialize_AmountSerializeObject_AreEqual()
@@ -200,9 +200,9 @@ public class AmountTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
 #if NET8_0_OR_GREATER
@@ -224,9 +224,9 @@ public class AmountTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 #endif
 
@@ -246,9 +246,9 @@ public class AmountTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
     [Test]
@@ -601,7 +601,7 @@ public class AmountTest
     {
         Amount amount = (Amount)40.10;
         Amount other = (Amount)2.07;
-        Assert.AreEqual(TestStruct, amount + other);
+        Should.BeEqual(TestStruct, amount + other);
     }
 
     [Test]
@@ -609,7 +609,7 @@ public class AmountTest
     {
         Amount amount = (Amount)40.00;
         var p = 10.Percent();
-        Assert.AreEqual((Amount)44.00, amount + p);
+        Should.BeEqual((Amount)44.00, amount + p);
     }
 
     [Test]
@@ -617,7 +617,7 @@ public class AmountTest
     {
         Amount amount = (Amount)43.20;
         Amount other = (Amount)1.03;
-        Assert.AreEqual(TestStruct, amount - other);
+        Should.BeEqual(TestStruct, amount - other);
     }
 
     [Test]
@@ -625,7 +625,7 @@ public class AmountTest
     {
         Amount amount = (Amount)40.00;
         var p = 25.Percent();
-        Assert.AreEqual((Amount)30.00, amount - p);
+        Should.BeEqual((Amount)30.00, amount - p);
     }
 
     [Test]
@@ -634,7 +634,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         var p = 50.Percent();
         Amount expected = (Amount)50.20m;
-        Assert.AreEqual(expected, amount * p);
+        Should.BeEqual(expected, amount * p);
     }
 
     [Test]
@@ -643,7 +643,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         float p = 0.5F;
         Amount expected = (Amount)50.20m;
-        Assert.AreEqual(expected, amount * p);
+        Should.BeEqual(expected, amount * p);
     }
 
     [Test]
@@ -652,7 +652,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         double p = 0.5;
         Amount expected = (Amount)50.20m;
-        Assert.AreEqual(expected, amount * p);
+        Should.BeEqual(expected, amount * p);
     }
 
     [Test]
@@ -661,7 +661,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         var p = 0.5m;
         Amount expected = (Amount)50.20m;
-        Assert.AreEqual(expected, amount * p);
+        Should.BeEqual(expected, amount * p);
     }
 
     [Test]
@@ -670,7 +670,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         short f = 2;
         Amount expected = (Amount)200.80m;
-        Assert.AreEqual(expected, amount * f);
+        Should.BeEqual(expected, amount * f);
     }
 
     [Test]
@@ -679,7 +679,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         int f = 2;
         Amount expected = (Amount)200.80m;
-        Assert.AreEqual(expected, amount * f);
+        Should.BeEqual(expected, amount * f);
     }
 
     [Test]
@@ -688,7 +688,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         long f = 2;
         Amount expected = (Amount)200.80m;
-        Assert.AreEqual(expected, amount * f);
+        Should.BeEqual(expected, amount * f);
     }
 
     [Test]
@@ -697,7 +697,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         ushort f = 2;
         Amount expected = (Amount)200.80m;
-        Assert.AreEqual(expected, amount * f);
+        Should.BeEqual(expected, amount * f);
     }
 
     [Test]
@@ -706,7 +706,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         uint f = 2;
         Amount expected = (Amount)200.80m;
-        Assert.AreEqual(expected, amount * f);
+        Should.BeEqual(expected, amount * f);
     }
 
     [Test]
@@ -715,7 +715,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         ulong f = 2;
         Amount expected = (Amount)200.80m;
-        Assert.AreEqual(expected, amount * f);
+        Should.BeEqual(expected, amount * f);
     }
 
     [Test]
@@ -724,7 +724,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         var p = 50.Percent();
         Amount expected = (Amount)200.80m;
-        Assert.AreEqual(expected, amount / p);
+        Should.BeEqual(expected, amount / p);
     }
 
     [Test]
@@ -733,7 +733,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         float p = 0.5F;
         Amount expected = (Amount)200.80m;
-        Assert.AreEqual(expected, amount / p);
+        Should.BeEqual(expected, amount / p);
     }
 
     [Test]
@@ -742,7 +742,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         double p = 0.5;
         Amount expected = (Amount)200.80m;
-        Assert.AreEqual(expected, amount / p);
+        Should.BeEqual(expected, amount / p);
     }
 
     [Test]
@@ -751,7 +751,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         var p = 0.5m;
         Amount expected = (Amount)200.80m;
-        Assert.AreEqual(expected, amount / p);
+        Should.BeEqual(expected, amount / p);
     }
 
     [Test]
@@ -760,7 +760,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         short f = 2;
         Amount expected = (Amount)50.20m;
-        Assert.AreEqual(expected, amount / f);
+        Should.BeEqual(expected, amount / f);
     }
 
     [Test]
@@ -769,7 +769,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         int f = 2;
         Amount expected = (Amount)50.20m;
-        Assert.AreEqual(expected, amount / f);
+        Should.BeEqual(expected, amount / f);
     }
 
     [Test]
@@ -778,7 +778,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         long f = 2;
         Amount expected = (Amount)50.20m;
-        Assert.AreEqual(expected, amount / f);
+        Should.BeEqual(expected, amount / f);
     }
 
     [Test]
@@ -787,7 +787,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         ushort f = 2;
         Amount expected = (Amount)50.20m;
-        Assert.AreEqual(expected, amount / f);
+        Should.BeEqual(expected, amount / f);
     }
 
     [Test]
@@ -796,7 +796,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         uint f = 2;
         Amount expected = (Amount)50.20m;
-        Assert.AreEqual(expected, amount / f);
+        Should.BeEqual(expected, amount / f);
     }
 
     [Test]
@@ -805,7 +805,7 @@ public class AmountTest
         Amount amount = (Amount)100.40m;
         ulong f = 2;
         Amount expected = (Amount)50.20m;
-        Assert.AreEqual(expected, amount / f);
+        Should.BeEqual(expected, amount / f);
     }
 
     [Test]

@@ -183,9 +183,9 @@ public class IdForInt64Test
 
         ;
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 #endif
 
@@ -209,9 +209,9 @@ public class IdForInt64Test
 
         ;
         var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
     [Test]
@@ -234,9 +234,9 @@ public class IdForInt64Test
 
         ;
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
 #if NET8_0_OR_GREATER
@@ -262,9 +262,9 @@ public class IdForInt64Test
 
         ;
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 #endif
 
@@ -288,9 +288,9 @@ public class IdForInt64Test
 
         ;
         var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
     [Test]

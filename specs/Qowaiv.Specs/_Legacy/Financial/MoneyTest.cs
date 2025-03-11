@@ -28,7 +28,7 @@ public class MoneyTest
         {
             Money exp = 42.17 + Currency.EUR;
             Money.TryParse("€42,17", out Money act).Should().BeTrue();
-            Assert.AreEqual(exp, act, "Value");
+            Should.BeEqual(exp, act, "Value");
         }
     }
 
@@ -38,7 +38,7 @@ public class MoneyTest
     {
         string str = "string";
         Money.TryParse(str, out Money val).Should().BeFalse();
-        Assert.AreEqual(Money.Zero, val, "Value");
+        Should.BeEqual(Money.Zero, val, "Value");
     }
 
     [Test]
@@ -164,9 +164,9 @@ public class MoneyTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 #endif
 
@@ -186,9 +186,9 @@ public class MoneyTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
     [Test]
     public void DataContractSerializeDeserialize_MoneySerializeObject_AreEqual()
@@ -206,9 +206,9 @@ public class MoneyTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
 #if NET8_0_OR_GREATER
@@ -230,9 +230,9 @@ public class MoneyTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 #endif
 
@@ -252,9 +252,9 @@ public class MoneyTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
     [Test]
@@ -592,7 +592,7 @@ public class MoneyTest
     {
         var money = value + Currency.USD;
         var abs = money.Abs();
-        Assert.AreEqual(expected + Currency.USD, abs);
+        Should.BeEqual(expected + Currency.USD, abs);
     }
 
     [Test]
@@ -635,7 +635,7 @@ public class MoneyTest
         var r = 26 + Currency.EUR;
         var a = 42 + Currency.EUR;
 
-        Assert.AreEqual(a, l + r);
+        Should.BeEqual(a, l + r);
     }
 
     [Test]
@@ -645,7 +645,7 @@ public class MoneyTest
         var p = 25.Percent();
         var a = 20 + Currency.EUR;
 
-        Assert.AreEqual(a, l + p);
+        Should.BeEqual(a, l + p);
     }
 
     [Test]
@@ -655,7 +655,7 @@ public class MoneyTest
         var r = 27 + Currency.EUR;
         var a = 42 + Currency.EUR;
 
-        Assert.AreEqual(a, l - r);
+        Should.BeEqual(a, l - r);
     }
 
     [Test]
@@ -665,7 +665,7 @@ public class MoneyTest
         var p = 25.Percent();
         var a = 12 + Currency.EUR;
 
-        Assert.AreEqual(a, l - p);
+        Should.BeEqual(a, l - p);
     }
 
     [Test]
@@ -674,7 +674,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         var p = 50.Percent();
         var expected = 50.20m + Currency.USD;
-        Assert.AreEqual(expected, money * p);
+        Should.BeEqual(expected, money * p);
     }
 
     [Test]
@@ -683,7 +683,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         float p = 0.5F;
         var expected = 50.20m + Currency.USD;
-        Assert.AreEqual(expected, money * p);
+        Should.BeEqual(expected, money * p);
     }
 
     [Test]
@@ -692,7 +692,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         double p = 0.5;
         var expected = 50.20m + Currency.USD;
-        Assert.AreEqual(expected, money * p);
+        Should.BeEqual(expected, money * p);
     }
 
     [Test]
@@ -701,7 +701,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         var p = 0.5m;
         var expected = 50.20m + Currency.USD;
-        Assert.AreEqual(expected, money * p);
+        Should.BeEqual(expected, money * p);
     }
 
     [Test]
@@ -710,7 +710,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         short f = 2;
         var expected = 200.8m + Currency.USD;
-        Assert.AreEqual(expected, money * f);
+        Should.BeEqual(expected, money * f);
     }
 
     [Test]
@@ -719,7 +719,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         int f = 2;
         var expected = 200.8m + Currency.USD;
-        Assert.AreEqual(expected, money * f);
+        Should.BeEqual(expected, money * f);
     }
 
     [Test]
@@ -728,7 +728,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         long f = 2;
         var expected = 200.8m + Currency.USD;
-        Assert.AreEqual(expected, money * f);
+        Should.BeEqual(expected, money * f);
     }
 
     [Test]
@@ -737,7 +737,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         ushort f = 2;
         var expected = 200.8m + Currency.USD;
-        Assert.AreEqual(expected, money * f);
+        Should.BeEqual(expected, money * f);
     }
 
     [Test]
@@ -746,7 +746,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         uint f = 2;
         var expected = 200.8m + Currency.USD;
-        Assert.AreEqual(expected, money * f);
+        Should.BeEqual(expected, money * f);
     }
 
     [Test]
@@ -755,7 +755,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         ulong f = 2;
         var expected = 200.8m + Currency.USD;
-        Assert.AreEqual(expected, money * f);
+        Should.BeEqual(expected, money * f);
     }
 
     [Test]
@@ -764,7 +764,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         var p = 50.Percent();
         var expected = 200.8m + Currency.USD;
-        Assert.AreEqual(expected, money / p);
+        Should.BeEqual(expected, money / p);
     }
 
     [Test]
@@ -773,7 +773,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         float p = 0.5F;
         var expected = 200.8m + Currency.USD;
-        Assert.AreEqual(expected, money / p);
+        Should.BeEqual(expected, money / p);
     }
 
     [Test]
@@ -782,7 +782,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         double p = 0.5;
         var expected = 200.8m + Currency.USD;
-        Assert.AreEqual(expected, money / p);
+        Should.BeEqual(expected, money / p);
     }
 
     [Test]
@@ -791,7 +791,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         var p = 0.5m;
         var expected = 200.8m + Currency.USD;
-        Assert.AreEqual(expected, money / p);
+        Should.BeEqual(expected, money / p);
     }
 
     [Test]
@@ -800,7 +800,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         short f = 2;
         var expected = 50.20m + Currency.USD;
-        Assert.AreEqual(expected, money / f);
+        Should.BeEqual(expected, money / f);
     }
 
     [Test]
@@ -809,7 +809,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         int f = 2;
         var expected = 50.20m + Currency.USD;
-        Assert.AreEqual(expected, money / f);
+        Should.BeEqual(expected, money / f);
     }
 
     [Test]
@@ -818,7 +818,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         long f = 2;
         var expected = 50.20m + Currency.USD;
-        Assert.AreEqual(expected, money / f);
+        Should.BeEqual(expected, money / f);
     }
 
     [Test]
@@ -827,7 +827,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         ushort f = 2;
         var expected = 50.20m + Currency.USD;
-        Assert.AreEqual(expected, money / f);
+        Should.BeEqual(expected, money / f);
     }
 
     [Test]
@@ -836,7 +836,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         uint f = 2;
         var expected = 50.20m + Currency.USD;
-        Assert.AreEqual(expected, money / f);
+        Should.BeEqual(expected, money / f);
     }
 
     [Test]
@@ -845,7 +845,7 @@ public class MoneyTest
         var money = 100.40m + Currency.USD;
         ulong f = 2;
         var expected = 50.20m + Currency.USD;
-        Assert.AreEqual(expected, money / f);
+        Should.BeEqual(expected, money / f);
     }
 
     [Test]
@@ -853,7 +853,7 @@ public class MoneyTest
     {
         var money = 123.4567m + Currency.EUR;
         var rounded = money.Round();
-        Assert.AreEqual(123.46m + Currency.EUR, rounded);
+        Should.BeEqual(123.46m + Currency.EUR, rounded);
     }
 
     [Test]
@@ -861,7 +861,7 @@ public class MoneyTest
     {
         var money = 123.4567m + Currency.EUR;
         var rounded = money.Round(1);
-        Assert.AreEqual(123.5m + Currency.EUR, rounded);
+        Should.BeEqual(123.5m + Currency.EUR, rounded);
     }
 
     [Test]
@@ -869,7 +869,7 @@ public class MoneyTest
     {
         var money = 123.6567m + Currency.EUR;
         var rounded = money.RoundToMultiple(0.25m);
-        Assert.AreEqual(123.75m + Currency.EUR, rounded);
+        Should.BeEqual(123.75m + Currency.EUR, rounded);
     }
 
     #endregion

@@ -40,7 +40,7 @@ public class DateTest
         string str = "1983-05-02";
 
         Date.TryParse(str, out Date val).Should().BeTrue();
-        Assert.AreEqual(new Date(1983, 05, 02), val, "Value");
+        Should.BeEqual(new Date(1983, 05, 02), val, "Value");
     }
 
     /// <summary>TryParse with specified string value should be invalid.</summary>
@@ -52,7 +52,7 @@ public class DateTest
             string str = "not a date";
 
             Date.TryParse(str, out Date val).Should().BeFalse();
-            Assert.AreEqual(Date.MinValue, val, "Value");
+            Should.BeEqual(Date.MinValue, val, "Value");
         }
     }
 
@@ -99,7 +99,7 @@ public class DateTest
         var info = new SerializationInfo(typeof(Date), new System.Runtime.Serialization.FormatterConverter());
         obj.GetObjectData(info, default);
 
-        Assert.AreEqual(new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), info.GetDateTime("Value"));
+        Should.BeEqual(new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), info.GetDateTime("Value"));
     }
 
     [Test]
@@ -156,9 +156,9 @@ public class DateTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 #endif
 
@@ -178,9 +178,9 @@ public class DateTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
     [Test]
     public void DataContractSerializeDeserialize_DateSerializeObject_AreEqual()
@@ -198,9 +198,9 @@ public class DateTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
 #if NET8_0_OR_GREATER
@@ -222,9 +222,9 @@ public class DateTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 #endif
 
@@ -244,9 +244,9 @@ public class DateTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
     [Test]
@@ -595,14 +595,14 @@ public class DateTest
     public void Add_12Months_AreEqual()
     {
         var added = new Date(1970, 02, 14) + MonthSpan.FromMonths(12);
-        Assert.AreEqual(new Date(1971, 02, 14), added);
+        Should.BeEqual(new Date(1971, 02, 14), added);
     }
 
     [Test]
     public void Subtract_3Months_AreEqual()
     {
         var subtracted = new Date(1971, 02, 14) - MonthSpan.FromMonths(3);
-        Assert.AreEqual(new Date(1970, 11, 14), subtracted);
+        Should.BeEqual(new Date(1970, 11, 14), subtracted);
     }
 
     [Test]

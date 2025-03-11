@@ -10,8 +10,8 @@ public class CultureInfoScopeTest
 
         using (new CultureInfoScope("es-ES", "fr-FR"))
         {
-            Assert.AreEqual("es-ES", CultureInfo.CurrentCulture.Name);
-            Assert.AreEqual("fr-FR", CultureInfo.CurrentUICulture.Name);
+            Should.BeEqual("es-ES", CultureInfo.CurrentCulture.Name);
+            Should.BeEqual("fr-FR", CultureInfo.CurrentUICulture.Name);
         }
 
         CultureInfo.CurrentCulture.Should().Be(current);
@@ -26,8 +26,8 @@ public class CultureInfoScopeTest
 
         using (new CultureInfo("es-ES").Scoped())
         {
-            Assert.AreEqual("es-ES", CultureInfo.CurrentCulture.Name);
-            Assert.AreEqual("es-ES", CultureInfo.CurrentUICulture.Name);
+            Should.BeEqual("es-ES", CultureInfo.CurrentCulture.Name);
+            Should.BeEqual("es-ES", CultureInfo.CurrentUICulture.Name);
         }
 
         CultureInfo.CurrentCulture.Should().Be(current);

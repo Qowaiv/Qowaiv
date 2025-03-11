@@ -76,24 +76,6 @@ public class MonthSpanTest
        => MonthSpan.TryParse("invalid input").Should().BeNull();
 
     [Test]
-    public void FromYears_20k_Throws()
-    {
-        Assert.Throws<ArgumentOutOfRangeException>(() => MonthSpan.FromYears(20_000));
-    }
-
-    [Test]
-    public void FromMonths_200k_Throws()
-    {
-        Assert.Throws<ArgumentOutOfRangeException>(() => MonthSpan.FromMonths(200_000));
-    }
-
-    [Test]
-    public void Constructor_OutOfRange()
-    {
-        Assert.Throws<ArgumentOutOfRangeException>(() => new MonthSpan(years: 9800, months: 5000));
-    }
-
-    [Test]
     public void Constructor_5Years9Months_69Months()
     {
         var ctor = new MonthSpan(years: 5, months: 9);

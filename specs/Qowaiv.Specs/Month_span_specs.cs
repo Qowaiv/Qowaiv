@@ -1,5 +1,27 @@
 namespace Month_span_specs;
 
+public class Guards
+{
+    [TestCase(10_000)]
+    [TestCase(20_000)]
+    public void year_not_to_exceed_9999(int years)
+        => years.Invoking(MonthSpan.FromYears)
+        .Should().Throw<ArgumentOutOfRangeException>();
+
+    [TestCase(10_000 * 12)]
+    [TestCase(200_000)]
+    public void months_not_to_exceed_9999(int months)
+        => months.Invoking(MonthSpan.FromMonths)
+        .Should().Throw<ArgumentOutOfRangeException>();
+
+    [Test]
+    public void ctor_arguments()
+    {
+        Func<MonthSpan> ctor = () => new MonthSpan(years: 9800, months: 5000);
+        ctor.Should().Throw<ArgumentOutOfRangeException>();
+    }
+}
+
 public class Is_equal_by_value
 {
     [Test]

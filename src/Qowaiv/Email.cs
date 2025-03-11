@@ -147,10 +147,12 @@ internal static partial class Email
 
             var length = QuoteLength();
 
-            return length.IsInRange(3, PartLength)
-                && Input[length++] is At
-                ? new(Input[length..], Buffer, length)
-                : None();
+            if (length.IsInRange(3, PartLength) && Input[length] is At)
+            {
+                Buffer[length++] = At;
+                return new(Input[length..], Buffer, length);
+            }
+            else return None();
         }
 
         [Pure]

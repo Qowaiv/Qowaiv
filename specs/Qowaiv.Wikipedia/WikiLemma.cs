@@ -59,7 +59,7 @@ public sealed record WikiLemma
 
     [Pure]
     public async Task<IReadOnlyCollection<T>> TransformRange<T>(Func<string, IEnumerable<T>> tryParse) where T : class
-        => tryParse(await Content()).ToArray();
+        => [.. tryParse(await Content())];
 
 #if NET8_0_OR_GREATER
     private async Task Update()

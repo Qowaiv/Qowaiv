@@ -39,11 +39,10 @@ public static class Unknown
                 {
                     if (!Strings.TryGetValue(c, out values))
                     {
-                        values = ResourceManager
+                        values = [.. ResourceManager
                             .GetString("Values", c)!
                             .Split(';')
-                            .Select(v => v.ToUpper(c))
-                            .ToArray();
+                            .Select(v => v.ToUpper(c))];
                         Strings[c] = values;
                     }
                 }

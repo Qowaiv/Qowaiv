@@ -241,10 +241,9 @@ public readonly partial struct Currency : IXmlSerializable, IFormattable, IForma
     /// because ALL exists.
     /// </remarks>
     public static readonly ReadOnlyCollection<Currency> AllCurrencies = new(
-        (ResourceManager.GetString("All") ?? string.Empty)
+        [.. (ResourceManager.GetString("All") ?? string.Empty)
             .Split(';')
-            .Select(str => new Currency(str))
-            .ToList());
+            .Select(str => new Currency(str))]);
 
     private static readonly CurrencyValues ParseValues = new();
 

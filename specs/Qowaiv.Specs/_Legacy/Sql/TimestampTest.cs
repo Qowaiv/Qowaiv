@@ -14,7 +14,7 @@ public class TimestampTest
         string str = "0x00000000075BCD15";
 
         Timestamp.TryParse(str, out Timestamp val).Should().BeTrue();
-        Assert.AreEqual(TestStruct, val, "Value");
+        Should.BeEqual(TestStruct, val, "Value");
     }
 
     [Test]
@@ -23,7 +23,7 @@ public class TimestampTest
         string str = "123456789";
 
         Timestamp.TryParse(str, out Timestamp val).Should().BeTrue();
-        Assert.AreEqual(TestStruct, val, "Value");
+        Should.BeEqual(TestStruct, val, "Value");
     }
 
     /// <summary>TryParse with specified string value should be invalid.</summary>
@@ -33,7 +33,7 @@ public class TimestampTest
         string str = "0xInvalidTimeStamp";
 
         Timestamp.TryParse(str, out Timestamp val).Should().BeFalse();
-        Assert.AreEqual(Timestamp.MinValue, val, "Value");
+        Should.BeEqual(Timestamp.MinValue, val, "Value");
     }
 
     [Test]
@@ -126,9 +126,9 @@ public class TimestampTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 #endif
 
@@ -148,9 +148,9 @@ public class TimestampTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
     [Test]
     public void DataContractSerializeDeserialize_TimestampSerializeObject_AreEqual()
@@ -168,9 +168,9 @@ public class TimestampTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
 #if NET8_0_OR_GREATER
@@ -192,9 +192,9 @@ public class TimestampTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 #endif
 
@@ -214,9 +214,9 @@ public class TimestampTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
     [Test]

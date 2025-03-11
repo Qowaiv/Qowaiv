@@ -76,24 +76,6 @@ public class MonthSpanTest
        => MonthSpan.TryParse("invalid input").Should().BeNull();
 
     [Test]
-    public void FromYears_20k_Throws()
-    {
-        Assert.Throws<ArgumentOutOfRangeException>(() => MonthSpan.FromYears(20_000));
-    }
-
-    [Test]
-    public void FromMonths_200k_Throws()
-    {
-        Assert.Throws<ArgumentOutOfRangeException>(() => MonthSpan.FromMonths(200_000));
-    }
-
-    [Test]
-    public void Constructor_OutOfRange()
-    {
-        Assert.Throws<ArgumentOutOfRangeException>(() => new MonthSpan(years: 9800, months: 5000));
-    }
-
-    [Test]
     public void Constructor_5Years9Months_69Months()
     {
         var ctor = new MonthSpan(years: 5, months: 9);
@@ -115,7 +97,7 @@ public class MonthSpanTest
         ISerializable obj = TestStruct;
         var info = new SerializationInfo(typeof(MonthSpan), new FormatterConverter());
         obj.GetObjectData(info, default);
-        Assert.AreEqual(69, info.GetValue("Value", typeof(int)));
+        Should.BeEqual(69, info.GetValue("Value", typeof(int)));
     }
 
     [Test]
@@ -162,9 +144,9 @@ public class MonthSpanTest
         var input = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
         var exp = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 #endif
 
@@ -174,9 +156,9 @@ public class MonthSpanTest
         var input = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
         var exp = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
         var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
     [Test]
@@ -185,9 +167,9 @@ public class MonthSpanTest
         var input = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
         var exp = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
 #if NET8_0_OR_GREATER
@@ -199,9 +181,9 @@ public class MonthSpanTest
         var input = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
         var exp = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 #endif
 
@@ -211,9 +193,9 @@ public class MonthSpanTest
         var input = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
         var exp = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
         var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
     [Test]
@@ -273,7 +255,7 @@ public class MonthSpanTest
     public void Negated_TestStruct_Min69Months()
     {
         var negated = -TestStruct;
-        Assert.AreEqual(MonthSpan.FromMonths(-69), negated);
+        Should.BeEqual(MonthSpan.FromMonths(-69), negated);
     }
 
     [Test]

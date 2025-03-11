@@ -37,6 +37,19 @@ public class Created_from_file
         => InternetMediaType.FromFile(string.Empty).Should().Be(InternetMediaType.Empty);
 }
 
+public class Is_equal_by_value
+{
+    [TestCase("", 0)]
+    [TestCase("application/x-chess-pgn", 787633777)]
+    public void hash_code_is_value_based(InternetMediaType svo, int hash)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hash);
+        }
+    }
+}
+
 public class Supports_type_conversion
 {
     [Test]

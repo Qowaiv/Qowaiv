@@ -7,12 +7,12 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="AsyncFixer" Version="1.6.0" />
-    <PackageVersion Include="AwesomeAssertions" Version="8.0.1" />
+    <PackageVersion Include="AwesomeAssertions" Version="8.0.2" />
     <PackageVersion Include="AwesomeAssertions.Analyzers" Version="0.34.2" />
     <PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
-    <PackageVersion Include="DotNetProjectFile.Analyzers" Version="1.5.10.1" />
-    <PackageVersion Include="DotNetProjectFile.Analyzers.Sdk" Version="1.5.10.1" />
+    <PackageVersion Include="DotNetProjectFile.Analyzers" Version="1.5.11" />
+    <PackageVersion Include="DotNetProjectFile.Analyzers.Sdk" Version="1.5.11" />
     <PackageVersion Include="MathNet.Numerics" Version="5.0.0" />
     <PackageVersion Include="Microsoft.AspNet.Mvc" Version="5.3.0" />
     <PackageVersion Include="Microsoft.AspNet.Razor" Version="3.3.0" />
@@ -35,6 +35,6 @@
     <PackageVersion Include="System.Data.SqlClient" Version="4.8.6" />
     <PackageVersion Include="System.Memory" Version="4.5.5" />
     <PackageVersion Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
-    <PackageVersion Include="System.Text.Encodings.Web" Version="9.0.2" />
+    <PackageVersion Include="System.Text.Encodings.Web" Version="9.0.3" />
   </ItemGroup>
 </Project>

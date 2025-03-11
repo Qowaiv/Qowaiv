@@ -27,19 +27,6 @@ namespace Qowaiv.UnitTests.Statistics
 
         #endregion
 
-        #region Methods
-
-        [Test]
-        public void GetZScore_Delta100_0Dot64()
-        {
-            var act = Elo.GetZScore(1600, 1500);
-            var exp = 0.64;
-
-            Assert.AreEqual(exp, act, 0.001);
-        }
-
-        #endregion
-
         #region TryParse tests
 
         /// <summary>TryParse with specified string value should be valid.</summary>
@@ -48,7 +35,7 @@ namespace Qowaiv.UnitTests.Statistics
         {
             string str = "1400";
             Elo.TryParse(str, out Elo val).Should().BeTrue();
-            Assert.AreEqual(str, val.ToString(), "Value");
+            Should.BeEqual(str, val.ToString(), "Value");
         }
 
         [Test]
@@ -147,9 +134,9 @@ namespace Qowaiv.UnitTests.Statistics
                 Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var act = SerializeDeserialize.Binary(input);
-            Assert.AreEqual(exp.Id, act.Id, "Id");
-            Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date");
+            Should.BeEqual(exp.Id, act.Id, "Id");
+            Should.BeEqual(exp.Obj, act.Obj, "Obj");
+            Should.BeEqual(exp.Date, act.Date, "Date");
         }
 #endif
 
@@ -169,9 +156,9 @@ namespace Qowaiv.UnitTests.Statistics
                 Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var act = SerializeDeserialize.Xml(input);
-            Assert.AreEqual(exp.Id, act.Id, "Id");
-            Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date");
+            Should.BeEqual(exp.Id, act.Id, "Id");
+            Should.BeEqual(exp.Obj, act.Obj, "Obj");
+            Should.BeEqual(exp.Date, act.Date, "Date");
         }
         [Test]
         public void DataContractSerializeDeserialize_EloSerializeObject_AreEqual()
@@ -189,9 +176,9 @@ namespace Qowaiv.UnitTests.Statistics
                 Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var act = SerializeDeserialize.DataContract(input);
-            Assert.AreEqual(exp.Id, act.Id, "Id");
-            Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date");
+            Should.BeEqual(exp.Id, act.Id, "Id");
+            Should.BeEqual(exp.Obj, act.Obj, "Obj");
+            Should.BeEqual(exp.Date, act.Date, "Date");
         }
 
 #if NET8_0_OR_GREATER
@@ -213,9 +200,9 @@ namespace Qowaiv.UnitTests.Statistics
                 Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var act = SerializeDeserialize.Binary(input);
-            Assert.AreEqual(exp.Id, act.Id, "Id");
-            Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-            Assert.AreEqual(exp.Date, act.Date, "Date");
+            Should.BeEqual(exp.Id, act.Id, "Id");
+            Should.BeEqual(exp.Obj, act.Obj, "Obj");
+            Should.BeEqual(exp.Date, act.Date, "Date");
         }
 #endif
 

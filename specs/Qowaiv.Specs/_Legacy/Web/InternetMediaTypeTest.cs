@@ -122,7 +122,7 @@ public class InternetMediaTypeTest
         string str = "application/atom+xml";
 
         InternetMediaType.TryParse(str, out var val).Should().BeTrue();
-        Assert.AreEqual(str, val.ToString(), "Value");
+        Should.BeEqual(str, val.ToString(), "Value");
     }
 
     /// <summary>TryParse with specified string value should be invalid.</summary>
@@ -189,7 +189,7 @@ public class InternetMediaTypeTest
         var info = new SerializationInfo(typeof(InternetMediaType), new System.Runtime.Serialization.FormatterConverter());
         obj.GetObjectData(info, default);
 
-        Assert.AreEqual("application/x-chess-pgn", info.GetString("Value"));
+        Should.BeEqual("application/x-chess-pgn", info.GetString("Value"));
     }
 
     [Test]
@@ -246,9 +246,9 @@ public class InternetMediaTypeTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 #endif
 
@@ -268,9 +268,9 @@ public class InternetMediaTypeTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
     [Test]
     public void DataContractSerializeDeserialize_InternetMediaTypeSerializeObject_AreEqual()
@@ -288,9 +288,9 @@ public class InternetMediaTypeTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.DataContract(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
 #if NET8_0_OR_GREATER
@@ -312,9 +312,9 @@ public class InternetMediaTypeTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Binary(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 #endif
 
@@ -334,9 +334,9 @@ public class InternetMediaTypeTest
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
-        Assert.AreEqual(exp.Id, act.Id, "Id");
-        Assert.AreEqual(exp.Obj, act.Obj, "Obj");
-        Assert.AreEqual(exp.Date, act.Date, "Date");
+        Should.BeEqual(exp.Id, act.Id, "Id");
+        Should.BeEqual(exp.Obj, act.Obj, "Obj");
+        Should.BeEqual(exp.Date, act.Date, "Date");
     }
 
     [Test]
@@ -385,20 +385,6 @@ public class InternetMediaTypeTest
     #endregion
 
     #region IEquatable tests
-
-    /// <summary>GetHash should not fail for InternetMediaType.Empty.</summary>
-    [Test]
-    public void GetHash_Empty_0()
-    {
-        InternetMediaType.Empty.GetHashCode().Should().Be(0);
-    }
-
-    /// <summary>GetHash should not fail for the test struct.</summary>
-    [Test]
-    public void GetHash_TestStruct_NotZero()
-    {
-        Assert.NotZero(TestStruct.GetHashCode());
-    }
 
     [Test]
     public void Equals_EmptyEmpty_IsTrue()

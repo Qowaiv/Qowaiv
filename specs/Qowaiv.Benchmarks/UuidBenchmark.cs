@@ -23,11 +23,11 @@ public partial class UuidBenchmark
         [GlobalSetup]
         public void Setup()
         {
-            Uuids = Enumerable.Range(0, Iterations).Select(_ => Uuid.NewUuid()).ToArray();
-            Guids = Uuids.Select(x => (Guid)x).ToArray();
-            Strings = Uuids.Select(g => g.ToString("D")).ToArray();
-            Base64s = Uuids.Select(g => g.ToString("S")).ToArray();
-            Base32s = Uuids.Select(g => g.ToString("H")).ToArray();
+            Uuids = [.. Enumerable.Range(0, Iterations).Select(_ => Uuid.NewUuid())];
+            Guids = [.. Uuids.Select(x => (Guid)x)];
+            Strings = [.. Uuids.Select(g => g.ToString("D"))];
+            Base64s = [.. Uuids.Select(g => g.ToString("S"))];
+            Base32s = [.. Uuids.Select(g => g.ToString("H"))];
         }
 
         [Benchmark(Baseline = true)]
@@ -98,8 +98,8 @@ public partial class UuidBenchmark
         [GlobalSetup]
         public void Setup()
         {
-            Uuids = Enumerable.Range(0, Iterations).Select(_ => Uuid.NewUuid()).ToArray();
-            Guids = Uuids.Select(x => (Guid)x).ToArray();
+            Uuids = [.. Enumerable.Range(0, Iterations).Select(_ => Uuid.NewUuid())];
+            Guids = [.. Uuids.Select(x => (Guid)x)];
         }
 
         [Benchmark(Baseline = true)]

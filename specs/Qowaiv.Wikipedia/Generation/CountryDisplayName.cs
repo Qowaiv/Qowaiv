@@ -188,7 +188,7 @@ public static class CountryDisplayName
 
             foreach (var part in parts.Skip(1))
             {
-                var codes = part.Split(new[] { "<code>", "</code>" }, StringSplitOptions.None);
+                var codes = part.Split(["<code>", "</code>"], StringSplitOptions.None);
                 if (codes.Length >= 7
                     && Regex.Match(codes[4], @"id=""(?<iso>[A-Z]{2})""") is { Success: true } iso)
                 {

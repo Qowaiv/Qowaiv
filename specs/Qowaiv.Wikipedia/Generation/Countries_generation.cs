@@ -49,7 +49,7 @@ public class Resource_files
 
     public class Display_names
     {
-        private static readonly IReadOnlyCollection<Country> Existing = Country.GetExisting().ToArray();
+        private static readonly IReadOnlyCollection<Country> Existing = [.. Country.GetExisting()];
 
         [TestCaseSource(nameof(Existing))]
         public async Task ar(Country country)

@@ -13,6 +13,19 @@ public class With_domain_logic
     public void IsKnown_is(bool result, BusinessIdentifierCode svo) => svo.IsKnown.Should().Be(result);
 }
 
+public class Is_equal_by_value
+{
+    [TestCase("", 0)]
+    [TestCase("AEGONL2UXXX", -238769066)]
+    public void hash_code_is_value_based(BusinessIdentifierCode svo, int hash)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hash);
+        }
+    }
+}
+
 public class Is_comparable
 {
     [Test]

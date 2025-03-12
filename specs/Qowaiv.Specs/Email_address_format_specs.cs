@@ -267,6 +267,11 @@ public class Comments
     public void are_ignored(string email)
         => EmailAddress.Parse(email).Should().Be(Svo.EmailAddress);
 
+    [Test]
+    public void are_ignored_after_quoted_local()
+        => EmailAddress.Parse(@"""comments""(are ignored)@qowaiv.org")
+        .ToString().Should().Be(@"""comments""@qowaiv.org");
+
     [TestCase("ipv4.addr@[123.1.7(some comment)2.10]")]
     [TestCase("ipv4.addr@123.1.7(some comment)2.10")]
     public void are_ignored_in_ip_based_domain(string email)

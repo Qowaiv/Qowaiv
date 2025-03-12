@@ -134,11 +134,10 @@ file static class QowaivTypeExtensions
         private TypeInfo(Type type, IEnumerable<Type> genericArguments)
         {
             Type = type;
-            GenericTypeArguments = genericArguments
+            GenericTypeArguments = [.. genericArguments
                 .Select(t => t.Info())
                 .Take(type.GetGenericArguments().Length)
-                .OfType<TypeInfo>()
-                .ToArray();
+                .OfType<TypeInfo>()];
 
             DeclaringType = IsNestedType && type.DeclaringType is { } declaringType
                 ? new(declaringType, genericArguments)
@@ -168,7 +167,7 @@ file static class QowaivTypeExtensions
         [Pure]
         public TypeInfo[] GetGenericArguments()
             => DeclaringType is { } declaring && Type.IsNested
-            ? GenericTypeArguments.Skip(declaring.GenericTypeArguments.Length).ToArray()
+            ? GenericTypeArguments[declaring.GenericTypeArguments.Length..]
             : GenericTypeArguments;
 
         public TypeInfo[] GenericTypeArguments { get; }

@@ -66,9 +66,8 @@ public class Can_not_be_related_to
 
 public class Method : SingleValueObjectSpecs
 {
-    private static readonly IReadOnlyCollection<MethodInfo> DateMethods = AllSvos
-        .SelectMany(t => t.GetMethods().Where(WithDateParameter))
-        .ToArray();
+    private static readonly IReadOnlyCollection<MethodInfo> DateMethods =
+        [.. AllSvos.SelectMany(t => t.GetMethods().Where(WithDateParameter))];
 
     [TestCaseSource(nameof(DateMethods))]
     public void Exist_with_DateOnly_overload(MethodInfo method)

@@ -72,7 +72,7 @@ jobs:
           /d:sonar.token="$SONAR_TOKEN"
       - name: Test Report
         if: success() || failure()
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v2
         with:
           name: Unit test results
           path: "**/*.trx"

@@ -100,7 +100,9 @@ public sealed record OpenApiDataType
     /// The type to create an <see cref="OpenApiDataType" /> for.
     /// </param>
     [Pure]
-    public static OpenApiDataType? FromType(Type type)
+    [RequiresDynamicCode("Calls System.Type.MakeGenericType(params Type[])")]
+    [RequiresUnreferencedCode("Calls System.Type.MakeGenericType(params Type[])")]
+    public static OpenApiDataType? FromType([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces | DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
         => Guard.NotNull(type).GetCustomAttributes<OpenApiDataTypeAttribute>().FirstOrDefault() is { } attr
         ? new(
             dataType: AsDataType(type),
@@ -114,13 +116,17 @@ public sealed record OpenApiDataType
         : null;
 
     [Pure]
-    private static Type AsDataType(Type type)
+    [RequiresDynamicCode("Calls System.Type.MakeGenericType(params Type[])")]
+    [RequiresUnreferencedCode("Calls System.Type.MakeGenericType(params Type[])")]
+    private static Type AsDataType([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces | DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
         => IdDataType(type)
         ?? SvoDataType(type)
         ?? type;
 
     [Pure]
-    private static Type? IdDataType(Type type)
+    [RequiresDynamicCode("Calls System.Type.MakeGenericType(params Type[])")]
+    [RequiresUnreferencedCode("Calls System.Type.MakeGenericType(params Type[])")]
+    private static Type? IdDataType([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces | DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
          => !type.IsAbstract
         && type.GetInterfaces().Contains(typeof(IIdentifierBehavior))
         && HasPublicParameterlessCtor(type)
@@ -128,7 +134,9 @@ public sealed record OpenApiDataType
         : null;
 
     [Pure]
-    private static Type? SvoDataType(Type type)
+    [RequiresDynamicCode("Calls System.Type.MakeGenericType(params Type[])")]
+    [RequiresUnreferencedCode("Calls System.Type.MakeGenericType(params Type[])")]
+    private static Type? SvoDataType([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
        => !type.IsAbstract
       && type.IsSubclassOf(typeof(SvoBehavior))
       && HasPublicParameterlessCtor(type)
@@ -136,6 +144,6 @@ public sealed record OpenApiDataType
       : null;
 
     [Pure]
-    private static bool HasPublicParameterlessCtor(Type type)
+    private static bool HasPublicParameterlessCtor([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
         => type.GetConstructors().Exists(ctor => ctor.GetParameters().None());
 }

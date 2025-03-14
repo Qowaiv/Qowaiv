@@ -58,6 +58,7 @@ inside and outside a Domain-driven context.
     <Company>Qowaiv community</Company>
     <Copyright>Copyright © Qowaiv community 2013-current</Copyright>
     <LangVersion>preview</LangVersion>
+    <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
   </PropertyGroup>
 
   <PropertyGroup Label="Signing">

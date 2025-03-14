@@ -98,7 +98,9 @@ public sealed record OpenApiDataType
     /// The type to create an <see cref="OpenApiDataType" /> for.
     /// </param>
     [Pure]
-    public static OpenApiDataType? FromType(Type type)
+    [RequiresDynamicCode("Calls System.Type.MakeGenericType(params Type[])")]
+    [RequiresUnreferencedCode("Calls System.Type.MakeGenericType(params Type[])")]
+    public static OpenApiDataType? FromType([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces | DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
         => Guard.NotNull(type).GetCustomAttributes<OpenApiDataTypeAttribute>().FirstOrDefault() is { } attr
         ? new(
             dataType: type,

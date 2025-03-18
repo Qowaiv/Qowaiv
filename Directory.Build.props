@@ -2,10 +2,15 @@
 
   <PropertyGroup>
     <IsPublishable>false</IsPublishable>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <OutputType>library</OutputType>
   </PropertyGroup>
 
+  <PropertyGroup Label="Compiler options">
+    <LangVersion>preview</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
+  </PropertyGroup>
+  
   <PropertyGroup Label="Diagnostics">
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <NuGetAudit>true</NuGetAudit>
@@ -57,7 +62,6 @@ inside and outside a Domain-driven context.
     </PackageTags>
     <Company>Qowaiv community</Company>
     <Copyright>Copyright © Qowaiv community 2013-current</Copyright>
-    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Signing">

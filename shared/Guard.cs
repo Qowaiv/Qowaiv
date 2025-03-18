@@ -20,6 +20,7 @@ namespace Qowaiv;
 /// * Keep the checks cheap so that you also can run them in production code.
 /// </remarks>
 [ExcludeFromCodeCoverage]
+[StackTraceHidden]
 internal static partial class Guard
 {
     /// <summary>Guards the parameter if not null, otherwise throws an argument (null) exception.</summary>
@@ -84,6 +85,7 @@ internal static partial class Guard
     /// <remarks>
     /// That <typeparamref name="T" /> is an enum is implicitly guard by <see cref="Enum.IsDefined(Type, object)" />.
     /// </remarks>
+    [DebuggerStepThrough]
     public static T DefinedEnum<T>(T parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         where T : struct
         => Enum.IsDefined(typeof(T), parameter)

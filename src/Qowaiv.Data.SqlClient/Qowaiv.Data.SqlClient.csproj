@@ -9,6 +9,8 @@
     <PackageId>Qowaiv.Data.SqlClient</PackageId>
     <PackageReleaseNotes>
       <![CDATA[
+ToBeReleased:
+- Hide Guard methods from stacktrace.
 v7.2.0
 - Added .NET 9.0 version to the package.
 - Potentially improved performance of concurrency when generating sql parameters in .NET 9 and up (using new System.Threading.Lock).

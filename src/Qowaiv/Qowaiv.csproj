@@ -41,6 +41,7 @@
     <PackageReleaseNotes>
       <![CDATA[
 ToBeReleased:
+- Hide Guard methods from stacktrace.
 - Use [SkipLocalsInit] (speed improvement). #458
 - Email address topdomain can not be longer than 63. (fix) #459
 - Rewritten email parser 2.4 times faster. #460

@@ -39,7 +39,7 @@ jobs:
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
       - name: Build
-        run: dotnet build Qowaiv.sln --configuration Release
+        run: dotnet build qowaiv.slnx --configuration Release
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         run: |

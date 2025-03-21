@@ -7,6 +7,7 @@ namespace Qowaiv.Diagnostics.Contracts
     /// <summary>Indicates the struct is empty by design.</summary>
     [global::System.AttributeUsage(global::System.AttributeTargets.Struct, AllowMultiple = false)]
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     internal sealed class EmptyTestStructAttribute(global::System.String? justification) : global::Qowaiv.Diagnostics.Contracts.EmptyStructAttribute(justification ?? "For test purposes.")
     {
         public EmptyTestStructAttribute() : this(null) { }

@@ -7,6 +7,7 @@ namespace Qowaiv.Diagnostics.Contracts
     /// <summary>Indicates the a class is designed to be inheritable.</summary>
     [global::System.AttributeUsage(global::System.AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     internal class InheritableAttribute(global::System.String? justification) : global::System.Attribute
     {
         public InheritableAttribute() : this(null) { }

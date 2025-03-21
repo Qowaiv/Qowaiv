@@ -7,6 +7,7 @@ namespace Qowaiv.Diagnostics.Contracts
     /// <summary>Indicates the enum is empty by design.</summary>
     [global::System.AttributeUsage(global::System.AttributeTargets.Enum, AllowMultiple = false)]
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     internal sealed class EmptyTestEnumAttribute(global::System.String? justification) : global::Qowaiv.Diagnostics.Contracts.EmptyEnumAttribute(justification ?? "For test purposes.")
     {
         public EmptyTestEnumAttribute() : this(null) { }

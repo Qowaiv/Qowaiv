@@ -9,6 +9,7 @@ namespace Qowaiv.Diagnostics.Contracts
     /// </summary>
     [global::System.AttributeUsage(global::System.AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     internal sealed class FluentSyntaxAttribute(global::System.String? justification) : global::Qowaiv.Diagnostics.Contracts.ImpureAttribute(justification)
     {
         public FluentSyntaxAttribute() : this(null) { }

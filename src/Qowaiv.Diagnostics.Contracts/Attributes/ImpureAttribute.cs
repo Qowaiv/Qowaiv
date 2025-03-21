@@ -7,6 +7,7 @@ namespace Qowaiv.Diagnostics.Contracts
     /// <summary>To mark a method explicitly as impure.</summary>
     [global::System.AttributeUsage(global::System.AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     internal class ImpureAttribute(global::System.String? justification) : global::System.Attribute
     {
         public ImpureAttribute() : this(null) { }

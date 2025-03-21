@@ -7,6 +7,7 @@ namespace Qowaiv.Diagnostics.Contracts
     /// <summary>Indicates the class will be sealed with the next major change.</summary>
     [global::System.AttributeUsage(global::System.AttributeTargets.Class | global::System.AttributeTargets.Method | global::System.AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     internal sealed class WillBeSealedAttribute(global::System.String? justification) : global::Qowaiv.Diagnostics.Contracts.InheritableAttribute(justification)
     {
         public WillBeSealedAttribute() : this(null) { }

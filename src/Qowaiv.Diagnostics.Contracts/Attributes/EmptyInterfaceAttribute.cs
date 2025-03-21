@@ -7,5 +7,6 @@ namespace Qowaiv.Diagnostics.Contracts
     /// <summary>Indicates the class is empty by design.</summary>
     [global::System.AttributeUsage(global::System.AttributeTargets.Interface, AllowMultiple = false)]
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     internal class EmptyInterfaceAttribute(global::System.String justification) : global::Qowaiv.Diagnostics.Contracts.EmptyTypeAttribute(justification) { }
 }

@@ -1,6 +1,4 @@
-using Qowaiv.Customization;
-
-namespace Qowaiv.CodeGeneration;
+namespace Qowaiv.Customization;
 
 /// <summary>
 /// Used by Qowaiv.CodeGeneration.SingleValueObjects to generateod the

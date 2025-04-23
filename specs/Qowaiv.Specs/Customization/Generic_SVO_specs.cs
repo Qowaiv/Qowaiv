@@ -40,23 +40,17 @@ public class With_domain_logic
     public void has_length(int length, CustomSvo svo)
         => svo.Length.Should().Be(length);
 
-    [TestCase(false, "QOWAIV")]
-    [TestCase(false, "?")]
-    [TestCase(true, "")]
-    public void IsEmpty_returns(bool result, CustomSvo svo)
-        => svo.IsEmpty().Should().Be(result);
-
-    [TestCase(false, "QOWAIV")]
-    [TestCase(true, "?")]
-    [TestCase(true, "")]
-    public void IsEmptyOrUnknown_returns(bool result, CustomSvo svo)
-        => svo.IsEmptyOrUnknown().Should().Be(result);
-
-    [TestCase(false, "QOWAIV")]
+    [TestCase(true, "QOWAIV")]
     [TestCase(true, "?")]
     [TestCase(false, "")]
-    public void IsUnknown_returns(bool result, CustomSvo svo)
-        => svo.IsUnknown().Should().Be(result);
+    public void IsEmpty_returns(bool result, CustomSvo svo)
+        => svo.HasValue.Should().Be(result);
+
+    [TestCase(true, "QOWAIV")]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void IsEmptyOrUnknown_returns(bool result, CustomSvo svo)
+        => svo.IsKnown.Should().Be(result);
 }
 
 public class Has_constant
@@ -413,7 +407,7 @@ public class Is_Open_API_data_type
 {
     [Test]
     public void with_info()
-       => OpenApiDataType.FromType(typeof(ForCustomSvo))
+       => OpenApiDataType.FromType(typeof(CustomSvo))
        .Should().Be(new OpenApiDataType(
            dataType: typeof(CustomSvo),
            description: "Custom SVO Example",
@@ -423,25 +417,6 @@ public class Is_Open_API_data_type
            pattern: null));
 }
 
-#if NET8_0_OR_GREATER
-#else
-public class Supports_binary_serialization
-{
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void using_BinaryFormatter()
-    {
-        var round_tripped = SerializeDeserialize.Binary(Svo.CustomSvo);
-        round_tripped.Should().Be(Svo.CustomSvo);
-    }
-    [Test]
-    public void storing_string_in_SerializationInfo()
-    {
-        var info = Serialize.GetInfo(Svo.CustomSvo);
-        info.GetString("Value").Should().Be("QOWAIV");
-    }
-}
-#endif
 public class Debugger
 {
     [TestCase("{empty}", "")]

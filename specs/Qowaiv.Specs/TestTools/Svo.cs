@@ -122,7 +122,7 @@ public sealed class WithDefaultBehavior : SvoBehavior { }
 [Svo<Behavior>]
 public readonly partial struct CustomSvo
 {
-    private sealed class Behavior : SvoBehavior
+    public sealed class Behavior : SvoBehavior
     {
         public override int MinLength => 3;
         public override int MaxLength => 16;

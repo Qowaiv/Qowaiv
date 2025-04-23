@@ -6,7 +6,8 @@ namespace Qowaiv.Customization;
 /// <summary>Handles the behavior of a custom Single Value Object.</summary>
 public abstract class SvoBehavior : TypeConverter, IComparer<string>
 {
-    internal static readonly string unknown = $"{char.MaxValue}";
+    /// <summary>The string to store the unknown state internally.</summary>
+    internal const string unknown = "\uFFFF";
 
     /// <summary>Defines the minimum length the string representation of the Single Value Object may be.</summary>
     /// <remarks>
@@ -174,7 +175,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    internal bool TryParse(string? str, IFormatProvider? formatProvider, out string? validated)
+    public bool TryParse(string? str, IFormatProvider? formatProvider, out string? validated)
     {
         var normalized = NormalizeInput(str, formatProvider);
         if (string.IsNullOrWhiteSpace(normalized))
@@ -219,20 +220,11 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// The format provider.
     /// </param>
     [Pure]
-    internal string ToString(string? str, string? format, IFormatProvider? formatProvider)
+    public string ToString(string? str, string? format, IFormatProvider? formatProvider) => str switch
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, str!, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-        else if (str is null)
-        {
-            return string.Empty;
-        }
-        else if (str == unknown)
-        {
-            return FormatUnknown(format, formatProvider);
-        }
-        else return Format(str, format, formatProvider);
-    }
+        _ when StringFormatter.TryApplyCustomFormatter(format, str!, formatProvider, out string formatted) => formatted,
+        null => string.Empty,
+        unknown => FormatUnknown(format, formatProvider),
+        _ => Format(str, format, formatProvider),
+    };
 }

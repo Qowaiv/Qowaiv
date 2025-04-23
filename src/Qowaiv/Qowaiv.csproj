@@ -37,15 +37,16 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>7.2.3</Version>
+    <Version>7.3.0-rc.1</Version>
     <PackageReleaseNotes>
       <![CDATA[
-ToBeReleased:
+v7.3.0
 - Hide Guard methods from stacktrace.
 - Use [SkipLocalsInit] (speed improvement). #458
 - Email address topdomain can not be longer than 63. (fix) #459
 - Rewritten email parser 2.4 times faster. #460
 - Drop CharBuffer in favor of Span<char> based implementations. #464 
+- Support [Svo<TBehavior>]. #478
 v7.2.3
 - IBAN adjustments for Nicaragua and Côte d'Ivoire. (fix) #454
 v7.2.2

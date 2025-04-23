@@ -7,7 +7,7 @@ namespace Qowaiv.Customization;
 public abstract class SvoBehavior : TypeConverter, IComparer<string>
 {
     /// <summary>The string to store the unknown state internally.</summary>
-    internal static readonly string unknown = "\uFFFF";
+    internal const string unknown = "\uFFFF";
 
     /// <summary>Defines the minimum length the string representation of the Single Value Object may be.</summary>
     /// <remarks>
@@ -32,7 +32,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// The optional format provider.
     /// </param>
     [Pure]
-    public virtual bool IsUnknown(string str, IFormatProvider? formatProvider) => Qowaiv.Unknown.IsUnknown(str, formatProvider as CultureInfo);
+    public virtual bool IsUnknown(string str, IFormatProvider? formatProvider) => Unknown.IsUnknown(str, formatProvider as CultureInfo);
 
     /// <summary>Validates if the input <see cref="string" /> is valid given its format provider.</summary>
     /// <param name="str">

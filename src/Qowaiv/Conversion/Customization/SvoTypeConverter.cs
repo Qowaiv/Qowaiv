@@ -4,6 +4,7 @@ using System.Reflection;
 namespace Qowaiv.Conversion.Customization;
 
 /// <summary>Provides a conversion for strongly typed identifiers.</summary>
+[Obsolete("Used by obsolete Svo<TBehavior>. Will be dropped in version 8.0.0.")]
 public sealed class SvoTypeConverter : TypeConverter
 {
     /// <summary>Accessor to the underlying value.</summary>

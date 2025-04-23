@@ -132,10 +132,12 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// A 'For'-prefix will be stripped from the name in the message.
     /// </remarks>
     [Pure]
-    public virtual string InvalidFormatMessage(string? str, IFormatProvider? formatProvider)
-        => GetType().Name.StartsWith("For")
-        ? $"Not a valid {GetType().Name[3..]}"
-        : $"Not a valid {GetType().Name}";
+    public virtual string InvalidFormatMessage(string? str, IFormatProvider? formatProvider) => GetType() switch
+    {
+        var t when t.DeclaringType is { } declaring => $"Not a valid {declaring.Name}",
+        var t when t.Name.StartsWith("For") /*...*/ => $"Not a valid {t.Name[3..]}",
+        var t /*.................................*/ => $"Not a valid {t.Name}",
+    };
 
     /// <inheritdoc />
     [Pure]

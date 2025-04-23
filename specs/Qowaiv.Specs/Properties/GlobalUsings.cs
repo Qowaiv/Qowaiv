@@ -38,7 +38,6 @@ global using System.Text;
 global using System.Text.RegularExpressions;
 global using System.Threading.Tasks;
 global using System.Xml.Serialization;
-global using CustomSvo = Qowaiv.Customization.Svo<Qowaiv.TestTools.ForCustomSvo>;
 global using GenericSvo = Qowaiv.Customization.Svo<Qowaiv.TestTools.WithDefaultBehavior>;
 global using CustomGuid = Qowaiv.Identifiers.Id<Qowaiv.TestTools.ForGuid>;
 global using Int32Id = Qowaiv.Identifiers.Id<Qowaiv.TestTools.ForInt32>;

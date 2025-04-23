@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>7.3.0-rc.1</Version>
+    <Version>7.3.0</Version>
     <PackageReleaseNotes>
       <![CDATA[
 v7.3.0

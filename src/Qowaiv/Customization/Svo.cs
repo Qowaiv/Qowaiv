@@ -17,6 +17,7 @@ namespace Qowaiv.Customization;
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Customization.GenericSvoJsonConverter))]
 #endif
+[Obsolete("Use a generated SVO with [Svo<SvoBehavior>] instead.")]
 public readonly struct Svo<TSvoBehavior> : IXmlSerializable, IFormattable, IEquatable<Svo<TSvoBehavior>>, IComparable, IComparable<Svo<TSvoBehavior>>, IUnknown<Svo<TSvoBehavior>>
 #if NET8_0_OR_GREATER
 , IEqualityOperators<Svo<TSvoBehavior>, Svo<TSvoBehavior>, bool>

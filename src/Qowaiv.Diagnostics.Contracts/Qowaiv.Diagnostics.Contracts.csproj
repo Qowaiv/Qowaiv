@@ -9,7 +9,7 @@
     <DevelopmentDependency>true</DevelopmentDependency>
     <IncludeSymbols>false</IncludeSymbols>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <Version>2.0.5</Version>
+    <Version>2.0.6</Version>
     <PackageId>Qowaiv.Diagnostics.Contracts</PackageId>
     <ProductName>Qowaiv Diagnostics Contracts</ProductName>
     <LangVersion>10</LangVersion>

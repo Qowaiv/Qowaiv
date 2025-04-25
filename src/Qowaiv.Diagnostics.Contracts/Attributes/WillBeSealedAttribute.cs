@@ -8,8 +8,10 @@ namespace Qowaiv.Diagnostics.Contracts
     [global::System.AttributeUsage(global::System.AttributeTargets.Class | global::System.AttributeTargets.Method | global::System.AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    internal sealed class WillBeSealedAttribute(global::System.String? justification) : global::Qowaiv.Diagnostics.Contracts.InheritableAttribute(justification)
+    internal sealed class WillBeSealedAttribute: global::Qowaiv.Diagnostics.Contracts.InheritableAttribute
     {
+        public WillBeSealedAttribute(global::System.String? justification) : base(justification) { }
+
         public WillBeSealedAttribute() : this(null) { }
     }
 }

@@ -10,5 +10,8 @@ namespace Qowaiv.Diagnostics.Contracts
     [global::System.AttributeUsage(global::System.AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    internal sealed class CollectionMutationAttribute(global::System.String? justification = null) : global::Qowaiv.Diagnostics.Contracts.ImpureAttribute(justification) { }
+    internal sealed class CollectionMutationAttribute : global::Qowaiv.Diagnostics.Contracts.ImpureAttribute
+    {
+        public CollectionMutationAttribute(global::System.String? justification = null) : base(justification) { }
+    }
 }

@@ -7,9 +7,11 @@ namespace Qowaiv.Diagnostics.Contracts
     /// <summary>Indicates the type is empty by design.</summary>
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    internal abstract class EmptyTypeAttribute(global::System.String justification) : global::System.Attribute
+    internal abstract class EmptyTypeAttribute : global::System.Attribute
     {
+        protected EmptyTypeAttribute(global::System.String justification) => this.Justification = justification;
+
         /// <summary>The justification of this decoration.</summary>
-        public global::System.String Justification { get; } = justification;
+        public global::System.String Justification { get; }
     }
 }

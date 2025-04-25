@@ -8,5 +8,8 @@ namespace Qowaiv.Diagnostics.Contracts
     [global::System.AttributeUsage(global::System.AttributeTargets.Enum, AllowMultiple = false)]
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    internal class EmptyEnumAttribute(global::System.String justification) : global::Qowaiv.Diagnostics.Contracts.EmptyTypeAttribute(justification) { }
+    internal class EmptyEnumAttribute : global::Qowaiv.Diagnostics.Contracts.EmptyTypeAttribute
+    {
+        public EmptyEnumAttribute(global::System.String justification) : base(justification) { }
+    }
 }

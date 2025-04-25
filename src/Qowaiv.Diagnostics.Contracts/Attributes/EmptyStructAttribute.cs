@@ -8,5 +8,8 @@ namespace Qowaiv.Diagnostics.Contracts
     [global::System.AttributeUsage(global::System.AttributeTargets.Struct, AllowMultiple = false)]
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    internal class EmptyStructAttribute(global::System.String justification) : global::Qowaiv.Diagnostics.Contracts.EmptyTypeAttribute(justification) { }
+    internal class EmptyStructAttribute : global::Qowaiv.Diagnostics.Contracts.EmptyTypeAttribute
+    {
+        public EmptyStructAttribute(global::System.String justification) : base(justification) { }
+    }
 }

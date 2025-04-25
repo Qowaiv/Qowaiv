@@ -12,8 +12,11 @@
     <Version>2.0.5</Version>
     <PackageId>Qowaiv.Diagnostics.Contracts</PackageId>
     <ProductName>Qowaiv Diagnostics Contracts</ProductName>
+    <LangVersion>10</LangVersion>
     <PackageReleaseNotes>
       <![CDATA[
+v2.0.6
+- Reduce required C# language version from 12 to 10.
 v2.0.5
 - Decorate all code with [ExcludeFromCodeCoverage].
 v2.0.4

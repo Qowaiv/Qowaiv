@@ -8,11 +8,13 @@ namespace Qowaiv.Diagnostics.Contracts
     [global::System.AttributeUsage(global::System.AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    internal class InheritableAttribute(global::System.String? justification) : global::System.Attribute
+    internal class InheritableAttribute : global::System.Attribute
     {
+        public InheritableAttribute(global::System.String? justification) => Justification = justification;
+
         public InheritableAttribute() : this(null) { }
 
         /// <summary>The justification of this decoration.</summary>
-        public global::System.String? Justification { get; init; } = justification;
+        public global::System.String? Justification { get; init; }
     }
 }

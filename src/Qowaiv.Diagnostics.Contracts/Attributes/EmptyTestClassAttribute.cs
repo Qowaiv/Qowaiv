@@ -12,8 +12,10 @@ namespace Qowaiv.Diagnostics.Contracts
     [global::System.AttributeUsage(global::System.AttributeTargets.Class, AllowMultiple = false)]
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    internal sealed class EmptyTestClassAttribute(global::System.String? justification) : global::Qowaiv.Diagnostics.Contracts.EmptyClassAttribute(justification ?? "For test purposes.")
+    internal sealed class EmptyTestClassAttribute : global::Qowaiv.Diagnostics.Contracts.EmptyClassAttribute
     {
+        public EmptyTestClassAttribute(global::System.String? justification) : base(justification ?? "For test purposes.") { }
+
         public EmptyTestClassAttribute() : this(null) { }
     }
 }

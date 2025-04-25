@@ -12,5 +12,8 @@ namespace Qowaiv.Diagnostics.Contracts
     [global::System.AttributeUsage(global::System.AttributeTargets.Class, AllowMultiple = false)]
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    internal class EmptyClassAttribute(global::System.String justification) : global::Qowaiv.Diagnostics.Contracts.EmptyTypeAttribute(justification) { }
+    internal class EmptyClassAttribute : global::Qowaiv.Diagnostics.Contracts.EmptyTypeAttribute
+    {
+        public EmptyClassAttribute(global::System.String justification) : base(justification) { }
+    }
 }

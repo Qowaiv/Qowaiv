@@ -8,8 +8,10 @@ namespace Qowaiv.Diagnostics.Contracts
     [global::System.AttributeUsage(global::System.AttributeTargets.Interface, AllowMultiple = false)]
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    internal sealed class EmptyTestInterfaceAttribute(global::System.String? justification) : global::Qowaiv.Diagnostics.Contracts.EmptyInterfaceAttribute(justification ?? "For test purposes.")
+    internal sealed class EmptyTestInterfaceAttribute : global::Qowaiv.Diagnostics.Contracts.EmptyInterfaceAttribute
     {
+        public EmptyTestInterfaceAttribute(global::System.String? justification) : base (justification ?? "For test purposes.") { }
+
         public EmptyTestInterfaceAttribute() : this(null) { }
     }
 }

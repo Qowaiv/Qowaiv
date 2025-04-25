@@ -8,11 +8,13 @@ namespace Qowaiv.Diagnostics.Contracts
     [global::System.AttributeUsage(global::System.AttributeTargets.Class | global::System.AttributeTargets.Struct | global::System.AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
     [global::System.Diagnostics.Conditional("CONTRACTS_FULL")]
     [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    internal sealed class MutableAttribute(global::System.String? justification) : global::System.Attribute
+    internal sealed class MutableAttribute : global::System.Attribute
     {
+        public MutableAttribute(global::System.String? justification) => Justification = justification;
+
         public MutableAttribute() : this(null) { }
 
         /// <summary>The justification of this decoration.</summary>
-        public global::System.String? Justification { get; init; } = justification;
+        public global::System.String? Justification { get; init; }
     }
 }

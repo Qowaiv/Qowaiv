@@ -9,7 +9,7 @@ namespace Diagnostics_Contracts_Specs
     {
         private static bool IsGenerated(Type t)
             => !t.IsAbstract
-            && t.IsAssignableTo(typeof(System.Attribute))
+            && t.IsAssignableTo(typeof(Attribute))
             && t.Namespace == "Qowaiv.Diagnostics.Contracts";
 
         [Test]

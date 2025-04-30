@@ -8,15 +8,13 @@ namespace Specs;
 
 public static class Svo
 {
-    public static readonly CustomSvo CustomSvo = CustomSvo.Parse("QOWAIV");
+    //public static readonly CustomSvo CustomSvo = CustomSvo.Parse("QOWAIV");
 }
 
 [OpenApiDataType(description: "Custom SVO Example", type: "string", example: "QOWAIV", format: "custom")]
 [Svo<Behavior>]
 public readonly partial struct CustomSvo
 {
-    public static CustomSvo Parse(string s) => new();
-
     private sealed class Behavior : SvoBehavior
     {
         public override int MinLength => 3;

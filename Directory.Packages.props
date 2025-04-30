@@ -31,7 +31,6 @@
     <PackageVersion Include="NUnit3TestAdapter" Version="5.0.0" />
     <PackageVersion Include="PolySharp" Version="1.15.0" />
     <PackageVersion Include="Qowaiv.Analyzers.CSharp" Version="2.0.5" />
-    <PackageVersion Include="Qowaiv.CodeGeneration.SingleValueObjects" Version="1.0.2" />
     <PackageVersion Include="Qowaiv.Validation.DataAnnotations" Version="3.0.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.8.0.113526" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />

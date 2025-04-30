@@ -25,12 +25,14 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageVersion Include="Microsoft.Sbom.Targets" Version="3.0.1" />
     <PackageVersion Include="Microsoft.Web.Infrastructure" Version="2.0.0" />
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageVersion Include="NUnit" Version="3.14.0" />
     <PackageVersion Include="NUnit.Analyzers" Version="4.7.0" />
     <PackageVersion Include="NUnit3TestAdapter" Version="5.0.0" />
     <PackageVersion Include="PolySharp" Version="1.15.0" />
     <PackageVersion Include="Qowaiv.Analyzers.CSharp" Version="2.0.5" />
     <PackageVersion Include="Qowaiv.CodeGeneration.SingleValueObjects" Version="1.0.2" />
+    <PackageVersion Include="Qowaiv.Validation.DataAnnotations" Version="3.0.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.8.0.113526" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
     <PackageVersion Include="System.Data.SqlClient" Version="4.8.6" />

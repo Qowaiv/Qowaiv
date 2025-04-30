@@ -4,6 +4,8 @@
     <Project Path="src/Qowaiv/Qowaiv.csproj" />
   </Folder>
   <Folder Name="/Generation/" Id="02ea681e-c7d8-13c7-8484-4ac65e1b71e8">
+    <Project Path="src/Qowaiv.CodeGeneration.SingleValueObjects/Qowaiv.CodeGeneration.SingleValueObjects.csproj" />
+    <Project Path="src/Qowaiv.CodeGeneration/Qowaiv.CodeGeneration.csproj" />
     <Project Path="src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" />
   </Folder>
   <Folder Name="/Model Binding and Serialization/">

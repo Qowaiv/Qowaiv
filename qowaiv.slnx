@@ -1,17 +1,24 @@
 <Solution>
+  <Folder Name="/Core/" Id="4f35c0b3-93dc-4660-8294-d474d7c27851">
+    <Project Path="src/Qowaiv.Data.SqlClient/Qowaiv.Data.SqlClient.csproj" />
+    <Project Path="src/Qowaiv/Qowaiv.csproj" />
+  </Folder>
+  <Folder Name="/Generation/" Id="02ea681e-c7d8-13c7-8484-4ac65e1b71e8">
+    <Project Path="src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" />
+  </Folder>
   <Folder Name="/Model Binding and Serialization/">
     <Project Path="example/Qowaiv.AspNetCore.Mvc.ModelBinding.UnitTests/Qowaiv.AspNetCore.Mvc.ModelBinding.UnitTests.csproj" />
     <Project Path="example/Qowaiv.AspNetCore.Mvc.ModelBinding/Qowaiv.AspNetCore.Mvc.ModelBinding.csproj" />
     <Project Path="example/Qowaiv.Web.Mvc.ModelBinding/Qowaiv.Web.Mvc.ModelBinding.csproj" />
   </Folder>
-  <Folder Name="/specs/">
+  <Folder Name="/Specs/">
     <Project Path="specs/Qowaiv.Benchmarks/Qowaiv.Benchmarks.csproj" />
+    <Project Path="specs/Qowaiv.Diagnostics.Contracts.Specs/Qowaiv.Diagnostics.Contracts.Specs.csproj" Id="cc59c5f3-8ef4-41e7-9d7f-ffba44c57e6a" />
     <Project Path="specs/Qowaiv.Specs/Qowaiv.Specs.csproj" />
     <Project Path="specs/Qowaiv.Wikipedia/Qowaiv.Wikipedia.csproj" />
   </Folder>
+  <Folder Name="/Tooling/" Id="80c029d3-9b7b-485d-a0f1-4efd2042e1fe">
+    <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
+  </Folder>
   <Project Path=".net.csproj" />
-  <Project Path="src/Qowaiv.Data.SqlClient/Qowaiv.Data.SqlClient.csproj" />
-  <Project Path="src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" />
-  <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
-  <Project Path="src/Qowaiv/Qowaiv.csproj" />
 </Solution>

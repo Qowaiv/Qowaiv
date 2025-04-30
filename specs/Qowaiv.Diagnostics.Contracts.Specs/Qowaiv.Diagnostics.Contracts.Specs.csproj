@@ -1,18 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/nopackage.props" />
-
+  
   <PropertyGroup>
-    <Nullable>enable</Nullable>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <IsTestProject>true</IsTestProject>
-    <TargetFrameworks>net5.0;net6.0;net8.0;net9.0</TargetFrameworks>
-    <DefineConstants>CONTRACTS_FULL</DefineConstants>
+    <LangVersion>9</LangVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="../../src/Qowaiv/Text/ASCII.cs" Link="Qowaiv.Internal/Text/ASCII.cs" />
-    <Compile Include="../../src/Qowaiv/Text/CharBuffer.cs" Link="Qowaiv.Internal/Text/CharBuffer.cs" />
-  </ItemGroup>
 
   <ItemGroup Label="Test Tools">
     <PackageReference Include="AwesomeAssertions" />
@@ -33,16 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/Qowaiv/Qowaiv.csproj" />
-    <ProjectReference Include="../../src/Qowaiv.Data.SqlClient/Qowaiv.Data.SqlClient.csproj" />
-    <ProjectReference Include="../../src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
-  </ItemGroup>
-
-  <ItemGroup Label="Diagnostics contracts code generation">
-    <ProjectReference
-      Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj"
-      OutputItemType="Analyzer"
-      ReferenceOutputAssembly="false" />
+    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
 </Project>

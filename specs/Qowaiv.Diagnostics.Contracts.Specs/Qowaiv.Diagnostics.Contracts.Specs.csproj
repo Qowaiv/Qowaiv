@@ -6,6 +6,7 @@
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <IsTestProject>true</IsTestProject>
     <LangVersion>9</LangVersion>
+    <RootNamespace>Specs</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup Label="Test Tools">
@@ -27,7 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference
+      Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj"
+      OutputItemType="Analyzer"
+      ReferenceOutputAssembly="false" />
   </ItemGroup>
 
 </Project>

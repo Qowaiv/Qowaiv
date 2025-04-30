@@ -15,6 +15,7 @@
   </Folder>
   <Folder Name="/Specs/">
     <Project Path="specs/Qowaiv.Benchmarks/Qowaiv.Benchmarks.csproj" />
+    <Project Path="specs/Qowaiv.CodeGeneration.SingleValueObjects.Specs/Qowaiv.CodeGeneration.SingleValueObjects.Specs.csproj" />
     <Project Path="specs/Qowaiv.Diagnostics.Contracts.Specs/Qowaiv.Diagnostics.Contracts.Specs.csproj" Id="cc59c5f3-8ef4-41e7-9d7f-ffba44c57e6a" />
     <Project Path="specs/Qowaiv.Specs/Qowaiv.Specs.csproj" />
     <Project Path="specs/Qowaiv.Wikipedia/Qowaiv.Wikipedia.csproj" />

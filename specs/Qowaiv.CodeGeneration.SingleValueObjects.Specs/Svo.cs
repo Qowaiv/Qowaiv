@@ -8,7 +8,7 @@ namespace Specs;
 
 public static class Svo
 {
-    //public static readonly CustomSvo CustomSvo = CustomSvo.Parse("QOWAIV");
+    public static readonly CustomSvo CustomSvo = CustomSvo.Parse("QOWAIV");
 }
 
 [OpenApiDataType(description: "Custom SVO Example", type: "string", example: "QOWAIV", format: "custom")]

@@ -18,7 +18,6 @@
     <PackageReference Include="coverlet.collector" PrivateAssets="all" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" PrivateAssets="all" />
     <PackageReference Include="NUnit3TestAdapter" PrivateAssets="all" />
-    <PackageReference Include="Qowaiv.CodeGeneration.SingleValueObjects" PrivateAssets="all" />
   </ItemGroup>
 
   <!-- We do not want to report on this during a PR/Release build. -->

@@ -1,11 +1,14 @@
-/*
+using Qowaiv.Globalization;
+using Qowaiv.Hashing;
 using Qowaiv.OpenApi;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Xml.Serialization;
 
 namespace Specs.CustomSvo_specs;
 
@@ -220,7 +223,7 @@ public class Has_custom_formatting
 public class Is_comparable
 {
     [Test]
-    public void to_null_is_1() => Svo.CustomSvo.CompareTo(Nil.Object).Should().Be(1);
+    public void to_null_is_1() => Svo.CustomSvo.CompareTo((object?)null).Should().Be(1);
 
     [Test]
     public void to_Svo_as_object()
@@ -406,15 +409,3 @@ public class Is_Open_API_data_type
            format: "custom",
            pattern: null));
 }
-
-public class Debugger
-{
-    [TestCase("{empty}", "")]
-    [TestCase("{unknown}", "?")]
-    [TestCase("QOWAIV", "QOWAIV")]
-    public void has_custom_display(object display, CustomSvo svo)
-    {
-        svo.Should().HaveDebuggerDisplay(display);
-    }
-}
-*/

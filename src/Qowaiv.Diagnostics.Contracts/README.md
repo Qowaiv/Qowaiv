@@ -25,6 +25,9 @@ constant `CONTRACTS_FULL` has to be set.
 If you only use these decorations to enable static code analysis, this constant
 is not needed.
 
+## C# Language version
+The generated code requires C# 9.0 or higher to compile.
+
 ## Impure attribute
 Opposed to the `[Pure]` attribute, the `[Impure]` attribute indicates that a
 method has side effects. This attribute can help working with static code 

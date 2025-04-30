@@ -4,6 +4,8 @@
     <Project Path="src/Qowaiv/Qowaiv.csproj" />
   </Folder>
   <Folder Name="/Generation/" Id="02ea681e-c7d8-13c7-8484-4ac65e1b71e8">
+    <Project Path="src/Qowaiv.CodeGeneration.SingleValueObjects/Qowaiv.CodeGeneration.SingleValueObjects.csproj" />
+    <Project Path="src/Qowaiv.CodeGeneration/Qowaiv.CodeGeneration.csproj" />
     <Project Path="src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" />
   </Folder>
   <Folder Name="/Model Binding and Serialization/">
@@ -13,6 +15,7 @@
   </Folder>
   <Folder Name="/Specs/">
     <Project Path="specs/Qowaiv.Benchmarks/Qowaiv.Benchmarks.csproj" />
+    <Project Path="specs/Qowaiv.CodeGeneration.SingleValueObjects.Specs/Qowaiv.CodeGeneration.SingleValueObjects.Specs.csproj" />
     <Project Path="specs/Qowaiv.Diagnostics.Contracts.Specs/Qowaiv.Diagnostics.Contracts.Specs.csproj" Id="cc59c5f3-8ef4-41e7-9d7f-ffba44c57e6a" />
     <Project Path="specs/Qowaiv.Specs/Qowaiv.Specs.csproj" />
     <Project Path="specs/Qowaiv.Wikipedia/Qowaiv.Wikipedia.csproj" />

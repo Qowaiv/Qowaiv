@@ -90,7 +90,7 @@ internal static partial class Guard
         where T : struct
         => Enum.IsDefined(typeof(T), parameter)
         ? parameter
-        : throw new ArgumentOutOfRangeException(paramName, string.Format(CultureInfo.CurrentCulture, Messages.ArgumentOutOfRangeException_DefinedEnum, parameter, typeof(T)));
+        : throw new ArgumentOutOfRangeException(paramName, string.Format(Messages.ArgumentOutOfRangeException_DefinedEnum, parameter, typeof(T)));
 
     /// <summary>
     /// Guards that the parameter is an instance of T, otherwise throws an argument (null) exception.
@@ -107,7 +107,7 @@ internal static partial class Guard
     public static T IsInstanceOf<T>([ValidatedNotNull] object? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => NotNull(parameter, paramName) is T guarded
         ? guarded
-        : throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Messages.ArgumentException_NotAnInstanceOf, typeof(T)), paramName);
+        : throw new ArgumentException(string.Format(Messages.ArgumentException_NotAnInstanceOf, typeof(T)), paramName);
 
     /// <summary>Guards that the parameter is not null or an empty collection, otherwise throws an argument (null) exception.</summary>
     /// <typeparam name="T">The type to guard; must be an <see cref="ICollection" />.</typeparam>

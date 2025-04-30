@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  
+  <Import Project="../../props/package.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <IncludeSymbols>false</IncludeSymbols>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <PackageId>Qowaiv.CodeGeneration.SingleValueObjects</PackageId>
+    <Version>1.0.2</Version>
+    <PackageReleaseNotes>
+      <![CDATA[
+v1.0.2
+- Fixes for Generation before .NET 6.0.
+v1.0.1
+- Generate JSON Converter only for .NET 6.0 and higher.
+v1.0.0
+- Generate custom SVO's.
+]]>
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Snippets/*.cs" />
+    <EmbeddedResource Include="Snippets/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference 
+      Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj"
+      OutputItemType="Analyzer"
+      ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup Label="Qowaiv.CodeGeneration">
+    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
+    <Compile Include="../Qowaiv.CodeGeneration/Code.cs" Link="Qowaiv.CodeGeneration/Code.cs" />
+    <Compile Include="../Qowaiv.CodeGeneration/Constant.cs" Link="Qowaiv.CodeGeneration/Constant.cs" />
+    <Compile Include="../Qowaiv.CodeGeneration/Nill.cs" Link="Qowaiv.CodeGeneration/Nill.cs" />
+    <Compile Include="../Qowaiv.CodeGeneration/CSharpWriter.cs" Link="Qowaiv.CodeGeneration/CSharpWriter.cs" />
+    <Compile Include="../Qowaiv.CodeGeneration/CSharpWriterSettings.cs" Link="Qowaiv.CodeGeneration/CSharpWriterSettings.cs" />
+    <Compile Include="../Qowaiv.CodeGeneration/Extensions/Qowaiv.CodeGeneration.Code.cs" Link="Qowaiv.CodeGeneration/Extensions/Qowaiv.CodeGeneration.Code.cs" />
+    <Compile Include="../Qowaiv.CodeGeneration/Syntax/*.cs" Link="Qowaiv.CodeGeneration/Syntax/%(Filename).cs" />
+    <Compile Include="../Qowaiv.CodeGeneration/Types/Namespace.cs" Link="Qowaiv.CodeGeneration/Types/Namespace.cs" />
+  </ItemGroup>
+
+  <ItemGroup Label="CompileTimeDependencies">
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup Label="DependencyPackaging">
+    <None Include="$(OutputPath)/$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+  </ItemGroup>
+
+</Project>

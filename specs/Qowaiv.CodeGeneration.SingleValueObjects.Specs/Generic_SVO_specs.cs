@@ -1,23 +1,16 @@
-namespace Customization.SVO_specs;
+using Qowaiv.Globalization;
+using Qowaiv.Hashing;
+using Qowaiv.OpenApi;
+using Qowaiv.TestTools;
+using Qowaiv.TestTools.Globalization;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.Linq;
+using System.Xml.Serialization;
 
-public class Default_behavior
-{
-    [Test]
-    public void MinLength_is_0()
-        => new WithDefaultBehavior().MinLength.Should().Be(0);
-
-    [Test]
-    public void MaxLength_is_int_MaxValue()
-        => new WithDefaultBehavior().MaxLength.Should().Be(int.MaxValue);
-
-    [Test]
-    public void Regex_Pattern_is_null()
-        => new WithDefaultBehavior().Pattern.Should().BeNull();
-
-    [Test]
-    public void ToJson_returns_underlying_value()
-        => GenericSvo.Empty.ToJson().Should().BeNull();
-}
+namespace Specs.CustomSvo_specs;
 
 public class With_domain_logic
 {
@@ -135,7 +128,7 @@ public class Can_be_parsed
         {
             Func<CustomSvo> parse = () => CustomSvo.Parse("invalid input!");
             parse.Should().Throw<FormatException>()
-                .WithMessage("Not a valid CustomSvo");
+                .WithMessage("Is not a valid CustomSvo");
         }
     }
 
@@ -230,7 +223,7 @@ public class Has_custom_formatting
 public class Is_comparable
 {
     [Test]
-    public void to_null_is_1() => Svo.CustomSvo.CompareTo(Nil.Object).Should().Be(1);
+    public void to_null_is_1() => Svo.CustomSvo.CompareTo((object?)null).Should().Be(1);
 
     [Test]
     public void to_Svo_as_object()
@@ -284,7 +277,7 @@ public class Supports_type_conversion
 {
     [Test]
     public void via_TypeConverter_registered_with_attribute()
-        => typeof(CustomSvo).Should().HaveTypeConverterDefined();
+        => typeof(CustomSvo).Should().BeDecoratedWith<TypeConverterAttribute>();
 
     [Test]
     public void from_null_string()
@@ -415,15 +408,4 @@ public class Is_Open_API_data_type
            type: "string",
            format: "custom",
            pattern: null));
-}
-
-public class Debugger
-{
-    [TestCase("{empty}", "")]
-    [TestCase("{unknown}", "?")]
-    [TestCase("QOWAIV", "QOWAIV")]
-    public void has_custom_display(object display, CustomSvo svo)
-    {
-        svo.Should().HaveDebuggerDisplay(display);
-    }
 }

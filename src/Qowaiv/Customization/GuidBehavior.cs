@@ -1,0 +1,78 @@
+namespace Qowaiv.Customization;
+
+/// <summary>
+/// Provides <see cref="Guid"/> based behavior for an identifier generated using
+/// <see cref="IdAttribute{TBehavior, TValue}"/>.
+/// </summary>
+[Inheritable]
+public class GuidBehavior : IdBehavior<Guid>
+{
+    /// <inheritdoc />
+    [Pure]
+    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
+        => sourceType == typeof(Guid)
+        || sourceType == typeof(Uuid)
+        || base.CanConvertFrom(context, sourceType);
+
+    /// <inheritdoc />
+    [Pure]
+    public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
+        => destinationType == typeof(Guid)
+        || destinationType == typeof(Uuid)
+        || base.CanConvertTo(context, destinationType);
+
+    /// <inheritdoc />
+    [Pure]
+    public sealed override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value) => value switch
+    {
+        null or "" => Guid.Empty,
+        Guid guid => guid,
+        Uuid uuid => (Guid)uuid,
+        string str when Guid.TryParse(str, out var id) => id,
+        _ => throw Exceptions.InvalidCast(value.GetType(), typeof(Guid)),
+    };
+
+    /// <inheritdoc />
+    [Pure]
+    public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        => value is Guid guid
+        ? destinationType switch
+        {
+            var t when t == typeof(Guid) => guid,
+            var t when t == typeof(Uuid) => (Uuid)guid,
+            var t when t == typeof(string) => guid.ToString(),
+            _ => base.ConvertTo(context, culture, value, destinationType),
+        }
+        : base.ConvertTo(context, culture, value, destinationType);
+
+    /// <inheritdoc />
+    [Pure]
+    public override Guid FromBytes(byte[] bytes) => new(bytes);
+
+    /// <inheritdoc />
+    [Pure]
+    public override byte[] ToByteArray(Guid obj) => obj.ToByteArray();
+
+    /// <inheritdoc />
+    [Pure]
+    public override Guid NextId() => Guid.NewGuid();
+
+    /// <inheritdoc />
+    public override bool TryTransform(Guid value, out Guid transformed)
+    {
+        transformed = value;
+        return value != Guid.Empty;
+    }
+
+    /// <inheritdoc />
+    public override bool TryTransform(string? str, IFormatProvider? formatProvider, out Guid id)
+    {
+        if (Uuid.TryParse(str, out var guid))
+        {
+            id = guid;
+            return true;
+        }
+        id = Guid.Empty;
+        return false;
+    }
+}

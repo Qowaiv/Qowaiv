@@ -26,9 +26,9 @@ public class UuidBehavior : IdBehavior<Uuid>
     public sealed override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value) => value switch
     {
         null or "" => Uuid.Empty,
-        Guid guid => (Uuid)guid,
-        Uuid uuid => uuid,
-        string str when Uuid.TryParse(str, out var id) => id,
+        Guid guid when TryTransform(guid, out var transformed) => transformed,
+        Uuid uuid when TryTransform(uuid, out var transformed) => transformed,
+        string str when TryTransform(str, culture, out var id) => id,
         _ => throw Exceptions.InvalidCast(value.GetType(), typeof(Uuid)),
     };
 
@@ -40,7 +40,7 @@ public class UuidBehavior : IdBehavior<Uuid>
         {
             var t when t == typeof(Guid) => (Guid)uuid,
             var t when t == typeof(Uuid) => uuid,
-            var t when t == typeof(string) => uuid.ToString(),
+            var t when t == typeof(string) => ToString(uuid, null, culture),
             _ => base.ConvertTo(context, culture, value, destinationType),
         }
         : base.ConvertTo(context, culture, value, destinationType);

@@ -9,6 +9,41 @@ public class Int32IdBehavior : IdBehavior<int>
 {
     /// <inheritdoc />
     [Pure]
+    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
+        => sourceType == typeof(int)
+        || base.CanConvertFrom(context, sourceType);
+
+    /// <inheritdoc />
+    [Pure]
+    public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
+        => destinationType == typeof(int)
+        || base.CanConvertTo(context, destinationType);
+
+    /// <inheritdoc />
+    [Pure]
+    public sealed override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value) => value switch
+    {
+        null or "" => 0,
+        int id when TryTransform(id, out var transformed) => transformed,
+        string str when TryTransform(str, culture,  out var id) => id,
+        _ => throw Exceptions.InvalidCast(value.GetType(), typeof(Guid)),
+    };
+
+    /// <inheritdoc />
+    [Pure]
+    public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        => value is int id
+        ? destinationType switch
+        {
+            var t when t == typeof(string) => ToString(id, null, culture),
+            var t when t == typeof(int) => id,
+            var t when t == typeof(long) => (long)id,
+            _ => base.ConvertTo(context, culture, value, destinationType),
+        }
+        : base.ConvertTo(context, culture, value, destinationType);
+
+    /// <inheritdoc />
+    [Pure]
     public override int FromBytes(byte[] bytes) => BitConverter.ToInt32(bytes, 0);
 
     /// <inheritdoc />
@@ -25,9 +60,13 @@ public class Int32IdBehavior : IdBehavior<int>
     /// <inheritdoc />
     public override bool TryTransform(string? str, IFormatProvider? formatProvider, out int id)
     {
-        if (int.TryParse(str, NumberStyles.Integer, formatProvider, out var guid))
+        if (str is not { Length: > 0})
         {
-            id = guid;
+            id = 0;
+            return true;
+        }
+        else if (int.TryParse(str, NumberStyles.Integer, formatProvider, out id))
+        {
             return true;
         }
         id = default;

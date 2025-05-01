@@ -1,3 +1,5 @@
+using System;
+
 namespace Qowaiv.Customization;
 
 /// <summary>
@@ -26,9 +28,9 @@ public class GuidBehavior : IdBehavior<Guid>
     public sealed override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value) => value switch
     {
         null or "" => Guid.Empty,
-        Guid guid => guid,
-        Uuid uuid => (Guid)uuid,
-        string str when Guid.TryParse(str, out var id) => id,
+        Guid guid when TryTransform(guid, out var transformed) => transformed,
+        Uuid uuid when TryTransform(uuid, out var transformed) => transformed,
+        string str when TryTransform(str, culture, out var id) => id,
         _ => throw Exceptions.InvalidCast(value.GetType(), typeof(Guid)),
     };
 
@@ -40,7 +42,7 @@ public class GuidBehavior : IdBehavior<Guid>
         {
             var t when t == typeof(Guid) => guid,
             var t when t == typeof(Uuid) => (Uuid)guid,
-            var t when t == typeof(string) => guid.ToString(),
+            var t when t == typeof(string) => ToString(guid, null, culture),
             _ => base.ConvertTo(context, culture, value, destinationType),
         }
         : base.ConvertTo(context, culture, value, destinationType);

@@ -14,15 +14,13 @@ public sealed class ConvertFrom<TFrom>
     {
         var converter = Converter<To>();
 
-        if (Subject is { } && !converter.CanConvertFrom(Subject.GetType()))
+        return Subject switch
         {
-            throw new NotSupportedException($"Converter {converter} can not convert from {Subject}.");
-        }
-        else return typeof(TFrom) == typeof(string)
-#nullable disable // should not be a problem here
-            ? (To)converter.ConvertFromString(Subject as string)
-            : (To)converter.ConvertFrom(Subject);
-#nullable enable
+            null => default,
+            var s when !converter.CanConvertFrom(s.GetType()) => throw new NotSupportedException($"Converter {converter} can not convert from {Subject}."),
+            string s => (To)converter.ConvertFromString(s)!,
+            var s => (To)converter.ConvertFrom(s!)!,
+        };
     }
 
     [Pure]

@@ -318,7 +318,6 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
     [TestCase(null, null)]
     [TestCase("?", "?")]
     [TestCase("QOWAIV", "QOWAIV")]
@@ -336,7 +335,7 @@ public class Supports_JSON_serialization
         json.Invoking(json => System.Text.Json.JsonSerializer.Deserialize<CustomSvo>(json))
             .Should().Throw<System.Text.Json.JsonException>();
     }
-#endif
+
     [TestCase("?", "?")]
     [TestCase("QOWAIV", "QOWAIV")]
     public void convention_based_deserialization(object json, CustomSvo svo)

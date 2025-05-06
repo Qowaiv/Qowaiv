@@ -120,8 +120,6 @@ public class Supports_JSON_serialization
     public void writes_GUID_for_non_default_value()
         => JsonTester.Write(Svo.CustomGuid).Should().Be("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
 
-#if NET6_0_OR_GREATER
-
     [Test]
     public void System_Text_JSON_deserialization_of_dictionary_keys()
     {
@@ -143,5 +141,4 @@ public class Supports_JSON_serialization
         System.Text.Json.JsonSerializer.Serialize(dictionary)
             .Should().Be(@"{"""":17,""8a1a8c42-d2ff-e254-e26e-b6abcbf19420"":42}");
     }
-#endif
 }

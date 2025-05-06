@@ -46,10 +46,9 @@ public class Is_comparable
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
-
     [TestCase("", "")]
     [TestCase(12345678L, 12345678)]
+    [TestCase("PREFIX12345678", 12345678)]
     [TestCase("12345678", 12345678)]
     public void System_Text_JSON_deserialization(object json, Int32Id svo)
         => JsonTester.Read_System_Text_JSON<Int32Id>(json).Should().Be(svo);
@@ -61,6 +60,7 @@ public class Supports_JSON_serialization
 
     [TestCase(-2)]
     [TestCase(17)]
+    [TestCase(16)]
     [TestCase("17")]
     [TestCase(int.MaxValue + 1L)]
     public void taking_constrains_into_account(object json)
@@ -90,7 +90,6 @@ public class Supports_JSON_serialization
             }
         }
     }
-#endif
 }
 
 public class Supports_type_conversion
@@ -131,7 +130,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.ToString().From(Svo.Int32Id).Should().Be("17");
+            Converting.ToString().From(Svo.Int32Id).Should().Be("PREFIX17");
         }
     }
 

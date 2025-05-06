@@ -2,7 +2,7 @@ namespace Qowaiv.Customization;
 
 /// <summary>
 /// Provides <see cref="Uuid"/> based behavior for an identifier generated using
-/// <see cref="IdAttribute{TBehavior, TValue}"/>.
+/// <see cref="IdAttribute{TBehavior, TRaw}"/>.
 /// </summary>
 [Inheritable]
 public class UuidBehavior : IdBehavior<Uuid>
@@ -29,7 +29,7 @@ public class UuidBehavior : IdBehavior<Uuid>
         Guid guid when TryTransform(guid, out var transformed) => transformed,
         Uuid uuid when TryTransform(uuid, out var transformed) => transformed,
         string str when TryTransform(str, culture, out var id) => id,
-        _ => throw Exceptions.InvalidCast(value.GetType(), typeof(Uuid)),
+        _ => throw Exceptions.InvalidCast(value.GetType(), SvoType),
     };
 
     /// <inheritdoc />

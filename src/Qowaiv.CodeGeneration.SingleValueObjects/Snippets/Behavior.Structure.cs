@@ -14,7 +14,7 @@ readonly partial struct @Svo
     [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)]
     private readonly @Value m_Value;
 
-    private sealed class TypeConverter : global::Qowaiv.Customization.CustomBehaviorTypeConverter<@Svo, @Value, @Behavior>
+    private sealed class TypeConverter(global::System.Type underlying) : global::Qowaiv.Customization.CustomBehaviorTypeConverter<@Svo, @Value, @Behavior>
     {
         /// <summary>Converts from the raw/underlying type.</summary>
         [global::System.Diagnostics.Contracts.Pure]

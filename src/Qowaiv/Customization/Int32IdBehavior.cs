@@ -2,7 +2,7 @@ namespace Qowaiv.Customization;
 
 /// <summary>
 /// Provides <see cref="int"/> based behavior for an identifier generated using
-/// <see cref="IdAttribute{TBehavior, TValue}"/>.
+/// <see cref="IdAttribute{TBehavior, TRaw}"/>.
 /// </summary>
 [Inheritable]
 public class Int32IdBehavior : IdBehavior<int>
@@ -26,7 +26,7 @@ public class Int32IdBehavior : IdBehavior<int>
         null or "" => 0,
         int id when TryTransform(id, out var transformed) => transformed,
         string str when TryTransform(str, culture,  out var id) => id,
-        _ => throw Exceptions.InvalidCast(value.GetType(), typeof(int)),
+        _ => throw Exceptions.InvalidCast(value.GetType(), SvoType),
     };
 
     /// <inheritdoc />
@@ -54,7 +54,7 @@ public class Int32IdBehavior : IdBehavior<int>
     public override bool TryTransform(int value, [NotNullWhen(true)] out int transformed)
     {
         transformed = value;
-        return value > 0;
+        return value >= 0;
     }
 
     /// <inheritdoc />
@@ -65,7 +65,7 @@ public class Int32IdBehavior : IdBehavior<int>
             id = 0;
             return true;
         }
-        else if (int.TryParse(str, NumberStyles.Integer, formatProvider, out id))
+        else if (int.TryParse(str, NumberStyles.Integer, formatProvider, out id) && id >= 0)
         {
             return true;
         }

@@ -2,7 +2,7 @@ namespace Qowaiv.Customization;
 
 /// <summary>
 /// Provides <see cref="long"/> based behavior for an identifier generated using
-/// <see cref="IdAttribute{TBehavior, TValue}"/>.
+/// <see cref="IdAttribute{TBehavior, TRaw}"/>.
 /// </summary>
 [Inheritable]
 public class Int64IdBehavior : IdBehavior<long>
@@ -29,7 +29,7 @@ public class Int64IdBehavior : IdBehavior<long>
         int id when TryTransform(id, out var transformed) => transformed,
         long id when TryTransform(id, out var transformed) => transformed,
         string str when TryTransform(str, culture, out var id) => id,
-        _ => throw Exceptions.InvalidCast(value.GetType(), typeof(long)),
+        _ => throw Exceptions.InvalidCast(value.GetType(), SvoType),
     };
 
     /// <inheritdoc />
@@ -60,7 +60,7 @@ public class Int64IdBehavior : IdBehavior<long>
     public override bool TryTransform(long value, [NotNullWhen(true)] out long transformed)
     {
         transformed = value;
-        return value > 0;
+        return value >= 0;
     }
 
     /// <inheritdoc />
@@ -71,7 +71,7 @@ public class Int64IdBehavior : IdBehavior<long>
             id = 0;
             return true;
         }
-        else if (long.TryParse(str, NumberStyles.Integer, formatProvider, out id))
+        else if (long.TryParse(str, NumberStyles.Integer, formatProvider, out id) && id >= 0)
         {
             return true;
         }

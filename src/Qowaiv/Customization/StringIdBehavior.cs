@@ -2,7 +2,7 @@ namespace Qowaiv.Customization;
 
 /// <summary>
 /// Provides <see cref="string"/> based behavior for an identifier generated using
-/// <see cref="IdAttribute{TBehavior, TValue}"/>.
+/// <see cref="IdAttribute{TBehavior, TRaw}"/>.
 /// </summary>
 [Inheritable]
 public class StringIdBehavior : IdBehavior<string>
@@ -20,7 +20,7 @@ public class StringIdBehavior : IdBehavior<string>
     public override byte[] ToByteArray(string value) => Encoding.ASCII.GetBytes(Guard.NotNull(value));
 
     /// <inheritdoc />
-    public sealed override bool TryTransform(string value, [NotNullWhen(true)] out string? transformed) => TryTransform(value, out transformed);
+    public sealed override bool TryTransform(string value, [NotNullWhen(true)] out string? transformed) => TryTransform(value, null, out transformed);
 
     /// <inheritdoc />
     public override bool TryTransform(string? str, IFormatProvider? formatProvider, [NotNullWhen(true)] out string? transformed)

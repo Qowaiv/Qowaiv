@@ -1,15 +1,23 @@
 namespace Qowaiv.Customization;
 
 /// <summary>Inheritable (custom) behavior for ad-hoc SVO's.</summary>
-/// <typeparam name="TValue">
+/// <typeparam name="TRaw">
 /// The type of the underlying value.
 /// </typeparam>
-public abstract class CustomBehavior<TValue> : TypeConverter, IComparer<TValue>
-    where TValue : IEquatable<TValue>
+public abstract class CustomBehavior<TRaw> : TypeConverter, IComparer<TRaw>
+    where TRaw : IEquatable<TRaw>
 {
+    /// <summary>The type of the SVO.</summary>
+    /// <remarks>
+    /// Used to report <see cref="TypeConverter"/> issues.
+    /// </remarks>
+#pragma warning disable QW0011 // Define properties as immutables
+    protected Type SvoType { get; private set; } = typeof(TRaw);
+#pragma warning restore QW0011 // Define properties as immutables
+
     /// <inheritdoc />
     [Pure]
-    public virtual int Compare(TValue? x, TValue? y) => Comparer<TValue>.Default.Compare(x!, y!);
+    public virtual int Compare(TRaw? x, TRaw? y) => Comparer<TRaw>.Default.Compare(x!, y!);
 
     /// <inheritdoc />
     [Pure]
@@ -23,15 +31,23 @@ public abstract class CustomBehavior<TValue> : TypeConverter, IComparer<TValue>
         ? transformed
         : throw InvalidFormat(value?.ToString(), culture);
 
+    /// <summary>Updates <see cref="SvoType"/>.</summary>
+    [FluentSyntax]
+    public TypeConverter WithSvoType(Type type)
+    {
+        SvoType = Guard.NotNull(type);
+        return this;
+    }
+
     /// <summary>Returns a formatted <see cref="string" /> that represents the underlying value of the identifier.</summary>
     [Pure]
-    public abstract string ToString(TValue value, string? format, IFormatProvider? formatProvider);
+    public abstract string ToString(TRaw value, string? format, IFormatProvider? formatProvider);
 
     /// <summary>Serializes the underlying value to a JSON node.</summary>
     [Pure]
-    public virtual object? ToJson(TValue value) => value switch
+    public virtual object? ToJson(TRaw value) => value switch
     {
-        _ when Equals(value, default(TValue)) => null,
+        _ when Equals(value, default(TRaw)) => null,
         IFormattable formattable /*........*/ => formattable.ToString(null, CultureInfo.InvariantCulture),
         _ /*...............................*/ => value.ToString(),
     };
@@ -41,9 +57,9 @@ public abstract class CustomBehavior<TValue> : TypeConverter, IComparer<TValue>
     /// The string representing the identifier.
     /// </param>
     [Pure]
-    public virtual string? ToXml(TValue value) => value switch
+    public virtual string? ToXml(TRaw value) => value switch
     {
-        _ when Equals(value, default(TValue)) => null,
+        _ when Equals(value, default(TRaw)) => null,
         IFormattable formattable /*........*/ => formattable.ToString(null, CultureInfo.InvariantCulture),
         _ /*...............................*/ => value.ToString(),
     };
@@ -77,7 +93,7 @@ public abstract class CustomBehavior<TValue> : TypeConverter, IComparer<TValue>
     /// <param name="transformed">
     /// The transformed value.
     /// </param>
-    public abstract bool TryTransform(string? str, IFormatProvider? formatProvider, [NotNullWhen(true)] out TValue? transformed);
+    public abstract bool TryTransform(string? str, IFormatProvider? formatProvider, [NotNullWhen(true)] out TRaw? transformed);
 
     /// <summary>Converts the to a SVO.
     /// A return value indicates whether the conversion succeeded.
@@ -89,7 +105,7 @@ public abstract class CustomBehavior<TValue> : TypeConverter, IComparer<TValue>
     /// The transformed value.
     /// </param>
     [Pure]
-    public virtual bool TryTransform(TValue value, [NotNullWhen(true)] out TValue? transformed)
+    public virtual bool TryTransform(TRaw value, [NotNullWhen(true)] out TRaw? transformed)
     {
         transformed = value;
         return true;

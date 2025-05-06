@@ -1,4 +1,3 @@
-using Qowaiv.Customization;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
 using System;
@@ -92,7 +91,7 @@ public class Supports_type_conversion
 
     [Test]
     public void to_string()
-        => Converting.ToString().From(Svo.Int64Id).Should().Be("987654321");
+        => Converting.ToString().From(Svo.Int64Id).Should().Be("PREFIX987654321");
 
     [Test]
     public void from_long()
@@ -102,21 +101,20 @@ public class Supports_type_conversion
     public void to_long()
         => Converting.To<long>().From(Svo.Int64Id).Should().Be(987654321L);
 
-    [TestCase("666")]
+    [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
     [TestCase("PREF17")]
     public void from_invalid_string(string str)
     {
         Func<Int64Id> convert = () => Converting.From(str).To<Int64Id>();
         convert.Should().Throw<InvalidCastException>()
-            .WithMessage("Cast from string to Qowaiv.Identifiers.Id<Qowaiv.TestTools.ForInt64> is not valid.");
+            .WithMessage("Cast from string to Specs.Int64Id is not valid.");
     }
 
-    [TestCase(-18)]
-    [TestCase(666)]
-    public void from_invalid_number(long number)
+    [Test]
+    public void from_invalid_number()
     {
-        Func<Int64Id> convert = () => Converting.From(number).To<Int64Id>();
+        Func<Int64Id> convert = () => Converting.From(-18L).To<Int64Id>();
         convert.Should().Throw<InvalidCastException>()
-            .WithMessage("Cast from long to Qowaiv.Identifiers.Id<Qowaiv.TestTools.ForInt64> is not valid.");
+            .WithMessage("Cast from long to Specs.Int64Id is not valid.");
     }
 }

@@ -18,6 +18,9 @@ public static class Svo
     /// <summary>PREFIX17</summary>
     public static readonly Int32Id Int32Id = Int32Id.Create(17);
 
+    /// <summary>PREFIX987654321</summary>
+    public static readonly Int64Id Int64Id = Int64Id.Create(987654321L);
+
     /// <summary>8a1a8c42-d2ff-e254-e26e-b6abcbf19420.</summary>
     public static readonly Guid Guid = Guid.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
 
@@ -50,6 +53,27 @@ public readonly partial struct Int32Id
             : str;
     }
 }
+
+[Id<Behavior, long>]
+public readonly partial struct Int64Id
+{
+    private sealed class Behavior : Int64IdBehavior
+    {
+        public override string ToString(long value, string? format, IFormatProvider? formatProvider)
+            => string.Format(formatProvider, $"PREFIX{{0:{format}}}", value);
+
+        public override bool TryTransform(string? str, IFormatProvider? formatProvider, out long id)
+            => base.TryTransform(Trim(str), formatProvider, out id);
+
+        public override object? ToJson(long value) => value is 0 ? null : value;
+
+        private static string? Trim(string? str)
+            => str is { Length: > 6 } && str[..6] == "PREFIX"
+            ? str[6..]
+            : str;
+    }
+}
+
 
 [OpenApiDataType(description: "Custom SVO Example", type: "string", example: "QOWAIV", format: "custom")]
 [Svo<Behavior>]

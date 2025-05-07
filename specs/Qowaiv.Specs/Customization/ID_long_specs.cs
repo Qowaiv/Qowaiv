@@ -105,7 +105,7 @@ public class Supports_type_conversion
     {
         Func<Int64BasedId> convert = () => Converting.From(str).To<Int64BasedId>();
         convert.Should().Throw<InvalidCastException>()
-            .WithMessage("Cast from string to Specs_Generated.Int64Id is not valid.");
+            .WithMessage("Cast from string to Specs_Generated.Int64BasedId is not valid.");
     }
 
     [Test]
@@ -113,6 +113,6 @@ public class Supports_type_conversion
     {
         Func<Int64BasedId> convert = () => Converting.From(-18L).To<Int64BasedId>();
         convert.Should().Throw<InvalidCastException>()
-            .WithMessage("Cast from long to Specs_Generated.Int64Id is not valid.");
+            .WithMessage("Cast from long to Specs_Generated.Int64BasedId is not valid.");
     }
 }

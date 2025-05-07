@@ -1,29 +1,22 @@
-using Qowaiv.Customization;
-using Qowaiv.TestTools;
-using Qowaiv.TestTools.Globalization;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
+namespace Specs.Customization.ID_int_specs;
 
-namespace Specs.ID_int_specs;
+using Int32Id = Specs_Generated.Int32Id;
 
 public class Is_comparable
 {
     [Test]
-    public void to_null_is_1() => Svo.Int32Id.CompareTo((object?)null).Should().Be(1);
+    public void to_null_is_1() => Svo.Generated.Int32Id.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_Int32Id_as_object()
     {
-        object obj = Svo.Int32Id;
-        Svo.Int32Id.CompareTo(obj).Should().Be(0);
+        object obj = Svo.Generated.Int32Id;
+        Svo.Generated.Int32Id.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
     public void to_Int32Id_only()
-        => new object().Invoking(Svo.Int32Id.CompareTo).Should().Throw<ArgumentException>();
+        => new object().Invoking(Svo.Generated.Int32Id.CompareTo).Should().Throw<ArgumentException>();
 
     [Test]
     public void can_be_sorted_using_compare()
@@ -44,6 +37,7 @@ public class Is_comparable
     }
 }
 
+#if NET6_0_OR_GREATER
 public class Supports_JSON_serialization
 {
     [TestCase("", "")]
@@ -64,11 +58,12 @@ public class Supports_JSON_serialization
     [TestCase(int.MaxValue + 1L)]
     public void taking_constrains_into_account(object json)
     {
-        json.Invoking(JsonTester.Read_System_Text_JSON<EvenOnlyId>)
+        json.Invoking(JsonTester.Read_System_Text_JSON<Specs_Generated.EvenOnlyId>)
             .Should().Throw<System.Text.Json.JsonException>()
             .WithMessage("Not a valid EvenOnlyId");
     }
 }
+#endif
 
 public class Supports_type_conversion
 {
@@ -99,7 +94,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From("PREFIX17").To<Int32Id>().Should().Be(Svo.Int32Id);
+            Converting.From("PREFIX17").To<Int32Id>().Should().Be(Svo.Generated.Int32Id);
         }
     }
 
@@ -108,15 +103,15 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.ToString().From(Svo.Int32Id).Should().Be("PREFIX17");
+            Converting.ToString().From(Svo.Generated.Int32Id).Should().Be("PREFIX17");
         }
     }
 
     [Test]
     public void from_int()
-        => Converting.From(17).To<Int32Id>().Should().Be(Svo.Int32Id);
+        => Converting.From(17).To<Int32Id>().Should().Be(Svo.Generated.Int32Id);
 
     [Test]
     public void to_int()
-        => Converting.To<int>().From(Svo.Int32Id).Should().Be(17);
+        => Converting.To<int>().From(Svo.Generated.Int32Id).Should().Be(17);
 }

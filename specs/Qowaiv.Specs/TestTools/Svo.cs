@@ -111,6 +111,30 @@ public static class Svo
     public static IEnumerable<object> All() => typeof(Svo)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
         .Select(field => field.GetValue(null)!);
+
+#pragma warning disable S3218 // Inner class members should not shadow outer class "static" or type members    
+    // They have equivilent meaning, other naming would not make tings better.
+    public static class Generated
+    {
+        /// <summary>QOWAIV</summary>
+        public static readonly Specs_Generated.CustomSvo CustomSvo = Specs_Generated.CustomSvo.Parse("QOWAIV");
+
+        /// <summary>8a1a8c42-d2ff-e254-e26e-b6abcbf19420</summary>
+        public static readonly Specs_Generated.CustomGuid CustomGuid = Specs_Generated.CustomGuid.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+
+        /// <summary>"Qowaiv_SVOLibrary_GUIA</summary>
+        public static readonly Specs_Generated.CustomUuid CustomUuid = Specs_Generated.CustomUuid.Parse("Qowaiv_SVOLibrary_GUIA");
+
+        /// <summary>PREFIX17</summary>
+        public static readonly Specs_Generated.Int32Id Int32Id = Specs_Generated.Int32Id.Create(17);
+
+        /// <summary>PREFIX987654321</summary>
+        public static readonly Specs_Generated.Int64Id Int64Id = Specs_Generated.Int64Id.Create(987654321L);
+
+        /// <summary>Qowaiv-ID</summary>
+        public static readonly Specs_Generated.StringId StringId = Specs_Generated.StringId.Parse("Qowaiv-ID");
+    }
+#pragma warning restore S3218 // Inner class members should not shadow outer class "static" or type members
 }
 
 public sealed class ForInt32 : Int32IdBehavior

@@ -1,12 +1,6 @@
-using Qowaiv;
-using Qowaiv.TestTools;
-using Qowaiv.TestTools.Globalization;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
+namespace Specs.Customization.CustomGuid_specs;
 
-namespace Specs.CustomGuid_specs;
+using CustomGuid = Specs_Generated.CustomGuid;
 
 public class With_domain_logic
 {
@@ -18,18 +12,18 @@ public class With_domain_logic
 public class Is_comparable
 {
     [Test]
-    public void to_null_is_1() => Svo.CustomGuid.CompareTo((object?)null).Should().Be(1);
+    public void to_null_is_1() => Svo.Generated.CustomGuid.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_CustomGuid_as_object()
     {
-        object obj = Svo.CustomGuid;
-        Svo.CustomGuid.CompareTo(obj).Should().Be(0);
+        object obj = Svo.Generated.CustomGuid;
+        Svo.Generated.CustomGuid.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
     public void to_CustomGuid_only()
-        => new object().Invoking(Svo.CustomGuid.CompareTo).Should().Throw<ArgumentException>();
+        => new object().Invoking(Svo.Generated.CustomGuid.CompareTo).Should().Throw<ArgumentException>();
 
     [Test]
     public void can_be_sorted_using_compare()
@@ -79,7 +73,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From("8A1A8C42-D2FF-E254-E26E-B6ABCBF19420").To<CustomGuid>().Should().Be(Svo.CustomGuid);
+            Converting.From("8A1A8C42-D2FF-E254-E26E-B6ABCBF19420").To<CustomGuid>().Should().Be(Svo.Generated.CustomGuid);
         }
     }
 
@@ -88,26 +82,26 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.ToString().From(Svo.CustomGuid).Should().Be("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+            Converting.ToString().From(Svo.Generated.CustomGuid).Should().Be("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
         }
     }
 
     [Test]
     public void from_Guid()
-        => Converting.From(Svo.Guid).To<CustomGuid>().Should().Be(Svo.CustomGuid);
+        => Converting.From(Svo.Guid).To<CustomGuid>().Should().Be(Svo.Generated.CustomGuid);
 
 
     [Test]
     public void from_Uuid()
-        => Converting.From(Svo.Uuid).To<CustomGuid>().Should().Be(Svo.CustomGuid);
+        => Converting.From(Svo.Uuid).To<CustomGuid>().Should().Be(Svo.Generated.CustomGuid);
 
     [Test]
     public void to_Guid()
-        => Converting.To<Guid>().From(Svo.CustomGuid).Should().Be(Svo.Guid);
+        => Converting.To<Guid>().From(Svo.Generated.CustomGuid).Should().Be(Svo.Guid);
 
     [Test]
     public void to_Uuid()
-        => Converting.To<Uuid>().From(Svo.CustomGuid).Should().Be(Svo.Uuid);
+        => Converting.To<Uuid>().From(Svo.Generated.CustomGuid).Should().Be(Svo.Uuid);
 }
 
 public class Supports_JSON_serialization
@@ -118,15 +112,16 @@ public class Supports_JSON_serialization
 
     [Test]
     public void writes_GUID_for_non_default_value()
-        => JsonTester.Write(Svo.CustomGuid).Should().Be("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+        => JsonTester.Write(Svo.Generated.CustomGuid).Should().Be("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
 
+#if NET6_0_OR_GREATER
     [Test]
     public void System_Text_JSON_deserialization_of_dictionary_keys()
     {
         System.Text.Json.JsonSerializer.Deserialize<Dictionary<CustomGuid, int>>(@"{""8a1a8c42-d2ff-e254-e26e-b6abcbf19420"":42}")
             .Should().BeEquivalentTo(new Dictionary<CustomGuid, int>()
             {
-                [Svo.CustomGuid] = 42,
+                [Svo.Generated.CustomGuid] = 42,
             });
     }
 
@@ -136,9 +131,10 @@ public class Supports_JSON_serialization
         var dictionary = new Dictionary<CustomGuid, int>()
         {
             [default] = 17,
-            [Svo.CustomGuid] = 42,
+            [Svo.Generated.CustomGuid] = 42,
         };
         System.Text.Json.JsonSerializer.Serialize(dictionary)
             .Should().Be(@"{"""":17,""8a1a8c42-d2ff-e254-e26e-b6abcbf19420"":42}");
     }
+#endif
 }

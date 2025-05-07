@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/nopackage.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net5.0;net6.0;net8.0;net9.0</TargetFrameworks>
+    <LangVersion>12</LangVersion>
+    <RootNamespace>Specs_Generated</RootNamespace>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Qowaiv/Qowaiv.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Qowaiv.CodeGeneration.SingleValueObjects/Qowaiv.CodeGeneration.SingleValueObjects.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup Label="Analyzers">
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>

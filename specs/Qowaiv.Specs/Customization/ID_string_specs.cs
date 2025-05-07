@@ -1,27 +1,22 @@
-using Qowaiv.TestTools;
-using Qowaiv.TestTools.Globalization;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
+namespace Specs.Customization.ID_string_specs;
 
-namespace Specs.ID_string_specs;
+using StringId = Specs_Generated.StringId;
 
 public class Is_comparable
 {
     [Test]
-    public void to_null_is_1() => Svo.StringId.CompareTo((object?)null).Should().Be(1);
+    public void to_null_is_1() => Svo.Generated.StringId.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_StringId_as_object()
     {
-        object obj = Svo.StringId;
-        Svo.StringId.CompareTo(obj).Should().Be(0);
+        object obj = Svo.Generated.StringId;
+        Svo.Generated.StringId.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
     public void to_StringId_only()
-        => new object().Invoking(Svo.StringId.CompareTo).Should().Throw<ArgumentException>();
+        => new object().Invoking(Svo.Generated.StringId.CompareTo).Should().Throw<ArgumentException>();
 
     [Test]
     public void can_be_sorted_using_compare()
@@ -71,7 +66,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From("Qowaiv-ID").To<StringId>().Should().Be(Svo.StringId);
+            Converting.From("Qowaiv-ID").To<StringId>().Should().Be(Svo.Generated.StringId);
         }
     }
 
@@ -80,7 +75,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.ToString().From(Svo.StringId).Should().Be("Qowaiv-ID");
+            Converting.ToString().From(Svo.Generated.StringId).Should().Be("Qowaiv-ID");
         }
     }
 }

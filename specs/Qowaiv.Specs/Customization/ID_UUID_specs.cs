@@ -1,12 +1,6 @@
-using Qowaiv;
-using Qowaiv.TestTools;
-using Qowaiv.TestTools.Globalization;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
+namespace Specs.Customization.CustomUuid_specs;
 
-namespace Specs.CustomUuid_specs;
+using CustomUuid = Specs_Generated.CustomUuid;
 
 public class With_domain_logic
 {
@@ -18,18 +12,18 @@ public class With_domain_logic
 public class Is_comparable
 {
     [Test]
-    public void to_null_is_1() => Svo.CustomUuid.CompareTo((object?)null).Should().Be(1);
+    public void to_null_is_1() => Svo.Generated.CustomUuid.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_CustomUuid_as_object()
     {
-        object obj = Svo.CustomUuid;
-        Svo.CustomUuid.CompareTo(obj).Should().Be(0);
+        object obj = Svo.Generated.CustomUuid;
+        Svo.Generated.CustomUuid.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
     public void to_CustomUuid_only()
-        => new object().Invoking(Svo.CustomUuid.CompareTo).Should().Throw<ArgumentException>();
+        => new object().Invoking(Svo.Generated.CustomUuid.CompareTo).Should().Throw<ArgumentException>();
 
     [Test]
     public void can_be_sorted_using_compare()
@@ -79,7 +73,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From("Qowaiv_SVOLibrary_GUIA").To<CustomUuid>().Should().Be(Svo.CustomUuid);
+            Converting.From("Qowaiv_SVOLibrary_GUIA").To<CustomUuid>().Should().Be(Svo.Generated.CustomUuid);
         }
     }
 
@@ -88,26 +82,26 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.ToString().From(Svo.CustomUuid).Should().Be("Qowaiv_SVOLibrary_GUIA");
+            Converting.ToString().From(Svo.Generated.CustomUuid).Should().Be("Qowaiv_SVOLibrary_GUIA");
         }
     }
 
     [Test]
     public void from_Guid()
-        => Converting.From(Svo.Guid).To<CustomUuid>().Should().Be(Svo.CustomUuid);
+        => Converting.From(Svo.Guid).To<CustomUuid>().Should().Be(Svo.Generated.CustomUuid);
 
 
     [Test]
     public void from_Uuid()
-        => Converting.From(Svo.Uuid).To<CustomUuid>().Should().Be(Svo.CustomUuid);
+        => Converting.From(Svo.Uuid).To<CustomUuid>().Should().Be(Svo.Generated.CustomUuid);
 
     [Test]
     public void to_Guid()
-        => Converting.To<Guid>().From(Svo.CustomUuid).Should().Be(Svo.Guid);
+        => Converting.To<Guid>().From(Svo.Generated.CustomUuid).Should().Be(Svo.Guid);
 
     [Test]
     public void to_Uuid()
-        => Converting.To<Uuid>().From(Svo.CustomUuid).Should().Be(Svo.Uuid);
+        => Converting.To<Uuid>().From(Svo.Generated.CustomUuid).Should().Be(Svo.Uuid);
 }
 
 public class Supports_JSON_serialization
@@ -118,7 +112,7 @@ public class Supports_JSON_serialization
 
     [Test]
     public void writes_Base64_string_for_non_default_value()
-        => JsonTester.Write(Svo.CustomUuid).Should().Be("Qowaiv_SVOLibrary_GUIA");
+        => JsonTester.Write(Svo.Generated.CustomUuid).Should().Be("Qowaiv_SVOLibrary_GUIA");
 
 #if NET6_0_OR_GREATER
 
@@ -128,7 +122,7 @@ public class Supports_JSON_serialization
         System.Text.Json.JsonSerializer.Deserialize<Dictionary<CustomUuid, int>>(@"{""Qowaiv_SVOLibrary_GUIA"":42}")
             .Should().BeEquivalentTo(new Dictionary<CustomUuid, int>()
             {
-                [Svo.CustomUuid] = 42,
+                [Svo.Generated.CustomUuid] = 42,
             });
     }
 
@@ -138,7 +132,7 @@ public class Supports_JSON_serialization
         var dictionary = new Dictionary<CustomUuid, int>()
         {
             [default] = 17,
-            [Svo.CustomUuid] = 42,
+            [Svo.Generated.CustomUuid] = 42,
         };
         System.Text.Json.JsonSerializer.Serialize(dictionary)
             .Should().Be(@"{"""":17,""Qowaiv_SVOLibrary_GUIA"":42}");

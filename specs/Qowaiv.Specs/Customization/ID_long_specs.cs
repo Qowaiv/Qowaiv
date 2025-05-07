@@ -1,27 +1,22 @@
-using Qowaiv.TestTools;
-using Qowaiv.TestTools.Globalization;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
+namespace Specs.Customization.ID_long_specs;
 
-namespace Specs.ID_long_specs;
+using Int64Id = Specs_Generated.Int64Id;
 
 public class Is_comparable
 {
     [Test]
-    public void to_null_is_1() => Svo.Int64Id.CompareTo((object?)null).Should().Be(1);
+    public void to_null_is_1() => Svo.Generated.Int64Id.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_Int64Id_as_object()
     {
-        object obj = Svo.Int64Id;
-        Svo.Int64Id.CompareTo(obj).Should().Be(0);
+        object obj = Svo.Generated.Int64Id;
+        Svo.Generated.Int64Id.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
     public void to_Int64Id_only()
-        => new object().Invoking(Svo.Int64Id.CompareTo).Should().Throw<ArgumentException>();
+        => new object().Invoking(Svo.Generated.Int64Id.CompareTo).Should().Throw<ArgumentException>();
 
     [Test]
     public void can_be_sorted_using_compare()
@@ -41,6 +36,8 @@ public class Is_comparable
         list.Should().BeEquivalentTo(sorted);
     }
 }
+
+#if NET6_0_OR_GREATER
 public class Supports_JSON_serialization
 {
     [TestCase("", null)]
@@ -55,6 +52,7 @@ public class Supports_JSON_serialization
     public void System_Text_JSON_serialization(Int64Id svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 }
+#endif
 
 public class Supports_type_conversion
 {
@@ -85,21 +83,21 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From("PREFIX987654321").To<Int64Id>().Should().Be(Svo.Int64Id);
+            Converting.From("PREFIX987654321").To<Int64Id>().Should().Be(Svo.Generated.Int64Id);
         }
     }
 
     [Test]
     public void to_string()
-        => Converting.ToString().From(Svo.Int64Id).Should().Be("PREFIX987654321");
+        => Converting.ToString().From(Svo.Generated.Int64Id).Should().Be("PREFIX987654321");
 
     [Test]
     public void from_long()
-        => Converting.From(987654321L).To<Int64Id>().Should().Be(Svo.Int64Id);
+        => Converting.From(987654321L).To<Int64Id>().Should().Be(Svo.Generated.Int64Id);
 
     [Test]
     public void to_long()
-        => Converting.To<long>().From(Svo.Int64Id).Should().Be(987654321L);
+        => Converting.To<long>().From(Svo.Generated.Int64Id).Should().Be(987654321L);
 
     [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
     [TestCase("PREF17")]
@@ -107,7 +105,7 @@ public class Supports_type_conversion
     {
         Func<Int64Id> convert = () => Converting.From(str).To<Int64Id>();
         convert.Should().Throw<InvalidCastException>()
-            .WithMessage("Cast from string to Specs.Int64Id is not valid.");
+            .WithMessage("Cast from string to Specs_Generated.Int64Id is not valid.");
     }
 
     [Test]
@@ -115,6 +113,6 @@ public class Supports_type_conversion
     {
         Func<Int64Id> convert = () => Converting.From(-18L).To<Int64Id>();
         convert.Should().Throw<InvalidCastException>()
-            .WithMessage("Cast from long to Specs.Int64Id is not valid.");
+            .WithMessage("Cast from long to Specs_Generated.Int64Id is not valid.");
     }
 }

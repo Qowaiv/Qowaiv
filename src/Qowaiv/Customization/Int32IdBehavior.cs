@@ -23,7 +23,6 @@ public class Int32IdBehavior : IdBehavior<int>
     [Pure]
     public sealed override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value) => value switch
     {
-        null or "" => 0,
         int id when TryTransform(id, out var transformed) => transformed,
         string str when TryTransform(str, culture,  out var id) => id,
         _ => throw Exceptions.InvalidCast(value.GetType(), SvoType),

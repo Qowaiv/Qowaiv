@@ -25,7 +25,6 @@ public class Int64IdBehavior : IdBehavior<long>
     [Pure]
     public sealed override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value) => value switch
     {
-        null or "" => 0L,
         int id when TryTransform(id, out var transformed) => transformed,
         long id when TryTransform(id, out var transformed) => transformed,
         string str when TryTransform(str, culture, out var id) => id,

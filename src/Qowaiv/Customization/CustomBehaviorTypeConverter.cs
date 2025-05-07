@@ -36,7 +36,9 @@ public abstract class CustomBehaviorTypeConverter<TSvo, TRaw, TConverter> : Type
     /// <inheritdoc />
     [Pure]
     public sealed override object ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
-        => FromRaw(Guard.IsInstanceOf<TRaw>(Converter.ConvertFrom(context, culture, value)));
+        => value is null or ""
+        ? default
+        : FromRaw(Guard.IsInstanceOf<TRaw>(Converter.ConvertFrom(context, culture, value)));
 
     /// <inheritdoc />
     [Pure]

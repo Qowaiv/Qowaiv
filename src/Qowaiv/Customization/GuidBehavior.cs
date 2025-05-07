@@ -25,7 +25,6 @@ public class GuidBehavior : IdBehavior<Guid>
     [Pure]
     public sealed override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value) => value switch
     {
-        null or "" => Guid.Empty,
         Guid guid when TryTransform(guid, out var transformed) => transformed,
         Uuid uuid when TryTransform(uuid, out var transformed) => transformed,
         string str when TryTransform(str, culture, out var id) => id,

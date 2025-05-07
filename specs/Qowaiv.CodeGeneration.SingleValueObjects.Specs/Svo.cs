@@ -4,6 +4,7 @@ using Qowaiv.OpenApi;
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using static Specs.ID_int_specs.Supports_JSON_serialization.EvenOnlyId;
 
 namespace Specs;
 
@@ -26,6 +27,8 @@ public static class Svo
 
     /// <summary>Qowaiv_SVOLibrary_GUIA.</summary>
     public static readonly Uuid Uuid = Uuid.Parse("Qowaiv_SVOLibrary_GUIA");
+
+    public static readonly StringId StringId = StringId.Parse("Qowaiv-ID");
 }
 
 [Id<GuidBehavior, Guid>]
@@ -73,6 +76,9 @@ public readonly partial struct Int64Id
             : str;
     }
 }
+
+[Id<StringIdBehavior, string>]
+public readonly partial struct StringId { }
 
 
 [OpenApiDataType(description: "Custom SVO Example", type: "string", example: "QOWAIV", format: "custom")]

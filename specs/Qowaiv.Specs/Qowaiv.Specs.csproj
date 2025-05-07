@@ -32,10 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../Qowaiv.Specs.Generated/Qowaiv.Specs.Generated.csproj" />
     <ProjectReference Include="../../src/Qowaiv/Qowaiv.csproj" />
     <ProjectReference Include="../../src/Qowaiv.Data.SqlClient/Qowaiv.Data.SqlClient.csproj" />
     <ProjectReference Include="../../src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
+    <ProjectReference Include="../Qowaiv.Specs.Generated/Qowaiv.Specs.Generated.csproj" />
   </ItemGroup>
 
   <ItemGroup Label="Diagnostics contracts code generation">

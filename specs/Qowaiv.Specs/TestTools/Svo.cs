@@ -120,19 +120,19 @@ public static class Svo
         public static readonly Specs_Generated.CustomSvo CustomSvo = Specs_Generated.CustomSvo.Parse("QOWAIV");
 
         /// <summary>8a1a8c42-d2ff-e254-e26e-b6abcbf19420</summary>
-        public static readonly Specs_Generated.CustomGuid CustomGuid = Specs_Generated.CustomGuid.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+        public static readonly Specs_Generated.GuidBasedId CustomGuid = Specs_Generated.GuidBasedId.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
 
         /// <summary>"Qowaiv_SVOLibrary_GUIA</summary>
-        public static readonly Specs_Generated.CustomUuid CustomUuid = Specs_Generated.CustomUuid.Parse("Qowaiv_SVOLibrary_GUIA");
+        public static readonly Specs_Generated.UuidBasedId CustomUuid = Specs_Generated.UuidBasedId.Parse("Qowaiv_SVOLibrary_GUIA");
 
         /// <summary>PREFIX17</summary>
-        public static readonly Specs_Generated.Int32Id Int32Id = Specs_Generated.Int32Id.Create(17);
+        public static readonly Specs_Generated.Int32BasedId Int32Id = Specs_Generated.Int32BasedId.Create(17);
 
         /// <summary>PREFIX987654321</summary>
-        public static readonly Specs_Generated.Int64Id Int64Id = Specs_Generated.Int64Id.Create(987654321L);
+        public static readonly Specs_Generated.Int64BasedId Int64Id = Specs_Generated.Int64BasedId.Create(987654321L);
 
         /// <summary>Qowaiv-ID</summary>
-        public static readonly Specs_Generated.StringId StringId = Specs_Generated.StringId.Parse("Qowaiv-ID");
+        public static readonly Specs_Generated.StringBasedId StringId = Specs_Generated.StringBasedId.Parse("Qowaiv-ID");
     }
 #pragma warning restore S3218 // Inner class members should not shadow outer class "static" or type members
 }

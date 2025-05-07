@@ -1,6 +1,6 @@
-namespace Specs.Customization.ID_int_specs;
+using Specs_Generated;
 
-using Int32Id = Specs_Generated.Int32Id;
+namespace Specs.Customization.ID_int_specs;
 
 public class Is_comparable
 {
@@ -24,14 +24,14 @@ public class Is_comparable
         var sorted = new[]
         {
             default,
-            Int32Id.Create(1),
-            Int32Id.Create(2),
-            Int32Id.Create(3),
-            Int32Id.Create(4),
-            Int32Id.Create(17),
+            Int32BasedId.Create(1),
+            Int32BasedId.Create(2),
+            Int32BasedId.Create(3),
+            Int32BasedId.Create(4),
+            Int32BasedId.Create(17),
         };
 
-        var list = new List<Int32Id> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        var list = new List<Int32BasedId> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
         list.Sort();
         list.Should().BeEquivalentTo(sorted);
     }
@@ -44,12 +44,12 @@ public class Supports_JSON_serialization
     [TestCase(12345678L, 12345678)]
     [TestCase("PREFIX12345678", 12345678)]
     [TestCase("12345678", 12345678)]
-    public void System_Text_JSON_deserialization(object json, Int32Id svo)
-        => JsonTester.Read_System_Text_JSON<Int32Id>(json).Should().Be(svo);
+    public void System_Text_JSON_deserialization(object json, Int32BasedId svo)
+        => JsonTester.Read_System_Text_JSON<Int32BasedId>(json).Should().Be(svo);
 
     [TestCase("", null)]
     [TestCase("12345678", 12345678L)]
-    public void System_Text_JSON_serialization(Int32Id svo, object json)
+    public void System_Text_JSON_serialization(Int32BasedId svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
     [TestCase(-2)]
@@ -69,14 +69,14 @@ public class Supports_type_conversion
 {
     [Test]
     public void via_TypeConverter_registered_with_attribute()
-        => typeof(Int32Id).Should().BeDecoratedWith<TypeConverterAttribute>();
+        => typeof(Int32BasedId).Should().BeDecoratedWith<TypeConverterAttribute>();
 
     [Test]
     public void from_null_string()
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.FromNull<string>().To<Int32Id>().Should().Be(Int32Id.Empty);
+            Converting.FromNull<string>().To<Int32BasedId>().Should().Be(Int32BasedId.Empty);
         }
     }
 
@@ -85,7 +85,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From(string.Empty).To<Int32Id>().Should().Be(Int32Id.Empty);
+            Converting.From(string.Empty).To<Int32BasedId>().Should().Be(Int32BasedId.Empty);
         }
     }
 
@@ -94,7 +94,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From("PREFIX17").To<Int32Id>().Should().Be(Svo.Generated.Int32Id);
+            Converting.From("PREFIX17").To<Int32BasedId>().Should().Be(Svo.Generated.Int32Id);
         }
     }
 
@@ -109,7 +109,7 @@ public class Supports_type_conversion
 
     [Test]
     public void from_int()
-        => Converting.From(17).To<Int32Id>().Should().Be(Svo.Generated.Int32Id);
+        => Converting.From(17).To<Int32BasedId>().Should().Be(Svo.Generated.Int32Id);
 
     [Test]
     public void to_int()

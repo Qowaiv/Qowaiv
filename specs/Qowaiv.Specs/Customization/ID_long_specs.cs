@@ -1,6 +1,6 @@
-namespace Specs.Customization.ID_long_specs;
+using Specs_Generated;
 
-using Int64Id = Specs_Generated.Int64Id;
+namespace Specs.Customization.ID_long_specs;
 
 public class Is_comparable
 {
@@ -23,15 +23,15 @@ public class Is_comparable
     {
         var sorted = new[]
         {
-            Int64Id.Empty,
-            Int64Id.Create(1L),
-            Int64Id.Create(3L),
-            Int64Id.Create(7L),
-            Int64Id.Create(11L),
-            Int64Id.Create(17L),
+            Int64BasedId.Empty,
+            Int64BasedId.Create(1L),
+            Int64BasedId.Create(3L),
+            Int64BasedId.Create(7L),
+            Int64BasedId.Create(11L),
+            Int64BasedId.Create(17L),
         };
 
-        var list = new List<Int64Id> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        var list = new List<Int64BasedId> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
         list.Sort();
         list.Should().BeEquivalentTo(sorted);
     }
@@ -44,12 +44,12 @@ public class Supports_JSON_serialization
     [TestCase(null, null)]
     [TestCase(123456789L, 123456789L)]
     [TestCase("123456789", 123456789L)]
-    public void System_Text_JSON_deserialization(object json, Int64Id svo)
-        => JsonTester.Read_System_Text_JSON<Int64Id>(json).Should().Be(svo);
+    public void System_Text_JSON_deserialization(object json, Int64BasedId svo)
+        => JsonTester.Read_System_Text_JSON<Int64BasedId>(json).Should().Be(svo);
 
     [TestCase(null, null)]
     [TestCase(123456789L, 123456789)]
-    public void System_Text_JSON_serialization(Int64Id svo, object json)
+    public void System_Text_JSON_serialization(Int64BasedId svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 }
 #endif
@@ -58,14 +58,14 @@ public class Supports_type_conversion
 {
     [Test]
     public void via_TypeConverter_registered_with_attribute()
-        => typeof(Int64Id).Should().BeDecoratedWith<TypeConverterAttribute>();
+        => typeof(Int64BasedId).Should().BeDecoratedWith<TypeConverterAttribute>();
 
     [Test]
     public void from_null_string()
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.FromNull<string>().To<Int64Id>().Should().Be(Int64Id.Empty);
+            Converting.FromNull<string>().To<Int64BasedId>().Should().Be(Int64BasedId.Empty);
         }
     }
 
@@ -74,7 +74,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From(string.Empty).To<Int64Id>().Should().Be(Int64Id.Empty);
+            Converting.From(string.Empty).To<Int64BasedId>().Should().Be(Int64BasedId.Empty);
         }
     }
 
@@ -83,7 +83,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From("PREFIX987654321").To<Int64Id>().Should().Be(Svo.Generated.Int64Id);
+            Converting.From("PREFIX987654321").To<Int64BasedId>().Should().Be(Svo.Generated.Int64Id);
         }
     }
 
@@ -93,7 +93,7 @@ public class Supports_type_conversion
 
     [Test]
     public void from_long()
-        => Converting.From(987654321L).To<Int64Id>().Should().Be(Svo.Generated.Int64Id);
+        => Converting.From(987654321L).To<Int64BasedId>().Should().Be(Svo.Generated.Int64Id);
 
     [Test]
     public void to_long()
@@ -103,7 +103,7 @@ public class Supports_type_conversion
     [TestCase("PREF17")]
     public void from_invalid_string(string str)
     {
-        Func<Int64Id> convert = () => Converting.From(str).To<Int64Id>();
+        Func<Int64BasedId> convert = () => Converting.From(str).To<Int64BasedId>();
         convert.Should().Throw<InvalidCastException>()
             .WithMessage("Cast from string to Specs_Generated.Int64Id is not valid.");
     }
@@ -111,7 +111,7 @@ public class Supports_type_conversion
     [Test]
     public void from_invalid_number()
     {
-        Func<Int64Id> convert = () => Converting.From(-18L).To<Int64Id>();
+        Func<Int64BasedId> convert = () => Converting.From(-18L).To<Int64BasedId>();
         convert.Should().Throw<InvalidCastException>()
             .WithMessage("Cast from long to Specs_Generated.Int64Id is not valid.");
     }

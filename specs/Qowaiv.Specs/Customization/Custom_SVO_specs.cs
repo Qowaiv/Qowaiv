@@ -1,6 +1,6 @@
-namespace Specs.Customization.CustomSvo_specs;
+using Specs_Generated;
 
-using CustomSvo = Specs_Generated.CustomSvo;
+namespace Specs.Customization.CustomSvo_specs;
 
 public class With_domain_logic
 {

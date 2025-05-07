@@ -1,6 +1,6 @@
-namespace Specs.Customization.ID_string_specs;
+using Specs_Generated;
 
-using StringId = Specs_Generated.StringId;
+namespace Specs.Customization.ID_string_specs;
 
 public class Is_comparable
 {
@@ -23,15 +23,15 @@ public class Is_comparable
     {
         var sorted = new[]
         {
-            StringId.Empty,
-            StringId.Parse("33ef5805c472"),
-            StringId.Parse("58617a652a14"),
-            StringId.Parse("853634b4e474"),
-            StringId.Parse("93ca7b438fb3"),
-            StringId.Parse("f5e6c39aadcf"),
+            StringBasedId.Empty,
+            StringBasedId.Parse("33ef5805c472"),
+            StringBasedId.Parse("58617a652a14"),
+            StringBasedId.Parse("853634b4e474"),
+            StringBasedId.Parse("93ca7b438fb3"),
+            StringBasedId.Parse("f5e6c39aadcf"),
         };
 
-        var list = new List<StringId> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        var list = new List<StringBasedId> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
         list.Sort();
         list.Should().BeEquivalentTo(sorted);
     }
@@ -41,14 +41,14 @@ public class Supports_type_conversion
 {
     [Test]
     public void via_TypeConverter_registered_with_attribute()
-        => typeof(StringId).Should().BeDecoratedWith<TypeConverterAttribute>();
+        => typeof(StringBasedId).Should().BeDecoratedWith<TypeConverterAttribute>();
 
     [Test]
     public void from_null_string()
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.FromNull<string>().To<StringId>().Should().Be(StringId.Empty);
+            Converting.FromNull<string>().To<StringBasedId>().Should().Be(StringBasedId.Empty);
         }
     }
 
@@ -57,7 +57,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From(string.Empty).To<StringId>().Should().Be(StringId.Empty);
+            Converting.From(string.Empty).To<StringBasedId>().Should().Be(StringBasedId.Empty);
         }
     }
 
@@ -66,7 +66,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From("Qowaiv-ID").To<StringId>().Should().Be(Svo.Generated.StringId);
+            Converting.From("Qowaiv-ID").To<StringBasedId>().Should().Be(Svo.Generated.StringId);
         }
     }
 

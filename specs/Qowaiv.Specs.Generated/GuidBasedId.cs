@@ -1,4 +1,4 @@
 namespace Specs_Generated;
 
 [Id<GuidBehavior, Guid>]
-public readonly partial struct CustomGuid { }
+public readonly partial struct GuidBasedId { }

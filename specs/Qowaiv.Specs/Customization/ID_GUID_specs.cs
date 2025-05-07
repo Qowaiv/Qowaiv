@@ -1,12 +1,12 @@
-namespace Specs.Customization.CustomGuid_specs;
+using Specs_Generated;
 
-using CustomGuid = Specs_Generated.CustomGuid;
+namespace Specs.Customization.CustomGuid_specs;
 
 public class With_domain_logic
 {
     [TestCase(true, "33ef5805-c472-4b1f-88bb-2f0723c43889")]
     [TestCase(false, "")]
-    public void HasValue_is(bool result, CustomGuid svo) => svo.HasValue.Should().Be(result);
+    public void HasValue_is(bool result, GuidBasedId svo) => svo.HasValue.Should().Be(result);
 }
 
 public class Is_comparable
@@ -30,15 +30,15 @@ public class Is_comparable
     {
         var sorted = new[]
         {
-            CustomGuid.Empty,
-            CustomGuid.Parse("33ef5805-c472-4b1f-88bb-2f0723c43889"),
-            CustomGuid.Parse("58617a65-2a14-4a9a-82a8-c1a82c956c25"),
-            CustomGuid.Parse("853634b4-e474-4b0f-b9ba-01fc732b56d8"),
-            CustomGuid.Parse("93ca7b43-8fb3-44e5-a21f-feeebb8e0f6f"),
-            CustomGuid.Parse("f5e6c39a-adcf-4eca-bcf2-6b8317ac502c"),
+            GuidBasedId.Empty,
+            GuidBasedId.Parse("33ef5805-c472-4b1f-88bb-2f0723c43889"),
+            GuidBasedId.Parse("58617a65-2a14-4a9a-82a8-c1a82c956c25"),
+            GuidBasedId.Parse("853634b4-e474-4b0f-b9ba-01fc732b56d8"),
+            GuidBasedId.Parse("93ca7b43-8fb3-44e5-a21f-feeebb8e0f6f"),
+            GuidBasedId.Parse("f5e6c39a-adcf-4eca-bcf2-6b8317ac502c"),
         };
 
-        var list = new List<CustomGuid> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        var list = new List<GuidBasedId> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
         list.Sort();
         list.Should().BeEquivalentTo(sorted);
     }
@@ -48,14 +48,14 @@ public class Supports_type_conversion
 {
     [Test]
     public void via_TypeConverter_registered_with_attribute()
-        => typeof(CustomGuid).Should().BeDecoratedWith<TypeConverterAttribute>();
+        => typeof(GuidBasedId).Should().BeDecoratedWith<TypeConverterAttribute>();
 
     [Test]
     public void from_null_string()
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.FromNull<string>().To<CustomGuid>().Should().Be(CustomGuid.Empty);
+            Converting.FromNull<string>().To<GuidBasedId>().Should().Be(GuidBasedId.Empty);
         }
     }
 
@@ -64,7 +64,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From(string.Empty).To<CustomGuid>().Should().Be(CustomGuid.Empty);
+            Converting.From(string.Empty).To<GuidBasedId>().Should().Be(GuidBasedId.Empty);
         }
     }
 
@@ -73,7 +73,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From("8A1A8C42-D2FF-E254-E26E-B6ABCBF19420").To<CustomGuid>().Should().Be(Svo.Generated.CustomGuid);
+            Converting.From("8A1A8C42-D2FF-E254-E26E-B6ABCBF19420").To<GuidBasedId>().Should().Be(Svo.Generated.CustomGuid);
         }
     }
 
@@ -88,12 +88,12 @@ public class Supports_type_conversion
 
     [Test]
     public void from_Guid()
-        => Converting.From(Svo.Guid).To<CustomGuid>().Should().Be(Svo.Generated.CustomGuid);
+        => Converting.From(Svo.Guid).To<GuidBasedId>().Should().Be(Svo.Generated.CustomGuid);
 
 
     [Test]
     public void from_Uuid()
-        => Converting.From(Svo.Uuid).To<CustomGuid>().Should().Be(Svo.Generated.CustomGuid);
+        => Converting.From(Svo.Uuid).To<GuidBasedId>().Should().Be(Svo.Generated.CustomGuid);
 
     [Test]
     public void to_Guid()
@@ -108,7 +108,7 @@ public class Supports_JSON_serialization
 {
     [Test]
     public void writes_null_for_default_value()
-        => JsonTester.Write(default(CustomGuid)).Should().BeNull();
+        => JsonTester.Write(default(GuidBasedId)).Should().BeNull();
 
     [Test]
     public void writes_GUID_for_non_default_value()
@@ -118,8 +118,8 @@ public class Supports_JSON_serialization
     [Test]
     public void System_Text_JSON_deserialization_of_dictionary_keys()
     {
-        System.Text.Json.JsonSerializer.Deserialize<Dictionary<CustomGuid, int>>(@"{""8a1a8c42-d2ff-e254-e26e-b6abcbf19420"":42}")
-            .Should().BeEquivalentTo(new Dictionary<CustomGuid, int>()
+        System.Text.Json.JsonSerializer.Deserialize<Dictionary<GuidBasedId, int>>(@"{""8a1a8c42-d2ff-e254-e26e-b6abcbf19420"":42}")
+            .Should().BeEquivalentTo(new Dictionary<GuidBasedId, int>()
             {
                 [Svo.Generated.CustomGuid] = 42,
             });
@@ -128,7 +128,7 @@ public class Supports_JSON_serialization
     [Test]
     public void System_Text_JSON_serialization_of_dictionary_keys()
     {
-        var dictionary = new Dictionary<CustomGuid, int>()
+        var dictionary = new Dictionary<GuidBasedId, int>()
         {
             [default] = 17,
             [Svo.Generated.CustomGuid] = 42,

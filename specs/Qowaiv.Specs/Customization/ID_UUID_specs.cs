@@ -1,12 +1,12 @@
-namespace Specs.Customization.CustomUuid_specs;
+using Specs_Generated;
 
-using CustomUuid = Specs_Generated.CustomUuid;
+namespace Specs.Customization.UuidBasedId_specs;
 
 public class With_domain_logic
 {
     [TestCase(true, "Qowaiv_SVOLibrary_GUIA")]
     [TestCase(false, "")]
-    public void HasValue_is(bool result, CustomUuid svo) => svo.HasValue.Should().Be(result);
+    public void HasValue_is(bool result, UuidBasedId svo) => svo.HasValue.Should().Be(result);
 }
 
 public class Is_comparable
@@ -15,14 +15,14 @@ public class Is_comparable
     public void to_null_is_1() => Svo.Generated.CustomUuid.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
-    public void to_CustomUuid_as_object()
+    public void to_UuidBasedId_as_object()
     {
         object obj = Svo.Generated.CustomUuid;
         Svo.Generated.CustomUuid.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
-    public void to_CustomUuid_only()
+    public void to_UuidBasedId_only()
         => new object().Invoking(Svo.Generated.CustomUuid.CompareTo).Should().Throw<ArgumentException>();
 
     [Test]
@@ -30,15 +30,15 @@ public class Is_comparable
     {
         var sorted = new[]
         {
-            CustomUuid.Empty,
-            CustomUuid.Parse("33ef5805-c472-4b1f-88bb-2f0723c43889"),
-            CustomUuid.Parse("58617a65-2a14-4a9a-82a8-c1a82c956c25"),
-            CustomUuid.Parse("853634b4-e474-4b0f-b9ba-01fc732b56d8"),
-            CustomUuid.Parse("93ca7b43-8fb3-44e5-a21f-feeebb8e0f6f"),
-            CustomUuid.Parse("f5e6c39a-adcf-4eca-bcf2-6b8317ac502c"),
+            UuidBasedId.Empty,
+            UuidBasedId.Parse("33ef5805-c472-4b1f-88bb-2f0723c43889"),
+            UuidBasedId.Parse("58617a65-2a14-4a9a-82a8-c1a82c956c25"),
+            UuidBasedId.Parse("853634b4-e474-4b0f-b9ba-01fc732b56d8"),
+            UuidBasedId.Parse("93ca7b43-8fb3-44e5-a21f-feeebb8e0f6f"),
+            UuidBasedId.Parse("f5e6c39a-adcf-4eca-bcf2-6b8317ac502c"),
         };
 
-        var list = new List<CustomUuid> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        var list = new List<UuidBasedId> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
         list.Sort();
         list.Should().BeEquivalentTo(sorted);
     }
@@ -48,14 +48,14 @@ public class Supports_type_conversion
 {
     [Test]
     public void via_TypeConverter_registered_with_attribute()
-        => typeof(CustomUuid).Should().BeDecoratedWith<TypeConverterAttribute>();
+        => typeof(UuidBasedId).Should().BeDecoratedWith<TypeConverterAttribute>();
 
     [Test]
     public void from_null_string()
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.FromNull<string>().To<CustomUuid>().Should().Be(CustomUuid.Empty);
+            Converting.FromNull<string>().To<UuidBasedId>().Should().Be(UuidBasedId.Empty);
         }
     }
 
@@ -64,7 +64,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From(string.Empty).To<CustomUuid>().Should().Be(CustomUuid.Empty);
+            Converting.From(string.Empty).To<UuidBasedId>().Should().Be(UuidBasedId.Empty);
         }
     }
 
@@ -73,7 +73,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From("Qowaiv_SVOLibrary_GUIA").To<CustomUuid>().Should().Be(Svo.Generated.CustomUuid);
+            Converting.From("Qowaiv_SVOLibrary_GUIA").To<UuidBasedId>().Should().Be(Svo.Generated.CustomUuid);
         }
     }
 
@@ -88,12 +88,12 @@ public class Supports_type_conversion
 
     [Test]
     public void from_Guid()
-        => Converting.From(Svo.Guid).To<CustomUuid>().Should().Be(Svo.Generated.CustomUuid);
+        => Converting.From(Svo.Guid).To<UuidBasedId>().Should().Be(Svo.Generated.CustomUuid);
 
 
     [Test]
     public void from_Uuid()
-        => Converting.From(Svo.Uuid).To<CustomUuid>().Should().Be(Svo.Generated.CustomUuid);
+        => Converting.From(Svo.Uuid).To<UuidBasedId>().Should().Be(Svo.Generated.CustomUuid);
 
     [Test]
     public void to_Guid()
@@ -108,7 +108,7 @@ public class Supports_JSON_serialization
 {
     [Test]
     public void writes_null_for_default_value()
-        => JsonTester.Write(default(CustomUuid)).Should().BeNull();
+        => JsonTester.Write(default(UuidBasedId)).Should().BeNull();
 
     [Test]
     public void writes_Base64_string_for_non_default_value()
@@ -119,8 +119,8 @@ public class Supports_JSON_serialization
     [Test]
     public void System_Text_JSON_deserialization_of_dictionary_keys()
     {
-        System.Text.Json.JsonSerializer.Deserialize<Dictionary<CustomUuid, int>>(@"{""Qowaiv_SVOLibrary_GUIA"":42}")
-            .Should().BeEquivalentTo(new Dictionary<CustomUuid, int>()
+        System.Text.Json.JsonSerializer.Deserialize<Dictionary<UuidBasedId, int>>(@"{""Qowaiv_SVOLibrary_GUIA"":42}")
+            .Should().BeEquivalentTo(new Dictionary<UuidBasedId, int>()
             {
                 [Svo.Generated.CustomUuid] = 42,
             });
@@ -129,7 +129,7 @@ public class Supports_JSON_serialization
     [Test]
     public void System_Text_JSON_serialization_of_dictionary_keys()
     {
-        var dictionary = new Dictionary<CustomUuid, int>()
+        var dictionary = new Dictionary<UuidBasedId, int>()
         {
             [default] = 17,
             [Svo.Generated.CustomUuid] = 42,

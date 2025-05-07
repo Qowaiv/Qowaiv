@@ -27,7 +27,7 @@ public sealed class IdTemplate(IdParameters parameters) : Code
             .Transform(line => line
                 .Replace("@Svo", Parameters.Svo)
                 .Replace("@Behavior", Parameters.Behavior)
-                .Replace("@Value", Parameters.Value)
+                .Replace("@Raw", Parameters.Raw)
                 .Replace("@Namespace", Parameters.Namespace.ToString())));
 
     /// <inheritdoc />

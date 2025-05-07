@@ -1,7 +1,7 @@
 namespace Specs_Generated;
 
 [Id<Behavior, long>]
-public readonly partial struct Int64Id
+public readonly partial struct Int64BasedId
 {
     private sealed class Behavior : Int64IdBehavior
     {

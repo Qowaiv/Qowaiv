@@ -28,7 +28,7 @@ public class GuidBehavior : IdBehavior<Guid>
         Guid guid when TryTransform(guid, out var transformed) => transformed,
         Uuid uuid when TryTransform(uuid, out var transformed) => transformed,
         string str when TryTransform(str, culture, out var id) => id,
-        _ => throw Exceptions.InvalidCast(value.GetType(), SvoType),
+        _ => throw Exceptions.InvalidCast(value!.GetType(), SvoType),
     };
 
     /// <inheritdoc />
@@ -66,7 +66,7 @@ public class GuidBehavior : IdBehavior<Guid>
     /// <inheritdoc />
     public override bool TryTransform(string? str, IFormatProvider? formatProvider, out Guid id)
     {
-        if (Uuid.TryParse(str, out var guid))
+        if (Uuid.TryParse(str, out var parsed) && TryTransform(parsed, out var guid))
         {
             id = guid;
             return true;

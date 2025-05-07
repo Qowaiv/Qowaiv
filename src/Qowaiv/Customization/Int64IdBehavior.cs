@@ -28,7 +28,7 @@ public class Int64IdBehavior : IdBehavior<long>
         int id when TryTransform(id, out var transformed) => transformed,
         long id when TryTransform(id, out var transformed) => transformed,
         string str when TryTransform(str, culture, out var id) => id,
-        _ => throw Exceptions.InvalidCast(value.GetType(), SvoType),
+        _ => throw Exceptions.InvalidCast(value!.GetType(), SvoType),
     };
 
     /// <inheritdoc />
@@ -70,7 +70,8 @@ public class Int64IdBehavior : IdBehavior<long>
             id = 0;
             return true;
         }
-        else if (long.TryParse(str, NumberStyles.Integer, formatProvider, out id) && id >= 0)
+        else if (long.TryParse(str, NumberStyles.Integer, formatProvider, out var parsed)
+            && TryTransform(parsed, out id))
         {
             return true;
         }

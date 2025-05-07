@@ -25,7 +25,7 @@ public class Int32IdBehavior : IdBehavior<int>
     {
         int id when TryTransform(id, out var transformed) => transformed,
         string str when TryTransform(str, culture,  out var id) => id,
-        _ => throw Exceptions.InvalidCast(value.GetType(), SvoType),
+        _ => throw Exceptions.InvalidCast(value!.GetType(), SvoType),
     };
 
     /// <inheritdoc />
@@ -59,12 +59,13 @@ public class Int32IdBehavior : IdBehavior<int>
     /// <inheritdoc />
     public override bool TryTransform(string? str, IFormatProvider? formatProvider, out int id)
     {
-        if (str is not { Length: > 0})
+        if (str is not { Length: > 0 })
         {
             id = 0;
             return true;
         }
-        else if (int.TryParse(str, NumberStyles.Integer, formatProvider, out id) && id >= 0)
+        else if (int.TryParse(str, NumberStyles.Integer, formatProvider, out var parsed)
+           && TryTransform(parsed, out id))
         {
             return true;
         }

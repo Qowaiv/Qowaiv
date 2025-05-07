@@ -60,35 +60,13 @@ public class Supports_JSON_serialization
 
     [TestCase(-2)]
     [TestCase(17)]
-    [TestCase(16)]
     [TestCase("17")]
     [TestCase(int.MaxValue + 1L)]
     public void taking_constrains_into_account(object json)
     {
         json.Invoking(JsonTester.Read_System_Text_JSON<EvenOnlyId>)
             .Should().Throw<System.Text.Json.JsonException>()
-            .WithMessage("Not a valid identifier");
-    }
-
-    [Id<Behavior, int>]
-    public readonly partial struct EvenOnlyId
-    {
-        internal sealed class Behavior : Int32IdBehavior
-        {
-            public override bool TryTransform(int value, [NotNullWhen(true)] out int transformed)
-            {
-                if (value % 2 == 0)
-                {
-                    transformed = value;
-                    return true;
-                }
-                else
-                {
-                    transformed = default;
-                    return false;
-                }
-            }
-        }
+            .WithMessage("Not a valid EvenOnlyId");
     }
 }
 

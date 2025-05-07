@@ -2,9 +2,9 @@ using Qowaiv;
 using Qowaiv.Customization;
 using Qowaiv.OpenApi;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using static Specs.ID_int_specs.Supports_JSON_serialization.EvenOnlyId;
 
 namespace Specs;
 
@@ -96,5 +96,15 @@ public readonly partial struct CustomSvo
 
         public override string InvalidFormatMessage(string? str, IFormatProvider? formatProvider)
             => "Is not a valid CustomSvo";
+    }
+}
+
+[Id<Behavior, int>]
+public readonly partial struct EvenOnlyId
+{
+    internal sealed class Behavior : Int32IdBehavior
+    {
+        public override bool TryTransform(int value, [NotNullWhen(true)] out int transformed)
+            => base.TryTransform(value, out transformed) && value % 2 == 0;
     }
 }

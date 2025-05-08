@@ -41,7 +41,12 @@ public abstract class CustomBehavior<TRaw> : TypeConverter, IComparer<TRaw>
 
     /// <summary>Returns a formatted <see cref="string" /> that represents the underlying value of the identifier.</summary>
     [Pure]
-    public abstract string ToString(TRaw value, string? format, IFormatProvider? formatProvider);
+    public virtual string ToString(TRaw value, string? format, IFormatProvider? formatProvider) => value switch
+    {
+        _ when Equals(value, default(TRaw)) => string.Empty,
+        IFormattable formattable /*........*/ => formattable.ToString(format, formatProvider),
+        _ /*...............................*/ => value.ToString() ?? string.Empty,
+    };
 
     /// <summary>Serializes the underlying value to a JSON node.</summary>
     [Pure]

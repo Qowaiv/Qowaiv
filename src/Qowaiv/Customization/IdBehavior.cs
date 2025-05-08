@@ -15,13 +15,4 @@ public abstract class IdBehavior<TValue> : CustomBehavior<TValue>
     /// <summary>Creates a new (random) underlying value.</summary>
     [Pure]
     public virtual TValue NextId() => throw new NotSupportedException();
-
-    /// <inheritdoc />
-    [Pure]
-    public override string ToString(TValue value, string? format, IFormatProvider? formatProvider) => value switch
-    {
-        _ when Equals(value, default(TValue)) => string.Empty,
-        IFormattable formattable /*........*/ => formattable.ToString(format, formatProvider),
-        _ /*...............................*/ => value.ToString() ?? string.Empty,
-    };
 }

@@ -2,6 +2,20 @@ using Specs_Generated;
 
 namespace Specs.Customization.ID_long_specs;
 
+public class Bytes
+{
+    [Test]
+    public void describe_the_id()
+        => Svo.Generated.Int64Id.ToByteArray()
+        .Should()
+        .BeEquivalentTo<byte>([0xB1, 0x68, 0xDE, 0x3A, 0x00, 0x00, 0x00, 0x00]);
+
+    [Test]
+    public void init_the_id()
+        => Int64BasedId.FromBytes([0xB1, 0x68, 0xDE, 0x3A, 0x00, 0x00, 0x00, 0x00])
+        .Should().Be(Svo.Generated.Int64Id);
+}
+
 public class Is_comparable
 {
     [Test]

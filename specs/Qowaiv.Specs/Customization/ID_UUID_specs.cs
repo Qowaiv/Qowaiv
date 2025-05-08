@@ -9,6 +9,20 @@ public class With_domain_logic
     public void HasValue_is(bool result, UuidBasedId svo) => svo.HasValue.Should().Be(result);
 }
 
+public class Bytes
+{
+    [TestCase("")]
+    [TestCase("Qowaiv_SVOLibrary_GUIA", (byte)0x42, (byte)0x8C, (byte)0x1A, (byte)0x8A, (byte)0xFF, (byte)0xD2, (byte)0x54, (byte)0xE2, (byte)0xE2, (byte)0x6E, (byte)0xB6, (byte)0xAB, (byte)0xCB, (byte)0xF1, (byte)0x94, (byte)0x20)]
+    public void describe_the_id(UuidBasedId svo, params byte[] bytes)
+         => svo.ToByteArray().Should().BeEquivalentTo(bytes);
+
+    [TestCase("")]
+    [TestCase("Qowaiv_SVOLibrary_GUIA", (byte)0x42, (byte)0x8C, (byte)0x1A, (byte)0x8A, (byte)0xFF, (byte)0xD2, (byte)0x54, (byte)0xE2, (byte)0xE2, (byte)0x6E, (byte)0xB6, (byte)0xAB, (byte)0xCB, (byte)0xF1, (byte)0x94, (byte)0x20)]
+    public void init_the_id(UuidBasedId svo, params byte[] bytes)
+        => UuidBasedId.FromBytes(bytes)
+        .Should().Be(svo);
+}
+
 public class Is_comparable
 {
     [Test]

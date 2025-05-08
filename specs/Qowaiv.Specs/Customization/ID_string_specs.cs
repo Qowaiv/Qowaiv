@@ -2,6 +2,20 @@ using Specs_Generated;
 
 namespace Specs.Customization.ID_string_specs;
 
+public class Bytes
+{
+    [Test]
+    public void describe_the_id()
+        => Svo.Generated.StringId.ToByteArray()
+        .Should()
+        .BeEquivalentTo<byte>([0x51, 0x6F, 0x77, 0x61, 0x69, 0x76, 0x2D, 0x49, 0x44]);
+
+    [Test]
+    public void init_the_id()
+        => StringBasedId.FromBytes([0x51, 0x6F, 0x77, 0x61, 0x69, 0x76, 0x2D, 0x49, 0x44])
+        .Should().Be(Svo.Generated.StringId);
+}
+
 public class Is_comparable
 {
     [Test]

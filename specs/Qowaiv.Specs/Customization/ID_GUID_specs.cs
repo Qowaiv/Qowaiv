@@ -9,6 +9,20 @@ public class With_domain_logic
     public void HasValue_is(bool result, GuidBasedId svo) => svo.HasValue.Should().Be(result);
 }
 
+public class Bytes
+{
+    [TestCase("")]
+    [TestCase("33ef5805-c472-4b1f-88bb-2f0723c43889", (byte)0x42, (byte)0x8C, (byte)0x1A, (byte)0x8A, (byte)0xFF, (byte)0xD2, (byte)0x54, (byte)0xE2, (byte)0xE2, (byte)0x6E, (byte)0xB6, (byte)0xAB, (byte)0xCB, (byte)0xF1, (byte)0x94, (byte)0x20)]
+    public void describe_the_id(GuidBasedId svo, params byte[] bytes)
+        => svo.ToByteArray().Should().BeEquivalentTo(bytes);
+
+    [TestCase("")]
+    [TestCase("33ef5805-c472-4b1f-88bb-2f0723c43889", (byte)0x42, (byte)0x8C, (byte)0x1A, (byte)0x8A, (byte)0xFF, (byte)0xD2, (byte)0x54, (byte)0xE2, (byte)0xE2, (byte)0x6E, (byte)0xB6, (byte)0xAB, (byte)0xCB, (byte)0xF1, (byte)0x94, (byte)0x20)]
+    public void init_the_id(GuidBasedId svo, params byte[] bytes)
+        => GuidBasedId.FromBytes(bytes)
+        .Should().Be(svo);
+}
+
 public class Is_comparable
 {
     [Test]

@@ -2,6 +2,17 @@ using Specs_Generated;
 
 namespace Specs.Customization.CustomGuid_specs;
 
+public class With_domain_logic
+{
+    [Test]
+    public void Next_generates_unique_ids()
+        => Enumerable
+            .Range(0, 100)
+            .Select(_ => GuidBasedId.Next())
+            .ToHashSet()
+            .Should().HaveCount(100);
+}
+
 public class Has_constant
 {
     [Test]

@@ -2,7 +2,7 @@ partial struct @Svo
 {
     /// <summary>Gets a <see cref="byte" /> array that represents the <see cref="@Svo" />.</summary>
     [global::System.Diagnostics.Contracts.Pure]
-    public (global::System.Byte[] ToByteArray() => HasValue ? behavior.ToByteArray(m_Value) : [];
+    public global::System.Byte[] ToByteArray() => HasValue ? behavior.ToByteArray(m_Value) : [];
 
     /// <summary>Creates the <see cref="@Svo" /> for the <see cref="global::System.Byte" /> array.</summary>
     /// <param name="bytes">

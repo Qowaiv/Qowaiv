@@ -34,7 +34,7 @@ public class Int64IdBehavior : IdBehavior<long>
     /// <inheritdoc />
     [Pure]
     public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
-        => AsLong(value) is long id
+        => value is long id
         ? destinationType switch
         {
             var t when t == typeof(string) => ToString(id, null, culture),
@@ -43,9 +43,6 @@ public class Int64IdBehavior : IdBehavior<long>
             _ => base.ConvertTo(context, culture, value, destinationType),
         }
         : base.ConvertTo(context, culture, value, destinationType);
-
-    [Pure]
-    private static object? AsLong(object? value) => value switch { int i => (long)i, long l => l, _ => null };
 
     /// <inheritdoc />
     [Pure]

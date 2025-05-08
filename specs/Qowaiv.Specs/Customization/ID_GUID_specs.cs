@@ -2,22 +2,71 @@ using Specs_Generated;
 
 namespace Specs.Customization.CustomGuid_specs;
 
-public class With_domain_logic
+public class Has_constant
 {
-    [TestCase(true, "33ef5805-c472-4b1f-88bb-2f0723c43889")]
+    [Test]
+    public void Empty_represent_default_value()
+        => GuidBasedId.Empty.Should().Be(default);
+
+    [TestCase(true, "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
     [TestCase(false, "")]
     public void HasValue_is(bool result, GuidBasedId svo) => svo.HasValue.Should().Be(result);
+}
+
+public class Is_equal_by_value
+{
+    [Test]
+    public void not_equal_to_null()
+        => Svo.Generated.CustomGuid.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.Generated.CustomGuid.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.Generated.CustomGuid.Equals(GuidBasedId.Next()).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.Generated.CustomGuid.Equals(GuidBasedId.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420")).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (Svo.Generated.CustomGuid == GuidBasedId.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420")).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (Svo.Generated.CustomGuid == GuidBasedId.Next()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (Svo.Generated.CustomGuid != GuidBasedId.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420")).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (Svo.Generated.CustomGuid != GuidBasedId.Next()).Should().BeTrue();
+
+    [TestCase("", 0)]
+    [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", -994020281)]
+    public void hash_code_is_value_based(GuidBasedId svo, int hashCode)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hashCode);
+        }
+    }
 }
 
 public class Bytes
 {
     [TestCase("")]
-    [TestCase("33ef5805-c472-4b1f-88bb-2f0723c43889", (byte)0x42, (byte)0x8C, (byte)0x1A, (byte)0x8A, (byte)0xFF, (byte)0xD2, (byte)0x54, (byte)0xE2, (byte)0xE2, (byte)0x6E, (byte)0xB6, (byte)0xAB, (byte)0xCB, (byte)0xF1, (byte)0x94, (byte)0x20)]
+    [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", (byte)0x42, (byte)0x8C, (byte)0x1A, (byte)0x8A, (byte)0xFF, (byte)0xD2, (byte)0x54, (byte)0xE2, (byte)0xE2, (byte)0x6E, (byte)0xB6, (byte)0xAB, (byte)0xCB, (byte)0xF1, (byte)0x94, (byte)0x20)]
     public void describe_the_id(GuidBasedId svo, params byte[] bytes)
         => svo.ToByteArray().Should().BeEquivalentTo(bytes);
 
     [TestCase("")]
-    [TestCase("33ef5805-c472-4b1f-88bb-2f0723c43889", (byte)0x42, (byte)0x8C, (byte)0x1A, (byte)0x8A, (byte)0xFF, (byte)0xD2, (byte)0x54, (byte)0xE2, (byte)0xE2, (byte)0x6E, (byte)0xB6, (byte)0xAB, (byte)0xCB, (byte)0xF1, (byte)0x94, (byte)0x20)]
+    [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", (byte)0x42, (byte)0x8C, (byte)0x1A, (byte)0x8A, (byte)0xFF, (byte)0xD2, (byte)0x54, (byte)0xE2, (byte)0xE2, (byte)0x6E, (byte)0xB6, (byte)0xAB, (byte)0xCB, (byte)0xF1, (byte)0x94, (byte)0x20)]
     public void init_the_id(GuidBasedId svo, params byte[] bytes)
         => GuidBasedId.FromBytes(bytes)
         .Should().Be(svo);

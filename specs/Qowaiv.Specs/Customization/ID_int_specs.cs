@@ -2,6 +2,63 @@ using Specs_Generated;
 
 namespace Specs.Customization.ID_int_specs;
 
+public class Has_constant
+{
+    [Test]
+    public void Empty_represent_default_value()
+        => Int32BasedId.Empty.Should().Be(default);
+
+    [TestCase(true, 17)]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, Int32BasedId svo) => svo.HasValue.Should().Be(result);
+}
+
+public class Is_equal_by_value
+{
+    [Test]
+    public void not_equal_to_null()
+        => Svo.Generated.Int32Id.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.Generated.Int32Id.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.Generated.Int32Id.Equals(Int32BasedId.Create(42)).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.Generated.Int32Id.Equals(Int32BasedId.Create(17)).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (Svo.Generated.Int32Id == Int32BasedId.Create(17)).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (Svo.Generated.Int32Id == Int32BasedId.Create(42)).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (Svo.Generated.Int32Id != Int32BasedId.Create(17)).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (Svo.Generated.Int32Id != Int32BasedId.Create(42)).Should().BeTrue();
+
+    [TestCase("", 0)]
+    [TestCase(17, 665630146)]
+    public void hash_code_is_value_based(Int32BasedId svo, int hashCode)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hashCode);
+        }
+    }
+}
+
+
 public class Bytes
 {
     [Test]

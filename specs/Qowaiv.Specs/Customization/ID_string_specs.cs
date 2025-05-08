@@ -2,6 +2,62 @@ using Specs_Generated;
 
 namespace Specs.Customization.ID_string_specs;
 
+public class Has_constant
+{
+    [Test]
+    public void Empty_represent_default_value()
+        => StringBasedId.Empty.Should().Be(default);
+
+    [TestCase(true, "Qowaiv-ID")]
+    [TestCase(false, "")]
+    public void HasValue_is(bool result, StringBasedId svo) => svo.HasValue.Should().Be(result);
+}
+
+public class Is_equal_by_value
+{
+    [Test]
+    public void not_equal_to_null()
+        => Svo.Generated.StringId.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.Generated.StringId.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.Generated.StringId.Equals(StringBasedId.Next()).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.Generated.StringId.Equals(StringBasedId.Parse("Qowaiv-ID")).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (Svo.Generated.StringId == StringBasedId.Parse("Qowaiv-ID")).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (Svo.Generated.StringId == StringBasedId.Next()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (Svo.Generated.StringId != StringBasedId.Parse("Qowaiv-ID")).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (Svo.Generated.StringId != StringBasedId.Next()).Should().BeTrue();
+
+    [TestCase("", 0)]
+    [TestCase("Qowaiv-ID", 890829876)]
+    public void hash_code_is_value_based(StringBasedId svo, int hashCode)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hashCode);
+        }
+    }
+}
+
 public class Bytes
 {
     [Test]

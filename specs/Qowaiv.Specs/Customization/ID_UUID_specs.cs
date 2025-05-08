@@ -2,11 +2,60 @@ using Specs_Generated;
 
 namespace Specs.Customization.UuidBasedId_specs;
 
-public class With_domain_logic
+public class Has_constant
 {
+    [Test]
+    public void Empty_represent_default_value()
+        => UuidBasedId.Empty.Should().Be(default);
+
     [TestCase(true, "Qowaiv_SVOLibrary_GUIA")]
     [TestCase(false, "")]
     public void HasValue_is(bool result, UuidBasedId svo) => svo.HasValue.Should().Be(result);
+}
+
+public class Is_equal_by_value
+{
+    [Test]
+    public void not_equal_to_null()
+        => Svo.Generated.CustomUuid.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.Generated.CustomUuid.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.Generated.CustomUuid.Equals(UuidBasedId.Next()).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.Generated.CustomUuid.Equals(UuidBasedId.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (Svo.Generated.CustomUuid == UuidBasedId.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (Svo.Generated.CustomUuid == UuidBasedId.Next()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (Svo.Generated.CustomUuid != UuidBasedId.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (Svo.Generated.CustomUuid != UuidBasedId.Next()).Should().BeTrue();
+
+    [TestCase("", 0)]
+    [TestCase("Qowaiv_SVOLibrary_GUIA", -479411820)]
+    public void hash_code_is_value_based(UuidBasedId svo, int hashCode)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hashCode);
+        }
+    }
 }
 
 public class Bytes

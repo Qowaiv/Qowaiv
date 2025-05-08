@@ -27,12 +27,12 @@ v1.0.0
     <EmbeddedResource Include="Snippets/*.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference 
-      Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj"
-      OutputItemType="Analyzer"
-      ReferenceOutputAssembly="false" />
-  </ItemGroup>
+    <ItemGroup>
+      <ProjectReference
+        Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj"
+        OutputItemType="Analyzer"
+        ReferenceOutputAssembly="false" />
+    </ItemGroup>
 
   <ItemGroup Label="Qowaiv.CodeGeneration">
     <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
@@ -44,6 +44,10 @@ v1.0.0
     <Compile Include="../Qowaiv.CodeGeneration/Extensions/Qowaiv.CodeGeneration.Code.cs" Link="Qowaiv.CodeGeneration/Extensions/Qowaiv.CodeGeneration.Code.cs" />
     <Compile Include="../Qowaiv.CodeGeneration/Syntax/*.cs" Link="Qowaiv.CodeGeneration/Syntax/%(Filename).cs" />
     <Compile Include="../Qowaiv.CodeGeneration/Types/Namespace.cs" Link="Qowaiv.CodeGeneration/Types/Namespace.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="../../shared/ProductInfo.cs" />
   </ItemGroup>
 
   <ItemGroup Label="CompileTimeDependencies">

@@ -4,6 +4,7 @@ using System.Threading;
 namespace Qowaiv.CodeGeneration.SingleValueObjects;
 
 [Generator]
+[ExcludeFromCodeCoverage/* Tested by the code it generates */]
 public sealed class IdGenerator : BaseGenerator<IdParameters>
 {
     /// <inheritdoc />

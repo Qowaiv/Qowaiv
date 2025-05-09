@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/package.props" />
 
@@ -13,6 +13,9 @@
 v8.1.0
 - Hide Guard methods from stacktrace.
 - Introduction of Converting.From(Type).To<To>() to check CanConvertTo.
+<![CDATA[
+v8.1.0
+- Hide Guard methods from stacktrace.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

@@ -172,6 +172,14 @@ public class Supports_type_conversion
         => Converting.ToString().From(Svo.Generated.Int64Id).Should().Be("PREFIX987654321");
 
     [Test]
+    public void from_int()
+       => Converting.From(42).To<Int64BasedId>().Should().Be(Int64BasedId.Create(42));
+
+    [Test]
+    public void to_int()
+        => Converting.To<int>().From(Int64BasedId.Create(42)).Should().Be(42);
+
+    [Test]
     public void from_long()
         => Converting.From(987654321L).To<Int64BasedId>().Should().Be(Svo.Generated.Int64Id);
 
@@ -195,4 +203,10 @@ public class Supports_type_conversion
         convert.Should().Throw<InvalidCastException>()
             .WithMessage("Cast from long to Specs_Generated.Int64BasedId is not valid.");
     }
+
+    [TestCase(typeof(int))]
+    [TestCase(typeof(long))]
+    [TestCase(typeof(object))]
+    public void not_to(Type type)
+    => Converting.To<Int64BasedId>().From(type).Should().BeFalse();
 }

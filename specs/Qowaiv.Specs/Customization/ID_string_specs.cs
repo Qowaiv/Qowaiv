@@ -159,4 +159,8 @@ public class Supports_type_conversion
             Converting.ToString().From(Svo.Generated.StringId).Should().Be("Qowaiv-ID");
         }
     }
+
+    [TestCase(typeof(string))]
+    public void to(Type type)
+        => Converting.To(type).From<StringBasedId>().Should().BeTrue();
 }

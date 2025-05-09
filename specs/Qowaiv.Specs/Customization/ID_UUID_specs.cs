@@ -176,6 +176,12 @@ public class Supports_type_conversion
     [Test]
     public void to_Uuid()
         => Converting.To<Uuid>().From(Svo.Generated.CustomUuid).Should().Be(Svo.Uuid);
+
+    [TestCase(typeof(Guid))]
+    [TestCase(typeof(Uuid))]
+    [TestCase(typeof(string))]
+    public void to(Type type)
+        => Converting.To(type).From<UuidBasedId>().Should().BeTrue();
 }
 
 public class Supports_JSON_serialization

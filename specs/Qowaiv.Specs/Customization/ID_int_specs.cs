@@ -195,4 +195,9 @@ public class Supports_type_conversion
     [Test]
     public void to_int()
         => Converting.To<int>().From(Svo.Generated.Int32Id).Should().Be(17);
+
+    [TestCase(typeof(int))]
+    [TestCase(typeof(string))]
+    public void to(Type type)
+        => Converting.To(type).From<Int32BasedId>().Should().BeTrue();
 }

@@ -206,7 +206,7 @@ public class Supports_type_conversion
 
     [TestCase(typeof(int))]
     [TestCase(typeof(long))]
-    [TestCase(typeof(object))]
-    public void not_to(Type type)
-    => Converting.To<Int64BasedId>().From(type).Should().BeFalse();
+    [TestCase(typeof(string))]
+    public void to(Type type)
+        => Converting.To(type).From<Int64BasedId>().Should().BeTrue();
 }

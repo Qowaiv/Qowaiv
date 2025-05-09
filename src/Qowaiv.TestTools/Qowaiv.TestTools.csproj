@@ -8,10 +8,15 @@
     <Version>8.0.0</Version>
     <PackageId>Qowaiv.TestTools</PackageId>
     <ProductName>Qowaiv Test Tools</ProductName>
+    <ToBeReleased>
+        <![CDATA[
+v8.1.0
+- Hide Guard methods from stacktrace.
+- Introduction of Converting.From(Type).To<To>() to check CanConvertTo.
+]]>
+    </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
-ToBeReleased:
-- Hide Guard methods from stacktrace.
 v8.0.0
 - Drop FluentAssertion dependency. (BREAKING)
 v7.2.0

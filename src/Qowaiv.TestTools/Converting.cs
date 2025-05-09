@@ -15,6 +15,10 @@ public static class Converting
     [Pure]
     public static ConvertTo<To> To<To>() => new();
 
+    /// <summary>Initializes a new instance of the <see cref="ConvertTo" /> class.</summary>
+    [Pure]
+    public static ConvertTo To(Type type) => new(type);
+
     /// <summary>Initializes a new instance of the <see cref="ConvertTo{To}" /> class.</summary>
     [Pure]
     public static new ConvertTo<string> ToString() => new();

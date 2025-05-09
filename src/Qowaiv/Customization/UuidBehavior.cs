@@ -60,7 +60,7 @@ public class UuidBehavior : IdBehavior<Uuid>
     public override bool TryTransform(Uuid value, out Uuid transformed)
     {
         transformed = value;
-        return value != Uuid.Empty;
+        return true;
     }
 
     /// <inheritdoc />

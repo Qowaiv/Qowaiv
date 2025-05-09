@@ -201,3 +201,42 @@ public class Supports_type_conversion
     public void to(Type type)
         => Converting.To(type).From<Int32BasedId>().Should().BeTrue();
 }
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.Generated.Int32Id);
+        xml.Should().Be("PREFIX17");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<Int32BasedId>("PREFIX17");
+        svo.Should().Be(Svo.Generated.Int32Id);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.Generated.Int32Id);
+        round_tripped.Should().Be(Svo.Generated.Int32Id);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.Generated.Int32Id);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        round_tripped.Should().Be(structure);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.Generated.Int32Id;
+        obj.GetSchema().Should().BeNull();
+    }
+}

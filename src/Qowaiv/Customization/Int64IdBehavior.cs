@@ -53,7 +53,7 @@ public class Int64IdBehavior : IdBehavior<long>
     public override byte[] ToByteArray(long id) => BitConverter.GetBytes(id);
 
     /// <inheritdoc />
-    public override bool TryTransform(long value, [NotNullWhen(true)] out long transformed)
+    public override bool TryTransform(long value, out long transformed)
     {
         transformed = value;
         return value >= 0;

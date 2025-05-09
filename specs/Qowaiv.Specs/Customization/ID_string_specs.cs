@@ -164,3 +164,42 @@ public class Supports_type_conversion
     public void to(Type type)
         => Converting.To(type).From<StringBasedId>().Should().BeTrue();
 }
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.Generated.StringId);
+        xml.Should().Be("Qowaiv-ID");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<StringBasedId>("Qowaiv-ID");
+        svo.Should().Be(Svo.Generated.StringId);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.Generated.StringId);
+        round_tripped.Should().Be(Svo.Generated.StringId);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.Generated.StringId);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        round_tripped.Should().Be(structure);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.Generated.StringId;
+        obj.GetSchema().Should().BeNull();
+    }
+}

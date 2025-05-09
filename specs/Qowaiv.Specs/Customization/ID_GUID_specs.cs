@@ -218,3 +218,42 @@ public class Supports_JSON_serialization
     }
 #endif
 }
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.Generated.CustomGuid);
+        xml.Should().Be("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<GuidBasedId>("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+        svo.Should().Be(Svo.Generated.CustomGuid);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.Generated.CustomGuid);
+        round_tripped.Should().Be(Svo.Generated.CustomGuid);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.Generated.CustomGuid);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        round_tripped.Should().Be(structure);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.Generated.CustomGuid;
+        obj.GetSchema().Should().BeNull();
+    }
+}

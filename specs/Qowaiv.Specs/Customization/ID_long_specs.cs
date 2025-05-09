@@ -210,3 +210,42 @@ public class Supports_type_conversion
     public void to(Type type)
         => Converting.To(type).From<Int64BasedId>().Should().BeTrue();
 }
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.Generated.Int64Id);
+        xml.Should().Be("PREFIX987654321");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<Int64BasedId>("PREFIX987654321");
+        svo.Should().Be(Svo.Generated.Int64Id);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.Generated.Int64Id);
+        round_tripped.Should().Be(Svo.Generated.Int64Id);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.Generated.Int64Id);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        round_tripped.Should().Be(structure);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.Generated.Int64Id;
+        obj.GetSchema().Should().BeNull();
+    }
+}

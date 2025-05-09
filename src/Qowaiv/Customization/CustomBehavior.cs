@@ -50,24 +50,20 @@ public abstract class CustomBehavior<TRaw> : TypeConverter, IComparer<TRaw>
 
     /// <summary>Serializes the underlying value to a JSON node.</summary>
     [Pure]
-    public virtual object? ToJson(TRaw value) => value switch
-    {
-        _ when Equals(value, default(TRaw)) => null,
-        IFormattable formattable /*........*/ => formattable.ToString(null, CultureInfo.InvariantCulture),
-        _ /*...............................*/ => value.ToString(),
-    };
+    public virtual object? ToJson(TRaw value)
+        => Equals(value, default(TRaw))
+        ? null
+        : ToString(value, null, CultureInfo.InvariantCulture);
 
     /// <summary>Serializes theidentifier to an XML string.</summary>
     /// <param name="value">
     /// The string representing the identifier.
     /// </param>
     [Pure]
-    public virtual string? ToXml(TRaw value) => value switch
-    {
-        _ when Equals(value, default(TRaw)) => null,
-        IFormattable formattable /*........*/ => formattable.ToString(null, CultureInfo.InvariantCulture),
-        _ /*...............................*/ => value.ToString(),
-    };
+    public virtual string? ToXml(TRaw value)
+        => Equals(value, default(TRaw))
+        ? null
+        : ToString(value, null, CultureInfo.InvariantCulture);
 
     /// <summary>Creates a <see cref="FormatException" /> using the <see cref="InvalidFormatMessage(string?, IFormatProvider?)" />.</summary>
     [Pure]
@@ -98,7 +94,7 @@ public abstract class CustomBehavior<TRaw> : TypeConverter, IComparer<TRaw>
     /// <param name="transformed">
     /// The transformed value.
     /// </param>
-    public abstract bool TryTransform(string? str, IFormatProvider? formatProvider, [NotNullWhen(true)] out TRaw? transformed);
+    public abstract bool TryTransform(string? str, IFormatProvider? formatProvider, out TRaw? transformed);
 
     /// <summary>Converts the to a SVO.
     /// A return value indicates whether the conversion succeeded.
@@ -110,9 +106,5 @@ public abstract class CustomBehavior<TRaw> : TypeConverter, IComparer<TRaw>
     /// The transformed value.
     /// </param>
     [Pure]
-    public virtual bool TryTransform(TRaw value, [NotNullWhen(true)] out TRaw? transformed)
-    {
-        transformed = value;
-        return true;
-    }
+    public abstract bool TryTransform(TRaw value, out TRaw? transformed);
 }

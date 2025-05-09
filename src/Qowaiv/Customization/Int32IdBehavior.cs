@@ -50,7 +50,7 @@ public class Int32IdBehavior : IdBehavior<int>
     public override byte[] ToByteArray(int id) => BitConverter.GetBytes(id);
 
     /// <inheritdoc />
-    public override bool TryTransform(int value, [NotNullWhen(true)] out int transformed)
+    public override bool TryTransform(int value, out int transformed)
     {
         transformed = value;
         return value >= 0;

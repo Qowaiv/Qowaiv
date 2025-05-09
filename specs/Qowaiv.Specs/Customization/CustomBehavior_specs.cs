@@ -18,6 +18,12 @@ public class ToString
             transformed = new(42);
             return true;
         }
+
+        public override bool TryTransform(NoneFormattable value, out NoneFormattable transformed)
+        {
+            transformed = value;
+            return true;
+        }
     }
 
     internal readonly struct NoneFormattable : IEquatable<NoneFormattable>

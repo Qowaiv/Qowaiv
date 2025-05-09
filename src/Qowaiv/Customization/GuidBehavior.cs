@@ -60,7 +60,7 @@ public class GuidBehavior : IdBehavior<Guid>
     public override bool TryTransform(Guid value, out Guid transformed)
     {
         transformed = value;
-        return value != Guid.Empty;
+        return true;
     }
 
     /// <inheritdoc />

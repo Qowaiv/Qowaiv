@@ -23,9 +23,9 @@ public class StringIdBehavior : IdBehavior<string>
     public sealed override bool TryTransform(string value, [NotNullWhen(true)] out string? transformed) => TryTransform(value, null, out transformed);
 
     /// <inheritdoc />
-    public override bool TryTransform(string? str, IFormatProvider? formatProvider, [NotNullWhen(true)] out string? transformed)
+    public override bool TryTransform(string? str, IFormatProvider? formatProvider, out string? transformed)
     {
-        transformed = str;
-        return str is { Length: > 0 };
+        transformed = str is { Length: > 0 } ? str : null;
+        return true;
     }
 }

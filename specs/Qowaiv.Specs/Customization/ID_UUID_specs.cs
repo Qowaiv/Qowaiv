@@ -219,3 +219,42 @@ public class Supports_JSON_serialization
     }
 #endif
 }
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.Generated.CustomUuid);
+        xml.Should().Be("Qowaiv_SVOLibrary_GUIA");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<UuidBasedId>("Qowaiv_SVOLibrary_GUIA");
+        svo.Should().Be(Svo.Generated.CustomUuid);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.Generated.CustomUuid);
+        round_tripped.Should().Be(Svo.Generated.CustomUuid);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.Generated.CustomUuid);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        round_tripped.Should().Be(structure);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.Generated.CustomUuid;
+        obj.GetSchema().Should().BeNull();
+    }
+}

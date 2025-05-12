@@ -77,12 +77,10 @@ public class README_md
         public string[]? @enum { get; init; } = [];
     }
 
-#if DEBUG
     private static readonly System.Text.Json.JsonSerializerOptions Options = new()
     {
         WriteIndented = true,
         DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
     };
-#endif
 }
 #endif

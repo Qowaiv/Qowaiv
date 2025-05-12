@@ -1,5 +1,6 @@
 namespace Open_API_specs;
 
+[Obsolete("Will be dropped in Qowaiv 8.0.")]
 public class Open_API_data_type
 {
     [Test]

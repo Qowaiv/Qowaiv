@@ -404,6 +404,7 @@ public class IdForInt32Test
     }
 }
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 [Serializable]
 public class IdForInt32SerializeObject
 {

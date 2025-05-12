@@ -426,6 +426,7 @@ public class IdForGuidTest
         .ToHashSet().Should().HaveCount(100);
 }
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 [Serializable]
 public class IdForGuidSerializeObject
 {

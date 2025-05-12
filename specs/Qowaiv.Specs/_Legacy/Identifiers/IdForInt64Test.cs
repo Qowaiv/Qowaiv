@@ -410,6 +410,8 @@ public class IdForInt64Test
     }
 }
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
+
 [Serializable]
 public class IdForInt64SerializeObject
 {

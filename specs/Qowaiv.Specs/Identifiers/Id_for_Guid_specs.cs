@@ -164,6 +164,7 @@ public class Supports_binary_serialization
 }
 #endif
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class Is_Open_API_data_type
 {
     [Test]

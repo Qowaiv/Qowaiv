@@ -363,6 +363,8 @@ public class IdForStringTest
     }
 }
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
+
 [Serializable]
 public class IdForStringSerializeObject
 {

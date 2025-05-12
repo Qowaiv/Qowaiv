@@ -27,12 +27,18 @@ public class Default_value : SingleValueObjectSpecs
     [TestCase(typeof(Percentage), "0.00%")]
     [TestCase(typeof(StreamSize), "0 byte")]
     [TestCase(typeof(WeekDate), "0001-W01-1")]
+    public void display(Type svoType, object display)
+    {
+        var empty = Activator.CreateInstance(svoType);
+        empty.Should().HaveDebuggerDisplay(display);
+    }
+
     [TestCase(typeof(CustomGuid), "{empty} (ForGuid)")]
     [TestCase(typeof(CustomUuid), "{empty} (ForUuid)")]
     [TestCase(typeof(Int32Id), "{empty} (ForInt32)")]
     [TestCase(typeof(Int64Id), "{empty} (ForInt64)")]
     [TestCase(typeof(StringId), "{empty} (ForString)")]
-    public void display(Type svoType, object display)
+    public void display_for_obsolete(Type svoType, object display)
     {
         var empty = Activator.CreateInstance(svoType);
         empty.Should().HaveDebuggerDisplay(display);

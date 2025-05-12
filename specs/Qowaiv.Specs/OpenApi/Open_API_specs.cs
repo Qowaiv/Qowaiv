@@ -39,6 +39,7 @@ public class Open_API_data_type
 }
 
 #if NET6_0_OR_GREATER
+[Explicit]
 public class README_md
 {
     [Test]
@@ -59,9 +60,8 @@ public class README_md
                     nullable = info.Nullable,
                     @enum = info.Enum?.ToArray(),
                 });
-#if DEBUG
+
         Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(all, Options));
-#endif
         all.Should().NotBeEmpty();
     }
 

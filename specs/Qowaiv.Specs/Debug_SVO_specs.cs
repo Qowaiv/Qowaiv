@@ -32,17 +32,6 @@ public class Default_value : SingleValueObjectSpecs
         var empty = Activator.CreateInstance(svoType);
         empty.Should().HaveDebuggerDisplay(display);
     }
-
-    [TestCase(typeof(CustomGuid), "{empty} (ForGuid)")]
-    [TestCase(typeof(CustomUuid), "{empty} (ForUuid)")]
-    [TestCase(typeof(Int32Id), "{empty} (ForInt32)")]
-    [TestCase(typeof(Int64Id), "{empty} (ForInt64)")]
-    [TestCase(typeof(StringId), "{empty} (ForString)")]
-    public void display_for_obsolete(Type svoType, object display)
-    {
-        var empty = Activator.CreateInstance(svoType);
-        empty.Should().HaveDebuggerDisplay(display);
-    }
 }
 
 public class Unknown_value : SingleValueObjectSpecs
@@ -83,10 +72,6 @@ public class Displays
     [TestCase(typeof(Uuid), "Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
     [TestCase(typeof(WeekDate), "1997-W14-6", "1997-W14-6")]
     [TestCase(typeof(YesNo), "Y", "yes")]
-    [TestCase(typeof(CustomGuid), "702e186f-f026-4f47-ae4d-fd5f16751f32", "702e186f-f026-4f47-ae4d-fd5f16751f32 (ForGuid)")]
-    [TestCase(typeof(Int32Id), "123", "PREFIX123 (ForInt32)")]
-    [TestCase(typeof(Int64Id), "123456789", "PREFIX123456789 (ForInt64)")]
-    [TestCase(typeof(StringId), "QOWAIV-ID", "QOWAIV-ID (ForString)")]
     public void invariant_representation(Type svoType, string value, object debuggerDisplay)
     {
         var converter = TypeDescriptor.GetConverter(svoType);

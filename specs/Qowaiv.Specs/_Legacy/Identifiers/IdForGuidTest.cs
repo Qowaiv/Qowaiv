@@ -1,9 +1,10 @@
 namespace Qowaiv.UnitTests.Identifiers;
 
-[EmptyTestClass]
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public sealed class ForGuid : GuidBehavior { }
 
 /// <summary>Tests the identifier SVO.</summary>
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class IdForGuidTest
 {
     /// <summary>The test instance for most tests.</summary>

@@ -1,9 +1,10 @@
 namespace Qowaiv.UnitTests.Identifiers;
 
-[EmptyTestClass]
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public sealed class ForInt64 : Int64IdBehavior { }
 
 /// <summary>Tests the identifier SVO.</summary>
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class IdForInt64Test
 {
     /// <summary>The test instance for most tests.</summary>

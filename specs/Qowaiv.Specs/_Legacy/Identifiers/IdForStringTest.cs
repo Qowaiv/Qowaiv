@@ -1,9 +1,10 @@
 namespace Qowaiv.UnitTests.Identifiers;
 
-[EmptyTestClass]
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class ForString : StringIdBehavior { }
 
 /// <summary>Tests the identifier SVO.</summary>
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class IdForStringTest
 {
     /// <summary>The test instance for most tests.</summary>
@@ -361,6 +362,8 @@ public class IdForStringTest
         Assert.Throws<NotSupportedException>(() => Id<ForString>.Next());
     }
 }
+
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 
 [Serializable]
 public class IdForStringSerializeObject

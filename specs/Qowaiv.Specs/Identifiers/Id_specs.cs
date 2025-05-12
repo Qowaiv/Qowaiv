@@ -2,6 +2,7 @@
 
 namespace Identifiers.Id_specs;
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class Can_parse
 {
     [Test]

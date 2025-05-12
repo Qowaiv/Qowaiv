@@ -27,11 +27,6 @@ public class Default_value : SingleValueObjectSpecs
     [TestCase(typeof(Percentage), "0.00%")]
     [TestCase(typeof(StreamSize), "0 byte")]
     [TestCase(typeof(WeekDate), "0001-W01-1")]
-    [TestCase(typeof(CustomGuid), "{empty} (ForGuid)")]
-    [TestCase(typeof(CustomUuid), "{empty} (ForUuid)")]
-    [TestCase(typeof(Int32Id), "{empty} (ForInt32)")]
-    [TestCase(typeof(Int64Id), "{empty} (ForInt64)")]
-    [TestCase(typeof(StringId), "{empty} (ForString)")]
     public void display(Type svoType, object display)
     {
         var empty = Activator.CreateInstance(svoType);
@@ -77,10 +72,6 @@ public class Displays
     [TestCase(typeof(Uuid), "Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
     [TestCase(typeof(WeekDate), "1997-W14-6", "1997-W14-6")]
     [TestCase(typeof(YesNo), "Y", "yes")]
-    [TestCase(typeof(CustomGuid), "702e186f-f026-4f47-ae4d-fd5f16751f32", "702e186f-f026-4f47-ae4d-fd5f16751f32 (ForGuid)")]
-    [TestCase(typeof(Int32Id), "123", "PREFIX123 (ForInt32)")]
-    [TestCase(typeof(Int64Id), "123456789", "PREFIX123456789 (ForInt64)")]
-    [TestCase(typeof(StringId), "QOWAIV-ID", "QOWAIV-ID (ForString)")]
     public void invariant_representation(Type svoType, string value, object debuggerDisplay)
     {
         var converter = TypeDescriptor.GetConverter(svoType);

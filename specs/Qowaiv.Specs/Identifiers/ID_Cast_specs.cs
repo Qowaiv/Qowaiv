@@ -1,5 +1,6 @@
 namespace Identifiers.Id_specs;
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class Create
 {
     [Test]
@@ -14,6 +15,7 @@ public class Create
         => Int64Id.Create(null).Should().Be(Int64Id.Empty);
 }
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class Casts_from
 {
     [Test]
@@ -57,6 +59,7 @@ public class Casts_from
     }
 }
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class Can_not_cast_from
 {
     [Test]

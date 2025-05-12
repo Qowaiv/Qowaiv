@@ -1,5 +1,6 @@
 namespace Open_API_specs;
 
+[Obsolete("Will be dropped in Qowaiv 8.0.")]
 public class Open_API_data_type
 {
     [Test]
@@ -39,6 +40,7 @@ public class Open_API_data_type
 }
 
 #if NET6_0_OR_GREATER
+[Explicit]
 public class README_md
 {
     [Test]
@@ -59,9 +61,8 @@ public class README_md
                     nullable = info.Nullable,
                     @enum = info.Enum?.ToArray(),
                 });
-#if DEBUG
+
         Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(all, Options));
-#endif
         all.Should().NotBeEmpty();
     }
 
@@ -76,12 +77,10 @@ public class README_md
         public string[]? @enum { get; init; } = [];
     }
 
-#if DEBUG
     private static readonly System.Text.Json.JsonSerializerOptions Options = new()
     {
         WriteIndented = true,
         DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
     };
-#endif
 }
 #endif

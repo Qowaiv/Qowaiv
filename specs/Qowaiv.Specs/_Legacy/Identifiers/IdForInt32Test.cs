@@ -1,9 +1,10 @@
 namespace Qowaiv.UnitTests.Identifiers;
 
-[EmptyTestClass]
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public sealed class ForInt32 : Int32IdBehavior { }
 
 /// <summary>Tests the identifier SVO.</summary>
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class IdForInt32Test
 {
     /// <summary>The test instance for most tests.</summary>
@@ -403,6 +404,7 @@ public class IdForInt32Test
     }
 }
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 [Serializable]
 public class IdForInt32SerializeObject
 {

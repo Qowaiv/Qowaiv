@@ -7,6 +7,7 @@ namespace Qowaiv.Identifiers;
 /// <see cref="StringIdBehavior" />
 /// solving the type conversion part.
 /// </summary>
+[Obsolete("Use Qowaiv.Customization.IdBehavior instead.")]
 public abstract class IdentifierBehavior : TypeConverter, IIdentifierBehavior
 {
     /// <inheritdoc />

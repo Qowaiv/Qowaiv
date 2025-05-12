@@ -2,6 +2,7 @@ namespace Qowaiv.Identifiers;
 
 /// <summary>Implements <see cref="IIdentifierBehavior" /> for an identifier based on <see cref="int" />.</summary>
 [OpenApiDataType(description: "Int32 based identifier", example: 17, type: "integer", format: "identifier", nullable: true)]
+[Obsolete("Use Qowaiv.Customization.Int32IdBehavior instead.")]
 public class Int32IdBehavior : IdentifierBehavior
 {
     /// <summary>Initializes a new instance of the <see cref="Int32IdBehavior" /> class.</summary>

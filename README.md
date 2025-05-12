@@ -469,50 +469,7 @@ Primitive Obsession is a common issue when dealing with identifiers. It is quite
 common to provide two or even more identifiers (of different identities) to a
 method, which can lead to nasty bugs.
 
-To overcome this, strongly-typed identifiers can save the day: a specific type
-per identifier per identity. Qowaiv's approach is to use an `Id<T>` where T is
-a class dealing with the logic/behavior of the underlying values. This gives a
-lot of flexibility, and requires hardly any code per identifier, as in 99% of
-the cases, you can fully rely on a base implementation (Guid, long, int, string).
-
-``` C#
-// Definition of the identifiers.
-public sealed class ForDocument : Int64IdLogic { }
-public sealed class ForPerson : GuidLogic { }
-public sealed class ForUser : GuidLogic { }
-
-// Creation
-var documentId = (Id<ForDocument>)123457L; // cast
-var personId = Id<ForPerson>.Parse("0bb59085-9184-4df9-b9d4-08e1ba65cef8"); // parse
-var userId = Id<ForUser>.Create(new Guid("0bb59085-9184-4df9-b9d4-08e1ba65cef8")); // create.
-var bytesId = Id<forDocument>.FromBytes(new byte[]{ 17, 0, 0, 0, 0, 0, 0, 0 }); // create from bytes.
-var nextId = Id<ForPerson>.Next(); // New ID, a random GUID in this case
-
-var same = personId.Equals(userId); // false, same GUID, different types.
-
-// Export
-var docId = (long)documentId; // cast
-var perId = personId.ToString(); // "0bb59085-9184-4df9-b9d4-08e1ba65cef8"
-var bytId = bytesId.ToByteArray();
-
-// Custom logic
-public sealed class ForCustomer : StringIdLogic
-{
-    protected override bool IsValid(string str, out string normalized)
-    {
-        normalized = default;
-        if (Regex.IsMatch("$C[1-9][0-9]{4,6}^"))
-        {
-            normalized = str;
-            return true;
-        }
-        return false;
-    }
-
-    public override object Next() => 'C' + Rnd.Next(10_000, 9_999_999).ToString();
-}
-
-```
+More info about those generated strongly typed ID's can be found [here](src/Qowaiv.CodeGeneration.SingleValueObjects/README.md).
 
 ### UUID aka GUID
 The UUID (Universally unique identifier) aka GUID (Globally unique identifier) is an

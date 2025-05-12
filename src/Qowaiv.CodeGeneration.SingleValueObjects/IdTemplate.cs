@@ -12,7 +12,7 @@ public sealed class IdTemplate(IdParameters parameters) : Code
         + Embedded.Snippet("Behavior.IFormattable")
         + Embedded.Snippet("Behavior.Json")
         + Embedded.Snippet("Behavior.IXmlSerializable")
-        + Embedded.Snippet("Behavior.Id.Next")
+        + Embedded.Snippet("Behavior.Identifier")
         + Embedded.Snippet("Behavior.IParsable")
         + Embedded.Snippet("Behavior.Create");
 
@@ -27,7 +27,7 @@ public sealed class IdTemplate(IdParameters parameters) : Code
             .Transform(line => line
                 .Replace("@Svo", Parameters.Svo)
                 .Replace("@Behavior", Parameters.Behavior)
-                .Replace("@Value", Parameters.Value)
+                .Replace("@Raw", Parameters.Raw)
                 .Replace("@Namespace", Parameters.Namespace.ToString())));
 
     /// <inheritdoc />

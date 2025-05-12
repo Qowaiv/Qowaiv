@@ -1,15 +1,4 @@
-using Qowaiv.Customization;
-using Qowaiv.OpenApi;
-using System;
-using System.Globalization;
-using System.Text.RegularExpressions;
-
-namespace Specs;
-
-public static class Svo
-{
-    public static readonly CustomSvo CustomSvo = CustomSvo.Parse("QOWAIV");
-}
+namespace Specs_Generated;
 
 [OpenApiDataType(description: "Custom SVO Example", type: "string", example: "QOWAIV", format: "custom")]
 [Svo<Behavior>]

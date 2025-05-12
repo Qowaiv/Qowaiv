@@ -4,6 +4,7 @@ using System.Threading;
 namespace Qowaiv.CodeGeneration.SingleValueObjects;
 
 [Generator]
+[ExcludeFromCodeCoverage/* Tested by the code it generates */]
 public sealed class IdGenerator : BaseGenerator<IdParameters>
 {
     /// <inheritdoc />
@@ -22,7 +23,7 @@ public sealed class IdGenerator : BaseGenerator<IdParameters>
         {
             Svo = symbol.Name,
             Behavior = FullName(attr.TypeArguments[0]),
-            Value = FullName(attr.TypeArguments[1]),
+            Raw = FullName(attr.TypeArguments[1]),
             Namespace = symbol.ContainingNamespace.ToString(),
         };
     }

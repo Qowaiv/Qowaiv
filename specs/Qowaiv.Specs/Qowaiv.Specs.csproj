@@ -33,15 +33,14 @@
 
   <ItemGroup>
     <ProjectReference Include="../../src/Qowaiv/Qowaiv.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.CodeGeneration.SingleValueObjects/Qowaiv.CodeGeneration.SingleValueObjects.csproj" />
     <ProjectReference Include="../../src/Qowaiv.Data.SqlClient/Qowaiv.Data.SqlClient.csproj" />
     <ProjectReference Include="../../src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
+    <ProjectReference Include="../Qowaiv.Specs.Generated/Qowaiv.Specs.Generated.csproj" />
   </ItemGroup>
 
   <ItemGroup Label="Diagnostics contracts code generation">
-    <ProjectReference
-      Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj"
-      OutputItemType="Analyzer"
-      ReferenceOutputAssembly="false" />
+    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
 </Project>

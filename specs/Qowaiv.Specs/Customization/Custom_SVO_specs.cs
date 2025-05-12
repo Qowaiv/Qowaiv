@@ -1,16 +1,6 @@
-using Qowaiv.Globalization;
-using Qowaiv.Hashing;
-using Qowaiv.OpenApi;
-using Qowaiv.TestTools;
-using Qowaiv.TestTools.Globalization;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
-using System.Xml.Serialization;
+using Specs_Generated;
 
-namespace Specs.CustomSvo_specs;
+namespace Specs.Customization.CustomSvo_specs;
 
 public class With_domain_logic
 {
@@ -57,35 +47,35 @@ public class Is_equal_by_value
 {
     [Test]
     public void not_equal_to_null()
-        => Svo.CustomSvo.Equals(null).Should().BeFalse();
+        => Svo.Generated.CustomSvo.Equals(null).Should().BeFalse();
 
     [Test]
     public void not_equal_to_other_type()
-        => Svo.CustomSvo.Equals(new object()).Should().BeFalse();
+        => Svo.Generated.CustomSvo.Equals(new object()).Should().BeFalse();
 
     [Test]
     public void not_equal_to_different_value()
-        => Svo.CustomSvo.Equals(CustomSvo.Parse("different")).Should().BeFalse();
+        => Svo.Generated.CustomSvo.Equals(CustomSvo.Parse("different")).Should().BeFalse();
 
     [Test]
     public void equal_to_same_value()
-        => Svo.CustomSvo.Equals(CustomSvo.Parse("QOWAIV")).Should().BeTrue();
+        => Svo.Generated.CustomSvo.Equals(CustomSvo.Parse("QOWAIV")).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
-        => (Svo.CustomSvo == CustomSvo.Parse("QOWAIV")).Should().BeTrue();
+        => (Svo.Generated.CustomSvo == CustomSvo.Parse("QOWAIV")).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
-        => (Svo.CustomSvo == CustomSvo.Parse("different")).Should().BeFalse();
+        => (Svo.Generated.CustomSvo == CustomSvo.Parse("different")).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
-        => (Svo.CustomSvo != CustomSvo.Parse("QOWAIV")).Should().BeFalse();
+        => (Svo.Generated.CustomSvo != CustomSvo.Parse("QOWAIV")).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
-        => (Svo.CustomSvo != CustomSvo.Parse("different")).Should().BeTrue();
+        => (Svo.Generated.CustomSvo != CustomSvo.Parse("different")).Should().BeTrue();
 
     [TestCase("", 0)]
     [TestCase("QOWAIV", 467820648)]
@@ -117,7 +107,7 @@ public class Can_be_parsed
     {
         using (culture.Scoped())
         {
-            CustomSvo.Parse(input).Should().Be(Svo.CustomSvo);
+            CustomSvo.Parse(input).Should().Be(Svo.Generated.CustomSvo);
         }
     }
 
@@ -142,7 +132,7 @@ public class Can_be_parsed
 
     [Test]
     public void with_TryParse_returns_SVO()
-        => CustomSvo.TryParse("QOWAIV").Should().Be(Svo.CustomSvo);
+        => CustomSvo.TryParse("QOWAIV").Should().Be(Svo.Generated.CustomSvo);
 }
 
 public class Has_custom_formatting
@@ -152,7 +142,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Svo.CustomSvo.ToString().Should().Be("QOWAIV");
+            Svo.Generated.CustomSvo.ToString().Should().Be("QOWAIV");
         }
     }
 
@@ -161,7 +151,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Svo.CustomSvo.ToString().Should().Be(Svo.CustomSvo.ToString(default(string)));
+            Svo.Generated.CustomSvo.ToString().Should().Be(Svo.Generated.CustomSvo.ToString(default(string)));
         }
     }
 
@@ -170,7 +160,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Svo.CustomSvo.ToString().Should().Be(Svo.CustomSvo.ToString(string.Empty));
+            Svo.Generated.CustomSvo.ToString().Should().Be(Svo.Generated.CustomSvo.ToString(string.Empty));
         }
     }
 
@@ -187,14 +177,14 @@ public class Has_custom_formatting
     {
         using (TestCultures.es_EC.Scoped())
         {
-            Svo.CustomSvo.ToString(FormatProvider.Empty).Should().Be("QOWAIV");
+            Svo.Generated.CustomSvo.ToString(FormatProvider.Empty).Should().Be("QOWAIV");
         }
     }
 
     [Test]
     public void custom_format_provider_is_applied()
     {
-        var formatted = Svo.CustomSvo.ToString("SomeFormat", FormatProvider.CustomFormatter);
+        var formatted = Svo.Generated.CustomSvo.ToString("SomeFormat", FormatProvider.CustomFormatter);
         formatted.Should().Be("Unit Test Formatter, value: 'QOWAIV', format: 'SomeFormat'");
     }
 
@@ -215,7 +205,7 @@ public class Has_custom_formatting
             culture: TestCultures.nl_NL,
             cultureUI: TestCultures.en_GB))
         {
-            Svo.CustomSvo.ToString(provider: null).Should().Be("QOWAIV");
+            Svo.Generated.CustomSvo.ToString(provider: null).Should().Be("QOWAIV");
         }
     }
 }
@@ -223,18 +213,18 @@ public class Has_custom_formatting
 public class Is_comparable
 {
     [Test]
-    public void to_null_is_1() => Svo.CustomSvo.CompareTo((object?)null).Should().Be(1);
+    public void to_null_is_1() => Svo.Generated.CustomSvo.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_Svo_as_object()
     {
-        object obj = Svo.CustomSvo;
-        Svo.CustomSvo.CompareTo(obj).Should().Be(0);
+        object obj = Svo.Generated.CustomSvo;
+        Svo.Generated.CustomSvo.CompareTo(obj).Should().Be(0);
     }
 
     [Test]
     public void to_Svo_only()
-        => new object().Invoking(Svo.CustomSvo.CompareTo).Should().Throw<ArgumentException>();
+        => new object().Invoking(Svo.Generated.CustomSvo.CompareTo).Should().Throw<ArgumentException>();
 
     [Test]
     public void can_be_sorted_using_compare()
@@ -262,13 +252,13 @@ public class Casts
     public void explicitly_from_string()
     {
         var casted = (CustomSvo)"QOWAIV";
-        casted.Should().Be(Svo.CustomSvo);
+        casted.Should().Be(Svo.Generated.CustomSvo);
     }
 
     [Test]
     public void explicitly_to_string()
     {
-        var casted = (string)Svo.CustomSvo;
+        var casted = (string)Svo.Generated.CustomSvo;
         casted.Should().Be("QOWAIV");
     }
 }
@@ -302,7 +292,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From("QOWAIV").To<CustomSvo>().Should().Be(Svo.CustomSvo);
+            Converting.From("QOWAIV").To<CustomSvo>().Should().Be(Svo.Generated.CustomSvo);
         }
     }
 
@@ -311,7 +301,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.ToString().From(Svo.CustomSvo).Should().Be("QOWAIV");
+            Converting.ToString().From(Svo.Generated.CustomSvo).Should().Be("QOWAIV");
         }
     }
 }
@@ -337,6 +327,7 @@ public class Supports_JSON_serialization
             .Should().Throw<System.Text.Json.JsonException>();
     }
 #endif
+
     [TestCase("?", "?")]
     [TestCase("QOWAIV", "QOWAIV")]
     public void convention_based_deserialization(object json, CustomSvo svo)
@@ -362,7 +353,7 @@ public class Supports_XML_serialization
     [Test]
     public void using_XmlSerializer_to_serialize()
     {
-        var xml = Serialize.Xml(Svo.CustomSvo);
+        var xml = Serialize.Xml(Svo.Generated.CustomSvo);
         xml.Should().Be("QOWAIV");
     }
 
@@ -370,20 +361,20 @@ public class Supports_XML_serialization
     public void using_XmlSerializer_to_deserialize()
     {
         var svo = Deserialize.Xml<CustomSvo>("QOWAIV");
-        svo.Should().Be(Svo.CustomSvo);
+        svo.Should().Be(Svo.Generated.CustomSvo);
     }
 
     [Test]
     public void using_DataContractSerializer()
     {
-        var round_tripped = SerializeDeserialize.DataContract(Svo.CustomSvo);
-        Svo.CustomSvo.Should().Be(round_tripped);
+        var round_tripped = SerializeDeserialize.DataContract(Svo.Generated.CustomSvo);
+        Svo.Generated.CustomSvo.Should().Be(round_tripped);
     }
 
     [Test]
     public void as_part_of_a_structure()
     {
-        var structure = XmlStructure.New(Svo.CustomSvo);
+        var structure = XmlStructure.New(Svo.Generated.CustomSvo);
         var round_tripped = SerializeDeserialize.Xml(structure);
         structure.Should().Be(round_tripped);
     }
@@ -391,21 +382,7 @@ public class Supports_XML_serialization
     [Test]
     public void has_no_custom_XML_schema()
     {
-        IXmlSerializable obj = Svo.CustomSvo;
+        IXmlSerializable obj = Svo.Generated.CustomSvo;
         obj.GetSchema().Should().BeNull();
     }
-}
-
-public class Is_Open_API_data_type
-{
-    [Test]
-    public void with_info()
-       => OpenApiDataType.FromType(typeof(CustomSvo))
-       .Should().Be(new OpenApiDataType(
-           dataType: typeof(CustomSvo),
-           description: "Custom SVO Example",
-           example: "QOWAIV",
-           type: "string",
-           format: "custom",
-           pattern: null));
 }

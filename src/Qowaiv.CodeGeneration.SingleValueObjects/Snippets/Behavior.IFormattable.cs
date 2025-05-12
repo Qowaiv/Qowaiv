@@ -32,5 +32,6 @@ partial struct @Svo : global::System.IFormattable
 
     /// <summary>Returns a <see cref="string" /> that represents the @FullName for DEBUG purposes.</summary>
     [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)]
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     private string DebuggerDisplay => HasValue ? ToString("F") : "{empty}";
 }

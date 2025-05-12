@@ -18,6 +18,7 @@ namespace Qowaiv.Identifiers;
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Identifiers.IdJsonConverter))]
 #endif
+// [Obsolete("Use a generated Id with [Id<IdBehavior>] instead.")] TODO, NOT YET
 public readonly struct Id<TIdentifier> : IXmlSerializable, IFormattable, IEquatable<Id<TIdentifier>>, IComparable, IComparable<Id<TIdentifier>>, IEmpty<Id<TIdentifier>>
 #if NET8_0_OR_GREATER
 , IEqualityOperators<Id<TIdentifier>, Id<TIdentifier>, bool>

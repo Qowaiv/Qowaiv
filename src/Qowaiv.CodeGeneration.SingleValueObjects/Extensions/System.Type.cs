@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 namespace System;
 
 /// <summary>Extensions on <see cref="Type" />.</summary>
-public static class QowaivTypeExtensions
+internal static class QowaivCodeGenerationTypeExtensions
 {
     private static readonly object _shortNameCacheLocker = new();
     private static readonly object _longNameCacheLocker = new();

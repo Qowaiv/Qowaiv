@@ -1,5 +1,6 @@
 namespace Identifiers.Id_for_Int64_specs;
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class Is_comparable
 {
     [Test]
@@ -34,6 +35,8 @@ public class Is_comparable
         list.Should().BeEquivalentTo(sorted);
     }
 }
+
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class Supports_JSON_serialization
 {
 #if NET6_0_OR_GREATER
@@ -59,6 +62,7 @@ public class Supports_JSON_serialization
             .WithMessage("Not a valid identifier");
     }
 
+    [Obsolete("Will be dropped in Qowaiv 8.0")]
     private sealed class ForEven : Int64IdBehavior
     {
         public override bool TryCreate(object? obj, out object? id)
@@ -92,6 +96,7 @@ public class Supports_JSON_serialization
         => JsonTester.Write(svo).Should().Be(json);
 }
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class Supports_type_conversion
 {
     [Test]
@@ -158,6 +163,7 @@ public class Supports_type_conversion
 
 #if NET8_0_OR_GREATER
 #else
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class Supports_binary_serialization
 {
     [Test]
@@ -177,6 +183,7 @@ public class Supports_binary_serialization
 }
 #endif
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class Is_Open_API_data_type
 {
     [Test]

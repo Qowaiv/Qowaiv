@@ -1,5 +1,6 @@
 namespace Identifiers.Id_for_Uuid_specs;
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class With_domain_logic
 {
     [TestCase(true, "Qowaiv_SVOLibrary_GUIA")]
@@ -7,6 +8,7 @@ public class With_domain_logic
     public void HasValue_is(bool result, CustomUuid svo) => svo.HasValue.Should().Be(result);
 }
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class Is_comparable
 {
     [Test]
@@ -42,6 +44,7 @@ public class Is_comparable
     }
 }
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class Supports_type_conversion
 {
     [Test]
@@ -102,6 +105,7 @@ public class Supports_type_conversion
         => Converting.To<Uuid>().From(Svo.CustomUuid).Should().Be(Svo.Uuid);
 }
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class Supports_JSON_serialization
 {
     [Test]
@@ -140,6 +144,7 @@ public class Supports_JSON_serialization
 
 #if NET8_0_OR_GREATER
 #else
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class Supports_binary_serialization
 {
     [Test]
@@ -159,6 +164,7 @@ public class Supports_binary_serialization
 }
 #endif
 
+[Obsolete("Will be dropped in Qowaiv 8.0")]
 public class Is_Open_API_data_type
 {
     [Test]

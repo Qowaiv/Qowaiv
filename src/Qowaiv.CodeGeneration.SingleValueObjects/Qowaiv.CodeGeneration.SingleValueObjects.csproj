@@ -9,9 +9,11 @@
     <IncludeSymbols>false</IncludeSymbols>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <PackageId>Qowaiv.CodeGeneration.SingleValueObjects</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.1.0</Version>
     <PackageReleaseNotes>
       <![CDATA[
+v1.1.0
+- Generated custom ID's.
 v1.0.2
 - Fixes for Generation before .NET 6.0.
 v1.0.1

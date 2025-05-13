@@ -1,4 +1,4 @@
-#if !NotStringBased // exec
+#if !StringBased // exec
 partial struct @Svo
 {
     /// <summary>Creates a new instance of the <see cref="@Svo" /> struct.</summary>
@@ -18,6 +18,6 @@ partial struct @Svo
     public static @Svo? TryCreate(@Raw value)
         => behavior.TryTransform(@value, out var tranformed)
         ? new @Svo(tranformed)
-        : default;
+        : null;
 }
 #endif // exec

@@ -38,9 +38,11 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>7.4.0</Version>
+    <Version>7.4.1</Version>
     <PackageReleaseNotes>
       <![CDATA[
+v7.4.1
+- return null instead of default(TSvo) for TryCreate when false.
 v7.4.0
 - Support [Id<TBehavior, TRaw>]. #483
 v7.3.0

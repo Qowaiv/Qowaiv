@@ -23,6 +23,15 @@ public class Has_constant
     public void HasValue_is(bool result, Int32BasedId svo) => svo.HasValue.Should().Be(result);
 }
 
+public class Create
+{
+    [Test]
+    public void returns_null_for_non_representable_values()
+    {
+        EvenOnlyId.TryCreate(17).Should().Be(null);
+    }
+}
+
 public class Is_equal_by_value
 {
     [Test]
@@ -67,7 +76,6 @@ public class Is_equal_by_value
         }
     }
 }
-
 
 public class Bytes
 {

@@ -28,7 +28,8 @@ public sealed class IdTemplate(IdParameters parameters) : Code
                 .Replace("@Svo", Parameters.Svo)
                 .Replace("@Behavior", Parameters.Behavior)
                 .Replace("@Raw", Parameters.Raw)
-                .Replace("@Namespace", Parameters.Namespace.ToString())));
+                .Replace("@Namespace", Parameters.Namespace.ToString()))
+            .Transform([Parameters.Raw == "System.String" ? new("StringBased") : new("NotStringBased")]));
 
     /// <inheritdoc />
     [Pure]

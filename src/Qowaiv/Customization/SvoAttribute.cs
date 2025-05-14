@@ -7,7 +7,7 @@ namespace Qowaiv.Customization;
 /// <typeparam name="TBehavior">
 /// Singleton that handles the behavior of the custom SVO.
 /// </typeparam>
-[Conditional("CONTRACTS_FULL")]
+[Conditional("CODE_GENERATOR_ATTRIBUTES")]
 [AttributeUsage(AttributeTargets.Struct, AllowMultiple = false)]
 [ExcludeFromCodeCoverage]
 public sealed class SvoAttribute<TBehavior> : Attribute

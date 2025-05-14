@@ -38,9 +38,11 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>7.4.1</Version>
+    <Version>7.4.2</Version>
     <PackageReleaseNotes>
       <![CDATA[
+v7.4.2
+- Code generators are decorated with [Conditional("CODE_GENERATOR_ATTRIBUTES")].
 v7.4.1
 - return null instead of default(TSvo) for TryCreate when false.
 v7.4.0

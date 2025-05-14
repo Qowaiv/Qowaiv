@@ -16,7 +16,7 @@ namespace Qowaiv.Customization;
 /// - <see cref="string" />
 /// or other.
 /// </typeparam>
-[Conditional("CONTRACTS_FULL")]
+[Conditional("CODE_GENERATOR_ATTRIBUTES")]
 [AttributeUsage(AttributeTargets.Struct, AllowMultiple = false)]
 [ExcludeFromCodeCoverage]
 public sealed class IdAttribute<TBehavior, TValue> : Attribute

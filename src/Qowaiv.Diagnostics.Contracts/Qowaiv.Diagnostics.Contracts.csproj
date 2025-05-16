@@ -10,6 +10,7 @@
     <IncludeSymbols>false</IncludeSymbols>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <Version>2.0.6</Version>
+    <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
     <PackageId>Qowaiv.Diagnostics.Contracts</PackageId>
     <ProductName>Qowaiv Diagnostics Contracts</ProductName>
     <LangVersion>10</LangVersion>

@@ -130,7 +130,7 @@ public sealed class CodeSnippet : Code
         {
             lines.Add(line);
         }
-        return new(lines.ToArray());
+        return new([.. lines]);
     }
 
     /// <summary>Parses the code snippet for a string.</summary>

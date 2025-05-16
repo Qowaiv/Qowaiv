@@ -7,8 +7,10 @@
 
   <PropertyGroup Label="Package info">
     <IsPackable>true</IsPackable>
-    <!-- disable for now -->
-    <EnablePackageValidation>false</EnablePackageValidation>
+    <EnablePackageValidation>true</EnablePackageValidation>
+    <ApiCompatGenerateSuppressionFile>true</ApiCompatGenerateSuppressionFile>
+    <ApiCompatEnableRuleAttributesMustMatch>true</ApiCompatEnableRuleAttributesMustMatch>
+    <ApiCompatEnableRuleCannotChangeParameterName>true</ApiCompatEnableRuleCannotChangeParameterName>
     <PackageIcon>package-icon.png</PackageIcon>
     <PackageIconUrl>https://github.com/Qowaiv/Qowaiv/blob/master/design/package-icon.png</PackageIconUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

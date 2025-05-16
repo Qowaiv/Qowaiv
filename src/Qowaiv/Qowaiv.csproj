@@ -39,6 +39,7 @@
 
   <PropertyGroup>
     <Version>7.4.2</Version>
+    <PackageValidationBaselineVersion>7.0.0</PackageValidationBaselineVersion>
     <PackageReleaseNotes>
       <![CDATA[
 v7.4.2

@@ -7,6 +7,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DevelopmentDependency>false</DevelopmentDependency>
     <Version>7.2.0</Version>
+    <PackageValidationBaselineVersion>7.0.0</PackageValidationBaselineVersion>
     <PackageId>Qowaiv.Data.SqlClient</PackageId>
     <PackageReleaseNotes>
       <![CDATA[

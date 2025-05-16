@@ -10,6 +10,7 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <PackageId>Qowaiv.CodeGeneration.SingleValueObjects</PackageId>
     <Version>1.1.1</Version>
+    <PackageValidationBaselineVersion>1.0.0</PackageValidationBaselineVersion>
     <PackageReleaseNotes>
       <![CDATA[
 v1.1.1

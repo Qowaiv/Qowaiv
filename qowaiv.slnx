@@ -1,9 +1,9 @@
 <Solution>
-  <Folder Name="/Core/" Id="4f35c0b3-93dc-4660-8294-d474d7c27851">
+  <Folder Name="/Core/">
     <Project Path="src/Qowaiv.Data.SqlClient/Qowaiv.Data.SqlClient.csproj" />
     <Project Path="src/Qowaiv/Qowaiv.csproj" />
   </Folder>
-  <Folder Name="/Generation/" Id="02ea681e-c7d8-13c7-8484-4ac65e1b71e8">
+  <Folder Name="/Generation/">
     <Project Path="src/Qowaiv.CodeGeneration.SingleValueObjects/Qowaiv.CodeGeneration.SingleValueObjects.csproj" />
     <Project Path="src/Qowaiv.CodeGeneration/Qowaiv.CodeGeneration.csproj" />
     <Project Path="src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" />
@@ -15,12 +15,12 @@
   </Folder>
   <Folder Name="/Specs/">
     <Project Path="specs/Qowaiv.Benchmarks/Qowaiv.Benchmarks.csproj" />
-    <Project Path="specs/Qowaiv.Diagnostics.Contracts.Specs/Qowaiv.Diagnostics.Contracts.Specs.csproj" Id="cc59c5f3-8ef4-41e7-9d7f-ffba44c57e6a" />
-    <Project Path="specs/Qowaiv.Specs.Generated/Qowaiv.Specs.Generated.csproj" Id="7417c9e6-7275-4c0f-bd1c-166676ca2caf" />
+    <Project Path="specs/Qowaiv.Diagnostics.Contracts.Specs/Qowaiv.Diagnostics.Contracts.Specs.csproj" />
+    <Project Path="specs/Qowaiv.Specs.Generated/Qowaiv.Specs.Generated.csproj" />
     <Project Path="specs/Qowaiv.Specs/Qowaiv.Specs.csproj" />
     <Project Path="specs/Qowaiv.Wikipedia/Qowaiv.Wikipedia.csproj" />
   </Folder>
-  <Folder Name="/Tooling/" Id="80c029d3-9b7b-485d-a0f1-4efd2042e1fe">
+  <Folder Name="/Tooling/" >
     <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
   </Folder>
   <Project Path=".net.csproj" />

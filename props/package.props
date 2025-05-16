@@ -8,6 +8,8 @@
   <PropertyGroup Label="Package info">
     <IsPackable>true</IsPackable>
     <EnablePackageValidation>true</EnablePackageValidation>
+    <EnableStrictModeForCompatibleFrameworksInPackage>false</EnableStrictModeForCompatibleFrameworksInPackage>
+    <EnableStrictModeForBaselineValidation>true</EnableStrictModeForBaselineValidation>
     <ApiCompatGenerateSuppressionFile>true</ApiCompatGenerateSuppressionFile>
     <ApiCompatEnableRuleAttributesMustMatch>true</ApiCompatEnableRuleAttributesMustMatch>
     <ApiCompatEnableRuleCannotChangeParameterName>true</ApiCompatEnableRuleCannotChangeParameterName>

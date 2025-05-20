@@ -24,7 +24,7 @@ namespace Qowaiv;
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.UuidJsonConverter))]
 #endif
-public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>
+public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>, INext<Uuid>
 {
     private static readonly UuidBehavior behavior = UuidBehavior.Instance;
 
@@ -106,9 +106,13 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
     /// <summary>Casts a System.GUID to a Qowaiv.UUID.</summary>
     public static implicit operator Uuid(Guid val) => new(val);
 
-    /// <summary>Initializes a new instance of a UUID.</summary>
+    /// <summary>Initializes a new (random) instance of a UUID.</summary>
     [Pure]
     public static Uuid NewUuid() => new(Guid.NewGuid());
+
+    /// <summary>Initializes a new (random) instance of a UUID.</summary>
+    [Pure]
+    public static Uuid Next() => new(Guid.NewGuid());
 
     /// <summary>Initializes a new  instance of a UUID that is sequential.</summary>
     /// <remarks>

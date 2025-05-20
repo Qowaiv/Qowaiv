@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   
   <Import Project="../../props/package.props" />
 
@@ -15,6 +15,7 @@
       <![CDATA[
 v1.1.2
 - ID m_Value's raw type with global:: namespace prefix.
+- ID's implement INext<TSvo>.
       ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

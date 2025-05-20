@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   
   <Import Project="../../props/package.props" />
 
@@ -9,8 +9,14 @@
     <IncludeSymbols>false</IncludeSymbols>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <PackageId>Qowaiv.CodeGeneration.SingleValueObjects</PackageId>
-    <Version>1.1.1</Version>
     <PackageValidationBaselineVersion>1.0.0</PackageValidationBaselineVersion>
+    <Version>1.1.1</Version>
+    <ToBeReleased>
+      <![CDATA[
+v1.1.2
+- ID m_Value's raw type with global:: namespace prefix.
+      ]]>
+    </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
 v1.1.1

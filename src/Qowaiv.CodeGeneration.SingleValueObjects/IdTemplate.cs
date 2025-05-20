@@ -27,7 +27,7 @@ public sealed class IdTemplate(IdParameters parameters) : Code
             .Transform(line => line
                 .Replace("@Svo", Parameters.Svo)
                 .Replace("@Behavior", Parameters.Behavior)
-                .Replace("@Raw", Parameters.Raw)
+                .Replace("@Raw", $"global::{Parameters.Raw}")
                 .Replace("@Namespace", Parameters.Namespace.ToString()))
             .Transform([Parameters.Raw == "System.String" ? new("StringBased") : new("NotStringBased")]));
 

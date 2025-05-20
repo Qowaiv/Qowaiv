@@ -54,7 +54,7 @@ public class UuidBehavior : IdBehavior<Uuid>
 
     /// <inheritdoc />
     [Pure]
-    public override Uuid NextId() => Uuid.NewUuid();
+    public override Uuid NextId() => Uuid.Next();
 
     /// <inheritdoc />
     public override bool TryTransform(Uuid value, out Uuid transformed)

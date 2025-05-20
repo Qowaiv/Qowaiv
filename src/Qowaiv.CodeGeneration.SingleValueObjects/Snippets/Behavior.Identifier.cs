@@ -1,4 +1,4 @@
-partial struct @Svo
+partial struct @Svo : global::Qowaiv.INext<@Svo>
 {
     /// <summary>Gets a <see cref="byte" /> array that represents the <see cref="@Svo" />.</summary>
     [global::System.Diagnostics.Contracts.Pure]

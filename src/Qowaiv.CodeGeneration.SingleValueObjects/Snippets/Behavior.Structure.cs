@@ -1,4 +1,4 @@
-namespace @Namespace;
+@NamespaceDeclaration
 
 [global::System.ComponentModel.TypeConverter(typeof(@Svo.TypeConverter))]
 readonly partial struct @Svo

@@ -13,13 +13,9 @@ public readonly struct Namespace(string name) : IEquatable<Namespace>
 
     /// <summary>Get the parent namespace of the namespace.</summary>
     public Namespace Parent
-    {
-        get
-        {
-            var index = Name.LastIndexOf('.');
-            return index == -1 ? default : new(Name[..index]);
-        }
-    }
+        => Name?.LastIndexOf('.') is { } index && index is not -1
+        ? new(Name[..index])
+        : default;
 
     /// <summary>Returns true if empty.</summary>
     [Pure]

@@ -1,4 +1,3 @@
-using Microsoft.Testing.Platform.Capabilities.TestFramework;
 using Qowaiv.CodeGeneration;
 
 namespace CodeGeneration.Namespace_specs;

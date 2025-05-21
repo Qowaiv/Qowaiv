@@ -39,7 +39,8 @@ public abstract class BaseGenerator<TParameters> : IIncrementalGenerator
         foreach (var pars in parameters)
         {
             var code = Generate(context, pars);
-            context.AddSource($"{pars.Namespace}.{pars.Svo}.g.cs", code.ToString());
+            var ns = pars.Namespace.IsEmpty() ? "__global__" : pars.Namespace.ToString();
+            context.AddSource($"{ns}.{pars.Svo}.g.cs", code.ToString());
         }
     }
 

@@ -13,13 +13,9 @@ public readonly struct Namespace(string name) : IEquatable<Namespace>
 
     /// <summary>Get the parent namespace of the namespace.</summary>
     public Namespace Parent
-    {
-        get
-        {
-            var index = Name.LastIndexOf('.');
-            return index == -1 ? default : new(Name[..index]);
-        }
-    }
+        => Name?.LastIndexOf('.') is { } index && index is not -1
+        ? new(Name[..index])
+        : default;
 
     /// <summary>Returns true if empty.</summary>
     [Pure]
@@ -55,7 +51,7 @@ public readonly struct Namespace(string name) : IEquatable<Namespace>
     public static bool operator !=(Namespace left, Namespace right) => !(left == right);
 
     /// <summary>Implicitly casts a string to a namespace.</summary>
-    public static implicit operator Namespace(string value) => new(value);
+    public static implicit operator Namespace(string? value) => value is { Length: > 0 } ? new(value) : Empty;
 
     /// <summary>Creates a collection of global namespaces based on file.</summary>
     [Pure]

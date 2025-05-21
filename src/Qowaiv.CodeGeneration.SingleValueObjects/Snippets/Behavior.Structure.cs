@@ -1,6 +1,6 @@
-namespace @Namespace;
+@NamespaceDeclaration
 
-[global::System.ComponentModel.TypeConverter(typeof(global::@Namespace.@Svo.TypeConverter))]
+[global::System.ComponentModel.TypeConverter(typeof(@Svo.TypeConverter))]
 readonly partial struct @Svo
 {
     /// <summary>An singleton instance that deals with the @FullName specific behavior.</summary>

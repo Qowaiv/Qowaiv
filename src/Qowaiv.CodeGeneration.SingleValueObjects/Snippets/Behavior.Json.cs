@@ -1,5 +1,5 @@
 #if NET6_0_OR_GREATER
-    [global::System.Text.Json.Serialization.JsonConverter(typeof(global::@Namespace.@Svo.SvoJsonConverter))]
+    [global::System.Text.Json.Serialization.JsonConverter(typeof(@Svo.SvoJsonConverter))]
 #endif
 partial struct @Svo
 {

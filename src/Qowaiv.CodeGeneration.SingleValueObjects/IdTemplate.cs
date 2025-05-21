@@ -28,10 +28,16 @@ public sealed class IdTemplate(IdParameters parameters) : Code
                 .Replace("@Svo", Parameters.Svo)
                 .Replace("@Behavior", Parameters.Behavior)
                 .Replace("@Raw", $"global::{Parameters.Raw}")
-                .Replace("@Namespace", Parameters.Namespace.ToString()))
+                .Replace("@NamespaceDeclaration", NamespaceDeclaration()))
             .Transform([Parameters.Raw == "System.String" ? new("StringBased") : new("NotStringBased")]));
 
     /// <inheritdoc />
     [Pure]
     public override string ToString() => this.Stringify();
+
+    [Pure]
+    private string NamespaceDeclaration()
+        => Parameters.Namespace.IsEmpty()
+        ? string.Empty
+        : $"namespace {Parameters.Namespace};";
 }

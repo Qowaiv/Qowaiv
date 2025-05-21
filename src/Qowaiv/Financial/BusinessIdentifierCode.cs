@@ -91,15 +91,13 @@ public readonly partial struct BusinessIdentifierCode : IXmlSerializable, IForma
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider) => m_Value switch
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-        else if (IsUnknown()) return "?";
-        else return m_Value ?? string.Empty;
-    }
+        _ when StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted) => formatted,
+        _ when !HasValue => string.Empty,
+        _ when !IsKnown => "?",
+        _ => m_Value!,
+    };
 
     /// <summary>Gets an XML string representation of the BIC.</summary>
     [Pure]

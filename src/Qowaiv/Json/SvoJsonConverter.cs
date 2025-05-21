@@ -121,21 +121,12 @@ public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : 
     [Pure]
     protected virtual TSvo FromJson(bool json) => FromJson(json ? "true" : "false");
 
-    private TSvo ReadNumber(ref Utf8JsonReader reader)
+    private TSvo ReadNumber(ref Utf8JsonReader reader) => reader switch
     {
-        if (reader.TryGetInt64(out long num))
-        {
-            return FromJson(num);
-        }
-        else if (reader.TryGetDecimal(out decimal dec))
-        {
-            return FromJson(dec);
-        }
-        else if (reader.TryGetDouble(out double dbl))
-        {
-            return FromJson(dbl);
-        }
-        else throw new JsonException($"QowaivJsonConverter does not support writing from {reader.GetString()}.");
-    }
+        _ when reader.TryGetInt64(out long num) => FromJson(num),
+        _ when reader.TryGetDecimal(out decimal dec) => FromJson(dec),
+        _ when reader.TryGetDouble(out double dbl) => FromJson(dbl),
+        _ => throw new JsonException($"QowaivJsonConverter does not support writing from {reader.GetString()}."),
+    };
 }
 #endif

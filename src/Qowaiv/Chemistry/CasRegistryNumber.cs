@@ -44,18 +44,14 @@ public readonly partial struct CasRegistryNumber : IXmlSerializable, IFormattabl
     /// other (not empty) formats are applied on the number (long).
     /// </remarks>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider) => m_Value switch
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-        else if (IsEmpty()) return string.Empty;
-        else if (IsUnknown()) return "?";
-        else return format.WithDefault("f") == "f"
-            ? m_Value.ToString(@"#00\-00\-0", formatProvider)
-            : m_Value.ToString(format, formatProvider);
-    }
+        _ when StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted) => formatted,
+        _ when !HasValue => string.Empty,
+        _ when !IsKnown => "?",
+        _ when format.WithDefault("f") == "f" => m_Value.ToString(@"#00\-00\-0", formatProvider),
+        _ => m_Value.ToString(format, formatProvider),
+    };
 
     /// <summary>Gets an XML string representation of the CAS Registry Number.</summary>
     [Pure]

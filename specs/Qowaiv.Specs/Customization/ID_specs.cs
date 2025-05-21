@@ -4,8 +4,6 @@ internal class Implements
 {
     [Test]
     public void INext()
-    {
-        global::GlobalId id = default;
-       // ((INext<GlobalId>)id).Should().NotBeNull();
-    }
+        => typeof(GlobalId).GetMethod("Next", BindingFlags.Public | BindingFlags.Static)
+        .Should().NotBeNull();
 }

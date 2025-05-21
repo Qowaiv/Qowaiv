@@ -5,6 +5,7 @@ internal class Implements
     [Test]
     public void INext()
     {
-        //var next = GlobalId
+        GlobalId id = default;
+       // ((INext<GlobalId>)id).Should().NotBeNull();
     }
 }

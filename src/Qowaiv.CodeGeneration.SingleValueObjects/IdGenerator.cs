@@ -24,7 +24,7 @@ public sealed class IdGenerator : BaseGenerator<IdParameters>
             Svo = symbol.Name,
             Behavior = FullName(attr.TypeArguments[0]),
             Raw = FullName(attr.TypeArguments[1]),
-            Namespace = symbol.ContainingNamespace.ToString(),
+            Namespace = symbol.ContainingNamespace?.ToString(),
         };
     }
 

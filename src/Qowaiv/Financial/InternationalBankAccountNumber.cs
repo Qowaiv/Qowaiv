@@ -38,7 +38,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     public Country Country => m_Value switch
     {
         null => Country.Empty,
-        var v when v == Unknown.m_Value => Country.Unknown,
+        _ when m_Value == Unknown.m_Value => Country.Unknown,
         _ => Country.Parse(m_Value[..2], CultureInfo.InvariantCulture),
     };
 
@@ -58,7 +58,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     public string MachineReadable() => m_Value switch
     {
         null => string.Empty,
-        var v when v == Unknown.m_Value => "?",
+        _ when m_Value == Unknown.m_Value => "?",
         _ => m_Value,
     };
 

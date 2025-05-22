@@ -44,7 +44,7 @@ public readonly partial struct CasRegistryNumber : IXmlSerializable, IFormattabl
     /// other (not empty) formats are applied on the number (long).
     /// </remarks>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider) => m_Value switch
+    public string ToString(string? format, IFormatProvider? formatProvider) => format switch
     {
         _ when StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted) => formatted,
         _ when !HasValue => string.Empty,

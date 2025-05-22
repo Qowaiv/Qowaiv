@@ -94,16 +94,13 @@ public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEq
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider) => format switch
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-        else if (IsUnknown()) return "?";
-        else if (IsEmpty()) return string.Empty;
-        else return m_Value.ToString(format, formatProvider);
-    }
+        _ when StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)=> formatted,
+        _ when !HasValue => string.Empty,
+        _ when !IsKnown => "?",
+        _ => m_Value.ToString(format, formatProvider),
+    };
 
     /// <summary>Gets an XML string representation of the house number.</summary>
     [Pure]

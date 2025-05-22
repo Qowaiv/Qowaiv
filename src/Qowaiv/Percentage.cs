@@ -225,18 +225,12 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider) => format switch
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-        else if (FormatInfo.TryParse(format, formatProvider, out var info))
-        {
-            return info.ToString(m_Value);
-        }
-        else throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
-    }
+        _ when StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted) => formatted,
+        _ when FormatInfo.TryParse(format, formatProvider, out var info) => info.ToString(m_Value),
+        _ => throw new FormatException(QowaivMessages.FormatException_InvalidFormat),
+    };
 
     /// <summary>Gets an XML string representation of the percentage.</summary>
     [Pure]

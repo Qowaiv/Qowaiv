@@ -91,7 +91,7 @@ public readonly partial struct BusinessIdentifierCode : IXmlSerializable, IForma
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider) => m_Value switch
+    public string ToString(string? format, IFormatProvider? formatProvider) => format switch
     {
         _ when StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted) => formatted,
         _ when !HasValue => string.Empty,

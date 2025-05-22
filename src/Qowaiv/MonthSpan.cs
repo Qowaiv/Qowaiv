@@ -217,18 +217,12 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// All others format the total months.
     /// </remarks>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider) => format switch
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-        else if (string.IsNullOrEmpty(format) || format == "F")
-        {
-            return string.Format(formatProvider, "{0}Y{1:+0;-0;+0}M", Years, Months);
-        }
-        else return m_Value.ToString(format, formatProvider);
-    }
+        _ when StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted) => formatted,
+        null or "" or "F" => $"{Years}Y{Months:+0;-0;+0}M",
+        _ => m_Value.ToString(format, formatProvider),
+    };
 
     /// <summary>Gets an XML string representation of the month span.</summary>
     [Pure]

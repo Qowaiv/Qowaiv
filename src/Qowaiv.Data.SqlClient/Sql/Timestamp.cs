@@ -63,18 +63,12 @@ public readonly partial struct Timestamp : IXmlSerializable, IFormattable, IEqua
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider) => format switch
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-        else if (string.IsNullOrEmpty(format))
-        {
-            return string.Format(formatProvider, "0x{0:X16}", m_Value);
-        }
-        else return m_Value.ToString(format, formatProvider);
-    }
+        _ when StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted) => formatted,
+        null or "" => $"0x{m_Value:X16}",
+        _ => m_Value.ToString(format, formatProvider),
+    };
 
     /// <summary>Gets an XML string representation of the timestamp.</summary>
     [Pure]

@@ -66,7 +66,7 @@ public readonly partial struct Timestamp : IXmlSerializable, IFormattable, IEqua
     public string ToString(string? format, IFormatProvider? formatProvider) => format switch
     {
         _ when StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted) => formatted,
-        null or "" => string.Format(formatProvider, "0x{0:X16}", m_Value),
+        null or "" => $"0x{m_Value:X16}",
         _ => m_Value.ToString(format, formatProvider),
     };
 

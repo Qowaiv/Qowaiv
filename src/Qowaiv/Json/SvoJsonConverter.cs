@@ -126,7 +126,7 @@ public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : 
         _ when reader.TryGetInt64(out long num) => FromJson(num),
         _ when reader.TryGetDecimal(out decimal dec) => FromJson(dec),
         _ when reader.TryGetDouble(out double dbl) => FromJson(dbl),
-        _ => throw new JsonException($"QowaivJsonConverter does not support writing from {reader.GetString()}."),
+        _ => throw new JsonException($"QowaivJsonConverter does not support reading from {reader.GetString()}."),
     };
 }
 #endif

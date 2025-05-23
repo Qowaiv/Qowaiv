@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" />
+    <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="System.Text.Encodings.Web" />
   </ItemGroup>
 

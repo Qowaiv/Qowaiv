@@ -1,8 +1,8 @@
 namespace Email_address_char_lookup;
 
+[Explicit]
 public class Generate
 {
-    [Explicit]
     [Test]
     public void Category()
     {

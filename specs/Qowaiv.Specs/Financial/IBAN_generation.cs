@@ -1,5 +1,6 @@
 namespace Financial.IBAN_generation;
 
+[Explicit]
 internal class Markdown_file
 {
     private static readonly FileInfo Location = new("../../../../../IBAN.md");
@@ -27,6 +28,7 @@ internal class Markdown_file
         Assert.Inconclusive("Copy output to code file.");
     }
 
+    [Explicit]
     [Test]
     public void Generate_JS_RegEx_Pattern()
     {

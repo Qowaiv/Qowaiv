@@ -4,7 +4,7 @@ public class From_type
 {
     [Test]
     public void tests_CanConvertTo()
-        => Converting.To(typeof(string)).From<int>().Should().BeTrue();
+        => Converting.To<string>().From<int>().Should().BeTrue();
 }
 
 public class From_typed_value

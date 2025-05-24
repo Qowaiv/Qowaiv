@@ -8,11 +8,6 @@
     <Project Path="src/Qowaiv.CodeGeneration/Qowaiv.CodeGeneration.csproj" />
     <Project Path="src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" />
   </Folder>
-  <Folder Name="/Model Binding and Serialization/">
-    <Project Path="example/Qowaiv.AspNetCore.Mvc.ModelBinding.UnitTests/Qowaiv.AspNetCore.Mvc.ModelBinding.UnitTests.csproj" />
-    <Project Path="example/Qowaiv.AspNetCore.Mvc.ModelBinding/Qowaiv.AspNetCore.Mvc.ModelBinding.csproj" />
-    <Project Path="example/Qowaiv.Web.Mvc.ModelBinding/Qowaiv.Web.Mvc.ModelBinding.csproj" />
-  </Folder>
   <Folder Name="/Specs/">
     <Project Path="specs/Qowaiv.Benchmarks/Qowaiv.Benchmarks.csproj" />
     <Project Path="specs/Qowaiv.Diagnostics.Contracts.Specs/Qowaiv.Diagnostics.Contracts.Specs.csproj" />
@@ -20,7 +15,7 @@
     <Project Path="specs/Qowaiv.Specs/Qowaiv.Specs.csproj" />
     <Project Path="specs/Qowaiv.Wikipedia/Qowaiv.Wikipedia.csproj" />
   </Folder>
-  <Folder Name="/Tooling/" >
+  <Folder Name="/Tooling/">
     <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
   </Folder>
   <Project Path=".net.csproj" />

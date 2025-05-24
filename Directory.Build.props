@@ -14,6 +14,7 @@
   <PropertyGroup Label="Diagnostics">
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <NuGetAudit>true</NuGetAudit>
+    <NuGetAuditMode>all</NuGetAuditMode>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
   </PropertyGroup>
 
@@ -82,6 +83,10 @@ inside and outside a Domain-driven context.
 
   <ItemGroup Label="Additional files">
     <AdditionalFiles Include="*.csproj" Visible="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ThirdPartyLicense Include="SonarAnalyzer.CSharp" Hash="IBM9yngU7omFyJOMSFSy0w" />
   </ItemGroup>
 
 </Project>

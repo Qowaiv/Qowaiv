@@ -46,7 +46,6 @@ Multiple scenarios are supported:
 * Formatting (including `ICustomFormatter`)
 * Validation
 * Serialization (JSON, XML, in-memory)
-* Model binding
 * Domain-specific logic
 * Explicit and implicit casting
 
@@ -626,15 +625,6 @@ var toOdd = 23.0455m.Round(3, DecimalRounding.ToOdd); // 23.045m
 var towardsZero = 23.5m.Round(DecimalRounding.TowardsZero); // 23m
 var randomTie = 23.5m.Round(DecimalRounding.RandomTieBreaking); // 50% 23m, 50% 24,
 ```
-
-## Model Binding
-All SVO's support model binding out of the box. That is to say, when the model
-binding mechanism works with a `TypeConverter`. It still may be beneficial to
-have a custom model binder. Because different solutions might require different
-custom model binders, and deploying them as NuGet packages would potentially
-lead to a dependency hell, Qowaiv provides them as code snippets:
-* [ASP.NET Core MVC ModelBinding](example/Qowaiv.AspNetCore.Mvc.ModelBinding/README.md)
-* [ASP.NET (Classic) MVC ModelBinding](example/Qowaiv.Web.Mvc.ModelBinding/README.md)
 
 ## Serialization
 ### JSON

@@ -7,8 +7,6 @@
     <IsTestProject>true</IsTestProject>
     <TargetFrameworks>net5.0;net6.0;net8.0;net9.0</TargetFrameworks>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
-    <!-- See https://github.com/dotnet/runtime/issues/8792 -->
-    <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
   </PropertyGroup>
 
   <ItemGroup>

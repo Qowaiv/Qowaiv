@@ -44,6 +44,8 @@
       <![CDATA[
 v7.4.3
 - Introduction of INext<TSelf>.
+- Update System.Memory to 4.6.3 (netstandard2.0 only). 
+- Update System.Runtime.CompilerServices.Unsafe to 6.1.2 (netstandard2.0 only). 
       ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

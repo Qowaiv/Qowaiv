@@ -1,7 +1,7 @@
-using FluentAssertions.Numeric;
-using FluentAssertions.Primitives;
+using AwesomeAssertions.Numeric;
+using AwesomeAssertions.Primitives;
 
-namespace FluentAssertions;
+namespace AwesomeAssertions;
 
 /// <summary>Extensions to assert debugger display behavior.</summary>
 internal static class QowaivDebuggerDisplayAssertions

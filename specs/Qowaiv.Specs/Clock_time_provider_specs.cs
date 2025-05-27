@@ -1,6 +1,6 @@
 #if NET8_0_OR_GREATER
 
-using FluentAssertions.Extensions;
+using AwesomeAssertions.Extensions;
 
 namespace Clock_specs;
 

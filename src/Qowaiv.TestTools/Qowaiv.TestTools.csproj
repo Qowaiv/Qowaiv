@@ -37,7 +37,7 @@ v6.3.0
 v6.0.0
 - Added .NET 6.0 version to the package. #216
 - Added Serialize, SerializeDeserialize, and Converting helpers. #218
-- Added FluentAssertions extensions. #218
+- Added AwesomeAssertions extensions. #218
 - Decorate nullable types. #228
 - Assert* classes dropped. #218 (BREAKING)
 ]]>

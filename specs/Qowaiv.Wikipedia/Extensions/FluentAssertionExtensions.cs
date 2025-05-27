@@ -1,4 +1,4 @@
-using FluentAssertions.Primitives;
+using AwesomeAssertions.Primitives;
 
 namespace Qowaiv.TestTools.Generation;
 

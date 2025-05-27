@@ -1,4 +1,4 @@
-using FluentAssertions.Primitives;
+using AwesomeAssertions.Primitives;
 using Qowaiv.Data;
 using System.Data;
 using System.Data.SqlClient;
@@ -69,7 +69,7 @@ namespace Data.SvoParameter_specs
         public override string ToString() => val;
     }
 
-    internal static class FluentAssertionsExtensions
+    internal static class AwesomeAssertionsExtensions
     {
         public static AndConstraint<ObjectAssertions> Be(this ObjectAssertions assertions, string parameterName, object value, DbType dbType)
             => assertions.BeEquivalentTo(new

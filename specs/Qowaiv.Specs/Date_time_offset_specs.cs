@@ -1,4 +1,4 @@
-using FluentAssertions.Extensions;
+using AwesomeAssertions.Extensions;
 
 namespace Date_time_offset_specs;
 

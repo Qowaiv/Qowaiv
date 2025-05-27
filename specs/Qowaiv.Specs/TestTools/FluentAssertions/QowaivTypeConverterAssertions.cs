@@ -1,6 +1,6 @@
-using FluentAssertions.Types;
+using AwesomeAssertions.Types;
 
-namespace FluentAssertions;
+namespace AwesomeAssertions;
 
 /// <summary>Extensions to assert type converter behavior.</summary>
 internal static class QowaivTypeConverterAssertions

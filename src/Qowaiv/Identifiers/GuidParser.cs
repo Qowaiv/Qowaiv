@@ -1,5 +1,3 @@
-using System.Runtime.InteropServices;
-
 namespace Qowaiv.Identifiers;
 
 /// <summary><see cref="Guid" /> parser for Base64 and Base32 strings.</summary>
@@ -23,7 +21,7 @@ internal static class GuidParser
 
 #if NET8_0_OR_GREATER
         GuidLayout layout = default;
-        Span<byte> bytes = MemoryMarshal.AsBytes(new Span<GuidLayout>(ref layout));
+        Span<byte> bytes = System.Runtime.InteropServices.MemoryMarshal.AsBytes(new Span<GuidLayout>(ref layout));
 #else
         var bytes = new byte[16];
 #endif

@@ -1,5 +1,3 @@
-using System.Runtime.InteropServices;
-
 namespace Qowaiv.Text;
 
 /// <summary> is a group of similar binary-to-text encoding schemes that
@@ -54,7 +52,7 @@ public static class Base64
         Span<char> chars = stackalloc char[22];
 
 #if NET8_0_OR_GREATER
-        ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes(new Span<Guid>(ref guid));
+        ReadOnlySpan<byte> bytes = System.Runtime.InteropServices.MemoryMarshal.AsBytes(new Span<Guid>(ref guid));
 #else
         ReadOnlySpan<byte> bytes = guid.ToByteArray();
 #endif

@@ -7,8 +7,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="AsyncFixer" Version="1.6.0" />
-    <PackageVersion Include="AwesomeAssertions" Version="8.1.0" />
-    <PackageVersion Include="AwesomeAssertions.Analyzers" Version="0.34.2" />
+    <PackageVersion Include="AwesomeAssertions" Version="9.0.0" />
+    <PackageVersion Include="AwesomeAssertions.Analyzers" Version="9.0.0" />
     <PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="DotNetProjectFile.Analyzers" Version="1.5.12" />

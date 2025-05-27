@@ -84,4 +84,8 @@ inside and outside a Domain-driven context.
     <AdditionalFiles Include="*.csproj" Visible="false" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ThirdPartyLicense Include="SonarAnalyzer.CSharp" Hash="IBM9yngU7omFyJOMSFSy0w" />
+  </ItemGroup>
+
 </Project>

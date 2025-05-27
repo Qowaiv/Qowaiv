@@ -1,4 +1,4 @@
-using FluentAssertions.Extensions;
+using AwesomeAssertions.Extensions;
 
 namespace YearMonth_specs;
 

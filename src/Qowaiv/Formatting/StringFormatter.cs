@@ -1,5 +1,3 @@
-using System;
-
 namespace Qowaiv.Formatting;
 
 /// <summary>A string formatter class.</summary>

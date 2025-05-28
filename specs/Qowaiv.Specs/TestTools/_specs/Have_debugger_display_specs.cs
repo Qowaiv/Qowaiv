@@ -24,7 +24,7 @@ public class Fails_on
         => new SimpleClass()
         .Invoking(x => x.Should().HaveDebuggerDisplay("wrong"))
         .Should().Throw<AssertionException>()
-        .WithMessage(@"Expected x to be ""wrong"", but found ""SimpleClass display"".");
+        .WithMessage(@"Expected * to be ""wrong"", but found ""SimpleClass display"".");
 }
 
 public class can_be_changed

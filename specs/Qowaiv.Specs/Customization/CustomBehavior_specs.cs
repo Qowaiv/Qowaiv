@@ -8,7 +8,7 @@ public class ToString
     public void supports_none_formattable_raw_types()
     {
         var behavior = new NoneFormattableBehavior();
-        behavior.ToString(new(42), "", CultureInfo.InvariantCulture).Should().Be("NoneFormattable");
+        behavior.ToString(new(42), "", CultureInfo.InvariantCulture).Should().Be("[42"]);
     }
 
     internal sealed class NoneFormattableBehavior : CustomBehavior<NoneFormattable>
@@ -30,7 +30,7 @@ public class ToString
     {
        public bool Equals(NoneFormattable other) => true;
 
-        public override string ToString() => value.ToString();
+        public override string ToString() => $"[{value}]";
     }
 }
 

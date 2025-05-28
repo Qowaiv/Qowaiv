@@ -26,15 +26,11 @@ public class ToString
         }
     }
 
-    internal readonly struct NoneFormattable : IEquatable<NoneFormattable>
+    internal readonly struct NoneFormattable(int value) : IEquatable<NoneFormattable>
     {
-        private readonly int Value;
+       public bool Equals(NoneFormattable other) => true;
 
-        public NoneFormattable(int value) => Value = value;
-
-        public bool Equals(NoneFormattable other) => true;
-
-        public override string ToString() => nameof(NoneFormattable);
+        public override string ToString() => value.ToString();
     }
 }
 

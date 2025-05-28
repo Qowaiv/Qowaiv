@@ -45,7 +45,7 @@ internal static partial class Email
             : null;
 
         [Pure]
-        public override string ToString()
+        public override readonly string ToString()
            => Success
            ? $"Input = {Input.ToString()}, Result = {Buffer.ToString()}, Length = {Length}"
            : $"Input = {Input.ToString()}, Result = {Buffer.ToString()}, Success = false";

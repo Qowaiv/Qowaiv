@@ -10,7 +10,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
   </PropertyGroup>
-  
+
   <PropertyGroup Label="Diagnostics">
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <NuGetAudit>true</NuGetAudit>
@@ -70,8 +70,8 @@ inside and outside a Domain-driven context.
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)build/Qowaiv.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-  
-  <ItemGroup>
+
+  <ItemGroup Label="Code generation">
     <PackageReference Include="PolySharp" PrivateAssets="all" />
   </ItemGroup>
 
@@ -79,14 +79,32 @@ inside and outside a Domain-driven context.
     <PackageReference Include="AsyncFixer" PrivateAssets="all" />
     <PackageReference Include="DotNetProjectFile.Analyzers" PrivateAssets="all" />
     <PackageReference Include="SonarAnalyzer.CSharp" PrivateAssets="all" />
-  </ItemGroup>
-
-  <ItemGroup Label="Additional files">
-    <AdditionalFiles Include="*.csproj" Visible="false" />
+    <!-- required by the analyzer -->
+    <PackageReference Include="System.Collections.Immutable" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
     <ThirdPartyLicense Include="SonarAnalyzer.CSharp" Hash="IBM9yngU7omFyJOMSFSy0w" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ThirdPartyLicense Include="SonarAnalyzer.CSharp" Hash="IBM9yngU7omFyJOMSFSy0w" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' == 'true'">
+    <RestoreLockedMode>true</RestoreLockedMode>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNet.ReproducibleBuilds" PrivateAssets="all"/>
   </ItemGroup>
 
 </Project>

@@ -1,13 +1,10 @@
 namespace Qowaiv.CodeGeneration.Syntax;
 
 /// <summary>Represents a code literal.</summary>
-public sealed class Literal : Code
+public sealed class Literal(object? value) : Code
 {
-    /// <summary>Initializes a new instance of the <see cref="Literal"/> class.</summary>
-    public Literal(object? value) => Value = value;
-
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly object? Value;
+    private readonly object? Value = value;
 
     /// <inheritdoc />
     public void WriteTo(CSharpWriter writer)
@@ -48,12 +45,10 @@ public sealed class Literal : Code
     };
 
     [Pure]
-    private static string String(string str)
-    {
-        return str.Contains('\\') || str.Contains('"')
-            ? $@"@""{str}"""
-            : $@"""{str}""";
-    }
+    private static string String(string str) 
+        => str.Contains('\\') || str.Contains('"')
+        ? $@"@""{str}"""
+        : $@"""{str}""";
 
     /// <inheritdoc />
     [Pure]

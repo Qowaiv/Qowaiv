@@ -15,7 +15,7 @@ internal ref struct DecCalc
     public int scale;
     public bool negative;
 
-    private uint flags => negative
+    private readonly uint flags => negative
         ? (uint)((byte)scale << 16) | SignMask
         : (uint)((byte)scale << 16);
 

@@ -8,7 +8,7 @@ public class ToString
     public void supports_none_formattable_raw_types()
     {
         var behavior = new NoneFormattableBehavior();
-        behavior.ToString(new(42), "", CultureInfo.InvariantCulture).Should().Be("NoneFormattable");
+        behavior.ToString(new(42), "", CultureInfo.InvariantCulture).Should().Be("[42]");
     }
 
     internal sealed class NoneFormattableBehavior : CustomBehavior<NoneFormattable>
@@ -26,15 +26,11 @@ public class ToString
         }
     }
 
-    internal readonly struct NoneFormattable : IEquatable<NoneFormattable>
+    internal readonly struct NoneFormattable(int value) : IEquatable<NoneFormattable>
     {
-        private readonly int Value;
+       public bool Equals(NoneFormattable other) => true;
 
-        public NoneFormattable(int value) => Value = value;
-
-        public bool Equals(NoneFormattable other) => true;
-
-        public override string ToString() => nameof(NoneFormattable);
+        public override string ToString() => $"[{value}]";
     }
 }
 

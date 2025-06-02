@@ -320,3 +320,11 @@ public class Supports_XML_serialization
         obj.GetSchema().Should().BeNull();
     }
 }
+
+public class Debugger
+{
+    [TestCase("{empty}", "")]
+    [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
+    public void has_custom_display(object display, UuidBasedId id)
+        => id.Should().HaveDebuggerDisplay(display);
+}

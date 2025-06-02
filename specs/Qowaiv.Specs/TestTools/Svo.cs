@@ -129,7 +129,7 @@ public static class Svo
         /// <summary>8a1a8c42-d2ff-e254-e26e-b6abcbf19420</summary>
         public static readonly Specs_Generated.GuidBasedId CustomGuid = Specs_Generated.GuidBasedId.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
 
-        /// <summary>"Qowaiv_SVOLibrary_GUIA</summary>
+        /// <summary>Qowaiv_SVOLibrary_GUIA</summary>
         public static readonly Specs_Generated.UuidBasedId CustomUuid = Specs_Generated.UuidBasedId.Parse("Qowaiv_SVOLibrary_GUIA");
 
         /// <summary>PREFIX17</summary>

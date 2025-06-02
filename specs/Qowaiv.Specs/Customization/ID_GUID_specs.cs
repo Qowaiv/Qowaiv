@@ -319,3 +319,11 @@ public class Supports_XML_serialization
         obj.GetSchema().Should().BeNull();
     }
 }
+
+public class Debugger
+{
+    [TestCase("{empty}", "")]
+    [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
+    public void has_custom_display(object display, GuidBasedId id)
+        => id.Should().HaveDebuggerDisplay(display);
+}

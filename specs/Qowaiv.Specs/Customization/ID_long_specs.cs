@@ -310,3 +310,11 @@ public class Supports_XML_serialization
         obj.GetSchema().Should().BeNull();
     }
 }
+
+public class Debugger
+{
+    [TestCase("{empty}", "")]
+    [TestCase("PREFIX42", "42")]
+    public void has_custom_display(object display, Int64BasedId id)
+        => id.Should().HaveDebuggerDisplay(display);
+}

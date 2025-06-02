@@ -265,3 +265,11 @@ public class Supports_XML_serialization
         obj.GetSchema().Should().BeNull();
     }
 }
+
+public class Debugger
+{
+    [TestCase("{empty}", "")]
+    [TestCase("Qowaiv-ID", "Qowaiv-ID")]
+    public void has_custom_display(object display, StringBasedId id)
+        => id.Should().HaveDebuggerDisplay(display);
+}

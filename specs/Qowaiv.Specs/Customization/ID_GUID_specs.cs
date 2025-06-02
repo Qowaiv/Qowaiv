@@ -69,6 +69,68 @@ public class Is_equal_by_value
     }
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Generated.CustomGuid.ToString().Should().Be("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+        }
+    }
+
+    [Test]
+    public void with_null_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Generated.CustomGuid.ToString().Should().Be(Svo.Generated.CustomGuid.ToString(default(string)));
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Generated.CustomGuid.ToString().Should().Be(Svo.Generated.CustomGuid.ToString(string.Empty));
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_string_empty()
+        => default(GuidBasedId).ToString().Should().BeEmpty();
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.Generated.CustomGuid.ToString(FormatProvider.Empty).Should().Be("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.Generated.CustomGuid.ToString("B", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}', format: 'B'");
+    }
+
+    [TestCase(null, "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
+    [TestCase("", "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
+    [TestCase("P", "(8a1a8c42-d2ff-e254-e26e-b6abcbf19420)")]
+    [TestCase("B", "{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}")]
+    public void with_current_thread_culture_as_default(string? format, string formattted)
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.Generated.CustomGuid.ToString(format, formatProvider: null).Should().Be(formattted);
+        }
+    }
+}
+
 public class Bytes
 {
     [TestCase("")]
@@ -256,4 +318,12 @@ public class Supports_XML_serialization
         IXmlSerializable obj = Svo.Generated.CustomGuid;
         obj.GetSchema().Should().BeNull();
     }
+}
+
+public class Debugger
+{
+    [TestCase("{empty}", "")]
+    [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
+    public void has_custom_display(object display, GuidBasedId id)
+        => id.Should().HaveDebuggerDisplay(display);
 }

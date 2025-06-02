@@ -10,17 +10,18 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <PackageId>Qowaiv.CodeGeneration.SingleValueObjects</PackageId>
     <PackageValidationBaselineVersion>1.0.0</PackageValidationBaselineVersion>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <ToBeReleased>
+      <![CDATA[
+      ]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
       <![CDATA[
 v1.1.2
 - ID m_Value's raw type with global:: namespace prefix.
 - ID's implement INext<TSvo>.
 - ID's can be generated in the global namespace.
-      ]]>
-    </ToBeReleased>
-    <PackageReleaseNotes>
-      <![CDATA[
+- ID ToString() supports custom formatters and string.Empty for default value.
 v1.1.1
 - Do not generate Create and TryCreate for string based ID's.
 v1.1.0

@@ -28,7 +28,20 @@ partial struct @Svo : global::System.IFormattable
     /// </param>
     [global::System.Diagnostics.Contracts.Pure]
     public string ToString(string? format, global::System.IFormatProvider? formatProvider)
-        => behavior.ToString(m_Value, format, formatProvider);
+    {
+        if (global::Qowaiv.Formatting.StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
+        {
+            return formatted;
+        }
+        else if (HasValue)
+        {
+            return behavior.ToString(m_Value, format, formatProvider);
+        }
+        else
+        {
+            return string.Empty;
+        }
+    }
 
     /// <summary>Returns a <see cref="string" /> that represents the @FullName for DEBUG purposes.</summary>
     [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)]

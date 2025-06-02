@@ -77,6 +77,68 @@ public class Is_equal_by_value
     }
 }
 
+
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Generated.Int32Id.ToString().Should().Be("PREFIX17");
+        }
+    }
+
+    [Test]
+    public void with_null_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Generated.Int32Id.ToString().Should().Be(Svo.Generated.Int32Id.ToString(default(string)));
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Generated.Int32Id.ToString().Should().Be(Svo.Generated.Int32Id.ToString(string.Empty));
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_string_empty()
+        => default(Int32BasedId).ToString().Should().BeEmpty();
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.Generated.Int32Id.ToString(FormatProvider.Empty).Should().Be("PREFIX17");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.Generated.Int32Id.ToString("0000", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: 'PREFIX0017', format: '0000'");
+    }
+
+    [TestCase(null, "PREFIX17")]
+    [TestCase("", "PREFIX17")]
+    [TestCase("000", "PREFIX017")]
+    public void with_current_thread_culture_as_default(string? format, string formattted)
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.Generated.Int32Id.ToString(format, formatProvider: null).Should().Be(formattted);
+        }
+    }
+}
+
 public class Bytes
 {
     [Test]

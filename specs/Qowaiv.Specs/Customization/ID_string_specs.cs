@@ -69,6 +69,68 @@ public class Is_equal_by_value
     }
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Generated.StringId.ToString().Should().Be("Qowaiv-ID");
+        }
+    }
+
+    [Test]
+    public void with_null_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Generated.StringId.ToString().Should().Be(Svo.Generated.StringId.ToString(default(string)));
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Generated.StringId.ToString().Should().Be(Svo.Generated.StringId.ToString(string.Empty));
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_string_empty()
+        => default(StringBasedId).ToString().Should().BeEmpty();
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.Generated.StringId.ToString(FormatProvider.Empty).Should().Be("Qowaiv-ID");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.Generated.StringId.ToString("B", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: 'Qowaiv-ID', format: 'B'");
+    }
+
+    [TestCase(null, "Qowaiv-ID")]
+    [TestCase("", "Qowaiv-ID")]
+    [TestCase("P", "Qowaiv-ID")]
+    public void with_current_thread_culture_as_default(string? format, string formattted)
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.Generated.StringId.ToString(format, formatProvider: null).Should().Be(formattted);
+        }
+    }
+}
+
+
 public class Bytes
 {
     [Test]

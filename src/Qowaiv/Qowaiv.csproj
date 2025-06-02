@@ -38,18 +38,19 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>7.4.2</Version>
+    <Version>7.4.3</Version>
     <PackageValidationBaselineVersion>7.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
+      <![CDATA[
+
+      ]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
       <![CDATA[
 v7.4.3
 - Introduction of INext<TSelf>.
 - Update System.Memory to 4.6.3 (netstandard2.0 only). 
 - Update System.Runtime.CompilerServices.Unsafe to 6.1.2 (netstandard2.0 only). 
-      ]]>
-    </ToBeReleased>
-    <PackageReleaseNotes>
-      <![CDATA[
 v7.4.2
 - Code generators are decorated with [Conditional("CODE_GENERATOR_ATTRIBUTES")].
 v7.4.1

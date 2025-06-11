@@ -1,3 +1,4 @@
+[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "S1210", Justification = "Being sortable is enough.")]
 partial struct @Svo : global::System.IComparable, global::System.IComparable<@Svo>
 {
     /// <inheritdoc />

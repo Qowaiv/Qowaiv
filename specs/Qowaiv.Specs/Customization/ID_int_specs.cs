@@ -270,6 +270,13 @@ public class Supports_type_conversion
     [TestCase(typeof(string))]
     public void to(Type type)
         => Converting.To(type).From<Int32BasedId>().Should().BeTrue();
+
+    [Test]
+    public void to_underlying_via_explicit_cast()
+    {
+        var cast = (int)Svo.Generated.Int32Id;
+        cast.Should().Be(17);
+    }
 }
 
 public class Supports_XML_serialization

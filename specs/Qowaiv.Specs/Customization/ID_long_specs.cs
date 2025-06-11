@@ -309,6 +309,13 @@ public class Supports_XML_serialization
         IXmlSerializable obj = Svo.Generated.Int64Id;
         obj.GetSchema().Should().BeNull();
     }
+
+    [Test]
+    public void to_underlying_via_explicit_cast()
+    {
+        var cast = (long)Svo.Generated.Int64Id;
+        cast.Should().Be(987654321);
+    }
 }
 
 public class Debugger

@@ -1,5 +1,5 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <Import Project="../../props/package.props" />
 
   <PropertyGroup>
@@ -8,34 +8,6 @@
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <IncludeSymbols>false</IncludeSymbols>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <PackageId>Qowaiv.CodeGeneration.SingleValueObjects</PackageId>
-    <PackageValidationBaselineVersion>1.0.0</PackageValidationBaselineVersion>
-    <Version>1.1.3</Version>
-    <ToBeReleased>
-      <![CDATA[
-      ]]>
-    </ToBeReleased>
-    <PackageReleaseNotes>
-      <![CDATA[
-v1.1.3
-- Use Microsoft.CodeAnalysis.CSharp v4.11.0 (.NET 8.0).
-v1.1.2
-- ID m_Value's raw type with global:: namespace prefix.
-- ID's implement INext<TSvo>.
-- ID's can be generated in the global namespace.
-- ID ToString() supports custom formatters and string.Empty for default value.
-v1.1.1
-- Do not generate Create and TryCreate for string based ID's.
-v1.1.0
-- Generated custom ID's.
-v1.0.2
-- Fixes for Generation before .NET 6.0.
-v1.0.1
-- Generate JSON Converter only for .NET 6.0 and higher.
-v1.0.0
-- Generate custom SVO's.
-]]>
-    </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -74,5 +46,40 @@ v1.0.0
   <ItemGroup Label="DependencyPackaging">
     <None Include="$(OutputPath)/$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <PackageId>Qowaiv.CodeGeneration.SingleValueObjects</PackageId>
+    <PackageValidationBaselineVersion>1.0.0</PackageValidationBaselineVersion>
+    <Version>1.1.3</Version>
+    <ToBeReleased>
+      <![CDATA[
+v1.1.*
+?
+      ]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
+      <![CDATA[
+v1.1.4
+- Generate explicit castings for non-string based ID's.
+v1.1.3
+- Use Microsoft.CodeAnalysis.CSharp v4.11.0 (.NET 8.0).
+v1.1.2
+- ID m_Value's raw type with global:: namespace prefix.
+- ID's implement INext<TSvo>.
+- ID's can be generated in the global namespace.
+- ID ToString() supports custom formatters and string.Empty for default value.
+v1.1.1
+- Do not generate Create and TryCreate for string based ID's.
+v1.1.0
+- Generated custom ID's.
+v1.0.2
+- Fixes for Generation before .NET 6.0.
+v1.0.1
+- Generate JSON Converter only for .NET 6.0 and higher.
+v1.0.0
+- Generate custom SVO's.
+]]>
+    </PackageReleaseNotes>
+  </PropertyGroup>
 
 </Project>

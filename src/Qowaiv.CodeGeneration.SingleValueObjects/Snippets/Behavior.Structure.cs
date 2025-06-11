@@ -14,6 +14,11 @@ readonly partial struct @Svo
     [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)]
     private readonly @Raw m_Value;
 
+#if !StringBased // exec
+    /// <summary>Casts the Single Value Object to a <see cref="@Raw" />.</summary>
+    public static explicit operator @Raw(@Svo id) => id.m_Value;
+#endif // exec
+
     private sealed class TypeConverter(global::System.Type underlying) : global::Qowaiv.Customization.CustomBehaviorTypeConverter<@Svo, @Raw, @Behavior>
     {
         /// <summary>Converts from the raw/underlying type.</summary>

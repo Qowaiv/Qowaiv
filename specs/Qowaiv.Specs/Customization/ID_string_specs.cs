@@ -227,6 +227,18 @@ public class Supports_type_conversion
         => Converting.To(type).From<StringBasedId>().Should().BeTrue();
 }
 
+public class Does_not_support
+{
+    [Test]
+    public void casting()
+    {
+        var op_Explicit = typeof(StringBasedId).GetMethods(BindingFlags.Static | BindingFlags.Public)
+            .Where(m => m.IsSpecialName && m.Name == "op_Explicit")
+            .ToArray();
+
+        op_Explicit.Should().BeEmpty();
+    }
+}
 public class Supports_XML_serialization
 {
     [Test]

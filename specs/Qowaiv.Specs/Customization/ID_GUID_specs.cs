@@ -244,6 +244,13 @@ public class Supports_type_conversion
     [TestCase(typeof(string))]
     public void to(Type type)
         => Converting.To(type).From<GuidBasedId>().Should().BeTrue();
+
+    [Test]
+    public void to_underlying_via_explicit_cast()
+    {
+        var cast = (Guid)Svo.Generated.CustomGuid;
+        cast.Should().Be(Svo.Guid);
+    }
 }
 
 public class Supports_JSON_serialization

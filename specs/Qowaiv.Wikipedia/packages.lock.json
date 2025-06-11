@@ -118,7 +118,7 @@
           "AwesomeAssertions": "[9.0.0, )",
           "NUnit": "[3.14.0, )",
           "Qowaiv": "[7.4.3, )",
-          "Qowaiv.CodeGeneration.SingleValueObjects": "[1.1.3, )",
+          "Qowaiv.CodeGeneration.SingleValueObjects": "[1.1.4, )",
           "Qowaiv.Data.SqlClient": "[7.2.0, )",
           "Qowaiv.Specs.Generated": "[1.0.0, )",
           "Qowaiv.TestTools": "[8.0.0, )"

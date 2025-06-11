@@ -50,7 +50,7 @@
   <PropertyGroup>
     <PackageId>Qowaiv.CodeGeneration.SingleValueObjects</PackageId>
     <PackageValidationBaselineVersion>1.0.0</PackageValidationBaselineVersion>
-    <Version>1.1.3</Version>
+    <Version>1.1.4</Version>
     <ToBeReleased>
       <![CDATA[
 v1.1.*
@@ -61,6 +61,7 @@ v1.1.*
       <![CDATA[
 v1.1.4
 - Generate explicit castings for non-string based ID's.
+- Generate SuppressMessage("S1210", Justification = "Being sortable is enough.")] to reduce false positives.
 v1.1.3
 - Use Microsoft.CodeAnalysis.CSharp v4.11.0 (.NET 8.0).
 v1.1.2

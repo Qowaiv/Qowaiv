@@ -605,7 +605,7 @@ public class Exports
     public void TypeScript_code()
     {
         var sb = new StringBuilder();
-        foreach(var country in Country.All.Where(c => c.HasPostalCodeSystem()))
+        foreach (var country in Country.All.Where(c => c.HasPostalCodeSystem()))
         {
             var info = PostalCodeCountryInfo.GetInstance(country);
             var pattern = ValidationPattern.GetValue(info);
@@ -613,7 +613,7 @@ public class Exports
             var replace = FormattingReplacePattern.GetValue(info);
             sb.Append($"public {country.Name} = new PostalCodeInfo(/{pattern}/");
 
-            if(search is { })
+            if (search is { })
             {
                 sb.Append($", /{search}/, '{replace}'");
             }

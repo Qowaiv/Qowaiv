@@ -8,7 +8,7 @@ public class Locks
         using var dir = new TemporaryDirectory();
 
         var file = dir.CreateFile("test.txt");
-        
+
         using (var writer = new StreamWriter(file.FullName, false))
         {
             writer.Write("Unit Test");

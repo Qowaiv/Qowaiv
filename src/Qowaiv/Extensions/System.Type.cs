@@ -205,7 +205,7 @@ public static class QowaivTypeExtensions
         public TypeInfo[] GetGenericArguments()
             => DeclaringType is { } declaring && Type.IsNested
 #if NETSTANDARD2_0
-            ? [..GenericTypeArguments.Skip(declaring.GenericTypeArguments.Length)]
+            ? [.. GenericTypeArguments.Skip(declaring.GenericTypeArguments.Length)]
 #else
             ? GenericTypeArguments[declaring.GenericTypeArguments.Length..]
 #endif

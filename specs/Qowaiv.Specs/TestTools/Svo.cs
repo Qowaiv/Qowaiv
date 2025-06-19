@@ -104,7 +104,7 @@ public static class Svo
     /// <summary>PREFIX987654321</summary>
     [Obsolete("Will be dropped in Qowaiv 8.0")]
     public static readonly Int64Id Int64Id = Int64Id.Create(987654321L);
-    
+
     [Obsolete("Will be dropped in Qowaiv 8.0")]
     public static readonly StringId StringId = StringId.Parse("Qowaiv-ID");
 

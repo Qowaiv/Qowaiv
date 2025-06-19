@@ -39,7 +39,7 @@ public class Generates
         var bytes = new byte[256];
         for (var i = 0; i < bytes.Length; i++) { bytes[i] = 255; }
 
-        for(byte i = 0; i < 32; i++)
+        for (byte i = 0; i < 32; i++)
         {
             bytes[values[i]] = i;
             bytes[char.ToLowerInvariant(values[i])] = i;

@@ -45,7 +45,7 @@ public sealed class Literal(object? value) : Code
     };
 
     [Pure]
-    private static string String(string str) 
+    private static string String(string str)
         => str.Contains('\\') || str.Contains('"')
         ? $@"@""{str}"""
         : $@"""{str}""";

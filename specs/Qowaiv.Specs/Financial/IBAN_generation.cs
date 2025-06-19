@@ -198,7 +198,7 @@ internal sealed record IbanInfo(string CountryName, int Length, string Bban, int
         var sb = new StringBuilder("['")
             .Append(Country.IsoAlpha2Code)
             .Append("', /^");
-        
+
         var first = true;
 
         foreach (var part in Bban.Split(','))

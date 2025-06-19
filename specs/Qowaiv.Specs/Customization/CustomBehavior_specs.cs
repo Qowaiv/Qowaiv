@@ -28,7 +28,7 @@ public class ToString
 
     internal readonly struct NoneFormattable(int value) : IEquatable<NoneFormattable>
     {
-       public bool Equals(NoneFormattable other) => true;
+        public bool Equals(NoneFormattable other) => true;
 
         public override string ToString() => $"[{value}]";
     }

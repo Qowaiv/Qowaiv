@@ -1,5 +1,3 @@
-using System.Threading;
-
 namespace Clock_specs;
 
 public class Default_behavior

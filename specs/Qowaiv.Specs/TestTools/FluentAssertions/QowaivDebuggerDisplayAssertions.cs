@@ -22,7 +22,7 @@ internal static class QowaivDebuggerDisplayAssertions
 
 
         prop!.GetValue(assertions.Subject).Should().Be(display, because, becauseArgs);
-       
+
         return new AndConstraint<ObjectAssertions>(assertions);
     }
 

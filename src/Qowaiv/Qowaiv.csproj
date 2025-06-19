@@ -42,8 +42,9 @@
     <PackageValidationBaselineVersion>7.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
-
-      ]]>
+v7.*
+-
+]]>
     </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[

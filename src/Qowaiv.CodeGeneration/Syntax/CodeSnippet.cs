@@ -118,7 +118,7 @@ public sealed class CodeSnippet : Code
 
     /// <summary>Joins two code snippets.</summary>
     [Pure]
-    public static CodeSnippet operator +(CodeSnippet l, CodeSnippet r) => new([..l.Lines, ..r.Lines]);
+    public static CodeSnippet operator +(CodeSnippet l, CodeSnippet r) => new([.. l.Lines, .. r.Lines]);
 
     /// <summary>Creates a code snippet from a stream.</summary>
     [Pure]

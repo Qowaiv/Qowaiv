@@ -28,9 +28,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.6.0, )",
-        "resolved": "1.6.0",
-        "contentHash": "+N7pXNX4+45z0Pt1Gumo8AtMGXFxS5ihYuXPE6DUou1/kjPyNVeZpoD2qLv060YgB5sQWF1Ci1FNZtgfFcxP5Q=="
+        "requested": "[1.7.0, )",
+        "resolved": "1.7.0",
+        "contentHash": "eyJL+587l3ChUk8L0hqaXSU9l4ecVTEqc2VdeWYFFCVtkEmv7B7unqMkIer3EaeiCfE8PzGUEMxq42PweURd+Q=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
@@ -44,7 +44,7 @@
       },
       "NUnit": {
         "type": "Direct",
-        "requested": "[3.14.0, )",
+        "requested": "[3.14.0, 3.14.0]",
         "resolved": "3.14.0",
         "contentHash": "R7iPwD7kbOaP3o2zldWJbWeMQAvDKD0uld27QvA3PAALl1unl7x0v2J7eGiJOYjimV/BuGT4VJmr45RjS7z4LA==",
         "dependencies": {
@@ -69,15 +69,15 @@
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
-        "requested": "[10.10.0.116381, )",
-        "resolved": "10.10.0.116381",
-        "contentHash": "HkJuI8dBE64BF7ySlfN8t/lQ91E/pgiQPvOS51lIKKy3/IJiwHHqQ4dkI6gixDkKBDK7lImvvNa0ECH+I0PqmA=="
+        "requested": "[10.12.0.118525, )",
+        "resolved": "10.12.0.118525",
+        "contentHash": "uP38bsYegQBk8WOM6LYIAht6hrA7tcJgep/WuifPJjhjtjysPUP/iM/c1+P2+llNIDmm1s8Xh86+WG3K71eycw=="
       },
       "System.Collections.Immutable": {
         "type": "Direct",
-        "requested": "[9.0.5, )",
-        "resolved": "9.0.5",
-        "contentHash": "lVPwqkFWucEB13zcXpvMCmG+xp0HTSxVyAiG7c0AC8qsQ1ZaC5O8evb9QGR6PKmJZch3VuFKnzkl+SA78dvjeA==",
+        "requested": "[9.0.6, )",
+        "resolved": "9.0.6",
+        "contentHash": "lqvXJBZ9KtKKffQt9PgHj5aCdm8HGpPOZQgN3sHRN8j2Yjh+KANkdomhv8QybsBk3/YDDG83OdIWcsfQfdRglw==",
         "dependencies": {
           "System.Memory": "4.5.5",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
@@ -240,7 +240,7 @@
         "type": "Project",
         "dependencies": {
           "Qowaiv": "[7.4.3, )",
-          "System.Data.SqlClient": "[4.8.6, )"
+          "System.Data.SqlClient": "[4.8.6, 4.8.6]"
         }
       },
       "qowaiv.specs.generated": {
@@ -263,7 +263,7 @@
       },
       "System.Data.SqlClient": {
         "type": "CentralTransitive",
-        "requested": "[4.8.6, )",
+        "requested": "[4.8.6, 4.8.6]",
         "resolved": "4.8.6",
         "contentHash": "2Ij/LCaTQRyAi5lAv7UUTV9R2FobC8xN9mE0fXBZohum/xLl8IZVmE98Rq5ugQHjCgTBRKqpXRb4ORulRdA6Ig==",
         "dependencies": {
@@ -312,9 +312,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.6.0, )",
-        "resolved": "1.6.0",
-        "contentHash": "+N7pXNX4+45z0Pt1Gumo8AtMGXFxS5ihYuXPE6DUou1/kjPyNVeZpoD2qLv060YgB5sQWF1Ci1FNZtgfFcxP5Q=="
+        "requested": "[1.7.0, )",
+        "resolved": "1.7.0",
+        "contentHash": "eyJL+587l3ChUk8L0hqaXSU9l4ecVTEqc2VdeWYFFCVtkEmv7B7unqMkIer3EaeiCfE8PzGUEMxq42PweURd+Q=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
@@ -328,7 +328,7 @@
       },
       "NUnit": {
         "type": "Direct",
-        "requested": "[3.14.0, )",
+        "requested": "[3.14.0, 3.14.0]",
         "resolved": "3.14.0",
         "contentHash": "R7iPwD7kbOaP3o2zldWJbWeMQAvDKD0uld27QvA3PAALl1unl7x0v2J7eGiJOYjimV/BuGT4VJmr45RjS7z4LA==",
         "dependencies": {
@@ -353,15 +353,15 @@
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
-        "requested": "[10.10.0.116381, )",
-        "resolved": "10.10.0.116381",
-        "contentHash": "HkJuI8dBE64BF7ySlfN8t/lQ91E/pgiQPvOS51lIKKy3/IJiwHHqQ4dkI6gixDkKBDK7lImvvNa0ECH+I0PqmA=="
+        "requested": "[10.12.0.118525, )",
+        "resolved": "10.12.0.118525",
+        "contentHash": "uP38bsYegQBk8WOM6LYIAht6hrA7tcJgep/WuifPJjhjtjysPUP/iM/c1+P2+llNIDmm1s8Xh86+WG3K71eycw=="
       },
       "System.Collections.Immutable": {
         "type": "Direct",
-        "requested": "[9.0.5, )",
-        "resolved": "9.0.5",
-        "contentHash": "lVPwqkFWucEB13zcXpvMCmG+xp0HTSxVyAiG7c0AC8qsQ1ZaC5O8evb9QGR6PKmJZch3VuFKnzkl+SA78dvjeA==",
+        "requested": "[9.0.6, )",
+        "resolved": "9.0.6",
+        "contentHash": "lqvXJBZ9KtKKffQt9PgHj5aCdm8HGpPOZQgN3sHRN8j2Yjh+KANkdomhv8QybsBk3/YDDG83OdIWcsfQfdRglw==",
         "dependencies": {
           "System.Memory": "4.5.5",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
@@ -520,7 +520,7 @@
         "type": "Project",
         "dependencies": {
           "Qowaiv": "[7.4.3, )",
-          "System.Data.SqlClient": "[4.8.6, )"
+          "System.Data.SqlClient": "[4.8.6, 4.8.6]"
         }
       },
       "qowaiv.specs.generated": {
@@ -543,7 +543,7 @@
       },
       "System.Data.SqlClient": {
         "type": "CentralTransitive",
-        "requested": "[4.8.6, )",
+        "requested": "[4.8.6, 4.8.6]",
         "resolved": "4.8.6",
         "contentHash": "2Ij/LCaTQRyAi5lAv7UUTV9R2FobC8xN9mE0fXBZohum/xLl8IZVmE98Rq5ugQHjCgTBRKqpXRb4ORulRdA6Ig==",
         "dependencies": {
@@ -592,9 +592,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.6.0, )",
-        "resolved": "1.6.0",
-        "contentHash": "+N7pXNX4+45z0Pt1Gumo8AtMGXFxS5ihYuXPE6DUou1/kjPyNVeZpoD2qLv060YgB5sQWF1Ci1FNZtgfFcxP5Q=="
+        "requested": "[1.7.0, )",
+        "resolved": "1.7.0",
+        "contentHash": "eyJL+587l3ChUk8L0hqaXSU9l4ecVTEqc2VdeWYFFCVtkEmv7B7unqMkIer3EaeiCfE8PzGUEMxq42PweURd+Q=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
@@ -608,7 +608,7 @@
       },
       "NUnit": {
         "type": "Direct",
-        "requested": "[3.14.0, )",
+        "requested": "[3.14.0, 3.14.0]",
         "resolved": "3.14.0",
         "contentHash": "R7iPwD7kbOaP3o2zldWJbWeMQAvDKD0uld27QvA3PAALl1unl7x0v2J7eGiJOYjimV/BuGT4VJmr45RjS7z4LA==",
         "dependencies": {
@@ -633,15 +633,15 @@
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
-        "requested": "[10.10.0.116381, )",
-        "resolved": "10.10.0.116381",
-        "contentHash": "HkJuI8dBE64BF7ySlfN8t/lQ91E/pgiQPvOS51lIKKy3/IJiwHHqQ4dkI6gixDkKBDK7lImvvNa0ECH+I0PqmA=="
+        "requested": "[10.12.0.118525, )",
+        "resolved": "10.12.0.118525",
+        "contentHash": "uP38bsYegQBk8WOM6LYIAht6hrA7tcJgep/WuifPJjhjtjysPUP/iM/c1+P2+llNIDmm1s8Xh86+WG3K71eycw=="
       },
       "System.Collections.Immutable": {
         "type": "Direct",
-        "requested": "[9.0.5, )",
-        "resolved": "9.0.5",
-        "contentHash": "lVPwqkFWucEB13zcXpvMCmG+xp0HTSxVyAiG7c0AC8qsQ1ZaC5O8evb9QGR6PKmJZch3VuFKnzkl+SA78dvjeA=="
+        "requested": "[9.0.6, )",
+        "resolved": "9.0.6",
+        "contentHash": "lqvXJBZ9KtKKffQt9PgHj5aCdm8HGpPOZQgN3sHRN8j2Yjh+KANkdomhv8QybsBk3/YDDG83OdIWcsfQfdRglw=="
       },
       "Microsoft.ApplicationInsights": {
         "type": "Transitive",
@@ -796,7 +796,7 @@
         "type": "Project",
         "dependencies": {
           "Qowaiv": "[7.4.3, )",
-          "System.Data.SqlClient": "[4.8.6, )"
+          "System.Data.SqlClient": "[4.8.6, 4.8.6]"
         }
       },
       "qowaiv.specs.generated": {
@@ -819,7 +819,7 @@
       },
       "System.Data.SqlClient": {
         "type": "CentralTransitive",
-        "requested": "[4.8.6, )",
+        "requested": "[4.8.6, 4.8.6]",
         "resolved": "4.8.6",
         "contentHash": "2Ij/LCaTQRyAi5lAv7UUTV9R2FobC8xN9mE0fXBZohum/xLl8IZVmE98Rq5ugQHjCgTBRKqpXRb4ORulRdA6Ig==",
         "dependencies": {
@@ -856,9 +856,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.6.0, )",
-        "resolved": "1.6.0",
-        "contentHash": "+N7pXNX4+45z0Pt1Gumo8AtMGXFxS5ihYuXPE6DUou1/kjPyNVeZpoD2qLv060YgB5sQWF1Ci1FNZtgfFcxP5Q=="
+        "requested": "[1.7.0, )",
+        "resolved": "1.7.0",
+        "contentHash": "eyJL+587l3ChUk8L0hqaXSU9l4ecVTEqc2VdeWYFFCVtkEmv7B7unqMkIer3EaeiCfE8PzGUEMxq42PweURd+Q=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
@@ -872,7 +872,7 @@
       },
       "NUnit": {
         "type": "Direct",
-        "requested": "[3.14.0, )",
+        "requested": "[3.14.0, 3.14.0]",
         "resolved": "3.14.0",
         "contentHash": "R7iPwD7kbOaP3o2zldWJbWeMQAvDKD0uld27QvA3PAALl1unl7x0v2J7eGiJOYjimV/BuGT4VJmr45RjS7z4LA==",
         "dependencies": {
@@ -897,15 +897,15 @@
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
-        "requested": "[10.10.0.116381, )",
-        "resolved": "10.10.0.116381",
-        "contentHash": "HkJuI8dBE64BF7ySlfN8t/lQ91E/pgiQPvOS51lIKKy3/IJiwHHqQ4dkI6gixDkKBDK7lImvvNa0ECH+I0PqmA=="
+        "requested": "[10.12.0.118525, )",
+        "resolved": "10.12.0.118525",
+        "contentHash": "uP38bsYegQBk8WOM6LYIAht6hrA7tcJgep/WuifPJjhjtjysPUP/iM/c1+P2+llNIDmm1s8Xh86+WG3K71eycw=="
       },
       "System.Collections.Immutable": {
         "type": "Direct",
-        "requested": "[9.0.5, )",
-        "resolved": "9.0.5",
-        "contentHash": "lVPwqkFWucEB13zcXpvMCmG+xp0HTSxVyAiG7c0AC8qsQ1ZaC5O8evb9QGR6PKmJZch3VuFKnzkl+SA78dvjeA=="
+        "requested": "[9.0.6, )",
+        "resolved": "9.0.6",
+        "contentHash": "lqvXJBZ9KtKKffQt9PgHj5aCdm8HGpPOZQgN3sHRN8j2Yjh+KANkdomhv8QybsBk3/YDDG83OdIWcsfQfdRglw=="
       },
       "Microsoft.ApplicationInsights": {
         "type": "Transitive",
@@ -1060,7 +1060,7 @@
         "type": "Project",
         "dependencies": {
           "Qowaiv": "[7.4.3, )",
-          "System.Data.SqlClient": "[4.8.6, )"
+          "System.Data.SqlClient": "[4.8.6, 4.8.6]"
         }
       },
       "qowaiv.specs.generated": {
@@ -1083,7 +1083,7 @@
       },
       "System.Data.SqlClient": {
         "type": "CentralTransitive",
-        "requested": "[4.8.6, )",
+        "requested": "[4.8.6, 4.8.6]",
         "resolved": "4.8.6",
         "contentHash": "2Ij/LCaTQRyAi5lAv7UUTV9R2FobC8xN9mE0fXBZohum/xLl8IZVmE98Rq5ugQHjCgTBRKqpXRb4ORulRdA6Ig==",
         "dependencies": {

@@ -137,7 +137,7 @@ public class Is_equal_by_value
 public class Can_be_parsed
 {
     [Test]
-    public void from_null_string_represents_Empty() 
+    public void from_null_string_represents_Empty()
         => EmailAddress.Parse(null).Should().Be(EmailAddress.Empty);
 
     [Test]

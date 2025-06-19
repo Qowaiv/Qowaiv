@@ -7,13 +7,13 @@ public sealed class Literal(object? value) : Code
     private readonly object? Value = value;
 
     /// <inheritdoc />
+#pragma warning disable S1541 // Methods and properties should not be too complex
     public void WriteTo(CSharpWriter writer)
     {
         Guard.NotNull(writer);
         _ = Value switch
         {
-            Nill or
-            null /*.........*/ => writer.Write("null"),
+            Nill or null /*.*/ => writer.Write("null"),
             Type type /*....*/ => writer.Write("typeof(").Write(type).Write(')'),
             bool boolean /*.*/ => writer.Write(boolean ? "true" : "false"),
             int int32 /*....*/ => writer.Write(Int32(int32)),
@@ -24,6 +24,7 @@ public sealed class Literal(object? value) : Code
             _ => throw new NotSupportedException($"Literals of type {Value.GetType()} are not supported"),
         };
     }
+#pragma warning restore S1541 // Methods and properties should not be too complex
 
     [Pure]
     private static string Int32(int num) => num switch
@@ -45,7 +46,7 @@ public sealed class Literal(object? value) : Code
     };
 
     [Pure]
-    private static string String(string str) 
+    private static string String(string str)
         => str.Contains('\\') || str.Contains('"')
         ? $@"@""{str}"""
         : $@"""{str}""";

@@ -18,7 +18,7 @@ public class Stacktrace
             var method = trace.GetFrames()[0].GetMethod();
 
             method.Should().BeEquivalentTo(
-                new 
+                new
                 {
                     Name = "NotNull",
                     DeclaringType = new { Name = "Guard" },

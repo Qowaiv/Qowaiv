@@ -96,7 +96,7 @@ public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEq
     [Pure]
     public string ToString(string? format, IFormatProvider? formatProvider) => format switch
     {
-        _ when StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)=> formatted,
+        _ when StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted) => formatted,
         _ when !HasValue => string.Empty,
         _ when !IsKnown => "?",
         _ => m_Value.ToString(format, formatProvider),

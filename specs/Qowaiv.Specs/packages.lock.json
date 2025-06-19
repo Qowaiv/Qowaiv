@@ -28,9 +28,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.6.0, )",
-        "resolved": "1.6.0",
-        "contentHash": "+N7pXNX4+45z0Pt1Gumo8AtMGXFxS5ihYuXPE6DUou1/kjPyNVeZpoD2qLv060YgB5sQWF1Ci1FNZtgfFcxP5Q=="
+        "requested": "[1.7.0, )",
+        "resolved": "1.7.0",
+        "contentHash": "eyJL+587l3ChUk8L0hqaXSU9l4ecVTEqc2VdeWYFFCVtkEmv7B7unqMkIer3EaeiCfE8PzGUEMxq42PweURd+Q=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
@@ -312,9 +312,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.6.0, )",
-        "resolved": "1.6.0",
-        "contentHash": "+N7pXNX4+45z0Pt1Gumo8AtMGXFxS5ihYuXPE6DUou1/kjPyNVeZpoD2qLv060YgB5sQWF1Ci1FNZtgfFcxP5Q=="
+        "requested": "[1.7.0, )",
+        "resolved": "1.7.0",
+        "contentHash": "eyJL+587l3ChUk8L0hqaXSU9l4ecVTEqc2VdeWYFFCVtkEmv7B7unqMkIer3EaeiCfE8PzGUEMxq42PweURd+Q=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
@@ -592,9 +592,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.6.0, )",
-        "resolved": "1.6.0",
-        "contentHash": "+N7pXNX4+45z0Pt1Gumo8AtMGXFxS5ihYuXPE6DUou1/kjPyNVeZpoD2qLv060YgB5sQWF1Ci1FNZtgfFcxP5Q=="
+        "requested": "[1.7.0, )",
+        "resolved": "1.7.0",
+        "contentHash": "eyJL+587l3ChUk8L0hqaXSU9l4ecVTEqc2VdeWYFFCVtkEmv7B7unqMkIer3EaeiCfE8PzGUEMxq42PweURd+Q=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
@@ -856,9 +856,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.6.0, )",
-        "resolved": "1.6.0",
-        "contentHash": "+N7pXNX4+45z0Pt1Gumo8AtMGXFxS5ihYuXPE6DUou1/kjPyNVeZpoD2qLv060YgB5sQWF1Ci1FNZtgfFcxP5Q=="
+        "requested": "[1.7.0, )",
+        "resolved": "1.7.0",
+        "contentHash": "eyJL+587l3ChUk8L0hqaXSU9l4ecVTEqc2VdeWYFFCVtkEmv7B7unqMkIer3EaeiCfE8PzGUEMxq42PweURd+Q=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",

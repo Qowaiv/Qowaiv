@@ -40,7 +40,6 @@ v1.0.0
   </PropertyGroup>
 
   <ItemGroup Label="CompileTimeDependencies">
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
   </ItemGroup>
 

@@ -16,15 +16,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.6.0, )",
-        "resolved": "1.6.0",
-        "contentHash": "+N7pXNX4+45z0Pt1Gumo8AtMGXFxS5ihYuXPE6DUou1/kjPyNVeZpoD2qLv060YgB5sQWF1Ci1FNZtgfFcxP5Q=="
-      },
-      "Microsoft.CodeAnalysis.Analyzers": {
-        "type": "Direct",
-        "requested": "[4.14.0, )",
-        "resolved": "4.14.0",
-        "contentHash": "fCj+MzjJxN/4iYAz7JPLONGKeTomaZNzx4UgGA0AerTrx4Ou6Rw2J5YF4V51vWW+aSQSCv1nnAkCZUw5Z9+3zw=="
+        "requested": "[1.7.0, )",
+        "resolved": "1.7.0",
+        "contentHash": "eyJL+587l3ChUk8L0hqaXSU9l4ecVTEqc2VdeWYFFCVtkEmv7B7unqMkIer3EaeiCfE8PzGUEMxq42PweURd+Q=="
       },
       "Microsoft.CodeAnalysis.CSharp": {
         "type": "Direct",
@@ -92,6 +86,11 @@
           "System.Memory": "4.5.5",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         }
+      },
+      "Microsoft.CodeAnalysis.Analyzers": {
+        "type": "Transitive",
+        "resolved": "3.3.4",
+        "contentHash": "AxkxcPR+rheX0SmvpLVIGLhOUXAKG56a64kV9VQZ4y9gR9ZmPXnqZvHJnmwLSwzrEP6junUF11vuc+aqo5r68g=="
       },
       "Microsoft.CodeAnalysis.Common": {
         "type": "Transitive",

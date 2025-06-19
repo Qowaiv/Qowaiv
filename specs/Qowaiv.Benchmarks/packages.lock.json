@@ -40,21 +40,15 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.6.0, )",
-        "resolved": "1.6.0",
-        "contentHash": "+N7pXNX4+45z0Pt1Gumo8AtMGXFxS5ihYuXPE6DUou1/kjPyNVeZpoD2qLv060YgB5sQWF1Ci1FNZtgfFcxP5Q=="
+        "requested": "[1.7.0, )",
+        "resolved": "1.7.0",
+        "contentHash": "eyJL+587l3ChUk8L0hqaXSU9l4ecVTEqc2VdeWYFFCVtkEmv7B7unqMkIer3EaeiCfE8PzGUEMxq42PweURd+Q=="
       },
       "MathNet.Numerics": {
         "type": "Direct",
         "requested": "[5.0.0, )",
         "resolved": "5.0.0",
         "contentHash": "pg1W2VwaEQMAiTpGK840hZgzavnqjlCMTVSbtVCXVyT+7AX4mc1o89SPv4TBlAjhgCOo9c1Y+jZ5m3ti2YgGgA=="
-      },
-      "Microsoft.CodeAnalysis.Analyzers": {
-        "type": "Direct",
-        "requested": "[4.14.0, )",
-        "resolved": "4.14.0",
-        "contentHash": "fCj+MzjJxN/4iYAz7JPLONGKeTomaZNzx4UgGA0AerTrx4Ou6Rw2J5YF4V51vWW+aSQSCv1nnAkCZUw5Z9+3zw=="
       },
       "Microsoft.CodeAnalysis.CSharp": {
         "type": "Direct",
@@ -110,6 +104,11 @@
         "type": "Transitive",
         "resolved": "1.1.0",
         "contentHash": "1Am6l4Vpn3/K32daEqZI+FFr96OlZkgwK2LcT3pZ2zWubR5zTPW3/FkO1Rat9kb7oQOa4rxgl9LJHc5tspCWfg=="
+      },
+      "Microsoft.CodeAnalysis.Analyzers": {
+        "type": "Transitive",
+        "resolved": "3.3.4",
+        "contentHash": "AxkxcPR+rheX0SmvpLVIGLhOUXAKG56a64kV9VQZ4y9gR9ZmPXnqZvHJnmwLSwzrEP6junUF11vuc+aqo5r68g=="
       },
       "Microsoft.CodeAnalysis.Common": {
         "type": "Transitive",

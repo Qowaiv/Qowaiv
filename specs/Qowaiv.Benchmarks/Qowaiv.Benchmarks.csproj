@@ -18,7 +18,6 @@
 
   <ItemGroup Label="Analyzers">
     <PackageReference Include="AwesomeAssertions.Analyzers" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
   </ItemGroup>
 

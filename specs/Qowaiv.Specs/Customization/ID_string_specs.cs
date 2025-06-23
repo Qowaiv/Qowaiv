@@ -69,6 +69,31 @@ public class Is_equal_by_value
     }
 }
 
+public class Can_be_parsed
+{
+    [Test]
+    public void from_null_string_represents_Empty()
+        => StringBasedId.Parse(null).Should().Be(StringBasedId.Empty);
+
+    [Test]
+    public void from_empty_string_represents_Empty()
+        => StringBasedId.Parse(string.Empty).Should().Be(StringBasedId.Empty);
+
+    [TestCase("en", "Qowaiv-ID")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            StringBasedId.Parse(input).Should().Be(Svo.Generated.StringId);
+        }
+    }
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+        => StringBasedId.TryParse("Qowaiv-ID").Should().Be(Svo.Generated.StringId);
+}
+
+
 public class Has_custom_formatting
 {
     [Test]

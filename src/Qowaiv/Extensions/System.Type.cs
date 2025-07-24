@@ -90,15 +90,16 @@ public static class QowaivTypeExtensions
         }
         else if (type.IsArray)
         {
-            sb.AppendType(type, withNamespace);
+            var array = new StringBuilder();
+
             do
             {
-                sb.Append('[').Append(',', type.ArrayRank - 1).Append(']');
+                array.Append('[').Append(',', type.ArrayRank - 1).Append(']');
                 type = type.ElementType!;
             }
             while (type.IsArray);
 
-            return sb;
+            return sb.AppendType(type, withNamespace).Append(array);
         }
         else if (type.IsGenericTypeDefinition)
         {

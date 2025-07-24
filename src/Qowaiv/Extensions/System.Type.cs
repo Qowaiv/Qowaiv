@@ -1,4 +1,5 @@
 using Qowaiv;
+using System.Collections.Frozen;
 using System.Runtime.CompilerServices;
 
 namespace System;
@@ -6,11 +7,11 @@ namespace System;
 /// <summary>Extensions on <see cref="Type" />.</summary>
 public static class QowaivTypeExtensions
 {
-    private static readonly Lock _shortNameCacheLocker = new();
-    private static readonly Lock _longNameCacheLocker = new();
+    private static readonly Lock ShortNameLocker = new();
+    private static readonly Lock LongNameLocker = new();
 
-    private static readonly ConditionalWeakTable<Type, string> _shortNameCache = new();
-    private static readonly ConditionalWeakTable<Type, string> _longNameCache = new();
+    private static readonly ConditionalWeakTable<Type, string> ShortNames = new();
+    private static readonly ConditionalWeakTable<Type, string> LongNames = new();
 
     /// <summary>Gets a C# formatted <see cref="string" /> representing the <see cref="Type" />.</summary>
     /// <param name="type">
@@ -36,17 +37,17 @@ public static class QowaivTypeExtensions
     [Pure]
     private static string ToCSharpStringShort(this Type type)
     {
-        if (_shortNameCache.TryGetValue(type, out var result))
+        if (ShortNames.TryGetValue(type, out var result))
         {
             return result;
         }
 
-        lock (_shortNameCacheLocker)
+        lock (ShortNameLocker)
         {
-            if (!_shortNameCache.TryGetValue(type, out result))
+            if (!ShortNames.TryGetValue(type, out result))
             {
                 result = new StringBuilder().AppendType(TypeInfo.New(type), false).ToString();
-                _shortNameCache.Add(type, result);
+                ShortNames.Add(type, result);
             }
         }
 
@@ -56,17 +57,17 @@ public static class QowaivTypeExtensions
     [Pure]
     private static string ToCSharpStringLong(this Type type)
     {
-        if (_longNameCache.TryGetValue(type, out var result))
+        if (LongNames.TryGetValue(type, out var result))
         {
             return result;
         }
 
-        lock (_longNameCacheLocker)
+        lock (LongNameLocker)
         {
-            if (!_longNameCache.TryGetValue(type, out result))
+            if (!LongNames.TryGetValue(type, out result))
             {
                 result = new StringBuilder().AppendType(TypeInfo.New(type), true).ToString();
-                _longNameCache.Add(type, result);
+                LongNames.Add(type, result);
             }
         }
 
@@ -79,7 +80,7 @@ public static class QowaivTypeExtensions
     [FluentSyntax]
     private static StringBuilder AppendType(this StringBuilder sb, TypeInfo type, bool withNamespace)
     {
-        if (primitives.TryGetValue(type.Type, out var primitive))
+        if (Primitives.TryGetValue(type.Type, out var primitive))
         {
             return sb.Append(primitive);
         }
@@ -90,6 +91,7 @@ public static class QowaivTypeExtensions
         else if (type.IsArray)
         {
             var array = new StringBuilder();
+
             do
             {
                 array.Append('[').Append(',', type.ArrayRank - 1).Append(']');
@@ -105,7 +107,7 @@ public static class QowaivTypeExtensions
                 .AppendPrefix(type, withNamespace)
                 .Append(type.Name)
                 .Append('<')
-                .Append(new string(',', type.GetGenericArguments().Length - 1))
+                .Append(',', type.GetGenericArguments().Length - 1)
                 .Append('>');
         }
         else if (type.GetGenericArguments() is { Length: > 0 } genericArguments)
@@ -139,7 +141,7 @@ public static class QowaivTypeExtensions
         return sb;
     }
 
-    private static readonly Dictionary<Type, string> primitives = new()
+    private static readonly FrozenDictionary<Type, string> Primitives = new Dictionary<Type, string>()
     {
         [typeof(void)] = "void",
         [typeof(object)] = "object",
@@ -157,7 +159,8 @@ public static class QowaivTypeExtensions
         [typeof(float)] = "float",
         [typeof(double)] = "double",
         [typeof(decimal)] = "decimal",
-    };
+    }
+    .ToFrozenDictionary();
 
     [Pure]
     private static TypeInfo? Info([NotNullIfNotNull(nameof(type))] this Type? type) => type is { } ? TypeInfo.New(type) : null;
@@ -168,20 +171,26 @@ public static class QowaivTypeExtensions
 
     private sealed class TypeInfo
     {
-        private TypeInfo(Type type, IEnumerable<Type> genericArguments)
+        private TypeInfo(Type type, Type[] genericArgs)
         {
             Type = type;
-            GenericTypeArguments = [.. genericArguments
-                .Select(t => t.Info())
-                .Take(type.GetGenericArguments().Length)
-                .OfType<TypeInfo>()];
+            GenericTypeArguments = [.. genericArgs
+                .Select(New)
+                .Take(type.GetGenericArguments().Length)];
 
-            DeclaringType = IsNestedType && type.DeclaringType is { } declaringType
-                ? new(declaringType, genericArguments)
+            DeclaringType = IsNestedType && type.DeclaringType is { } declaring
+                ? new(declaring, genericArgs)
                 : null;
         }
 
         public Type Type { get; }
+
+        public TypeInfo[] GenericTypeArguments { get; }
+
+        /// <remarks>
+        /// Replaces generic definitions with actual choices of the nested type.
+        /// </remarks>
+        public TypeInfo? DeclaringType { get; }
 
         public int ArrayRank => IsArray ? Type.GetArrayRank() : -1;
 
@@ -193,11 +202,6 @@ public static class QowaivTypeExtensions
 
         /// <summary>A Nested type but not a generic parameter.</summary>
         public bool IsNestedType => Type.IsNested && !Type.IsGenericParameter;
-
-        /// <remarks>
-        /// Replaces generic definitions with actual choices of the nested type.
-        /// </remarks>
-        public TypeInfo? DeclaringType { get; }
 
         public TypeInfo? ElementType => Type.GetElementType().Info();
 
@@ -211,15 +215,14 @@ public static class QowaivTypeExtensions
 #endif
             : GenericTypeArguments;
 
-        public TypeInfo[] GenericTypeArguments { get; }
-
         public TypeInfo? NotNullable => Nullable.GetUnderlyingType(Type).Info();
 
         public string Name
         {
             get
             {
-                var split = Type.Name.IndexOf('`');
+                // If we find one, it's likely at the end of the string.
+                var split = Type.Name.LastIndexOf('`');
                 return split > 0
                     ? Type.Name[..split]
                     : Type.Name;
@@ -229,10 +232,10 @@ public static class QowaivTypeExtensions
         public string Namespace => Type.Namespace ?? string.Empty;
 
         [Pure]
+        [ExcludeFromCodeCoverage/* Justification = Debugger experience only. */]
         public override string ToString() => Type.ToCSharpString();
 
         [Pure]
-        public static TypeInfo New(Type type)
-            => new(type, type.GetGenericArguments());
+        public static TypeInfo New(Type type) => new(type, type.GetGenericArguments());
     }
 }

@@ -3,31 +3,41 @@ namespace Benchmarks;
 [MemoryDiagnoser(true)]
 public class ToCSharpStringBenchmark
 {
-    private static readonly Type Type = typeof(Dictionary<int, List<LinkedList<string>>>);
+    private static readonly Type Type = typeof(Dictionary<int[,][], List<LinkedList<int?>>>);
 
-    [Params(1, 10, 100/*, 1000, 10_000*/)]
+    private readonly string[] Result = new string[100];
+
+    [Params(1, 10, 100)]
     public int Count { get; set; }
 
     [Benchmark(Baseline = true)]
-    public string[] No_cache()
+    public string[] System_ToString()
     {
-        var result = new string[Count];
         for (var i = 0; i < Count; i++)
         {
-            result[i] = Type.OldToCSharpString(true);
+            Result[i] = Type.ToString();
         }
-        return result;
+        return Result;
+    }
+
+    [Benchmark]
+    public string[] No_cache()
+    {
+        for (var i = 0; i < Count; i++)
+        {
+            Result[i] = Type.OldToCSharpString(true);
+        }
+        return Result;
     }
 
     [Benchmark]
     public string[] With_cache()
     {
-        var result = new string[Count];
         for (var i = 0; i < Count; i++)
         {
-            result[i] = Type.ToCSharpString(true);
+            Result[i] = Type.ToCSharpString(true);
         }
-        return result;
+        return Result;
     }
 }
 

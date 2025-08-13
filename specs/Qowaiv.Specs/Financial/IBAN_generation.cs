@@ -202,19 +202,18 @@ internal sealed record IbanInfo(Country Country, int Length, string Bban, int? C
                 else if (part[^1] == 'n')
                 {
                     var n = int.Parse(part[..^1]) + 2;
-                    sb.Append($"[0-9]{{{n}}}");
+                    sb.Append($"\\d{{{n}}}");
                     continue;
                 }
                 else
                 {
-                    sb.Append("[0-9]{2}");
+                    sb.Append("\\d{2}");
                 }
             }
 
-
             sb.Append(part[^1] switch
             {
-                'n' => $"[0-9]{{{part[..^1]}}}",
+                'n' => $"\\d{{{part[..^1]}}}",
                 'a' => $"[A-Z]{{{part[..^1]}}}",
                 'c' => $"[A-Z0-9]{{{part[..^1]}}}",
                 _ => part[1..^1],

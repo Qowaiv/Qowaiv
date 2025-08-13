@@ -7,14 +7,14 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="AsyncFixer" Version="1.6.0" />
-    <PackageVersion Include="AwesomeAssertions" Version="9.0.0" />
-    <PackageVersion Include="AwesomeAssertions.Analyzers" Version="9.0.0" />
+    <PackageVersion Include="AwesomeAssertions" Version="9.1.0" />
+    <PackageVersion Include="AwesomeAssertions.Analyzers" Version="9.0.3" />
     <!-- linked to Roslyn version -->
     <PackageVersion Include="BenchmarkDotNet" Version="[0.14.0]" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="DotNet.ReproducibleBuilds" Version="1.2.25" />
-    <PackageVersion Include="DotNetProjectFile.Analyzers" Version="1.7.0" />
-    <PackageVersion Include="DotNetProjectFile.Analyzers.Sdk" Version="1.7.0" />
+    <PackageVersion Include="DotNetProjectFile.Analyzers" Version="1.7.1" />
+    <PackageVersion Include="DotNetProjectFile.Analyzers.Sdk" Version="1.7.1" />
     <PackageVersion Include="MathNet.Numerics" Version="5.0.0" />
     <!-- Roslyn .NET 8 -->
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="[4.11.0]" />
@@ -24,14 +24,14 @@
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
     <!-- To facilitate legacy tests -->
     <PackageVersion Include="NUnit" Version="[3.14.0]" />
-    <PackageVersion Include="NUnit.Analyzers" Version="4.9.2" />
-    <PackageVersion Include="NUnit3TestAdapter" Version="5.0.0" />
+    <PackageVersion Include="NUnit.Analyzers" Version="4.10.0" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="5.1.0" />
     <PackageVersion Include="PolySharp" Version="1.15.0" />
     <PackageVersion Include="Qowaiv.Analyzers.CSharp" Version="2.0.5" />
-    <PackageVersion Include="Qowaiv.Validation.DataAnnotations" Version="4.0.0" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.12.0.118525" />
+    <PackageVersion Include="Qowaiv.Validation.DataAnnotations" Version="4.0.1" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.15.0.120848" />
     <PackageVersion Include="StyleCop.Analyzers.Unstable" Version="1.2.0.556" />
-    <PackageVersion Include="System.Collections.Immutable" Version="9.0.6" />
+    <PackageVersion Include="System.Collections.Immutable" Version="9.0.8" />
     <!-- Don't enforce newer versions -->
     <PackageVersion Include="System.Data.SqlClient" Version="[4.8.6]" />
     <PackageVersion Include="System.Memory" Version="4.6.3" />

@@ -6,10 +6,10 @@ namespace Json.SvoJsonConverter_specs;
 
 public class Read_from
 {
-    [TestCase(true)]
-    [TestCase(false)]
-    public void Boolean(bool value)
+    [TestCase(true, "True")]
+    [TestCase(false, "False")]
+    public void Boolean(bool value, string text)
         => JsonTester.Read_System_Text_JSON<StringBasedId>(value)
-        .ToString().Should().Be(value.ToString());
+        .ToString().Should().Be(text);
 }
 #endif

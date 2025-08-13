@@ -2,6 +2,7 @@ using System.Reflection;
 
 namespace Qowaiv.Diagnostics;
 
+/// <summary>Helper to unify th debugger display of SVO's.</summary>
 internal static class DebugDisplay
 {
     public const string Empty = "{empty}";
@@ -16,7 +17,7 @@ internal static class DebugDisplay
     }
 
     [Pure]
-    private static bool HasEmptyValue<TSvo>()
-        => typeof(TSvo).GetCustomAttribute<SingleValueObjectAttribute>()?
-        .StaticOptions.HasFlag(SingleValueStaticOptions.HasEmptyValue) ?? false;
+    private static bool HasEmptyValue<TSvo>() => typeof(TSvo)
+        .GetInterfaces()
+        .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEmpty<>));
 }

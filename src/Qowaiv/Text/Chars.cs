@@ -10,8 +10,6 @@ internal readonly struct Chars(char[] value, int length)
 
     public readonly int Length = length;
 
-    public char Last => Length == 0 ? default : m_Value[Length - 1];
-
     [Pure]
     private Chars Add(char c)
     {

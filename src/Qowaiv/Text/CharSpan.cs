@@ -69,20 +69,6 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
     }
 
     [Pure]
-    public int? LastIndexOf(char c)
-    {
-        int? last = null;
-        for (var i = Start; i < End; i++)
-        {
-            if (m_Value[i] == c)
-            {
-                last = i;
-            }
-        }
-        return last is { } l ? l - Start : null;
-    }
-
-    [Pure]
     public CharSpan Prev(int steps) => new(m_Value, Start - steps, End);
 
     [Pure]
@@ -97,9 +83,6 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
         ch = m_Value[End - 1];
         return new(m_Value, Start, End - 1);
     }
-
-    [Pure]
-    public CharSpan TrimLeft() => TrimLeft(char.IsWhiteSpace, out _);
 
     [Pure]
     public CharSpan TrimLeft(Func<char, bool> predicate, out CharSpan trimmed)
@@ -154,6 +137,7 @@ internal readonly struct CharSpan : IEquatable<CharSpan>, IEquatable<string>, IE
 
     /// <inheritdoc />
     [Pure]
+    [ExcludeFromCodeCoverage/* Justification = "Not used but required to be overridden." */]
     public override bool Equals(object? obj) => obj is CharSpan other && Equals(other);
 
     [Pure]

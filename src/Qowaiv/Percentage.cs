@@ -215,7 +215,7 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
 
     /// <summary>Returns a <see cref="string" /> that represents the current Percentage for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private string DebuggerDisplay => ToString("0.00##########################%", CultureInfo.InvariantCulture);
+    private string DebuggerDisplay => this.DebuggerDisplay("{0:0.00##########################%}");
 
     /// <summary>Returns a formatted <see cref="string" /> that represents the current Percentage.</summary>
     /// <param name="format">

@@ -176,7 +176,7 @@ public class Can_be_parsed
 {
     [Test]
     public void from_null_string_represents_Empty()
-        => EnergyLabel.Parse(null).Should().Be(EnergyLabel.Empty);
+        => EnergyLabel.TryParse(null).Should().Be(EnergyLabel.Empty);
 
     [Test]
     public void from_empty_string_represents_Empty()
@@ -236,7 +236,7 @@ public class Has_custom_formatting
         => EnergyLabel.Parse(label).ToString().Should().Be(label);
 
     [Test]
-    public void with_null_pattern_equal_to_default()
+    public void with_null_format_equal_to_default()
     {
         using (TestCultures.en_GB.Scoped())
         {

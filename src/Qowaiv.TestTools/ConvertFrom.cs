@@ -16,7 +16,7 @@ public sealed class ConvertFrom<TFrom>
 
         return Subject switch
         {
-            null => (To?)converter.ConvertFrom(null),
+            null => (To?)converter.ConvertFrom(null!),
             var s when !converter.CanConvertFrom(s.GetType()) => throw new NotSupportedException($"Converter {converter} can not convert from {Subject}."),
             string s => (To)converter.ConvertFromString(s)!,
             var s => (To)converter.ConvertFrom(s!)!,

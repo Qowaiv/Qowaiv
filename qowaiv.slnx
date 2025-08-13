@@ -14,7 +14,7 @@
     <Project Path="specs/Qowaiv.Specs.Generated/Qowaiv.Specs.Generated.csproj" />
     <Project Path="specs/Qowaiv.Specs/Qowaiv.Specs.csproj" />
     <Project Path="specs/Qowaiv.Wikipedia/Qowaiv.Wikipedia.csproj" />
-    <Project Path="specs/WikiScraper/WikiScraper.csproj" Id="8446fffc-9746-474f-800b-107c945a4db0" />
+    <Project Path="specs/WikiScraper/WikiScraper.csproj" />
   </Folder>
   <Folder Name="/Tooling/">
     <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />

@@ -42,8 +42,8 @@
     <PackageValidationBaselineVersion>7.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
-v7.*
--
+v7.4.4
+- Add Oman, Somalia, and Yemen to the list of countries with IBAN. #508
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

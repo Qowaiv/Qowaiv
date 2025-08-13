@@ -8,19 +8,9 @@ internal class Markdown_file
     public void Exists() => Location.Exists.Should().BeTrue();
 
     [Test]
-    public void Generate_Markdown()
-    {
-        foreach (var info in Infos.OrderByDescending(i => i.Official).ThenBy(i => i.Country))
-        {
-            Console.WriteLine(info.Markdown());
-        }
-        Assert.Inconclusive("Copy output to code file.");
-    }
-
-    [Test]
     public void Generate_LocalizedPattern()
     {
-        foreach (var info in Infos.OrderBy(i => i.Example))
+        foreach (var info in Infos.OrderBy(i => i.Country.IsoAlpha2Code))
         {
             Console.WriteLine(info.LocalizedPattern());
         }
@@ -52,7 +42,9 @@ internal class Markdown_file
 
     [TestCaseSource(nameof(Infos))]
     public void Example_is_valid(IbanInfo info)
-        => InternationalBankAccountNumber.TryParse(info.Example).Should().NotBeNull(because: $"{info.Example} should be valid for {info.CountryName}.");
+        => InternationalBankAccountNumber.TryParse(info.Example)
+        .Should().NotBeNull(because: $"{info.Example} should be valid for {info.Country}.")
+        .And.Subject.ToString().Should().NotBeEmpty();
 
     [Test]
     public void Supported_countries_match_overview()
@@ -165,10 +157,8 @@ internal class Markdown_file
     }
 }
 
-internal sealed record IbanInfo(string CountryName, int Length, string Bban, int? CheckSum, string Fields, YesNo Official, string Example)
+internal sealed record IbanInfo(Country Country, int Length, string Bban, int? CheckSum, string Fields, YesNo Official, string Example)
 {
-    public Country Country => Country.Parse(Example[..2]);
-
     public int BbanLength
     {
         get
@@ -185,13 +175,10 @@ internal sealed record IbanInfo(string CountryName, int Length, string Bban, int
         }
     }
 
-    public string Markdown()
-        => $"| {NoBreak(CountryName),-25} | {Length,5} | {Bban,-15} | {CheckSum,5:00} | {NoBreak(Fields),-41} | {Official,-4:f} | {NoBreak(Example),-41} |";
-
     internal string LocalizedPattern()
         => CheckSum is { } c
-        ? $@"Bban(Country.{Example[..2]}, ""{Bban}"", checksum: {c:00}),"
-        : $@"Bban(Country.{Example[..2]}, ""{Bban}""),";
+        ? $@"Bban(Country.{Country.IsoAlpha2Code}, ""{Bban}"", checksum: {c:00}),"
+        : $@"Bban(Country.{Country.IsoAlpha2Code}, ""{Bban}""),";
 
     public string JsRegex()
     {
@@ -215,19 +202,18 @@ internal sealed record IbanInfo(string CountryName, int Length, string Bban, int
                 else if (part[^1] == 'n')
                 {
                     var n = int.Parse(part[..^1]) + 2;
-                    sb.Append($"[0-9]{{{n}}}");
+                    sb.Append($"\\d{{{n}}}");
                     continue;
                 }
                 else
                 {
-                    sb.Append("[0-9]{2}");
+                    sb.Append("\\d{2}");
                 }
             }
 
-
             sb.Append(part[^1] switch
             {
-                'n' => $"[0-9]{{{part[..^1]}}}",
+                'n' => $"\\d{{{part[..^1]}}}",
                 'a' => $"[A-Z]{{{part[..^1]}}}",
                 'c' => $"[A-Z0-9]{{{part[..^1]}}}",
                 _ => part[1..^1],
@@ -241,7 +227,7 @@ internal sealed record IbanInfo(string CountryName, int Length, string Bban, int
             .ToString();
     }
 
-    public override string ToString() => Example;
+    public override string ToString() => Example is { Length: > 0 } ? Example : Country.IsoAlpha2Code;
 
     public static IbanInfo? Parse(string line)
     {
@@ -252,7 +238,7 @@ internal sealed record IbanInfo(string CountryName, int Length, string Bban, int
         {
             int? checksum = parts[3].Trim() is { Length: > 0 } t ? int.Parse(t) : null;
             return new(
-                CountryName: parts[0].Trim(),
+                Country: Country.Parse(parts[4].Trim()[..2]),
                 Length: int.Parse(parts[1].Trim()),
                 Bban: parts[2].Replace(" ", ""),
                 CheckSum: checksum,
@@ -266,6 +252,4 @@ internal sealed record IbanInfo(string CountryName, int Length, string Bban, int
             return null;
         }
     }
-
-    static string NoBreak(string s) => s.Replace(' ', (char)160);
 }

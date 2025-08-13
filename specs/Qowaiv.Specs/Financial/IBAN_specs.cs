@@ -18,20 +18,22 @@ public class Supported
         Country.LB, Country.LC, Country.LI, Country.LT, Country.LU, Country.LV, Country.LY,
         Country.MA, Country.MC, Country.MD, Country.ME, Country.MG, Country.MK, Country.ML, Country.MR, Country.MT, Country.MU,
         Country.MZ, Country.NE, Country.NI, Country.NL, Country.NO,
+        Country.OM,
         Country.PK, Country.PL, Country.PS, Country.PT,
         Country.QA,
         Country.RO, Country.RS, Country.RU,
-        Country.SA, Country.SC, Country.SD, Country.SE, Country.SI, Country.SK, Country.SM, Country.SN, Country.ST, Country.SV,
+        Country.SA, Country.SC, Country.SD, Country.SE, Country.SI, Country.SK, Country.SM, Country.SN,Country.SO, Country.ST, Country.SV,
         Country.TD, Country.TG, Country.TL, Country.TN, Country.TR,
         Country.UA, Country.VA, Country.VG,
         Country.XK,
+        Country.YE,
     ];
 
     [Test]
-    public void by_106_Countries()
+    public void by_109_Countries()
     {
         InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code).Should().BeEquivalentTo(All);
-        InternationalBankAccountNumber.Supported.Count.Should().Be(106);
+        InternationalBankAccountNumber.Supported.Count.Should().Be(109);
     }
 }
 

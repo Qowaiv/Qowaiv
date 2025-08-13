@@ -1,8 +1,45 @@
 namespace Open_API_specs;
 
+public class Open_API_data_types
+{
+    [Test]
+    public void can_be_resolved_from_assemblies()
+        => OpenApiDataTypes.FromAssemblies(typeof(Date).Assembly)
+            .Should().NotBeEmpty();
+
+    [Test]
+    public void can_be_resolved_from_types()
+       => OpenApiDataTypes.FromTypes(typeof(Date).Assembly.GetTypes())
+           .Should().BeEquivalentTo(OpenApiDataTypes.FromAssemblies(typeof(Date).Assembly));
+}
+
 [Obsolete("Will be dropped in Qowaiv 8.0.")]
 public class Open_API_data_type
 {
+    [Test]
+    public void is_a_record()
+    {
+        var type = OpenApiDataTypes.FromTypes(typeof(Date)).Single();
+        var copy = type with { };
+        type.Should().Be(copy);
+    }
+
+    [TestCase(null)]
+    [TestCase("")]
+    [TestCase("42")]
+    [TestCase("Hello, world!")]
+    [TestCase("Qowaiv")]
+    public void Match_null_regex_is_always_true(string? value)
+        => new OpenApiDataType(typeof(int), "descrption", "type", null, pattern: null).Matches(value).Should().BeTrue();
+
+    [Test]
+    public void DebuggerDisplay_shows_minimum() => new OpenApiDataType(typeof(int), "descrption", "type", null)
+        .Should().HaveDebuggerDisplay("""{ type: type, desc: descrption, example:  }""");
+
+    [Test]
+    public void DebuggerDisplay_shows_maximum() => new OpenApiDataType(typeof(int), "descrption", "type", "example", "format", true, "pattern")
+        .Should().HaveDebuggerDisplay("""{ type: type, desc: descrption, example: example, format: format, pattern: pattern, nullable: true }""");
+
     [Test]
     public void Resolved_by_base_if_not_decorated()
         => OpenApiDataType.FromType(typeof(ForUuid))

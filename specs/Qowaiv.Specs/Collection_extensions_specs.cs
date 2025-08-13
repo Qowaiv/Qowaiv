@@ -230,6 +230,10 @@ public class Percentages
         => nullables.Average().Should().Be(8.Percent());
 
     [Test]
+    public void Average_on_empty_nullables_is_null()
+        => Array.Empty<Percentage?>().Average().Should().BeNull();
+
+    [Test]
     public void Average_on_empty_collection_throws()
     {
         Func<Percentage> average = () => Array.Empty<Percentage>().Average();

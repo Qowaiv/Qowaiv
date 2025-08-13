@@ -111,11 +111,67 @@ public class Exists
 #endif
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Country.ToString().Should().Be(Svo.Country.ToString(default(string)));
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Country.ToString().Should().Be(Svo.Country.ToString(string.Empty));
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_string_empty()
+        => default(Country).ToString().Should().BeEmpty();
+
+    [Test]
+    public void unknown_value_is_represented_as_unknown()
+        => Country.Unknown.ToString().Should().Be("?");
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.Country.ToString(FormatProvider.Empty).Should().Be("VA");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.Country.ToString("2", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: 'VA', format: '2'");
+    }
+
+    [TestCase("MZ", "nl", "0", "508")]
+    [TestCase("MZ", "nl", "2", "MZ")]
+    [TestCase("MZ", "nl", "3", "MOZ")]
+    [TestCase("MZ", "ja-JP", "e", "Mozambique")]
+    [TestCase("MZ", "ja-JP", "f", "モザンビーク")]
+    [TestCase("CSHH", "nl", "2", "CS")]
+    [TestCase("CSHH", "nl", "n", "CSHH")]
+    public void format_dependent(Country svo, CultureInfo culture, string format, string formatted)
+        => svo.ToString(format, culture).Should().Be(formatted);
+}
+
 public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.Country.CompareTo(Nil.Object).Should().Be(1);
 }
+
 public class Supports_type_conversion
 {
     [Test]
@@ -240,5 +296,8 @@ public class Can_parse
     [Test]
     public void former_countries_via_ISO_3166_3()
         => Country.Parse("BQAQ").Should().Be(Country.BQAQ);
-}
 
+    [Test]
+    public void culture_specific()
+        => Country.TryParse("モザンビーク", new CultureInfo("ja-JP")).Should().Be(Country.MZ);
+}

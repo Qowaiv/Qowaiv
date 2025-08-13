@@ -277,7 +277,7 @@ public class Has_custom_formatting
     }
 
     [Test]
-    public void with_null_pattern_equal_to_default()
+    public void with_null_format_equal_to_default()
     {
         using (TestCultures.en_GB.Scoped())
         {

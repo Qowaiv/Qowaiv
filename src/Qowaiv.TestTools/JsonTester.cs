@@ -12,9 +12,9 @@ public static class JsonTester
 #if NET6_0_OR_GREATER
     /// <summary>Reads the JSON using System.Text.Json.</summary>
     [Pure]
-    public static T? Read_System_Text_JSON<T>(object? val)
+    public static T? Read_System_Text_JSON<T>(object? val, JsonSerializerOptions? options = null)
     {
-        return JsonSerializer.Deserialize<T>(ToString(val));
+        return JsonSerializer.Deserialize<T>(ToString(val), options);
 
         static string ToString(object? val)
             => val switch
@@ -33,9 +33,9 @@ public static class JsonTester
     /// <see cref="JsonSerializer.SerializeToElement(object?, Type, JsonSerializerOptions?)" /> is only available in .NET 6.0.
     /// </remarks>
     [Pure]
-    public static object? Write_System_Text_JSON(object? svo)
+    public static object? Write_System_Text_JSON(object? svo, JsonSerializerOptions? options = null)
     {
-        var json = JsonSerializer.SerializeToElement(svo);
+        var json = JsonSerializer.SerializeToElement(svo, options);
 
         if (json.ValueKind == JsonValueKind.String) return json.GetString();
         else if (json.ValueKind == JsonValueKind.Number)

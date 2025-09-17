@@ -18,4 +18,18 @@ internal static class QowaivTypeConverterAssertions
 
         return new AndConstraint<TypeAssertions>(assertions);
     }
+
+    /// <summary>Asserts that the type converter exists for the specified type.</summary>
+    [CustomAssertion]
+    public static AndConstraint<TypeAssertions> HaveNoTypeConverterDefined(this TypeAssertions assertions, string because = "", params object[] becauseArgs)
+    {
+        var converter = TypeDescriptor.GetConverter(assertions.Subject);
+
+        assertions.CurrentAssertionChain
+           .BecauseOf(because, becauseArgs)
+           .ForCondition(converter.GetType() == typeof(TypeConverter))
+           .FailWith($"There is type converter defined for '{assertions.Subject}' ({converter.GetType().FullName}).");
+
+        return new AndConstraint<TypeAssertions>(assertions);
+    }
 }

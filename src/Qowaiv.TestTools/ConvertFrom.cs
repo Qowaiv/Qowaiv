@@ -8,11 +8,21 @@ public sealed class ConvertFrom<TFrom>
     /// <summary>The subject that can be converted to a destination type.</summary>
     public TFrom? Subject { get; }
 
+    private TypeConverter? Converter { get; init; }
+
+    /// <summary>Defines the <see cref="TypeConverter"/> to use while converting.</summary>
+    /// <typeparam name="TConverter">
+    /// The type converter to use.
+    /// </typeparam>
+    [Pure]
+    public ConvertFrom<TFrom> With<TConverter>() where TConverter : TypeConverter, new()
+        => new(Subject) { Converter = new TConverter() };
+
     /// <summary>Converts the value to the destination type, using its <see cref="TypeConverter" />.</summary>
     [Pure]
     public To? To<To>()
     {
-        var converter = Converter<To>();
+        var converter = Init<To>();
 
         return Subject switch
         {
@@ -24,5 +34,5 @@ public sealed class ConvertFrom<TFrom>
     }
 
     [Pure]
-    private static TypeConverter Converter<To>() => TypeDescriptor.GetConverter(typeof(To));
+    private TypeConverter Init<To>() => Converter ?? TypeDescriptor.GetConverter(typeof(To));
 }

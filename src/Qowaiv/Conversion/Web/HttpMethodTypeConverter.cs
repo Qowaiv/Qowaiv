@@ -1,4 +1,4 @@
-using System.Net.Http;
+using Qowaiv.Web;
 
 namespace Qowaiv.Conversion.Web;
 
@@ -14,30 +14,6 @@ public sealed class HttpMethodTypeConverter : TypeConverter
     [Pure]
     public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
         => value is null || value is string
-        ? FromString(value as string)
+        ? HttpMethodParser.Parse(value as string)
         : base.ConvertFrom(context, culture, value);
-
-#if NET8_0_OR_GREATER
-    /// <summary>Converts from <see cref="string" />.</summary>
-    [Pure]
-    private static HttpMethod? FromString(string? str)
-        => str is { Length: > 0 }
-        ? HttpMethod.Parse(str)
-        : null;
-#else
-    /// <summary>Converts from <see cref="string" />.</summary>
-    [Pure]
-    private static HttpMethod? FromString(string? str) => str?.ToUpperInvariant() switch
-    {
-        "Delete" => HttpMethod.Delete,
-        "Get" => HttpMethod.Get,
-        "Head" => HttpMethod.Head,
-        "Options" => HttpMethod.Options,
-        "Post" => HttpMethod.Post,
-        "Put" => HttpMethod.Put,
-        "Trace" => HttpMethod.Trace,
-        { Length: > 0 } => new(str),
-        _ => null,
-    };
-#endif
 }

@@ -32,7 +32,7 @@ seen as bad design, as it leads to error-prone, cluttered code. Using SVO's
 instead, prevents this.
 
 ### Struct v.s. Class
-All Qowaiv SVO's have been created as `struct`, not as `class`. The reason for
+All Qowaiv SVO's have been created as a `struct`, not as `class`. The reason for
 doing this, is that for primitive like SVO's they should behave similar to the
 known primitives, like `double`, `int`, `DateTime`, `Guid`, etcetera.
 
@@ -45,7 +45,7 @@ Multiple scenarios are supported:
 * Parsing
 * Formatting (including `ICustomFormatter`)
 * Validation
-* Serialization (JSON, XML, in-memory)
+* Serialization (JSON, XML)
 * Domain-specific logic
 * Explicit and implicit casting
 
@@ -595,6 +595,14 @@ also support the use of SQL wildcard characters _ and %.
 ## Extensions on .NET build-in types
 For types that are shipped with the .NET standard library that meet (most) SVO
 criteria, Qowaiv can offer some extensions to improve usage.
+
+### System.Globalization.CultureInfo
+The [`CultureInfo`](https://learn.microsoft.com/dotnet/api/system.globalization.cultureinfo)
+lacks a `JsonConverter`:
+* `Qowaiv.Json.Globalization.CultureInfoJsonConverter`
+
+The current culture can be set for a (`IDisposable`) scope using thie [`.Scope()`](#CultureInfoScope)
+extension method.
 
 ### System.Net.Http.HttpMethod
 The [`HttpMethod`](https://learn.microsoft.com/dotnet/api/system.net.http.httpmethod)

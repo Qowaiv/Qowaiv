@@ -221,6 +221,99 @@ v5.1.3
 - ConvertFrom(object) should use Behavior.TryCreate(). #189
 v5.1.2
 - Extend Open API documentation with explicit example. #188
+v5.1.1
+- Revoked `IConvertable` (fix)
+v5.1.0
+- Introduction of strongly-typed identifier (#132)
+- Introduction of `MonthSpan` (#142)
+- Introduction of `Fraction` (#128)
+- Introduction of a UUID/GUID comparer (#125)
+- Add `IConvertable` to all SVO's (#133)
+- Added `Sign()` method (#131)
+- Added `Uuid.NewSequential()` (#123)
+- Added `YesNo.YesOrNo()` method (#141)
+- Added `CultureInfo.Scoped()` extension method (#146)
+- Added `Type.ToCSharpString()` extension method (#139)
+- Extended support on email addresses (#143)
+- Invalid casts throw `InvalidCastException`s (#137) fix
+- `CompereTo(object)` returns one on object is null (#126) fix
+v5.0.1
+- Fix minor issue with serializing Amount.Zero. (#121) fix
+- DecimalRound.IsNearestRouding => DecimalRound.IsNearestRounding (#119) fix
+- NaN, +oo, -oo are not longer valid values for Elo (#118) fix
+v5.0.0
+- JSON serialization is convention based. (#115) breaking
+- Dropped `BankIdentifierCode`. (#116) breaking
+v4.1.0
+- Introduction of `DateSpan` (#95)
+- Money, Amount, Percentage and SteamSize have `Abs()` method (#96)
+- Money, Amount, Percentage and SteamSize have `Round()` method (#96)
+- Introduction of `DecimalRound.Round()` and `RoundToMultiple()` (#97)
+- `Date.FromJson(DateTime)` ignores time part (#98) fix
+- Null message `NotSupportedException_ConverterCanNotConvertFomString` (#100) fix
+v4.0.6
+- Support OpenAPI (#81)
+- Fix on serialization Month (#88)
+- Introduction of BusinessIdentifierCode (#89)
+v4.0.5
+- Added support of "mailto:"-prefix on email address (#78)
+- Fix on '<' in display name on email address (#77)
+v4.0.4
+- Added Percentage.Min() and Percentage.Max() (#73)
+- Added Percentage.Round() (#74)
+v4.0.3
+- Added Percent() extension method (#70)
+v4.0.2
+- Extended display name support for email address #69 
+v4.0.1 
+- Added support for 12 new countries with IBAN patterns #65
+- Fix Y-N parsing for non-English languages #66
+v4.0.0
+- .NET standard 2.0 only (#59)
+- Drop of Qowaiv.Web, Qowaiv.Json.Newtonsoft packages
+v3.2.4
+- Introduction of Clock.NowWithOffset(TimezoneInfo) #45
+- Fix LocalDateTime to always have DateTimeKind.Local and no loss of ticks
+- Clock.UtcNow() is guaranteed to have DateTimeKind.Utc
+v3.2.3
+- Introduced Clock (#44)
+v3.2.2
+- JsonConverter only throws JSON exceptions #36
+v3.2.1
+- TypeConverters support conversions from the underlying value type (#19)
+- Added Month.Days(year) (#30)
+v3.2.0
+- Added the country Kosovo (#22)
+- Made SonarAnalyzer dependency a private asset (#26)
+- Extended Qowaiv.ComponentModel.Result with factory methods (#24)
+- Introduced Qowaiv.ComponentModel.DataAnnotations.AnyAttribute (#25)
+- Fix in email address collection (#21)
+v3.1.3
+- Fix in email address validation (#18)
+v3.1.2
+- New Base-32 implementation
+v3.1.1
+- Introduced Component Model validation
+v3.0.0.223
+- Introduced namespaces Financial, Globalization, Security, Statistics, and moved types from root namespace to those.
+- Introduced Money.
+v2.0.2.186
+- Add Qowaiv.Text.Base32.
+- Added explicit conversion from Gender to Byte.
+v2.0.1.179
+- Internal refactoring based on SonarLint recommendations.
+- Converted solution to Visual Studio 2015.
+- Extended country and currency definitions.
+v2.0.0.164
+- Added Qowaiv.Statistics.Elo.
+v2.0.0.159
+- Fixed an issue with negative values for StreamSize.
+v2.0.0.150
+- Fix NuGet dependencies and use .net 4.5.
+v2.0.0.149
+- Made Qowaiv.Guard internal.
+v1.0.0.139
+- Introduced a build based on Fake.
 ]]>
     </PackageReleaseNotes>
   </PropertyGroup>

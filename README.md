@@ -592,6 +592,16 @@ Represents an Internet media type (also known as MIME-type and content type).
 Represents a pattern to match strings, using wildcard characters ? and *. It 
 also support the use of SQL wildcard characters _ and %.
 
+## Extensions on .NET build-in types
+For types that are shipped with the .NET standard library that meet (most) SVO
+criteria, Qowaiv can offer some extensions to improve usage.
+
+### System.Net.Http.HttpMethod
+The [`HttpMethod`](https://learn.microsoft.com/dotnet/api/system.net.http.httpmethod)
+lacks a `TypeConverter` and a `JsonConverter`:
+* `Qowaiv.Conversion.Web.HttpMethodTypeConverter`
+* `Qowaiv.Json.Web.HttpMethodJsonConverter`
+
 ## Qowaiv helpers
 
 ### Decimal round

@@ -58,7 +58,7 @@ public class Supports_JSON_serialization
     [TestCase(int.MaxValue + 1L)]
     public void taking_constrains_into_account(object json)
     {
-        json.Invoking(JsonTester.Read_System_Text_JSON<Id<ForEven>>)
+        json.Invoking(j => JsonTester.Read_System_Text_JSON<Id<ForEven>>(j))
             .Should().Throw<System.Text.Json.JsonException>()
             .WithMessage("Not a valid identifier");
     }

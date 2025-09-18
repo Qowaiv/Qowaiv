@@ -50,16 +50,16 @@ public class Supports_type_conversion
 }
 
 #if NET6_0_OR_GREATER
-public class Supports_JSON_serialization
+public class Supports_System_Text_JSON_serialization
 {
     [TestCase(null)]
     [TestCase("POST")]
-    public void System_Text_JSON_deserialization(object? json)
+    public void Value_deserialization(object? json)
         => JsonTester.Read_System_Text_JSON<HttpMethod>(json, Options()).Should().Be(json is null ? null : HttpMethod.Post);
 
     [TestCase(null)]
     [TestCase("POST")]
-    public void System_Text_JSON_serialization(object? json)
+    public void Value_serialization(object? json)
         => JsonTester.Write_System_Text_JSON(json is null ? null : HttpMethod.Post, Options()).Should().Be(json);
 
     [Test]

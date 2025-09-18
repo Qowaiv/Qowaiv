@@ -601,7 +601,7 @@ The [`CultureInfo`](https://learn.microsoft.com/dotnet/api/system.globalization.
 lacks a `JsonConverter`:
 * `Qowaiv.Json.Globalization.CultureInfoJsonConverter`
 
-The current culture can be set for a (`IDisposable`) scope using thie [`.Scope()`](#CultureInfoScope)
+The current culture can be set for a (`IDisposable`) scope using the [`.Scope()`](#CultureInfoScope)
 extension method.
 
 ### System.Net.Http.HttpMethod

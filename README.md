@@ -32,7 +32,7 @@ seen as bad design, as it leads to error-prone, cluttered code. Using SVO's
 instead, prevents this.
 
 ### Struct v.s. Class
-All Qowaiv SVO's have been created as a `struct`, not as `class`. The reason for
+All Qowaiv SVO's have been created as a `struct`, not as a `class`. The reason for
 doing this, is that for primitive like SVO's they should behave similar to the
 known primitives, like `double`, `int`, `DateTime`, `Guid`, etcetera.
 

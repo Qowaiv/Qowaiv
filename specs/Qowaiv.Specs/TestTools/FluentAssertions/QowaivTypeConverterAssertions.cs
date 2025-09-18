@@ -28,7 +28,7 @@ internal static class QowaivTypeConverterAssertions
         assertions.CurrentAssertionChain
            .BecauseOf(because, becauseArgs)
            .ForCondition(converter.GetType() == typeof(TypeConverter))
-           .FailWith($"There is type converter defined for '{assertions.Subject}' ({converter.GetType().FullName}).");
+           .FailWith($"There is a type converter defined for '{assertions.Subject}' ({converter.GetType().FullName}).");
 
         return new AndConstraint<TypeAssertions>(assertions);
     }

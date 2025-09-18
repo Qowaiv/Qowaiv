@@ -50,9 +50,9 @@ v7.*
       <![CDATA[
 v7.4.4
 - Add Oman, Somalia, and Yemen to the list of countries with IBAN. #508
-- Provide a JsonConverter for System.Globalization.CultureInfo as Micrsoft does not. #515
-- Provide a TypeConverter for System.Net.Http.HttpMethod as Micrsoft does not. #514
-- Provide a JsonConverter for System.Net.Http.HttpMethod as Micrsoft does not. #514
+- Provide a JsonConverter for System.Globalization.CultureInfo as Microsoft does not. #515
+- Provide a TypeConverter for System.Net.Http.HttpMethod as Microsoft does not. #514
+- Provide a JsonConverter for System.Net.Http.HttpMethod as Microsoft does not. #514
 v7.4.3
 - Introduction of INext<TSelf>.
 - Update System.Memory to 4.6.3 (netstandard2.0 only). 

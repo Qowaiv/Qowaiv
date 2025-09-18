@@ -62,6 +62,29 @@ public class Supports_JSON_serialization
     public void System_Text_JSON_serialization(object? json)
         => JsonTester.Write_System_Text_JSON(json is null ? null : HttpMethod.Post, Options()).Should().Be(json);
 
+    [Test]
+    public void Dictionary_deserialization()
+    {
+        JsonSerializer.Deserialize<Dictionary<HttpMethod, int>>("""{"GET":100,"PUT":200}""", Options())
+            .Should().BeEquivalentTo(new Dictionary<HttpMethod, int>
+              {
+                  [HttpMethod.Get] = 100,
+                  [HttpMethod.Put] = 200,
+              });
+    }
+
+    [Test]
+    public void Dictionary_serialization()
+    {
+        JsonSerializer.Serialize(new Dictionary<HttpMethod, int>
+        {
+            [HttpMethod.Get] = 100,
+            [HttpMethod.Put] = 200,
+        },
+        Options())
+            .Should().Be("""{"GET":100,"PUT":200}""");
+    }
+
     private static JsonSerializerOptions Options()
     {
         var options = new JsonSerializerOptions();

@@ -21,5 +21,11 @@ public class HttpMethodJsonConverter : JsonConverter<HttpMethod>
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, HttpMethod value, JsonSerializerOptions options)
         => writer.WriteStringValue(value.Method);
+
+    /// <inheritdoc />
+    public override HttpMethod ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => HttpMethodParser.Parse(reader.GetString())!;
+
+    /// <inheritdoc />
+    public override void WriteAsPropertyName(Utf8JsonWriter writer, [DisallowNull] HttpMethod value, JsonSerializerOptions options) => writer.WritePropertyName(value.Method);
 }
 #endif

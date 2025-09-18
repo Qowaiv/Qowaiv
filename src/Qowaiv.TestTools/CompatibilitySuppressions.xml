@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- https://learn.microsoft.com/dotnet/fundamentals/package-validation/diagnostic-ids -->
-<Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<Suppressions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.TestTools.ConvertTo</Target>
@@ -49,7 +49,49 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.ConvertFrom`1.With``1</Target>
+    <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net6.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.TestTools.Converting.To(System.Type)</Target>
+    <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net6.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.ConvertTo`1.With``1</Target>
+    <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net6.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.JsonTester.Read_System_Text_JSON``1(System.Object)</Target>
+    <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net6.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.JsonTester.Read_System_Text_JSON``1(System.Object,System.Text.Json.JsonSerializerOptions)</Target>
+    <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net6.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.JsonTester.Write_System_Text_JSON(System.Object)</Target>
+    <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net6.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.JsonTester.Write_System_Text_JSON(System.Object,System.Text.Json.JsonSerializerOptions)</Target>
     <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/net6.0/Qowaiv.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -62,9 +104,58 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.ConvertFrom`1.With``1</Target>
+    <Left>lib/net8.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.TestTools.Converting.To(System.Type)</Target>
     <Left>lib/net8.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.ConvertTo`1.With``1</Target>
+    <Left>lib/net8.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.JsonTester.Read_System_Text_JSON``1(System.Object)</Target>
+    <Left>lib/net8.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.JsonTester.Read_System_Text_JSON``1(System.Object,System.Text.Json.JsonSerializerOptions)</Target>
+    <Left>lib/net8.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.JsonTester.Write_System_Text_JSON(System.Object)</Target>
+    <Left>lib/net8.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.JsonTester.Write_System_Text_JSON(System.Object,System.Text.Json.JsonSerializerOptions)</Target>
+    <Left>lib/net8.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.ConvertFrom`1.With``1</Target>
+    <Left>lib/net9.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net9.0/Qowaiv.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -76,19 +167,68 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.ConvertTo`1.With``1</Target>
+    <Left>lib/net9.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net9.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.TestTools.JsonTester.Read_System_Text_JSON``1(System.Object)</Target>
-    <Left>lib/netstandard2.0/Qowaiv.TestTools.dll</Left>
-    <Right>lib/net6.0/Qowaiv.TestTools.dll</Right>
+    <Left>lib/net9.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net9.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.JsonTester.Read_System_Text_JSON``1(System.Object,System.Text.Json.JsonSerializerOptions)</Target>
+    <Left>lib/net9.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net9.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.TestTools.JsonTester.Write_System_Text_JSON(System.Object)</Target>
+    <Left>lib/net9.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net9.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.JsonTester.Write_System_Text_JSON(System.Object,System.Text.Json.JsonSerializerOptions)</Target>
+    <Left>lib/net9.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net9.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.JsonTester.Read_System_Text_JSON``1(System.Object,System.Text.Json.JsonSerializerOptions)</Target>
     <Left>lib/netstandard2.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/net6.0/Qowaiv.TestTools.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.JsonTester.Write_System_Text_JSON(System.Object,System.Text.Json.JsonSerializerOptions)</Target>
+    <Left>lib/netstandard2.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net6.0/Qowaiv.TestTools.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.ConvertFrom`1.With``1</Target>
+    <Left>lib/netstandard2.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.TestTools.Converting.To(System.Type)</Target>
+    <Left>lib/netstandard2.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.ConvertTo`1.With``1</Target>
     <Left>lib/netstandard2.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -135,6 +275,18 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.ConvertFrom`1.With``1:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.ConvertFrom`1.With``1&lt;0&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.TestTools.Converting.From``1(``0)&lt;0&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
@@ -159,13 +311,25 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.TestTools.Deserialize.Xml``1(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.TestTools.ConvertTo`1.With``1:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.ConvertTo`1.With``1&lt;0&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.TestTools.Deserialize.Xml``1(System.String)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.Deserialize.Xml``1(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
   </Suppression>
@@ -219,13 +383,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.TestTools.Serialize.Xml``1(``0):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.TestTools.Serialize.Xml``1(``0)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.TestTools.Serialize.Xml``1(``0)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Target>M:Qowaiv.TestTools.Serialize.Xml``1(``0):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
   </Suppression>

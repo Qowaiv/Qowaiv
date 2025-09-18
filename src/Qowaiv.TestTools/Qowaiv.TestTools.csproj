@@ -40,6 +40,21 @@ v6.0.0
 - Added AwesomeAssertions extensions. #218
 - Decorate nullable types. #228
 - Assert* classes dropped. #218 (BREAKING)
+v3.1.0
+- Introduction of `TypeAssert` (#148)
+v3.0.0
+- JSON serialization is convention based. (#115) breaking
+v2.0.0
+- Removed Qowaiv.TestTools.Validation.* (107) breaking
+- DebuggerDisplayAssert supports nested classes. (#110) fix
+v1.0.3
+- Extend TestTools.SerializationTest with XmlSerialize() and XmlDeserialize() (#93)
+v1.0.2
+- Updated references
+v1.0.1
+- Fix in TestTools Assert (internal)
+v1.0.0
+* Introduction of Qowaiv.TestTools
 ]]>
     </PackageReleaseNotes>
   </PropertyGroup>

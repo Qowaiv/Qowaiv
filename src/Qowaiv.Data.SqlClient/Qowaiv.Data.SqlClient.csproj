@@ -36,6 +36,15 @@ v6.0.0
 - TryParse(string) returns nullable SVO. #206 (breaking)
 - Drop cast from and to string. #212 (breaking)
 - Non-predictable hash codes. #205 (breaking)
+v5.1.1
+- Revoked `IConvertable` (fix)
+v5.1.0
+- Add `IConvertable` to all SVO's (#133)
+v5.0.0
+- JSON serialization is convention based. (#115) breaking
+v4.1.0
+- Updated package depedency.
+- Own internal Guard.
 ]]>
     </PackageReleaseNotes>
   </PropertyGroup>

@@ -49,7 +49,7 @@ v7.*
     <PackageReleaseNotes>
       <![CDATA[
 v7.4.5
-- Remove implicit System.Collections.Immutable. #518
+- Remove implicit System.Collections.Immutable dependency. #518
 v7.4.4
 - Add Oman, Somalia, and Yemen to the list of countries with IBAN. #508
 - Provide a JsonConverter for System.Globalization.CultureInfo as Microsoft does not. #515

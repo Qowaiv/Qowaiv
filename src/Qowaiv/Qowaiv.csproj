@@ -43,7 +43,7 @@
     <ToBeReleased>
       <![CDATA[
 v7.*
-- Addition and subtraction of MonthSpan to/of DateOnly. #519
+- Addition and subtraction of MonthSpan to/of DateOnly. #520
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

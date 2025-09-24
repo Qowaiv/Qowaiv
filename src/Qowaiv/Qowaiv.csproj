@@ -36,9 +36,9 @@
       <LastGenOutput>QowaivMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
+  
   <PropertyGroup>
-    <Version>7.4.4</Version>
+    <Version>7.4.5</Version>
     <PackageValidationBaselineVersion>7.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
@@ -48,6 +48,8 @@ v7.*
     </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
+v7.4.5
+- Remove implicit System.Collections.Immutable. #518
 v7.4.4
 - Add Oman, Somalia, and Yemen to the list of countries with IBAN. #508
 - Provide a JsonConverter for System.Globalization.CultureInfo as Microsoft does not. #515

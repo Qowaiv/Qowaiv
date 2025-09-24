@@ -72,23 +72,13 @@ inside and outside a Domain-driven context.
   </PropertyGroup>
 
   <ItemGroup Label="Code generation">
-    <PackageReference Include="PolySharp" PrivateAssets="all" />
+    <PackageReference PrivateAssets="all" Include="PolySharp" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">
-    <PackageReference Include="AsyncFixer" PrivateAssets="all" />
-    <PackageReference Include="DotNetProjectFile.Analyzers" PrivateAssets="all" />
-    <PackageReference Include="SonarAnalyzer.CSharp" PrivateAssets="all" />
-    <!-- required by the analyzer -->
-    <PackageReference Include="System.Collections.Immutable" PrivateAssets="all" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ThirdPartyLicense Include="SonarAnalyzer.CSharp" Hash="IBM9yngU7omFyJOMSFSy0w" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ThirdPartyLicense Include="SonarAnalyzer.CSharp" Hash="IBM9yngU7omFyJOMSFSy0w" />
+    <PackageReference PrivateAssets="all" Include="AsyncFixer" />
+    <PackageReference PrivateAssets="all" Include="DotNetProjectFile.Analyzers" />
+    <PackageReference PrivateAssets="all" Include="SonarAnalyzer.CSharp"  />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">

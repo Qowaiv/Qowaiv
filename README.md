@@ -596,6 +596,32 @@ also support the use of SQL wildcard characters _ and %.
 For types that are shipped with the .NET standard library that meet (most) SVO
 criteria, Qowaiv can offer some extensions to improve usage.
 
+### System.DateOnly
+The [`DateOnly`](https://learn.microsoft.com/dotnet/api/system.dateonly) is the
+type has been introduced with .NET 6.0. For previous versions we still
+recommend [`Qowaiv.Date`](#Date). Interaction with Qowaiv SVO' is provided:
+
+``` C#
+var more = new DateOnly(2017, 06, 11) + MonthSpan.FromMonths(3);
+var less = new DateOnly(2017, 06, 11) - MonthSpan.FromMonths(3);
+
+var more = new DateOnly(2017, 06, 11) + DateSpan.FromDays(3);
+var less = new DateOnly(2017, 06, 11) - DateSpan.FromDays(3);
+```
+
+### System.DateTime
+The [`DateTime`](https://learn.microsoft.com/dotnet/api/system.datetime) is the
+to type to use when representing date and time. Interaction with Qowaiv SVO's
+is provided:
+
+``` C#
+var more = new DateTime(2017, 06, 11) + MonthSpan.FromMonths(3);
+var less = new DateTime(2017, 06, 11) - MonthSpan.FromMonths(3);
+
+var more = new DateTime(2017, 06, 11) + DateSpan.FromDays(3);
+var less = new DateTime(2017, 06, 11) - DateSpan.FromDays(3);
+```
+
 ### System.Globalization.CultureInfo
 The [`CultureInfo`](https://learn.microsoft.com/dotnet/api/system.globalization.cultureinfo)
 lacks a `JsonConverter`:

@@ -1,3 +1,5 @@
+using AwesomeAssertions.Extensions;
+
 namespace Month_span_specs;
 
 public class Guards
@@ -110,6 +112,39 @@ public class Can_be_transformed
 
     [Test]
     public void divide_by_decimal() => (Svo.MonthSpan / 4.0588m).Should().Be(MonthSpan.FromMonths(17));
+}
+
+public class Can_modify
+{
+    [Test]
+    public void DateTime_by_addition()
+    {
+        var added = Svo.DateTime + Svo.MonthSpan;
+        added.Should().Be(11.March(2023).At(06, 15).AsUtc());
+    }
+
+    [Test]
+    public void DateTime_by_subtraction()
+    {
+        var added = Svo.DateTime - Svo.MonthSpan;
+        added.Should().Be(11.September(2011).At(06, 15).AsUtc());
+    }
+
+#if NET6_0_OR_GREATER
+    [Test]
+    public void DateOnly_by_addition()
+    {
+        var added = Svo.DateOnly + Svo.MonthSpan;
+        added.Should().Be(new DateOnly(2023, 03, 11));
+    }
+
+    [Test]
+    public void DateOnly_by_subtraction()
+    {
+        var added = Svo.DateOnly - Svo.MonthSpan;
+        added.Should().Be(new DateOnly(2011, 09, 11));
+    }
+#endif
 }
 
 public class Can_subtract

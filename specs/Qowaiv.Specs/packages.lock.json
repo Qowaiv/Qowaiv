@@ -244,20 +244,20 @@
       "qowaiv.data.sqlclient": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[7.4.3, )",
+          "Qowaiv": "[7.4.4, )",
           "System.Data.SqlClient": "[4.8.6, 4.8.6]"
         }
       },
       "qowaiv.specs.generated": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[7.4.3, )"
+          "Qowaiv": "[7.4.4, )"
         }
       },
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[7.4.3, )"
+          "Qowaiv": "[7.4.4, )"
         }
       },
       "Newtonsoft.Json": {
@@ -529,20 +529,20 @@
       "qowaiv.data.sqlclient": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[7.4.3, )",
+          "Qowaiv": "[7.4.4, )",
           "System.Data.SqlClient": "[4.8.6, 4.8.6]"
         }
       },
       "qowaiv.specs.generated": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[7.4.3, )"
+          "Qowaiv": "[7.4.4, )"
         }
       },
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[7.4.3, )"
+          "Qowaiv": "[7.4.4, )"
         }
       },
       "Newtonsoft.Json": {
@@ -810,20 +810,20 @@
       "qowaiv.data.sqlclient": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[7.4.3, )",
+          "Qowaiv": "[7.4.4, )",
           "System.Data.SqlClient": "[4.8.6, 4.8.6]"
         }
       },
       "qowaiv.specs.generated": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[7.4.3, )"
+          "Qowaiv": "[7.4.4, )"
         }
       },
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[7.4.3, )"
+          "Qowaiv": "[7.4.4, )"
         }
       },
       "Newtonsoft.Json": {
@@ -1079,20 +1079,20 @@
       "qowaiv.data.sqlclient": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[7.4.3, )",
+          "Qowaiv": "[7.4.4, )",
           "System.Data.SqlClient": "[4.8.6, 4.8.6]"
         }
       },
       "qowaiv.specs.generated": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[7.4.3, )"
+          "Qowaiv": "[7.4.4, )"
         }
       },
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[7.4.3, )"
+          "Qowaiv": "[7.4.4, )"
         }
       },
       "Newtonsoft.Json": {

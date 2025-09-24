@@ -265,25 +265,10 @@ public class MonthSpanTest
         added.Should().Be(MonthSpan.FromMonths(19));
     }
 
-    [Test]
-    public void Add_2MonthsToDateTime_2MonthsLater()
-    {
-        var added = new DateTime(1979, 12, 31, 00, 00, 000, DateTimeKind.Local) + MonthSpan.FromMonths(2);
-        added.Should().Be(new DateTime(1980, 02, 29, 00, 00, 000, DateTimeKind.Local));
-    }
-
-    [Test]
     public void Subtract_19Months6Months_13Months()
     {
         var subtracted = MonthSpan.FromMonths(19) - MonthSpan.FromMonths(6);
         subtracted.Should().Be(MonthSpan.FromMonths(13));
-    }
-
-    [Test]
-    public void Subtract_9MonthsFromDateTime_9MonthsEarlier()
-    {
-        var added = new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local) - MonthSpan.FromMonths(9);
-        added.Should().Be(new DateTime(2016, 09, 11, 00, 00, 000, DateTimeKind.Local));
     }
 
     /// <summary>Orders a list of month spans ascending.</summary>

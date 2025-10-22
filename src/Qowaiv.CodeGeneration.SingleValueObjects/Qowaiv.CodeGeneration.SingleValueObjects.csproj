@@ -10,7 +10,7 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Label="Snippets">
     <Compile Remove="Snippets/*.cs" />
     <EmbeddedResource Include="Snippets/*.cs" />
   </ItemGroup>
@@ -34,7 +34,7 @@
     <Compile Include="../Qowaiv.CodeGeneration/Types/Namespace.cs" Link="Qowaiv.CodeGeneration/Types/Namespace.cs" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Label="Templates">
     <Compile Remove="../../shared/ProductInfo.cs" />
   </ItemGroup>
 

@@ -13,7 +13,6 @@ public class Open_API_data_types
            .Should().BeEquivalentTo(OpenApiDataTypes.FromAssemblies(typeof(Date).Assembly));
 }
 
-[Obsolete("Will be dropped in Qowaiv 8.0.")]
 public class Open_API_data_type
 {
     [Test]

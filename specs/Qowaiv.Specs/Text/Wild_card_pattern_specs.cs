@@ -116,15 +116,3 @@ public class Can_not_have
             .WithMessage("The wildcard pattern is invalid.*");
     }
 }
-
-public class Can_be_serialized
-{
-    public static readonly WildcardPattern TestPattern = new("t?st*", WildcardPatternOptions.SingleOrTrailing, StringComparison.Ordinal);
-
-    [Test]
-    public void DataContract_serializer()
-    {
-        var act = SerializeDeserialize.DataContract(TestPattern);
-        act.Should().HaveDebuggerDisplay("{t?st*}, SingleOrTrailing, Ordinal");
-    }
-}

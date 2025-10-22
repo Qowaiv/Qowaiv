@@ -458,7 +458,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase(null, null)]
     [TestCase("?", "?")]
     [TestCase(2.0, "February")]

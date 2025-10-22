@@ -178,7 +178,7 @@ public class Can_modify
         total.Should().Be(new(years: 11, months: 3));
     }
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [Test]
     public void DateOnly_by_addition()
     {
@@ -208,7 +208,7 @@ public class Can_subtract
     public void two_Dates(Date d1, Date d2, MonthSpan expected)
         => MonthSpan.Subtract(d1, d2).Should().Be(expected);
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase("2020-04-30", "1710-02-01", "310Y+2M")]
     [TestCase("2020-04-30", "2020-04-01", 00)]
     [TestCase("2020-04-30", "2020-03-31", 01)]
@@ -333,7 +333,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase(69d, "5Y+9M")]
     [TestCase(69L, "5Y+9M")]
     [TestCase("5Y+9M", "5Y+9M")]

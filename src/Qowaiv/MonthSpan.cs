@@ -6,7 +6,7 @@ namespace Qowaiv;
 [SingleValueObject(SingleValueStaticOptions.Continuous, underlyingType: typeof(int))]
 [OpenApiDataType(description: "Month span, specified in years and months.", example: "1Y+10M", type: "string", format: "month-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M")]
 [TypeConverter(typeof(MonthSpanTypeConverter))]
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.MonthSpanJsonConverter))]
 #endif
 public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEquatable<MonthSpan>, IComparable, IComparable<MonthSpan>
@@ -232,7 +232,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// <summary>Casts a years span to a month span.</summary>
     public static implicit operator MonthSpan(YearSpan years) => FromYears((int)years);
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     /// <summary>Adds a month span to the date only.</summary>
     public static DateOnly operator +(DateOnly dt, MonthSpan span) => dt.Add(span);
 

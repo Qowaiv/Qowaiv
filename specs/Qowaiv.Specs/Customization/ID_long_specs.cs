@@ -178,7 +178,7 @@ public class Is_comparable
     }
 }
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 public class Supports_JSON_serialization
 {
     [TestCase("", null)]

@@ -1,7 +1,7 @@
 {
   "version": 2,
   "dependencies": {
-    "net8.0": {
+    "net10.0": {
       "AsyncFixer": {
         "type": "Direct",
         "requested": "[1.6.0, )",
@@ -81,6 +81,80 @@
         "type": "Project"
       }
     },
+    "net8.0": {
+      "AsyncFixer": {
+        "type": "Direct",
+        "requested": "[1.6.0, )",
+        "resolved": "1.6.0",
+        "contentHash": "/Xfs9H3UMfEv64cwT+C/JrTRp4w08BmPuFbj0ageadCHpx6rxYJxAU2C6sEqRFG22xmGk5cX9ewzoiiehWVHOw=="
+      },
+      "DotNet.ReproducibleBuilds": {
+        "type": "Direct",
+        "requested": "[1.2.25, )",
+        "resolved": "1.2.25",
+        "contentHash": "xCXiw7BCxHJ8pF6wPepRUddlh2dlQlbr81gXA72hdk4FLHkKXas7EH/n+fk5UCA/YfMqG1Z6XaPiUjDbUNBUzg=="
+      },
+      "DotNetProjectFile.Analyzers": {
+        "type": "Direct",
+        "requested": "[1.7.1, )",
+        "resolved": "1.7.1",
+        "contentHash": "UdFWpLkSL8QFje40D4He2kpQBWwUBEuNVzknBTQVQZ6NraH1qf25IHBmfYXJi8Z+kueby1BCpFDZOXlrYz40Rw=="
+      },
+      "Microsoft.Sbom.Targets": {
+        "type": "Direct",
+        "requested": "[4.0.3, )",
+        "resolved": "4.0.3",
+        "contentHash": "xwHbbj9gLj1HZzLVEM2UpQM7ZY7FkiEs/nRkt6G1H7mR/14aNhjsskRoI7K7CezHJA4cASsGxTvqorbUXTI1TQ=="
+      },
+      "Newtonsoft.Json": {
+        "type": "Direct",
+        "requested": "[13.0.3, )",
+        "resolved": "13.0.3",
+        "contentHash": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ=="
+      },
+      "PolySharp": {
+        "type": "Direct",
+        "requested": "[1.15.0, )",
+        "resolved": "1.15.0",
+        "contentHash": "FbU0El+EEjdpuIX4iDbeS7ki1uzpJPx8vbqOzEtqnl1GZeAGJfq+jCbxeJL2y0EPnUNk8dRnnqR2xnYXg9Tf+g=="
+      },
+      "Qowaiv.Analyzers.CSharp": {
+        "type": "Direct",
+        "requested": "[2.0.5, )",
+        "resolved": "2.0.5",
+        "contentHash": "ux4MyZzQvl44z/rYRGHsZg0i8oF7h2X50Rs8VNy3T5twEBscPwBi5Og1YndOZty8m95A+iocjdGTgAp2g9NLbQ=="
+      },
+      "Qowaiv.Validation.DataAnnotations": {
+        "type": "Direct",
+        "requested": "[4.0.1, )",
+        "resolved": "4.0.1",
+        "contentHash": "p6hC/MD65kl6IyVPAIUvIXQNl0lWPQf+NLt9vKsp3CUtixu8DH99loGphodecO+aQsIRiJFDYrZmoqsMiP2s/A==",
+        "dependencies": {
+          "Qowaiv": "7.4.3",
+          "Qowaiv.Validation.Abstractions": "1.0.0"
+        }
+      },
+      "SonarAnalyzer.CSharp": {
+        "type": "Direct",
+        "requested": "[10.15.0.120848, )",
+        "resolved": "10.15.0.120848",
+        "contentHash": "1hM3HVRl5jdC/ZBDu+G7CCYLXRGe/QaP01Zy+c9ETPhY7lWD8g8HiefY6sGaH0T3CJ4wAy0/waGgQTh0TYy0oQ=="
+      },
+      "StyleCop.Analyzers.Unstable": {
+        "type": "Direct",
+        "requested": "[1.2.0.556, )",
+        "resolved": "1.2.0.556",
+        "contentHash": "zvn9Mqs/ox/83cpYPignI8hJEM2A93s2HkHs8HYMOAQW0PkampyoErAiIyKxgTLqbbad29HX/shv/6LGSjPJNQ=="
+      },
+      "Qowaiv.Validation.Abstractions": {
+        "type": "Transitive",
+        "resolved": "1.0.0",
+        "contentHash": "tgczqZ9H793awCUncyel9wi9W9N6RIjuqaJHWsE/zl3VNRgUUrxNLezn1Ofnv/oVx8P90mTNXLgxJ84fzoTNKQ=="
+      },
+      "qowaiv": {
+        "type": "Project"
+      }
+    },
     "net9.0": {
       "AsyncFixer": {
         "type": "Direct",
@@ -131,8 +205,7 @@
         "contentHash": "p6hC/MD65kl6IyVPAIUvIXQNl0lWPQf+NLt9vKsp3CUtixu8DH99loGphodecO+aQsIRiJFDYrZmoqsMiP2s/A==",
         "dependencies": {
           "Qowaiv": "7.4.3",
-          "Qowaiv.Validation.Abstractions": "1.0.0",
-          "System.ComponentModel.Annotations": "5.0.0"
+          "Qowaiv.Validation.Abstractions": "1.0.0"
         }
       },
       "SonarAnalyzer.CSharp": {
@@ -151,11 +224,6 @@
         "type": "Transitive",
         "resolved": "1.0.0",
         "contentHash": "tgczqZ9H793awCUncyel9wi9W9N6RIjuqaJHWsE/zl3VNRgUUrxNLezn1Ofnv/oVx8P90mTNXLgxJ84fzoTNKQ=="
-      },
-      "System.ComponentModel.Annotations": {
-        "type": "Transitive",
-        "resolved": "5.0.0",
-        "contentHash": "dMkqfy2el8A8/I76n2Hi1oBFEbG1SfxD2l5nhwXV3XjlnOmwxJlQbYpJH4W51odnU9sARCSAgv7S3CyAFMkpYg=="
       },
       "qowaiv": {
         "type": "Project"

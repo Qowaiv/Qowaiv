@@ -1,18 +1,42 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/package.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net8.0;net9.0;net10.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DevelopmentDependency>false</DevelopmentDependency>
     <Version>7.2.0</Version>
     <PackageValidationBaselineVersion>7.0.0</PackageValidationBaselineVersion>
     <PackageId>Qowaiv.Data.SqlClient</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="../Qowaiv/Qowaiv.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>7.2.0</Version>
+    <PackageValidationBaselineVersion>7.0.0</PackageValidationBaselineVersion>
+    <ToBeReleased>
+      <![CDATA[
+v8.0.0
+- Add support for .NET 10.
+- Drop support for .NET 6. (breaking)
+- Hide Guard methods from stacktrace.
+]]>
+    </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
-ToBeReleased:
-- Hide Guard methods from stacktrace.
 v7.2.0
 - Added .NET 9.0 version to the package.
 - Potentially improved performance of concurrency when generating sql parameters in .NET 9 and up (using new System.Threading.Lock).
@@ -48,18 +72,5 @@ v4.1.0
 ]]>
     </PackageReleaseNotes>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-    <ProjectReference Include="../Qowaiv/Qowaiv.csproj" />
-  </ItemGroup>
 
 </Project>

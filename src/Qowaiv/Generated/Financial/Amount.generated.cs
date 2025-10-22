@@ -101,27 +101,6 @@ public partial struct Amount : IFormattable
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
-#if NET8_0_OR_GREATER
-#else
-public partial struct Amount : ISerializable
-{
-    /// <summary>Initializes a new instance of the amount based on the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    private Amount(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        m_Value = info.GetValue("Value", typeof(decimal)) is decimal val ? val : default(decimal);
-    }
-
-    /// <summary>Adds the underlying property of the amount to the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        => Guard.NotNull(info).AddValue("Value", m_Value);
-}
-#endif
-
 public partial struct Amount
 {
     /// <summary>Creates the amount from a JSON string.</summary>

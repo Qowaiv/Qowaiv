@@ -253,27 +253,6 @@ public class Supports_JSON_serialization
             .And.Should().BeOfType(exceptionType);
 }
 
-#if NET8_0_OR_GREATER
-#else
-public class Supports_binary_serialization
-{
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void using_BinaryFormatter()
-    {
-        var round_tripped = SerializeDeserialize.Binary(Svo.Country);
-        round_tripped.Should().Be(Svo.Country);
-    }
-
-    [Test]
-    public void storing_value_in_SerializationInfo()
-    {
-        var info = Serialize.GetInfo(Svo.Country);
-        info.GetString("Value").Should().Be("VA");
-    }
-}
-#endif
-
 public class Is_equal_by_value
 {
     [TestCase("", 0)]

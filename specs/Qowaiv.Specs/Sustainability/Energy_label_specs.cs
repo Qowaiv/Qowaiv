@@ -547,26 +547,6 @@ public class Is_Open_API_data_type
         => OpenApiDataType.FromType(typeof(EnergyLabel))!.Matches(input).Should().BeTrue();
 }
 
-#if NET8_0_OR_GREATER
-#else
-public class Supports_binary_serialization
-{
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void using_BinaryFormatter()
-    {
-        var round_tripped = SerializeDeserialize.Binary(Svo.EnergyLabel);
-        round_tripped.Should().Be(Svo.EnergyLabel);
-    }
-
-    [Test]
-    public void storing_int_in_SerializationInfo()
-    {
-        var info = Serialize.GetInfo(Svo.EnergyLabel);
-        info.GetInt32("Value").Should().Be(9);
-    }
-}
-#endif
 
 public class Debugger
 {

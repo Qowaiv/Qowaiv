@@ -36,7 +36,6 @@ namespace Qowaiv.Web;
 /// See http://tools.ietf.org/html/rfc6838.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable]
 [SingleValueObject(SingleValueStaticOptions.AllExcludingCulture, typeof(string))]
 [OpenApiDataType(description: "Media type notation as defined by RFC 6838.", example: "text/html", type: "string", format: "internet-media-type", nullable: true)]
 [TypeConverter(typeof(InternetMediaTypeTypeConverter))]

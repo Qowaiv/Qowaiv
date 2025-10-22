@@ -87,27 +87,6 @@ public partial struct DateSpan : IFormattable
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
-#if NET8_0_OR_GREATER
-#else
-public partial struct DateSpan : ISerializable
-{
-    /// <summary>Initializes a new instance of the date span based on the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    private DateSpan(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        m_Value = info.GetValue("Value", typeof(ulong)) is ulong val ? val : default(ulong);
-    }
-
-    /// <summary>Adds the underlying property of the date span to the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        => Guard.NotNull(info).AddValue("Value", m_Value);
-}
-#endif
-
 public partial struct DateSpan
 {
     /// <summary>Creates the date span from a JSON string.</summary>

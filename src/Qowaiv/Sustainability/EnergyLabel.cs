@@ -20,11 +20,11 @@ namespace Qowaiv.Sustainability;
 [SingleValueObject(SingleValueStaticOptions.All, typeof(int))]
 [OpenApiDataType(description: "EU energy label", type: "string", format: "energy-label", example: "A++", pattern: @"[A-H]|A\+{1,4}", nullable: true)]
 [TypeConverter(typeof(Conversion.Sustainability.EnergyLabelTypeConverter))]
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Sustainability.EnergyLabelJsonConverter))]
 #endif
 public readonly partial struct EnergyLabel : IXmlSerializable, IEquatable<EnergyLabel>, IComparable, IComparable<EnergyLabel>
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     , ISpanFormattable
 #else
     , IFormattable
@@ -102,7 +102,7 @@ public readonly partial struct EnergyLabel : IXmlSerializable, IEquatable<Energy
         }
     }
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     /// <inheritdoc />
     public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
     {

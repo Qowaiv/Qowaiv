@@ -65,7 +65,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase(null, "0Y+0M+0D")]
     [TestCase(0L, "0Y+0M+0D")]
     [TestCase("0Y+0M+0D", "0Y+0M+0D")]
@@ -165,7 +165,7 @@ public class Can_create
         }
     }
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 
     [Test]
     public void Age_form_DateOnly_without_months()
@@ -252,7 +252,7 @@ public class Can_subtract
         DateSpan.Subtract(d1, d2, settings).Should().Be(expected);
     }
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [Test]
     public void two_DateOnlys()
         => DateSpan.Subtract(new DateOnly(2023, 11, 17), Svo.DateOnly)

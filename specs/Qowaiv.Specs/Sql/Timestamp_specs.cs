@@ -88,7 +88,7 @@ public class Can_not_be_created
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase(null, null)]
     [TestCase(1849341697d, "0x000000006E3AB701")]
     [TestCase(1849341697L, "0x000000006E3AB701")]

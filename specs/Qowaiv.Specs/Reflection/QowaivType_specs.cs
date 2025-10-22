@@ -76,7 +76,7 @@ public class IsNumeric
 public class IsDate
 {
     [TestCase(typeof(DateTime))]
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase(typeof(DateOnly))]
 #endif
     [TestCase(typeof(DateTimeOffset))]

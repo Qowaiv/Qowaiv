@@ -56,7 +56,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase("EUR 42.17", "EUR 42.17")]
     [TestCase("EUR42.17", "EUR 42.17")]
     [TestCase("€42.17", "EUR 42.17")]

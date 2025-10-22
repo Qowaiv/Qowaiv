@@ -4,7 +4,6 @@ namespace Qowaiv.Financial;
 
 /// <summary>Represents an amount.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable]
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
 [OpenApiDataType(description: "Decimal representation of a currency amount.", example: 15.95, type: "number", format: "amount")]
 [TypeConverter(typeof(AmountTypeConverter))]

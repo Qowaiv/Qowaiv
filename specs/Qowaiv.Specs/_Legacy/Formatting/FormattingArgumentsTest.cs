@@ -19,42 +19,6 @@ public class FormattingArgumentsTest
 
     #region (De)serialization tests
 
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    public void GetObjectData_SerializationInfo_AreEqual()
-    {
-        ISerializable obj = TestStruct;
-        var info = new SerializationInfo(typeof(FormattingArguments), new System.Runtime.Serialization.FormatterConverter());
-        obj.GetObjectData(info, default);
-
-        info.GetString("Format").Should().Be("0.000");
-        Should.BeEqual(new CultureInfo("fr-BE"), info.GetValue("FormatProvider", typeof(IFormatProvider)));
-    }
-
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_Default_AreEqual()
-    {
-        var input = new FormattableArgumentsSerializeObject
-        {
-            Id = 17,
-            Obj = default,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new FormattableArgumentsSerializeObject
-        {
-            Id = 17,
-            Obj = default,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Binary(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-#endif
-
     [Test]
     public void XmlSerializeDeserialize_Empty_AreEqual()
     {

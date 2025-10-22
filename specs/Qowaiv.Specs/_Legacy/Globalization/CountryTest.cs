@@ -243,31 +243,6 @@ public class CountryTest
         act.Should().Be(TestStruct);
     }
 
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_CountrySerializeObject_AreEqual()
-    {
-        var input = new CountrySerializeObject
-        {
-            Id = 17,
-            Obj = CountryTest.TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new CountrySerializeObject
-        {
-            Id = 17,
-            Obj = CountryTest.TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Binary(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-#endif
-
     [Test]
     public void XmlSerializeDeserialize_CountrySerializeObject_AreEqual()
     {
@@ -308,31 +283,6 @@ public class CountryTest
         Should.BeEqual(exp.Obj, act.Obj, "Obj");
         Should.BeEqual(exp.Date, act.Date, "Date");
     }
-
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_Empty_AreEqual()
-    {
-        var input = new CountrySerializeObject
-        {
-            Id = 17,
-            Obj = Country.Empty,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new CountrySerializeObject
-        {
-            Id = 17,
-            Obj = Country.Empty,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Binary(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-#endif
 
     [Test]
     public void XmlSerializeDeserialize_Empty_AreEqual()

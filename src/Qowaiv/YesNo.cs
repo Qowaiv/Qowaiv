@@ -13,7 +13,6 @@ namespace Qowaiv;
 /// achieved when modeling a property as <see cref="bool" /> instead of an <see cref="YesNo" />.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Yes-No notation.", example: "yes", type: "string", format: "yes-no", nullable: true, @enum: "yes,no,?")]
 [TypeConverter(typeof(YesNoTypeConverter))]

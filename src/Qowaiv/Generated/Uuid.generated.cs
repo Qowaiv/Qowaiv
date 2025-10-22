@@ -101,27 +101,6 @@ public partial struct Uuid : IFormattable
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
-#if NET8_0_OR_GREATER
-#else
-public partial struct Uuid : ISerializable
-{
-    /// <summary>Initializes a new instance of the UUID based on the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    private Uuid(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        m_Value = info.GetValue("Value", typeof(Guid)) is Guid val ? val : default(Guid);
-    }
-
-    /// <summary>Adds the underlying property of the UUID to the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        => Guard.NotNull(info).AddValue("Value", m_Value);
-}
-#endif
-
 public partial struct Uuid
 {
     /// <summary>Creates the UUID from a JSON string.</summary>

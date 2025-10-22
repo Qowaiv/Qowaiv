@@ -443,27 +443,6 @@ public class Is_Open_API_data_type
            nullable: true));
 }
 
-#if NET8_0_OR_GREATER
-#else
-public class Supports_binary_serialization
-{
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void using_BinaryFormatter()
-    {
-        var round_tripped = SerializeDeserialize.Binary(Svo.Sex);
-        round_tripped.Should().Be(Svo.Sex);
-    }
-
-    [Test]
-    public void storing_Byte_in_SerializationInfo()
-    {
-        var info = Serialize.GetInfo(Svo.Sex);
-        info.GetByte("Value").Should().Be((byte)4);
-    }
-}
-#endif
-
 public class Debugger
 {
     [TestCase("{empty}", "")]

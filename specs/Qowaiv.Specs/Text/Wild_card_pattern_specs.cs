@@ -121,29 +121,6 @@ public class Can_be_serialized
 {
     public static readonly WildcardPattern TestPattern = new("t?st*", WildcardPatternOptions.SingleOrTrailing, StringComparison.Ordinal);
 
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    public void ISerializer_interface()
-    {
-        ISerializable obj = TestPattern;
-        var info = new SerializationInfo(typeof(Date), new FormatterConverter());
-        obj.GetObjectData(info, default);
-
-        info.GetString("Pattern").Should().Be("t?st*");
-        info.GetInt32("Options").Should().Be((int)WildcardPatternOptions.SingleOrTrailing);
-        info.GetInt32("ComparisonType").Should().Be((int)StringComparison.Ordinal);
-    }
-
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void BInary_serializer()
-    {
-        var act = SerializeDeserialize.Binary(TestPattern);
-        act.Should().HaveDebuggerDisplay("{t?st*}, SingleOrTrailing, Ordinal");
-    }
-#endif
-
     [Test]
     public void DataContract_serializer()
     {

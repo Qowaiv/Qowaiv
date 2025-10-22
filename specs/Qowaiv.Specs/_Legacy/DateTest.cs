@@ -90,29 +90,6 @@ public class DateTest
 
     #region (XML) (De)serialization tests
 
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    public void GetObjectData_SerializationInfo_AreEqual()
-    {
-        ISerializable obj = TestStruct;
-        var info = new SerializationInfo(typeof(Date), new System.Runtime.Serialization.FormatterConverter());
-        obj.GetObjectData(info, default);
-
-        Should.BeEqual(new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), info.GetDateTime("Value"));
-    }
-
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_TestStruct_AreEqual()
-    {
-        var input = TestStruct;
-        var exp = TestStruct;
-        var act = SerializeDeserialize.Binary(input);
-        act.Should().Be(exp);
-    }
-#endif
-
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
@@ -136,31 +113,6 @@ public class DateTest
         var act = Deserialize.Xml<Date>("1970-02-14");
         act.Should().Be(TestStruct);
     }
-
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_DateSerializeObject_AreEqual()
-    {
-        var input = new DateSerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new DateSerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Binary(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-#endif
 
     [Test]
     public void XmlSerializeDeserialize_DateSerializeObject_AreEqual()
@@ -202,31 +154,6 @@ public class DateTest
         Should.BeEqual(exp.Obj, act.Obj, "Obj");
         Should.BeEqual(exp.Date, act.Date, "Date");
     }
-
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_MinValue_AreEqual()
-    {
-        var input = new DateSerializeObject
-        {
-            Id = 17,
-            Obj = Date.MinValue,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new DateSerializeObject
-        {
-            Id = 17,
-            Obj = Date.MinValue,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Binary(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-#endif
 
     [Test]
     public void XmlSerializeDeserialize_Empty_AreEqual()

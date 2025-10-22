@@ -458,21 +458,6 @@ public class Is_Open_API_data_type
             nullable: true));
 }
 
-#if NET8_0_OR_GREATER
-#else
-public class Supports_binary_serialization
-{
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void using_BinaryFormatter()
-        => SerializeDeserialize.Binary(Svo.PostalCode).Should().Be(Svo.PostalCode);
-
-    [Test]
-    public void storing_string_in_SerializationInfo()
-        => Serialize.GetInfo(Svo.PostalCode).GetString("Value").Should().Be("H0H0H0");
-}
-#endif
-
 public class Not_supported_by
 {
     [Test]

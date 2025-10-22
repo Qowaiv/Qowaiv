@@ -520,27 +520,6 @@ public class Is_Open_API_data_type
           nullable: true));
 }
 
-#if NET8_0_OR_GREATER
-#else
-public class Supports_binary_serialization
-{
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void using_BinaryFormatter()
-    {
-        var round_tripped = SerializeDeserialize.Binary(Svo.Year);
-        round_tripped.Should().Be(Svo.Year);
-    }
-
-    [Test]
-    public void storing_short_in_SerializationInfo()
-    {
-        var info = Serialize.GetInfo(Svo.Year);
-        info.GetInt16("Value").Should().Be((short)1979);
-    }
-}
-#endif
-
 public class Debugger
 {
     [TestCase("{empty}", "")]

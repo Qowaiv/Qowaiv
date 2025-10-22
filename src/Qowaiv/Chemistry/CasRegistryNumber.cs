@@ -11,7 +11,6 @@ namespace Qowaiv.Chemistry;
 /// early 1800's.
 /// </summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(long))]
 [OpenApiDataType(description: "CAS Registry Number", type: "string", format: "cas-nr", example: "7732-18-5", pattern: "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]", nullable: true)]
 [TypeConverter(typeof(Conversion.Chemistry.CasRegistryNumberTypeConverter))]

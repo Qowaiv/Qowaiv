@@ -97,21 +97,6 @@ public class Supports_JSON_serialization
             .And.Should().BeOfType(exceptionType);
 }
 
-#if NET8_0_OR_GREATER
-#else
-public class Supports_binary_serialization
-{
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void using_BinaryFormatter()
-        => SerializeDeserialize.Binary(Svo.DateSpan).Should().Be(Svo.DateSpan);
-
-    [Test]
-    public void storing_string_in_SerializationInfo()
-        => Serialize.GetInfo(Svo.DateSpan).GetUInt64("Value").Should().Be(532575944699UL);
-}
-#endif
-
 public class Is_Open_API_data_type
 {
     [Test]

@@ -101,27 +101,6 @@ public partial struct Percentage : IFormattable
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
-#if NET8_0_OR_GREATER
-#else
-public partial struct Percentage : ISerializable
-{
-    /// <summary>Initializes a new instance of the percentage based on the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    private Percentage(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        m_Value = info.GetValue("Value", typeof(decimal)) is decimal val ? val : default(decimal);
-    }
-
-    /// <summary>Adds the underlying property of the percentage to the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        => Guard.NotNull(info).AddValue("Value", m_Value);
-}
-#endif
-
 public partial struct Percentage
 {
     /// <summary>Creates the percentage from a JSON string.</summary>

@@ -457,27 +457,6 @@ public class Is_Open_API_data_type
         => OpenApiDataType.FromType(typeof(CasRegistryNumber))!.Matches(input).Should().BeTrue();
 }
 
-#if NET8_0_OR_GREATER
-#else
-public class Supports_binary_serialization
-{
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void using_BinaryFormatter()
-    {
-        var round_tripped = SerializeDeserialize.Binary(Svo.CasRegistryNumber);
-        round_tripped.Should().Be(Svo.CasRegistryNumber);
-    }
-
-    [Test]
-    public void storing_long_in_SerializationInfo()
-    {
-        var info = Serialize.GetInfo(Svo.CasRegistryNumber);
-        info.GetInt64("Value").Should().Be(10028_14_5L);
-    }
-}
-#endif
-
 public class Debugger
 {
     [TestCase("{empty}", "")]

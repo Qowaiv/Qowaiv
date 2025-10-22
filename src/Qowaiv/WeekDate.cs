@@ -28,7 +28,6 @@ namespace Qowaiv;
 /// 2006-W52-7 (extended form) or 2006W527 (compact form).
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable]
 [SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(Date))]
 [OpenApiDataType(description: "Full-date notation as defined by ISO 8601.", example: "1997-W14-6", type: "string", format: "date-weekbased")]
 [TypeConverter(typeof(WeekDateTypeConverter))]
@@ -38,8 +37,6 @@ namespace Qowaiv;
 public readonly partial struct WeekDate : IXmlSerializable, IFormattable, IEquatable<WeekDate>, IComparable, IComparable<WeekDate>
 #if NET8_0_OR_GREATER
     , IMinMaxValue<WeekDate>
-#else
-    , ISerializable
 #endif
 {
     /// <summary>Represents the pattern of a (potential) valid week date.</summary>
@@ -160,27 +157,6 @@ public readonly partial struct WeekDate : IXmlSerializable, IFormattable, IEquat
         var adddays = ((int)start.DayOfWeek + 6) % 7;
         return start.AddDays(-adddays);
     }
-
-#if NET8_0_OR_GREATER
-#else
-    /// <summary>Initializes a new instance of the <see cref="WeekDate" /> struct.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    private WeekDate(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        m_Value = (Date)info.GetDateTime("Value");
-    }
-
-    /// <summary>Adds the underlying property of week date to the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        info.AddValue("Value", m_Value);
-    }
-#endif
 
     /// <summary>Serializes the week date to a JSON node.</summary>
     /// <returns>

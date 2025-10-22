@@ -16,7 +16,6 @@ namespace Qowaiv.Sustainability;
 /// and A++++ grades were later introduced for various product.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(int))]
 [OpenApiDataType(description: "EU energy label", type: "string", format: "energy-label", example: "A++", pattern: @"[A-H]|A\+{1,4}", nullable: true)]
 [TypeConverter(typeof(Conversion.Sustainability.EnergyLabelTypeConverter))]

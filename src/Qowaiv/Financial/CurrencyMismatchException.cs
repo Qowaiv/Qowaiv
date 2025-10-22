@@ -1,7 +1,6 @@
 namespace Qowaiv.Financial;
 
 /// <summary>When currencies differ, operations on money are not possible.</summary>
-[Serializable]
 public class CurrencyMismatchException : Exception
 {
     /// <summary>Initializes a new instance of the <see cref="CurrencyMismatchException" /> class.</summary>

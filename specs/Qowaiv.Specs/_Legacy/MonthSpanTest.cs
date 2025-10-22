@@ -82,35 +82,6 @@ public class MonthSpanTest
         ctor.Should().Be(MonthSpan.FromMonths(69));
     }
 
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    public void GetObjectData_NulSerializationInfo_Throws()
-    {
-        ISerializable obj = TestStruct;
-        Assert.Catch<ArgumentNullException>(() => obj.GetObjectData(null!, default));
-    }
-
-    [Test]
-    public void GetObjectData_SerializationInfo_AreEqual()
-    {
-        ISerializable obj = TestStruct;
-        var info = new SerializationInfo(typeof(MonthSpan), new FormatterConverter());
-        obj.GetObjectData(info, default);
-        Should.BeEqual(69, info.GetValue("Value", typeof(int)));
-    }
-
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_TestStruct_AreEqual()
-    {
-        var input = TestStruct;
-        var exp = TestStruct;
-        var act = SerializeDeserialize.Binary(input);
-        act.Should().Be(exp);
-    }
-#endif
-
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
@@ -135,21 +106,6 @@ public class MonthSpanTest
         act.Should().Be(TestStruct);
     }
 
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_MonthSpanSerializeObject_AreEqual()
-    {
-        var input = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
-        var exp = new MonthSpanSerializeObject { Id = 17, Obj = TestStruct, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
-        var act = SerializeDeserialize.Binary(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-#endif
-
     [Test]
     public void XmlSerializeDeserialize_MonthSpanSerializeObject_AreEqual()
     {
@@ -171,21 +127,6 @@ public class MonthSpanTest
         Should.BeEqual(exp.Obj, act.Obj, "Obj");
         Should.BeEqual(exp.Date, act.Date, "Date");
     }
-
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_Default_AreEqual()
-    {
-        var input = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
-        var exp = new MonthSpanSerializeObject { Id = 17, Obj = default, Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local), };
-        var act = SerializeDeserialize.Binary(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-#endif
 
     [Test]
     public void XmlSerializeDeserialize_Default_AreEqual()

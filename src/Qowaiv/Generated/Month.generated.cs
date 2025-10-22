@@ -115,28 +115,6 @@ public partial struct Month : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
-#if NET8_0_OR_GREATER
-#else
-public partial struct Month : ISerializable
-{
-    /// <summary>Initializes a new instance of the month based on the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    private Month(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        m_Value = info.GetValue("Value", typeof(byte)) is byte val ? val : default(byte);
-    }
-
-    /// <summary>Adds the underlying property of the month to the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        => Guard.NotNull(info).AddValue("Value", m_Value);
-}
-#endif
-
 public partial struct Month
 {
     /// <summary>Creates the month from a JSON string.</summary>

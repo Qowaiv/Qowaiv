@@ -101,27 +101,6 @@ public partial struct Elo : IFormattable
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
-#if NET8_0_OR_GREATER
-#else
-public partial struct Elo : ISerializable
-{
-    /// <summary>Initializes a new instance of the elo based on the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    private Elo(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        m_Value = info.GetValue("Value", typeof(double)) is double val ? val : default(double);
-    }
-
-    /// <summary>Adds the underlying property of the elo to the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        => Guard.NotNull(info).AddValue("Value", m_Value);
-}
-#endif
-
 public partial struct Elo
 {
     /// <summary>Creates the elo from a JSON string.</summary>

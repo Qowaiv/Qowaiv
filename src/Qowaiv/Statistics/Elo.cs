@@ -14,7 +14,6 @@ namespace Qowaiv.Statistics;
 /// League Baseball, competitive programming, and other games.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable]
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(double))]
 [OpenApiDataType(description: "Elo rating system notation.", example: 1600d, type: "number", format: "elo")]
 [TypeConverter(typeof(EloTypeConverter))]

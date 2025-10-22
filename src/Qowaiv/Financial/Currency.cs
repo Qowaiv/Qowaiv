@@ -18,7 +18,6 @@ namespace Qowaiv.Financial;
 /// is a synonym for the concept of money.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "Currency notation as defined by ISO 4217.", example: "EUR", type: "string", format: "currency", nullable: true)]
 [TypeConverter(typeof(CurrencyTypeConverter))]

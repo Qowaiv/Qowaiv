@@ -68,30 +68,6 @@ public class LocalDateTimeTest
 
     #region (XML) (De)serialization tests
 
-
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    public void GetObjectData_SerializationInfo_AreEqual()
-    {
-        ISerializable obj = TestStruct;
-        var info = new SerializationInfo(typeof(LocalDateTime), new System.Runtime.Serialization.FormatterConverter());
-        obj.GetObjectData(info, default);
-
-        info.GetDateTime("Value").Should().Be(new DateTime(1988, 06, 13, 22, 10, 05, 001, DateTimeKind.Local));
-    }
-
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_TestStruct_AreEqual()
-    {
-        var input = LocalDateTimeTest.TestStructNoMilliseconds;
-        var exp = LocalDateTimeTest.TestStructNoMilliseconds;
-        var act = SerializeDeserialize.Binary(input);
-        act.Should().Be(exp);
-    }
-#endif
-
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
@@ -115,31 +91,6 @@ public class LocalDateTimeTest
         var act = Deserialize.Xml<LocalDateTime>("1988-06-13 22:10:05.001");
         act.Should().Be(TestStruct);
     }
-
-#if NET8_0_OR_GREATER
-#else
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void SerializeDeserialize_LocalDateTimeSerializeObject_AreEqual()
-    {
-        var input = new LocalDateTimeSerializeObject
-        {
-            Id = 17,
-            Obj = LocalDateTimeTest.TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new LocalDateTimeSerializeObject
-        {
-            Id = 17,
-            Obj = LocalDateTimeTest.TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Binary(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-#endif
 
     [Test]
     public void XmlSerializeDeserialize_LocalDateTimeSerializeObject_AreEqual()

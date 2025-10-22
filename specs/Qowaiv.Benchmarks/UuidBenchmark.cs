@@ -1,17 +1,12 @@
 using Qowaiv;
-using Qowaiv.Identifiers;
 
 namespace Benchmarks;
 
 public partial class UuidBenchmark
 {
-    [EmptyTestClass]
-    public sealed class ForUuid : UuidBehavior { }
-
     internal const int Iterations = 1000;
     internal Guid[] Guids = new Guid[Iterations];
     internal Uuid[] Uuids = new Uuid[Iterations];
-    internal readonly Id<ForUuid>[] IDs = new Id<ForUuid>[Iterations];
     internal readonly UuidVersion[] Versions = new UuidVersion[Iterations];
 
     public class Parse : UuidBenchmark
@@ -69,26 +64,6 @@ public partial class UuidBenchmark
             }
             return Uuids;
         }
-
-        [Benchmark]
-        public Id<ForUuid>[] ID_for_UUID_Parse()
-        {
-            for (var i = 0; i < Base64s.Length; i++)
-            {
-                IDs[i] = Id<ForUuid>.Parse(Base64s[i]);
-            }
-            return IDs;
-        }
-
-        [Benchmark]
-        public Uuid[] Convert_fromBase64()
-        {
-            for (var i = 0; i < Base64s.Length; i++)
-            {
-                Uuids[i] = Reference.Convert_FromBase64(Base64s[i]);
-            }
-            return Uuids;
-        }
     }
 
     public class StringOutput : UuidBenchmark
@@ -131,16 +106,6 @@ public partial class UuidBenchmark
             }
             return Strings;
         }
-
-        [Benchmark]
-        public string[] Convert_ToBase64()
-        {
-            for (var i = 0; i < Uuids.Length; i++)
-            {
-                Strings[i] = Reference.ToString(Uuids[i]);
-            }
-            return Strings;
-        }
     }
 
     public class Version : UuidBenchmark
@@ -151,16 +116,6 @@ public partial class UuidBenchmark
             for (var i = 0; i < Uuids.Length; i++)
             {
                 Versions[i] = Uuids[i].Version;
-            }
-            return Versions;
-        }
-
-        [Benchmark]
-        public UuidVersion[] From_byte_array()
-        {
-            for (var i = 0; i < Uuids.Length; i++)
-            {
-                Versions[i] = Reference.GetVersion(Uuids[i]);
             }
             return Versions;
         }

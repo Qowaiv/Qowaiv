@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/package.props" />
 
@@ -6,8 +6,6 @@
     <TargetFrameworks>netstandard2.0;net8.0;net9.0;net10.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DevelopmentDependency>false</DevelopmentDependency>
-    <Version>7.2.0</Version>
-    <PackageValidationBaselineVersion>7.0.0</PackageValidationBaselineVersion>
     <PackageId>Qowaiv.Data.SqlClient</PackageId>
   </PropertyGroup>
 

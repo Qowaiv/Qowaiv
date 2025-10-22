@@ -284,7 +284,7 @@ public class Has_custom_formatting
     public void format_dependent(string format, EnergyLabel svo, string formatted)
         => svo.ToString(format).Should().Be(formatted);
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 
     public class Span_formattable
     {
@@ -450,7 +450,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase("?", "?")]
     [TestCase("C", "C")]
     [TestCase("A++", "A++")]

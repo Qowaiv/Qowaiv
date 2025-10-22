@@ -39,12 +39,12 @@
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">
-    <PackageReference Include="Qowaiv.Analyzers.CSharp" PrivateAssets="all" />
-    <PackageReference Include="StyleCop.Analyzers.Unstable" PrivateAssets="all" />
+    <PackageReference PrivateAssets="all" Include="Qowaiv.Analyzers.CSharp" />
+    <PackageReference PrivateAssets="all" Include="StyleCop.Analyzers.Unstable" />
   </ItemGroup>
 
-  <ItemGroup Label="Build extensions" Condition="'$(Configuration)' == 'Release'">
-    <PackageReference Include="Microsoft.Sbom.Targets" PrivateAssets="all" />
+  <ItemGroup Label="Build extensions">
+    <PackageReference PrivateAssets="all" Include="Microsoft.Sbom.Targets" />
   </ItemGroup>
 
   <ItemGroup Label="Additional files">
@@ -53,15 +53,8 @@
 
   <ItemGroup>
     <!-- Shared assembly tags. -->
+    <Compile Include="$(MSBuildThisFileDirectory)../shared/Lock.cs" Link="Properties/Lock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)../shared/ProductInfo.cs" Link="Properties/ProductInfo.cs" />
-  </ItemGroup>
-
-  <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))">
-    <Using Alias="Lock" Include="System.Object" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))">
-    <Using Alias="Lock" Include="System.Threading.Lock" />
   </ItemGroup>
 
 </Project>

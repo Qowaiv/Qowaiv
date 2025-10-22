@@ -15,7 +15,7 @@ namespace Qowaiv.Identifiers;
 [SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(object))]
 [OpenApiDataType(description: "identifier", example: "8a1a8c42-d2ff-e254-e26e-b6abcbf19420", type: "any")]
 [TypeConverter(typeof(IdTypeConverter))]
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Identifiers.IdJsonConverter))]
 #endif
 [Obsolete("Use a generated Id with [Id<IdBehavior>] instead.")]

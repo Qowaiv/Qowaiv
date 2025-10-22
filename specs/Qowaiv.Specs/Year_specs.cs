@@ -430,7 +430,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase("?", "?")]
     [TestCase(null, null)]
     [TestCase(2017d, 2017)]

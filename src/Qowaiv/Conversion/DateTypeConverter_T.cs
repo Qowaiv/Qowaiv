@@ -24,7 +24,7 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
         T self => self,
         string str => FromString(str, culture),
         DateTime /*.......*/ date => FromDateTime(date),
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         DateOnly /*.......*/ date => FromDate((Date)date),
 #endif
         DateTimeOffset /*.*/ date => FromDateTimeOffset(date),
@@ -126,7 +126,7 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
     private static readonly Dictionary<Type, Func<DateTypeConverter<T>, T, object>> ConvertTos = new()
     {
         [typeof(DateTime)] /*.......*/ = (c, d) => c.ToDateTime(d),
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         [typeof(DateOnly)] /*.......*/ = (c, d) => (DateOnly)c.ToDate(d),
 #endif
         [typeof(DateTimeOffset)] /*.*/ = (c, d) => c.ToDateTimeOffset(d),

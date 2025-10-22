@@ -100,7 +100,7 @@ public class Exists
     public void not_for_country_not_exiting_on_Date()
         => Country.CSXX.ExistsOnDate(new Date(1992, 12, 31)).Should().BeFalse();
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [Test]
     public void for_country_exiting_on_DateOnly()
         => Country.CSXX.ExistsOnDate(new DateOnly(1993, 01, 01)).Should().BeTrue();
@@ -217,7 +217,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase("Netherlands", "NL")]
     [TestCase("nl", "NL")]
     [TestCase(100L, "BG")]

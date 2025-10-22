@@ -116,7 +116,7 @@ public class Supports_JSON_serialization
     public void writes_Base64_string_for_non_default_value()
         => JsonTester.Write(Svo.CustomUuid).Should().Be("Qowaiv_SVOLibrary_GUIA");
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 
     [Test]
     public void System_Text_JSON_deserialization_of_dictionary_keys()

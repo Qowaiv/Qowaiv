@@ -153,7 +153,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase("1600*", 1600.0)]
     [TestCase("1700", 1700.0)]
     [TestCase(1234L, 1234.0)]

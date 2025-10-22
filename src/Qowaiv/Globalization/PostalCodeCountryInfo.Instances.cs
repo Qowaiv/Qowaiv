@@ -21,10 +21,10 @@ public partial class PostalCodeCountryInfo
         { Country.AM, New(Country.AM, @"^[0-4][0-9]{3}$") },
 
         // AR: Argentina, http://en.wikipedia.org/wiki/Argentine_postal_code
-        { Country.AR, New(Country.AR, @"^[A-Z][1-9][0-9]{3}[A-Z]{3}$", "^(.)(....)(...)$", "$1 $2 $3") },
+        { Country.AR, New(Country.AR, @"^[A-Z][1-9][0-9]{3}[A-Z]{3}$", "^(.)(....)(...)$", "$1 $2 $3") },
 
         // AS: American Samoa, http://en.wikipedia.org/wiki/ZIP_Code
-        { Country.AS, New(Country.AS, @"^9[0-9]{4}([0-9]{4})?$", "^(.{5})(....)?$", "$1 $2") },
+        { Country.AS, New(Country.AS, @"^9[0-9]{4}([0-9]{4})?$", "^(.{5})(....)?$", "$1 $2") },
 
         // AT: Austria, http://en.wikipedia.org/wiki/List_of_postal_codes_in_Austria
         { Country.AT, New(Country.AT, @"^[1-9][0-9]{3}$") },
@@ -60,7 +60,7 @@ public partial class PostalCodeCountryInfo
         { Country.BL, New(Country.BL, @"^977[0-9]{2}$") },
 
         // BM: Bermuda, http://en.wikipedia.org/wiki/Postal_codes_in_Bermuda
-        { Country.BM, New(Country.BM, @"^[A-Z]{2}([A-Z0-9]{2})?$", "^(..)(..)$", "$1 $2") },
+        { Country.BM, New(Country.BM, @"^[A-Z]{2}([A-Z0-9]{2})?$", "^(..)(..)$", "$1 $2") },
 
         // BN: Brunei Darussalam, http://en.wikipedia.org/wiki/Postal_codes_in_Brunei
         { Country.BN, New(Country.BN, @"^[A-Z]{2}[0-9]{4}$") },
@@ -111,7 +111,7 @@ public partial class PostalCodeCountryInfo
         { Country.CY, New(Country.CY, @"^[1-9][0-9]{3}$") },
 
         // CZ: Czech Republic, http://en.wikipedia.org/wiki/List_of_postal_codes_in_the_Czech_Republic
-        { Country.CZ, New(Country.CZ, @"^[1-7][0-9]{4}$", "^(...)(..)$", "$1 $2") },
+        { Country.CZ, New(Country.CZ, @"^[1-7][0-9]{4}$", "^(...)(..)$", "$1 $2") },
 
         // DE: Germany, http://en.wikipedia.org/wiki/List_of_postal_codes_in_Germany
         { Country.DE, New(Country.DE, @"^([0-9]{2})(?<!00)[0-9]{3}$") },
@@ -141,7 +141,7 @@ public partial class PostalCodeCountryInfo
         { Country.FI, New(Country.FI, @"^[0-9]{5}$", "^(..)(...)$", "$1-$2") },
 
         // FK: Falkland Islands, http://en.wikipedia.org/wiki/List_of_postal_codes
-        { Country.FK, New(Country.FK, @"^FIQQ1ZZ$", "^.+$", "FIQQ 1ZZ", isSingle: true) },
+        { Country.FK, New(Country.FK, @"^FIQQ1ZZ$", "^.+$", "FIQQ 1ZZ", isSingle: true) },
 
         // FM: Micronesia, http://en.wikipedia.org/wiki/ZIP_Code
         { Country.FM, New(Country.FM, @"^9694[1234]([0-9]{4})?$", "^(.{5})(....)$", "$1-$2") },
@@ -153,10 +153,10 @@ public partial class PostalCodeCountryInfo
         { Country.FR, New(Country.FR, @"^([0-9]{2})(?<!00)[0-9]{3}$") },
 
         // GA: Gabon, http://en.wikipedia.org/wiki/List_of_postal_codes
-        { Country.GA, New(Country.GA, @"^[0-9]{4}$", "^(..)(..)$", "$1 $2") },
+        { Country.GA, New(Country.GA, @"^[0-9]{4}$", "^(..)(..)$", "$1 $2") },
 
         // GB: United Kingdom, http://en.wikipedia.org/wiki/UK_postcodes
-        { Country.GB, New(Country.GB, @"^[A-Z]?[A-Z][0-9][A-Z0-9]?[0-9][A-Z]{2}$", "^(.+)(...)$", "$1 $2") },
+        { Country.GB, New(Country.GB, @"^[A-Z]?[A-Z][0-9][A-Z0-9]?[0-9][A-Z]{2}$", "^(.+)(...)$", "$1 $2") },
 
         // GE: Georgia, http://en.wikipedia.org/wiki/List_of_postal_codes
         { Country.GE, New(Country.GE, @"^[0-9]{4}$") },
@@ -165,10 +165,10 @@ public partial class PostalCodeCountryInfo
         { Country.GF, New(Country.GF, @"^973[0-9]{2}$") },
 
         // GG: Guernsey, https://en.wikipedia.org/wiki/GY_postcode_area
-        { Country.GG, New(Country.GG, @"^(GY)?[0-9]{2,3}[A-Z]{2}$", "^(GY)?(...?)(...)$", "GY$2 $3") },
+        { Country.GG, New(Country.GG, @"^(GY)?[0-9]{2,3}[A-Z]{2}$", "^(GY)?(...?)(...)$", "GY$2 $3") },
 
         // GI: Gibraltar, http://en.wikipedia.org/wiki/List_of_postal_codes
-        { Country.GI, New(Country.GI, @"^GX111AA$", "^.+$", "GX11 1AA", isSingle: true) },
+        { Country.GI, New(Country.GI, @"^GX111AA$", "^.+$", "GX11 1AA", isSingle: true) },
 
         // GL: Greenland, http://en.wikipedia.org/wiki/List_of_postal_codes_in_Greenland
         { Country.GL, New(Country.GL, @"^(GL)?39[0-9]{2}$", "^(GL)?(....)$", "GL-$2") },
@@ -177,10 +177,10 @@ public partial class PostalCodeCountryInfo
         { Country.GP, New(Country.GP, @"^971[0-9]{2}$") },
 
         // GR: Greece, http://en.wikipedia.org/wiki/List_of_postal_codes_in_Greece
-        { Country.GR, New(Country.GR, @"^[1-9][0-9]{4}$", "^(...)(..)$", "$1 $2") },
+        { Country.GR, New(Country.GR, @"^[1-9][0-9]{4}$", "^(...)(..)$", "$1 $2") },
 
         // GS: South Georgia And The South Sandwich Islands, http://en.wikipedia.org/wiki/List_of_postal_codes
-        { Country.GS, New(Country.GS, @"^SIQQ1ZZ$", "^.+$", "SIQQ 1ZZ", isSingle: true) },
+        { Country.GS, New(Country.GS, @"^SIQQ1ZZ$", "^.+$", "SIQQ 1ZZ", isSingle: true) },
 
         // GT: Guatemala, http://en.wikipedia.org/wiki/List_of_postal_codes
         { Country.GT, New(Country.GT, @"^[0-9]{5}$") },
@@ -216,13 +216,13 @@ public partial class PostalCodeCountryInfo
         { Country.IL, New(Country.IL, @"^[0-9]{7}$") },
 
         // IM: Isle Of Man, https://en.wikipedia.org/wiki/IM_postcode_area
-        { Country.IM, New(Country.IM, @"^(IM)?[0-9]{2,3}[A-Z]{2}$", "^(IM)?(..?)(...)$", "IM$2 $3") },
+        { Country.IM, New(Country.IM, @"^(IM)?[0-9]{2,3}[A-Z]{2}$", "^(IM)?(..?)(...)$", "IM$2 $3") },
 
         // IN: India, http://en.wikipedia.org/wiki/Postal_Index_Number
         { Country.IN, New(Country.IN, @"^[1-9][0-9]{5}$") },
 
         // IO: British Indian Ocean Territory, http://en.wikipedia.org/wiki/List_of_postal_codes
-        { Country.IO, New(Country.IO, @"^BBND1ZZ$", "^.+$", "BBND 1ZZ", isSingle: true) },
+        { Country.IO, New(Country.IO, @"^BBND1ZZ$", "^.+$", "BBND 1ZZ", isSingle: true) },
 
         // IQ: Iraq, http://en.wikipedia.org/wiki/List_of_postal_codes_in_Iraq
         { Country.IQ, New(Country.IQ, @"^[13456][0-9]{4}$") },
@@ -237,7 +237,7 @@ public partial class PostalCodeCountryInfo
         { Country.IT, New(Country.IT, @"^([0-9]{3})(?<!000)[0-9]{2}$") },
 
         // JE: Jersey, https://en.wikipedia.org/wiki/JE_postcode_area
-        { Country.JE, New(Country.JE, @"^(JE)?[0-9]{2,3}[A-Z]{2}$", "^(JE)?(...?)(...)$", "JE$2 $3") },
+        { Country.JE, New(Country.JE, @"^(JE)?[0-9]{2,3}[A-Z]{2}$", "^(JE)?(...?)(...)$", "JE$2 $3") },
 
         // JO: Jordan, http://en.wikipedia.org/wiki/List_of_postal_codes
         { Country.JO, New(Country.JO, @"^[0-9]{5}$") },
@@ -264,7 +264,7 @@ public partial class PostalCodeCountryInfo
         { Country.LA, New(Country.LA, @"^[0-9]{5}$") },
 
         // LB: Lebanon, http://en.wikipedia.org/wiki/List_of_postal_codes
-        { Country.LB, New(Country.LB, @"^[0-9]{8}$", "^(....)(....)$", "$1 $2") },
+        { Country.LB, New(Country.LB, @"^[0-9]{8}$", "^(....)(....)$", "$1 $2") },
 
         // LI: Liechtenstein, http://en.wikipedia.org/wiki/Postal_codes_in_Switzerland_and_Liechtenstein
         { Country.LI, New(Country.LI, @"^94(8[5-9]|9[0-8])$") },
@@ -291,7 +291,7 @@ public partial class PostalCodeCountryInfo
         { Country.LY, New(Country.LY, @"^[0-9]{5}$") },
 
         // MA: Morocco, http://en.wikipedia.org/wiki/List_of_postal_codes_in_Morocco
-        { Country.MA, New(Country.MA, @"^[1-9][0-9]{4}$", "^(..)(...)$", "$1 $2") },
+        { Country.MA, New(Country.MA, @"^[1-9][0-9]{4}$", "^(..)(...)$", "$1 $2") },
 
         // MC: Monaco, http://en.wikipedia.org/wiki/Postal_codes_in_France
         { Country.MC, New(Country.MC, @"^(MC)?980[0-9]{2}$") },
@@ -327,7 +327,7 @@ public partial class PostalCodeCountryInfo
         { Country.MQ, New(Country.MQ, @"^972[0-9]{2}$") },
 
         // MT: Malta, http://en.wikipedia.org/wiki/Postal_codes_in_Malta
-        { Country.MT, New(Country.MT, @"^[A-Z]{3}[0-9]{4}$", "^(...)(....)$", "$1 $2") },
+        { Country.MT, New(Country.MT, @"^[A-Z]{3}[0-9]{4}$", "^(...)(....)$", "$1 $2") },
 
         // MX: Mexico, http://en.wikipedia.org/wiki/List_of_postal_codes_in_Mexico
         { Country.MX, New(Country.MX, @"^[0-9]{5}$") },
@@ -357,7 +357,7 @@ public partial class PostalCodeCountryInfo
         { Country.NI, New(Country.NI, @"^[0-9]{5}$") },
 
         // NL: Netherlands, http://en.wikipedia.org/wiki/List_of_postal_codes_in_the_Netherlands. No SA, SD, or SS.
-        { Country.NL, New(Country.NL, @"^[1-9][0-9]{3}([A-Z]{2})(?<!SS|SA|SD)$", "^(....)(..)$", "$1 $2") },
+        { Country.NL, New(Country.NL, @"^[1-9][0-9]{3}([A-Z]{2})(?<!SS|SA|SD)$", "^(....)(..)$", "$1 $2") },
 
         // NO: Norway, http://en.wikipedia.org/wiki/Postal_codes_in_Norway
         { Country.NO, New(Country.NO, @"^[0-9]{4}$") },
@@ -396,7 +396,7 @@ public partial class PostalCodeCountryInfo
         { Country.PM, New(Country.PM, @"^97500$") },
 
         // PN: Pitcairn, http://en.wikipedia.org/wiki/List_of_postal_codes
-        { Country.PN, New(Country.PN, @"^PCRN1ZZ$", "^.+$", "PCRN 1ZZ", isSingle: true) },
+        { Country.PN, New(Country.PN, @"^PCRN1ZZ$", "^.+$", "PCRN 1ZZ", isSingle: true) },
 
         // PR: Puerto Rico, http://en.wikipedia.org/wiki/Postal_codes_in_Puerto_Rico
         { Country.PR, New(Country.PR, @"^[0-9]{5}$") },
@@ -405,7 +405,7 @@ public partial class PostalCodeCountryInfo
         { Country.PS, New(Country.PS, @"^[0-9]{5}$") },
 
         // PT: Portugal, http://en.wikipedia.org/wiki/List_of_postal_codes_in_Portugal
-        { Country.PT, New(Country.PT, @"^[1-9][0-9]{6}$", "^(....)(...)$", "$1 $2") },
+        { Country.PT, New(Country.PT, @"^[1-9][0-9]{6}$", "^(....)(...)$", "$1 $2") },
 
         // PW: Palau, http://en.wikipedia.org/wiki/ZIP_Code
         { Country.PW, New(Country.PW, @"^96940([0-9]{4})?$", "^(.{5})(....)$", "$1-$2") },
@@ -432,19 +432,19 @@ public partial class PostalCodeCountryInfo
         { Country.SD, New(Country.SD, @"^[0-9]{5}$") },
 
         // SE: Sweden, http://en.wikipedia.org/wiki/Postal_codes_in_Sweden
-        { Country.SE, New(Country.SE, @"^[1-9][0-9]{4}$", "^(...)(..)$", "$1 $2") },
+        { Country.SE, New(Country.SE, @"^[1-9][0-9]{4}$", "^(...)(..)$", "$1 $2") },
 
         // SG: Singapore, http://en.wikipedia.org/wiki/Postal_codes_in_Singapore
         { Country.SG, New(Country.SG, @"^[0-9]{6}$") },
 
         // SH: Saint Helena, http://en.wikipedia.org/wiki/List_of_postal_codes
-        { Country.SH, New(Country.SH, @"^STHL1ZZ$", "^.+$", "STHL 1ZZ", isSingle: true) },
+        { Country.SH, New(Country.SH, @"^STHL1ZZ$", "^.+$", "STHL 1ZZ", isSingle: true) },
 
         // SI: Slovenia, http://en.wikipedia.org/wiki/List_of_postal_codes
         { Country.SI, New(Country.SI, @"^(SI)?[0-9]{4}$", "^(SI)?(....)$", "SI-$2") },
 
         // SK: Slovakia, http://en.wikipedia.org/wiki/List_of_postal_codes_in_Slovakia
-        { Country.SK, New(Country.SK, @"^[0-9]{5}$", "^(...)(..)$", "$1 $2") },
+        { Country.SK, New(Country.SK, @"^[0-9]{5}$", "^(...)(..)$", "$1 $2") },
 
         // SM: San Marino, http://en.wikipedia.org/wiki/List_of_postal_codes_in_Italy
         { Country.SM, New(Country.SM, @"^4789[0-9]$") },
@@ -459,7 +459,7 @@ public partial class PostalCodeCountryInfo
         { Country.SZ, New(Country.SZ, @"^[HLMS][0-9]{3}$") },
 
         // TC: Turks And Caicos Islands, http://en.wikipedia.org/wiki/List_of_postal_codes
-        { Country.TC, New(Country.TC, @"^TKCA1ZZ$", "^.+$", "TKCA 1ZZ", isSingle: true) },
+        { Country.TC, New(Country.TC, @"^TKCA1ZZ$", "^.+$", "TKCA 1ZZ", isSingle: true) },
 
         // TD: Chad, http://en.wikipedia.org/wiki/List_of_postal_codes
         { Country.TD, New(Country.TD, @"^[0-9]{5}$") },

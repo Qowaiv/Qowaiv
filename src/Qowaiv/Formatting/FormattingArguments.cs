@@ -3,7 +3,7 @@ namespace Qowaiv.Formatting;
 /// <summary>Represents formatting arguments.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
 [Serializable]
-public readonly struct FormattingArguments : ISerializable, IEquatable<FormattingArguments>
+public readonly struct FormattingArguments : IEquatable<FormattingArguments>
 {
     /// <summary>Represents empty/not set formatting arguments.</summary>
     public static readonly FormattingArguments None;
@@ -75,26 +75,6 @@ public readonly struct FormattingArguments : ISerializable, IEquatable<Formattin
         => obj is IFormattable formattable
         ? ToString(formattable)
         : obj?.ToString();
-
-    /// <summary>Initializes a new instance of the <see cref="FormattingArguments" /> struct.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    private FormattingArguments(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        Format = info.GetString(nameof(Format));
-        FormatProvider = (IFormatProvider?)info.GetValue(nameof(FormatProvider), typeof(IFormatProvider));
-    }
-
-    /// <summary>Adds the underlying property of formatting arguments to the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        info.AddValue(nameof(Format), Format);
-        info.AddValue(nameof(FormatProvider), FormatProvider);
-    }
 
     /// <summary>Returns a <see cref="string" /> that represents the current formatting arguments for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

@@ -27,8 +27,6 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
     , IMultiplyOperators<Money, uint, Money>, IDivisionOperators<Money, uint, Money>
     , IMultiplyOperators<Money, ushort, Money>, IDivisionOperators<Money, ushort, Money>
     , IMinMaxValue<Money>
-#else
-, ISerializable
 #endif
 {
     /// <summary>Represents an Amount of zero.</summary>
@@ -442,29 +440,6 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
         => l.Currency == r.Currency
         ? l.Currency
         : throw new CurrencyMismatchException(l.Currency, r.Currency, operation);
-
-#if NET8_0_OR_GREATER
-#else
-    /// <summary>Initializes a new instance of the <see cref="Money" /> struct.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    private Money(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        m_Value = info.GetDecimal("Value");
-        m_Currency = Currency.Parse(info.GetString(nameof(Currency)), CultureInfo.InvariantCulture);
-    }
-
-    /// <summary>Adds the underlying property of Money to the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        info.AddValue("Value", m_Value);
-        info.AddValue(nameof(Currency), m_Currency.Name);
-    }
-#endif
 
     /// <summary>Deserializes the money from a JSON number.</summary>
     /// <param name="json">

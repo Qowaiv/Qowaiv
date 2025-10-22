@@ -14,10 +14,6 @@ namespace Qowaiv.Mathematics;
 #endif
 [StructLayout(LayoutKind.Sequential)]
 public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquatable<Fraction>, IComparable, IComparable<Fraction>
-#if NET8_0_OR_GREATER
-#else
-, ISerializable
-#endif
 {
     /// <summary>Represents the zero (0) <see cref="Fraction" /> value.</summary>
     /// <remarks>
@@ -293,37 +289,6 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
 
         return self.CompareTo(othr);
     }
-
-#if NET8_0_OR_GREATER
-#else
-    /// <summary>Initializes a new instance of the <see cref="Fraction" /> struct.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    private Fraction(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-
-        var n = info.GetInt64(nameof(numerator));
-        var d = info.GetInt64(nameof(denominator));
-
-        if (n != default || d != default)
-        {
-            var data = new Data(n, d).Guard().Simplify();
-            numerator = data.numerator;
-            denominator = data.denominator;
-        }
-    }
-
-    /// <summary>Adds the underlying property of the fraction to the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        info.AddValue(nameof(numerator), numerator);
-        info.AddValue(nameof(denominator), denominator);
-    }
-#endif
 
     /// <summary>Gets an XML string representation of the fraction.</summary>
     [Pure]

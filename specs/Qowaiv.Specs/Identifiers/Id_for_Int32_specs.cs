@@ -39,7 +39,7 @@ public class Is_comparable
 [Obsolete("Will be dropped in Qowaiv 8.0")]
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 
     [TestCase("", "")]
     [TestCase(12345678L, 12345678)]

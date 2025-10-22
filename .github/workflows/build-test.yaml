@@ -16,11 +16,12 @@ jobs:
       - name: Setup .NET core versions
         uses: actions/setup-dotnet@v5
         with:
+          # 5.x For running .NET Framework
           dotnet-version: |
             5.x
-            6.x
             8.x
             9.x
+            10.x
       - name: Install OpenSSL 1.1 # Needed for dotnet 5.x
         run: |
           wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.24_amd64.deb

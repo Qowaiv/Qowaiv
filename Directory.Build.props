@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Compiler options">
-    <LangVersion>preview</LangVersion>
+    <LangVersion>14.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
   </PropertyGroup>

@@ -1,4 +1,4 @@
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 using Qowaiv.Json.Globalization;
 using System.Text.Json;
 #endif
@@ -12,7 +12,7 @@ public class Supports_type_conversion
         => typeof(CultureInfo).Should().HaveTypeConverterDefined();
 }
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 public class Supports_System_Text_JSON_serialization
 {
     [TestCase(null, null)]

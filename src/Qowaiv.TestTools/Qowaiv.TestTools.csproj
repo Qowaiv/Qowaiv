@@ -3,15 +3,29 @@
   <Import Project="../../props/package.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net8.0;net9.0;net10.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>8.0.0</Version>
-    <PackageValidationBaselineVersion>8.0.0</PackageValidationBaselineVersion>
     <PackageId>Qowaiv.TestTools</PackageId>
     <ProductName>Qowaiv Test Tools</ProductName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Qowaiv/Qowaiv.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>8.0.0</Version>
+    <PackageValidationBaselineVersion>8.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
-        <![CDATA[
-v8.1.0
+      <![CDATA[
+v9.0.0
+- Add support for .NET 10.
+- Drop support for .NET 6. (breaking)
 - Hide Guard methods from stacktrace.
 - Introduction of Converting.From(Type).To<To>() to check CanConvertTo.
 ]]>
@@ -58,14 +72,5 @@ v1.0.0
 ]]>
     </PackageReleaseNotes>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="../../src/Qowaiv/Qowaiv.csproj" />
-    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-  </ItemGroup>
 
 </Project>

@@ -367,7 +367,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase("?", "?")]
     [TestCase(10028_14_5L, "10028-14-5")]
     public void System_Text_JSON_deserialization(object json, CasRegistryNumber svo)

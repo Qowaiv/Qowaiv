@@ -99,7 +99,7 @@
         "contentHash": "2hBr6zdbIBTDE3EhK7NSVNdX58uTK6iHW/P/Axmm9sl1xoGSLqDvMtpecn226TNwHByFokYwJmt/aQQNlO5CRw=="
       }
     },
-    "net6.0": {
+    "net10.0": {
       "AsyncFixer": {
         "type": "Direct",
         "requested": "[1.6.0, )",

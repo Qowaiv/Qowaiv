@@ -544,27 +544,6 @@ public class Is_Open_API_data_type
         => OpenApiDataType.FromType(typeof(InternationalBankAccountNumber))!.Matches(input).Should().BeTrue();
 }
 
-#if NET8_0_OR_GREATER
-#else
-public class Supports_binary_serialization
-{
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void using_BinaryFormatter()
-    {
-        var round_tripped = SerializeDeserialize.Binary(Svo.Iban);
-        Svo.Iban.Should().Be(round_tripped);
-    }
-
-    [Test]
-    public void storing_string_in_SerializationInfo()
-    {
-        var info = Serialize.GetInfo(Svo.Iban);
-        info.GetString("Value").Should().Be("NL20INGB0001234567");
-    }
-}
-#endif
-
 public class Debugger
 {
     [TestCase("{empty}", "")]

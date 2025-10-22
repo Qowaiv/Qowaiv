@@ -13,7 +13,6 @@ namespace Qowaiv.IO;
 /// stream sizes bigger than long.MaxValue.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable]
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(long))]
 [OpenApiDataType(description: "Stream size notation (in byte).", example: 1024, type: "integer", format: "stream-size")]
 [TypeConverter(typeof(StreamSizeTypeConverter))]

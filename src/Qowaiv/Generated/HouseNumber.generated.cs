@@ -130,27 +130,6 @@ public partial struct HouseNumber : IFormattable
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
 
-#if NET8_0_OR_GREATER
-#else
-public partial struct HouseNumber : ISerializable
-{
-    /// <summary>Initializes a new instance of the house number based on the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    private HouseNumber(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        m_Value = info.GetValue("Value", typeof(int)) is int val ? val : default(int);
-    }
-
-    /// <summary>Adds the underlying property of the house number to the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        => Guard.NotNull(info).AddValue("Value", m_Value);
-}
-#endif
-
 public partial struct HouseNumber
 {
     /// <summary>Creates the house number from a JSON string.</summary>

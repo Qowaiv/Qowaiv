@@ -20,7 +20,6 @@ namespace Qowaiv.Financial;
 /// statements.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "Business Identifier Code, as defined by ISO 9362.", example: "DEUTDEFF", type: "string", format: "bic", nullable: true)]
 [TypeConverter(typeof(BusinessIdentifierCodeTypeConverter))]

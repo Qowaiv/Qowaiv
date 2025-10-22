@@ -610,34 +610,6 @@ public class Is_Open_API_data_type
            nullable: true));
 }
 
-#if NET8_0_OR_GREATER
-#else
-public class Supports_binary_serialization
-{
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void using_BinaryFormatter()
-    {
-        var round_tripped = SerializeDeserialize.Binary(Svo.Uuid);
-        round_tripped.Should().Be(Svo.Uuid);
-    }
-
-    [Test]
-    public void storing_Guid_in_SerializationInfo()
-    {
-        var info = Serialize.GetInfo(Svo.Uuid);
-        info.GetValue("Value", typeof(Guid)).Should().Be(Svo.Guid);
-    }
-
-    [Test]
-    public void export_to_byte_array_equal_to_GUID_equivalent()
-    {
-        var bytes = Svo.Uuid.ToByteArray();
-        bytes.Should().BeEquivalentTo(((Guid)Svo.Uuid).ToByteArray());
-    }
-}
-#endif
-
 public class Debugger
 {
     [TestCase("{empty}", "")]

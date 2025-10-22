@@ -4,7 +4,6 @@ namespace Qowaiv.Hashing;
 /// is not designed to support hashing.
 /// </summary>
 [ExcludeFromCodeCoverage]
-[Serializable]
 public class HashingNotSupported : NotSupportedException
 {
     /// <summary>Initializes a new instance of the <see cref="HashingNotSupported" /> class.</summary>

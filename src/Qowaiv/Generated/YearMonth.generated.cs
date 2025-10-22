@@ -101,26 +101,6 @@ public partial struct YearMonth : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-#if NET8_0_OR_GREATER
-#else
-public partial struct YearMonth : ISerializable
-{
-    /// <summary>Initializes a new instance of the year-month based on the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    private YearMonth(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        m_Value = info.GetValue("Value", typeof(int)) is int val ? val : default(int);
-    }
-
-    /// <summary>Adds the underlying property of the year-month to the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        => Guard.NotNull(info).AddValue("Value", m_Value);
-}
-#endif
 
 public partial struct YearMonth
 {

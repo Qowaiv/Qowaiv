@@ -4,7 +4,6 @@ namespace Qowaiv.Text;
 /// <remarks>
 /// This child type allows to specify the string value and the target type involved.
 /// </remarks>
-[Serializable]
 public class Unparsable : FormatException
 {
     /// <summary>Initializes a new instance of the <see cref="Unparsable" /> class.</summary>

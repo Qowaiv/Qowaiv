@@ -26,6 +26,7 @@
 v9.0.0
 - Add support for .NET 10.
 - Drop support for .NET 6. (BREAKING)
+- Drop binary serialization support. (BREAKING)
 - Hide Guard methods from stacktrace.
 - Introduction of Converting.From(Type).To<To>() to check CanConvertTo.
 ]]>

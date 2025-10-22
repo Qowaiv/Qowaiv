@@ -872,28 +872,6 @@ public class Supports_JSON_serialization
             .And.Should().BeOfType(exceptionType);
 }
 
-#if NET8_0_OR_GREATER
-#else
-public class Supports_binary_serialization
-{
-    [Test]
-    [Obsolete("Usage of the binary formatter is considered harmful.")]
-    public void using_BinaryFormatter()
-    {
-        var round_tripped = SerializeDeserialize.Binary(Svo.Fraction);
-        round_tripped.Should().Be(Svo.Fraction);
-    }
-
-    [Test]
-    public void storing_values_in_SerializationInfo()
-    {
-        var info = Serialize.GetInfo(Svo.Fraction);
-        info.GetInt64("numerator").Should().Be(-69);
-        info.GetInt64("denominator").Should().Be(17);
-    }
-}
-#endif
-
 public class Supports_XML_serialization
 {
     [Test]

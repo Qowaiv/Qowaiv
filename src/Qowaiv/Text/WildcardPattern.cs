@@ -1,9 +1,8 @@
 namespace Qowaiv.Text;
 
 /// <summary>Represents a wildcard pattern.</summary>
-[Serializable]
 [DebuggerDisplay("{DebuggerDisplay}")]
-public class WildcardPattern : ISerializable
+public class WildcardPattern
 {
     /// <summary>Initializes a new instance of the <see cref="WildcardPattern" /> class.</summary>
     /// <remarks>
@@ -59,23 +58,6 @@ public class WildcardPattern : ISerializable
         }
     }
 
-    /// <summary>Initializes a new instance of the <see cref="WildcardPattern" /> class.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    protected WildcardPattern(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        Options = (WildcardPatternOptions)info.GetInt32("Options");
-        Pattern = GuardPattern(info.GetString("Pattern"), Options);
-        ComparisonType = (StringComparison)info.GetInt32("ComparisonType");
-
-        if (Options.HasFlag(WildcardPatternOptions.SqlWildcards))
-        {
-            SingleChar = '_';
-            MultipleChars = '%';
-        }
-    }
-
     private static string GuardPattern(string? pattern, WildcardPatternOptions options)
     {
         pattern = Guard.NotNullOrEmpty(pattern);
@@ -92,26 +74,6 @@ public class WildcardPattern : ISerializable
             throw new ArgumentException(QowaivMessages.ArgumentException_InvalidWildcardPattern, nameof(pattern));
         }
         return pattern;
-    }
-
-    /// <summary>Adds the underlying property of a wild card pattern to the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) { GetObjectData(info, context); }
-
-    /// <summary>Adds the underlying property of a wild card pattern to the serialization info.</summary>
-    /// <param name="info">The serialization info.</param>
-    /// <param name="context">The streaming context.</param>
-    /// <remarks>
-    /// this is used by ISerializable.GetObjectData() so that it can be
-    /// changed by derived classes.
-    /// </remarks>
-    protected virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-    {
-        Guard.NotNull(info);
-        info.AddValue("Pattern", Pattern);
-        info.AddValue("Options", (int)Options);
-        info.AddValue("ComparisonType", (int)ComparisonType);
     }
 
     /// <summary>The wildcard pattern options.</summary>

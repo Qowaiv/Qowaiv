@@ -44,7 +44,11 @@
       <![CDATA[
 v8.0.0
 - Add support for .NET 10.
-- Drop support for .NET 6. (breaking)
+- Drop support for .NET 6. (BREAKING)
+- Drop Id<>. (BREAKING)
+- Drop Svo<>. (BREAKING)
+- Drop Date.Add(DateSpan, bool). (BREAKING)
+- Drop LocalDateTime.Add(DateSpan, bool). (BREAKING)
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
@@ -74,14 +78,14 @@ v7.4.0
 v7.3.0
 - Hide Guard methods from stacktrace.
 - Use [SkipLocalsInit] (speed improvement). #458
-- Email address topdomain can not be longer than 63. (fix) #459
+- Email address topdomain can not be longer than 63. (FIX) #459
 - Rewritten email parser is 2.4 times faster. #460
 - Drop CharBuffer in favor of Span<char> based implementations. #464 
 - Support [Svo<TBehavior>]. #478
 v7.2.3
-- IBAN adjustments for Nicaragua and Côte d'Ivoire. (fix) #454
+- IBAN adjustments for Nicaragua and Côte d'Ivoire. (FIX) #454
 v7.2.2
-- PostalCode.Empty is valid for countries without a postal code system. (fix) #444
+- PostalCode.Empty is valid for countries without a postal code system. (FIX) #444
 - Added Country.HasPostalCodeSystem(). #444
 - Use Random.Shared in DecimalMath. #448
 - IBAN internals clean-up. #449
@@ -94,10 +98,10 @@ v7.2.1
 - Add Deconstruct to MonthSpan.
 - Add Deconstruct to WeekDate.
 - Add Deconstruct to YearMonth.
-- Year-month Open API definition pattern allows months without leading zero. (fix)
+- Year-month Open API definition pattern allows months without leading zero. (FIX)
 v7.2.0
 - Added .NET 9.0 version to the package.
-- Singapore postal codes contain 6, not 5 digits. (fix)
+- Singapore postal codes contain 6, not 5 digits. (FIX)
 - Potentially improved performance of concurrency when generating C# type names and looking up localized strings in .NET 9 and up (using new System.Threading.Lock).
 v7.1.3
 - Provide way to skip the JSON serialization of empty SVO's with ModifyTypeInfo.IgnoreEmptySvos. #427
@@ -105,33 +109,33 @@ v7.1.2
 - Add examples to the intellisense of Percentage.Create(), .Percent() and casts from and to numbers.
 v7.1.1
 - Diagnostics contracts compiled internals.
-- Wildcard patterns with trailing chars at the end. #417 (fix)
+- Wildcard patterns with trailing chars at the end. #417 (FIX)
 v7.0.5
 - Extensions to calculate the sum and average for multiple percentges. #415
 - Add ZeroIfNull() on INumberBase<TSelf>. #416
 v7.0.4
-- Percentage.TryParse should first change the scale, before checking the boundaries. (fix)
+- Percentage.TryParse should first change the scale, before checking the boundaries. (FIX)
 v7.0.3
-- DecimalMath.ChangeScale() should have a value between [0.28]. #405 (fix)
+- DecimalMath.ChangeScale() should have a value between [0.28]. #405 (FIX)
 v7.0.2
 - Introduction of Year-Month. #295
 - Email address parsing performance improvements.
-- Add check for percentage.MaxValue and percentage.MinValue when creating a percentage. (fix)
+- Add check for percentage.MaxValue and percentage.MinValue when creating a percentage. (FIX)
 - Use DecimalMath.Pow10() to convert decimal values to percentages.
-- DateTimeOffset.ToLocal() wrongly converted DateTime before creation LocalDateTime. #404 (fix)
+- DateTimeOffset.ToLocal() wrongly converted DateTime before creation LocalDateTime. #404 (FIX)
 v7.0.1
-- ISpanFormattable INumbers should be able to provide formatting (.NET 8.0 only). #393 (fix)
+- ISpanFormattable INumbers should be able to provide formatting (.NET 8.0 only). #393 (FIX)
 v7.0.0
-- Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
-- Drop email address collection. #382 (breaking)
-- Drop Gender. #361  (breaking)
-- Drop public static IsValid(string) methods. #361 (breaking)
-- Align Parse and TryParse provider naming with IParsable. #360 (breaking)
-- Seal all JSON converters. #361 (breaking)
-- Move Qowaiv.Diagnostics.Contracs to a separate package. (breaking)
-- Clock.Now returns DateTimeOffset. (breaking)
-- Clock.NowWithOffset is dropped. (breaking)
-- Implement IMinMaxValue<TSelf> for SVO's with a min and max value. #362 (breaking)
+- Drop support for .NET 5 and .NET 7 STS's. #359 (BREAKING)
+- Drop email address collection. #382 (BREAKING)
+- Drop Gender. #361  (BREAKING)
+- Drop public static IsValid(string) methods. #361 (BREAKING)
+- Align Parse and TryParse provider naming with IParsable. #360 (BREAKING)
+- Seal all JSON converters. #361 (BREAKING)
+- Move Qowaiv.Diagnostics.Contracs to a separate package. (BREAKING)
+- Clock.Now returns DateTimeOffset. (BREAKING)
+- Clock.NowWithOffset is dropped. (BREAKING)
+- Implement IMinMaxValue<TSelf> for SVO's with a min and max value. #362 (BREAKING)
 - Extension methods on DateTimeOffset.
 - Implement INumber<Percentage>. #367
 - Implement INumber<Amount>. #370
@@ -142,7 +146,7 @@ v7.0.0
 - Provide Clock as TimeProvider (.NET 8.0 only). #371
 - Deserializing ID's from JSON numeric nodes takes constrains into account. #374
 v6.6.2
-- JSON-deserialization from decimal.MaxValue (as double) should not fail. #386 (fix)
+- JSON-deserialization from decimal.MaxValue (as double) should not fail. #386 (FIX)
 v6.6.1
 - Add missing IParsable interface for Id. #372
 v6.6.0
@@ -172,7 +176,7 @@ v6.5.0
 v6.4.4
 - Introduction of EnergyLabel. #324
 v6.4.3
-- Analyzers should not be included in NuGet packages. #321 (fix)
+- Analyzers should not be included in NuGet packages. #321 (FIX)
 V6.4.2
 - Svo<SvoBehavior> and Id<IdBehavior> decorated with IEqualityOperators. #315
 v6.4.1
@@ -195,7 +199,7 @@ v6.3.0
 v6.2.2
 - Introduction of CasRegistryNumber. #258
 v6.2.1
-- Prevent implicit casting by introducing obsolete operator overloads. #257 (fix)
+- Prevent implicit casting by introducing obsolete operator overloads. #257 (FIX)
 v6.2.0
 -  Introduction of Svo<SvoBehavior> as a generic for string based SVO's. #248
 v6.1.2
@@ -215,12 +219,12 @@ v6.0.0
 - YesNo converter support from and to boolean. #208
 - Introduction of (string based) secret. #200
 - Decorate nullable types. #228
-- Cryptographic seed stripped from SVO contract. #215 (breaking)
-- TryParse(string) returns nullable SVO. #206 (breaking)
-- Drop cast from and to string. #212 (breaking)
-- Drop obsolete code. #201 (breaking)
-- Re-order extension methods. #209 (breaking)
-- Non-predictable hash codes. #205 (breaking)
+- Cryptographic seed stripped from SVO contract. #215 (BREAKING)
+- TryParse(string) returns nullable SVO. #206 (BREAKING)
+- Drop cast from and to string. #212 (BREAKING)
+- Drop obsolete code. #201 (BREAKING)
+- Re-order extension methods. #209 (BREAKING)
+- Non-predictable hash codes. #205 (BREAKING)
 v5.1.5
 - Percentage can not be initialized on environments lacking French or Iranian culture. #226
 v5.1.4
@@ -230,7 +234,7 @@ v5.1.3
 v5.1.2
 - Extend Open API documentation with explicit example. #188
 v5.1.1
-- Revoked `IConvertable` (fix)
+- Revoked `IConvertable` (FIX)
 v5.1.0
 - Introduction of strongly-typed identifier (#132)
 - Introduction of `MonthSpan` (#142)

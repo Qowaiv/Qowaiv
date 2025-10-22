@@ -7,14 +7,14 @@ public class Communicates
     {
         using var _ = TestCultures.en_GB.Scoped();
 
-        "no_guid".Invoking(CustomGuid.Parse)
+        "no_guid".Invoking(Uuid.Parse)
             .Should().Throw<FormatException>()
-            .WithMessage("Not a valid identifier")
+            .WithMessage("Not a valid GUID")
             .And.InnerException.Should().BeOfType<Unparsable>()
             .And.Subject.Should().BeEquivalentTo(new
             {
                 Value = "no_guid",
-                Type = "Qowaiv.Identifiers.Id<Qowaiv.TestTools.ForGuid>"
+                Type = "Qowaiv.Uuid"
             });
     }
 }

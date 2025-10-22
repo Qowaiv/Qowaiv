@@ -40,7 +40,7 @@ public class Is_decorated_with : SingleValueObjectSpecs
     public void Type_converter(Type svo)
         => svo.Should().HaveTypeConverterDefined();
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCaseSource(nameof(AllSvos))]
     public void NotNullWhen_attribute_on_Equals_object(Type svo)
     {
@@ -64,7 +64,7 @@ public class Is_decorated_with : SingleValueObjectSpecs
     public void Open_API_data_type(Type svo)
         => svo.Should().BeDecoratedWith<Qowaiv.OpenApi.OpenApiDataTypeAttribute>();
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCaseSource(nameof(AllSvos))]
     public void System_Text_Json_JsonConverter(Type type)
     {

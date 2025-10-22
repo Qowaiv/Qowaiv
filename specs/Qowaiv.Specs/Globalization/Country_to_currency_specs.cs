@@ -22,7 +22,7 @@ internal class Get_Currency
     public void based_on_Date()
         => Country.NL.GetCurrency(Svo.Date).Should().Be(Currency.EUR);
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [Test]
     public void based_on_DateOnly()
         => Country.NL.GetCurrency(Svo.DateOnly).Should().Be(Currency.EUR);

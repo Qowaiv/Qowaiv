@@ -11,7 +11,7 @@ namespace Qowaiv;
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "Email notation as defined by RFC 5322.", example: "svo@qowaiv.org", type: "string", format: "email", nullable: true)]
 [TypeConverter(typeof(EmailAddressTypeConverter))]
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.EmailAddressJsonConverter))]
 #endif
 public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IEquatable<EmailAddress>, IComparable, IComparable<EmailAddress>

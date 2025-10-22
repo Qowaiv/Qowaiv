@@ -18,7 +18,7 @@ public class Can_be_created
     public void from_Date()
         => WeekDate.Create(Svo.Date).Should().Be(Svo.WeekDate);
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [Test]
     public void from_DateOnly()
         => WeekDate.Create(Svo.DateOnly).Should().Be(Svo.WeekDate);
@@ -109,7 +109,7 @@ public class Supports_type_conversion
     public void from_DateTime()
         => Converting.From(Svo.DateTime).To<WeekDate>().Should().Be(Svo.WeekDate);
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [Test]
     public void from_DateOnly()
         => Converting.From(Svo.DateOnly).To<WeekDate>().Should().Be(Svo.WeekDate);
@@ -136,7 +136,7 @@ public class Supports_type_conversion
         }
     }
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [Test]
     public void to_DateOnly()
        => Converting.To<DateOnly>().From(Svo.WeekDate).Should().Be(Svo.DateOnly);
@@ -161,7 +161,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase("1997-W14-6", "1997-W14-6")]
     public void System_Text_JSON_deserialization(object json, WeekDate svo)
         => JsonTester.Read_System_Text_JSON<WeekDate>(json).Should().Be(svo);
@@ -201,7 +201,7 @@ public class Is_Open_API_data_type
            format: "date-weekbased"));
 }
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 public class Casts
 {
     [Test]

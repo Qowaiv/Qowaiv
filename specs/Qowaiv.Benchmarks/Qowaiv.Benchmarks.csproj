@@ -5,7 +5,7 @@
   <PropertyGroup>
     <OutputType>exe</OutputType>
     <Nullable>enable</Nullable>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>Benchmarks</RootNamespace>
     <!-- We do not care about strong names for benchmarking -->
     <NoWarn>CS8002</NoWarn>

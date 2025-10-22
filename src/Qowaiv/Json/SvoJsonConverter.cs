@@ -1,4 +1,4 @@
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -82,7 +82,7 @@ public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : 
         }
     }
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 
     /// <inheritdoc />
     public override TSvo ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

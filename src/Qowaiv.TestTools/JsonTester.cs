@@ -1,6 +1,6 @@
 using System.Reflection;
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 using System.Text.Json;
 #endif
 
@@ -9,7 +9,7 @@ namespace Qowaiv.TestTools;
 /// <summary>Helper class for testing JSON conversion.</summary>
 public static class JsonTester
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     /// <summary>Reads the JSON using System.Text.Json.</summary>
     [Pure]
     public static T? Read_System_Text_JSON<T>(object? val, JsonSerializerOptions? options = null)

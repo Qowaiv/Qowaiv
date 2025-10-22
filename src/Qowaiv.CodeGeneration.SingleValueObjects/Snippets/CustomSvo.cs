@@ -2,7 +2,7 @@ namespace @Namespace
 {
     [global::System.Diagnostics.DebuggerDisplay("{DebuggerDisplay}")]
     [global::System.ComponentModel.TypeConverter(typeof(SvoTypeConverter))]
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [global::System.Text.Json.Serialization.JsonConverter(typeof(SvoJsonConverter))]
 #endif
     public readonly partial struct @Svo
@@ -56,7 +56,7 @@ namespace @Namespace
 
         /// <inheritdoc />
         [global::System.Diagnostics.Contracts.Pure]
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         public int CompareTo(@Svo other) { return behavior.Compare(m_Value, other.m_Value); }
 #else
         public int CompareTo(@Svo other)
@@ -157,7 +157,7 @@ namespace @Namespace
         /// <param name="reader">An XML reader.</param>
         void global::System.Xml.Serialization.IXmlSerializable.ReadXml(global::System.Xml.XmlReader reader)
         {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
             global::System.ArgumentNullException.ThrowIfNull(reader);
 #else
             if (reader is null) throw new global::System.ArgumentNullException(nameof(reader));
@@ -173,7 +173,7 @@ namespace @Namespace
         /// <param name="writer">An XML writer.</param>
         void global::System.Xml.Serialization.IXmlSerializable.WriteXml(global::System.Xml.XmlWriter writer)
         {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
             global::System.ArgumentNullException.ThrowIfNull(writer);
 #else
             if (writer is null) throw new global::System.ArgumentNullException(nameof(writer));
@@ -325,7 +325,7 @@ namespace @Namespace
             }
         }
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         private sealed class SvoJsonConverter : global::Qowaiv.Json.SvoJsonConverter<@Svo>
         {
             /// <inheritdoc />

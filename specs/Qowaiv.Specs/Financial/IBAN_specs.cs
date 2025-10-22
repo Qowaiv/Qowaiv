@@ -351,7 +351,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase(null, null)]
     [TestCase("NL20INGB0001234567", "NL20INGB0001234567")]
     public void System_Text_JSON_deserialization(object json, InternationalBankAccountNumber svo)

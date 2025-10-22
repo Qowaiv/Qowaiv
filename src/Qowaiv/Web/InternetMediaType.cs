@@ -40,7 +40,7 @@ namespace Qowaiv.Web;
 [SingleValueObject(SingleValueStaticOptions.AllExcludingCulture, typeof(string))]
 [OpenApiDataType(description: "Media type notation as defined by RFC 6838.", example: "text/html", type: "string", format: "internet-media-type", nullable: true)]
 [TypeConverter(typeof(InternetMediaTypeTypeConverter))]
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Web.InternetMediaTypeJsonConverter))]
 #endif
 public readonly partial struct InternetMediaType : IXmlSerializable, IFormattable, IEquatable<InternetMediaType>, IComparable, IComparable<InternetMediaType>

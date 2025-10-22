@@ -17,7 +17,7 @@ namespace Qowaiv.IO;
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(long))]
 [OpenApiDataType(description: "Stream size notation (in byte).", example: 1024, type: "integer", format: "stream-size")]
 [TypeConverter(typeof(StreamSizeTypeConverter))]
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.IO.StreamSizeJsonConverter))]
 #endif
 public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>

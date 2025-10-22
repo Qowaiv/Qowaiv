@@ -6,7 +6,7 @@ namespace Qowaiv.Sql;
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(ulong))]
 [OpenApiDataType(description: "SQL Server timestamp notation.", example: "0x00000000000007D9", type: "string", format: "timestamp")]
 [TypeConverter(typeof(Conversion.Sql.TimestampTypeConverter))]
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.TimestampJsonConverter))]
 #endif
 public readonly partial struct Timestamp : IXmlSerializable, IFormattable, IEquatable<Timestamp>, IComparable, IComparable<Timestamp>

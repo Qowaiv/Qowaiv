@@ -58,7 +58,7 @@ public class DateTypeConverter : DateTypeConverter<Date>
     [Pure]
     protected override YearMonth ToYearMonth(Date date) => new(date.Year, date.Month);
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     /// <inheritdoc />
     [Pure]
     public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)

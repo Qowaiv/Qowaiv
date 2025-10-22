@@ -1160,7 +1160,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase("17.51", "17.51%")]
     [TestCase("175.1‰", "17.51%")]
     [TestCase(0.1751, "17.51%")]

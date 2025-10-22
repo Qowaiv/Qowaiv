@@ -27,7 +27,7 @@ public static class Svo
     /// <summary>2017-06-11</summary>
     public static readonly Date Date = new(2017, 06, 11);
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     /// <summary>2017-06-11</summary>
     public static readonly DateOnly DateOnly = new(2017, 06, 11);
 #endif

@@ -163,7 +163,7 @@ public class Supports_type_conversion
     public void from_DateTime()
         => Converting.From(Svo.DateTime).To<LocalDateTime>().Should().Be(Svo.LocalDateTime);
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [Test]
     public void from_DateOnly()
         => Converting.From(Svo.DateOnly).To<LocalDateTime>().Should().Be(new LocalDateTime(2017, 06, 11));
@@ -199,7 +199,7 @@ public class Supports_type_conversion
     public void to_DateTime()
         => Converting.To<DateTime>().From(Svo.LocalDateTime).Should().Be(Svo.DateTime);
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [Test]
     public void to_DateOnly()
         => Converting.To<DateOnly>().From(Svo.LocalDateTime).Should().Be(Svo.DateOnly);
@@ -224,7 +224,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase(627178398050010000L, "1988-06-13 22:10:05.001")]
     [TestCase("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
     public void System_Text_JSON_deserialization(object json, LocalDateTime svo)
@@ -255,7 +255,7 @@ public class Supports_JSON_serialization
 
 public class Casts
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [Test]
     public void explicitly_from_DateOnly()
     {

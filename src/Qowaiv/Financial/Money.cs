@@ -8,7 +8,7 @@ namespace Qowaiv.Financial;
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
 [OpenApiDataType(description: "Combined currency and amount notation as defined by ISO 4217.", example: "EUR12.47", type: "string", format: "money", pattern: @"[A-Z]{3} -?[0-9]+(\.[0-9]+)?")]
 [TypeConverter(typeof(MoneyTypeConverter))]
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.MoneyJsonConverter))]
 #endif
 public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatable<Money>, IComparable, IComparable<Money>

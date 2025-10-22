@@ -1,7 +1,6 @@
 namespace Qowaiv.Text;
 
 /// <summary>Represents a wildcard pattern.</summary>
-[Serializable]
 [DebuggerDisplay("{DebuggerDisplay}")]
 public class WildcardPattern
 {

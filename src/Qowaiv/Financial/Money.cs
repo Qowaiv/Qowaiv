@@ -4,7 +4,6 @@ namespace Qowaiv.Financial;
 
 /// <summary>Represents money (amount and currency).</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable]
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
 [OpenApiDataType(description: "Combined currency and amount notation as defined by ISO 4217.", example: "EUR12.47", type: "string", format: "money", pattern: @"[A-Z]{3} -?[0-9]+(\.[0-9]+)?")]
 [TypeConverter(typeof(MoneyTypeConverter))]

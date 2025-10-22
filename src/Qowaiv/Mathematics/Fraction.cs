@@ -5,7 +5,6 @@ namespace Qowaiv.Mathematics;
 
 /// <summary>Represents a fraction.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable]
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(Tuple<long, long>))]
 [OpenApiDataType(description: "Faction", type: "string", format: "faction", pattern: "-?[0-9]+(/[0-9]+)?", example: "13/42")]
 [TypeConverter(typeof(FractionTypeConverter))]

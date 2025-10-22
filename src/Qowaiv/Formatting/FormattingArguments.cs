@@ -2,7 +2,6 @@ namespace Qowaiv.Formatting;
 
 /// <summary>Represents formatting arguments.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable]
 public readonly struct FormattingArguments : IEquatable<FormattingArguments>
 {
     /// <summary>Represents empty/not set formatting arguments.</summary>

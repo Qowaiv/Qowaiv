@@ -29,7 +29,7 @@
       <![CDATA[
 v8.0.0
 - Add support for .NET 10.
-- Drop support for .NET 6. (breaking)
+- Drop support for .NET 6. (BREAKING)
 - Hide Guard methods from stacktrace.
 ]]>
     </ToBeReleased>
@@ -41,8 +41,8 @@ v7.2.0
 v7.0.1
 - Update Qowaiv.Diagnostics.Contracts to 2.0.0. #418
 v7.0.0
-- Implement IMinMaxValue<TSelf> for SVO's with a min and max value. #362 (breaking)
-- Drop support for .NET 5 and .NET 7 STS's. #359 (breaking)
+- Implement IMinMaxValue<TSelf> for SVO's with a min and max value. #362 (BREAKING)
+- Drop support for .NET 5 and .NET 7 STS's. #359 (BREAKING)
 - Update to System.Data.SqlClient 4.8.6. #363 (security issue)
 v6.4.0
 - Support .NET 7.0. #261
@@ -55,11 +55,11 @@ v6.1.0
 v6.0.0
 - Added .NET 6.0 version to the package. #216
 - Decorate nullable types. #228
-- TryParse(string) returns nullable SVO. #206 (breaking)
-- Drop cast from and to string. #212 (breaking)
-- Non-predictable hash codes. #205 (breaking)
+- TryParse(string) returns nullable SVO. #206 (BREAKING)
+- Drop cast from and to string. #212 (BREAKING)
+- Non-predictable hash codes. #205 (BREAKING)
 v5.1.1
-- Revoked `IConvertable` (fix)
+- Revoked `IConvertable` (FIX)
 v5.1.0
 - Add `IConvertable` to all SVO's (#133)
 v5.0.0

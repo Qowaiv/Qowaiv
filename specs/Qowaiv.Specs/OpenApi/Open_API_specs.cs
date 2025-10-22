@@ -41,27 +41,6 @@ public class Open_API_data_type
         .Should().HaveDebuggerDisplay("""{ type: type, desc: descrption, example: example, format: format, pattern: pattern, nullable: true }""");
 
     [Test]
-    public void Resolved_by_base_if_not_decorated()
-        => OpenApiDataType.FromType(typeof(ForUuid))
-        .Should().Be(new OpenApiDataType(
-            dataType: typeof(CustomUuid),
-            description: "UUID based identifier",
-            type: "string",
-            example: "lmZO_haEOTCwGsCcbIZFFg",
-            format: "uuid-base64",
-            nullable: true));
-
-    [Test]
-    public void Identifier_behavior_is_resolved_as_Id_type()
-        => OpenApiDataType.FromType(typeof(DecoratedId))
-        .Should().Be(new OpenApiDataType(
-            dataType: typeof(Id<DecoratedId>),
-            description: "Custom description",
-            type: "string",
-            example: "custom example",
-            format: "custom-uuid"));
-
-    [Test]
     public void has_custom_debug_display()
             => new OpenApiDataType(
             dataType: typeof(Date),
@@ -71,9 +50,6 @@ public class Open_API_data_type
             format: "custom-uuid",
             pattern: "[0-9]{4}-[0-9]{2}-[0-9]{2}")
         .Should().HaveDebuggerDisplay("{ type: string, desc: Custom description, example: custom example, format: custom-uuid, pattern: [0-9]{4}-[0-9]{2}-[0-9]{2} }");
-
-    [OpenApiDataType(description: "Custom description", example: "custom example", type: "string", format: "custom-uuid")]
-    internal sealed class DecoratedId : UuidBehavior { }
 }
 
 #if NET8_0_OR_GREATER

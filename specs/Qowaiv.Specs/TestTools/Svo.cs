@@ -101,24 +101,6 @@ public static class Svo
 
     public static readonly YesNo YesNo = YesNo.Yes;
 
-    /// <summary>PREFIX17</summary>
-    [Obsolete("Will be dropped in Qowaiv 8.0")]
-    public static readonly Int32Id Int32Id = Int32Id.Create(17);
-
-    /// <summary>PREFIX987654321</summary>
-    [Obsolete("Will be dropped in Qowaiv 8.0")]
-    public static readonly Int64Id Int64Id = Int64Id.Create(987654321L);
-
-    [Obsolete("Will be dropped in Qowaiv 8.0")]
-    public static readonly StringId StringId = StringId.Parse("Qowaiv-ID");
-
-    /// <summary>8A1A8C42-D2FF-E254-E26E-B6ABCBF19420</summary>
-    [Obsolete("Will be dropped in Qowaiv 8.0")]
-    public static readonly CustomGuid CustomGuid = CustomGuid.Parse("8A1A8C42-D2FF-E254-E26E-B6ABCBF19420");
-
-    [Obsolete("Will be dropped in Qowaiv 8.0")]
-    public static readonly CustomUuid CustomUuid = CustomUuid.Parse("Qowaiv_SVOLibrary_GUIA");
-
     public static IEnumerable<object> All() => typeof(Svo)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
         .Select(field => field.GetValue(null)!);
@@ -147,43 +129,3 @@ public static class Svo
     }
 #pragma warning restore S3218 // Inner class members should not shadow outer class "static" or type members
 }
-
-[Obsolete("Will be dropped in Qowaiv 8.0")]
-public sealed class ForInt32 : Int32IdBehavior
-{
-    public override string ToString(object? obj, string? format, IFormatProvider? formatProvider)
-       => string.Format(formatProvider, $"PREFIX{{0:{format}}}", obj);
-
-    public override bool TryParse(string? str, out object? id)
-        => str is { Length: > 6 } && str[..6] == "PREFIX"
-        ? base.TryParse(str[6..], out id)
-        : base.TryParse(str, out id);
-}
-
-[Obsolete("Will be dropped in Qowaiv 8.0")]
-public sealed class ForInt64 : Int64IdBehavior
-{
-    public override string ToString(object? obj, string? format, IFormatProvider? formatProvider)
-       => string.Format(formatProvider, $"PREFIX{{0:{format}}}", obj);
-
-    public override bool TryCreate(object? obj, out object? id)
-        => base.TryCreate(obj, out id)
-        && id is long number
-        && IsValid(number);
-
-    public override bool TryParse(string? str, out object? id)
-        => str is { Length: > 6 } && str[..6] == "PREFIX"
-        ? base.TryParse(str[6..], out id)
-        : base.TryParse(str, out id) && IsValid(id!);
-
-    private static bool IsValid(long number) => (number & 1) == 1;
-}
-
-[Obsolete("Will be dropped in Qowaiv 8.0")]
-public class ForString : StringIdBehavior { }
-
-[Obsolete("Will be dropped in Qowaiv 8.0")]
-public class ForGuid : GuidBehavior { }
-
-[Obsolete("Will be dropped in Qowaiv 8.0")]
-public class ForUuid : UuidBehavior { }

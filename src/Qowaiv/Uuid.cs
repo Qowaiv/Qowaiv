@@ -26,8 +26,6 @@ namespace Qowaiv;
 #endif
 public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>, INext<Uuid>
 {
-    private static readonly UuidBehavior behavior = UuidBehavior.Instance;
-
     /// <summary>Gets the size of the <see cref="byte" /> array representation.</summary>
     public static readonly int ArraySize = 16;
 
@@ -94,7 +92,16 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
     public string ToString(string? format, IFormatProvider? formatProvider)
         => StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
         ? formatted
-        : behavior.ToString(m_Value, format, formatProvider);
+        : format.WithDefault("S") switch
+        {
+            _ when !HasValue => string.Empty,
+            "s" or "S" => Base64.ToString(m_Value),
+            "h" => Base32.ToString(ToByteArray(), true),
+            "H" => Base32.ToString(ToByteArray(), false),
+            "N" or "D" or "B" or "P" => m_Value.ToString(format, formatProvider).ToUpperInvariant(),
+            "X" => m_Value.ToString(format, formatProvider).ToUpperInvariant().Replace('X', 'x'),
+            _ => m_Value.ToString(format, formatProvider),
+        };
 
     /// <summary>Gets an XML string representation of the UUID.</summary>
     [Pure]

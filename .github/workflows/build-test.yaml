@@ -16,8 +16,9 @@ jobs:
       - name: Setup .NET core versions
         uses: actions/setup-dotnet@v5
         with:
+          # 5.x For running .NET Framework
           dotnet-version: |
-            5.x # For running .NET Framework
+            5.x
             8.x
             9.x
             10.x

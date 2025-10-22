@@ -6,7 +6,7 @@ namespace Qowaiv;
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(ulong))]
 [OpenApiDataType(description: "Date span, specified in years, months and days.", example: "1Y+10M+16D", type: "string", format: "date-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M[+-][0-9]+D")]
 [TypeConverter(typeof(DateSpanTypeConverter))]
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.DateSpanJsonConverter))]
 #endif
 public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquatable<DateSpan>, IComparable, IComparable<DateSpan>

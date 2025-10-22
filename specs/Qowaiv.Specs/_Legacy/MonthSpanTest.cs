@@ -265,6 +265,7 @@ public class MonthSpanTest
         added.Should().Be(MonthSpan.FromMonths(19));
     }
 
+    [Test]
     public void Subtract_19Months6Months_13Months()
     {
         var subtracted = MonthSpan.FromMonths(19) - MonthSpan.FromMonths(6);

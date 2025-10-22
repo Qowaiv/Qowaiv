@@ -6,7 +6,7 @@ public class All
     public void get_existing_by_Date()
         => Currency.GetExisting(new Date(2016, 01, 01)).Should().HaveCount(179);
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [Test]
     public void get_existing_by_DateOnly()
         => Currency.GetExisting(new DateOnly(2016, 01, 01)).Should().HaveCount(179);

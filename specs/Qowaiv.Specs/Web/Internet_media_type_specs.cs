@@ -101,7 +101,7 @@ public class Is_comparable
 
 public class Supports_JSON_serialization
 {
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [TestCase(null, null)]
     [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
     public void System_Text_JSON_deserialization(object json, InternetMediaType svo)

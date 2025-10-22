@@ -1,4 +1,4 @@
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     [global::System.Text.Json.Serialization.JsonConverter(typeof(@Svo.SvoJsonConverter))]
 #endif
 partial struct @Svo
@@ -20,7 +20,7 @@ partial struct @Svo
     [global::System.Diagnostics.Contracts.Pure]
     public object? ToJson() => behavior.ToJson(m_Value);
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
     private sealed class SvoJsonConverter : global::Qowaiv.Json.SvoJsonConverter<@Svo>
     {
         /// <inheritdoc />

@@ -76,7 +76,7 @@ public class Open_API_data_type
     internal sealed class DecoratedId : UuidBehavior { }
 }
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 [Explicit]
 public class README_md
 {

@@ -79,7 +79,7 @@ public static class Base64
         chars[20] = Read0(bytes, 15);
         chars[21] = Base64Chars[(bytes[15] << 4) & 0b11_0000];
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
         return new(chars);
 #else
         return new(chars.ToArray());

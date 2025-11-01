@@ -1,5 +1,4 @@
 using Microsoft.CodeAnalysis;
-using System.Collections.Immutable;
 using System.Threading;
 
 namespace Qowaiv.CodeGeneration.SingleValueObjects;
@@ -17,8 +16,8 @@ public abstract class BaseGenerator<TParameters> : IIncrementalGenerator
     /// <inheritdoc />
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var symbols = context.SyntaxProvider.ForAttributeWithMetadataName(MetadataName, Filter, Collect).Collect();
-        context.RegisterSourceOutput(symbols, Generate);
+        var symbols = context.SyntaxProvider.ForAttributeWithMetadataName(MetadataName, Filter, Collect);
+        context.RegisterSourceOutput(symbols, GenerateInternal);
     }
 
     /// <summary>Collects the SVO parameters.</summary>
@@ -34,14 +33,11 @@ public abstract class BaseGenerator<TParameters> : IIncrementalGenerator
     }
 
     /// <summary>Generates the source code for the SVO.</summary>
-    protected void Generate(SourceProductionContext context, ImmutableArray<TParameters> parameters)
+    private void GenerateInternal(SourceProductionContext context, TParameters pars)
     {
-        foreach (var pars in parameters)
-        {
-            var code = Generate(context, pars);
-            var ns = pars.Namespace.IsEmpty() ? "__global__" : pars.Namespace.ToString();
-            context.AddSource($"{ns}.{pars.Svo}.g.cs", code.ToString());
-        }
+        var code = Generate(context, pars);
+        var ns = pars.Namespace.IsEmpty() ? "__global__" : pars.Namespace.ToString();
+        context.AddSource($"{ns}.{pars.Svo}.g.cs", code.ToString());
     }
 
     /// <summary>Generates <see cref="Code"/> based on the parameters.</summary>

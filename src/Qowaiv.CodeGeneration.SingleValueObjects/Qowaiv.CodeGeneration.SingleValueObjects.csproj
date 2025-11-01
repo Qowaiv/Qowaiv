@@ -52,8 +52,8 @@
     <Version>1.1.4</Version>
     <ToBeReleased>
       <![CDATA[
-v1.1.*
-?
+v1.1.5
+- Increased performance in projects with many generated types.
       ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

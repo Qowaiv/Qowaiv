@@ -49,15 +49,17 @@
   <PropertyGroup>
     <PackageId>Qowaiv.CodeGeneration.SingleValueObjects</PackageId>
     <PackageValidationBaselineVersion>1.0.0</PackageValidationBaselineVersion>
-    <Version>1.1.4</Version>
+    <Version>1.1.5</Version>
     <ToBeReleased>
       <![CDATA[
-v1.1.5
-- Increased performance in projects with many generated types.
+v1.*
+- 
       ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
+v1.1.5
+- Increased performance in projects with many generated types.
 v1.1.4
 - Generate explicit castings for non-string based ID's.
 - Generate SuppressMessage("S1210", Justification = "Being sortable is enough.")] to reduce false positives.

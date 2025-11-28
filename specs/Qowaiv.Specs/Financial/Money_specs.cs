@@ -119,7 +119,7 @@ public class Money_zero
     }
 
     [Test]
-    public void can_be_added_to_zero_currenty()
+    public void can_be_added_to_zero_currency()
     {
         var first = Money.Zero + (0 + Currency.EUR);
         first.Should().Be(0 + Currency.EUR);

@@ -204,34 +204,18 @@ public static class QowaivEnumerableExtensions
         Guard.NotNull(source);
         Guard.NotNull(selector);
 
-        var currency = Currency.Empty;
-        var first = true;
-        var total = decimal.Zero;
+        var total = Money.Zero;
         var count = 0L;
 
         foreach (var item in source)
         {
             count++;
-            var money = selector(item);
-
-            if (first)
-            {
-                first = false;
-                currency = money.Currency;
-            }
-            if (currency != money.Currency)
-            {
-                throw new CurrencyMismatchException(currency, money.Currency, nameof(Average));
-            }
-            checked
-            {
-                total += (decimal)money;
-            }
+            total = total.Add(selector(item), nameof(Average));
         }
 
-        return count == 0
+        return count is 0
             ? throw NoElements()
-            : (total / count) + currency;
+            : total / count;
     }
 
     /// <summary>Computes the average of a sequence of nullable <see cref="Money" /> values that are
@@ -262,40 +246,20 @@ public static class QowaivEnumerableExtensions
         Guard.NotNull(source);
         Guard.NotNull(selector);
 
-        var currency = Currency.Empty;
-        var first = true;
-        var total = decimal.Zero;
+        var total = Money.Zero;
         var count = 0L;
 
         foreach (var item in source)
         {
-            var value = selector(item);
-
-            if (value.HasValue)
+            if (selector(item) is { } money)
             {
                 count++;
-                var money = value.GetValueOrDefault();
-
-                if (first)
-                {
-                    first = false;
-                    currency = money.Currency;
-                }
-                if (currency != money.Currency)
-                {
-                    throw new CurrencyMismatchException(currency, money.Currency, nameof(Average));
-                }
-                checked
-                {
-                    total += (decimal)money;
-                }
+                total = total.Add(money, nameof(Average));
             }
         }
-        if (count == 0)
-        {
-            return null;
-        }
-        return (total / count) + currency;
+        return count is 0
+            ? null
+            : total / count;
     }
 
     /// <summary>Computes the average of a sequence of <see cref="Money" /> values.</summary>
@@ -319,33 +283,18 @@ public static class QowaivEnumerableExtensions
     {
         Guard.NotNull(source);
 
-        var currency = Currency.Empty;
-        var first = true;
-        var total = decimal.Zero;
+        var total = Money.Zero;
         var count = 0L;
 
         foreach (var money in source)
         {
             count++;
-
-            if (first)
-            {
-                first = false;
-                currency = money.Currency;
-            }
-            if (currency != money.Currency)
-            {
-                throw new CurrencyMismatchException(currency, money.Currency, nameof(Average));
-            }
-            checked
-            {
-                total += (decimal)money;
-            }
+            total = total.Add(money, nameof(Average));
         }
 
-        return count == 0
+        return count is 0
             ? throw NoElements()
-            : (total / count) + currency;
+            : total / count;
     }
 
     /// <summary>Computes the average of a sequence of nullable <see cref="Money" /> values.</summary>
@@ -367,38 +316,20 @@ public static class QowaivEnumerableExtensions
     {
         Guard.NotNull(source);
 
-        var currency = Currency.Empty;
-        var first = true;
-        var total = decimal.Zero;
+        var total = Money.Zero;
         var count = 0L;
 
         foreach (var value in source)
         {
-            if (value.HasValue)
+            if (value is { } money)
             {
                 count++;
-                var money = value.GetValueOrDefault();
-
-                if (first)
-                {
-                    first = false;
-                    currency = money.Currency;
-                }
-                if (currency != money.Currency)
-                {
-                    throw new CurrencyMismatchException(currency, money.Currency, nameof(Average));
-                }
-                checked
-                {
-                    total += (decimal)money;
-                }
+                total = total.Add(money, nameof(Average));
             }
         }
-        if (count == 0)
-        {
-            return null;
-        }
-        return (total / count) + currency;
+        return count is 0
+            ? null
+            : total / count;
     }
 
     /// <summary>Gets the average Elo.</summary>

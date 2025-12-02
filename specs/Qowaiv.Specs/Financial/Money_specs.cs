@@ -142,7 +142,7 @@ public class Money_zero
 public class Throws_when
 {
     [Test]
-    public void adding_multiple__zero_currencies()
+    public void adding_multiple_zero_currencies()
     {
         var euros = 0 + Currency.EUR;
         var dollars = 0+ Currency.USD;

@@ -322,7 +322,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
         throw new ArgumentOutOfRangeException(nameof(months), QowaivMessages.FormatExceptionMonthSpan);
     }
 
-    /// <summary>Creates a month span by subtracting <paramref name="d1" /> from <paramref name="d2" />.</summary>
+    /// <summary>Creates a month span by subtracting <paramref name="d2" /> from <paramref name="d1" />.</summary>
     /// <param name="d1">
     /// The date to subtract from.
     /// </param>

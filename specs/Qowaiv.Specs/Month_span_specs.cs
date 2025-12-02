@@ -156,6 +156,7 @@ public class Can_subtract
     [TestCase("2020-01-01", "2019-03-13", 09)]
     [TestCase("2020-01-01", "2019-03-01", 10)]
     [TestCase("2020-01-01", "2020-02-20", -1)]
+    [TestCase("2020-01-01", "2023-02-20", "-3Y-1M")]
     public void two_Dates(Date d1, Date d2, MonthSpan expected)
         => MonthSpan.Subtract(d1, d2).Should().Be(expected);
 

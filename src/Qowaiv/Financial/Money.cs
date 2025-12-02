@@ -93,10 +93,21 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
     /// <summary>Decreases the amount with one.</summary>
     /// <summary>Adds a amount to the current amount.</summary>
     /// <param name="money">
-    /// The money to add.
+    /// The money to subtract.
     /// </param>
     [Pure]
-    public Money Add(Money money) => (m_Value + money.m_Value) + HaveSameCurrency(this, money, "addition");
+    public Money Add(Money money) => Add(money, "addition");
+
+    /// <summary>Decreases the amount with one.</summary>
+    /// <summary>Adds a amount to the current amount.</summary>
+    /// <param name="money">
+    /// The money to add.
+    /// </param>
+    /// <param name="operation">
+    /// The operation involved.
+    /// </param>
+    [Pure]
+    internal Money Add(Money money, string operation) => checked(m_Value + money.m_Value) + HaveSameCurrency(this, money, operation);
 
     /// <summary>Adds the specified percentage to the amount.</summary>
     /// <param name="p">
@@ -438,10 +449,13 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
 
     [DebuggerStepThrough]
     [Pure]
-    private static Currency HaveSameCurrency(Money l, Money r, string operation)
-        => l.Currency == r.Currency
-        ? l.Currency
-        : throw new CurrencyMismatchException(l.Currency, r.Currency, operation);
+    private static Currency HaveSameCurrency(Money l, Money r, string operation) => (l, r) switch
+    {
+        _ when l.Currency == r.Currency => l.Currency,
+        _ when l == Zero /*..........*/ => r.Currency,
+        _ when r == Zero /*..........*/ => l.Currency,
+        _ => throw new CurrencyMismatchException(l.Currency, r.Currency, operation),
+    };
 
 #if NET8_0_OR_GREATER
 #else

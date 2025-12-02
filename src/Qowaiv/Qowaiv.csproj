@@ -38,7 +38,7 @@
   </ItemGroup>
   
   <PropertyGroup>
-    <Version>7.4.5</Version>
+    <Version>7.4.6</Version>
     <PackageValidationBaselineVersion>7.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
@@ -48,6 +48,8 @@ v7.*
     </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
+v7.4.6
+- Adding and subtracting Money.Zero to other currencies is okay. (BUG)
 v7.4.5
 - Addition and subtraction of MonthSpan to/of DateOnly. #520
 - Remove implicit System.Collections.Immutable dependency. #518

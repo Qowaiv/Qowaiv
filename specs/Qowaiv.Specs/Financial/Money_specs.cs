@@ -1,3 +1,5 @@
+using Qowaiv.Financial;
+
 namespace Financial.Money_specs;
 
 public class Is_comparable
@@ -107,8 +109,49 @@ public class Has_operators
     }
 }
 
+public class Money_zero
+{
+    [Test]
+    public void can_be_added_to_other()
+    {
+        var sum = Money.Zero + Money.Zero;
+        sum.Should().Be(Money.Zero);
+    }
+
+    [Test]
+    public void can_be_added_to_zero_currency()
+    {
+        var first = Money.Zero + (0 + Currency.EUR);
+        first.Should().Be(0 + Currency.EUR);
+
+        var second = (0 + Currency.USD) + Money.Zero;
+        second.Should().Be(0 + Currency.USD);
+    }
+
+    [Test]
+    public void can_be_added_to_money_currency()
+    {
+        var first = Money.Zero + (12 + Currency.EUR);
+        first.Should().Be(12 + Currency.EUR);
+
+        var second = (12 + Currency.USD) + Money.Zero;
+        second.Should().Be(12 + Currency.USD);
+    }
+}
+
 public class Throws_when
 {
+    [Test]
+    public void adding_multiple_zero_currencies()
+    {
+        var euros = 0 + Currency.EUR;
+        var dollars = 0+ Currency.USD;
+        var operation = () => euros + dollars;
+
+        operation.Should().Throw<CurrencyMismatchException>()
+            .WithMessage("The addition operation could not be applied. There is a mismatch between EUR and USD.");
+    }
+
     [Test]
     public void adding_multiple_currencies()
     {

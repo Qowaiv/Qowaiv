@@ -93,7 +93,7 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
     /// <summary>Decreases the amount with one.</summary>
     /// <summary>Adds a amount to the current amount.</summary>
     /// <param name="money">
-    /// The money to add.
+    /// The money to subtract.
     /// </param>
     [Pure]
     public Money Add(Money money) => Add(money, "addition");

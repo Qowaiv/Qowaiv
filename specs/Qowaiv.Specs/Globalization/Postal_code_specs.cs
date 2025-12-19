@@ -1,4 +1,4 @@
-namespace Postal_code_specs;
+namespace Globalization.Postal_code_specs;
 
 public class With_domain_logic
 {
@@ -222,8 +222,8 @@ public class Has_custom_formatting
         => svo.ToString(country).Should().Be(expected);
 
     [Test]
-    public void for_58_countries()
-        => PostalCodeCountryInfo.GetCountriesWithFormatting().Should().HaveCount(58);
+    public void for_59_countries()
+        => PostalCodeCountryInfo.GetCountriesWithFormatting().Should().HaveCount(59);
 
     [TestCaseSource(nameof(FormattedPostalCodes))]
     public void with_formatting(Country country, PostalCode code, string formatted)
@@ -476,7 +476,7 @@ public class Supports_binary_serialization
 public class Not_supported_by
 {
     [Test]
-    public void _77_countries()
+    public void _76_countries()
         => PostalCodeCountryInfo.GetCountriesWithoutPostalCode().Should().BeEquivalentTo(
         [
             Country.AE,
@@ -512,7 +512,6 @@ public class Not_supported_by
             Country.GQ,
             Country.GY,
             Country.HK,
-            Country.IE,
             Country.JM,
             Country.KE,
             Country.KI,
@@ -703,6 +702,7 @@ internal class PostalCodes(Country country, params string[] values)
         new PostalCodes(Country.HT, "0123", "1234", "2000", "3248", "4945", "5640", "6208", "7645", "6752", "8782", "9999"),
         new PostalCodes(Country.HU, "1000", "2077", "2650", "4241"),
         new PostalCodes(Country.ID, "10000", "31123", "89000", "89007", "12340"),
+        new PostalCodes(Country.IE, "D6WF4E2", "D06F4E2", "T121234", "A0ABCEF", "A0ABC23"),
         new PostalCodes(Country.IL, "0110023", "1084023", "3108701", "4201907", "5403506", "6177008"),
         new PostalCodes(Country.IM, "00DF", "04DS", "18RF", "23WK", "34SD", "40PJ", "59KF", "68LS", "71JD", "66MO", "85DF", "99JS", "00DF", "000DF", "014DS", "128RF", "203WK", "324SD", "400PJ", "569KF", "628LS", "761JD", "676MO", "875DF", "999JS", "000DF", "IM00DF", "IM04DS", "IM18RF", "IM23WK", "IM34SD", "IM40PJ", "IM59KF", "IM68LS", "IM71JD", "IM66MO", "IM85DF", "IM99JS", "IM00DF", "IM000DF", "IM014DS", "IM128RF", "IM203WK", "IM324SD", "IM400PJ", "IM569KF", "IM628LS", "IM761JD", "IM676MO", "IM875DF", "IM999JS", "IM000DF", "IM00DF", "IM04DS", "IM18RF", "IM23WK", "IM34SD", "IM40PJ", "IM59KF", "IM68LS", "IM71JD", "IM66MO", "IM85DF", "IM99JS", "IM00DF"),
         new PostalCodes(Country.IN, "110000", "342600", "810185", "810 185"),

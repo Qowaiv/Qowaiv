@@ -209,6 +209,9 @@ public partial class PostalCodeCountryInfo
         // ID: Indonesia, http://en.wikipedia.org/wiki/Postal_codes_in_Indonesia
         { Country.ID, New(Country.ID, @"^[1-9][0-9]{4}$") },
 
+        // IE: Ireland, https://en.wikipedia.org/wiki/Postal_addresses_in_the_Republic_of_Ireland
+        { Country.IE, New(Country.IE, "^[A-Z][0-9][0-9A-Z]{5}$", "^(...)(....)$", "$1 $2") },
+
         // IL: Israel, http://en.wikipedia.org/wiki/Postal_codes_in_Israel
         { Country.IL, New(Country.IL, @"^[0-9]{7}$") },
 

@@ -1,4 +1,4 @@
-namespace Postal_code_specs;
+namespace Globalization.Postal_code_specs;
 
 public class With_domain_logic
 {
@@ -222,8 +222,8 @@ public class Has_custom_formatting
         => svo.ToString(country).Should().Be(expected);
 
     [Test]
-    public void for_58_countries()
-        => PostalCodeCountryInfo.GetCountriesWithFormatting().Should().HaveCount(58);
+    public void for_59_countries()
+        => PostalCodeCountryInfo.GetCountriesWithFormatting().Should().HaveCount(59);
 
     [TestCaseSource(nameof(FormattedPostalCodes))]
     public void with_formatting(Country country, PostalCode code, string formatted)
@@ -476,7 +476,7 @@ public class Supports_binary_serialization
 public class Not_supported_by
 {
     [Test]
-    public void _77_countries()
+    public void _76_countries()
         => PostalCodeCountryInfo.GetCountriesWithoutPostalCode().Should().BeEquivalentTo(
         [
             Country.AE,
@@ -512,7 +512,6 @@ public class Not_supported_by
             Country.GQ,
             Country.GY,
             Country.HK,
-            Country.IE,
             Country.JM,
             Country.KE,
             Country.KI,

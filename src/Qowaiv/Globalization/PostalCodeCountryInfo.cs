@@ -145,7 +145,12 @@ public sealed partial class PostalCodeCountryInfo
     /// Used for initializing the Instances dictionary.
     /// </remarks>
     [Pure]
-    private static PostalCodeCountryInfo New(Country country, string validation, string? search = null, string? replace = null, bool isSingle = false)
+    private static PostalCodeCountryInfo New(
+        Country country,
+        [StringSyntax(StringSyntaxAttribute.Regex)] string validation,
+        [StringSyntax(StringSyntaxAttribute.Regex)] string? search = null,
+        [StringSyntax(StringSyntaxAttribute.Regex)] string? replace = null,
+        bool isSingle = false)
         => new(
             country: country,
             validationPattern: new(validation, RegOptions.WithBackTracking, RegOptions.Timeout),

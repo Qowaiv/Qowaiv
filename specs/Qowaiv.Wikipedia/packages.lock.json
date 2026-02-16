@@ -102,7 +102,7 @@
       "qowaiv.data.sqlclient": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[7.4.5, )",
+          "Qowaiv": "[7.4.7, )",
           "System.Data.SqlClient": "[4.8.6, 4.8.6]"
         }
       },
@@ -111,8 +111,8 @@
         "dependencies": {
           "AwesomeAssertions": "[9.1.0, )",
           "NUnit": "[3.14.0, 3.14.0]",
-          "Qowaiv": "[7.4.5, )",
-          "Qowaiv.CodeGeneration.SingleValueObjects": "[1.1.4, )",
+          "Qowaiv": "[7.4.7, )",
+          "Qowaiv.CodeGeneration.SingleValueObjects": "[1.1.5, )",
           "Qowaiv.Data.SqlClient": "[7.2.0, )",
           "Qowaiv.Specs.Generated": "[1.0.0, )",
           "Qowaiv.TestTools": "[8.0.0, )"
@@ -121,13 +121,13 @@
       "qowaiv.specs.generated": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[7.4.5, )"
+          "Qowaiv": "[7.4.7, )"
         }
       },
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[7.4.5, )"
+          "Qowaiv": "[7.4.7, )"
         }
       },
       "AwesomeAssertions": {

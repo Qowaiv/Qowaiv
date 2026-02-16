@@ -268,6 +268,14 @@ var next = date++; // new YearMonth(2017, 07)
 MonthSpan age = new YearMonth(2024, 08) - date; // 7 years and 2 months.
 ```
 
+### Year span
+Represents a year span.
+
+``` C#
+// Creation
+var span = 17.Years(); // 17 years.
+```
+
 ### Yes-no
 A Yes-no is a (bi-)polar that obviously has the values "yes" and "no". It also
 has an "empty"(unset) and "unknown" value. It maps easily with a `boolean`, but

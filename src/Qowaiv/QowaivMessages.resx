@@ -150,6 +150,9 @@
   <data name="FormatExceptionYearMonth">
     <value>Not a valid year-month.</value>
   </data>
+  <data name="FormatExceptionYearSpan">
+    <value>Not a valid year span</value>
+  </data>
   <data name="FormatExceptionYesNo">
     <value>Not a valid yes-no value</value>
   </data>

@@ -99,6 +99,10 @@ public static class Svo
     /// <summary>2017-06</summary>
     public static readonly YearMonth YearMonth = new(year: 2017, month: 06);
 
+    /// <summary>17 years</summary>
+    public static readonly YearSpan YearSpan = 17.Years();
+
+    /// <summary>Yes</summary>
     public static readonly YesNo YesNo = YesNo.Yes;
 
     /// <summary>PREFIX17</summary>

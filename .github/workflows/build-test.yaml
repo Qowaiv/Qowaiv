@@ -10,9 +10,11 @@ jobs:
         with:
           distribution: oracle
           java-version: 17
+
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+
       - name: Setup .NET core versions
         uses: actions/setup-dotnet@v5
         with:
@@ -21,16 +23,19 @@ jobs:
             6.x
             8.x
             9.x
+
       - name: Install OpenSSL 1.1 # Needed for dotnet 5.x
         run: |
           wget https://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.24_amd64.deb
           sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2.24_amd64.deb
+
       - name: Cache SonarCloud packages
         uses: actions/cache@v5
         with:
           path: ~/sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
+
       - name: Cache SonarCloud scanner
         id: cache-sonar-scanner
         uses: actions/cache@v5
@@ -38,13 +43,13 @@ jobs:
           path: ./.sonar/scanner
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
-      - name: Build
-        run: dotnet build qowaiv.slnx --configuration Release
+
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         run: |
           mkdir -p ./.sonar/scanner
           dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
+
       - name: Start SonarCloud scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
@@ -57,11 +62,16 @@ jobs:
           /d:sonar.host.url="https://sonarcloud.io" \
           /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" \
           /d:sonar.cs.vstest.reportsPaths="**/*.trx"
+
+      - name: Build
+        run: dotnet build qowaiv.slnx --configuration Release
+
       - name: Test
         run: |
           dotnet test specs/Qowaiv.Specs --configuration Release \
           --logger "trx;LogFileName=test-results.trx" \
           --collect:"XPlat Code Coverage;Format=opencover"
+
       - name: Stop SonarCloud scanner
         if: success() || failure()
         env:
@@ -70,6 +80,7 @@ jobs:
         run: |
           ./.sonar/scanner/dotnet-sonarscanner end \
           /d:sonar.token="$SONAR_TOKEN"
+
       - name: Test Report
         if: success() || failure()
         uses: dorny/test-reporter@v2

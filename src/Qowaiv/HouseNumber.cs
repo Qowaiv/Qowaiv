@@ -156,54 +156,44 @@ public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEq
         else return false;
     }
 
-    /// <summary>Creates a house number from a Int32. </summary >
-    /// <param name="val" >
-    /// A decimal describing a house number.
+    /// <summary>Creates a house number from an <see cref="int" />.</summary>
+    /// <param name="val">
+    /// A number describing a house number.
     /// </param >
-    /// <exception cref="FormatException" >
+    /// <exception cref="FormatException">
     /// val is not a valid house number.
-    /// </exception >
+    /// </exception>
     [Pure]
-    public static HouseNumber Create(int? val)
-    {
-        if (TryCreate(val, out HouseNumber result))
-        {
-            return result;
-        }
-        throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.FormatExceptionHouseNumber);
-    }
+    public static HouseNumber Create(int? val) 
+        => TryCreate(val, out HouseNumber result)
+        ? result
+        : throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.FormatExceptionHouseNumber);
 
-    /// <summary>Creates a house number from a Int32.
-    /// A return value indicates whether the conversion succeeded.
-    /// </summary >
-    /// <param name="val" >
-    /// A decimal describing a house number.
-    /// </param >
-    /// <returns >
+    /// <summary>Creates a house number from an <see cref="int" />.</summary>
+    /// <param name="val">
+    /// A number describing a house number.
+    /// </param>
+    /// <returns>
     /// A house number if the creation was successfully, otherwise Empty.
-    /// </returns >
+    /// </returns>
     [Pure]
     public static HouseNumber TryCreate(int? val)
-    {
-        if (TryCreate(val, out HouseNumber result))
-        {
-            return result;
-        }
-        return Empty;
-    }
+        => TryCreate(val, out HouseNumber result)
+        ? result
+        : Empty;
 
-    /// <summary>Creates a house number from a Int32.
+    /// <summary>Creates a house number from an <see cref="int" />.
     /// A return value indicates whether the creation succeeded.
-    /// </summary >
-    /// <param name="val" >
-    /// A Int32 describing a house number.
-    /// </param >
-    /// <param name="result" >
+    /// </summary>
+    /// <param name="val">
+    /// A number describing a house number.
+    /// </param>
+    /// <param name="result">
     /// The result of the creation.
-    /// </param >
-    /// <returns >
+    /// </param>
+    /// <returns>
     /// True if a house number was created successfully, otherwise false.
-    /// </returns >
+    /// </returns>
     public static bool TryCreate(int? val, out HouseNumber result)
     {
         result = Empty;

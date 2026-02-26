@@ -105,6 +105,9 @@
   <data name="FormatExceptionYearMonth">
     <value>Geen geldige jaar/maand combinatie</value>
   </data>
+  <data name="FormatExceptionYearSpan">
+    <value>Geen geldige duur in jaren</value>
+  </data>
   <data name="FormatExceptionYesNo">
     <value>Geen geldige ja/nee waarde</value>
   </data>

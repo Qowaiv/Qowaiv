@@ -1,6 +1,6 @@
 namespace Qowaiv.Conversion;
 
-/// <summary>Provides a conversion for a month span.</summary>
+/// <summary>Provides a conversion for a year span.</summary>
 [Inheritable]
 public class YearSpanTypeConverter : NumericTypeConverter<YearSpan, int>
 {

@@ -151,7 +151,7 @@ public class Can_modify
     }
 
     [Test]
-    public void Add_YearSpan_to_MonthSPan()
+    public void Add_YearSpan_to_MonthSpan()
     {
         var total = Svo.MonthSpan + Svo.YearSpan;
         total.Should().Be(new(years: 22, months: 9));

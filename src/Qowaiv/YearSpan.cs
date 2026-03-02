@@ -28,6 +28,20 @@ public readonly partial struct YearSpan : IXmlSerializable, IFormattable, IEquat
     [Pure]
     public YearSpan Abs() => new(Math.Abs(m_Value));
 
+    /// <summary>
+    /// Returns an integer that indicates the sign of the year span.
+    /// </summary>
+    /// <returns>
+    /// A number that indicates the sign of value, as shown in the following table.
+    ///
+    /// Return value – Meaning
+    /// -1 –value is less than zero.
+    /// 0 –value is equal to zero.
+    /// 1 –value is greater than zero.
+    /// </returns>
+    [Pure]
+    public int Sign() => Math.Sign(m_Value);
+
     /// <summary>Unary plus the year span.</summary>
     public static YearSpan operator +(YearSpan span) => span;
 

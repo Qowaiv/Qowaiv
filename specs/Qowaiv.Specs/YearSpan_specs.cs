@@ -41,6 +41,11 @@ public class Can_be_transformed
     [TestCase(-17, 17)]
     [TestCase(+17, 17)]
     public void Abs(YearSpan span, YearSpan abs) => span.Abs().Should().Be(abs);
+
+    [TestCase(-2, -1)]
+    [TestCase(+0, +0)]
+    [TestCase(+7, +1)]
+    public void Sign(YearSpan span, int sign) => span.Sign().Should().Be(sign);
 }
 
 public class Is_equal_by_value

@@ -94,6 +94,11 @@ public class Can_be_transformed
     [TestCase(+17, 17)]
     public void Abs(MonthSpan span, MonthSpan abs) => span.Abs().Should().Be(abs);
 
+    [TestCase(-2, -1)]
+    [TestCase(+0, +0)]
+    [TestCase(+7, +1)]
+    public void Sign(MonthSpan span, int sign) => span.Sign().Should().Be(sign);
+
     [Test]
     public void multiply_by_int() => (Svo.MonthSpan * 3).Should().Be(MonthSpan.FromMonths(207));
 

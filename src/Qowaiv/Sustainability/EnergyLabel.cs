@@ -68,7 +68,7 @@ public readonly partial struct EnergyLabel : IXmlSerializable, IEquatable<Energy
 
     /// <summary>Returns a formatted <see cref="string" /> that represents the EU energy label.</summary>
     /// <param name="format">
-    /// The format that this describes the formatting.
+    /// The string that describes the formatting.
     /// </param>
     /// <param name="formatProvider">
     /// The format provider.

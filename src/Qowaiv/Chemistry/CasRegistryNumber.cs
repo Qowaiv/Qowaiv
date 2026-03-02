@@ -32,7 +32,7 @@ public readonly partial struct CasRegistryNumber : IXmlSerializable, IFormattabl
 
     /// <summary>Returns a formatted <see cref="string" /> that represents the CAS Registry Number.</summary>
     /// <param name="format">
-    /// The format that this describes the formatting.
+    /// The string that describes the formatting.
     /// </param>
     /// <param name="formatProvider">
     /// The format provider.

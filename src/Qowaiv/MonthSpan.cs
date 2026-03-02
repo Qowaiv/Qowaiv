@@ -246,7 +246,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
 
     /// <summary>Returns a formatted <see cref = "string " /> that represents the month span.</summary>
     /// <param name = "format">
-    /// The format that this describes the formatting.
+    /// The string that describes the formatting.
     /// </param>
     /// <param name = "formatProvider">
     /// The format provider.

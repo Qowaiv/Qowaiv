@@ -167,20 +167,20 @@ public readonly partial struct YearSpan : IXmlSerializable, IFormattable, IEquat
         }
     }
 
-    /// <summary>Creates a date span.</summary>
+    /// <summary>Creates a year span.</summary>
     [Pure]
-    public static YearSpan Create(int months)
-        => TryCreate(months, out var yearSpan)
+    public static YearSpan Create(int years)
+        => TryCreate(years, out var yearSpan)
         ? yearSpan
-        : throw new ArgumentOutOfRangeException(nameof(months), QowaivMessages.FormatExceptionYearSpan);
+        : throw new ArgumentOutOfRangeException(nameof(years), QowaivMessages.FormatExceptionYearSpan);
 
     /// <summary>Tries to Create a year span from.</summary>
-    public static bool TryCreate(long? months, out YearSpan yearSpan)
+    public static bool TryCreate(long? years, out YearSpan yearSpan)
     {
         yearSpan = default;
-        if (months.HasValue && months >= MinValue.m_Value && months <= MaxValue.m_Value)
+        if (years is { } y && y >= MinValue.m_Value && y <= MaxValue.m_Value)
         {
-            yearSpan = new((int)months);
+            yearSpan = new(y);
             return true;
         }
         return false;

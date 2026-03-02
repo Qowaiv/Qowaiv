@@ -180,7 +180,7 @@ public readonly partial struct YearSpan : IXmlSerializable, IFormattable, IEquat
         yearSpan = default;
         if (years is { } y && y >= MinValue.m_Value && y <= MaxValue.m_Value)
         {
-            yearSpan = new(y);
+            yearSpan = new((int)y);
             return true;
         }
         return false;

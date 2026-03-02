@@ -67,10 +67,10 @@ public readonly partial struct YearSpan : IXmlSerializable, IFormattable, IEquat
     public static YearSpan operator *(YearSpan span, short factor) => new(span.m_Value * factor);
 
     /// <summary>Multiplies the year span with a factor.</summary>
-    public static YearSpan operator *(YearSpan span, decimal factor) => new(Cast.ToInt<YearSpan>((int)(span.m_Value * factor)));
+    public static YearSpan operator *(YearSpan span, decimal factor) => new(Cast.ToInt<YearSpan>(span.m_Value * factor));
 
     /// <summary>Multiplies the year span with a factor.</summary>
-    public static YearSpan operator *(YearSpan span, double factor) => new(Cast.ToInt<YearSpan>((int)(span.m_Value * factor)));
+    public static YearSpan operator *(YearSpan span, double factor) => new(Cast.ToInt<YearSpan>(span.m_Value * factor));
 
     /// <summary>Divides the year span by a factor.</summary>
     public static YearSpan operator /(YearSpan span, int factor) => new(span.m_Value / factor);
@@ -79,10 +79,10 @@ public readonly partial struct YearSpan : IXmlSerializable, IFormattable, IEquat
     public static YearSpan operator /(YearSpan span, short factor) => new(span.m_Value / factor);
 
     /// <summary>Divides the year span by a factor.</summary>
-    public static YearSpan operator /(YearSpan span, decimal factor) => new(Cast.ToInt<YearSpan>((int)(span.m_Value / factor)));
+    public static YearSpan operator /(YearSpan span, decimal factor) => new(Cast.ToInt<YearSpan>(span.m_Value / factor));
 
     /// <summary>Divides the year span by a factor.</summary>
-    public static YearSpan operator /(YearSpan span, double factor) => new(Cast.ToInt<YearSpan>((int)(span.m_Value / factor)));
+    public static YearSpan operator /(YearSpan span, double factor) => new(Cast.ToInt<YearSpan>(span.m_Value / factor));
 
     /// <summary>Casts the year span to a <see cref="int"/>.</summary>
     public static explicit operator int(YearSpan val) => val.m_Value;

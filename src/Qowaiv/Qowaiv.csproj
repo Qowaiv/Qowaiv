@@ -38,7 +38,7 @@
   </ItemGroup>
   
   <PropertyGroup>
-    <Version>7.4.7</Version>
+    <Version>7.5.0</Version>
     <PackageValidationBaselineVersion>7.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
@@ -48,6 +48,9 @@ v7.*
     </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
+v7.5.0
+- Add year span SVO.
+- Add .Abs() and .Sign() to month span.
 v7.4.7
 - Support EIR Code (Irish Postal Code system).
 v7.4.6

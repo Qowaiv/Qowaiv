@@ -76,6 +76,26 @@ public static class QowaivDateTimeExtensions
     [Pure]
     public static DateTime Add(this DateTime d, MonthSpan value) => d.AddMonths(value.TotalMonths);
 
+    /// <summary>Returns a new date time that adds the value of the specified <see cref="YearSpan" />
+    /// to the value of this instance.
+    /// </summary>
+    /// <param name="d">
+    /// The date time to add a <see cref="YearSpan" /> to.
+    /// </param>
+    /// <param name="value">
+    /// A <see cref="YearSpan" /> object that represents a positive or negative time interval.
+    /// </param>
+    /// <returns>
+    /// A new date whose value is the sum of the date and time represented
+    /// by this instance and the time interval represented by value.
+    /// </returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// The resulting date is less than <see cref="DateTime.MinValue" /> or greater
+    /// than <see cref="DateTime.MaxValue" />.
+    /// </exception>
+    [Pure]
+    public static DateTime Add(this DateTime d, YearSpan value) => d.AddYears((int)value);
+
     /// <summary>Returns true if the date is in the specified month, otherwise false.</summary>
     /// <param name="d">
     /// The date time to check.

@@ -69,6 +69,16 @@ public class Is_equal_by_value
     }
 }
 
+public class Can_be_created
+{
+    [Test]
+    public void implictly_casted_from_YearSpan()
+    {
+        MonthSpan span = Svo.YearSpan;
+        span.Should().Be(MonthSpan.FromYears(17));
+    }
+}
+
 public class Can_be_transformed
 {
     [Test]
@@ -81,6 +91,7 @@ public class Can_be_transformed
         span++;
         span.Should().Be(MonthSpan.FromMonths(70));
     }
+
     [Test]
     public void decrement()
     {
@@ -88,6 +99,15 @@ public class Can_be_transformed
         span--;
         span.Should().Be(MonthSpan.FromMonths(68));
     }
+
+    [TestCase(-17, 17)]
+    [TestCase(+17, 17)]
+    public void Abs(MonthSpan span, MonthSpan abs) => span.Abs().Should().Be(abs);
+
+    [TestCase(-2, -1)]
+    [TestCase(+0, +0)]
+    [TestCase(+7, +1)]
+    public void Sign(MonthSpan span, int sign) => span.Sign().Should().Be(sign);
 
     [Test]
     public void multiply_by_int() => (Svo.MonthSpan * 3).Should().Be(MonthSpan.FromMonths(207));
@@ -128,6 +148,34 @@ public class Can_modify
     {
         var added = Svo.DateTime - Svo.MonthSpan;
         added.Should().Be(11.September(2011).At(06, 15).AsUtc());
+    }
+
+    [Test]
+    public void Add_YearSpan_to_MonthSpan()
+    {
+        var total = Svo.MonthSpan + Svo.YearSpan;
+        total.Should().Be(new(years: 22, months: 9));
+    }
+
+    [Test]
+    public void Add_MonthSpan_to_YearSpan()
+    {
+        var total = Svo.YearSpan + Svo.MonthSpan;
+        total.Should().Be(new(years: 22, months: 9));
+    }
+
+    [Test]
+    public void Subtract_YearSpan_from_MonthSpan()
+    {
+        var total = Svo.MonthSpan - Svo.YearSpan;
+        total.Should().Be(new(years: -11, months: -3));
+    }
+
+    [Test]
+    public void Subtract_MonthSpan_from_YearSpan()
+    {
+        var total = Svo.YearSpan - Svo.MonthSpan;
+        total.Should().Be(new(years: 11, months: 3));
     }
 
 #if NET6_0_OR_GREATER

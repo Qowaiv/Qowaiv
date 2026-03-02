@@ -77,6 +77,10 @@ public class Can_be_adjusted_with
     [Test]
     public void Month_span()
         => new Date(2017, 06, 11).Add(MonthSpan.FromMonths(3)).Should().Be(new Date(2017, 09, 11));
+
+    [Test]
+    public void Year_span()
+       => new Date(2017, 06, 11).Add(8.Years()).Should().Be(new Date(2025, 06, 11));
 }
 
 public class Can_not_be_adjusted_with

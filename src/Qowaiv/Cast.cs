@@ -65,6 +65,14 @@ internal static class Cast
         ? throw Exceptions.InvalidCast<long, TSvo>()
         : (int)value;
 
+    /// <summary>Casts a <see cref="decimal" /> to <see cref="int" /> for the SVO.</summary>
+    [Pure]
+    public static int ToInt<TSvo>(decimal value)
+        => value < int.MinValue
+        || value > int.MaxValue
+        ? throw Exceptions.InvalidCast<long, TSvo>()
+        : (int)value;
+
     /// <summary>Casts a <see cref="long" /> to <see cref="int" /> for the SVO.</summary>
     [Pure]
     public static int ToInt<TSvo>(long value)

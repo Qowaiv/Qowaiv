@@ -68,8 +68,7 @@ public static class QowaivDateOnlyExtensions
     /// A <see cref="MonthSpan" /> object that represents a positive or negative time interval.
     /// </param>
     /// <returns>
-    /// A new date whose value is the sum of the date and time represented
-    /// by this instance and the time interval represented by value.
+    /// A new date.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException">
     /// The resulting date is less than <see cref="DateOnly.MinValue" /> or greater
@@ -77,6 +76,25 @@ public static class QowaivDateOnlyExtensions
     /// </exception>
     [Pure]
     public static DateOnly Add(this DateOnly d, MonthSpan value) => d.AddMonths(value.TotalMonths);
+
+    /// <summary>Returns a new date that adds the value of the specified <see cref="YearSpan" />
+    /// to the value of this instance.
+    /// </summary>
+    /// <param name="d">
+    /// The date to add a <see cref="YearSpan" /> to.
+    /// </param>
+    /// <param name="value">
+    /// A <see cref="YearSpan" /> object that represents a positive or negative time interval.
+    /// </param>
+    /// <returns>
+    /// A new date.
+    /// </returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// The resulting date is less than <see cref="DateTime.MinValue" /> or greater
+    /// than <see cref="DateTime.MaxValue" />.
+    /// </exception>
+    [Pure]
+    public static DateOnly Add(this DateOnly d, YearSpan value) => d.AddYears((int)value);
 
     /// <summary>Returns true if the date is in the specified month, otherwise false.</summary>
     /// <param name="d">

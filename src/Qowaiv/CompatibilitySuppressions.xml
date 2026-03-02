@@ -17,6 +17,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Conversion.YearSpanTypeConverter</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Customization.CustomBehavior`1</Target>
     <Left>lib/net6.0/Qowaiv.dll</Left>
     <Right>lib/net6.0/Qowaiv.dll</Right>
@@ -115,7 +122,28 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.YearSpanJsonConverter</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.NumberToYearSpanExtensions</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.YearMonth</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.YearSpan</Target>
     <Left>lib/net6.0/Qowaiv.dll</Left>
     <Right>lib/net6.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -154,6 +182,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Conversion.YearSpanTypeConverter</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Customization.CustomBehavior`1</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
@@ -259,7 +294,28 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.YearSpanJsonConverter</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.NumberToYearSpanExtensions</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.YearMonth</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.YearSpan</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -471,6 +527,12 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.YearSpanJsonConverter</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Json.YesNoJsonConverter</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net6.0/Qowaiv.dll</Right>
@@ -497,6 +559,13 @@
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Conversion.YearMonthTypeConverter</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Conversion.YearSpanTypeConverter</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -580,7 +649,21 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.NumberToYearSpanExtensions</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.YearMonth</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.YearSpan</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -609,6 +692,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Customization.SvoBehavior.TryParse(System.String,System.IFormatProvider,System.String@)</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Date.Add(Qowaiv.YearSpan)</Target>
     <Left>lib/net6.0/Qowaiv.dll</Left>
     <Right>lib/net6.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -657,7 +747,28 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.Abs</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.MonthSpan.Deconstruct(System.Int32@,System.Int32@)</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.op_Addition(Qowaiv.MonthSpan,Qowaiv.YearSpan)</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.op_Addition(Qowaiv.YearSpan,Qowaiv.MonthSpan)</Target>
     <Left>lib/net6.0/Qowaiv.dll</Left>
     <Right>lib/net6.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -671,7 +782,35 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.op_Implicit(Qowaiv.YearSpan)~Qowaiv.MonthSpan</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.op_Subtraction(Qowaiv.MonthSpan,Qowaiv.YearSpan)</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.op_Subtraction(Qowaiv.YearSpan,Qowaiv.MonthSpan)</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.MonthSpan.op_Subtraction(System.DateOnly,Qowaiv.MonthSpan)</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.Sign</Target>
     <Left>lib/net6.0/Qowaiv.dll</Left>
     <Right>lib/net6.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -693,6 +832,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.QowaivMessages.get_FormatExceptionIdentifier</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.QowaivMessages.get_FormatExceptionYearSpan</Target>
     <Left>lib/net6.0/Qowaiv.dll</Left>
     <Right>lib/net6.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -763,6 +909,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:System.Linq.QowaivEnumerableExtensions.Sum``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Nullable{Qowaiv.Percentage}})</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:System.QowaivDateOnlyExtensions.Add(System.DateOnly,Qowaiv.YearSpan)</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:System.QowaivDateTimeExtensions.Add(System.DateTime,Qowaiv.YearSpan)</Target>
     <Left>lib/net6.0/Qowaiv.dll</Left>
     <Right>lib/net6.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -839,6 +999,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Date.Add(Qowaiv.YearSpan)</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Date.Deconstruct(System.Int32@,System.Int32@,System.Int32@)</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
@@ -881,7 +1048,28 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.Abs</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.MonthSpan.Deconstruct(System.Int32@,System.Int32@)</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.op_Addition(Qowaiv.MonthSpan,Qowaiv.YearSpan)</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.op_Addition(Qowaiv.YearSpan,Qowaiv.MonthSpan)</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -895,7 +1083,35 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.op_Implicit(Qowaiv.YearSpan)~Qowaiv.MonthSpan</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.op_Subtraction(Qowaiv.MonthSpan,Qowaiv.YearSpan)</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.op_Subtraction(Qowaiv.YearSpan,Qowaiv.MonthSpan)</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.MonthSpan.op_Subtraction(System.DateOnly,Qowaiv.MonthSpan)</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.Sign</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -917,6 +1133,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.QowaivMessages.get_FormatExceptionIdentifier</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.QowaivMessages.get_FormatExceptionYearSpan</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -987,6 +1210,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:System.Linq.QowaivEnumerableExtensions.Sum``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Nullable{Qowaiv.Percentage}})</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:System.QowaivDateOnlyExtensions.Add(System.DateOnly,Qowaiv.YearSpan)</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:System.QowaivDateTimeExtensions.Add(System.DateTime,Qowaiv.YearSpan)</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1153,6 +1390,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Date.Add(Qowaiv.YearSpan)</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Date.Deconstruct(System.Int32@,System.Int32@,System.Int32@)</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
@@ -1195,7 +1439,56 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.Abs</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.MonthSpan.Deconstruct(System.Int32@,System.Int32@)</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.op_Addition(Qowaiv.MonthSpan,Qowaiv.YearSpan)</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.op_Addition(Qowaiv.YearSpan,Qowaiv.MonthSpan)</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.op_Implicit(Qowaiv.YearSpan)~Qowaiv.MonthSpan</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.op_Subtraction(Qowaiv.MonthSpan,Qowaiv.YearSpan)</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.op_Subtraction(Qowaiv.YearSpan,Qowaiv.MonthSpan)</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.MonthSpan.Sign</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1217,6 +1510,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.QowaivMessages.get_FormatExceptionIdentifier</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.QowaivMessages.get_FormatExceptionYearSpan</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1287,6 +1587,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:System.Linq.QowaivEnumerableExtensions.Sum``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Nullable{Qowaiv.Percentage}})</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:System.QowaivDateTimeExtensions.Add(System.DateTime,Qowaiv.YearSpan)</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1526,6 +1833,12 @@
   <Suppression>
     <DiagnosticId>CP0008</DiagnosticId>
     <Target>T:Qowaiv.YearMonth</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.YearSpan</Target>
     <Left>lib/net6.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
   </Suppression>
@@ -1816,9 +2129,30 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
+    <Target>T:Qowaiv.QowaivMessages:[T:System.CodeDom.Compiler.GeneratedCodeAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0015</DiagnosticId>
     <Target>T:Qowaiv.Globalization.PostalCodeCountryInfo:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0015</DiagnosticId>
+    <Target>T:Qowaiv.QowaivMessages:[T:System.CodeDom.Compiler.GeneratedCodeAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0015</DiagnosticId>
+    <Target>T:Qowaiv.QowaivMessages:[T:System.CodeDom.Compiler.GeneratedCodeAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -2375,6 +2709,12 @@
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Conversion.YearMonthTypeConverter.FromString(System.String,System.Globalization.CultureInfo):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Conversion.YearSpanTypeConverter.FromString(System.String,System.Globalization.CultureInfo):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/net6.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
   </Suppression>
@@ -6244,6 +6584,42 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.YearSpan.ToString(System.IFormatProvider)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.YearSpan.ToString(System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.YearSpan.ToString(System.String)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.YearSpan.ToString(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.YearSpan.ToString(System.String,System.IFormatProvider)-&gt;string:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.YearSpan.ToString:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.YesNo.CompareTo(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/net6.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
@@ -7498,6 +7874,18 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.Json.YearSpanJsonConverter:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.Json.YearSpanJsonConverter:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
     <Target>T:Qowaiv.Json.YesNoJsonConverter:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/net6.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
@@ -7769,6 +8157,18 @@
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>T:Qowaiv.YearMonth:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.YearSpan:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.YearSpan:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/net6.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
   </Suppression>
@@ -8244,6 +8644,12 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.YearSpan.Equals(System.Object)$0:[T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.YesNo.Equals(System.Object)$0:[T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net6.0/Qowaiv.dll</Right>
@@ -8437,6 +8843,12 @@
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>T:Qowaiv.YearMonth:[T:System.Text.Json.Serialization.JsonConverterAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net6.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.YearSpan:[T:System.Text.Json.Serialization.JsonConverterAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net6.0/Qowaiv.dll</Right>
   </Suppression>

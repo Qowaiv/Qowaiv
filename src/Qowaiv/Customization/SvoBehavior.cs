@@ -74,7 +74,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// unknown state of the Single Value Object.
     /// </summary>
     /// <param name="format">
-    /// The format that this describes the formatting.
+    /// The string that describes the formatting.
     /// </param>
     /// <param name="formatProvider">
     /// The format provider.
@@ -87,7 +87,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// The string representing the Single Value Object.
     /// </param>
     /// <param name="format">
-    /// The format that this describes the formatting.
+    /// The string that describes the formatting.
     /// </param>
     /// <param name="formatProvider">
     /// The format provider.
@@ -216,7 +216,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// The string representing the Single Value Object.
     /// </param>
     /// <param name="format">
-    /// The format that this describes the formatting.
+    /// The string that describes the formatting.
     /// </param>
     /// <param name="formatProvider">
     /// The format provider.

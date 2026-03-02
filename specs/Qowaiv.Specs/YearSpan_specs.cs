@@ -46,6 +46,30 @@ public class Can_be_transformed
     [TestCase(+0, +0)]
     [TestCase(+7, +1)]
     public void Sign(YearSpan span, int sign) => span.Sign().Should().Be(sign);
+
+    [Test]
+    public void multiply_by_int() => (Svo.YearSpan * 3).Should().Be(51.Years());
+
+    [Test]
+    public void multiply_by_short() => (Svo.YearSpan * (short)3).Should().Be(51.Years());
+
+    [Test]
+    public void multiply_by_double() => (Svo.YearSpan * 2.471).Should().Be(42.Years());
+
+    [Test]
+    public void multiply_by_decimal() => (Svo.YearSpan * 2.471m).Should().Be(42.Years());
+
+    [Test]
+    public void divide_by_int() => (Svo.YearSpan / 3).Should().Be(5.Years());
+
+    [Test]
+    public void divide_by_short() => (Svo.YearSpan / (short)3).Should().Be(5.Years());
+
+    [Test]
+    public void divide_by_double() => (Svo.YearSpan / 0.265625).Should().Be(64.Years());
+
+    [Test]
+    public void divide_by_decimal() => (Svo.YearSpan / 0.265625m).Should().Be(64.Years());
 }
 
 public class Is_equal_by_value

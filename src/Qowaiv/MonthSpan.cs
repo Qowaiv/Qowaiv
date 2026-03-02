@@ -184,8 +184,20 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// <summary>Adds two month spans.</summary>
     public static MonthSpan operator +(MonthSpan l, MonthSpan r) => l.Add(r);
 
+    /// <summary>Adds a year span to a month span.</summary>
+    public static MonthSpan operator +(MonthSpan months, YearSpan years) => new(months.m_Value + ((int)years * 12));
+
+    /// <summary>Adds a month span to a year span.</summary>
+    public static MonthSpan operator +(YearSpan years, MonthSpan months) => new(months.m_Value + ((int)years * 12));
+
     /// <summary>Subtracts two month spans.</summary>
     public static MonthSpan operator -(MonthSpan l, MonthSpan r) => l.Subtract(r);
+
+    /// <summary>Subtracts a year span from a month span.</summary>
+    public static MonthSpan operator -(MonthSpan months, YearSpan years) => new(months.m_Value - ((int)years * 12));
+
+    /// <summary>Subtracts a month span from a year span.</summary>
+    public static MonthSpan operator -(YearSpan years, MonthSpan months) => new(((int)years * 12) - months.m_Value);
 
     /// <summary>Multiplies the month span with a factor.</summary>
     public static MonthSpan operator *(MonthSpan span, int factor) => span.Multiply(factor);
@@ -218,7 +230,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     public static DateTime operator -(DateTime dt, MonthSpan span) => dt.Add(-span);
 
     /// <summary>Casts a years span to a month span.</summary>
-    public static implicit operator MonthSpan(YearSpan years) => new((int)years);
+    public static implicit operator MonthSpan(YearSpan years) => FromYears((int)years);
 
 #if NET6_0_OR_GREATER
     /// <summary>Adds a month span to the date only.</summary>

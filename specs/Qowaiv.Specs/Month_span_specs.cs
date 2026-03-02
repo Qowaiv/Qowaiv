@@ -151,10 +151,31 @@ public class Can_modify
     }
 
     [Test]
-    public void Add_YearSpan()
+    public void Add_YearSpan_to_MonthSPan()
     {
         var total = Svo.MonthSpan + Svo.YearSpan;
-        total.Should().Be(new(years: 22, months: 5));
+        total.Should().Be(new(years: 22, months: 9));
+    }
+
+    [Test]
+    public void Add_MonthSpan_to_YearSpan()
+    {
+        var total = Svo.YearSpan + Svo.MonthSpan;
+        total.Should().Be(new(years: 22, months: 9));
+    }
+
+    [Test]
+    public void Subtract_YearSpan_from_MonthSPan()
+    {
+        var total = Svo.MonthSpan - Svo.YearSpan;
+        total.Should().Be(new(years: -11, months: -3));
+    }
+
+    [Test]
+    public void Subtract_MonthSpan_from_YearSpan()
+    {
+        var total = Svo.YearSpan - Svo.MonthSpan;
+        total.Should().Be(new(years: 11, months: 3));
     }
 
 #if NET6_0_OR_GREATER

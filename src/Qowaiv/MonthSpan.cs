@@ -71,6 +71,10 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     [Pure]
     private MonthSpan Decrement() => new(m_Value - 1);
 
+    /// <summary>Returns the absolute value of the month span.</summary>
+    [Pure]
+    public MonthSpan Abs() => new(Math.Abs(m_Value));
+
     /// <summary>Returns a new month span whose value is the sum of the specified month span and this instance.</summary>
     /// <param name="other">
     /// The month span to add.
@@ -160,7 +164,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// <summary>Increases the month span with one month.</summary>
     public static MonthSpan operator ++(MonthSpan span) => span.Increment();
 
-    /// <summary>Decreases the monthspan with one month.</summary>
+    /// <summary>Decreases the month span with one month.</summary>
     public static MonthSpan operator --(MonthSpan span) => span.Decrement();
 
     /// <summary>Adds two month spans.</summary>

@@ -81,6 +81,7 @@ public class Can_be_transformed
         span++;
         span.Should().Be(MonthSpan.FromMonths(70));
     }
+
     [Test]
     public void decrement()
     {
@@ -88,6 +89,10 @@ public class Can_be_transformed
         span--;
         span.Should().Be(MonthSpan.FromMonths(68));
     }
+
+    [TestCase(-17, 17)]
+    [TestCase(+17, 17)]
+    public void Abs(MonthSpan span, MonthSpan abs) => span.Abs().Should().Be(abs);
 
     [Test]
     public void multiply_by_int() => (Svo.MonthSpan * 3).Should().Be(MonthSpan.FromMonths(207));

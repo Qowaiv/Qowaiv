@@ -24,6 +24,22 @@ public readonly partial struct YearSpan : IXmlSerializable, IFormattable, IEquat
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0} years");
 
+    /// <summary>Returns the absolute value of the year span.</summary>
+    [Pure]
+    public YearSpan Abs() => new(Math.Abs(m_Value));
+
+    /// <summary>Unary plus the year span.</summary>
+    public static YearSpan operator +(YearSpan span) => span;
+
+    /// <summary>Negates the year span.</summary>
+    public static YearSpan operator -(YearSpan span) => new(-span.m_Value);
+
+    /// <summary>Increases the year span with one year.</summary>
+    public static YearSpan operator ++(YearSpan span) => new(span.m_Value + 1);
+
+    /// <summary>Decreases the year span with one year.</summary>
+    public static YearSpan operator --(YearSpan span) => new(span.m_Value - 1);
+
     /// <summary>Returns a formatted <see cref="string" /> that represents the year span.</summary>
     /// <param name="format">
     /// The format that this describes the formatting.

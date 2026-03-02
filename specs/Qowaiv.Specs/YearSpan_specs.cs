@@ -12,6 +12,37 @@ public class Has_constant
     public void MaxValue() => YearSpan.MaxValue.Should().Be(YearSpan.Create(+9999));
 }
 
+public class Can_be_transformed
+{
+    [TestCase(+17, -17)]
+    [TestCase(-17, +17)]
+    public void Negate(YearSpan span, YearSpan negated) => (-span).Should().Be(negated);
+
+    [TestCase(+17, +17)]
+    [TestCase(-17, -17)]
+    public void Plus(YearSpan span, YearSpan negated) => (+span).Should().Be(negated);
+
+    [TestCase(+17, +18)]
+    [TestCase(-17, -16)]
+    public void Increase(YearSpan span, YearSpan increase)
+    {
+        span++;
+        span.Should().Be(increase);
+    }
+
+    [TestCase(+17, +16)]
+    [TestCase(-17, -18)]
+    public void Decrease(YearSpan span, YearSpan decrease)
+    {
+        span--;
+        span.Should().Be(decrease);
+    }
+
+    [TestCase(-17, 17)]
+    [TestCase(+17, 17)]
+    public void Abs(YearSpan span, YearSpan abs) => span.Abs().Should().Be(abs);
+}
+
 public class Is_equal_by_value
 {
     [Test]
@@ -170,7 +201,7 @@ public class Has_custom_formatting
 
         [Test]
         public void to_YearSpan_only()
-            =>  new object().Invoking(o => Svo.YearSpan.CompareTo(o)).Should().Throw<ArgumentException>();
+            => new object().Invoking(o => Svo.YearSpan.CompareTo(o)).Should().Throw<ArgumentException>();
 
         [Test]
         public void can_be_sorted_using_compare()

@@ -165,7 +165,7 @@ public class Can_modify
     }
 
     [Test]
-    public void Subtract_YearSpan_from_MonthSPan()
+    public void Subtract_YearSpan_from_MonthSpan()
     {
         var total = Svo.MonthSpan - Svo.YearSpan;
         total.Should().Be(new(years: -11, months: -3));

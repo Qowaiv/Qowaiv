@@ -217,6 +217,9 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// <summary>Subtracts a month span from the date time.</summary>
     public static DateTime operator -(DateTime dt, MonthSpan span) => dt.Add(-span);
 
+    /// <summary>Casts a years span to a month span.</summary>
+    public static implicit operator MonthSpan(YearSpan years) => new((int)years);
+
 #if NET6_0_OR_GREATER
     /// <summary>Adds a month span to the date only.</summary>
     public static DateOnly operator +(DateOnly dt, MonthSpan span) => dt.Add(span);

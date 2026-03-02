@@ -54,6 +54,15 @@ public readonly partial struct YearSpan : IXmlSerializable, IFormattable, IEquat
     /// <summary>Decreases the year span with one year.</summary>
     public static YearSpan operator --(YearSpan span) => new(span.m_Value - 1);
 
+    /// <summary>Casts the year span to a <see cref="int"/>.</summary>
+    public static explicit operator int(YearSpan val) => val.m_Value;
+
+    /// <summary>Casts a <see cref="int"/> to a year span.</summary>
+    public static explicit operator YearSpan(int val) => Create(val);
+
+    /// <summary>Casts a month span to a year span.</summary>
+    public static implicit operator YearSpan(MonthSpan months) => new(months.Years);
+
     /// <summary>Returns a formatted <see cref="string" /> that represents the year span.</summary>
     /// <param name="format">
     /// The format that this describes the formatting.
@@ -97,12 +106,6 @@ public readonly partial struct YearSpan : IXmlSerializable, IFormattable, IEquat
     /// </returns>
     [Pure]
     public static YearSpan FromJson(long json) => new(Cast.ToInt<YearSpan>(json));
-
-    /// <summary>Casts the year span to a <see cref="int"/>.</summary>
-    public static explicit operator int(YearSpan val) => val.m_Value;
-
-    /// <summary>Casts a <see cref="int"/> to a year span.</summary>
-    public static explicit operator YearSpan(int val) => Create(val);
 
     /// <summary>Converts the <see cref="string"/> to <see cref="YearSpan"/>.
     /// A return value indicates whether the conversion succeeded.

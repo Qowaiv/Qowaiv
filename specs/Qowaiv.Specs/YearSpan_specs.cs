@@ -266,6 +266,13 @@ public class Has_custom_formatting
             var casted = (int)Svo.YearSpan;
             casted.Should().Be(17);
         }
+
+        [Test]
+        public void explicitly_from_MothSpan()
+        {
+            var casted = (YearSpan)Svo.MonthSpan;
+            casted.Should().Be(5.Years());
+        }
     }
 
     public class Supports_type_conversion

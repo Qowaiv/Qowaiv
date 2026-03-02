@@ -164,7 +164,7 @@ public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEq
     /// val is not a valid house number.
     /// </exception>
     [Pure]
-    public static HouseNumber Create(int? val) 
+    public static HouseNumber Create(int? val)
         => TryCreate(val, out HouseNumber result)
         ? result
         : throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.FormatExceptionHouseNumber);

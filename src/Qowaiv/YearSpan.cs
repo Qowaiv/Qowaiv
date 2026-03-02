@@ -95,7 +95,7 @@ public readonly partial struct YearSpan : IXmlSerializable, IFormattable, IEquat
 
     /// <summary>Returns a formatted <see cref="string" /> that represents the year span.</summary>
     /// <param name="format">
-    /// The format that this describes the formatting.
+    /// The string that describes the formatting.
     /// </param>
     /// <param name="formatProvider">
     /// The format provider.

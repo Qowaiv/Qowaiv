@@ -206,6 +206,23 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     [Pure]
     public Date Add(MonthSpan value) => AddMonths(value.TotalMonths);
 
+    /// <summary>Returns a new date that adds the value of the specified <see cref="YearSpan" />
+    /// to the value of this instance.
+    /// </summary>
+    /// <param name="value">
+    /// A <see cref="YearSpan" /> object that represents a positive or negative time interval.
+    /// </param>
+    /// <returns>
+    /// A new date whose value is the sum of the date represented
+    /// by this instance and the time interval represented by value.
+    /// </returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// The resulting date is less than <see cref="MinValue" /> or greater
+    /// than <see cref="MaxValue" />.
+    /// </exception>
+    [Pure]
+    public Date Add(YearSpan value) => AddYears((int)value);
+
     /// <summary>Subtracts the specified date from this instance.</summary>
     /// <param name="value">
     /// An instance of date.

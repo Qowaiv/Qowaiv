@@ -16,6 +16,11 @@ public class Can_be_adjusted_with
     public void Month_span()
         => new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local).Add(MonthSpan.FromMonths(3))
         .Should().Be(new DateTime(2017, 09, 11, 00, 00, 000, DateTimeKind.Local));
+
+    [Test]
+    public void Year_span()
+      => new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local).Add(8.Years())
+      .Should().Be(new DateTime(2025, 06, 11, 00, 00, 000, DateTimeKind.Local));
 }
 
 public class Can_not_be_adjusted_with

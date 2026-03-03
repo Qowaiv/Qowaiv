@@ -2,7 +2,6 @@ namespace Qowaiv;
 
 /// <summary>Represents a year span.</summary>
 [DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable]
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(int))]
 [OpenApiDataType(description: "Year span", type: "int", format: "year-span", example: 17)]
 [TypeConverter(typeof(Conversion.YearSpanTypeConverter))]

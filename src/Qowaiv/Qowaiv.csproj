@@ -51,6 +51,7 @@ v8.0.0
 - Drop Date.Add(DateSpan, bool). (BREAKING)
 - Drop LocalDateTime.Add(DateSpan, bool). (BREAKING)
 - Use non-breaking spaces for formatting postal codes. (BREAKING)
+- Date +/- TimeSpan results in a DateTime. (BREAKING)
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

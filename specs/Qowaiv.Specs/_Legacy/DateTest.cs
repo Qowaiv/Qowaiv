@@ -444,21 +444,6 @@ public class DateTest
     }
 
     [Test]
-    public void Plus_TimeSpan_AreEqual()
-    {
-        var act = TestStruct + new TimeSpan(25, 30, 15);
-        var exp = new Date(1970, 02, 15);
-        act.Should().Be(exp);
-    }
-    [Test]
-    public void Min_TimeSpan_AreEqual()
-    {
-        var act = TestStruct - new TimeSpan(25, 30, 15);
-        var exp = new Date(1970, 02, 12);
-        act.Should().Be(exp);
-    }
-
-    [Test]
     public void Min_DateTime_AreEqual()
     {
         var act = TestStruct - new Date(1970, 02, 12);

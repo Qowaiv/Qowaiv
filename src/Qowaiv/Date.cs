@@ -11,7 +11,7 @@ namespace Qowaiv;
 public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable<Date>, IComparable, IComparable<Date>
 #if NET8_0_OR_GREATER
     , IIncrementOperators<Date>, IDecrementOperators<Date>
-    , IAdditionOperators<Date, TimeSpan, Date>, ISubtractionOperators<Date, TimeSpan, Date>
+    , IAdditionOperators<Date, TimeSpan, DateTime>, ISubtractionOperators<Date, TimeSpan, DateTime>
     , IAdditionOperators<Date, MonthSpan, Date>, ISubtractionOperators<Date, MonthSpan, Date>
     , ISubtractionOperators<Date, Date, TimeSpan>
     , IMinMaxValue<Date>
@@ -117,7 +117,7 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
-    public Date Add(TimeSpan value) => new(Ticks + value.Ticks);
+    public DateTime Add(TimeSpan value) => new(Ticks + value.Ticks, DateTimeKind.Utc);
 
     /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan" />
     /// to the value of this instance.
@@ -224,7 +224,7 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// The result is less than <see cref="MinValue" /> or greater than <see cref="MaxValue" />.
     /// </exception>
     [Pure]
-    public Date Subtract(TimeSpan value) => new(Ticks - value.Ticks);
+    public DateTime Subtract(TimeSpan value) => new(Ticks - value.Ticks, DateTimeKind.Utc);
 
     /// <summary>Subtracts the specified duration from this instance.</summary>
     /// <param name="value">
@@ -453,10 +453,10 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     public static implicit operator Date(WeekDate val) => val.Date;
 
     /// <summary>Adds the time span to the date.</summary>
-    public static Date operator +(Date d, TimeSpan t) => d.Add(t);
+    public static DateTime operator +(Date d, TimeSpan t) => d.Add(t);
 
     /// <summary>Subtracts the Time Span from the date.</summary>
-    public static Date operator -(Date d, TimeSpan t) => d.Subtract(t);
+    public static DateTime operator -(Date d, TimeSpan t) => d.Subtract(t);
 
     /// <summary>Adds the month span to the date.</summary>
     public static Date operator +(Date date, MonthSpan span) => date.Add(span);

@@ -81,6 +81,14 @@ public class Can_be_adjusted_with
     [Test]
     public void Year_span()
        => new Date(2017, 06, 11).Add(8.Years()).Should().Be(new Date(2025, 06, 11));
+
+    [Test]
+    public void adding_TimeSpan()
+        => (Svo.Date + new TimeSpan(25, 30, 15)).Should().Be(new DateTime(2017, 06, 12, 01, 30, 15, DateTimeKind.Utc));
+
+    [Test]
+    public void subtracting_TimeSpan()
+        => (Svo.Date - new TimeSpan(25, 30, 15)).Should().Be(new DateTime(2017, 06, 09, 22, 29, 45, DateTimeKind.Utc));
 }
 
 public class Can_not_be_adjusted_with

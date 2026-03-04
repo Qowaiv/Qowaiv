@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- https://learn.microsoft.com/dotnet/fundamentals/package-validation/diagnostic-ids -->
-<Suppressions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Sql.Json.TimestampJsonConverter</Target>
@@ -108,13 +108,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Sql.Timestamp.Equals(System.Object)$0:[T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute]</Target>
+    <Target>M:Qowaiv.Sql.Timestamp.Equals(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Data.SqlClient.dll</Left>
     <Right>lib/net8.0/Qowaiv.Data.SqlClient.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Sql.Timestamp.Equals(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Sql.Timestamp.Equals(System.Object)$0:[T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Data.SqlClient.dll</Left>
     <Right>lib/net8.0/Qowaiv.Data.SqlClient.dll</Right>
   </Suppression>
@@ -126,13 +126,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Sql.Timestamp.Parse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Sql.Timestamp.Parse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Data.SqlClient.dll</Left>
     <Right>lib/net8.0/Qowaiv.Data.SqlClient.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Sql.Timestamp.Parse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Sql.Timestamp.Parse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Data.SqlClient.dll</Left>
     <Right>lib/net8.0/Qowaiv.Data.SqlClient.dll</Right>
   </Suppression>
@@ -144,7 +144,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Sql.Timestamp.ToString(System.String)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Target>M:Qowaiv.Sql.Timestamp.ToString(System.String,System.IFormatProvider)-&gt;string:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Data.SqlClient.dll</Left>
     <Right>lib/net8.0/Qowaiv.Data.SqlClient.dll</Right>
   </Suppression>
@@ -156,13 +156,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Sql.Timestamp.ToString(System.String,System.IFormatProvider)-&gt;string:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.Data.SqlClient.dll</Left>
-    <Right>lib/net8.0/Qowaiv.Data.SqlClient.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Sql.Timestamp.TryParse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Sql.Timestamp.ToString(System.String)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Data.SqlClient.dll</Left>
     <Right>lib/net8.0/Qowaiv.Data.SqlClient.dll</Right>
   </Suppression>
@@ -174,13 +168,19 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sql.Timestamp.TryParse(System.String,System.IFormatProvider,Qowaiv.Sql.Timestamp@):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Data.SqlClient.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Data.SqlClient.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Sql.Timestamp.TryParse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Data.SqlClient.dll</Left>
     <Right>lib/net8.0/Qowaiv.Data.SqlClient.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Sql.Timestamp.TryParse(System.String,System.IFormatProvider,Qowaiv.Sql.Timestamp@):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Sql.Timestamp.TryParse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Data.SqlClient.dll</Left>
     <Right>lib/net8.0/Qowaiv.Data.SqlClient.dll</Right>
   </Suppression>

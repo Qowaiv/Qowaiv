@@ -106,6 +106,15 @@ public class For_current_execution_context_and_scope
 public class Today
 {
     [Test]
+    public void UTC_based()
+    {
+        using (Clock.SetTimeAndTimeZoneForCurrentContext(() => Svo.DateTime, Svo.TimeZone))
+        {
+            Clock.UtcToday().Should().Be(new Date(2017, 06, 11));
+        }
+    }
+
+    [Test]
     public void according_to_the_specified_time_zone()
     {
         using (Clock.SetTimeAndTimeZoneForCurrentContext(() => Svo.DateTime, Svo.TimeZone))
@@ -120,48 +129,6 @@ public class Today
         using (Clock.SetTimeAndTimeZoneForCurrentContext(() => Svo.DateTime, Svo.TimeZone))
         {
             Clock.Today().Should().Be(new Date(2017, 06, 11));
-        }
-    }
-}
-
-public class Yesterday
-{
-    [Test]
-    public void according_to_the_specified_time_zone()
-    {
-        using (Clock.SetTimeAndTimeZoneForCurrentContext(() => Svo.DateTime, Svo.TimeZone))
-        {
-            Clock.Yesterday(TestTimeZones.AlaskanStandardTime).Should().Be(new Date(2017, 06, 09));
-        }
-    }
-
-    [Test]
-    public void according_to_the_current_time_zone_if_not_specified()
-    {
-        using (Clock.SetTimeAndTimeZoneForCurrentContext(() => Svo.DateTime, Svo.TimeZone))
-        {
-            Clock.Yesterday().Should().Be(new Date(2017, 06, 10));
-        }
-    }
-}
-
-public class Tomorrow
-{
-    [Test]
-    public void according_to_the_specified_time_zone()
-    {
-        using (Clock.SetTimeAndTimeZoneForCurrentContext(() => Svo.DateTime, Svo.TimeZone))
-        {
-            Clock.Tomorrow(TestTimeZones.AlaskanStandardTime).Should().Be(new Date(2017, 06, 11));
-        }
-    }
-
-    [Test]
-    public void according_to_the_current_time_zone_if_not_specified()
-    {
-        using (Clock.SetTimeAndTimeZoneForCurrentContext(() => Svo.DateTime, Svo.TimeZone))
-        {
-            Clock.Tomorrow().Should().Be(new Date(2017, 06, 12));
         }
     }
 }

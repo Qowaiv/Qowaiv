@@ -14,7 +14,7 @@ public class Can_be_adjusted_with
 
     [Test]
     public void Month_span()
-        => Svo.DateOnly.Add(MonthSpan.FromMonths(3)).Should().Be(new DateOnly(2017, 09, 11));
+        => Svo.DateOnly.Add(3.Months()).Should().Be(new DateOnly(2017, 09, 11));
 
     [Test]
     public void Year_span()

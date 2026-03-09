@@ -14,7 +14,7 @@ public class Can_be_adjusted_with
 
     [Test]
     public void Month_span()
-        => new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local).Add(MonthSpan.FromMonths(3))
+        => new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local).Add(3.Months())
         .Should().Be(new DateTime(2017, 09, 11, 00, 00, 000, DateTimeKind.Local));
 
     [Test]

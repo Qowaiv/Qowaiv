@@ -79,7 +79,7 @@ public class Can_be_adjusted_with
 
     [Test]
     public void Month_span()
-        => new LocalDateTime(2017, 06, 11).Add(MonthSpan.FromMonths(3)).Should().Be(new LocalDateTime(2017, 09, 11));
+        => new LocalDateTime(2017, 06, 11).Add(3.Months()).Should().Be(new LocalDateTime(2017, 09, 11));
 }
 
 public class Can_not_be_adjusted_with

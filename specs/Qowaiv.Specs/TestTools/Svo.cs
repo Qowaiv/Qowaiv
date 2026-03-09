@@ -32,7 +32,7 @@ public static class Svo
     public static readonly DateOnly DateOnly = new(2017, 06, 11);
 #endif
     /// <summary>10Y+3M-5D</summary>
-    public static readonly DateSpan DateSpan = new(10, 3, -5);
+    public static readonly DateSpan DateSpan = 10.Years() + 3.Months() - 5.Days();
 
     /// <summary>2017-06-11 06:15:00U</summary>
     public static readonly DateTime DateTime = new(2017, 06, 11, 06, 15, 00, 000, DateTimeKind.Local);
@@ -61,7 +61,7 @@ public static class Svo
     public static readonly Hash Hash = Hash.Code("QOWAIV");
 
     /// <summary>123.456.789</summary>
-    public static readonly HouseNumber HouseNumber = 123456789L;
+    public static readonly HouseNumber HouseNumber = 123_456_789L;
 
     /// <summary>POST.</summary>
     public static readonly HttpMethod HttpMethod = HttpMethod.Post;
@@ -78,8 +78,9 @@ public static class Svo
     public static readonly Month Month = Month.February;
 
     /// <summary>5Y+9M</summary>
-    public static readonly MonthSpan MonthSpan = MonthSpan.FromMonths(69);
+    public static readonly MonthSpan MonthSpan = 5.Years() + 9.Months();
 
+    /// <summary>17.51%</summary>
     public static readonly Percentage Percentage = 17.51.Percent();
 
     /// <summary>H0H0H0 (Canada)</summary>

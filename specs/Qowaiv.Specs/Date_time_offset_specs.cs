@@ -16,7 +16,7 @@ public class Can_be_adjusted_with
 
     [Test]
     public void Month_span()
-        => 11.June(2017).At(06, 15).WithOffset(TimeSpan.FromHours(+2)).Add(MonthSpan.FromMonths(3))
+        => 11.June(2017).At(06, 15).WithOffset(TimeSpan.FromHours(+2)).Add(3.Months())
         .Should().Be(11.September(2017).At(06, 15).WithOffset(TimeSpan.FromHours(+2)));
 }
 

@@ -83,7 +83,7 @@ jobs:
 
       - name: Test Report
         if: success() || failure()
-        uses: dorny/test-reporter@b082adf0eced0765477756c2a610396589b8c637
+        uses: dorny/test-reporter@3d76b34a4535afbd0600d347b09a6ee5deb3ed7f
         with:
           name: Unit test results
           path: "**/*.trx"

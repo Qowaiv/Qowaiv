@@ -38,9 +38,15 @@
   </ItemGroup>
   
   <PropertyGroup>
-    <Version>7.5.0</Version>
+    <Version>8.0.0</Version>
     <PackageValidationBaselineVersion>7.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
+      <![CDATA[
+v8.*
+-
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
       <![CDATA[
 v8.0.0
 - Add support for .NET 10.
@@ -56,10 +62,6 @@ v8.0.0
 - Drop Clock.Yesterday() and Clock.Tomorrow(). (BREAKING)
 - Use non-breaking spaces for formatting postal codes. (BREAKING)
 - Date +/- TimeSpan results in a DateTime. (BREAKING)
-]]>
-    </ToBeReleased>
-    <PackageReleaseNotes>
-      <![CDATA[
 v7.5.0
 - Add year span SVO.
 - Add .Abs() and .Sign() to month span.

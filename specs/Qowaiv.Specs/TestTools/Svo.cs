@@ -32,7 +32,7 @@ public static class Svo
     public static readonly DateOnly DateOnly = new(2017, 06, 11);
 #endif
     /// <summary>10Y+3M-5D</summary>
-    public static readonly DateSpan DateSpan = new(10, 3, -5);
+    public static readonly DateSpan DateSpan = 10.Years() + 3.Months() - 5.Days();
 
     /// <summary>2017-06-11 06:15:00U</summary>
     public static readonly DateTime DateTime = new(2017, 06, 11, 06, 15, 00, 000, DateTimeKind.Local);

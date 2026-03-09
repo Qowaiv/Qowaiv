@@ -61,7 +61,7 @@ public static class Svo
     public static readonly Hash Hash = Hash.Code("QOWAIV");
 
     /// <summary>123.456.789</summary>
-    public static readonly HouseNumber HouseNumber = 123456789L;
+    public static readonly HouseNumber HouseNumber = 123_456_789L;
 
     /// <summary>POST.</summary>
     public static readonly HttpMethod HttpMethod = HttpMethod.Post;
@@ -78,8 +78,9 @@ public static class Svo
     public static readonly Month Month = Month.February;
 
     /// <summary>5Y+9M</summary>
-    public static readonly MonthSpan MonthSpan = MonthSpan.FromMonths(69);
+    public static readonly MonthSpan MonthSpan = 5.Years() + 9.Months();
 
+    /// <summary>17.51%</summary>
     public static readonly Percentage Percentage = 17.51.Percent();
 
     /// <summary>H0H0H0 (Canada)</summary>

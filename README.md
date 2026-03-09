@@ -163,6 +163,7 @@ var ctor = new MonthSpan(years: 5, months: 6); // 69 months.
 var months = MonthSpan.FromMonths(13);
 var years = MonthSpan.FromYears(3); // 35 months.
 var (years, months) = ctor; // deconstructs.
+var humanizer = 5.Years() + 6.Months();
 
 // operations
 var delta = MonthSpan.Subtract(new Date(2020, 04, 01), new Date(2020, 02, 28)); // 1 month.
@@ -610,8 +611,8 @@ type has been introduced with .NET 6.0. For previous versions we still
 recommend [`Qowaiv.Date`](#Date). Interaction with Qowaiv SVO' is provided:
 
 ``` C#
-var more = new DateOnly(2017, 06, 11) + MonthSpan.FromMonths(3);
-var less = new DateOnly(2017, 06, 11) - MonthSpan.FromMonths(3);
+var more = new DateOnly(2017, 06, 11) + 3.Months();
+var less = new DateOnly(2017, 06, 11) - 3.Months();
 
 var more = new DateOnly(2017, 06, 11) + DateSpan.FromDays(3);
 var less = new DateOnly(2017, 06, 11) - DateSpan.FromDays(3);
@@ -623,8 +624,8 @@ to type to use when representing date and time. Interaction with Qowaiv SVO's
 is provided:
 
 ``` C#
-var more = new DateTime(2017, 06, 11) + MonthSpan.FromMonths(3);
-var less = new DateTime(2017, 06, 11) - MonthSpan.FromMonths(3);
+var more = new DateTime(2017, 06, 11) + 3.Months();
+var less = new DateTime(2017, 06, 11) - 3.Months();
 
 var more = new DateTime(2017, 06, 11) + DateSpan.FromDays(3);
 var less = new DateTime(2017, 06, 11) - DateSpan.FromDays(3);

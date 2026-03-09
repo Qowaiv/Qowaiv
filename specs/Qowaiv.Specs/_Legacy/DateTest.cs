@@ -504,20 +504,6 @@ public class DateTest
     }
 
     [Test]
-    public void Add_12Months_AreEqual()
-    {
-        var added = new Date(1970, 02, 14) + MonthSpan.FromMonths(12);
-        Should.BeEqual(new Date(1971, 02, 14), added);
-    }
-
-    [Test]
-    public void Subtract_3Months_AreEqual()
-    {
-        var subtracted = new Date(1971, 02, 14) - MonthSpan.FromMonths(3);
-        Should.BeEqual(new Date(1970, 11, 14), subtracted);
-    }
-
-    [Test]
     public void AddYears_Min12_AreEqual()
     {
         var act = TestStruct.AddYears(-12);

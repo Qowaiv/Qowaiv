@@ -18,6 +18,18 @@ public partial struct Country
     /// <summary>The inner value of the country.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? m_Value;
+
+    /// <summary>False if the country is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the country is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the country is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct Country : IEmpty<Country>
@@ -33,22 +45,6 @@ public partial struct Country : IEmpty<Country>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
-
-public partial struct Country : IUnknown<Country>
-{
-    /// <summary>False if the country is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the country is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the country is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-}
-
 public partial struct Country : IEquatable<Country>
 #if NET8_0_OR_GREATER
     , IEqualityOperators<Country, Country, bool>
@@ -94,7 +90,6 @@ public partial struct Country : IComparable, IComparable<Country>
     public int CompareTo(Country other) => Comparer<string>.Default.Compare(m_Value, other.m_Value);
 #nullable enable
 }
-
 public partial struct Country : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the country.</summary>
@@ -115,7 +110,6 @@ public partial struct Country : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct Country
 {
     /// <summary>Creates the country from a JSON string.</summary>
@@ -128,7 +122,6 @@ public partial struct Country
     [Pure]
     public static Country FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct Country : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the country.</summary>
@@ -155,7 +148,6 @@ public partial struct Country : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct Country
 #if NET8_0_OR_GREATER
     : IParsable<Country>

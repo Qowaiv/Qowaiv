@@ -18,6 +18,18 @@ public partial struct BusinessIdentifierCode
     /// <summary>The inner value of the BIC.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? m_Value;
+
+    /// <summary>False if the BIC is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the BIC is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the BIC is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct BusinessIdentifierCode : IEmpty<BusinessIdentifierCode>
@@ -33,22 +45,6 @@ public partial struct BusinessIdentifierCode : IEmpty<BusinessIdentifierCode>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
-
-public partial struct BusinessIdentifierCode : IUnknown<BusinessIdentifierCode>
-{
-    /// <summary>False if the BIC is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the BIC is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the BIC is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-}
-
 public partial struct BusinessIdentifierCode : IEquatable<BusinessIdentifierCode>
 #if NET8_0_OR_GREATER
     , IEqualityOperators<BusinessIdentifierCode, BusinessIdentifierCode, bool>
@@ -94,7 +90,6 @@ public partial struct BusinessIdentifierCode : IComparable, IComparable<Business
     public int CompareTo(BusinessIdentifierCode other) => Comparer<string>.Default.Compare(m_Value, other.m_Value);
 #nullable enable
 }
-
 public partial struct BusinessIdentifierCode : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the BIC.</summary>
@@ -115,7 +110,6 @@ public partial struct BusinessIdentifierCode : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct BusinessIdentifierCode
 {
     /// <summary>Creates the BIC from a JSON string.</summary>
@@ -128,7 +122,6 @@ public partial struct BusinessIdentifierCode
     [Pure]
     public static BusinessIdentifierCode FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct BusinessIdentifierCode : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the BIC.</summary>
@@ -155,7 +148,6 @@ public partial struct BusinessIdentifierCode : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct BusinessIdentifierCode
 #if NET8_0_OR_GREATER
     : IParsable<BusinessIdentifierCode>

@@ -56,7 +56,6 @@ public partial struct Money : IComparable, IComparable<Money>
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(Money l, Money r) => l.CompareTo(r) >= 0;
 }
-
 public partial struct Money : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the money.</summary>
@@ -77,7 +76,6 @@ public partial struct Money : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct Money
 {
     /// <summary>Creates the money from a JSON string.</summary>
@@ -90,7 +88,6 @@ public partial struct Money
     [Pure]
     public static Money FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct Money : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the money.</summary>
@@ -117,7 +114,6 @@ public partial struct Money : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct Money
 #if NET8_0_OR_GREATER
     : IParsable<Money>

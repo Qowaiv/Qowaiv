@@ -79,7 +79,6 @@ public partial struct Percentage : IComparable, IComparable<Percentage>
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(Percentage l, Percentage r) => l.CompareTo(r) >= 0;
 }
-
 public partial struct Percentage : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the percentage.</summary>
@@ -100,7 +99,6 @@ public partial struct Percentage : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct Percentage
 {
     /// <summary>Creates the percentage from a JSON string.</summary>
@@ -113,7 +111,6 @@ public partial struct Percentage
     [Pure]
     public static Percentage FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct Percentage : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the percentage.</summary>
@@ -140,7 +137,6 @@ public partial struct Percentage : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct Percentage
 #if NET8_0_OR_GREATER
     : IParsable<Percentage>

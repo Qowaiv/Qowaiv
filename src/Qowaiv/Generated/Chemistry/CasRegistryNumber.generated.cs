@@ -18,6 +18,18 @@ public partial struct CasRegistryNumber
     /// <summary>The inner value of the CAS Registry Number.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly long m_Value;
+
+    /// <summary>False if the CAS Registry Number is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the CAS Registry Number is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the CAS Registry Number is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct CasRegistryNumber : IEmpty<CasRegistryNumber>
@@ -33,22 +45,6 @@ public partial struct CasRegistryNumber : IEmpty<CasRegistryNumber>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
-
-public partial struct CasRegistryNumber : IUnknown<CasRegistryNumber>
-{
-    /// <summary>False if the CAS Registry Number is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the CAS Registry Number is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the CAS Registry Number is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-}
-
 public partial struct CasRegistryNumber : IEquatable<CasRegistryNumber>
 #if NET8_0_OR_GREATER
     , IEqualityOperators<CasRegistryNumber, CasRegistryNumber, bool>
@@ -94,7 +90,6 @@ public partial struct CasRegistryNumber : IComparable, IComparable<CasRegistryNu
     public int CompareTo(CasRegistryNumber other) => Comparer<long>.Default.Compare(m_Value, other.m_Value);
 #nullable enable
 }
-
 public partial struct CasRegistryNumber : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the CAS Registry Number.</summary>
@@ -115,7 +110,6 @@ public partial struct CasRegistryNumber : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct CasRegistryNumber
 {
     /// <summary>Creates the CAS Registry Number from a JSON string.</summary>
@@ -128,7 +122,6 @@ public partial struct CasRegistryNumber
     [Pure]
     public static CasRegistryNumber FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct CasRegistryNumber : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the CAS Registry Number.</summary>
@@ -155,7 +148,6 @@ public partial struct CasRegistryNumber : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct CasRegistryNumber
 #if NET8_0_OR_GREATER
     : IParsable<CasRegistryNumber>

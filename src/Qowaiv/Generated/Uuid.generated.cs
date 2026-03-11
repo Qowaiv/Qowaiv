@@ -33,7 +33,6 @@ public partial struct Uuid : IEmpty<Uuid>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
-
 public partial struct Uuid : IEquatable<Uuid>
 #if NET8_0_OR_GREATER
     , IEqualityOperators<Uuid, Uuid, bool>
@@ -79,7 +78,6 @@ public partial struct Uuid : IComparable, IComparable<Uuid>
     public int CompareTo(Uuid other) => Comparer<Guid>.Default.Compare(m_Value, other.m_Value);
 #nullable enable
 }
-
 public partial struct Uuid : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the UUID.</summary>
@@ -100,7 +98,6 @@ public partial struct Uuid : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct Uuid
 {
     /// <summary>Creates the UUID from a JSON string.</summary>
@@ -113,7 +110,6 @@ public partial struct Uuid
     [Pure]
     public static Uuid FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct Uuid : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the UUID.</summary>
@@ -140,7 +136,6 @@ public partial struct Uuid : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct Uuid
 #if NET8_0_OR_GREATER
     : IParsable<Uuid>

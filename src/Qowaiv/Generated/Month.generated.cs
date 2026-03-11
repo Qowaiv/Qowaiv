@@ -18,6 +18,18 @@ public partial struct Month
     /// <summary>The inner value of the month.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly byte m_Value;
+
+    /// <summary>False if the month is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the month is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the month is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct Month : IEmpty<Month>
@@ -33,22 +45,6 @@ public partial struct Month : IEmpty<Month>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
-
-public partial struct Month : IUnknown<Month>
-{
-    /// <summary>False if the month is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the month is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the month is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-}
-
 public partial struct Month : IEquatable<Month>
 #if NET8_0_OR_GREATER
     , IEqualityOperators<Month, Month, bool>
@@ -94,7 +90,6 @@ public partial struct Month : IComparable, IComparable<Month>
     public int CompareTo(Month other) => Comparer<byte>.Default.Compare(m_Value, other.m_Value);
 #nullable enable
 }
-
 public partial struct Month : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the month.</summary>
@@ -127,7 +122,6 @@ public partial struct Month
     [Pure]
     public static Month FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct Month : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the month.</summary>
@@ -154,7 +148,6 @@ public partial struct Month : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct Month
 #if NET8_0_OR_GREATER
     : IParsable<Month>

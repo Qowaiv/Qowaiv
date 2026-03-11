@@ -70,7 +70,6 @@ public partial struct StreamSize : IComparable, IComparable<StreamSize>
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(StreamSize l, StreamSize r) => l.CompareTo(r) >= 0;
 }
-
 public partial struct StreamSize
 {
     /// <summary>Creates the stream size from a JSON string.</summary>
@@ -83,7 +82,6 @@ public partial struct StreamSize
     [Pure]
     public static StreamSize FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct StreamSize : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the stream size.</summary>
@@ -110,7 +108,6 @@ public partial struct StreamSize : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct StreamSize
 #if NET8_0_OR_GREATER
     : IParsable<StreamSize>

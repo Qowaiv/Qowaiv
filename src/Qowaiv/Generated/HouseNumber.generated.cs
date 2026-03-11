@@ -18,6 +18,18 @@ public partial struct HouseNumber
     /// <summary>The inner value of the house number.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly int m_Value;
+
+    /// <summary>False if the house number is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the house number is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the house number is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct HouseNumber : IEmpty<HouseNumber>
@@ -33,22 +45,6 @@ public partial struct HouseNumber : IEmpty<HouseNumber>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
-
-public partial struct HouseNumber : IUnknown<HouseNumber>
-{
-    /// <summary>False if the house number is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the house number is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the house number is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-}
-
 public partial struct HouseNumber : IEquatable<HouseNumber>
 #if NET8_0_OR_GREATER
     , IEqualityOperators<HouseNumber, HouseNumber, bool>
@@ -108,7 +104,6 @@ public partial struct HouseNumber : IComparable, IComparable<HouseNumber>
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(HouseNumber l, HouseNumber r) => l.CompareTo(r) >= 0;
 }
-
 public partial struct HouseNumber : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the house number.</summary>
@@ -129,7 +124,6 @@ public partial struct HouseNumber : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct HouseNumber
 {
     /// <summary>Creates the house number from a JSON string.</summary>
@@ -142,7 +136,6 @@ public partial struct HouseNumber
     [Pure]
     public static HouseNumber FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct HouseNumber : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the house number.</summary>
@@ -169,7 +162,6 @@ public partial struct HouseNumber : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct HouseNumber
 #if NET8_0_OR_GREATER
     : IParsable<HouseNumber>

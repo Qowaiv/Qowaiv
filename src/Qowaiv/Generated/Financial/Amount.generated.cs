@@ -79,7 +79,6 @@ public partial struct Amount : IComparable, IComparable<Amount>
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(Amount l, Amount r) => l.CompareTo(r) >= 0;
 }
-
 public partial struct Amount : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the amount.</summary>
@@ -100,7 +99,6 @@ public partial struct Amount : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct Amount
 {
     /// <summary>Creates the amount from a JSON string.</summary>
@@ -113,7 +111,6 @@ public partial struct Amount
     [Pure]
     public static Amount FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct Amount : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the amount.</summary>
@@ -140,7 +137,6 @@ public partial struct Amount : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct Amount
 #if NET8_0_OR_GREATER
     : IParsable<Amount>

@@ -18,6 +18,18 @@ public partial struct InternationalBankAccountNumber
     /// <summary>The inner value of the IBAN.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? m_Value;
+
+    /// <summary>False if the IBAN is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the IBAN is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the IBAN is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct InternationalBankAccountNumber : IEmpty<InternationalBankAccountNumber>
@@ -33,22 +45,6 @@ public partial struct InternationalBankAccountNumber : IEmpty<InternationalBankA
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
-
-public partial struct InternationalBankAccountNumber : IUnknown<InternationalBankAccountNumber>
-{
-    /// <summary>False if the IBAN is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the IBAN is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the IBAN is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-}
-
 public partial struct InternationalBankAccountNumber : IEquatable<InternationalBankAccountNumber>
 #if NET8_0_OR_GREATER
     , IEqualityOperators<InternationalBankAccountNumber, InternationalBankAccountNumber, bool>
@@ -94,7 +90,6 @@ public partial struct InternationalBankAccountNumber : IComparable, IComparable<
     public int CompareTo(InternationalBankAccountNumber other) => Comparer<string>.Default.Compare(m_Value, other.m_Value);
 #nullable enable
 }
-
 public partial struct InternationalBankAccountNumber : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the IBAN.</summary>
@@ -115,7 +110,6 @@ public partial struct InternationalBankAccountNumber : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct InternationalBankAccountNumber
 {
     /// <summary>Creates the IBAN from a JSON string.</summary>
@@ -128,7 +122,6 @@ public partial struct InternationalBankAccountNumber
     [Pure]
     public static InternationalBankAccountNumber FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct InternationalBankAccountNumber : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the IBAN.</summary>
@@ -155,7 +148,6 @@ public partial struct InternationalBankAccountNumber : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct InternationalBankAccountNumber
 #if NET8_0_OR_GREATER
     : IParsable<InternationalBankAccountNumber>

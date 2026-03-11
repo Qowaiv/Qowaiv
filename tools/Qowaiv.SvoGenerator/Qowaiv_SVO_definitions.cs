@@ -42,7 +42,6 @@ public class Generation_of
     [TestCase("CasRegistryNumber", typeof(long), "CAS Registry Number", "Qowaiv.Chemistry", SvoFeatures.Default)]
 
     [TestCase("Country", typeof(string), "country", "Qowaiv.Globalization", SvoFeatures.Default)]
-    [TestCase("Region", typeof(string), "region", "Qowaiv.Globalization", SvoFeatures.Default)]
 
     [TestCase("StreamSize", typeof(long), "stream size", "Qowaiv.IO", SvoFeatures.Continuous ^ SvoFeatures.Field ^ SvoFeatures.IFormattable)]
 

@@ -18,6 +18,18 @@ public partial struct YesNo
     /// <summary>The inner value of the yes-no.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly byte m_Value;
+
+    /// <summary>False if the yes-no is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the yes-no is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the yes-no is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct YesNo : IEmpty<YesNo>
@@ -33,22 +45,6 @@ public partial struct YesNo : IEmpty<YesNo>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
-
-public partial struct YesNo : IUnknown<YesNo>
-{
-    /// <summary>False if the yes-no is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the yes-no is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the yes-no is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-}
-
 public partial struct YesNo : IEquatable<YesNo>
 #if NET8_0_OR_GREATER
     , IEqualityOperators<YesNo, YesNo, bool>
@@ -94,7 +90,6 @@ public partial struct YesNo : IComparable, IComparable<YesNo>
     public int CompareTo(YesNo other) => Comparer<byte>.Default.Compare(m_Value, other.m_Value);
 #nullable enable
 }
-
 public partial struct YesNo : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the yes-no.</summary>
@@ -115,7 +110,6 @@ public partial struct YesNo : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct YesNo
 {
     /// <summary>Creates the yes-no from a JSON string.</summary>
@@ -128,7 +122,6 @@ public partial struct YesNo
     [Pure]
     public static YesNo FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct YesNo : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the yes-no.</summary>
@@ -155,7 +148,6 @@ public partial struct YesNo : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct YesNo
 #if NET8_0_OR_GREATER
     : IParsable<YesNo>

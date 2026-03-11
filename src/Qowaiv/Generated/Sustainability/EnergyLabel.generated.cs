@@ -18,6 +18,18 @@ public partial struct EnergyLabel
     /// <summary>The inner value of the EU energy label.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly int m_Value;
+
+    /// <summary>False if the EU energy label is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the EU energy label is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the EU energy label is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct EnergyLabel : IEmpty<EnergyLabel>
@@ -33,22 +45,6 @@ public partial struct EnergyLabel : IEmpty<EnergyLabel>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
-
-public partial struct EnergyLabel : IUnknown<EnergyLabel>
-{
-    /// <summary>False if the EU energy label is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the EU energy label is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the EU energy label is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-}
-
 public partial struct EnergyLabel : IEquatable<EnergyLabel>
 #if NET8_0_OR_GREATER
     , IEqualityOperators<EnergyLabel, EnergyLabel, bool>
@@ -94,7 +90,6 @@ public partial struct EnergyLabel : IComparable, IComparable<EnergyLabel>
     public int CompareTo(EnergyLabel other) => Comparer<int>.Default.Compare(m_Value, other.m_Value);
 #nullable enable
 }
-
 public partial struct EnergyLabel : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the EU energy label.</summary>
@@ -115,7 +110,6 @@ public partial struct EnergyLabel : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct EnergyLabel
 {
     /// <summary>Creates the EU energy label from a JSON string.</summary>
@@ -128,7 +122,6 @@ public partial struct EnergyLabel
     [Pure]
     public static EnergyLabel FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct EnergyLabel : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the EU energy label.</summary>
@@ -155,7 +148,6 @@ public partial struct EnergyLabel : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct EnergyLabel
 #if NET8_0_OR_GREATER
     : IParsable<EnergyLabel>

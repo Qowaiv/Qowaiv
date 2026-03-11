@@ -10,14 +10,13 @@ public enum SvoFeatures
     IEquatable = /*..........*/ 0x00010,
     EqualsSvo = /*...........*/ 0x00020,
     ISerializable = /*.......*/ 0x00080,
-    IXmlSerializable = /*....*/ 0x00100,
-    IJsonSerializable = /*...*/ 0x00200,
-    IFormattable = /*........*/ 0x00400,
-    IComparable = /*.........*/ 0x00800,
-    ComparisonOperators = /*.*/ 0x01000,
-    Parsing = /*.............*/ 0x02000,
-    Validation = /*..........*/ 0x04000,
-    All = /*.................*/ 0x07FFF,
+    IJsonSerializable = /*...*/ 0x00100,
+    IFormattable = /*........*/ 0x00200,
+    IComparable = /*.........*/ 0x00400,
+    ComparisonOperators = /*.*/ 0x00800,
+    Parsing = /*.............*/ 0x01000,
+    Validation = /*..........*/ 0x02000,
+    All = /*.................*/ 0x03FFF,
 
     Structure = Field | IsEmpty | IsUnknown,
     EqualsSvoAndGetHashCode = EqualsSvo | GetHashCode,
@@ -25,5 +24,5 @@ public enum SvoFeatures
     Default = All ^ ComparisonOperators ^ Validation,
     Continuous = All ^ IsEmpty ^ IsUnknown ^ Validation,
 
-    Utf8 = /*................*/ 0x08000,
+    Utf8 = /*................*/ 0x04000,
 }

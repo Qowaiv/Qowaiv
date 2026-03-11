@@ -136,7 +136,7 @@ public readonly partial struct YearSpan : IXmlSerializable, IFormattable, IEquat
     [Pure]
     public static YearSpan FromJson(long json) => new(Cast.ToInt<YearSpan>(json));
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="YearSpan"/>.
+    /// <summary>Converts the <see cref="string" /> to <see cref="YearSpan"/>.
     /// The return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">

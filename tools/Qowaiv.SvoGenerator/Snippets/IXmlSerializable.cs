@@ -22,7 +22,7 @@ public partial struct @TSvo : IXmlSerializable
 
     /// <summary>Writes the @FullName to an <see href="XmlWriter" />.</summary>
     /// <remarks>
-    /// Uses <see cref="ToXmlString()"/>.
+    /// Uses <see cref="ToXmlString()" />.
     /// </remarks>
     /// <param name="writer">An XML writer.</param>
     void IXmlSerializable.WriteXml(XmlWriter writer)

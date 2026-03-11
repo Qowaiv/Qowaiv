@@ -7,7 +7,7 @@ public sealed class SvoTemplate : Code
 {
     private readonly CodeSnippet Snippet;
 
-    /// <summary>Creates new instance of the <see cref="SvoTemplate"/> class.</summary>
+    /// <summary>Creates new instance of the <see cref="SvoTemplate" /> class.</summary>
     private SvoTemplate(CodeSnippet snippet) => Snippet = snippet;
 
     /// <inheritdoc />
@@ -71,7 +71,6 @@ public sealed class SvoTemplate : Code
         Embedded("IEquatable"),
         Embedded("IComparable"),
         Embedded("IFormattable"),
-        Embedded("ISerializable"),
         Embedded("IJsonSerializable"),
         Embedded("IXmlSerializable"),
         Embedded("Parsing"),
@@ -89,7 +88,7 @@ public sealed class SvoTemplate : Code
     [Pure]
     private static CodeSnippet Embedded(string name)
     {
-        var path = $"Qowaiv.CodeGeneration.SingleValueObjects.Snippets.{name}.cs";
+        var path = $"Qowaiv.SvoGenerator.Snippets.{name}.cs";
 
         using var stream = typeof(SvoTemplate).Assembly.GetManifestResourceStream(path);
 

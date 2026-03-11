@@ -1,7 +1,7 @@
 namespace Qowaiv.Customization;
 
 /// <summary>
-/// Provides <see cref="string"/> based behavior for an identifier generated using
+/// Provides <see cref="string" /> based behavior for an identifier generated using
 /// <see cref="IdAttribute{TBehavior, TRaw}"/>.
 /// </summary>
 [Inheritable]

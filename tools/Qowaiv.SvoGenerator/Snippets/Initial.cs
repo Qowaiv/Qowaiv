@@ -88,21 +88,21 @@ public readonly partial struct @TSvo : IXmlSerializable, IFormattable, IEquatabl
     [Pure]
     public static @TSvo FromJson(bool json) => Create(json);
 
-    /// <summary>Casts the @FullName to a <see cref="string"/>.</summary>
+    /// <summary>Casts the @FullName to a <see cref="string" />.</summary>
     public static explicit operator string(@TSvo val) => val.ToString(CultureInfo.CurrentCulture);
 
-    /// <summary>Casts a <see cref="string"/> to a @FullName.</summary>
+    /// <summary>Casts a <see cref="string" /> to a @FullName.</summary>
     public static explicit operator @TSvo(string str) => Parse(str, CultureInfo.CurrentCulture);
 
-    /// <summary>Casts the @FullName to a <see cref="@type"/>.</summary>
+    /// <summary>Casts the @FullName to a <see cref="@type" />.</summary>
     public static explicit operator @type(@TSvo val) => val.m_Value;
 
-    /// <summary>Casts a <see cref="@type"/> to a @FullName.</summary>
+    /// <summary>Casts a <see cref="@type" /> to a @FullName.</summary>
     public static explicit operator @TSvo(@type val) => Create(val);
 
 #if !NotCultureDependent // exec
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="@TSvo"/>.
+    /// <summary>Converts the <see cref="string" /> to <see cref="@TSvo" />.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">
@@ -133,7 +133,7 @@ public readonly partial struct @TSvo : IXmlSerializable, IFormattable, IEquatabl
         throw new NotImplementedException();
     }
 #else // exec
-    /// <summary>Converts the <see cref="string"/> to <see cref="@TSvo"/>.
+    /// <summary>Converts the <see cref="string" /> to <see cref="@TSvo" />.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">

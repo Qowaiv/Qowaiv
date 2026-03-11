@@ -3,7 +3,7 @@ public partial struct @TSvo
     : IParsable<@TSvo>
 #endif
 {
-    /// <summary>Converts the <see cref="string"/> to <see cref="@TSvo"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="@TSvo" />.</summary>
     /// <param name="s">
     /// A string containing the @FullName to convert.
     /// </param>
@@ -11,7 +11,7 @@ public partial struct @TSvo
     /// The parsed @FullName.
     /// </returns>
     /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
+    /// <paramref name="s" /> is not in the correct format.
     /// </exception>
     [Pure]
     public static @TSvo Parse(string? s)
@@ -19,7 +19,7 @@ public partial struct @TSvo
             ? svo
             : throw Unparsable.ForValue<@TSvo>(s, @FormatExceptionMessage);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="@TSvo"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="@TSvo" />.</summary>
     /// <param name="s">
     /// A string containing the @FullName to convert.
     /// </param>
@@ -30,7 +30,7 @@ public partial struct @TSvo
     /// The parsed @FullName.
     /// </returns>
     /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
+    /// <paramref name="s" /> is not in the correct format.
     /// </exception>
     [Pure]
     public static @TSvo Parse(string? s, IFormatProvider? provider)
@@ -38,7 +38,7 @@ public partial struct @TSvo
             ? svo
             : throw Unparsable.ForValue<@TSvo>(s, @FormatExceptionMessage);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="@TSvo"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="@TSvo" />.</summary>
     /// <param name="s">
     /// A string containing the @FullName to convert.
     /// </param>
@@ -51,7 +51,7 @@ public partial struct @TSvo
             ? val
             : default(@TSvo?);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="@TSvo"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="@TSvo" />.</summary>
     /// <param name="s">
     /// A string containing the @FullName to convert.
     /// </param>
@@ -67,7 +67,7 @@ public partial struct @TSvo
             ? val
             : default(@TSvo?);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="@TSvo"/>.
+    /// <summary>Converts the <see cref="string" /> to <see cref="@TSvo" />.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">

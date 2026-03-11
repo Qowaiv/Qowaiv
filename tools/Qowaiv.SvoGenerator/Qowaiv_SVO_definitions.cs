@@ -133,10 +133,12 @@ public class Generation_of
                 {
                     location.Directory.Create();
                 }
-                var writer = new CSharpWriter(new StreamWriter(location.FullName, false, Encoding.UTF8));
+                var writer = new CSharpWriter(new StreamWriter(location.FullName, false, UTF8_no_BOM));
                 writer.Write(template.Transform(arguments));
                 writer.Flush();
             }
         }
     }
+
+    private static readonly UTF8Encoding UTF8_no_BOM = new(false);
 }

@@ -3,7 +3,7 @@ public partial struct @TSvo
 #if !NotCultureDependent // exec
     /// <summary>Returns true if the value represents a valid @FullName.</summary>
     /// <param name="val">
-    /// The <see cref="string"/> to validate.
+    /// The <see cref="string" /> to validate.
     /// </param>
     [Pure]
     [ExcludeFromCodeCoverage]
@@ -12,10 +12,10 @@ public partial struct @TSvo
 
     /// <summary>Returns true if the value represents a valid @FullName.</summary>
     /// <param name="val">
-    /// The <see cref="string"/> to validate.
+    /// The <see cref="string" /> to validate.
     /// </param>
     /// <param name="formatProvider">
-    /// The <see cref="IFormatProvider"/> to interpret the <see cref="string"/> value with.
+    /// The <see cref="IFormatProvider" /> to interpret the <see cref="string" /> value with.
     /// </param>
     [Pure]
     [ExcludeFromCodeCoverage]
@@ -26,7 +26,7 @@ public partial struct @TSvo
 #else // exec
     /// <summary>Returns true if the value represents a valid @FullName.</summary>
     /// <param name="val">
-    /// The <see cref="string"/> to validate.
+    /// The <see cref="string" /> to validate.
     /// </param>
     [Pure]
     [ExcludeFromCodeCoverage]

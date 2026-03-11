@@ -30,3 +30,4 @@ public partial struct @TSvo : IEquatable<@TSvo>
     /// <param name="right">The right operand</param>
     public static bool operator !=(@TSvo left, @TSvo right) => !(left == right);
 }
+

@@ -80,18 +80,18 @@ public partial struct YearSpan : IComparable, IComparable<YearSpan>
 }
 public partial struct YearSpan : IFormattable
 {
-    /// <summary>Returns a <see cref="string"/> that represents the year span.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the year span.</summary>
     [Pure]
     public override string ToString() => ToString(format: null, formatProvider: null);
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the year span.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the year span.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
     public string ToString(string? format) => ToString(format, formatProvider: null);
 
-    /// <summary>Returns a formatted <see cref="string"/> that represents the year span.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the year span.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
@@ -131,7 +131,7 @@ public partial struct YearSpan : IXmlSerializable
 
     /// <summary>Writes the year span to an <see href="XmlWriter" />.</summary>
     /// <remarks>
-    /// Uses <see cref="ToXmlString()"/>.
+    /// Uses <see cref="ToXmlString()" />.
     /// </remarks>
     /// <param name="writer">An XML writer.</param>
     void IXmlSerializable.WriteXml(XmlWriter writer)
@@ -142,7 +142,7 @@ public partial struct YearSpan
     : IParsable<YearSpan>
 #endif
 {
-    /// <summary>Converts the <see cref="string"/> to <see cref="YearSpan"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="YearSpan"/>.</summary>
     /// <param name="s">
     /// A string containing the year span to convert.
     /// </param>
@@ -150,7 +150,7 @@ public partial struct YearSpan
     /// The parsed year span.
     /// </returns>
     /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
+    /// <paramref name="s" /> is not in the correct format.
     /// </exception>
     [Pure]
     public static YearSpan Parse(string? s)
@@ -158,7 +158,7 @@ public partial struct YearSpan
             ? svo
             : throw Unparsable.ForValue<YearSpan>(s, QowaivMessages.FormatExceptionYearSpan);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="YearSpan"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="YearSpan"/>.</summary>
     /// <param name="s">
     /// A string containing the year span to convert.
     /// </param>
@@ -169,7 +169,7 @@ public partial struct YearSpan
     /// The parsed year span.
     /// </returns>
     /// <exception cref="FormatException">
-    /// <paramref name="s"/> is not in the correct format.
+    /// <paramref name="s" /> is not in the correct format.
     /// </exception>
     [Pure]
     public static YearSpan Parse(string? s, IFormatProvider? provider)
@@ -177,7 +177,7 @@ public partial struct YearSpan
             ? svo
             : throw Unparsable.ForValue<YearSpan>(s, QowaivMessages.FormatExceptionYearSpan);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="YearSpan"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="YearSpan"/>.</summary>
     /// <param name="s">
     /// A string containing the year span to convert.
     /// </param>
@@ -190,7 +190,7 @@ public partial struct YearSpan
             ? val
             : default(YearSpan?);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="YearSpan"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="YearSpan"/>.</summary>
     /// <param name="s">
     /// A string containing the year span to convert.
     /// </param>
@@ -206,7 +206,7 @@ public partial struct YearSpan
             ? val
             : default(YearSpan?);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="YearSpan"/>.
+    /// <summary>Converts the <see cref="string" /> to <see cref="YearSpan"/>.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">

@@ -4,7 +4,7 @@
 public partial struct @TSvo
     : IUtf8SpanParsable<@TSvo>
 {
-    /// <summary>Converts the <see cref="string"/> to <see cref="@TSvo"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="@TSvo" />.</summary>
     /// <param name="utf8Text">
     /// An UTF-8 string containing the @FullName to convert.
     /// </param>
@@ -15,14 +15,14 @@ public partial struct @TSvo
     /// The parsed @FullName.
     /// </returns>
     /// <exception cref="FormatException">
-    /// <paramref name="utf8Text"/> is not in the correct format.
+    /// <paramref name="utf8Text" /> is not in the correct format.
     /// </exception>
     [Pure]
     public static @TSvo Parse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider)
         => TryParse(utf8Text, provider)
         ?? throw Unparsable.ForValue<@TSvo>(utf8Text.ToString(), @FormatExceptionMessage);
 
-    /// <summary>Converts the <see cref="string"/> to <see cref="@TSvo"/>.</summary>
+    /// <summary>Converts the <see cref="string" /> to <see cref="@TSvo" />.</summary>
     /// <param name="utf8Text">
     /// An UTF-8 string containing the @FullName to convert.
     /// </param>

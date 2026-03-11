@@ -1,3 +1,4 @@
+using AwesomeAssertions;
 using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.CodeGeneration;
@@ -68,7 +69,8 @@ public class Generation_of
         var init = $@"{Root}\src\Qowaiv\{sub}\{name}.cs".Replace(@"\\", @"\");
         var json = $@"{Root}\src\Qowaiv\Json\{sub}\{name}JsonConverter.cs".Replace(@"\\", @"\");
         var spec = $@"{Root}\specs\Qowaiv.Specs\{sub}\{name}_specs.cs".Replace(@"\\", @"\");
-        Generate(name, underlying, fullName, ns, features, path, init, json, spec, formatExceptionMessage);
+        Generate(name, underlying, fullName, ns, features, path, init, json, spec, formatExceptionMessage)
+            .Should().BeTrue();
     }
 
     [TestCase("Timestamp", typeof(ulong), "timestamp", "Qowaiv.Sql", SvoFeatures.Continuous)]
@@ -78,10 +80,12 @@ public class Generation_of
         var init = $@"{Root}\src\Qowaiv.Data.SqlClient\Sql\{name}.cs";
         var json = $@"{Root}\src\Qowaiv.Data.SqlClient\Json\{name}JsonConverter.cs";
         var spec = $@"{Root}\specs\Qowaiv.Specs\Sql\{name}_specs.cs".Replace(@"\\", @"\");
-        Generate(name, underlying, fulleName, ns, features, path, init, json, spec, formatExceptionMessage);
+        Generate(name, underlying, fulleName, ns, features, path, init, json, spec, formatExceptionMessage)
+            .Should().BeTrue();
     }
 
-    private static void Generate(
+#pragma warning disable S107 // Methods should not have too many parameters
+    private static bool Generate(
         string name,
         Type underlying,
         string fulleName,
@@ -107,6 +111,8 @@ public class Generation_of
         GenerateInitial(new FileInfo(init), arguments);
         GenerateJsonConverter(new FileInfo(json), arguments);
         GenerateSpecs(new FileInfo(spec), arguments);
+
+        return true;
 
         static void Generate(FileInfo location, SvoArguments arguments)
             => Write(location, arguments, SvoTemplate.GeneratedCode, @override: true);

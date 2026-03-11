@@ -1,6 +1,5 @@
 namespace Qowaiv.SvoGenerator;
 
-[Flags]
 public enum SvoFeatures
 {
     Field = /*...............*/ 0x00001,

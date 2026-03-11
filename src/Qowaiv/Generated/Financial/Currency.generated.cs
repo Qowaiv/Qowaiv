@@ -18,6 +18,18 @@ public partial struct Currency
     /// <summary>The inner value of the currency.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? m_Value;
+
+    /// <summary>False if the currency is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the currency is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the currency is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct Currency : IEmpty<Currency>
@@ -33,22 +45,6 @@ public partial struct Currency : IEmpty<Currency>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
-
-public partial struct Currency : IUnknown<Currency>
-{
-    /// <summary>False if the currency is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the currency is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the currency is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-}
-
 public partial struct Currency : IEquatable<Currency>
 #if NET8_0_OR_GREATER
     , IEqualityOperators<Currency, Currency, bool>
@@ -94,7 +90,6 @@ public partial struct Currency : IComparable, IComparable<Currency>
     public int CompareTo(Currency other) => Comparer<string>.Default.Compare(m_Value, other.m_Value);
 #nullable enable
 }
-
 public partial struct Currency : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the currency.</summary>
@@ -115,7 +110,6 @@ public partial struct Currency : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct Currency
 {
     /// <summary>Creates the currency from a JSON string.</summary>
@@ -128,7 +122,6 @@ public partial struct Currency
     [Pure]
     public static Currency FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct Currency : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the currency.</summary>
@@ -155,7 +148,6 @@ public partial struct Currency : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct Currency
 #if NET8_0_OR_GREATER
     : IParsable<Currency>

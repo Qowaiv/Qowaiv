@@ -56,7 +56,6 @@ public partial struct Fraction : IComparable, IComparable<Fraction>
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(Fraction l, Fraction r) => l.CompareTo(r) >= 0;
 }
-
 public partial struct Fraction : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the fraction.</summary>
@@ -77,7 +76,6 @@ public partial struct Fraction : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct Fraction
 {
     /// <summary>Creates the fraction from a JSON string.</summary>
@@ -90,7 +88,6 @@ public partial struct Fraction
     [Pure]
     public static Fraction FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct Fraction : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the fraction.</summary>
@@ -117,7 +114,6 @@ public partial struct Fraction : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct Fraction
 #if NET8_0_OR_GREATER
     : IParsable<Fraction>

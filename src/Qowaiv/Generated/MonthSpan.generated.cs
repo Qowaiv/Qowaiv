@@ -79,7 +79,6 @@ public partial struct MonthSpan : IComparable, IComparable<MonthSpan>
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(MonthSpan l, MonthSpan r) => l.CompareTo(r) >= 0;
 }
-
 public partial struct MonthSpan : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the month span.</summary>
@@ -100,7 +99,6 @@ public partial struct MonthSpan : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct MonthSpan
 {
     /// <summary>Creates the month span from a JSON string.</summary>
@@ -113,7 +111,6 @@ public partial struct MonthSpan
     [Pure]
     public static MonthSpan FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct MonthSpan : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the month span.</summary>
@@ -140,7 +137,6 @@ public partial struct MonthSpan : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct MonthSpan
 #if NET8_0_OR_GREATER
     : IParsable<MonthSpan>

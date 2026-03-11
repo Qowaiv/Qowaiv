@@ -2,12 +2,12 @@ using System.IO;
 
 namespace Qowaiv.CodeGeneration;
 
-/// <summary>Extensions on <see cref="Code"/>.</summary>
+/// <summary>Extensions on <see cref="Code" />.</summary>
 public static class CodeExtensions
 {
-    /// <summary>Represents the <see cref="Code"/> as <see cref="string"/>.</summary>
+    /// <summary>Represents the <see cref="Code" /> as <see cref="string" />.</summary>
     /// <remarks>
-    /// Used by several code syntaxes their <see cref="object.ToString()"/> implementations.
+    /// Used by several code syntaxes their <see cref="object.ToString()" /> implementations.
     /// </remarks>
     [Pure]
     public static string Stringify(this Code code)

@@ -70,7 +70,6 @@ public partial struct LocalDateTime : IComparable, IComparable<LocalDateTime>
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(LocalDateTime l, LocalDateTime r) => l.CompareTo(r) >= 0;
 }
-
 public partial struct LocalDateTime : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the local date time.</summary>
@@ -91,7 +90,6 @@ public partial struct LocalDateTime : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct LocalDateTime
 {
     /// <summary>Creates the local date time from a JSON string.</summary>
@@ -104,7 +102,6 @@ public partial struct LocalDateTime
     [Pure]
     public static LocalDateTime FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct LocalDateTime : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the local date time.</summary>
@@ -131,7 +128,6 @@ public partial struct LocalDateTime : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct LocalDateTime
 #if NET8_0_OR_GREATER
     : IParsable<LocalDateTime>

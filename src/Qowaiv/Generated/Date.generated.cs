@@ -70,7 +70,6 @@ public partial struct Date : IComparable, IComparable<Date>
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(Date l, Date r) => l.CompareTo(r) >= 0;
 }
-
 public partial struct Date : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the date.</summary>
@@ -91,7 +90,6 @@ public partial struct Date : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct Date
 {
     /// <summary>Creates the date from a JSON string.</summary>
@@ -104,7 +102,6 @@ public partial struct Date
     [Pure]
     public static Date FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct Date : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the date.</summary>
@@ -131,7 +128,6 @@ public partial struct Date : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct Date
 #if NET8_0_OR_GREATER
     : IParsable<Date>

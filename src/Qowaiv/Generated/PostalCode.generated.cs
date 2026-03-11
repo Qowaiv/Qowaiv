@@ -18,6 +18,18 @@ public partial struct PostalCode
     /// <summary>The inner value of the postal code.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? m_Value;
+
+    /// <summary>False if the postal code is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the postal code is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the postal code is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct PostalCode : IEmpty<PostalCode>
@@ -33,22 +45,6 @@ public partial struct PostalCode : IEmpty<PostalCode>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
-
-public partial struct PostalCode : IUnknown<PostalCode>
-{
-    /// <summary>False if the postal code is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the postal code is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the postal code is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
-}
-
 public partial struct PostalCode : IEquatable<PostalCode>
 #if NET8_0_OR_GREATER
     , IEqualityOperators<PostalCode, PostalCode, bool>
@@ -94,7 +90,6 @@ public partial struct PostalCode : IComparable, IComparable<PostalCode>
     public int CompareTo(PostalCode other) => Comparer<string>.Default.Compare(m_Value, other.m_Value);
 #nullable enable
 }
-
 public partial struct PostalCode : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the postal code.</summary>
@@ -115,7 +110,6 @@ public partial struct PostalCode : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct PostalCode
 {
     /// <summary>Creates the postal code from a JSON string.</summary>
@@ -128,7 +122,6 @@ public partial struct PostalCode
     [Pure]
     public static PostalCode FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct PostalCode : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the postal code.</summary>
@@ -155,7 +148,6 @@ public partial struct PostalCode : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct PostalCode
 #if NET8_0_OR_GREATER
     : IParsable<PostalCode>

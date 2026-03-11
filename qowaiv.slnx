@@ -19,5 +19,8 @@
   <Folder Name="/Tooling/">
     <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
   </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/Qowaiv.SvoGenerator/Qowaiv.SvoGenerator.csproj" />
+  </Folder>
   <Project Path=".net.csproj" />
 </Solution>

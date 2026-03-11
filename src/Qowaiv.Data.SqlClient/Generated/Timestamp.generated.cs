@@ -79,7 +79,6 @@ public partial struct Timestamp : IComparable, IComparable<Timestamp>
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(Timestamp l, Timestamp r) => l.CompareTo(r) >= 0;
 }
-
 public partial struct Timestamp : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the timestamp.</summary>
@@ -100,7 +99,6 @@ public partial struct Timestamp : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct Timestamp
 {
     /// <summary>Creates the timestamp from a JSON string.</summary>
@@ -113,7 +111,6 @@ public partial struct Timestamp
     [Pure]
     public static Timestamp FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct Timestamp : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the timestamp.</summary>
@@ -140,7 +137,6 @@ public partial struct Timestamp : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct Timestamp
 #if NET8_0_OR_GREATER
     : IParsable<Timestamp>

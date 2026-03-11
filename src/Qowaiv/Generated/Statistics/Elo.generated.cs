@@ -79,7 +79,6 @@ public partial struct Elo : IComparable, IComparable<Elo>
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(Elo l, Elo r) => l.CompareTo(r) >= 0;
 }
-
 public partial struct Elo : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the elo.</summary>
@@ -100,7 +99,6 @@ public partial struct Elo : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct Elo
 {
     /// <summary>Creates the elo from a JSON string.</summary>
@@ -113,7 +111,6 @@ public partial struct Elo
     [Pure]
     public static Elo FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct Elo : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the elo.</summary>
@@ -140,7 +137,6 @@ public partial struct Elo : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct Elo
 #if NET8_0_OR_GREATER
     : IParsable<Elo>

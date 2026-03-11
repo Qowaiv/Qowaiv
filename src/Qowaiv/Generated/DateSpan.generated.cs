@@ -65,7 +65,6 @@ public partial struct DateSpan : IComparable, IComparable<DateSpan>
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
     public static bool operator >=(DateSpan l, DateSpan r) => l.CompareTo(r) >= 0;
 }
-
 public partial struct DateSpan : IFormattable
 {
     /// <summary>Returns a <see cref="string" /> that represents the date span.</summary>
@@ -86,7 +85,6 @@ public partial struct DateSpan : IFormattable
     [Pure]
     public string ToString(IFormatProvider? provider) => ToString(format: null, provider);
 }
-
 public partial struct DateSpan
 {
     /// <summary>Creates the date span from a JSON string.</summary>
@@ -99,7 +97,6 @@ public partial struct DateSpan
     [Pure]
     public static DateSpan FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
-
 public partial struct DateSpan : IXmlSerializable
 {
     /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the date span.</summary>
@@ -126,7 +123,6 @@ public partial struct DateSpan : IXmlSerializable
     void IXmlSerializable.WriteXml(XmlWriter writer)
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
-
 public partial struct DateSpan
 #if NET8_0_OR_GREATER
     : IParsable<DateSpan>

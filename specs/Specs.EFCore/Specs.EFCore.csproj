@@ -1,11 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/nopackage.props" />
 
   <PropertyGroup>
-    <Nullable>enable</Nullable>
-    <IsTestProject>true</IsTestProject>
     <TargetFramework>net10.0</TargetFramework>
+    <IsTestProject>true</IsTestProject>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
   </PropertyGroup>
 

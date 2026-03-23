@@ -14,6 +14,12 @@
         "resolved": "9.4.0",
         "contentHash": "dJxkWiQ8D+xT6Gr2sSL83+Mar+Vpy2JTcUPxFcckpPJ8VYBfSgnk+zqpS6t7kcGnjz8NLyF14qfuoL4bKzzoew=="
       },
+      "AwesomeAssertions.Analyzers": {
+        "type": "Direct",
+        "requested": "[9.0.8, )",
+        "resolved": "9.0.8",
+        "contentHash": "rjDBIQk8NA16LusDMh0XH1M9kZCwWdmP89pqLiv7caRzx+w68xAXUd0Za6ojwcDrEC+HSRPNBN8BFW1GnGTC7g=="
+      },
       "coverlet.collector": {
         "type": "Direct",
         "requested": "[10.0.1, )",
@@ -53,6 +59,12 @@
         "requested": "[4.6.0, )",
         "resolved": "4.6.0",
         "contentHash": "RsafbuYR+HzdDhgfdLYrDOSuFdv8IgGpbe5NIqXWAhZ7t6lXNj9yNcLcAk34lKVio6OusBQolKlboyl/9hObNA=="
+      },
+      "NUnit.Analyzers": {
+        "type": "Direct",
+        "requested": "[4.10.0, )",
+        "resolved": "4.10.0",
+        "contentHash": "w0DLq/bYgjUOugReSDJEOC3E9gOtVw85AJhVQoMk06+Kas2HdJMX0ojMjt+FoN8+38FIKlAppNOuHacIBkXJTQ=="
       },
       "NUnit3TestAdapter": {
         "type": "Direct",
@@ -173,6 +185,12 @@
         "resolved": "9.4.0",
         "contentHash": "dJxkWiQ8D+xT6Gr2sSL83+Mar+Vpy2JTcUPxFcckpPJ8VYBfSgnk+zqpS6t7kcGnjz8NLyF14qfuoL4bKzzoew=="
       },
+      "AwesomeAssertions.Analyzers": {
+        "type": "Direct",
+        "requested": "[9.0.8, )",
+        "resolved": "9.0.8",
+        "contentHash": "rjDBIQk8NA16LusDMh0XH1M9kZCwWdmP89pqLiv7caRzx+w68xAXUd0Za6ojwcDrEC+HSRPNBN8BFW1GnGTC7g=="
+      },
       "coverlet.collector": {
         "type": "Direct",
         "requested": "[10.0.1, )",
@@ -212,6 +230,12 @@
         "requested": "[4.6.0, )",
         "resolved": "4.6.0",
         "contentHash": "RsafbuYR+HzdDhgfdLYrDOSuFdv8IgGpbe5NIqXWAhZ7t6lXNj9yNcLcAk34lKVio6OusBQolKlboyl/9hObNA=="
+      },
+      "NUnit.Analyzers": {
+        "type": "Direct",
+        "requested": "[4.10.0, )",
+        "resolved": "4.10.0",
+        "contentHash": "w0DLq/bYgjUOugReSDJEOC3E9gOtVw85AJhVQoMk06+Kas2HdJMX0ojMjt+FoN8+38FIKlAppNOuHacIBkXJTQ=="
       },
       "NUnit3TestAdapter": {
         "type": "Direct",
@@ -332,6 +356,12 @@
         "resolved": "9.4.0",
         "contentHash": "dJxkWiQ8D+xT6Gr2sSL83+Mar+Vpy2JTcUPxFcckpPJ8VYBfSgnk+zqpS6t7kcGnjz8NLyF14qfuoL4bKzzoew=="
       },
+      "AwesomeAssertions.Analyzers": {
+        "type": "Direct",
+        "requested": "[9.0.8, )",
+        "resolved": "9.0.8",
+        "contentHash": "rjDBIQk8NA16LusDMh0XH1M9kZCwWdmP89pqLiv7caRzx+w68xAXUd0Za6ojwcDrEC+HSRPNBN8BFW1GnGTC7g=="
+      },
       "coverlet.collector": {
         "type": "Direct",
         "requested": "[10.0.1, )",
@@ -371,6 +401,12 @@
         "requested": "[4.6.0, )",
         "resolved": "4.6.0",
         "contentHash": "RsafbuYR+HzdDhgfdLYrDOSuFdv8IgGpbe5NIqXWAhZ7t6lXNj9yNcLcAk34lKVio6OusBQolKlboyl/9hObNA=="
+      },
+      "NUnit.Analyzers": {
+        "type": "Direct",
+        "requested": "[4.10.0, )",
+        "resolved": "4.10.0",
+        "contentHash": "w0DLq/bYgjUOugReSDJEOC3E9gOtVw85AJhVQoMk06+Kas2HdJMX0ojMjt+FoN8+38FIKlAppNOuHacIBkXJTQ=="
       },
       "NUnit3TestAdapter": {
         "type": "Direct",

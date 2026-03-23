@@ -1,24 +1,26 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Qowaiv.EntityFrameworkCore.Builders;
 
 namespace Qowaiv.EntityFrameworkCore;
 
 public static class QowaivPropertyBuilder
 {
-    extension(PropertyBuilder<EmailAddress> builder)
+    extension(PropertyBuilder<Percentage> builder)
     {
         [FluentSyntax]
-        public PropertyBuilder<EmailAddress> Svo(int? maxLength = EmailAddress.MaxLength, bool required = false)
+        public PropertyBuilder<Percentage> Svo(bool required = true)
         {
             Guard.NotNull(builder)
-                .HasConversion(email => email.ToString(), str => EmailAddress.Parse(str))
+                .HasConversion(email => (decimal)email, dec => Percentage.Create(dec))
                 .IsRequired(required);
-
-            if (maxLength > 0)
-            {
-                builder.HasMaxLength(maxLength.Value);
-            }
 
             return builder;
         }
+    }
+
+    extension(PropertyBuilder<EmailAddress> builder)
+    {
+        [FluentSyntax]
+        public EmailAddressPropertyBuilder Svo() => new(Guard.NotNull(builder).Metadata);
     }
 }

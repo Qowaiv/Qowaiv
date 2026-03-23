@@ -27,6 +27,11 @@ public class SvoProperty
 
         await context.SaveChangesAsync();
 
+        var x = await context.Models
+            .Where(x => x.Email == EmailAddress.Parse("info@qowaiv.org"))
+            .ToListAsync();
+
+        x.Should().ContainSingle();
 
         await container.DisposeAsync();
     }

@@ -20,20 +20,7 @@ public static class SvoPropertyBuilder
         [CLSCompliant(false)]
         public PropertyBuilder<EmailAddress> SvoProperty(Expression<Func<TEntity, EmailAddress>> propertyExpression) => builder
             .Property(propertyExpression)
-            .HasConversion(email => email.ToString(), str => EmailAddress.Parse(str))
+            .HasConversion(svo => svo.ToString(), str => EmailAddress.Parse(str))
             .HasMaxLength(EmailAddress.MaxLength);
-    }
-
-    extension(PropertyBuilder<Percentage> builder)
-    {
-        [FluentSyntax]
-        public PropertyBuilder<Percentage> Svo(bool required = true)
-        {
-            Guard.NotNull(builder)
-                .HasConversion(email => (decimal)email, dec => Percentage.Create(dec))
-                .IsRequired(required);
-
-            return builder;
-        }
     }
 }

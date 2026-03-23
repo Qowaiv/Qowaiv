@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/nopackage.props" />
 
@@ -6,10 +6,12 @@
     <TargetFramework>net10.0</TargetFramework>
     <IsTestProject>true</IsTestProject>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
+    <RootNamespace>Specs</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup Label="Test Tools">
     <PackageReference Include="AwesomeAssertions" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
     <PackageReference Include="NUnit" />
   </ItemGroup>
 
@@ -22,6 +24,8 @@
   <ItemGroup Label="Analyzers">
     <PackageReference Include="AwesomeAssertions.Analyzers" PrivateAssets="all" />
     <PackageReference Include="NUnit.Analyzers" PrivateAssets="all" />
+    <PackageReference Include="Testcontainers.MsSql" />
+    <PackageReference Include="Testcontainers.PostgreSql" />
   </ItemGroup>
 
   <ItemGroup>

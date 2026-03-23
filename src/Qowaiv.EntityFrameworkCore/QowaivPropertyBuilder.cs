@@ -1,10 +1,18 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Qowaiv.EntityFrameworkCore.Builders;
+using System.Linq.Expressions;
 
 namespace Qowaiv.EntityFrameworkCore;
 
 public static class QowaivPropertyBuilder
 {
+    extension<TEntity>(EntityTypeBuilder<TEntity> builder) where TEntity : class
+    {
+        [FluentSyntax]
+        public EmailAddressPropertyBuilder SvoProperty(Expression<Func<TEntity, EmailAddress>> propertyExpression)
+            => new(builder.Property(propertyExpression).Metadata);
+    }
+
     extension(PropertyBuilder<Percentage> builder)
     {
         [FluentSyntax]
@@ -16,11 +24,5 @@ public static class QowaivPropertyBuilder
 
             return builder;
         }
-    }
-
-    extension(PropertyBuilder<EmailAddress> builder)
-    {
-        [FluentSyntax]
-        public EmailAddressPropertyBuilder Svo() => new(Guard.NotNull(builder).Metadata);
     }
 }

@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/package.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DevelopmentDependency>false</DevelopmentDependency>
+    <PackageId>Qowaiv.EntityFrameworkCore</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="../Qowaiv/Qowaiv.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+  </ItemGroup>
+
+  <ItemGroup Label="Analyzers">
+    <PackageReference PrivateAssets="all" Include="Microsoft.EntityFrameworkCore.Analyzers" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>8.0.0</Version>
+    <!--<PackageValidationBaselineVersion>8.0.0</PackageValidationBaselineVersion>-->
+    <ToBeReleased>
+      <![CDATA[
+v8.*
+-
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
+      <![CDATA[
+v8.0.0
+
+]]>
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>

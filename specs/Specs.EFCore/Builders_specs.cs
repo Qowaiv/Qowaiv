@@ -19,7 +19,9 @@ public class SvoProperty
             o.UseNpgsql(cs);
         });
 
+        await context.Database.CloseConnectionAsync();
         await context.Database.EnsureCreatedAsync();
+        await context.Database.OpenConnectionAsync();
 
         context.Models.Add(new() { Email = EmailAddress.Parse("info@qowaiv.org") });
 

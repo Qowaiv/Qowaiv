@@ -29,7 +29,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     /// <remarks>
     /// https://en.wikipedia.org/wiki/International_Bank_Account_Number.
     /// </remarks>
-    public const int MaxLength = 54;
+    public const int MaxLength = 34;
 
     private const char Nbsp = (char)160;
 

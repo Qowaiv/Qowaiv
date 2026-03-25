@@ -40,7 +40,7 @@ public class Supported
 public class With_domain_logic
 {
     [Test]
-    public void has_max_length_of_34() => EmailAddress.MaxLength.Should().Be(34);
+    public void has_max_length_of_34() => InternationalBankAccountNumber.MaxLength.Should().Be(34);
 
     [TestCase("")]
     [TestCase("?")]

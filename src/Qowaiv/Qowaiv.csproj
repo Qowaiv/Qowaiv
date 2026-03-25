@@ -44,6 +44,7 @@
       <![CDATA[
 v8.*
 - IBAN must not exceed 34 chars. (BUG)
+- IBAN for Russia has become more strict.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

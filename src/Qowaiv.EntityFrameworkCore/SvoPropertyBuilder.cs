@@ -17,6 +17,29 @@ public static class SvoPropertyBuilder
         /// <remarks>
         /// Configured are:
         /// * Conversion
+        /// * Precsion = 35
+        /// * Scale = 3.
+        /// </remarks>
+        /// <param name="propertyExpression">
+        /// A lambda expression representing the property to be configured (
+        /// <c>model => model.Email</c>).
+        /// </param>
+        [FluentSyntax]
+        [CLSCompliant(false)]
+        public PropertyBuilder<Amount> SvoProperty(Expression<Func<TEntity, Amount>> propertyExpression) => builder
+            .Property(propertyExpression)
+            .HasConversion(svo => (decimal)svo, num => num.Amount())
+            .HasPrecision(35, 3)
+            .IsRequired();
+
+        /// <summary>
+        /// Returns a builder that can be used to configure an <see cref="EmailAddress"/>
+        /// SVO property of the entity type. If the specified property is not
+        /// already part of the model, it will be added.
+        /// </summary>
+        /// <remarks>
+        /// Configured are:
+        /// * Conversion
         /// * MaxLength
         /// * Unicode.
         /// </remarks>

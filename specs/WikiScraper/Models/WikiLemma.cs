@@ -65,6 +65,7 @@ public sealed record WikiLemma
     private async Task Update()
     {
         var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("User-Agent", "Qowaiv WikiScraper / 8.0.0");
         var response = await client.GetAsync(Url);
 
         var body = await response.Content.ReadAsStringAsync();

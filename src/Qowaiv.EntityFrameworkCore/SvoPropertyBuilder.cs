@@ -14,13 +14,14 @@ public static class SvoPropertyBuilder
         /// </summary>
         /// <param name="propertyExpression">
         /// A lambda expression representing the property to be configured (
-        /// <c>blog => blog.Url</c>).
+        /// <c>model => model.Email</c>).
         /// </param>
         [FluentSyntax]
         [CLSCompliant(false)]
         public PropertyBuilder<EmailAddress> SvoProperty(Expression<Func<TEntity, EmailAddress>> propertyExpression) => builder
             .Property(propertyExpression)
             .HasConversion(svo => svo.ToString(), str => EmailAddress.Parse(str))
+            .IsUnicode()
             .HasMaxLength(EmailAddress.MaxLength);
     }
 }

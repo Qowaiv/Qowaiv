@@ -155,7 +155,7 @@ internal static partial class IbanParser
         Bban(Country.QA, "4a,21c"),
         Bban(Country.RO, "4a,16c"),
         Bban(Country.RS, "18n", checksum: 35),
-        Bban(Country.RU, "9n,20c"),
+        Bban(Country.RU, "14n,15c"),
         Bban(Country.SA, "2n,18c"),
         Bban(Country.SC, "4a,20n,3a"),
         Bban(Country.SD, "14n"),

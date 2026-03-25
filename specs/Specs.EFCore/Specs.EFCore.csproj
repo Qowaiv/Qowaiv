@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/nopackage.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsTestProject>true</IsTestProject>
+    <DefineConstants>CONTRACTS_FULL</DefineConstants>
+    <RootNamespace>Specs</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup Label="Test Tools">
+    <PackageReference Include="AwesomeAssertions" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <PackageReference Include="NUnit" />
+  </ItemGroup>
+
+  <ItemGroup Label="Build Tools">
+    <PackageReference Include="coverlet.collector" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" PrivateAssets="all" />
+    <PackageReference Include="NUnit3TestAdapter" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup Label="Analyzers">
+    <PackageReference Include="AwesomeAssertions.Analyzers" PrivateAssets="all" />
+    <PackageReference Include="NUnit.Analyzers" PrivateAssets="all" />
+    <PackageReference Include="Testcontainers.MsSql" />
+    <PackageReference Include="Testcontainers.PostgreSql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Qowaiv.EntityFrameworkCore/Qowaiv.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="Diagnostics contracts code generation">
+    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+</Project>

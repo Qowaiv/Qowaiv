@@ -53,6 +53,6 @@ public static class SvoPropertyBuilder
             .Property(propertyExpression)
             .HasConversion(svo => svo.ToString(), str => InternationalBankAccountNumber.Parse(str))
             .IsUnicode(false)
-            .HasMaxLength(34 /* InternationalBankAccountNumber.MaxLength */ );
+            .HasMaxLength(InternationalBankAccountNumber.MaxLength);
     }
 }

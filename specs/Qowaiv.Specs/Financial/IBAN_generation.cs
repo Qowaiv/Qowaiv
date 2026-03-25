@@ -62,7 +62,7 @@ internal class Markdown_file
     [TestCase("NLkk aaaa nnnn nnnn nnn", "NL too long.")]
     [TestCase("SCkk BANK nnnn nnnn nnnn nnnn nnnn ZZZ", "SC with a non-existing currency.")]
     [TestCase("USkk cccc aann ", "A non IBAN country with length 12.")]
-    [TestCase("USkk cccc cccc nnnn nnnn nnnn nnnn nnnn nnnn", "A non IBAN country with length 36.")]
+    [TestCase("USkk cccc cccc nnnn nnnn nnnn nnnn nnnn nn", "A non IBAN country with length 34.")]
     [TestCase("BAkk nnnn nnnn nnnn nnnn", "BA with non-fixed checksum.")]
     [TestCase("MEkk nnnn nnnn nnnn nnnn nn", "ME with non-fixed checksum.")]
     [TestCase("MKkk nnnn nnnn nnnn nnn", "MK with non-fixed checksum.")]

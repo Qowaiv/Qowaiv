@@ -48,6 +48,7 @@ validator code.
 | Greenland                 |    18 | 14n             |       | GLkk bbbb cccc cccc cx                    | yes  | GL20 0040 0440 1162 43                    |
 | Greece                    |    27 | 7n,16c          |       | GRkk bbbs sssc cccc cccc cccc ccc         | yes  | GR16 0110 1250 0000 0001 2300 695         |
 | Guatemala                 |    28 | 24c             |       | GTkk bbbb mmtt cccc cccc cccc cccc        | yes  | GT82 TRAJ 0102 0000 0012 1002 9690        |
+| Honduras                  |    28 | 4a,20n          |       | HNkk bbbb cccc cccc cccc cccc cccc        | yes  | HN54 PISA 0000 0000 0000 0012 3124        |
 | Croatia                   |    21 | 17n             |       | HRkk bbbb bbbc cccc cccc c                | yes  | HR12 1001 0051 8630 0016 0                |
 | Hungary                   |    28 | 24n             |       | HUkk bbbs sssx cccc cccc cccc cccx        | yes  | HU42 1177 3016 1111 1018 0000 0000        |
 | Ireland                   |    22 | 4a,14n          |       | IEkk qqqq bbbb bbcc cccc cc               | yes  | IE29 AIBK 9311 5212 3456 78               |
@@ -73,17 +74,17 @@ validator code.
 | Malta                     |    31 | 4a,5n,18c       |       | MTkk bbbb ssss sccc cccc cccc cccc ccc    | yes  | MT84 MALT 0110 0001 2345 MTLC AST0 01S    |
 | Mauritius                 |    30 | 4a,16n,[000],3a |       | MUkk bbbb bbss cccc cccc cccc 000m mm     | yes  | MU17 BOMM 0101 1010 3030 0200 000M UR     |
 | Nicaragua                 |    28 | 4a,20n          |       | NIkk aaaa cccc cccc cccc cccc cccc        | yes  | NI91 BAMC 0112 0203 0000 0355 8124        |
-| Netherlands               |    18 | 4a,10n          |       | NLkk bbbb cccc cccc cc                    | yes  | NL20 INGB 0001 2345 67                    |
+| Netherlands               |    18 | 4a,10n          |       | NLkk bbbb cccc cccc cx                    | yes  | NL20 INGB 0001 2345 67                    |
 | Norway                    |    15 | 11n             |       | NOkk bbbb cccc ccx                        | yes  | NO93 8601 1117 947                        |
 | Oman                      |    23 | 3n,16c          |       | OMkk bbbc cccc cccc cccc ccc              | yes  | OM34 0180 0104 7042 8485 001              |
 | Pakistan                  |    24 | 4a,16c          |       | PKkk bbbb cccc cccc cccc cccc             | yes  | PK36 SCBL 0000 0011 2345 6702             |
-| Poland                    |    28 | 24n             |       | PLkk bbbs sssx cccc cccc cccc cccc        | yes  | PL61 1090 1014 0000 0712 1981 2874        |
+| Poland                    |    28 | 24n             |       | PLkk bbbb bbbb cccc cccc cccc cccc        | yes  | PL61 1090 1014 0000 0712 1981 2874        |
 | Palestine                 |    29 | 4a,21c          |       | PSkk bbbb cccc cccc cccc cccc cccc c      | yes  | PS92 PALS 0000 0000 0400 1234 5670 2      |
 | Portugal                  |    25 | 21n             |    50 | PTkk bbbb ssss cccc cccc cccx x           | yes  | PT50 0002 0123 1234 5678 9015 4           |
 | Qatar                     |    29 | 4a,21c          |       | QAkk bbbb cccc cccc cccc cccc cccc c      | yes  | QA58 DOHB 0000 1234 5678 90AB CDEF G      |
 | Romania                   |    24 | 4a,16c          |       | ROkk bbbb cccc cccc cccc cccc             | yes  | RO49 AAAA 1B31 0075 9384 0000             |
 | Serbia                    |    22 | 18n             |    35 | RSkk bbbc cccc cccc cccc xx               | yes  | RS35 2600 0560 1001 6113 79               |
-| Russia                    |    33 | 9n,20c          |       | RUkk bbbb bbbb bsss sscc cccc cccc cccc c | yes  | RU02 0445 2560 0407 0281 0412 3456 7890 1 |
+| Russia                    |    33 | 14n,15c         |       | RUkk bbbb bbbb bsss sscc cccc cccc cccc c | yes  | RU02 0445 2560 0407 0281 0412 3456 7890 1 |
 | Saudi Arabia              |    24 | 2n,18c          |       | SAkk bbcc cccc cccc cccc cccc             | yes  | SA84 4000 0108 0540 1173 0013             |
 | Seychelles                |    31 | 4a,20n,3a       |       | SCkk bbbb bb ss cccc cccc cccc cccc mmm   | yes  | SC18 SSCB 1101 0000 0000 0000 1497 USD    |
 | Sudan                     |    18 | 14n             |       | SDkk bbcc cccc cccc cc                    | yes  | SD21 2901 0501 2340 01                    |
@@ -114,7 +115,6 @@ validator code.
 | Gabon                     |    27 | 23n             |       | GAkk nnnn nnnn nnnn nnnn nnnn nnn         | no   | GA21 4002 1010 0320 0189 0020 126         |
 | Equatorial Guinea         |    27 | 23n             |       | GQkk nnnn nnnn nnnn nnnn nnnn nnn         | no   | GQ70 5000 2001 0037 1522 8190 196         |
 | Guinea-Bissau             |    25 | 2c,19n          |       | GWkk ccnn nnnn nnnn nnnn nnnn n           | no   | GW04 GW14 3001 0181 8006 3760 1           |
-| Honduras                  |    28 | 4a,20n          |       | HNkk aaaa nnnn nnnn nnnn nnnn nnnn        | no   | HN54 PISA 0000 0000 0000 0012 3124        |
 | Iran                      |    26 | 22n             |       | IRkk nnnn nnnn nnnn nnnn nnnn nn          | no   | IR58 0540 1051 8002 1273 1130 07          |
 | Comoros                   |    27 | 23n             |       | KMkk nnnn nnnn nnnn nnnn nnnn nnn         | no   | KM46 0000 5000 0100 1090 4400 137         |
 | Morocco                   |    28 | 24n             |       | MAkk nnnn nnnn nnnn nnnn nnnn nnnn        | no   | MA64 0115 1900 0001 2050 0053 4921        |

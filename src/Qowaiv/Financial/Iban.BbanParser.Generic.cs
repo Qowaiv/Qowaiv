@@ -2,7 +2,7 @@ namespace Qowaiv.Financial;
 
 internal sealed class BbanGenericParser : BbanParser
 {
-    public BbanGenericParser() : base("ZZnncccccccccccccccccccccccccccccccc") { }
+    public BbanGenericParser() : base("ZZnncccccccccccccccccccccccccccccc") { }
 
     [Pure]
     protected override Chars Buffer(int id)

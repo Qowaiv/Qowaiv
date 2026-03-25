@@ -43,7 +43,7 @@
     <ToBeReleased>
       <![CDATA[
 v8.*
--
+- IBAN must not exceed 34 chars. (BUG)
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

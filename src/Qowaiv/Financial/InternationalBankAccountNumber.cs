@@ -25,6 +25,12 @@ namespace Qowaiv.Financial;
 #endif
 public readonly partial struct InternationalBankAccountNumber : IXmlSerializable, IFormattable, IEquatable<InternationalBankAccountNumber>, IComparable, IComparable<InternationalBankAccountNumber>
 {
+    /// <summary>An International Bank Account Number must not exceed 34 characters.</summary>
+    /// <remarks>
+    /// https://en.wikipedia.org/wiki/International_Bank_Account_Number.
+    /// </remarks>
+    public const int MaxLength = 54;
+
     private const char Nbsp = (char)160;
 
     /// <summary>Represents an unknown (but set) IBAN.</summary>

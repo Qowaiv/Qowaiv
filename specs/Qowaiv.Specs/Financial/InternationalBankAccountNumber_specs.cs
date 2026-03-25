@@ -39,6 +39,9 @@ public class Supported
 
 public class With_domain_logic
 {
+    [Test]
+    public void has_max_length_of_34() => EmailAddress.MaxLength.Should().Be(34);
+
     [TestCase("")]
     [TestCase("?")]
     public void has_length_zero_for_empty_and_unknown(InternationalBankAccountNumber svo)
@@ -498,7 +501,7 @@ public class Input_is_valid
 
     [TestCase("US70 ABCD 1234")]
     [TestCase("US41 1234 5678 90AB CDEF GHIJ KLMN OPQR")]
-    [TestCase("US19 T3NB 32YP 2588 8395 8870 7523 1343 8517")]
+    [TestCase("US78 590A 55XL 4071 0933 7937 5649 3947 97")]
     public void for_countries_without_IBAN(string str)
     {
         var iban = InternationalBankAccountNumber.Parse(str);

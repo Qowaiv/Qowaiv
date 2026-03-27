@@ -29,15 +29,11 @@ public class Amount_as_INumber
 
     [Test]
     public void is_canonical_equal_to_decimal([Random(Min, Max, Count)] decimal d)
-    {
-        Number.IsCanonical(d.Amount()).Should().Be(Number.IsCanonical(d));
-    }
+        => Number.IsCanonical(d.Amount()).Should().Be(Number.IsCanonical(d));
 
     [Test]
     public void abs_equal_to_Amount_Abs([Random(Min, Max, Count)] decimal d)
-    {
-        Number.Abs(d.Amount()).Should().Be(d.Amount().Abs());
-    }
+        => Number.Abs(d.Amount()).Should().Be(d.Amount().Abs());
 
     [Test]
     public void is_never_a_complexnumber([Random(Min, Max, Count)] decimal d)
@@ -100,10 +96,7 @@ public class Amount_as_INumber
         => Number.IsNaN(d.Amount()).Should().BeFalse();
 
     [Test]
-    public void is_negative_equal_to_decimal([Random(Min, Max, Count)] decimal d)
-    {
-        Number.IsNegative(d.Amount()).Should().Be(Number.IsNegative(d));
-    }
+    public void is_negative_equal_to_decimal([Random(Min, Max, Count)] decimal d) => Number.IsNegative(d.Amount()).Should().Be(Number.IsNegative(d));
 
     [Test]
     public void zero_is_positive_and_not_negative()
@@ -117,15 +110,11 @@ public class Amount_as_INumber
 
     [Test]
     public void is_zero_is_false_for_all_but_zero([Random(Min, Max, Count)] decimal d)
-    {
-        Number.IsZero(d.Amount()).Should().BeFalse();
-    }
+        => Number.IsZero(d.Amount()).Should().BeFalse();
 
     [Test]
     public void is_positive_equal_to_decimal([Random(Min, Max, Count)] decimal d)
-    {
-        Number.IsPositive(d.Amount()).Should().Be(Number.IsPositive(d.Amount()));
-    }
+        => Number.IsPositive(d.Amount()).Should().Be(Number.IsPositive(d.Amount()));
 
     [Test]
     public void is_not_Normal_when_zero()
@@ -137,9 +126,7 @@ public class Amount_as_INumber
 
     [Test]
     public void is_normal_when_not_zero([Random(Min, Max, Count)] decimal d)
-    {
-        Number.IsNormal(d.Amount()).Should().BeTrue();
-    }
+        => Number.IsNormal(d.Amount()).Should().BeTrue();
 
     [Test]
     public void max_magnitude_equal_to_decimal([Random(Min, Max, 3)] decimal x, [Random(Min, Max, 3)] decimal y)
@@ -156,16 +143,10 @@ public class Amount_as_INumber
     }
 
     [Test]
-    public void multiplication_is_supported_via_explicit_contract_only([Random(-100_000, +100_000, 3)] decimal x, [Random(-100_000, +100_000, 3)] decimal y)
-    {
-        Number.Multiply(x.Amount(), y.Amount()).Should().Be((x * y).Amount());
-    }
+    public void multiplication_is_supported_via_explicit_contract_only([Random(-100_000, +100_000, 3)] decimal x, [Random(-100_000, +100_000, 3)] decimal y) => Number.Multiply(x.Amount(), y.Amount()).Should().Be((x * y).Amount());
 
     [Test]
-    public void division_is_supported_via_explicit_contract_only([Random(Min, Max, 3)] decimal x, [Random(Min, Max, 3)] decimal y)
-    {
-        Number.Divide(x.Amount(), y.Amount()).Should().Be((x / y).Amount());
-    }
+    public void division_is_supported_via_explicit_contract_only([Random(Min, Max, 3)] decimal x, [Random(Min, Max, 3)] decimal y) => Number.Divide(x.Amount(), y.Amount()).Should().Be((x / y).Amount());
 
     private const double Min = -79228162514264337593543950335d;
     private const double Max = +79228162514264337593543950335d;

@@ -16,10 +16,7 @@ public class InternetMediaTypeTest
 
     /// <summary>InternetMediaType.Empty should be equal to the default of internet media type.</summary>
     [Test]
-    public void Empty_None_EqualsDefault()
-    {
-        InternetMediaType.Empty.Should().Be(default);
-    }
+    public void Empty_None_EqualsDefault() => InternetMediaType.Empty.Should().Be(default);
 
     #endregion
 
@@ -27,60 +24,33 @@ public class InternetMediaTypeTest
 
     /// <summary>InternetMediaType.IsEmpty() should be true for the default of internet media type.</summary>
     [Test]
-    public void IsEmpty_Default_IsTrue()
-    {
-        default(InternetMediaType).IsEmpty().Should().BeTrue();
-    }
+    public void IsEmpty_Default_IsTrue() => default(InternetMediaType).IsEmpty().Should().BeTrue();
     /// <summary>InternetMediaType.IsEmpty() should be false for InternetMediaType.Unknown.</summary>
     [Test]
-    public void IsEmpty_Unknown_IsFalse()
-    {
-        InternetMediaType.Unknown.IsEmpty().Should().BeFalse();
-    }
+    public void IsEmpty_Unknown_IsFalse() => InternetMediaType.Unknown.IsEmpty().Should().BeFalse();
     /// <summary>InternetMediaType.IsEmpty() should be false for the TestStruct.</summary>
     [Test]
-    public void IsEmpty_TestStruct_IsFalse()
-    {
-        TestStruct.IsEmpty().Should().BeFalse();
-    }
+    public void IsEmpty_TestStruct_IsFalse() => TestStruct.IsEmpty().Should().BeFalse();
 
     /// <summary>InternetMediaType.IsUnknown() should be false for the default of internet media type.</summary>
     [Test]
-    public void IsUnknown_Default_IsFalse()
-    {
-        default(InternetMediaType).IsUnknown().Should().BeFalse();
-    }
+    public void IsUnknown_Default_IsFalse() => default(InternetMediaType).IsUnknown().Should().BeFalse();
     /// <summary>InternetMediaType.IsUnknown() should be true for InternetMediaType.Unknown.</summary>
     [Test]
-    public void IsUnknown_Unknown_IsTrue()
-    {
-        InternetMediaType.Unknown.IsUnknown().Should().BeTrue();
-    }
+    public void IsUnknown_Unknown_IsTrue() => InternetMediaType.Unknown.IsUnknown().Should().BeTrue();
     /// <summary>InternetMediaType.IsUnknown() should be false for the TestStruct.</summary>
     [Test]
-    public void IsUnknown_TestStruct_IsFalse()
-    {
-        TestStruct.IsUnknown().Should().BeFalse();
-    }
+    public void IsUnknown_TestStruct_IsFalse() => TestStruct.IsUnknown().Should().BeFalse();
 
     /// <summary>InternetMediaType.IsEmptyOrUnknown() should be true for the default of internet media type.</summary>
     [Test]
-    public void IsEmptyOrUnknown_Default_IsFalse()
-    {
-        default(InternetMediaType).IsEmptyOrUnknown().Should().BeTrue();
-    }
+    public void IsEmptyOrUnknown_Default_IsFalse() => default(InternetMediaType).IsEmptyOrUnknown().Should().BeTrue();
     /// <summary>InternetMediaType.IsEmptyOrUnknown() should be true for InternetMediaType.Unknown.</summary>
     [Test]
-    public void IsEmptyOrUnknown_Unknown_IsTrue()
-    {
-        InternetMediaType.Unknown.IsEmptyOrUnknown().Should().BeTrue();
-    }
+    public void IsEmptyOrUnknown_Unknown_IsTrue() => InternetMediaType.Unknown.IsEmptyOrUnknown().Should().BeTrue();
     /// <summary>InternetMediaType.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
     [Test]
-    public void IsEmptyOrUnknown_TestStruct_IsFalse()
-    {
-        TestStruct.IsEmptyOrUnknown().Should().BeFalse();
-    }
+    public void IsEmptyOrUnknown_TestStruct_IsFalse() => TestStruct.IsEmptyOrUnknown().Should().BeFalse();
 
     #endregion
 
@@ -314,10 +284,7 @@ public class InternetMediaTypeTest
     #region IEquatable tests
 
     [Test]
-    public void Equals_EmptyEmpty_IsTrue()
-    {
-        InternetMediaType.Empty.Equals(InternetMediaType.Empty).Should().BeTrue();
-    }
+    public void Equals_EmptyEmpty_IsTrue() => InternetMediaType.Empty.Equals(InternetMediaType.Empty).Should().BeTrue();
 
     [Test]
     public void Equals_FormattedAndUnformatted_IsTrue()
@@ -329,40 +296,22 @@ public class InternetMediaTypeTest
     }
 
     [Test]
-    public void Equals_TestStructTestStruct_IsTrue()
-    {
-        TestStruct.Equals(TestStruct).Should().BeTrue();
-    }
+    public void Equals_TestStructTestStruct_IsTrue() => TestStruct.Equals(TestStruct).Should().BeTrue();
 
     [Test]
-    public void Equals_TestStructEmpty_IsFalse()
-    {
-        TestStruct.Equals(InternetMediaType.Empty).Should().BeFalse();
-    }
+    public void Equals_TestStructEmpty_IsFalse() => TestStruct.Equals(InternetMediaType.Empty).Should().BeFalse();
 
     [Test]
-    public void Equals_EmptyTestStruct_IsFalse()
-    {
-        InternetMediaType.Empty.Equals(TestStruct).Should().BeFalse();
-    }
+    public void Equals_EmptyTestStruct_IsFalse() => InternetMediaType.Empty.Equals(TestStruct).Should().BeFalse();
 
     [Test]
-    public void Equals_TestStructObjectTestStruct_IsTrue()
-    {
-        TestStruct.Equals((object)TestStruct).Should().BeTrue();
-    }
+    public void Equals_TestStructObjectTestStruct_IsTrue() => TestStruct.Equals((object)TestStruct).Should().BeTrue();
 
     [Test]
-    public void Equals_TestStructNull_IsFalse()
-    {
-        TestStruct.Equals(null).Should().BeFalse();
-    }
+    public void Equals_TestStructNull_IsFalse() => TestStruct.Equals(null).Should().BeFalse();
 
     [Test]
-    public void Equals_TestStructObject_IsFalse()
-    {
-        TestStruct.Equals(new object()).Should().BeFalse();
-    }
+    public void Equals_TestStructObject_IsFalse() => TestStruct.Equals(new object()).Should().BeFalse();
 
     [Test]
     public void OperatorIs_TestStructTestStruct_IsTrue()

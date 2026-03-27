@@ -265,14 +265,11 @@ public class Supports_JSON_serialization
 
 #if NET8_0_OR_GREATER
     [Test]
-    public void System_Text_JSON_deserialization_of_dictionary_keys()
-    {
-        System.Text.Json.JsonSerializer.Deserialize<Dictionary<GuidBasedId, int>>(@"{""8a1a8c42-d2ff-e254-e26e-b6abcbf19420"":42}")
+    public void System_Text_JSON_deserialization_of_dictionary_keys() => System.Text.Json.JsonSerializer.Deserialize<Dictionary<GuidBasedId, int>>(@"{""8a1a8c42-d2ff-e254-e26e-b6abcbf19420"":42}")
             .Should().BeEquivalentTo(new Dictionary<GuidBasedId, int>()
             {
                 [Svo.Generated.CustomGuid] = 42,
             });
-    }
 
     [Test]
     public void System_Text_JSON_serialization_of_dictionary_keys()

@@ -75,6 +75,7 @@ dotnet_diagnostic.SA1204.severity   = none       # Sort members based on static/
 dotnet_diagnostic.SA1208.severity   = none       # System using directives must be placed before other using directives.
 dotnet_diagnostic.SA1214.severity   = none       # Sort readonly fields before non-readonly fields.
 dotnet_diagnostic.SA1300.severity   = none       # Enum members should not start with lower-case character.
+dotnet_diagnostic.SA1302.severity   = none       # Interface names should begin with I
 dotnet_diagnostic.SA1304.severity   = none       # None-private fields should begin with upper-case character.
 dotnet_diagnostic.SA1306.severity   = none       # Fields should begin with lower-case character.
 dotnet_diagnostic.SA1307.severity   = none       # Fields should begin with upper-case character.

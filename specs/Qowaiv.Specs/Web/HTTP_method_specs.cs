@@ -64,26 +64,22 @@ public class Supports_System_Text_JSON_serialization
 
     [Test]
     public void Dictionary_deserialization()
-    {
-        JsonSerializer.Deserialize<Dictionary<HttpMethod, int>>("""{"GET":100,"PUT":200}""", Options())
-            .Should().BeEquivalentTo(new Dictionary<HttpMethod, int>
-              {
-                  [HttpMethod.Get] = 100,
-                  [HttpMethod.Put] = 200,
-              });
-    }
+        => JsonSerializer.Deserialize<Dictionary<HttpMethod, int>>("""{"GET":100,"PUT":200}""", Options())
+        .Should().BeEquivalentTo(new Dictionary<HttpMethod, int>
+        {
+            [HttpMethod.Get] = 100,
+            [HttpMethod.Put] = 200,
+        });
 
     [Test]
     public void Dictionary_serialization()
-    {
-        JsonSerializer.Serialize(new Dictionary<HttpMethod, int>
+        => JsonSerializer.Serialize(new Dictionary<HttpMethod, int>
         {
             [HttpMethod.Get] = 100,
             [HttpMethod.Put] = 200,
         },
         Options())
             .Should().Be("""{"GET":100,"PUT":200}""");
-    }
 
     private static JsonSerializerOptions Options()
     {

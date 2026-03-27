@@ -7,10 +7,7 @@ public class CountryTest
 
     /// <summary>Country.Empty should be equal to the default of Country.</summary>
     [Test]
-    public void Empty_None_EqualsDefault()
-    {
-        Country.Empty.Should().Be(default);
-    }
+    public void Empty_None_EqualsDefault() => Country.Empty.Should().Be(default);
 
     #region Current
 
@@ -56,17 +53,11 @@ public class CountryTest
 
     /// <summary>Country.IsEmpty() should true for the default of Country.</summary>
     [Test]
-    public void IsEmpty_Default_IsTrue()
-    {
-        default(Country).IsEmpty().Should().BeTrue();
-    }
+    public void IsEmpty_Default_IsTrue() => default(Country).IsEmpty().Should().BeTrue();
 
     /// <summary>Country.IsEmpty() should false for the TestStruct.</summary>
     [Test]
-    public void IsEmpty_Default_IsFalse()
-    {
-        TestStruct.IsEmpty().Should().BeFalse();
-    }
+    public void IsEmpty_Default_IsFalse() => TestStruct.IsEmpty().Should().BeFalse();
 
     #endregion
 
@@ -317,10 +308,7 @@ public class CountryTest
     #region IEquatable tests
 
     [Test]
-    public void Equals_EmptyEmpty_IsTrue()
-    {
-        Country.Empty.Equals(Country.Empty).Should().BeTrue();
-    }
+    public void Equals_EmptyEmpty_IsTrue() => Country.Empty.Equals(Country.Empty).Should().BeTrue();
 
     [Test]
     public void Equals_FormattedAndUnformatted_IsTrue()
@@ -335,40 +323,22 @@ public class CountryTest
     }
 
     [Test]
-    public void Equals_TestStructTestStruct_IsTrue()
-    {
-        CountryTest.TestStruct.Equals(CountryTest.TestStruct).Should().BeTrue();
-    }
+    public void Equals_TestStructTestStruct_IsTrue() => CountryTest.TestStruct.Equals(CountryTest.TestStruct).Should().BeTrue();
 
     [Test]
-    public void Equals_TestStructEmpty_IsFalse()
-    {
-        CountryTest.TestStruct.Equals(Country.Empty).Should().BeFalse();
-    }
+    public void Equals_TestStructEmpty_IsFalse() => CountryTest.TestStruct.Equals(Country.Empty).Should().BeFalse();
 
     [Test]
-    public void Equals_EmptyTestStruct_IsFalse()
-    {
-        Country.Empty.Equals(CountryTest.TestStruct).Should().BeFalse();
-    }
+    public void Equals_EmptyTestStruct_IsFalse() => Country.Empty.Equals(CountryTest.TestStruct).Should().BeFalse();
 
     [Test]
-    public void Equals_TestStructObjectTestStruct_IsTrue()
-    {
-        CountryTest.TestStruct.Equals((object)CountryTest.TestStruct).Should().BeTrue();
-    }
+    public void Equals_TestStructObjectTestStruct_IsTrue() => CountryTest.TestStruct.Equals((object)CountryTest.TestStruct).Should().BeTrue();
 
     [Test]
-    public void Equals_TestStructNull_IsFalse()
-    {
-        CountryTest.TestStruct.Equals(Nil.Object).Should().BeFalse();
-    }
+    public void Equals_TestStructNull_IsFalse() => CountryTest.TestStruct.Equals(Nil.Object).Should().BeFalse();
 
     [Test]
-    public void Equals_TestStructObject_IsFalse()
-    {
-        CountryTest.TestStruct.Equals(new object()).Should().BeFalse();
-    }
+    public void Equals_TestStructObject_IsFalse() => CountryTest.TestStruct.Equals(new object()).Should().BeFalse();
 
     [Test]
     public void OperatorIs_TestStructTestStruct_IsTrue()
@@ -546,22 +516,13 @@ public class CountryTest
     #region Methods
 
     [Test]
-    public void IsEmptyOrNotKnown_Empty_IsTrue()
-    {
-        Country.Empty.IsEmptyOrUnknown().Should().BeTrue();
-    }
+    public void IsEmptyOrNotKnown_Empty_IsTrue() => Country.Empty.IsEmptyOrUnknown().Should().BeTrue();
 
     [Test]
-    public void IsEmptyOrNotKnown_NotKnown_IsTrue()
-    {
-        Country.Unknown.IsEmptyOrUnknown().Should().BeTrue();
-    }
+    public void IsEmptyOrNotKnown_NotKnown_IsTrue() => Country.Unknown.IsEmptyOrUnknown().Should().BeTrue();
 
     [Test]
-    public void IsEmptyOrNotKnown_TestStruct_IsFalse()
-    {
-        TestStruct.IsEmptyOrUnknown().Should().BeFalse();
-    }
+    public void IsEmptyOrNotKnown_TestStruct_IsFalse() => TestStruct.IsEmptyOrUnknown().Should().BeFalse();
 
     /// <remarks>
     /// On 1980, Burkina Faso did not yet exist.

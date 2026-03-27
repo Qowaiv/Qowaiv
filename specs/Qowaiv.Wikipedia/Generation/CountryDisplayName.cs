@@ -206,15 +206,9 @@ public static class CountryDisplayName
         }
     }
 
-    public static Task<string?> it(Country country)
-    {
-        return Task.FromResult<string?>(country.GetDisplayName(TestCultures.it));
-    }
+    public static Task<string?> it(Country country) => Task.FromResult<string?>(country.GetDisplayName(TestCultures.it));
 
-    public static Task<string?> ja(Country country)
-    {
-        return Task.FromResult<string?>(country.GetDisplayName(TestCultures.ja));
-    }
+    public static Task<string?> ja(Country country) => Task.FromResult<string?>(country.GetDisplayName(TestCultures.ja));
 
     public static async Task<string?> nl(Country country)
     {
@@ -286,15 +280,9 @@ public static class CountryDisplayName
         }
     }
 
-    public static Task<string?> ru(Country country)
-    {
-        return Task.FromResult<string?>(country.GetDisplayName(TestCultures.ru));
-    }
+    public static Task<string?> ru(Country country) => Task.FromResult<string?>(country.GetDisplayName(TestCultures.ru));
 
-    public static Task<string?> zh(Country country)
-    {
-        return Task.FromResult<string?>(country.GetDisplayName(TestCultures.zh));
-    }
+    public static Task<string?> zh(Country country) => Task.FromResult<string?>(country.GetDisplayName(TestCultures.zh));
 
     private record Display(string Iso2, string Name);
 

@@ -3,57 +3,33 @@ namespace Unknown_specs;
 public class Is_unknown
 {
     [Test]
-    public void question_mark_with_culture()
-    {
-        Unknown.IsUnknown("?", new CultureInfo("nl-NL")).Should().BeTrue();
-    }
+    public void question_mark_with_culture() => Unknown.IsUnknown("?", new CultureInfo("nl-NL")).Should().BeTrue();
 
     [Test]
-    public void question_mark_without_culture()
-    {
-        Unknown.IsUnknown("?", null).Should().BeTrue();
-    }
+    public void question_mark_without_culture() => Unknown.IsUnknown("?", null).Should().BeTrue();
 
     [Test]
-    public void language_specific_unknown_for_specific_culture()
-    {
-        Unknown.IsUnknown("Não SABe", new CultureInfo("pt-PT")).Should().BeTrue();
-    }
+    public void language_specific_unknown_for_specific_culture() => Unknown.IsUnknown("Não SABe", new CultureInfo("pt-PT")).Should().BeTrue();
 }
 
 public class Is_not_unknown
 {
     [Test]
-    public void Null()
-    {
-        Unknown.IsUnknown(null).Should().BeFalse();
-    }
+    public void Null() => Unknown.IsUnknown(null).Should().BeFalse();
 
     [Test]
-    public void string_empty()
-    {
-        Unknown.IsUnknown(string.Empty).Should().BeFalse();
-    }
+    public void string_empty() => Unknown.IsUnknown(string.Empty).Should().BeFalse();
 
     [Test]
-    public void string_not_representing_unknown_for_specified_culture()
-    {
-        Unknown.IsUnknown("onbekend", CultureInfo.InvariantCulture).Should().BeFalse();
-    }
+    public void string_not_representing_unknown_for_specified_culture() => Unknown.IsUnknown("onbekend", CultureInfo.InvariantCulture).Should().BeFalse();
 }
 
 public class Can_be_resolved_for
 {
     [Test]
-    public void value_type_with_unknown_value()
-    {
-        Unknown.Value(typeof(PostalCode)).Should().Be(PostalCode.Unknown);
-    }
+    public void value_type_with_unknown_value() => Unknown.Value(typeof(PostalCode)).Should().Be(PostalCode.Unknown);
     [Test]
-    public void reference_type_with_unknown_value()
-    {
-        Unknown.Value(typeof(ClassWithUnknownValue)).Should().Be(ClassWithUnknownValue.Unknown);
-    }
+    public void reference_type_with_unknown_value() => Unknown.Value(typeof(ClassWithUnknownValue)).Should().Be(ClassWithUnknownValue.Unknown);
 
     private class ClassWithUnknownValue
     {

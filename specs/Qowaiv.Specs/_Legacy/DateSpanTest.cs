@@ -12,10 +12,7 @@ public class DateSpanTest
 
     /// <summary>DateSpan.Zero should be equal to the default of date span.</summary>
     [Test]
-    public void Zero_None_EqualsDefault()
-    {
-        DateSpan.Zero.Should().Be(default);
-    }
+    public void Zero_None_EqualsDefault() => DateSpan.Zero.Should().Be(default);
 
     [Test]
     public void MaxValue_EqualsDateMaxDateMin()
@@ -211,23 +208,14 @@ public class DateSpanTest
 
     /// <summary>GetHash should not fail for DateSpan.Zero.</summary>
     [Test]
-    public void GetHash_Zero_Hash()
-    {
-        DateSpan.Zero.GetHashCode().Should().Be(0);
-    }
+    public void GetHash_Zero_Hash() => DateSpan.Zero.GetHashCode().Should().Be(0);
 
     /// <summary>GetHash should not fail for the test struct.</summary>
     [Test]
-    public void GetHash_TestStruct_Hash()
-    {
-        TestStruct.GetHashCode().Should().NotBe(0);
-    }
+    public void GetHash_TestStruct_Hash() => TestStruct.GetHashCode().Should().NotBe(0);
 
     [Test]
-    public void Equals_ZeroZero_IsTrue()
-    {
-        DateSpan.Zero.Equals(DateSpan.Zero).Should().BeTrue();
-    }
+    public void Equals_ZeroZero_IsTrue() => DateSpan.Zero.Equals(DateSpan.Zero).Should().BeTrue();
 
     [Test]
     public void Equals_FormattedAndUnformatted_IsTrue()
@@ -239,40 +227,22 @@ public class DateSpanTest
     }
 
     [Test]
-    public void Equals_TestStructTestStruct_IsTrue()
-    {
-        TestStruct.Equals(TestStruct).Should().BeTrue();
-    }
+    public void Equals_TestStructTestStruct_IsTrue() => TestStruct.Equals(TestStruct).Should().BeTrue();
 
     [Test]
-    public void Equals_TestStructZero_IsFalse()
-    {
-        TestStruct.Equals(DateSpan.Zero).Should().BeFalse();
-    }
+    public void Equals_TestStructZero_IsFalse() => TestStruct.Equals(DateSpan.Zero).Should().BeFalse();
 
     [Test]
-    public void Equals_ZeroTestStruct_IsFalse()
-    {
-        DateSpan.Zero.Equals(TestStruct).Should().BeFalse();
-    }
+    public void Equals_ZeroTestStruct_IsFalse() => DateSpan.Zero.Equals(TestStruct).Should().BeFalse();
 
     [Test]
-    public void Equals_TestStructObjectTestStruct_IsTrue()
-    {
-        TestStruct.Equals((object)TestStruct).Should().BeTrue();
-    }
+    public void Equals_TestStructObjectTestStruct_IsTrue() => TestStruct.Equals((object)TestStruct).Should().BeTrue();
 
     [Test]
-    public void Equals_TestStructNull_IsFalse()
-    {
-        TestStruct.Equals(null).Should().BeFalse();
-    }
+    public void Equals_TestStructNull_IsFalse() => TestStruct.Equals(null).Should().BeFalse();
 
     [Test]
-    public void Equals_TestStructObject_IsFalse()
-    {
-        TestStruct.Equals(new object()).Should().BeFalse();
-    }
+    public void Equals_TestStructObject_IsFalse() => TestStruct.Equals(new object()).Should().BeFalse();
 
     [Test]
     public void OperatorIs_TestStructTestStruct_IsTrue()
@@ -356,26 +326,14 @@ public class DateSpanTest
     }
 
     [Test]
-    public void Smaller_LessThan_Bigger_IsTrue()
-    {
-        (Smaller < Bigger).Should().BeTrue();
-    }
+    public void Smaller_LessThan_Bigger_IsTrue() => (Smaller < Bigger).Should().BeTrue();
     [Test]
-    public void Bigger_GreaterThan_Smaller_IsTrue()
-    {
-        (Bigger > Smaller).Should().BeTrue();
-    }
+    public void Bigger_GreaterThan_Smaller_IsTrue() => (Bigger > Smaller).Should().BeTrue();
 
     [Test]
-    public void Smaller_LessThanOrEqual_Bigger_IsTrue()
-    {
-        (Smaller <= Bigger).Should().BeTrue();
-    }
+    public void Smaller_LessThanOrEqual_Bigger_IsTrue() => (Smaller <= Bigger).Should().BeTrue();
     [Test]
-    public void Bigger_GreaterThanOrEqual_Smaller_IsTrue()
-    {
-        (Bigger >= Smaller).Should().BeTrue();
-    }
+    public void Bigger_GreaterThanOrEqual_Smaller_IsTrue() => (Bigger >= Smaller).Should().BeTrue();
 
     [Test]
     public void Smaller_LessThanOrEqual_Smaller_IsTrue()

@@ -69,16 +69,10 @@ public class TryGetBytes_from
 public class GetBytes
 {
     [Test]
-    public void Null_returns_EmptyArray()
-    {
-        Base32.GetBytes(null).Should().BeEmpty();
-    }
+    public void Null_returns_EmptyArray() => Base32.GetBytes(null).Should().BeEmpty();
 
     [Test]
-    public void StringEmpty_returns_EmptyArray()
-    {
-        Base32.GetBytes(string.Empty).Should().BeEmpty();
-    }
+    public void StringEmpty_returns_EmptyArray() => Base32.GetBytes(string.Empty).Should().BeEmpty();
 
     [Test]
     public void LowerCase_equals_UpperCase()

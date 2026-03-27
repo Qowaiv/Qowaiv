@@ -109,10 +109,10 @@ internal static partial class Email
         {
             if (Failure) return None();
 
-            var (ch, index, length) = Next(-1, 0);
+            var (ch, index, len) = Next(-1, 0);
             char prev = default;
 
-            while (index < Input.Length && length <= PartLength + 1)
+            while (index < Input.Length && len <= PartLength + 1)
             {
                 if (Is.Local(ch)) { /* Continue. */ }
                 else if (ch is Dot)
@@ -121,14 +121,14 @@ internal static partial class Email
                 }
                 else if (ch is At)
                 {
-                    return length is 1 || prev is Dot
+                    return len is 1 || prev is Dot
                         ? None()
-                        : new(Input[++index..], Buffer, length);
+                        : new(Input[++index..], Buffer, len);
                 }
                 else return None();
 
                 prev = ch;
-                (ch, index, length) = Next(index, length);
+                (ch, index, len) = Next(index, len);
             }
             return None();
         }

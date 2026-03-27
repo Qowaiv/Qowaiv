@@ -43,7 +43,11 @@ public static class Clock
     }
 
     /// <summary>Gets the time zone of the <see cref="Clock" />.</summary>
-    public static TimeZoneInfo TimeZone => localContextTimeZone.Value ?? globalTimeZone;
+    public static TimeZoneInfo TimeZone
+    {
+        get => localContextTimeZone.Value ?? field;
+        private set;
+    } = TimeZoneInfo.Local;
 
     /// <summary>Gets the current <see cref="DateTimeOffset" />.</summary>
     [Pure]
@@ -117,7 +121,7 @@ public static class Clock
     /// <remarks>
     /// For test purposes use <see cref="SetTimeZoneForCurrentContext(TimeZoneInfo)" />.
     /// </remarks>
-    public static void SetTimeZone(TimeZoneInfo timeZone) => globalTimeZone = Guard.NotNull(timeZone);
+    public static void SetTimeZone(TimeZoneInfo timeZone) => TimeZone = Guard.NotNull(timeZone);
 
     /// <summary>Sets the <see cref="DateTime" /> function for current (execution) context only.</summary>
     [Impure]
@@ -139,7 +143,6 @@ public static class Clock
     // This is the testable time provider.
     private static Func<DateTime> globalUtcNow = () => DateTime.UtcNow;
 #pragma warning restore S6354 // Use a testable (date) time provider instead
-    private static TimeZoneInfo globalTimeZone = TimeZoneInfo.Local;
 
     private static readonly AsyncLocal<Func<DateTime>?> localContextUtcNow = new();
 

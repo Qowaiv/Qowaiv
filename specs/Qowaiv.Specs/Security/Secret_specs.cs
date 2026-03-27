@@ -76,10 +76,16 @@ public class Hashing
 public class Can_be_parsed
 {
     [Test]
-    public void from_null_string_represents_Empty() => Secret.Parse(null).Should().Be(Secret.Empty);
+    public void from_null_string_represents_Empty()
+    {
+        Secret.Parse(null).Should().Be(Secret.Empty);
+    }
 
     [Test]
-    public void from_empty_string_represents_Empty() => Secret.Parse(string.Empty).Should().Be(Secret.Empty);
+    public void from_empty_string_represents_Empty()
+    {
+        Secret.Parse(string.Empty).Should().Be(Secret.Empty);
+    }
 }
 
 public class Supports_type_conversion_from

@@ -321,8 +321,11 @@ public class Supports_JSON_serialization
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
     [TestCase("{}")]
-    public void System_Text_JSON_throws_on(string json) => json.Invoking(json => System.Text.Json.JsonSerializer.Deserialize<CustomSvo>(json))
+    public void System_Text_JSON_throws_on(string json)
+    {
+        json.Invoking(json => System.Text.Json.JsonSerializer.Deserialize<CustomSvo>(json))
             .Should().Throw<System.Text.Json.JsonException>();
+    }
 #endif
 
     [TestCase("?", "?")]

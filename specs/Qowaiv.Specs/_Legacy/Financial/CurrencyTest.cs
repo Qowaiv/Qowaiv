@@ -10,7 +10,10 @@ public class CurrencyTest
 
     /// <summary>Currency.Empty should be equal to the default of currency.</summary>
     [Test]
-    public void Empty_None_EqualsDefault() => Currency.Empty.Should().Be(default);
+    public void Empty_None_EqualsDefault()
+    {
+        Currency.Empty.Should().Be(default);
+    }
 
     #endregion
 
@@ -58,33 +61,60 @@ public class CurrencyTest
 
     /// <summary>Currency.IsEmpty() should be true for the default of currency.</summary>
     [Test]
-    public void IsEmpty_Default_IsTrue() => default(Currency).IsEmpty().Should().BeTrue();
+    public void IsEmpty_Default_IsTrue()
+    {
+        default(Currency).IsEmpty().Should().BeTrue();
+    }
     /// <summary>Currency.IsEmpty() should be false for Currency.Unknown.</summary>
     [Test]
-    public void IsEmpty_Unknown_IsFalse() => Currency.Unknown.IsEmpty().Should().BeFalse();
+    public void IsEmpty_Unknown_IsFalse()
+    {
+        Currency.Unknown.IsEmpty().Should().BeFalse();
+    }
     /// <summary>Currency.IsEmpty() should be false for the TestStruct.</summary>
     [Test]
-    public void IsEmpty_TestStruct_IsFalse() => TestStruct.IsEmpty().Should().BeFalse();
+    public void IsEmpty_TestStruct_IsFalse()
+    {
+        TestStruct.IsEmpty().Should().BeFalse();
+    }
 
     /// <summary>Currency.IsUnknown() should be false for the default of currency.</summary>
     [Test]
-    public void IsUnknown_Default_IsFalse() => default(Currency).IsUnknown().Should().BeFalse();
+    public void IsUnknown_Default_IsFalse()
+    {
+        default(Currency).IsUnknown().Should().BeFalse();
+    }
     /// <summary>Currency.IsUnknown() should be true for Currency.Unknown.</summary>
     [Test]
-    public void IsUnknown_Unknown_IsTrue() => Currency.Unknown.IsUnknown().Should().BeTrue();
+    public void IsUnknown_Unknown_IsTrue()
+    {
+        Currency.Unknown.IsUnknown().Should().BeTrue();
+    }
     /// <summary>Currency.IsUnknown() should be false for the TestStruct.</summary>
     [Test]
-    public void IsUnknown_TestStruct_IsFalse() => TestStruct.IsUnknown().Should().BeFalse();
+    public void IsUnknown_TestStruct_IsFalse()
+    {
+        TestStruct.IsUnknown().Should().BeFalse();
+    }
 
     /// <summary>Currency.IsEmptyOrUnknown() should be true for the default of currency.</summary>
     [Test]
-    public void IsEmptyOrUnknown_Default_IsFalse() => default(Currency).IsEmptyOrUnknown().Should().BeTrue();
+    public void IsEmptyOrUnknown_Default_IsFalse()
+    {
+        default(Currency).IsEmptyOrUnknown().Should().BeTrue();
+    }
     /// <summary>Currency.IsEmptyOrUnknown() should be true for Currency.Unknown.</summary>
     [Test]
-    public void IsEmptyOrUnknown_Unknown_IsTrue() => Currency.Unknown.IsEmptyOrUnknown().Should().BeTrue();
+    public void IsEmptyOrUnknown_Unknown_IsTrue()
+    {
+        Currency.Unknown.IsEmptyOrUnknown().Should().BeTrue();
+    }
     /// <summary>Currency.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
     [Test]
-    public void IsEmptyOrUnknown_TestStruct_IsFalse() => TestStruct.IsEmptyOrUnknown().Should().BeFalse();
+    public void IsEmptyOrUnknown_TestStruct_IsFalse()
+    {
+        TestStruct.IsEmptyOrUnknown().Should().BeFalse();
+    }
 
     #endregion
 
@@ -429,7 +459,10 @@ public class CurrencyTest
     #region IEquatable tests
 
     [Test]
-    public void Equals_EmptyEmpty_IsTrue() => Currency.Empty.Equals(Currency.Empty).Should().BeTrue();
+    public void Equals_EmptyEmpty_IsTrue()
+    {
+        Currency.Empty.Equals(Currency.Empty).Should().BeTrue();
+    }
 
     [Test]
     public void Equals_FormattedAndUnformatted_IsTrue()
@@ -441,22 +474,40 @@ public class CurrencyTest
     }
 
     [Test]
-    public void Equals_TestStructTestStruct_IsTrue() => CurrencyTest.TestStruct.Equals(CurrencyTest.TestStruct).Should().BeTrue();
+    public void Equals_TestStructTestStruct_IsTrue()
+    {
+        CurrencyTest.TestStruct.Equals(CurrencyTest.TestStruct).Should().BeTrue();
+    }
 
     [Test]
-    public void Equals_TestStructEmpty_IsFalse() => CurrencyTest.TestStruct.Equals(Currency.Empty).Should().BeFalse();
+    public void Equals_TestStructEmpty_IsFalse()
+    {
+        CurrencyTest.TestStruct.Equals(Currency.Empty).Should().BeFalse();
+    }
 
     [Test]
-    public void Equals_EmptyTestStruct_IsFalse() => Currency.Empty.Equals(CurrencyTest.TestStruct).Should().BeFalse();
+    public void Equals_EmptyTestStruct_IsFalse()
+    {
+        Currency.Empty.Equals(CurrencyTest.TestStruct).Should().BeFalse();
+    }
 
     [Test]
-    public void Equals_TestStructObjectTestStruct_IsTrue() => CurrencyTest.TestStruct.Equals((object)CurrencyTest.TestStruct).Should().BeTrue();
+    public void Equals_TestStructObjectTestStruct_IsTrue()
+    {
+        CurrencyTest.TestStruct.Equals((object)CurrencyTest.TestStruct).Should().BeTrue();
+    }
 
     [Test]
-    public void Equals_TestStructNull_IsFalse() => CurrencyTest.TestStruct.Equals(null).Should().BeFalse();
+    public void Equals_TestStructNull_IsFalse()
+    {
+        CurrencyTest.TestStruct.Equals(null).Should().BeFalse();
+    }
 
     [Test]
-    public void Equals_TestStructObject_IsFalse() => CurrencyTest.TestStruct.Equals(new object()).Should().BeFalse();
+    public void Equals_TestStructObject_IsFalse()
+    {
+        CurrencyTest.TestStruct.Equals(new object()).Should().BeFalse();
+    }
 
     [Test]
     public void OperatorIs_TestStructTestStruct_IsTrue()

@@ -266,11 +266,14 @@ public class Supports_JSON_serialization
 #if NET8_0_OR_GREATER
 
     [Test]
-    public void System_Text_JSON_deserialization_of_dictionary_keys() => System.Text.Json.JsonSerializer.Deserialize<Dictionary<UuidBasedId, int>>(@"{""Qowaiv_SVOLibrary_GUIA"":42}")
+    public void System_Text_JSON_deserialization_of_dictionary_keys()
+    {
+        System.Text.Json.JsonSerializer.Deserialize<Dictionary<UuidBasedId, int>>(@"{""Qowaiv_SVOLibrary_GUIA"":42}")
             .Should().BeEquivalentTo(new Dictionary<UuidBasedId, int>()
             {
                 [Svo.Generated.CustomUuid] = 42,
             });
+    }
 
     [Test]
     public void System_Text_JSON_serialization_of_dictionary_keys()

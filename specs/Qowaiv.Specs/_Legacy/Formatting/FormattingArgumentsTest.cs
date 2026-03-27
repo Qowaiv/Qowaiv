@@ -10,7 +10,10 @@ public class FormattingArgumentsTest
 
     /// <summary>FormattableArguments.None should be equal to the default of formatting arguments.</summary>
     [Test]
-    public void None_None_EqualsDefault() => FormattingArguments.None.Should().Be(default(FormattingArguments));
+    public void None_None_EqualsDefault()
+    {
+        FormattingArguments.None.Should().Be(default(FormattingArguments));
+    }
 
     #endregion
 
@@ -42,16 +45,28 @@ public class FormattingArgumentsTest
     #region IEquatable tests
 
     [Test]
-    public void Equals_EmptyEmpty_IsTrue() => FormattingArguments.None.Equals(default).Should().BeTrue();
+    public void Equals_EmptyEmpty_IsTrue()
+    {
+        FormattingArguments.None.Equals(default).Should().BeTrue();
+    }
 
     [Test]
-    public void Equals_TestStructTestStruct_IsTrue() => TestStruct.Equals(new FormattingArguments("0.000", new CultureInfo("fr-BE"))).Should().BeTrue();
+    public void Equals_TestStructTestStruct_IsTrue()
+    {
+        TestStruct.Equals(new FormattingArguments("0.000", new CultureInfo("fr-BE"))).Should().BeTrue();
+    }
 
     [Test]
-    public void Equals_TestStructEmpty_IsFalse() => TestStruct.Equals(FormattingArguments.None).Should().BeFalse();
+    public void Equals_TestStructEmpty_IsFalse()
+    {
+        TestStruct.Equals(FormattingArguments.None).Should().BeFalse();
+    }
 
     [Test]
-    public void Equals_EmptyTestStruct_IsFalse() => FormattingArguments.None.Equals(TestStruct).Should().BeFalse();
+    public void Equals_EmptyTestStruct_IsFalse()
+    {
+        FormattingArguments.None.Equals(TestStruct).Should().BeFalse();
+    }
 
     [Test]
     public void Equals_TestStructObjectTestStruct_IsTrue()
@@ -61,10 +76,16 @@ public class FormattingArgumentsTest
     }
 
     [Test]
-    public void Equals_TestStructNull_IsFalse() => TestStruct.Equals(null).Should().BeFalse();
+    public void Equals_TestStructNull_IsFalse()
+    {
+        TestStruct.Equals(null).Should().BeFalse();
+    }
 
     [Test]
-    public void Equals_TestStructObject_IsFalse() => TestStruct.Equals(new object()).Should().BeFalse();
+    public void Equals_TestStructObject_IsFalse()
+    {
+        TestStruct.Equals(new object()).Should().BeFalse();
+    }
 
     [Test]
     public void OperatorIs_TestStructTestStruct_IsTrue()

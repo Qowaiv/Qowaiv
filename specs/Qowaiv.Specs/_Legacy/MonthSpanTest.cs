@@ -8,7 +8,10 @@ public class MonthSpanTest
 
     /// <summary>MonthSpan.Zero should be equal to the default of month span.</summary>
     [Test]
-    public void Zero_EqualsDefault() => MonthSpan.Zero.Should().Be(default);
+    public void Zero_EqualsDefault()
+    {
+        MonthSpan.Zero.Should().Be(default);
+    }
 
     /// <summary>TryParse null should be valid.</summary>
     [Test]

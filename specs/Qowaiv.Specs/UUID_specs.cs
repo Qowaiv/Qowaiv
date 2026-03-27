@@ -8,7 +8,10 @@ public class With_domain_logic
 
     [TestCase(false, "Qowaiv_SVOLibrary_GUIA")]
     [TestCase(true, "")]
-    public void IsEmpty_returns(bool result, Uuid svo) => svo.IsEmpty().Should().Be(result);
+    public void IsEmpty_returns(bool result, Uuid svo)
+    {
+        svo.IsEmpty().Should().Be(result);
+    }
 }
 
 public class Has_version
@@ -45,34 +48,61 @@ public class Has_version
 public class Has_constant
 {
     [Test]
-    public void Empty_represent_default_value() => Uuid.Empty.Should().Be(default);
+    public void Empty_represent_default_value()
+    {
+        Uuid.Empty.Should().Be(default);
+    }
 }
 
 public class Is_equal_by_value
 {
     [Test]
-    public void not_equal_to_null() => Svo.Uuid.Equals(null).Should().BeFalse();
+    public void not_equal_to_null()
+    {
+        Svo.Uuid.Equals(null).Should().BeFalse();
+    }
 
     [Test]
-    public void not_equal_to_other_type() => Svo.Uuid.Equals(new object()).Should().BeFalse();
+    public void not_equal_to_other_type()
+    {
+        Svo.Uuid.Equals(new object()).Should().BeFalse();
+    }
 
     [Test]
-    public void not_equal_to_different_value() => Svo.Uuid.Equals(Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeFalse();
+    public void not_equal_to_different_value()
+    {
+        Svo.Uuid.Equals(Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeFalse();
+    }
 
     [Test]
-    public void equal_to_same_value() => Svo.Uuid.Equals(Uuid.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeTrue();
+    public void equal_to_same_value()
+    {
+        Svo.Uuid.Equals(Uuid.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeTrue();
+    }
 
     [Test]
-    public void equal_operator_returns_true_for_same_values() => (Svo.Uuid == Uuid.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeTrue();
+    public void equal_operator_returns_true_for_same_values()
+    {
+        (Svo.Uuid == Uuid.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeTrue();
+    }
 
     [Test]
-    public void equal_operator_returns_false_for_different_values() => (Svo.Uuid == Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeFalse();
+    public void equal_operator_returns_false_for_different_values()
+    {
+        (Svo.Uuid == Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeFalse();
+    }
 
     [Test]
-    public void not_equal_operator_returns_false_for_same_values() => (Svo.Uuid != Uuid.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeFalse();
+    public void not_equal_operator_returns_false_for_same_values()
+    {
+        (Svo.Uuid != Uuid.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeFalse();
+    }
 
     [Test]
-    public void not_equal_operator_returns_true_for_different_values() => (Svo.Uuid != Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeTrue();
+    public void not_equal_operator_returns_true_for_different_values()
+    {
+        (Svo.Uuid != Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeTrue();
+    }
 
     [TestCase("", 0)]
     [TestCase("Qowaiv_SVOLibrary_GUIA", -994020281)]
@@ -88,10 +118,16 @@ public class Is_equal_by_value
 public class Can_be_parsed
 {
     [Test]
-    public void from_null_string_represents_Empty() => Uuid.Parse(null).Should().Be(Uuid.Empty);
+    public void from_null_string_represents_Empty()
+    {
+        Uuid.Parse(null).Should().Be(Uuid.Empty);
+    }
 
     [Test]
-    public void from_empty_string_represents_Empty() => Uuid.Parse(string.Empty).Should().Be(Uuid.Empty);
+    public void from_empty_string_represents_Empty()
+    {
+        Uuid.Parse(string.Empty).Should().Be(Uuid.Empty);
+    }
 
     public class from_GUID
     {
@@ -174,14 +210,20 @@ public class Can_be_parsed
     }
 
     [Test]
-    public void from_valid_input_only_otherwise_return_false_on_TryParse() => Uuid.TryParse("invalid input", out _).Should().BeFalse();
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+    {
+        Uuid.TryParse("invalid input", out _).Should().BeFalse();
+    }
 
     [Test]
     public void from_invalid_as_null_with_TryParse()
         => Uuid.TryParse("invalid input").Should().BeNull();
 
     [Test]
-    public void with_TryParse_returns_SVO() => Uuid.TryParse("Qowaiv_SVOLibrary_GUIA").Should().Be(Svo.Uuid);
+    public void with_TryParse_returns_SVO()
+    {
+        Uuid.TryParse("Qowaiv_SVOLibrary_GUIA").Should().Be(Svo.Uuid);
+    }
 }
 
 public class Can_not_be_parsed
@@ -335,7 +377,10 @@ public class Can_be_created_sequential
 public class Has_custom_formatting
 {
     [Test]
-    public void default_value_is_represented_as_string_empty() => default(Uuid).ToString().Should().Be(string.Empty);
+    public void default_value_is_represented_as_string_empty()
+    {
+        default(Uuid).ToString().Should().Be(string.Empty);
+    }
 
     [Test]
     public void custom_format_provider_is_applied()
@@ -380,7 +425,10 @@ public class Has_custom_formatting
 public class Is_comparable
 {
     [Test]
-    public void to_null_is_1() => Svo.Uuid.CompareTo(null).Should().Be(1);
+    public void to_null_is_1()
+    {
+        Svo.Uuid.CompareTo(null).Should().Be(1);
+    }
 
     [Test]
     public void to_Uuid_as_object()

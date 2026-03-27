@@ -20,9 +20,17 @@ public sealed class ThreadDomain
     /// <remarks>
     /// There is one domain per thread.
     /// </remarks>
-    [field: ThreadStatic]
     public static ThreadDomain Current
-        => field ??= new ThreadDomain();
+    {
+        get
+        {
+            s_Current ??= new ThreadDomain();
+            return s_Current;
+        }
+    }
+
+    [ThreadStatic]
+    private static ThreadDomain? s_Current;
 
     /// <summary>Registers a creator function for the type that can create
     /// an instance of type based on a thread.

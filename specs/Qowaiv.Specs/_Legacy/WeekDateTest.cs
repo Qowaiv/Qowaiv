@@ -10,7 +10,10 @@ public class WeekDateTest
 
     /// <summary>WeekDate.MinValue should be equal to the default of week date.</summary>
     [Test]
-    public void MinValue_None_EqualsDefault() => WeekDate.MinValue.Should().Be(default);
+    public void MinValue_None_EqualsDefault()
+    {
+        WeekDate.MinValue.Should().Be(default);
+    }
 
     #endregion
 
@@ -219,11 +222,17 @@ public class WeekDateTest
 
     /// <summary>GetHash should not fail for WeekDate.Empty.</summary>
     [Test]
-    public void GetHash_Empty_Hash() => WeekDate.MinValue.GetHashCode().Should().Be(0);
+    public void GetHash_Empty_Hash()
+    {
+        WeekDate.MinValue.GetHashCode().Should().Be(0);
+    }
 
     /// <summary>GetHash should not fail for the test struct.</summary>
     [Test]
-    public void GetHash_TestStruct_Hash() => TestStruct.GetHashCode().Should().Be(2027589483);
+    public void GetHash_TestStruct_Hash()
+    {
+        TestStruct.GetHashCode().Should().Be(2027589483);
+    }
 
     [Test]
     public void Equals_FormattedAndUnformatted_IsTrue()
@@ -235,22 +244,40 @@ public class WeekDateTest
     }
 
     [Test]
-    public void Equals_TestStructTestStruct_IsTrue() => TestStruct.Equals(TestStruct).Should().BeTrue();
+    public void Equals_TestStructTestStruct_IsTrue()
+    {
+        TestStruct.Equals(TestStruct).Should().BeTrue();
+    }
 
     [Test]
-    public void Equals_TestStructEmpty_IsFalse() => TestStruct.Equals(WeekDate.MinValue).Should().BeFalse();
+    public void Equals_TestStructEmpty_IsFalse()
+    {
+        TestStruct.Equals(WeekDate.MinValue).Should().BeFalse();
+    }
 
     [Test]
-    public void Equals_EmptyTestStruct_IsFalse() => WeekDate.MinValue.Equals(TestStruct).Should().BeFalse();
+    public void Equals_EmptyTestStruct_IsFalse()
+    {
+        WeekDate.MinValue.Equals(TestStruct).Should().BeFalse();
+    }
 
     [Test]
-    public void Equals_TestStructObjectTestStruct_IsTrue() => TestStruct.Equals((object)TestStruct).Should().BeTrue();
+    public void Equals_TestStructObjectTestStruct_IsTrue()
+    {
+        TestStruct.Equals((object)TestStruct).Should().BeTrue();
+    }
 
     [Test]
-    public void Equals_TestStructNull_IsFalse() => TestStruct.Equals(null).Should().BeFalse();
+    public void Equals_TestStructNull_IsFalse()
+    {
+        TestStruct.Equals(null).Should().BeFalse();
+    }
 
     [Test]
-    public void Equals_TestStructObject_IsFalse() => TestStruct.Equals(new object()).Should().BeFalse();
+    public void Equals_TestStructObject_IsFalse()
+    {
+        TestStruct.Equals(new object()).Should().BeFalse();
+    }
 
     [Test]
     public void OperatorIs_TestStructTestStruct_IsTrue()

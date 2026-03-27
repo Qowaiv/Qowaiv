@@ -13,7 +13,10 @@ public class LocalDateTimeTest
 
     /// <summary>LocalDateTime.MinValue should be equal to the default of local date time.</summary>
     [Test]
-    public void MinValue_None_EqualsDefault() => LocalDateTime.MinValue.Should().Be(default);
+    public void MinValue_None_EqualsDefault()
+    {
+        LocalDateTime.MinValue.Should().Be(default);
+    }
 
     #endregion
 

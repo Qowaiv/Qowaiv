@@ -10,7 +10,10 @@ public class BusinessIdentifierCodeTest
 
     /// <summary>BusinessIdentifierCode.Empty should be equal to the default of BIC.</summary>
     [Test]
-    public void Empty_None_EqualsDefault() => BusinessIdentifierCode.Empty.Should().Be(default);
+    public void Empty_None_EqualsDefault()
+    {
+        BusinessIdentifierCode.Empty.Should().Be(default);
+    }
 
     #endregion
 
@@ -18,33 +21,60 @@ public class BusinessIdentifierCodeTest
 
     /// <summary>BusinessIdentifierCode.IsEmpty() should be true for the default of BIC.</summary>
     [Test]
-    public void IsEmpty_Default_IsTrue() => default(BusinessIdentifierCode).IsEmpty().Should().BeTrue();
+    public void IsEmpty_Default_IsTrue()
+    {
+        default(BusinessIdentifierCode).IsEmpty().Should().BeTrue();
+    }
     /// <summary>BusinessIdentifierCode.IsEmpty() should be false for BusinessIdentifierCode.Unknown.</summary>
     [Test]
-    public void IsEmpty_Unknown_IsFalse() => BusinessIdentifierCode.Unknown.IsEmpty().Should().BeFalse();
+    public void IsEmpty_Unknown_IsFalse()
+    {
+        BusinessIdentifierCode.Unknown.IsEmpty().Should().BeFalse();
+    }
     /// <summary>BusinessIdentifierCode.IsEmpty() should be false for the TestStruct.</summary>
     [Test]
-    public void IsEmpty_TestStruct_IsFalse() => TestStruct.IsEmpty().Should().BeFalse();
+    public void IsEmpty_TestStruct_IsFalse()
+    {
+        TestStruct.IsEmpty().Should().BeFalse();
+    }
 
     /// <summary>BusinessIdentifierCode.IsUnknown() should be false for the default of BIC.</summary>
     [Test]
-    public void IsUnknown_Default_IsFalse() => default(BusinessIdentifierCode).IsUnknown().Should().BeFalse();
+    public void IsUnknown_Default_IsFalse()
+    {
+        default(BusinessIdentifierCode).IsUnknown().Should().BeFalse();
+    }
     /// <summary>BusinessIdentifierCode.IsUnknown() should be true for BusinessIdentifierCode.Unknown.</summary>
     [Test]
-    public void IsUnknown_Unknown_IsTrue() => BusinessIdentifierCode.Unknown.IsUnknown().Should().BeTrue();
+    public void IsUnknown_Unknown_IsTrue()
+    {
+        BusinessIdentifierCode.Unknown.IsUnknown().Should().BeTrue();
+    }
     /// <summary>BusinessIdentifierCode.IsUnknown() should be false for the TestStruct.</summary>
     [Test]
-    public void IsUnknown_TestStruct_IsFalse() => TestStruct.IsUnknown().Should().BeFalse();
+    public void IsUnknown_TestStruct_IsFalse()
+    {
+        TestStruct.IsUnknown().Should().BeFalse();
+    }
 
     /// <summary>BusinessIdentifierCode.IsEmptyOrUnknown() should be true for the default of BIC.</summary>
     [Test]
-    public void IsEmptyOrUnknown_Default_IsFalse() => default(BusinessIdentifierCode).IsEmptyOrUnknown().Should().BeTrue();
+    public void IsEmptyOrUnknown_Default_IsFalse()
+    {
+        default(BusinessIdentifierCode).IsEmptyOrUnknown().Should().BeTrue();
+    }
     /// <summary>BusinessIdentifierCode.IsEmptyOrUnknown() should be true for BusinessIdentifierCode.Unknown.</summary>
     [Test]
-    public void IsEmptyOrUnknown_Unknown_IsTrue() => BusinessIdentifierCode.Unknown.IsEmptyOrUnknown().Should().BeTrue();
+    public void IsEmptyOrUnknown_Unknown_IsTrue()
+    {
+        BusinessIdentifierCode.Unknown.IsEmptyOrUnknown().Should().BeTrue();
+    }
     /// <summary>BusinessIdentifierCode.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
     [Test]
-    public void IsEmptyOrUnknown_TestStruct_IsFalse() => TestStruct.IsEmptyOrUnknown().Should().BeFalse();
+    public void IsEmptyOrUnknown_TestStruct_IsFalse()
+    {
+        TestStruct.IsEmptyOrUnknown().Should().BeFalse();
+    }
 
     #endregion
 
@@ -273,7 +303,10 @@ public class BusinessIdentifierCodeTest
     #region IEquatable tests
 
     [Test]
-    public void Equals_EmptyEmpty_IsTrue() => BusinessIdentifierCode.Empty.Equals(BusinessIdentifierCode.Empty).Should().BeTrue();
+    public void Equals_EmptyEmpty_IsTrue()
+    {
+        BusinessIdentifierCode.Empty.Equals(BusinessIdentifierCode.Empty).Should().BeTrue();
+    }
 
     [Test]
     public void Equals_FormattedAndUnformatted_IsTrue()
@@ -285,22 +318,40 @@ public class BusinessIdentifierCodeTest
     }
 
     [Test]
-    public void Equals_TestStructTestStruct_IsTrue() => TestStruct.Equals(TestStruct).Should().BeTrue();
+    public void Equals_TestStructTestStruct_IsTrue()
+    {
+        TestStruct.Equals(TestStruct).Should().BeTrue();
+    }
 
     [Test]
-    public void Equals_TestStructEmpty_IsFalse() => TestStruct.Equals(BusinessIdentifierCode.Empty).Should().BeFalse();
+    public void Equals_TestStructEmpty_IsFalse()
+    {
+        TestStruct.Equals(BusinessIdentifierCode.Empty).Should().BeFalse();
+    }
 
     [Test]
-    public void Equals_EmptyTestStruct_IsFalse() => BusinessIdentifierCode.Empty.Equals(TestStruct).Should().BeFalse();
+    public void Equals_EmptyTestStruct_IsFalse()
+    {
+        BusinessIdentifierCode.Empty.Equals(TestStruct).Should().BeFalse();
+    }
 
     [Test]
-    public void Equals_TestStructObjectTestStruct_IsTrue() => TestStruct.Equals((object)TestStruct).Should().BeTrue();
+    public void Equals_TestStructObjectTestStruct_IsTrue()
+    {
+        TestStruct.Equals((object)TestStruct).Should().BeTrue();
+    }
 
     [Test]
-    public void Equals_TestStructNull_IsFalse() => TestStruct.Equals(null).Should().BeFalse();
+    public void Equals_TestStructNull_IsFalse()
+    {
+        TestStruct.Equals(null).Should().BeFalse();
+    }
 
     [Test]
-    public void Equals_TestStructObject_IsFalse() => TestStruct.Equals(new object()).Should().BeFalse();
+    public void Equals_TestStructObject_IsFalse()
+    {
+        TestStruct.Equals(new object()).Should().BeFalse();
+    }
 
     [Test]
     public void OperatorIs_TestStructTestStruct_IsTrue()

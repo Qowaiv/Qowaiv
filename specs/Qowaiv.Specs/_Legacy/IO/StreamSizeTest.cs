@@ -10,7 +10,10 @@ public class StreamSizeTest
 
     /// <summary>StreamSize.Empty should be equal to the default of stream size.</summary>
     [Test]
-    public void Empty_None_EqualsDefault() => StreamSize.Zero.Should().Be(default);
+    public void Empty_None_EqualsDefault()
+    {
+        StreamSize.Zero.Should().Be(default);
+    }
 
     #endregion
 

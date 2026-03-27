@@ -316,7 +316,7 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
         {
             foreach (var month in All)
             {
-                var m = (byte)(int)month;
+                var m = (byte)month;
                 var full = culture.DateTimeFormat.GetAbbreviatedMonthName(m).Unify();
                 var shrt = culture.DateTimeFormat.GetMonthName(m).Unify();
                 this[culture][full] = m;

@@ -11,13 +11,22 @@ public class HouseNumberTest
 
     /// <summary>HouseNumber.Empty should be equal to the default of house number.</summary>
     [Test]
-    public void Empty_None_EqualsDefault() => HouseNumber.Empty.Should().Be(default);
+    public void Empty_None_EqualsDefault()
+    {
+        HouseNumber.Empty.Should().Be(default);
+    }
 
     [Test]
-    public void MinValue_None_1() => HouseNumber.MinValue.Should().Be(HouseNumber.Create(1));
+    public void MinValue_None_1()
+    {
+        HouseNumber.MinValue.Should().Be(HouseNumber.Create(1));
+    }
 
     [Test]
-    public void MaxValue_None_999999999() => HouseNumber.MaxValue.Should().Be(HouseNumber.Create(999999999));
+    public void MaxValue_None_999999999()
+    {
+        HouseNumber.MaxValue.Should().Be(HouseNumber.Create(999999999));
+    }
 
     #endregion
 
@@ -25,33 +34,60 @@ public class HouseNumberTest
 
     /// <summary>HouseNumber.IsEmpty() should be true for the default of house number.</summary>
     [Test]
-    public void IsEmpty_Default_IsTrue() => default(HouseNumber).IsEmpty().Should().BeTrue();
+    public void IsEmpty_Default_IsTrue()
+    {
+        default(HouseNumber).IsEmpty().Should().BeTrue();
+    }
     /// <summary>HouseNumber.IsEmpty() should be false for HouseNumber.Unknown.</summary>
     [Test]
-    public void IsEmpty_Unknown_IsFalse() => HouseNumber.Unknown.IsEmpty().Should().BeFalse();
+    public void IsEmpty_Unknown_IsFalse()
+    {
+        HouseNumber.Unknown.IsEmpty().Should().BeFalse();
+    }
     /// <summary>HouseNumber.IsEmpty() should be false for the TestStruct.</summary>
     [Test]
-    public void IsEmpty_TestStruct_IsFalse() => TestStruct.IsEmpty().Should().BeFalse();
+    public void IsEmpty_TestStruct_IsFalse()
+    {
+        TestStruct.IsEmpty().Should().BeFalse();
+    }
 
     /// <summary>HouseNumber.IsUnknown() should be false for the default of house number.</summary>
     [Test]
-    public void IsUnknown_Default_IsFalse() => default(HouseNumber).IsUnknown().Should().BeFalse();
+    public void IsUnknown_Default_IsFalse()
+    {
+        default(HouseNumber).IsUnknown().Should().BeFalse();
+    }
     /// <summary>HouseNumber.IsUnknown() should be true for HouseNumber.Unknown.</summary>
     [Test]
-    public void IsUnknown_Unknown_IsTrue() => HouseNumber.Unknown.IsUnknown().Should().BeTrue();
+    public void IsUnknown_Unknown_IsTrue()
+    {
+        HouseNumber.Unknown.IsUnknown().Should().BeTrue();
+    }
     /// <summary>HouseNumber.IsUnknown() should be false for the TestStruct.</summary>
     [Test]
-    public void IsUnknown_TestStruct_IsFalse() => TestStruct.IsUnknown().Should().BeFalse();
+    public void IsUnknown_TestStruct_IsFalse()
+    {
+        TestStruct.IsUnknown().Should().BeFalse();
+    }
 
     /// <summary>HouseNumber.IsEmptyOrUnknown() should be true for the default of house number.</summary>
     [Test]
-    public void IsEmptyOrUnknown_Default_IsFalse() => default(HouseNumber).IsEmptyOrUnknown().Should().BeTrue();
+    public void IsEmptyOrUnknown_Default_IsFalse()
+    {
+        default(HouseNumber).IsEmptyOrUnknown().Should().BeTrue();
+    }
     /// <summary>HouseNumber.IsEmptyOrUnknown() should be true for HouseNumber.Unknown.</summary>
     [Test]
-    public void IsEmptyOrUnknown_Unknown_IsTrue() => HouseNumber.Unknown.IsEmptyOrUnknown().Should().BeTrue();
+    public void IsEmptyOrUnknown_Unknown_IsTrue()
+    {
+        HouseNumber.Unknown.IsEmptyOrUnknown().Should().BeTrue();
+    }
     /// <summary>HouseNumber.IsEmptyOrUnknown() should be false for the TestStruct.</summary>
     [Test]
-    public void IsEmptyOrUnknown_TestStruct_IsFalse() => TestStruct.IsEmptyOrUnknown().Should().BeFalse();
+    public void IsEmptyOrUnknown_TestStruct_IsFalse()
+    {
+        TestStruct.IsEmptyOrUnknown().Should().BeFalse();
+    }
 
     #endregion
 
@@ -472,25 +508,46 @@ public class HouseNumberTest
     #region Properties
 
     [Test]
-    public void IsOdd_Empty_IsFalse() => HouseNumber.Empty.IsOdd.Should().BeFalse();
+    public void IsOdd_Empty_IsFalse()
+    {
+        HouseNumber.Empty.IsOdd.Should().BeFalse();
+    }
 
     [Test]
-    public void IsOdd_Unknown_IsFalse() => HouseNumber.Unknown.IsOdd.Should().BeFalse();
+    public void IsOdd_Unknown_IsFalse()
+    {
+        HouseNumber.Unknown.IsOdd.Should().BeFalse();
+    }
 
     [Test]
-    public void IsOdd_TestStruct_IsTrue() => TestStruct.IsOdd.Should().BeTrue();
+    public void IsOdd_TestStruct_IsTrue()
+    {
+        TestStruct.IsOdd.Should().BeTrue();
+    }
 
     [Test]
-    public void IsEven_Empty_IsFalse() => HouseNumber.Empty.IsEven.Should().BeFalse();
+    public void IsEven_Empty_IsFalse()
+    {
+        HouseNumber.Empty.IsEven.Should().BeFalse();
+    }
 
     [Test]
-    public void IsEven_Unknown_IsFalse() => HouseNumber.Unknown.IsEven.Should().BeFalse();
+    public void IsEven_Unknown_IsFalse()
+    {
+        HouseNumber.Unknown.IsEven.Should().BeFalse();
+    }
 
     [Test]
-    public void IsEven_TestStruct_IsFalse() => TestStruct.IsEven.Should().BeFalse();
+    public void IsEven_TestStruct_IsFalse()
+    {
+        TestStruct.IsEven.Should().BeFalse();
+    }
 
     [Test]
-    public void IsEven_1234_IsTrue() => HouseNumber.Create(1234).IsEven.Should().BeTrue();
+    public void IsEven_1234_IsTrue()
+    {
+        HouseNumber.Create(1234).IsEven.Should().BeTrue();
+    }
 
 
     [Test]

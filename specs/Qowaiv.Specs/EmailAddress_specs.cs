@@ -76,28 +76,52 @@ public class Has_constant
 public class Is_equal_by_value
 {
     [Test]
-    public void not_equal_to_null() => Svo.EmailAddress.Equals(null).Should().BeFalse();
+    public void not_equal_to_null()
+    {
+        Svo.EmailAddress.Equals(null).Should().BeFalse();
+    }
 
     [Test]
-    public void not_equal_to_other_type() => Svo.EmailAddress.Equals(new object()).Should().BeFalse();
+    public void not_equal_to_other_type()
+    {
+        Svo.EmailAddress.Equals(new object()).Should().BeFalse();
+    }
 
     [Test]
-    public void not_equal_to_different_value() => Svo.EmailAddress.Equals(EmailAddress.Parse("no_spam@qowaiv.org")).Should().BeFalse();
+    public void not_equal_to_different_value()
+    {
+        Svo.EmailAddress.Equals(EmailAddress.Parse("no_spam@qowaiv.org")).Should().BeFalse();
+    }
 
     [Test]
-    public void equal_to_same_value() => Svo.EmailAddress.Equals(EmailAddress.Parse("info@qowaiv.org")).Should().BeTrue();
+    public void equal_to_same_value()
+    {
+        Svo.EmailAddress.Equals(EmailAddress.Parse("info@qowaiv.org")).Should().BeTrue();
+    }
 
     [Test]
-    public void equal_operator_returns_true_for_same_values() => (Svo.EmailAddress == EmailAddress.Parse("info@qowaiv.org")).Should().BeTrue();
+    public void equal_operator_returns_true_for_same_values()
+    {
+        (Svo.EmailAddress == EmailAddress.Parse("info@qowaiv.org")).Should().BeTrue();
+    }
 
     [Test]
-    public void equal_operator_returns_false_for_different_values() => (Svo.EmailAddress == EmailAddress.Parse("no_spam@qowaiv.org")).Should().BeFalse();
+    public void equal_operator_returns_false_for_different_values()
+    {
+        (Svo.EmailAddress == EmailAddress.Parse("no_spam@qowaiv.org")).Should().BeFalse();
+    }
 
     [Test]
-    public void not_equal_operator_returns_false_for_same_values() => (Svo.EmailAddress != EmailAddress.Parse("info@qowaiv.org")).Should().BeFalse();
+    public void not_equal_operator_returns_false_for_same_values()
+    {
+        (Svo.EmailAddress != EmailAddress.Parse("info@qowaiv.org")).Should().BeFalse();
+    }
 
     [Test]
-    public void not_equal_operator_returns_true_for_different_values() => (Svo.EmailAddress != EmailAddress.Parse("no_spam@qowaiv.org")).Should().BeTrue();
+    public void not_equal_operator_returns_true_for_different_values()
+    {
+        (Svo.EmailAddress != EmailAddress.Parse("no_spam@qowaiv.org")).Should().BeTrue();
+    }
 
     [TestCase("", 0)]
     [TestCase("info@qowaiv.org", 798543550)]
@@ -153,14 +177,20 @@ public class Can_be_parsed
     }
 
     [Test]
-    public void from_valid_input_only_otherwise_return_false_on_TryParse() => EmailAddress.TryParse("invalid input", out _).Should().BeFalse();
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+    {
+        EmailAddress.TryParse("invalid input", out _).Should().BeFalse();
+    }
 
     [Test]
     public void from_invalid_as_null_with_TryParse()
         => EmailAddress.TryParse("invalid input").Should().BeNull();
 
     [Test]
-    public void with_TryParse_returns_SVO() => EmailAddress.TryParse("info@qowaiv.org").Should().Be(Svo.EmailAddress);
+    public void with_TryParse_returns_SVO()
+    {
+        EmailAddress.TryParse("info@qowaiv.org").Should().Be(Svo.EmailAddress);
+    }
 }
 
 public class Has_custom_formatting
@@ -193,10 +223,16 @@ public class Has_custom_formatting
     }
 
     [Test]
-    public void default_value_is_represented_as_string_empty() => default(EmailAddress).ToString().Should().Be(string.Empty);
+    public void default_value_is_represented_as_string_empty()
+    {
+        default(EmailAddress).ToString().Should().Be(string.Empty);
+    }
 
     [Test]
-    public void unknown_value_is_represented_as_unknown() => EmailAddress.Unknown.ToString().Should().Be("?");
+    public void unknown_value_is_represented_as_unknown()
+    {
+        EmailAddress.Unknown.ToString().Should().Be("?");
+    }
 
     [Test]
     public void custom_format_provider_is_applied()
@@ -328,11 +364,14 @@ public class Supports_JSON_serialization
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
     [Test]
-    public void System_Text_JSON_deserialization_of_dictionary_keys() => System.Text.Json.JsonSerializer.Deserialize<Dictionary<EmailAddress, int>>(@"{""info@qowaiv.org"":42}")
+    public void System_Text_JSON_deserialization_of_dictionary_keys()
+    {
+        System.Text.Json.JsonSerializer.Deserialize<Dictionary<EmailAddress, int>>(@"{""info@qowaiv.org"":42}")
             .Should().BeEquivalentTo(new Dictionary<EmailAddress, int>()
             {
                 [Svo.EmailAddress] = 42,
             });
+    }
 
     [Test]
     public void System_Text_JSON_serialization_of_dictionary_keys()

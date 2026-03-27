@@ -26,7 +26,10 @@ public class Has_constant
 public class Create
 {
     [Test]
-    public void returns_null_for_non_representable_values() => EvenOnlyId.TryCreate(17).Should().Be(null);
+    public void returns_null_for_non_representable_values()
+    {
+        EvenOnlyId.TryCreate(17).Should().Be(null);
+    }
 }
 
 public class Is_equal_by_value
@@ -204,9 +207,12 @@ public class Supports_JSON_serialization
     [TestCase(17)]
     [TestCase("17")]
     [TestCase(int.MaxValue + 1L)]
-    public void taking_constrains_into_account(object json) => json.Invoking(j => JsonTester.Read_System_Text_JSON<Specs_Generated.EvenOnlyId>(j))
+    public void taking_constrains_into_account(object json)
+    {
+        json.Invoking(j => JsonTester.Read_System_Text_JSON<Specs_Generated.EvenOnlyId>(j))
             .Should().Throw<System.Text.Json.JsonException>()
             .WithMessage("Not a valid EvenOnlyId");
+    }
 }
 #endif
 

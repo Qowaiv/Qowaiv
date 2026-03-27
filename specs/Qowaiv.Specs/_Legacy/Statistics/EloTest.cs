@@ -10,11 +10,20 @@ namespace Qowaiv.UnitTests.Statistics
 
         /// <summary>Elo.Zero should be equal to the default of Elo.</summary>
         [Test]
-        public void Zero_None_EqualsDefault() => Elo.Zero.Should().Be(default);
+        public void Zero_None_EqualsDefault()
+        {
+            Elo.Zero.Should().Be(default);
+        }
         [Test]
-        public void MinValue_None_DoubleMinValue() => Elo.MinValue.Should().Be((Elo)double.MinValue);
+        public void MinValue_None_DoubleMinValue()
+        {
+            Elo.MinValue.Should().Be((Elo)double.MinValue);
+        }
         [Test]
-        public void MaxValue_None_DoubleMaxValue() => Elo.MaxValue.Should().Be((Elo)double.MaxValue);
+        public void MaxValue_None_DoubleMaxValue()
+        {
+            Elo.MaxValue.Should().Be((Elo)double.MaxValue);
+        }
 
         #endregion
 

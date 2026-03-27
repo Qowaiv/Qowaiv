@@ -22,18 +22,11 @@ internal static partial class Email
         return new Parser(str, buffer, 0).Email().Result;
     }
 
-    private ref struct Parser
+    private ref struct Parser(ReadOnlySpan<char> input, Span<char> buffer, int length)
     {
-        public Parser(ReadOnlySpan<char> input, Span<char> buffer, int length)
-        {
-            Input = input;
-            Buffer = buffer;
-            Length = length;
-        }
-
-        private readonly ReadOnlySpan<char> Input;
-        private readonly Span<char> Buffer;
-        private readonly int Length;
+        private readonly ReadOnlySpan<char> Input = input;
+        private readonly Span<char> Buffer = buffer;
+        private readonly int Length = length;
 
         private readonly bool Success => Length != NoMatch;
 

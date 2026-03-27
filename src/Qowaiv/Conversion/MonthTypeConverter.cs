@@ -6,7 +6,7 @@ public class MonthTypeConverter : NumericTypeConverter<Month, byte>
 {
     /// <inheritdoc />
     [Pure]
-    protected override Month FromRaw(byte raw) => Month.Create((raw == 0) ? null : (int?)raw);
+    protected override Month FromRaw(byte raw) => Month.Create((raw == 0) ? null : raw);
 
     /// <inheritdoc />
     [Pure]
@@ -14,5 +14,5 @@ public class MonthTypeConverter : NumericTypeConverter<Month, byte>
 
     /// <inheritdoc />
     [Pure]
-    protected override byte ToRaw(Month svo) => (byte)svo;
+    protected override byte ToRaw(Month svo) => (byte)(int)svo;
 }

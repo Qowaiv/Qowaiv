@@ -47,7 +47,8 @@ public static class Clock
     {
         get => localContextTimeZone.Value ?? field;
         private set;
-    } = TimeZoneInfo.Local;
+    }
+    = TimeZoneInfo.Local;
 
     /// <summary>Gets the current <see cref="DateTimeOffset" />.</summary>
     [Pure]

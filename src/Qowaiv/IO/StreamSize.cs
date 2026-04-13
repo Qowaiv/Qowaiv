@@ -613,7 +613,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
             {
                 sizeDecimal *= factor;
 
-                if (sizeDecimal <= long.MaxValue && sizeDecimal >= long.MinValue)
+                if (sizeDecimal is <= long.MaxValue and >= long.MinValue)
                 {
                     result = new StreamSize((long)sizeDecimal);
                     return true;

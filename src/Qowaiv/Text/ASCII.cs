@@ -13,7 +13,7 @@ internal static class ASCII
 
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsDigit(char c) => c >= '0' && c <= '9';
+    public static bool IsDigit(char c) => c is >= '0' and <= '9';
 
     /// <summary>Returns the digit value of the char.</summary>
     /// <remarks>

@@ -41,7 +41,7 @@ internal static class DecimalMath
     {
         Guard.DefinedEnum(mode);
 
-        if ((decimals < -28) || (decimals > 28))
+        if (decimals is < -28 or > 28)
         {
             throw new ArgumentOutOfRangeException(nameof(decimals), QowaivMessages.ArgumentOutOfRange_DecimalRound);
         }

@@ -36,7 +36,7 @@ public readonly partial struct EnergyLabel : IXmlSerializable, IEquatable<Energy
     /// The total of '+'s [0, 4].
     /// </param>
     [Pure]
-    public static EnergyLabel A(int plusses = 0) => plusses < 0 || plusses > MaxPlusses
+    public static EnergyLabel A(int plusses = 0) => plusses is < 0 or > MaxPlusses
         ? throw new ArgumentOutOfRangeException(nameof(plusses), QowaivMessages.FormatExceptionEnergyLabel)
         : new(7 + plusses);
 
@@ -199,7 +199,7 @@ public readonly partial struct EnergyLabel : IXmlSerializable, IEquatable<Energy
             result = Unknown;
             return true;
         }
-        else if (str[0] >= 'A' && str[0] <= 'G')
+        else if (str[0] is >= 'A' and <= 'G')
         {
             var value = 'H' - str[0];
 

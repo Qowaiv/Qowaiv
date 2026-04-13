@@ -23,7 +23,7 @@ public static class QowaivType
     public static bool IsNumeric(Type objectType)
     {
         var code = Type.GetTypeCode(GetNotNullableType(objectType));
-        return code >= TypeCode.SByte && code <= TypeCode.Decimal;
+        return code is >= TypeCode.SByte and <= TypeCode.Decimal;
     }
 
 #if NET8_0_OR_GREATER

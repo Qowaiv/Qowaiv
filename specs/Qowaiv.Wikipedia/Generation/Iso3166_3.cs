@@ -14,7 +14,7 @@ public sealed record Iso3166_3(string DisplayName, string Iso2, string Iso3, int
         {
             var name = entry.Substring(entry.IndexOf(@"id=""") + 4, 4);
 
-            if (name.Any(c => c < 'A' || c > 'Z')) continue;
+            if (name.Any(c => c is < 'A' or > 'Z')) continue;
 
             var display = WikiLink.Parse(entry).First().Display;
 

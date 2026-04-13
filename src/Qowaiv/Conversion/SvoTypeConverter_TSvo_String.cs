@@ -19,7 +19,7 @@ public abstract class SvoTypeConverter<TSvo> : TypeConverter
     /// <inheritdoc />
     [Pure]
     public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
-        => value is null || value is string
+        => value is null or string
         ? FromString(value as string, culture)
         : base.ConvertFrom(context, culture, value);
 

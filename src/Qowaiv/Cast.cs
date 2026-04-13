@@ -60,24 +60,24 @@ internal static class Cast
     /// <summary>Casts a <see cref="double" /> to <see cref="int" /> for the SVO.</summary>
     [Pure]
     public static int ToInt<TSvo>(double value)
-        => value < int.MinValue
-        || value > int.MaxValue
+        => value is < int.MinValue
+        or > int.MaxValue
         ? throw Exceptions.InvalidCast<long, TSvo>()
         : (int)value;
 
     /// <summary>Casts a <see cref="decimal" /> to <see cref="int" /> for the SVO.</summary>
     [Pure]
     public static int ToInt<TSvo>(decimal value)
-        => value < int.MinValue
-        || value > int.MaxValue
+        => value is < int.MinValue
+        or > int.MaxValue
         ? throw Exceptions.InvalidCast<long, TSvo>()
         : (int)value;
 
     /// <summary>Casts a <see cref="long" /> to <see cref="int" /> for the SVO.</summary>
     [Pure]
     public static int ToInt<TSvo>(long value)
-        => value < int.MinValue
-        || value > int.MaxValue
+        => value is < int.MinValue
+        or > int.MaxValue
         ? throw Exceptions.InvalidCast<long, TSvo>()
         : (int)value;
 }

@@ -182,7 +182,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
                     if (pos == len) FormatError();
                     ch = format[pos];
                 }
-                if (ch < '0' || ch > '9') FormatError();
+                if (ch is < '0' or > '9') FormatError();
                 do
                 {
                     width = (width * 10) + ch - '0';

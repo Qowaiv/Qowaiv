@@ -12,7 +12,7 @@ internal static class GuidParser
         guid = Guid.Empty;
 
         // Wrong length.
-        if (s.Length < 22 || s.Length > 24) return false;
+        if (s.Length is < 22 or > 24) return false;
 
         // Invalid suffix.
         for (var i = 22; i < s.Length; i++) { if (s[i] != '=') return false; }

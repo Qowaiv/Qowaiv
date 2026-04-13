@@ -169,7 +169,7 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     /// </exception>
     [Pure]
     public Percentage Round(int decimals, DecimalRounding mode)
-        => decimals >= -26 && decimals <= 26
+        => decimals is >= -26 and <= 26
         ? new(m_Value.Round(decimals + 2, mode))
         : throw new ArgumentOutOfRangeException(nameof(decimals), QowaivMessages.ArgumentOutOfRange_PercentageRound);
 

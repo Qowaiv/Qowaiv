@@ -404,9 +404,12 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     /// </param>
     [Pure]
     public static Fraction Create(double number)
-        => number < (double)decimal.MinValue || number > (double)decimal.MaxValue
+        => number is < Decimal_MinValue or > Decimal_MaxValue
         ? throw new ArgumentOutOfRangeException(nameof(number), QowaivMessages.OverflowException_Fraction)
         : Create((decimal)number, MinimumError);
+
+    private const double Decimal_MinValue = (double)decimal.MinValue;
+    private const double Decimal_MaxValue = (double)decimal.MaxValue;
 
     /// <summary>Creates a fraction based on a <see cref="long" />.</summary>
     /// <param name="number">
@@ -476,7 +479,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
             {
                 throw new ArgumentOutOfRangeException(nameof(numerator), QowaivMessages.OverflowException_Fraction);
             }
-            if (denominator == 0 || denominator == long.MinValue)
+            if (denominator is 0 or long.MinValue)
             {
                 throw new ArgumentOutOfRangeException(nameof(denominator), QowaivMessages.OverflowException_Fraction);
             }

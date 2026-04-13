@@ -102,9 +102,9 @@ public class WildcardPattern
 
     /// <summary>Returns true if the case should be ignored, otherwise false.</summary>
     protected bool IgnoreCase
-        => ComparisonType == StringComparison.CurrentCultureIgnoreCase
-        || ComparisonType == StringComparison.InvariantCultureIgnoreCase
-        || ComparisonType == StringComparison.OrdinalIgnoreCase;
+        => ComparisonType is StringComparison.CurrentCultureIgnoreCase
+        or StringComparison.InvariantCultureIgnoreCase
+        or StringComparison.OrdinalIgnoreCase;
 
     /// <summary>Indicates whether the wildcard pattern finds a match in the specified input string.</summary>
     /// <param name="input">

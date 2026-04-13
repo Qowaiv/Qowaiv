@@ -112,7 +112,7 @@ public readonly partial struct PostalCode : IXmlSerializable, IFormattable, IEqu
             result = Unknown;
             return true;
         }
-        else if (str.Length >= 2 && str.Length <= 10)
+        else if (str.Length is >= 2 and <= 10)
         {
             result = new PostalCode(str);
             return true;

@@ -127,7 +127,7 @@ public readonly partial struct CasRegistryNumber : IXmlSerializable, IFormattabl
     {
         result = default;
         if (val == 0) return true;
-        else if (val >= 10_000 && val <= 9_999_999_999)
+        else if (val is >= 10_000 and <= 9_999_999_999)
         {
             var checksum = val % 10;
             var buffer = val / 10;

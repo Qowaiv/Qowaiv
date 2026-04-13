@@ -45,12 +45,12 @@ public sealed class CodeSnippet : Code
                 enabled = Enabled(@if, constants);
                 mode = Mode.@if;
             }
-            else if (Matches(mode, nr, line, "#elif", Patterns.ElIf, m => m != Mode.@if && m != Mode.elif, out var elif))
+            else if (Matches(mode, nr, line, "#elif", Patterns.ElIf, m => m is not Mode.@if and not Mode.elif, out var elif))
             {
                 enabled = !enabled && Enabled(elif, constants);
                 mode = Mode.elif;
             }
-            else if (Matches(mode, nr, line, "#else", Patterns.Else, m => m != Mode.@if && m != Mode.elif, out _))
+            else if (Matches(mode, nr, line, "#else", Patterns.Else, m => m is not Mode.@if and not Mode.elif, out _))
             {
                 enabled = !enabled;
                 mode = Mode.@else;

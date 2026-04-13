@@ -1,11 +1,54 @@
-using Qowaiv.Financial;
-
 namespace Financial.Money_specs;
 
 public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.Money.CompareTo(Nil.Object).Should().Be(1);
+}
+
+public class Is_equal_by_value
+{
+    [Test]
+    public void not_equal_to_null()
+        => Svo.Money.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.Money.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.Money.Equals(42 + Currency.EUR).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.Money.Equals(42.17 + Currency.EUR).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (Svo.Money == 42.17 + Currency.EUR).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (Svo.Money == 42 + Currency.USD).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (Svo.Money != 42.17 + Currency.EUR).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (Svo.Money != 42.17 + Currency.USD).Should().BeTrue();
+
+    [TestCase("USD 0.00", 931756561)]
+    [TestCase("EUR 42.00", -943833957)]
+    public void hash_code_is_value_based(Money svo, int hash)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hash);
+        }
+    }
 }
 
 public class Can_be_parsed
@@ -145,7 +188,7 @@ public class Throws_when
     public void adding_multiple_zero_currencies()
     {
         var euros = 0 + Currency.EUR;
-        var dollars = 0+ Currency.USD;
+        var dollars = 0 + Currency.USD;
         var operation = () => euros + dollars;
 
         operation.Should().Throw<CurrencyMismatchException>()

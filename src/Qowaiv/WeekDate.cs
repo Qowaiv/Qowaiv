@@ -288,7 +288,7 @@ public readonly partial struct WeekDate : IXmlSerializable, IFormattable, IEquat
     [Pure]
     private static Date Create(int year, int week, int day) => (year, week, day) switch
     {
-        (< 1 or > 9999, _, _) => throw new ArgumentOutOfRangeException(nameof(year), "Year should be in range [1,9999]."),
+        ( < 1 or > 9999, _, _) => throw new ArgumentOutOfRangeException(nameof(year), "Year should be in range [1,9999]."),
         (_, < 1 or > 53, _) => throw new ArgumentOutOfRangeException(nameof(week), "Week should be in range [1,53]."),
         (_, _, < 1 or > DaysPerWeek) => throw new ArgumentOutOfRangeException(nameof(day), "Day should be in range [1,7]."),
         _ when TryCreate(year, week, day, out Date dt) => dt,

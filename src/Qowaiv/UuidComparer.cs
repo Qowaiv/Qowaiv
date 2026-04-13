@@ -34,7 +34,7 @@ public abstract class UuidComparer : IComparer<Uuid>, IComparer<Guid>, IComparer
             (null, null) => 0,
             var (gx, gy) => Compare(gx, gy),
         };
-        
+
         static Guid? Cast(object? obj) => obj switch
         {
             null => default,

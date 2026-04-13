@@ -1,8 +1,14 @@
 namespace Qowaiv;
 
 /// <summary>Describes a single value object as intended at the Domain Driven Design context.</summary>
+/// <param name="staticOptions">
+/// The available static options of the single value object.
+/// </param>
+/// <param name="underlyingType">
+/// The underlying type of the single value object.
+/// </param>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false, Inherited = true)]
-public sealed class SingleValueObjectAttribute : Attribute
+public sealed class SingleValueObjectAttribute(SingleValueStaticOptions staticOptions, Type underlyingType) : Attribute
 {
     /// <summary>Initializes a new instance of the <see cref="SingleValueObjectAttribute" /> class.</summary>
     /// <remarks>
@@ -11,24 +17,11 @@ public sealed class SingleValueObjectAttribute : Attribute
     [ExcludeFromCodeCoverage]
     private SingleValueObjectAttribute() : this(default, typeof(object)) { }
 
-    /// <summary>Initializes a new instance of the <see cref="SingleValueObjectAttribute" /> class.</summary>
-    /// <param name="staticOptions">
-    /// The available static options of the single value object.
-    /// </param>
-    /// <param name="underlyingType">
-    /// The underlying type of the single value object.
-    /// </param>
-    public SingleValueObjectAttribute(SingleValueStaticOptions staticOptions, Type underlyingType)
-    {
-        StaticOptions = staticOptions;
-        UnderlyingType = underlyingType;
-    }
-
     /// <summary>The available static options of the single value object.</summary>
-    public SingleValueStaticOptions StaticOptions { get; }
+    public SingleValueStaticOptions StaticOptions { get; } = staticOptions;
 
     /// <summary>The underlying type of the single value object.</summary>
-    public Type UnderlyingType { get; }
+    public Type UnderlyingType { get; } = underlyingType;
 
     /// <summary>Gets and set the database type.</summary>
     /// <remarks>

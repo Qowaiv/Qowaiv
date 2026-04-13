@@ -4,26 +4,19 @@ using System.IO;
 namespace Qowaiv.CodeGeneration;
 
 /// <summary>Writer to generate C# code.</summary>
-public sealed class CSharpWriter
+public sealed class CSharpWriter(TextWriter writer, CSharpWriterSettings? settings)
 {
     /// <summary>UTF-8 BOM.</summary>
     public static readonly Encoding Encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
 
     /// <summary>The C# writer settings.</summary>
-    public CSharpWriterSettings Settings { get; }
+    public CSharpWriterSettings Settings { get; } = settings ?? new();
 
-    private readonly TextWriter Writer;
+    private readonly TextWriter Writer = Guard.NotNull(writer);
     private int Indentation;
 
     /// <summary>Initializes a new instance of the <see cref="CSharpWriter"/> class.</summary>
     public CSharpWriter(TextWriter writer) : this(writer, null) { }
-
-    /// <summary>Initializes a new instance of the <see cref="CSharpWriter"/> class.</summary>
-    public CSharpWriter(TextWriter writer, CSharpWriterSettings? settings)
-    {
-        Writer = Guard.NotNull(writer);
-        Settings = settings ?? new();
-    }
 
     /// <summary>Writes a character to the code file.</summary>
     [FluentSyntax]

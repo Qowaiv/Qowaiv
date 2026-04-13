@@ -90,7 +90,7 @@ public sealed record OpenApiDataType
     [Pure]
     public bool Matches(string? str)
         => Pattern is null
-        || Regex.IsMatch(str!, '^' + Pattern + '$', RegexOptions.None, RegOptions.Timeout);
+        || (str is { Length: > 0 } && Regex.IsMatch(str, '^' + Pattern + '$', RegexOptions.None, RegOptions.Timeout));
 
     /// <summary>
     /// Creates an <see cref="OpenApiDataType" /> based on a type, null if not

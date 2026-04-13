@@ -40,7 +40,7 @@ public static class Unknown
                     if (!Strings.TryGetValue(c, out values))
                     {
                         values = [.. ResourceManager
-                            .GetString("Values", c)!
+                            .GetString("Values", c)
                             .Split(';')
                             .Select(v => v.ToUpper(c))];
                         Strings[c] = values;

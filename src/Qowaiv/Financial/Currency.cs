@@ -281,16 +281,8 @@ public readonly partial struct Currency : IXmlSerializable, IFormattable, IForma
 
     /// <remarks>This is done so that it will be available when called by another initialization.</remarks>
     private static ResourceManager ResourceManager
-    {
-        get
-        {
-            rm ??= new("Qowaiv.Financial.CurrencyLabels", typeof(Currency).Assembly);
-            return rm;
-        }
-    }
-
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private static ResourceManager? rm;
+        => field
+        ??= new("Qowaiv.Financial.CurrencyLabels", typeof(Currency).Assembly);
 
     /// <summary>Get resource string.</summary>
     /// <param name="postfix">

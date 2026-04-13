@@ -58,7 +58,7 @@ public class Is_decorated_with : SingleValueObjectSpecs
 
     [TestCaseSource(nameof(AllSvosExceptGeneric))]
     public void Open_API_data_type(Type svo)
-        => svo.Should().BeDecoratedWith<Qowaiv.OpenApi.OpenApiDataTypeAttribute>();
+        => svo.Should().BeDecoratedWith<OpenApiDataTypeAttribute>();
 
 #if NET8_0_OR_GREATER
     [TestCaseSource(nameof(AllSvos))]

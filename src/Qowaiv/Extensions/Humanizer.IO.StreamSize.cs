@@ -1,6 +1,6 @@
 namespace Qowaiv.IO;
 
-/// <summary>Extensions to create <see cref="IO.StreamSize" />s, inspired by Humanizer.NET.</summary>
+/// <summary>Extensions to create <see cref="StreamSize" />s, inspired by Humanizer.NET.</summary>
 public static class NumberToStreamSizeExtensions
 {
     /// <summary>Creates a <see cref="StreamSize" /> as bytes.</summary>

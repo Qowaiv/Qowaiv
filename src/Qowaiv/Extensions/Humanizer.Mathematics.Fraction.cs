@@ -11,11 +11,11 @@ public static class NumberToFractionExtensions
     [Pure]
     public static Fraction DividedBy(this long numerator, long denominator) => new(numerator, denominator);
 
-    /// <summary>Converts the <see cref="decimal" /> to a <see cref="Qowaiv.Mathematics.Fraction" />.</summary>
+    /// <summary>Converts the <see cref="decimal" /> to a <see cref="Mathematics.Fraction" />.</summary>
     [Pure]
     public static Fraction Fraction(this decimal number) => Qowaiv.Mathematics.Fraction.Create(number);
 
-    /// <summary>Converts the <see cref="double" /> to a <see cref="Qowaiv.Mathematics.Fraction" />.</summary>
+    /// <summary>Converts the <see cref="double" /> to a <see cref="Mathematics.Fraction" />.</summary>
     [Pure]
     public static Fraction Fraction(this double number) => Qowaiv.Mathematics.Fraction.Create(number);
 }

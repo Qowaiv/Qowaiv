@@ -27,26 +27,22 @@ public class Supports_System_Text_JSON_serialization
 
     [Test]
     public void Dictionary_deserialization()
-    {
-        JsonSerializer.Deserialize<Dictionary<CultureInfo, int>>("""{"en-GB":100,"es-EC":200}""", Options())
+        => JsonSerializer.Deserialize<Dictionary<CultureInfo, int>>("""{"en-GB":100,"es-EC":200}""", Options())
             .Should().BeEquivalentTo(new Dictionary<CultureInfo, int>
             {
                 [TestCultures.en_GB] = 100,
                 [TestCultures.es_EC] = 200,
             });
-    }
 
     [Test]
     public void Dictionary_serialization()
-    {
-        JsonSerializer.Serialize(new Dictionary<CultureInfo, int>
+        => JsonSerializer.Serialize(new Dictionary<CultureInfo, int>
         {
             [TestCultures.en_GB] = 100,
             [TestCultures.es_EC] = 200,
         },
         Options())
             .Should().Be("""{"en-GB":100,"es-EC":200}""");
-    }
 
     private static JsonSerializerOptions Options()
     {

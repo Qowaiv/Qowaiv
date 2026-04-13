@@ -213,10 +213,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// than date.MaxValue.
     /// </exception>
     [Pure]
-    public LocalDateTime Add(TimeSpan value)
-    {
-        return new LocalDateTime(m_Value.Ticks + value.Ticks);
-    }
+    public LocalDateTime Add(TimeSpan value) => new LocalDateTime(m_Value.Ticks + value.Ticks);
 
     /// <summary>Returns a new local date time that adds the value of the specified <see cref="DateSpan" />
     /// to the value of this instance.
@@ -292,10 +289,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// The result is less than date.MinValue or greater than date.MaxValue.
     /// </exception>
     [Pure]
-    public TimeSpan Subtract(LocalDateTime value)
-    {
-        return new TimeSpan(this.Ticks - value.Ticks);
-    }
+    public TimeSpan Subtract(LocalDateTime value) => new TimeSpan(this.Ticks - value.Ticks);
 
     /// <summary>Subtracts the specified duration from this instance.</summary>
     /// <param name="value">
@@ -309,10 +303,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// The result is less than date.MinValue or greater than date.MaxValue.
     /// </exception>
     [Pure]
-    public LocalDateTime Subtract(TimeSpan value)
-    {
-        return new LocalDateTime(this.Ticks - value.Ticks);
-    }
+    public LocalDateTime Subtract(TimeSpan value) => new LocalDateTime(this.Ticks - value.Ticks);
 
     /// <summary>Returns a new local date time that adds the specified number of years to
     /// the value of this instance.
@@ -330,10 +321,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// or greater than date.MaxValue.
     /// </exception>
     [Pure]
-    public LocalDateTime AddYears(int value)
-    {
-        return new LocalDateTime(m_Value.AddYears(value));
-    }
+    public LocalDateTime AddYears(int value) => new LocalDateTime(m_Value.AddYears(value));
 
     /// <summary>Returns a new local date time that adds the specified number of months to
     /// the value of this instance.
@@ -351,10 +339,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// than 120,000.
     /// </exception>
     [Pure]
-    public LocalDateTime AddMonths(int months)
-    {
-        return new LocalDateTime(m_Value.AddMonths(months));
-    }
+    public LocalDateTime AddMonths(int months) => new LocalDateTime(m_Value.AddMonths(months));
 
     /// <summary>Returns a new local date time that adds the specified number of days to the
     /// value of this instance.
@@ -372,10 +357,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// than date.MaxValue.
     /// </exception>
     [Pure]
-    public LocalDateTime AddDays(double value)
-    {
-        return new LocalDateTime(m_Value.AddDays(value));
-    }
+    public LocalDateTime AddDays(double value) => new LocalDateTime(m_Value.AddDays(value));
 
     /// <summary>Returns a new local date time that adds the specified number of ticks to
     /// the value of this instance.
@@ -393,10 +375,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// than date.MaxValue.
     /// </exception>
     [Pure]
-    public LocalDateTime AddTicks(long value)
-    {
-        return new LocalDateTime(Ticks + value);
-    }
+    public LocalDateTime AddTicks(long value) => new LocalDateTime(Ticks + value);
 
     /// <summary>Returns a new local date time that adds the specified number of hours to
     /// the value of this instance.
@@ -414,10 +393,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// than date.MaxValue.
     /// </exception>
     [Pure]
-    public LocalDateTime AddHours(double value)
-    {
-        return new LocalDateTime(m_Value.AddHours(value));
-    }
+    public LocalDateTime AddHours(double value) => new LocalDateTime(m_Value.AddHours(value));
 
     /// <summary>Returns a new local date time that adds the specified number of minutes to
     /// the value of this instance.
@@ -435,10 +411,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// than date.MaxValue.
     /// </exception>
     [Pure]
-    public LocalDateTime AddMinutes(double value)
-    {
-        return new LocalDateTime(m_Value.AddMinutes(value));
-    }
+    public LocalDateTime AddMinutes(double value) => new LocalDateTime(m_Value.AddMinutes(value));
 
     /// <summary>Returns a new local date time that adds the specified number of seconds to
     /// the value of this instance.
@@ -456,10 +429,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// than date.MaxValue.
     /// </exception>
     [Pure]
-    public LocalDateTime AddSeconds(double value)
-    {
-        return new LocalDateTime(m_Value.AddSeconds(value));
-    }
+    public LocalDateTime AddSeconds(double value) => new LocalDateTime(m_Value.AddSeconds(value));
 
     /// <summary>Returns a new local date time that adds the specified number of milliseconds
     /// to the value of this instance.
@@ -477,10 +447,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// than date.MaxValue.
     /// </exception>
     [Pure]
-    public LocalDateTime AddMilliseconds(double value)
-    {
-        return new LocalDateTime(m_Value.AddMilliseconds(value));
-    }
+    public LocalDateTime AddMilliseconds(double value) => new LocalDateTime(m_Value.AddMilliseconds(value));
 
     /// <summary>Returns true if the local date time is in the specified month, otherwise false.</summary>
     /// <param name="month">
@@ -583,9 +550,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     public static bool TryParse(string? s, IFormatProvider? provider, out LocalDateTime result)
-    {
-        return TryParse(s, provider, DateTimeStyles.None, out result);
-    }
+        => TryParse(s, provider, DateTimeStyles.None, out result);
 
     /// <summary>Converts the string to a local date time.
     /// A return value indicates whether the conversion succeeded.

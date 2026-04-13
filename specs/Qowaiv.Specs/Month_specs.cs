@@ -339,16 +339,16 @@ public class Is_comparable
 public class Casts
 {
     [Test]
-    public void explicitly_from_byte()
+    public void explicitly_from_int()
     {
         var casted = (Month)2;
         casted.Should().Be(Svo.Month);
     }
 
     [Test]
-    public void explicitly_to_byte()
+    public void explicitly_to_int()
     {
-        var casted = (byte)Svo.Month;
+        var casted = (int)Svo.Month;
         casted.Should().Be(2);
     }
 }

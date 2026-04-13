@@ -31,15 +31,15 @@ public abstract class UuidComparer : IComparer<Uuid>, IComparer<Guid>, IComparer
         {
             ({ }, null) => +1,
             (null, { }) => -1,
-            (null, null) => 0,
-            var (gx, gy) => Compare(gx, gy),
+            (Guid gx, Guid gy) => Compare(gx, gy),
+            _ => 0,
         };
 
         static Guid? Cast(object? obj) => obj switch
         {
-            null => default,
+            null => null,
             Guid guid => guid,
-            Uuid uuid => uuid,
+            Uuid uuid => (Guid)uuid,
             _ => throw new NotSupportedException("Both arguments must be GUID/UUID."),
         };
     }

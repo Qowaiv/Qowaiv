@@ -66,18 +66,16 @@ public sealed partial class PostalCodeCountryInfo
     /// for the country.
     /// </remarks>
     [Pure]
-    public string Format(string postalcode)
+    public string Format(string postalcode) => FormattingSearchPattern switch
     {
-        if (FormattingSearchPattern is { } && IsValid(postalcode))
-        {
-            return FormattingSearchPattern.Replace(postalcode, FormattingReplacePattern ?? string.Empty);
-        }
-        else if (Unknown.IsUnknown(postalcode, CultureInfo.InvariantCulture))
-        {
-            return "?";
-        }
-        else return postalcode ?? string.Empty;
-    }
+        { } when IsValid(postalcode)
+            => FormattingSearchPattern.Replace(postalcode, FormattingReplacePattern ?? string.Empty),
+
+        _ when Unknown.IsUnknown(postalcode, CultureInfo.InvariantCulture)
+            => "?",
+
+        _ => postalcode ?? string.Empty,
+    };
 
     /// <summary>Gets the single value if supported, otherwise string.Empty.</summary>
     [Pure]

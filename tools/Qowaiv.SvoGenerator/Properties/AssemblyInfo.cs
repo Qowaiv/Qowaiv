@@ -1,1 +1,1 @@
-[assembly:ExcludeFromCodeCoverage]
+[assembly: ExcludeFromCodeCoverage]

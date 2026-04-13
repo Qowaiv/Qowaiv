@@ -1,6 +1,6 @@
 namespace Qowaiv.TestTools;
 
-/// <summary>Type converter builder to apply <see cref="TypeConverter.ConvertTo(object, System.Type)" />.</summary>
+/// <summary>Type converter builder to apply <see cref="TypeConverter.ConvertTo(object, Type)" />.</summary>
 public sealed class ConvertTo<To> : ConvertTo
 {
     internal ConvertTo() : base(typeof(To)) { }

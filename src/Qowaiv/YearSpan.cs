@@ -4,7 +4,7 @@ namespace Qowaiv;
 [DebuggerDisplay("{DebuggerDisplay}")]
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(int))]
 [OpenApiDataType(description: "Year span", type: "int", format: "year-span", example: 17)]
-[TypeConverter(typeof(Conversion.YearSpanTypeConverter))]
+[TypeConverter(typeof(YearSpanTypeConverter))]
 #if NET6_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.YearSpanJsonConverter))]
 #endif

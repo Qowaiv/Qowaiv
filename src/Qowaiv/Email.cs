@@ -22,18 +22,11 @@ internal static partial class Email
         return new Parser(str, buffer, 0).Email().Result;
     }
 
-    private ref struct Parser
+    private readonly ref struct Parser(ReadOnlySpan<char> input, Span<char> buffer, int length)
     {
-        public Parser(ReadOnlySpan<char> input, Span<char> buffer, int length)
-        {
-            Input = input;
-            Buffer = buffer;
-            Length = length;
-        }
-
-        private readonly ReadOnlySpan<char> Input;
-        private readonly Span<char> Buffer;
-        private readonly int Length;
+        private readonly ReadOnlySpan<char> Input = input;
+        private readonly Span<char> Buffer = buffer;
+        private readonly int Length = length;
 
         private readonly bool Success => Length != NoMatch;
 
@@ -145,14 +138,12 @@ internal static partial class Email
         {
             if (Failure) return None();
 
-            var length = QuoteLength();
+            var len = QuoteLength();
 
-            if (length.IsInRange(3, PartLength) &&
-                Next(length - 1, length) is { Ch: At } next)
-            {
-                return new(Input[(next.Index + 1)..], Buffer, next.Length);
-            }
-            else return None();
+            return len.IsInRange(3, PartLength)
+                && Next(len - 1, len) is { Ch: At } next
+                ? new(Input[(next.Index + 1)..], Buffer, next.Length)
+                : None();
         }
 
         [Pure]
@@ -166,14 +157,14 @@ internal static partial class Email
         {
             if (Failure) return None();
 
-            var (ch, index, length) = Next(-1, Length);
+            var (ch, index, len) = Next(-1, Length);
             char prev = default;
             var part = 0;
 
             while (part < PartLength && index < Input.Length)
             {
                 part++;
-                if (length > TotalLength) return None();
+                if (len > TotalLength) return None();
                 else if (Is.Domain(ch)) { /* Continue. */ }
                 else if (ch is Dot)
                 {
@@ -187,14 +178,14 @@ internal static partial class Email
                 else return None();
 
                 prev = ch;
-                (ch, index, length) = Next(index, length);
+                (ch, index, len) = Next(index, len);
             }
-            var result = Buffer[..length];
+            var result = Buffer[..len];
             var last = result[^part..];
             return prev is not Dot and not Dash
                 && part < PartLength
                 && Is.FinalPart(last)
-                ? new(Input, result, length)
+                ? new(Input, result, len)
                 : None();
         }
 
@@ -214,20 +205,20 @@ internal static partial class Email
 
             var isIp6 = Input.StartsWith("IPV6:".AsSpan(), StringComparison.OrdinalIgnoreCase);
             var dots = 0;
-            var length = Length;
-            Buffer[length++] = '[';
+            var len = Length;
+            Buffer[len++] = '[';
 
-            var (ch, index, len) = Next(isIp6 ? 4 : -1, length);
+            var (ch, index, ipLen) = Next(isIp6 ? 4 : -1, len);
 
             // Strip comments
             while (index < Input.Length)
             {
                 dots += ch is Dot ? 1 : 0;
-                (ch, index, len) = Next(index, len);
-                if (len is NoMatch or TotalLength) return None();
+                (ch, index, ipLen) = Next(index, ipLen);
+                if (ipLen is NoMatch or TotalLength) return None();
             }
 
-            var str = Buffer[length..len].ToString();
+            var str = Buffer[len..ipLen].ToString();
 
             if (IPAddress.TryParse(str, out var ip) && IsValid(ip))
             {
@@ -237,12 +228,12 @@ internal static partial class Email
 
                 for (var i = 0; i < str.Length; i++)
                 {
-                    Buffer[length++] = str[i];
+                    Buffer[len++] = str[i];
                 }
-                length = Length + str.Length + 1;
-                Buffer[length++] = ']';
+                len = Length + str.Length + 1;
+                Buffer[len++] = ']';
 
-                return new(Input, Buffer[..length], length);
+                return new(Input, Buffer[..len], len);
             }
             else return None();
 

@@ -10,20 +10,11 @@ namespace Qowaiv.UnitTests.Statistics
 
         /// <summary>Elo.Zero should be equal to the default of Elo.</summary>
         [Test]
-        public void Zero_None_EqualsDefault()
-        {
-            Elo.Zero.Should().Be(default);
-        }
+        public void Zero_None_EqualsDefault() => Elo.Zero.Should().Be(default);
         [Test]
-        public void MinValue_None_DoubleMinValue()
-        {
-            Elo.MinValue.Should().Be((Elo)double.MinValue);
-        }
+        public void MinValue_None_DoubleMinValue() => Elo.MinValue.Should().Be((Elo)double.MinValue);
         [Test]
-        public void MaxValue_None_DoubleMaxValue()
-        {
-            Elo.MaxValue.Should().Be((Elo)double.MaxValue);
-        }
+        public void MaxValue_None_DoubleMaxValue() => Elo.MaxValue.Should().Be((Elo)double.MaxValue);
 
         #endregion
 
@@ -71,8 +62,8 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
-            var input = EloTest.TestStruct;
-            var exp = EloTest.TestStruct;
+            var input = TestStruct;
+            var exp = TestStruct;
             var act = SerializeDeserialize.DataContract(input);
             act.Should().Be(exp);
         }
@@ -98,13 +89,13 @@ namespace Qowaiv.UnitTests.Statistics
             var input = new EloSerializeObject
             {
                 Id = 17,
-                Obj = EloTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var exp = new EloSerializeObject
             {
                 Id = 17,
-                Obj = EloTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var act = SerializeDeserialize.Xml(input);
@@ -118,13 +109,13 @@ namespace Qowaiv.UnitTests.Statistics
             var input = new EloSerializeObject
             {
                 Id = 17,
-                Obj = EloTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var exp = new EloSerializeObject
             {
                 Id = 17,
-                Obj = EloTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var act = SerializeDeserialize.DataContract(input);

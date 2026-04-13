@@ -18,25 +18,19 @@ public class YesNoTypeConverter : SvoTypeConverter<YesNo>
 
     /// <inheritdoc/>
     [Pure]
-    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
+    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value) => value switch
     {
-        if (value is bool boolean)
-        {
-            return (YesNo)boolean;
-        }
-        else return base.ConvertFrom(context, culture, value);
-    }
+        null => YesNo.Empty,
+        bool boolean => (YesNo)boolean,
+        _ => base.ConvertFrom(context, culture, value),
+    };
 
     /// <inheritdoc/>
     [Pure]
     public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
-    {
-        if (destinationType == typeof(bool) && value is YesNo yesNo)
-        {
-            return (bool)yesNo;
-        }
-        else return base.ConvertTo(context, culture, value, destinationType);
-    }
+        => destinationType == typeof(bool) && value is YesNo yesNo
+        ? (bool)yesNo
+        : base.ConvertTo(context, culture, value, destinationType);
 
     /// <inheritdoc/>
     [Pure]

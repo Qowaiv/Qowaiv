@@ -180,11 +180,9 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     {
         var totalDays = (months * DaysPerMonth) + days;
 
-        if (IsOutOfRange(months, days, totalDays))
-        {
-            throw new OverflowException(QowaivMessages.OverflowException_DateSpan);
-        }
-        return new DateSpan(AsUInt64(months, days));
+        return IsOutOfRange(months, days, totalDays)
+            ? throw new OverflowException(QowaivMessages.OverflowException_DateSpan)
+            : new DateSpan(AsUInt64(months, days));
     }
 
     /// <summary>Deserializes the date span from a JSON number.</summary>
@@ -311,16 +309,12 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     /// Returns a date span describing the duration between <paramref name="d1" /> and <paramref name="d2" />.
     /// </returns>
     [Pure]
-    public static DateSpan Subtract(Date d1, Date d2, DateSpanSettings settings)
+    public static DateSpan Subtract(Date d1, Date d2, DateSpanSettings settings) => settings switch
     {
-        if (settings.HasFlag(DateSpanSettings.DaysOnly))
-        {
-            return FromDays((int)(d1 - d2).TotalDays);
-        }
-        else return d1 < d2
-            ? Subtraction(d2, d1, settings).Negate()
-            : Subtraction(d1, d2, settings);
-    }
+        _ when settings.HasFlag(DateSpanSettings.DaysOnly) => FromDays((int)(d1 - d2).TotalDays),
+        _ when d1 < d2 => Subtraction(d2, d1, settings).Negate(),
+        _ => Subtraction(d1, d2, settings),
+    };
 
     [Pure]
     private static DateSpan Subtraction(Date max, Date min, DateSpanSettings settings)

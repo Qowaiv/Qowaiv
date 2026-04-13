@@ -286,22 +286,12 @@ public readonly partial struct WeekDate : IXmlSerializable, IFormattable, IEquat
     }
 
     [Pure]
-    private static Date Create(int year, int week, int day)
+    private static Date Create(int year, int week, int day) => (year, week, day) switch
     {
-        if (year < 1 || year > 9999)
-        {
-            throw new ArgumentOutOfRangeException(nameof(year), "Year should be in range [1,9999].");
-        }
-        if (week < 1 || week > 53)
-        {
-            throw new ArgumentOutOfRangeException(nameof(week), "Week should be in range [1,53].");
-        }
-        if (day < 1 || day > DaysPerWeek)
-        {
-            throw new ArgumentOutOfRangeException(nameof(day), "Day should be in range [1,7].");
-        }
-        return TryCreate(year, week, day, out Date dt)
-            ? dt
-            : throw new ArgumentOutOfRangeException("Year, Week, and Day parameters describe an un-representable Date.", (Exception?)null);
-    }
+        ( < 1 or > 9999, _, _) => throw new ArgumentOutOfRangeException(nameof(year), "Year should be in range [1,9999]."),
+        (_, < 1 or > 53, _) => throw new ArgumentOutOfRangeException(nameof(week), "Week should be in range [1,53]."),
+        (_, _, < 1 or > DaysPerWeek) => throw new ArgumentOutOfRangeException(nameof(day), "Day should be in range [1,7]."),
+        _ when TryCreate(year, week, day, out Date dt) => dt,
+        _ => throw new ArgumentOutOfRangeException("Year, Week, and Day parameters describe an un-representable Date.", (Exception?)null),
+    };
 }

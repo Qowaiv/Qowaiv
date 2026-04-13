@@ -261,16 +261,10 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
     }
 
     [Pure]
-    private static int Create(int year, int month)
+    private static int Create(int year, int month) => (year, month) switch
     {
-        if (year < 1 || year > 9999)
-        {
-            throw new ArgumentOutOfRangeException(nameof(year), QowaivMessages.ArgumentOutOfRange_YearMonth);
-        }
-        if (month < 1 || month > 12)
-        {
-            throw new ArgumentOutOfRangeException(nameof(month), QowaivMessages.ArgumentOutOfRange_YearMonth);
-        }
-        return ((year - 1) * MonthsPerYear) + month - 1;
-    }
+        (< 1 or > 9999, _) => throw new ArgumentOutOfRangeException(nameof(year), QowaivMessages.ArgumentOutOfRange_YearMonth),
+        (_, < 1 or > 12) => throw new ArgumentOutOfRangeException(nameof(month), QowaivMessages.ArgumentOutOfRange_YearMonth),
+        _ => ((year - 1) * MonthsPerYear) + month - 1,
+    };
 }

@@ -8,10 +8,7 @@ public class With_domain_logic
 
     [TestCase(false, "Qowaiv_SVOLibrary_GUIA")]
     [TestCase(true, "")]
-    public void IsEmpty_returns(bool result, Uuid svo)
-    {
-        svo.IsEmpty().Should().Be(result);
-    }
+    public void IsEmpty_returns(bool result, Uuid svo) => svo.IsEmpty().Should().Be(result);
 }
 
 public class Has_version
@@ -49,60 +46,42 @@ public class Has_constant
 {
     [Test]
     public void Empty_represent_default_value()
-    {
-        Uuid.Empty.Should().Be(default);
-    }
+        => Uuid.Empty.Should().Be(default);
 }
 
 public class Is_equal_by_value
 {
     [Test]
     public void not_equal_to_null()
-    {
-        Svo.Uuid.Equals(null).Should().BeFalse();
-    }
+        => Svo.Uuid.Equals(null).Should().BeFalse();
 
     [Test]
     public void not_equal_to_other_type()
-    {
-        Svo.Uuid.Equals(new object()).Should().BeFalse();
-    }
+        => Svo.Uuid.Equals(new object()).Should().BeFalse();
 
     [Test]
     public void not_equal_to_different_value()
-    {
-        Svo.Uuid.Equals(Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeFalse();
-    }
+        => Svo.Uuid.Equals(Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeFalse();
 
     [Test]
     public void equal_to_same_value()
-    {
-        Svo.Uuid.Equals(Uuid.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeTrue();
-    }
+        => Svo.Uuid.Equals(Uuid.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
-    {
-        (Svo.Uuid == Uuid.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeTrue();
-    }
+        => (Svo.Uuid == Uuid.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
-    {
-        (Svo.Uuid == Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeFalse();
-    }
+        => (Svo.Uuid == Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
-    {
-        (Svo.Uuid != Uuid.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeFalse();
-    }
+        => (Svo.Uuid != Uuid.Parse("Qowaiv_SVOLibrary_GUIA")).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
-    {
-        (Svo.Uuid != Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeTrue();
-    }
+        => (Svo.Uuid != Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeTrue();
 
     [TestCase("", 0)]
     [TestCase("Qowaiv_SVOLibrary_GUIA", -994020281)]
@@ -119,15 +98,11 @@ public class Can_be_parsed
 {
     [Test]
     public void from_null_string_represents_Empty()
-    {
-        Uuid.Parse(null).Should().Be(Uuid.Empty);
-    }
+        => Uuid.Parse(null).Should().Be(Uuid.Empty);
 
     [Test]
     public void from_empty_string_represents_Empty()
-    {
-        Uuid.Parse(string.Empty).Should().Be(Uuid.Empty);
-    }
+        => Uuid.Parse(string.Empty).Should().Be(Uuid.Empty);
 
     public class from_GUID
     {
@@ -211,9 +186,7 @@ public class Can_be_parsed
 
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
-    {
-        Uuid.TryParse("invalid input", out _).Should().BeFalse();
-    }
+        => Uuid.TryParse("invalid input", out _).Should().BeFalse();
 
     [Test]
     public void from_invalid_as_null_with_TryParse()
@@ -221,9 +194,7 @@ public class Can_be_parsed
 
     [Test]
     public void with_TryParse_returns_SVO()
-    {
-        Uuid.TryParse("Qowaiv_SVOLibrary_GUIA").Should().Be(Svo.Uuid);
-    }
+        => Uuid.TryParse("Qowaiv_SVOLibrary_GUIA").Should().Be(Svo.Uuid);
 }
 
 public class Can_not_be_parsed
@@ -263,7 +234,8 @@ public class Can_be_created_sequential
     [Test]
     public void from_1_Jan_1970_on()
     {
-        using (Clock.SetTimeForCurrentContext(() => DateTime.UnixEpoch.AddTicks(-1)))
+        using (Clock.SetTimeForCurrentContext(()
+        => DateTime.UnixEpoch.AddTicks(-1)))
         {
             Func<Uuid> next = Uuid.NewSequential;
             next.Should().Throw<InvalidOperationException>();
@@ -273,7 +245,8 @@ public class Can_be_created_sequential
     [Test]
     public void until_3_Dec_9276()
     {
-        using (Clock.SetTimeForCurrentContext(() => new DateTime(9276, 12, 04, 00, 00, 000, DateTimeKind.Utc)))
+        using (Clock.SetTimeForCurrentContext(()
+        => new DateTime(9276, 12, 04, 00, 00, 000, DateTimeKind.Utc)))
         {
             Func<Uuid> next = Uuid.NewSequential;
             next.Should().Throw<InvalidOperationException>();
@@ -283,7 +256,8 @@ public class Can_be_created_sequential
     [Test]
     public void on_min_Date_first_6_bytes_are_0_for_default()
     {
-        using (Clock.SetTimeForCurrentContext(() => DateTime.UnixEpoch))
+        using (Clock.SetTimeForCurrentContext(()
+        => DateTime.UnixEpoch))
         {
             Uuid.NewSequential().Should().HavePattern(
                 0, 0, 0, 0,
@@ -296,7 +270,8 @@ public class Can_be_created_sequential
     [Test]
     public void on_min_Date_last_6_bytes_are_0_for_SQL_Server()
     {
-        using (Clock.SetTimeForCurrentContext(() => DateTime.UnixEpoch))
+        using (Clock.SetTimeForCurrentContext(()
+        => DateTime.UnixEpoch))
         {
             Uuid.NewSequential(UuidComparer.SqlServer).Should().HavePattern(
                 null, null, null, null,
@@ -309,7 +284,8 @@ public class Can_be_created_sequential
     [Test]
     public void on_max_Date_first_6_bytes_are_255_for_default()
     {
-        using (Clock.SetTimeForCurrentContext(() => MaxDate))
+        using (Clock.SetTimeForCurrentContext(()
+        => MaxDate))
         {
             Uuid.NewSequential().Should().HavePattern(
                 0xFF, 0xFF, 0xFF, 0xFF,
@@ -322,7 +298,8 @@ public class Can_be_created_sequential
     [Test]
     public void on_max_Date_last_6_bytes_are_255_for_SQL_Server()
     {
-        using (Clock.SetTimeForCurrentContext(() => MaxDate))
+        using (Clock.SetTimeForCurrentContext(()
+        => MaxDate))
         {
             Uuid.NewSequential(UuidComparer.SqlServer).Should().HavePattern(
                 null, null, null, null,
@@ -333,13 +310,16 @@ public class Can_be_created_sequential
     }
 
     [Test]
-    public void is_sorted_for_default() => AssertIsSorted(UuidComparer.Default);
+    public void is_sorted_for_default()
+        => AssertIsSorted(UuidComparer.Default);
 
     [Test]
-    public void is_sorted_for_MongoDb() => AssertIsSorted(UuidComparer.MongoDb);
+    public void is_sorted_for_MongoDb()
+        => AssertIsSorted(UuidComparer.MongoDb);
 
     [Test]
-    public void is_sorted_for_SQL_Server() => AssertIsSorted(UuidComparer.SqlServer);
+    public void is_sorted_for_SQL_Server()
+        => AssertIsSorted(UuidComparer.SqlServer);
 
     private const int MultipleCount = 10000;
 
@@ -351,7 +331,8 @@ public class Can_be_created_sequential
 
         foreach (var date in GetTimes().Take(MultipleCount))
         {
-            using (Clock.SetTimeForCurrentContext(() => date))
+            using (Clock.SetTimeForCurrentContext(()
+        => date))
             {
                 ids.Add(Uuid.NewSequential(comparer));
             }
@@ -378,9 +359,7 @@ public class Has_custom_formatting
 {
     [Test]
     public void default_value_is_represented_as_string_empty()
-    {
-        default(Uuid).ToString().Should().Be(string.Empty);
-    }
+        => default(Uuid).ToString().Should().Be(string.Empty);
 
     [Test]
     public void custom_format_provider_is_applied()
@@ -426,9 +405,7 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1()
-    {
-        Svo.Uuid.CompareTo(null).Should().Be(1);
-    }
+        => Svo.Uuid.CompareTo(null).Should().Be(1);
 
     [Test]
     public void to_Uuid_as_object()

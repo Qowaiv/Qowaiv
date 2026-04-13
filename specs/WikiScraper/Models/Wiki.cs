@@ -14,7 +14,7 @@ public static class Wiki
         var mode = FormattingMode.None;
 
 
-        for(var i = 0; i < text.Length; i++)
+        for (var i = 0; i < text.Length; i++)
         {
             var ch = text[i];
 
@@ -22,7 +22,7 @@ public static class Wiki
             {
                 if (ch == '>') mode = FormattingMode.None;
             }
-            else if(mode is FormattingMode.Lemma)
+            else if (mode is FormattingMode.Lemma)
             {
                 if (ch is '}' && text[i - 1] is '}')
                 {

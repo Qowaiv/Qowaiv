@@ -45,12 +45,12 @@ public sealed class CodeSnippet : Code
                 enabled = Enabled(@if, constants);
                 mode = Mode.@if;
             }
-            else if (Matches(mode, nr, line, "#elif", Patterns.ElIf, m => m != Mode.@if && m != Mode.elif, out var elif))
+            else if (Matches(mode, nr, line, "#elif", Patterns.ElIf, m => m is not Mode.@if and not Mode.elif, out var elif))
             {
                 enabled = !enabled && Enabled(elif, constants);
                 mode = Mode.elif;
             }
-            else if (Matches(mode, nr, line, "#else", Patterns.Else, m => m != Mode.@if && m != Mode.elif, out _))
+            else if (Matches(mode, nr, line, "#else", Patterns.Else, m => m is not Mode.@if and not Mode.elif, out _))
             {
                 enabled = !enabled;
                 mode = Mode.@else;
@@ -66,12 +66,9 @@ public sealed class CodeSnippet : Code
             }
         }
 
-        if (mode != Mode.None)
-        {
-            throw ParseError.Line(nr, Lines[^1], "Missing closing #endif statement.");
-        }
-
-        return new([.. lines]);
+        return mode == Mode.None
+            ? new([.. lines])
+            : throw ParseError.Line(nr, Lines[^1], "Missing closing #endif statement.");
 
         static bool Enabled(Match match, IReadOnlyCollection<Constant> constants)
         {

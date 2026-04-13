@@ -2,20 +2,20 @@ namespace Diagnostics.Contracts.Conditional_specs;
 
 public class Is_decorated_with
 {
-    [TestCase(typeof(Qowaiv.Diagnostics.Contracts.CollectionMutationAttribute))]
-    [TestCase(typeof(Qowaiv.Diagnostics.Contracts.FluentSyntaxAttribute))]
-    [TestCase(typeof(Qowaiv.Diagnostics.Contracts.ImpureAttribute))]
-    [TestCase(typeof(Qowaiv.Diagnostics.Contracts.InheritableAttribute))]
-    [TestCase(typeof(Qowaiv.Diagnostics.Contracts.MutableAttribute))]
-    [TestCase(typeof(Qowaiv.Diagnostics.Contracts.EmptyTypeAttribute))]
-    [TestCase(typeof(Qowaiv.Diagnostics.Contracts.EmptyClassAttribute))]
-    [TestCase(typeof(Qowaiv.Diagnostics.Contracts.EmptyEnumAttribute))]
-    [TestCase(typeof(Qowaiv.Diagnostics.Contracts.EmptyInterfaceAttribute))]
-    [TestCase(typeof(Qowaiv.Diagnostics.Contracts.EmptyStructAttribute))]
-    [TestCase(typeof(Qowaiv.Diagnostics.Contracts.EmptyTestClassAttribute))]
-    [TestCase(typeof(Qowaiv.Diagnostics.Contracts.EmptyTestEnumAttribute))]
-    [TestCase(typeof(Qowaiv.Diagnostics.Contracts.EmptyTestInterfaceAttribute))]
-    [TestCase(typeof(Qowaiv.Diagnostics.Contracts.EmptyTestStructAttribute))]
+    [TestCase(typeof(CollectionMutationAttribute))]
+    [TestCase(typeof(FluentSyntaxAttribute))]
+    [TestCase(typeof(ImpureAttribute))]
+    [TestCase(typeof(InheritableAttribute))]
+    [TestCase(typeof(MutableAttribute))]
+    [TestCase(typeof(EmptyTypeAttribute))]
+    [TestCase(typeof(EmptyClassAttribute))]
+    [TestCase(typeof(EmptyEnumAttribute))]
+    [TestCase(typeof(EmptyInterfaceAttribute))]
+    [TestCase(typeof(EmptyStructAttribute))]
+    [TestCase(typeof(EmptyTestClassAttribute))]
+    [TestCase(typeof(EmptyTestEnumAttribute))]
+    [TestCase(typeof(EmptyTestInterfaceAttribute))]
+    [TestCase(typeof(EmptyTestStructAttribute))]
     public void condtional_CONTRACTS_FULL(Type attribute)
         => attribute.Should().BeDecoratedWith<ConditionalAttribute>()
             .Which.ConditionString.Should().Be("CONTRACTS_FULL");

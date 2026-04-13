@@ -118,7 +118,7 @@ public class Created_from
     public void IO_Directory_info()
     {
         using var temp = new TemporaryDirectory();
-        DirectoryInfo dir = temp!;
+        DirectoryInfo dir = temp;
 
         for (var i = 0; i < 10; i++)
         {

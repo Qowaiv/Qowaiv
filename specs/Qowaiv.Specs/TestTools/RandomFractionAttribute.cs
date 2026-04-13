@@ -2,6 +2,7 @@ using NUnit.Framework.Interfaces;
 using NUnit.Framework.Internal;
 
 namespace Qowaiv.Specs.TestTools;
+
 [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
 public sealed class RandomFractionAttribute(int count, bool includeZero = false) : NUnitAttribute, IParameterDataSource
 {

@@ -8,11 +8,12 @@ internal static class DebugDisplay
 
     [Pure]
     public static string DebuggerDisplay<TSvo>(this TSvo svo, string format) where TSvo : struct, IFormattable
+    => svo switch
     {
-        if (svo.Equals(default(TSvo)) && HasEmptyValue<TSvo>()) return Empty;
-        else if (svo.Equals(Qowaiv.Unknown.Value(typeof(TSvo)))) return Unknown;
-        else return string.Format(CultureInfo.InvariantCulture, format, svo);
-    }
+        _ when svo.Equals(default(TSvo)) && HasEmptyValue<TSvo>() => Empty,
+        _ when svo.Equals(Qowaiv.Unknown.Value(typeof(TSvo))) => Unknown,
+        _ => string.Format(CultureInfo.InvariantCulture, format, svo),
+    };
 
     [Pure]
     private static bool HasEmptyValue<TSvo>() => typeof(TSvo)

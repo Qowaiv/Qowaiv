@@ -9,8 +9,8 @@ public static class TestCultures
     [Pure]
     public static CultureInfo Select(string name)
         => typeof(TestCultures).GetProperties(BindingFlags.Public | BindingFlags.Static)
-        .Select(prop => (CultureInfo)prop.GetValue(null)!)
-        .FirstOrDefault(culture => culture.Name == name) ?? new CultureInfo(name);
+        .Select(prop => (CultureInfo?)prop.GetValue(null))
+        .FirstOrDefault(culture => culture?.Name == name) ?? new(name);
 
     /// <summary>Gets the Arabic (ar) <see cref="CultureInfo" />.</summary>
     public static CultureInfo ar => new("ar");
@@ -112,7 +112,7 @@ public static class TestCultures
     public static CultureInfo WithPercentageSymbols(this CultureInfo? culture, string percentSymbol, string perMilleSymbol)
     {
         culture ??= CultureInfo.CurrentCulture;
-        var info = (NumberFormatInfo)culture.NumberFormat.Clone()!;
+        var info = (NumberFormatInfo)culture.NumberFormat.Clone();
         var custom = new CultureInfo(culture.Name);
         info.PercentSymbol = percentSymbol;
         info.PerMilleSymbol = perMilleSymbol;

@@ -103,7 +103,7 @@ public sealed partial record IbanInfo
         + $"| {Official,-4:f} "
         + $"| {NoBreak(Example),-41} |";
 
-    static string NoBreak(string s) => s.Replace(' ', (char)160);
+    private static string NoBreak(string s) => s.Replace(' ', (char)160);
 
     public static IEnumerable<IbanInfo> Parse(string content)
     {

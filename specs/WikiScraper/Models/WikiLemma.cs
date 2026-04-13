@@ -18,10 +18,7 @@ public sealed record WikiLemma
         }
     }
 
-    private static string ToFile(string lemma)
-    {
-        return lemma.Replace(":", "_");
-    }
+    private static string ToFile(string lemma) => lemma.Replace(":", "_");
 
     public string Title { get; }
 

@@ -11,10 +11,7 @@ public class DateTest
 
     /// <summary>Date.Empty should be equal to the default of Date.</summary>
     [Test]
-    public void MinValue_None_EqualsDefault()
-    {
-        Date.MinValue.Should().Be(default);
-    }
+    public void MinValue_None_EqualsDefault() => Date.MinValue.Should().Be(default);
 
     #endregion
 

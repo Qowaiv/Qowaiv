@@ -93,10 +93,7 @@ public sealed class XResourceFile
     /// <param name="writer">
     /// The writer to save with.
     /// </param>
-    public void Save(XmlWriter writer)
-    {
-        serializer.Serialize(writer, this);
-    }
+    public void Save(XmlWriter writer) => serializer.Serialize(writer, this);
 
     /// <summary>Loads a resource file from a stream.</summary>
     /// <param name="stream">

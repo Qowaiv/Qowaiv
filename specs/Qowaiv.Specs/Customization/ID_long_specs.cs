@@ -7,7 +7,7 @@ public class With_domain_logic
     [Test]
     public void Next_is_not_supported()
     {
-        Func<Int64BasedId> next = () => Int64BasedId.Next();
+        Func<Int64BasedId> next = Int64BasedId.Next;
         next.Should().Throw<NotSupportedException>();
     }
 }

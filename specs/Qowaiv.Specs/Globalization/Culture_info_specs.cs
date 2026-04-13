@@ -20,33 +20,29 @@ public class Supports_System_Text_JSON_serialization
     public void Value_deserialization(object? json, CultureInfo? svo)
         => JsonTester.Read_System_Text_JSON<CultureInfo>(json, Options()).Should().Be(svo);
 
-	[TestCase(null, null)]
-	[TestCase("es-EC", "es-EC")]
-	public void Value_serialization(object? json, CultureInfo? svo)
+    [TestCase(null, null)]
+    [TestCase("es-EC", "es-EC")]
+    public void Value_serialization(object? json, CultureInfo? svo)
         => JsonTester.Write_System_Text_JSON(svo, Options()).Should().Be(json);
 
     [Test]
     public void Dictionary_deserialization()
-    {
-        JsonSerializer.Deserialize<Dictionary<CultureInfo, int>>("""{"en-GB":100,"es-EC":200}""", Options())
+        => JsonSerializer.Deserialize<Dictionary<CultureInfo, int>>("""{"en-GB":100,"es-EC":200}""", Options())
             .Should().BeEquivalentTo(new Dictionary<CultureInfo, int>
-              {
-                  [TestCultures.en_GB] = 100,
-                  [TestCultures.es_EC] = 200,
-              });
-    }
+            {
+                [TestCultures.en_GB] = 100,
+                [TestCultures.es_EC] = 200,
+            });
 
     [Test]
     public void Dictionary_serialization()
-    {
-        JsonSerializer.Serialize(new Dictionary<CultureInfo, int>
+        => JsonSerializer.Serialize(new Dictionary<CultureInfo, int>
         {
             [TestCultures.en_GB] = 100,
             [TestCultures.es_EC] = 200,
         },
         Options())
             .Should().Be("""{"en-GB":100,"es-EC":200}""");
-    }
 
     private static JsonSerializerOptions Options()
     {

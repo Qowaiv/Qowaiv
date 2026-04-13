@@ -45,9 +45,7 @@ file static class QowaivTypeExtensions
 {
     [Pure]
     public static string OldToCSharpString(this Type type, bool withNamespace)
-    {
-        return new StringBuilder().AppendType(TypeInfo.New(type), withNamespace).ToString();
-    }
+        => new StringBuilder().AppendType(TypeInfo.New(type), withNamespace).ToString();
 
     [FluentSyntax]
     private static StringBuilder AppendType(this StringBuilder sb, TypeInfo type, bool withNamespace)

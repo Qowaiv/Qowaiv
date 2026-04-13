@@ -264,15 +264,12 @@ public readonly partial struct Fraction : INumber<Fraction>
     static Fraction INumberBase<Fraction>.MaxMagnitudeNumber(Fraction x, Fraction y) => MaxMagnitude(x, y);
 
     [Pure]
-    private static Fraction MaxMagnitude(Fraction x, Fraction y)
+    private static Fraction MaxMagnitude(Fraction x, Fraction y) => (x.Abs(), y.Abs()) switch
     {
-        var ax = x.Abs();
-        var ay = y.Abs();
-
-        if (ax > ay) return x;
-        else if (ax == ay) return x < Zero ? y : x;
-        else return y;
-    }
+        var (ax, ay) when ax > ay => x,
+        var (ax, ay) when ax == ay => x < Zero ? y : x,
+        _ => y,
+    };
 
     /// <inheritdoc />
     [Pure]
@@ -283,15 +280,12 @@ public readonly partial struct Fraction : INumber<Fraction>
     static Fraction INumberBase<Fraction>.MinMagnitudeNumber(Fraction x, Fraction y) => MinMagnitude(x, y);
 
     [Pure]
-    private static Fraction MinMagnitude(Fraction x, Fraction y)
+    private static Fraction MinMagnitude(Fraction x, Fraction y) => (x.Abs(), y.Abs()) switch
     {
-        var ax = x.Abs();
-        var ay = y.Abs();
-
-        if (ax < ay) return x;
-        else if (ax == ay) return x < Zero ? x : y;
-        else return y;
-    }
+        var (ax, ay) when ax < ay => x,
+        var (ax, ay) when ax == ay => x < Zero ? x : y,
+        _ => y,
+    };
 
     /// <inheritdoc />
     bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)

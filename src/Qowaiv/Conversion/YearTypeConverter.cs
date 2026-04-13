@@ -6,7 +6,7 @@ public class YearTypeConverter : NumericTypeConverter<Year, int>
 {
     /// <inheritdoc/>
     [Pure]
-    protected override Year FromRaw(int raw) => Year.Create(raw == 0 ? null : (int?)raw);
+    protected override Year FromRaw(int raw) => Year.Create(raw == 0 ? null : raw);
 
     /// <inheritdoc/>
     [Pure]

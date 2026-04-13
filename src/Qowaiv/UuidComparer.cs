@@ -27,19 +27,20 @@ public abstract class UuidComparer : IComparer<Uuid>, IComparer<Guid>, IComparer
     [Pure]
     public int Compare(object? x, object? y)
     {
-        var guidX = Cast(x);
-        var guidY = Cast(y);
-
-        if (guidX is null) return guidY is null ? 0 : -1;
-        else if (guidY is null) return +1;
-        else return Compare(guidX.Value, guidY.Value);
-
-        static Guid? Cast(object? obj)
+        return (Cast(x), Cast(y)) switch
         {
-            if (obj is null) return default;
-            else if (obj is Guid guid) return guid;
-            else if (obj is Uuid uuid) return uuid;
-            else throw new NotSupportedException("Both arguments must be GUID/UUID.");
-        }
+            ({ }, null) => +1,
+            (null, { }) => -1,
+            (Guid gx, Guid gy) => Compare(gx, gy),
+            _ => 0,
+        };
+
+        static Guid? Cast(object? obj) => obj switch
+        {
+            null => null,
+            Guid guid => guid,
+            Uuid uuid => (Guid)uuid,
+            _ => throw new NotSupportedException("Both arguments must be GUID/UUID."),
+        };
     }
 }

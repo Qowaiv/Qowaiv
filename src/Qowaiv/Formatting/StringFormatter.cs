@@ -93,11 +93,9 @@ public static class StringFormatter
                 sb.Append(ch);
             }
         }
-        if (isEscape)
-        {
-            throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
-        }
-        return sb.ToString();
+        return isEscape
+            ? throw new FormatException(QowaivMessages.FormatException_InvalidFormat)
+            : sb.ToString();
     }
 
     /// <summary>Tries to apply the custom formatter to format the object.</summary>

@@ -102,9 +102,9 @@ public class WildcardPattern
 
     /// <summary>Returns true if the case should be ignored, otherwise false.</summary>
     protected bool IgnoreCase
-        => ComparisonType == StringComparison.CurrentCultureIgnoreCase
-        || ComparisonType == StringComparison.InvariantCultureIgnoreCase
-        || ComparisonType == StringComparison.OrdinalIgnoreCase;
+        => ComparisonType is StringComparison.CurrentCultureIgnoreCase
+        or StringComparison.InvariantCultureIgnoreCase
+        or StringComparison.OrdinalIgnoreCase;
 
     /// <summary>Indicates whether the wildcard pattern finds a match in the specified input string.</summary>
     /// <param name="input">
@@ -195,27 +195,22 @@ public class WildcardPattern
     }
 
     [Pure]
-    private bool MatchChar(Substring pattern, Substring input)
+    private bool MatchChar(Substring pattern, Substring input) => pattern.Ch switch
     {
         // If there is *, then there are two possibilities:
         // - We consider current character of second string.
-        // - We ignore current character of second string.
-        if (pattern.Ch == MultipleChars)
-        {
-            return Match(pattern.Next(), input) || Match(pattern, input.Next());
-        }
+        // - We ignore current character of second string./
+        var c when c == MultipleChars => Match(pattern.Next(), input) || Match(pattern, input.Next()),
 
         // If the first string contains '?'.
-        else if (pattern.Ch == SingleChar)
-        {
-            return Options.HasFlag(WildcardPatternOptions.SingleOrTrailing)
-                ? Match(pattern.Next(), input) || Match(pattern.Next(), input.Next())
-                : Match(pattern.Next(), input.Next());
-        }
+        var c when c == SingleChar && Options.HasFlag(WildcardPatternOptions.SingleOrTrailing)
+            => Match(pattern.Next(), input) || Match(pattern.Next(), input.Next()),
+
+        var c when c == SingleChar => Match(pattern.Next(), input.Next()),
 
         // If the current characters of both strings match.
-        else return Equals(pattern.Ch, input.Ch) && Match(pattern.Next(), input.Next());
-    }
+        _ => Equals(pattern.Ch, input.Ch) && Match(pattern.Next(), input.Next()),
+    };
 
     [Pure]
     private bool Equals(char l, char r)

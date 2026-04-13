@@ -95,11 +95,9 @@ public static class QowaivEnumerableExtensions
                 }
             }
         }
-        if (count == 0)
-        {
-            return null;
-        }
-        return (total / count).Amount();
+        return count is 0
+            ? null
+            : (total / count).Amount();
     }
 
     /// <summary>Computes the average of a sequence of <see cref="Amount" /> values.</summary>
@@ -167,11 +165,9 @@ public static class QowaivEnumerableExtensions
                 }
             }
         }
-        if (count == 0)
-        {
-            return null;
-        }
-        return (total / count).Amount();
+        return count is 0
+            ? null
+            : (total / count).Amount();
     }
 
     /// <summary>Computes the average of a sequence of <see cref="Money" /> values that are obtained
@@ -334,7 +330,9 @@ public static class QowaivEnumerableExtensions
 
     /// <summary>Gets the average Elo.</summary>
     [Pure]
+#pragma warning disable IDE0120 // Simplify LINQ expression: Average only exists on Elo due to this method.
     public static Elo Average(this IEnumerable<Elo> elos) => elos.Select(elo => (double)elo).Average();
+#pragma warning restore IDE0120 // Simplify LINQ expression
 
     /// <summary>Computes the average of a sequence of <see cref="Percentage" /> values that are obtained
     /// by invoking a transform function on each element of the input sequence.
@@ -420,11 +418,9 @@ public static class QowaivEnumerableExtensions
                 }
             }
         }
-        if (count == 0)
-        {
-            return null;
-        }
-        return Percentage.Create(total / count);
+        return count is 0
+            ? null
+            : Percentage.Create(total / count);
     }
 
     /// <summary>Computes the average of a sequence of <see cref="Percentage" /> values.</summary>
@@ -491,11 +487,9 @@ public static class QowaivEnumerableExtensions
                 }
             }
         }
-        if (count == 0)
-        {
-            return null;
-        }
-        return Percentage.Create(total / count);
+        return count is 0
+            ? null
+            : Percentage.Create(total / count);
     }
 
     /// <summary>Computes the average of a sequence of stream sizes.</summary>

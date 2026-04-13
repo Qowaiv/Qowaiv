@@ -12,8 +12,10 @@ public sealed class HttpMethodTypeConverter : TypeConverter
 
     /// <inheritdoc />
     [Pure]
-    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
-        => value is null || value is string
-        ? HttpMethodParser.Parse(value as string)
-        : base.ConvertFrom(context, culture, value);
+    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value) => value switch
+    {
+        null => null,
+        string str => HttpMethodParser.Parse(str),
+        _ => base.ConvertFrom(context, culture, value),
+    };
 }

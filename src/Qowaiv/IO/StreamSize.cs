@@ -474,7 +474,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
             var decimalFormat = GetWithoutStreamSizeMarker(format, streamSizeMarker);
             var mp = GetMultiplier(streamSizeMarker);
 
-            decimal size = (decimal)m_Value / (decimal)mp;
+            decimal size = (decimal)m_Value / mp;
 
             return size.ToString(decimalFormat, formatProvider) + streamSizeMarker;
         }
@@ -613,7 +613,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
             {
                 sizeDecimal *= factor;
 
-                if (sizeDecimal <= long.MaxValue && sizeDecimal >= long.MinValue)
+                if (sizeDecimal is <= long.MaxValue and >= long.MinValue)
                 {
                     result = new StreamSize((long)sizeDecimal);
                     return true;

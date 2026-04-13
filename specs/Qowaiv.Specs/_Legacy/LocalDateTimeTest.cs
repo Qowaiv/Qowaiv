@@ -71,8 +71,8 @@ public class LocalDateTimeTest
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
-        var input = LocalDateTimeTest.TestStructNoMilliseconds;
-        var exp = LocalDateTimeTest.TestStructNoMilliseconds;
+        var input = TestStructNoMilliseconds;
+        var exp = TestStructNoMilliseconds;
         var act = SerializeDeserialize.DataContract(input);
         act.Should().Be(exp);
     }
@@ -98,13 +98,13 @@ public class LocalDateTimeTest
         var input = new LocalDateTimeSerializeObject
         {
             Id = 17,
-            Obj = LocalDateTimeTest.TestStruct,
+            Obj = TestStruct,
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new LocalDateTimeSerializeObject
         {
             Id = 17,
-            Obj = LocalDateTimeTest.TestStruct,
+            Obj = TestStruct,
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
@@ -118,13 +118,13 @@ public class LocalDateTimeTest
         var input = new LocalDateTimeSerializeObject
         {
             Id = 17,
-            Obj = LocalDateTimeTest.TestStructNoMilliseconds,
+            Obj = TestStructNoMilliseconds,
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new LocalDateTimeSerializeObject
         {
             Id = 17,
-            Obj = LocalDateTimeTest.TestStructNoMilliseconds,
+            Obj = TestStructNoMilliseconds,
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.DataContract(input);

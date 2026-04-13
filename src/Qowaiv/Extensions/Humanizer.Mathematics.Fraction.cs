@@ -13,9 +13,9 @@ public static class NumberToFractionExtensions
 
     /// <summary>Converts the <see cref="decimal" /> to a <see cref="Mathematics.Fraction" />.</summary>
     [Pure]
-    public static Fraction Fraction(this decimal number) => Qowaiv.Mathematics.Fraction.Create(number);
+    public static Fraction Fraction(this decimal number) => Mathematics.Fraction.Create(number);
 
     /// <summary>Converts the <see cref="double" /> to a <see cref="Mathematics.Fraction" />.</summary>
     [Pure]
-    public static Fraction Fraction(this double number) => Qowaiv.Mathematics.Fraction.Create(number);
+    public static Fraction Fraction(this double number) => Mathematics.Fraction.Create(number);
 }

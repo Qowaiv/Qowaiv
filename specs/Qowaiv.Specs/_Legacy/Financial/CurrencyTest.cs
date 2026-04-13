@@ -229,8 +229,8 @@ public class CurrencyTest
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
-        var input = CurrencyTest.TestStruct;
-        var exp = CurrencyTest.TestStruct;
+        var input = TestStruct;
+        var exp = TestStruct;
         var act = SerializeDeserialize.DataContract(input);
         act.Should().Be(exp);
     }
@@ -256,13 +256,13 @@ public class CurrencyTest
         var input = new CurrencySerializeObject
         {
             Id = 17,
-            Obj = CurrencyTest.TestStruct,
+            Obj = TestStruct,
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new CurrencySerializeObject
         {
             Id = 17,
-            Obj = CurrencyTest.TestStruct,
+            Obj = TestStruct,
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
@@ -276,13 +276,13 @@ public class CurrencyTest
         var input = new CurrencySerializeObject
         {
             Id = 17,
-            Obj = CurrencyTest.TestStruct,
+            Obj = TestStruct,
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new CurrencySerializeObject
         {
             Id = 17,
-            Obj = CurrencyTest.TestStruct,
+            Obj = TestStruct,
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.DataContract(input);
@@ -476,52 +476,52 @@ public class CurrencyTest
     [Test]
     public void Equals_TestStructTestStruct_IsTrue()
     {
-        CurrencyTest.TestStruct.Equals(CurrencyTest.TestStruct).Should().BeTrue();
+        TestStruct.Equals(TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructEmpty_IsFalse()
     {
-        CurrencyTest.TestStruct.Equals(Currency.Empty).Should().BeFalse();
+        TestStruct.Equals(Currency.Empty).Should().BeFalse();
     }
 
     [Test]
     public void Equals_EmptyTestStruct_IsFalse()
     {
-        Currency.Empty.Equals(CurrencyTest.TestStruct).Should().BeFalse();
+        Currency.Empty.Equals(TestStruct).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObjectTestStruct_IsTrue()
     {
-        CurrencyTest.TestStruct.Equals((object)CurrencyTest.TestStruct).Should().BeTrue();
+        TestStruct.Equals((object)TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        CurrencyTest.TestStruct.Equals(null).Should().BeFalse();
+        TestStruct.Equals(null).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObject_IsFalse()
     {
-        CurrencyTest.TestStruct.Equals(new object()).Should().BeFalse();
+        TestStruct.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
     public void OperatorIs_TestStructTestStruct_IsTrue()
     {
-        var l = CurrencyTest.TestStruct;
-        var r = CurrencyTest.TestStruct;
+        var l = TestStruct;
+        var r = TestStruct;
         (l == r).Should().BeTrue();
     }
 
     [Test]
     public void OperatorIsNot_TestStructTestStruct_IsFalse()
     {
-        var l = CurrencyTest.TestStruct;
-        var r = CurrencyTest.TestStruct;
+        var l = TestStruct;
+        var r = TestStruct;
         (l != r).Should().BeFalse();
     }
 

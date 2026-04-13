@@ -222,8 +222,8 @@ public class CountryTest
     [Test]
     public void DataContractSerializeDeserialize_TestStruct_AreEqual()
     {
-        var input = CountryTest.TestStruct;
-        var exp = CountryTest.TestStruct;
+        var input = TestStruct;
+        var exp = TestStruct;
         var act = SerializeDeserialize.DataContract(input);
         act.Should().Be(exp);
     }
@@ -249,13 +249,13 @@ public class CountryTest
         var input = new CountrySerializeObject
         {
             Id = 17,
-            Obj = CountryTest.TestStruct,
+            Obj = TestStruct,
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new CountrySerializeObject
         {
             Id = 17,
-            Obj = CountryTest.TestStruct,
+            Obj = TestStruct,
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.Xml(input);
@@ -269,13 +269,13 @@ public class CountryTest
         var input = new CountrySerializeObject
         {
             Id = 17,
-            Obj = CountryTest.TestStruct,
+            Obj = TestStruct,
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var exp = new CountrySerializeObject
         {
             Id = 17,
-            Obj = CountryTest.TestStruct,
+            Obj = TestStruct,
             Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
         };
         var act = SerializeDeserialize.DataContract(input);
@@ -337,52 +337,52 @@ public class CountryTest
     [Test]
     public void Equals_TestStructTestStruct_IsTrue()
     {
-        CountryTest.TestStruct.Equals(CountryTest.TestStruct).Should().BeTrue();
+        TestStruct.Equals(TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructEmpty_IsFalse()
     {
-        CountryTest.TestStruct.Equals(Country.Empty).Should().BeFalse();
+        TestStruct.Equals(Country.Empty).Should().BeFalse();
     }
 
     [Test]
     public void Equals_EmptyTestStruct_IsFalse()
     {
-        Country.Empty.Equals(CountryTest.TestStruct).Should().BeFalse();
+        Country.Empty.Equals(TestStruct).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObjectTestStruct_IsTrue()
     {
-        CountryTest.TestStruct.Equals((object)CountryTest.TestStruct).Should().BeTrue();
+        TestStruct.Equals((object)TestStruct).Should().BeTrue();
     }
 
     [Test]
     public void Equals_TestStructNull_IsFalse()
     {
-        CountryTest.TestStruct.Equals(Nil.Object).Should().BeFalse();
+        TestStruct.Equals(Nil.Object).Should().BeFalse();
     }
 
     [Test]
     public void Equals_TestStructObject_IsFalse()
     {
-        CountryTest.TestStruct.Equals(new object()).Should().BeFalse();
+        TestStruct.Equals(new object()).Should().BeFalse();
     }
 
     [Test]
     public void OperatorIs_TestStructTestStruct_IsTrue()
     {
-        var l = CountryTest.TestStruct;
-        var r = CountryTest.TestStruct;
+        var l = TestStruct;
+        var r = TestStruct;
         (l == r).Should().BeTrue();
     }
 
     [Test]
     public void OperatorIsNot_TestStructTestStruct_IsFalse()
     {
-        var l = CountryTest.TestStruct;
-        var r = CountryTest.TestStruct;
+        var l = TestStruct;
+        var r = TestStruct;
         (l != r).Should().BeFalse();
     }
 

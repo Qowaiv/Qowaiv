@@ -71,8 +71,8 @@ namespace Qowaiv.UnitTests.Statistics
         [Test]
         public void DataContractSerializeDeserialize_TestStruct_AreEqual()
         {
-            var input = EloTest.TestStruct;
-            var exp = EloTest.TestStruct;
+            var input = TestStruct;
+            var exp = TestStruct;
             var act = SerializeDeserialize.DataContract(input);
             act.Should().Be(exp);
         }
@@ -98,13 +98,13 @@ namespace Qowaiv.UnitTests.Statistics
             var input = new EloSerializeObject
             {
                 Id = 17,
-                Obj = EloTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var exp = new EloSerializeObject
             {
                 Id = 17,
-                Obj = EloTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var act = SerializeDeserialize.Xml(input);
@@ -118,13 +118,13 @@ namespace Qowaiv.UnitTests.Statistics
             var input = new EloSerializeObject
             {
                 Id = 17,
-                Obj = EloTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var exp = new EloSerializeObject
             {
                 Id = 17,
-                Obj = EloTest.TestStruct,
+                Obj = TestStruct,
                 Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
             };
             var act = SerializeDeserialize.DataContract(input);

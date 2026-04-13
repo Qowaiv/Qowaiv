@@ -405,7 +405,7 @@ public class Has_custom_formatting
     {
         [Test]
         public void with_info()
-           => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(YearSpan))
+           => OpenApiDataType.FromType(typeof(YearSpan))
            .Should().Be(new OpenApiDataType(
                dataType: typeof(YearSpan),
                description: "Year span",

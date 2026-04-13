@@ -108,14 +108,14 @@ public class Moneys
     [Test]
     public void Average_on_mixed_currencies_throws()
     {
-        Func<Money> average = () => mixed.Average();
+        Func<Money> average = mixed.Average;
         average.Should().Throw<CurrencyMismatchException>();
     }
 
     [Test]
     public void Average_on_mixed_nullables_currencies_throws()
     {
-        Func<Money?> average = () => mixedNulables.Average();
+        Func<Money?> average = mixedNulables.Average;
         average.Should().Throw<CurrencyMismatchException>();
     }
 
@@ -172,14 +172,14 @@ public class Moneys
     [Test]
     public void Sum_on_mixed_currencies_throws()
     {
-        Func<Money> average = () => mixed.Sum();
+        Func<Money> average = mixed.Sum;
         average.Should().Throw<CurrencyMismatchException>();
     }
 
     [Test]
     public void Sum_on_mixed_nullables_currencies_throws()
     {
-        Func<Money?> average = () => mixedNulables.Sum();
+        Func<Money?> average = mixedNulables.Sum;
         average.Should().Throw<CurrencyMismatchException>();
     }
 

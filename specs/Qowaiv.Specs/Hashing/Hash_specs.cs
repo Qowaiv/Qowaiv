@@ -165,7 +165,7 @@ public class Not_supported
     [Test]
     public void for_type_throws_exception()
     {
-        Func<int> hash = () => Hash.NotSupportedBy<string>();
+        Func<int> hash = Hash.NotSupportedBy<string>;
         hash.Should().Throw<HashingNotSupported>()
             .WithMessage("Hashing is not supported by System.String.");
     }

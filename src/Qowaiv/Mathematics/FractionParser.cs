@@ -78,7 +78,7 @@ internal static class FractionParser
 
     private static CharSpan? Integer(CharSpan span, string digits, out long integer)
     {
-        var next = span.TrimRight(ch => digits.Contains(ch), out var trimmed);
+        var next = span.TrimRight(digits.Contains, out var trimmed);
         integer = 0;
         foreach (var ch in trimmed)
         {
@@ -151,7 +151,7 @@ internal static class FractionParser
 
     /// <summary>Only strings containing percentage markers (%, ‰, ‱) should be parsed by <see cref="Percentage.TryParse(string)" />.</summary>
     [Pure]
-    private static bool PotentialPercentage(string str) => str.Any(ch => "%‰‱".Contains(ch));
+    private static bool PotentialPercentage(string str) => str.Any("%‰‱".Contains);
 
     private const NumberStyles IntegerStyle = NumberStyles.Integer | NumberStyles.AllowThousands ^ NumberStyles.AllowTrailingSign;
     private const NumberStyles DecimalStyle = IntegerStyle | NumberStyles.AllowDecimalPoint | NumberStyles.AllowTrailingSign;

@@ -98,6 +98,8 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
 #pragma warning disable S1541 // Methods and properties should not be too complex
 #pragma warning disable S1854 // Dead stores should be removed
 #pragma warning disable S3776 // Cognitive Complexity of methods should not be too high
+#pragma warning disable IDE0045 // Simplify if
+#pragma warning disable IDE0046 // Simplify if
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
 
     // This code is here as reference, so we don't want to touch it.

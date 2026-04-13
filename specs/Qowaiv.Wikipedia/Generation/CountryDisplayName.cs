@@ -287,14 +287,10 @@ public static class CountryDisplayName
     }
 
     public static Task<string?> ru(Country country)
-    {
-        return Task.FromResult<string?>(country.GetDisplayName(TestCultures.ru));
-    }
+        => Task.FromResult<string?>(country.GetDisplayName(TestCultures.ru));
 
     public static Task<string?> zh(Country country)
-    {
-        return Task.FromResult<string?>(country.GetDisplayName(TestCultures.zh));
-    }
+        => Task.FromResult<string?>(country.GetDisplayName(TestCultures.zh));
 
     private record Display(string Iso2, string Name);
 

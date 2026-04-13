@@ -75,14 +75,19 @@ public class Compares
 
     [Test]
     public void GUID_with_UUID()
-        => UuidComparer.Default.Compare((object)guid, (object)uuid).Should().Be(-1);
+        => UuidComparer.Default.Compare(guid.AsObject(), uuid.AsObject()).Should().Be(-1);
 
     [Test]
     public void UUID_with_GUIDF()
-        => UuidComparer.Default.Compare((object)uuid, (object)guid).Should().Be(+1);
+        => UuidComparer.Default.Compare(uuid.AsObject(), guid.AsObject()).Should().Be(+1);
 
     [Test]
     public void Compare_UuidObject_Throws()
-        => new object().Invoking(o => UuidComparer.Default.Compare((object)uuid, o))
+        => new object().Invoking(o => UuidComparer.Default.Compare(uuid.AsObject(), o))
             .Should().Throw<NotSupportedException>();
+}
+
+file static class Extensions
+{
+    public static object AsObject<T>(this T o) where T: struct => o;
 }

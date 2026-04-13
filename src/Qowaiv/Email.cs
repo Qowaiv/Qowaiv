@@ -157,14 +157,14 @@ internal static partial class Email
         {
             if (Failure) return None();
 
-            var (ch, index, length) = Next(-1, Length);
+            var (ch, index, len) = Next(-1, Length);
             char prev = default;
             var part = 0;
 
             while (part < PartLength && index < Input.Length)
             {
                 part++;
-                if (length > TotalLength) return None();
+                if (len > TotalLength) return None();
                 else if (Is.Domain(ch)) { /* Continue. */ }
                 else if (ch is Dot)
                 {
@@ -178,14 +178,14 @@ internal static partial class Email
                 else return None();
 
                 prev = ch;
-                (ch, index, length) = Next(index, length);
+                (ch, index, len) = Next(index, len);
             }
-            var result = Buffer[..length];
+            var result = Buffer[..len];
             var last = result[^part..];
             return prev is not Dot and not Dash
                 && part < PartLength
                 && Is.FinalPart(last)
-                ? new(Input, result, length)
+                ? new(Input, result, len)
                 : None();
         }
 

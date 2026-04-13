@@ -85,7 +85,7 @@ public sealed class CSharpWriter
     public CSharpWriter Write(Type type, bool attribute)
     {
         Guard.NotNull(type);
-        var withoutNamespace = Settings.GlobalUsings.Contains((Nullable.GetUnderlyingType(type) ?? type).Namespace!);
+        var withoutNamespace = Settings.GlobalUsings.Contains((Nullable.GetUnderlyingType(type) ?? type).Namespace);
         var name = type.ToCSharpString(!withoutNamespace);
         return attribute && name.EndsWith("Attribute")
             ? Write(name[..^9])

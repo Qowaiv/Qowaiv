@@ -112,7 +112,7 @@ public static class TestCultures
     public static CultureInfo WithPercentageSymbols(this CultureInfo? culture, string percentSymbol, string perMilleSymbol)
     {
         culture ??= CultureInfo.CurrentCulture;
-        var info = (NumberFormatInfo)culture.NumberFormat.Clone()!;
+        var info = (NumberFormatInfo)culture.NumberFormat.Clone();
         var custom = new CultureInfo(culture.Name);
         info.PercentSymbol = percentSymbol;
         info.PerMilleSymbol = perMilleSymbol;

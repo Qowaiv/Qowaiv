@@ -13,9 +13,7 @@ public partial class IbanBenchmark
     {
         [GlobalSetup]
         public void Setup()
-        {
-            Inputs = [.. Unformatted.OrderBy(_ => Rnd.Next()).Take(Iterations)];
-        }
+            => Inputs = [.. Unformatted.OrderBy(_ => Rnd.Next()).Take(Iterations)];
 
         [Benchmark(Baseline = true)]
         public Iban?[] BBAN()
@@ -32,9 +30,7 @@ public partial class IbanBenchmark
     {
         [GlobalSetup]
         public void Setup()
-        {
-            Inputs = [.. Formatted.OrderBy(_ => Rnd.Next()).Take(Iterations)];
-        }
+            => Inputs = [.. Formatted.OrderBy(_ => Rnd.Next()).Take(Iterations)];
 
         [Benchmark(Baseline = true)]
         public Iban?[] BBAN()

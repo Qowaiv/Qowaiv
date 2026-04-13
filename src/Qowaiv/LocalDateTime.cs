@@ -33,9 +33,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// ticks is less than System.DateTime.MinValue or greater than System.DateTime.MaxValue.
     /// </exception>
     public LocalDateTime(long ticks)
-    {
-        m_Value = new DateTime(ticks, DateTimeKind.Local);
-    }
+        => m_Value = new DateTime(ticks, DateTimeKind.Local);
 
     /// <summary>Initializes a new instance of the <see cref="LocalDateTime" /> struct based on a System.DateTime.</summary>
     /// <param name="dt">

@@ -5,9 +5,7 @@ namespace Benchmarks;
 public static class Program
 {
     public static void Main()
-    {
-        BenchmarkRunner.Run<EmailBenchmark>();
-    }
+        => BenchmarkRunner.Run<EmailBenchmark>();
 
     public static void Other()
     {

@@ -113,9 +113,8 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     /// </param>
     [Pure]
     public bool ExistsOnDate(Date measurement)
-    {
-        return StartDate <= measurement && (!EndDate.HasValue || EndDate.Value >= measurement);
-    }
+        => StartDate <= measurement
+        && (!EndDate.HasValue || EndDate.Value >= measurement);
 
     /// <summary>Gets the active currency at the given date.</summary>
     /// <param name="measurement">
@@ -308,9 +307,7 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     /// </returns>
     [Pure]
     public static IEnumerable<Country> GetExisting(Date measurement)
-    {
-        return All.Where(country => country.ExistsOnDate(measurement));
-    }
+        => All.Where(country => country.ExistsOnDate(measurement));
 
     /// <summary>Gets a collection of all country info's.</summary>
     public static readonly ReadOnlyCollection<Country> All = new([.. ResourceManager

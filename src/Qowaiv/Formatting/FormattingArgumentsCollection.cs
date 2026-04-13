@@ -113,7 +113,7 @@ public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, Form
         int len = format.Length;
         char ch = '\x0';
 
-        var provider = this.FormatProvider;
+        var provider = FormatProvider;
 
         // This is different form string.Format, as the provider is never null.
         ICustomFormatter cf = provider.GetFormat<ICustomFormatter>();

@@ -289,7 +289,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// The result is less than date.MinValue or greater than date.MaxValue.
     /// </exception>
     [Pure]
-    public TimeSpan Subtract(LocalDateTime value) => new(this.Ticks - value.Ticks);
+    public TimeSpan Subtract(LocalDateTime value) => new(Ticks - value.Ticks);
 
     /// <summary>Subtracts the specified duration from this instance.</summary>
     /// <param name="value">
@@ -303,7 +303,7 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// The result is less than date.MinValue or greater than date.MaxValue.
     /// </exception>
     [Pure]
-    public LocalDateTime Subtract(TimeSpan value) => new(this.Ticks - value.Ticks);
+    public LocalDateTime Subtract(TimeSpan value) => new(Ticks - value.Ticks);
 
     /// <summary>Returns a new local date time that adds the specified number of years to
     /// the value of this instance.

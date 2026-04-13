@@ -45,9 +45,9 @@ public class With_domain_logic
 
 public class Is_valid_for
 {
-    static readonly IEnumerable<object[]> ValidForCountry = PostalCodes.Valid.SelectMany(codes => codes.ToArrays());
+    private static readonly IEnumerable<object[]> ValidForCountry = PostalCodes.Valid.SelectMany(codes => codes.ToArrays());
 
-    static readonly IEnumerable<Country> CountriesWithoutPostalCodeSystem = PostalCodeCountryInfo.GetCountriesWithoutPostalCode();
+    private static readonly IEnumerable<Country> CountriesWithoutPostalCodeSystem = PostalCodeCountryInfo.GetCountriesWithoutPostalCode();
 
     [TestCaseSource(nameof(ValidForCountry))]
     public void country(Country country, PostalCode postalCode)
@@ -78,7 +78,7 @@ public class Is_valid_for
 
 public class Is_not_valid_for
 {
-    static readonly IEnumerable<Country> CountriesWithoutPostalCodeSystem = PostalCodeCountryInfo.GetCountriesWithoutPostalCode();
+    private static readonly IEnumerable<Country> CountriesWithoutPostalCodeSystem = PostalCodeCountryInfo.GetCountriesWithoutPostalCode();
 
     [Test]
     public void country_with_different_system()

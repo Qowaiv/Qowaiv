@@ -75,7 +75,7 @@ public class Amounts
     public void Sum_on_selected_nullable_empty_collection_is_zero()
         => Array.Empty<Amount?>().Sum(Selection).Should().BeNull();
 
-    static T Selection<T>(T value) => value;
+    private static T Selection<T>(T value) => value;
 }
 
 public class Moneys
@@ -213,7 +213,7 @@ public class Moneys
         average.Should().Throw<CurrencyMismatchException>();
     }
 
-    static T Selection<T>(T value) => value;
+    private static T Selection<T>(T value) => value;
 }
 
 public class Percentages
@@ -295,5 +295,5 @@ public class Percentages
     public void Sum_on_selected_nullable_empty_collection_is_zero()
         => Array.Empty<Percentage?>().Sum(Selection).Should().BeNull();
 
-    static T Selection<T>(T value) => value;
+    private static T Selection<T>(T value) => value;
 }

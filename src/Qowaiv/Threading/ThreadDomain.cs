@@ -81,20 +81,12 @@ public sealed class ThreadDomain
     /// convert from string.
     /// </exception>
     [Pure]
-    public T? Get<T>()
+    public T? Get<T>() => Guard(typeof(T), Values.ContainsKey(typeof(T))) switch
     {
-        var type = Guard(typeof(T), Values.ContainsKey(typeof(T)));
-
-        if (Values.TryGetValue(type, out var value) && value is T typed)
-        {
-            return typed;
-        }
-        else if (Creators.TryGetValue(type, out var func) && func.Invoke(Thread.CurrentThread) is T invoked)
-        {
-            return invoked;
-        }
-        else return default;
-    }
+        var type when Values.TryGetValue(type, out var value) && value is T typed => typed,
+        var type when Creators.TryGetValue(type, out var func) && func.Invoke(Thread.CurrentThread) is T invoked => invoked,
+        _ => default,
+    };
 
     /// <summary>Sets the value for T.</summary>
     /// <typeparam name="T">

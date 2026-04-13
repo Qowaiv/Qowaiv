@@ -68,18 +68,12 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     /// When the email address is empty or unknown.
     /// </exception>
     [Pure]
-    public string WithDisplayName(string displayName)
+    public string WithDisplayName(string displayName) => this switch
     {
-        if (IsEmptyOrUnknown())
-        {
-            throw new InvalidOperationException(QowaivMessages.InvalidOperationException_WithDisplayName);
-        }
-        if (string.IsNullOrWhiteSpace(displayName))
-        {
-            return ToString(CultureInfo.InvariantCulture);
-        }
-        return string.Format(CultureInfo.CurrentCulture, "{0} <{1}>", displayName.Trim(), this);
-    }
+        { IsKnown: false } => throw new InvalidOperationException(QowaivMessages.InvalidOperationException_WithDisplayName),
+        _ when string.IsNullOrWhiteSpace(displayName) => ToString(CultureInfo.InvariantCulture),
+        _ => string.Format(CultureInfo.CurrentCulture, "{0} <{1}>", displayName.Trim(), this),
+    };
 
     /// <summary>Serializes the email address to a JSON node.</summary>
     /// <returns>

@@ -95,11 +95,9 @@ public static class QowaivEnumerableExtensions
                 }
             }
         }
-        if (count == 0)
-        {
-            return null;
-        }
-        return (total / count).Amount();
+        return count is 0
+            ? null
+            : (total / count).Amount();
     }
 
     /// <summary>Computes the average of a sequence of <see cref="Amount" /> values.</summary>
@@ -167,11 +165,9 @@ public static class QowaivEnumerableExtensions
                 }
             }
         }
-        if (count == 0)
-        {
-            return null;
-        }
-        return (total / count).Amount();
+        return count is 0
+            ? null
+            : (total / count).Amount();
     }
 
     /// <summary>Computes the average of a sequence of <see cref="Money" /> values that are obtained
@@ -420,11 +416,9 @@ public static class QowaivEnumerableExtensions
                 }
             }
         }
-        if (count == 0)
-        {
-            return null;
-        }
-        return Percentage.Create(total / count);
+        return count is 0
+            ? null
+            : Percentage.Create(total / count);
     }
 
     /// <summary>Computes the average of a sequence of <see cref="Percentage" /> values.</summary>
@@ -491,11 +485,9 @@ public static class QowaivEnumerableExtensions
                 }
             }
         }
-        if (count == 0)
-        {
-            return null;
-        }
-        return Percentage.Create(total / count);
+        return count is 0
+            ? null
+            : Percentage.Create(total / count);
     }
 
     /// <summary>Computes the average of a sequence of stream sizes.</summary>

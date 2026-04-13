@@ -172,24 +172,20 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     /// The format provider.
     /// </param>
     [Pure]
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? formatProvider) => format switch
     {
-        if (StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted))
-        {
-            return formatted;
-        }
-        else if (Formatting.Pattern.Match(format.WithDefault("0/0")) is { Success: true } match)
-        {
-            return ToString(formatProvider, match);
-        }
+        _ when StringFormatter.TryApplyCustomFormatter(format, this, formatProvider, out string formatted)
+            => formatted,
+
+        _ when Formatting.Pattern.Match(format.WithDefault("0/0")) is { Success: true } match
+            => ToString(formatProvider, match),
 
         // if no fraction bar character has been provided, format as a decimal.
-        else if (!format.WithDefault().Any(Formatting.IsFractionBar))
-        {
-            return ToDecimal().ToString(format, formatProvider);
-        }
-        else throw new FormatException(QowaivMessages.FormatException_InvalidFormat);
-    }
+        _ when !format.WithDefault().Any(Formatting.IsFractionBar)
+            => ToDecimal().ToString(format, formatProvider),
+
+        _ => throw new FormatException(QowaivMessages.FormatException_InvalidFormat),
+    };
 
     [Pure]
     private string ToString(IFormatProvider? formatProvider, Match match)
@@ -259,15 +255,8 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     /// <inheritdoc/>
     [Pure]
     public bool Equals(Fraction other)
-    {
-        // to deal with zero (default should be zero).
-        if (IsZero() && other.IsZero())
-        {
-            return true;
-        }
-        return denominator == other.denominator
-            && numerator == other.numerator;
-    }
+        => (IsZero() && other.IsZero())
+        || (denominator == other.denominator && numerator == other.numerator);
 
     /// <inheritdoc/>
     [Pure]

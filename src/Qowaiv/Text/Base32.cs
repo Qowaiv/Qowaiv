@@ -88,13 +88,9 @@ public static class Base32
     /// </exception>
     [Pure]
     public static byte[] GetBytes(string? s)
-    {
-        if (TryGetBytes(s, out byte[] bytes))
-        {
-            return bytes;
-        }
-        throw Unparsable.ForValue(s, QowaivMessages.FormatExceptionBase32, typeof(Base32));
-    }
+        => TryGetBytes(s, out byte[] bytes)
+        ? bytes
+        : throw Unparsable.ForValue(s, QowaivMessages.FormatExceptionBase32, typeof(Base32));
 
     /// <summary>Tries to get the corresponding bytes of the Base32 string.</summary>
     /// <param name="s">

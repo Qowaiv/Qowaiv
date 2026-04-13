@@ -50,12 +50,12 @@ internal static class Cast
         : ToDecimal(value);
 
     [Pure]
-    private static decimal ToDecimal(double value)
+    private static decimal ToDecimal(double value) => value switch
     {
-        if (value >= Dbl.DecimalMax) return decimal.MaxValue;
-        if (value <= Dbl.DecimalMin) return decimal.MinValue;
-        return (decimal)value;
-    }
+        >= Dbl.DecimalMax => decimal.MaxValue,
+        <= Dbl.DecimalMin => decimal.MinValue,
+        _ => (decimal)value,
+    };
 
     /// <summary>Casts a <see cref="double" /> to <see cref="int" /> for the SVO.</summary>
     [Pure]

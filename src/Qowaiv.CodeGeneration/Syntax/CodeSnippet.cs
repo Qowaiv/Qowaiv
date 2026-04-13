@@ -66,12 +66,9 @@ public sealed class CodeSnippet : Code
             }
         }
 
-        if (mode != Mode.None)
-        {
-            throw ParseError.Line(nr, Lines[^1], "Missing closing #endif statement.");
-        }
-
-        return new([.. lines]);
+        return mode == Mode.None
+            ? new([.. lines])
+            : throw ParseError.Line(nr, Lines[^1], "Missing closing #endif statement.");
 
         static bool Enabled(Match match, IReadOnlyCollection<Constant> constants)
         {

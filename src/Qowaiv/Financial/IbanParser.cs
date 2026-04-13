@@ -33,31 +33,20 @@ internal static partial class IbanParser
                 id = (id * 26) + Id(span);
                 span++;
 
-                if (Parsers[id] is { } bban)
+                return Parsers[id] switch
                 {
-                    return bban.Parse(span, id);
-                }
-                else if (!prefixed && HasIbanPrefix(id, span))
-                {
-                    return Parse(span.Next(3), prefixed: true);
-                }
-                else
-                {
-                    return null;
-                }
+                    { } bban => bban.Parse(span, id),
+                    _ when !prefixed && HasIbanPrefix(id, span) => Parse(span.Next(3), prefixed: true),
+                    _ => null,
+                };
             }
             else if (IsMarkup(span.First))
             {
                 span++;
             }
-            else if (!prefixed && HasIbanPrefix(span))
-            {
-                return Parse(span.Next(6), prefixed: true);
-            }
-            else
-            {
-                return null;
-            }
+            else return !prefixed && HasIbanPrefix(span)
+                ? Parse(span.Next(6), prefixed: true)
+                : null;
         }
         return null;
     }

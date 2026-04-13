@@ -34,20 +34,18 @@ public static class JsonTester
     /// </remarks>
     [Pure]
     public static object? Write_System_Text_JSON(object? svo, JsonSerializerOptions? options = null)
-    {
-        var json = JsonSerializer.SerializeToElement(svo, options);
-
-        if (json.ValueKind == JsonValueKind.String) return json.GetString();
-        else if (json.ValueKind == JsonValueKind.Number)
+        => JsonSerializer.SerializeToElement(svo, options) switch
         {
-            if (json.TryGetInt32(out var int32)) return int32;
-            else if (json.TryGetInt64(out var int64)) return int64;
-            else if (json.TryGetDouble(out var number)) return number;
-            else return null;
-        }
-        else return null;
-    }
-
+            { ValueKind: JsonValueKind.String } json => json.GetString(),
+            { ValueKind: JsonValueKind.Number } json => json switch
+            {
+                _ when json.TryGetInt32(out var num) => num,
+                _ when json.TryGetInt64(out var num) => num,
+                _ when json.TryGetDouble(out var num) => num,
+                _ => null,
+            },
+            _ => null,
+        };
 #endif
 
     /// <summary>Applies multiple FromJson scenario's.</summary>

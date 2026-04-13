@@ -39,13 +39,10 @@ public class DateSpanTypeConverter : TypeConverter
     /// The conversion cannot be performed.
     /// </exception>
     [Pure]
-    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
+    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value) => value switch
     {
-        var str = value as string;
-        if (value is null || str != null)
-        {
-            return DateSpan.Parse(str, culture);
-        }
-        else return base.ConvertFrom(context, culture, value);
-    }
+        null => DateSpan.Zero,
+        string str => DateSpan.Parse(str, culture),
+        _ => base.ConvertFrom(context, culture, value),
+    };
 }

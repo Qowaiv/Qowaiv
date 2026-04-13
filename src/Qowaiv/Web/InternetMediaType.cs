@@ -79,19 +79,12 @@ public readonly partial struct InternetMediaType : IXmlSerializable, IFormattabl
     /// <remarks>
     /// If the top level start with "x-" unregistered is returned.
     /// </remarks>
-    public InternetMediaTopLevelType TopLevelType
+    public InternetMediaTopLevelType TopLevelType => this switch
     {
-        get
-        {
-            if (!IsEmpty())
-            {
-                return Enum.TryParse(TopLevel, true, out InternetMediaTopLevelType type)
-                ? type
-                : InternetMediaTopLevelType.Unregistered;
-            }
-            else return InternetMediaTopLevelType.None;
-        }
-    }
+        { HasValue: false } => InternetMediaTopLevelType.None,
+        _ when Enum.TryParse(TopLevel, true, out InternetMediaTopLevelType type) => type,
+        _ => InternetMediaTopLevelType.Unregistered,
+    };
 
     /// <summary>Gets the subtype of the Internet media type.</summary>
     public string Subtype

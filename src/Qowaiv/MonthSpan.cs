@@ -335,24 +335,16 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     /// <summary>Creates a date span from years.</summary>
     [Pure]
     public static MonthSpan FromYears(int years)
-    {
-        if (TryCreate(years * DateSpan.MonthsPerYear, out var monthSpan))
-        {
-            return monthSpan;
-        }
-        throw new ArgumentOutOfRangeException(nameof(years), QowaivMessages.FormatExceptionMonthSpan);
-    }
+        => TryCreate(years * DateSpan.MonthsPerYear, out var monthSpan)
+        ? monthSpan
+        : throw new ArgumentOutOfRangeException(nameof(years), QowaivMessages.FormatExceptionMonthSpan);
 
     /// <summary>Creates a date span from months.</summary>
     [Pure]
     public static MonthSpan FromMonths(int months)
-    {
-        if (TryCreate(months, out var monthSpan))
-        {
-            return monthSpan;
-        }
-        throw new ArgumentOutOfRangeException(nameof(months), QowaivMessages.FormatExceptionMonthSpan);
-    }
+        => TryCreate(months, out var monthSpan)
+        ? monthSpan
+        : throw new ArgumentOutOfRangeException(nameof(months), QowaivMessages.FormatExceptionMonthSpan);
 
     /// <summary>Creates a month span by subtracting <paramref name="d2" /> from <paramref name="d1" />.</summary>
     /// <param name="d1">

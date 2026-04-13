@@ -143,14 +143,12 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
     public static implicit operator bool(YesNo val) => val.IsYes();
 
     /// <summary>Casts a nullable <see cref="bool" /> to a yes-no.</summary>
-    public static explicit operator YesNo(bool? val)
+    public static explicit operator YesNo(bool? val) => val switch
     {
-        if (val.HasValue)
-        {
-            return val.Value ? Yes : No;
-        }
-        else return Empty;
-    }
+        null => Empty,
+        true => Yes,
+        _ => No,
+    };
 
     /// <summary>Casts a <see cref="bool" /> to a yes-no.</summary>
     public static explicit operator YesNo(bool val) => val ? Yes : No;

@@ -124,19 +124,19 @@ internal static class FractionParser
     [Pure]
     private static Fraction? External(string s, IFormatProvider? formatInfo)
     {
-        if (long.TryParse(s, IntegerStyle, formatInfo, out var lng) && ValidLong(lng))
+        return s switch
         {
-            return Fraction.Create(lng);
-        }
-        else if (decimal.TryParse(s, DecimalStyle, formatInfo, out var dec) && ValidDec(dec))
-        {
-            return Fraction.Create(dec);
-        }
-        else if (PotentialPercentage(s) && Percentage.TryParse(s, formatInfo, out var percentage) && ValidDec((decimal)percentage))
-        {
-            return Fraction.Create((decimal)percentage);
-        }
-        else return null;
+            _ when long.TryParse(s, IntegerStyle, formatInfo, out var lng) && ValidLong(lng)
+                => Fraction.Create(lng),
+
+            _ when decimal.TryParse(s, DecimalStyle, formatInfo, out var dec) && ValidDec(dec)
+                => Fraction.Create(dec),
+
+            _ when PotentialPercentage(s) && Percentage.TryParse(s, formatInfo, out var percentage) && ValidDec((decimal)percentage)
+                => Fraction.Create((decimal)percentage),
+
+            _ => null,
+        };
 
         static bool ValidLong(long number) => number != long.MinValue;
         static bool ValidDec(decimal number) => number >= Fraction.MinValue.Numerator && number <= Fraction.MaxValue.Numerator;

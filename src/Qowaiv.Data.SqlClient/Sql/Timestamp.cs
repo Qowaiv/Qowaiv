@@ -147,9 +147,7 @@ public readonly partial struct Timestamp : IXmlSerializable, IFormattable, IEqua
     /// </param>
     [Pure]
     public static Timestamp Create(byte[] bytes)
-    {
-        Guard.HasAny(bytes);
-        if (bytes.Length == 8) return Create(BitConverter.ToUInt64(bytes, 0));
-        else throw new ArgumentException(QowaivMessages.ArgumentException_TimestampArrayShouldHaveSize8, nameof(bytes));
-    }
+        => Guard.HasAny(bytes).Length == 8
+        ? Create(BitConverter.ToUInt64(bytes, 0))
+        : throw new ArgumentException(QowaivMessages.ArgumentException_TimestampArrayShouldHaveSize8, nameof(bytes));
 }

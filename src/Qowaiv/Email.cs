@@ -138,14 +138,12 @@ internal static partial class Email
         {
             if (Failure) return None();
 
-            var length = QuoteLength();
+            var len = QuoteLength();
 
-            if (length.IsInRange(3, PartLength) &&
-                Next(length - 1, length) is { Ch: At } next)
-            {
-                return new(Input[(next.Index + 1)..], Buffer, next.Length);
-            }
-            else return None();
+            return len.IsInRange(3, PartLength)
+                && Next(len - 1, len) is { Ch: At } next
+                ? new(Input[(next.Index + 1)..], Buffer, next.Length)
+                : None();
         }
 
         [Pure]

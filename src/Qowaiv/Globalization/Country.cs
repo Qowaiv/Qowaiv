@@ -261,18 +261,15 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     /// Returns a country that represents the same region as region info.
     /// </returns>
     [Pure]
-    public static Country Create(RegionInfo? region)
+    public static Country Create(RegionInfo? region) => region switch
     {
-        if (region == null) { return default; }
+        null => Empty,
 
         // In .NET, Serbia and Montenegro (CS) is still active.
-        if (region.TwoLetterISORegionName == "CS")
-        {
-            return CSXX;
-        }
+        { TwoLetterISORegionName: "CS" } => CSXX,
 
-        return All.FirstOrDefault(c => c.Name == region.TwoLetterISORegionName);
-    }
+        _ => All.FirstOrDefault(c => c.Name == region.TwoLetterISORegionName),
+    };
 
     /// <summary>Creates a country based on a culture info.</summary>
     /// <param name="culture">

@@ -103,24 +103,24 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// The string representing the Single Value Object.
     /// </param>
     [Pure]
-    public virtual string? ToJson(string? str)
+    public virtual string? ToJson(string? str) => str switch
     {
-        if (str is null) return null;
-        else if (str == unknown) return FormatUnknown(default, CultureInfo.InvariantCulture);
-        else return str;
-    }
+        null => null,
+        unknown => FormatUnknown(default, CultureInfo.InvariantCulture),
+        _ => str,
+    };
 
     /// <summary>Serializes the Single Value Object to an XML string.</summary>
     /// <param name="str">
     /// The string representing the Single Value Object.
     /// </param>
     [Pure]
-    public virtual string? ToXml(string? str)
+    public virtual string? ToXml(string? str) => str switch
     {
-        if (str is null) return null;
-        else if (str == unknown) return FormatUnknown(default, CultureInfo.InvariantCulture);
-        else return str;
-    }
+        null => null,
+        unknown => FormatUnknown(default, CultureInfo.InvariantCulture),
+        _ => str,
+    };
 
     /// <summary>Creates a <see cref="FormatException" /> using the <see cref="InvalidFormatMessage(string?, IFormatProvider?)" />.</summary>
     [Pure]

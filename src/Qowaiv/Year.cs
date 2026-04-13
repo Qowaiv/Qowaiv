@@ -53,12 +53,12 @@ public readonly partial struct Year : IXmlSerializable, IFormattable, IEquatable
     /// The serialized JSON node.
     /// </returns>
     [Pure]
-    public object? ToJson()
+    public object? ToJson() => this switch
     {
-        if (IsEmpty()) return null;
-        else if (IsUnknown()) return "?";
-        else return (long)m_Value;
-    }
+        { HasValue: false } => null,
+        { IsKnown: false } => "?",
+        _ => (long)m_Value,
+    };
 
     /// <summary>Returns a <see cref="string" /> that represents the current year for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

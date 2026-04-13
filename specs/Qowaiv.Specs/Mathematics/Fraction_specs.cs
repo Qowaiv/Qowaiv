@@ -624,7 +624,7 @@ public class Can_be_casted_explicit
 {
     [TestCase(0, 0)]
     [TestCase("-69/17", -69 / 17)]
-    public void to_Int32(Fraction fraction, int casted) => ((int)fraction).Should().Be(casted);
+    public void to_Int32(Fraction fraction, int casted) => ((int)(long)fraction).Should().Be(casted);
 
     [TestCase(0, 0)]
     [TestCase("-69/17", -69 / 17)]

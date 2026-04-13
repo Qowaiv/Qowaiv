@@ -330,7 +330,9 @@ public static class QowaivEnumerableExtensions
 
     /// <summary>Gets the average Elo.</summary>
     [Pure]
+#pragma warning disable IDE0120 // Simplify LINQ expression: Average only exists on Elo due to this method.
     public static Elo Average(this IEnumerable<Elo> elos) => elos.Select(elo => (double)elo).Average();
+#pragma warning restore IDE0120 // Simplify LINQ expression
 
     /// <summary>Computes the average of a sequence of <see cref="Percentage" /> values that are obtained
     /// by invoking a transform function on each element of the input sequence.

@@ -298,17 +298,17 @@ public class Is_comparable
 public class Casts
 {
     [Test]
-    public void explicitly_from_short()
+    public void explicitly_from_int()
     {
         var casted = (Year)1979;
         casted.Should().Be(Svo.Year);
     }
 
     [Test]
-    public void explicitly_to_short()
+    public void explicitly_to_int()
     {
-        var casted = (short)Svo.Year;
-        casted.Should().Be((short)1979);
+        var casted = (int)Svo.Year;
+        casted.Should().Be(1979);
     }
 }
 

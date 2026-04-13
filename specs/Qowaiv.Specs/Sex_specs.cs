@@ -262,7 +262,7 @@ public class Casts
     public void explicitly_to_byte()
     {
         var casted = (byte)Svo.Sex;
-        casted.Should().Be((byte)2);
+        casted.Should().Be(2);
     }
 
     [Test]

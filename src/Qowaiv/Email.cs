@@ -205,20 +205,20 @@ internal static partial class Email
 
             var isIp6 = Input.StartsWith("IPV6:".AsSpan(), StringComparison.OrdinalIgnoreCase);
             var dots = 0;
-            var length = Length;
-            Buffer[length++] = '[';
+            var len = Length;
+            Buffer[len++] = '[';
 
-            var (ch, index, len) = Next(isIp6 ? 4 : -1, length);
+            var (ch, index, ipLen) = Next(isIp6 ? 4 : -1, len);
 
             // Strip comments
             while (index < Input.Length)
             {
                 dots += ch is Dot ? 1 : 0;
-                (ch, index, len) = Next(index, len);
-                if (len is NoMatch or TotalLength) return None();
+                (ch, index, ipLen) = Next(index, ipLen);
+                if (ipLen is NoMatch or TotalLength) return None();
             }
 
-            var str = Buffer[length..len].ToString();
+            var str = Buffer[len..ipLen].ToString();
 
             if (IPAddress.TryParse(str, out var ip) && IsValid(ip))
             {
@@ -228,12 +228,12 @@ internal static partial class Email
 
                 for (var i = 0; i < str.Length; i++)
                 {
-                    Buffer[length++] = str[i];
+                    Buffer[len++] = str[i];
                 }
-                length = Length + str.Length + 1;
-                Buffer[length++] = ']';
+                len = Length + str.Length + 1;
+                Buffer[len++] = ']';
 
-                return new(Input, Buffer[..length], length);
+                return new(Input, Buffer[..len], len);
             }
             else return None();
 

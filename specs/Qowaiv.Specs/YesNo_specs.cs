@@ -75,60 +75,42 @@ public class Has_constant
 {
     [Test]
     public void Empty_represent_default_value()
-    {
-        YesNo.Empty.Should().Be(default);
-    }
+        => YesNo.Empty.Should().Be(default);
 }
 
 public class Is_equal_by_value
 {
     [Test]
     public void not_equal_to_null()
-    {
-        Svo.YesNo.Equals(null).Should().BeFalse();
-    }
+        => Svo.YesNo.Equals(null).Should().BeFalse();
 
     [Test]
     public void not_equal_to_other_type()
-    {
-        Svo.YesNo.Equals(new object()).Should().BeFalse();
-    }
+        => Svo.YesNo.Equals(new object()).Should().BeFalse();
 
     [Test]
     public void not_equal_to_different_value()
-    {
-        Svo.YesNo.Equals(YesNo.Unknown).Should().BeFalse();
-    }
+        => Svo.YesNo.Equals(YesNo.Unknown).Should().BeFalse();
 
     [Test]
     public void equal_to_same_value()
-    {
-        Svo.YesNo.Equals(YesNo.Yes).Should().BeTrue();
-    }
+        => Svo.YesNo.Equals(YesNo.Yes).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
-    {
-        (YesNo.Yes == Svo.YesNo).Should().BeTrue();
-    }
+        => (YesNo.Yes == Svo.YesNo).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
-    {
-        (YesNo.Yes == YesNo.No).Should().BeFalse();
-    }
+        => (YesNo.Yes == YesNo.No).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
-    {
-        (YesNo.Yes != Svo.YesNo).Should().BeFalse();
-    }
+        => (YesNo.Yes != Svo.YesNo).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
-    {
-        (YesNo.Yes != YesNo.No).Should().BeTrue();
-    }
+        => (YesNo.Yes != YesNo.No).Should().BeTrue();
 
     [TestCase("", 0)]
     [TestCase("yes", 665630161)]
@@ -145,21 +127,15 @@ public class Can_be_parsed
 {
     [Test]
     public void from_null_string_represents_Empty()
-    {
-        YesNo.Parse(null).Should().Be(YesNo.Empty);
-    }
+        => YesNo.Parse(null).Should().Be(YesNo.Empty);
 
     [Test]
     public void from_empty_string_represents_Empty()
-    {
-        YesNo.Parse(string.Empty).Should().Be(YesNo.Empty);
-    }
+        => YesNo.Parse(string.Empty).Should().Be(YesNo.Empty);
 
     [Test]
     public void from_question_mark_represents_Unknown()
-    {
-        YesNo.Parse("?").Should().Be(YesNo.Unknown);
-    }
+        => YesNo.Parse("?").Should().Be(YesNo.Unknown);
 
     [TestCase("en", "y")]
     [TestCase("nl", "j")]
@@ -187,9 +163,7 @@ public class Can_be_parsed
 
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
-    {
-        YesNo.TryParse("invalid input", out _).Should().BeFalse();
-    }
+        => YesNo.TryParse("invalid input", out _).Should().BeFalse();
 
     [Test]
     public void from_invalid_as_null_with_TryParse()
@@ -197,24 +171,18 @@ public class Can_be_parsed
 
     [Test]
     public void with_TryParse_returns_SVO()
-    {
-        YesNo.TryParse("yes").Should().Be(Svo.YesNo);
-    }
+        => YesNo.TryParse("yes").Should().Be(Svo.YesNo);
 }
 
 public class Has_custom_formatting
 {
     [Test]
     public void default_value_is_represented_as_string_empty()
-    {
-        default(YesNo).ToString().Should().Be(string.Empty);
-    }
+        => default(YesNo).ToString().Should().Be(string.Empty);
 
     [Test]
     public void unknown_value_is_represented_as_unknown()
-    {
-        YesNo.Unknown.ToString(CultureInfo.InvariantCulture).Should().Be("unknown");
-    }
+        => YesNo.Unknown.ToString(CultureInfo.InvariantCulture).Should().Be("unknown");
 
     [Test]
     public void custom_format_provider_is_applied()
@@ -272,7 +240,8 @@ public class Has_custom_formatting
 public class Is_comparable
 {
     [Test]
-    public void to_null_is_1() => Svo.YesNo.CompareTo(Nil.Object).Should().Be(1);
+    public void to_null_is_1()
+        => Svo.YesNo.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_YesNo_as_object()
@@ -307,10 +276,7 @@ public class Casts
 {
     [TestCase("yes", true)]
     [TestCase("no", false)]
-    public void explicitly_from_boolean(YesNo casted, bool boolean)
-    {
-        ((YesNo)boolean).Should().Be(casted);
-    }
+    public void explicitly_from_boolean(YesNo casted, bool boolean) => ((YesNo)boolean).Should().Be(casted);
 
     [Test]
     public void yes_implicitly_to_true()

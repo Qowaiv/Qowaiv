@@ -27,9 +27,7 @@ public class Create
 {
     [Test]
     public void returns_null_for_non_representable_values()
-    {
-        EvenOnlyId.TryCreate(17).Should().Be(null);
-    }
+        => EvenOnlyId.TryCreate(17).Should().Be(null);
 }
 
 public class Is_equal_by_value

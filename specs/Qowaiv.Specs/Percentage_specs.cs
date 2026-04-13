@@ -77,9 +77,7 @@ public class Has_constant
 {
     [Test]
     public void Zero_represent_default_value()
-    {
-        Percentage.Zero.Should().Be(default);
-    }
+        => Percentage.Zero.Should().Be(default);
 
     [Test]
     public void One_represent_1_percent()
@@ -102,51 +100,35 @@ public class Is_equal_by_value
 {
     [Test]
     public void not_equal_to_null()
-    {
-        Svo.Percentage.Equals(null).Should().BeFalse();
-    }
+        => Svo.Percentage.Equals(null).Should().BeFalse();
 
     [Test]
     public void not_equal_to_other_type()
-    {
-        Svo.Percentage.Equals(new object()).Should().BeFalse();
-    }
+        => Svo.Percentage.Equals(new object()).Should().BeFalse();
 
     [Test]
     public void not_equal_to_different_value()
-    {
-        Svo.Percentage.Equals(84.17.Percent()).Should().BeFalse();
-    }
+        => Svo.Percentage.Equals(84.17.Percent()).Should().BeFalse();
 
     [Test]
     public void equal_to_same_value()
-    {
-        Svo.Percentage.Equals(17.51.Percent()).Should().BeTrue();
-    }
+        => Svo.Percentage.Equals(17.51.Percent()).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
-    {
-        (Svo.Percentage == 17.51.Percent()).Should().BeTrue();
-    }
+        => (Svo.Percentage == 17.51.Percent()).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
-    {
-        (Svo.Percentage == 6.66.Percent()).Should().BeFalse();
-    }
+        => (Svo.Percentage == 6.66.Percent()).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
-    {
-        (Svo.Percentage != 17.51.Percent()).Should().BeFalse();
-    }
+        => (Svo.Percentage != 17.51.Percent()).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
-    {
-        (Svo.Percentage != 6.66.Percent()).Should().BeTrue();
-    }
+        => (Svo.Percentage != 6.66.Percent()).Should().BeTrue();
 
     [TestCase("0%", 0)]
     [TestCase("17.51%", 665367300)]
@@ -198,9 +180,7 @@ public class Can_be_parsed
 
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
-    {
-        Percentage.TryParse("invalid input", out _).Should().BeFalse();
-    }
+        => Percentage.TryParse("invalid input", out _).Should().BeFalse();
 
     [Test]
     public void from_invalid_as_null_with_TryParse()
@@ -373,7 +353,8 @@ public class Formatting_is_invalid
 public class Is_comparable
 {
     [Test]
-    public void to_null_is_1() => Svo.Percentage.CompareTo(Nil.Object).Should().Be(1);
+    public void to_null_is_1()
+        => Svo.Percentage.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_Percentage_as_object()

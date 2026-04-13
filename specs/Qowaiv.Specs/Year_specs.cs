@@ -15,76 +15,50 @@ public class With_domain_logic
     [TestCase(false, 1979)]
     [TestCase(false, "?")]
     [TestCase(true, "")]
-    public void IsEmpty_returns(bool result, Year svo)
-    {
-        svo.IsEmpty().Should().Be(result);
-    }
+    public void IsEmpty_returns(bool result, Year svo) => svo.IsEmpty().Should().Be(result);
 
     [TestCase(false, 1979)]
     [TestCase(true, "?")]
     [TestCase(true, "")]
-    public void IsEmptyOrUnknown_returns(bool result, Year svo)
-    {
-        svo.IsEmptyOrUnknown().Should().Be(result);
-    }
+    public void IsEmptyOrUnknown_returns(bool result, Year svo) => svo.IsEmptyOrUnknown().Should().Be(result);
 
     [TestCase(false, 1979)]
     [TestCase(true, "?")]
     [TestCase(false, "")]
-    public void IsUnknown_returns(bool result, Year svo)
-    {
-        svo.IsUnknown().Should().Be(result);
-    }
+    public void IsUnknown_returns(bool result, Year svo) => svo.IsUnknown().Should().Be(result);
 }
 
 public class Is_not_leap_year_when
 {
     [TestCase("")]
     [TestCase("?")]
-    public void empty_or_unknown(Year year)
-    {
-        year.IsLeapYear.Should().BeFalse();
-    }
+    public void empty_or_unknown(Year year) => year.IsLeapYear.Should().BeFalse();
 
     [TestCase(1979)]
     [TestCase(2017)]
-    public void not_dividable_by_4(Year year)
-    {
-        year.IsLeapYear.Should().BeFalse();
-    }
+    public void not_dividable_by_4(Year year) => year.IsLeapYear.Should().BeFalse();
 
     [TestCase(1800)]
     [TestCase(1900)]
-    public void dividable_by_100_not_by_400(Year year)
-    {
-        year.IsLeapYear.Should().BeFalse();
-    }
+    public void dividable_by_100_not_by_400(Year year) => year.IsLeapYear.Should().BeFalse();
 }
 
 public class Is_leap_year
 {
     [TestCase(1988)]
     [TestCase(2004)]
-    public void dividable_by_4_not_by_100(Year year)
-    {
-        year.IsLeapYear.Should().BeTrue();
-    }
+    public void dividable_by_4_not_by_100(Year year) => year.IsLeapYear.Should().BeTrue();
 
     [TestCase(1600)]
     [TestCase(2000)]
-    public void dividable_by_400(Year year)
-    {
-        year.IsLeapYear.Should().BeTrue();
-    }
+    public void dividable_by_400(Year year) => year.IsLeapYear.Should().BeTrue();
 }
 
 public class Has_constant
 {
     [Test]
     public void Empty_represent_default_value()
-    {
-        Year.Empty.Should().Be(default);
-    }
+        => Year.Empty.Should().Be(default);
 
     [Test]
     public void MinValue_represents_1()
@@ -105,15 +79,11 @@ public class Is_equal_by_value
 {
     [Test]
     public void not_equal_to_null()
-    {
-        Svo.Year.Equals(null).Should().BeFalse();
-    }
+        => Svo.Year.Equals(null).Should().BeFalse();
 
     [Test]
     public void not_equal_to_other_type()
-    {
-        Svo.Year.Equals(new object()).Should().BeFalse();
-    }
+        => Svo.Year.Equals(new object()).Should().BeFalse();
 
     [Test]
     public void not_equal_to_different_value()
@@ -124,33 +94,23 @@ public class Is_equal_by_value
 
     [Test]
     public void equal_to_same_value()
-    {
-        Svo.Year.Equals(1979.CE()).Should().BeTrue();
-    }
+        => Svo.Year.Equals(1979.CE()).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
-    {
-        (Svo.Year == 1979.CE()).Should().BeTrue();
-    }
+        => (Svo.Year == 1979.CE()).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
-    {
-        (Svo.Year == 2017.CE()).Should().BeFalse();
-    }
+        => (Svo.Year == 2017.CE()).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
-    {
-        (Svo.Year != 1979.CE()).Should().BeFalse();
-    }
+        => (Svo.Year != 1979.CE()).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
-    {
-        (Svo.Year != 2017.CE()).Should().BeTrue();
-    }
+        => (Svo.Year != 2017.CE()).Should().BeTrue();
 
     [TestCase("", 0)]
     [TestCase("1979", 665629288)]
@@ -167,21 +127,15 @@ public class Can_be_parsed
 {
     [Test]
     public void from_null_string_represents_Empty()
-    {
-        Year.Parse(null).Should().Be(Year.Empty);
-    }
+        => Year.Parse(null).Should().Be(Year.Empty);
 
     [Test]
     public void from_empty_string_represents_Empty()
-    {
-        Year.Parse(string.Empty).Should().Be(Year.Empty);
-    }
+        => Year.Parse(string.Empty).Should().Be(Year.Empty);
 
     [Test]
     public void from_question_mark_represents_Unknown()
-    {
-        Year.Parse("?").Should().Be(Year.Unknown);
-    }
+        => Year.Parse("?").Should().Be(Year.Unknown);
 
     [Test]
     public void from_string()
@@ -203,9 +157,7 @@ public class Can_be_parsed
 
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
-    {
-        Year.TryParse("invalid input", out _).Should().BeFalse();
-    }
+        => Year.TryParse("invalid input", out _).Should().BeFalse();
 
     [Test]
     public void from_invalid_as_null_with_TryParse()
@@ -213,9 +165,7 @@ public class Can_be_parsed
 
     [Test]
     public void with_TryParse_returns_SVO()
-    {
-        Year.TryParse("1979").Should().Be(Svo.Year);
-    }
+        => Year.TryParse("1979").Should().Be(Svo.Year);
 }
 
 public class Can_be_created_from_int
@@ -230,31 +180,22 @@ public class Can_be_created_from_int
 
     [Test]
     public void within_range()
-    {
-        Year.TryCreate(1979).Should().Be(Svo.Year);
-    }
+        => Year.TryCreate(1979).Should().Be(Svo.Year);
 
     [TestCase(0)]
     [TestCase(10000)]
-    public void but_not_outside_1_to_9999(int year)
-    {
-        Year.TryCreate(year, out _).Should().BeFalse();
-    }
+    public void but_not_outside_1_to_9999(int year) => Year.TryCreate(year, out _).Should().BeFalse();
 }
 
 public class Has_custom_formatting
 {
     [Test]
     public void default_value_is_represented_as_string_empty()
-    {
-        default(Year).ToString().Should().Be(string.Empty);
-    }
+        => default(Year).ToString().Should().Be(string.Empty);
 
     [Test]
     public void unknown_value_is_represented_as_unknown()
-    {
-        Year.Unknown.ToString().Should().Be("?");
-    }
+        => Year.Unknown.ToString().Should().Be("?");
 
     [Test]
     public void custom_format_provider_is_applied()
@@ -288,9 +229,7 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1()
-    {
-        Svo.Year.CompareTo(null).Should().Be(1);
-    }
+        => Svo.Year.CompareTo(null).Should().Be(1);
 
     [Test]
     public void to_Year_as_object()

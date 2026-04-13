@@ -11,10 +11,7 @@ public class MoneyTest
 
     /// <summary>Money.Empty should be equal to the default of Money.</summary>
     [Test]
-    public void Zero_None_EqualsDefault()
-    {
-        Money.Zero.Should().Be(default);
-    }
+    public void Zero_None_EqualsDefault() => Money.Zero.Should().Be(default);
 
     #endregion
 
@@ -296,23 +293,14 @@ public class MoneyTest
 
     /// <summary>GetHash should not fail for Money.Empty.</summary>
     [Test]
-    public void GetHash_Empty_Hash()
-    {
-        Money.Zero.GetHashCode().Should().Be(0);
-    }
+    public void GetHash_Empty_Hash() => Money.Zero.GetHashCode().Should().Be(0);
 
     /// <summary>GetHash should not fail for the test struct.</summary>
     [Test]
-    public void GetHash_TestStruct_NotZero()
-    {
-        Assert.NotZero(TestStruct.GetHashCode());
-    }
+    public void GetHash_TestStruct_NotZero() => Assert.NotZero(TestStruct.GetHashCode());
 
     [Test]
-    public void Equals_EmptyEmpty_IsTrue()
-    {
-        Money.Zero.Equals(Money.Zero).Should().BeTrue();
-    }
+    public void Equals_EmptyEmpty_IsTrue() => Money.Zero.Equals(Money.Zero).Should().BeTrue();
 
     [Test]
     public void Equals_FormattedAndUnformatted_IsTrue()
@@ -324,40 +312,22 @@ public class MoneyTest
     }
 
     [Test]
-    public void Equals_TestStructTestStruct_IsTrue()
-    {
-        TestStruct.Equals(TestStruct).Should().BeTrue();
-    }
+    public void Equals_TestStructTestStruct_IsTrue() => TestStruct.Equals(TestStruct).Should().BeTrue();
 
     [Test]
-    public void Equals_TestStructEmpty_IsFalse()
-    {
-        TestStruct.Equals(Money.Zero).Should().BeFalse();
-    }
+    public void Equals_TestStructEmpty_IsFalse() => TestStruct.Equals(Money.Zero).Should().BeFalse();
 
     [Test]
-    public void Equals_EmptyTestStruct_IsFalse()
-    {
-        Money.Zero.Equals(TestStruct).Should().BeFalse();
-    }
+    public void Equals_EmptyTestStruct_IsFalse() => Money.Zero.Equals(TestStruct).Should().BeFalse();
 
     [Test]
-    public void Equals_TestStructObjectTestStruct_IsTrue()
-    {
-        TestStruct.Equals((object)TestStruct).Should().BeTrue();
-    }
+    public void Equals_TestStructObjectTestStruct_IsTrue() => TestStruct.Equals((object)TestStruct).Should().BeTrue();
 
     [Test]
-    public void Equals_TestStructNull_IsFalse()
-    {
-        TestStruct.Equals(null).Should().BeFalse();
-    }
+    public void Equals_TestStructNull_IsFalse() => TestStruct.Equals(null).Should().BeFalse();
 
     [Test]
-    public void Equals_TestStructObject_IsFalse()
-    {
-        TestStruct.Equals(new object()).Should().BeFalse();
-    }
+    public void Equals_TestStructObject_IsFalse() => TestStruct.Equals(new object()).Should().BeFalse();
 
     [Test]
     public void OperatorIs_TestStructTestStruct_IsTrue()

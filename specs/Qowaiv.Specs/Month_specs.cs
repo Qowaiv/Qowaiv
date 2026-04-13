@@ -5,36 +5,32 @@ public class With_domain_logic
     [TestCase(true, "February")]
     [TestCase(true, "?")]
     [TestCase(false, "")]
-    public void HasValue_is(bool result, Month svo) => svo.HasValue.Should().Be(result);
+    public void HasValue_is(bool result, Month svo)
+        => svo.HasValue.Should().Be(result);
 
     [TestCase(true, "February")]
     [TestCase(false, "?")]
     [TestCase(false, "")]
-    public void IsKnown_is(bool result, Month svo) => svo.IsKnown.Should().Be(result);
+    public void IsKnown_is(bool result, Month svo)
+        => svo.IsKnown.Should().Be(result);
 
     [TestCase(false, "February")]
     [TestCase(false, "?")]
     [TestCase(true, "")]
     public void IsEmpty_returns(bool result, Month svo)
-    {
-        svo.IsEmpty().Should().Be(result);
-    }
+        => svo.IsEmpty().Should().Be(result);
 
     [TestCase(false, "February")]
     [TestCase(true, "?")]
     [TestCase(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, Month svo)
-    {
-        svo.IsEmptyOrUnknown().Should().Be(result);
-    }
+        => svo.IsEmptyOrUnknown().Should().Be(result);
 
     [TestCase(false, "February")]
     [TestCase(true, "?")]
     [TestCase(false, "")]
     public void IsUnknown_returns(bool result, Month svo)
-    {
-        svo.IsUnknown().Should().Be(result);
-    }
+        => svo.IsUnknown().Should().Be(result);
 }
 
 public class Days
@@ -46,23 +42,17 @@ public class Days
     [TestCase(31, "January", 2020)]
     [TestCase(30, "November", 2020)]
     public void per_year(int days, Month month, Year year)
-    {
-        month.Days(year).Should().Be(days);
-    }
+        => month.Days(year).Should().Be(days);
 }
 
 public class Short_name
 {
     [Test]
     public void is_string_empty_for_empty()
-    {
-        Month.Empty.ShortName.Should().Be(string.Empty);
-    }
+        => Month.Empty.ShortName.Should().Be(string.Empty);
     [Test]
     public void is_question_mark_for_unknown()
-    {
-        Month.Unknown.ShortName.Should().Be("?");
-    }
+        => Month.Unknown.ShortName.Should().Be("?");
     [Test]
     public void picks_current_culture()
     {
@@ -73,23 +63,17 @@ public class Short_name
     }
     [Test]
     public void supports_custom_culture()
-    {
-        Svo.Month.GetShortName(TestCultures.nl_BE).Should().Be("feb.");
-    }
+        => Svo.Month.GetShortName(TestCultures.nl_BE).Should().Be("feb.");
 }
 
 public class Full_name
 {
     [Test]
     public void is_string_empty_for_empty()
-    {
-        Month.Empty.FullName.Should().Be(string.Empty);
-    }
+        => Month.Empty.FullName.Should().Be(string.Empty);
     [Test]
     public void is_question_mark_for_unknown()
-    {
-        Month.Unknown.FullName.Should().Be("?");
-    }
+        => Month.Unknown.FullName.Should().Be("?");
     [Test]
     public void picks_current_culture()
     {
@@ -100,9 +84,7 @@ public class Full_name
     }
     [Test]
     public void supports_custom_culture()
-    {
-        Svo.Month.GetFullName(TestCultures.nl_BE).Should().Be("februari");
-    }
+        => Svo.Month.GetFullName(TestCultures.nl_BE).Should().Be("februari");
 }
 
 public class Has_constant
@@ -116,51 +98,35 @@ public class Is_equal_by_value
 {
     [Test]
     public void not_equal_to_null()
-    {
-        Svo.Month.Equals(null).Should().BeFalse();
-    }
+        => Svo.Month.Equals(null).Should().BeFalse();
 
     [Test]
     public void not_equal_to_other_type()
-    {
-        Svo.Month.Equals(new object()).Should().BeFalse();
-    }
+        => Svo.Month.Equals(new object()).Should().BeFalse();
 
     [Test]
     public void not_equal_to_different_value()
-    {
-        Svo.Month.Equals(Month.December).Should().BeFalse();
-    }
+        => Svo.Month.Equals(Month.December).Should().BeFalse();
 
     [Test]
     public void equal_to_same_value()
-    {
-        Svo.Month.Equals(Month.February).Should().BeTrue();
-    }
+        => Svo.Month.Equals(Month.February).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
-    {
-        (Svo.Month == Month.February).Should().BeTrue();
-    }
+        => (Svo.Month == Month.February).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
-    {
-        (Svo.Month == Month.December).Should().BeFalse();
-    }
+        => (Svo.Month == Month.December).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
-    {
-        (Svo.Month != Month.February).Should().BeFalse();
-    }
+        => (Svo.Month != Month.February).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
-    {
-        (Svo.Month != Month.December).Should().BeTrue();
-    }
+        => (Svo.Month != Month.December).Should().BeTrue();
 
     [TestCase("", 0)]
     [TestCase("February", 665630161)]
@@ -177,21 +143,15 @@ public class Can_be_parsed
 {
     [Test]
     public void from_null_string_represents_Empty()
-    {
-        Month.Parse(null).Should().Be(Month.Empty);
-    }
+        => Month.Parse(null).Should().Be(Month.Empty);
 
     [Test]
     public void from_empty_string_represents_Empty()
-    {
-        Month.Parse(string.Empty).Should().Be(Month.Empty);
-    }
+        => Month.Parse(string.Empty).Should().Be(Month.Empty);
 
     [Test]
     public void from_question_mark_represents_Unknown()
-    {
-        Month.Parse("?").Should().Be(Month.Unknown);
-    }
+        => Month.Parse("?").Should().Be(Month.Unknown);
 
     [TestCase("en", "February")]
     [TestCase("en", "02")]
@@ -218,9 +178,7 @@ public class Can_be_parsed
 
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
-    {
-        Month.TryParse("invalid input", out _).Should().BeFalse();
-    }
+        => Month.TryParse("invalid input", out _).Should().BeFalse();
 
     [Test]
     public void from_invalid_as_null_with_TryParse()
@@ -228,23 +186,17 @@ public class Can_be_parsed
 
     [Test]
     public void with_TryParse_returns_SVO()
-    {
-        Month.TryParse("February").Should().Be(Svo.Month);
-    }
+        => Month.TryParse("February").Should().Be(Svo.Month);
 }
 
 public class Can_be_created
 {
     [Test]
     public void with_TryCreate_returns_SVO()
-    {
-        Month.TryCreate(2).Should().Be(Svo.Month);
-    }
+        => Month.TryCreate(2).Should().Be(Svo.Month);
     [Test]
     public void with_TryCreate_returns_Empty()
-    {
-        Month.TryCreate(null).Should().Be(Month.Empty);
-    }
+        => Month.TryCreate(null).Should().Be(Month.Empty);
 }
 public class Has_custom_formatting
 {
@@ -277,15 +229,11 @@ public class Has_custom_formatting
 
     [Test]
     public void default_value_is_represented_as_string_empty()
-    {
-        default(Month).ToString().Should().Be(string.Empty);
-    }
+        => default(Month).ToString().Should().Be(string.Empty);
 
     [Test]
     public void unknown_value_is_represented_as_unknown()
-    {
-        Month.Unknown.ToString().Should().Be("?");
-    }
+        => Month.Unknown.ToString().Should().Be("?");
 
     [Test]
     public void custom_format_provider_is_applied()
@@ -322,7 +270,8 @@ public class Has_custom_formatting
 public class Is_comparable
 {
     [Test]
-    public void to_null_is_1() => Svo.Month.CompareTo(Nil.Object).Should().Be(1);
+    public void to_null_is_1()
+        => Svo.Month.CompareTo(Nil.Object).Should().Be(1);
 
     [Test]
     public void to_Month_as_object()

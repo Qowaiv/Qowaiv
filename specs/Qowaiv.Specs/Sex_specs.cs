@@ -32,19 +32,13 @@ public class With_domain_logic
     [TestCase(false, "Female")]
     [TestCase(true, "?")]
     [TestCase(false, "")]
-    public void IsUnknown_returns(bool result, Sex svo)
-    {
-        svo.IsUnknown().Should().Be(result);
-    }
+    public void IsUnknown_returns(bool result, Sex svo) => svo.IsUnknown().Should().Be(result);
 
     [TestCase(true, "Male")]
     [TestCase(true, "Female")]
     [TestCase(false, "?")]
     [TestCase(false, "")]
-    public void IsMaleOrFemale_returns(bool result, Sex svo)
-    {
-        svo.IsMaleOrFemale().Should().Be(result);
-    }
+    public void IsMaleOrFemale_returns(bool result, Sex svo) => svo.IsMaleOrFemale().Should().Be(result);
 }
 
 public class Display_name
@@ -60,18 +54,14 @@ public class Display_name
 
     [Test]
     public void for_custom_culture_if_specified()
-    {
-        Svo.Sex.GetDisplayName(TestCultures.es_EC).Should().Be("Mujer");
-    }
+        => Svo.Sex.GetDisplayName(TestCultures.es_EC).Should().Be("Mujer");
 }
 
 public class Has_constant
 {
     [Test]
     public void Empty_represent_default_value()
-    {
-        Sex.Empty.Should().Be(default);
-    }
+        => Sex.Empty.Should().Be(default);
 }
 
 public class Is_equal_by_value
@@ -148,7 +138,8 @@ public class Can_be_parsed
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Func<Sex> parse = () => Sex.Parse("invalid input");
+            Func<Sex> parse = ()
+        => Sex.Parse("invalid input");
             parse.Should().Throw<FormatException>()
                 .WithMessage("Not a valid sex");
         }
@@ -198,9 +189,7 @@ public class Has_custom_formatting
 
     [Test]
     public void default_value_is_represented_as_string_empty()
-    {
-        default(Sex).ToString().Should().Be(string.Empty);
-    }
+        => default(Sex).ToString().Should().Be(string.Empty);
 
     [Test]
     public void custom_format_provider_is_applied()
@@ -285,10 +274,7 @@ public class Casts
 
     [TestCase(2, "Female")]
     [TestCase(null, "?")]
-    public void explicitly_to_nullable_int(int casted, Sex sex)
-    {
-        ((int?)sex).Should().Be(casted);
-    }
+    public void explicitly_to_nullable_int(int casted, Sex sex) => ((int?)sex).Should().Be(casted);
 
     [TestCase("Female", 2)]
     [TestCase("", null)]

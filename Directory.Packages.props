@@ -29,7 +29,7 @@
     <PackageVersion Include="PolySharp" Version="1.15.0" />
     <PackageVersion Include="Qowaiv.Analyzers.CSharp" Version="2.0.6" />
     <PackageVersion Include="Qowaiv.Validation.DataAnnotations" Version="4.0.2" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.15.0.120848" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.25.0.139117" />
     <PackageVersion Include="StyleCop.Analyzers.Unstable" Version="1.2.0.556" />
     <!-- Don't enforce newer versions -->
     <PackageVersion Include="System.Data.SqlClient" Version="[4.8.6]" />

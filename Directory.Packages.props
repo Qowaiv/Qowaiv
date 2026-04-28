@@ -6,7 +6,7 @@
     <CentralPackageVersionOverrideEnabled>true</CentralPackageVersionOverrideEnabled>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="AsyncFixer" Version="1.6.0" />
+    <PackageVersion Include="AsyncFixer" Version="2.1.0" />
     <PackageVersion Include="AwesomeAssertions" Version="9.2.1" />
     <PackageVersion Include="AwesomeAssertions.Analyzers" Version="9.0.8" />
     <!-- linked to Roslyn version -->

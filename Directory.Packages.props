@@ -13,7 +13,7 @@
     <PackageVersion Include="BenchmarkDotNet" Version="[0.14.0]" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="DotNet.ReproducibleBuilds" Version="1.2.39" />
-    <PackageVersion Include="DotNetProjectFile.Analyzers" Version="1.8.0" />
+    <PackageVersion Include="DotNetProjectFile.Analyzers" Version="1.12.1" />
     <PackageVersion Include="DotNetProjectFile.Analyzers.Sdk" Version="1.8.0" />
     <PackageVersion Include="MathNet.Numerics" Version="5.0.0" />
     <!-- Roslyn .NET 8 -->

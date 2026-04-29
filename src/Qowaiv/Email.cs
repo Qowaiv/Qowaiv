@@ -275,11 +275,11 @@ internal static partial class Email
         private readonly int QuoteLength()
         {
             var escaped = false;
-            var length = 0;
+            var len = 0;
 
             if (Input[0] is not Quote) return NoMatch;
 
-            Buffer[length++] = Quote;
+            Buffer[len++] = Quote;
 
             // there should at least be one char after.
             for (var i = 1; i < Input.Length - 1; i++)
@@ -287,7 +287,7 @@ internal static partial class Email
                 var ch = Input[i];
 
                 // Copy the local while it could fit.
-                if (length < PartLength) { Buffer[length++] = ch; }
+                if (len < PartLength) { Buffer[len++] = ch; }
 
                 if (!escaped && ch == Quote) return i + 1;
 

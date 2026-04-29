@@ -43,10 +43,6 @@
     <PackageReference PrivateAssets="all" Include="StyleCop.Analyzers.Unstable" />
   </ItemGroup>
 
-  <ItemGroup Label="Build extensions">
-    <PackageReference PrivateAssets="all" Include="Microsoft.Sbom.Targets" />
-  </ItemGroup>
-
   <ItemGroup>
     <!-- Shared assembly tags. -->
     <Compile Include="$(MSBuildThisFileDirectory)../shared/Lock.cs" Link="Properties/Lock.cs" />

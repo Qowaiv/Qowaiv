@@ -5,9 +5,7 @@ public class Decimal_scale
 {
     [Test]
     public void _0_for_Percentage_Hudrded()
-    {
-        Scale(Percentage.Hundred).Should().Be(0);
-    }
+        => Scale(Percentage.Hundred).Should().Be(0);
 
     [Test]
     public void _0_for_100_Percent()

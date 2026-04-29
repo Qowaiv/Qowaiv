@@ -280,6 +280,7 @@ internal static class CharBuffer
         ['ĳ'] = "ij",
     };
 
+#pragma warning disable S1067 // Expressions should not be too complex
     [Pure]
     private static bool IsMarkup(char ch)
         => char.IsWhiteSpace(ch)

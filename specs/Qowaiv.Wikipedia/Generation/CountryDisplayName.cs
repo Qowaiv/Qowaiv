@@ -139,11 +139,10 @@ public static class CountryDisplayName
             {
                 var text = str[(index + Prefix.ES.Length)..];
                 var display = text[..text.IndexOf('}')];
-                if (display.Length > 0)
-                {
-                    return display.Replace(" Y ", " y ");
-                }
-                else return null;
+                
+                return display.Length > 0
+                    ? display.Replace(" Y ", " y ")
+                    : null;
             }
             else return null;
         }

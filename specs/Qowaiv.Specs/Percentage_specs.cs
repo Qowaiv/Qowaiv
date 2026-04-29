@@ -658,14 +658,14 @@ public class Can_be_added_to
     public void _short()
     {
         var addition = ((short)400) + 17.Percent();
-        addition.Should().Be((short)468);
+        addition.Should().Be(468);
     }
 
     [Test]
     public void _ushort()
     {
         var addition = ((ushort)400) + 17.Percent();
-        addition.Should().Be((ushort)468);
+        addition.Should().Be(468);
     }
 }
 
@@ -745,14 +745,14 @@ public class Can_be_subtracted_from
     public void _short()
     {
         var addition = ((short)400) - 17.Percent();
-        addition.Should().Be((short)332);
+        addition.Should().Be(332);
     }
 
     [Test]
     public void _ushort()
     {
         var addition = ((ushort)400) - 17.Percent();
-        addition.Should().Be((ushort)332);
+        addition.Should().Be(332);
     }
 }
 
@@ -832,14 +832,14 @@ public class Can_get_a_percentage_of
     public void _short()
     {
         var addition = ((short)400) * 17.Percent();
-        addition.Should().Be((short)68);
+        addition.Should().Be(68);
     }
 
     [Test]
     public void _ushort()
     {
         var addition = ((ushort)400) * 17.Percent();
-        addition.Should().Be((ushort)68);
+        addition.Should().Be(68);
     }
 }
 
@@ -919,14 +919,14 @@ public class Can_get_100_percent_based_on_percentage
     public void _short()
     {
         var addition = ((short)400) / 17.Percent();
-        addition.Should().Be((short)2352);
+        addition.Should().Be(2352);
     }
 
     [Test]
     public void _ushort()
     {
         var addition = ((ushort)400) / 17.Percent();
-        addition.Should().Be((ushort)2352);
+        addition.Should().Be(2352);
     }
 }
 

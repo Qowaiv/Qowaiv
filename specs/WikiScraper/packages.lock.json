@@ -16,9 +16,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.12.2, )",
-        "resolved": "1.12.2",
-        "contentHash": "fipSHWciBSOFAV3XqNiET+Zrl3/ATohHEamilaL9CS3cfJ2YYpLBk/w1jc1vURPfyhhYbggTw7XG6/IChQOFvA=="
+        "requested": "[1.13.1, )",
+        "resolved": "1.13.1",
+        "contentHash": "nDIThFLyqnihw9eTStm0oteWT31DanE/0k07TDWxcqrlG4wfEoTY4cWNr3MxLBSoXCI6MdkhUIxyrVB53yrM9A=="
       },
       "Microsoft.Sbom.Targets": {
         "type": "Direct",

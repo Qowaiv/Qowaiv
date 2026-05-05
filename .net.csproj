@@ -15,9 +15,5 @@
     <AdditionalFiles Include="props/**" />
     <AdditionalFiles Include="dictionary.dic" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="DotNetProjectFile.Analyzers.Sdk" PrivateAssets="all" />
-  </ItemGroup>
-
+ 
 </Project>

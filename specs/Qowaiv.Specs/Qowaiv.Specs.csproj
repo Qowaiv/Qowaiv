@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/nopackage.props" />
 
@@ -17,12 +17,12 @@
   <ItemGroup Label="Test Tools">
     <PackageReference Include="AwesomeAssertions" />
     <PackageReference Include="NUnit" />
+    <PackageReference Include="NUnit3TestAdapter" NoWarn="NU1701" />
   </ItemGroup>
 
   <ItemGroup Label="Build Tools">
     <PackageReference PrivateAssets="all" Include="coverlet.collector" />
     <PackageReference PrivateAssets="all" Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference PrivateAssets="all" Include="NUnit3TestAdapter"   NoWarn="NU1701" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">

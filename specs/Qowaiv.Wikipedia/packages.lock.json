@@ -44,10 +44,66 @@
         "resolved": "10.25.0.139117",
         "contentHash": "2iBZIkcgsaUNyIPFqR9ECv5PLbAwV9I/v/PeEiMdkfhWEAnqD7VyNXzukQDlL/D24f5OoUc4MbWF5SgYI7x3CA=="
       },
+      "Microsoft.ApplicationInsights": {
+        "type": "Transitive",
+        "resolved": "2.23.0",
+        "contentHash": "nWArUZTdU7iqZLycLKWe0TDms48KKGE6pONH2terYNa8REXiqixrMOkf1sk5DHGMaUTqONU2YkS4SAXBhLStgw=="
+      },
+      "Microsoft.Extensions.DependencyModel": {
+        "type": "Transitive",
+        "resolved": "8.0.2",
+        "contentHash": "mUBDZZRgZrSyFOsJ2qJJ9fXfqd/kXJwf3AiDoqLD9m6TjY5OO/vLNOb9fb4juC0487eq4hcGN/M2Rh/CKS7QYw=="
+      },
       "Microsoft.NETCore.Platforms": {
         "type": "Transitive",
         "resolved": "1.1.0",
         "contentHash": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A=="
+      },
+      "Microsoft.Testing.Extensions.Telemetry": {
+        "type": "Transitive",
+        "resolved": "2.1.0",
+        "contentHash": "5TwgTx2u7k9Al/xbZ18QXq4Hdy2xewkVTI6K3sk+jY2ykqUkIKNuj7rFu3GOV5KnEUkevhw6eZcyZs77STHJIA==",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "2.23.0",
+          "Microsoft.Testing.Platform": "2.1.0"
+        }
+      },
+      "Microsoft.Testing.Extensions.TrxReport.Abstractions": {
+        "type": "Transitive",
+        "resolved": "2.1.0",
+        "contentHash": "D8xmIJYQFJ6D49Rx5/vPrkZZxb338Jkew+eSqZLBfBiWKw4QZKy3i1BOXiLfz0lOmaNErwDz/YWRojCdNl+B9Q==",
+        "dependencies": {
+          "Microsoft.Testing.Platform": "2.1.0"
+        }
+      },
+      "Microsoft.Testing.Extensions.VSTestBridge": {
+        "type": "Transitive",
+        "resolved": "2.1.0",
+        "contentHash": "bNRIEA2YoGr+Y+7LHdA7i1U80+7BAdf4K4Qh4Kx6eKkoBK/NV7QpoMg+GWPP0/eqAFzuUmUOIPVZ87Oo0Vyxmw==",
+        "dependencies": {
+          "Microsoft.TestPlatform.ObjectModel": "18.0.1",
+          "Microsoft.Testing.Extensions.Telemetry": "2.1.0",
+          "Microsoft.Testing.Extensions.TrxReport.Abstractions": "2.1.0",
+          "Microsoft.Testing.Platform": "2.1.0"
+        }
+      },
+      "Microsoft.Testing.Platform": {
+        "type": "Transitive",
+        "resolved": "2.1.0",
+        "contentHash": "aHkjNTGIA+Zbdw6RJgSFrbDrCjO0CgqpElqYcvkRSeUhBv2bKarnvU3ep786U7UqrPlArT/B7VmImRibJD0Zrg=="
+      },
+      "Microsoft.Testing.Platform.MSBuild": {
+        "type": "Transitive",
+        "resolved": "2.1.0",
+        "contentHash": "UpfPebXQtHGrWz21+YLHmJSm+5zsuPE9U9pfdCtoB+67g75fDmWlNgpkH2ZmdVhSwkjNIed9Icg8Iu63z2ei5Q==",
+        "dependencies": {
+          "Microsoft.Testing.Platform": "2.1.0"
+        }
+      },
+      "Microsoft.TestPlatform.ObjectModel": {
+        "type": "Transitive",
+        "resolved": "18.0.1",
+        "contentHash": "qT/mwMcLF9BieRkzOBPL2qCopl8hQu6A1P7JWAoj/FMu5i9vds/7cjbJ/LLtaiwWevWLAeD5v5wjQJ/l6jvhWQ=="
       },
       "NETStandard.Library": {
         "type": "Transitive",
@@ -100,6 +156,7 @@
         "dependencies": {
           "AwesomeAssertions": "[9.4.0, )",
           "NUnit": "[3.14.0, 3.14.0]",
+          "NUnit3TestAdapter": "[6.2.0, )",
           "Qowaiv": "[8.0.0, )",
           "Qowaiv.CodeGeneration.SingleValueObjects": "[1.1.5, )",
           "Qowaiv.Data.SqlClient": "[8.0.0, )",
@@ -132,6 +189,17 @@
         "contentHash": "R7iPwD7kbOaP3o2zldWJbWeMQAvDKD0uld27QvA3PAALl1unl7x0v2J7eGiJOYjimV/BuGT4VJmr45RjS7z4LA==",
         "dependencies": {
           "NETStandard.Library": "2.0.0"
+        }
+      },
+      "NUnit3TestAdapter": {
+        "type": "CentralTransitive",
+        "requested": "[6.2.0, )",
+        "resolved": "6.2.0",
+        "contentHash": "8PMJB8za2u8S0ey/nEtvh9BHjLhv5yzUEMCmA0+VIPLKSeOAZ3TEHWDyAp0+iPQb3jnBH1o8k0PoU2FgzXLRnQ==",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyModel": "8.0.2",
+          "Microsoft.Testing.Extensions.VSTestBridge": "2.1.0",
+          "Microsoft.Testing.Platform.MSBuild": "2.1.0"
         }
       },
       "System.Data.SqlClient": {

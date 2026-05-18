@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <TargetFramework>net10.0</TargetFramework>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
+    <IsTestCode>true</IsTestCode>
   </PropertyGroup>
 
   <ItemGroup>

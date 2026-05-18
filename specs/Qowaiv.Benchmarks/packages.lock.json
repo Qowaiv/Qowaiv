@@ -40,9 +40,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.13.1, )",
-        "resolved": "1.13.1",
-        "contentHash": "nDIThFLyqnihw9eTStm0oteWT31DanE/0k07TDWxcqrlG4wfEoTY4cWNr3MxLBSoXCI6MdkhUIxyrVB53yrM9A=="
+        "requested": "[1.14.0, )",
+        "resolved": "1.14.0",
+        "contentHash": "ZQh99+wAb+tFTwMu0d/gL44W3i4Mx7+Rilz1VbFrowXwvSKtX6HwMZAFobVeQ5opmUdQ9fnW7K4e6QoAcSUdLA=="
       },
       "MathNet.Numerics": {
         "type": "Direct",
@@ -71,6 +71,12 @@
         "requested": "[1.15.0, )",
         "resolved": "1.15.0",
         "contentHash": "FbU0El+EEjdpuIX4iDbeS7ki1uzpJPx8vbqOzEtqnl1GZeAGJfq+jCbxeJL2y0EPnUNk8dRnnqR2xnYXg9Tf+g=="
+      },
+      "Qowaiv.Analyzers.CSharp": {
+        "type": "Direct",
+        "requested": "[2.4.0, )",
+        "resolved": "2.4.0",
+        "contentHash": "Hx8kO7ZA1+Or3V6JnX/YyGLYSIKCLCsN9truQyZscZ+KfJkO+k4FG/HpaUTjTzlYeGKG9gBKFXgoTttYedk/0g=="
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",

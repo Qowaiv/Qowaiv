@@ -114,6 +114,7 @@ dotnet_diagnostic.QW0010.severity   = none       # Use DateOnly instead of Date
 dotnet_diagnostic.QW0001.severity   = none       # Use a testable Time Provider
 dotnet_diagnostic.QW0003.severity   = warning    # Decorate Pure functions
 
+dotnet_diagnostic.SA0001.severity   = none       # XML comment analysis is disabled due to project configuration
 dotnet_diagnostic.SA1001.severity   = none       # Commas should not be preceded by whitespace
 dotnet_diagnostic.SA1101.severity   = none       # Prefix local calls with this.
 dotnet_diagnostic.SA1127.severity   = none       # Generic type constraints should be on their own line.
@@ -165,6 +166,7 @@ dotnet_diagnostic.S2178.severity    = none       # Short-circuit logic should be
 dotnet_diagnostic.S3376.severity    = none       # EventArgs, and Exception type names should end with the type being extended
 dotnet_diagnostic.S3376.severity    = none       # Attribute, EventArgs, and Exception type names should end with the type being extended
 dotnet_diagnostic.S3925.severity    = none       # "ISerializable" should be implemented correctly
+dotnet_diagnostic.S4055.severity    = none       # Literals should not be passed as localized parameters
 dotnet_diagnostic.S4136.severity    = none       # Method overloads should be grouped together
 
 dotnet_diagnostic.S1133.severity    = suggestion # Deprecated code should be removed
@@ -193,7 +195,6 @@ dotnet_diagnostic.S3254.severity    = warning    # Rename this enumeration to ma
 dotnet_diagnostic.S3257.severity    = warning    # Default parameter values should not be passed as arguments
 dotnet_diagnostic.S3776.severity    = warning    # Cognitive Complexity of methods should not be too high
 dotnet_diagnostic.S3900.severity    = warning    # Arguments of public methods should be validated against null
-dotnet_diagnostic.S4055.severity    = warning    # Literals should not be passed as localized parameters
 
 dotnet_diagnostic.S6354.severity    = warning    # Use a testable (date) time provider instead
 

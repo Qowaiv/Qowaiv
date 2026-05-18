@@ -22,9 +22,9 @@
       },
       "coverlet.collector": {
         "type": "Direct",
-        "requested": "[10.0.0, )",
-        "resolved": "10.0.0",
-        "contentHash": "WFejCcOUR6k8UYyDnnR6Gk+obFYMsWrZuNqPJnsVFGVhpPSN0y20D4qbdKJnXinYGx9PQ397Hf9TnU1NBST8vA=="
+        "requested": "[10.0.1, )",
+        "resolved": "10.0.1",
+        "contentHash": "27jXSV/0DbVqF5jDrAxuQFZ9oaz6gmG03p8ttxAFk+X0M4woFYj7MoWDLCna5EGLb0CE6OE7X6ZH3Wt5smTtaA=="
       },
       "DotNet.ReproducibleBuilds": {
         "type": "Direct",
@@ -34,9 +34,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.13.1, )",
-        "resolved": "1.13.1",
-        "contentHash": "nDIThFLyqnihw9eTStm0oteWT31DanE/0k07TDWxcqrlG4wfEoTY4cWNr3MxLBSoXCI6MdkhUIxyrVB53yrM9A=="
+        "requested": "[1.14.0, )",
+        "resolved": "1.14.0",
+        "contentHash": "ZQh99+wAb+tFTwMu0d/gL44W3i4Mx7+Rilz1VbFrowXwvSKtX6HwMZAFobVeQ5opmUdQ9fnW7K4e6QoAcSUdLA=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
@@ -65,9 +65,9 @@
       },
       "NUnit.Analyzers": {
         "type": "Direct",
-        "requested": "[4.12.0, )",
-        "resolved": "4.12.0",
-        "contentHash": "QuEHoNlYPyjX+MUNLgj5WquT4MFFJIhIVjbZelP13z6hQP5eCl/7QgSCA0xxhTJLnrMkc7QcnEp2lTchx5pHYA=="
+        "requested": "[4.13.0, )",
+        "resolved": "4.13.0",
+        "contentHash": "ZUs8pwS0ErvlgO/Glv9ae8Ny4t6dAueLX6U3k1Jr3XMkXy2hR6fM3nfAiTr+mgUhaR3hbq89EjfF2EKnNywKQQ=="
       },
       "NUnit3TestAdapter": {
         "type": "Direct",
@@ -85,6 +85,12 @@
         "requested": "[1.15.0, )",
         "resolved": "1.15.0",
         "contentHash": "FbU0El+EEjdpuIX4iDbeS7ki1uzpJPx8vbqOzEtqnl1GZeAGJfq+jCbxeJL2y0EPnUNk8dRnnqR2xnYXg9Tf+g=="
+      },
+      "Qowaiv.Analyzers.CSharp": {
+        "type": "Direct",
+        "requested": "[2.4.0, )",
+        "resolved": "2.4.0",
+        "contentHash": "Hx8kO7ZA1+Or3V6JnX/YyGLYSIKCLCsN9truQyZscZ+KfJkO+k4FG/HpaUTjTzlYeGKG9gBKFXgoTttYedk/0g=="
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
@@ -262,9 +268,9 @@
       },
       "coverlet.collector": {
         "type": "Direct",
-        "requested": "[10.0.0, )",
-        "resolved": "10.0.0",
-        "contentHash": "WFejCcOUR6k8UYyDnnR6Gk+obFYMsWrZuNqPJnsVFGVhpPSN0y20D4qbdKJnXinYGx9PQ397Hf9TnU1NBST8vA=="
+        "requested": "[10.0.1, )",
+        "resolved": "10.0.1",
+        "contentHash": "27jXSV/0DbVqF5jDrAxuQFZ9oaz6gmG03p8ttxAFk+X0M4woFYj7MoWDLCna5EGLb0CE6OE7X6ZH3Wt5smTtaA=="
       },
       "DotNet.ReproducibleBuilds": {
         "type": "Direct",
@@ -274,9 +280,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.13.1, )",
-        "resolved": "1.13.1",
-        "contentHash": "nDIThFLyqnihw9eTStm0oteWT31DanE/0k07TDWxcqrlG4wfEoTY4cWNr3MxLBSoXCI6MdkhUIxyrVB53yrM9A=="
+        "requested": "[1.14.0, )",
+        "resolved": "1.14.0",
+        "contentHash": "ZQh99+wAb+tFTwMu0d/gL44W3i4Mx7+Rilz1VbFrowXwvSKtX6HwMZAFobVeQ5opmUdQ9fnW7K4e6QoAcSUdLA=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
@@ -305,9 +311,9 @@
       },
       "NUnit.Analyzers": {
         "type": "Direct",
-        "requested": "[4.12.0, )",
-        "resolved": "4.12.0",
-        "contentHash": "QuEHoNlYPyjX+MUNLgj5WquT4MFFJIhIVjbZelP13z6hQP5eCl/7QgSCA0xxhTJLnrMkc7QcnEp2lTchx5pHYA=="
+        "requested": "[4.13.0, )",
+        "resolved": "4.13.0",
+        "contentHash": "ZUs8pwS0ErvlgO/Glv9ae8Ny4t6dAueLX6U3k1Jr3XMkXy2hR6fM3nfAiTr+mgUhaR3hbq89EjfF2EKnNywKQQ=="
       },
       "NUnit3TestAdapter": {
         "type": "Direct",
@@ -324,6 +330,12 @@
         "requested": "[1.15.0, )",
         "resolved": "1.15.0",
         "contentHash": "FbU0El+EEjdpuIX4iDbeS7ki1uzpJPx8vbqOzEtqnl1GZeAGJfq+jCbxeJL2y0EPnUNk8dRnnqR2xnYXg9Tf+g=="
+      },
+      "Qowaiv.Analyzers.CSharp": {
+        "type": "Direct",
+        "requested": "[2.4.0, )",
+        "resolved": "2.4.0",
+        "contentHash": "Hx8kO7ZA1+Or3V6JnX/YyGLYSIKCLCsN9truQyZscZ+KfJkO+k4FG/HpaUTjTzlYeGKG9gBKFXgoTttYedk/0g=="
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
@@ -533,9 +545,9 @@
       },
       "coverlet.collector": {
         "type": "Direct",
-        "requested": "[10.0.0, )",
-        "resolved": "10.0.0",
-        "contentHash": "WFejCcOUR6k8UYyDnnR6Gk+obFYMsWrZuNqPJnsVFGVhpPSN0y20D4qbdKJnXinYGx9PQ397Hf9TnU1NBST8vA=="
+        "requested": "[10.0.1, )",
+        "resolved": "10.0.1",
+        "contentHash": "27jXSV/0DbVqF5jDrAxuQFZ9oaz6gmG03p8ttxAFk+X0M4woFYj7MoWDLCna5EGLb0CE6OE7X6ZH3Wt5smTtaA=="
       },
       "DotNet.ReproducibleBuilds": {
         "type": "Direct",
@@ -545,9 +557,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.13.1, )",
-        "resolved": "1.13.1",
-        "contentHash": "nDIThFLyqnihw9eTStm0oteWT31DanE/0k07TDWxcqrlG4wfEoTY4cWNr3MxLBSoXCI6MdkhUIxyrVB53yrM9A=="
+        "requested": "[1.14.0, )",
+        "resolved": "1.14.0",
+        "contentHash": "ZQh99+wAb+tFTwMu0d/gL44W3i4Mx7+Rilz1VbFrowXwvSKtX6HwMZAFobVeQ5opmUdQ9fnW7K4e6QoAcSUdLA=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
@@ -576,9 +588,9 @@
       },
       "NUnit.Analyzers": {
         "type": "Direct",
-        "requested": "[4.12.0, )",
-        "resolved": "4.12.0",
-        "contentHash": "QuEHoNlYPyjX+MUNLgj5WquT4MFFJIhIVjbZelP13z6hQP5eCl/7QgSCA0xxhTJLnrMkc7QcnEp2lTchx5pHYA=="
+        "requested": "[4.13.0, )",
+        "resolved": "4.13.0",
+        "contentHash": "ZUs8pwS0ErvlgO/Glv9ae8Ny4t6dAueLX6U3k1Jr3XMkXy2hR6fM3nfAiTr+mgUhaR3hbq89EjfF2EKnNywKQQ=="
       },
       "NUnit3TestAdapter": {
         "type": "Direct",
@@ -596,6 +608,12 @@
         "requested": "[1.15.0, )",
         "resolved": "1.15.0",
         "contentHash": "FbU0El+EEjdpuIX4iDbeS7ki1uzpJPx8vbqOzEtqnl1GZeAGJfq+jCbxeJL2y0EPnUNk8dRnnqR2xnYXg9Tf+g=="
+      },
+      "Qowaiv.Analyzers.CSharp": {
+        "type": "Direct",
+        "requested": "[2.4.0, )",
+        "resolved": "2.4.0",
+        "contentHash": "Hx8kO7ZA1+Or3V6JnX/YyGLYSIKCLCsN9truQyZscZ+KfJkO+k4FG/HpaUTjTzlYeGKG9gBKFXgoTttYedk/0g=="
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
@@ -773,9 +791,9 @@
       },
       "coverlet.collector": {
         "type": "Direct",
-        "requested": "[10.0.0, )",
-        "resolved": "10.0.0",
-        "contentHash": "WFejCcOUR6k8UYyDnnR6Gk+obFYMsWrZuNqPJnsVFGVhpPSN0y20D4qbdKJnXinYGx9PQ397Hf9TnU1NBST8vA=="
+        "requested": "[10.0.1, )",
+        "resolved": "10.0.1",
+        "contentHash": "27jXSV/0DbVqF5jDrAxuQFZ9oaz6gmG03p8ttxAFk+X0M4woFYj7MoWDLCna5EGLb0CE6OE7X6ZH3Wt5smTtaA=="
       },
       "DotNet.ReproducibleBuilds": {
         "type": "Direct",
@@ -785,9 +803,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.13.1, )",
-        "resolved": "1.13.1",
-        "contentHash": "nDIThFLyqnihw9eTStm0oteWT31DanE/0k07TDWxcqrlG4wfEoTY4cWNr3MxLBSoXCI6MdkhUIxyrVB53yrM9A=="
+        "requested": "[1.14.0, )",
+        "resolved": "1.14.0",
+        "contentHash": "ZQh99+wAb+tFTwMu0d/gL44W3i4Mx7+Rilz1VbFrowXwvSKtX6HwMZAFobVeQ5opmUdQ9fnW7K4e6QoAcSUdLA=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
@@ -816,9 +834,9 @@
       },
       "NUnit.Analyzers": {
         "type": "Direct",
-        "requested": "[4.12.0, )",
-        "resolved": "4.12.0",
-        "contentHash": "QuEHoNlYPyjX+MUNLgj5WquT4MFFJIhIVjbZelP13z6hQP5eCl/7QgSCA0xxhTJLnrMkc7QcnEp2lTchx5pHYA=="
+        "requested": "[4.13.0, )",
+        "resolved": "4.13.0",
+        "contentHash": "ZUs8pwS0ErvlgO/Glv9ae8Ny4t6dAueLX6U3k1Jr3XMkXy2hR6fM3nfAiTr+mgUhaR3hbq89EjfF2EKnNywKQQ=="
       },
       "NUnit3TestAdapter": {
         "type": "Direct",
@@ -836,6 +854,12 @@
         "requested": "[1.15.0, )",
         "resolved": "1.15.0",
         "contentHash": "FbU0El+EEjdpuIX4iDbeS7ki1uzpJPx8vbqOzEtqnl1GZeAGJfq+jCbxeJL2y0EPnUNk8dRnnqR2xnYXg9Tf+g=="
+      },
+      "Qowaiv.Analyzers.CSharp": {
+        "type": "Direct",
+        "requested": "[2.4.0, )",
+        "resolved": "2.4.0",
+        "contentHash": "Hx8kO7ZA1+Or3V6JnX/YyGLYSIKCLCsN9truQyZscZ+KfJkO+k4FG/HpaUTjTzlYeGKG9gBKFXgoTttYedk/0g=="
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",

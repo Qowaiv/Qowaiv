@@ -2,6 +2,7 @@ namespace Specs_Generated;
 
 [OpenApiDataType(description: "Custom SVO Example", type: "string", example: "QOWAIV", format: "custom")]
 [Svo<Behavior>]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1210:\"Equals\" and the comparison operators should be overridden when implementing \"IComparable\"", Justification = "Sorting is sufficient")]
 public readonly partial struct CustomSvo
 {
     private sealed class Behavior : SvoBehavior

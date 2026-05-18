@@ -183,11 +183,8 @@ public class WildcardPattern
             }
             return true;
         }
-        else if (pattern.IsEnd())
-        {
-            return false;
-        }
-        else return MatchChar(pattern, input);
+        else return !pattern.IsEnd()
+            && MatchChar(pattern, input);
 
         bool IsTrailing(char ch)
             => ch == MultipleChars

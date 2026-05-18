@@ -5,7 +5,7 @@ namespace Qowaiv;
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(int))]
 [OpenApiDataType(description: "Year span", type: "int", format: "year-span", example: 17)]
 [TypeConverter(typeof(YearSpanTypeConverter))]
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.YearSpanJsonConverter))]
 #endif
 public readonly partial struct YearSpan : IXmlSerializable, IFormattable, IEquatable<YearSpan>, IComparable, IComparable<YearSpan>

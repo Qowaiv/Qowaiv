@@ -12,7 +12,7 @@ namespace @Namespace;
 [SingleValueObject(SingleValueStaticOptions.All, typeof(@type))]
 [OpenApiDataType(description: "@FullName", type: "@TSvo", format: "@TSvo", example: "ABC")]
 [TypeConverter(typeof(Conversion.@TSvoTypeConverter))]
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.@TSvoJsonConverter))]
 #endif
 public readonly partial struct @TSvo : IXmlSerializable, IFormattable, IEquatable<@TSvo>, IComparable, IComparable<@TSvo>

@@ -7,6 +7,7 @@ internal class Markdown_file
     [Test]
     public void Exists() => Location.Exists.Should().BeTrue();
 
+    [Explicit]
     [Test]
     public void Generate_LocalizedPattern()
     {
@@ -17,6 +18,7 @@ internal class Markdown_file
         Assert.Inconclusive("Copy output to code file.");
     }
 
+    [Explicit]
     [Test]
     public void Generate_JS_RegEx_Pattern()
     {

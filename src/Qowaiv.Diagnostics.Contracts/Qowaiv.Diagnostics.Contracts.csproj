@@ -8,7 +8,6 @@
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <DevelopmentDependency>true</DevelopmentDependency>
     <IncludeSymbols>false</IncludeSymbols>
-    <SymbolPackageFormat>none</SymbolPackageFormat>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <Version>2.0.6</Version>
     <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>

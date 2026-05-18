@@ -247,7 +247,7 @@
         }
       }
     },
-    ".NETCoreApp,Version=v5.0": {
+    "net6.0": {
       "AsyncFixer": {
         "type": "Direct",
         "requested": "[2.1.0, )",
@@ -364,8 +364,7 @@
         "contentHash": "5TwgTx2u7k9Al/xbZ18QXq4Hdy2xewkVTI6K3sk+jY2ykqUkIKNuj7rFu3GOV5KnEUkevhw6eZcyZs77STHJIA==",
         "dependencies": {
           "Microsoft.ApplicationInsights": "2.23.0",
-          "Microsoft.Testing.Platform": "2.1.0",
-          "System.Diagnostics.DiagnosticSource": "6.0.0"
+          "Microsoft.Testing.Platform": "2.1.0"
         }
       },
       "Microsoft.Testing.Extensions.TrxReport.Abstractions": {
@@ -453,18 +452,7 @@
       "System.Collections.Immutable": {
         "type": "Transitive",
         "resolved": "8.0.0",
-        "contentHash": "AurL6Y5BA1WotzlEvVaIDpqzpIPvYnnldxru8oXJU2yFxFUy3+pNXjXd1ymO+RA0rq0+590Q8gaz2l3Sr7fmqg==",
-        "dependencies": {
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
-        }
-      },
-      "System.Diagnostics.DiagnosticSource": {
-        "type": "Transitive",
-        "resolved": "6.0.0",
-        "contentHash": "frQDfv0rl209cKm1lnwTgFPzNigy2EKk1BS3uAvHvlBVKe5cymGyHO+Sj+NLv5VF/AhHsqPIUUwya5oV4CHMUw==",
-        "dependencies": {
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
-        }
+        "contentHash": "AurL6Y5BA1WotzlEvVaIDpqzpIPvYnnldxru8oXJU2yFxFUy3+pNXjXd1ymO+RA0rq0+590Q8gaz2l3Sr7fmqg=="
       },
       "System.Reflection.Metadata": {
         "type": "Transitive",
@@ -475,10 +463,7 @@
         }
       },
       "qowaiv": {
-        "type": "Project",
-        "dependencies": {
-          "System.Runtime.CompilerServices.Unsafe": "[6.1.2, )"
-        }
+        "type": "Project"
       },
       "qowaiv.codegeneration.singlevalueobjects": {
         "type": "Project"
@@ -516,12 +501,6 @@
         "dependencies": {
           "runtime.native.System.Data.SqlClient.sni": "4.7.0"
         }
-      },
-      "System.Runtime.CompilerServices.Unsafe": {
-        "type": "CentralTransitive",
-        "requested": "[6.1.2, )",
-        "resolved": "6.1.2",
-        "contentHash": "2hBr6zdbIBTDE3EhK7NSVNdX58uTK6iHW/P/Axmm9sl1xoGSLqDvMtpecn226TNwHByFokYwJmt/aQQNlO5CRw=="
       }
     },
     "net8.0": {

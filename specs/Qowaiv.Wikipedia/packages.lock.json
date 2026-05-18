@@ -54,11 +54,6 @@
         "resolved": "8.0.2",
         "contentHash": "mUBDZZRgZrSyFOsJ2qJJ9fXfqd/kXJwf3AiDoqLD9m6TjY5OO/vLNOb9fb4juC0487eq4hcGN/M2Rh/CKS7QYw=="
       },
-      "Microsoft.NETCore.Platforms": {
-        "type": "Transitive",
-        "resolved": "1.1.0",
-        "contentHash": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A=="
-      },
       "Microsoft.Testing.Extensions.Telemetry": {
         "type": "Transitive",
         "resolved": "2.1.0",
@@ -105,14 +100,6 @@
         "resolved": "18.0.1",
         "contentHash": "qT/mwMcLF9BieRkzOBPL2qCopl8hQu6A1P7JWAoj/FMu5i9vds/7cjbJ/LLtaiwWevWLAeD5v5wjQJ/l6jvhWQ=="
       },
-      "NETStandard.Library": {
-        "type": "Transitive",
-        "resolved": "2.0.0",
-        "contentHash": "7jnbRU+L08FXKMxqUflxEXtVymWvNOrS8yHgu9s6EM8Anr6T/wIX4nZ08j/u3Asz+tCufp3YVwFSEvFTPYmBPA==",
-        "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0"
-        }
-      },
       "runtime.native.System.Data.SqlClient.sni": {
         "type": "Transitive",
         "resolved": "4.7.0",
@@ -155,7 +142,7 @@
         "type": "Project",
         "dependencies": {
           "AwesomeAssertions": "[9.4.0, )",
-          "NUnit": "[3.14.0, 3.14.0]",
+          "NUnit": "[4.6.0, )",
           "NUnit3TestAdapter": "[6.2.0, )",
           "Qowaiv": "[8.0.0, )",
           "Qowaiv.CodeGeneration.SingleValueObjects": "[1.1.5, )",
@@ -184,12 +171,9 @@
       },
       "NUnit": {
         "type": "CentralTransitive",
-        "requested": "[3.14.0, 3.14.0]",
-        "resolved": "3.14.0",
-        "contentHash": "R7iPwD7kbOaP3o2zldWJbWeMQAvDKD0uld27QvA3PAALl1unl7x0v2J7eGiJOYjimV/BuGT4VJmr45RjS7z4LA==",
-        "dependencies": {
-          "NETStandard.Library": "2.0.0"
-        }
+        "requested": "[4.6.0, )",
+        "resolved": "4.6.0",
+        "contentHash": "RsafbuYR+HzdDhgfdLYrDOSuFdv8IgGpbe5NIqXWAhZ7t6lXNj9yNcLcAk34lKVio6OusBQolKlboyl/9hObNA=="
       },
       "NUnit3TestAdapter": {
         "type": "CentralTransitive",

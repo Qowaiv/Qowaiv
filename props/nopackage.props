@@ -4,4 +4,8 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileFullPath)" />
+  </ItemGroup>
+
 </Project>

@@ -87,17 +87,13 @@ public readonly struct FormattingArguments : IEquatable<FormattingArguments>
     /// <inheritdoc />
     [Pure]
     public bool Equals(FormattingArguments other)
-    {
-        if (Format != other.Format)
+        => Format == other.Format
+        && (FormatProvider, other.FormatProvider) switch
         {
-            return false;
-        }
-        else if (FormatProvider is null)
-        {
-            return other.FormatProvider is null;
-        }
-        else return FormatProvider.Equals(other.FormatProvider);
-    }
+            ({ }, _) => FormatProvider.Equals(other.FormatProvider),
+            (null, null) => true,
+            _ => false,
+        };
 
     /// <inheritdoc />
     [Pure]

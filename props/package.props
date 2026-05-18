@@ -39,18 +39,17 @@
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">
-    <PackageReference PrivateAssets="all" Include="Qowaiv.Analyzers.CSharp" />
     <PackageReference PrivateAssets="all" Include="StyleCop.Analyzers.Unstable" />
-  </ItemGroup>
-
-  <ItemGroup Label="Build extensions">
-    <PackageReference PrivateAssets="all" Include="Microsoft.Sbom.Targets" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Shared assembly tags. -->
     <Compile Include="$(MSBuildThisFileDirectory)../shared/Lock.cs" Link="Properties/Lock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)../shared/ProductInfo.cs" Link="Properties/ProductInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileFullPath)" />
   </ItemGroup>
 
 </Project>

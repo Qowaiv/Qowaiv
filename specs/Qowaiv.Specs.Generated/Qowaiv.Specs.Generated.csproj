@@ -7,6 +7,7 @@
     <LangVersion>12</LangVersion>
     <RootNamespace>Specs_Generated</RootNamespace>
     <Nullable>enable</Nullable>
+    <IsTestCode>true</IsTestCode>
   </PropertyGroup>
 
   <ItemGroup>

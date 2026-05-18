@@ -9,6 +9,7 @@
     <RootNamespace>Benchmarks</RootNamespace>
     <!-- We do not care about strong names for benchmarking -->
     <NoWarn>CS8002</NoWarn>
+    <IsTestCode>true</IsTestCode>
   </PropertyGroup>
 
   <ItemGroup>

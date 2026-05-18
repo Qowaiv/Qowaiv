@@ -1,6 +1,6 @@
-#if DEBUG
 namespace UUID_generation;
 
+[Explicit]
 public class Generates
 {
     [Test]
@@ -64,4 +64,3 @@ public class Generates
         bytes.Distinct().Should().HaveCount(33);
     }
 }
-#endif

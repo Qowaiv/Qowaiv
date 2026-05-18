@@ -72,16 +72,6 @@ inside and outside a Domain-driven context.
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)build/Qowaiv.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
-  <ItemGroup Label="Code generation">
-    <PackageReference PrivateAssets="all" Include="PolySharp" />
-  </ItemGroup>
-
-  <ItemGroup Label="Analyzers">
-    <PackageReference PrivateAssets="all" Include="AsyncFixer" />
-    <PackageReference PrivateAssets="all" Include="DotNetProjectFile.Analyzers" />
-    <PackageReference PrivateAssets="all" Include="SonarAnalyzer.CSharp"  />
-  </ItemGroup>
-
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
@@ -93,9 +83,5 @@ inside and outside a Domain-driven context.
   <PropertyGroup>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="DotNet.ReproducibleBuilds" PrivateAssets="all"/>
-  </ItemGroup>
 
 </Project>

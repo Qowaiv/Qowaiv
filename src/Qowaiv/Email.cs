@@ -109,26 +109,21 @@ internal static partial class Email
         {
             if (Failure) return None();
 
-            var (ch, index, length) = Next(-1, 0);
+            var (ch, index, len) = Next(-1, 0);
             char prev = default;
 
-            while (index < Input.Length && length <= PartLength + 1)
+            while (index < Input.Length && len <= PartLength + 1)
             {
-                if (Is.Local(ch)) { /* Continue. */ }
-                else if (ch is Dot)
+                if (Is.Local(ch) ||
+                    // Not .. and not starting with a dot.
+                    (ch is Dot && prev is not Dot and not default(char)))
                 {
-                    if (prev is Dot or default(char)) return None();
+                    prev = ch;
+                    (ch, index, len) = Next(index, len);
                 }
-                else if (ch is At)
-                {
-                    return length is 1 || prev is Dot
-                        ? None()
-                        : new(Input[++index..], Buffer, length);
-                }
-                else return None();
-
-                prev = ch;
-                (ch, index, length) = Next(index, length);
+                else return ch is At && len > 1 && prev is not Dot
+                    ? new(Input[++index..], Buffer, len)
+                    : None();
             }
             return None();
         }
@@ -280,11 +275,11 @@ internal static partial class Email
         private readonly int QuoteLength()
         {
             var escaped = false;
-            var length = 0;
+            var len = 0;
 
             if (Input[0] is not Quote) return NoMatch;
 
-            Buffer[length++] = Quote;
+            Buffer[len++] = Quote;
 
             // there should at least be one char after.
             for (var i = 1; i < Input.Length - 1; i++)
@@ -292,7 +287,7 @@ internal static partial class Email
                 var ch = Input[i];
 
                 // Copy the local while it could fit.
-                if (length < PartLength) { Buffer[length++] = ch; }
+                if (len < PartLength) { Buffer[len++] = ch; }
 
                 if (!escaped && ch == Quote) return i + 1;
 

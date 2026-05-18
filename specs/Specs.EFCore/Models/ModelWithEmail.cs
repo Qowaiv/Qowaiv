@@ -17,12 +17,8 @@ public class ModelWithEmailContext(Action<DbContextOptionsBuilder> configure) : 
 {
     public DbSet<ModelWithEmail> Models { get; init; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder
-            .Entity<ModelWithEmail>()
-            .SvoProperty(m => m.Email);
-    }
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        => configurationBuilder.WithSvoProperties();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

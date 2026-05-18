@@ -28,9 +28,8 @@ public static class SvoPropertyBuilder
         [CLSCompliant(false)]
         public PropertyBuilder<Amount> SvoProperty(Expression<Func<TEntity, Amount>> propertyExpression) => builder
             .Property(propertyExpression)
-            .HasConversion(svo => (decimal)svo, num => num.Amount())
-            .HasPrecision(35, 3)
-            .IsRequired();
+            .HasConversion<AmountDecimalConverter>()
+            .HasPrecision(35, 3);
 
         /// <summary>
         /// Returns a builder that can be used to configure an <see cref="EmailAddress"/>
@@ -51,7 +50,7 @@ public static class SvoPropertyBuilder
         [CLSCompliant(false)]
         public PropertyBuilder<EmailAddress> SvoProperty(Expression<Func<TEntity, EmailAddress>> propertyExpression) => builder
             .Property(propertyExpression)
-            .HasConversion(svo => svo.ToString(), str => EmailAddress.Parse(str))
+            .HasConversion<EmailStringConverter>()
             .HasMaxLength(EmailAddress.MaxLength)
             .IsUnicode();
 
@@ -74,8 +73,8 @@ public static class SvoPropertyBuilder
         [CLSCompliant(false)]
         public PropertyBuilder<InternationalBankAccountNumber> SvoProperty(Expression<Func<TEntity, InternationalBankAccountNumber>> propertyExpression) => builder
             .Property(propertyExpression)
-            .HasConversion(svo => svo.ToString(), str => InternationalBankAccountNumber.Parse(str))
-            .IsUnicode(false)
-            .HasMaxLength(InternationalBankAccountNumber.MaxLength);
+            .HasConversion<IbanStringConverter>()
+            .HasMaxLength(InternationalBankAccountNumber.MaxLength)
+            .IsUnicode(false);
     }
 }

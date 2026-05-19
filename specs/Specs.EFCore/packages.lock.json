@@ -348,6 +348,12 @@
           "Qowaiv": "[8.0.0, )"
         }
       },
+      "qowaiv.specs.generated": {
+        "type": "Project",
+        "dependencies": {
+          "Qowaiv": "[8.0.0, )"
+        }
+      },
       "Microsoft.EntityFrameworkCore": {
         "type": "CentralTransitive",
         "requested": "[10.0.5, )",

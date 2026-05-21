@@ -1,7 +1,11 @@
 <Solution>
   <Folder Name="/Core/">
-    <Project Path="src/Qowaiv.Data.SqlClient/Qowaiv.Data.SqlClient.csproj" />
     <Project Path="src/Qowaiv/Qowaiv.csproj" />
+  </Folder>
+  <Folder Name="/DB/">
+    <Project Path="specs/Specs.EFCore/Specs.EFCore.csproj" Id="f218c590-a0b2-4858-b3f6-14c8636ba690" />
+    <Project Path="src/Qowaiv.Data.SqlClient/Qowaiv.Data.SqlClient.csproj" />
+    <Project Path="src/Qowaiv.EntityFrameworkCore/Qowaiv.EntityFrameworkCore.csproj" Id="d52c79ab-f06d-4671-bc5c-d45be0826f23" />
   </Folder>
   <Folder Name="/Generation/">
     <Project Path="src/Qowaiv.CodeGeneration.SingleValueObjects/Qowaiv.CodeGeneration.SingleValueObjects.csproj" />

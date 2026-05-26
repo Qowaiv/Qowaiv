@@ -33,7 +33,7 @@
     <GlobalPackageReference Include="Microsoft.Sbom.Targets" Version="4.1.5" />
     <GlobalPackageReference Include="PolySharp" Version="1.15.0" />
     <GlobalPackageReference Include="Qowaiv.Analyzers.CSharp" Version="2.4.0" />
-    <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="10.26.0.140279" />
+    <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="10.27.0.140913" />
   </ItemGroup>
   <ItemGroup>
     <ThirdPartyLicense Include="SonarAnalyzer.CSharp" Hash="IBM9yngU7omFyJOMSFSy0w" />

@@ -32,7 +32,7 @@
     <GlobalPackageReference Include="DotNetProjectFile.Analyzers" Version="1.14.1" />
     <GlobalPackageReference Include="Microsoft.Sbom.Targets" Version="4.1.5" />
     <GlobalPackageReference Include="PolySharp" Version="1.16.0" />
-    <GlobalPackageReference Include="Qowaiv.Analyzers.CSharp" Version="2.4.0" />
+    <GlobalPackageReference Include="Qowaiv.Analyzers.CSharp" Version="2.5.0" />
     <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="10.27.0.140913" />
   </ItemGroup>
   <ItemGroup>

@@ -4,18 +4,38 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <PackageId>Qowaiv.Diagnostics.Contracts</PackageId>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <DevelopmentDependency>true</DevelopmentDependency>
-    <IncludeSymbols>false</IncludeSymbols>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <Version>2.0.6</Version>
-    <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
-    <PackageId>Qowaiv.Diagnostics.Contracts</PackageId>
+    <LangVersion>10.0</LangVersion>
     <ProductName>Qowaiv Diagnostics Contracts</ProductName>
-    <LangVersion>10</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup Label="CompileTimeDependencies">
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Attributes/**" />
+  </ItemGroup>
+
+  <ItemGroup Label="DependencyPackaging">
+    <None
+      Include="$(OutputPath)/netstandard2.0/$(AssemblyName).dll"
+      Pack="true"
+      PackagePath="analyzers/dotnet/cs"
+      Visible="false" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>2.1.0</Version>
+    <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
     <PackageReleaseNotes>
       <![CDATA[
+v2.1.0
+- Added [PrimitiveRequired] attribute.
 v2.0.6
 - Reduce required C# language version from 12 to 10.
 v2.0.5
@@ -38,17 +58,5 @@ v1.0.0
 ]]>
     </PackageReleaseNotes>
   </PropertyGroup>
-
-  <ItemGroup Label="CompileTimeDependencies">
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Attributes/**" />
-  </ItemGroup>
-
-  <ItemGroup Label="DependencyPackaging">
-    <None Include="$(OutputPath)/netstandard2.0/$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-  </ItemGroup>
 
 </Project>

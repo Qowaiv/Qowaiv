@@ -31,6 +31,7 @@ namespace Diagnostics_Contracts_Specs
                 typeof(Qowaiv.Diagnostics.Contracts.ImpureAttribute),
                 typeof(Qowaiv.Diagnostics.Contracts.InheritableAttribute),
                 typeof(Qowaiv.Diagnostics.Contracts.MutableAttribute),
+                typeof(Qowaiv.Diagnostics.Contracts.PrimitiveRequiredAttribute),
                 typeof(Qowaiv.Diagnostics.Contracts.WillBeSealedAttribute),
             });
     }

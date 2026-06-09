@@ -9,8 +9,10 @@
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <DevelopmentDependency>true</DevelopmentDependency>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeSymbols>false</IncludeSymbols>
     <LangVersion>10.0</LangVersion>
     <ProductName>Qowaiv Diagnostics Contracts</ProductName>
+    <NoWarn>Proj0220</NoWarn>
   </PropertyGroup>
 
   <ItemGroup Label="CompileTimeDependencies">

@@ -429,6 +429,13 @@ public class Is_equal_by_value
             svo.GetHashCode().Should().Be(hash);
         }
     }
+
+    [Test]
+    public void hash_code_is_value_based_for_zero()
+    {
+        var zero = 17.DividedBy(42) - 17.DividedBy(42);
+        zero.GetHashCode().Should().Be(Fraction.Zero.GetHashCode());
+    }
 }
 public class Can_be_parsed
 {

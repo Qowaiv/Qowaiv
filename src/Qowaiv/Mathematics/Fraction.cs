@@ -260,7 +260,10 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
 
     /// <inheritdoc/>
     [Pure]
-    public override int GetHashCode() => Hash.Code(denominator).And(numerator);
+    public override int GetHashCode()
+        => IsZero()
+        ? Hash.Code(0)
+        : Hash.Code(denominator).And(numerator);
 
     /// <inheritdoc/>
     [Pure]

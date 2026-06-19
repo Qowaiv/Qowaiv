@@ -45,6 +45,7 @@
 v8.*
 - IBAN must not exceed 34 chars. (BUG)
 - IBAN for Russia has become more strict.
+- Fraction.GetHashCode() returns same value for all zero value's. (BUG)
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

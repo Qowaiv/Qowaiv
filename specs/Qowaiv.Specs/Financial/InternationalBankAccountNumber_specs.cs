@@ -555,3 +555,33 @@ public class Debugger
     public void has_custom_display(object display, InternationalBankAccountNumber svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }
+
+public class Mod97
+{
+    [TestCase(55)]
+    [TestCase(56)]
+    public void No_overflow_until(int bits)
+    {
+        var max = (1UL << (bits + 1)) - 1d;
+        // Add 1 Z.
+        max *= 100;
+        max += 'Z' - 'A' + 10;
+        max.Should().BeLessThanOrEqualTo(ulong.MaxValue);
+    }
+
+    [TestCase(42)]
+    [TestCase(43)]
+    public void No_checsum_overflow_until(int bits)
+    {
+        var max = (1UL << (bits + 1)) - 1d;
+        // Add 2 Z's.
+        max *= 100;
+        max += 'Z' - 'A' + 10;
+        max *= 100;
+        max += 'Z' - 'A' + 10;
+        // Add checksum 99
+        max *= 100;
+        max += 99;
+        max.Should().BeLessThanOrEqualTo(ulong.MaxValue);
+    }
+}

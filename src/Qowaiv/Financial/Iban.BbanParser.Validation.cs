@@ -4,36 +4,35 @@ namespace Qowaiv.Financial;
 
 internal partial class BbanParser
 {
+    /// <summary>Checks the Mod97 constraint.</summary>
     [Pure]
     private static bool Mod97(string iban)
     {
-        var mod = 0;
+        ulong num = 0;
 
         // Calculate the first 4 characters (country and checksum) last
         for (var i = 4; i < iban.Length; i++)
         {
-            mod = Mod(mod, iban[i]);
+            num = Next(num, iban[i]);
+
+            // If we wait longer, we could overflow.
+            if (num >> 57 is not 0) num %= 97;
         }
+
+        // If we wait longer, we could overflow.
+        if (num >> 44 is not 0) num %= 97;
+
         for (var i = 0; i < 4; i++)
         {
-            mod = Mod(mod, iban[i]);
+            num = Next(num, iban[i]);
         }
-        return mod == 1;
+
+        return num % 97 is 1;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static int Mod(int mod, char ch)
-        {
-            var index = Mod97(ch);
-            mod *= index > 9 ? 100 : 10;
-            mod += index;
-            return mod % 97;
-        }
+        static ulong Next(ulong num, char ch)
+            => ch <= '9'
+            ? (num * 10) + ch - '0'
+            : (num * 100) + ch - 'A' + 10;
     }
-
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int Mod97(char ch)
-        => ch <= '9'
-            ? ch - '0'
-            : ch - 'A' + 10;
 }

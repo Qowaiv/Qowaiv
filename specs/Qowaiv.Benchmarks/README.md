@@ -7,6 +7,7 @@ dramatically.
 | Parse (unformatted) | Mean       | Ratio |
 |---------------------|-----------:|------:|
 | BBAN                |   149.8 ns |  1.00 |
+| IBAN.NET            |   202.3 ns |  1.35 |
 | Regex               | 2,138.8 ns | 14.29 |
 | Regex (with tweaks) | 1,425.3 ns |  9.54 |
 
@@ -15,6 +16,7 @@ Formatted v.s. unformatted strings have hardly any effect on the durations.
 | Parse (formatted)   | Mean       | Ratio |
 |-------------------- |-----------:|------:|
 | BBAN                |   151.8 ns |  1.00 |
+| IBAN.NET            |   206.5 ns |  1.36 |
 | Regex               | 2,150.6 ns | 14.19 |
 | Regex (with tweaks) | 1,359.1 ns |  8.98 |
 

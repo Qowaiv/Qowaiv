@@ -242,6 +242,10 @@ public class Has_custom_formatting
     [TestCase("F", "EE382200221020145685", /*........*/ "EE38 2200 2210 2014 5685")]
     [TestCase("F", "", "")]
     [TestCase("F", "?", "?")]
+    [TestCase("o", "NL20INGB0001234567", "nl20xxxxxxxxxx4567")]
+    [TestCase("O", "NL20INGB0001234567", "NL20XXXXXXXXXX4567")]
+    [TestCase("O", "", "")]
+    [TestCase("O", "?", "?")]
     public void with_format(string format, InternationalBankAccountNumber svo, string formatted)
         => svo.ToString(format).Should().Be(formatted);
 }

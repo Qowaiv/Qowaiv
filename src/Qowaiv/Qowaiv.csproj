@@ -36,6 +36,7 @@
     <ToBeReleased>
       <![CDATA[
 v8.*
+- IBAN supports obfuscation with ToString("O").
 - IBAN parsing 1.75 times faster.
 - IBAN must not exceed 34 chars. (BUG)
 - IBAN for Russia has become more strict.

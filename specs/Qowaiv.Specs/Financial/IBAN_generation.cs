@@ -80,6 +80,15 @@ internal class Markdown_file
     public void Generate_IBAN(string bban, string? because = null)
     {
         var rnd = new Random(bban.GetHashCode());
+        string? iban = Generate(bban, rnd);
+
+        iban.Should().NotBeNull(because);
+
+        Console.WriteLine(iban);
+    }
+
+    private static string? Generate(string bban, Random rnd)
+    {
         var sb = new StringBuilder();
         foreach (var ch in bban)
         {
@@ -101,10 +110,8 @@ internal class Markdown_file
             .Select(kk => str.Replace("kk", kk.ToString("00")))
             .Select(Mod97)
             .First(i => i is { });
-
-        iban.Should().NotBeNull(because);
-
-        Console.WriteLine(iban);
+        
+        return iban;
     }
 
     private static readonly IbanInfo[] Infos = Init();

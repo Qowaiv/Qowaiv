@@ -1,22 +1,20 @@
 # Qowaiv Benchmarks
 
 ## IBAN
-By removing `Regex`'s from IBAN, durations of parsing have been reduced
-dramatically.
+The first IBAN parse relied on regular expressions to validate the format. With
+the v6.6.0 rewrite, regexes where removed, amongst other improvements which
+made the parsing 14 times faster. With v8, The number of mod97's executes has
+been drasticially reduced, leading to another big improvement.
 
-| Parse (unformatted) | Mean       | Ratio |
-|---------------------|-----------:|------:|
-| BBAN                |   149.8 ns |  1.00 |
-| Regex               | 2,138.8 ns | 14.29 |
-| Regex (with tweaks) | 1,425.3 ns |  9.54 |
+| Parse         | Mean       | Ratio |
+|---------------|-----------:|------:|
+| Qowaiv v8     |    85.2 ns |  1.00 |
+| Qowaiv v6.6.0 |   149.8 ns |  1.76 |
+| IBAN.NET      |   196.1 ns |  2.30 |
+| Regex based   | 2,138.8 ns | 25.10 |
 
 Formatted v.s. unformatted strings have hardly any effect on the durations.
 
-| Parse (formatted)   | Mean       | Ratio |
-|-------------------- |-----------:|------:|
-| BBAN                |   151.8 ns |  1.00 |
-| Regex               | 2,150.6 ns | 14.19 |
-| Regex (with tweaks) | 1,359.1 ns |  8.98 |
 
 ## Decimal round
 Custom rounding is slower than .NET's default implementation. A big part can

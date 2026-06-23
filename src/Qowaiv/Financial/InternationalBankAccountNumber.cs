@@ -111,13 +111,13 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     }
 
     /// <summary>
-    /// Masks sensitive parts of an IBAN to protect user privacy (eg: NL20XXXXXXXXXX4567).</summary>
+    /// Masks sensitive parts of an IBAN to protect user privacy (eg: NL20XXXXXXXXXXX567).</summary>
     [Pure]
     public string Obfuscated() => m_Value switch
     {
         null => string.Empty,
         "ZZ" => "?",
-        _ => m_Value[..4] + new string('X', m_Value.Length - 8) + m_Value[^4..],
+        _ => m_Value[..4] + new string('X', m_Value.Length - 7) + m_Value[^3..],
     };
 
     /// <summary>Returns a formatted <see cref="string" /> that represents the current IBAN.</summary>

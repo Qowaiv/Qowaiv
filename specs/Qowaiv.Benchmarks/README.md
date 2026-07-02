@@ -55,6 +55,13 @@ By removing `Regex` for the UUID parsing, durations have been reduced.
 | Base32             | 27.82 ns |  1.78 |
 | Regex + FromBase64 | 92.76 ns |  5.94 |
 
+| Method            | Mean     | Error    | StdDev    | Median   | Ratio | RatioSD |
+|------------------ |---------:|---------:|----------:|---------:|------:|--------:|
+| GUID_Parse        | 52.24 us | 5.929 us | 17.480 us | 40.97 us |  1.11 |    0.50 |
+| UUID_Parse        | 39.84 us | 0.822 us |  2.292 us | 39.53 us |  0.84 |    0.25 |
+| UUID_Parse_Base64 | 28.15 us | 0.563 us |  1.606 us | 27.93 us |  0.60 |    0.18 |
+| UUID_Parse_Base32 | 40.01 us | 0.774 us |  1.942 us | 39.63 us |  0.85 |    0.25 |
+
 Reduced the function calls, and string replacements.
 
 | Uuid.ToString()      | Mean     | Ratio |

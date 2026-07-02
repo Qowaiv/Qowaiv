@@ -1,3 +1,4 @@
+using BenchmarkDotNet.Configs;
 using IbanNet;
 using IbanNet.Registry;
 using Iban = Qowaiv.Financial.InternationalBankAccountNumber;
@@ -5,73 +6,74 @@ using IbanObject = IbanNet.Iban;
 
 namespace Benchmarks;
 
-public partial class IbanBenchmark
+[GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
+[CategoriesColumn]
+[MemoryDiagnoser(true)]
+[MinColumn]
+public class IbanBenchmark
 {
     public const int Iterations = 1000;
-    public string[] Inputs { get; set; } = [];
     public readonly string?[] Outputs = new string?[Iterations];
-    public readonly Iban?[] Ibans = new Iban?[Iterations];
+    public readonly Iban[] Ibans = new Iban[Iterations];
     public readonly IbanObject?[] IbanObjects = new IbanObject?[Iterations];
-    
+
     private static readonly IbanParser IbanParser = new(IbanRegistry.Default);
 
-    public class ParseUnformatted : IbanBenchmark
+    [GlobalSetup]
+    public void Setup()
     {
-        [GlobalSetup]
-        public void Setup()
-            => Inputs = [.. Unformatted.OrderBy(_ => Rnd.Next())];
-
-        [Benchmark(Baseline = true)]
-        public Iban?[] BBAN()
+        Formatted = [.. Formatted.OrderBy(_ => Rnd.Next())];
+        Unformatted = [.. Unformatted.OrderBy(_ => Rnd.Next())];
+    }
+    [Benchmark(Description = "Qowaiv", Baseline = true)]
+    [BenchmarkCategory("Unformatted")]
+    public Iban[] Qowaiv_Unformatted()
+    {
+        for (var i = 0; i < Unformatted.Length; i++)
         {
-            for (var i = 0; i < Inputs.Length; i++)
-            {
-                Ibans[i] = Iban.TryParse(Inputs[i]);
-            }
-            return Ibans;
+            Iban.TryParse(Unformatted[i], null, out var iban);
+            Ibans[i] = iban;
         }
-
-        [Benchmark]
-        public IbanObject?[] IbanNetParsing()
-        {
-            for (var i = 0; i < Inputs.Length; i++)
-            {
-                _ = IbanParser.TryParse(Inputs[i], out var iban);
-                IbanObjects[i] = iban;
-            }
-            return IbanObjects;
-        }
+        return Ibans;
     }
 
-    public class ParseFormatted : IbanBenchmark
+    [Benchmark(Description = "Iban.NET")]
+    [BenchmarkCategory("Unformatted")]
+    public IbanObject?[] IbanNet_Unformatted()
     {
-        [GlobalSetup]
-        public void Setup()
-            => Inputs = [.. Formatted.OrderBy(_ => Rnd.Next())];
-
-        [Benchmark(Baseline = true)]
-        public Iban?[] BBAN()
+        for (var i = 0; i < Unformatted.Length; i++)
         {
-            for (var i = 0; i < Inputs.Length; i++)
-            {
-                Ibans[i] = Iban.TryParse(Inputs[i]);
-            }
-            return Ibans;
+            _ = IbanParser.TryParse(Unformatted[i], out var iban);
+            IbanObjects[i] = iban;
         }
-
-        [Benchmark]
-        public IbanObject?[] IbanNetParsing()
-        {
-            for (var i = 0; i < Inputs.Length; i++)
-            {
-                _ = IbanParser.TryParse(Inputs[i], out var iban);
-                IbanObjects[i] = iban;
-            }
-            return IbanObjects;
-        }
+        return IbanObjects;
     }
 
-    internal static readonly string[] Formatted =
+    [Benchmark(Description = "Qowaiv", Baseline = true)]
+    [BenchmarkCategory("Formatted")]
+    public Iban[] Qowaiv_Formatted()
+    {
+        for (var i = 0; i < Formatted.Length; i++)
+        {
+            Iban.TryParse(Formatted[i], null, out var iban);
+            Ibans[i] = iban;
+        }
+        return Ibans;
+    }
+
+    [Benchmark(Description = "Iban.NET")]
+    [BenchmarkCategory("Formatted")]
+    public IbanObject?[] IbanNet_Formatted()
+    {
+        for (var i = 0; i < Formatted.Length; i++)
+        {
+            _ = IbanParser.TryParse(Formatted[i], out var iban);
+            IbanObjects[i] = iban;
+        }
+        return IbanObjects;
+    }
+
+    private static string[] Formatted { get; set; } =
     [
 "AD01 2241 3556 6486 5834 1478",
 "AD02 8216 6468 9451 1616 4402",
@@ -1073,9 +1075,9 @@ public partial class IbanBenchmark
 "YE86 VHZZ 7398 8685 3328 3539 6872 36",
 "YE94 ADCW 3097 3618 9032 0113 3175 26",
 "YE94 OKZY 6248 1377 2609 2990 1388 69",
-    ];
+];
 
-    private static string[] Unformatted { get; } = [.. Formatted.Select(f => f.Replace(" ", string.Empty))];
+    private static string[] Unformatted { get; set; } = [.. Formatted.Select(f => f.Replace(" ", string.Empty))];
 
-    private static readonly RandomSource Rnd = new MersenneTwister();
+    private readonly RandomSource Rnd = new MersenneTwister(42);
 }

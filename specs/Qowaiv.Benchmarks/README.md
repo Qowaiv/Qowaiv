@@ -6,15 +6,13 @@ the v6.6.0 rewrite, regexes where removed, amongst other improvements which
 made the parsing 14 times faster. With v8, The number of mod97's executes has
 been drasticially reduced, leading to another big improvement.
 
-| Parse         | Mean       | Ratio |
-|---------------|-----------:|------:|
-| Qowaiv v8     |    85.2 ns |  1.00 |
-| Qowaiv v6.6.0 |   149.8 ns |  1.76 |
-| IBAN.NET      |   196.1 ns |  2.30 |
-| Regex based   | 2,138.8 ns | 25.10 |
-
-Formatted v.s. unformatted strings have hardly any effect on the durations.
-
+| Method   | Categories  | Mean      | Ratio | Gen0    | Gen1   | Allocated | Alloc Ratio |
+|--------- |------------ |----------:|------:|--------:|-------:|----------:|------------:|
+| Qowaiv   | Formatted   | 130.85 us |  1.00 |  5.6152 | 1.2207 |   70.9 KB |        1.00 |
+| Iban.NET | Formatted   | 280.17 us |  2.14 | 12.2070 | 3.9063 |  155.3 KB |        2.19 |
+|          |             |           |       |         |        |           |             |
+| Qowaiv   | Unformatted |  92.95 us |  1.00 |  5.7373 | 1.3428 |   70.9 KB |        1.00 |
+| Iban.NET | Unformatted | 271.90 us |  2.93 | 12.2070 | 3.9063 |  155.3 KB |        2.19 |
 
 ## Decimal round
 Custom rounding is slower than .NET's default implementation. A big part can

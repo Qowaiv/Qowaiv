@@ -184,7 +184,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     {
         result = default;
 
-        if (s is { Length: >= 12 } && IbanParser.Parse(s.CharSpan()) is { } iban)
+        if (s is { } && IbanParser.Parse(s.AsSpan()) is { } iban)
         {
             result = new(iban);
             return true;
@@ -210,8 +210,9 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
 
     /// <summary>A list with countries supporting IBAN.</summary>
     public static readonly IReadOnlyCollection<Country> Supported = new ReadOnlyCollection<Country>(
-        [.. IbanParser.Parsers
-            .OfType<BbanParser>()
+    [
+        .. Bban.All
+            .Where(d => d.Country.IsKnown && !d.IsGeneric)
             .Select(p => p.Country)
-            .Where(c => c.IsKnown)]);
+    ]);
 }

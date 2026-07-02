@@ -10,15 +10,15 @@
       },
       "DotNet.ReproducibleBuilds": {
         "type": "Direct",
-        "requested": "[2.0.3, )",
+        "requested": "[2.0.5, )",
         "resolved": "2.0.5",
         "contentHash": "8LrlvI1KpjjJ4VGSqZ16yoOCKlQnYS+Y8rYNifNrscmVh5anJcF9E4e0NiDP30BHBMUbkoJ5KdcxoRWM7Pz9Aw=="
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.15.0, )",
-        "resolved": "1.15.0",
-        "contentHash": "gTwbvBCbTOBFsGI63Uau2Ovlcgm66ln0hGS00DCENz+BB8PMqlQm96ajTKKtod2S66xF+MFMUl37HNsKULnzwQ=="
+        "requested": "[1.15.1, )",
+        "resolved": "1.15.1",
+        "contentHash": "tfIqswLOYPLGuvmYioo64ooQkpIO3x5U0SfeDgNAhnuXIpHTrcOcUb5gzUfQtYRz6NJTIWERYUouJGGS/BuXFQ=="
       },
       "Microsoft.CodeAnalysis.CSharp": {
         "type": "Direct",

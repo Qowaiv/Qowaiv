@@ -8,11 +8,11 @@ been drasticially reduced, leading to another big improvement.
 
 | Method   | Categories  | Mean      | Ratio | Gen0    | Gen1   | Allocated | Alloc Ratio |
 |--------- |------------ |----------:|------:|--------:|-------:|----------:|------------:|
-| Qowaiv   | Formatted   | 130.85 us |  1.00 |  5.6152 | 1.2207 |   70.9 KB |        1.00 |
-| Iban.NET | Formatted   | 280.17 us |  2.14 | 12.2070 | 3.9063 |  155.3 KB |        2.19 |
+| Qowaiv   | Formatted   | 130.85 ns |  1.00 |  5.6152 | 1.2207 |   70.9 KB |        1.00 |
+| Iban.NET | Formatted   | 280.17 ns |  2.14 | 12.2070 | 3.9063 |  155.3 KB |        2.19 |
 |          |             |           |       |         |        |           |             |
-| Qowaiv   | Unformatted |  92.95 us |  1.00 |  5.7373 | 1.3428 |   70.9 KB |        1.00 |
-| Iban.NET | Unformatted | 271.90 us |  2.93 | 12.2070 | 3.9063 |  155.3 KB |        2.19 |
+| Qowaiv   | Unformatted |  92.95 ns |  1.00 |  5.7373 | 1.3428 |   70.9 KB |        1.00 |
+| Iban.NET | Unformatted | 271.90 ns |  2.93 | 12.2070 | 3.9063 |  155.3 KB |        2.19 |
 
 ## Decimal round
 Custom rounding is slower than .NET's default implementation. A big part can

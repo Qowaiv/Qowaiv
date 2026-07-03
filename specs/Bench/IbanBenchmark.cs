@@ -4,7 +4,7 @@ using IbanNet.Registry;
 using Iban = Qowaiv.Financial.InternationalBankAccountNumber;
 using IbanObject = IbanNet.Iban;
 
-namespace Benchmarks;
+namespace Bench;
 
 [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
 [CategoriesColumn]

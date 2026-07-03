@@ -1,6 +1,6 @@
 using Qowaiv;
 
-namespace Benchmarks;
+namespace Bench;
 
 public partial class RoundBenchmark
 {

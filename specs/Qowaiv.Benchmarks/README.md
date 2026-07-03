@@ -6,15 +6,13 @@ the v6.6.0 rewrite, regexes where removed, amongst other improvements which
 made the parsing 14 times faster. With v8, The number of mod97's executes has
 been drasticially reduced, leading to another big improvement.
 
-| Parse         | Mean       | Ratio |
-|---------------|-----------:|------:|
-| Qowaiv v8     |    85.2 ns |  1.00 |
-| Qowaiv v6.6.0 |   149.8 ns |  1.76 |
-| IBAN.NET      |   196.1 ns |  2.30 |
-| Regex based   | 2,138.8 ns | 25.10 |
-
-Formatted v.s. unformatted strings have hardly any effect on the durations.
-
+| Method   | Categories  | Mean      | Ratio | Gen0    | Gen1   | Allocated | Alloc Ratio |
+|--------- |------------ |----------:|------:|--------:|-------:|----------:|------------:|
+| Qowaiv   | Formatted   | 130.85 ns |  1.00 |  5.6152 | 1.2207 |   70.9 KB |        1.00 |
+| Iban.NET | Formatted   | 280.17 ns |  2.14 | 12.2070 | 3.9063 |  155.3 KB |        2.19 |
+|          |             |           |       |         |        |           |             |
+| Qowaiv   | Unformatted |  92.95 ns |  1.00 |  5.7373 | 1.3428 |   70.9 KB |        1.00 |
+| Iban.NET | Unformatted | 271.90 ns |  2.93 | 12.2070 | 3.9063 |  155.3 KB |        2.19 |
 
 ## Decimal round
 Custom rounding is slower than .NET's default implementation. A big part can
@@ -54,6 +52,13 @@ By removing `Regex` for the UUID parsing, durations have been reduced.
 | GUID               | 18.77 ns |  1.20 |
 | Base32             | 27.82 ns |  1.78 |
 | Regex + FromBase64 | 92.76 ns |  5.94 |
+
+| Method            | Mean     | Error    | StdDev    | Median   | Ratio | RatioSD |
+|------------------ |---------:|---------:|----------:|---------:|------:|--------:|
+| GUID_Parse        | 52.24 us | 5.929 us | 17.480 us | 40.97 us |  1.11 |    0.50 |
+| UUID_Parse        | 39.84 us | 0.822 us |  2.292 us | 39.53 us |  0.84 |    0.25 |
+| UUID_Parse_Base64 | 28.15 us | 0.563 us |  1.606 us | 27.93 us |  0.60 |    0.18 |
+| UUID_Parse_Base32 | 40.01 us | 0.774 us |  1.942 us | 39.63 us |  0.85 |    0.25 |
 
 Reduced the function calls, and string replacements.
 

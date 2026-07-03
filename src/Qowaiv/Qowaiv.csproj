@@ -37,7 +37,7 @@
       <![CDATA[
 v8.*
 - IBAN supports obfuscation with ToString("O").
-- IBAN parsing 1.75 times faster.
+- IBAN parsing 1.75 times faster, with lower memory consumption.
 - IBAN must not exceed 34 chars. (BUG)
 - IBAN for Russia has become more strict.
 - Fraction.GetHashCode() returns same value for all zero value's. (BUG)

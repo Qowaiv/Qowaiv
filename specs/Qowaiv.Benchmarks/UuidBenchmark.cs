@@ -9,7 +9,7 @@ public partial class UuidBenchmark
     internal Uuid[] Uuids = new Uuid[Iterations];
     internal readonly UuidVersion[] Versions = new UuidVersion[Iterations];
 
-    public class Parse : UuidBenchmark
+    public class UUID_Parsing : UuidBenchmark
     {
         private string[] Strings { get; set; } = [];
         private string[] Base64s { get; set; } = [];
@@ -66,7 +66,7 @@ public partial class UuidBenchmark
         }
     }
 
-    public class StringOutput : UuidBenchmark
+    public class UUID_Format : UuidBenchmark
     {
         private string[] Strings { get; set; } = new string[Iterations];
 
@@ -108,7 +108,7 @@ public partial class UuidBenchmark
         }
     }
 
-    public class Version : UuidBenchmark
+    public class UUID_Version : UuidBenchmark
     {
         [Benchmark(Baseline = true)]
         public UuidVersion[] Layout()

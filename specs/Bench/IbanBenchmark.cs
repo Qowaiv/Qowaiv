@@ -1079,5 +1079,5 @@ public class IbanBenchmark
 
     private static string[] Unformatted { get; set; } = [.. Formatted.Select(f => f.Replace(" ", string.Empty))];
 
-    private readonly RandomSource Rnd = new MersenneTwister(42);
+    private readonly MersenneTwister Rnd = new(42);
 }

@@ -62,7 +62,7 @@ public class Date_time_kind
     [TestCase(DateTimeKind.Unspecified)]
     public void UTC_for_UtcNow(DateTimeKind kind)
     {
-        using (Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11, 06, 15, 0, kind)))
+        using (Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11, 06, 15, 00, kind)))
         {
             Clock.UtcNow().Kind.Should().Be(DateTimeKind.Utc);
         }

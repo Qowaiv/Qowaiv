@@ -5,6 +5,7 @@
   <PropertyGroup>
     <OutputType>exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
     <!-- We do not care about strong names for benchmarking -->
     <NoWarn>CS8002;S101</NoWarn>
     <IsTestCode>true</IsTestCode>

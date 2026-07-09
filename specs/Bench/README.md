@@ -44,36 +44,16 @@ does not.
 | value * 0.01m     | 10.31 ns | 12.26 ns | 13.87 ns |
 
 ## UUID
-By removing `Regex` for the UUID parsing, durations have been reduced.
-| Parse              | Mean     | Ratio |
-|------------------- |---------:|------:|
-| GUID (Guid.Parse)  | 15.63 ns |  1.00 |
-| Base64             | 18.58 ns |  1.19 |
-| GUID               | 18.77 ns |  1.20 |
-| Base32             | 27.82 ns |  1.78 |
-| Regex + FromBase64 | 92.76 ns |  5.94 |
+The Base64 (default) implementation of a UUID is comparable with GUID.
 
-| Method            | Mean     | Error    | StdDev    | Median   | Ratio | RatioSD |
-|------------------ |---------:|---------:|----------:|---------:|------:|--------:|
-| GUID_Parse        | 52.24 us | 5.929 us | 17.480 us | 40.97 us |  1.11 |    0.50 |
-| UUID_Parse        | 39.84 us | 0.822 us |  2.292 us | 39.53 us |  0.84 |    0.25 |
-| UUID_Parse_Base64 | 28.15 us | 0.563 us |  1.606 us | 27.93 us |  0.60 |    0.18 |
-| UUID_Parse_Base32 | 40.01 us | 0.774 us |  1.942 us | 39.63 us |  0.85 |    0.25 |
-
-Reduced the function calls, and string replacements.
-
-| Uuid.ToString()      | Mean     | Ratio |
-|--------------------- |---------:|------:|
-| GUID (Guid.ToString) | 12.53 us |  1.00 |
-| Base64               | 18.11 us |  1.45 |
-| GUID                 | 50.66 us |  4.04 |
-| Convert.ToBase64     | 59.49 us |  4.75 |
-
-The version of a `UUID` is stored in the upper 4 bits of byte 7. By using the
-`GuidLayout` instead of `ToByteArray()` to retrieve that those bits is a big
-improvement.
-
-| Version     | Mean       | Ratio |
-|------------ |-----------:|------:|
-| Layout      |   0.584 ns |  1.00 |
-| From byte[] |   3.024 ns |  5.20 |
+| Method      | Categories | Mean      | Ratio |
+|------------ |----------- |----------:|------:|
+| System.Guid | Parse()    | 24.536 ns |  1.00 |
+| UUID.Base16 | Parse()    | 26.007 ns |  1.06 |
+| UUID.Base64 | Parse()    | 17.990 ns |  0.73 |
+| UUID.Base32 | Parse()    | 25.909 ns |  1.06 |
+|             |            |           |       |
+| System.Guid | ToString() |  8.062 ns |  1.00 |
+| UUID.Base16 | ToString() | 35.960 ns |  4.47 |
+| UUID.Base64 | ToString() | 18.460 ns |  2.29 |
+| UUID.Base32 | ToString() | 45.504 ns |  5.65 |

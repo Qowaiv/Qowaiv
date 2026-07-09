@@ -1,121 +1,107 @@
+using BenchmarkDotNet.Configs;
+
 namespace Bench;
 
+[GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
+[CategoriesColumn]
+[MemoryDiagnoser(true)]
+[MinColumn]
 public partial class UuidBenchmark
 {
-    internal const int Iterations = 1000;
-    internal Guid[] Guids = new Guid[Iterations];
-    internal Uuid[] Uuids = new Uuid[Iterations];
-    internal readonly UuidVersion[] Versions = new UuidVersion[Iterations];
+    private const int Iterations = 1000;
+    private Guid[] Guids = new Guid[Iterations];
+    private Uuid[] Uuids = new Uuid[Iterations];
+    private string[] Strings { get; set; } = [];
+    private string[] Base64s { get; set; } = [];
+    private string[] Base32s { get; set; } = [];
 
-    public class UUID_Parsing : UuidBenchmark
+    [GlobalSetup]
+    public void Setup()
     {
-        private string[] Strings { get; set; } = [];
-        private string[] Base64s { get; set; } = [];
-        private string[] Base32s { get; set; } = [];
-
-        [GlobalSetup]
-        public void Setup()
-        {
-            Uuids = [.. Enumerable.Range(0, Iterations).Select(_ => Uuid.NewUuid())];
-            Guids = [.. Uuids.Select(x => (Guid)x)];
-            Strings = [.. Uuids.Select(g => g.ToString("D"))];
-            Base64s = [.. Uuids.Select(g => g.ToString("S"))];
-            Base32s = [.. Uuids.Select(g => g.ToString("H"))];
-        }
-
-        [Benchmark(Baseline = true)]
-        public Guid[] GUID_Parse()
-        {
-            for (var i = 0; i < Strings.Length; i++)
-            {
-                Guids[i] = Guid.Parse(Strings[i]);
-            }
-            return Guids;
-        }
-
-        [Benchmark]
-        public Uuid[] UUID_Parse()
-        {
-            for (var i = 0; i < Strings.Length; i++)
-            {
-                Uuids[i] = Uuid.Parse(Strings[i]);
-            }
-            return Uuids;
-        }
-
-        [Benchmark]
-        public Uuid[] UUID_Parse_Base64()
-        {
-            for (var i = 0; i < Strings.Length; i++)
-            {
-                Uuids[i] = Uuid.Parse(Base64s[i]);
-            }
-            return Uuids;
-        }
-
-        [Benchmark]
-        public Uuid[] UUID_Parse_Base32()
-        {
-            for (var i = 0; i < Strings.Length; i++)
-            {
-                Uuids[i] = Uuid.Parse(Base32s[i]);
-            }
-            return Uuids;
-        }
+        Uuids = [.. Enumerable.Range(0, Iterations).Select(_ => Uuid.NewUuid())];
+        Guids = [.. Uuids.Select(x => (Guid)x)];
+        Strings = [.. Uuids.Select(g => g.ToString("D"))];
+        Base64s = [.. Uuids.Select(g => g.ToString("S"))];
+        Base32s = [.. Uuids.Select(g => g.ToString("H"))];
     }
 
-    public class UUID_Format : UuidBenchmark
+    [BenchmarkCategory("Parse()")]
+    [Benchmark(Description = "System.Guid", Baseline = true)]
+    public Guid[] GUID_Parse()
     {
-        private string[] Strings { get; set; } = new string[Iterations];
+        for (var i = 0; i < Strings.Length; i++)
+            Guids[i] = Guid.Parse(Strings[i]);
 
-        [GlobalSetup]
-        public void Setup()
-        {
-            Uuids = [.. Enumerable.Range(0, Iterations).Select(_ => Uuid.NewUuid())];
-            Guids = [.. Uuids.Select(x => (Guid)x)];
-        }
-
-        [Benchmark(Baseline = true)]
-        public string[] GUID_ToString()
-        {
-            for (var i = 0; i < Guids.Length; i++)
-            {
-                Strings[i] = Guids[i].ToString();
-            }
-            return Strings;
-        }
-
-        [Benchmark]
-        public string[] GUID()
-        {
-            for (var i = 0; i < Uuids.Length; i++)
-            {
-                Strings[i] = Uuids[i].ToString("B");
-            }
-            return Strings;
-        }
-
-        [Benchmark]
-        public string[] Base64()
-        {
-            for (var i = 0; i < Uuids.Length; i++)
-            {
-                Strings[i] = Uuids[i].ToJson()!;
-            }
-            return Strings;
-        }
+        return Guids;
     }
 
-    public class UUID_Version : UuidBenchmark
+    [BenchmarkCategory("Parse()")]
+    [Benchmark(Description = "UUID.Base16")]
+    public Uuid[] UUID_Parse()
     {
-        [Benchmark(Baseline = true)]
-        public UuidVersion[] Layout()
-        {
-            for (var i = 0; i < Uuids.Length; i++)
-            {
-                Versions[i] = Uuids[i].Version;
-            }
-            return Versions;
-        }
+        for (var i = 0; i < Strings.Length; i++)
+            Uuids[i] = Uuid.Parse(Strings[i]);
+
+        return Uuids;
+    }
+
+    [BenchmarkCategory("Parse()")]
+    [Benchmark(Description = "UUID.Base64")]
+    public Uuid[] UUID_Parse_Base64()
+    {
+        for (var i = 0; i < Strings.Length; i++)
+            Uuids[i] = Uuid.Parse(Base64s[i]);
+
+        return Uuids;
+    }
+
+    [BenchmarkCategory("Parse()")]
+    [Benchmark(Description = "UUID.Base32")]
+    public Uuid[] UUID_Parse_Base32()
+    {
+        for (var i = 0; i < Strings.Length; i++)
+            Uuids[i] = Uuid.Parse(Base32s[i]);
+
+        return Uuids;
+    }
+
+    [BenchmarkCategory("ToString()")]
+    [Benchmark(Description = "System.Guid", Baseline = true)]
+    public string[] GUID_ToString()
+    {
+        for (var i = 0; i < Guids.Length; i++)
+            Strings[i] = Guids[i].ToString("D");
+
+        return Strings;
+    }
+
+    [BenchmarkCategory("ToString()")]
+    [Benchmark(Description = "UUID.Base16")]
+    public string[] GUID()
+    {
+        for (var i = 0; i < Uuids.Length; i++)
+            Strings[i] = Uuids[i].ToString("D");
+
+        return Strings;
+    }
+
+    [BenchmarkCategory("ToString()")]
+    [Benchmark(Description = "UUID.Base64")]
+    public string[] Base64()
+    {
+        for (var i = 0; i < Uuids.Length; i++)
+            Strings[i] = Uuids[i].ToJson()!;
+
+        return Strings;
+    }
+
+    [BenchmarkCategory("ToString()")]
+    [Benchmark(Description = "UUID.Base32")]
+    public string[] Base32()
+    {
+        for (var i = 0; i < Uuids.Length; i++)
+            Strings[i] = Uuids[i].ToString("H");
+
+        return Strings;
     }
 }

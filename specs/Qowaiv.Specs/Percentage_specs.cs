@@ -1150,6 +1150,20 @@ public class Supports_JSON_serialization
     [TestCase("17.51%", "17.51%")]
     public void System_Text_JSON_serialization(Percentage svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+
+    [Test]
+    public void System_Text_JSON_is_culture_invariant()
+    {
+        using (TestCultures.nl_BE.Scoped())
+        {
+            JsonTester.Write_System_Text_JSON(Svo.Percentage).Should().Be("17.51%");
+        }
+    }
+
+    [Test]
+    public void System_Text_JSON_does_not_exceed_span_bufffer()
+        => JsonTester.Write_System_Text_JSON(Percentage.MinValue).Should().Be("-792281625142643375935439503.35%");
+
 #endif
     [TestCase("17.51", "17.51%")]
     [TestCase("175.1‰", "17.51%")]

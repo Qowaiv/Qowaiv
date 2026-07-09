@@ -1,5 +1,11 @@
 #if NET8_0_OR_GREATER
 
+using Qowaiv.Mathematics;
+using System.Buffers;
+using System.Buffers.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a percentage.</summary>
@@ -21,6 +27,35 @@ public class PercentageJsonConverter : SvoJsonConverter<Percentage>
     /// <inheritdoc />
     [Pure]
     protected override object? ToJson(Percentage svo) => svo.ToJson();
+
+    /// <inheritdoc />
+    /// <remarks>
+    /// Uses <see cref="Utf8JsonWriter.WriteRawValue(string, bool)"/>:
+    /// Writes '"'
+    /// Writes decimal (decimal point moved left 2 positions)
+    /// Writes '%'
+    /// Writes '"'.
+    /// The buffer length:
+    /// 29 bytes for decimal (precision)
+    ///  2 bytes for quotes
+    ///  1 byte  for percentage sign
+    ///  1 byte  for decimal seperator
+    ///  1 byte  for minius sign.
+    /// </remarks>
+    public override void Write(Utf8JsonWriter writer, Percentage value, JsonSerializerOptions options)
+    {
+        Span<byte> buffer = stackalloc byte[34];
+        buffer[0] = Quote;
+        var dec = DecimalMath.ChangeScale((decimal)value, 2);
+        Utf8Formatter.TryFormat(dec, buffer[1..], out var length);
+        length++;
+        buffer[length++] = Sign;
+        buffer[length++] = Quote;
+        writer.WriteRawValue(buffer[..length], true);
+    }
+
+    private const byte Quote = (byte)'"';
+    private const byte Sign = (byte)'%';
 }
 
 #endif

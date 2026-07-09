@@ -29,6 +29,23 @@ public class PercentageJsonConverter : SvoJsonConverter<Percentage>
     protected override object? ToJson(Percentage svo) => svo.ToJson();
 
     /// <inheritdoc />
+    public override Percentage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        if (reader.TokenType == JsonTokenType.String)
+        {
+            var span = reader.ValueSpan;
+            if (span[^1] is Sign
+                && Utf8Parser.TryParse(span[..^1], out decimal dec, out int bytesConsumed)
+                && bytesConsumed == span.Length - 1)
+            {
+                return dec.Percent();
+            }
+        }
+
+        return base.Read(ref reader, typeToConvert, options);
+    }
+
+    /// <inheritdoc />
     /// <remarks>
     /// Uses <see cref="Utf8JsonWriter.WriteRawValue(string, bool)"/>:
     /// Writes '"'

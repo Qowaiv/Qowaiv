@@ -12,7 +12,7 @@ namespace Qowaiv.Json;
 public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : struct
 {
     /// <inheritdoc />
-    public sealed override TSvo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override TSvo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         try
         {

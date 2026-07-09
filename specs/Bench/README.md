@@ -44,11 +44,13 @@ does not.
 | value * 0.01m     | 10.31 ns | 12.26 ns | 13.87 ns |
 
 ### System.Text.Json Serialization
-| Method           |  Mean     | Ratio |
-|----------------- |----------:|------:|
-| Decimal          |  24.34 ns |  1.00 |
-| Percentage       |  38.20 ns |  1.57 |
-| Percentage (old) | 326.19 ns | 13.40 |
+| Method     | Categories           | Mean     | Ratio |
+|----------- |--------------------- |---------:|------:|
+| Decimal    | JSON Deserialization | 42.65 us |  1.00 |
+| Percentage | JSON Deserialization | 52.71 us |  1.24 |
+|            |                      |          |       |
+| Decimal    | JSON Serialization   | 25.65 us |  1.00 |
+| Percentage | JSON Serialization   | 39.77 us |  1.55 |
 
 ## UUID
 The Base64 (default) implementation of a UUID is comparable with GUID.

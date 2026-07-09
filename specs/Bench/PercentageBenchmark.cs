@@ -1,7 +1,6 @@
 using BenchmarkDotNet.Configs;
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Bench;
 
@@ -14,7 +13,9 @@ public class PercentageBenchmark
     private const int Iterations = 1000;
     private readonly decimal[] Decimals = new decimal[Iterations];
     private readonly Percentage[] Percentages = new Percentage[Iterations];
-    private readonly Stream Stream = new MemoryStream();
+    private readonly Stream Write = new MemoryStream();
+    private readonly Stream ReadDecimal = new MemoryStream();
+    private readonly Stream ReadPercentage = new MemoryStream();
 
     public PercentageBenchmark()
     {
@@ -25,28 +26,49 @@ public class PercentageBenchmark
             Decimals[i] = nr;
             Percentages[i] = nr.Percent();
         }
+
+        JsonSerializer.Serialize(ReadDecimal, Decimals);
+        JsonSerializer.Serialize(ReadPercentage, Percentages);
     }
 
     [Benchmark(Description = nameof(Decimal), Baseline = true)]
     [BenchmarkCategory(Cat.Serialization)]
     public Stream Decimal_serialization()
     {
-        Stream.Position = 0;
-        JsonSerializer.Serialize(Stream, Decimals);
-        return Stream;
+        Write.Position = 0;
+        JsonSerializer.Serialize(Write, Decimals);
+        return Write;
     }
 
     [Benchmark(Description = nameof(Percentage))]
     [BenchmarkCategory(Cat.Serialization)]
     public Stream Percentage_serialization()
     {
-        Stream.Position = 0;
-        JsonSerializer.Serialize(Stream, Percentages);
-        return Stream;
+        Write.Position = 0;
+        JsonSerializer.Serialize(Write, Percentages);
+        return Write;
+    }
+
+
+    [Benchmark(Description = nameof(Decimal), Baseline = true)]
+    [BenchmarkCategory(Cat.Deserialization)]
+    public decimal[]? Decimal_deserialization()
+    {
+        ReadDecimal.Position = 0;
+        return JsonSerializer.Deserialize<decimal[]>(ReadDecimal);
+    }
+
+    [Benchmark(Description = nameof(Percentage))]
+    [BenchmarkCategory(Cat.Deserialization)]
+    public Percentage[]? Percentage_deserialization()
+    {
+        ReadPercentage.Position = 0;
+        return JsonSerializer.Deserialize<Percentage[]>(ReadPercentage);
     }
 
     private static class Cat
     {
         public const string Serialization = nameof(Serialization);
+        public const string Deserialization = nameof(Deserialization);
     }
 }

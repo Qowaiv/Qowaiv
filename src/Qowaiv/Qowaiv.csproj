@@ -42,6 +42,7 @@ v8.*
 - IBAN for Russia has become more strict.
 - Percentage JSON serialization speed improvements.
 - Fraction.GetHashCode() returns same value for all zero value's. (BUG)
+- [DebuggerDisplay("{DebuggerDisplay,nq}")] to drop quotes from debugger display.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

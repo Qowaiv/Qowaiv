@@ -42,12 +42,6 @@
           "Microsoft.TestPlatform.TestHost": "18.7.0"
         }
       },
-      "Microsoft.Sbom.Targets": {
-        "type": "Direct",
-        "requested": "[4.1.5, )",
-        "resolved": "4.1.5",
-        "contentHash": "i5z+cNu/cOcdO0AgFB8aXk8w6In2H+haaDfSgd9ImvQIK+rSHavHZIogVoAZLL8jLwYx4bAcs5b7EyuMMG4mQQ=="
-      },
       "NUnit": {
         "type": "Direct",
         "requested": "[4.6.1, )",
@@ -201,12 +195,6 @@
           "Microsoft.TestPlatform.TestHost": "18.7.0"
         }
       },
-      "Microsoft.Sbom.Targets": {
-        "type": "Direct",
-        "requested": "[4.1.5, )",
-        "resolved": "4.1.5",
-        "contentHash": "i5z+cNu/cOcdO0AgFB8aXk8w6In2H+haaDfSgd9ImvQIK+rSHavHZIogVoAZLL8jLwYx4bAcs5b7EyuMMG4mQQ=="
-      },
       "NUnit": {
         "type": "Direct",
         "requested": "[4.6.1, )",
@@ -359,12 +347,6 @@
           "Microsoft.CodeCoverage": "18.7.0",
           "Microsoft.TestPlatform.TestHost": "18.7.0"
         }
-      },
-      "Microsoft.Sbom.Targets": {
-        "type": "Direct",
-        "requested": "[4.1.5, )",
-        "resolved": "4.1.5",
-        "contentHash": "i5z+cNu/cOcdO0AgFB8aXk8w6In2H+haaDfSgd9ImvQIK+rSHavHZIogVoAZLL8jLwYx4bAcs5b7EyuMMG4mQQ=="
       },
       "NUnit": {
         "type": "Direct",

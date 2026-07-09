@@ -222,6 +222,7 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
         else return false;
     }
 
+#pragma warning disable S4790 // Use strong hashing algorithms
     /// <summary>Generates an <see cref="Uuid" /> applying a <see cref="MD5" /> hash on the data.</summary>
     [Pure]
     public static Uuid GenerateWithMD5(byte[] data)
@@ -251,6 +252,7 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
         SetVersion(hash, UuidVersion.SHA1);
         return new Guid(hash);
     }
+#pragma warning restore S4790
 
     private static void SetVersion(byte[] uuid, UuidVersion version)
     {

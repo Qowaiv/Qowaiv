@@ -1,5 +1,6 @@
 global using BenchmarkDotNet.Attributes;
 global using MathNet.Numerics.Random;
+global using Qowaiv;
 global using Qowaiv.Diagnostics.Contracts;
 global using System;
 global using System.Collections.Generic;

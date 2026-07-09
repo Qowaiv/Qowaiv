@@ -355,17 +355,7 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
         }
     }
 
-    private static ResourceManager ResourceManager
-    {
-        get
-        {
-            rm ??= new("Qowaiv.Globalization.CountryLabels", typeof(Country).Assembly);
-            return rm;
-        }
-    }
-
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private static ResourceManager? rm;
+    private static ResourceManager ResourceManager => field ??= new("Qowaiv.Globalization.CountryLabels", typeof(Country).Assembly);
 
     /// <summary>Get resource string.</summary>
     /// <param name="postfix">

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/nopackage.props" />
 
@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">
-    <PackageReference Include="AwesomeAssertions.Analyzers" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
   </ItemGroup>
 
@@ -26,7 +25,7 @@
     <ProjectReference Include="../../src/Qowaiv/Qowaiv.csproj" />
     <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="../../src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
-    <ProjectReference Include="..\Qowaiv.Specs.Generated\Qowaiv.Specs.Generated.csproj" />
+    <ProjectReference Include="../Qowaiv.Specs.Generated/Qowaiv.Specs.Generated.csproj" />
   </ItemGroup>
 
 </Project>

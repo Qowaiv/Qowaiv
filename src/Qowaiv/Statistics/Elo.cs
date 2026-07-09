@@ -13,7 +13,7 @@ namespace Qowaiv.Statistics;
 /// of video games, association football, gridiron football, basketball, Major
 /// League Baseball, competitive programming, and other games.
 /// </remarks>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(double))]
 [OpenApiDataType(description: "Elo rating system notation.", example: 1600d, type: "number", format: "elo")]
 [TypeConverter(typeof(EloTypeConverter))]

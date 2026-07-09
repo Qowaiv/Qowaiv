@@ -1,7 +1,7 @@
 namespace Qowaiv.Formatting;
 
 /// <summary>Represents a collection of formatting arguments.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 public class FormattingArgumentsCollection : IEnumerable<KeyValuePair<Type, FormattingArguments>>
 {
     /// <summary>Initializes a new instance of the <see cref="FormattingArgumentsCollection" /> class based on the current culture.</summary>

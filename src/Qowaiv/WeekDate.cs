@@ -27,7 +27,7 @@ namespace Qowaiv;
 /// corresponds to the Sunday of the 52nd week of 2006, and is written
 /// 2006-W52-7 (extended form) or 2006W527 (compact form).
 /// </remarks>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(Date))]
 [OpenApiDataType(description: "Full-date notation as defined by ISO 8601.", example: "1997-W14-6", type: "string", format: "date-weekbased")]
 [TypeConverter(typeof(WeekDateTypeConverter))]

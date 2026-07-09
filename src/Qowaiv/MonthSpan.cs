@@ -1,7 +1,7 @@
 namespace Qowaiv;
 
 /// <summary>Represents a month span.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.Continuous, underlyingType: typeof(int))]
 [OpenApiDataType(description: "Month span, specified in years and months.", example: "1Y+10M", type: "string", format: "month-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M")]
 [TypeConverter(typeof(MonthSpanTypeConverter))]

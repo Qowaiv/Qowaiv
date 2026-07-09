@@ -1,7 +1,7 @@
 namespace Qowaiv;
 
 /// <summary>Represents a year-month.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(int))]
 [OpenApiDataType(description: "Date notation with month precision.", example: "2017-06", type: "string", format: "year-month", pattern: "[0-9]{4}-(0?[1-9]|1[0-2])")]
 [TypeConverter(typeof(YearMonthTypeConverter))]

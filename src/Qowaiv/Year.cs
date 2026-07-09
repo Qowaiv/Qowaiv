@@ -1,7 +1,7 @@
 namespace Qowaiv;
 
 /// <summary>Represents a year.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(short))]
 [OpenApiDataType(description: "Year(-only) notation.", example: 1983, type: "integer", format: "year", nullable: true)]
 [TypeConverter(typeof(YearTypeConverter))]

@@ -12,7 +12,7 @@ namespace Qowaiv.IO;
 /// and the total size of the file system. This value type can not represent
 /// stream sizes bigger than long.MaxValue.
 /// </remarks>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(long))]
 [OpenApiDataType(description: "Stream size notation (in byte).", example: 1024, type: "integer", format: "stream-size")]
 [TypeConverter(typeof(StreamSizeTypeConverter))]

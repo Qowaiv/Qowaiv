@@ -7,7 +7,7 @@
 namespace @Namespace;
 
 /// <summary>Represents a @FullName.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(@type))]
 [OpenApiDataType(description: "@FullName", type: "@TSvo", format: "@TSvo", example: "ABC")]

@@ -1,7 +1,7 @@
 namespace Qowaiv.Globalization;
 
 /// <summary>Represents country specific postal code information.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 public sealed partial class PostalCodeCountryInfo
 {
     /// <summary>Initializes a new instance of the <see cref="PostalCodeCountryInfo" /> class.</summary>

@@ -15,7 +15,7 @@ namespace Qowaiv.Sustainability;
 /// In an attempt to keep up with advances in energy efficiency, A+, A++, A+++,
 /// and A++++ grades were later introduced for various product.
 /// </remarks>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(int))]
 [OpenApiDataType(description: "EU energy label", type: "string", format: "energy-label", example: "A++", pattern: @"[A-H]|A\+{1,4}", nullable: true)]
 [TypeConverter(typeof(Conversion.Sustainability.EnergyLabelTypeConverter))]

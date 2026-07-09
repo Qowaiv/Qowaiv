@@ -1,5 +1,3 @@
-using Qowaiv;
-
 namespace Bench;
 
 public class EmailBenchmark

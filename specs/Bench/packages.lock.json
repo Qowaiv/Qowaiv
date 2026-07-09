@@ -66,12 +66,6 @@
           "Microsoft.CodeAnalysis.Common": "[4.11.0]"
         }
       },
-      "Microsoft.Sbom.Targets": {
-        "type": "Direct",
-        "requested": "[4.1.5, )",
-        "resolved": "4.1.5",
-        "contentHash": "i5z+cNu/cOcdO0AgFB8aXk8w6In2H+haaDfSgd9ImvQIK+rSHavHZIogVoAZLL8jLwYx4bAcs5b7EyuMMG4mQQ=="
-      },
       "PolySharp": {
         "type": "Direct",
         "requested": "[1.16.0, )",

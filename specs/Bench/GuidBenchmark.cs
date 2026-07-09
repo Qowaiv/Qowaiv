@@ -1,16 +1,18 @@
 using BenchmarkDotNet.Configs;
+using Specs_Generated;
 
 namespace Bench;
 
 [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
 [CategoriesColumn]
-[MemoryDiagnoser(true)]
 [MinColumn]
-public partial class UuidBenchmark
+public partial class GuidBenchmark
 {
     private const int Iterations = 1000;
     private Guid[] Guids = new Guid[Iterations];
     private Uuid[] Uuids = new Uuid[Iterations];
+    private GuidBasedId[] GuidBasedIds = new GuidBasedId[Iterations];
+    private UuidBasedId[] UuidBasedIds = new UuidBasedId[Iterations];
     private string[] Strings { get; set; } = [];
     private string[] Base64s { get; set; } = [];
     private string[] Base32s { get; set; } = [];
@@ -65,6 +67,26 @@ public partial class UuidBenchmark
         return Uuids;
     }
 
+    [BenchmarkCategory("Parse()")]
+    [Benchmark(Description = "GUID based ID")]
+    public GuidBasedId[] GUID_Based_Id_Parse()
+    {
+        for (var i = 0; i < Strings.Length; i++)
+            GuidBasedIds[i] = GuidBasedId.Parse(Base32s[i]);
+
+        return GuidBasedIds;
+    }
+
+    [BenchmarkCategory("Parse()")]
+    [Benchmark(Description = "UUID based ID")]
+    public UuidBasedId[] UUID_Based_Id_Parse()
+    {
+        for (var i = 0; i < Strings.Length; i++)
+            UuidBasedIds[i] = UuidBasedId.Parse(Base32s[i]);
+
+        return UuidBasedIds;
+    }
+
     [BenchmarkCategory("ToString()")]
     [Benchmark(Description = "System.Guid", Baseline = true)]
     public string[] GUID_ToString()
@@ -101,6 +123,26 @@ public partial class UuidBenchmark
     {
         for (var i = 0; i < Uuids.Length; i++)
             Strings[i] = Uuids[i].ToString("H");
+
+        return Strings;
+    }
+
+    [BenchmarkCategory("ToString()")]
+    [Benchmark(Description = "GUID based ID")]
+    public string[] GuidBasedId_ToString()
+    {
+        for (var i = 0; i < GuidBasedIds.Length; i++)
+            Strings[i] = GuidBasedIds[i].ToString();
+
+        return Strings;
+    }
+
+    [BenchmarkCategory("ToString()")]
+    [Benchmark(Description = "UUID based ID")]
+    public string[] UuidBasedId_ToString()
+    {
+        for (var i = 0; i < UuidBasedIds.Length; i++)
+            Strings[i] = UuidBasedIds[i].ToString();
 
         return Strings;
     }

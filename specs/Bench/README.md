@@ -46,14 +46,18 @@ does not.
 ## UUID
 The Base64 (default) implementation of a UUID is comparable with GUID.
 
-| Method      | Categories | Mean      | Ratio |
-|------------ |----------- |----------:|------:|
-| System.Guid | Parse()    | 24.536 ns |  1.00 |
-| UUID.Base16 | Parse()    | 26.007 ns |  1.06 |
-| UUID.Base64 | Parse()    | 17.990 ns |  0.73 |
-| UUID.Base32 | Parse()    | 25.909 ns |  1.06 |
-|             |            |           |       |
-| System.Guid | ToString() |  8.062 ns |  1.00 |
-| UUID.Base16 | ToString() | 35.960 ns |  4.47 |
-| UUID.Base64 | ToString() | 18.460 ns |  2.29 |
-| UUID.Base32 | ToString() | 45.504 ns |  5.65 |
+| Method        | Categories | Mean      | Ratio |
+|-------------- |----------- |----------:|------:|
+| System.Guid   | Parse()    | 15.773 us |  1.00 |
+| UUID.Base16   | Parse()    | 25.355 us |  1.61 |
+| UUID.Base64   | Parse()    | 17.381 us |  1.10 |
+| UUID.Base32   | Parse()    | 28.491 us |  1.81 |
+| GUID based ID | Parse()    | 33.180 us |  2.11 |
+| UUID based ID | Parse()    | 28.857 us |  1.83 |
+|               |            |           |       |
+| System.Guid   | ToString() |  7.952 us |  1.00 |
+| UUID.Base16   | ToString() | 36.774 us |  4.63 |
+| UUID.Base64   | ToString() | 17.795 us |  2.24 |
+| UUID.Base32   | ToString() | 51.867 us |  6.53 |
+| GUID based ID | ToString() |  3.420 us |  0.43 |
+| UUID based ID | ToString() |  3.306 us |  0.42 |

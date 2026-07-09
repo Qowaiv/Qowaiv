@@ -235,6 +235,12 @@
       "qowaiv": {
         "type": "Project"
       },
+      "qowaiv.specs.generated": {
+        "type": "Project",
+        "dependencies": {
+          "Qowaiv": "[8.0.0, )"
+        }
+      },
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {

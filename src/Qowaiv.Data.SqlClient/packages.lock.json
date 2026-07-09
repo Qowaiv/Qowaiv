@@ -16,9 +16,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.15.1, )",
-        "resolved": "1.15.1",
-        "contentHash": "tfIqswLOYPLGuvmYioo64ooQkpIO3x5U0SfeDgNAhnuXIpHTrcOcUb5gzUfQtYRz6NJTIWERYUouJGGS/BuXFQ=="
+        "requested": "[1.15.2, )",
+        "resolved": "1.15.2",
+        "contentHash": "waAOyVGjDWA4Vw4xvrITEdBeRPNRhTIpJ4qwWXrOefvV1/WY3rY5OcaLJJdBERqEJKT3ADDkYD6zFh7Er7JwZg=="
       },
       "Microsoft.Sbom.Targets": {
         "type": "Direct",
@@ -194,9 +194,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.15.1, )",
-        "resolved": "1.15.1",
-        "contentHash": "tfIqswLOYPLGuvmYioo64ooQkpIO3x5U0SfeDgNAhnuXIpHTrcOcUb5gzUfQtYRz6NJTIWERYUouJGGS/BuXFQ=="
+        "requested": "[1.15.2, )",
+        "resolved": "1.15.2",
+        "contentHash": "waAOyVGjDWA4Vw4xvrITEdBeRPNRhTIpJ4qwWXrOefvV1/WY3rY5OcaLJJdBERqEJKT3ADDkYD6zFh7Er7JwZg=="
       },
       "Microsoft.Sbom.Targets": {
         "type": "Direct",
@@ -281,9 +281,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.15.1, )",
-        "resolved": "1.15.1",
-        "contentHash": "tfIqswLOYPLGuvmYioo64ooQkpIO3x5U0SfeDgNAhnuXIpHTrcOcUb5gzUfQtYRz6NJTIWERYUouJGGS/BuXFQ=="
+        "requested": "[1.15.2, )",
+        "resolved": "1.15.2",
+        "contentHash": "waAOyVGjDWA4Vw4xvrITEdBeRPNRhTIpJ4qwWXrOefvV1/WY3rY5OcaLJJdBERqEJKT3ADDkYD6zFh7Er7JwZg=="
       },
       "Microsoft.Sbom.Targets": {
         "type": "Direct",
@@ -368,9 +368,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.15.1, )",
-        "resolved": "1.15.1",
-        "contentHash": "tfIqswLOYPLGuvmYioo64ooQkpIO3x5U0SfeDgNAhnuXIpHTrcOcUb5gzUfQtYRz6NJTIWERYUouJGGS/BuXFQ=="
+        "requested": "[1.15.2, )",
+        "resolved": "1.15.2",
+        "contentHash": "waAOyVGjDWA4Vw4xvrITEdBeRPNRhTIpJ4qwWXrOefvV1/WY3rY5OcaLJJdBERqEJKT3ADDkYD6zFh7Er7JwZg=="
       },
       "Microsoft.Sbom.Targets": {
         "type": "Direct",

@@ -66,10 +66,9 @@ public class PercentageJsonConverter : SvoJsonConverter<Percentage>
         Span<byte> buffer = stackalloc byte[34];
         buffer[0] = Quote;
         Utf8Formatter.TryFormat(dec, buffer[1..], out var length);
-        length++;
-        buffer[length++] = Sign;
-        buffer[length++] = Quote;
-        writer.WriteRawValue(buffer[..length], skipInputValidation: true);
+        buffer[length + 1] = Sign;
+        buffer[length + 2] = Quote;
+        writer.WriteRawValue(buffer[..(length + 3)], skipInputValidation: true);
     }
 
     private const byte Quote = (byte)'"';

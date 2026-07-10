@@ -12,7 +12,7 @@ namespace Qowaiv.Json;
 public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : struct
 {
     /// <inheritdoc />
-    public sealed override TSvo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override TSvo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         try
         {
@@ -34,7 +34,7 @@ public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : 
     }
 
     /// <inheritdoc />
-    public sealed override void Write(Utf8JsonWriter writer, TSvo value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, TSvo value, JsonSerializerOptions options)
     {
         Guard.NotNull(writer);
 

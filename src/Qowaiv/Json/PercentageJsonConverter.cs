@@ -34,7 +34,7 @@ public class PercentageJsonConverter : SvoJsonConverter<Percentage>
         if (reader.TokenType == JsonTokenType.String)
         {
             var span = reader.ValueSpan;
-            if (span[^1] is Sign
+            if (span[^1] is Symbol
                 && Utf8Parser.TryParse(span[..^1], out decimal dec, out int bytesConsumed)
                 && bytesConsumed == span.Length - 1)
             {
@@ -55,7 +55,7 @@ public class PercentageJsonConverter : SvoJsonConverter<Percentage>
     /// The buffer length:
     /// 29 bytes for decimal (precision)
     ///  2 bytes for quotes
-    ///  1 byte  for percentage sign
+    ///  1 byte  for percentage symbol
     ///  1 byte  for decimal seperator
     ///  1 byte  for minus sign.
     /// </remarks>
@@ -66,13 +66,13 @@ public class PercentageJsonConverter : SvoJsonConverter<Percentage>
         Span<byte> buffer = stackalloc byte[34];
         buffer[0] = Quote;
         Utf8Formatter.TryFormat(dec, buffer[1..], out var length);
-        buffer[++length] = Sign;
+        buffer[++length] = Symbol;
         buffer[++length] = Quote;
         writer.WriteRawValue(buffer[..++length], skipInputValidation: true);
     }
 
     private const byte Quote = (byte)'"';
-    private const byte PercentageSign = (byte)'%';
+    private const byte Symbol = (byte)'%';
 }
 
 #endif

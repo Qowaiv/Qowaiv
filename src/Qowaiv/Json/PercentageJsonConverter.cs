@@ -72,7 +72,7 @@ public class PercentageJsonConverter : SvoJsonConverter<Percentage>
     }
 
     private const byte Quote = (byte)'"';
-    private const byte Sign = (byte)'%';
+    private const byte PercentageSign = (byte)'%';
 }
 
 #endif

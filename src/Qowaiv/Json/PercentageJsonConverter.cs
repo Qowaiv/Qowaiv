@@ -61,9 +61,10 @@ public class PercentageJsonConverter : SvoJsonConverter<Percentage>
     /// </remarks>
     public override void Write(Utf8JsonWriter writer, Percentage value, JsonSerializerOptions options)
     {
+        var dec = DecimalMath.ChangeScale((decimal)value, 2);
+
         Span<byte> buffer = stackalloc byte[34];
         buffer[0] = Quote;
-        var dec = DecimalMath.ChangeScale((decimal)value, 2);
         Utf8Formatter.TryFormat(dec, buffer[1..], out var length);
         length++;
         buffer[length++] = Sign;

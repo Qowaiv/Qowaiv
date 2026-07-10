@@ -40,6 +40,7 @@ v8.*
 - IBAN parsing 1.75 times faster, with lower memory consumption.
 - IBAN must not exceed 34 chars. (BUG)
 - IBAN for Russia has become more strict.
+- Percentage JSON serialization speed improvements.
 - Fraction.GetHashCode() returns same value for all zero value's. (BUG)
 ]]>
     </ToBeReleased>

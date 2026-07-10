@@ -57,7 +57,7 @@ public class PercentageJsonConverter : SvoJsonConverter<Percentage>
     ///  2 bytes for quotes
     ///  1 byte  for percentage sign
     ///  1 byte  for decimal seperator
-    ///  1 byte  for minius sign.
+    ///  1 byte  for minus sign.
     /// </remarks>
     public override void Write(Utf8JsonWriter writer, Percentage value, JsonSerializerOptions options)
     {
@@ -68,7 +68,7 @@ public class PercentageJsonConverter : SvoJsonConverter<Percentage>
         length++;
         buffer[length++] = Sign;
         buffer[length++] = Quote;
-        writer.WriteRawValue(buffer[..length], true);
+        writer.WriteRawValue(buffer[..length], skipInputValidation: true);
     }
 
     private const byte Quote = (byte)'"';

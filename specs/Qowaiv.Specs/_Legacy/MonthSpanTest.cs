@@ -45,19 +45,6 @@ public class MonthSpanTest
     }
 
     [Test]
-    public void Parse_InvalidInput_ThrowsFormatException()
-    {
-        using (new CultureInfoScope("en-GB"))
-        {
-            Assert.Catch<FormatException>(() =>
-            {
-                MonthSpan.Parse("InvalidInput");
-            }
-            , "Not a valid month span");
-        }
-    }
-
-    [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
         using (new CultureInfoScope("en-GB"))

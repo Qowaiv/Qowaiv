@@ -117,20 +117,6 @@ public class CountryTest
     }
 
     [Test]
-    public void Parse_InvalidInput_ThrowsFormatException()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            Assert.Catch<FormatException>
-            (() =>
-            {
-                Country.Parse("InvalidInput");
-            },
-            "Not a valid country");
-        }
-    }
-
-    [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
         using (TestCultures.en_GB.Scoped())

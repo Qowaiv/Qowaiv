@@ -58,6 +58,19 @@ public class Is_equal_by_value
     }
 }
 
+public class Can_be_parsed
+{
+    [Test]
+    public void from_valid_input_only_otherwise_throws_on_Parse()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            "invalid input".Invoking(HouseNumber.Parse)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid house number");
+        }
+    }
+}
 public class Is_comparable
 {
     [Test]

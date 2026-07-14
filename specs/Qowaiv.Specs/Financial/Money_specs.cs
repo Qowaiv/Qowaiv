@@ -72,6 +72,17 @@ public class Can_be_parsed
     [Test]
     public void with_out_currency()
         => Money.Parse("42.17", CultureInfo.InvariantCulture).Should().Be(42.17 + Currency.Empty);
+
+    [Test]
+    public void from_valid_input_only_otherwise_throws_on_Parse()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            "invalid input".Invoking(Money.Parse)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid amount");
+        }
+    }
 }
 
 public class Supports_type_conversion

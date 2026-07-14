@@ -111,6 +111,20 @@ public class Exists
 #endif
 }
 
+public class Can_be_parsed
+{
+    [Test]
+    public void from_valid_input_only_otherwise_throws_on_Parse()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            "invalid input".Invoking(Country.Parse)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid BIC");
+        }
+    }
+}
+
 public class Has_custom_formatting
 {
     [Test]

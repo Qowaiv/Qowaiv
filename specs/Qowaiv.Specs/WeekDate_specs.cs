@@ -12,6 +12,20 @@ public class Is_invalid
     public void for_garbage() => WeekDate.TryParse("Not a week date").Should().BeNull();
 }
 
+public class Can_be_parsed
+{
+    [Test]
+    public void from_valid_input_only_otherwise_throws_on_Parse()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            "invalid input".Invoking(WeekDate.Parse)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid week date");
+        }
+    }
+}
+
 public class Can_be_created
 {
     [Test]

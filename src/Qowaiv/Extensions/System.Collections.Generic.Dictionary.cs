@@ -6,7 +6,7 @@ internal static class QowaivDictionaryExtensions
     extension<TKey, TValue>(IDictionary<TKey, TValue> dictionary) where TKey : notnull
     {
         [Pure]
-        public FrozenDictionary<TKey, TValue> ToFrozenDictionar()
+        public FrozenDictionary<TKey, TValue> ToFrozenDictionary()
             => new(dictionary);
     }
 }

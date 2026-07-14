@@ -1,7 +1,7 @@
 namespace Qowaiv;
 
 /// <summary>Represents a house number.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(int))]
 [OpenApiDataType(description: "House number notation.", example: "13", type: "string", format: "house-number", nullable: true)]
 [TypeConverter(typeof(HouseNumberTypeConverter))]

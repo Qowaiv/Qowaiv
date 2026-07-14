@@ -21,7 +21,7 @@ namespace Qowaiv;
 /// The standard specifies that its use may be referred to by the
 /// designator "SEX".
 /// </remarks>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Sex as specified by ISO/IEC 5218.", example: "female", type: "string", format: "sex", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
 [TypeConverter(typeof(SexTypeConverter))]

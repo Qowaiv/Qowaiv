@@ -9,7 +9,9 @@
     <Project Path="src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" />
   </Folder>
   <Folder Name="/Specs/">
-    <Project Path="specs/Bench/Bench.csproj" />
+    <Project Path="specs/Bench/Bench.csproj">
+      <Build Solution="Debug|*" Project="false" />
+    </Project>
     <Project Path="specs/Qowaiv.Diagnostics.Contracts.Specs/Qowaiv.Diagnostics.Contracts.Specs.csproj" />
     <Project Path="specs/Qowaiv.Specs.Generated/Qowaiv.Specs.Generated.csproj" />
     <Project Path="specs/Qowaiv.Specs/Qowaiv.Specs.csproj" />

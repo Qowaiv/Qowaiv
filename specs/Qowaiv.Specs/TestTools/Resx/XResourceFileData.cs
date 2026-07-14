@@ -1,7 +1,7 @@
 namespace Qowaiv.TestTools.Resx;
 
 /// <summary>Represents data of a resource file.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [XmlType("data")]
 public sealed class XResourceFileData : IComparable<XResourceFileData>
 {

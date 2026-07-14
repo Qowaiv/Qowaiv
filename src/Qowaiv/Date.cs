@@ -1,7 +1,7 @@
 namespace Qowaiv;
 
 /// <summary>Represents a date, so opposed to a date time without time precision.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(DateTime))]
 [OpenApiDataType(description: "Full-date notation as defined by RFC 3339, section 5.6.", example: "2017-06-10", type: "string", format: "date")]
 [TypeConverter(typeof(DateTypeConverter))]

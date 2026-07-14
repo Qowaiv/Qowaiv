@@ -9,7 +9,7 @@ namespace Qowaiv.Globalization;
 /// }
 /// </code>
 /// </remarks>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 public class CultureInfoScope : IDisposable
 {
     /// <summary>Initializes a new instance of the <see cref="CultureInfoScope" /> class.</summary>

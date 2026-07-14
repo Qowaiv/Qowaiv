@@ -4,7 +4,7 @@ namespace Qowaiv.Security.Cryptography;
 
 /// <summary>Represents a cryptographic seed.</summary>
 [TypeConverter(typeof(CryptographicSeedTypeConverter))]
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 #if NET8_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Security.Cryptography.CryptographicSeedJsonConverter))]
 #endif

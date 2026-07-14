@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 namespace Qowaiv.Globalization;
 
 /// <summary>Represents a country.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "Country notation as defined by ISO 3166-1 alpha-2.", example: "NL", type: "string", format: "country", nullable: true)]
 [TypeConverter(typeof(CountryTypeConverter))]

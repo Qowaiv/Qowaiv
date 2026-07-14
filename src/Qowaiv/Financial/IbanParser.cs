@@ -119,12 +119,12 @@ internal static class IbanParser
             ? ASCII.IsMarkup(ch)
             : char.IsWhiteSpace(ch);
 
-        /// <summary>Starts with "(IBAN)".</summary>
+        // Starts with "(IBAN)".
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static bool Has_IBAN_Prefix(ReadOnlySpan<char> reader)
             => reader.StartsWith("(IBAN)", StringComparison.OrdinalIgnoreCase);
 
-        /// <summary>Starts with "IBAN " or "IBAN:".</summary>
+        // Starts with "IBAN " or "IBAN:".
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static bool HasIBANPrefix(ReadOnlySpan<char> reader)
             => reader.StartsWith("IBAN", StringComparison.OrdinalIgnoreCase)

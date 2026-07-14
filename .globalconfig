@@ -27,7 +27,8 @@ dotnet_diagnostic.FAA0004.severity  = error      # Replace NUnit assertion with 
 dotnet_diagnostic.IDE0130.severity  = none       # Namespace does not match file structure [Justification: We do not care.]
 dotnet_diagnostic.IDE1006.severity  = none       # Naming Styles [Justification: Naming styles should be guarded by other rules.]
 
-dotnet_diagnostic.IDE0005.severity  = suggestion # Using directive is unnecessary
+dotnet_diagnostic.IDE0005.severity  = hidden     # Using directive is unnecessary
+
 dotnet_diagnostic.IDE0032.severity  = suggestion # Use auto-implemented property
 dotnet_diagnostic.IDE0290.severity  = suggestion # Use primary constructor
 

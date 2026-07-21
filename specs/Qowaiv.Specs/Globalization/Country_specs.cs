@@ -120,7 +120,7 @@ public class Can_be_parsed
         {
             "invalid input".Invoking(Country.Parse)
                 .Should().Throw<FormatException>()
-                .WithMessage("Not a valid BIC");
+                .WithMessage("Not a valid country");
         }
     }
 }

@@ -109,7 +109,7 @@
     <value>Not a valid internet media type</value>
   </data>
   <data name="FormatExceptionLocalDateTime">
-    <value>Not valid date</value>
+    <value>Not a valid date</value>
   </data>
   <data name="FormatExceptionMoney">
     <value>Not a valid amount</value>

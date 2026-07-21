@@ -6,26 +6,20 @@ namespace Bench;
 [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
 [CategoriesColumn]
 [MinColumn]
-public partial class GuidBenchmark
+public partial class GuidBenchmark(Uuid[] uuids)
 {
-    private const int Iterations = 1000;
-    private Guid[] Guids = new Guid[Iterations];
-    private Uuid[] Uuids = new Uuid[Iterations];
-    private GuidBasedId[] GuidBasedIds = new GuidBasedId[Iterations];
-    private UuidBasedId[] UuidBasedIds = new UuidBasedId[Iterations];
-    private string[] Strings { get; set; } = [];
-    private string[] Base64s { get; set; } = [];
-    private string[] Base32s { get; set; } = [];
+    public GuidBenchmark() : this([.. Enumerable.Range(0, Iterations).Select(_ => Uuid.NewUuid())]) { }
 
-    [GlobalSetup]
-    public void Setup()
-    {
-        Uuids = [.. Enumerable.Range(0, Iterations).Select(_ => Uuid.NewUuid())];
-        Guids = [.. Uuids.Select(x => (Guid)x)];
-        Strings = [.. Uuids.Select(g => g.ToString("D"))];
-        Base64s = [.. Uuids.Select(g => g.ToString("S"))];
-        Base32s = [.. Uuids.Select(g => g.ToString("H"))];
-    }
+    private const int Iterations = 1000;
+
+    private readonly Guid[] Guids = [.. uuids];
+    private readonly Uuid[] Uuids = [.. uuids];
+    private readonly GuidBasedId[] GuidBasedIds = new GuidBasedId[Iterations];
+    private readonly UuidBasedId[] UuidBasedIds = new UuidBasedId[Iterations];
+
+    private readonly string[] Strings = [.. uuids.Select(g => g.ToString("D"))];
+    private readonly string[] Base64s = [.. uuids.Select(g => g.ToString("S"))];
+    private readonly string[] Base32s = [.. uuids.Select(g => g.ToString("H"))];
 
     [BenchmarkCategory("Parse()")]
     [Benchmark(Description = "System.Guid", Baseline = true)]

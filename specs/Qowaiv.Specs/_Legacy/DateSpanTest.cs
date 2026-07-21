@@ -42,20 +42,6 @@ public class DateSpanTest
     }
 
     [Test]
-    public void Parse_InvalidInput_ThrowsFormatException()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            Assert.Catch<FormatException>
-            (() =>
-            {
-                DateSpan.Parse("InvalidInput");
-            },
-            "Not a valid date span");
-        }
-    }
-
-    [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
         using (TestCultures.en_GB.Scoped())

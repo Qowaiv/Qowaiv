@@ -310,7 +310,7 @@ public class Has_custom_formatting
         {
             using (TestCultures.en_GB.Scoped())
             {
-                Converting.From<string>(Nil.String!).To<YearSpan>().Should().Be(YearSpan.Zero);
+                Converting.From(Nil.String!).To<YearSpan>().Should().Be(YearSpan.Zero);
             }
         }
 

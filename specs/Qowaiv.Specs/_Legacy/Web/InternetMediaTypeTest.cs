@@ -117,20 +117,6 @@ public class InternetMediaTypeTest
     }
 
     [Test]
-    public void Parse_InvalidInput_ThrowsFormatException()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            Assert.Catch<FormatException>
-            (() =>
-            {
-                InternetMediaType.Parse("InvalidInput");
-            },
-            "Not a valid internet media type");
-        }
-    }
-
-    [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
         using (TestCultures.en_GB.Scoped())

@@ -154,7 +154,9 @@ internal static class DecimalMath
     [Pure]
     private static Random Random()
     {
+#pragma warning disable S2245 // Pseudorandom number generators can be used when security is not an issue.
         _rnd ??= new Random();
+#pragma warning restore S2245 // Pseudorandom number generators (PRNGs) should not be used in security contexts
         return _rnd;
     }
 

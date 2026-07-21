@@ -2,9 +2,9 @@ namespace TestTools.ConvertTo_specs;
 
 public class From_type
 {
-    [Test]
-    public void tests_CanConvertTo()
-        => Converting.To(typeof(string)).From<int>().Should().BeTrue();
+    [TestCase(typeof(string))]
+    public void tests_CanConvertTo(Type type)
+        => Converting.To(type).From<int>().Should().BeTrue();
 }
 
 public class From_typed_value

@@ -39,15 +39,17 @@
     <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
+v*
+*
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
+      <![CDATA[
 v2.1.0
 - Added [PrimitiveRequired] attribute.
 - Added [OpenApi.PrimitiveRequired.AllOf] attribute.
 - Added [OpenApi.PrimitiveRequired.AnyOf] attribute.
 - Added [OpenApi.PrimitiveRequired.OneOf] attribute.
-]]>
-    </ToBeReleased>
-    <PackageReleaseNotes>
-      <![CDATA[
 v2.0.6
 - Reduce required C# language version from 12 to 10.
 v2.0.5

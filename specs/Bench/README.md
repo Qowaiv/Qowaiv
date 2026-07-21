@@ -1,5 +1,16 @@
 # Qowaiv Benchmarks
 
+## Amount
+Amount JSON serialization is equivalent ot decimal JSON serialization:
+
+| Method  | Categories           | Mean     | Ratio |
+|-------- |--------------------- |---------:|------:|
+| Decimal | JSON Deserialization | 51.81 us |  1.00 |
+| Amount  | JSON Deserialization | 50.68 us |  0.98 |
+|         |                      |          |       |
+| Decimal | JSON Serialization   | 26.88 us |  1.00 |
+| Amount  | JSON Serialization   | 27.49 us |  1.02 |
+
 ## IBAN
 The first IBAN parse relied on regular expressions to validate the format. With
 the v6.6.0 rewrite, regexes where removed, amongst other improvements which

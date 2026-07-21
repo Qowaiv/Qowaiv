@@ -13,22 +13,6 @@ namespace Qowaiv.Json;
 public class PercentageJsonConverter : SvoJsonConverter<Percentage>
 {
     /// <inheritdoc />
-    [Pure]
-    protected override Percentage FromJson(string? json) => Percentage.FromJson(json);
-
-    /// <inheritdoc />
-    [Pure]
-    protected override Percentage FromJson(long json) => Percentage.FromJson(json);
-
-    /// <inheritdoc />
-    [Pure]
-    protected override Percentage FromJson(double json) => Percentage.FromJson(json);
-
-    /// <inheritdoc />
-    [Pure]
-    protected override object? ToJson(Percentage svo) => svo.ToJson();
-
-    /// <inheritdoc />
     public override Percentage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType == JsonTokenType.String)
@@ -73,6 +57,23 @@ public class PercentageJsonConverter : SvoJsonConverter<Percentage>
 
     private const byte Quote = (byte)'"';
     private const byte Symbol = (byte)'%';
+
+    /// <inheritdoc />
+    [Pure]
+    protected override Percentage FromJson(string? json) => Percentage.FromJson(json);
+
+    /// <inheritdoc />
+    [Pure]
+    protected override Percentage FromJson(long json) => Percentage.FromJson(json);
+
+    /// <inheritdoc />
+    [Pure]
+    protected override Percentage FromJson(double json) => Percentage.FromJson(json);
+
+    /// <inheritdoc />
+    [Pure]
+    protected override object? ToJson(Percentage svo) => svo.ToJson();
+
 }
 
 #endif

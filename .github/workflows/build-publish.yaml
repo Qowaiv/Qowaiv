@@ -1,25 +1,23 @@
 name: Build
-on: [push,workflow_dispatch]
-on: 
+on:
   push:
     branches:
-      - main
+      - master
     tags:
       - 'v*'
   pull_request:
     branches:
-      - main
+      - master
+  workflow_dispatch:
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   NUGET_FEED: https://api.nuget.org/v3/index.json
-  NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
     permissions:
-      packages: write
-      contents: write
+      contents: read
+      checks: write # Needed by dorny/test-reporter to publish the check run
     steps:
       - name: Set up JDK 17
         uses: actions/setup-java@v5
@@ -98,11 +96,12 @@ jobs:
           name: Unit test results
           path: "**/*.trx"
           reporter: dotnet-trx
+
       - name: DotNet Pack
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
-          dotnet pack qowaiv-validation.slnx -v normal --no-build --no-restore -c Release --output packages
-   
+          dotnet pack qowaiv.slnx -v normal --no-build --no-restore -c Release --output packages
+
       - name: Upload Artifact
         if: startsWith(github.ref, 'refs/tags/v')
         uses: actions/upload-artifact@v4
@@ -115,32 +114,33 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     permissions:
-      packages: write
-      contents: write
+      contents: write # Needed to create the GitHub release
     needs: build
+    concurrency:
+      group: publish-${{ github.ref }}
+      cancel-in-progress: false
     steps:
       - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
           name: nupkg
 
-      - name: Create release notes
-        uses: johnyherangi/create-release-notes@main
-        id: create-release-notes
+      - name: Create GitHub Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                   
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          body: ${{ steps.create-release-notes.outputs.release-notes }}
-          draft: false
-          prerelease: ${{ contains(github.ref, '-') }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          prerelease=""
+          if [[ "$TAG" == *-* ]]; then
+            prerelease="--prerelease"
+          fi
+          gh release create "$TAG" \
+            --title "$TAG" \
+            --generate-notes \
+            $prerelease
 
-      - name: DotNet NuGet Push  
-        run: dotnet nuget push "*.nupkg" --source ${{ env.NUGET_FEED}} --api-key ${{ env.NUGET_KEY }} --skip-duplicate --no-symbols
+      - name: DotNet NuGet Push
+        env:
+          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push "*.nupkg" --source "$NUGET_FEED" --api-key "$NUGET_KEY" --skip-duplicate --no-symbols

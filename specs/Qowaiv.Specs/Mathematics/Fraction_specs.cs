@@ -925,7 +925,7 @@ public class Is_Open_API_data_type
         => OpenApiDataType.FromType(typeof(Fraction))
         .Should().Be(new OpenApiDataType(
             dataType: typeof(Fraction),
-            description: "Faction",
+            description: "Fraction",
             type: "string",
             format: "faction",
             pattern: "-?[0-9]+(/[0-9]+)?",

@@ -179,33 +179,33 @@ public readonly partial struct Percentage
     [CLSCompliant(false)]
     public static ushort operator +(ushort d, Percentage p) => (ushort)(d + (d * p));
 
-    /// <summary>Subtracts the percentage to the Decimal.</summary>
+    /// <summary>Subtracts the percentage from the Decimal.</summary>
     public static decimal operator -(decimal d, Percentage p) => d - (d * p);
 
-    /// <summary>Subtracts the percentage to the Double.</summary>
+    /// <summary>Subtracts the percentage from the Double.</summary>
     public static double operator -(double d, Percentage p) => d - (d * p);
 
-    /// <summary>Subtracts the percentage to the Single.</summary>
+    /// <summary>Subtracts the percentage from the Single.</summary>
     public static float operator -(float d, Percentage p) => d - (d * p);
 
-    /// <summary>Subtracts the percentage to the Int64.</summary>
+    /// <summary>Subtracts the percentage from the Int64.</summary>
     public static long operator -(long d, Percentage p) => d - (d * p);
 
-    /// <summary>Subtracts the percentage to the Int32.</summary>
+    /// <summary>Subtracts the percentage from the Int32.</summary>
     public static int operator -(int d, Percentage p) => d - (d * p);
 
-    /// <summary>Subtracts the percentage to the Int16.</summary>
+    /// <summary>Subtracts the percentage from the Int16.</summary>
     public static short operator -(short d, Percentage p) => (short)(d - (d * p));
 
-    /// <summary>Subtracts the percentage to the UInt64.</summary>
+    /// <summary>Subtracts the percentage from the UInt64.</summary>
     [CLSCompliant(false)]
     public static ulong operator -(ulong d, Percentage p) => d - (d * p);
 
-    /// <summary>Subtracts the percentage to the UInt32.</summary>
+    /// <summary>Subtracts the percentage from the UInt32.</summary>
     [CLSCompliant(false)]
     public static uint operator -(uint d, Percentage p) => d - (d * p);
 
-    /// <summary>Subtracts the percentage to the UInt16.</summary>
+    /// <summary>Subtracts the percentage from the UInt16.</summary>
     [CLSCompliant(false)]
     public static ushort operator -(ushort d, Percentage p) => (ushort)(d - (d * p));
 }

@@ -9,8 +9,8 @@ should add the dependency as follows:
   <PackageReference
     Include="Qowaiv.Diagnostics.Contracts"
     Version="*"
-    PrivateAssets=""all" />
-<ItemGroup>
+    PrivateAssets="all" />
+</ItemGroup>
 ```
 
 To embed the result of these decorations in the compiled assembly, the `DEFINE`

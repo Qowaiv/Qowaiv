@@ -40,7 +40,7 @@ public class PercentageJsonConverter : SvoJsonConverter<Percentage>
     /// 29 bytes for decimal (precision)
     ///  2 bytes for quotes
     ///  1 byte  for percentage symbol
-    ///  1 byte  for decimal seperator
+    ///  1 byte  for decimal separator
     ///  1 byte  for minus sign.
     /// </remarks>
     public override void Write(Utf8JsonWriter writer, Percentage value, JsonSerializerOptions options)

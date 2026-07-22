@@ -75,7 +75,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     public MonthSpan Abs() => new(Math.Abs(m_Value));
 
     /// <summary>
-    /// Returns an integer that indicates the sign of the year span.
+    /// Returns an integer that indicates the sign of the month span.
     /// </summary>
     /// <returns>
     /// A number that indicates the sign of value, as shown in the following table.

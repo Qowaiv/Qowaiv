@@ -168,7 +168,7 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// to the value of this instance.
     /// </summary>
     /// <param name="value">
-    /// A <see cref="DateSpan" /> object that represents a positive or negative time interval.
+    /// A <see cref="MonthSpan" /> object that represents a positive or negative time interval.
     /// </param>
     /// <returns>
     /// A new date whose value is the sum of the date represented

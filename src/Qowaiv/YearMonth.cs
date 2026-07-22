@@ -178,10 +178,10 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
     /// <summary>Adds a number of months to the year-month.</summary>
     public static YearMonth operator +(YearMonth date, MonthSpan months) => date.Add(months);
 
-    /// <summary>Subtracts a number of months to the year-month.</summary>
+    /// <summary>Subtracts a number of months from the year-month.</summary>
     public static YearMonth operator -(YearMonth date, MonthSpan months) => date.Add(-months);
 
-    /// <summary>Determines the duretion between the left and the right year-month.</summary>
+    /// <summary>Determines the duration between the left and the right year-month.</summary>
     public static MonthSpan operator -(YearMonth l, YearMonth r) => MonthSpan.FromMonths(l.m_Value - r.m_Value);
 
     /// <summary>Casts a year-month to a date.</summary>
@@ -205,7 +205,7 @@ public readonly partial struct YearMonth : IXmlSerializable, IFormattable, IEqua
     /// <summary>Adds one month to the year-month.</summary>
     public static YearMonth operator ++(YearMonth date) => date.AddMonths(+1);
 
-    /// <summary>Subtracts one month to the year-month.</summary>
+    /// <summary>Subtracts one month from the year-month.</summary>
     public static YearMonth operator --(YearMonth date) => date.AddMonths(-1);
 
     /// <summary>Converts the string to a year-month.

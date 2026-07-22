@@ -238,6 +238,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.SetTimeAndTimeZoneForCurrentContext(System.Func{System.DateOnly},System.TimeZoneInfo)</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.SetTimeForCurrentContext(System.Func{System.DateOnly})</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Financial.InternationalBankAccountNumber.Obfuscated</Target>
     <Left>lib/net10.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
@@ -252,6 +266,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.SetTimeAndTimeZoneForCurrentContext(System.Func{System.DateOnly},System.TimeZoneInfo)</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.SetTimeForCurrentContext(System.Func{System.DateOnly})</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Financial.InternationalBankAccountNumber.Obfuscated</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
@@ -266,6 +294,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.SetTimeAndTimeZoneForCurrentContext(System.Func{System.DateOnly},System.TimeZoneInfo)</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/net9.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.SetTimeForCurrentContext(System.Func{System.DateOnly})</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/net9.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Financial.InternationalBankAccountNumber.Obfuscated</Target>
     <Left>lib/net9.0/Qowaiv.dll</Left>
     <Right>lib/net9.0/Qowaiv.dll</Right>
@@ -274,6 +316,18 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>F:Qowaiv.Clock.TimeProvider</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.SetTimeAndTimeZoneForCurrentContext(System.Func{System.DateOnly},System.TimeZoneInfo)</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.SetTimeForCurrentContext(System.Func{System.DateOnly})</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
   </Suppression>
@@ -455,6 +509,34 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Financial.InternationalBankAccountNumber.Obfuscated</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv, Version=8.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv, Version=8.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv, Version=8.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/net9.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv, Version=8.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1812,6 +1894,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
+    <Target>T:Qowaiv.Mathematics.Fraction:[T:Qowaiv.OpenApi.OpenApiDataTypeAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0015</DiagnosticId>
     <Target>T:Qowaiv.Mathematics.Fraction:[T:System.Diagnostics.DebuggerDisplayAttribute]</Target>
     <Left>lib/net10.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
@@ -2085,6 +2174,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
+    <Target>T:Qowaiv.Mathematics.Fraction:[T:Qowaiv.OpenApi.OpenApiDataTypeAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0015</DiagnosticId>
     <Target>T:Qowaiv.Mathematics.Fraction:[T:System.Diagnostics.DebuggerDisplayAttribute]</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
@@ -2358,6 +2454,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
+    <Target>T:Qowaiv.Mathematics.Fraction:[T:Qowaiv.OpenApi.OpenApiDataTypeAttribute]</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/net9.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0015</DiagnosticId>
     <Target>T:Qowaiv.Mathematics.Fraction:[T:System.Diagnostics.DebuggerDisplayAttribute]</Target>
     <Left>lib/net9.0/Qowaiv.dll</Left>
     <Right>lib/net9.0/Qowaiv.dll</Right>
@@ -2610,6 +2713,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0015</DiagnosticId>
+    <Target>T:Qowaiv.Mathematics.Fraction:[T:Qowaiv.OpenApi.OpenApiDataTypeAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0015</DiagnosticId>
     <Target>T:Qowaiv.Mathematics.Fraction:[T:System.Diagnostics.DebuggerDisplayAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
@@ -2739,6 +2849,20 @@
     <Target>T:Qowaiv.YesNo:[T:System.Diagnostics.DebuggerDisplayAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Clock.SetTimeAndTimeZoneForCurrentContext(System.Func{System.DateTime},System.TimeZoneInfo):[T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Clock.SetTimeForCurrentContext(System.Func{System.DateTime}):[T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -3019,6 +3143,44 @@
     <Target>T:Qowaiv.Sustainability.EnergyLabel:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/net8.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Clock.SetTimeAndTimeZoneForCurrentContext(System.Func{System.DateOnly},System.TimeZoneInfo):[T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net9.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Clock.SetTimeAndTimeZoneForCurrentContext(System.Func{System.DateTime},System.TimeZoneInfo):[T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net9.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Clock.SetTimeForCurrentContext(System.Func{System.DateOnly}):[T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net9.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Clock.SetTimeForCurrentContext(System.Func{System.DateTime}):[T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/net9.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Clock.SetTimeAndTimeZoneForCurrentContext(System.Func{System.DateTime},System.TimeZoneInfo):[T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute]</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/net9.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Clock.SetTimeForCurrentContext(System.Func{System.DateTime}):[T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute]</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/net9.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>

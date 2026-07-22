@@ -126,7 +126,15 @@ public static class Clock
 
     /// <summary>Sets the <see cref="DateTime" /> function for current (execution) context only.</summary>
     [Impure]
+    [OverloadResolutionPriority(2)]
     public static IDisposable SetTimeForCurrentContext(Func<DateTime> time) => new TimeScope(time);
+
+#if NET8_0_OR_GREATER
+    /// <summary>Sets the <see cref="DateTime" /> function for current (execution) context only.</summary>
+    [Impure]
+    [OverloadResolutionPriority(1)]
+    public static IDisposable SetTimeForCurrentContext(Func<DateOnly> time) => new TimeScope(time.ToDateTime());
+#endif
 
     /// <summary>Sets the <see cref="TimeZoneInfo" /> for current (execution) context only.</summary>
     [Impure]
@@ -134,7 +142,15 @@ public static class Clock
 
     /// <summary>Sets the <see cref="DateTime" /> function and <see cref="TimeZoneInfo" /> for current (execution) context only.</summary>
     [Impure]
+    [OverloadResolutionPriority(2)]
     public static IDisposable SetTimeAndTimeZoneForCurrentContext(Func<DateTime> time, TimeZoneInfo timeZone) => new ClockScope(time, timeZone);
+
+#if NET8_0_OR_GREATER
+    /// <summary>Sets the <see cref="DateTime" /> function and <see cref="TimeZoneInfo" /> for current (execution) context only.</summary>
+    [Impure]
+    [OverloadResolutionPriority(1)]
+    public static IDisposable SetTimeAndTimeZoneForCurrentContext(Func<DateOnly> time, TimeZoneInfo timeZone) => new ClockScope(time.ToDateTime(), timeZone);
+#endif
 
     private static void SetLocalContextUtcNow(Func<DateTime>? time) => localContextUtcNow.Value = time;
 
@@ -200,6 +216,9 @@ public static class Clock
     }
 
 #if NET8_0_OR_GREATER
+    /// <summary>Converts a date provider to a time provider.</summary>
+    [Pure]
+    private static Func<DateTime> ToDateTime(this Func<DateOnly> time) => () => time().ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc);
 
     /// <summary>
     /// Returns a <see cref="System.TimeProvider" /> implementation depending on

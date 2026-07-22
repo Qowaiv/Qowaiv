@@ -31,11 +31,17 @@
   </ItemGroup>
   
   <PropertyGroup>
-    <Version>8.0.0</Version>
+    <Version>8.1.0</Version>
     <PackageValidationBaselineVersion>8.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
 v8.*
+- ?
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
+      <![CDATA[
+v8.1.0
 - IBAN supports obfuscation with ToString("O").
 - IBAN parsing 1.75 times faster, with lower memory consumption.
 - IBAN must not exceed 34 chars. (BUG)
@@ -44,10 +50,7 @@ v8.*
 - Percentage JSON serialization speed improvements.
 - Fraction.GetHashCode() returns same value for all zero value's. (BUG)
 - [DebuggerDisplay("{DebuggerDisplay,nq}")] to drop quotes from debugger display.
-]]>
-    </ToBeReleased>
-    <PackageReleaseNotes>
-      <![CDATA[
+- Clock.SetTimeForCurrentContext() can be set using DateOnly.
 v8.0.0
 - Add support for .NET 10.
 - Add Clock.UtcToday().

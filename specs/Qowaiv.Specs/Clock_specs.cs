@@ -82,6 +82,16 @@ public class For_current_execution_context_and_scope
     }
 
     [Test]
+    public void Can_Be_set_with_date_only()
+    {
+        using (Clock.SetTimeForCurrentContext(() => Svo.DateOnly))
+        {
+            Clock.UtcNow().Should().Be(Svo.Date);
+        }
+        Clock.UtcNow().Should().NotBe(Svo.Date);
+    }
+
+    [Test]
     public void TimeZone_can_be_set()
     {
         using (Clock.SetTimeZoneForCurrentContext(TestTimeZones.LeidenTime))
@@ -99,6 +109,18 @@ public class For_current_execution_context_and_scope
             Clock.TimeZone.Should().Be(Svo.TimeZone);
         }
         Clock.UtcNow().Should().NotBe(Svo.DateTime);
+        Clock.TimeZone.Should().NotBe(Svo.TimeZone);
+    }
+
+    [Test]
+    public void UtcNow_and_TimeZone_with_DateOnly()
+    {
+        using (Clock.SetTimeAndTimeZoneForCurrentContext(() => Svo.DateOnly, Svo.TimeZone))
+        {
+            Clock.UtcNow().Should().Be(Svo.Date);
+            Clock.TimeZone.Should().Be(Svo.TimeZone);
+        }
+        Clock.UtcNow().Should().NotBe(Svo.Date);
         Clock.TimeZone.Should().NotBe(Svo.TimeZone);
     }
 }

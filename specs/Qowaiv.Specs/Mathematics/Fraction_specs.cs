@@ -927,7 +927,7 @@ public class Is_Open_API_data_type
             dataType: typeof(Fraction),
             description: "Fraction",
             type: "string",
-            format: "faction",
+            format: "fraction",
             pattern: "-?[0-9]+(/[0-9]+)?",
             example: "13/42"));
 }

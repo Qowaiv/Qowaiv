@@ -6,7 +6,7 @@
     <CentralPackageVersionOverrideEnabled>true</CentralPackageVersionOverrideEnabled>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="AwesomeAssertions" Version="9.4.0" />
+    <PackageVersion Include="AwesomeAssertions" Version="9.5.0" />
     <PackageVersion Include="AwesomeAssertions.Analyzers" Version="9.0.8" />
     <!-- linked to Roslyn version -->
     <PackageVersion Include="BenchmarkDotNet" Version="[0.14.0]" />
@@ -15,7 +15,7 @@
     <PackageVersion Include="MathNet.Numerics" Version="5.0.0" />
     <!-- Roslyn .NET 8 -->
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="[4.11.0]" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.7.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
     <PackageVersion Include="Microsoft.Sbom.Targets" Version="4.1.5" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageVersion Include="NUnit" Version="4.6.1" />

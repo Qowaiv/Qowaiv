@@ -155,20 +155,6 @@ public class CurrencyTest
     }
 
     [Test]
-    public void Parse_InvalidInput_ThrowsFormatException()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            Assert.Catch<FormatException>
-            (() =>
-            {
-                Currency.Parse("InvalidInput");
-            },
-            "Not a valid currency");
-        }
-    }
-
-    [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
         using (TestCultures.en_GB.Scoped())

@@ -9,6 +9,20 @@ public class Has_constant
     public void MaxValue_equal_to_decimal_MaxValue() => Amount.MaxValue.Should().Be(decimal.MaxValue.Amount());
 }
 
+public class Can_be_parsed
+{
+    [Test]
+    public void from_valid_input_only_otherwise_throws_on_Parse()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            "invalid input".Invoking(Amount.Parse)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid amount");
+        }
+    }
+}
+
 public class Min_and_max
 {
     [TestCase(17, 17)]

@@ -106,7 +106,7 @@ public class Is_equal_by_value
         => Svo.Iban.Equals(new object()).Should().BeFalse();
 
     [Test]
-    public void not_equal_to_DE68210501700012345678_value()
+    public void not_equal_to_other_value()
         => Svo.Iban.Equals(InternationalBankAccountNumber.Parse("DE68210501700012345678")).Should().BeFalse();
 
     [Test]
@@ -118,7 +118,7 @@ public class Is_equal_by_value
         => (Svo.Iban == InternationalBankAccountNumber.Parse("NL20INGB0001234567")).Should().BeTrue();
 
     [Test]
-    public void equal_operator_returns_false_for_DE68210501700012345678_values()
+    public void equal_operator_returns_false_for_other_values()
         => (Svo.Iban == InternationalBankAccountNumber.Parse("DE68210501700012345678")).Should().BeFalse();
 
     [Test]
@@ -126,7 +126,7 @@ public class Is_equal_by_value
         => (Svo.Iban != InternationalBankAccountNumber.Parse("NL20INGB0001234567")).Should().BeFalse();
 
     [Test]
-    public void not_equal_operator_returns_true_for_DE68210501700012345678_values()
+    public void not_equal_operator_returns_true_for_other_values()
         => (Svo.Iban != InternationalBankAccountNumber.Parse("DE68210501700012345678")).Should().BeTrue();
 
     [TestCase("", 0)]
@@ -242,6 +242,10 @@ public class Has_custom_formatting
     [TestCase("F", "EE382200221020145685", /*........*/ "EE38 2200 2210 2014 5685")]
     [TestCase("F", "", "")]
     [TestCase("F", "?", "?")]
+    [TestCase("o", "NL20INGB0001234567", "nl20xxxxxxxxxxx567")]
+    [TestCase("O", "NL20INGB0001234567", "NL20XXXXXXXXXXX567")]
+    [TestCase("O", "", "")]
+    [TestCase("O", "?", "?")]
     public void with_format(string format, InternationalBankAccountNumber svo, string formatted)
         => svo.ToString(format).Should().Be(formatted);
 }
@@ -259,17 +263,6 @@ public class Can_be_parsed
     [Test]
     public void from_question_mark_represents_Unknown()
         => InternationalBankAccountNumber.Parse("?").Should().Be(InternationalBankAccountNumber.Unknown);
-
-    [Test]
-    public void from_valid_input_only_otherwise_throws_on_Parse()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            Func<InternationalBankAccountNumber> parse = () => InternationalBankAccountNumber.Parse("invalid input");
-            parse.Should().Throw<FormatException>()
-                .WithMessage("Not a valid IBAN");
-        }
-    }
 
     [Test]
     public void from_valid_input_only_otherwise_return_false_on_TryParse()
@@ -293,7 +286,19 @@ public class Can_be_parsed
     [TestCase('.')]
     public void ignoring_formatting(char ch)
     {
-        var iban = InternationalBankAccountNumber.Parse($"{ch}NL{ch}20{ch}INGB00{ch}0123456{ch}7{ch}");
+        var iban = InternationalBankAccountNumber.Parse($"NL{ch}20{ch}INGB00{ch}{ch}0123456{ch}7");
+        iban.Should().Be(Svo.Iban);
+    }
+
+    [TestCase(' ')]
+    [TestCase((char)160)]
+    [TestCase('\t')]
+    [TestCase('\r')]
+    [TestCase('\n')]
+
+    public void trims_input(char ch)
+    {
+        var iban = InternationalBankAccountNumber.Parse($"{ch}NL20INGB0001234567{ch}");
         iban.Should().Be(Svo.Iban);
     }
 }
@@ -307,6 +312,18 @@ public class Can_not_be_parsed
     [Test]
     public void with_markup_within_the_checksum_code()
         => InternationalBankAccountNumber.TryParse("NL2 0INGB0001234567").Should().BeNull();
+
+
+    [Test]
+    public void Throws()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Func<InternationalBankAccountNumber> parse = () => InternationalBankAccountNumber.Parse("invalid input");
+            parse.Should().Throw<FormatException>()
+                .WithMessage("Not a valid IBAN");
+        }
+    }
 }
 
 public class Supports_type_conversion
@@ -554,4 +571,34 @@ public class Debugger
     [TestCase("NL20 INGB 0001 2345 67", "NL20INGB0001234567")]
     public void has_custom_display(object display, InternationalBankAccountNumber svo)
         => svo.Should().HaveDebuggerDisplay(display);
+}
+
+public class Mod97
+{
+    [TestCase(55)]
+    [TestCase(56)]
+    public void No_overflow_until(int bits)
+    {
+        var max = (1UL << (bits + 1)) - 1d;
+        // Add 1 Z.
+        max *= 100;
+        max += 'Z' - 'A' + 10;
+        max.Should().BeLessThanOrEqualTo(ulong.MaxValue);
+    }
+
+    [TestCase(42)]
+    [TestCase(43)]
+    public void No_checsum_overflow_until(int bits)
+    {
+        var max = (1UL << (bits + 1)) - 1d;
+        // Add 2 Z's.
+        max *= 100;
+        max += 'Z' - 'A' + 10;
+        max *= 100;
+        max += 'Z' - 'A' + 10;
+        // Add checksum 99
+        max *= 100;
+        max += 99;
+        max.Should().BeLessThanOrEqualTo(ulong.MaxValue);
+    }
 }

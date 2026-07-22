@@ -16,7 +16,7 @@ namespace Qowaiv.Financial;
 /// <remarks>
 /// The official IBAN registrar under ISO 13616-2:2007 is SWIFT.
 /// </remarks>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "International Bank Account Number notation as defined by ISO 13616:2007.", example: "BE71096123456769", type: "string", format: "iban", nullable: true, pattern: "[A-Z]{2}[0-9]{2}[A-Z0-9]{8,32}")]
 [TypeConverter(typeof(InternationalBankAccountNumberTypeConverter))]
@@ -43,7 +43,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     public Country Country => m_Value switch
     {
         null => Country.Empty,
-        _ when m_Value == Unknown.m_Value => Country.Unknown,
+        "ZZ" => Country.Unknown,
         _ => Country.Parse(m_Value[..2], CultureInfo.InvariantCulture),
     };
 
@@ -63,7 +63,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     public string MachineReadable() => m_Value switch
     {
         null => string.Empty,
-        _ when m_Value == Unknown.m_Value => "?",
+        "ZZ" => "?",
         _ => m_Value,
     };
 
@@ -84,24 +84,23 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     [Pure]
     public string HumanReadable(char space)
     {
-        if (m_Value == default)
+        return m_Value switch
         {
-            return string.Empty;
-        }
-        else if (m_Value == Unknown.m_Value)
-        {
-            return "?";
-        }
-        else
+            null => string.Empty,
+            "ZZ" => "?",
+            _ => Format(m_Value, space),
+        };
+
+        static string Format(string val, char space)
         {
             var index = 0;
             var pointer = 0;
-            var spacing = (m_Value.Length - 1) / 4;
-            var buffer = new char[m_Value.Length + spacing];
+            var spacing = (val.Length - 1) / 4;
+            var buffer = new char[val.Length + spacing];
 
-            while (index < m_Value.Length)
+            while (index < val.Length)
             {
-                buffer[pointer++] = m_Value[index++];
+                buffer[pointer++] = val[index++];
                 if ((index % 4) == 0 && pointer < buffer.Length)
                 {
                     buffer[pointer++] = space;
@@ -110,6 +109,16 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
             return new(buffer);
         }
     }
+
+    /// <summary>
+    /// Masks sensitive parts of an IBAN to protect user privacy (eg: NL20XXXXXXXXXXX567).</summary>
+    [Pure]
+    public string Obfuscated() => m_Value switch
+    {
+        null => string.Empty,
+        "ZZ" => "?",
+        _ => m_Value[..4] + new string('X', m_Value.Length - 7) + m_Value[^3..],
+    };
 
     /// <summary>Returns a formatted <see cref="string" /> that represents the current IBAN.</summary>
     /// <param name="format">
@@ -128,6 +137,8 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     /// H: as human readable (with non-breaking spaces).
     /// f: as formatted lowercase.
     /// F: as formatted uppercase.
+    /// o: as obfuscated lowercase.
+    /// O: as obfuscated uppercase.
     /// </remarks>
     [Pure]
     public string ToString(string? format, IFormatProvider? formatProvider)
@@ -146,6 +157,8 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
         ['H'] = (svo, _) => svo.HumanReadable(Nbsp),
         ['f'] = (svo, _) => svo.HumanReadable(' ').ToLowerInvariant(),
         ['F'] = (svo, _) => svo.HumanReadable(' '),
+        ['o'] = (svo, _) => svo.Obfuscated().ToLowerInvariant(),
+        ['O'] = (svo, _) => svo.Obfuscated(),
     };
 
     /// <summary>Gets an XML string representation of the IBAN.</summary>
@@ -171,7 +184,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     {
         result = default;
 
-        if (s is { Length: >= 12 } && IbanParser.Parse(s.CharSpan()) is { } iban)
+        if (s is { } && IbanParser.Parse(s.AsSpan()) is { } iban)
         {
             result = new(iban);
             return true;
@@ -183,7 +196,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
             {
                 return true;
             }
-            if (str.IsUnknown(provider))
+            else if (str.IsUnknown(provider))
             {
                 result = Unknown;
                 return true;
@@ -197,8 +210,9 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
 
     /// <summary>A list with countries supporting IBAN.</summary>
     public static readonly IReadOnlyCollection<Country> Supported = new ReadOnlyCollection<Country>(
-        [.. IbanParser.Parsers
-            .OfType<BbanParser>()
+    [
+        .. Bban.All
+            .Where(d => d.Country.IsKnown && !d.IsGeneric)
             .Select(p => p.Country)
-            .Where(c => c.IsKnown)]);
+    ]);
 }

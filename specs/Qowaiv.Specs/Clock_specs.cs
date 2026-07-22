@@ -62,7 +62,7 @@ public class Date_time_kind
     [TestCase(DateTimeKind.Unspecified)]
     public void UTC_for_UtcNow(DateTimeKind kind)
     {
-        using (Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11, 06, 15, 0, kind)))
+        using (Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11, 06, 15, 00, kind)))
         {
             Clock.UtcNow().Kind.Should().Be(DateTimeKind.Utc);
         }
@@ -79,6 +79,16 @@ public class For_current_execution_context_and_scope
             Clock.UtcNow().Should().Be(Svo.DateTime);
         }
         Clock.UtcNow().Should().NotBe(Svo.DateTime);
+    }
+
+    [Test]
+    public void Can_Be_set_with_date_only()
+    {
+        using (Clock.SetTimeForCurrentContext(() => Svo.DateOnly))
+        {
+            Clock.UtcNow().Should().Be(Svo.Date);
+        }
+        Clock.UtcNow().Should().NotBe(Svo.Date);
     }
 
     [Test]
@@ -99,6 +109,18 @@ public class For_current_execution_context_and_scope
             Clock.TimeZone.Should().Be(Svo.TimeZone);
         }
         Clock.UtcNow().Should().NotBe(Svo.DateTime);
+        Clock.TimeZone.Should().NotBe(Svo.TimeZone);
+    }
+
+    [Test]
+    public void UtcNow_and_TimeZone_with_DateOnly()
+    {
+        using (Clock.SetTimeAndTimeZoneForCurrentContext(() => Svo.DateOnly, Svo.TimeZone))
+        {
+            Clock.UtcNow().Should().Be(Svo.Date);
+            Clock.TimeZone.Should().Be(Svo.TimeZone);
+        }
+        Clock.UtcNow().Should().NotBe(Svo.Date);
         Clock.TimeZone.Should().NotBe(Svo.TimeZone);
     }
 }

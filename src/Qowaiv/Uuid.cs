@@ -16,7 +16,7 @@ namespace Qowaiv;
 /// Qowaiv to be forced to specify the namespace of there GUID of choice
 /// everywhere.
 /// </remarks>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(Guid))]
 [OpenApiDataType(description: "Universally unique identifier, Base64 encoded.", example: "lmZO_haEOTCwGsCcbIZFFg", type: "string", format: "uuid-base64", nullable: true)]
 [TypeConverter(typeof(UuidTypeConverter))]
@@ -222,6 +222,7 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
         else return false;
     }
 
+#pragma warning disable S4790 // Use strong hashing algorithms
     /// <summary>Generates an <see cref="Uuid" /> applying a <see cref="MD5" /> hash on the data.</summary>
     [Pure]
     public static Uuid GenerateWithMD5(byte[] data)
@@ -251,6 +252,7 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
         SetVersion(hash, UuidVersion.SHA1);
         return new Guid(hash);
     }
+#pragma warning restore S4790
 
     private static void SetVersion(byte[] uuid, UuidVersion version)
     {

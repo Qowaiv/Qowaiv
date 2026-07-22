@@ -3,7 +3,7 @@ using Qowaiv.Conversion.Financial;
 namespace Qowaiv.Financial;
 
 /// <summary>Represents an amount.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
 [OpenApiDataType(description: "Decimal representation of a currency amount.", example: 15.95, type: "number", format: "amount")]
 [TypeConverter(typeof(AmountTypeConverter))]

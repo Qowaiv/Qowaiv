@@ -12,7 +12,7 @@ namespace Qowaiv;
 /// Supports all kind of formatting(and both empty and unknown) that can not be
 /// achieved when modeling a property as <see cref="bool" /> instead of an <see cref="YesNo" />.
 /// </remarks>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Yes-No notation.", example: "yes", type: "string", format: "yes-no", nullable: true, @enum: "yes,no,?")]
 [TypeConverter(typeof(YesNoTypeConverter))]

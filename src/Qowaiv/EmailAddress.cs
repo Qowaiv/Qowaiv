@@ -6,7 +6,7 @@ using System.Net;
 namespace Qowaiv;
 
 /// <summary>Represents an email address.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "Email notation as defined by RFC 5322.", example: "svo@qowaiv.org", type: "string", format: "email", nullable: true)]
 [TypeConverter(typeof(EmailAddressTypeConverter))]

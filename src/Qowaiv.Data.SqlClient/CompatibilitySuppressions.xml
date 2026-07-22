@@ -89,6 +89,27 @@
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
+    <DiagnosticId>CP0015</DiagnosticId>
+    <Target>T:Qowaiv.Sql.Timestamp:[T:System.Diagnostics.DebuggerDisplayAttribute]</Target>
+    <Left>lib/net6.0/Qowaiv.Data.SqlClient.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Data.SqlClient.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0015</DiagnosticId>
+    <Target>T:Qowaiv.Sql.Timestamp:[T:System.Diagnostics.DebuggerDisplayAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.Data.SqlClient.dll</Left>
+    <Right>lib/net8.0/Qowaiv.Data.SqlClient.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0015</DiagnosticId>
+    <Target>T:Qowaiv.Sql.Timestamp:[T:System.Diagnostics.DebuggerDisplayAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Data.SqlClient.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Data.SqlClient.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Conversion.Sql.TimestampTypeConverter.FromString(System.String,System.Globalization.CultureInfo):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Data.SqlClient.dll</Left>

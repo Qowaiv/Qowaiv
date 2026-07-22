@@ -17,7 +17,7 @@ namespace Qowaiv.Financial;
 /// in any circumstances, as a medium of exchange. In this use, "currency"
 /// is a synonym for the concept of money.
 /// </remarks>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "Currency notation as defined by ISO 4217.", example: "EUR", type: "string", format: "currency", nullable: true)]
 [TypeConverter(typeof(CurrencyTypeConverter))]

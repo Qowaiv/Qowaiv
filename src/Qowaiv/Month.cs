@@ -3,7 +3,7 @@ using Qowaiv.Globalization;
 namespace Qowaiv;
 
 /// <summary>Represents a month.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Month(-only) notation.", example: "Jun", type: "string", format: "month", nullable: true, @enum: "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,?")]
 [TypeConverter(typeof(MonthTypeConverter))]

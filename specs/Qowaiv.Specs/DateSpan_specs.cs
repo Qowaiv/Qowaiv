@@ -8,6 +8,20 @@ public class Is_comparable
     public void to_null_is_1() => Svo.DateSpan.CompareTo(Nil.Object).Should().Be(1);
 }
 
+public class Can_be_parsed
+{
+    [Test]
+    public void from_valid_input_only_otherwise_throws_on_Parse()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            "invalid input".Invoking(DateSpan.Parse)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid date span");
+        }
+    }
+}
+
 public class Is_valid
 {
     [TestCase("23Y+0M+0D", "Without starting sign")]

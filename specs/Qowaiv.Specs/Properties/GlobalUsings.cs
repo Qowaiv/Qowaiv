@@ -8,7 +8,6 @@ global using Qowaiv.Financial;
 global using Qowaiv.Formatting;
 global using Qowaiv.Globalization;
 global using Qowaiv.Hashing;
-global using Qowaiv.Identifiers;
 global using Qowaiv.IO;
 global using Qowaiv.Mathematics;
 global using Qowaiv.OpenApi;

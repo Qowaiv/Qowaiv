@@ -11,10 +11,30 @@ internal class Markdown_file
     [Test]
     public void Generate_LocalizedPattern()
     {
-        foreach (var info in Infos.OrderBy(i => i.Country.IsoAlpha2Code))
+        var writer = new StringBuilder();
+
+        for(var f = 'A'; f <='Z'; f++)
         {
-            Console.WriteLine(info.LocalizedPattern());
+            for(var s = 'A'; s <= 'Z'; s++)
+            {
+                writer.Append(new string(' ', 8));
+                if(Country.TryParse($"{f}{s}") is not { } country)
+                {
+                    writer.AppendLine("default,");
+                }
+                else if(Infos.FirstOrDefault(i => i.Country == country) is { } info)
+                {
+                    writer.AppendLine(info.BbanData());
+                }
+                else
+                {
+                    writer.AppendLine($"""gen("{country.IsoAlpha2Code}"),""");
+                }
+            }
         }
+        
+        Console.WriteLine(writer);
+
         Assert.Inconclusive("Copy output to code file.");
     }
 
@@ -80,6 +100,15 @@ internal class Markdown_file
     public void Generate_IBAN(string bban, string? because = null)
     {
         var rnd = new Random(bban.GetHashCode());
+        string? iban = Generate(bban, rnd);
+
+        iban.Should().NotBeNull(because);
+
+        Console.WriteLine(iban);
+    }
+
+    private static string? Generate(string bban, Random rnd)
+    {
         var sb = new StringBuilder();
         foreach (var ch in bban)
         {
@@ -101,10 +130,8 @@ internal class Markdown_file
             .Select(kk => str.Replace("kk", kk.ToString("00")))
             .Select(Mod97)
             .First(i => i is { });
-
-        iban.Should().NotBeNull(because);
-
-        Console.WriteLine(iban);
+        
+        return iban;
     }
 
     private static readonly IbanInfo[] Infos = Init();
@@ -174,6 +201,44 @@ internal sealed record IbanInfo(Country Country, int Length, string Bban, int? C
             }
 
             return total;
+        }
+    }
+    
+    public string BbanData()
+    {
+        var sb = new StringBuilder()
+            .Append($@"new(""{LookupPattern}""");
+        if (Fields.EndsWith('m'))
+            sb.Append(", true");
+
+        sb.Append("), // ");
+        sb.Append(new string(' ', 49 - sb.Length));
+        sb.Append($"{Country.IsoAlpha2Code}: {Bban}");
+        return sb.ToString();
+    }
+
+    public string LookupPattern
+    {
+        get
+        {
+            var pattern = new StringBuilder(InternationalBankAccountNumber.MaxLength)
+               .Append(Country.IsoAlpha2Code)
+               .Append(CheckSum is { } checksum ? checksum.ToString("00") : "nn");
+
+            foreach (var block in Bban.Split(','))
+            {
+                var type = block.Last();
+
+                if (!int.TryParse(block[..^1], out int length) && type == ']')
+                {
+                    pattern.Append(block[1..^1]);
+                }
+                else
+                {
+                    pattern.Append(new string(type, length));
+                }
+            }
+            return pattern.ToString();
         }
     }
 

@@ -9,7 +9,7 @@
 | version                                                                               | downloads                                                                    | package                                                                                                            |
 |---------------------------------------------------------------------------------------|------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
 |![v](https://img.shields.io/nuget/v/Qowaiv?color=18C)                                  |![v](https://img.shields.io/nuget/dt/Qowaiv)                                  |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                                                                    |
-|![v](https://img.shields.io/nuget/v/Qowaiv.Data.SqlClient?color=18C)                   |![v](https://img.shields.io/nuget/dt/Qowaiv.Data.SqlClient)                   |[Qowaiv.Data.SqlCient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)                                       |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Data.SqlClient?color=18C)                   |![v](https://img.shields.io/nuget/dt/Qowaiv.Data.SqlClient)                   |[Qowaiv.Data.SqlClient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)                                      |
 |![v](https://img.shields.io/nuget/v/Qowaiv.Diagnostics.Contracts?color=118)            |![v](https://img.shields.io/nuget/dt/Qowaiv.Diagnostics.Contracts)            |[Qowaiv.Diagnostics.Contracts](https://www.nuget.org/packages/Qowaiv.Diagnostics.Contracts/)                        |
 |![v](https://img.shields.io/nuget/v/Qowaiv.TestTools?color=118)                        |![v](https://img.shields.io/nuget/dt/Qowaiv.TestTools)                        |[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)                                                |
 |![v](https://img.shields.io/nuget/v/Qowaiv.CodeGeneration.SingleValueObjects?color=118)|![v](https://img.shields.io/nuget/dt/Qowaiv.CodeGeneration.SingleValueObjects)|[Qowaiv.CodeGeneration.SingleValueObjects](https://www.nuget.org/packages/Qowaiv.CodeGeneration.SingleValueObjects/)|
@@ -121,7 +121,7 @@ new StreamSize(238900).ToString("0000.00 S") => 0238.90 kB
 
 // Full notation
 new StreamSize(8900).ToString("0.0 f") => 8900.0 byte
-new StreamSize(238900).ToString("0 f") => 234 kilobyte
+new StreamSize(238900).ToString("0 f") => 239 kilobyte
 new StreamSize(1238900).ToString("0.00 F") => 1.24 Megabyte
 
 // Custom
@@ -162,7 +162,7 @@ Is a subset of the date span, so without the days precision.
 // Creation
 var ctor = new MonthSpan(years: 5, months: 6); // 69 months.
 var months = MonthSpan.FromMonths(13);
-var years = MonthSpan.FromYears(3); // 35 months.
+var years = MonthSpan.FromYears(3); // 36 months.
 var (years, months) = ctor; // deconstructs.
 var humanizer = 5.Years() + 6.Months();
 
@@ -281,8 +281,8 @@ var span = 17.Years(); // 17 years.
 ### Yes-no
 A Yes-no is a (bi-)polar that obviously has the values "yes" and "no". It also
 has an "empty"(unset) and "unknown" value. It maps easily with a `boolean`, but
-Supports all kind of formatting (and both empty and unknown) that can not be
-achieved when modeling a property as `bool` instead of an `YesNo`.
+supports all kinds of formatting (and both empty and unknown) that can not be
+achieved when modeling a property as `bool` instead of a `YesNo`.
 
 ``` C#
 // Creation
@@ -322,16 +322,16 @@ var fromInt64 = 7732_18_5L.CasNr();
 Represents money without the notion of the actual currency.
 
 ### Business Identifier Code (BIC)
-Represents a BIC as specified in ISO 13616.
+Represents a BIC as specified in ISO 9362.
 
 ``` C#
 var bic = BusinessIdentifierCode.Parse("AEGONL2UXXX");
 
 var business = bic.Business; // "AEGO"
-var country = bic.Country; // Country.NL
+var country = bic.Country;   // Country.NL
 var location = bic.Location; // "2U"
-var branch = bic.Branch; // "XXX"
-var length = bic.Length; // 11
+var branch = bic.Branch;     // "XXX"
+var length = bic.Length;     // 11
 ```
 
 ### Currency
@@ -347,6 +347,7 @@ iban.Country; // Country.NL
 iban.Length; // 18
 iban.ToString("F"); // NL20 INGB 0001 2345 67
 iban.ToString("H"); // NL20 INGB 0001 2345 67 (with non-breaking spaces).
+iban.ToString("O"); // NL20XXXXXXXXXXX567 (obfuscated).
 ```
 
 An overview with all supported countries and patterns can be found [here](IBAN.md).
@@ -377,7 +378,7 @@ using(new CultureInfoScope("es-ES"))
     Console.WriteLine(234.12.ToString()); // 234,12
 }
 // or with an extension
-using(new CultureInfo("en-ES").Scoped())
+using(new CultureInfo("es-ES").Scoped())
 {
     // ...
 }
@@ -412,10 +413,10 @@ var (numerator, denominator) = fluent; // deconstructs.
 
 #### Operations
 ``` C#
-var add = 4.DividedBy(3) +  7.DividedBy(4); // 3 1/12
+var add      = 4.DividedBy(3) + 7.DividedBy(4); // 3 1/12
 var subtract = 4.DividedBy(3) - 2.DividedBy(3); // 2/3
 var multiply = 3.DividedBy(5) * 2.DividedBy(3); // 6/15
-var divide = = 3.DividedBy(5) / 2.DividedBy(3); // 9/10
+var divide   = 3.DividedBy(5) / 2.DividedBy(3); // 9/10
 ```
 
 #### Formatting
@@ -425,7 +426,7 @@ a fraction bar, the fraction is formatted as a decimal.
 var dec = 17.DividedBy(5).ToString("0.##"); // 3,40
 ```
 
-If the whole should be formatted as such the by adding the preferred formatting
+If the whole part should be formatted as such, by adding the preferred formatting
 between brackets.
 ``` C#
 var withWhole = 17.DividedBy(5).ToString("[0]0/0"); // 3 2/5
@@ -435,7 +436,7 @@ To specify fraction bar of choice, just define that one in the format:
 ##### Fraction bars
 name           |   c    | code 
 ---------------|:------:|------
-slash          |   /    | 005C
+slash          |   /    | 002F
 colon          |   :    | 003A
 division sign  |   ÷    | 00F7
 fraction slash |   ⁄    | 2044
@@ -556,10 +557,10 @@ potentially sensitive data to log files or (external) devices. It does not
 defend against sources that have (direct) access to the system memory. Consider
 if this is secure enough for the problem at hand, before using this type.
 
-A secret can be created by parsing, deserializing JSON, or using its type
-converter to convert from string. serializing to JSON, or converting it to
-another type are not supported, and `ToString()` returns `*****`. The only way
-to access its value is by calling the `Value()` or `ToByteArray()` method.
+A cryptographic seed can be created by parsing, deserializing JSON, or using
+its type converter to convert from string. serializing to JSON, or converting
+it to another type are not supported, and `ToString()` returns `*****`. The
+only way to access its value is by calling the `Value()` or `ToByteArray()` method.
 
 ``` C#
 var seed = CryptographicSeed.Parse("S2VuIHNlbnQgbWUhIQ=="); // Base64 string
@@ -600,16 +601,16 @@ Represents an Internet media type (also known as MIME-type and content type).
 
 ### Wildcard pattern
 Represents a pattern to match strings, using wildcard characters ? and *. It 
-also support the use of SQL wildcard characters _ and %.
+also supports the use of SQL wildcard characters _ and %.
 
-## Extensions on .NET build-in types
+## Extensions on .NET built-in types
 For types that are shipped with the .NET standard library that meet (most) SVO
 criteria, Qowaiv can offer some extensions to improve usage.
 
 ### System.DateOnly
-The [`DateOnly`](https://learn.microsoft.com/dotnet/api/system.dateonly) is the
-type has been introduced with .NET 6.0. For previous versions we still
-recommend [`Qowaiv.Date`](#Date). Interaction with Qowaiv SVO' is provided:
+The [`DateOnly`](https://learn.microsoft.com/dotnet/api/system.dateonly) type
+was introduced with .NET 6.0. For previous versions we still
+recommend [`Qowaiv.Date`](#Date). Interaction with Qowaiv SVO's is provided:
 
 ``` C#
 var more = new DateOnly(2017, 06, 11) + 3.Months();
@@ -621,7 +622,7 @@ var less = new DateOnly(2017, 06, 11) - DateSpan.FromDays(3);
 
 ### System.DateTime
 The [`DateTime`](https://learn.microsoft.com/dotnet/api/system.datetime) is the
-to type to use when representing date and time. Interaction with Qowaiv SVO's
+type to use when representing date and time. Interaction with Qowaiv SVO's
 is provided:
 
 ``` C#
@@ -677,7 +678,7 @@ By specifying the `DecimalRounding` 13 ways are supported.
 ``` c#
 var toOdd = 23.0455m.Round(3, DecimalRounding.ToOdd); // 23.045m
 var towardsZero = 23.5m.Round(DecimalRounding.TowardsZero); // 23m
-var randomTie = 23.5m.Round(DecimalRounding.RandomTieBreaking); // 50% 23m, 50% 24,
+var randomTie = 23.5m.Round(DecimalRounding.RandomTieBreaking); // 50% 23, 50% 24
 ```
 
 ## Serialization
@@ -952,10 +953,10 @@ and if the data type is nullable, all when applicable.
     "nullable": false
   },
   "Mathematics.Fraction": {
-    "description": "Faction",
+    "description": "Fraction",
     "example": "13/42",
     "type": "string",
-    "format": "faction",
+    "format": "fraction",
     "pattern": "-?[0-9]+(/[0-9]+)?",
     "nullable": false
   },
@@ -1014,7 +1015,7 @@ public static class SwaggerGenOptionsSvoExtensions
         {
             int integer => new OpenApiInteger(integer),
             double floating => new OpenApiDouble(floating),
-            _ => new OpenApiString(attr.Example.ToString()),
+            _ => new OpenApiString(info.Example.ToString()),
         };
 }
 ```
@@ -1046,11 +1047,11 @@ To support hashing (`object.GetHashCode()`) the hash code should always return
 the same value, for the same object. As SVO's are equal by value, the hash
 is calculated based on the underlying value.
 
-For security messures, however, this is only true within the same app domain.
+For security measures, however, this is only true within the same app domain.
 By having different hashes for the same value for different app domains, there
 is good defense against hash flooding.
 
-for test purposes, it is possible to generate a hashcode without using the randomizer:
+For test purposes, it is possible to generate a hashcode without using the randomizer:
 ``` C#
 using (Hash.WithoutRandomizer())
 {
@@ -1059,7 +1060,7 @@ using (Hash.WithoutRandomizer())
 }
 ```
 
-``Hash.Code()` also supports a fluent syntax, to get hashcodes for complex objects:
+`Hash.Code()` also supports a fluent syntax, to get hashcodes for complex objects:
 ``` C#
 public int GetHashCode()
     => Hash.Code(Prop)
@@ -1076,7 +1077,7 @@ work out of the box, just like Array.Sort(), and List.Sort(). However, the
 comparison operators (<, >, <=, >=) do only make sense for a subset of those,
 and are not implemented on all.
 
-Therefor
+Therefore
 
 ``` CSharp
 #pragma warning disable S1210
@@ -1087,14 +1088,14 @@ Therefor
 is fine for types that are sortable via IComparable (in most cases).
 
 ### Debugger display
-During debugging sessions, by default, the IDE shows the result of ToString()
-on a watch. Although Tostring() is overridden for all Qowaiv Single Value 
+During debugging sessions, by default, the IDE shows the result of `ToString()`
+on a watch. Although `ToString()` is overridden for all Qowaiv Single Value 
 Objects, for debugging a special debugger display is provided too, using a 
 debugger display attribute.
 
-The debugger display attribute refers to (private) property with the name 
+The debugger display attribute refers to a (private) property with the name 
 "DebuggerDisplay", which represents the Single Value Object as string. If 
-supported, formatted, and in case of a Empty or Unknown value with a 
+supported, formatted, and in case of an Empty or Unknown value with a 
 notification of that too. The outcome of the DebuggerDisplay is tested in the 
 UnitTests.
 
@@ -1114,8 +1115,8 @@ returned by `ToString(string, IFormatProvider)`.
 
 ### Formatting arguments
 The formatting arguments object, is a container object (struct) of the format 
-and the format provider, the two arguments required for the System.Iformatable 
-ToString() method.
+and the format provider, the two arguments required for the `System.IFormattable`
+`ToString()` method.
 
 ### Formatting arguments collection
 This collection of formatting arguments stores them based on a type to apply 

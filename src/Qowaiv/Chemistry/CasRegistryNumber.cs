@@ -10,7 +10,7 @@ namespace Qowaiv.Chemistry;
 /// from 1957 through the present, plus some substances from as far back as the
 /// early 1800's.
 /// </summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(long))]
 [OpenApiDataType(description: "CAS Registry Number", type: "string", format: "cas-nr", example: "7732-18-5", pattern: "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]", nullable: true)]
 [TypeConverter(typeof(Conversion.Chemistry.CasRegistryNumberTypeConverter))]

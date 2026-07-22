@@ -1,6 +1,4 @@
-using Qowaiv;
-
-namespace Benchmarks;
+namespace Bench;
 
 public partial class RoundBenchmark
 {
@@ -11,7 +9,7 @@ public partial class RoundBenchmark
 
     public RoundBenchmark()
     {
-        var rnd = new MersenneTwister();
+        var rnd = new MersenneTwister(Count);
         for (var i = 0; i < Count; i++)
         {
             decimal n = rnd.Next(0, 100) * rnd.Next(5, 10);
@@ -26,13 +24,13 @@ public partial class RoundBenchmark
         }
     }
 
-    [Params(/*-2, -1, 0, 1, */2)]
+    [Params(-2, -1, 0, 1, 2)]
     public int Decimals { get; set; }
 
     [Benchmark(Baseline = true)]
     public decimal[] Math_Round()
     {
-        for (var i = 0; i < Count; i++)
+        for (var i = 0; i < Unrounded.Length; i++)
         {
             Rounded[i] = decimal.Round(Unrounded[i], Decimals, MidpointRounding.ToEven);
         }
@@ -42,7 +40,7 @@ public partial class RoundBenchmark
     [Benchmark]
     public decimal[] DecimalMath_()
     {
-        for (var i = 0; i < Count; i++)
+        for (var i = 0; i < Unrounded.Length; i++)
         {
             Rounded[i] = Unrounded[i].Round(Decimals, DecimalRounding.ToEven);
         }

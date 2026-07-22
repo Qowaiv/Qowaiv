@@ -1,5 +1,19 @@
 namespace Financial.Currencies_specs;
 
+public class Can_be_parsed
+{
+    [Test]
+    public void from_valid_input_only_otherwise_throws_on_Parse()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            "invalid input".Invoking(Currency.Parse)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid currency");
+        }
+    }
+}
+
 public class All
 {
     [Test]

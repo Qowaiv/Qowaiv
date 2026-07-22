@@ -1,8 +1,7 @@
 namespace Qowaiv.TestTools.Resx;
 
 /// <summary>Represents data of a resource file.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
-[Serializable]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [XmlType("data")]
 public sealed class XResourceFileData : IComparable<XResourceFileData>
 {
@@ -22,7 +21,7 @@ public sealed class XResourceFileData : IComparable<XResourceFileData>
         Name = name;
         Value = val;
         // Do not add empty comments.
-        Comment = string.IsNullOrWhiteSpace(comment) ? null : comment;
+        Comment = comment is { Length: > 0 } ? comment : null;
     }
 
     /// <summary>Gets and set the name.</summary>

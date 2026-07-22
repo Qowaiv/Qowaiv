@@ -1,7 +1,7 @@
 namespace Qowaiv;
 
 /// <summary>Represents a month span.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.Continuous, underlyingType: typeof(int))]
 [OpenApiDataType(description: "Month span, specified in years and months.", example: "1Y+10M", type: "string", format: "month-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M")]
 [TypeConverter(typeof(MonthSpanTypeConverter))]
@@ -75,7 +75,7 @@ public readonly partial struct MonthSpan : IXmlSerializable, IFormattable, IEqua
     public MonthSpan Abs() => new(Math.Abs(m_Value));
 
     /// <summary>
-    /// Returns an integer that indicates the sign of the year span.
+    /// Returns an integer that indicates the sign of the month span.
     /// </summary>
     /// <returns>
     /// A number that indicates the sign of value, as shown in the following table.

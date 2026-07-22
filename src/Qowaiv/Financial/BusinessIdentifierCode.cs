@@ -19,7 +19,7 @@ namespace Qowaiv.Financial;
 /// messages between banks. The codes can sometimes be found on account
 /// statements.
 /// </remarks>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "Business Identifier Code, as defined by ISO 9362.", example: "DEUTDEFF", type: "string", format: "bic", nullable: true)]
 [TypeConverter(typeof(BusinessIdentifierCodeTypeConverter))]

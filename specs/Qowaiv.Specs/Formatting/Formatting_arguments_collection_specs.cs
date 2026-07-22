@@ -67,7 +67,7 @@ public class Formats
                 { typeof(decimal), "0.000" }
             };
 
-            var formatted = collection.Format("{0:000.00} - {1} * {1:dd-MM-yyyy} - {2} - {3} - {4}", 3, new Date(2014, 10, 8), 666, 0.8m, 0.9);
+            var formatted = collection.Format("{0:000.00} - {1} * {1:dd-MM-yyyy} - {2} - {3} - {4}", 3, new Date(2014, 10, 08), 666, 0.8m, 0.9);
             formatted.Should().Be("003,00 - 2014-10-08 00:00 * 08-10-2014 - 666 - 0,800 - 0,9");
         }
     }
@@ -83,7 +83,7 @@ public class Formats
                 { typeof(decimal), "0.000" }
             };
 
-            var formattted = collection.Format("{0:yyyy-MM-dd} * {0}", new Date(2014, 10, 8));
+            var formattted = collection.Format("{0:yyyy-MM-dd} * {0}", new Date(2014, 10, 08));
             formattted.Should().Be("Unit Test Formatter, value: '2014-10-08', format: 'yyyy-MM-dd' * Unit Test Formatter, value: '10/08/2014', format: ''");
         }
     }

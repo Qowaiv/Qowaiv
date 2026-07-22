@@ -1,24 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/nopackage.props" />
-  
+
   <PropertyGroup>
     <OutputType>exe</OutputType>
-    <Nullable>enable</Nullable>
     <TargetFramework>net10.0</TargetFramework>
-    <RootNamespace>Benchmarks</RootNamespace>
+    <Nullable>enable</Nullable>
     <!-- We do not care about strong names for benchmarking -->
-    <NoWarn>CS8002</NoWarn>
+    <NoWarn>CS8002;S101</NoWarn>
     <IsTestCode>true</IsTestCode>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" />
+    <PackageReference Include="IbanNet" />
     <PackageReference Include="MathNet.Numerics" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">
-    <PackageReference Include="AwesomeAssertions.Analyzers" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
   </ItemGroup>
 
@@ -26,6 +25,7 @@
     <ProjectReference Include="../../src/Qowaiv/Qowaiv.csproj" />
     <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="../../src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
+    <ProjectReference Include="../Qowaiv.Specs.Generated/Qowaiv.Specs.Generated.csproj" />
   </ItemGroup>
 
 </Project>

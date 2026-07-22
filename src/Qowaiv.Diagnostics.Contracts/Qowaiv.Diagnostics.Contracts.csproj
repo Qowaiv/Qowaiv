@@ -1,21 +1,55 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  
+
   <Import Project="../../props/package.props" />
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <LangVersion>10.0</LangVersion>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-    <DevelopmentDependency>true</DevelopmentDependency>
-    <IncludeSymbols>false</IncludeSymbols>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
-    <Version>2.0.6</Version>
-    <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
-    <PackageId>Qowaiv.Diagnostics.Contracts</PackageId>
+    <NoWarn>Proj0220</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <ProductName>Qowaiv Diagnostics Contracts</ProductName>
-    <LangVersion>10</LangVersion>
+    <PackageId>Qowaiv.Diagnostics.Contracts</PackageId>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeSymbols>false</IncludeSymbols>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Attributes/**" />
+  </ItemGroup>
+
+  <ItemGroup Label="CompileTimeDependencies">
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup Label="DependencyPackaging">
+    <None
+      Include="$(OutputPath)/netstandard2.0/$(AssemblyName).dll"
+      Pack="true"
+      PackagePath="analyzers/dotnet/cs"
+      Visible="false" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>2.1.0</Version>
+    <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
+    <ToBeReleased>
+      <![CDATA[
+v*
+*
+]]>
+    </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
+v2.1.0
+- Added [PrimitiveRequired] attribute.
+- Added [OpenApi.PrimitiveRequired.AllOf] attribute.
+- Added [OpenApi.PrimitiveRequired.AnyOf] attribute.
+- Added [OpenApi.PrimitiveRequired.OneOf] attribute.
 v2.0.6
 - Reduce required C# language version from 12 to 10.
 v2.0.5
@@ -38,17 +72,5 @@ v1.0.0
 ]]>
     </PackageReleaseNotes>
   </PropertyGroup>
-
-  <ItemGroup Label="CompileTimeDependencies">
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Attributes/**" />
-  </ItemGroup>
-
-  <ItemGroup Label="DependencyPackaging">
-    <None Include="$(OutputPath)/netstandard2.0/$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-  </ItemGroup>
 
 </Project>

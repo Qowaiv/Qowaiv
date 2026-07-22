@@ -1,11 +1,9 @@
-using Qowaiv.Customization;
-using Qowaiv.Identifiers;
 using System.Reflection;
 
 namespace Qowaiv.OpenApi;
 
 /// <summary>Represents an Open API data type.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 public sealed record OpenApiDataType
 {
     /// <summary>Initializes a new instance of the <see cref="OpenApiDataType" /> class.</summary>

@@ -38,10 +38,11 @@ internal static partial class Email
             : null;
 
         [Pure]
+        [SuppressMessage("Style", "IDE0071", Justification = "FP: ref structs can not be interpolated directly.")]
         public override readonly string ToString()
-           => Success
-           ? $"Input = {Input.ToString()}, Result = {Buffer.ToString()}, Length = {Length}"
-           : $"Input = {Input.ToString()}, Result = {Buffer.ToString()}, Success = false";
+          => Success
+          ? $"Input = {Input.ToString()}, Result = {Buffer.ToString()}, Length = {Length}"
+          : $"Input = {Input.ToString()}, Result = {Buffer.ToString()}, Success = false";
 
         [Pure]
         public readonly Parser Email()
@@ -94,7 +95,7 @@ internal static partial class Email
         /// <remarks>Trims MailTo: prefix if used.</remarks>
         [Pure]
         private readonly Parser MailTo()
-            => Input.StartsWith("MAILTO:".AsSpan(), StringComparison.OrdinalIgnoreCase)
+            => Input.StartsWith("MAILTO:", StringComparison.OrdinalIgnoreCase)
             ? new(Input[7..], Buffer, Length)
             : this;
 

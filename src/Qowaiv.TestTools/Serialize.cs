@@ -25,6 +25,6 @@ public static class Serialize
 
         var reader = new StreamReader(stream);
         var xml = XDocument.Load(reader);
-        return xml.Element("Wrapper")!.Element("Value")!.Value;
+        return xml.Element("Wrapper")?.Element("Value")?.Value;
     }
 }

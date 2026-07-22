@@ -36,7 +36,7 @@ public class can_be_changed
 }
 
 
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 internal class SimpleClass
 {
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

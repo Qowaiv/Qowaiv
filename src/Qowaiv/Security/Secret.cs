@@ -6,7 +6,7 @@ namespace Qowaiv.Security;
 
 /// <summary>Represents a secret.</summary>
 [TypeConverter(typeof(SecretTypeConverter))]
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 #if NET8_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Security.SecretJsonConverter))]
 #endif

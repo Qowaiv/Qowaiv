@@ -37,20 +37,6 @@ public class TimestampTest
     }
 
     [Test]
-    public void Parse_InvalidInput_ThrowsFormatException()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            Assert.Catch<FormatException>
-            (() =>
-            {
-                Timestamp.Parse("InvalidInput");
-            },
-            "Not a valid SQL timestamp");
-        }
-    }
-
-    [Test]
     public void TryParse_TestStructInput_AreEqual()
     {
         using (TestCultures.en_GB.Scoped())

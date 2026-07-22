@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 namespace Qowaiv.Globalization;
 
 /// <summary>Represents a country.</summary>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(description: "Country notation as defined by ISO 3166-1 alpha-2.", example: "NL", type: "string", format: "country", nullable: true)]
 [TypeConverter(typeof(CountryTypeConverter))]
@@ -355,17 +355,7 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
         }
     }
 
-    private static ResourceManager ResourceManager
-    {
-        get
-        {
-            rm ??= new("Qowaiv.Globalization.CountryLabels", typeof(Country).Assembly);
-            return rm;
-        }
-    }
-
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private static ResourceManager? rm;
+    private static ResourceManager ResourceManager => field ??= new("Qowaiv.Globalization.CountryLabels", typeof(Country).Assembly);
 
     /// <summary>Get resource string.</summary>
     /// <param name="postfix">

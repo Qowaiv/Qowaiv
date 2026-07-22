@@ -10,7 +10,7 @@ namespace Diagnostics_Contracts_Specs
         private static bool IsGenerated(Type t)
             => !t.IsAbstract
             && t.IsAssignableTo(typeof(Attribute))
-            && t.Namespace == "Qowaiv.Diagnostics.Contracts";
+            && t.Namespace.StartsWith("Qowaiv.Diagnostics.Contracts");
 
         [Test]
         public void Contains_attributes()
@@ -31,7 +31,11 @@ namespace Diagnostics_Contracts_Specs
                 typeof(Qowaiv.Diagnostics.Contracts.ImpureAttribute),
                 typeof(Qowaiv.Diagnostics.Contracts.InheritableAttribute),
                 typeof(Qowaiv.Diagnostics.Contracts.MutableAttribute),
+                typeof(Qowaiv.Diagnostics.Contracts.PrimitiveRequiredAttribute),
                 typeof(Qowaiv.Diagnostics.Contracts.WillBeSealedAttribute),
+                typeof(Qowaiv.Diagnostics.Contracts.OpenApi.AllOfAttribute),
+                typeof(Qowaiv.Diagnostics.Contracts.OpenApi.AnyOfAttribute),
+                typeof(Qowaiv.Diagnostics.Contracts.OpenApi.OneOfAttribute),
             });
     }
 }

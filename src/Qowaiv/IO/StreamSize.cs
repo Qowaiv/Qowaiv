@@ -12,7 +12,7 @@ namespace Qowaiv.IO;
 /// and the total size of the file system. This value type can not represent
 /// stream sizes bigger than long.MaxValue.
 /// </remarks>
-[DebuggerDisplay("{DebuggerDisplay}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(long))]
 [OpenApiDataType(description: "Stream size notation (in byte).", example: 1024, type: "integer", format: "stream-size")]
 [TypeConverter(typeof(StreamSizeTypeConverter))]
@@ -448,7 +448,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
     ///
     /// Full notation:
     /// 8900.ToString("0.0 f") => 8900.0 byte
-    /// 238900.ToString("0 f") => 234 kilobyte
+    /// 238900.ToString("0 f") => 239 kilobyte
     /// 1238900.ToString("0.00 F") => 1.24 Megabyte
     ///
     /// Custom:

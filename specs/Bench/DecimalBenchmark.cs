@@ -1,6 +1,4 @@
-using Qowaiv;
-
-namespace Benchmarks;
+namespace Bench;
 
 public class DecimalBenchmark
 {

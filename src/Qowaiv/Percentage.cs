@@ -51,10 +51,10 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
 
     /// <summary>Returns the larger of two percentages.</summary>
     /// <param name="val1">
-    /// The second of the two percentages to compare.
+    /// The first of the two percentages to compare.
     /// </param>
     /// <param name="val2">
-    /// The first of the two percentages to compare.
+    /// The second of the two percentages to compare.
     /// </param>
     /// <returns>
     /// Parameter val1 or val2, whichever is larger.
@@ -74,10 +74,10 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
 
     /// <summary>Returns the smaller of two percentages.</summary>
     /// <param name="val1">
-    /// The second of the two percentages to compare.
+    /// The first of the two percentages to compare.
     /// </param>
     /// <param name="val2">
-    /// The first of the two percentages to compare.
+    /// The second of the two percentages to compare.
     /// </param>
     /// <returns>
     /// Parameter val1 or val2, whichever is smaller.

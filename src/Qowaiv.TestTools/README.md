@@ -15,14 +15,14 @@ Testing IO can be cumbersome. The `TemporaryDirectory` can help by creating a
 directory that only exists for the duration of a test:
 
 ``` C#
-using (var directory = new TemporaryDirectory()
+using (var directory = new TemporaryDirectory())
 {
-     var file = directory.CraeteFile("somefile.txt");
+     var file = directory.CreateFile("somefile.txt");
      // ..
 }
 ```
 
-On the dispose, the directory, and all it children will be deleted.
+On the dispose, the directory, and all its children will be deleted.
 
 ### File lock
 To test IO related unhappy flows, it can be useful to create a temporary lock

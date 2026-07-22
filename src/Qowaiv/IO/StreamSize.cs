@@ -448,7 +448,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
     ///
     /// Full notation:
     /// 8900.ToString("0.0 f") => 8900.0 byte
-    /// 238900.ToString("0 f") => 234 kilobyte
+    /// 238900.ToString("0 f") => 239 kilobyte
     /// 1238900.ToString("0.00 F") => 1.24 Megabyte
     ///
     /// Custom:

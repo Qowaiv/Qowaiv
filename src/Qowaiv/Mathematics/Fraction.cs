@@ -6,7 +6,7 @@ namespace Qowaiv.Mathematics;
 /// <summary>Represents a fraction.</summary>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(Tuple<long, long>))]
-[OpenApiDataType(description: "Faction", type: "string", format: "faction", pattern: "-?[0-9]+(/[0-9]+)?", example: "13/42")]
+[OpenApiDataType(description: "Fraction", type: "string", format: "fraction", pattern: "-?[0-9]+(/[0-9]+)?", example: "13/42")]
 [TypeConverter(typeof(FractionTypeConverter))]
 #if NET8_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Mathematics.FractionJsonConverter))]
@@ -49,7 +49,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
         /// <remarks>
         /// name           | c | code
         /// ---------------|---|------
-        /// slash          | / |   5C
+        /// slash          | / |   2F
         /// colon          | : |   3A
         /// division sign  | ÷ |   F7
         /// fraction slash | ⁄ | 2044
@@ -142,7 +142,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:super⁄sub} = {0:0.########}");
 
-    /// <summary>Returns true if the faction is zero.</summary>
+    /// <summary>Returns true if the fraction is zero.</summary>
     [Pure]
     public bool IsZero() => numerator == 0;
 
@@ -154,7 +154,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     [Pure]
     public Fraction Abs() => New(numerator.Abs(), denominator);
 
-    /// <summary>Gets the inverse of a faction.</summary>
+    /// <summary>Gets the inverse of a fraction.</summary>
     /// <exception cref="DivideByZeroException">
     /// When the fraction is <see cref="Zero" />.
     /// </exception>

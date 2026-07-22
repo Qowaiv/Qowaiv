@@ -2,7 +2,7 @@ namespace Qowaiv.Mathematics;
 
 internal static class FractionParser
 {
-    /// <summary>Parses a faction.</summary>
+    /// <summary>Parses a fraction.</summary>
     /// <remarks>
     /// Fraction Grammar
     ///
@@ -145,8 +145,8 @@ internal static class FractionParser
     [Pure]
     private static char Separator(this IFormatProvider? provider)
     {
-        var seperator = provider?.GetFormat<NumberFormatInfo>()?.NumberGroupSeparator ?? ".";
-        return seperator == " " ? '+' : ' ';
+        var separator = provider?.GetFormat<NumberFormatInfo>()?.NumberGroupSeparator ?? ".";
+        return separator == " " ? '+' : ' ';
     }
 
     /// <summary>Only strings containing percentage markers (%, ‰, ‱) should be parsed by <see cref="Percentage.TryParse(string)" />.</summary>

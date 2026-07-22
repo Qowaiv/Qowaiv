@@ -15,9 +15,9 @@ public readonly partial struct DocumentId { }
 ```
 
 ### customization
-If needed, the behavior can be tweaked extening the provided behavior. Behavior
+If needed, the behavior can be tweaked extending the provided behavior. Behavior
 that can be overridden:
-* TypeConvertion
+* TypeConversion
 * Parsing
 * IdGeneration
 * Formatting

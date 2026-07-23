@@ -104,7 +104,7 @@ jobs:
 
       - name: Upload Artifact
         if: startsWith(github.ref, 'refs/tags/v')
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: nupkg
           path: packages/*.nupkg

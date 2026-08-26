@@ -72,7 +72,7 @@ inside and outside a Domain-driven context.
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)build/Qowaiv.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true' AND '$(DEPENDABOT)' != 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
 

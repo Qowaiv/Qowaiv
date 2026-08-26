@@ -16,9 +16,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.15.2, )",
-        "resolved": "1.15.2",
-        "contentHash": "waAOyVGjDWA4Vw4xvrITEdBeRPNRhTIpJ4qwWXrOefvV1/WY3rY5OcaLJJdBERqEJKT3ADDkYD6zFh7Er7JwZg=="
+        "requested": "[1.16.1, )",
+        "resolved": "1.16.1",
+        "contentHash": "WUqCgl7unxfAS98+H16uY3bYokM1g1sjmyvqWtBdVVwreNxjztPfDZrjMZGenE+R0LYqJO8fGDuAB6M/YJrCcw=="
       },
       "PolySharp": {
         "type": "Direct",

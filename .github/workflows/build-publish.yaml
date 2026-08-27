@@ -20,7 +20,7 @@ jobs:
       checks: write # Needed by dorny/test-reporter to publish the check run
     steps:
       - name: Set up JDK 17
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
           distribution: oracle
           java-version: 17

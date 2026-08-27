@@ -1,0 +1,53 @@
+name: Dependabot lock files
+
+# Repairs packages.lock.json after a Dependabot update; Dependabot leaves it
+# broken for projects with more than two target frameworks.
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - Directory.Packages.props
+      - "**/*.csproj"
+      - "**/packages.lock.json"
+
+concurrency:
+  group: dependabot-lock-files-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  lock-files:
+    name: Regenerate lock files
+    if: github.actor == 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Setup .NET core versions
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: |
+            8.x
+            9.x
+            10.x
+
+      - name: Regenerate lock files
+        run: dotnet restore qowaiv.slnx --force-evaluate
+
+      # A push made with GITHUB_TOKEN does not start a new Build run; the push to
+      # master after merging does.
+      - name: Push lock files
+        run: |
+          if git diff --quiet -- '*packages.lock.json'; then
+            echo "Lock files already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '*packages.lock.json'
+          git commit -m "Regenerate packages.lock.json for all target frameworks"
+          git push

@@ -11,9 +11,6 @@ on:
       - "**/*.csproj"
       - "**/packages.lock.json"
 
-permissions:
-  contents: read
-
 concurrency:
   group: dependabot-lock-files-${{ github.event.pull_request.number }}
   cancel-in-progress: true
@@ -23,22 +20,12 @@ jobs:
     name: Regenerate lock files
     if: github.actor == 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      # Has to be a Dependabot secret; GITHUB_TOKEN is read-only in Dependabot runs
-      # and pushes made with it do not trigger Build.
-      - name: Verify token
-        env:
-          LOCK_FILES_TOKEN: ${{ secrets.LOCK_FILES_TOKEN }}
-        run: |
-          if [ -z "$LOCK_FILES_TOKEN" ]; then
-            echo "::error::Missing Dependabot secret LOCK_FILES_TOKEN (fine-grained PAT, Contents: read and write)."
-            exit 1
-          fi
-
       - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.ref }}
-          token: ${{ secrets.LOCK_FILES_TOKEN }}
 
       - name: Setup .NET core versions
         uses: actions/setup-dotnet@v6
@@ -51,6 +38,8 @@ jobs:
       - name: Regenerate lock files
         run: dotnet restore qowaiv.slnx --force-evaluate
 
+      # A push made with GITHUB_TOKEN does not start a new Build run; the push to
+      # master after merging does.
       - name: Push lock files
         run: |
           if git diff --quiet -- '*packages.lock.json'; then

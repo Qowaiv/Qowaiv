@@ -18,16 +18,29 @@ concurrency:
 jobs:
   lock-files:
     name: Regenerate lock files
-    if: github.actor == 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
+      # Dependabot deletes the branch when it abandons a pull request, which can
+      # happen while this job is starting.
+      - name: Check branch
+        id: check
+        env:
+          BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: |
+          git ls-remote --exit-code --heads "https://github.com/${{ github.repository }}" "$BRANCH" > /dev/null \
+            && echo "exists=true" >> "$GITHUB_OUTPUT" \
+            || echo "Branch is gone; nothing to do."
+
       - uses: actions/checkout@v7
+        if: steps.check.outputs.exists
         with:
           ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Setup .NET core versions
+        if: steps.check.outputs.exists
         uses: actions/setup-dotnet@v6
         with:
           dotnet-version: |
@@ -36,11 +49,13 @@ jobs:
             10.x
 
       - name: Regenerate lock files
+        if: steps.check.outputs.exists
         run: dotnet restore qowaiv.slnx --force-evaluate
 
       # A push made with GITHUB_TOKEN does not start a new Build run; the push to
       # master after merging does.
       - name: Push lock files
+        if: steps.check.outputs.exists
         run: |
           if git diff --quiet -- '*packages.lock.json'; then
             echo "Lock files already up to date."

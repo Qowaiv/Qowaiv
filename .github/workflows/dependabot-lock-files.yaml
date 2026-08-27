@@ -1,15 +1,7 @@
 name: Dependabot lock files
 
-# Dependabot's NuGet updater restores a multi-targeting project one target framework
-# at a time. Each of those restores rewrites packages.lock.json with only the single
-# framework it was pinned to, so the lock files Dependabot commits lose every other
-# target framework and the locked-mode restore of the Build workflow fails with:
-#
-#   error NU1004: The project target frameworks are different than the lock file's
-#   target frameworks.
-#
-# That behaviour cannot be configured away from this side, so regenerate the lock
-# files for the whole solution and push them back onto the pull request.
+# Repairs packages.lock.json after a Dependabot update; Dependabot leaves it
+# broken for projects with more than two target frameworks.
 on:
   pull_request:
     branches:
@@ -32,16 +24,14 @@ jobs:
     if: github.actor == 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
-      # A push authenticated with the built-in GITHUB_TOKEN does not start a new
-      # workflow run, which would leave the corrected commit without a Build result.
-      # The token has to be a Dependabot secret: runs triggered by Dependabot resolve
-      # secrets.* against Dependabot secrets, not against Actions secrets.
+      # Has to be a Dependabot secret; GITHUB_TOKEN is read-only in Dependabot runs
+      # and pushes made with it do not trigger Build.
       - name: Verify token
         env:
           LOCK_FILES_TOKEN: ${{ secrets.LOCK_FILES_TOKEN }}
         run: |
           if [ -z "$LOCK_FILES_TOKEN" ]; then
-            echo "::error::Missing Dependabot secret LOCK_FILES_TOKEN. Add a fine-grained personal access token with 'Contents: read and write' on this repository under Settings > Secrets and variables > Dependabot."
+            echo "::error::Missing Dependabot secret LOCK_FILES_TOKEN (fine-grained PAT, Contents: read and write)."
             exit 1
           fi
 
@@ -58,15 +48,13 @@ jobs:
             9.x
             10.x
 
-      # --force-evaluate rewrites every lock file from the project graph, and takes
-      # precedence over the RestoreLockedMode that Directory.Build.props enables on CI.
       - name: Regenerate lock files
         run: dotnet restore qowaiv.slnx --force-evaluate
 
       - name: Push lock files
         run: |
           if git diff --quiet -- '*packages.lock.json'; then
-            echo "The lock files already cover every target framework."
+            echo "Lock files already up to date."
             exit 0
           fi
           git config user.name "github-actions[bot]"

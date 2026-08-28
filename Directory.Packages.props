@@ -9,12 +9,12 @@
     <PackageVersion Include="AwesomeAssertions" Version="9.5.0" />
     <PackageVersion Include="AwesomeAssertions.Analyzers" Version="9.0.8" />
     <!-- linked to Roslyn version -->
-    <PackageVersion Include="BenchmarkDotNet" Version="[0.14.0]" />
+    <PackageVersion Include="BenchmarkDotNet" Version="[0.15.8]" />
     <PackageVersion Include="coverlet.collector" Version="10.0.1" />
     <PackageVersion Include="IbanNet" Version="6.2.0" />
     <PackageVersion Include="MathNet.Numerics" Version="5.0.0" />
     <!-- Roslyn .NET 8 -->
-    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="[4.11.0]" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="[5.9.0]" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.9.0" />
     <PackageVersion Include="Microsoft.Sbom.Targets" Version="4.1.5" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />

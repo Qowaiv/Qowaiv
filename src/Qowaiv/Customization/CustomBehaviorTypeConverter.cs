@@ -4,7 +4,7 @@
 namespace Qowaiv.Customization;
 
 /// <summary>
-/// Used by generated SVO's that uses the <see cref="CustomBehavior{TValue}"/>
+/// Used by generated SVOs that use the <see cref="CustomBehavior{TValue}"/>
 /// to apply type conversions.
 /// </summary>
 /// <typeparam name="TSvo">

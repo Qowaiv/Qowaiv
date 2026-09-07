@@ -18,7 +18,7 @@
 
 ## Domain-driven design bottom up
 Qowaiv is a (Single) Value Object library. It aims to model reusable (Single)
-Value Objects that can be used a wide variety of modeling scenarios, both
+Value Objects that can be used in a wide variety of modeling scenarios, both
 inside and outside a Domain-driven context.
 
 ### (Single) Value Objects
@@ -65,16 +65,16 @@ var casted = (Date)new DateTime(2017, 06, 11, 06, 15);
 var (year, month, day) = date; // deconstructs.
 ```
 
-As, since .NET 6.0, `System.DateOnly` is available, `Qowaiv.Date` can be casted to (and from)
+As, since .NET 6.0, `System.DateOnly` is available, `Qowaiv.Date` can be cast to (and from)
 this type, if (and only if), the .NET 8.0 version or higher of the package is used.
 
 ### Date span
-Represents a date span. Opposed to a `TimeSpan` its duration is (a bit) resilient;
-Adding one month to a date in January result in adding a different number of days, 
-than adding one month a date in March.
+Represents a date span. As opposed to a `TimeSpan`, its duration is (a bit) resilient;
+Adding one month to a date in January results in adding a different number of days, 
+than adding one month to a date in March.
 
-Date spans are particular useful in scenario's for defining (and doing calculations on)
-month based periods, and ages (mostly in years and days).
+Date spans are particularly useful in scenarios for defining (and doing calculations on)
+month-based periods, and ages (mostly in years and days).
 
 ``` C#
 var span = new DateSpan(years: 3, months: 2, days: -4);
@@ -135,7 +135,7 @@ new StreamSize(1238900).ToString("#,##0") => 1,238,900
 Represents a house number in the range [1-999999999].
 
 ### Local Date Time
-Explicitly marked local date time. It allows the clear distinction between local 
+Explicitly marked local date time. It allows a clear distinction between local 
 and UTC-based date times.
 
 ### Month
@@ -243,7 +243,7 @@ var (year, week, day) = date; // deconstructs.
 Represents a year in the range [1-9999].
 
 ``` C#
-Year year = 2017.CE(); // Extention, Common Era
+Year year = 2017.CE(); // Extension, Common Era
 bool isLeap = year.IsLeapYear;
 
 // behavior similar to double.NaN
@@ -366,11 +366,11 @@ var (amount, currency) = money; // deconstructs.
 ## Qowaiv globalization types
 
 ### Country
-Represents a country based on an ISO 3166-1 code (or 3166-3 if the country does not longer exists).
+Represents a country based on an ISO 3166-1 code (or 3166-3 if the country no longer exists).
 
 ### CultureInfoScope
-A CultureInfoScope is a class that allows to specify the current (UI) for the
-duration/lifetime of specified scope.
+A CultureInfoScope is a class that allows specifying the current (UI) culture for the
+duration/lifetime of the specified scope.
 
 ``` C#
 using(new CultureInfoScope("es-ES"))
@@ -390,7 +390,7 @@ using(new CultureInfo("es-ES").Scoped())
 A fraction (from Latin _fractus_, "broken") represents a part of a whole or, more
 generally, any number of equal parts. It can be written as a/b (a divided by b).
 
-It is worth noticing that the `default` value of a `Fraction` is ``Fraction.Zero`
+It is worth noting that the `default` value of a `Fraction` is `Fraction.Zero`
 and that `NaN` and `Infinity` are not supported.
 
 #### Creation
@@ -406,8 +406,8 @@ Fraction parsed = Fraction.Parse("4²³⁄₄₇"); // Unicode super- and subscr
 
 Fraction fromFloating = Fraction.Create(0.3456786754m);
 
-Fraction casted = (Fraction)34;
-Fraction casted = (Fraction)0.3333;
+Fraction cast = (Fraction)34;
+Fraction cast = (Fraction)0.3333;
 var (numerator, denominator) = fluent; // deconstructs.
 ```
 
@@ -462,16 +462,16 @@ var basic = 3.DividedBy(4).ToString("0/0"); // 3/4
 ## Qowaiv SQL types
 
 ### Timestamp
-Represents a (MS SQL) time-stamp is a data type that exposes automatically generated
-binary numbers, which are guaranteed to be unique within a database. time-stamp is
-used typically as a mechanism for version-stamping table rows. The storage size is
+Represents a (MS SQL) timestamp, which is a data type that exposes automatically generated
+binary numbers, guaranteed to be unique within a database. A timestamp is used
+typically as a mechanism for version-stamping table rows. The storage size is
 8 bytes. See: https://technet.microsoft.com/en-us/library/aa260631%28v=sql.80%29.aspx
 
 ## Qowaiv Data
 
 ### SVO Parameter factory class
-To create a (SQL) parameter with a SVO as value, use the SvoParamater factory
-class. It will return SQL parameter with a converted database proof value.
+To create a (SQL) parameter with an SVO as its value, use the `SvoParameter` factory
+class. It will return a SQL parameter with a converted database-proof value.
 
 ## Qowaiv identifiers
 
@@ -480,12 +480,12 @@ Primitive Obsession is a common issue when dealing with identifiers. It is quite
 common to provide two or even more identifiers (of different identities) to a
 method, which can lead to nasty bugs.
 
-More info about those generated strongly typed ID's can be found [here](src/Qowaiv.CodeGeneration.SingleValueObjects/README.md).
+More info about those generated strongly-typed IDs can be found [here](src/Qowaiv.CodeGeneration.SingleValueObjects/README.md).
 
 ### UUID aka GUID
-The UUID (Universally unique identifier) aka GUID (Globally unique identifier) is an
-extension on the System.Guid. It is by default represented by a 22 length string, 
-instead of a 32 length string.
+The UUID (Universally unique identifier), also known as GUID (Globally unique identifier), is an
+extension of System.Guid. It is by default represented by a 22-character string, 
+instead of a 32-character string.
 
 ``` C#
 var rnd = Uuid.NewUuid();
@@ -497,8 +497,8 @@ var sha1 = Uuid.GenerateWithSHA1(bytes); // 39h-Y1rR51ym_t78x9h0bA, UUID Version
 ```
 
 #### Comparer
-The UUID Comparer can sort both UUID's as GUID's, Furthermore, is support both
-.NET's default way of sorting as the sorting of SQL Server, or MongoDB.
+The UUID Comparer can sort both UUIDs and GUIDs. Furthermore, it supports both
+.NET's default way of sorting as well as the sorting of SQL Server or MongoDB.
 
 ``` C#
 var uuids = new List<Uuid>();
@@ -512,26 +512,26 @@ guids.Sort(UuidComparer.Default);
 ```
 
 #### Sequential
-As UUID's are commonly used for the clustered key of a database table. For
-massive database with a lot of inserts (they go hand in hand normally) this can
-be a performance issue, as by default generated UUID's are not sequential, so
-the clustered index gets a lot of random inserts.
+UUIDs are commonly used as the clustered key of a database table. For
+massive databases with many inserts (which normally go hand in hand), this can
+be a performance issue, as by default, generated UUIDs are not sequential, leading to
+a lot of random inserts in the clustered index.
 
-By using a sequential UUID this problem can be minimized. Obviously, if you can
+By using a sequential UUID, this problem can be minimized. Obviously, if you can
 fully rely on the sequential UUID generation by your database of choice, you
 should consider that, but in most cases you want to generate the ID upfront.
-In that case `Uuid.NewSequential()` comes handy:
+In that case, `Uuid.NewSequential()` comes in handy:
 
 ``` C#
 var uuid = Uuid.NewSequential(UuidComparer.SqlServer);
 ```
 
-As databases might (like SQL Server does) order your UUID/GUID's differently
-that .NET does, this generator does that too. Also keep in mind that this generated ID
-is not perfectly sequential; first of all because it has a 0.32 nanosecond
-overlap, but more seriously, as some time may elapse between the generation and
-the storage in the database. Furthermore, these generated UUID's are not sequential
-once mixed with the sequential generated UUID's by your database.
+As databases might (like SQL Server does) order your UUID/GUIDs differently
+than .NET does, this generator does that too. Also keep in mind that this generated ID
+is not perfectly sequential; first of all because it has a 0.32-nanosecond
+overlap, but more seriously, because some time may elapse between generation and
+storage in the database. Furthermore, these generated UUIDs are not sequential
+once mixed with sequentially generated UUIDs by your database.
 
 ## Qowaiv security types
 
@@ -548,7 +548,7 @@ only way to access its value is by calling the `Value()` method.
 
 ``` C#
 var secret = Secret.Parse("Ken sent me!");
-var encrypted = secret.ComputeHash(sha516);
+var encrypted = secret.ComputeHash(sha512);
 ```
 
 ## Cryptographic Seed
@@ -564,7 +564,7 @@ only way to access its value is by calling the `Value()` or `ToByteArray()` meth
 
 ``` C#
 var seed = CryptographicSeed.Parse("S2VuIHNlbnQgbWUhIQ=="); // Base64 string
-var seed = sha516.ComputeCryptographicSeed(new byte[]{ 0xD4, 0x1D, 0x8C, 0xD9 });
+var seed = sha512.ComputeCryptographicSeed(new byte[]{ 0xD4, 0x1D, 0x8C, 0xD9 });
 ```
 
 ## Qowaiv statistical types
@@ -650,7 +650,7 @@ lacks a `TypeConverter` and a `JsonConverter`:
 ## Qowaiv helpers
 
 ### Decimal round
-By default, .NET support rounding of floating points (including `decimal`s).
+By default, .NET supports rounding of floating-point numbers (including `decimal`s).
 However, for some domains this support is too limited. To overcome this, Qowaiv
 has the static `DecimalRound` helper class, containing extension methods for rounding.
 
@@ -709,20 +709,20 @@ public struct Svo
 ```
 
 #### Implementations
-There are two _out-of-the-box_ implementations that support this convention
+There are two _out-of-the-box_ implementations that support this convention-
 based contract.
 * [Qowaiv.Json.Newtonsoft](https://www.nuget.org/packages/Qowaiv.Json.Newtonsoft/)  
 * [Qowaiv.Text.Json.Serialization](https://www.nuget.org/packages/Qowaiv.Text.Json.Serialization/)  
 
 For .NET 6.0, and higher versions of the package, when using `System.Text.Json`,
-no custom serialization registration is required for Qowaiv SVO's: all have been
+no custom serialization registration is required for Qowaiv SVOs: all have been
 decorated with the `[JsonConverter]` attribute.
 
-#### Do not serialize empty SVO's
+#### Do not serialize empty SVOs
 Since .NET 8.0, it is possible to register modifiers for the `System.Text.Json.TypeInfoResolver`.
 This allows you to change serialization behavior, for example by editing
 `ShouldSerialize(object model, object? prop)`. This can be useful if you do not
-want to serialize empty SVO's (such as `EmailAddress.Empty`). To get this
+want to serialize empty SVOs (such as `EmailAddress.Empty`). To get this
 (non-default) behavior you have to provide `JsonSerializerOptions` when serializing:
 
 ``` C#
@@ -737,10 +737,10 @@ var options = new JsonSerializerOptions()
 
 ### OpenAPI Specification
 The [OpenAPI Specification](https://swagger.io/docs/specification/about/)
-(formerly Swagger Specification) is an API description format for REST API's.
+(formerly Swagger Specification) is an API description format for REST APIs.
 
-To improve usage of your REST API's you should specify the Data Type of your
-SVO's. To make this as simple as possible, Qowaiv SVO's are decorated with the
+To improve usage of your REST APIs you should specify the Data Type of your
+SVOs. To make this as simple as possible, Qowaiv SVOs are decorated with the
 `OpenApiDataTypeAttribute`. It specifies the type, format, (regex) pattern,
 and if the data type is nullable, all when applicable.
 
@@ -992,7 +992,7 @@ an Open API definition, this could be done like below:
 /// <summary>Extensions on <see cref="SwaggerGenOptions" />.</summary>
 public static class SwaggerGenOptionsSvoExtensions
 {
-    /// <summary>Maps Qowaiv SVO's.</summary>
+    /// <summary>Maps Qowaiv SVOs.</summary>
     public static SwaggerGenOptions MapSingleValueObjects(this SwaggerGenOptions options)
     {
         var infos = OpenApiDataTypes.FromAssemblies(typeof(Date).Assembly);
@@ -1021,7 +1021,7 @@ public static class SwaggerGenOptionsSvoExtensions
 ```
             
 ### XML
-.NET supports XML Serialization out-of-the-box. All SVO's implement `IXmlSerialization`
+.NET supports XML Serialization out-of-the-box. All SVOs implement `IXmlSerialization`
 with the same approach:
 ``` C#
 XmlSchema IXmlSerializable.GetSchema() => null;
@@ -1044,7 +1044,7 @@ void IXmlSerializable.WriteXml(XmlWriter writer)
 
 ### Hashing
 To support hashing (`object.GetHashCode()`) the hash code should always return 
-the same value, for the same object. As SVO's are equal by value, the hash
+the same value for the same object. As SVOs are equal by value, the hash
 is calculated based on the underlying value.
 
 For security measures, however, this is only true within the same app domain.
@@ -1068,13 +1068,13 @@ public int GetHashCode()
     .And(Collection); // takes all items into account
 ```
 
-This works out of the box because `Hash` can be implicitly cast to an `int`.
+This works _out-of-the-box_ because `Hash` can be implicitly cast to an `int`.
 Calling `Hash.GetHashCode()` is not allowed, just use the implicit cast.
 
 ### Sortable
-SVO's support sorting. So, LINQ expressions like OrderBy() and OrderByDescending()
-work out of the box, just like Array.Sort(), and List.Sort(). However, the
-comparison operators (<, >, <=, >=) do only make sense for a subset of those,
+SVOs support sorting. So, LINQ expressions like `OrderBy()` and `OrderByDescending()`
+work out-of-the-box, just like `Array.Sort()`, and `List.Sort()`. However, the
+comparison operators (`<`, `>`, `<=`, `>=`) only make sense for a subset of those,
 and are not implemented on all.
 
 Therefore
@@ -1104,13 +1104,13 @@ environment, and methods as debugger display are not supported by VB.NET, the
 debugger display attribute refers to a property instead.
 
 ## Qowaiv Formatting
-Formatting is an important part of the functionality in Qowaiv. All SVO's 
+Formatting is an important part of the functionality in Qowaiv. All SVOs 
 implement IFormattable, and have custom formatting. For details, see the 
 different remarks at the `ToString(string, IFormatProvider)`.
 
-All SVO's support the `ICustomFormatter` interface; if the `IFormatProvider`
+All SVOs support the `ICustomFormatter` interface; if the `IFormatProvider`
 returns an `ICustomFormatter` on the `GetFormat(Type? type)` call and the
-custom formatter actually returns a non-null string that formatted result is
+custom formatter actually returns a non-null string, that formatted result is
 returned by `ToString(string, IFormatProvider)`.
 
 ### Formatting arguments
@@ -1127,7 +1127,7 @@ formatting of the object is used, where FormattingArgumentsCollection.Format()
 uses the default specified at the formatting collection of a type (if available).
 
 ### Threading
-Because there are scenario's where you want to set typical values as a country 
+Because there are scenarios where you want to set typical values as a country 
 or a currency for the context of the current thread (like the culture info) 
 there is a possibility to add these to the Qowaiv.Threading.ThreadDomain.
 
@@ -1138,8 +1138,8 @@ country will be created (if possible) based on the current culture.
 ## Qowaiv clock
 The `Clock` class is an outsider within the Qowaiv library. It is a solution 
 for a problem that is not related to Domain-Driven Design, but to the fact that
-the behaviour of `System.DateTime.UtcNow` (and its equivalents) can not be controlled.
-This can be problematic for writing proper tests that relay on its behaviour.
+the behavior of `System.DateTime.UtcNow` (and its equivalents) cannot be controlled.
+This can be problematic for writing proper tests that rely on its behavior.
 
 The default way to tackle this problem is by providing a lightweight service 
 like this one:
@@ -1174,10 +1174,10 @@ public void TestSomething()
 
 ### TimeProvider
 Since .NET 8.0, Microsoft provides a `TimeProvider`. To benefit from both the
-`Qowaiv.Clock` mechanism, and this time provider, the `Clock.TimeProvider`,
-a singleton which provides access to `Clock.UtcNow()` and `Clock.TimeZone` is
+`Qowaiv.Clock` mechanism and this time provider, `Clock.TimeProvider`—a
+singleton which provides access to `Clock.UtcNow()` and `Clock.TimeZone`—has been
 added.
 
 # Qowaiv Diagnostics Contracts
-This packages contains attributes to define (expected) behavior on code
+This package contains attributes to define (expected) behavior on code
 [(..)](src/Qowaiv.Diagnostics.Contracts/README.md)

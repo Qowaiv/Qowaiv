@@ -14,8 +14,8 @@ a trivial task.
 public readonly partial struct DocumentId { }
 ```
 
-### customization
-If needed, the behavior can be tweaked extending the provided behavior. Behavior
+### Customization
+If needed, the behavior can be tweaked by extending the provided behavior. Behavior
 that can be overridden:
 * TypeConversion
 * Parsing
@@ -37,8 +37,8 @@ public readonly partial struct ProjectId
 }
 ```
 
-## Generated SVO's
-Creating SVO's for the scope of (just) a project, might feel like a burden that
+## Generated SVOs
+Creating SVOs for the scope of (just) a project, might feel like a burden that
 is not worth the effort. To reduce the burden, this package comes with a code
 generator:
 
@@ -51,15 +51,15 @@ public partial readonly struct CustomSvo
 ```
 
 Just having this definition might prevent some primitive obsession, but
-with implementing some custom behavior, we can achieve some nice results.
+by implementing some custom behavior, we can achieve some nice results.
 
 
 ### Validation
-Ensuring the validness of a SVO is key. The following mechanisms are provided:
+Ensuring the validity of an SVO is key. The following mechanisms are provided:
 
 #### Setting the minimum and/or maximum length
 By simply setting the `MinLength` and/or the `MaxLength` strings exceeding
-these constrains are rejected:
+these constraints are rejected:
 
 ``` C#
 private sealed class CustomBehavior : SvoBehavior
@@ -83,7 +83,7 @@ private sealed class CustomBehavior : SvoBehavior
 
 #### Overriding the validation method
 For more complex scenarios, the first options provided might not be sufficient.
-Therefore, is also possible to override `IsValid()`:
+Therefore, it is also possible to override `IsValid()`:
 
 ``` C#
 private sealed class CustomBehavior : SvoBehavior

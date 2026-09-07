@@ -2,11 +2,11 @@
 
 ## Domain-driven design bottom up
 Qowaiv is a (Single) Value Object library. It aims to model reusable, immutable,
-(Single) Value Objects that can be used a wide variety of modeling scenarios,
+(Single) Value Objects that can be used in a wide variety of modeling scenarios,
 both inside and outside a Domain-driven context.
 
 ## Package
-This package contains helpers to make writing unit tests for SVO's easier.
+This package contains helpers to make writing unit tests for SVOs easier.
 
 ## IO
 
@@ -22,10 +22,10 @@ using (var directory = new TemporaryDirectory())
 }
 ```
 
-On the dispose, the directory, and all its children will be deleted.
+On disposal, the directory and all its children will be deleted.
 
 ### File lock
-To test IO related unhappy flows, it can be useful to create a temporary lock
+To test IO-related unhappy flows, it can be useful to create a temporary lock
 on a file. This can be done as follows:
 
 ``` C#

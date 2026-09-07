@@ -2,7 +2,7 @@ namespace Qowaiv.Text;
 
 /// <summary>The exception that is thrown when a value could not be parsed.</summary>
 /// <remarks>
-/// This child type allows to specify the string value and the target type involved.
+/// This child type allows specifying the string value and the target type involved.
 /// </remarks>
 public class Unparsable : FormatException
 {

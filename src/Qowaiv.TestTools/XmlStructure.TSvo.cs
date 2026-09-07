@@ -1,6 +1,6 @@
 namespace Qowaiv.TestTools;
 
-/// <summary>A test structure to test <see cref="IXmlSerializable" /> behavior of SVO's.</summary>
+/// <summary>A test structure to test <see cref="IXmlSerializable" /> behavior of SVOs.</summary>
 [Mutable]
 [Serializable]
 public sealed class XmlStructure<TSvo>

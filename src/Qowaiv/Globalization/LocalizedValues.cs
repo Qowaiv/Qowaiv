@@ -1,6 +1,6 @@
 namespace Qowaiv.Globalization;
 
-/// <summary>Helper method to store localized string representations of SVO's.</summary>
+/// <summary>Helper class to store localized string representations of SVOs.</summary>
 /// <typeparam name="TValue">
 /// The type of the underlying value of the SVO.
 /// </typeparam>

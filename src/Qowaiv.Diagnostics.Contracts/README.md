@@ -1,7 +1,7 @@
 # Qowaiv Diagnostics Contracts
-This packages contains attributes to define (expected) behavior on code.
+This package contains attributes to define (expected) behavior on code.
 
-Most likely, you only need this dependency compile time. In that case you
+Most likely, you only need this dependency at compile time. In that case you
 should add the dependency as follows:
 
 ``` XML
@@ -29,8 +29,8 @@ is not needed.
 The generated code requires C# 9.0 or higher to compile.
 
 ## Impure attribute
-Opposed to the `[Pure]` attribute, the `[Impure]` attribute indicates that a
-method has side effects. This attribute can help working with static code 
+Unlike the `[Pure]` attribute, the `[Impure]` attribute indicates that a
+method has side effects. This attribute can help when working with the static code 
 analyzer rule: [QW0003](https://github.com/Qowaiv/qowaiv-analyzers/blob/main/rules/QW0003.md).
 
 ### Collection mutation attribute
@@ -39,7 +39,7 @@ changes due to this method call.
 
 ### Fluent syntax mutation attribute
 An attribute that inherits from `[Impure]` to indicate that the returned
-instance is equal to self or of the parameters, just to allow a fluent syntax.
+instance is equal to self or one of the parameters, just to allow a fluent syntax.
 
 ## Empty type attributes
 Empty types (classes, enums, interfaces, structs) are generally seen as a bad
@@ -60,7 +60,7 @@ can help:
 ## Inheritable attribute
 The `[Inheritable]` attribute indicates that a class is designed to be
 inheritable although no virtual or protected members have been defined.
-This attribute can help working with static code analyzer rule: [QW0006](https://github.com/Qowaiv/qowaiv-analyzers/blob/main/rules/QW0006.md).
+This attribute can help when working with the static code analyzer rule: [QW0006](https://github.com/Qowaiv/qowaiv-analyzers/blob/main/rules/QW0006.md).
 
 ### Will be sealed attribute
 An attribute that inherits from `[Inheritable]` that indicates that the
@@ -69,6 +69,6 @@ obsolete code.
 
 ## Mutable attribute
 Indicates that a class, record, interface or struct is mutable by design.
-This attribute can help working with static code analyzer rules:
+This attribute can help when working with static code analyzer rules:
 [QW0011](https://github.com/Qowaiv/qowaiv-analyzers/blob/main/rules/QW0011.md)
 and [QW0012](https://github.com/Qowaiv/qowaiv-analyzers/blob/main/rules/QW0012.md).

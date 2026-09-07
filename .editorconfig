@@ -30,5 +30,3 @@ csharp_style_inlined_variable_declaration = true:warning # IDE0018: Inline varia
 csharp_prefer_simple_default_expression = true:warning # IDE0034: Simplify 'default' expression
 dotnet_style_prefer_compound_assignment = true:warning # IDE0054: Use compound assignment
 csharp_style_unused_value_assignment_preference = discard_variable:warning # IDE0059: Unnecessary assignment of a value
-
-dotnet_diagnostic.VSSpell001.severity = silent # Correct spelling

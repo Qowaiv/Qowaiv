@@ -98,7 +98,7 @@ public class Can_be_parsed
 {
     [Test]
     public void from_null_string_represents_Empty()
-        => Uuid.Parse(null).Should().Be(Uuid.Empty);
+        => Uuid.Parse(Nil.String).Should().Be(Uuid.Empty);
 
     [Test]
     public void from_empty_string_represents_Empty()
@@ -153,6 +153,8 @@ public class Can_be_parsed
         public void UpperCase()
             => Uuid.Parse("IKGBVCX72JKOFYTOW2V4X4MUEA").Should().Be(Svo.Uuid);
 
+#pragma warning disable QW0025 // Use compliant UUID literals. FPs
+
         [Test]
         public void with_0s_equivilent_to_Os()
             => Uuid.Parse("IKGBVCX72JK0FYT0W2V4X4MUEA").Should().Be(Uuid.Parse("IKGBVCX72JKOFYTOW2V4X4MUEA"));
@@ -160,6 +162,8 @@ public class Can_be_parsed
         [Test]
         public void with_1s_equivilent_to_Is()
             => Uuid.Parse("1KGBVCX72JKOFYTOW2V4X4MUEA").Should().Be(Uuid.Parse("IKGBVCX72JKOFYTOW2V4X4MUEA"));
+
+#pragma warning restore QW0025 // Use compliant UUID literals
     }
 
     [TestCase("en", "Qowaiv_SVOLibrary_GUIA")]

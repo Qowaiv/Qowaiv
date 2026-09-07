@@ -15,7 +15,7 @@ namespace Qowaiv;
 /// [Test]
 /// public void TestSomething()
 /// {
-///     using(Clock.SetTimeForCurrentContext(() => new DateTimeOffset(2017, 06, 11, 00, 00, 000, TimeSpan.FromHours(+1))
+///     using(Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11, 00, 00, 000))
 ///     {
 ///         // test code.
 ///     }

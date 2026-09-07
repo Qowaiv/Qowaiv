@@ -8,6 +8,7 @@ public sealed class XmlStructure<TSvo>
     where TSvo : struct
 {
     /// <summary>Gets and sets int property.</summary>
+    [PrimitiveRequired("Tests serialization of ints")]
     public int Id { get; set; } = 17;
 
     /// <summary>Gets and sets SVO property.</summary>

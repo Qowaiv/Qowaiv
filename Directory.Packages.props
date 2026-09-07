@@ -6,7 +6,7 @@
     <CentralPackageVersionOverrideEnabled>true</CentralPackageVersionOverrideEnabled>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="AwesomeAssertions" Version="9.5.0" />
+    <PackageVersion Include="AwesomeAssertions" Version="9.6.0" />
     <PackageVersion Include="AwesomeAssertions.Analyzers" Version="9.0.8" />
     <!-- linked to Roslyn version -->
     <PackageVersion Include="BenchmarkDotNet" Version="[0.15.8]" />
@@ -33,7 +33,7 @@
     <GlobalPackageReference Include="DotNet.ReproducibleBuilds" Version="2.0.5" />
     <GlobalPackageReference Include="DotNetProjectFile.Analyzers" Version="1.17.0" />
     <GlobalPackageReference Include="PolySharp" Version="1.16.0" />
-    <GlobalPackageReference Include="Qowaiv.Analyzers.CSharp" Version="2.5.1" />
+    <GlobalPackageReference Include="Qowaiv.Analyzers.CSharp" Version="2.6.1" />
     <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="10.33.0.1635" />
   </ItemGroup>
   <ItemGroup>

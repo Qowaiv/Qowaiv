@@ -1,6 +1,6 @@
 namespace Qowaiv.Diagnostics;
 
-/// <summary>Helper to unify th debugger display of SVO's.</summary>
+/// <summary>Helper to unify the debugger display of SVOs.</summary>
 internal static class DebugDisplay
 {
     public const string Empty = "{empty}";

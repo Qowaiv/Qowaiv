@@ -1,6 +1,6 @@
 namespace Qowaiv.Customization;
 
-/// <summary>Inheritable (custom) behavior for ad-hoc SVO's.</summary>
+/// <summary>Inheritable (custom) behavior for ad-hoc SVOs.</summary>
 /// <typeparam name="TRaw">
 /// The type of the underlying value.
 /// </typeparam>
@@ -55,7 +55,7 @@ public abstract class CustomBehavior<TRaw> : TypeConverter, IComparer<TRaw>
         ? null
         : ToString(value, null, CultureInfo.InvariantCulture);
 
-    /// <summary>Serializes theidentifier to an XML string.</summary>
+    /// <summary>Serializes the identifier to an XML string.</summary>
     /// <param name="value">
     /// The string representing the identifier.
     /// </param>
@@ -82,7 +82,7 @@ public abstract class CustomBehavior<TRaw> : TypeConverter, IComparer<TRaw>
         var t /*.................................*/ => $"Not a valid {t.Name}",
     };
 
-    /// <summary>Converts the <see cref="string" /> to a SVO.
+    /// <summary>Converts the <see cref="string" /> to an SVO.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="str">
@@ -96,7 +96,7 @@ public abstract class CustomBehavior<TRaw> : TypeConverter, IComparer<TRaw>
     /// </param>
     public abstract bool TryTransform(string? str, IFormatProvider? formatProvider, out TRaw? transformed);
 
-    /// <summary>Converts the to a SVO.
+    /// <summary>Converts the value to an SVO.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="value">

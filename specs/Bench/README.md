@@ -1,7 +1,7 @@
 # Qowaiv Benchmarks
 
 ## Amount
-Amount JSON serialization is equivalent ot decimal JSON serialization:
+Amount JSON serialization is equivalent to decimal JSON serialization:
 
 | Method  | Categories           | Mean     | Ratio |
 |-------- |--------------------- |---------:|------:|
@@ -13,9 +13,9 @@ Amount JSON serialization is equivalent ot decimal JSON serialization:
 
 ## IBAN
 The first IBAN parse relied on regular expressions to validate the format. With
-the v6.6.0 rewrite, regexes where removed, amongst other improvements which
-made the parsing 14 times faster. With v8, The number of mod97's executes has
-been drasticially reduced, leading to another big improvement.
+the v6.6.0 rewrite, regexes were removed, among other improvements which
+made the parsing 14 times faster. With v8, the number of mod97 executions has
+been drastically reduced, leading to another major improvement.
 
 | Method   | Categories  | Mean      | Ratio | Gen0    | Gen1   | Allocated | Alloc Ratio |
 |--------- |------------ |----------:|------:|--------:|-------:|----------:|------------:|

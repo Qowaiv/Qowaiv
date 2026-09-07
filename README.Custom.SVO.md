@@ -1,7 +1,7 @@
 # Custom Single Value Object
-Creating SVO's for the scope of (just) a project, might feel like a burden that
-is not worth the effort. Although Qowaiv has as [code generator](https://github.com/Qowaiv/qowaiv-codegenerator),
-it still results in quite some lines of code (easily 400), that needs
+Creating SVOs for the scope of (just) a project, might feel like a burden that
+is not worth the effort. Although Qowaiv has a [code generator](https://github.com/Qowaiv/qowaiv-codegenerator),
+it still results in quite some lines of code (easily 400), that need
 maintenance, and unit test coverage.
 
 Another way to deal with this, is by providing a generic SVO where the actual
@@ -29,15 +29,15 @@ public class MyModel
 ```
 
 Just having this definition might prevent some primitive obsession, but
-with implementing some custom behavior, we can achieve some nice results.
+by implementing some custom behavior, we can achieve some nice results.
 
 
 ## Validation
-Ensuring the validness of a SVO is key. The following mechanisms are provided:
+Ensuring the validity of an SVO is key. The following mechanisms are provided:
 
 ### Setting the minimum and/or maximum length
 By simply setting the `MinLength` and/or the `MaxLength` strings exceeding
-these constrains are rejected:
+these constraints are rejected:
 
 ``` C#
 public sealed class ForMySvo : SvoBehavior
@@ -61,7 +61,7 @@ public sealed class ForMySvo : SvoBehavior
 
 ### Overriding the validation method
 For more complex scenarios, the first options provided might not be sufficient.
-Therefore, is also possible to override `IsValid()`:
+Therefore, it is also possible to override `IsValid()`:
 
 ``` C#
 public sealed class ForMySvo : SvoBehavior

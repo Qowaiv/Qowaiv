@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace Qowaiv.CodeGeneration.SingleValueObjects;
 
-/// <summary>Provides a base generator for generating SVO's.</summary>
+/// <summary>Provides a base generator for generating SVOs.</summary>
 /// <typeparam name="TParameters">
 /// The type of the parameters.
 /// </typeparam>

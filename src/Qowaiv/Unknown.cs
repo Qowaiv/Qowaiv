@@ -9,7 +9,7 @@ namespace Qowaiv;
 /// has set the value, saying, there must be some value, but I just don't know
 /// which value it should be.
 ///
-/// Note that not all scenario's that support 'empty' support 'unknown' too.
+/// Note that not all scenarios that support 'empty' support 'unknown' too.
 /// </remarks>
 public static class Unknown
 {

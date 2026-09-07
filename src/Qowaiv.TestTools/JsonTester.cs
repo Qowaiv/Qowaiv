@@ -48,7 +48,7 @@ public static class JsonTester
         };
 #endif
 
-    /// <summary>Applies multiple FromJson scenario's.</summary>
+    /// <summary>Applies multiple FromJson scenarios.</summary>
     [Pure]
     public static T? Read<T>(object? val)
     {

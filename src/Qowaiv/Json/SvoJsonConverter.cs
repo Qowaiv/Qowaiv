@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Qowaiv.Json;
 
-/// <summary>A custom <see cref="JsonConverter{T}" /> for SVO's.</summary>
+/// <summary>A custom <see cref="JsonConverter{T}" /> for SVOs.</summary>
 /// <typeparam name="TSvo">
 /// The type of SVO.
 /// </typeparam>
@@ -93,7 +93,7 @@ public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : 
         => writer.WritePropertyName(ToJson(value)?.ToString() ?? string.Empty);
 #endif
 
-    /// <summary>Represent the SVO as a JSON node.</summary>
+    /// <summary>Represents the SVO as a JSON node.</summary>
     [Pure]
     protected abstract object? ToJson(TSvo svo);
 

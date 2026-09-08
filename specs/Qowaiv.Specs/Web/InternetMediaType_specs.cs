@@ -162,3 +162,42 @@ public class Is_Open_API_data_type
             format: "internet-media-type",
             nullable: true));
 }
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.InternetMediaType);
+        xml.Should().Be("application/x-chess-pgn");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<InternetMediaType>("application/x-chess-pgn");
+        svo.Should().Be(Svo.InternetMediaType);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.InternetMediaType);
+        Svo.InternetMediaType.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.InternetMediaType);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.InternetMediaType;
+        obj.GetSchema().Should().BeNull();
+    }
+}

@@ -294,3 +294,42 @@ public class Can_parse
     public void culture_specific()
         => Country.TryParse("モザンビーク", new CultureInfo("ja-JP")).Should().Be(Country.MZ);
 }
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.Country);
+        xml.Should().Be("VA");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<Country>("VA");
+        svo.Should().Be(Svo.Country);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.Country);
+        Svo.Country.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.Country);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.Country;
+        obj.GetSchema().Should().BeNull();
+    }
+}

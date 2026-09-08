@@ -215,6 +215,45 @@ public class Is_Open_API_data_type
            format: "date-weekbased"));
 }
 
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.WeekDate);
+        xml.Should().Be("2017-W23-7");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<WeekDate>("2017-W23-7");
+        svo.Should().Be(Svo.WeekDate);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.WeekDate);
+        Svo.WeekDate.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.WeekDate);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.WeekDate;
+        obj.GetSchema().Should().BeNull();
+    }
+}
+
 #if NET8_0_OR_GREATER
 public class Casts
 {

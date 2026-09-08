@@ -277,3 +277,42 @@ public class Is_Open_API_data_type
             type: "integer",
             format: "stream-size"));
 }
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.StreamSize);
+        xml.Should().Be("123456789 byte");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<StreamSize>("123456789 byte");
+        svo.Should().Be(Svo.StreamSize);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.StreamSize);
+        Svo.StreamSize.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.StreamSize);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.StreamSize;
+        obj.GetSchema().Should().BeNull();
+    }
+}

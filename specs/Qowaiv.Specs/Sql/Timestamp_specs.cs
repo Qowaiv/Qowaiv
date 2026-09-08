@@ -150,3 +150,42 @@ public class Is_Open_API_data_type
             type: "string",
             format: "timestamp"));
 }
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.Timestamp);
+        xml.Should().Be("0x00000000499602D2");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<Timestamp>("0x00000000499602D2");
+        svo.Should().Be(Svo.Timestamp);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.Timestamp);
+        Svo.Timestamp.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.Timestamp);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.Timestamp;
+        obj.GetSchema().Should().BeNull();
+    }
+}

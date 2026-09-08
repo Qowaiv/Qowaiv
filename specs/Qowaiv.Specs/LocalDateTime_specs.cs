@@ -300,3 +300,42 @@ public class Casts
     }
 }
 
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.LocalDateTime);
+        xml.Should().Be("2017-06-11 06:15:00");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<LocalDateTime>("2017-06-11 06:15:00");
+        svo.Should().Be(Svo.LocalDateTime);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.LocalDateTime);
+        Svo.LocalDateTime.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.LocalDateTime);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.LocalDateTime;
+        obj.GetSchema().Should().BeNull();
+    }
+}
+

@@ -175,6 +175,45 @@ public class Is_Open_API_data_type
            description: "House number notation.",
            example: "13",
            type: "string",
-           format: "house-number",
-           nullable: true));
+format: "house-number",
+            nullable: true));
+}
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.HouseNumber);
+        xml.Should().Be("123456789");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<HouseNumber>("123456789");
+        svo.Should().Be(Svo.HouseNumber);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.HouseNumber);
+        Svo.HouseNumber.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.HouseNumber);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.HouseNumber;
+        obj.GetSchema().Should().BeNull();
+    }
 }

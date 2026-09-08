@@ -71,103 +71,6 @@ public class DateTest
 
     #endregion
 
-    #region (XML) (De)serialization tests
-
-    [Test]
-    public void DataContractSerializeDeserialize_TestStruct_AreEqual()
-    {
-        var input = TestStruct;
-        var exp = TestStruct;
-        var act = SerializeDeserialize.DataContract(input);
-        act.Should().Be(exp);
-    }
-    [Test]
-
-    public void XmlSerialize_TestStruct_AreEqual()
-    {
-        var act = Serialize.Xml(TestStruct);
-        var exp = "1970-02-14";
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void XmlDeserialize_XmlString_AreEqual()
-    {
-        var act = Deserialize.Xml<Date>("1970-02-14");
-        act.Should().Be(TestStruct);
-    }
-
-    [Test]
-    public void XmlSerializeDeserialize_DateSerializeObject_AreEqual()
-    {
-        var input = new DateSerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new DateSerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Xml(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-    [Test]
-    public void DataContractSerializeDeserialize_DateSerializeObject_AreEqual()
-    {
-        var input = new DateSerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new DateSerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.DataContract(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-
-    [Test]
-    public void XmlSerializeDeserialize_Empty_AreEqual()
-    {
-        var input = new DateSerializeObject
-        {
-            Id = 17,
-            Obj = Date.MinValue,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new DateSerializeObject
-        {
-            Id = 17,
-            Obj = Date.MinValue,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Xml(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-
-    [Test]
-    public void GetSchema_None_IsNull()
-    {
-        IXmlSerializable obj = TestStruct;
-        obj.GetSchema().Should().BeNull();
-    }
-
-    #endregion
-
     #region IFormattable / Tostring tests
 
     [Test]
@@ -496,12 +399,4 @@ public class DateTest
     }
 
     #endregion
-}
-
-[Serializable]
-public class DateSerializeObject
-{
-    public int Id { get; set; }
-    public Date Obj { get; set; }
-    public DateTime Date { get; set; }
 }

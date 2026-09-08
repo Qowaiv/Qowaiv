@@ -294,9 +294,48 @@ public class Is_Open_API_data_type
        .Should().Be(new OpenApiDataType(
            dataType: typeof(Date),
            description: "Full-date notation as defined by RFC 3339, section 5.6.",
-           example: "2017-06-10",
-           type: "string",
-           format: "date"));
+example: "2017-06-10",
+            type: "string",
+            format: "date"));
+}
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.Date);
+        xml.Should().Be("2017-06-11");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<Date>("2017-06-11");
+        svo.Should().Be(Svo.Date);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.Date);
+        Svo.Date.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.Date);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.Date;
+        obj.GetSchema().Should().BeNull();
+    }
 }
 
 #if NET8_0_OR_GREATER

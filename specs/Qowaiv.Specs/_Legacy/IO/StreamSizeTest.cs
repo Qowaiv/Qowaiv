@@ -84,103 +84,6 @@ public class StreamSizeTest
 
     #endregion
 
-    #region (XML) (De)serialization tests
-
-    [Test]
-    public void DataContractSerializeDeserialize_TestStruct_AreEqual()
-    {
-        var input = TestStruct;
-        var exp = TestStruct;
-        var act = SerializeDeserialize.DataContract(input);
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void XmlSerialize_TestStruct_AreEqual()
-    {
-        var act = Serialize.Xml(TestStruct);
-        var exp = "123456789 byte";
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void XmlDeserialize_XmlString_AreEqual()
-    {
-        var act = Deserialize.Xml<StreamSize>("123456789 byte");
-        act.Should().Be(TestStruct);
-    }
-
-    [Test]
-    public void XmlSerializeDeserialize_StreamSizeSerializeObject_AreEqual()
-    {
-        var input = new StreamSizeSerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new StreamSizeSerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Xml(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-    [Test]
-    public void DataContractSerializeDeserialize_StreamSizeSerializeObject_AreEqual()
-    {
-        var input = new StreamSizeSerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new StreamSizeSerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.DataContract(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-
-    [Test]
-    public void XmlSerializeDeserialize_Empty_AreEqual()
-    {
-        var input = new StreamSizeSerializeObject
-        {
-            Id = 17,
-            Obj = StreamSize.Zero,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new StreamSizeSerializeObject
-        {
-            Id = 17,
-            Obj = StreamSize.Zero,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Xml(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-
-    [Test]
-    public void GetSchema_None_IsNull()
-    {
-        IXmlSerializable obj = TestStruct;
-        obj.GetSchema().Should().BeNull();
-    }
-
-    #endregion
-
     #region IFormattable / ToString tests
 
     [Test]
@@ -950,12 +853,4 @@ public class StreamSizeTest
     }
 
     #endregion
-}
-
-[Serializable]
-public class StreamSizeSerializeObject
-{
-    public int Id { get; set; }
-    public StreamSize Obj { get; set; }
-    public DateTime Date { get; set; }
 }

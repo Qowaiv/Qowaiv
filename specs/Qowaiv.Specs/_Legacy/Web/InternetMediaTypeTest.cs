@@ -134,103 +134,6 @@ public class InternetMediaTypeTest
 
     #endregion
 
-    #region (XML) (De)serialization tests
-
-    [Test]
-    public void DataContractSerializeDeserialize_TestStruct_AreEqual()
-    {
-        var input = TestStruct;
-        var exp = TestStruct;
-        var act = SerializeDeserialize.DataContract(input);
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void XmlSerialize_TestStruct_AreEqual()
-    {
-        var act = Serialize.Xml(TestStruct);
-        var exp = "application/x-chess-pgn";
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void XmlDeserialize_XmlString_AreEqual()
-    {
-        var act = Deserialize.Xml<InternetMediaType>("application/x-chess-pgn");
-        act.Should().Be(TestStruct);
-    }
-
-    [Test]
-    public void XmlSerializeDeserialize_InternetMediaTypeSerializeObject_AreEqual()
-    {
-        var input = new InternetMediaTypeSerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new InternetMediaTypeSerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Xml(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-    [Test]
-    public void DataContractSerializeDeserialize_InternetMediaTypeSerializeObject_AreEqual()
-    {
-        var input = new InternetMediaTypeSerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new InternetMediaTypeSerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.DataContract(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-
-    [Test]
-    public void XmlSerializeDeserialize_Empty_AreEqual()
-    {
-        var input = new InternetMediaTypeSerializeObject
-        {
-            Id = 17,
-            Obj = InternetMediaType.Empty,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new InternetMediaTypeSerializeObject
-        {
-            Id = 17,
-            Obj = InternetMediaType.Empty,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Xml(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-
-    [Test]
-    public void GetSchema_None_IsNull()
-    {
-        IXmlSerializable obj = TestStruct;
-        obj.GetSchema().Should().BeNull();
-    }
-
-    #endregion
-
     #region IFormattable / ToString tests
 
     [Test]
@@ -540,12 +443,4 @@ public class InternetMediaTypeTest
     }
 
     #endregion
-}
-
-[Serializable]
-public class InternetMediaTypeSerializeObject
-{
-    public int Id { get; set; }
-    public InternetMediaType Obj { get; set; }
-    public DateTime Date { get; set; }
 }

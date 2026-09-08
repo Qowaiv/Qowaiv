@@ -125,6 +125,45 @@ public class Is_Open_API_data_type
            pattern: @"[+-]?[0-9]+Y[+-][0-9]+M[+-][0-9]+D"));
 }
 
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.DateSpan);
+        xml.Should().Be("10Y+3M-5D");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<DateSpan>("10Y+3M-5D");
+        svo.Should().Be(Svo.DateSpan);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.DateSpan);
+        Svo.DateSpan.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.DateSpan);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.DateSpan;
+        obj.GetSchema().Should().BeNull();
+    }
+}
+
 public class Can_be_operated
 {
     [Test]

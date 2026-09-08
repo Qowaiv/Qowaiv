@@ -78,103 +78,6 @@ public class MoneyTest
 
     #endregion
 
-    #region (XML) (De)serialization tests
-
-    [Test]
-    public void DataContractSerializeDeserialize_TestStruct_AreEqual()
-    {
-        var input = TestStruct;
-        var exp = TestStruct;
-        var act = SerializeDeserialize.DataContract(input);
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void XmlSerialize_TestStruct_AreEqual()
-    {
-        var act = Serialize.Xml(TestStruct);
-        var exp = "EUR42.17";
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void XmlDeserialize_XmlString_AreEqual()
-    {
-        var act = Deserialize.Xml<Money>("EUR42.17");
-        act.Should().Be(TestStruct);
-    }
-
-    [Test]
-    public void XmlSerializeDeserialize_MoneySerializeObject_AreEqual()
-    {
-        var input = new MoneySerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new MoneySerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Xml(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-    [Test]
-    public void DataContractSerializeDeserialize_MoneySerializeObject_AreEqual()
-    {
-        var input = new MoneySerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new MoneySerializeObject
-        {
-            Id = 17,
-            Obj = TestStruct,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.DataContract(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-
-    [Test]
-    public void XmlSerializeDeserialize_Empty_AreEqual()
-    {
-        var input = new MoneySerializeObject
-        {
-            Id = 17,
-            Obj = Money.Zero,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var exp = new MoneySerializeObject
-        {
-            Id = 17,
-            Obj = Money.Zero,
-            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
-        };
-        var act = SerializeDeserialize.Xml(input);
-        Should.BeEqual(exp.Id, act.Id, "Id");
-        Should.BeEqual(exp.Obj, act.Obj, "Obj");
-        Should.BeEqual(exp.Date, act.Date, "Date");
-    }
-
-    [Test]
-    public void GetSchema_None_IsNull()
-    {
-        IXmlSerializable obj = TestStruct;
-        obj.GetSchema().Should().BeNull();
-    }
-
-    #endregion
-
     #region IFormattable / ToString tests
 
     [Test]
@@ -697,12 +600,4 @@ public class MoneyTest
     }
 
     #endregion
-}
-
-[Serializable]
-public class MoneySerializeObject
-{
-    public int Id { get; set; }
-    public Money Obj { get; set; }
-    public DateTime Date { get; set; }
 }

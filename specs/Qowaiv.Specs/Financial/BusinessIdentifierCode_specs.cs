@@ -146,3 +146,42 @@ public class Supports_JSON_serialization
             .Should().Throw<Exception>()
             .And.Should().BeOfType(exceptionType);
 }
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.BusinessIdentifierCode);
+        xml.Should().Be("AEGONL2UXXX");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<BusinessIdentifierCode>("AEGONL2UXXX");
+        svo.Should().Be(Svo.BusinessIdentifierCode);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.BusinessIdentifierCode);
+        Svo.BusinessIdentifierCode.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.BusinessIdentifierCode);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.BusinessIdentifierCode;
+        obj.GetSchema().Should().BeNull();
+    }
+}

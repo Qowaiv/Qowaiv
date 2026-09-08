@@ -388,6 +388,45 @@ public class Is_Open_API_data_type
            pattern: @"[+-]?[0-9]+Y[+-][0-9]+M"));
 }
 
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.MonthSpan);
+        xml.Should().Be("5Y+9M");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<MonthSpan>("5Y+9M");
+        svo.Should().Be(Svo.MonthSpan);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.MonthSpan);
+        Svo.MonthSpan.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.MonthSpan);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.MonthSpan;
+        obj.GetSchema().Should().BeNull();
+    }
+}
+
 public class Can_be_deconstructed
 {
     [Test]

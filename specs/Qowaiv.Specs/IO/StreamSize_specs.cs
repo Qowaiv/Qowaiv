@@ -1,5 +1,11 @@
 namespace IO.StreamSize_specs;
 
+public class Has_constant
+{
+    [Test]
+    public void Zero_equals_default() => StreamSize.Zero.Should().Be(default);
+}
+
 public class Is_comparable
 {
     [Test]
@@ -353,6 +359,284 @@ public class Created_from
         writer.Write("Hello, world!");
         writer.Flush();
         file.GetStreamSize().Should().Be(13.Bytes());
+    }
+
+    [Test]
+    public void IO_stream()
+    {
+        using var stream = new MemoryStream([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]);
+
+        stream.GetStreamSize().Should().Be(17);
+    }
+}
+
+public class From_byte_factories
+{
+    [TestCase(2, 2000L)]
+    public void Kilobytes(double kilobytes, long bytes)
+        => ((long)StreamSize.FromKilobytes(kilobytes)).Should().Be(bytes);
+
+    [TestCase(3.5, 3500000L)]
+    public void Megabytes(double megabytes, long bytes)
+        => ((long)StreamSize.FromMegabytes(megabytes)).Should().Be(bytes);
+
+    [TestCase(0.8, 800000000L)]
+    public void Gigabytes(double gigabytes, long bytes)
+        => ((long)StreamSize.FromGigabytes(gigabytes)).Should().Be(bytes);
+
+    [TestCase(10, 10000000000000L)]
+    public void Terabytes(double terabytes, long bytes)
+        => ((long)StreamSize.FromTerabytes(terabytes)).Should().Be(bytes);
+
+    [TestCase(2, 2048L)]
+    public void Kibibytes(double kibibytes, long bytes)
+        => ((long)StreamSize.FromKibibytes(kibibytes)).Should().Be(bytes);
+
+    [TestCase(3.5, 3670016L)]
+    public void Mebibytes(double mebibytes, long bytes)
+        => ((long)StreamSize.FromMebibytes(mebibytes)).Should().Be(bytes);
+
+    [TestCase(0.8, 858993459L)]
+    public void Gibibytes(double gibibytes, long bytes)
+        => ((long)StreamSize.FromGibibytes(gibibytes)).Should().Be(bytes);
+
+    [TestCase(10, 10995116277760L)]
+    public void Tebibytes(double tebibytes, long bytes)
+        => ((long)StreamSize.FromTebibytes(tebibytes)).Should().Be(bytes);
+}
+
+public class Can_be_operated_on
+{
+    [TestCase(-1, "-23KB")]
+    [TestCase(0, "0KB")]
+    [TestCase(1, "16KB")]
+    public void get_sign(int sign, StreamSize size) => size.Sign().Should().Be(sign);
+
+    [TestCase("1234", "-1234")]
+    [TestCase("1234", "1234")]
+    public void get_absolute(StreamSize expected, StreamSize value) => value.Abs().Should().Be(expected);
+
+    [Test]
+    public void add()
+    {
+        StreamSize act = 17;
+        act += (StreamSize)7;
+        act.Should().Be(24);
+    }
+
+    [Test]
+    public void add_percentage()
+    {
+        StreamSize act = 17;
+        act += Percentage.Create(0.1);
+        act.Should().Be(18);
+    }
+
+    [Test]
+    public void subtract()
+    {
+        StreamSize act = 17;
+        act -= (StreamSize)5;
+        act.Should().Be(12);
+    }
+
+    [Test]
+    public void subtract_percentage()
+    {
+        StreamSize act = 17;
+        act -= Percentage.Create(0.1);
+        act.Should().Be(16);
+    }
+
+    [Test]
+    public void increment()
+    {
+        StreamSize act = 21;
+        act++;
+        act.Should().Be(22);
+    }
+
+    [Test]
+    public void decrement()
+    {
+        StreamSize act = 21;
+        act--;
+        act.Should().Be(20);
+    }
+
+    [Test]
+    public void negate()
+    {
+        StreamSize act = 21;
+        (-act).Should().Be(-21);
+    }
+
+    [Test]
+    public void plus()
+    {
+        StreamSize act = 21;
+        act = +act;
+        act.Should().Be(21);
+    }
+
+    [Test]
+    public void divide_by_short()
+    {
+        StreamSize act = 81;
+        act /= (short)2;
+        act.Should().Be(40);
+    }
+
+    [Test]
+    public void divide_by_int()
+    {
+        StreamSize act = 81;
+        act /= 2;
+        act.Should().Be(40);
+    }
+
+    [Test]
+    public void divide_by_long()
+    {
+        StreamSize act = 81;
+        act /= (long)2;
+        act.Should().Be(40);
+    }
+
+    [Test]
+    public void divide_by_ushort()
+    {
+        StreamSize act = 81;
+        act /= (ushort)2;
+        act.Should().Be(40);
+    }
+
+    [Test]
+    public void divide_by_uint()
+    {
+        StreamSize act = 81;
+        act /= (uint)2;
+        act.Should().Be(40);
+    }
+
+    [Test]
+    public void divide_by_ulong()
+    {
+        StreamSize act = 81;
+        act /= (ulong)2;
+        act.Should().Be(40);
+    }
+
+    [Test]
+    public void divide_by_percentage()
+    {
+        StreamSize act = 81;
+        act /= (Percentage)1.50;
+        act.Should().Be(54);
+    }
+
+    [Test]
+    public void divide_by_float()
+    {
+        StreamSize act = 81;
+        act /= (float)1.5;
+        act.Should().Be(54);
+    }
+
+    [Test]
+    public void divide_by_double()
+    {
+        StreamSize act = 81;
+        act /= 1.5;
+        act.Should().Be(54);
+    }
+
+    [Test]
+    public void divide_by_decimal()
+    {
+        StreamSize act = 81;
+        act /= 1.5d;
+        act.Should().Be(54);
+    }
+
+    [Test]
+    public void multiply_by_short()
+    {
+        StreamSize act = 42;
+        act *= (short)3;
+        act.Should().Be(126);
+    }
+
+    [Test]
+    public void multiply_by_int()
+    {
+        StreamSize act = 42;
+        act *= 3;
+        act.Should().Be(126);
+    }
+
+    [Test]
+    public void multiply_by_long()
+    {
+        StreamSize act = 42;
+        act *= (long)3;
+        act.Should().Be(126);
+    }
+
+    [Test]
+    public void multiply_by_ushort()
+    {
+        StreamSize act = 42;
+        act *= (ushort)3;
+        act.Should().Be(126);
+    }
+
+    [Test]
+    public void multiply_by_uint()
+    {
+        StreamSize act = 42;
+        act *= (uint)3;
+        act.Should().Be(126);
+    }
+
+    [Test]
+    public void multiply_by_ulong()
+    {
+        StreamSize act = 42;
+        act *= (ulong)3;
+        act.Should().Be(126);
+    }
+
+    [Test]
+    public void multiply_by_percentage()
+    {
+        StreamSize act = 42;
+        act *= 50.Percent();
+        act.Should().Be(21);
+    }
+
+    [Test]
+    public void multiply_by_float()
+    {
+        StreamSize act = 42;
+        act *= (float)0.5;
+        act.Should().Be(21);
+    }
+
+    [Test]
+    public void multiply_by_double()
+    {
+        StreamSize act = 42;
+        act *= 0.5;
+        act.Should().Be(21);
+    }
+
+    [Test]
+    public void multiply_by_decimal()
+    {
+        StreamSize act = 42;
+        act *= 0.5d;
+        act.Should().Be(21);
     }
 }
 

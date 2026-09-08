@@ -297,3 +297,27 @@ public class Percentages
 
     private static T Selection<T>(T value) => value;
 }
+
+public class StreamSizes
+{
+    private static readonly StreamSize[] collection = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+    [Test]
+    public void Average_on_collection_is_calculated()
+        => collection.Average().Should().Be(5);
+
+    [Test]
+    public void Average_on_empty_collection_throws()
+    {
+        Func<StreamSize> average = () => Array.Empty<StreamSize>().Average();
+        average.Should().Throw<InvalidOperationException>();
+    }
+
+    [Test]
+    public void Sum_on_collection_is_calculated()
+        => collection.Sum().Should().Be(45);
+
+    [Test]
+    public void Sum_on_empty_collection_is_zero()
+        => Array.Empty<StreamSize>().Sum().Should().Be(StreamSize.Zero);
+}

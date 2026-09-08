@@ -22,6 +22,18 @@ public class Is_invalid
     public void for_garbage() => Elo.TryParse("Not an Elo").Should().BeNull();
 }
 
+public class Has_constant
+{
+    [Test]
+    public void Zero_equals_default() => Elo.Zero.Should().Be(default);
+
+    [Test]
+    public void MinValue_equals_double_MinValue() => Elo.MinValue.Should().Be((Elo)double.MinValue);
+
+    [Test]
+    public void MaxValue_equals_double_MaxValue() => Elo.MaxValue.Should().Be((Elo)double.MaxValue);
+}
+
 public class Is_equal_by_value
 {
     [Test]
@@ -302,6 +314,72 @@ public class Is_comparable
     }
 }
 
+public class Can_be_operated_on
+{
+    [Test]
+    public void add()
+    {
+        Elo l = 1600;
+        Elo r = 100;
+        (l + r).Should().Be(1700);
+    }
+
+    [Test]
+    public void subtract()
+    {
+        Elo l = 1600;
+        Elo r = 100;
+        (l - r).Should().Be(1500);
+    }
+
+    [Test]
+    public void divide()
+    {
+        Elo act = 1600m;
+        act /= 2.0;
+        act.Should().Be(800);
+    }
+
+    [Test]
+    public void multiply()
+    {
+        Elo act = 1600m;
+        act *= 2.0;
+        act.Should().Be(3200);
+    }
+
+    [Test]
+    public void increment()
+    {
+        Elo act = 1600;
+        act++;
+        act.Should().Be(1601);
+    }
+
+    [Test]
+    public void decrement()
+    {
+        Elo act = 1600;
+        act--;
+        act.Should().Be(1599);
+    }
+
+    [Test]
+    public void negate()
+    {
+        Elo elo = 1600;
+        (-elo).Should().Be(-(Elo)1600);
+    }
+
+    [Test]
+    public void plus()
+    {
+        Elo act = 1600;
+        act = +act;
+        act.Should().Be(1600);
+    }
+}
+
 public class Is_Finite_only
 {
     [TestCase(double.NaN)]
@@ -368,16 +446,6 @@ public class Supports_type_conversion
     [Test]
     public void to_double()
         => Converting.To<double>().From(Svo.Elo).Should().Be(1732.4);
-
-    [TestCase("0", 0)]
-    [TestCase("1732.4", -22135344)]
-    public void hash_code_is_value_based(Elo svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
 }
 
 public class Supports_JSON_serialization

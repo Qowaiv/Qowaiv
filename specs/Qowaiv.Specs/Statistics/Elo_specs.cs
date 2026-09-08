@@ -189,6 +189,51 @@ public class Has_custom_formatting
     }
 }
 
+public class Casts
+{
+    [Test]
+    public void implicitly_from_double()
+    {
+        Elo casted = 1732.4;
+        casted.Should().Be(Svo.Elo);
+    }
+
+    [Test]
+    public void explicitly_to_double()
+    {
+        var casted = (double)Svo.Elo;
+        casted.Should().Be(1732.4);
+    }
+
+    [Test]
+    public void implicitly_from_decimal()
+    {
+        Elo casted = 1732.4m;
+        casted.Should().Be(Svo.Elo);
+    }
+
+    [Test]
+    public void explicitly_to_decimal()
+    {
+        var casted = (decimal)Svo.Elo;
+        casted.Should().Be(1732.4m);
+    }
+
+    [Test]
+    public void implicitly_from_int()
+    {
+        Elo casted = 1732;
+        casted.Should().Be(Elo.Create(1732));
+    }
+
+    [Test]
+    public void explicitly_to_int()
+    {
+        var casted = (int)Svo.Elo;
+        casted.Should().Be(1732);
+    }
+}
+
 public class Is_comparable
 {
     [Test]

@@ -174,27 +174,6 @@ public class CountryTest
 
     #endregion
 
-    #region Casting tests
-
-    [Test]
-    public void Implicit_RegionInfoToCountry_AreEqual()
-    {
-        Country exp = Country.NL;
-        Country act = new RegionInfo("NL");
-
-        act.Should().Be(exp);
-    }
-    [Test]
-    public void Explicit_CountryToRegionInfo_AreEqual()
-    {
-        var exp = new RegionInfo("NL");
-        var act = (RegionInfo)Country.NL;
-
-        act.Should().Be(exp);
-    }
-
-    #endregion
-
     #region Properties
 
     [Test]

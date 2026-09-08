@@ -515,6 +515,34 @@ public class Casts
         DateOnly casted = Svo.Date;
         casted.Should().Be(Svo.DateOnly);
     }
+
+    [Test]
+    public void explicitly_from_DateTime()
+    {
+        var casted = (Date)new DateTime(2017, 06, 11, 0, 0, 0, DateTimeKind.Local);
+        casted.Should().Be(Svo.Date);
+    }
+
+    [Test]
+    public void implicitly_to_DateTime()
+    {
+        DateTime casted = Svo.Date;
+        casted.Should().Be(new DateTime(2017, 06, 11, 0, 0, 0, DateTimeKind.Local));
+    }
+
+    [Test]
+    public void implicitly_from_WeekDate()
+    {
+        Date casted = Svo.WeekDate;
+        casted.Should().Be(Svo.Date);
+    }
+
+    [Test]
+    public void implicitly_to_WeekDate()
+    {
+        WeekDate casted = Svo.Date;
+        casted.Should().Be(Svo.WeekDate);
+    }
 }
 #endif
 

@@ -200,6 +200,65 @@ public class Has_custom_formatting
     }
 }
 
+public class Casts
+{
+    [Test]
+    public void implicitly_from_int()
+    {
+        StreamSize casted = 123_456_789;
+        casted.Should().Be(Svo.StreamSize);
+    }
+
+    [Test]
+    public void explicitly_to_int()
+    {
+        var casted = (int)Svo.StreamSize;
+        casted.Should().Be(123_456_789);
+    }
+
+    [Test]
+    public void implicitly_from_long()
+    {
+        StreamSize casted = 123_456_789L;
+        casted.Should().Be(Svo.StreamSize);
+    }
+
+    [Test]
+    public void explicitly_to_long()
+    {
+        var casted = (long)Svo.StreamSize;
+        casted.Should().Be(123_456_789L);
+    }
+
+    [Test]
+    public void explicitly_from_double()
+    {
+        var casted = (StreamSize)123_456_789d;
+        casted.Should().Be(Svo.StreamSize);
+    }
+
+    [Test]
+    public void explicitly_to_double()
+    {
+        var casted = (double)Svo.StreamSize;
+        casted.Should().Be(123_456_789d);
+    }
+
+    [Test]
+    public void explicitly_from_decimal()
+    {
+        var casted = (StreamSize)123_456_789m;
+        casted.Should().Be(Svo.StreamSize);
+    }
+
+    [Test]
+    public void explicitly_to_decimal()
+    {
+        var casted = (decimal)Svo.StreamSize;
+        casted.Should().Be(123_456_789m);
+    }
+}
+
 public class Has_humanizer_creators
 {
     [Test]

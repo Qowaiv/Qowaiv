@@ -89,26 +89,6 @@ public class HouseNumberTest
 
     #endregion
 
-    #region Casting tests
-
-    [Test]
-    public void Explicit_Int32ToHouseNumber_AreEqual()
-    {
-        var exp = TestStruct;
-        var act = (HouseNumber)123456789;
-
-        act.Should().Be(exp);
-    }
-    [Test]
-    public void Explicit_HouseNumberToInt32_AreEqual()
-    {
-        var exp = 123456789;
-        var act = (int)TestStruct;
-
-        act.Should().Be(exp);
-    }
-    #endregion
-
     #region Properties
 
     [Test]

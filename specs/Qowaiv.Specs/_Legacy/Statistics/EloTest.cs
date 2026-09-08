@@ -31,62 +31,6 @@ public class EloTest
 
     #endregion
 
-    #region Casting tests
-
-    [Test]
-    public void Implicit_DoubleToElo_AreEqual()
-    {
-        Elo exp = Elo.Create(1600.1);
-        Elo act = 1600.1;
-
-        act.Should().Be(exp);
-    }
-    [Test]
-    public void Explicit_EloToDouble_AreEqual()
-    {
-        var exp = 1600.1;
-        var act = (double)Elo.Create(1600.1);
-
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void Implicit_DecimalToElo_AreEqual()
-    {
-        Elo exp = Elo.Create(1600.1);
-        Elo act = 1600.1m;
-
-        act.Should().Be(exp);
-    }
-    [Test]
-    public void Explicit_EloToDecimal_AreEqual()
-    {
-        var exp = 1600.1m;
-        var act = (decimal)Elo.Create(1600.1);
-
-        act.Should().Be(exp);
-    }
-
-
-    [Test]
-    public void Implicit_Int32ToElo_AreEqual()
-    {
-        Elo exp = Elo.Create(1600);
-        Elo act = 1600;
-
-        act.Should().Be(exp);
-    }
-    [Test]
-    public void Explicit_EloToInt32_AreEqual()
-    {
-        var exp = 1600;
-        var act = (int)Elo.Create(1600);
-
-        act.Should().Be(exp);
-    }
-
-    #endregion
-
     #region Properties
     #endregion
 

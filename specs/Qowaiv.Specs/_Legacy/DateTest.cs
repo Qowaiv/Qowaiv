@@ -41,46 +41,6 @@ public class DateTest
 
     #endregion
 
-    
-
-    #region Casting tests
-
-    [Test]
-    public void Implicit_WeekDateToDate_AreEqual()
-    {
-        Date exp = new WeekDate(1970, 07, 6);
-        Date act = TestStruct;
-
-        act.Should().Be(exp);
-    }
-    [Test]
-    public void Implicit_DateToWeekDate_AreEqual()
-    {
-        WeekDate exp = TestStruct;
-        WeekDate act = new(1970, 07, 6);
-
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void Explicit_DateTimeToDate_AreEqual()
-    {
-        Date exp = (Date)new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local);
-        Date act = TestStruct;
-
-        act.Should().Be(exp);
-    }
-    [Test]
-    public void Implicit_DateToDateTime_AreEqual()
-    {
-        DateTime exp = TestStruct;
-        DateTime act = new(1970, 02, 14, 00, 00, 000, DateTimeKind.Local);
-
-        act.Should().Be(exp);
-    }
-
-    #endregion
-
     #region Properties
 
     [Test]

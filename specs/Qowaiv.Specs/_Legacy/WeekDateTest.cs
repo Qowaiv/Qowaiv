@@ -69,26 +69,6 @@ public class WeekDateTest
 
     #endregion
 
-    #region Casting tests
-
-    [Test]
-    public void Explicit_Int32ToWeekDate_AreEqual()
-    {
-        var exp = TestStruct;
-        var act = (WeekDate)new DateTime(1997, 04, 05, 00, 00, 000, DateTimeKind.Local);
-
-        act.Should().Be(exp);
-    }
-    [Test]
-    public void Explicit_WeekDateToInt32_AreEqual()
-    {
-        DateTime exp = new(1997, 04, 05, 00, 00, 000, DateTimeKind.Local);
-        DateTime act = TestStruct;
-
-        act.Should().Be(exp);
-    }
-    #endregion
-
     #region Properties
 
     [Test]

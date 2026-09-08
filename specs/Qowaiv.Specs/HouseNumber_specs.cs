@@ -247,6 +247,22 @@ public class Is_comparable
         (left >= right).Should().BeTrue();
     }
 }
+public class Casts
+{
+    [Test]
+    public void implicitly_from_int()
+    {
+        HouseNumber casted = 123_456_789;
+        casted.Should().Be(Svo.HouseNumber);
+    }
+
+    [Test]
+    public void explicitly_to_int()
+    {
+        var casted = (int)Svo.HouseNumber;
+        casted.Should().Be(123_456_789);
+    }
+}
 public class Supports_type_conversion
 {
     [Test]

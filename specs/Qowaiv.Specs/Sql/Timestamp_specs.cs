@@ -168,6 +168,51 @@ public class Has_custom_formatting
     }
 }
 
+public class Casts
+{
+    [Test]
+    public void explicitly_from_byte_array()
+    {
+        var casted = (Timestamp)Svo.Timestamp.ToByteArray();
+        casted.Should().Be(Svo.Timestamp);
+    }
+
+    [Test]
+    public void explicitly_to_byte_array()
+    {
+        var casted = (byte[])Svo.Timestamp;
+        casted.Should().BeEquivalentTo(Svo.Timestamp.ToByteArray());
+    }
+
+    [Test]
+    public void explicitly_from_long()
+    {
+        var casted = (Timestamp)1234567890L;
+        casted.Should().Be(Svo.Timestamp);
+    }
+
+    [Test]
+    public void explicitly_to_long()
+    {
+        var casted = (long)Svo.Timestamp;
+        casted.Should().Be(1234567890L);
+    }
+
+    [Test]
+    public void implicitly_from_ulong()
+    {
+        Timestamp casted = 1234567890UL;
+        casted.Should().Be(Svo.Timestamp);
+    }
+
+    [Test]
+    public void explicitly_to_ulong()
+    {
+        var casted = (ulong)Svo.Timestamp;
+        casted.Should().Be(1234567890UL);
+    }
+}
+
 public class Is_comparable
 {
     [Test]

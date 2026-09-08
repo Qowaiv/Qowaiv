@@ -250,6 +250,23 @@ public class Is_comparable
     }
 }
 
+public class Casts
+{
+    [Test]
+    public void implicitly_from_RegionInfo()
+    {
+        Country casted = new RegionInfo("VA");
+        casted.Should().Be(Svo.Country);
+    }
+
+    [Test]
+    public void explicitly_to_RegionInfo()
+    {
+        var casted = (RegionInfo)Svo.Country;
+        casted.Should().Be(new RegionInfo("VA"));
+    }
+}
+
 public class Supports_type_conversion
 {
     [Test]

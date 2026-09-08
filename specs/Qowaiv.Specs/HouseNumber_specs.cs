@@ -1,5 +1,17 @@
 namespace HouseNumber_specs;
 
+public class Has_constant
+{
+    [Test]
+    public void Empty_equals_default() => HouseNumber.Empty.Should().Be(default);
+
+    [Test]
+    public void MinValue_equals_1() => HouseNumber.MinValue.Should().Be(HouseNumber.Create(1));
+
+    [Test]
+    public void MaxValue_equals_999999999() => HouseNumber.MaxValue.Should().Be(HouseNumber.Create(999999999));
+}
+
 public class With_domain_logic
 {
     [TestCase(true, 123456789)]
@@ -11,6 +23,21 @@ public class With_domain_logic
     [TestCase(false, "?")]
     [TestCase(false, "")]
     public void IsKnown_is(bool result, HouseNumber svo) => svo.IsKnown.Should().Be(result);
+
+    [TestCase(false, 123456789)]
+    [TestCase(false, "?")]
+    [TestCase(true, "")]
+    public void IsEmpty_is(bool result, HouseNumber svo) => svo.IsEmpty().Should().Be(result);
+
+    [TestCase(false, 123456789)]
+    [TestCase(true, "?")]
+    [TestCase(false, "")]
+    public void IsUnknown_is(bool result, HouseNumber svo) => svo.IsUnknown().Should().Be(result);
+
+    [TestCase(false, 123456789)]
+    [TestCase(true, "?")]
+    [TestCase(true, "")]
+    public void IsEmptyOrUnknown_is(bool result, HouseNumber svo) => svo.IsEmptyOrUnknown().Should().Be(result);
 }
 
 public class Is_equal_by_value
@@ -48,14 +75,64 @@ public class Is_equal_by_value
         => (HouseNumber.Create(123456789) != HouseNumber.MinValue).Should().BeTrue();
 
     [TestCase("", 0)]
-    [TestCase("yes", 665630161)]
-    public void hash_code_is_value_based(YesNo svo, int hash)
+    [TestCase("123456789", 553089222)]
+    public void hash_code_is_value_based(HouseNumber svo, int hash)
     {
         using (Hash.WithoutRandomizer())
         {
             svo.GetHashCode().Should().Be(hash);
         }
     }
+}
+
+public class Can_be_created
+{
+    [Test]
+    public void with_TryCreate_returns_SVO()
+        => HouseNumber.TryCreate(123456789).Should().Be(Svo.HouseNumber);
+
+    [Test]
+    public void from_null_returns_Empty()
+        => HouseNumber.TryCreate(null).Should().Be(HouseNumber.Empty);
+
+    [Test]
+    public void from_Int32MinValue_returns_Empty()
+        => HouseNumber.TryCreate(int.MinValue).Should().Be(HouseNumber.Empty);
+
+    [Test]
+    public void with_null_out_returns_Empty()
+    {
+        HouseNumber.TryCreate(null, out HouseNumber act).Should().BeTrue();
+        act.Should().Be(HouseNumber.Empty);
+    }
+
+    [Test]
+    public void with_Int32MinValue_out_returns_false()
+    {
+        HouseNumber.TryCreate(int.MinValue, out HouseNumber act).Should().BeFalse();
+        act.Should().Be(HouseNumber.Empty);
+    }
+}
+
+public class Has_properties
+{
+    [TestCase(123456789, true)]
+    [TestCase(1234, false)]
+    [TestCase("", false)]
+    [TestCase("?", false)]
+    public void IsOdd_is(HouseNumber svo, bool isOdd) => svo.IsOdd.Should().Be(isOdd);
+
+    [TestCase(123456789, false)]
+    [TestCase(1234, true)]
+    [TestCase("", false)]
+    [TestCase("?", false)]
+    public void IsEven_is(HouseNumber svo, bool isEven) => svo.IsEven.Should().Be(isEven);
+
+    [TestCase(123456789, 9)]
+    [TestCase(1234, 4)]
+    [TestCase("", 0)]
+    [TestCase("?", 0)]
+    public void Length_is(HouseNumber svo, int length) => svo.Length.Should().Be(length);
 }
 
 public class Can_be_parsed

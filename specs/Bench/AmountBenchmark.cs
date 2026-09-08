@@ -9,7 +9,7 @@ namespace Bench;
 [CategoriesColumn]
 [MemoryDiagnoser(true)]
 [MinColumn]
-public class AmountBenchmark
+public class AmountBenchmark : IDisposable
 {
     private const int Iterations = 1000;
     private readonly decimal[] Decimals = new decimal[Iterations];
@@ -66,6 +66,28 @@ public class AmountBenchmark
         ReadSvo.Position = 0;
         return JsonSerializer.Deserialize<Amount[]>(ReadSvo);
     }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposedValue)
+        {
+            if (disposing)
+            {
+                Write.Dispose();
+                ReadDecimal.Dispose();
+                ReadSvo.Dispose();
+            }
+            disposedValue = true;
+        }
+    }
+
+    public void Dispose()
+    {
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
+    }
+
+    private bool disposedValue;
 
     private static class Cat
     {

@@ -15,6 +15,46 @@ public class With_domain_logic
 
 public class Is_equal_by_value
 {
+    [Test]
+    public void not_equal_to_null()
+        => Svo.BusinessIdentifierCode.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.BusinessIdentifierCode.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.BusinessIdentifierCode.Equals(BusinessIdentifierCode.Empty).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.BusinessIdentifierCode.Equals(BusinessIdentifierCode.Parse("AEGONL2UXXX")).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (BusinessIdentifierCode.Parse("AEGONL2UXXX") == Svo.BusinessIdentifierCode).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (BusinessIdentifierCode.Parse("AEGONL2UXXX") == BusinessIdentifierCode.Empty).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (BusinessIdentifierCode.Parse("AEGONL2UXXX") != Svo.BusinessIdentifierCode).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (BusinessIdentifierCode.Parse("AEGONL2UXXX") != BusinessIdentifierCode.Empty).Should().BeTrue();
+
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        var l = BusinessIdentifierCode.Parse("AEGONL2UXXX", CultureInfo.InvariantCulture);
+        var r = BusinessIdentifierCode.Parse("AEgonL2Uxxx", CultureInfo.InvariantCulture);
+        l.Equals(r).Should().BeTrue();
+    }
+
     [TestCase("", 0)]
     [TestCase("AEGONL2UXXX", -238769066)]
     public void hash_code_is_value_based(BusinessIdentifierCode svo, int hash)

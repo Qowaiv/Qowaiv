@@ -3,6 +3,38 @@ namespace Formatting_arguments_specs;
 public class Is_equal_by_value
 {
     [Test]
+    public void not_equal_to_null()
+        => Svo.FormattingArguments.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.FormattingArguments.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.FormattingArguments.Equals(FormattingArguments.None).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.FormattingArguments.Equals(new FormattingArguments("0.000", TestCultures.fr_BE)).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (new FormattingArguments("0.000", TestCultures.fr_BE) == Svo.FormattingArguments).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (new FormattingArguments("0.000", TestCultures.fr_BE) == FormattingArguments.None).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (new FormattingArguments("0.000", TestCultures.fr_BE) != Svo.FormattingArguments).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (new FormattingArguments("0.000", TestCultures.fr_BE) != FormattingArguments.None).Should().BeTrue();
+
+    [Test]
     public void hash_code_is_value_based_for_none()
     {
         using (Hash.WithoutRandomizer())

@@ -84,19 +84,6 @@ public class StreamSizeTest
 
     #endregion
 
-    #region IEquatable tests
-
-    [Test]
-    public void Equals_FormattedAndUnformatted_IsTrue()
-    {
-        var l = StreamSize.Parse("12,345 byte", CultureInfo.InvariantCulture);
-        var r = StreamSize.Parse("12345", CultureInfo.InvariantCulture);
-
-        l.Equals(r).Should().BeTrue();
-    }
-
-    #endregion
-
     [TestCase(-1, "-23KB")]
     [TestCase(0, "0KB")]
     [TestCase(+1, "16KB")]

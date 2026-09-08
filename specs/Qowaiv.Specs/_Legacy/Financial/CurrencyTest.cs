@@ -166,56 +166,6 @@ public class CurrencyTest
 
     #endregion
 
-    #region IEquatable tests
-
-    [Test]
-    public void Equals_EmptyEmpty_IsTrue() => Currency.Empty.Equals(Currency.Empty).Should().BeTrue();
-
-    [Test]
-    public void Equals_FormattedAndUnformatted_IsTrue()
-    {
-        var l = Currency.Parse("eur", CultureInfo.InvariantCulture);
-        var r = Currency.Parse("EUR", CultureInfo.InvariantCulture);
-
-        l.Equals(r).Should().BeTrue();
-    }
-
-    [Test]
-    public void Equals_TestStructTestStruct_IsTrue() => TestStruct.Equals(TestStruct).Should().BeTrue();
-
-    [Test]
-    public void Equals_TestStructEmpty_IsFalse() => TestStruct.Equals(Currency.Empty).Should().BeFalse();
-
-    [Test]
-    public void Equals_EmptyTestStruct_IsFalse() => Currency.Empty.Equals(TestStruct).Should().BeFalse();
-
-    [Test]
-    public void Equals_TestStructObjectTestStruct_IsTrue() => TestStruct.Equals((object)TestStruct).Should().BeTrue();
-
-    [Test]
-    public void Equals_TestStructNull_IsFalse() => TestStruct.Equals(null).Should().BeFalse();
-
-    [Test]
-    public void Equals_TestStructObject_IsFalse() => TestStruct.Equals(new object()).Should().BeFalse();
-
-    [Test]
-    public void OperatorIs_TestStructTestStruct_IsTrue()
-    {
-        var l = TestStruct;
-        var r = TestStruct;
-        (l == r).Should().BeTrue();
-    }
-
-    [Test]
-    public void OperatorIsNot_TestStructTestStruct_IsFalse()
-    {
-        var l = TestStruct;
-        var r = TestStruct;
-        (l != r).Should().BeFalse();
-    }
-
-    #endregion
-
     #region Properties
 
     [Test]

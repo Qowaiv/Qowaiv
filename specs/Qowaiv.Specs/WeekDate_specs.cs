@@ -12,6 +12,59 @@ public class Is_invalid
     public void for_garbage() => WeekDate.TryParse("Not a week date").Should().BeNull();
 }
 
+public class Is_equal_by_value
+{
+    [Test]
+    public void not_equal_to_null()
+        => Svo.WeekDate.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.WeekDate.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.WeekDate.Equals(WeekDate.MinValue).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.WeekDate.Equals(new WeekDate(2017, 23, 7)).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (new WeekDate(2017, 23, 7) == Svo.WeekDate).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (new WeekDate(2017, 23, 7) == WeekDate.MinValue).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (new WeekDate(2017, 23, 7) != Svo.WeekDate).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (new WeekDate(2017, 23, 7) != WeekDate.MinValue).Should().BeTrue();
+
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        var l = WeekDate.Parse("1997-14-6", CultureInfo.InvariantCulture);
+        var r = WeekDate.Parse("1997-W14-6", CultureInfo.InvariantCulture);
+        l.Equals(r).Should().BeTrue();
+    }
+
+    [TestCase("0001-W01-1", 0)]
+    [TestCase("2017-W23-7", -981651364)]
+    public void hash_code_is_value_based(WeekDate svo, int hash)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hash);
+        }
+    }
+}
+
 public class Can_be_parsed
 {
     [Test]

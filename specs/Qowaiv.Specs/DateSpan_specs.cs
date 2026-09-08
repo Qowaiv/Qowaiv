@@ -219,6 +219,59 @@ public class Is_invalid
         => DateSpan.TryParse(str).Should().BeNull(because);
 }
 
+public class Is_equal_by_value
+{
+    [Test]
+    public void not_equal_to_null()
+        => Svo.DateSpan.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.DateSpan.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.DateSpan.Equals(DateSpan.Zero).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.DateSpan.Equals(new DateSpan(10, 3, -5)).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (new DateSpan(10, 3, -5) == Svo.DateSpan).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (new DateSpan(10, 3, -5) == DateSpan.Zero).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (new DateSpan(10, 3, -5) != Svo.DateSpan).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (new DateSpan(10, 3, -5) != DateSpan.Zero).Should().BeTrue();
+
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        var l = DateSpan.Parse("3Y-0M+3D", CultureInfo.InvariantCulture);
+        var r = DateSpan.Parse("-0y+36m+3d", CultureInfo.InvariantCulture);
+        l.Equals(r).Should().BeTrue();
+    }
+
+    [TestCase("0Y+0M+0D", 0)]
+    [TestCase("10Y+3M-5D", -128)]
+    public void hash_code_is_value_based(DateSpan svo, int hash)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hash);
+        }
+    }
+}
+
 public class Supports_type_conversion
 {
     [Test]

@@ -54,56 +54,6 @@ public class InternetMediaTypeTest
 
     #endregion
 
-    #region IEquatable tests
-
-    [Test]
-    public void Equals_EmptyEmpty_IsTrue() => InternetMediaType.Empty.Equals(InternetMediaType.Empty).Should().BeTrue();
-
-    [Test]
-    public void Equals_FormattedAndUnformatted_IsTrue()
-    {
-        var l = InternetMediaType.Parse("application/x-chess-pgn");
-        var r = InternetMediaType.Parse("application/X-chess-PGN");
-
-        l.Equals(r).Should().BeTrue();
-    }
-
-    [Test]
-    public void Equals_TestStructTestStruct_IsTrue() => TestStruct.Equals(TestStruct).Should().BeTrue();
-
-    [Test]
-    public void Equals_TestStructEmpty_IsFalse() => TestStruct.Equals(InternetMediaType.Empty).Should().BeFalse();
-
-    [Test]
-    public void Equals_EmptyTestStruct_IsFalse() => InternetMediaType.Empty.Equals(TestStruct).Should().BeFalse();
-
-    [Test]
-    public void Equals_TestStructObjectTestStruct_IsTrue() => TestStruct.Equals((object)TestStruct).Should().BeTrue();
-
-    [Test]
-    public void Equals_TestStructNull_IsFalse() => TestStruct.Equals(null).Should().BeFalse();
-
-    [Test]
-    public void Equals_TestStructObject_IsFalse() => TestStruct.Equals(new object()).Should().BeFalse();
-
-    [Test]
-    public void OperatorIs_TestStructTestStruct_IsTrue()
-    {
-        var l = TestStruct;
-        var r = TestStruct;
-        (l == r).Should().BeTrue();
-    }
-
-    [Test]
-    public void OperatorIsNot_TestStructTestStruct_IsFalse()
-    {
-        var l = TestStruct;
-        var r = TestStruct;
-        (l != r).Should().BeFalse();
-    }
-
-    #endregion
-
     #region Properties
 
     [Test]

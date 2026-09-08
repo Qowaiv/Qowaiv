@@ -390,6 +390,14 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (StreamSize.Byte * 123456789 != StreamSize.MinValue).Should().BeTrue();
 
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        var l = StreamSize.Parse("12,345 byte", CultureInfo.InvariantCulture);
+        var r = StreamSize.Parse("12345", CultureInfo.InvariantCulture);
+        l.Equals(r).Should().BeTrue();
+    }
+
     [TestCase("0 byte", 0)]
     [TestCase("123456789 byte", 553089222)]
     public void hash_code_is_value_based(StreamSize svo, int hash)

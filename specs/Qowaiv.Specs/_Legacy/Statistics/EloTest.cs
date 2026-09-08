@@ -18,19 +18,6 @@ public class EloTest
 
     #endregion
 
-    #region IEquatable tests
-
-    [Test]
-    public void Equals_FormattedAndUnformatted_IsTrue()
-    {
-        var l = Elo.Parse("1600", CultureInfo.InvariantCulture);
-        var r = Elo.Parse("1,600.00*", CultureInfo.InvariantCulture);
-
-        l.Equals(r).Should().BeTrue();
-    }
-
-    #endregion
-
     #region Properties
     #endregion
 

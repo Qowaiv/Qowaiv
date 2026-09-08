@@ -56,6 +56,17 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (new LocalDateTime(2017, 06, 11, 06, 15, 00) != LocalDateTime.MinValue).Should().BeTrue();
 
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            var l = LocalDateTime.Parse("14 february 2010", CultureInfo.InvariantCulture);
+            var r = LocalDateTime.Parse("2010-02-14", CultureInfo.InvariantCulture);
+            l.Equals(r).Should().BeTrue();
+        }
+    }
+
     [TestCase("0001-01-01", 0)]
     [TestCase("2017-06-11 06:15", 533532482)]
     public void hash_code_is_value_based(LocalDateTime svo, int hash)

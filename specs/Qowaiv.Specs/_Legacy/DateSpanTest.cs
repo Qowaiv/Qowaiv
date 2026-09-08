@@ -28,64 +28,6 @@ public class DateSpanTest
 
     #endregion
 
-    #region IEquatable tests
-
-    /// <summary>GetHash should not fail for DateSpan.Zero.</summary>
-    [Test]
-    public void GetHash_Zero_Hash() => DateSpan.Zero.GetHashCode().Should().Be(0);
-
-    /// <summary>GetHash should not fail for the test struct.</summary>
-    [Test]
-    public void GetHash_TestStruct_Hash() => TestStruct.GetHashCode().Should().NotBe(0);
-
-    [Test]
-    public void Equals_ZeroZero_IsTrue() => DateSpan.Zero.Equals(DateSpan.Zero).Should().BeTrue();
-
-    [Test]
-    public void Equals_FormattedAndUnformatted_IsTrue()
-    {
-        var l = DateSpan.Parse("3Y-0M+3D", CultureInfo.InvariantCulture);
-        var r = DateSpan.Parse("-0y+36m+3d", CultureInfo.InvariantCulture);
-
-        l.Equals(r).Should().BeTrue();
-    }
-
-    [Test]
-    public void Equals_TestStructTestStruct_IsTrue() => TestStruct.Equals(TestStruct).Should().BeTrue();
-
-    [Test]
-    public void Equals_TestStructZero_IsFalse() => TestStruct.Equals(DateSpan.Zero).Should().BeFalse();
-
-    [Test]
-    public void Equals_ZeroTestStruct_IsFalse() => DateSpan.Zero.Equals(TestStruct).Should().BeFalse();
-
-    [Test]
-    public void Equals_TestStructObjectTestStruct_IsTrue() => TestStruct.Equals((object)TestStruct).Should().BeTrue();
-
-    [Test]
-    public void Equals_TestStructNull_IsFalse() => TestStruct.Equals(null).Should().BeFalse();
-
-    [Test]
-    public void Equals_TestStructObject_IsFalse() => TestStruct.Equals(new object()).Should().BeFalse();
-
-    [Test]
-    public void OperatorIs_TestStructTestStruct_IsTrue()
-    {
-        var l = TestStruct;
-        var r = TestStruct;
-        (l == r).Should().BeTrue();
-    }
-
-    [Test]
-    public void OperatorIsNot_TestStructTestStruct_IsFalse()
-    {
-        var l = TestStruct;
-        var r = TestStruct;
-        (l != r).Should().BeFalse();
-    }
-
-    #endregion
-
     #region Properties
 
     [TestCase(1, 2, +3)]

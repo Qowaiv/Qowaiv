@@ -82,6 +82,14 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Timestamp.Create(1234567890L) != Timestamp.MinValue).Should().BeTrue();
 
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        var l = Timestamp.Parse("0x75bcd15", CultureInfo.InvariantCulture);
+        var r = Timestamp.Parse("0x00000000075BCD15", CultureInfo.InvariantCulture);
+        l.Equals(r).Should().BeTrue();
+    }
+
     [TestCase("0", 0)]
     [TestCase("1234567890", 1849341697)]
     public void hash_code_is_value_based(Timestamp svo, int hash)

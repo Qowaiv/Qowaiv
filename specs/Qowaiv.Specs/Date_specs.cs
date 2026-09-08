@@ -53,6 +53,14 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (new Date(2017, 06, 11) != Date.MinValue).Should().BeTrue();
 
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        var l = Date.Parse("1970-02-14", CultureInfo.InvariantCulture);
+        var r = Date.Parse("14 february 1970", CultureInfo.InvariantCulture);
+        l.Equals(r).Should().BeTrue();
+    }
+
     [TestCase("0001-01-01", 0)]
     [TestCase("2017-06-11", -489585265)]
     public void hash_code_is_value_based(Date svo, int hash)

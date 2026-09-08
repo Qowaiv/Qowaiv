@@ -28,19 +28,6 @@ public class DateTest
 
     #endregion
 
-    #region IEquatable tests
-
-    [Test]
-    public void Equals_FormattedAndUnformatted_IsTrue()
-    {
-        var l = Date.Parse("1970-02-14", CultureInfo.InvariantCulture);
-        var r = Date.Parse("14 february 1970", CultureInfo.InvariantCulture);
-
-        l.Equals(r).Should().BeTrue();
-    }
-
-    #endregion
-
     #region Properties
 
     [Test]

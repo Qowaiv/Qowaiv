@@ -9,6 +9,62 @@ public class Has_constant
     public void MaxValue_equal_to_decimal_MaxValue() => Amount.MaxValue.Should().Be(decimal.MaxValue.Amount());
 }
 
+public class Is_equal_by_value
+{
+    [Test]
+    public void not_equal_to_null()
+        => Svo.Amount.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.Amount.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.Amount.Equals(Amount.Zero).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.Amount.Equals(42.17.Amount()).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (42.17.Amount() == Svo.Amount).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (42.17.Amount() == Amount.Zero).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (42.17.Amount() != Svo.Amount).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (42.17.Amount() != Amount.Zero).Should().BeTrue();
+
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        using (TestCultures.en_US.Scoped())
+        {
+            var l = Amount.Parse("$ 1,451.070");
+            var r = Amount.Parse("1451.07");
+            l.Equals(r).Should().BeTrue();
+        }
+    }
+
+    [TestCase("0", 0)]
+    [TestCase("42.17", 665757098)]
+    public void hash_code_is_value_based(Amount svo, int hash)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hash);
+        }
+    }
+}
+
 public class Can_be_parsed
 {
     [Test]

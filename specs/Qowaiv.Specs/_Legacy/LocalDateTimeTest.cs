@@ -17,22 +17,6 @@ public class LocalDateTimeTest
 
     #endregion
 
-    #region IEquatable tests
-
-    [Test]
-    public void Equals_FormattedAndUnformatted_IsTrue()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            var l = LocalDateTime.Parse("14 february 2010", CultureInfo.InvariantCulture);
-            var r = LocalDateTime.Parse("2010-02-14", CultureInfo.InvariantCulture);
-
-            l.Equals(r).Should().BeTrue();
-        }
-    }
-
-    #endregion
-
     #region Methods
 
     [Test]

@@ -39,6 +39,46 @@ public class Created_from_file
 
 public class Is_equal_by_value
 {
+    [Test]
+    public void not_equal_to_null()
+        => Svo.InternetMediaType.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.InternetMediaType.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.InternetMediaType.Equals(InternetMediaType.Empty).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.InternetMediaType.Equals(InternetMediaType.Parse("application/x-chess-pgn")).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (InternetMediaType.Parse("application/x-chess-pgn") == Svo.InternetMediaType).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (InternetMediaType.Parse("application/x-chess-pgn") == InternetMediaType.Empty).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (InternetMediaType.Parse("application/x-chess-pgn") != Svo.InternetMediaType).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (InternetMediaType.Parse("application/x-chess-pgn") != InternetMediaType.Empty).Should().BeTrue();
+
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        var l = InternetMediaType.Parse("application/x-chess-pgn");
+        var r = InternetMediaType.Parse("application/X-chess-PGN");
+        l.Equals(r).Should().BeTrue();
+    }
+
     [TestCase("", 0)]
     [TestCase("application/x-chess-pgn", 787633777)]
     public void hash_code_is_value_based(InternetMediaType svo, int hash)

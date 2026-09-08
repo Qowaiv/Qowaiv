@@ -39,51 +39,6 @@ public class FormattingArgumentsTest
 
     #endregion
 
-    #region IEquatable tests
-
-    [Test]
-    public void Equals_EmptyEmpty_IsTrue() => FormattingArguments.None.Equals(default).Should().BeTrue();
-
-    [Test]
-    public void Equals_TestStructTestStruct_IsTrue() => TestStruct.Equals(new FormattingArguments("0.000", new CultureInfo("fr-BE"))).Should().BeTrue();
-
-    [Test]
-    public void Equals_TestStructEmpty_IsFalse() => TestStruct.Equals(FormattingArguments.None).Should().BeFalse();
-
-    [Test]
-    public void Equals_EmptyTestStruct_IsFalse() => FormattingArguments.None.Equals(TestStruct).Should().BeFalse();
-
-    [Test]
-    public void Equals_TestStructObjectTestStruct_IsTrue()
-    {
-        object obj = TestStruct;
-        TestStruct.Equals(obj).Should().BeTrue();
-    }
-
-    [Test]
-    public void Equals_TestStructNull_IsFalse() => TestStruct.Equals(null).Should().BeFalse();
-
-    [Test]
-    public void Equals_TestStructObject_IsFalse() => TestStruct.Equals(new object()).Should().BeFalse();
-
-    [Test]
-    public void OperatorIs_TestStructTestStruct_IsTrue()
-    {
-        var l = TestStruct;
-        var r = TestStruct;
-        (l == r).Should().BeTrue();
-    }
-
-    [Test]
-    public void OperatorIsNot_TestStructTestStruct_IsFalse()
-    {
-        var l = TestStruct;
-        var r = TestStruct;
-        (l != r).Should().BeFalse();
-    }
-
-    #endregion
-
     #region Properties
 
     [Test]

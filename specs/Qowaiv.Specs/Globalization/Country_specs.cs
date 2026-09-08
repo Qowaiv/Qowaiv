@@ -350,6 +350,49 @@ public class Supports_JSON_serialization
 
 public class Is_equal_by_value
 {
+    [Test]
+    public void not_equal_to_null()
+        => Svo.Country.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.Country.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.Country.Equals(Country.Empty).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.Country.Equals(Country.Parse("VA")).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (Country.Parse("VA") == Svo.Country).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (Country.Parse("VA") == Country.Empty).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (Country.Parse("VA") != Svo.Country).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (Country.Parse("VA") != Country.Empty).Should().BeTrue();
+
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        using (TestCultures.nl_NL.Scoped())
+        {
+            var l = Country.Parse("België");
+            var r = Country.Parse("belgie");
+            l.Equals(r).Should().BeTrue();
+        }
+    }
+
     [TestCase("", 0)]
     [TestCase("NL", -1174190069)]
     public void hash_code_is_value_based(Country svo, int hash)

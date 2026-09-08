@@ -292,6 +292,46 @@ public class Supports_JSON_serialization
 
 public class Is_equal_by_value
 {
+    [Test]
+    public void not_equal_to_null()
+        => Svo.Currency.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.Currency.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.Currency.Equals(Currency.Empty).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.Currency.Equals(Currency.Parse("eur", CultureInfo.InvariantCulture)).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (Currency.Parse("eur", CultureInfo.InvariantCulture) == Svo.Currency).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (Currency.Parse("eur", CultureInfo.InvariantCulture) == Currency.Empty).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (Currency.Parse("eur", CultureInfo.InvariantCulture) != Svo.Currency).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (Currency.Parse("eur", CultureInfo.InvariantCulture) != Currency.Empty).Should().BeTrue();
+
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        var l = Currency.Parse("eur", CultureInfo.InvariantCulture);
+        var r = Currency.Parse("EUR", CultureInfo.InvariantCulture);
+        l.Equals(r).Should().BeTrue();
+    }
+
     [TestCase("", 0)]
     [TestCase("EUR", -943833935)]
     public void hash_code_is_value_based(Currency svo, int hash)

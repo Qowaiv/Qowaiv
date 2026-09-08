@@ -56,6 +56,14 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Elo.Create(1732.4) != Elo.MinValue).Should().BeTrue();
 
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        var l = Elo.Parse("1600", CultureInfo.InvariantCulture);
+        var r = Elo.Parse("1,600.00*", CultureInfo.InvariantCulture);
+        l.Equals(r).Should().BeTrue();
+    }
+
     [TestCase(0.0, 0)]
     [TestCase(1732.4, -22135344)]
     public void hash_code_is_value_based(Elo svo, int hash)

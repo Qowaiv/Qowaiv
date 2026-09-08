@@ -107,6 +107,69 @@ public class Supports_type_conversion
     }
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.InternetMediaType.ToString().Should().Be("application/x-chess-pgn");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.InternetMediaType.ToString(default(string)).Should().Be(Svo.InternetMediaType.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.InternetMediaType.ToString(string.Empty).Should().Be(Svo.InternetMediaType.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_string_empty()
+        => default(InternetMediaType).ToString().Should().BeEmpty();
+
+    [Test]
+    public void unknown_value_is_represented_as_unknown()
+        => InternetMediaType.Unknown.ToString().Should().Be("application/octet-stream");
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.InternetMediaType.ToString(FormatProvider.Empty).Should().Be("application/x-chess-pgn");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.InternetMediaType.ToString("Unit Test Format", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: 'application/x-chess-pgn', format: 'Unit Test Format'");
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.InternetMediaType.ToString(provider: null).Should().Be("application/x-chess-pgn");
+        }
+    }
+}
+
 public class Is_comparable
 {
     [Test]

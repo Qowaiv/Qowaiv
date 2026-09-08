@@ -89,6 +89,82 @@ public class Can_not_be_created
     }
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.WeekDate.ToString().Should().Be("2017-W23-7");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.WeekDate.ToString(default(string)).Should().Be(Svo.WeekDate.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.WeekDate.ToString(string.Empty).Should().Be(Svo.WeekDate.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_0001_W01_1()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            default(WeekDate).ToString().Should().Be("0001-W01-1");
+        }
+    }
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.WeekDate.ToString(FormatProvider.Empty).Should().Be("2017-W23-7");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = new WeekDate(1997, 14, 6).ToString("y#W", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '1997#14', format: 'y#W'");
+    }
+
+    [TestCase("en-US", @"y-\WW-d", 1997, 14, 6, "1997-W14-6")]
+    [TestCase("en-GB", "", 1997, 14, 6, "1997-W14-6")]
+    [TestCase("en-GB", @"y-\WW-d", 1979, 3, 5, "1979-W3-5")]
+    [TestCase("en-GB", @"y-\Ww-d", 1979, 3, 5, "1979-W03-5")]
+    public void culture_dependent(CultureInfo culture, string format, int year, int week, int day, string formatted)
+    {
+        using (culture.Scoped())
+        {
+            new WeekDate(year, week, day).ToString(format).Should().Be(formatted);
+        }
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.WeekDate.ToString(provider: null).Should().Be("2017-W23-7");
+        }
+    }
+}
+
 public class Is_comparable
 {
     [Test]

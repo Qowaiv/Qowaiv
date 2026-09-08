@@ -57,47 +57,6 @@ public class DateSpanTest
 
     #endregion
 
-    #region IFormattable / Tostring tests
-
-    [Test]
-    public void ToString_Zero_0Y0M0D()
-    {
-        var act = DateSpan.Zero.ToString();
-        var exp = "0Y+0M+0D";
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void ToString_CustomFormatter_SupportsCustomFormatting()
-    {
-        var act = TestStruct.ToString("Unit Test Format", FormatProvider.CustomFormatter);
-        var exp = "Unit Test Formatter, value: '10Y+3M-5D', format: 'Unit Test Format'";
-
-        act.Should().Be(exp);
-    }
-
-    [TestCase("0Y+0M+0D", 0, 0)]
-    [TestCase("0Y+0M+1D", 0, 1)]
-    [TestCase("0Y+1M+0D", 1, 0)]
-    [TestCase("1Y+0M+0D", 12, 0)]
-    [TestCase("1Y+0M+1D", 12, 1)]
-    [TestCase("1Y+0M+1D", 12, 1)]
-    [TestCase("1Y+1M+1D", 13, 1)]
-    [TestCase("0Y+0M-11D", 0, -11)]
-    [TestCase("0Y+1M-12D", +1, -12)]
-    [TestCase("0Y-1M-12D", -1, -12)]
-    [TestCase("-1Y-1M+1D", -13, 1)]
-    public void ToString_Invariant(string expected, int months, int days)
-    {
-        using (CultureInfoScope.NewInvariant())
-        {
-            var span = new DateSpan(months, days);
-            span.ToString().Should().Be(expected);
-        }
-    }
-
-    #endregion
-
     #region IEquatable tests
 
     /// <summary>GetHash should not fail for DateSpan.Zero.</summary>

@@ -71,48 +71,6 @@ public class DateTest
 
     #endregion
 
-    #region IFormattable / Tostring tests
-
-    [Test]
-    public void ToString_CustomFormatter_SupportsCustomFormatting()
-    {
-        var act = TestStruct.ToString("d_M_yy", FormatProvider.CustomFormatter);
-        var exp = "Unit Test Formatter, value: '14_2_70', format: 'd_M_yy'";
-
-        act.Should().Be(exp);
-    }
-    [Test]
-    public void ToString_TestStruct_ComplexPattern()
-    {
-        using (TestCultures.nl_BE.Scoped())
-        {
-            var act = TestStruct.ToString(string.Empty);
-            var exp = "14/02/1970";
-            act.Should().Be(exp);
-        }
-    }
-
-    [Test]
-    public void ToString_FormatValueEnglishGreatBritain_AreEqual()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            var act = new Date(1988, 08, 08).ToString("yy-M-d");
-            var exp = "88-8-8";
-            act.Should().Be(exp);
-        }
-    }
-
-    [Test]
-    public void ToString_FormatValueSpanishSpain_AreEqual()
-    {
-        var act = new Date(1988, 08, 08).ToString("d", new CultureInfo("es-EC"));
-        var exp = "8/8/1988";
-        act.Should().Be(exp);
-    }
-
-    #endregion
-
     #region IEquatable tests
 
     [Test]

@@ -62,6 +62,104 @@ public class Can_not_be_parsed
              .WithMessage("The number style '*' is not supported.*");
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Amount.ToString().Should().Be("42.17");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Amount.ToString(default(string)).Should().Be(Svo.Amount.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Amount.ToString(string.Empty).Should().Be(Svo.Amount.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_zero()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            default(Amount).ToString().Should().Be("0");
+        }
+    }
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.Amount.ToString(FormatProvider.Empty).Should().Be("42,17");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.Amount.ToString("#.0", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '42.2', format: '#.0'");
+    }
+
+    [TestCase("nl-BE", null, "1600,1", "1600,1")]
+    [TestCase("en-GB", null, "1600.1", "1600.1")]
+    [TestCase("nl-BE", "0000", "800", "0800")]
+    [TestCase("en-GB", "0000", "800", "0800")]
+    [TestCase("es-EC", "00000.0", "1700", "01700,0")]
+    public void culture_dependent(CultureInfo culture, string format, string input, string formatted)
+    {
+        using (culture.Scoped())
+        {
+            Amount.Parse(input).ToString(format).Should().Be(formatted);
+        }
+    }
+
+    [Test]
+    public void with_currency_format_fr_FR()
+    {
+        using (TestCultures.fr_FR.Scoped())
+        {
+            ((Amount)170.42).ToString("C").Should().Be("170,42 €");
+        }
+    }
+
+    [Test]
+    public void with_custom_number_format_info()
+    {
+        var info = new NumberFormatInfo
+        {
+            CurrencyGroupSeparator = "#",
+            CurrencyDecimalSeparator = "*",
+        };
+        var formatted = ((Amount)12345678.235m).ToString("#,##0.0000", info);
+        formatted.Should().Be("12#345#678*2350");
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.Amount.ToString(provider: null).Should().Be("42,17");
+        }
+    }
+}
+
 public class Is_comparable
 {
     [Test]

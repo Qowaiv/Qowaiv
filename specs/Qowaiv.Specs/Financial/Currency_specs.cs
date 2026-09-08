@@ -34,6 +34,87 @@ public class Get_countries
 #endif
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Currency.ToString().Should().Be("EUR");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Currency.ToString(default(string)).Should().Be(Svo.Currency.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Currency.ToString(string.Empty).Should().Be(Svo.Currency.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_string_empty()
+        => default(Currency).ToString().Should().BeEmpty();
+
+    [Test]
+    public void unknown_value_is_represented_as_unknown()
+        => Currency.Unknown.ToString().Should().Be("?");
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.Currency.ToString(FormatProvider.Empty).Should().Be("EUR");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.Currency.ToString("$: e", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '€: Euro', format: '$: e'");
+    }
+
+    [Test]
+    public void with_dutch_translation_using_default_format()
+    {
+        using (TestCultures.nl_BE.Scoped())
+        {
+            Currency.Parse("Amerikaanse dollar").ToString().Should().Be("USD");
+        }
+    }
+
+    [Test]
+    public void with_english_name_using_full_name_format()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Currency.Parse("pound sterling").ToString("f").Should().Be("Pound sterling");
+        }
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.Currency.ToString(provider: null).Should().Be("EUR");
+        }
+    }
+}
+
 public class Is_comparable
 {
     [Test]

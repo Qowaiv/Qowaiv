@@ -134,42 +134,6 @@ public class InternetMediaTypeTest
 
     #endregion
 
-    #region IFormattable / ToString tests
-
-    [Test]
-    public void ToString_Empty_StringEmpty()
-    {
-        var act = InternetMediaType.Empty.ToString();
-        var exp = "";
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void ToString_Unknown_QuestionMark()
-    {
-        var act = InternetMediaType.Unknown.ToString();
-        var exp = "application/octet-stream";
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void ToString_CustomFormatter_SupportsCustomFormatting()
-    {
-        var act = TestStruct.ToString("Unit Test Format", FormatProvider.CustomFormatter);
-        var exp = "Unit Test Formatter, value: 'application/x-chess-pgn', format: 'Unit Test Format'";
-
-        act.Should().Be(exp);
-    }
-    [Test]
-    public void ToString_TestStruct_ComplexPattern()
-    {
-        var act = TestStruct.ToString(string.Empty);
-        var exp = "application/x-chess-pgn";
-        act.Should().Be(exp);
-    }
-
-    #endregion
-
     #region IEquatable tests
 
     [Test]

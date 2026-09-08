@@ -71,6 +71,81 @@ public class Is_equal_by_value
     }
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Timestamp.ToString().Should().Be("0x00000000499602D2");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Timestamp.ToString(default(string)).Should().Be(Svo.Timestamp.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Timestamp.ToString(string.Empty).Should().Be(Svo.Timestamp.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_0x0000000000000000()
+        => default(Timestamp).ToString().Should().Be("0x0000000000000000");
+
+    [Test]
+    public void max_value_is_represented_as_0xFFFFFFFFFFFFFFFF()
+        => Timestamp.MaxValue.ToString().Should().Be("0xFFFFFFFFFFFFFFFF");
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.Timestamp.ToString(FormatProvider.Empty).Should().Be("0x00000000499602D2");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = ((Timestamp)123456789L).ToString("#,##0", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '123,456,789', format: '#,##0'");
+    }
+
+    [TestCase("nl-BE", null, "1600", "0x0000000000000640")]
+    [TestCase("nl-BE", "0000", "800", "0800")]
+    [TestCase("en-GB", "0000", "800", "0800")]
+    [TestCase("es-EC", "00000.0", "1700", "01700,0")]
+    public void culture_dependent(CultureInfo culture, string format, string input, string formatted)
+    {
+        using (culture.Scoped())
+        {
+            Timestamp.Parse(input).ToString(format).Should().Be(formatted);
+        }
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.Timestamp.ToString(provider: null).Should().Be("0x00000000499602D2");
+        }
+    }
+}
+
 public class Is_comparable
 {
     [Test]

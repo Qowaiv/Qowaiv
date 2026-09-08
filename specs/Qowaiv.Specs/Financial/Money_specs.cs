@@ -139,6 +139,103 @@ public class Can_be_parsed
     }
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Money.ToString().Should().Be("€42.17");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Money.ToString(default(string)).Should().Be(Svo.Money.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Money.ToString(string.Empty).Should().Be(Svo.Money.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_zero()
+    {
+        using (CultureInfoScope.NewInvariant())
+        {
+            Money.Zero.ToString().Should().Be("0");
+        }
+    }
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.Money.ToString(FormatProvider.Empty).Should().Be("€42,17");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.Money.ToString("0.0", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '42.2', format: '0.0'");
+    }
+
+    [Test]
+    public void with_string_empty_pattern_uses_nl_BE_decimal_separator()
+    {
+        using (TestCultures.nl_BE.Scoped())
+        {
+            Svo.Money.ToString("0.00").Should().Be("42,17");
+        }
+    }
+
+    [TestCase("nl-BE", null, "ALL 1600,1", "Lekë 1.600,10")]
+    [TestCase("en-GB", null, "EUR 1600.1", "€1,600.10")]
+    [TestCase("en-GB", null, "AED 1600.1", "AED1,600.10")]
+    [TestCase("nl-BE", "0000", "800", "0800")]
+    [TestCase("en-GB", "0000", "800", "0800")]
+    [TestCase("es-EC", "00000.0", "1700", "01700,0")]
+    public void culture_dependent(CultureInfo culture, string format, string input, string formatted)
+    {
+        using (culture.Scoped())
+        {
+            Money.Parse(input).ToString(format).Should().Be(formatted);
+        }
+    }
+
+    [Test]
+    public void with_amount_after_currency_when_positive_pattern_is_set()
+    {
+        using (TestCultures.nl_BE.Scoped())
+        {
+            CultureInfo.CurrentCulture.NumberFormat.CurrencyPositivePattern = 3;
+            Money.Parse("ALL 1600,1").ToString().Should().Be("1.600,10 Lekë");
+        }
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.Money.ToString(provider: null).Should().Be("€ 42,17");
+        }
+    }
+}
+
 public class Supports_type_conversion
 {
     [Test]

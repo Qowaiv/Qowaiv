@@ -71,6 +71,80 @@ public class Can_be_parsed
         }
     }
 }
+
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.HouseNumber.ToString().Should().Be("123456789");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.HouseNumber.ToString(default(string)).Should().Be(Svo.HouseNumber.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.HouseNumber.ToString(string.Empty).Should().Be(Svo.HouseNumber.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_string_empty()
+        => default(HouseNumber).ToString().Should().BeEmpty();
+
+    [Test]
+    public void unknown_value_is_represented_as_unknown()
+        => HouseNumber.Unknown.ToString().Should().Be("?");
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.HouseNumber.ToString(FormatProvider.Empty).Should().Be("123456789");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.HouseNumber.ToString("#,##0", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '123,456,789', format: '#,##0'");
+    }
+
+    [TestCase("nl-BE", "0000", "800", "0800")]
+    [TestCase("en-GB", "0000", "800", "0800")]
+    [TestCase("es-EC", "00000.0", "1700", "01700,0")]
+    public void culture_dependent(CultureInfo culture, string format, string input, string formatted)
+    {
+        using (culture.Scoped())
+        {
+            HouseNumber.Parse(input).ToString(format).Should().Be(formatted);
+        }
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.HouseNumber.ToString(provider: null).Should().Be("123456789");
+        }
+    }
+}
 public class Is_comparable
 {
     [Test]

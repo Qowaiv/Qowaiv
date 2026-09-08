@@ -143,6 +143,77 @@ public class Can_not_be_related_to
        => new LocalDateTime(2017, 06, 11).IsIn(Year.Unknown).Should().BeFalse();
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.LocalDateTime.ToString().Should().Be("11/06/2017 06:15:00");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.LocalDateTime.ToString(default(string)).Should().Be(Svo.LocalDateTime.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.LocalDateTime.ToString(string.Empty).Should().Be(Svo.LocalDateTime.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_0001_01_01_00_00_00()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            default(LocalDateTime).ToString().Should().Be("01/01/0001 00:00:00");
+        }
+    }
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.LocalDateTime.ToString(FormatProvider.Empty).Should().Be("11/6/2017 06:15:00");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).ToString("M:d & h:m", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '6:13 & 10:10', format: 'M:d & h:m'");
+    }
+
+    [Test]
+    public void with_string_empty_pattern_formats_milliseconds()
+    {
+        var formatted = new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).ToString(@"yyyy-MM-dd\THH:mm:ss.FFFFFFF");
+        formatted.Should().Be("1988-06-13T22:10:05.001");
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.LocalDateTime.ToString(provider: null).Should().Be("11-06-2017 06:15:00");
+        }
+    }
+}
+
 public class Is_comparable
 {
     [Test]

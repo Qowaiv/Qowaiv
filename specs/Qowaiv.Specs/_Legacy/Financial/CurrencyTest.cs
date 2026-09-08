@@ -180,63 +180,6 @@ public class CurrencyTest
 
     #endregion
 
-    #region IFormattable / ToString tests
-
-    [Test]
-    public void ToString_Empty_StringEmpty()
-    {
-        var act = Currency.Empty.ToString();
-        var exp = "";
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void ToString_Unknown_QuestionMark()
-    {
-        var act = Currency.Unknown.ToString();
-        var exp = "?";
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void ToString_CustomFormatter_SupportsCustomFormatting()
-    {
-        var act = TestStruct.ToString("$: e", FormatProvider.CustomFormatter);
-        var exp = "Unit Test Formatter, value: '€: Euro', format: '$: e'";
-
-        act.Should().Be(exp);
-    }
-    [Test]
-    public void ToString_TestStruct_ComplexPattern()
-    {
-        var act = TestStruct.ToString(string.Empty);
-        var exp = "EUR";
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void ToString_ValueDutchBelgium_AreEqual()
-    {
-        using (TestCultures.nl_BE.Scoped())
-        {
-            var act = Currency.Parse("Amerikaanse dollar").ToString();
-            var exp = "USD";
-            act.Should().Be(exp);
-        }
-    }
-
-    [Test]
-    public void ToString_ValueEnglishGreatBritain_AreEqual()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            var act = Currency.Parse("pound sterling").ToString("f");
-            var exp = "Pound sterling";
-            act.Should().Be(exp);
-        }
-    }
-    #endregion
-
     #region IFormatProvider
 
     [Test]

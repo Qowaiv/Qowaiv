@@ -49,27 +49,6 @@ public class LocalDateTimeTest
 
     #endregion
 
-    #region IFormattable / ToString tests
-
-    [Test]
-    public void ToString_CustomFormatter_SupportsCustomFormatting()
-    {
-        var act = TestStruct.ToString("M:d & h:m", FormatProvider.CustomFormatter);
-        var exp = "Unit Test Formatter, value: '6:13 & 10:10', format: 'M:d & h:m'";
-
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void ToString_TestStruct_ComplexPattern()
-    {
-        var act = TestStruct.ToString(@"yyyy-MM-dd\THH:mm:ss.FFFFFFF");
-        var exp = "1988-06-13T22:10:05.001";
-        act.Should().Be(exp);
-    }
-
-    #endregion
-
     #region IEquatable tests
 
     [Test]

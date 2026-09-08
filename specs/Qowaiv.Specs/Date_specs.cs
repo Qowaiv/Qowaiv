@@ -160,6 +160,81 @@ public class Can_not_be_related_to
        => new Date(2017, 06, 11).IsIn(Year.Unknown).Should().BeFalse();
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Date.ToString().Should().Be("11/06/2017");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Date.ToString(default(string)).Should().Be(Svo.Date.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Date.ToString(string.Empty).Should().Be(Svo.Date.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_0001_01_01()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            default(Date).ToString().Should().Be("01/01/0001");
+        }
+    }
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.Date.ToString(FormatProvider.Empty).Should().Be("11/6/2017");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = new Date(1970, 02, 14).ToString("d_M_yy", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '14_2_70', format: 'd_M_yy'");
+    }
+
+    [TestCase("en-GB", 1988, 8, 8, "yy-M-d", "88-8-8")]
+    [TestCase("es-EC", 1988, 8, 8, "d", "8/8/1988")]
+    [TestCase("nl-BE", 1970, 2, 14, "", "14/02/1970")]
+    public void culture_dependent(CultureInfo culture, int year, int month, int day, string format, string formatted)
+    {
+        using (culture.Scoped())
+        {
+            new Date(year, month, day).ToString(format).Should().Be(formatted);
+        }
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.Date.ToString(provider: null).Should().Be("11-06-2017");
+        }
+    }
+}
+
 public class Is_comparable
 {
     [Test]

@@ -99,6 +99,107 @@ public class Can_be_parsed
         => StreamSize.TryParse("123456789").Should().Be(Svo.StreamSize);
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.StreamSize.ToString().Should().Be("123456789 byte");
+        }
+    }
+
+    [Test]
+    public void with_null_format()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.StreamSize.ToString(default(string)).Should().Be("123456789");
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.StreamSize.ToString(string.Empty).Should().Be("123456789");
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_zero()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            default(StreamSize).ToString().Should().Be("0 byte");
+        }
+    }
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.StreamSize.ToString(FormatProvider.Empty).Should().Be("123456789 byte");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.StreamSize.ToString("0.0 F", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '123.5 Megabyte', format: '0.0 F'");
+    }
+
+    [TestCase("nl-NL", "#,##0b", 123456789, "123.456.789b")]
+    [TestCase("nl-NL", "#,##0.00 kB", 123456789, "123.456,79 kB")]
+    [TestCase("nl-BE", "0.0 MegaByte", 123456789, "123,5 MegaByte")]
+    [TestCase("nl-BE", "0.0 F", -123456789, "-123,5 Megabyte")]
+    [TestCase("nl-BE", "0.00GB", 123456789, "0,12GB")]
+    [TestCase("de-DE", "0.0000 GiB", 123456789, "0,1150 GiB")]
+    [TestCase("nl-BE", "tb", 1_000_000_000_000_000L, "1000tb")]
+    [TestCase("nl-BE", " petabyte", 1_000_000_000_000L, "0,001 petabyte")]
+    [TestCase("nl-BE", "#,##0.## Exabyte", long.MaxValue, "9,22 Exabyte")]
+    [TestCase("nl-BE", "#,##0.## F", 123456789, "123,46 Megabyte")]
+    [TestCase("nl-BE", "0 f", 123456789, "123 megabyte")]
+    [TestCase("nl-BE", "0000 S", 123456789, "0123 MB")]
+    [TestCase("nl-BE", "0 s", 123456789, "123 mb")]
+    [TestCase("nl-BE", "0s", 123456789, "123mb")]
+    [TestCase("nl-BE", "0.0 si", 123456789, "117,7 mib")]
+    public void format_dependent(CultureInfo culture, string format, long bytes, string formatted)
+    {
+        using (culture.Scoped())
+        {
+            ((StreamSize)bytes).ToString(format).Should().Be(formatted);
+        }
+    }
+
+    [TestCase("nl-BE", null, "1600,1", "1600 byte")]
+    [TestCase("en-GB", null, "1600.1", "1600 byte")]
+    [TestCase("nl-BE", "0000 byte", "800", "0800 byte")]
+    [TestCase("en-GB", "0000", "800", "0800")]
+    [TestCase("es-EC", "00000.0", "1700", "01700,0")]
+    public void culture_dependent(CultureInfo culture, string format, string input, string formatted)
+    {
+        using (culture.Scoped())
+        {
+            var act = format is null ? StreamSize.Parse(input).ToString() : StreamSize.Parse(input).ToString(format);
+            act.Should().Be(formatted);
+        }
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.StreamSize.ToString(provider: null).Should().Be("123456789 byte");
+        }
+    }
+}
+
 public class Has_humanizer_creators
 {
     [Test]

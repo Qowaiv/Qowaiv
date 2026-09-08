@@ -81,6 +81,83 @@ public class Can_be_parsed
     }
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Elo.ToString().Should().Be("1732.4");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Elo.ToString(default(string)).Should().Be(Svo.Elo.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Elo.ToString(string.Empty).Should().Be(Svo.Elo.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_zero()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            default(Elo).ToString().Should().Be("0");
+        }
+    }
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.Elo.ToString(FormatProvider.Empty).Should().Be("1732,4");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.Elo.ToString("00000", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '01732', format: '00000'");
+    }
+
+    [TestCase("nl-BE", null, "1600,1", "1600,1")]
+    [TestCase("en-GB", null, "1600.1", "1600.1")]
+    [TestCase("nl-BE", "0000", "800", "0800")]
+    [TestCase("en-GB", "0000", "800", "0800")]
+    [TestCase("es-EC", "00000.0", "1700", "01700,0")]
+    public void culture_dependent(CultureInfo culture, string format, string input, string formatted)
+    {
+        using (culture.Scoped())
+        {
+            Elo.Parse(input).ToString(format).Should().Be(formatted);
+        }
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.Elo.ToString(provider: null).Should().Be("1732,4");
+        }
+    }
+}
+
 public class Is_comparable
 {
     [Test]

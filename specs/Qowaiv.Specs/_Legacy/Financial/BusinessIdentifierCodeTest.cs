@@ -123,42 +123,6 @@ public class BusinessIdentifierCodeTest
 
     #endregion
 
-    #region IFormattable / ToString tests
-
-    [Test]
-    public void ToString_Empty_StringEmpty()
-    {
-        var act = BusinessIdentifierCode.Empty.ToString();
-        var exp = "";
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void ToString_Unknown_QuestionMark()
-    {
-        var act = BusinessIdentifierCode.Unknown.ToString();
-        var exp = "?";
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void ToString_CustomFormatter_SupportsCustomFormatting()
-    {
-        var act = TestStruct.ToString("Unit Test Format", FormatProvider.CustomFormatter);
-        var exp = "Unit Test Formatter, value: 'AEGONL2UXXX', format: 'Unit Test Format'";
-
-        act.Should().Be(exp);
-    }
-    [Test]
-    public void ToString_TestStruct_ComplexPattern()
-    {
-        var act = TestStruct.ToString(string.Empty);
-        var exp = "AEGONL2UXXX";
-        act.Should().Be(exp);
-    }
-
-    #endregion
-
     #region IEquatable tests
 
     [Test]

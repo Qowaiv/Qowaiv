@@ -76,6 +76,88 @@ public class Can_be_parsed
     }
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.DateSpan.ToString().Should().Be("10Y+3M-5D");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.DateSpan.ToString(default(string)).Should().Be(Svo.DateSpan.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.DateSpan.ToString(string.Empty).Should().Be(Svo.DateSpan.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_0Y0M0D()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            default(DateSpan).ToString().Should().Be("0Y+0M+0D");
+        }
+    }
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.DateSpan.ToString(FormatProvider.Empty).Should().Be("10Y+3M-5D");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.DateSpan.ToString("Unit Test Format", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '10Y+3M-5D', format: 'Unit Test Format'");
+    }
+
+    [TestCase("0Y+0M+0D", 0, 0)]
+    [TestCase("0Y+0M+1D", 0, 1)]
+    [TestCase("0Y+1M+0D", 1, 0)]
+    [TestCase("1Y+0M+0D", 12, 0)]
+    [TestCase("1Y+0M+1D", 12, 1)]
+    [TestCase("1Y+1M+1D", 13, 1)]
+    [TestCase("0Y+0M-11D", 0, -11)]
+    [TestCase("0Y+1M-12D", +1, -12)]
+    [TestCase("0Y-1M-12D", -1, -12)]
+    [TestCase("-1Y-1M+1D", -13, 1)]
+    public void format_dependent(string formatted, int months, int days)
+    {
+        using (CultureInfoScope.NewInvariant())
+        {
+            new DateSpan(months, days).ToString().Should().Be(formatted);
+        }
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.DateSpan.ToString(provider: null).Should().Be("10Y+3M-5D");
+        }
+    }
+}
+
 public class Is_valid
 {
     [TestCase("23Y+0M+0D", "Without starting sign")]

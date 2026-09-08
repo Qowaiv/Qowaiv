@@ -55,55 +55,6 @@ public class WeekDateTest
 
     #endregion
 
-    #region IFormattable / ToString tests
-
-    [Test]
-    public void ToString_CustomFormatter_SupportsCustomFormatting()
-    {
-        var act = TestStruct.ToString("y#W", FormatProvider.CustomFormatter);
-        var exp = "Unit Test Formatter, value: '1997#14', format: 'y#W'";
-
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void ToString_NullFormatProvider_FormattedString()
-    {
-        using (TestCultures.en_US.Scoped())
-        {
-            var act = TestStruct.ToString(@"y-\WW-d", null);
-            var exp = "1997-W14-6";
-
-            act.Should().Be(exp);
-        }
-    }
-
-    [Test]
-    public void ToString_TestStruct_ComplexPattern()
-    {
-        var act = TestStruct.ToString(string.Empty);
-        var exp = "1997-W14-6";
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void ToString_Y1979W3D5FormatWUpper_ComplexPattern()
-    {
-        var act = new WeekDate(1979, 3, 5).ToString(@"y-\WW-d");
-        var exp = "1979-W3-5";
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void ToString_Y1979W3D5FormatWLower_ComplexPattern()
-    {
-        var act = new WeekDate(1979, 3, 5).ToString(@"y-\Ww-d");
-        var exp = "1979-W03-5";
-        act.Should().Be(exp);
-    }
-
-    #endregion
-
     #region IEquatable tests
 
     /// <summary>GetHash should not fail for WeekDate.Empty.</summary>

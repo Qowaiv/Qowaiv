@@ -1,5 +1,11 @@
 namespace Web.Internet_media_type_specs;
 
+public class Has_constant
+{
+    [Test]
+    public void Empty_equals_default() => InternetMediaType.Empty.Should().Be(default);
+}
+
 public class With_domain_logic
 {
     [TestCase(true, "application/x-chess-pgn")]
@@ -11,6 +17,58 @@ public class With_domain_logic
     [TestCase(false, "application/octet-stream")]
     [TestCase(false, "")]
     public void IsKnown_is(bool result, InternetMediaType svo) => svo.IsKnown.Should().Be(result);
+
+    [TestCase(true, "")]
+    [TestCase(false, "?")]
+    [TestCase(false, "application/x-chess-pgn")]
+    public void IsEmpty_is(bool result, InternetMediaType svo) => svo.IsEmpty().Should().Be(result);
+
+    [TestCase(false, "")]
+    [TestCase(true, "?")]
+    [TestCase(false, "application/x-chess-pgn")]
+    public void IsUnknown_is(bool result, InternetMediaType svo) => svo.IsUnknown().Should().Be(result);
+
+    [TestCase(true, "")]
+    [TestCase(true, "?")]
+    [TestCase(false, "application/x-chess-pgn")]
+    public void IsEmptyOrUnknown_is(bool result, InternetMediaType svo) => svo.IsEmptyOrUnknown().Should().Be(result);
+}
+
+public class Has_properties
+{
+    [TestCase("", 0)]
+    [TestCase("application/x-chess-pgn", 23)]
+    public void Length_is(InternetMediaType svo, int length) => svo.Length.Should().Be(length);
+
+    [TestCase("", "")]
+    [TestCase("text/html", "text")]
+    [TestCase("x-conference/x-cooltalk", "x-conference")]
+    [TestCase("application/x-chess-pgn", "application")]
+    public void TopLevel_is(InternetMediaType svo, string topLevel) => svo.TopLevel.Should().Be(topLevel);
+
+    [TestCase("", InternetMediaTopLevelType.None)]
+    [TestCase("text/html", InternetMediaTopLevelType.Text)]
+    [TestCase("x-conference/x-cooltalk", InternetMediaTopLevelType.Unregistered)]
+    [TestCase("application/x-chess-pgn", InternetMediaTopLevelType.Application)]
+    public void TopLevelType_is(InternetMediaType svo, InternetMediaTopLevelType type) => svo.TopLevelType.Should().Be(type);
+
+    [TestCase("", "")]
+    [TestCase("text/html", "html")]
+    [TestCase("x-conference/x-cooltalk", "x-cooltalk")]
+    [TestCase("application/x-chess-pgn", "x-chess-pgn")]
+    public void Subtype_is(InternetMediaType svo, string subtype) => svo.Subtype.Should().Be(subtype);
+
+    [TestCase("", false)]
+    [TestCase("text/html", true)]
+    [TestCase("x-conference/x-cooltalk", false)]
+    [TestCase("application/x-chess-pgn", false)]
+    [TestCase("video/x.test", false)]
+    public void IsRegistered_is(InternetMediaType svo, bool isRegistered) => svo.IsRegistered.Should().Be(isRegistered);
+
+    [TestCase("", InternetMediaSuffixType.None)]
+    [TestCase("application/x-chess-pgn", InternetMediaSuffixType.None)]
+    [TestCase("application/atom+xml", InternetMediaSuffixType.xml)]
+    public void Suffix_is(InternetMediaType svo, InternetMediaSuffixType suffix) => svo.Suffix.Should().Be(suffix);
 }
 
 public class Created_from_file

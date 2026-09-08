@@ -1,5 +1,11 @@
 namespace Web.Internet_media_type_specs;
 
+public class Has_constant
+{
+    [Test]
+    public void Empty_equals_default() => InternetMediaType.Empty.Should().Be(default);
+}
+
 public class With_domain_logic
 {
     [TestCase(true, "application/x-chess-pgn")]
@@ -11,6 +17,58 @@ public class With_domain_logic
     [TestCase(false, "application/octet-stream")]
     [TestCase(false, "")]
     public void IsKnown_is(bool result, InternetMediaType svo) => svo.IsKnown.Should().Be(result);
+
+    [TestCase(true, "")]
+    [TestCase(false, "?")]
+    [TestCase(false, "application/x-chess-pgn")]
+    public void IsEmpty_is(bool result, InternetMediaType svo) => svo.IsEmpty().Should().Be(result);
+
+    [TestCase(false, "")]
+    [TestCase(true, "?")]
+    [TestCase(false, "application/x-chess-pgn")]
+    public void IsUnknown_is(bool result, InternetMediaType svo) => svo.IsUnknown().Should().Be(result);
+
+    [TestCase(true, "")]
+    [TestCase(true, "?")]
+    [TestCase(false, "application/x-chess-pgn")]
+    public void IsEmptyOrUnknown_is(bool result, InternetMediaType svo) => svo.IsEmptyOrUnknown().Should().Be(result);
+}
+
+public class Has_properties
+{
+    [TestCase("", 0)]
+    [TestCase("application/x-chess-pgn", 23)]
+    public void Length_is(InternetMediaType svo, int length) => svo.Length.Should().Be(length);
+
+    [TestCase("", "")]
+    [TestCase("text/html", "text")]
+    [TestCase("x-conference/x-cooltalk", "x-conference")]
+    [TestCase("application/x-chess-pgn", "application")]
+    public void TopLevel_is(InternetMediaType svo, string topLevel) => svo.TopLevel.Should().Be(topLevel);
+
+    [TestCase("", InternetMediaTopLevelType.None)]
+    [TestCase("text/html", InternetMediaTopLevelType.Text)]
+    [TestCase("x-conference/x-cooltalk", InternetMediaTopLevelType.Unregistered)]
+    [TestCase("application/x-chess-pgn", InternetMediaTopLevelType.Application)]
+    public void TopLevelType_is(InternetMediaType svo, InternetMediaTopLevelType type) => svo.TopLevelType.Should().Be(type);
+
+    [TestCase("", "")]
+    [TestCase("text/html", "html")]
+    [TestCase("x-conference/x-cooltalk", "x-cooltalk")]
+    [TestCase("application/x-chess-pgn", "x-chess-pgn")]
+    public void Subtype_is(InternetMediaType svo, string subtype) => svo.Subtype.Should().Be(subtype);
+
+    [TestCase("", false)]
+    [TestCase("text/html", true)]
+    [TestCase("x-conference/x-cooltalk", false)]
+    [TestCase("application/x-chess-pgn", false)]
+    [TestCase("video/x.test", false)]
+    public void IsRegistered_is(InternetMediaType svo, bool isRegistered) => svo.IsRegistered.Should().Be(isRegistered);
+
+    [TestCase("", InternetMediaSuffixType.None)]
+    [TestCase("application/x-chess-pgn", InternetMediaSuffixType.None)]
+    [TestCase("application/atom+xml", InternetMediaSuffixType.xml)]
+    public void Suffix_is(InternetMediaType svo, InternetMediaSuffixType suffix) => svo.Suffix.Should().Be(suffix);
 }
 
 public class Created_from_file
@@ -39,6 +97,46 @@ public class Created_from_file
 
 public class Is_equal_by_value
 {
+    [Test]
+    public void not_equal_to_null()
+        => Svo.InternetMediaType.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.InternetMediaType.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.InternetMediaType.Equals(InternetMediaType.Empty).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.InternetMediaType.Equals(InternetMediaType.Parse("application/x-chess-pgn")).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (InternetMediaType.Parse("application/x-chess-pgn") == Svo.InternetMediaType).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (InternetMediaType.Parse("application/x-chess-pgn") == InternetMediaType.Empty).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (InternetMediaType.Parse("application/x-chess-pgn") != Svo.InternetMediaType).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (InternetMediaType.Parse("application/x-chess-pgn") != InternetMediaType.Empty).Should().BeTrue();
+
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        var l = InternetMediaType.Parse("application/x-chess-pgn");
+        var r = InternetMediaType.Parse("application/X-chess-PGN");
+        l.Equals(r).Should().BeTrue();
+    }
+
     [TestCase("", 0)]
     [TestCase("application/x-chess-pgn", 787633777)]
     public void hash_code_is_value_based(InternetMediaType svo, int hash)
@@ -53,6 +151,28 @@ public class Is_equal_by_value
 public class Can_be_parsed
 {
     [Test]
+    public void from_null_string_represents_Empty()
+        => InternetMediaType.Parse(null).Should().Be(InternetMediaType.Empty);
+
+    [Test]
+    public void from_empty_string_represents_Empty()
+        => InternetMediaType.Parse(string.Empty).Should().Be(InternetMediaType.Empty);
+
+    [Test]
+    public void from_question_mark_represents_Unknown()
+        => InternetMediaType.Parse("?").Should().Be(InternetMediaType.Unknown);
+
+    [TestCase("en-GB", "application/x-chess-pgn")]
+    [TestCase("es-EC", "application/x-chess-pgn")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            InternetMediaType.Parse(input).Should().Be(Svo.InternetMediaType);
+        }
+    }
+
+    [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
         using (TestCultures.en_GB.Scoped())
@@ -62,6 +182,18 @@ public class Can_be_parsed
                 .WithMessage("Not a valid internet media type");
         }
     }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => InternetMediaType.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => InternetMediaType.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+        => InternetMediaType.TryParse("application/x-chess-pgn").Should().Be(Svo.InternetMediaType);
 }
 
 public class Supports_type_conversion
@@ -107,10 +239,103 @@ public class Supports_type_conversion
     }
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.InternetMediaType.ToString().Should().Be("application/x-chess-pgn");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.InternetMediaType.ToString(default(string)).Should().Be(Svo.InternetMediaType.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.InternetMediaType.ToString(string.Empty).Should().Be(Svo.InternetMediaType.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_string_empty()
+        => default(InternetMediaType).ToString().Should().BeEmpty();
+
+    [Test]
+    public void unknown_value_is_represented_as_unknown()
+        => InternetMediaType.Unknown.ToString().Should().Be("application/octet-stream");
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.InternetMediaType.ToString(FormatProvider.Empty).Should().Be("application/x-chess-pgn");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.InternetMediaType.ToString("Unit Test Format", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: 'application/x-chess-pgn', format: 'Unit Test Format'");
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.InternetMediaType.ToString(provider: null).Should().Be("application/x-chess-pgn");
+        }
+    }
+}
+
 public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.InternetMediaType.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_InternetMediaType_as_object()
+    {
+        object obj = Svo.InternetMediaType;
+        Svo.InternetMediaType.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_InternetMediaType_only()
+        => new object().Invoking(Svo.InternetMediaType.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            InternetMediaType.Empty,
+            InternetMediaType.Empty,
+            InternetMediaType.Parse("audio/mp3"),
+            InternetMediaType.Parse("image/jpeg"),
+            InternetMediaType.Parse("text/x-markdown"),
+            InternetMediaType.Parse("video/quicktime"),
+        };
+
+        var list = new List<InternetMediaType> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
 }
 
 public class Supports_JSON_serialization
@@ -161,4 +386,43 @@ public class Is_Open_API_data_type
             type: "string",
             format: "internet-media-type",
             nullable: true));
+}
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.InternetMediaType);
+        xml.Should().Be("application/x-chess-pgn");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<InternetMediaType>("application/x-chess-pgn");
+        svo.Should().Be(Svo.InternetMediaType);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.InternetMediaType);
+        Svo.InternetMediaType.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.InternetMediaType);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.InternetMediaType;
+        obj.GetSchema().Should().BeNull();
+    }
 }

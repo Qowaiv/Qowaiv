@@ -1,7 +1,108 @@
 namespace Globalization.Country_specs;
 
+public class Has_constant
+{
+    [Test]
+    public void Empty_equals_default() => Country.Empty.Should().Be(default);
+}
+
+public class Has_properties
+{
+    [TestCase("", "")]
+    [TestCase("", "?")]
+    [TestCase("+379", "VA")]
+    public void CallingCode(string code, Country svo) => svo.CallingCode.Should().Be(code);
+
+    [TestCase("", "")]
+    [TestCase("?", "?")]
+    [TestCase("VA", "VA")]
+    public void Name(string name, Country svo)
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            svo.Name.Should().Be(name);
+        }
+    }
+
+    [TestCase(0, "")]
+    [TestCase(999, "?")]
+    [TestCase(336, "VA")]
+    public void IsoNumericCode(int code, Country svo) => svo.IsoNumericCode.Should().Be(code);
+}
+
+public class Current
+{
+    [Test]
+    public void for_current_culture_de_DE_is_DE()
+    {
+        using (TestCultures.de_DE.Scoped())
+        {
+            Country.Current.Should().Be(Country.DE);
+        }
+    }
+
+    [Test]
+    public void for_current_culture_es_EC_is_EC()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Country.Current.Should().Be(Country.EC);
+        }
+    }
+
+    [Test]
+    public void for_current_culture_en_is_empty()
+    {
+        using (TestCultures.en.Scoped())
+        {
+            Country.Current.Should().Be(Country.Empty);
+        }
+    }
+}
+
+public class Can_be_created
+{
+    [Test]
+    public void from_null_RegionInfo_is_empty()
+        => Country.Create((RegionInfo?)null).Should().Be(Country.Empty);
+
+    [Test]
+    public void from_null_CultureInfo_is_empty()
+        => Country.Create((CultureInfo?)null).Should().Be(Country.Empty);
+
+    [Test]
+    public void from_RegionInfo_NL_is_NL()
+        => Country.Create(new RegionInfo("NL")).Should().Be(Country.NL);
+
+    [Test]
+    public void from_invariant_culture_is_empty()
+        => Country.Create(CultureInfo.InvariantCulture).Should().Be(Country.Empty);
+
+    [Test]
+    public void from_neutral_culture_es_is_empty()
+        => Country.Create(new CultureInfo("es")).Should().Be(Country.Empty);
+
+    [Test]
+    public void from_culture_es_EC_is_EC()
+        => Country.Create(new CultureInfo("es-EC")).Should().Be(Country.EC);
+
+    [Test]
+    public void from_region_info_CS_is_CSXX()
+        => Country.Create(new RegionInfo("CS")).Should().Be(Country.CSXX);
+}
+
 public class With_domain_logic
 {
+    [TestCase(true, "")]
+    [TestCase(false, "?")]
+    [TestCase(false, "VA")]
+    public void IsEmpty_returns(bool result, Country svo) => svo.IsEmpty().Should().Be(result);
+
+    [TestCase(true, "")]
+    [TestCase(true, "?")]
+    [TestCase(false, "VA")]
+    public void IsEmptyOrUnknown_returns(bool result, Country svo) => svo.IsEmptyOrUnknown().Should().Be(result);
+
     [TestCase(true, "VA")]
     [TestCase(true, "?")]
     [TestCase(false, "")]
@@ -114,6 +215,28 @@ public class Exists
 public class Can_be_parsed
 {
     [Test]
+    public void from_null_string_represents_Empty()
+        => Country.Parse(null).Should().Be(Country.Empty);
+
+    [Test]
+    public void from_empty_string_represents_Empty()
+        => Country.Parse(string.Empty).Should().Be(Country.Empty);
+
+    [Test]
+    public void from_question_mark_represents_Unknown()
+        => Country.Parse("?").Should().Be(Country.Unknown);
+
+    [TestCase("en-GB", "VA")]
+    [TestCase("nl-NL", "VA")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            Country.Parse(input).Should().Be(Svo.Country);
+        }
+    }
+
+    [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
         using (TestCultures.en_GB.Scoped())
@@ -123,6 +246,18 @@ public class Can_be_parsed
                 .WithMessage("Not a valid country");
         }
     }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => Country.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => Country.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+        => Country.TryParse("VA").Should().Be(Svo.Country);
 }
 
 public class Has_custom_formatting
@@ -184,6 +319,53 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.Country.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_Country_as_object()
+    {
+        object obj = Svo.Country;
+        Svo.Country.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_Country_only()
+        => new object().Invoking(Svo.Country.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        Country[] sorted =
+        [
+            Country.Empty,
+            Country.Empty,
+            Country.AE,
+            Country.BE,
+            Country.CU,
+            Country.DO,
+        ];
+
+        var list = new List<Country> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
+}
+
+public class Casts
+{
+    [Test]
+    public void implicitly_from_RegionInfo()
+    {
+        Country casted = new RegionInfo("VA");
+        casted.Should().Be(Svo.Country);
+    }
+
+    [Test]
+    public void explicitly_to_RegionInfo()
+    {
+        var casted = (RegionInfo)Svo.Country;
+        casted.Should().Be(new RegionInfo("VA"));
+    }
 }
 
 public class Supports_type_conversion
@@ -269,6 +451,49 @@ public class Supports_JSON_serialization
 
 public class Is_equal_by_value
 {
+    [Test]
+    public void not_equal_to_null()
+        => Svo.Country.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.Country.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.Country.Equals(Country.Empty).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.Country.Equals(Country.Parse("VA")).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (Country.Parse("VA") == Svo.Country).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (Country.Parse("VA") == Country.Empty).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (Country.Parse("VA") != Svo.Country).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (Country.Parse("VA") != Country.Empty).Should().BeTrue();
+
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        using (TestCultures.nl_NL.Scoped())
+        {
+            var l = Country.Parse("België");
+            var r = Country.Parse("belgie");
+            l.Equals(r).Should().BeTrue();
+        }
+    }
+
     [TestCase("", 0)]
     [TestCase("NL", -1174190069)]
     public void hash_code_is_value_based(Country svo, int hash)
@@ -293,4 +518,43 @@ public class Can_parse
     [Test]
     public void culture_specific()
         => Country.TryParse("モザンビーク", new CultureInfo("ja-JP")).Should().Be(Country.MZ);
+}
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.Country);
+        xml.Should().Be("VA");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<Country>("VA");
+        svo.Should().Be(Svo.Country);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.Country);
+        Svo.Country.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.Country);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.Country;
+        obj.GetSchema().Should().BeNull();
+    }
 }

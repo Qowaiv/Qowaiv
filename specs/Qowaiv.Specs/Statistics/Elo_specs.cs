@@ -22,6 +22,18 @@ public class Is_invalid
     public void for_garbage() => Elo.TryParse("Not an Elo").Should().BeNull();
 }
 
+public class Has_constant
+{
+    [Test]
+    public void Zero_equals_default() => Elo.Zero.Should().Be(default);
+
+    [Test]
+    public void MinValue_equals_double_MinValue() => Elo.MinValue.Should().Be((Elo)double.MinValue);
+
+    [Test]
+    public void MaxValue_equals_double_MaxValue() => Elo.MaxValue.Should().Be((Elo)double.MaxValue);
+}
+
 public class Is_equal_by_value
 {
     [Test]
@@ -56,6 +68,14 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Elo.Create(1732.4) != Elo.MinValue).Should().BeTrue();
 
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        var l = Elo.Parse("1600", CultureInfo.InvariantCulture);
+        var r = Elo.Parse("1,600.00*", CultureInfo.InvariantCulture);
+        l.Equals(r).Should().BeTrue();
+    }
+
     [TestCase(0.0, 0)]
     [TestCase(1732.4, -22135344)]
     public void hash_code_is_value_based(Elo svo, int hash)
@@ -70,6 +90,20 @@ public class Is_equal_by_value
 public class Can_be_parsed
 {
     [Test]
+    public void from_elo_string()
+        => Elo.Parse("1400", CultureInfo.InvariantCulture).Should().Be(Elo.Create(1400));
+
+    [TestCase("en-GB", "1732.4")]
+    [TestCase("es-EC", "1732,4")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            Elo.Parse(input).Should().Be(Svo.Elo);
+        }
+    }
+
+    [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
         using (TestCultures.en_GB.Scoped())
@@ -79,12 +113,271 @@ public class Can_be_parsed
                 .WithMessage("Not a valid Elo");
         }
     }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => Elo.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => Elo.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Elo.TryParse("1732.4").Should().Be(Svo.Elo);
+        }
+    }
+}
+
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Elo.ToString().Should().Be("1732.4");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Elo.ToString(default(string)).Should().Be(Svo.Elo.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Elo.ToString(string.Empty).Should().Be(Svo.Elo.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_zero()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            default(Elo).ToString().Should().Be("0");
+        }
+    }
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.Elo.ToString(FormatProvider.Empty).Should().Be("1732,4");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.Elo.ToString("00000", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '01732', format: '00000'");
+    }
+
+    [TestCase("nl-BE", null, "1600,1", "1600,1")]
+    [TestCase("en-GB", null, "1600.1", "1600.1")]
+    [TestCase("nl-BE", "0000", "800", "0800")]
+    [TestCase("en-GB", "0000", "800", "0800")]
+    [TestCase("es-EC", "00000.0", "1700", "01700,0")]
+    public void culture_dependent(CultureInfo culture, string format, string input, string formatted)
+    {
+        using (culture.Scoped())
+        {
+            Elo.Parse(input).ToString(format).Should().Be(formatted);
+        }
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.Elo.ToString(provider: null).Should().Be("1732,4");
+        }
+    }
+}
+
+public class Casts
+{
+    [Test]
+    public void implicitly_from_double()
+    {
+        Elo casted = 1732.4;
+        casted.Should().Be(Svo.Elo);
+    }
+
+    [Test]
+    public void explicitly_to_double()
+    {
+        var casted = (double)Svo.Elo;
+        casted.Should().Be(1732.4);
+    }
+
+    [Test]
+    public void implicitly_from_decimal()
+    {
+        Elo casted = 1732.4m;
+        casted.Should().Be(Svo.Elo);
+    }
+
+    [Test]
+    public void explicitly_to_decimal()
+    {
+        var casted = (decimal)Svo.Elo;
+        casted.Should().Be(1732.4m);
+    }
+
+    [Test]
+    public void implicitly_from_int()
+    {
+        Elo casted = 1732;
+        casted.Should().Be(Elo.Create(1732));
+    }
+
+    [Test]
+    public void explicitly_to_int()
+    {
+        var casted = (int)Svo.Elo;
+        casted.Should().Be(1732);
+    }
 }
 
 public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.Elo.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_Elo_as_object()
+    {
+        object obj = Svo.Elo;
+        Svo.Elo.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_Elo_only()
+        => new object().Invoking(Svo.Elo.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new Elo[]
+        {
+            Elo.Zero,
+            Elo.Zero,
+            1601,
+            2371,
+            2416,
+            2601,
+        };
+
+        var list = new List<Elo> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        Elo smaller = 17;
+        Elo bigger = 19;
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        Elo left = 17;
+        Elo right = 17;
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
+}
+
+public class Can_be_operated_on
+{
+    [Test]
+    public void add()
+    {
+        Elo l = 1600;
+        Elo r = 100;
+        (l + r).Should().Be(1700);
+    }
+
+    [Test]
+    public void subtract()
+    {
+        Elo l = 1600;
+        Elo r = 100;
+        (l - r).Should().Be(1500);
+    }
+
+    [Test]
+    public void divide()
+    {
+        Elo act = 1600m;
+        act /= 2.0;
+        act.Should().Be(800);
+    }
+
+    [Test]
+    public void multiply()
+    {
+        Elo act = 1600m;
+        act *= 2.0;
+        act.Should().Be(3200);
+    }
+
+    [Test]
+    public void increment()
+    {
+        Elo act = 1600;
+        act++;
+        act.Should().Be(1601);
+    }
+
+    [Test]
+    public void decrement()
+    {
+        Elo act = 1600;
+        act--;
+        act.Should().Be(1599);
+    }
+
+    [Test]
+    public void negate()
+    {
+        Elo elo = 1600;
+        (-elo).Should().Be(-(Elo)1600);
+    }
+
+    [Test]
+    public void plus()
+    {
+        Elo act = 1600;
+        act = +act;
+        act.Should().Be(1600);
+    }
 }
 
 public class Is_Finite_only
@@ -153,16 +446,6 @@ public class Supports_type_conversion
     [Test]
     public void to_double()
         => Converting.To<double>().From(Svo.Elo).Should().Be(1732.4);
-
-    [TestCase("0", 0)]
-    [TestCase("1732.4", -22135344)]
-    public void hash_code_is_value_based(Elo svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
 }
 
 public class Supports_JSON_serialization
@@ -209,4 +492,43 @@ public class Is_Open_API_data_type
             example: 1600d,
             type: "number",
             format: "elo"));
+}
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.Elo);
+        xml.Should().Be("1732.4");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<Elo>("1732.4");
+        svo.Should().Be(Svo.Elo);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.Elo);
+        Svo.Elo.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.Elo);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.Elo;
+        obj.GetSchema().Should().BeNull();
+    }
 }

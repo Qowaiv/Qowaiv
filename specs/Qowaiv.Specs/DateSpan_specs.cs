@@ -6,10 +6,127 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.DateSpan.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_DateSpan_as_object()
+    {
+        object obj = Svo.DateSpan;
+        Svo.DateSpan.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_DateSpan_only()
+        => new object().Invoking(Svo.DateSpan.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            new DateSpan(0, 0, -1),
+            DateSpan.Zero,
+            DateSpan.Zero,
+            new DateSpan(1, 2, 0),
+            new DateSpan(0, 0, 500),
+            new DateSpan(4, 0, -40),
+        };
+
+        var list = new List<DateSpan> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        DateSpan smaller = new(10, 3, -5);
+        DateSpan bigger = new(10, 3, 2);
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        DateSpan left = new(10, 3, -5);
+        DateSpan right = new(10, 3, -5);
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
+}
+
+public class Has_constant
+{
+    [Test]
+    public void Zero_equals_default() => DateSpan.Zero.Should().Be(default);
+
+    [Test]
+    public void MaxValue_equals_DateMaxDateMin()
+        => DateSpan.Subtract(Date.MaxValue, Date.MinValue).Should().Be(DateSpan.MaxValue);
+
+    [Test]
+    public void MinValue_equals_DateMinDateMax()
+        => DateSpan.Subtract(Date.MinValue, Date.MaxValue).Should().Be(DateSpan.MinValue);
+}
+
+public class Has_properties
+{
+    [TestCase(1, 2, +3)]
+    [TestCase(0, 0, +3)]
+    [TestCase(9, 6, +0)]
+    [TestCase(9, 6, -1)]
+    [TestCase(-9, -6, -1)]
+    public void days(int years, int months, int days)
+        => new DateSpan(years, months, days).Days.Should().Be(days);
+
+    [TestCase(1, 2, +3)]
+    [TestCase(0, 0, +3)]
+    [TestCase(9, 6, +0)]
+    [TestCase(9, 6, -1)]
+    [TestCase(-9, -6, -1)]
+    public void months(int years, int months, int days)
+        => new DateSpan(years, months, days).Months.Should().Be(months);
+
+    [TestCase(1, 2, +3)]
+    [TestCase(0, 0, +3)]
+    [TestCase(9, 6, +0)]
+    [TestCase(9, 6, -1)]
+    [TestCase(-9, -6, -1)]
+    public void years(int years, int months, int days)
+        => new DateSpan(years, months, days).Years.Should().Be(years);
+
+    [TestCase(014, 1, 2, +3)]
+    [TestCase(012, 1, 0, +3)]
+    [TestCase(117, 9, 9, +0)]
+    [TestCase(006, 0, 6, -1)]
+    [TestCase(-19, -1, -7, -1)]
+    public void total_months(int total, int years, int months, int days)
+        => new DateSpan(years, months, days).TotalMonths.Should().Be(total);
 }
 
 public class Can_be_parsed
 {
+    [Test]
+    public void from_date_span_string()
+        => DateSpan.Parse("5Y+3M+2D", CultureInfo.InvariantCulture).Should().Be(new DateSpan(5, 3, 2));
+
+    [TestCase("en-GB", "10Y+3M-5D")]
+    [TestCase("es-EC", "10Y+3M-5D")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            DateSpan.Parse(input).Should().Be(Svo.DateSpan);
+        }
+    }
+
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
@@ -18,6 +135,105 @@ public class Can_be_parsed
             "invalid input".Invoking(DateSpan.Parse)
                 .Should().Throw<FormatException>()
                 .WithMessage("Not a valid date span");
+        }
+    }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => DateSpan.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => DateSpan.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            DateSpan.TryParse(Svo.DateSpan.ToString()).Should().Be(Svo.DateSpan);
+        }
+    }
+}
+
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.DateSpan.ToString().Should().Be("10Y+3M-5D");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.DateSpan.ToString(default(string)).Should().Be(Svo.DateSpan.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.DateSpan.ToString(string.Empty).Should().Be(Svo.DateSpan.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_0Y0M0D()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            default(DateSpan).ToString().Should().Be("0Y+0M+0D");
+        }
+    }
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.DateSpan.ToString(FormatProvider.Empty).Should().Be("10Y+3M-5D");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.DateSpan.ToString("Unit Test Format", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '10Y+3M-5D', format: 'Unit Test Format'");
+    }
+
+    [TestCase("0Y+0M+0D", 0, 0)]
+    [TestCase("0Y+0M+1D", 0, 1)]
+    [TestCase("0Y+1M+0D", 1, 0)]
+    [TestCase("1Y+0M+0D", 12, 0)]
+    [TestCase("1Y+0M+1D", 12, 1)]
+    [TestCase("1Y+1M+1D", 13, 1)]
+    [TestCase("0Y+0M-11D", 0, -11)]
+    [TestCase("0Y+1M-12D", +1, -12)]
+    [TestCase("0Y-1M-12D", -1, -12)]
+    [TestCase("-1Y-1M+1D", -13, 1)]
+    public void format_dependent(string formatted, int months, int days)
+    {
+        using (CultureInfoScope.NewInvariant())
+        {
+            new DateSpan(months, days).ToString().Should().Be(formatted);
+        }
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.DateSpan.ToString(provider: null).Should().Be("10Y+3M-5D");
         }
     }
 }
@@ -50,6 +266,59 @@ public class Is_invalid
     [TestCase("Not a date span", "Garbage")]
     public void For(string str, string because)
         => DateSpan.TryParse(str).Should().BeNull(because);
+}
+
+public class Is_equal_by_value
+{
+    [Test]
+    public void not_equal_to_null()
+        => Svo.DateSpan.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.DateSpan.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.DateSpan.Equals(DateSpan.Zero).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.DateSpan.Equals(new DateSpan(10, 3, -5)).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (new DateSpan(10, 3, -5) == Svo.DateSpan).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (new DateSpan(10, 3, -5) == DateSpan.Zero).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (new DateSpan(10, 3, -5) != Svo.DateSpan).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (new DateSpan(10, 3, -5) != DateSpan.Zero).Should().BeTrue();
+
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        var l = DateSpan.Parse("3Y-0M+3D", CultureInfo.InvariantCulture);
+        var r = DateSpan.Parse("-0y+36m+3d", CultureInfo.InvariantCulture);
+        l.Equals(r).Should().BeTrue();
+    }
+
+    [TestCase("0Y+0M+0D", 0)]
+    [TestCase("10Y+3M-5D", -128)]
+    public void hash_code_is_value_based(DateSpan svo, int hash)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hash);
+        }
+    }
 }
 
 public class Supports_type_conversion
@@ -125,6 +394,45 @@ public class Is_Open_API_data_type
            pattern: @"[+-]?[0-9]+Y[+-][0-9]+M[+-][0-9]+D"));
 }
 
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.DateSpan);
+        xml.Should().Be("10Y+3M-5D");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<DateSpan>("10Y+3M-5D");
+        svo.Should().Be(Svo.DateSpan);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.DateSpan);
+        Svo.DateSpan.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.DateSpan);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.DateSpan;
+        obj.GetSchema().Should().BeNull();
+    }
+}
+
 public class Can_be_operated
 {
     [Test]
@@ -154,6 +462,18 @@ public class Can_be_added_to
 
 public class Can_create
 {
+    [Test]
+    public void from_days()
+        => DateSpan.FromDays(4).Should().Be(new DateSpan(0, 4));
+
+    [Test]
+    public void from_months()
+        => DateSpan.FromMonths(17).Should().Be(new DateSpan(17, 0));
+
+    [Test]
+    public void from_years()
+        => DateSpan.FromYears(17).Should().Be(new DateSpan(17, 0, 0));
+
     [Test]
     public void Age_form_Date_without_months()
     {

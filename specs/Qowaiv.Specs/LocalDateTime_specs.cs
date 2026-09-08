@@ -7,6 +7,9 @@ public class Has_constant
 
     [Test]
     public void MaxValue_equal_to_9999Y_12M_31D() => LocalDateTime.MaxValue.Should().Be(new(DateTime.MaxValue.Ticks));
+
+    [Test]
+    public void MinValue_equals_default() => LocalDateTime.MinValue.Should().Be(default);
 }
 
 public class Is_invalid
@@ -56,6 +59,17 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (new LocalDateTime(2017, 06, 11, 06, 15, 00) != LocalDateTime.MinValue).Should().BeTrue();
 
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            var l = LocalDateTime.Parse("14 february 2010", CultureInfo.InvariantCulture);
+            var r = LocalDateTime.Parse("2010-02-14", CultureInfo.InvariantCulture);
+            l.Equals(r).Should().BeTrue();
+        }
+    }
+
     [TestCase("0001-01-01", 0)]
     [TestCase("2017-06-11 06:15", 533532482)]
     public void hash_code_is_value_based(LocalDateTime svo, int hash)
@@ -70,6 +84,21 @@ public class Is_equal_by_value
 public class Can_be_parsed
 {
     [Test]
+    public void from_local_date_time_string()
+        => LocalDateTime.Parse("26-4-2015 17:07:13", TestCultures.nl_NL)
+        .Should().Be(new LocalDateTime(2015, 04, 26, 17, 07, 13));
+
+    [TestCase("en-GB", "11/06/2017 06:15:00")]
+    [TestCase("nl-NL", "11-06-2017 06:15:00")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            LocalDateTime.Parse(input).Should().Be(Svo.LocalDateTime);
+        }
+    }
+
+    [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
         using (TestCultures.en_GB.Scoped())
@@ -77,6 +106,23 @@ public class Can_be_parsed
             "invalid input".Invoking(LocalDateTime.Parse)
                 .Should().Throw<FormatException>()
                 .WithMessage("Not a valid date");
+        }
+    }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => LocalDateTime.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => LocalDateTime.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            LocalDateTime.TryParse(Svo.LocalDateTime.ToString()).Should().Be(Svo.LocalDateTime);
         }
     }
 }
@@ -94,6 +140,82 @@ public class Can_be_adjusted_with
     [Test]
     public void Month_span()
         => new LocalDateTime(2017, 06, 11).Add(3.Months()).Should().Be(new LocalDateTime(2017, 09, 11));
+
+    [Test]
+    public void increment()
+    {
+        var ldt = new LocalDateTime(1988, 06, 13, 22, 10, 05, 001);
+        ldt++;
+        ldt.Should().Be(new LocalDateTime(1988, 06, 14, 22, 10, 05, 001));
+    }
+
+    [Test]
+    public void decrement()
+    {
+        var ldt = new LocalDateTime(1988, 06, 13, 22, 10, 05, 001);
+        ldt--;
+        ldt.Should().Be(new LocalDateTime(1988, 06, 12, 22, 10, 05, 001));
+    }
+
+    [Test]
+    public void adding_TimeSpan()
+        => (new LocalDateTime(1988, 06, 13, 22, 10, 05, 001) + new TimeSpan(25, 30, 15))
+        .Should().Be(new LocalDateTime(1988, 06, 14, 23, 40, 20, 001));
+
+    [Test]
+    public void subtracting_TimeSpan()
+        => (new LocalDateTime(1988, 06, 13, 22, 10, 05, 001) - new TimeSpan(25, 30, 15))
+        .Should().Be(new LocalDateTime(1988, 06, 12, 20, 39, 50, 001));
+
+    [Test]
+    public void subtracting_LocalDateTime_returns_TimeSpan()
+        => (new LocalDateTime(1988, 06, 13, 22, 10, 05, 001) - new LocalDateTime(1988, 06, 11, 20, 10, 05))
+        .Should().Be(new TimeSpan(2, 02, 00, 00, 001));
+
+    [Test]
+    public void add_ticks()
+        => new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).AddTicks(4000001700000L)
+        .Should().Be(new LocalDateTime(1988, 06, 18, 13, 16, 45, 171));
+
+    [Test]
+    public void add_milliseconds()
+        => new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).AddMilliseconds(3 * 24 * 60 * 60 * 1003)
+        .Should().Be(new LocalDateTime(1988, 06, 16, 22, 23, 02, 601));
+
+    [Test]
+    public void add_seconds()
+        => new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).AddSeconds(3 * 24 * 60 * 64)
+        .Should().Be(new LocalDateTime(1988, 06, 17, 02, 58, 05, 001));
+
+    [Test]
+    public void add_minutes()
+        => new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).AddMinutes(2 * 24 * 60)
+        .Should().Be(new LocalDateTime(1988, 06, 15, 22, 10, 05, 001));
+
+    [Test]
+    public void add_hours()
+        => new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).AddHours(41)
+        .Should().Be(new LocalDateTime(1988, 06, 15, 15, 10, 05, 001));
+
+    [Test]
+    public void add_months()
+        => new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).AddMonths(12)
+        .Should().Be(new LocalDateTime(1989, 06, 13, 22, 10, 05, 001));
+
+    [Test]
+    public void adding_MonthSpan()
+        => (new LocalDateTime(1988, 06, 13, 22, 10, 05, 001) + MonthSpan.FromYears(1))
+        .Should().Be(new LocalDateTime(1989, 06, 13, 22, 10, 05, 001));
+
+    [Test]
+    public void subtracting_MonthSpan()
+        => (new LocalDateTime(1988, 06, 13, 22, 10, 05, 001) - MonthSpan.FromMonths(1))
+        .Should().Be(new LocalDateTime(1988, 05, 13, 22, 10, 05, 001));
+
+    [Test]
+    public void add_years()
+        => new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).AddYears(-12)
+        .Should().Be(new LocalDateTime(1976, 06, 13, 22, 10, 05, 001));
 }
 
 public class Can_not_be_adjusted_with
@@ -143,10 +265,111 @@ public class Can_not_be_related_to
        => new LocalDateTime(2017, 06, 11).IsIn(Year.Unknown).Should().BeFalse();
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.LocalDateTime.ToString().Should().Be("11/06/2017 06:15:00");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.LocalDateTime.ToString(default(string)).Should().Be(Svo.LocalDateTime.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.LocalDateTime.ToString(string.Empty).Should().Be(Svo.LocalDateTime.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_0001_01_01_00_00_00()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            default(LocalDateTime).ToString().Should().Be("01/01/0001 00:00:00");
+        }
+    }
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.nl_NL.Scoped())
+        {
+            Svo.LocalDateTime.ToString(FormatProvider.Empty).Should().Be("11-06-2017 06:15:00");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).ToString("M:d & h:m", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '6:13 & 10:10', format: 'M:d & h:m'");
+    }
+
+    [Test]
+    public void with_string_empty_pattern_formats_milliseconds()
+    {
+        var formatted = new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).ToString(@"yyyy-MM-dd\THH:mm:ss.FFFFFFF");
+        formatted.Should().Be("1988-06-13T22:10:05.001");
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.LocalDateTime.ToString(provider: null).Should().Be("11-06-2017 06:15:00");
+        }
+    }
+}
+
 public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.LocalDateTime.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_LocalDateTime_as_object()
+    {
+        object obj = Svo.LocalDateTime;
+        Svo.LocalDateTime.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_LocalDateTime_only()
+        => new object().Invoking(Svo.LocalDateTime.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            LocalDateTime.MinValue,
+            LocalDateTime.MinValue,
+            new LocalDateTime(1900, 10, 01, 22, 10, 16),
+            new LocalDateTime(1963, 08, 23, 23, 59, 15),
+            new LocalDateTime(1999, 12, 05, 04, 13, 14),
+            new LocalDateTime(2010, 07, 13, 00, 44, 13),
+        };
+
+        var list = new List<LocalDateTime> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
 }
 
 public class Supports_type_conversion
@@ -297,6 +520,45 @@ public class Casts
     {
         var casted = (Date)Svo.LocalDateTime;
         casted.Should().Be(Svo.Date);
+    }
+}
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.LocalDateTime);
+        xml.Should().Be("2017-06-11 06:15:00");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<LocalDateTime>("2017-06-11 06:15:00");
+        svo.Should().Be(Svo.LocalDateTime);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.LocalDateTime);
+        Svo.LocalDateTime.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.LocalDateTime);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.LocalDateTime;
+        obj.GetSchema().Should().BeNull();
     }
 }
 

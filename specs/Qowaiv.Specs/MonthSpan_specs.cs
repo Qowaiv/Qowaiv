@@ -2,6 +2,12 @@ using AwesomeAssertions.Extensions;
 
 namespace Month_span_specs;
 
+public class Has_constant
+{
+    [Test]
+    public void Zero_equals_default() => MonthSpan.Zero.Should().Be(default);
+}
+
 public class Guards
 {
     [TestCase(10_000)]
@@ -67,6 +73,14 @@ public class Is_equal_by_value
             svo.GetHashCode().Should().Be(hash);
         }
     }
+
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        var l = MonthSpan.Parse("69", CultureInfo.InvariantCulture);
+        var r = MonthSpan.Parse("5Y+9M", CultureInfo.InvariantCulture);
+        l.Equals(r).Should().BeTrue();
+    }
 }
 
 public class Can_be_parsed
@@ -81,7 +95,50 @@ public class Can_be_parsed
                 .WithMessage("Not a valid month span");
         }
     }
+
+    [Test]
+    public void TryParse_null_returns_true_with_default()
+    {
+        MonthSpan.TryParse(null, out var val).Should().BeTrue();
+        val.Should().Be(default);
+    }
+
+    [Test]
+    public void TryParse_empty_returns_true_with_default()
+    {
+        MonthSpan.TryParse(string.Empty, out var val).Should().BeTrue();
+        val.Should().Be(default);
+    }
+
+    [Test]
+    public void TryParse_string_value_roundtrips()
+    {
+        var parsed = MonthSpan.TryParse("0Y+0M", out var val);
+        parsed.Should().BeTrue();
+        val.ToString().Should().Be("0Y+0M");
+    }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+    {
+        MonthSpan.TryParse("5Y#9M", out var val).Should().BeFalse();
+        val.Should().Be(default);
+    }
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => MonthSpan.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+    {
+        using (new CultureInfoScope("en-GB"))
+        {
+            MonthSpan.TryParse(Svo.MonthSpan.ToString()).Should().Be(Svo.MonthSpan);
+        }
+    }
 }
+
 public class Can_be_created
 {
     [Test]
@@ -90,12 +147,52 @@ public class Can_be_created
         MonthSpan span = Svo.YearSpan;
         span.Should().Be(MonthSpan.FromYears(17));
     }
+
+    [Test]
+    public void from_years_and_months()
+        => new MonthSpan(years: 5, months: 9).Should().Be(MonthSpan.FromMonths(69));
+
+    [Test]
+    public void from_years()
+        => MonthSpan.FromYears(3).Should().Be(MonthSpan.FromMonths(36));
+}
+
+public class Has_custom_formatting
+{
+    [Test]
+    public void Zero_represented_as_0Y_0M()
+        => MonthSpan.Zero.ToString().Should().Be("0Y+0M");
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = MonthSpan.FromMonths(69).ToString("0.00", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '69.00', format: '0.00'");
+    }
+
+    [Test]
+    public void es_EC_formats_with_comma_decimal_separator()
+    {
+        var act = MonthSpan.Parse("1700").ToString("00000.0", new CultureInfo("es-EC"));
+        act.Should().Be("01700,0");
+    }
 }
 
 public class Can_be_transformed
 {
     [Test]
     public void negate() => (-Svo.MonthSpan).Should().Be(MonthSpan.FromMonths(-69));
+
+    [Test]
+    public void plus() => (+Svo.MonthSpan).Should().Be(Svo.MonthSpan);
+
+    [Test]
+    public void add_two_MonthSpans()
+        => (MonthSpan.FromYears(1) + MonthSpan.FromMonths(7)).Should().Be(MonthSpan.FromMonths(19));
+
+    [Test]
+    public void subtract_two_MonthSpans()
+        => (MonthSpan.FromMonths(19) - MonthSpan.FromMonths(6)).Should().Be(MonthSpan.FromMonths(13));
 
     [Test]
     public void increment()
@@ -386,6 +483,62 @@ public class Is_Open_API_data_type
            type: "string",
            format: "month-span",
            pattern: @"[+-]?[0-9]+Y[+-][0-9]+M"));
+}
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.MonthSpan);
+        xml.Should().Be("5Y+9M");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<MonthSpan>("5Y+9M");
+        svo.Should().Be(Svo.MonthSpan);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.MonthSpan);
+        Svo.MonthSpan.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.MonthSpan);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.MonthSpan;
+        obj.GetSchema().Should().BeNull();
+    }
+}
+
+public class Casts
+{
+    [Test]
+    public void explicitly_from_int()
+    {
+        var casted = (MonthSpan)69;
+        casted.Should().Be(Svo.MonthSpan);
+    }
+
+    [Test]
+    public void explicitly_to_int()
+    {
+        var casted = (int)Svo.MonthSpan;
+        casted.Should().Be(69);
+    }
 }
 
 public class Can_be_deconstructed

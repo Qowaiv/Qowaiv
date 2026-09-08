@@ -17,6 +17,9 @@ public class Has_constant
 
     [Test]
     public void MaxValue_represents_9999_12_13() => Date.MaxValue.Should().Be(new Date(9999, 12, 31));
+
+    [Test]
+    public void MinValue_equals_default() => Date.MinValue.Should().Be(default);
 }
 
 public class Is_equal_by_value
@@ -53,6 +56,14 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (new Date(2017, 06, 11) != Date.MinValue).Should().BeTrue();
 
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        var l = Date.Parse("1970-02-14", CultureInfo.InvariantCulture);
+        var r = Date.Parse("14 february 1970", CultureInfo.InvariantCulture);
+        l.Equals(r).Should().BeTrue();
+    }
+
     [TestCase("0001-01-01", 0)]
     [TestCase("2017-06-11", -489585265)]
     public void hash_code_is_value_based(Date svo, int hash)
@@ -67,6 +78,21 @@ public class Is_equal_by_value
 public class Can_be_parsed
 {
     [Test]
+    public void from_ISO_8601_notation()
+        => Date.Parse("1983-05-02", CultureInfo.InvariantCulture).Should().Be(new Date(1983, 05, 02));
+
+    [TestCase("en-US", "06/11/2017")]
+    [TestCase("en-GB", "11/06/2017")]
+    [TestCase("nl-NL", "11-06-2017")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            Date.Parse(input).Should().Be(Svo.Date);
+        }
+    }
+
+    [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
         using (TestCultures.en_GB.Scoped())
@@ -76,6 +102,53 @@ public class Can_be_parsed
                 .WithMessage("Not a valid date");
         }
     }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => Date.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => Date.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Date.TryParse(Svo.Date.ToString()).Should().Be(Svo.Date);
+        }
+    }
+}
+
+public class Can_be_created
+{
+    [Test]
+    public void from_ticks()
+    {
+        var act = new Date(621393984000000017L);
+        act.Should().Be(new Date(1970, 02, 14));
+    }
+}
+
+public class Has_properties
+{
+    [TestCase(1970, 02, 14)]
+    public void year_month_and_day(int year, int month, int day)
+    {
+        var date = new Date(year, month, day);
+        date.Year.Should().Be(year);
+        date.Month.Should().Be(month);
+        date.Day.Should().Be(day);
+    }
+
+    [Test]
+    public void day_of_week()
+        => new Date(1970, 02, 14).DayOfWeek.Should().Be(DayOfWeek.Saturday);
+
+    [Test]
+    public void day_of_year()
+        => new Date(1970, 02, 14).DayOfYear.Should().Be(45);
 }
 
 public class Can_be_adjusted_with
@@ -111,6 +184,54 @@ public class Can_be_adjusted_with
     [Test]
     public void subtracting_TimeSpan()
         => (Svo.Date - new TimeSpan(25, 30, 15)).Should().Be(new DateTime(2017, 06, 09, 22, 29, 45, DateTimeKind.Utc));
+
+    [Test]
+    public void increment()
+    {
+        var date = new Date(1970, 02, 14);
+        date++;
+        date.Should().Be(new Date(1970, 02, 15));
+    }
+
+    [Test]
+    public void decrement()
+    {
+        var date = new Date(1970, 02, 14);
+        date--;
+        date.Should().Be(new Date(1970, 02, 13));
+    }
+
+    [Test]
+    public void subtracting_two_dates_returns_TimeSpan()
+        => (new Date(1970, 02, 14) - new Date(1970, 02, 12)).Should().Be(TimeSpan.FromDays(2));
+
+    [Test]
+    public void add_ticks()
+        => new Date(1970, 02, 14).AddTicks(4000000000017L).Should().Be(new Date(1970, 02, 18));
+
+    [Test]
+    public void add_milliseconds()
+        => new Date(1970, 02, 14).AddMilliseconds(3 * 24 * 60 * 60 * 1003).Should().Be(new Date(1970, 02, 17));
+
+    [Test]
+    public void add_seconds()
+        => new Date(1970, 02, 14).AddSeconds(3 * 24 * 60 * 64).Should().Be(new Date(1970, 02, 17));
+
+    [Test]
+    public void add_minutes()
+        => new Date(1970, 02, 14).AddMinutes(2 * 24 * 60).Should().Be(new Date(1970, 02, 16));
+
+    [Test]
+    public void add_hours()
+        => new Date(1970, 02, 14).AddHours(41).Should().Be(new Date(1970, 02, 15));
+
+    [Test]
+    public void add_months()
+        => new Date(1970, 02, 14).AddMonths(12).Should().Be(new Date(1971, 02, 14));
+
+    [Test]
+    public void add_years()
+        => new Date(1970, 02, 14).AddYears(-12).Should().Be(new Date(1958, 02, 14));
 }
 
 public class Can_not_be_adjusted_with
@@ -160,10 +281,139 @@ public class Can_not_be_related_to
        => new Date(2017, 06, 11).IsIn(Year.Unknown).Should().BeFalse();
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Date.ToString().Should().Be("11/06/2017");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Date.ToString(default(string)).Should().Be(Svo.Date.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Date.ToString(string.Empty).Should().Be(Svo.Date.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_0001_01_01()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            default(Date).ToString().Should().Be("01/01/0001");
+        }
+    }
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.Date.ToString(FormatProvider.Empty).Should().Be("11/6/2017");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = new Date(1970, 02, 14).ToString("d_M_yy", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '14_2_70', format: 'd_M_yy'");
+    }
+
+    [TestCase("en-GB", 1988, 8, 8, "yy-M-d", "88-8-8")]
+    [TestCase("es-EC", 1988, 8, 8, "d", "8/8/1988")]
+    [TestCase("nl-BE", 1970, 2, 14, "", "14/02/1970")]
+    public void culture_dependent(CultureInfo culture, int year, int month, int day, string format, string formatted)
+    {
+        using (culture.Scoped())
+        {
+            new Date(year, month, day).ToString(format).Should().Be(formatted);
+        }
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.Date.ToString(provider: null).Should().Be("11-06-2017");
+        }
+    }
+}
+
 public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.Date.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_Date_as_object()
+    {
+        object obj = Svo.Date;
+        Svo.Date.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_Date_only()
+        => new object().Invoking(Svo.Date.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            Date.MinValue,
+            Date.MinValue,
+            Date.Parse("1970-01-03"),
+            Date.Parse("1970-02-01"),
+            Date.Parse("1970-03-28"),
+            Date.Parse("1970-04-12"),
+        };
+
+        var list = new List<Date> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        Date smaller = new(1990, 10, 17);
+        Date bigger = new(1990, 10, 19);
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        Date left = new(1990, 10, 17);
+        Date right = new(1990, 10, 17);
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
 }
 
 public class Supports_type_conversion
@@ -294,9 +544,48 @@ public class Is_Open_API_data_type
        .Should().Be(new OpenApiDataType(
            dataType: typeof(Date),
            description: "Full-date notation as defined by RFC 3339, section 5.6.",
-           example: "2017-06-10",
-           type: "string",
-           format: "date"));
+example: "2017-06-10",
+            type: "string",
+            format: "date"));
+}
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.Date);
+        xml.Should().Be("2017-06-11");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<Date>("2017-06-11");
+        svo.Should().Be(Svo.Date);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.Date);
+        Svo.Date.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.Date);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.Date;
+        obj.GetSchema().Should().BeNull();
+    }
 }
 
 #if NET8_0_OR_GREATER
@@ -314,6 +603,34 @@ public class Casts
     {
         DateOnly casted = Svo.Date;
         casted.Should().Be(Svo.DateOnly);
+    }
+
+    [Test]
+    public void explicitly_from_DateTime()
+    {
+        var casted = (Date)new DateTime(2017, 06, 11, 0, 0, 0, DateTimeKind.Local);
+        casted.Should().Be(Svo.Date);
+    }
+
+    [Test]
+    public void implicitly_to_DateTime()
+    {
+        DateTime casted = Svo.Date;
+        casted.Should().Be(new DateTime(2017, 06, 11, 0, 0, 0, DateTimeKind.Local));
+    }
+
+    [Test]
+    public void implicitly_from_WeekDate()
+    {
+        Date casted = Svo.WeekDate;
+        casted.Should().Be(Svo.Date);
+    }
+
+    [Test]
+    public void implicitly_to_WeekDate()
+    {
+        WeekDate casted = Svo.Date;
+        casted.Should().Be(Svo.WeekDate);
     }
 }
 #endif

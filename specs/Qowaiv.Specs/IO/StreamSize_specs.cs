@@ -1,9 +1,69 @@
 namespace IO.StreamSize_specs;
 
+public class Has_constant
+{
+    [Test]
+    public void Zero_equals_default() => StreamSize.Zero.Should().Be(default);
+}
+
 public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.StreamSize.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_StreamSize_as_object()
+    {
+        object obj = Svo.StreamSize;
+        Svo.StreamSize.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_StreamSize_only()
+        => new object().Invoking(Svo.StreamSize.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        StreamSize[] sorted =
+        [
+            StreamSize.Zero,
+            StreamSize.Zero,
+            13.465.KB(),
+            83.465.KB(),
+            11.346.MB(),
+            77.346.MB(),
+        ];
+
+        var list = new List<StreamSize> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        StreamSize smaller = 17;
+        StreamSize bigger = 19;
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        StreamSize left = 17;
+        StreamSize right = 17;
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
 }
 
 public class Can_be_parsed
@@ -43,6 +103,166 @@ public class Can_be_parsed
     [Test]
     public void with_TryParse_returns_SVO()
         => StreamSize.TryParse("123456789").Should().Be(Svo.StreamSize);
+}
+
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.StreamSize.ToString().Should().Be("123456789 byte");
+        }
+    }
+
+    [Test]
+    public void with_null_format()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.StreamSize.ToString(default(string)).Should().Be("123456789");
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.StreamSize.ToString(string.Empty).Should().Be("123456789");
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_zero()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            default(StreamSize).ToString().Should().Be("0 byte");
+        }
+    }
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.StreamSize.ToString(FormatProvider.Empty).Should().Be("123456789 byte");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.StreamSize.ToString("0.0 F", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '123.5 Megabyte', format: '0.0 F'");
+    }
+
+    [TestCase("nl-NL", "#,##0b", 123456789, "123.456.789b")]
+    [TestCase("nl-NL", "#,##0.00 kB", 123456789, "123.456,79 kB")]
+    [TestCase("nl-BE", "0.0 MegaByte", 123456789, "123,5 MegaByte")]
+    [TestCase("nl-BE", "0.0 F", -123456789, "-123,5 Megabyte")]
+    [TestCase("nl-BE", "0.00GB", 123456789, "0,12GB")]
+    [TestCase("de-DE", "0.0000 GiB", 123456789, "0,1150 GiB")]
+    [TestCase("nl-BE", "tb", 1_000_000_000_000_000L, "1000tb")]
+    [TestCase("nl-BE", " petabyte", 1_000_000_000_000L, "0,001 petabyte")]
+    [TestCase("nl-BE", "#,##0.## Exabyte", long.MaxValue, "9,22 Exabyte")]
+    [TestCase("nl-BE", "#,##0.## F", 123456789, "123,46 Megabyte")]
+    [TestCase("nl-BE", "0 f", 123456789, "123 megabyte")]
+    [TestCase("nl-BE", "0000 S", 123456789, "0123 MB")]
+    [TestCase("nl-BE", "0 s", 123456789, "123 mb")]
+    [TestCase("nl-BE", "0s", 123456789, "123mb")]
+    [TestCase("nl-BE", "0.0 si", 123456789, "117,7 mib")]
+    public void format_dependent(CultureInfo culture, string format, long bytes, string formatted)
+    {
+        using (culture.Scoped())
+        {
+            ((StreamSize)bytes).ToString(format).Should().Be(formatted);
+        }
+    }
+
+    [TestCase("nl-BE", null, "1600,1", "1600 byte")]
+    [TestCase("en-GB", null, "1600.1", "1600 byte")]
+    [TestCase("nl-BE", "0000 byte", "800", "0800 byte")]
+    [TestCase("en-GB", "0000", "800", "0800")]
+    [TestCase("es-EC", "00000.0", "1700", "01700,0")]
+    public void culture_dependent(CultureInfo culture, string format, string input, string formatted)
+    {
+        using (culture.Scoped())
+        {
+            var act = format is null ? StreamSize.Parse(input).ToString() : StreamSize.Parse(input).ToString(format);
+            act.Should().Be(formatted);
+        }
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.StreamSize.ToString(provider: null).Should().Be("123456789 byte");
+        }
+    }
+}
+
+public class Casts
+{
+    [Test]
+    public void implicitly_from_int()
+    {
+        StreamSize casted = 123_456_789;
+        casted.Should().Be(Svo.StreamSize);
+    }
+
+    [Test]
+    public void explicitly_to_int()
+    {
+        var casted = (int)Svo.StreamSize;
+        casted.Should().Be(123_456_789);
+    }
+
+    [Test]
+    public void implicitly_from_long()
+    {
+        StreamSize casted = 123_456_789L;
+        casted.Should().Be(Svo.StreamSize);
+    }
+
+    [Test]
+    public void explicitly_to_long()
+    {
+        var casted = (long)Svo.StreamSize;
+        casted.Should().Be(123_456_789L);
+    }
+
+    [Test]
+    public void explicitly_from_double()
+    {
+        var casted = (StreamSize)123_456_789d;
+        casted.Should().Be(Svo.StreamSize);
+    }
+
+    [Test]
+    public void explicitly_to_double()
+    {
+        var casted = (double)Svo.StreamSize;
+        casted.Should().Be(123_456_789d);
+    }
+
+    [Test]
+    public void explicitly_from_decimal()
+    {
+        var casted = (StreamSize)123_456_789m;
+        casted.Should().Be(Svo.StreamSize);
+    }
+
+    [Test]
+    public void explicitly_to_decimal()
+    {
+        var casted = (decimal)Svo.StreamSize;
+        casted.Should().Be(123_456_789m);
+    }
 }
 
 public class Has_humanizer_creators
@@ -140,6 +360,284 @@ public class Created_from
         writer.Flush();
         file.GetStreamSize().Should().Be(13.Bytes());
     }
+
+    [Test]
+    public void IO_stream()
+    {
+        using var stream = new MemoryStream([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]);
+
+        stream.GetStreamSize().Should().Be(17);
+    }
+}
+
+public class From_byte_factories
+{
+    [TestCase(2, 2000L)]
+    public void Kilobytes(double kilobytes, long bytes)
+        => ((long)StreamSize.FromKilobytes(kilobytes)).Should().Be(bytes);
+
+    [TestCase(3.5, 3500000L)]
+    public void Megabytes(double megabytes, long bytes)
+        => ((long)StreamSize.FromMegabytes(megabytes)).Should().Be(bytes);
+
+    [TestCase(0.8, 800000000L)]
+    public void Gigabytes(double gigabytes, long bytes)
+        => ((long)StreamSize.FromGigabytes(gigabytes)).Should().Be(bytes);
+
+    [TestCase(10, 10000000000000L)]
+    public void Terabytes(double terabytes, long bytes)
+        => ((long)StreamSize.FromTerabytes(terabytes)).Should().Be(bytes);
+
+    [TestCase(2, 2048L)]
+    public void Kibibytes(double kibibytes, long bytes)
+        => ((long)StreamSize.FromKibibytes(kibibytes)).Should().Be(bytes);
+
+    [TestCase(3.5, 3670016L)]
+    public void Mebibytes(double mebibytes, long bytes)
+        => ((long)StreamSize.FromMebibytes(mebibytes)).Should().Be(bytes);
+
+    [TestCase(0.8, 858993459L)]
+    public void Gibibytes(double gibibytes, long bytes)
+        => ((long)StreamSize.FromGibibytes(gibibytes)).Should().Be(bytes);
+
+    [TestCase(10, 10995116277760L)]
+    public void Tebibytes(double tebibytes, long bytes)
+        => ((long)StreamSize.FromTebibytes(tebibytes)).Should().Be(bytes);
+}
+
+public class Can_be_operated_on
+{
+    [TestCase(-1, "-23KB")]
+    [TestCase(0, "0KB")]
+    [TestCase(1, "16KB")]
+    public void get_sign(int sign, StreamSize size) => size.Sign().Should().Be(sign);
+
+    [TestCase("1234", "-1234")]
+    [TestCase("1234", "1234")]
+    public void get_absolute(StreamSize expected, StreamSize value) => value.Abs().Should().Be(expected);
+
+    [Test]
+    public void add()
+    {
+        StreamSize act = 17;
+        act += (StreamSize)7;
+        act.Should().Be(24);
+    }
+
+    [Test]
+    public void add_percentage()
+    {
+        StreamSize act = 17;
+        act += Percentage.Create(0.1);
+        act.Should().Be(18);
+    }
+
+    [Test]
+    public void subtract()
+    {
+        StreamSize act = 17;
+        act -= (StreamSize)5;
+        act.Should().Be(12);
+    }
+
+    [Test]
+    public void subtract_percentage()
+    {
+        StreamSize act = 17;
+        act -= Percentage.Create(0.1);
+        act.Should().Be(16);
+    }
+
+    [Test]
+    public void increment()
+    {
+        StreamSize act = 21;
+        act++;
+        act.Should().Be(22);
+    }
+
+    [Test]
+    public void decrement()
+    {
+        StreamSize act = 21;
+        act--;
+        act.Should().Be(20);
+    }
+
+    [Test]
+    public void negate()
+    {
+        StreamSize act = 21;
+        (-act).Should().Be(-21);
+    }
+
+    [Test]
+    public void plus()
+    {
+        StreamSize act = 21;
+        act = +act;
+        act.Should().Be(21);
+    }
+
+    [Test]
+    public void divide_by_short()
+    {
+        StreamSize act = 81;
+        act /= (short)2;
+        act.Should().Be(40);
+    }
+
+    [Test]
+    public void divide_by_int()
+    {
+        StreamSize act = 81;
+        act /= 2;
+        act.Should().Be(40);
+    }
+
+    [Test]
+    public void divide_by_long()
+    {
+        StreamSize act = 81;
+        act /= (long)2;
+        act.Should().Be(40);
+    }
+
+    [Test]
+    public void divide_by_ushort()
+    {
+        StreamSize act = 81;
+        act /= (ushort)2;
+        act.Should().Be(40);
+    }
+
+    [Test]
+    public void divide_by_uint()
+    {
+        StreamSize act = 81;
+        act /= (uint)2;
+        act.Should().Be(40);
+    }
+
+    [Test]
+    public void divide_by_ulong()
+    {
+        StreamSize act = 81;
+        act /= (ulong)2;
+        act.Should().Be(40);
+    }
+
+    [Test]
+    public void divide_by_percentage()
+    {
+        StreamSize act = 81;
+        act /= (Percentage)1.50;
+        act.Should().Be(54);
+    }
+
+    [Test]
+    public void divide_by_float()
+    {
+        StreamSize act = 81;
+        act /= (float)1.5;
+        act.Should().Be(54);
+    }
+
+    [Test]
+    public void divide_by_double()
+    {
+        StreamSize act = 81;
+        act /= 1.5;
+        act.Should().Be(54);
+    }
+
+    [Test]
+    public void divide_by_decimal()
+    {
+        StreamSize act = 81;
+        act /= 1.5d;
+        act.Should().Be(54);
+    }
+
+    [Test]
+    public void multiply_by_short()
+    {
+        StreamSize act = 42;
+        act *= (short)3;
+        act.Should().Be(126);
+    }
+
+    [Test]
+    public void multiply_by_int()
+    {
+        StreamSize act = 42;
+        act *= 3;
+        act.Should().Be(126);
+    }
+
+    [Test]
+    public void multiply_by_long()
+    {
+        StreamSize act = 42;
+        act *= (long)3;
+        act.Should().Be(126);
+    }
+
+    [Test]
+    public void multiply_by_ushort()
+    {
+        StreamSize act = 42;
+        act *= (ushort)3;
+        act.Should().Be(126);
+    }
+
+    [Test]
+    public void multiply_by_uint()
+    {
+        StreamSize act = 42;
+        act *= (uint)3;
+        act.Should().Be(126);
+    }
+
+    [Test]
+    public void multiply_by_ulong()
+    {
+        StreamSize act = 42;
+        act *= (ulong)3;
+        act.Should().Be(126);
+    }
+
+    [Test]
+    public void multiply_by_percentage()
+    {
+        StreamSize act = 42;
+        act *= 50.Percent();
+        act.Should().Be(21);
+    }
+
+    [Test]
+    public void multiply_by_float()
+    {
+        StreamSize act = 42;
+        act *= (float)0.5;
+        act.Should().Be(21);
+    }
+
+    [Test]
+    public void multiply_by_double()
+    {
+        StreamSize act = 42;
+        act *= 0.5;
+        act.Should().Be(21);
+    }
+
+    [Test]
+    public void multiply_by_decimal()
+    {
+        StreamSize act = 42;
+        act *= 0.5d;
+        act.Should().Be(21);
+    }
 }
 
 public class Is_equal_by_value
@@ -175,6 +673,14 @@ public class Is_equal_by_value
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
         => (StreamSize.Byte * 123456789 != StreamSize.MinValue).Should().BeTrue();
+
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        var l = StreamSize.Parse("12,345 byte", CultureInfo.InvariantCulture);
+        var r = StreamSize.Parse("12345", CultureInfo.InvariantCulture);
+        l.Equals(r).Should().BeTrue();
+    }
 
     [TestCase("0 byte", 0)]
     [TestCase("123456789 byte", 553089222)]
@@ -276,4 +782,43 @@ public class Is_Open_API_data_type
             example: 1024,
             type: "integer",
             format: "stream-size"));
+}
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.StreamSize);
+        xml.Should().Be("123456789 byte");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<StreamSize>("123456789 byte");
+        svo.Should().Be(Svo.StreamSize);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.StreamSize);
+        Svo.StreamSize.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.StreamSize);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.StreamSize;
+        obj.GetSchema().Should().BeNull();
+    }
 }

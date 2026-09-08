@@ -3,14 +3,98 @@ namespace Financial.Amount_specs;
 public class Has_constant
 {
     [Test]
+    public void Zero_equals_default() => Amount.Zero.Should().Be(default);
+
+    [Test]
     public void MinValue_equal_to_decimal_MinValue() => Amount.MinValue.Should().Be(decimal.MinValue.Amount());
 
     [Test]
     public void MaxValue_equal_to_decimal_MaxValue() => Amount.MaxValue.Should().Be(decimal.MaxValue.Amount());
 }
 
+public class Is_equal_by_value
+{
+    [Test]
+    public void not_equal_to_null()
+        => Svo.Amount.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.Amount.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.Amount.Equals(Amount.Zero).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.Amount.Equals(42.17.Amount()).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (42.17.Amount() == Svo.Amount).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (42.17.Amount() == Amount.Zero).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (42.17.Amount() != Svo.Amount).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (42.17.Amount() != Amount.Zero).Should().BeTrue();
+
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        using (TestCultures.en_US.Scoped())
+        {
+            var l = Amount.Parse("$ 1,451.070");
+            var r = Amount.Parse("1451.07");
+            l.Equals(r).Should().BeTrue();
+        }
+    }
+
+    [TestCase("0", 0)]
+    [TestCase("42.17", 665757098)]
+    public void hash_code_is_value_based(Amount svo, int hash)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hash);
+        }
+    }
+}
+
 public class Can_be_parsed
 {
+    [Test]
+    public void from_amount_string()
+        => Amount.Parse("14.1804", CultureInfo.InvariantCulture).Should().Be((Amount)14.1804m);
+
+    [TestCase("en-GB", "42.17")]
+    [TestCase("es-EC", "42,17")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            Amount.Parse(input).Should().Be(Svo.Amount);
+        }
+    }
+
+    [Test]
+    public void with_custom_number_format_info()
+    {
+        var info = new NumberFormatInfo
+        {
+            CurrencyGroupSeparator = "#",
+            CurrencyDecimalSeparator = "*",
+        };
+        Amount.Parse("5#123*34", info).Should().Be((Amount)5123.34m);
+    }
+
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
@@ -19,6 +103,23 @@ public class Can_be_parsed
             "invalid input".Invoking(Amount.Parse)
                 .Should().Throw<FormatException>()
                 .WithMessage("Not a valid amount");
+        }
+    }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => Amount.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => Amount.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Amount.TryParse("42.17").Should().Be(Svo.Amount);
         }
     }
 }
@@ -62,10 +163,327 @@ public class Can_not_be_parsed
              .WithMessage("The number style '*' is not supported.*");
 }
 
+public class Can_be_operated_on
+{
+    [TestCase(-1, -1000)]
+    [TestCase(0, 0)]
+    [TestCase(+1, 1600)]
+    public void sign(int expected, Amount value)
+        => value.Sign().Should().Be(expected);
+
+    [TestCase(1234.01, -1234.01)]
+    [TestCase(1234.01, +1234.01)]
+    public void abs(Amount expected, Amount value)
+        => value.Abs().Should().Be(expected);
+
+    [TestCase(+1234.01)]
+    [TestCase(-1234.01)]
+    public void plus(Amount value)
+        => (+value).Should().Be(value);
+
+    [TestCase(+1234.01, -1234.01)]
+    [TestCase(-1234.01, +1234.01)]
+    public void negate(Amount expected, Amount value)
+        => (-value).Should().Be(expected);
+
+    [Test]
+    public void decrement()
+    {
+        Amount amount = (Amount)43.17;
+        amount--;
+        amount.Should().Be(Svo.Amount);
+    }
+
+    [Test]
+    public void increment()
+    {
+        Amount amount = (Amount)41.17;
+        amount++;
+        amount.Should().Be(Svo.Amount);
+    }
+
+    [Test]
+    public void add_amount()
+    {
+        Amount amount = (Amount)40.10;
+        Amount other = (Amount)2.07;
+        (amount + other).Should().Be(Svo.Amount);
+    }
+
+    [Test]
+    public void add_percentage()
+    {
+        Amount amount = (Amount)40.00;
+        (amount + 10.Percent()).Should().Be((Amount)44.00);
+    }
+
+    [Test]
+    public void subtract_amount()
+    {
+        Amount amount = (Amount)43.20;
+        Amount other = (Amount)1.03;
+        (amount - other).Should().Be(Svo.Amount);
+    }
+
+    [Test]
+    public void subtract_percentage()
+    {
+        Amount amount = (Amount)40.00;
+        (amount - 25.Percent()).Should().Be((Amount)30.00);
+    }
+
+    [Test]
+    public void multiply_percentage()
+        => ((Amount)100.40m * 50.Percent()).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void multiply_float()
+        => ((Amount)100.40m * 0.5F).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void multiply_double()
+        => ((Amount)100.40m * 0.5).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void multiply_decimal()
+        => ((Amount)100.40m * 0.5m).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void multiply_short()
+        => ((Amount)100.40m * (short)2).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void multiply_int()
+        => ((Amount)100.40m * 2).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void multiply_long()
+        => ((Amount)100.40m * 2L).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void multiply_ushort()
+        => ((Amount)100.40m * (ushort)2).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void multiply_uint()
+        => ((Amount)100.40m * 2u).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void multiply_ulong()
+        => ((Amount)100.40m * 2ul).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void divide_percentage()
+        => ((Amount)100.40m / 50.Percent()).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void divide_float()
+        => ((Amount)100.40m / 0.5F).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void divide_double()
+        => ((Amount)100.40m / 0.5).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void divide_decimal()
+        => ((Amount)100.40m / 0.5m).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void divide_short()
+        => ((Amount)100.40m / (short)2).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void divide_int()
+        => ((Amount)100.40m / 2).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void divide_long()
+        => ((Amount)100.40m / 2L).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void divide_ushort()
+        => ((Amount)100.40m / (ushort)2).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void divide_uint()
+        => ((Amount)100.40m / 2u).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void divide_ulong()
+        => ((Amount)100.40m / 2ul).Should().Be((Amount)50.20m);
+}
+
+public class Can_be_rounded
+{
+    [Test]
+    public void without_digits()
+        => ((Amount)123.4567m).Round().Should().Be((Amount)123m);
+
+    [Test]
+    public void with_1_digit()
+        => ((Amount)123.4567m).Round(1).Should().Be((Amount)123.5m);
+
+    [Test]
+    public void to_multiple_of_0d25()
+        => ((Amount)123.6567m).RoundToMultiple(0.25m).Should().Be((Amount)123.75m);
+}
+
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Amount.ToString().Should().Be("42.17");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Amount.ToString(default(string)).Should().Be(Svo.Amount.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.Amount.ToString(string.Empty).Should().Be(Svo.Amount.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_zero()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            default(Amount).ToString().Should().Be("0");
+        }
+    }
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.Amount.ToString(FormatProvider.Empty).Should().Be("42,17");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = Svo.Amount.ToString("#.0", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '42.2', format: '#.0'");
+    }
+
+    [TestCase("nl-BE", null, "1600,1", "1600,1")]
+    [TestCase("en-GB", null, "1600.1", "1600.1")]
+    [TestCase("nl-BE", "0000", "800", "0800")]
+    [TestCase("en-GB", "0000", "800", "0800")]
+    [TestCase("es-EC", "00000.0", "1700", "01700,0")]
+    public void culture_dependent(CultureInfo culture, string format, string input, string formatted)
+    {
+        using (culture.Scoped())
+        {
+            Amount.Parse(input).ToString(format).Should().Be(formatted);
+        }
+    }
+
+    [Test]
+    public void with_currency_format_fr_FR()
+    {
+        using (TestCultures.fr_FR.Scoped())
+        {
+            ((Amount)170.42).ToString("C").Should().Be("170,42 €");
+        }
+    }
+
+    [Test]
+    public void with_custom_number_format_info()
+    {
+        var info = new NumberFormatInfo
+        {
+            CurrencyGroupSeparator = "#",
+            CurrencyDecimalSeparator = "*",
+        };
+        var formatted = ((Amount)12345678.235m).ToString("#,##0.0000", info);
+        formatted.Should().Be("12#345#678*2350");
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.Amount.ToString(provider: null).Should().Be("42,17");
+        }
+    }
+}
+
 public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.Amount.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_Amount_as_object()
+    {
+        object obj = Svo.Amount;
+        Svo.Amount.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_Amount_only()
+        => new object().Invoking(Svo.Amount.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        Amount[] sorted =
+        [
+            Amount.Zero,
+            Amount.Zero,
+            0.23.Amount(),
+            1.24.Amount(),
+            2.27.Amount(),
+            1300.Amount(),
+        ];
+
+        var list = new List<Amount> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        var smaller = 17.Amount();
+        var bigger = 19.Amount();
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        var left = 17.Amount();
+        var right = 17.Amount();
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
 }
 
 public class Supports_type_conversion
@@ -216,5 +634,44 @@ public class Supports_type_conversion
             var ratio = Svo.Amount / 2.Amount();
             ratio.Should().Be(21.085m);
         }
+    }
+}
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.Amount);
+        xml.Should().Be("42.17");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<Amount>("42.17");
+        svo.Should().Be(Svo.Amount);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.Amount);
+        Svo.Amount.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.Amount);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.Amount;
+        obj.GetSchema().Should().BeNull();
     }
 }

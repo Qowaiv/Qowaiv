@@ -3,6 +3,38 @@ namespace Formatting_arguments_specs;
 public class Is_equal_by_value
 {
     [Test]
+    public void not_equal_to_null()
+        => Svo.FormattingArguments.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.FormattingArguments.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.FormattingArguments.Equals(FormattingArguments.None).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.FormattingArguments.Equals(new FormattingArguments("0.000", TestCultures.fr_BE)).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (new FormattingArguments("0.000", TestCultures.fr_BE) == Svo.FormattingArguments).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (new FormattingArguments("0.000", TestCultures.fr_BE) == FormattingArguments.None).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (new FormattingArguments("0.000", TestCultures.fr_BE) != Svo.FormattingArguments).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (new FormattingArguments("0.000", TestCultures.fr_BE) != FormattingArguments.None).Should().BeTrue();
+
+    [Test]
     public void hash_code_is_value_based_for_none()
     {
         using (Hash.WithoutRandomizer())
@@ -98,5 +130,39 @@ public class Can_be_deconstructed
         var (format, formatProvider) = Svo.FormattingArguments;
         format.Should().Be("0.000");
         formatProvider.Should().Be(TestCultures.fr_BE);
+    }
+}
+
+public class Has_constant
+{
+    [Test]
+    public void None_equals_default()
+        => FormattingArguments.None.Should().Be(default(FormattingArguments));
+}
+
+public class Has_properties
+{
+    [Test]
+    public void format_of_default_is_null()
+        => FormattingArguments.None.Format.Should().BeNull();
+
+    [Test]
+    public void format_of_TestStruct_is_format_string()
+        => Svo.FormattingArguments.Format.Should().Be("0.000");
+}
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = new XmlStructure<FormattingArguments>()
+        {
+            Id = 17,
+            Svo = FormattingArguments.None,
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
+        };
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        round_tripped.Should().Be(structure);
     }
 }

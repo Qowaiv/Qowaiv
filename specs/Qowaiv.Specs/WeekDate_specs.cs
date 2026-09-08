@@ -12,8 +12,110 @@ public class Is_invalid
     public void for_garbage() => WeekDate.TryParse("Not a week date").Should().BeNull();
 }
 
+public class Has_constant
+{
+    [Test]
+    public void MinValue_equals_default() => WeekDate.MinValue.Should().Be(default);
+}
+
+public class Has_properties
+{
+    [Test]
+    public void Date_of_test_struct()
+        => new WeekDate(1997, 14, 6).Date.Should().Be(new Date(1997, 04, 05));
+
+    [Test]
+    public void Year_of_MinValue()
+        => WeekDate.MinValue.Year.Should().Be(1);
+
+    [Test]
+    public void Year_of_MaxValue()
+        => WeekDate.MaxValue.Year.Should().Be(9999);
+
+    [TestCase(2010, 52, 7, 2010)]
+    [TestCase(2020, 01, 1, 2020)]
+    public void Year(int year, int week, int day, int expected)
+        => new WeekDate(year, week, day).Year.Should().Be(expected);
+
+    [TestCase(1997, 14, 6, 6)]
+    [TestCase(1990, 40, 7, 7)]
+    public void Day(int year, int week, int day, int expected)
+        => new WeekDate(year, week, day).Day.Should().Be(expected);
+
+    [Test]
+    public void DayOfYear_of_test_struct()
+        => new WeekDate(1997, 14, 6).DayOfYear.Should().Be(96);
+}
+
+public class Is_equal_by_value
+{
+    [Test]
+    public void not_equal_to_null()
+        => Svo.WeekDate.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.WeekDate.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.WeekDate.Equals(WeekDate.MinValue).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.WeekDate.Equals(new WeekDate(2017, 23, 7)).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_true_for_same_values()
+        => (new WeekDate(2017, 23, 7) == Svo.WeekDate).Should().BeTrue();
+
+    [Test]
+    public void equal_operator_returns_false_for_different_values()
+        => (new WeekDate(2017, 23, 7) == WeekDate.MinValue).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_false_for_same_values()
+        => (new WeekDate(2017, 23, 7) != Svo.WeekDate).Should().BeFalse();
+
+    [Test]
+    public void not_equal_operator_returns_true_for_different_values()
+        => (new WeekDate(2017, 23, 7) != WeekDate.MinValue).Should().BeTrue();
+
+    [Test]
+    public void formatted_and_unformatted_are_equal()
+    {
+        var l = WeekDate.Parse("1997-14-6", CultureInfo.InvariantCulture);
+        var r = WeekDate.Parse("1997-W14-6", CultureInfo.InvariantCulture);
+        l.Equals(r).Should().BeTrue();
+    }
+
+    [TestCase("0001-W01-1", 0)]
+    [TestCase("2017-W23-7", -981651364)]
+    public void hash_code_is_value_based(WeekDate svo, int hash)
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            svo.GetHashCode().Should().Be(hash);
+        }
+    }
+}
+
 public class Can_be_parsed
 {
+    [Test]
+    public void from_week_date_string()
+        => WeekDate.Parse("1234-W50-6", CultureInfo.InvariantCulture).Should().Be(new WeekDate(1234, 50, 6));
+
+    [TestCase("en-GB", "2017-W23-7")]
+    [TestCase("nl-NL", "2017-W23-7")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            WeekDate.Parse(input).Should().Be(Svo.WeekDate);
+        }
+    }
+
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
@@ -24,6 +126,19 @@ public class Can_be_parsed
                 .WithMessage("Not a valid week date");
         }
     }
+
+    [TestCase("0000-W21-7")]
+    [TestCase("2000-W53-7")]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse(string input)
+        => WeekDate.TryParse(input, out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => WeekDate.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+        => WeekDate.TryParse("2017-W23-7").Should().Be(Svo.WeekDate);
 }
 
 public class Can_be_created
@@ -89,10 +204,140 @@ public class Can_not_be_created
     }
 }
 
+public class Has_custom_formatting
+{
+    [Test]
+    public void _default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.WeekDate.ToString().Should().Be("2017-W23-7");
+        }
+    }
+
+    [Test]
+    public void with_null_format_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.WeekDate.ToString(default(string)).Should().Be(Svo.WeekDate.ToString());
+        }
+    }
+
+    [Test]
+    public void with_string_empty_pattern_equal_to_default()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Svo.WeekDate.ToString(string.Empty).Should().Be(Svo.WeekDate.ToString());
+        }
+    }
+
+    [Test]
+    public void default_value_is_represented_as_0001_W01_1()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            default(WeekDate).ToString().Should().Be("0001-W01-1");
+        }
+    }
+
+    [Test]
+    public void with_empty_format_provider()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Svo.WeekDate.ToString(FormatProvider.Empty).Should().Be("2017-W23-7");
+        }
+    }
+
+    [Test]
+    public void custom_format_provider_is_applied()
+    {
+        var formatted = new WeekDate(1997, 14, 6).ToString("y#W", FormatProvider.CustomFormatter);
+        formatted.Should().Be("Unit Test Formatter, value: '1997#14', format: 'y#W'");
+    }
+
+    [TestCase("en-US", @"y-\WW-d", 1997, 14, 6, "1997-W14-6")]
+    [TestCase("en-GB", "", 1997, 14, 6, "1997-W14-6")]
+    [TestCase("en-GB", @"y-\WW-d", 1979, 3, 5, "1979-W3-5")]
+    [TestCase("en-GB", @"y-\Ww-d", 1979, 3, 5, "1979-W03-5")]
+    public void culture_dependent(CultureInfo culture, string format, int year, int week, int day, string formatted)
+    {
+        using (culture.Scoped())
+        {
+            new WeekDate(year, week, day).ToString(format).Should().Be(formatted);
+        }
+    }
+
+    [Test]
+    public void with_current_thread_culture_as_default()
+    {
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
+        {
+            Svo.WeekDate.ToString(provider: null).Should().Be("2017-W23-7");
+        }
+    }
+}
+
 public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.WeekDate.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_WeekDate_as_object()
+    {
+        object obj = Svo.WeekDate;
+        Svo.WeekDate.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_WeekDate_only()
+        => new object().Invoking(Svo.WeekDate.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            WeekDate.MinValue,
+            WeekDate.MinValue,
+            WeekDate.Parse("2000-W01-3"),
+            WeekDate.Parse("2000-W11-2"),
+            WeekDate.Parse("2000-W21-1"),
+            WeekDate.Parse("2000-W31-7"),
+        };
+
+        var list = new List<WeekDate> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        WeekDate smaller = new(1980, 17, 5);
+        WeekDate bigger = new(1980, 19, 5);
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        WeekDate left = new(1980, 17, 5);
+        WeekDate right = new(1980, 17, 5);
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
 }
 
 public class Supports_type_conversion
@@ -215,6 +460,45 @@ public class Is_Open_API_data_type
            format: "date-weekbased"));
 }
 
+public class Supports_XML_serialization
+{
+    [Test]
+    public void using_XmlSerializer_to_serialize()
+    {
+        var xml = Serialize.Xml(Svo.WeekDate);
+        xml.Should().Be("2017-W23-7");
+    }
+
+    [Test]
+    public void using_XmlSerializer_to_deserialize()
+    {
+        var svo = Deserialize.Xml<WeekDate>("2017-W23-7");
+        svo.Should().Be(Svo.WeekDate);
+    }
+
+    [Test]
+    public void using_DataContractSerializer()
+    {
+        var round_tripped = SerializeDeserialize.DataContract(Svo.WeekDate);
+        Svo.WeekDate.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = XmlStructure.New(Svo.WeekDate);
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        structure.Should().Be(round_tripped);
+    }
+
+    [Test]
+    public void has_no_custom_XML_schema()
+    {
+        IXmlSerializable obj = Svo.WeekDate;
+        obj.GetSchema().Should().BeNull();
+    }
+}
+
 #if NET8_0_OR_GREATER
 public class Casts
 {
@@ -223,6 +507,20 @@ public class Casts
     {
         WeekDate casted = Svo.DateOnly;
         casted.Should().Be(Svo.WeekDate);
+    }
+
+    [Test]
+    public void explicitly_from_DateTime()
+    {
+        var casted = (WeekDate)new DateTime(2017, 06, 11, 0, 0, 0, DateTimeKind.Local);
+        casted.Should().Be(Svo.WeekDate);
+    }
+
+    [Test]
+    public void implicitly_to_DateTime()
+    {
+        DateTime casted = Svo.WeekDate;
+        casted.Should().Be(new DateTime(2017, 06, 11, 0, 0, 0, DateTimeKind.Local));
     }
 }
 #endif

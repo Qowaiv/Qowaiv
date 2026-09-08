@@ -1,17 +1,17 @@
-namespace Qowaiv.UnitTests.Globalization;
+namespace Globalization.Culture_info_scope_specs;
 
-public class CultureInfoScopeTest
+public class Can_scope
 {
     [Test]
-    public void Scoped_Ctor()
+    public void with_culture_and_ui_culture()
     {
         var current = CultureInfo.CurrentCulture;
         var currentUI = CultureInfo.CurrentUICulture;
 
         using (new CultureInfoScope("es-ES", "fr-FR"))
         {
-            Should.BeEqual("es-ES", CultureInfo.CurrentCulture.Name);
-            Should.BeEqual("fr-FR", CultureInfo.CurrentUICulture.Name);
+            CultureInfo.CurrentCulture.Name.Should().Be("es-ES");
+            CultureInfo.CurrentUICulture.Name.Should().Be("fr-FR");
         }
 
         CultureInfo.CurrentCulture.Should().Be(current);
@@ -19,15 +19,15 @@ public class CultureInfoScopeTest
     }
 
     [Test]
-    public void Scoped_ExtensionMethod()
+    public void via_extension_method()
     {
         var current = CultureInfo.CurrentCulture;
         var currentUI = CultureInfo.CurrentUICulture;
 
         using (new CultureInfo("es-ES").Scoped())
         {
-            Should.BeEqual("es-ES", CultureInfo.CurrentCulture.Name);
-            Should.BeEqual("es-ES", CultureInfo.CurrentUICulture.Name);
+            CultureInfo.CurrentCulture.Name.Should().Be("es-ES");
+            CultureInfo.CurrentUICulture.Name.Should().Be("es-ES");
         }
 
         CultureInfo.CurrentCulture.Should().Be(current);

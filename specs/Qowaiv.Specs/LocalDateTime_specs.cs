@@ -306,9 +306,9 @@ public class Has_custom_formatting
     [Test]
     public void with_empty_format_provider()
     {
-        using (TestCultures.es_EC.Scoped())
+        using (TestCultures.nl_NL.Scoped())
         {
-            Svo.LocalDateTime.ToString(FormatProvider.Empty).Should().Be("11/6/2017 06:15:00");
+            Svo.LocalDateTime.ToString(FormatProvider.Empty).Should().Be("11-06-2017 06:15:00");
         }
     }
 

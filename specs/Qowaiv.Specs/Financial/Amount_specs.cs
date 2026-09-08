@@ -3,6 +3,9 @@ namespace Financial.Amount_specs;
 public class Has_constant
 {
     [Test]
+    public void Zero_equals_default() => Amount.Zero.Should().Be(default);
+
+    [Test]
     public void MinValue_equal_to_decimal_MinValue() => Amount.MinValue.Should().Be(decimal.MinValue.Amount());
 
     [Test]
@@ -158,6 +161,171 @@ public class Can_not_be_parsed
          => style.Invoking(s => Amount.TryParse("4.50", s, CultureInfo.InvariantCulture, out _))
              .Should().Throw<ArgumentOutOfRangeException>()
              .WithMessage("The number style '*' is not supported.*");
+}
+
+public class Can_be_operated_on
+{
+    [TestCase(-1, -1000)]
+    [TestCase(0, 0)]
+    [TestCase(+1, 1600)]
+    public void sign(int expected, Amount value)
+        => value.Sign().Should().Be(expected);
+
+    [TestCase(1234.01, -1234.01)]
+    [TestCase(1234.01, +1234.01)]
+    public void abs(Amount expected, Amount value)
+        => value.Abs().Should().Be(expected);
+
+    [TestCase(+1234.01)]
+    [TestCase(-1234.01)]
+    public void plus(Amount value)
+        => (+value).Should().Be(value);
+
+    [TestCase(+1234.01, -1234.01)]
+    [TestCase(-1234.01, +1234.01)]
+    public void negate(Amount expected, Amount value)
+        => (-value).Should().Be(expected);
+
+    [Test]
+    public void decrement()
+    {
+        Amount amount = (Amount)43.17;
+        amount--;
+        amount.Should().Be(Svo.Amount);
+    }
+
+    [Test]
+    public void increment()
+    {
+        Amount amount = (Amount)41.17;
+        amount++;
+        amount.Should().Be(Svo.Amount);
+    }
+
+    [Test]
+    public void add_amount()
+    {
+        Amount amount = (Amount)40.10;
+        Amount other = (Amount)2.07;
+        (amount + other).Should().Be(Svo.Amount);
+    }
+
+    [Test]
+    public void add_percentage()
+    {
+        Amount amount = (Amount)40.00;
+        (amount + 10.Percent()).Should().Be((Amount)44.00);
+    }
+
+    [Test]
+    public void subtract_amount()
+    {
+        Amount amount = (Amount)43.20;
+        Amount other = (Amount)1.03;
+        (amount - other).Should().Be(Svo.Amount);
+    }
+
+    [Test]
+    public void subtract_percentage()
+    {
+        Amount amount = (Amount)40.00;
+        (amount - 25.Percent()).Should().Be((Amount)30.00);
+    }
+
+    [Test]
+    public void multiply_percentage()
+        => ((Amount)100.40m * 50.Percent()).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void multiply_float()
+        => ((Amount)100.40m * 0.5F).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void multiply_double()
+        => ((Amount)100.40m * 0.5).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void multiply_decimal()
+        => ((Amount)100.40m * 0.5m).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void multiply_short()
+        => ((Amount)100.40m * (short)2).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void multiply_int()
+        => ((Amount)100.40m * 2).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void multiply_long()
+        => ((Amount)100.40m * 2L).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void multiply_ushort()
+        => ((Amount)100.40m * (ushort)2).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void multiply_uint()
+        => ((Amount)100.40m * 2u).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void multiply_ulong()
+        => ((Amount)100.40m * 2ul).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void divide_percentage()
+        => ((Amount)100.40m / 50.Percent()).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void divide_float()
+        => ((Amount)100.40m / 0.5F).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void divide_double()
+        => ((Amount)100.40m / 0.5).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void divide_decimal()
+        => ((Amount)100.40m / 0.5m).Should().Be((Amount)200.80m);
+
+    [Test]
+    public void divide_short()
+        => ((Amount)100.40m / (short)2).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void divide_int()
+        => ((Amount)100.40m / 2).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void divide_long()
+        => ((Amount)100.40m / 2L).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void divide_ushort()
+        => ((Amount)100.40m / (ushort)2).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void divide_uint()
+        => ((Amount)100.40m / 2u).Should().Be((Amount)50.20m);
+
+    [Test]
+    public void divide_ulong()
+        => ((Amount)100.40m / 2ul).Should().Be((Amount)50.20m);
+}
+
+public class Can_be_rounded
+{
+    [Test]
+    public void without_digits()
+        => ((Amount)123.4567m).Round().Should().Be((Amount)123m);
+
+    [Test]
+    public void with_1_digit()
+        => ((Amount)123.4567m).Round(1).Should().Be((Amount)123.5m);
+
+    [Test]
+    public void to_multiple_of_0d25()
+        => ((Amount)123.6567m).RoundToMultiple(0.25m).Should().Be((Amount)123.75m);
 }
 
 public class Has_custom_formatting

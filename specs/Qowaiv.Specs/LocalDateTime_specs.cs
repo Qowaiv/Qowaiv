@@ -7,6 +7,9 @@ public class Has_constant
 
     [Test]
     public void MaxValue_equal_to_9999Y_12M_31D() => LocalDateTime.MaxValue.Should().Be(new(DateTime.MaxValue.Ticks));
+
+    [Test]
+    public void MinValue_equals_default() => LocalDateTime.MinValue.Should().Be(default);
 }
 
 public class Is_invalid
@@ -137,6 +140,82 @@ public class Can_be_adjusted_with
     [Test]
     public void Month_span()
         => new LocalDateTime(2017, 06, 11).Add(3.Months()).Should().Be(new LocalDateTime(2017, 09, 11));
+
+    [Test]
+    public void increment()
+    {
+        var ldt = new LocalDateTime(1988, 06, 13, 22, 10, 05, 001);
+        ldt++;
+        ldt.Should().Be(new LocalDateTime(1988, 06, 14, 22, 10, 05, 001));
+    }
+
+    [Test]
+    public void decrement()
+    {
+        var ldt = new LocalDateTime(1988, 06, 13, 22, 10, 05, 001);
+        ldt--;
+        ldt.Should().Be(new LocalDateTime(1988, 06, 12, 22, 10, 05, 001));
+    }
+
+    [Test]
+    public void adding_TimeSpan()
+        => (new LocalDateTime(1988, 06, 13, 22, 10, 05, 001) + new TimeSpan(25, 30, 15))
+        .Should().Be(new LocalDateTime(1988, 06, 14, 23, 40, 20, 001));
+
+    [Test]
+    public void subtracting_TimeSpan()
+        => (new LocalDateTime(1988, 06, 13, 22, 10, 05, 001) - new TimeSpan(25, 30, 15))
+        .Should().Be(new LocalDateTime(1988, 06, 12, 20, 39, 50, 001));
+
+    [Test]
+    public void subtracting_LocalDateTime_returns_TimeSpan()
+        => (new LocalDateTime(1988, 06, 13, 22, 10, 05, 001) - new LocalDateTime(1988, 06, 11, 20, 10, 05))
+        .Should().Be(new TimeSpan(2, 02, 00, 00, 001));
+
+    [Test]
+    public void add_ticks()
+        => new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).AddTicks(4000001700000L)
+        .Should().Be(new LocalDateTime(1988, 06, 18, 13, 16, 45, 171));
+
+    [Test]
+    public void add_milliseconds()
+        => new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).AddMilliseconds(3 * 24 * 60 * 60 * 1003)
+        .Should().Be(new LocalDateTime(1988, 06, 16, 22, 23, 02, 601));
+
+    [Test]
+    public void add_seconds()
+        => new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).AddSeconds(3 * 24 * 60 * 64)
+        .Should().Be(new LocalDateTime(1988, 06, 17, 02, 58, 05, 001));
+
+    [Test]
+    public void add_minutes()
+        => new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).AddMinutes(2 * 24 * 60)
+        .Should().Be(new LocalDateTime(1988, 06, 15, 22, 10, 05, 001));
+
+    [Test]
+    public void add_hours()
+        => new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).AddHours(41)
+        .Should().Be(new LocalDateTime(1988, 06, 15, 15, 10, 05, 001));
+
+    [Test]
+    public void add_months()
+        => new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).AddMonths(12)
+        .Should().Be(new LocalDateTime(1989, 06, 13, 22, 10, 05, 001));
+
+    [Test]
+    public void adding_MonthSpan()
+        => (new LocalDateTime(1988, 06, 13, 22, 10, 05, 001) + MonthSpan.FromYears(1))
+        .Should().Be(new LocalDateTime(1989, 06, 13, 22, 10, 05, 001));
+
+    [Test]
+    public void subtracting_MonthSpan()
+        => (new LocalDateTime(1988, 06, 13, 22, 10, 05, 001) - MonthSpan.FromMonths(1))
+        .Should().Be(new LocalDateTime(1988, 05, 13, 22, 10, 05, 001));
+
+    [Test]
+    public void add_years()
+        => new LocalDateTime(1988, 06, 13, 22, 10, 05, 001).AddYears(-12)
+        .Should().Be(new LocalDateTime(1976, 06, 13, 22, 10, 05, 001));
 }
 
 public class Can_not_be_adjusted_with

@@ -17,6 +17,9 @@ public class Has_constant
 
     [Test]
     public void MaxValue_represents_9999_12_13() => Date.MaxValue.Should().Be(new Date(9999, 12, 31));
+
+    [Test]
+    public void MinValue_equals_default() => Date.MinValue.Should().Be(default);
 }
 
 public class Is_equal_by_value
@@ -118,6 +121,36 @@ public class Can_be_parsed
     }
 }
 
+public class Can_be_created
+{
+    [Test]
+    public void from_ticks()
+    {
+        var act = new Date(621393984000000017L);
+        act.Should().Be(new Date(1970, 02, 14));
+    }
+}
+
+public class Has_properties
+{
+    [TestCase(1970, 02, 14)]
+    public void year_month_and_day(int year, int month, int day)
+    {
+        var date = new Date(year, month, day);
+        date.Year.Should().Be(year);
+        date.Month.Should().Be(month);
+        date.Day.Should().Be(day);
+    }
+
+    [Test]
+    public void day_of_week()
+        => new Date(1970, 02, 14).DayOfWeek.Should().Be(DayOfWeek.Saturday);
+
+    [Test]
+    public void day_of_year()
+        => new Date(1970, 02, 14).DayOfYear.Should().Be(45);
+}
+
 public class Can_be_adjusted_with
 {
     [Test]
@@ -151,6 +184,54 @@ public class Can_be_adjusted_with
     [Test]
     public void subtracting_TimeSpan()
         => (Svo.Date - new TimeSpan(25, 30, 15)).Should().Be(new DateTime(2017, 06, 09, 22, 29, 45, DateTimeKind.Utc));
+
+    [Test]
+    public void increment()
+    {
+        var date = new Date(1970, 02, 14);
+        date++;
+        date.Should().Be(new Date(1970, 02, 15));
+    }
+
+    [Test]
+    public void decrement()
+    {
+        var date = new Date(1970, 02, 14);
+        date--;
+        date.Should().Be(new Date(1970, 02, 13));
+    }
+
+    [Test]
+    public void subtracting_two_dates_returns_TimeSpan()
+        => (new Date(1970, 02, 14) - new Date(1970, 02, 12)).Should().Be(TimeSpan.FromDays(2));
+
+    [Test]
+    public void add_ticks()
+        => new Date(1970, 02, 14).AddTicks(4000000000017L).Should().Be(new Date(1970, 02, 18));
+
+    [Test]
+    public void add_milliseconds()
+        => new Date(1970, 02, 14).AddMilliseconds(3 * 24 * 60 * 60 * 1003).Should().Be(new Date(1970, 02, 17));
+
+    [Test]
+    public void add_seconds()
+        => new Date(1970, 02, 14).AddSeconds(3 * 24 * 60 * 64).Should().Be(new Date(1970, 02, 17));
+
+    [Test]
+    public void add_minutes()
+        => new Date(1970, 02, 14).AddMinutes(2 * 24 * 60).Should().Be(new Date(1970, 02, 16));
+
+    [Test]
+    public void add_hours()
+        => new Date(1970, 02, 14).AddHours(41).Should().Be(new Date(1970, 02, 15));
+
+    [Test]
+    public void add_months()
+        => new Date(1970, 02, 14).AddMonths(12).Should().Be(new Date(1971, 02, 14));
+
+    [Test]
+    public void add_years()
+        => new Date(1970, 02, 14).AddYears(-12).Should().Be(new Date(1958, 02, 14));
 }
 
 public class Can_not_be_adjusted_with

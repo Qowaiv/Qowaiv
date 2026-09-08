@@ -1,7 +1,60 @@
 namespace Financial.BIC_specs;
 
+public class Has_constant
+{
+    [Test]
+    public void Empty_equals_default() => BusinessIdentifierCode.Empty.Should().Be(default);
+}
+
+public class Has_properties
+{
+    [TestCase(0, "")]
+    [TestCase(0, "?")]
+    [TestCase(11, "AEGONL2UXXX")]
+    public void Length(int length, BusinessIdentifierCode svo) => svo.Length.Should().Be(length);
+
+    [TestCase("", "")]
+    [TestCase("", "?")]
+    [TestCase("AEGO", "AEGONL2UXXX")]
+    public void Business_code(string business, BusinessIdentifierCode svo) => svo.Business.Should().Be(business);
+
+    [TestCase("", "")]
+    [TestCase("?", "?")]
+    [TestCase("NL", "AEGONL2UXXX")]
+    public void Country_is(Country country, BusinessIdentifierCode svo) => svo.Country.Should().Be(country);
+
+    [TestCase("", "")]
+    [TestCase("", "?")]
+    [TestCase("2U", "AEGONL2UXXX")]
+    public void Location_code(string location, BusinessIdentifierCode svo) => svo.Location.Should().Be(location);
+
+    [TestCase("", "")]
+    [TestCase("", "?")]
+    [TestCase("XXX", "AEGONL2UXXX")]
+    public void Branch_code(string branch, BusinessIdentifierCode svo) => svo.Branch.Should().Be(branch);
+
+    [Test]
+    public void Branch_code_empty_for_BIC_without_one()
+        => BusinessIdentifierCode.Parse("AEGONL2U").Branch.Should().Be("");
+}
+
 public class With_domain_logic
 {
+    [TestCase(true, "")]
+    [TestCase(false, "?")]
+    [TestCase(false, "AEGONL2UXXX")]
+    public void IsEmpty_returns(bool result, BusinessIdentifierCode svo) => svo.IsEmpty().Should().Be(result);
+
+    [TestCase(false, "")]
+    [TestCase(true, "?")]
+    [TestCase(false, "AEGONL2UXXX")]
+    public void IsUnknown_returns(bool result, BusinessIdentifierCode svo) => svo.IsUnknown().Should().Be(result);
+
+    [TestCase(true, "")]
+    [TestCase(true, "?")]
+    [TestCase(false, "AEGONL2UXXX")]
+    public void IsEmptyOrUnknown_returns(bool result, BusinessIdentifierCode svo) => svo.IsEmptyOrUnknown().Should().Be(result);
+
     [TestCase(true, "AEGONL2UXXX")]
     [TestCase(true, "?")]
     [TestCase(false, "")]

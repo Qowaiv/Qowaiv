@@ -62,6 +62,55 @@ public class Is_comparable
     }
 }
 
+public class Has_constant
+{
+    [Test]
+    public void Zero_equals_default() => DateSpan.Zero.Should().Be(default);
+
+    [Test]
+    public void MaxValue_equals_DateMaxDateMin()
+        => DateSpan.Subtract(Date.MaxValue, Date.MinValue).Should().Be(DateSpan.MaxValue);
+
+    [Test]
+    public void MinValue_equals_DateMinDateMax()
+        => DateSpan.Subtract(Date.MinValue, Date.MaxValue).Should().Be(DateSpan.MinValue);
+}
+
+public class Has_properties
+{
+    [TestCase(1, 2, +3)]
+    [TestCase(0, 0, +3)]
+    [TestCase(9, 6, +0)]
+    [TestCase(9, 6, -1)]
+    [TestCase(-9, -6, -1)]
+    public void days(int years, int months, int days)
+        => new DateSpan(years, months, days).Days.Should().Be(days);
+
+    [TestCase(1, 2, +3)]
+    [TestCase(0, 0, +3)]
+    [TestCase(9, 6, +0)]
+    [TestCase(9, 6, -1)]
+    [TestCase(-9, -6, -1)]
+    public void months(int years, int months, int days)
+        => new DateSpan(years, months, days).Months.Should().Be(months);
+
+    [TestCase(1, 2, +3)]
+    [TestCase(0, 0, +3)]
+    [TestCase(9, 6, +0)]
+    [TestCase(9, 6, -1)]
+    [TestCase(-9, -6, -1)]
+    public void years(int years, int months, int days)
+        => new DateSpan(years, months, days).Years.Should().Be(years);
+
+    [TestCase(014, 1, 2, +3)]
+    [TestCase(012, 1, 0, +3)]
+    [TestCase(117, 9, 9, +0)]
+    [TestCase(006, 0, 6, -1)]
+    [TestCase(-19, -1, -7, -1)]
+    public void total_months(int total, int years, int months, int days)
+        => new DateSpan(years, months, days).TotalMonths.Should().Be(total);
+}
+
 public class Can_be_parsed
 {
     [Test]
@@ -413,6 +462,18 @@ public class Can_be_added_to
 
 public class Can_create
 {
+    [Test]
+    public void from_days()
+        => DateSpan.FromDays(4).Should().Be(new DateSpan(0, 4));
+
+    [Test]
+    public void from_months()
+        => DateSpan.FromMonths(17).Should().Be(new DateSpan(17, 0));
+
+    [Test]
+    public void from_years()
+        => DateSpan.FromYears(17).Should().Be(new DateSpan(17, 0, 0));
+
     [Test]
     public void Age_form_Date_without_months()
     {

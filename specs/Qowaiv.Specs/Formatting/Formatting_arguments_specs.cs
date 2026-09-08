@@ -132,3 +132,37 @@ public class Can_be_deconstructed
         formatProvider.Should().Be(TestCultures.fr_BE);
     }
 }
+
+public class Has_constant
+{
+    [Test]
+    public void None_equals_default()
+        => FormattingArguments.None.Should().Be(default(FormattingArguments));
+}
+
+public class Has_properties
+{
+    [Test]
+    public void format_of_default_is_null()
+        => FormattingArguments.None.Format.Should().BeNull();
+
+    [Test]
+    public void format_of_TestStruct_is_format_string()
+        => Svo.FormattingArguments.Format.Should().Be("0.000");
+}
+
+public class Supports_XML_serialization
+{
+    [Test]
+    public void as_part_of_a_structure()
+    {
+        var structure = new XmlStructure<FormattingArguments>()
+        {
+            Id = 17,
+            Svo = FormattingArguments.None,
+            Date = new DateTime(1970, 02, 14, 00, 00, 000, DateTimeKind.Local),
+        };
+        var round_tripped = SerializeDeserialize.Xml(structure);
+        round_tripped.Should().Be(structure);
+    }
+}

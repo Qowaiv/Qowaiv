@@ -1,5 +1,20 @@
 namespace Financial.Money_specs;
 
+public class Has_constant
+{
+    [Test]
+    public void Zero_equals_default() => Money.Zero.Should().Be(default);
+}
+
+public class Has_properties
+{
+    [Test]
+    public void Currency_is_set() => (42 + Currency.EUR).Currency.Should().Be(Currency.EUR);
+
+    [Test]
+    public void Amount_is_set() => (42 + Currency.EUR).Amount.Should().Be((Amount)42);
+}
+
 public class Is_comparable
 {
     [Test]
@@ -357,6 +372,234 @@ public class Has_operators
         Func<decimal> division = () => Svo.Money / (16 + Currency.USD);
         division.Should().Throw<CurrencyMismatchException>();
     }
+}
+
+public class Can_be_operated_on
+{
+    [TestCase(-1, "EUR -1000")]
+    [TestCase(0, "EUR 0")]
+    [TestCase(+1, "EUR 100")]
+    public void sign(int expected, Money value)
+        => value.Sign().Should().Be(expected);
+
+    [TestCase(23.1234, -23.1234)]
+    [TestCase(23.1234, +23.1234)]
+    public void abs(decimal expected, decimal value)
+    {
+        var money = value + Currency.USD;
+        money.Abs().Should().Be(expected + Currency.USD);
+    }
+
+    [Test]
+    public void plus()
+        => (+Svo.Money).Should().Be(Svo.Money);
+
+    [Test]
+    public void negate()
+    {
+        (-Svo.Money).Should().Be(-42.17 + Currency.EUR);
+    }
+
+    [Test]
+    public void increment()
+    {
+        var act = Svo.Money;
+        act++;
+        act.Should().Be(43.17 + Currency.EUR);
+    }
+
+    [Test]
+    public void decrement()
+    {
+        var act = Svo.Money;
+        act--;
+        act.Should().Be(41.17 + Currency.EUR);
+    }
+
+    [Test]
+    public void add_same_currency()
+    {
+        var l = 16 + Currency.EUR;
+        var r = 26 + Currency.EUR;
+        (l + r).Should().Be(42 + Currency.EUR);
+    }
+
+    [Test]
+    public void add_percentage()
+    {
+        var money = 16 + Currency.EUR;
+        (money + 25.Percent()).Should().Be(20 + Currency.EUR);
+    }
+
+    [Test]
+    public void subtract_same_currency()
+    {
+        var l = 69 + Currency.EUR;
+        var r = 27 + Currency.EUR;
+        (l - r).Should().Be(42 + Currency.EUR);
+    }
+
+    [Test]
+    public void subtract_percentage()
+    {
+        var money = 16 + Currency.EUR;
+        (money - 25.Percent()).Should().Be(12 + Currency.EUR);
+    }
+
+    [Test]
+    public void multiply_percentage()
+    {
+        var money = 100.40m + Currency.USD;
+        (money * 50.Percent()).Should().Be(50.20m + Currency.USD);
+    }
+
+    [Test]
+    public void multiply_float()
+    {
+        var money = 100.40m + Currency.USD;
+        (money * 0.5F).Should().Be(50.20m + Currency.USD);
+    }
+
+    [Test]
+    public void multiply_double()
+    {
+        var money = 100.40m + Currency.USD;
+        (money * 0.5).Should().Be(50.20m + Currency.USD);
+    }
+
+    [Test]
+    public void multiply_decimal()
+    {
+        var money = 100.40m + Currency.USD;
+        (money * 0.5m).Should().Be(50.20m + Currency.USD);
+    }
+
+    [Test]
+    public void multiply_short()
+    {
+        var money = 100.40m + Currency.USD;
+        (money * (short)2).Should().Be(200.8m + Currency.USD);
+    }
+
+    [Test]
+    public void multiply_int()
+    {
+        var money = 100.40m + Currency.USD;
+        (money * 2).Should().Be(200.8m + Currency.USD);
+    }
+
+    [Test]
+    public void multiply_long()
+    {
+        var money = 100.40m + Currency.USD;
+        (money * 2L).Should().Be(200.8m + Currency.USD);
+    }
+
+    [Test]
+    public void multiply_ushort()
+    {
+        var money = 100.40m + Currency.USD;
+        (money * (ushort)2).Should().Be(200.8m + Currency.USD);
+    }
+
+    [Test]
+    public void multiply_uint()
+    {
+        var money = 100.40m + Currency.USD;
+        (money * 2u).Should().Be(200.8m + Currency.USD);
+    }
+
+    [Test]
+    public void multiply_ulong()
+    {
+        var money = 100.40m + Currency.USD;
+        (money * 2ul).Should().Be(200.8m + Currency.USD);
+    }
+
+    [Test]
+    public void divide_percentage()
+    {
+        var money = 100.40m + Currency.USD;
+        (money / 50.Percent()).Should().Be(200.8m + Currency.USD);
+    }
+
+    [Test]
+    public void divide_float()
+    {
+        var money = 100.40m + Currency.USD;
+        (money / 0.5F).Should().Be(200.8m + Currency.USD);
+    }
+
+    [Test]
+    public void divide_double()
+    {
+        var money = 100.40m + Currency.USD;
+        (money / 0.5).Should().Be(200.8m + Currency.USD);
+    }
+
+    [Test]
+    public void divide_decimal()
+    {
+        var money = 100.40m + Currency.USD;
+        (money / 0.5m).Should().Be(200.8m + Currency.USD);
+    }
+
+    [Test]
+    public void divide_short()
+    {
+        var money = 100.40m + Currency.USD;
+        (money / (short)2).Should().Be(50.20m + Currency.USD);
+    }
+
+    [Test]
+    public void divide_int()
+    {
+        var money = 100.40m + Currency.USD;
+        (money / 2).Should().Be(50.20m + Currency.USD);
+    }
+
+    [Test]
+    public void divide_long()
+    {
+        var money = 100.40m + Currency.USD;
+        (money / 2L).Should().Be(50.20m + Currency.USD);
+    }
+
+    [Test]
+    public void divide_ushort()
+    {
+        var money = 100.40m + Currency.USD;
+        (money / (ushort)2).Should().Be(50.20m + Currency.USD);
+    }
+
+    [Test]
+    public void divide_uint()
+    {
+        var money = 100.40m + Currency.USD;
+        (money / 2u).Should().Be(50.20m + Currency.USD);
+    }
+
+    [Test]
+    public void divide_ulong()
+    {
+        var money = 100.40m + Currency.USD;
+        (money / 2ul).Should().Be(50.20m + Currency.USD);
+    }
+}
+
+public class Can_be_rounded
+{
+    [Test]
+    public void to_2_digits_by_default()
+        => (123.4567m + Currency.EUR).Round().Should().Be(123.46m + Currency.EUR);
+
+    [Test]
+    public void to_1_digit()
+        => (123.4567m + Currency.EUR).Round(1).Should().Be(123.5m + Currency.EUR);
+
+    [Test]
+    public void to_multiple_of_0d25()
+        => (123.6567m + Currency.EUR).RoundToMultiple(0.25m).Should().Be(123.75m + Currency.EUR);
 }
 
 public class Money_zero

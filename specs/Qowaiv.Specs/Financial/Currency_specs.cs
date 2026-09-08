@@ -1,5 +1,65 @@
 namespace Financial.Currency_specs;
 
+public class Has_constant
+{
+    [Test]
+    public void Empty_equals_default() => Currency.Empty.Should().Be(default);
+}
+
+public class With_domain_logic
+{
+    [TestCase(true, "")]
+    [TestCase(false, "?")]
+    [TestCase(false, "EUR")]
+    public void IsEmpty_returns(bool result, Currency svo) => svo.IsEmpty().Should().Be(result);
+
+    [TestCase(false, "")]
+    [TestCase(true, "?")]
+    [TestCase(false, "EUR")]
+    public void IsUnknown_returns(bool result, Currency svo) => svo.IsUnknown().Should().Be(result);
+
+    [TestCase(true, "")]
+    [TestCase(true, "?")]
+    [TestCase(false, "EUR")]
+    public void IsEmptyOrUnknown_returns(bool result, Currency svo) => svo.IsEmptyOrUnknown().Should().Be(result);
+}
+
+public class Current
+{
+    [Test]
+    public void for_current_culture_nl_NL_is_EUR()
+    {
+        using (TestCultures.nl_NL.Scoped())
+        {
+            Currency.Current.Should().Be(Currency.EUR);
+        }
+    }
+
+    [Test]
+    public void for_current_culture_es_EC_is_USD()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Currency.Current.Should().Be(Currency.USD);
+        }
+    }
+
+    [Test]
+    public void for_current_culture_en_is_empty()
+    {
+        using (TestCultures.en.Scoped())
+        {
+            Currency.Current.Should().Be(Currency.Empty);
+        }
+    }
+}
+
+public class Has_properties
+{
+    [Test]
+    public void Symbol_for_AZN() => Currency.AZN.Symbol.Should().Be("₼");
+}
+
 public class Exists
 {
     [Test]
@@ -172,6 +232,54 @@ public class Has_custom_formatting
         using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
         {
             Svo.Currency.ToString(provider: null).Should().Be("EUR");
+        }
+    }
+
+    [Test]
+    public void amount_with_BYR()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            var number = (Amount)1200.34m;
+            number.ToString("C", Currency.BYR).Should().Be("BYR1,200");
+        }
+    }
+
+    [Test]
+    public void amount_with_ANG()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            var number = (Amount)12.34m;
+            number.ToString("C", Currency.ANG).Should().Be("NAf.12.34");
+        }
+    }
+
+    [Test]
+    public void decimal_with_ANG()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            12.34m.ToString("C", Currency.ANG).Should().Be("NAf.12.34");
+        }
+    }
+
+    [Test]
+    public void decimal_with_TND()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            12.34m.ToString("C", Currency.TND).Should().Be("TND12.340");
+        }
+    }
+
+    [Test]
+    public void decimal_and_double_with_EUR()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            12.34m.ToString("C", Currency.EUR).Should().Be("€12.34");
+            12.34.ToString("C", Currency.EUR).Should().Be("€12.34");
         }
     }
 }

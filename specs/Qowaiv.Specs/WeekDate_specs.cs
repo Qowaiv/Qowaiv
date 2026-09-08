@@ -12,6 +12,41 @@ public class Is_invalid
     public void for_garbage() => WeekDate.TryParse("Not a week date").Should().BeNull();
 }
 
+public class Has_constant
+{
+    [Test]
+    public void MinValue_equals_default() => WeekDate.MinValue.Should().Be(default);
+}
+
+public class Has_properties
+{
+    [Test]
+    public void Date_of_test_struct()
+        => new WeekDate(1997, 14, 6).Date.Should().Be(new Date(1997, 04, 05));
+
+    [Test]
+    public void Year_of_MinValue()
+        => WeekDate.MinValue.Year.Should().Be(1);
+
+    [Test]
+    public void Year_of_MaxValue()
+        => WeekDate.MaxValue.Year.Should().Be(9999);
+
+    [TestCase(2010, 52, 7, 2010)]
+    [TestCase(2020, 01, 1, 2020)]
+    public void Year(int year, int week, int day, int expected)
+        => new WeekDate(year, week, day).Year.Should().Be(expected);
+
+    [TestCase(1997, 14, 6, 6)]
+    [TestCase(1990, 40, 7, 7)]
+    public void Day(int year, int week, int day, int expected)
+        => new WeekDate(year, week, day).Day.Should().Be(expected);
+
+    [Test]
+    public void DayOfYear_of_test_struct()
+        => new WeekDate(1997, 14, 6).DayOfYear.Should().Be(96);
+}
+
 public class Is_equal_by_value
 {
     [Test]

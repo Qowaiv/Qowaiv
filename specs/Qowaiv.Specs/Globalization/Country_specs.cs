@@ -1,7 +1,108 @@
 namespace Globalization.Country_specs;
 
+public class Has_constant
+{
+    [Test]
+    public void Empty_equals_default() => Country.Empty.Should().Be(default);
+}
+
+public class Has_properties
+{
+    [TestCase("", "")]
+    [TestCase("", "?")]
+    [TestCase("+379", "VA")]
+    public void CallingCode(string code, Country svo) => svo.CallingCode.Should().Be(code);
+
+    [TestCase("", "")]
+    [TestCase("?", "?")]
+    [TestCase("VA", "VA")]
+    public void Name(string name, Country svo)
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            svo.Name.Should().Be(name);
+        }
+    }
+
+    [TestCase(0, "")]
+    [TestCase(999, "?")]
+    [TestCase(336, "VA")]
+    public void IsoNumericCode(int code, Country svo) => svo.IsoNumericCode.Should().Be(code);
+}
+
+public class Current
+{
+    [Test]
+    public void for_current_culture_de_DE_is_DE()
+    {
+        using (TestCultures.de_DE.Scoped())
+        {
+            Country.Current.Should().Be(Country.DE);
+        }
+    }
+
+    [Test]
+    public void for_current_culture_es_EC_is_EC()
+    {
+        using (TestCultures.es_EC.Scoped())
+        {
+            Country.Current.Should().Be(Country.EC);
+        }
+    }
+
+    [Test]
+    public void for_current_culture_en_is_empty()
+    {
+        using (TestCultures.en.Scoped())
+        {
+            Country.Current.Should().Be(Country.Empty);
+        }
+    }
+}
+
+public class Can_be_created
+{
+    [Test]
+    public void from_null_RegionInfo_is_empty()
+        => Country.Create((RegionInfo?)null).Should().Be(Country.Empty);
+
+    [Test]
+    public void from_null_CultureInfo_is_empty()
+        => Country.Create((CultureInfo?)null).Should().Be(Country.Empty);
+
+    [Test]
+    public void from_RegionInfo_NL_is_NL()
+        => Country.Create(new RegionInfo("NL")).Should().Be(Country.NL);
+
+    [Test]
+    public void from_invariant_culture_is_empty()
+        => Country.Create(CultureInfo.InvariantCulture).Should().Be(Country.Empty);
+
+    [Test]
+    public void from_neutral_culture_es_is_empty()
+        => Country.Create(new CultureInfo("es")).Should().Be(Country.Empty);
+
+    [Test]
+    public void from_culture_es_EC_is_EC()
+        => Country.Create(new CultureInfo("es-EC")).Should().Be(Country.EC);
+
+    [Test]
+    public void from_region_info_CS_is_CSXX()
+        => Country.Create(new RegionInfo("CS")).Should().Be(Country.CSXX);
+}
+
 public class With_domain_logic
 {
+    [TestCase(true, "")]
+    [TestCase(false, "?")]
+    [TestCase(false, "VA")]
+    public void IsEmpty_returns(bool result, Country svo) => svo.IsEmpty().Should().Be(result);
+
+    [TestCase(true, "")]
+    [TestCase(true, "?")]
+    [TestCase(false, "VA")]
+    public void IsEmptyOrUnknown_returns(bool result, Country svo) => svo.IsEmptyOrUnknown().Should().Be(result);
+
     [TestCase(true, "VA")]
     [TestCase(true, "?")]
     [TestCase(false, "")]

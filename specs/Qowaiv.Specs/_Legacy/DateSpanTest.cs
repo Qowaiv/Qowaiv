@@ -28,35 +28,6 @@ public class DateSpanTest
 
     #endregion
 
-    #region TryParse tests
-
-    /// <summary>TryParse with specified string value should be valid.</summary>
-    [Test]
-    public void TryParse_StringValue_IsValid()
-    {
-        string str = "5Y+3M+2D";
-        DateSpan.TryParse(str, out DateSpan val).Should().BeTrue();
-        Should.BeEqual(str, val.ToString(), "Value");
-    }
-
-    [Test]
-    public void TryParse_TestStructInput_AreEqual()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            var exp = TestStruct;
-            var act = DateSpan.TryParse(exp.ToString());
-
-            act.Should().Be(exp);
-        }
-    }
-
-    [Test]
-    public void from_invalid_as_null_with_TryParse()
-        => DateSpan.TryParse("invalid input").Should().BeNull();
-
-    #endregion
-
     #region IEquatable tests
 
     /// <summary>GetHash should not fail for DateSpan.Zero.</summary>

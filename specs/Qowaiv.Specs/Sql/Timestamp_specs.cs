@@ -14,6 +14,16 @@ public class Is_invalid
 
 public class Can_be_parsed
 {
+    [TestCase("en-GB", "0x00000000499602D2")]
+    [TestCase("en-GB", "1234567890")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            Timestamp.Parse(input).Should().Be(Svo.Timestamp);
+        }
+    }
+
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
@@ -24,6 +34,18 @@ public class Can_be_parsed
                 .WithMessage("Not a valid SQL timestamp");
         }
     }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => Timestamp.TryParse("0xInvalidTimeStamp", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => Timestamp.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+        => Timestamp.TryParse("1234567890").Should().Be(Svo.Timestamp);
 }
 
 public class Is_equal_by_value

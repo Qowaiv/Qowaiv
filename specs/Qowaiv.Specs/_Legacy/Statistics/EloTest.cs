@@ -18,31 +18,6 @@ public class EloTest
 
     #endregion
 
-    #region TryParse tests
-
-    /// <summary>TryParse with specified string value should be valid.</summary>
-    [Test]
-    public void TryParse_StringValue_IsValid()
-    {
-        string str = "1400";
-        Elo.TryParse(str, out Elo val).Should().BeTrue();
-        Should.BeEqual(str, val.ToString(), "Value");
-    }
-
-    [Test]
-    public void TryParse_TestStructInput_AreEqual()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            var exp = TestStruct;
-            var act = Elo.TryParse(exp.ToString());
-
-            act.Should().Be(exp);
-        }
-    }
-
-    #endregion
-
     #region IEquatable tests
 
     [Test]

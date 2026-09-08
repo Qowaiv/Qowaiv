@@ -15,6 +15,20 @@ public class Is_invalid
 public class Can_be_parsed
 {
     [Test]
+    public void from_week_date_string()
+        => WeekDate.Parse("1234-W50-6", CultureInfo.InvariantCulture).Should().Be(new WeekDate(1234, 50, 6));
+
+    [TestCase("en-GB", "2017-W23-7")]
+    [TestCase("nl-NL", "2017-W23-7")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            WeekDate.Parse(input).Should().Be(Svo.WeekDate);
+        }
+    }
+
+    [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
         using (TestCultures.en_GB.Scoped())
@@ -24,6 +38,19 @@ public class Can_be_parsed
                 .WithMessage("Not a valid week date");
         }
     }
+
+    [TestCase("0000-W21-7")]
+    [TestCase("2000-W53-7")]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse(string input)
+        => WeekDate.TryParse(input, out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => WeekDate.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+        => WeekDate.TryParse("2017-W23-7").Should().Be(Svo.WeekDate);
 }
 
 public class Can_be_created

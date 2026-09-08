@@ -29,6 +29,28 @@ public class Is_equal_by_value
 public class Can_be_parsed
 {
     [Test]
+    public void from_null_string_represents_Empty()
+        => BusinessIdentifierCode.Parse(null).Should().Be(BusinessIdentifierCode.Empty);
+
+    [Test]
+    public void from_empty_string_represents_Empty()
+        => BusinessIdentifierCode.Parse(string.Empty).Should().Be(BusinessIdentifierCode.Empty);
+
+    [Test]
+    public void from_question_mark_represents_Unknown()
+        => BusinessIdentifierCode.Parse("?").Should().Be(BusinessIdentifierCode.Unknown);
+
+    [TestCase("en-GB", "AEGONL2UXXX")]
+    [TestCase("es-EC", "AEGONL2UXXX")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            BusinessIdentifierCode.Parse(input).Should().Be(Svo.BusinessIdentifierCode);
+        }
+    }
+
+    [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
         using (TestCultures.en_GB.Scoped())
@@ -38,6 +60,18 @@ public class Can_be_parsed
                 .WithMessage("Not a valid BIC");
         }
     }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => BusinessIdentifierCode.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => BusinessIdentifierCode.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+        => BusinessIdentifierCode.TryParse("AEGONL2UXXX").Should().Be(Svo.BusinessIdentifierCode);
 }
 
 public class Has_custom_formatting

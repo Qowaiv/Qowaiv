@@ -6,54 +6,6 @@ public class TimestampTest
     /// <summary>The test instance for most tests.</summary>
     public static readonly Timestamp TestStruct = 123456789L;
 
-    #region TryParse tests
-
-    [Test]
-    public void TryParse_0x00000000075BCD15_IsValid()
-    {
-        string str = "0x00000000075BCD15";
-
-        Timestamp.TryParse(str, out Timestamp val).Should().BeTrue();
-        Should.BeEqual(TestStruct, val, "Value");
-    }
-
-    [Test]
-    public void TryParse_123456789_IsValid()
-    {
-        string str = "123456789";
-
-        Timestamp.TryParse(str, out Timestamp val).Should().BeTrue();
-        Should.BeEqual(TestStruct, val, "Value");
-    }
-
-    /// <summary>TryParse with specified string value should be invalid.</summary>
-    [Test]
-    public void TryParse_0xInvalidTimeStamp_IsNotValid()
-    {
-        string str = "0xInvalidTimeStamp";
-
-        Timestamp.TryParse(str, out Timestamp val).Should().BeFalse();
-        Should.BeEqual(Timestamp.MinValue, val, "Value");
-    }
-
-    [Test]
-    public void TryParse_TestStructInput_AreEqual()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            var exp = TestStruct;
-            var act = Timestamp.TryParse(exp.ToString());
-
-            act.Should().Be(exp);
-        }
-    }
-
-    [Test]
-    public void from_invalid_as_null_with_TryParse()
-        => Timestamp.TryParse("invalid input").Should().BeNull();
-
-    #endregion
-
     #region IEquatable tests
 
     [Test]

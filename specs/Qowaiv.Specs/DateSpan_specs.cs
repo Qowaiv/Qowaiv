@@ -65,6 +65,20 @@ public class Is_comparable
 public class Can_be_parsed
 {
     [Test]
+    public void from_date_span_string()
+        => DateSpan.Parse("5Y+3M+2D", CultureInfo.InvariantCulture).Should().Be(new DateSpan(5, 3, 2));
+
+    [TestCase("en-GB", "10Y+3M-5D")]
+    [TestCase("es-EC", "10Y+3M-5D")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            DateSpan.Parse(input).Should().Be(Svo.DateSpan);
+        }
+    }
+
+    [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
         using (TestCultures.en_GB.Scoped())
@@ -72,6 +86,23 @@ public class Can_be_parsed
             "invalid input".Invoking(DateSpan.Parse)
                 .Should().Throw<FormatException>()
                 .WithMessage("Not a valid date span");
+        }
+    }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => DateSpan.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => DateSpan.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            DateSpan.TryParse(Svo.DateSpan.ToString()).Should().Be(Svo.DateSpan);
         }
     }
 }

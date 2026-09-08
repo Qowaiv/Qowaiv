@@ -70,6 +70,21 @@ public class Is_equal_by_value
 public class Can_be_parsed
 {
     [Test]
+    public void from_local_date_time_string()
+        => LocalDateTime.Parse("26-4-2015 17:07:13", TestCultures.nl_NL)
+        .Should().Be(new LocalDateTime(2015, 04, 26, 17, 07, 13));
+
+    [TestCase("en-GB", "11/06/2017 06:15:00")]
+    [TestCase("nl-NL", "11-06-2017 06:15:00")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            LocalDateTime.Parse(input).Should().Be(Svo.LocalDateTime);
+        }
+    }
+
+    [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
         using (TestCultures.en_GB.Scoped())
@@ -77,6 +92,23 @@ public class Can_be_parsed
             "invalid input".Invoking(LocalDateTime.Parse)
                 .Should().Throw<FormatException>()
                 .WithMessage("Not a valid date");
+        }
+    }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => LocalDateTime.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => LocalDateTime.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            LocalDateTime.TryParse(Svo.LocalDateTime.ToString()).Should().Be(Svo.LocalDateTime);
         }
     }
 }

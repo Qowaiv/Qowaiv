@@ -53,6 +53,28 @@ public class Is_equal_by_value
 public class Can_be_parsed
 {
     [Test]
+    public void from_null_string_represents_Empty()
+        => InternetMediaType.Parse(null).Should().Be(InternetMediaType.Empty);
+
+    [Test]
+    public void from_empty_string_represents_Empty()
+        => InternetMediaType.Parse(string.Empty).Should().Be(InternetMediaType.Empty);
+
+    [Test]
+    public void from_question_mark_represents_Unknown()
+        => InternetMediaType.Parse("?").Should().Be(InternetMediaType.Unknown);
+
+    [TestCase("en-GB", "application/x-chess-pgn")]
+    [TestCase("es-EC", "application/x-chess-pgn")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            InternetMediaType.Parse(input).Should().Be(Svo.InternetMediaType);
+        }
+    }
+
+    [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
         using (TestCultures.en_GB.Scoped())
@@ -62,6 +84,18 @@ public class Can_be_parsed
                 .WithMessage("Not a valid internet media type");
         }
     }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => InternetMediaType.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => InternetMediaType.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+        => InternetMediaType.TryParse("application/x-chess-pgn").Should().Be(Svo.InternetMediaType);
 }
 
 public class Supports_type_conversion

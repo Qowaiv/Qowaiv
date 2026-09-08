@@ -12,6 +12,31 @@ public class Has_constant
 public class Can_be_parsed
 {
     [Test]
+    public void from_amount_string()
+        => Amount.Parse("14.1804", CultureInfo.InvariantCulture).Should().Be((Amount)14.1804m);
+
+    [TestCase("en-GB", "42.17")]
+    [TestCase("es-EC", "42,17")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            Amount.Parse(input).Should().Be(Svo.Amount);
+        }
+    }
+
+    [Test]
+    public void with_custom_number_format_info()
+    {
+        var info = new NumberFormatInfo
+        {
+            CurrencyGroupSeparator = "#",
+            CurrencyDecimalSeparator = "*",
+        };
+        Amount.Parse("5#123*34", info).Should().Be((Amount)5123.34m);
+    }
+
+    [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
         using (TestCultures.en_GB.Scoped())
@@ -19,6 +44,23 @@ public class Can_be_parsed
             "invalid input".Invoking(Amount.Parse)
                 .Should().Throw<FormatException>()
                 .WithMessage("Not a valid amount");
+        }
+    }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => Amount.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => Amount.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Amount.TryParse("42.17").Should().Be(Svo.Amount);
         }
     }
 }

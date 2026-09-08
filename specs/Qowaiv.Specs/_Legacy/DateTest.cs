@@ -28,49 +28,6 @@ public class DateTest
 
     #endregion
 
-    #region TryParse tests
-
-    /// <summary>TryParse with specified string value should be valid.</summary>
-    [Test]
-    public void TryParse_StringValue_IsValid()
-    {
-        string str = "1983-05-02";
-
-        Date.TryParse(str, out Date val).Should().BeTrue();
-        Should.BeEqual(new Date(1983, 05, 02), val, "Value");
-    }
-
-    /// <summary>TryParse with specified string value should be invalid.</summary>
-    [Test]
-    public void TryParse_NotADate_IsNotValid()
-    {
-        using (new CultureInfoScope(TestCultures.nl_NL))
-        {
-            string str = "not a date";
-
-            Date.TryParse(str, out Date val).Should().BeFalse();
-            Should.BeEqual(Date.MinValue, val, "Value");
-        }
-    }
-
-    [Test]
-    public void TryParse_TestStructInput_AreEqual()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            var exp = TestStruct;
-            var act = Date.TryParse(exp.ToString());
-
-            act.Should().Be(exp);
-        }
-    }
-
-    [Test]
-    public void from_invalid_as_null_with_TryParse()
-        => Date.TryParse("invalid input").Should().BeNull();
-
-    #endregion
-
     #region IEquatable tests
 
     [Test]

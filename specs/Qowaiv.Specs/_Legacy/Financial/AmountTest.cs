@@ -6,70 +6,11 @@ public class AmountTest
     /// <summary>The test instance for most tests.</summary>
     public static readonly Amount TestStruct = (Amount)42.17m;
 
-    private static NumberFormatInfo GetCustomNumberFormatInfo()
-    {
-        var info = new NumberFormatInfo
-        {
-            CurrencyGroupSeparator = "#",
-            CurrencyDecimalSeparator = "*",
-        };
-        return info;
-    }
-
     #region Amount const tests
 
     /// <summary>Amount.Zero should be equal to the default of Amount.</summary>
     [Test]
     public void Zero_None_EqualsDefault() => Amount.Zero.Should().Be(default);
-
-    #endregion
-
-    #region TryParse tests
-
-    /// <summary>TryParse null should be valid.</summary>
-    [Test]
-    public void TryParse_Null_IsInvalid() => Amount.TryParse(Nil.String, out _).Should().BeFalse();
-
-    /// <summary>TryParse string.Empty should be valid.</summary>
-    [Test]
-    public void TryParse_StringEmpty_IsInvalid() => Amount.TryParse(string.Empty, out _).Should().BeFalse();
-
-    /// <summary>TryParse with specified string value should be valid.</summary>
-    [Test]
-    public void TryParse_StringValue_IsValid()
-    {
-        using (CultureInfoScope.NewInvariant())
-        {
-            string str = "14.1804";
-            Amount.TryParse(str, out Amount val).Should().BeTrue();
-            Should.BeEqual(str, val.ToString(), "Value");
-        }
-    }
-
-    [Test]
-    public void TryParse_TestStructInput_AreEqual()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            var exp = TestStruct;
-            var act = Amount.TryParse(exp.ToString());
-
-            act.Should().Be(exp);
-        }
-    }
-
-    [Test]
-    public void from_invalid_as_null_with_TryParse()
-        => Amount.TryParse("invalid input").Should().BeNull();
-
-    [Test]
-    public void Parse_CustomFormatProvider_ValidParsing()
-    {
-        Amount act = Amount.Parse("5#123*34", GetCustomNumberFormatInfo());
-        Amount exp = (Amount)5123.34;
-
-        act.Should().Be(exp);
-    }
 
     #endregion
 

@@ -15,69 +15,6 @@ public class MoneyTest
 
     #endregion
 
-    #region TryParse tests
-
-    /// <summary>TryParse with specified string value should be valid.</summary>
-    [Test]
-    public void TryParse_StringValue_IsValid()
-    {
-        using (TestCultures.nl_NL.Scoped())
-        {
-            Money exp = 42.17 + Currency.EUR;
-            Money.TryParse("€42,17", out Money act).Should().BeTrue();
-            Should.BeEqual(exp, act, "Value");
-        }
-    }
-
-    /// <summary>TryParse with specified string value should be invalid.</summary>
-    [Test]
-    public void TryParse_StringValue_IsNotValid()
-    {
-        string str = "string";
-        Money.TryParse(str, out Money val).Should().BeFalse();
-        Should.BeEqual(Money.Zero, val, "Value");
-    }
-
-    [Test]
-    public void TryParse_TestStructInput_AreEqual()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            var exp = TestStruct;
-            var act = Money.TryParse("€42.17");
-
-            act.Should().Be(exp);
-        }
-    }
-
-    [Test]
-    public void from_invalid_as_null_with_TryParse()
-        => Money.TryParse("invalid input").Should().BeNull();
-
-    [Test]
-    public void Parse_EuroSpace12_Parsed()
-    {
-        using (TestCultures.fr_FR.Scoped())
-        {
-            var exp = 12 + Currency.EUR;
-            var act = Money.Parse("€ 12");
-            act.Should().Be(exp);
-        }
-    }
-
-    [Test]
-    public void Parse_Min12Comma765SpaceEuro_Parsed()
-    {
-        using (TestCultures.fr_FR.Scoped())
-        {
-            var exp = -12.765 + Currency.EUR;
-            var act = Money.Parse("-12,765 €");
-            act.Should().Be(exp);
-        }
-    }
-
-    #endregion
-
     #region Properties
 
     [Test]

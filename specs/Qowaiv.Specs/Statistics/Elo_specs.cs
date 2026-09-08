@@ -70,6 +70,20 @@ public class Is_equal_by_value
 public class Can_be_parsed
 {
     [Test]
+    public void from_elo_string()
+        => Elo.Parse("1400", CultureInfo.InvariantCulture).Should().Be(Elo.Create(1400));
+
+    [TestCase("en-GB", "1732.4")]
+    [TestCase("es-EC", "1732,4")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            Elo.Parse(input).Should().Be(Svo.Elo);
+        }
+    }
+
+    [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
         using (TestCultures.en_GB.Scoped())
@@ -77,6 +91,23 @@ public class Can_be_parsed
             "invalid input".Invoking(Elo.Parse)
                 .Should().Throw<FormatException>()
                 .WithMessage("Not a valid Elo");
+        }
+    }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => Elo.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => Elo.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Elo.TryParse("1732.4").Should().Be(Svo.Elo);
         }
     }
 }

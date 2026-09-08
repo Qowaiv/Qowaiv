@@ -123,6 +123,34 @@ public class Can_be_parsed
     public void with_currency_after(string after)
         => Money.Parse(after, CultureInfo.InvariantCulture).Should().Be(Svo.Money);
 
+    [TestCase("en-GB", "€42.17")]
+    [TestCase("nl-NL", "€42,17")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            Money.Parse(input).Should().Be(Svo.Money);
+        }
+    }
+
+    [Test]
+    public void with_currency_symbol_before_on_french_culture()
+    {
+        using (TestCultures.fr_FR.Scoped())
+        {
+            Money.Parse("€ 12").Should().Be(12 + Currency.EUR);
+        }
+    }
+
+    [Test]
+    public void with_currency_symbol_after_negative_amount_on_french_culture()
+    {
+        using (TestCultures.fr_FR.Scoped())
+        {
+            Money.Parse("-12,765 €").Should().Be(-12.765 + Currency.EUR);
+        }
+    }
+
     [Test]
     public void with_out_currency()
         => Money.Parse("42.17", CultureInfo.InvariantCulture).Should().Be(42.17 + Currency.Empty);
@@ -135,6 +163,23 @@ public class Can_be_parsed
             "invalid input".Invoking(Money.Parse)
                 .Should().Throw<FormatException>()
                 .WithMessage("Not a valid amount");
+        }
+    }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => Money.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => Money.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Money.TryParse("€42.17").Should().Be(Svo.Money);
         }
     }
 }

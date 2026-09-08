@@ -14,47 +14,6 @@ public class WeekDateTest
 
     #endregion
 
-    #region TryParse tests
-
-    /// <summary>TryParse with specified string value should be valid.</summary>
-    [Test]
-    public void TryParse_StringValue_IsValid()
-    {
-        string str = "1234-W50-6";
-        WeekDate.TryParse(str, out WeekDate val).Should().BeTrue();
-        Should.BeEqual(str, val.ToString(), "Value");
-    }
-
-    [Test]
-    public void TryParse_TestStructInput_AreEqual()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            var exp = TestStruct;
-            var act = WeekDate.TryParse(exp.ToString());
-
-            act.Should().Be(exp);
-        }
-    }
-
-    [Test]
-    public void TryParse_Y0000W21D7_DefaultValue()
-    {
-        WeekDate exp = default;
-        WeekDate.TryParse("0000-W21-7", out WeekDate act).Should().BeFalse();
-        act.Should().Be(exp);
-    }
-
-    [Test]
-    public void TryParse_Y2000W53D7_DefaultValue()
-    {
-        WeekDate exp = default;
-        WeekDate.TryParse("2000-W53-7", out WeekDate act).Should().BeFalse();
-        act.Should().Be(exp);
-    }
-
-    #endregion
-
     #region IEquatable tests
 
     /// <summary>GetHash should not fail for WeekDate.Empty.</summary>

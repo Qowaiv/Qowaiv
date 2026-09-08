@@ -34,6 +34,67 @@ public class Get_countries
 #endif
 }
 
+public class Can_be_parsed
+{
+    [Test]
+    public void from_null_string_represents_Empty()
+        => Currency.Parse(null).Should().Be(Currency.Empty);
+
+    [Test]
+    public void from_empty_string_represents_Empty()
+        => Currency.Parse(string.Empty).Should().Be(Currency.Empty);
+
+    [Test]
+    public void from_question_mark_represents_Unknown()
+        => Currency.Parse("?").Should().Be(Currency.Unknown);
+
+    [Test]
+    public void from_generic_currency_symbol_represents_Unknown()
+        => Currency.Parse("¤").Should().Be(Currency.Unknown);
+
+    [Test]
+    public void from_euro_symbol()
+        => Currency.Parse("€").Should().Be(Currency.EUR);
+
+    [TestCase("en-GB", "EUR")]
+    [TestCase("es-EC", "EUR")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            Currency.Parse(input).Should().Be(Svo.Currency);
+        }
+    }
+
+    [Test]
+    public void from_valid_input_only_otherwise_throws_on_Parse()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            "invalid input".Invoking(Currency.Parse)
+                .Should().Throw<FormatException>()
+                .WithMessage("Not a valid currency");
+        }
+    }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => Currency.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => Currency.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Currency.TryParse(Svo.Currency.ToString()).Should().Be(Svo.Currency);
+        }
+    }
+}
+
 public class Has_custom_formatting
 {
     [Test]

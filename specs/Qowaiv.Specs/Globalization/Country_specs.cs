@@ -114,6 +114,28 @@ public class Exists
 public class Can_be_parsed
 {
     [Test]
+    public void from_null_string_represents_Empty()
+        => Country.Parse(null).Should().Be(Country.Empty);
+
+    [Test]
+    public void from_empty_string_represents_Empty()
+        => Country.Parse(string.Empty).Should().Be(Country.Empty);
+
+    [Test]
+    public void from_question_mark_represents_Unknown()
+        => Country.Parse("?").Should().Be(Country.Unknown);
+
+    [TestCase("en-GB", "VA")]
+    [TestCase("nl-NL", "VA")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            Country.Parse(input).Should().Be(Svo.Country);
+        }
+    }
+
+    [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
         using (TestCultures.en_GB.Scoped())
@@ -123,6 +145,18 @@ public class Can_be_parsed
                 .WithMessage("Not a valid country");
         }
     }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => Country.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => Country.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+        => Country.TryParse("VA").Should().Be(Svo.Country);
 }
 
 public class Has_custom_formatting

@@ -67,6 +67,21 @@ public class Is_equal_by_value
 public class Can_be_parsed
 {
     [Test]
+    public void from_ISO_8601_notation()
+        => Date.Parse("1983-05-02", CultureInfo.InvariantCulture).Should().Be(new Date(1983, 05, 02));
+
+    [TestCase("en-US", "06/11/2017")]
+    [TestCase("en-GB", "11/06/2017")]
+    [TestCase("nl-NL", "11-06-2017")]
+    public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
+    {
+        using (culture.Scoped())
+        {
+            Date.Parse(input).Should().Be(Svo.Date);
+        }
+    }
+
+    [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
         using (TestCultures.en_GB.Scoped())
@@ -74,6 +89,23 @@ public class Can_be_parsed
             "invalid input".Invoking(Date.Parse)
                 .Should().Throw<FormatException>()
                 .WithMessage("Not a valid date");
+        }
+    }
+
+    [Test]
+    public void from_valid_input_only_otherwise_return_false_on_TryParse()
+        => Date.TryParse("invalid input", out _).Should().BeFalse();
+
+    [Test]
+    public void from_invalid_as_null_with_TryParse()
+        => Date.TryParse("invalid input").Should().BeNull();
+
+    [Test]
+    public void with_TryParse_returns_SVO()
+    {
+        using (TestCultures.en_GB.Scoped())
+        {
+            Date.TryParse(Svo.Date.ToString()).Should().Be(Svo.Date);
         }
     }
 }

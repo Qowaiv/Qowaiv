@@ -17,38 +17,6 @@ public class LocalDateTimeTest
 
     #endregion
 
-    #region TryParse tests
-
-    /// <summary>TryParse with specified string value should be valid.</summary>
-    [Test]
-    public void TryParse_StringValue_IsValid()
-    {
-        using (new CultureInfoScope(TestCultures.nl_NL))
-        {
-            string str = "26-4-2015 17:07:13";
-            LocalDateTime.TryParse(str, out LocalDateTime val).Should().BeTrue();
-            Should.BeEqual(new LocalDateTime(2015, 04, 26, 17, 07, 13, 000), val, "Value");
-        }
-    }
-
-    [Test]
-    public void TryParse_TestStructInput_AreEqual()
-    {
-        using (TestCultures.en_GB.Scoped())
-        {
-            var exp = TestStructNoMilliseconds;
-            var act = LocalDateTime.TryParse(exp.ToString());
-
-            act.Should().Be(exp);
-        }
-    }
-
-    [Test]
-    public void from_invalid_as_null_with_TryParse()
-        => LocalDateTime.TryParse("invalid input").Should().BeNull();
-
-    #endregion
-
     #region IEquatable tests
 
     [Test]

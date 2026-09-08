@@ -292,6 +292,13 @@ public class Can_be_created
         => Timestamp.Create(-23).Should().Be((Timestamp)18446744073709551593L);
 }
 
+public class Can_be_converted
+{
+    [Test]
+    public void to_byte_array()
+        => ((Timestamp)123456789L).ToByteArray().Should().BeEquivalentTo(new byte[] { 21, 205, 91, 7, 0, 0, 0, 0 });
+}
+
 public class Can_not_be_created
 {
     [TestCase(7)]

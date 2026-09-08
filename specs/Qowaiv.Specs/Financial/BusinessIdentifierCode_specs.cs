@@ -44,6 +44,36 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.BusinessIdentifierCode.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_BusinessIdentifierCode_as_object()
+    {
+        object obj = Svo.BusinessIdentifierCode;
+        Svo.BusinessIdentifierCode.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_BusinessIdentifierCode_only()
+        => new object().Invoking(Svo.BusinessIdentifierCode.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            BusinessIdentifierCode.Empty,
+            BusinessIdentifierCode.Empty,
+            BusinessIdentifierCode.Parse("AEGONL2UXXX"),
+            BusinessIdentifierCode.Parse("CEBUNL2U"),
+            BusinessIdentifierCode.Parse("DSSBNL22"),
+            BusinessIdentifierCode.Parse("FTSBNL2R"),
+        };
+
+        var list = new List<BusinessIdentifierCode> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
 }
 
 public class Supports_type_conversion

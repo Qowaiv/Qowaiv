@@ -365,61 +365,6 @@ public class CurrencyTest
 
     #endregion
 
-    #region IComparable tests
-
-    /// <summary>Orders a list of currencys ascending.</summary>
-    [Test]
-    public void OrderBy_Currency_AreEqual()
-    {
-        var item0 = Currency.AED;
-        var item1 = Currency.BAM;
-        var item2 = Currency.CAD;
-        var item3 = Currency.EUR;
-
-        var inp = new List<Currency> { Currency.Empty, item3, item2, item0, item1, Currency.Empty };
-        var exp = new List<Currency> { Currency.Empty, Currency.Empty, item0, item1, item2, item3 };
-        var act = inp.OrderBy(item => item).ToList();
-
-        act.Should().BeEquivalentTo(exp);
-    }
-
-    /// <summary>Orders a list of currencys descending.</summary>
-    [Test]
-    public void OrderByDescending_Currency_AreEqual()
-    {
-        var item0 = Currency.AED;
-        var item1 = Currency.BAM;
-        var item2 = Currency.CAD;
-        var item3 = Currency.EUR;
-
-        var inp = new List<Currency> { Currency.Empty, item3, item2, item0, item1, Currency.Empty };
-        var exp = new List<Currency> { item3, item2, item1, item0, Currency.Empty, Currency.Empty };
-        var act = inp.OrderByDescending(item => item).ToList();
-
-        act.Should().BeEquivalentTo(exp);
-    }
-
-    /// <summary>Compare with a to object casted instance should be fine.</summary>
-    [Test]
-    public void CompareTo_ObjectTestStruct_0()
-    {
-        object other = TestStruct;
-
-        var exp = 0;
-        var act = TestStruct.CompareTo(other);
-
-        act.Should().Be(exp);
-    }
-
-    /// <summary>Compare with a random object should throw an exception.</summary>
-    [Test]
-    public void CompareTo_newObject_ThrowsArgumentException()
-    {
-        Func<int> compare = () => TestStruct.CompareTo(new object());
-        compare.Should().Throw<ArgumentException>();
-    }
-    #endregion
-
     #region Properties
 
     [Test]

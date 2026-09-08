@@ -75,6 +75,60 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.HouseNumber.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_HouseNumber_as_object()
+    {
+        object obj = Svo.HouseNumber;
+        Svo.HouseNumber.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_HouseNumber_only()
+        => new object().Invoking(Svo.HouseNumber.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new HouseNumber[]
+        {
+            HouseNumber.Empty,
+            HouseNumber.Empty,
+            1,
+            12,
+            123,
+            1234,
+        };
+
+        var list = new List<HouseNumber> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        HouseNumber smaller = 17;
+        HouseNumber bigger = 19;
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        HouseNumber left = 17;
+        HouseNumber right = 17;
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
 }
 public class Supports_type_conversion
 {

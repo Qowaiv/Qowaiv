@@ -133,34 +133,6 @@ public class MonthSpanTest
         subtracted.Should().Be(MonthSpan.FromMonths(13));
     }
 
-    /// <summary>Orders a list of month spans ascending.</summary>
-    [Test]
-    public void OrderBy_MonthSpan_AreEqual()
-    {
-        var item0 = MonthSpan.FromMonths(1);
-        var item1 = MonthSpan.FromMonths(12);
-        var item2 = MonthSpan.FromMonths(13);
-        var item3 = MonthSpan.FromMonths(145);
-        var inp = new List<MonthSpan> { MonthSpan.Zero, item3, item2, item0, item1, MonthSpan.Zero };
-        var exp = new List<MonthSpan> { MonthSpan.Zero, MonthSpan.Zero, item0, item1, item2, item3 };
-        var act = inp.OrderBy(item => item).ToList();
-        act.Should().BeEquivalentTo(exp);
-    }
-
-    /// <summary>Orders a list of month spans descending.</summary>
-    [Test]
-    public void OrderByDescending_MonthSpan_AreEqual()
-    {
-        var item0 = MonthSpan.FromMonths(1);
-        var item1 = MonthSpan.FromMonths(12);
-        var item2 = MonthSpan.FromMonths(13);
-        var item3 = MonthSpan.FromMonths(145);
-        var inp = new List<MonthSpan> { MonthSpan.Zero, item3, item2, item0, item1, MonthSpan.Zero };
-        var exp = new List<MonthSpan> { item3, item2, item1, item0, MonthSpan.Zero, MonthSpan.Zero };
-        var act = inp.OrderByDescending(item => item).ToList();
-        act.Should().BeEquivalentTo(exp);
-    }
-
     [Test]
     public void Explicit_Int32ToMonthSpan_AreEqual()
     {

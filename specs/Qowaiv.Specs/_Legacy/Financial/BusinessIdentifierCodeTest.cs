@@ -209,62 +209,6 @@ public class BusinessIdentifierCodeTest
 
     #endregion
 
-    #region IComparable tests
-
-    /// <summary>Orders a list of BICs ascending.</summary>
-    [Test]
-    public void OrderBy_BusinessIdentifierCode_AreEqual()
-    {
-        var item0 = BusinessIdentifierCode.Parse("AEGONL2UXXX");
-        var item1 = BusinessIdentifierCode.Parse("CEBUNL2U");
-        var item2 = BusinessIdentifierCode.Parse("DSSBNL22");
-        var item3 = BusinessIdentifierCode.Parse("FTSBNL2R");
-
-        var inp = new List<BusinessIdentifierCode> { BusinessIdentifierCode.Empty, item3, item2, item0, item1, BusinessIdentifierCode.Empty };
-        var exp = new List<BusinessIdentifierCode> { BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty, item0, item1, item2, item3 };
-        var act = inp.OrderBy(item => item).ToList();
-
-        act.Should().BeEquivalentTo(exp);
-    }
-
-    /// <summary>Orders a list of BICs descending.</summary>
-    [Test]
-    public void OrderByDescending_BusinessIdentifierCode_AreEqual()
-    {
-        var item0 = BusinessIdentifierCode.Parse("AEGONL2UXXX");
-        var item1 = BusinessIdentifierCode.Parse("CEBUNL2U");
-        var item2 = BusinessIdentifierCode.Parse("DSSBNL22");
-        var item3 = BusinessIdentifierCode.Parse("FTSBNL2R");
-
-        var inp = new List<BusinessIdentifierCode> { BusinessIdentifierCode.Empty, item3, item2, item0, item1, BusinessIdentifierCode.Empty };
-        var exp = new List<BusinessIdentifierCode> { item3, item2, item1, item0, BusinessIdentifierCode.Empty, BusinessIdentifierCode.Empty };
-        var act = inp.OrderByDescending(item => item).ToList();
-
-        act.Should().BeEquivalentTo(exp);
-    }
-
-    /// <summary>Compare with a to object casted instance should be fine.</summary>
-    [Test]
-    public void CompareTo_ObjectTestStruct_0()
-    {
-        object other = TestStruct;
-
-        var exp = 0;
-        var act = TestStruct.CompareTo(other);
-
-        act.Should().Be(exp);
-    }
-
-    /// <summary>Compare with a random object should throw an exception.</summary>
-    [Test]
-    public void CompareTo_newObject_ThrowsArgumentException()
-    {
-        Func<int> compare = () => TestStruct.CompareTo(new object());
-        compare.Should().Throw<ArgumentException>();
-    }
-
-    #endregion
-
     #region Properties
 
     [Test]

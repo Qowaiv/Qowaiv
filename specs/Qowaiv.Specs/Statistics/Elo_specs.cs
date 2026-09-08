@@ -85,6 +85,60 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.Elo.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_Elo_as_object()
+    {
+        object obj = Svo.Elo;
+        Svo.Elo.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_Elo_only()
+        => new object().Invoking(Svo.Elo.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new Elo[]
+        {
+            Elo.Zero,
+            Elo.Zero,
+            1601,
+            2371,
+            2416,
+            2601,
+        };
+
+        var list = new List<Elo> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        Elo smaller = 17;
+        Elo bigger = 19;
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        Elo left = 17;
+        Elo right = 17;
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
 }
 
 public class Is_Finite_only

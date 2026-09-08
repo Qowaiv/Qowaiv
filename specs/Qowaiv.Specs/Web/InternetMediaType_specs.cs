@@ -111,6 +111,36 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.InternetMediaType.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_InternetMediaType_as_object()
+    {
+        object obj = Svo.InternetMediaType;
+        Svo.InternetMediaType.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_InternetMediaType_only()
+        => new object().Invoking(Svo.InternetMediaType.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            InternetMediaType.Empty,
+            InternetMediaType.Empty,
+            InternetMediaType.Parse("audio/mp3"),
+            InternetMediaType.Parse("image/jpeg"),
+            InternetMediaType.Parse("text/x-markdown"),
+            InternetMediaType.Parse("video/quicktime"),
+        };
+
+        var list = new List<InternetMediaType> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
 }
 
 public class Supports_JSON_serialization

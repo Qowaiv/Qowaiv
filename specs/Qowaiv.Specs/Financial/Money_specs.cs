@@ -4,6 +4,60 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.Money.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_Money_as_object()
+    {
+        object obj = Svo.Money;
+        Svo.Money.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_Money_only()
+        => new object().Invoking(Svo.Money.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            Money.Zero,
+            Money.Zero,
+            124.40 + Currency.EUR,
+            124.41 + Currency.EUR,
+            124.42 + Currency.EUR,
+            124.39 + Currency.GBP,
+        };
+
+        var list = new List<Money> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        Money smaller = 17 + Currency.DKK;
+        Money bigger = 19 + Currency.DKK;
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        Money left = 17 + Currency.DKK;
+        Money right = 17 + Currency.DKK;
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
 }
 
 public class Is_equal_by_value

@@ -220,61 +220,6 @@ public class InternetMediaTypeTest
 
     #endregion
 
-    #region IComparable tests
-
-    /// <summary>Orders a list of internet media types ascending.</summary>
-    [Test]
-    public void OrderBy_InternetMediaType_AreEqual()
-    {
-        var item0 = InternetMediaType.Parse("audio/mp3");
-        var item1 = InternetMediaType.Parse("image/jpeg");
-        var item2 = InternetMediaType.Parse("text/x-markdown");
-        var item3 = InternetMediaType.Parse("video/quicktime");
-
-        var inp = new List<InternetMediaType> { InternetMediaType.Empty, item3, item2, item0, item1, InternetMediaType.Empty };
-        var exp = new List<InternetMediaType> { InternetMediaType.Empty, InternetMediaType.Empty, item0, item1, item2, item3 };
-        var act = inp.OrderBy(item => item).ToList();
-
-        act.Should().BeEquivalentTo(exp);
-    }
-
-    /// <summary>Orders a list of internet media types descending.</summary>
-    [Test]
-    public void OrderByDescending_InternetMediaType_AreEqual()
-    {
-        var item0 = InternetMediaType.Parse("audio/mp3");
-        var item1 = InternetMediaType.Parse("image/jpeg");
-        var item2 = InternetMediaType.Parse("text/x-markdown");
-        var item3 = InternetMediaType.Parse("video/quicktime");
-
-        var inp = new List<InternetMediaType> { InternetMediaType.Empty, item3, item2, item0, item1, InternetMediaType.Empty };
-        var exp = new List<InternetMediaType> { item3, item2, item1, item0, InternetMediaType.Empty, InternetMediaType.Empty };
-        var act = inp.OrderByDescending(item => item).ToList();
-
-        act.Should().BeEquivalentTo(exp);
-    }
-
-    /// <summary>Compare with a to object casted instance should be fine.</summary>
-    [Test]
-    public void CompareTo_ObjectTestStruct_0()
-    {
-        object other = TestStruct;
-
-        var exp = 0;
-        var act = TestStruct.CompareTo(other);
-
-        act.Should().Be(exp);
-    }
-
-    /// <summary>Compare with a random object should throw an exception.</summary>
-    [Test]
-    public void CompareTo_newObject_ThrowsArgumentException()
-    {
-        Func<int> compare = () => TestStruct.CompareTo(new object());
-        compare.Should().Throw<ArgumentException>();
-    }
-    #endregion
-
     #region Properties
 
     [Test]

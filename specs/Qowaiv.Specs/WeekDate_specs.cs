@@ -93,6 +93,60 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.WeekDate.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_WeekDate_as_object()
+    {
+        object obj = Svo.WeekDate;
+        Svo.WeekDate.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_WeekDate_only()
+        => new object().Invoking(Svo.WeekDate.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            WeekDate.MinValue,
+            WeekDate.MinValue,
+            WeekDate.Parse("2000-W01-3"),
+            WeekDate.Parse("2000-W11-2"),
+            WeekDate.Parse("2000-W21-1"),
+            WeekDate.Parse("2000-W31-7"),
+        };
+
+        var list = new List<WeekDate> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        WeekDate smaller = new(1980, 17, 5);
+        WeekDate bigger = new(1980, 19, 5);
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        WeekDate left = new(1980, 17, 5);
+        WeekDate right = new(1980, 17, 5);
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
 }
 
 public class Supports_type_conversion

@@ -75,6 +75,60 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.Timestamp.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_Timestamp_as_object()
+    {
+        object obj = Svo.Timestamp;
+        Svo.Timestamp.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_Timestamp_only()
+        => new object().Invoking(Svo.Timestamp.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        Timestamp[] sorted =
+        [
+            Timestamp.MinValue,
+            Timestamp.MinValue,
+            3245,
+            13245,
+            132456,
+            1324589,
+        ];
+
+        var list = new List<Timestamp> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        Timestamp smaller = 17;
+        Timestamp bigger = 19;
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        Timestamp left = 17;
+        Timestamp right = 17;
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
 }
 
 public class Can_be_created

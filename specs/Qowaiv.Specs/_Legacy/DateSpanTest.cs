@@ -5,8 +5,6 @@ public class DateSpanTest
 {
     /// <summary>The test instance for most tests.</summary>
     public static readonly DateSpan TestStruct = new(10, 3, -5);
-    public static readonly DateSpan Smaller = new(10, 3, -5);
-    public static readonly DateSpan Bigger = new(10, 3, +02);
 
     #region date span const tests
 
@@ -154,97 +152,6 @@ public class DateSpanTest
         var l = TestStruct;
         var r = TestStruct;
         (l != r).Should().BeFalse();
-    }
-
-    #endregion
-
-    #region IComparable tests
-
-    [Test]
-    public void DaysPerMonth_ShouldMatchTheCalculatedValue()
-    {
-        var date = new Date(2000, 01, 01) - Date.MinValue;
-        double daysPerMonth = date.TotalDays / 2000 / 12;
-        var DateSpan_DaysPerMonth = (double)typeof(DateSpan).GetField("DaysPerMonth", (BindingFlags)int.MaxValue)!.GetValue(null)!;
-        DateSpan_DaysPerMonth.Should().BeApproximately(daysPerMonth, precision: 0.000000001);
-    }
-
-    /// <summary>Orders a list of date spans ascending.</summary>
-    [Test]
-    public void OrderBy_DateSpan_AreEqual()
-    {
-        var item0 = new DateSpan(0, 00, -1);
-        var item1 = new DateSpan(1, +2, 0);
-        var item2 = new DateSpan(0, 00, +500);
-        var item3 = new DateSpan(4, 00, -40);
-
-        var inp = new List<DateSpan> { DateSpan.Zero, item3, item2, item0, item1, DateSpan.Zero };
-        var exp = new List<DateSpan> { item0, DateSpan.Zero, DateSpan.Zero, item1, item2, item3 };
-        var act = inp.OrderBy(item => item).ToList();
-
-        act.Should().BeEquivalentTo(exp);
-    }
-
-    /// <summary>Orders a list of date spans descending.</summary>
-    [Test]
-    public void OrderByDescending_DateSpan_AreEqual()
-    {
-        var item0 = new DateSpan(0, 00, -1);
-        var item1 = new DateSpan(1, +2, 0);
-        var item2 = new DateSpan(0, 00, +500);
-        var item3 = new DateSpan(4, 00, -40);
-
-        var inp = new List<DateSpan> { DateSpan.Zero, item3, item2, item0, item1, DateSpan.Zero };
-        var exp = new List<DateSpan> { item3, item2, item1, DateSpan.Zero, DateSpan.Zero, item0 };
-        var act = inp.OrderByDescending(item => item).ToList();
-
-        act.Should().BeEquivalentTo(exp);
-    }
-
-    /// <summary>Compare with a to object casted instance should be fine.</summary>
-    [Test]
-    public void CompareTo_ObjectTestStruct_0()
-    {
-        object other = TestStruct;
-
-        var exp = 0;
-        var act = TestStruct.CompareTo(other);
-
-        act.Should().Be(exp);
-    }
-
-    /// <summary>Compare with a random object should throw an exception.</summary>
-    [Test]
-    public void CompareTo_newObject_ThrowsArgumentException()
-    {
-        Func<int> compare = () => TestStruct.CompareTo(new object());
-        compare.Should().Throw<ArgumentException>();
-    }
-
-    [Test]
-    public void Smaller_LessThan_Bigger_IsTrue() => (Smaller < Bigger).Should().BeTrue();
-    [Test]
-    public void Bigger_GreaterThan_Smaller_IsTrue() => (Bigger > Smaller).Should().BeTrue();
-
-    [Test]
-    public void Smaller_LessThanOrEqual_Bigger_IsTrue() => (Smaller <= Bigger).Should().BeTrue();
-    [Test]
-    public void Bigger_GreaterThanOrEqual_Smaller_IsTrue() => (Bigger >= Smaller).Should().BeTrue();
-
-    [Test]
-    public void Smaller_LessThanOrEqual_Smaller_IsTrue()
-    {
-        var left = Smaller;
-        var right = Smaller;
-        (left <= right).Should().BeTrue();
-    }
-
-    [Test]
-    public void Smaller_GreaterThanOrEqual_Smaller_IsTrue()
-    {
-        var left = Smaller;
-        var right = Smaller;
-        (left >= right).Should().BeTrue();
     }
 
     #endregion

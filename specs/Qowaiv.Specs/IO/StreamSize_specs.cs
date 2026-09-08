@@ -4,6 +4,60 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.StreamSize.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_StreamSize_as_object()
+    {
+        object obj = Svo.StreamSize;
+        Svo.StreamSize.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_StreamSize_only()
+        => new object().Invoking(Svo.StreamSize.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        StreamSize[] sorted =
+        [
+            StreamSize.Zero,
+            StreamSize.Zero,
+            13.465.KB(),
+            83.465.KB(),
+            11.346.MB(),
+            77.346.MB(),
+        ];
+
+        var list = new List<StreamSize> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        StreamSize smaller = 17;
+        StreamSize bigger = 19;
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        StreamSize left = 17;
+        StreamSize right = 17;
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
 }
 
 public class Can_be_parsed

@@ -164,6 +164,60 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.Date.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_Date_as_object()
+    {
+        object obj = Svo.Date;
+        Svo.Date.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_Date_only()
+        => new object().Invoking(Svo.Date.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            Date.MinValue,
+            Date.MinValue,
+            Date.Parse("1970-01-03"),
+            Date.Parse("1970-02-01"),
+            Date.Parse("1970-03-28"),
+            Date.Parse("1970-04-12"),
+        };
+
+        var list = new List<Date> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        Date smaller = new(1990, 10, 17);
+        Date bigger = new(1990, 10, 19);
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        Date left = new(1990, 10, 17);
+        Date right = new(1990, 10, 17);
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
 }
 
 public class Supports_type_conversion

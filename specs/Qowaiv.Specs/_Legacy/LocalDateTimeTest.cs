@@ -86,62 +86,6 @@ public class LocalDateTimeTest
 
     #endregion
 
-    #region IComparable tests
-
-    /// <summary>Orders a list of local date times ascending.</summary>
-    [Test]
-    public void OrderBy_LocalDateTime_AreEqual()
-    {
-        var item0 = new LocalDateTime(1900, 10, 01, 22, 10, 16);
-        var item1 = new LocalDateTime(1963, 08, 23, 23, 59, 15);
-        var item2 = new LocalDateTime(1999, 12, 05, 04, 13, 14);
-        var item3 = new LocalDateTime(2010, 07, 13, 00, 44, 13);
-
-        var inp = new List<LocalDateTime> { LocalDateTime.MinValue, item3, item2, item0, item1, LocalDateTime.MinValue };
-        var exp = new List<LocalDateTime> { LocalDateTime.MinValue, LocalDateTime.MinValue, item0, item1, item2, item3 };
-        var act = inp.OrderBy(item => item).ToList();
-
-        act.Should().BeEquivalentTo(exp);
-    }
-
-    /// <summary>Orders a list of local date times descending.</summary>
-    [Test]
-    public void OrderByDescending_LocalDateTime_AreEqual()
-    {
-        var item0 = new LocalDateTime(1900, 10, 01, 22, 10, 16);
-        var item1 = new LocalDateTime(1963, 08, 23, 23, 59, 15);
-        var item2 = new LocalDateTime(1999, 12, 05, 04, 13, 14);
-        var item3 = new LocalDateTime(2010, 07, 13, 00, 44, 13);
-
-        var inp = new List<LocalDateTime> { LocalDateTime.MinValue, item3, item2, item0, item1, LocalDateTime.MinValue };
-        var exp = new List<LocalDateTime> { item3, item2, item1, item0, LocalDateTime.MinValue, LocalDateTime.MinValue };
-        var act = inp.OrderByDescending(item => item).ToList();
-
-        act.Should().BeEquivalentTo(exp);
-    }
-
-    /// <summary>Compare with a to object casted instance should be fine.</summary>
-    [Test]
-    public void CompareTo_ObjectTestStruct_0()
-    {
-        object other = TestStruct;
-
-        var exp = 0;
-        var act = TestStruct.CompareTo(other);
-
-        act.Should().Be(exp);
-    }
-
-    /// <summary>Compare with a random object should throw an exception.</summary>
-    [Test]
-    public void CompareTo_newObject_ThrowsArgumentException()
-    {
-        Func<int> compare = () => TestStruct.CompareTo(new object());
-        compare.Should().Throw<ArgumentException>();
-    }
-
-    #endregion
-
     #region Methods
 
     [Test]

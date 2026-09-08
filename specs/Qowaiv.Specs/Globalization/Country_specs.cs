@@ -184,6 +184,36 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.Country.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_Country_as_object()
+    {
+        object obj = Svo.Country;
+        Svo.Country.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_Country_only()
+        => new object().Invoking(Svo.Country.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        Country[] sorted =
+        [
+            Country.Empty,
+            Country.Empty,
+            Country.AE,
+            Country.BE,
+            Country.CU,
+            Country.DO,
+        ];
+
+        var list = new List<Country> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
 }
 
 public class Supports_type_conversion

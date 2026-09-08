@@ -247,61 +247,6 @@ public class CountryTest
 
     #endregion
 
-    #region IComparable tests
-
-    /// <summary>Orders a list of Countrys ascending.</summary>
-    [Test]
-    public void OrderBy_Country_AreEqual()
-    {
-        var item0 = Country.AE;
-        var item1 = Country.BE;
-        var item2 = Country.CU;
-        var item3 = Country.DO;
-
-        var inp = new List<Country> { Country.Empty, item3, item2, item0, item1, Country.Empty };
-        var exp = new List<Country> { Country.Empty, Country.Empty, item0, item1, item2, item3 };
-        var act = inp.OrderBy(item => item).ToList();
-
-        act.Should().BeEquivalentTo(exp);
-    }
-
-    /// <summary>Orders a list of Countrys descending.</summary>
-    [Test]
-    public void OrderByDescending_Country_AreEqual()
-    {
-        var item0 = Country.AE;
-        var item1 = Country.BE;
-        var item2 = Country.CU;
-        var item3 = Country.DO;
-
-        var inp = new List<Country> { Country.Empty, item3, item2, item0, item1, Country.Empty };
-        var exp = new List<Country> { item3, item2, item1, item0, Country.Empty, Country.Empty };
-        var act = inp.OrderByDescending(item => item).ToList();
-
-        act.Should().BeEquivalentTo(exp);
-    }
-
-    /// <summary>Compare with a to object casted instance should be fine.</summary>
-    [Test]
-    public void CompareTo_ObjectTestStruct_0()
-    {
-        object other = TestStruct;
-
-        var exp = 0;
-        var act = TestStruct.CompareTo(other);
-
-        act.Should().Be(exp);
-    }
-
-    /// <summary>Compare with a random object should throw an exception.</summary>
-    [Test]
-    public void CompareTo_newObject_ThrowsArgumentException()
-    {
-        Func<int> compare = () => TestStruct.CompareTo(new object());
-        compare.Should().Throw<ArgumentException>();
-    }
-    #endregion
-
     #region Casting tests
 
     [Test]

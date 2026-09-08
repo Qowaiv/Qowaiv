@@ -147,6 +147,36 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.LocalDateTime.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_LocalDateTime_as_object()
+    {
+        object obj = Svo.LocalDateTime;
+        Svo.LocalDateTime.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_LocalDateTime_only()
+        => new object().Invoking(Svo.LocalDateTime.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            LocalDateTime.MinValue,
+            LocalDateTime.MinValue,
+            new LocalDateTime(1900, 10, 01, 22, 10, 16),
+            new LocalDateTime(1963, 08, 23, 23, 59, 15),
+            new LocalDateTime(1999, 12, 05, 04, 13, 14),
+            new LocalDateTime(2010, 07, 13, 00, 44, 13),
+        };
+
+        var list = new List<LocalDateTime> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
 }
 
 public class Supports_type_conversion

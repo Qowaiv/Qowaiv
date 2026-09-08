@@ -66,6 +66,60 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.Amount.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_Amount_as_object()
+    {
+        object obj = Svo.Amount;
+        Svo.Amount.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_Amount_only()
+        => new object().Invoking(Svo.Amount.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        Amount[] sorted =
+        [
+            Amount.Zero,
+            Amount.Zero,
+            0.23.Amount(),
+            1.24.Amount(),
+            2.27.Amount(),
+            1300.Amount(),
+        ];
+
+        var list = new List<Amount> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        var smaller = 17.Amount();
+        var bigger = 19.Amount();
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        var left = 17.Amount();
+        var right = 17.Amount();
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
 }
 
 public class Supports_type_conversion

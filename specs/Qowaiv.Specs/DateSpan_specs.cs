@@ -6,6 +6,60 @@ public class Is_comparable
 {
     [Test]
     public void to_null_is_1() => Svo.DateSpan.CompareTo(Nil.Object).Should().Be(1);
+
+    [Test]
+    public void to_DateSpan_as_object()
+    {
+        object obj = Svo.DateSpan;
+        Svo.DateSpan.CompareTo(obj).Should().Be(0);
+    }
+
+    [Test]
+    public void to_DateSpan_only()
+        => new object().Invoking(Svo.DateSpan.CompareTo).Should().Throw<ArgumentException>();
+
+    [Test]
+    public void can_be_sorted_using_compare()
+    {
+        var sorted = new[]
+        {
+            new DateSpan(0, 0, -1),
+            DateSpan.Zero,
+            DateSpan.Zero,
+            new DateSpan(1, 2, 0),
+            new DateSpan(0, 0, 500),
+            new DateSpan(4, 0, -40),
+        };
+
+        var list = new List<DateSpan> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
+        list.Sort();
+
+        list.Should().BeEquivalentTo(sorted);
+    }
+
+    [Test]
+    public void by_operators_for_different_values()
+    {
+        DateSpan smaller = new(10, 3, -5);
+        DateSpan bigger = new(10, 3, 2);
+
+        (smaller < bigger).Should().BeTrue();
+        (smaller <= bigger).Should().BeTrue();
+        (smaller > bigger).Should().BeFalse();
+        (smaller >= bigger).Should().BeFalse();
+    }
+
+    [Test]
+    public void by_operators_for_equal_values()
+    {
+        DateSpan left = new(10, 3, -5);
+        DateSpan right = new(10, 3, -5);
+
+        (left < right).Should().BeFalse();
+        (left <= right).Should().BeTrue();
+        (left > right).Should().BeFalse();
+        (left >= right).Should().BeTrue();
+    }
 }
 
 public class Can_be_parsed

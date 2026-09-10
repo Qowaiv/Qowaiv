@@ -198,6 +198,8 @@ value += 10.Percent(); // value 55;
 
 var rounded = 17.56.Percent().Round(1); // 17.6%;
 
+var complement = 25.Percent().Complement(); // 75%
+
 var max = Percentage.Max(1.4.Percent(), 1.8.Percent()); // 1.8%;
 var min = Percentage.Min(1.7.Percent(), 1.9.Percent()); // 1.7%;
 

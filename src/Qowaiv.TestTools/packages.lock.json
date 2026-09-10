@@ -49,9 +49,9 @@
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
-        "requested": "[10.33.0.1635, )",
-        "resolved": "10.33.0.1635",
-        "contentHash": "nOwgvMh7p64z62GTy2n4Ki51DVy4Q2ejxxfuclW6Y5u6Htk1i2RNRqxuONiZ/4aaBi8V6RwzuCcGTOFcoVoQOg=="
+        "requested": "[10.34.0.3385, )",
+        "resolved": "10.34.0.3385",
+        "contentHash": "FfjaQa9G9xdEyh14AYWeG6vLQ+2PZWkooI/w3cH5aGBGGeWmhjeWS+/luYoJDYgrXMI2ciBj42y6buhJJHO2ow=="
       },
       "StyleCop.Analyzers.Unstable": {
         "type": "Direct",
@@ -138,9 +138,9 @@
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
-        "requested": "[10.33.0.1635, )",
-        "resolved": "10.33.0.1635",
-        "contentHash": "nOwgvMh7p64z62GTy2n4Ki51DVy4Q2ejxxfuclW6Y5u6Htk1i2RNRqxuONiZ/4aaBi8V6RwzuCcGTOFcoVoQOg=="
+        "requested": "[10.34.0.3385, )",
+        "resolved": "10.34.0.3385",
+        "contentHash": "FfjaQa9G9xdEyh14AYWeG6vLQ+2PZWkooI/w3cH5aGBGGeWmhjeWS+/luYoJDYgrXMI2ciBj42y6buhJJHO2ow=="
       },
       "StyleCop.Analyzers.Unstable": {
         "type": "Direct",
@@ -191,9 +191,9 @@
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
-        "requested": "[10.33.0.1635, )",
-        "resolved": "10.33.0.1635",
-        "contentHash": "nOwgvMh7p64z62GTy2n4Ki51DVy4Q2ejxxfuclW6Y5u6Htk1i2RNRqxuONiZ/4aaBi8V6RwzuCcGTOFcoVoQOg=="
+        "requested": "[10.34.0.3385, )",
+        "resolved": "10.34.0.3385",
+        "contentHash": "FfjaQa9G9xdEyh14AYWeG6vLQ+2PZWkooI/w3cH5aGBGGeWmhjeWS+/luYoJDYgrXMI2ciBj42y6buhJJHO2ow=="
       },
       "StyleCop.Analyzers.Unstable": {
         "type": "Direct",
@@ -244,9 +244,9 @@
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
-        "requested": "[10.33.0.1635, )",
-        "resolved": "10.33.0.1635",
-        "contentHash": "nOwgvMh7p64z62GTy2n4Ki51DVy4Q2ejxxfuclW6Y5u6Htk1i2RNRqxuONiZ/4aaBi8V6RwzuCcGTOFcoVoQOg=="
+        "requested": "[10.34.0.3385, )",
+        "resolved": "10.34.0.3385",
+        "contentHash": "FfjaQa9G9xdEyh14AYWeG6vLQ+2PZWkooI/w3cH5aGBGGeWmhjeWS+/luYoJDYgrXMI2ciBj42y6buhJJHO2ow=="
       },
       "StyleCop.Analyzers.Unstable": {
         "type": "Direct",

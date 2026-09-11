@@ -36,7 +36,7 @@
     <ToBeReleased>
       <![CDATA[
 v8.*
-- ?
+- Add Percentage.Complement().
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

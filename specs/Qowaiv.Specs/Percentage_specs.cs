@@ -930,6 +930,22 @@ public class Can_get_100_percent_based_on_percentage
     }
 }
 
+public class can_be_transformed
+{
+
+    [TestCase("0%", "0%")]
+    [TestCase("-3%", "3%")]
+    [TestCase("10%", "10%")]
+    public void absolute_value(Percentage percentage, Percentage absolute)
+        => percentage.Abs().Should().Be(absolute);
+
+    [TestCase("42%", "58%")]
+    [TestCase("-10%", "110%")]
+    [TestCase("110%", "-10%")]
+    public void Complement(Percentage percentage, Percentage complement)
+        => percentage.Complement().Should().Be(complement);
+}
+
 public class Can_be_rounded
 {
     [Test]
@@ -1037,14 +1053,6 @@ public class Can_get
         actual.Should().Be(expected);
     }
 
-    [TestCase("3%", "-3%")]
-    [TestCase("0%", "0%")]
-    [TestCase("10%", "10%")]
-    public void absolute_value(Percentage expected, Percentage percentage)
-    {
-        var actual = percentage.Abs();
-        actual.Should().Be(expected);
-    }
 }
 
 public class Can_get_maximum_of

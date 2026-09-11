@@ -49,6 +49,10 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     [Pure]
     public Percentage Abs() => new(Math.Abs(m_Value));
 
+    /// <summary>Gets the complement (100% - current) of the percentage.</summary>
+    [Pure]
+    public Percentage Complement() => new(1 - m_Value);
+
     /// <summary>Returns the larger of two percentages.</summary>
     /// <param name="val1">
     /// The first of the two percentages to compare.

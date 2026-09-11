@@ -930,7 +930,7 @@ public class Can_get_100_percent_based_on_percentage
     }
 }
 
-public class can_be_tranformed
+public class can_be_transformed
 {
 
     [TestCase("0%", "0%")]

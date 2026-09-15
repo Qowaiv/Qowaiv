@@ -4,5 +4,5 @@ namespace WikiScraper;
 
 internal static class Program
 {
-    public static Task Main(string[] args) => Iban.Generate();
+    public static Task Main(string[] args) => Currency.Generate();
 }

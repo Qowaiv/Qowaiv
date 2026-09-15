@@ -248,6 +248,10 @@ public class Has_custom_formatting
     [TestCase("O", "?", "?")]
     public void with_format(string format, InternationalBankAccountNumber svo, string formatted)
         => svo.ToString(format).Should().Be(formatted);
+
+    [Test]
+    public void HumanReadable()
+        => Svo.Iban.HumanReadable().Should().Be("NL20 INGB 0001 2345 67");
 }
 
 public class Can_be_parsed
@@ -305,14 +309,13 @@ public class Can_be_parsed
 
 public class Can_not_be_parsed
 {
-    [Test]
-    public void with_markup_within_the_country_code()
-        => InternationalBankAccountNumber.TryParse("N L20INGB0001234567").Should().BeNull();
-
-    [Test]
-    public void with_markup_within_the_checksum_code()
-        => InternationalBankAccountNumber.TryParse("NL2 0INGB0001234567").Should().BeNull();
-
+    [TestCase("N L20INGB0001234567", "with_markup_within_the_country_code")]
+    [TestCase("NL2 0INGB0001234567", "with_markup_within_the_checksum_code")]
+    public void for_invalid_IBANs(string str, string because)
+    {
+        InternationalBankAccountNumber.TryParse(str).Should().BeNull(because);
+        InternationalBankAccountNumber.TryParse(str, TestCultures.ar).Should().BeNull();
+    }
 
     [Test]
     public void Throws()

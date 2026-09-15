@@ -253,11 +253,26 @@ public class Can_be_parsed
 
     [Test]
     public void from_invalid_as_null_with_TryParse()
-        => Country.TryParse("invalid input").Should().BeNull();
+    {
+        Country.TryParse("invalid input").Should().BeNull();
+        Country.TryParse("invalid input", TestCultures.de).Should().BeNull();
+    }
 
     [Test]
     public void with_TryParse_returns_SVO()
         => Country.TryParse("VA").Should().Be(Svo.Country);
+
+    [Test]
+    public void prefering_existing_over_former_countries()
+        => Country.Parse("BQ").Should().Be(Country.BQ);
+
+    [Test]
+    public void former_countries_via_ISO_3166_3()
+        => Country.Parse("BQAQ").Should().Be(Country.BQAQ);
+
+    [Test]
+    public void culture_specific()
+        => Country.TryParse("モザンビーク", new CultureInfo("ja-JP")).Should().Be(Country.MZ);
 }
 
 public class Has_custom_formatting
@@ -503,21 +518,6 @@ public class Is_equal_by_value
             svo.GetHashCode().Should().Be(hash);
         }
     }
-}
-
-public class Can_parse
-{
-    [Test]
-    public void prefering_existing_over_former_countries()
-        => Country.Parse("BQ").Should().Be(Country.BQ);
-
-    [Test]
-    public void former_countries_via_ISO_3166_3()
-        => Country.Parse("BQAQ").Should().Be(Country.BQAQ);
-
-    [Test]
-    public void culture_specific()
-        => Country.TryParse("モザンビーク", new CultureInfo("ja-JP")).Should().Be(Country.MZ);
 }
 
 public class Supports_XML_serialization

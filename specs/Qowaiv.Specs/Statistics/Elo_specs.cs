@@ -132,6 +132,16 @@ public class Can_be_parsed
     }
 }
 
+public class Can_not_parsed
+{
+    [Test]
+    public void from_non_finate_numbers()
+    {
+        Elo.TryParse("nan").Should().BeNull();
+        Elo.TryParse("nan", TestCultures.nl).Should().BeNull();
+    }
+}
+
 public class Has_custom_formatting
 {
     [Test]

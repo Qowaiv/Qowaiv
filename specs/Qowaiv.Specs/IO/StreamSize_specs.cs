@@ -4,6 +4,12 @@ public class Has_constant
 {
     [Test]
     public void Zero_equals_default() => StreamSize.Zero.Should().Be(default);
+
+    [Test]
+    public void MinValue() => StreamSize.MinValue.Should().Be((-9223372036854775808).Bytes());
+
+    [Test]
+    public void MaxValue() => StreamSize.MaxValue.Should().Be(9223372036854775807.Bytes());
 }
 
 public class Is_comparable
@@ -555,7 +561,7 @@ public class Can_be_operated_on
     public void divide_by_decimal()
     {
         StreamSize act = 81;
-        act /= 1.5d;
+        act /= 1.5m;
         act.Should().Be(54);
     }
 
@@ -635,7 +641,7 @@ public class Can_be_operated_on
     public void multiply_by_decimal()
     {
         StreamSize act = 42;
-        act *= 0.5d;
+        act *= 0.5m;
         act.Should().Be(21);
     }
 }

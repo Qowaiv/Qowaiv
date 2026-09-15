@@ -62,6 +62,17 @@ public class Get_hash_code
         }
     }
 
+
+    [Test]
+    public void Null_items_are_hashed_as_0()
+    {
+        using (Hash.WithoutRandomizer())
+        {
+            int hash = Hash.Code(42).And(new List<int?>() { 17, null, 88 });
+            hash.Should().Be(490945808);
+        }
+    }
+
     [Test]
     public void GetHashCode_is_not_supported()
     {

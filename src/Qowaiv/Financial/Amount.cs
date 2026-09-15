@@ -154,6 +154,7 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// The deserialized amount.
     /// </returns>
     [Pure]
+    [ExcludeFromCodeCoverage/* Justification = "Converter bypasses this convention based entry." */]
     public static Amount FromJson(decimal json) => new(json);
 
     /// <summary>Deserializes the amount from a JSON number.</summary>

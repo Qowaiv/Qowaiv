@@ -81,7 +81,10 @@ public class Is_not_valid_for
     [TestCase("H")]
     [TestCase("I")]
     public void H_and_lower(string label)
-        => EnergyLabel.TryParse(label).Should().BeNull();
+    {
+        EnergyLabel.TryParse(label).Should().BeNull();
+        EnergyLabel.TryParse(label, TestCultures.en_GB).Should().BeNull();
+    }
 
     [TestCase("G+")]
     [TestCase("A+++++")]

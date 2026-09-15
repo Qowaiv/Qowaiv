@@ -22,6 +22,7 @@ public class FractionJsonConverter : SvoJsonConverter<Fraction>
 
     /// <inheritdoc />
     [Pure]
+    [ExcludeFromCodeCoverage(Justification = "For Fraction, decimal will always do.")]
     protected override Fraction FromJson(double json) => Fraction.FromJson(json);
 
     /// <inheritdoc />

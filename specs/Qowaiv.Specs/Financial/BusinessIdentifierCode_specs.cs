@@ -332,7 +332,10 @@ public class Is_invalid
     [TestCase("AAAANLBB12", "Branch length of 2")]
     [TestCase("ABCDXX01", "Not existing country")]
     public void For(string str, string because)
-        => BusinessIdentifierCode.TryParse(str).Should().BeNull(because);
+    {
+        BusinessIdentifierCode.TryParse(str).Should().BeNull(because);
+        BusinessIdentifierCode.TryParse(str, TestCultures.nl).Should().BeNull(because);
+    }
 }
 
 public class Supports_JSON_serialization

@@ -8,7 +8,7 @@ namespace Bench;
 [CategoriesColumn]
 [MemoryDiagnoser(true)]
 [MinColumn]
-public class PercentageBenchmark
+public class PercentageBenchmark : IDisposable
 {
     private const int Iterations = 1000;
     private readonly decimal[] Decimals = new decimal[Iterations];
@@ -71,4 +71,25 @@ public class PercentageBenchmark
         public const string Serialization = nameof(Serialization);
         public const string Deserialization = nameof(Deserialization);
     }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposedValue)
+        {
+            if (disposing)
+            {
+                ReadDecimal.Dispose();
+                ReadPercentage.Dispose();
+            }
+            disposedValue = true;
+        }
+    }
+
+    public void Dispose()
+    {
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
+    }
+
+    private bool disposedValue;
 }

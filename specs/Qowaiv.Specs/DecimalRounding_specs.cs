@@ -29,7 +29,6 @@ public class NearestRounding
     [TestCase(DecimalRounding.Up)]
     [TestCase(DecimalRounding.Down)]
     [TestCase(DecimalRounding.RandomTieBreaking)]
-    [TestCase(DecimalRounding.StochasticRounding)]
     public void Is(DecimalRounding rounding) => rounding.IsNearestRounding().Should().BeTrue();
 
     [TestCase(DecimalRounding.Truncate)]
@@ -37,5 +36,6 @@ public class NearestRounding
     [TestCase(DecimalRounding.DirectTowardsZero)]
     [TestCase(DecimalRounding.Ceiling)]
     [TestCase(DecimalRounding.Floor)]
+    [TestCase(DecimalRounding.StochasticRounding)]
     public void Not(DecimalRounding rounding) => rounding.IsNearestRounding().Should().BeFalse();
 }

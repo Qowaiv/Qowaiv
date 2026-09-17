@@ -31,16 +31,19 @@
   </ItemGroup>
   
   <PropertyGroup>
-    <Version>8.1.0</Version>
-    <PackageValidationBaselineVersion>8.0.0</PackageValidationBaselineVersion>
+    <Version>8.2.0</Version>
+    <PackageValidationBaselineVersion>8.1.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
 v8.*
-- Add Percentage.Complement().
+- ?
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
+v8.2.0
+- Add Percentage.Complement().
+- Bulgaria (BG) uses EUR, instead of BGN since 2026-01-01. (BUG)
 v8.1.0
 - IBAN supports obfuscation with ToString("O").
 - IBAN parsing 1.75 times faster, with lower memory consumption.

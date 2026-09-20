@@ -45,6 +45,12 @@ public static class TestCultures
     /// <summary>Gets the Chinese (zh) <see cref="CultureInfo" />.</summary>
     public static CultureInfo zh => new("zh");
 
+    /// <summary>Gets the Hong-Kong Chinese (zh-HK) <see cref="CultureInfo" />.</summary>
+    public static CultureInfo zh_HK => new("zh-HK");
+
+    /// <summary>Gets the Taiwanese (zh-TW) <see cref="CultureInfo" />.</summary>
+    public static CultureInfo zh_TW => new("zh-TW");
+
     /// <summary>Gets the German (de-DE) <see cref="CultureInfo" />.</summary>
     public static CultureInfo de_DE => new("de-DE");
 

@@ -155,7 +155,7 @@ internal readonly record struct Bban(string Pattern, bool Currency = false, bool
         default,
         new("FInnnnnnnnnnnnnnnn"), //                    FI: 14n
         gen("FJ"),
-        gen("FK"),
+        new("FKnnaannnnnnnnnnnn"), //                    FK: 2a,12n
         default,
         gen("FM"),
         default,
@@ -340,7 +340,7 @@ internal readonly record struct Bban(string Pattern, bool Currency = false, bool
         new("MK07nnnccccccccccnn"), //                   MK: 3n,10c,2n
         new("MLnnccnnnnnnnnnnnnnnnnnnnnnn"), //          ML: 2c,22n
         gen("MM"),
-        gen("MN"),
+        new("MNnnnnnnnnnnnnnnnnnn"), //                  MN: 4n,12n
         gen("MO"),
         gen("MP"),
         gen("MQ"),

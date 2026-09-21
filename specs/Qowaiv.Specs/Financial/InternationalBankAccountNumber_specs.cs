@@ -30,10 +30,10 @@ public class Supported
     ];
 
     [Test]
-    public void by_109_Countries()
+    public void by_111_Countries()
     {
         InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code).Should().BeEquivalentTo(All);
-        InternationalBankAccountNumber.Supported.Count.Should().Be(109);
+        InternationalBankAccountNumber.Supported.Count.Should().Be(111);
     }
 }
 

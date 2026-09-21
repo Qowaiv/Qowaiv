@@ -40,6 +40,7 @@ validator code.
 | Egypt                     |    29 | 25n             |       | EGkk bbbb ssss cccc cccc cccc cccc c      | yes  | EG38 0019 0005 0000 0000 2631 8000 2      |
 | Spain                     |    24 | 20n             |       | ESkk bbbb ssss xxcc cccc cccc             | yes  | ES91 2100 0418 4502 0005 1332             |
 | Finland                   |    18 | 14n             |       | FIkk bbbb bbcc cccc cx                    | yes  | FI21 1234 5600 0007 85                    |
+| Falkland Islands          |    18 | 2a,12n          |       | FKkk bbcc cccc cccc cc                    | yes  | FK88 SC12 3456 7890 12                    |
 | Faroe Islands             |    18 | 14n             |       | FOkk bbbb cccc cccc cx                    | yes  | FO20 0040 0440 1162 43                    |
 | France                    |    27 | 10n,11c,2n      |       | FRkk bbbb bsss sscc cccc cccc cxx         | yes  | FR14 2004 1010 0505 0001 3M02 606         |
 | United Kingdom            |    22 | 4a,14n          |       | GBkk bbbb ssss sscc cccc cc               | yes  | GB46 BARC 2078 9863 2748 45               |
@@ -70,6 +71,7 @@ validator code.
 | Moldova                   |    24 | 20c             |       | MDkk bbcc cccc cccc cccc cccc             | yes  | MD24 AG00 0225 1000 1310 4168             |
 | Montenegro                |    22 | 18n             |    25 | MEkk bbbc cccc cccc cccc xx               | yes  | ME25 5050 0001 2345 6789 51               |
 | North Macedonia           |    19 | 3n,10c,2n       |    07 | MKkk bbbc cccc cccc cxx                   | yes  | MK07 2501 2000 0058 984                   |
+| Mongolia                  |    20 | 4n,12n          |       | MNkk bbbb cccc cccc cccc                  | yes  | MN58 0050 0991 2345 6789                  |
 | Mauritania                |    27 | 23n             |    13 | MRkk bbbb bsss sscc cccc cccc cxx         | yes  | MR13 0002 0001 0100 0012 3456 753         |
 | Malta                     |    31 | 4a,5n,18c       |       | MTkk bbbb ssss sccc cccc cccc cccc ccc    | yes  | MT84 MALT 0110 0001 2345 MTLC AST0 01S    |
 | Mauritius                 |    30 | 4a,16n,[000],3a |       | MUkk bbbb bbss cccc cccc cccc 000m mm     | yes  | MU17 BOMM 0101 1010 3030 0200 000M UR     |

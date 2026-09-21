@@ -9,14 +9,14 @@ public class Supported
         Country.CF, Country.CG, Country.CH,Country.CI, Country.CM, Country.CR, Country.CV, Country.CY, Country.CZ,
         Country.DE, Country.DJ, Country.DK, Country.DO, Country.DZ,
         Country.EE, Country.EG, Country.ES,
-        Country.FI, Country.FO, Country.FR,
+        Country.FI, Country.FK, Country.FO, Country.FR,
         Country.GA, Country.GB, Country.GE, Country.GI, Country.GL, Country.GQ, Country.GR, Country.GT, Country.GW,
         Country.HN, Country.HR, Country.HU,
         Country.IE, Country.IL, Country.IQ, Country.IR, Country.IS, Country.IT,
         Country.JO,
         Country.KM, Country.KW, Country.KZ,
         Country.LB, Country.LC, Country.LI, Country.LT, Country.LU, Country.LV, Country.LY,
-        Country.MA, Country.MC, Country.MD, Country.ME, Country.MG, Country.MK, Country.ML, Country.MR, Country.MT, Country.MU,
+        Country.MA, Country.MC, Country.MD, Country.ME, Country.MG, Country.MK, Country.ML,  Country.MN, Country.MR, Country.MT, Country.MU,
         Country.MZ, Country.NE, Country.NI, Country.NL, Country.NO,
         Country.OM,
         Country.PK, Country.PL, Country.PS, Country.PT,
@@ -31,10 +31,9 @@ public class Supported
 
     [Test]
     public void by_111_Countries()
-    {
-        InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code).Should().BeEquivalentTo(All);
-        InternationalBankAccountNumber.Supported.Count.Should().Be(111);
-    }
+        => InternationalBankAccountNumber.Supported.OrderBy(c => c.IsoAlpha2Code)
+        .Should().BeEquivalentTo(All)
+        .And.HaveCount(111);
 }
 
 public class With_domain_logic

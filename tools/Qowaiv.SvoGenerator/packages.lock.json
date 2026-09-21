@@ -175,7 +175,7 @@
         "type": "Project",
         "dependencies": {
           "Newtonsoft.Json": "[13.0.4, )",
-          "Qowaiv": "[8.1.0, )",
+          "Qowaiv": "[8.2.0, )",
           "Qowaiv.Validation.DataAnnotations": "[6.0.0, )"
         }
       },

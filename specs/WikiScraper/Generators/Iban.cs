@@ -107,7 +107,7 @@ public sealed partial record IbanInfo
 
     public static IEnumerable<IbanInfo> Parse(string content)
     {
-        var groups = content.Split("|-\n|scope=\"row\"|");
+        var groups = Splitter().Split(content);
 
         foreach (var group in groups)
         {
@@ -137,6 +137,9 @@ public sealed partial record IbanInfo
             ? int.Parse(match.Groups[nameof(CheckSum)].Value)
             : null;
     }
+
+    [GeneratedRegex("""\|-\n\|\s*scope=\s*"row"\s*\|""")]
+    private static partial Regex Splitter();
 
     [GeneratedRegex(@"\(always.+""(?<CheckSum>[0-9][0-9])""\)")]
     private static partial Regex CheckSumPattern();

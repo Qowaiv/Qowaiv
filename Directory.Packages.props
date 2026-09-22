@@ -16,7 +16,7 @@
     <!-- Roslyn .NET 8 -->
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="[5.9.0]" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
-    <PackageVersion Include="Microsoft.Sbom.Targets" Version="4.1.12" />
+    <PackageVersion Include="Microsoft.Sbom.Targets" Version="4.1.13" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageVersion Include="NUnit" Version="4.6.1" />
     <PackageVersion Include="NUnit.Analyzers" Version="4.15.0" />

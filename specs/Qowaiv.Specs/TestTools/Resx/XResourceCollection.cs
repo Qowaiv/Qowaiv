@@ -1,3 +1,5 @@
+using static System.Net.WebRequestMethods;
+
 namespace Qowaiv.TestTools.Resx;
 
 /// <summary>Represents a collection of RESX resource files.</summary>
@@ -31,6 +33,14 @@ public sealed class XResourceCollection : IReadOnlyDictionary<CultureInfo, XReso
         private set => lookup[key] = value;
     }
 
+    /// <summary>Tries to get the value for a specific culture.</summary>
+    public string? TryGetValue(string key, CultureInfo culture) => culture switch
+    {
+        _ when lookup.TryGetValue(culture, out var file) && file[key]?.Value is { Length: > 0 } v => v,
+        _ when culture.Parent is { } parent => TryGetValue(key, parent),
+        _ => null,
+    };
+
     /// <summary>Saves the RESX resources files.</summary>
     public void Save(DirectoryInfo directory, string name)
     {
@@ -42,11 +52,11 @@ public sealed class XResourceCollection : IReadOnlyDictionary<CultureInfo, XReso
         }
     }
 
-    public static XResourceCollection Load(DirectoryInfo dir)
+    public static XResourceCollection Load(DirectoryInfo dir, string name)
     {
         var collection = new XResourceCollection();
 
-        foreach (var file in dir.GetFiles("*.resx"))
+        foreach (var file in dir.GetFiles($"{name}*.resx"))
         {
             var resource = XResourceFile.Load(file);
             collection[GetCulture(file)] = resource;

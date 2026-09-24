@@ -44,7 +44,7 @@ public sealed class XResourceCollection : IReadOnlyDictionary<CultureInfo, XReso
     /// <summary>Saves the RESX resources files.</summary>
     public void Save(DirectoryInfo directory, string name)
     {
-        foreach (var file in this)
+        foreach (var file in this.Where(f => f.Value.Data.Any()))
         {
             var filename = $"{name}.{file.Key.Name}.resx".Replace("..", ".");
 

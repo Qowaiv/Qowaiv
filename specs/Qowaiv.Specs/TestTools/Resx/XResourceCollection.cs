@@ -1,8 +1,36 @@
 namespace Qowaiv.TestTools.Resx;
 
 /// <summary>Represents a collection of RESX resource files.</summary>
-public sealed class XResourceCollection : Dictionary<CultureInfo, XResourceFile>
+public sealed class XResourceCollection : IReadOnlyDictionary<CultureInfo, XResourceFile>
 {
+    [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
+    private readonly Dictionary<CultureInfo, XResourceFile> lookup = [];
+
+    /// <inheritdoc />
+    public int Count =>lookup.Count;
+
+    /// <inheritdoc />
+    public IEnumerable<CultureInfo> Keys => lookup.Keys;
+    
+    /// <inheritdoc />
+    public IEnumerable<XResourceFile> Values => lookup.Values;
+
+    public XResourceFile Invariant => this[CultureInfo.InvariantCulture];
+
+    public XResourceFile this[CultureInfo key]
+    {
+        get
+        {
+            if (!TryGetValue(key, out var resoures))
+            {
+                resoures = new();
+                lookup[key] = resoures;
+            }
+            return resoures;
+        }
+        private set => lookup[key] = value;
+    }
+
     /// <summary>Saves the RESX resources files.</summary>
     public void Save(DirectoryInfo directory, string name)
     {
@@ -26,6 +54,7 @@ public sealed class XResourceCollection : Dictionary<CultureInfo, XResourceFile>
 
         return collection;
     }
+    
     private static CultureInfo GetCulture(FileInfo file)
     {
         var name = Path.GetFileNameWithoutExtension(file.Name);
@@ -34,4 +63,9 @@ public sealed class XResourceCollection : Dictionary<CultureInfo, XResourceFile>
         var culture = new CultureInfo(name);
         return culture;
     }
+
+    public bool ContainsKey(CultureInfo key) => ((IReadOnlyDictionary<CultureInfo, XResourceFile>)lookup).ContainsKey(key);
+    public bool TryGetValue(CultureInfo key, [MaybeNullWhen(false)] out XResourceFile value) => ((IReadOnlyDictionary<CultureInfo, XResourceFile>)lookup).TryGetValue(key, out value);
+    public IEnumerator<KeyValuePair<CultureInfo, XResourceFile>> GetEnumerator() => ((IEnumerable<KeyValuePair<CultureInfo, XResourceFile>>)lookup).GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)lookup).GetEnumerator();
 }

@@ -45,8 +45,6 @@ public class Generates
         {
             resources[culture].AddDisplay("ZZ", unknowns.TryGetValue("Values", culture)!.Split(';')[0]);
         }
-        
-
 
         while (reader.ReadLine() is { } line)
         {
@@ -80,6 +78,8 @@ public class Generates
                 if (en != ar) resources[TestCultures.ar].AddDisplay(name, ar);
             }
         }
+
+        resources.Should().HaveCount(13);
 
 
         LogDeltas(resources, Supported);
@@ -153,6 +153,8 @@ public class Generates
                 writer.Line("]);");
             }
         }
+
+        consts.Should().NotBeEmpty();
     }
 
     private sealed record CounrtyConst(string Name, string Display, string EndDate);

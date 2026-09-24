@@ -73,7 +73,6 @@ public class PercentageJsonConverter : SvoJsonConverter<Percentage>
     /// <inheritdoc />
     [Pure]
     protected override object? ToJson(Percentage svo) => svo.ToJson();
-
 }
 
 #endif

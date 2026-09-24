@@ -608,7 +608,7 @@ public class Casts
     [Test]
     public void explicitly_from_DateTime()
     {
-        var casted = (Date)new DateTime(2017, 06, 11, 0, 0, 0, DateTimeKind.Local);
+        var casted = (Date)new DateTime(2017, 06, 11, 00, 00, 00, DateTimeKind.Local);
         casted.Should().Be(Svo.Date);
     }
 
@@ -616,7 +616,7 @@ public class Casts
     public void implicitly_to_DateTime()
     {
         DateTime casted = Svo.Date;
-        casted.Should().Be(new DateTime(2017, 06, 11, 0, 0, 0, DateTimeKind.Local));
+        casted.Should().Be(new DateTime(2017, 06, 11, 00, 00, 00, DateTimeKind.Local));
     }
 
     [Test]

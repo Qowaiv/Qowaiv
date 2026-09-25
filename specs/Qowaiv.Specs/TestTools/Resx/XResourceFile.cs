@@ -85,7 +85,7 @@ public sealed class XResourceFile
     /// </param>
     public void Save(Stream stream)
     {
-        var writer = new StreamWriter(stream, Encoding.UTF8);
+        var writer = new StreamWriter(stream, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
         serializer.Serialize(writer, this);
     }
 

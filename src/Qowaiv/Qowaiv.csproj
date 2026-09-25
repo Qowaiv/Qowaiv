@@ -37,6 +37,7 @@
       <![CDATA[
 v8.*
 - IBAN supports Mongolia and Falkland Islands.
+- Country data update (display names, start dates, end dates).
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

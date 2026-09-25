@@ -309,12 +309,6 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     public static IEnumerable<Country> GetExisting(Date measurement)
         => All.Where(country => country.ExistsOnDate(measurement));
 
-    /// <summary>Gets a collection of all country info's.</summary>
-    public static readonly ReadOnlyCollection<Country> All = new([.. ResourceManager
-        .GetString("All")!
-        .Split(';')
-        .Select(str => new Country(str))]);
-
     private static readonly CountryValues ParseValues = new();
 
     private sealed class CountryValues : LocalizedValues<string?>

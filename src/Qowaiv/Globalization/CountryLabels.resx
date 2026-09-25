@@ -15,6 +15,9 @@
   <data name="AD_DisplayName">
     <value>Andorra</value>
   </data>
+  <data name="AD_Independent">
+    <value>true</value>
+  </data>
   <data name="AD_ISO">
     <value>020</value>
   </data>
@@ -32,6 +35,9 @@
   </data>
   <data name="AE_DisplayName">
     <value>United Arab Emirates</value>
+  </data>
+  <data name="AE_Independent">
+    <value>true</value>
   </data>
   <data name="AE_ISO">
     <value>784</value>
@@ -51,6 +57,9 @@
   <data name="AF_DisplayName">
     <value>Afghanistan</value>
   </data>
+  <data name="AF_Independent">
+    <value>true</value>
+  </data>
   <data name="AF_ISO">
     <value>004</value>
   </data>
@@ -69,6 +78,9 @@
   <data name="AG_DisplayName">
     <value>Antigua and Barbuda</value>
   </data>
+  <data name="AG_Independent">
+    <value>true</value>
+  </data>
   <data name="AG_ISO">
     <value>028</value>
   </data>
@@ -81,14 +93,20 @@
   <data name="AG_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="AIDJ_CallingCode">
+    <value />
+  </data>
   <data name="AIDJ_DisplayName">
     <value>French Afars and Issas</value>
   </data>
   <data name="AIDJ_EndDate">
     <value>1977-06-26</value>
   </data>
+  <data name="AIDJ_Independent">
+    <value>false</value>
+  </data>
   <data name="AIDJ_ISO">
-    <value>000</value>
+    <value>262</value>
   </data>
   <data name="AIDJ_ISO2">
     <value>AI</value>
@@ -105,6 +123,9 @@
   <data name="AI_DisplayName">
     <value>Anguilla</value>
   </data>
+  <data name="AI_Independent">
+    <value>false</value>
+  </data>
   <data name="AI_ISO">
     <value>660</value>
   </data>
@@ -117,14 +138,14 @@
   <data name="AI_StartDate">
     <value>1974-01-01</value>
   </data>
-  <data name="All">
-    <value>AD;AE;AF;AG;AI;AL;AM;AO;AQ;AR;AS;AT;AU;AW;AX;AZ;BA;BB;BD;BE;BF;BG;BH;BI;BJ;BL;BM;BN;BO;BQ;BR;BS;BT;BV;BW;BY;BZ;CA;CC;CD;CF;CG;CH;CI;CK;CL;CM;CN;CO;CR;CU;CV;CW;CX;CY;CZ;DE;DJ;DK;DM;DO;DZ;EC;EE;EG;EH;ER;ES;ET;FI;FJ;FK;FM;FO;FR;GA;GB;GD;GE;GF;GG;GH;GI;GL;GM;GN;GP;GQ;GR;GS;GT;GU;GW;GY;HK;HM;HN;HR;HT;HU;ID;IE;IL;IM;IN;IO;IQ;IR;IS;IT;JE;JM;JO;JP;KE;KG;KH;KI;KM;KN;KP;KR;KW;KY;KZ;LA;LB;LC;LI;LK;LR;LS;LT;LU;LV;LY;MA;MC;MD;ME;MF;MG;MH;MK;ML;MM;MN;MO;MP;MQ;MR;MS;MT;MU;MV;MW;MX;MY;MZ;NA;NC;NE;NF;NG;NI;NL;NO;NP;NR;NU;NZ;OM;PA;PE;PF;PG;PH;PK;PL;PM;PN;PR;PS;PT;PW;PY;QA;RE;RO;RS;RU;RW;SA;SB;SC;SD;SE;SG;SH;SI;SJ;SK;SL;SM;SN;SO;SR;SS;ST;SV;SX;SY;SZ;TC;TD;TF;TG;TH;TJ;TK;TL;TM;TN;TO;TR;TT;TV;TW;TZ;UA;UG;UM;US;UY;UZ;VA;VC;VE;VG;VI;VN;VU;WF;WS;XK;YE;YT;ZA;ZM;ZW;AIDJ;ANHH;BQAQ;BUMM;BYAA;CSHH;CSXX;CTKI;DDDE;DYBJ;FQHH;FXFR;GEHH;HVBF;JTUM;MIUM;NHVU;NQAQ;NTHH;PCHH;PUUM;PZPA;RHZW;SKIN;SUHH;TPTL;VDVN;WKUM;YDYE;YUCS;ZRCD</value>
-  </data>
   <data name="AL_CallingCode">
     <value>+355</value>
   </data>
   <data name="AL_DisplayName">
     <value>Albania</value>
+  </data>
+  <data name="AL_Independent">
+    <value>true</value>
   </data>
   <data name="AL_ISO">
     <value>008</value>
@@ -143,6 +164,9 @@
   </data>
   <data name="AM_DisplayName">
     <value>Armenia</value>
+  </data>
+  <data name="AM_Independent">
+    <value>true</value>
   </data>
   <data name="AM_ISO">
     <value>051</value>
@@ -165,6 +189,9 @@
   <data name="ANHH_EndDate">
     <value>2010-10-10</value>
   </data>
+  <data name="ANHH_Independent">
+    <value>false</value>
+  </data>
   <data name="ANHH_ISO">
     <value>530</value>
   </data>
@@ -183,6 +210,9 @@
   <data name="AO_DisplayName">
     <value>Angola</value>
   </data>
+  <data name="AO_Independent">
+    <value>true</value>
+  </data>
   <data name="AO_ISO">
     <value>024</value>
   </data>
@@ -195,8 +225,14 @@
   <data name="AO_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="AQ_CallingCode">
+    <value />
+  </data>
   <data name="AQ_DisplayName">
     <value>Antarctica</value>
+  </data>
+  <data name="AQ_Independent">
+    <value>false</value>
   </data>
   <data name="AQ_ISO">
     <value>010</value>
@@ -216,6 +252,9 @@
   <data name="AR_DisplayName">
     <value>Argentina</value>
   </data>
+  <data name="AR_Independent">
+    <value>true</value>
+  </data>
   <data name="AR_ISO">
     <value>032</value>
   </data>
@@ -233,6 +272,9 @@
   </data>
   <data name="AS_DisplayName">
     <value>American Samoa</value>
+  </data>
+  <data name="AS_Independent">
+    <value>false</value>
   </data>
   <data name="AS_ISO">
     <value>016</value>
@@ -252,6 +294,9 @@
   <data name="AT_DisplayName">
     <value>Austria</value>
   </data>
+  <data name="AT_Independent">
+    <value>true</value>
+  </data>
   <data name="AT_ISO">
     <value>040</value>
   </data>
@@ -269,6 +314,9 @@
   </data>
   <data name="AU_DisplayName">
     <value>Australia</value>
+  </data>
+  <data name="AU_Independent">
+    <value>true</value>
   </data>
   <data name="AU_ISO">
     <value>036</value>
@@ -288,6 +336,9 @@
   <data name="AW_DisplayName">
     <value>Aruba</value>
   </data>
+  <data name="AW_Independent">
+    <value>false</value>
+  </data>
   <data name="AW_ISO">
     <value>533</value>
   </data>
@@ -305,6 +356,9 @@
   </data>
   <data name="AX_DisplayName">
     <value>Åland Islands</value>
+  </data>
+  <data name="AX_Independent">
+    <value>false</value>
   </data>
   <data name="AX_ISO">
     <value>248</value>
@@ -324,6 +378,9 @@
   <data name="AZ_DisplayName">
     <value>Azerbaijan</value>
   </data>
+  <data name="AZ_Independent">
+    <value>true</value>
+  </data>
   <data name="AZ_ISO">
     <value>031</value>
   </data>
@@ -341,6 +398,9 @@
   </data>
   <data name="BA_DisplayName">
     <value>Bosnia and Herzegovina</value>
+  </data>
+  <data name="BA_Independent">
+    <value>true</value>
   </data>
   <data name="BA_ISO">
     <value>070</value>
@@ -360,6 +420,9 @@
   <data name="BB_DisplayName">
     <value>Barbados</value>
   </data>
+  <data name="BB_Independent">
+    <value>true</value>
+  </data>
   <data name="BB_ISO">
     <value>052</value>
   </data>
@@ -377,6 +440,9 @@
   </data>
   <data name="BD_DisplayName">
     <value>Bangladesh</value>
+  </data>
+  <data name="BD_Independent">
+    <value>true</value>
   </data>
   <data name="BD_ISO">
     <value>050</value>
@@ -396,6 +462,9 @@
   <data name="BE_DisplayName">
     <value>Belgium</value>
   </data>
+  <data name="BE_Independent">
+    <value>true</value>
+  </data>
   <data name="BE_ISO">
     <value>056</value>
   </data>
@@ -413,6 +482,9 @@
   </data>
   <data name="BF_DisplayName">
     <value>Burkina Faso</value>
+  </data>
+  <data name="BF_Independent">
+    <value>true</value>
   </data>
   <data name="BF_ISO">
     <value>854</value>
@@ -432,6 +504,9 @@
   <data name="BG_DisplayName">
     <value>Bulgaria</value>
   </data>
+  <data name="BG_Independent">
+    <value>true</value>
+  </data>
   <data name="BG_ISO">
     <value>100</value>
   </data>
@@ -449,6 +524,9 @@
   </data>
   <data name="BH_DisplayName">
     <value>Bahrain</value>
+  </data>
+  <data name="BH_Independent">
+    <value>true</value>
   </data>
   <data name="BH_ISO">
     <value>048</value>
@@ -468,6 +546,9 @@
   <data name="BI_DisplayName">
     <value>Burundi</value>
   </data>
+  <data name="BI_Independent">
+    <value>true</value>
+  </data>
   <data name="BI_ISO">
     <value>108</value>
   </data>
@@ -485,6 +566,9 @@
   </data>
   <data name="BJ_DisplayName">
     <value>Benin</value>
+  </data>
+  <data name="BJ_Independent">
+    <value>true</value>
   </data>
   <data name="BJ_ISO">
     <value>204</value>
@@ -504,6 +588,9 @@
   <data name="BL_DisplayName">
     <value>Saint Barthélemy</value>
   </data>
+  <data name="BL_Independent">
+    <value>false</value>
+  </data>
   <data name="BL_ISO">
     <value>652</value>
   </data>
@@ -521,6 +608,9 @@
   </data>
   <data name="BM_DisplayName">
     <value>Bermuda</value>
+  </data>
+  <data name="BM_Independent">
+    <value>false</value>
   </data>
   <data name="BM_ISO">
     <value>060</value>
@@ -540,6 +630,9 @@
   <data name="BN_DisplayName">
     <value>Brunei Darussalam</value>
   </data>
+  <data name="BN_Independent">
+    <value>true</value>
+  </data>
   <data name="BN_ISO">
     <value>096</value>
   </data>
@@ -558,6 +651,9 @@
   <data name="BO_DisplayName">
     <value>Bolivia</value>
   </data>
+  <data name="BO_Independent">
+    <value>true</value>
+  </data>
   <data name="BO_ISO">
     <value>068</value>
   </data>
@@ -570,11 +666,17 @@
   <data name="BO_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="BQAQ_CallingCode">
+    <value />
+  </data>
   <data name="BQAQ_DisplayName">
     <value>British Antarctic Territory</value>
   </data>
   <data name="BQAQ_EndDate">
     <value>1979-12-31</value>
+  </data>
+  <data name="BQAQ_Independent">
+    <value>false</value>
   </data>
   <data name="BQAQ_ISO">
     <value>000</value>
@@ -592,7 +694,10 @@
     <value>+599</value>
   </data>
   <data name="BQ_DisplayName">
-    <value>Caribbean Netherlands</value>
+    <value>Bonaire</value>
+  </data>
+  <data name="BQ_Independent">
+    <value>false</value>
   </data>
   <data name="BQ_ISO">
     <value>535</value>
@@ -612,6 +717,9 @@
   <data name="BR_DisplayName">
     <value>Brazil</value>
   </data>
+  <data name="BR_Independent">
+    <value>true</value>
+  </data>
   <data name="BR_ISO">
     <value>076</value>
   </data>
@@ -630,6 +738,9 @@
   <data name="BS_DisplayName">
     <value>Bahamas</value>
   </data>
+  <data name="BS_Independent">
+    <value>true</value>
+  </data>
   <data name="BS_ISO">
     <value>044</value>
   </data>
@@ -647,6 +758,9 @@
   </data>
   <data name="BT_DisplayName">
     <value>Bhutan</value>
+  </data>
+  <data name="BT_Independent">
+    <value>true</value>
   </data>
   <data name="BT_ISO">
     <value>064</value>
@@ -669,6 +783,9 @@
   <data name="BUMM_EndDate">
     <value>1988-12-31</value>
   </data>
+  <data name="BUMM_Independent">
+    <value>false</value>
+  </data>
   <data name="BUMM_ISO">
     <value>104</value>
   </data>
@@ -686,6 +803,9 @@
   </data>
   <data name="BV_DisplayName">
     <value>Bouvet Island</value>
+  </data>
+  <data name="BV_Independent">
+    <value>false</value>
   </data>
   <data name="BV_ISO">
     <value>074</value>
@@ -705,6 +825,9 @@
   <data name="BW_DisplayName">
     <value>Botswana</value>
   </data>
+  <data name="BW_Independent">
+    <value>true</value>
+  </data>
   <data name="BW_ISO">
     <value>072</value>
   </data>
@@ -717,11 +840,17 @@
   <data name="BW_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="BYAA_CallingCode">
+    <value />
+  </data>
   <data name="BYAA_DisplayName">
     <value>Byelorussian SSR</value>
   </data>
   <data name="BYAA_EndDate">
     <value>1991-12-25</value>
+  </data>
+  <data name="BYAA_Independent">
+    <value>true</value>
   </data>
   <data name="BYAA_ISO">
     <value>112</value>
@@ -741,6 +870,9 @@
   <data name="BY_DisplayName">
     <value>Belarus</value>
   </data>
+  <data name="BY_Independent">
+    <value>true</value>
+  </data>
   <data name="BY_ISO">
     <value>112</value>
   </data>
@@ -758,6 +890,9 @@
   </data>
   <data name="BZ_DisplayName">
     <value>Belize</value>
+  </data>
+  <data name="BZ_Independent">
+    <value>true</value>
   </data>
   <data name="BZ_ISO">
     <value>084</value>
@@ -777,6 +912,9 @@
   <data name="CA_DisplayName">
     <value>Canada</value>
   </data>
+  <data name="CA_Independent">
+    <value>true</value>
+  </data>
   <data name="CA_ISO">
     <value>124</value>
   </data>
@@ -794,6 +932,9 @@
   </data>
   <data name="CC_DisplayName">
     <value>Cocos Islands</value>
+  </data>
+  <data name="CC_Independent">
+    <value>false</value>
   </data>
   <data name="CC_ISO">
     <value>166</value>
@@ -813,6 +954,9 @@
   <data name="CD_DisplayName">
     <value>Congo, Democratic Republic of the</value>
   </data>
+  <data name="CD_Independent">
+    <value>true</value>
+  </data>
   <data name="CD_ISO">
     <value>180</value>
   </data>
@@ -830,6 +974,9 @@
   </data>
   <data name="CF_DisplayName">
     <value>Central African Republic</value>
+  </data>
+  <data name="CF_Independent">
+    <value>true</value>
   </data>
   <data name="CF_ISO">
     <value>140</value>
@@ -849,6 +996,9 @@
   <data name="CG_DisplayName">
     <value>Congo</value>
   </data>
+  <data name="CG_Independent">
+    <value>true</value>
+  </data>
   <data name="CG_ISO">
     <value>178</value>
   </data>
@@ -866,6 +1016,9 @@
   </data>
   <data name="CH_DisplayName">
     <value>Switzerland</value>
+  </data>
+  <data name="CH_Independent">
+    <value>true</value>
   </data>
   <data name="CH_ISO">
     <value>756</value>
@@ -885,6 +1038,9 @@
   <data name="CI_DisplayName">
     <value>Côte d'Ivoire</value>
   </data>
+  <data name="CI_Independent">
+    <value>true</value>
+  </data>
   <data name="CI_ISO">
     <value>384</value>
   </data>
@@ -902,6 +1058,9 @@
   </data>
   <data name="CK_DisplayName">
     <value>Cook Islands</value>
+  </data>
+  <data name="CK_Independent">
+    <value>false</value>
   </data>
   <data name="CK_ISO">
     <value>184</value>
@@ -921,6 +1080,9 @@
   <data name="CL_DisplayName">
     <value>Chile</value>
   </data>
+  <data name="CL_Independent">
+    <value>true</value>
+  </data>
   <data name="CL_ISO">
     <value>152</value>
   </data>
@@ -938,6 +1100,9 @@
   </data>
   <data name="CM_DisplayName">
     <value>Cameroon</value>
+  </data>
+  <data name="CM_Independent">
+    <value>true</value>
   </data>
   <data name="CM_ISO">
     <value>120</value>
@@ -957,6 +1122,9 @@
   <data name="CN_DisplayName">
     <value>China</value>
   </data>
+  <data name="CN_Independent">
+    <value>true</value>
+  </data>
   <data name="CN_ISO">
     <value>156</value>
   </data>
@@ -975,6 +1143,9 @@
   <data name="CO_DisplayName">
     <value>Colombia</value>
   </data>
+  <data name="CO_Independent">
+    <value>true</value>
+  </data>
   <data name="CO_ISO">
     <value>170</value>
   </data>
@@ -992,6 +1163,9 @@
   </data>
   <data name="CR_DisplayName">
     <value>Costa Rica</value>
+  </data>
+  <data name="CR_Independent">
+    <value>true</value>
   </data>
   <data name="CR_ISO">
     <value>188</value>
@@ -1014,6 +1188,9 @@
   <data name="CSHH_EndDate">
     <value>1992-12-31</value>
   </data>
+  <data name="CSHH_Independent">
+    <value>true</value>
+  </data>
   <data name="CSHH_ISO">
     <value>200</value>
   </data>
@@ -1035,6 +1212,9 @@
   <data name="CSXX_EndDate">
     <value>2006-12-31</value>
   </data>
+  <data name="CSXX_Independent">
+    <value>true</value>
+  </data>
   <data name="CSXX_ISO">
     <value>891</value>
   </data>
@@ -1045,13 +1225,19 @@
     <value>SCG</value>
   </data>
   <data name="CSXX_StartDate">
-    <value>1993-01-01</value>
+    <value>2003-01-01</value>
+  </data>
+  <data name="CTKI_CallingCode">
+    <value />
   </data>
   <data name="CTKI_DisplayName">
     <value>Canton and Enderbury Islands</value>
   </data>
   <data name="CTKI_EndDate">
     <value>1983-09-22</value>
+  </data>
+  <data name="CTKI_Independent">
+    <value>false</value>
   </data>
   <data name="CTKI_ISO">
     <value>128</value>
@@ -1071,6 +1257,9 @@
   <data name="CU_DisplayName">
     <value>Cuba</value>
   </data>
+  <data name="CU_Independent">
+    <value>true</value>
+  </data>
   <data name="CU_ISO">
     <value>192</value>
   </data>
@@ -1088,6 +1277,9 @@
   </data>
   <data name="CV_DisplayName">
     <value>Cabo Verde</value>
+  </data>
+  <data name="CV_Independent">
+    <value>true</value>
   </data>
   <data name="CV_ISO">
     <value>132</value>
@@ -1107,6 +1299,9 @@
   <data name="CW_DisplayName">
     <value>Curaçao</value>
   </data>
+  <data name="CW_Independent">
+    <value>false</value>
+  </data>
   <data name="CW_ISO">
     <value>531</value>
   </data>
@@ -1124,6 +1319,9 @@
   </data>
   <data name="CX_DisplayName">
     <value>Christmas Island</value>
+  </data>
+  <data name="CX_Independent">
+    <value>false</value>
   </data>
   <data name="CX_ISO">
     <value>162</value>
@@ -1143,6 +1341,9 @@
   <data name="CY_DisplayName">
     <value>Cyprus</value>
   </data>
+  <data name="CY_Independent">
+    <value>true</value>
+  </data>
   <data name="CY_ISO">
     <value>196</value>
   </data>
@@ -1160,6 +1361,9 @@
   </data>
   <data name="CZ_DisplayName">
     <value>Czechia</value>
+  </data>
+  <data name="CZ_Independent">
+    <value>true</value>
   </data>
   <data name="CZ_ISO">
     <value>203</value>
@@ -1182,6 +1386,9 @@
   <data name="DDDE_EndDate">
     <value>1990-10-03</value>
   </data>
+  <data name="DDDE_Independent">
+    <value>true</value>
+  </data>
   <data name="DDDE_ISO">
     <value>278</value>
   </data>
@@ -1199,6 +1406,9 @@
   </data>
   <data name="DE_DisplayName">
     <value>Germany</value>
+  </data>
+  <data name="DE_Independent">
+    <value>true</value>
   </data>
   <data name="DE_ISO">
     <value>276</value>
@@ -1218,6 +1428,9 @@
   <data name="DJ_DisplayName">
     <value>Djibouti</value>
   </data>
+  <data name="DJ_Independent">
+    <value>true</value>
+  </data>
   <data name="DJ_ISO">
     <value>262</value>
   </data>
@@ -1235,6 +1448,9 @@
   </data>
   <data name="DK_DisplayName">
     <value>Denmark</value>
+  </data>
+  <data name="DK_Independent">
+    <value>true</value>
   </data>
   <data name="DK_ISO">
     <value>208</value>
@@ -1254,6 +1470,9 @@
   <data name="DM_DisplayName">
     <value>Dominica</value>
   </data>
+  <data name="DM_Independent">
+    <value>true</value>
+  </data>
   <data name="DM_ISO">
     <value>212</value>
   </data>
@@ -1272,6 +1491,9 @@
   <data name="DO_DisplayName">
     <value>Dominican Republic</value>
   </data>
+  <data name="DO_Independent">
+    <value>true</value>
+  </data>
   <data name="DO_ISO">
     <value>214</value>
   </data>
@@ -1284,14 +1506,20 @@
   <data name="DO_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="DYBJ_CallingCode">
+    <value />
+  </data>
   <data name="DYBJ_DisplayName">
     <value>Dahomey</value>
   </data>
   <data name="DYBJ_EndDate">
     <value>1975-11-29</value>
   </data>
+  <data name="DYBJ_Independent">
+    <value>false</value>
+  </data>
   <data name="DYBJ_ISO">
-    <value>000</value>
+    <value>204</value>
   </data>
   <data name="DYBJ_ISO2">
     <value>DY</value>
@@ -1307,6 +1535,9 @@
   </data>
   <data name="DZ_DisplayName">
     <value>Algeria</value>
+  </data>
+  <data name="DZ_Independent">
+    <value>true</value>
   </data>
   <data name="DZ_ISO">
     <value>012</value>
@@ -1326,6 +1557,9 @@
   <data name="EC_DisplayName">
     <value>Ecuador</value>
   </data>
+  <data name="EC_Independent">
+    <value>true</value>
+  </data>
   <data name="EC_ISO">
     <value>218</value>
   </data>
@@ -1343,6 +1577,9 @@
   </data>
   <data name="EE_DisplayName">
     <value>Estonia</value>
+  </data>
+  <data name="EE_Independent">
+    <value>true</value>
   </data>
   <data name="EE_ISO">
     <value>233</value>
@@ -1362,6 +1599,9 @@
   <data name="EG_DisplayName">
     <value>Egypt</value>
   </data>
+  <data name="EG_Independent">
+    <value>true</value>
+  </data>
   <data name="EG_ISO">
     <value>818</value>
   </data>
@@ -1379,6 +1619,9 @@
   </data>
   <data name="EH_DisplayName">
     <value>Western Sahara</value>
+  </data>
+  <data name="EH_Independent">
+    <value>false</value>
   </data>
   <data name="EH_ISO">
     <value>732</value>
@@ -1398,6 +1641,9 @@
   <data name="ER_DisplayName">
     <value>Eritrea</value>
   </data>
+  <data name="ER_Independent">
+    <value>true</value>
+  </data>
   <data name="ER_ISO">
     <value>232</value>
   </data>
@@ -1415,6 +1661,9 @@
   </data>
   <data name="ES_DisplayName">
     <value>Spain</value>
+  </data>
+  <data name="ES_Independent">
+    <value>true</value>
   </data>
   <data name="ES_ISO">
     <value>724</value>
@@ -1434,6 +1683,9 @@
   <data name="ET_DisplayName">
     <value>Ethiopia</value>
   </data>
+  <data name="ET_Independent">
+    <value>true</value>
+  </data>
   <data name="ET_ISO">
     <value>231</value>
   </data>
@@ -1451,6 +1703,9 @@
   </data>
   <data name="FI_DisplayName">
     <value>Finland</value>
+  </data>
+  <data name="FI_Independent">
+    <value>true</value>
   </data>
   <data name="FI_ISO">
     <value>246</value>
@@ -1470,6 +1725,9 @@
   <data name="FJ_DisplayName">
     <value>Fiji</value>
   </data>
+  <data name="FJ_Independent">
+    <value>true</value>
+  </data>
   <data name="FJ_ISO">
     <value>242</value>
   </data>
@@ -1487,6 +1745,9 @@
   </data>
   <data name="FK_DisplayName">
     <value>Falkland Islands</value>
+  </data>
+  <data name="FK_Independent">
+    <value>false</value>
   </data>
   <data name="FK_ISO">
     <value>238</value>
@@ -1506,6 +1767,9 @@
   <data name="FM_DisplayName">
     <value>Micronesia</value>
   </data>
+  <data name="FM_Independent">
+    <value>true</value>
+  </data>
   <data name="FM_ISO">
     <value>583</value>
   </data>
@@ -1524,6 +1788,9 @@
   <data name="FO_DisplayName">
     <value>Faroe Islands</value>
   </data>
+  <data name="FO_Independent">
+    <value>false</value>
+  </data>
   <data name="FO_ISO">
     <value>234</value>
   </data>
@@ -1536,11 +1803,17 @@
   <data name="FO_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="FQHH_CallingCode">
+    <value />
+  </data>
   <data name="FQHH_DisplayName">
     <value>French Southern and Antarctic Territories</value>
   </data>
   <data name="FQHH_EndDate">
     <value>1978-12-31</value>
+  </data>
+  <data name="FQHH_Independent">
+    <value>false</value>
   </data>
   <data name="FQHH_ISO">
     <value>000</value>
@@ -1560,6 +1833,9 @@
   <data name="FR_DisplayName">
     <value>France</value>
   </data>
+  <data name="FR_Independent">
+    <value>true</value>
+  </data>
   <data name="FR_ISO">
     <value>250</value>
   </data>
@@ -1572,11 +1848,17 @@
   <data name="FR_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="FXFR_CallingCode">
+    <value />
+  </data>
   <data name="FXFR_DisplayName">
     <value>France, Metropolitan</value>
   </data>
   <data name="FXFR_EndDate">
     <value>1996-12-31</value>
+  </data>
+  <data name="FXFR_Independent">
+    <value>false</value>
   </data>
   <data name="FXFR_ISO">
     <value>249</value>
@@ -1596,6 +1878,9 @@
   <data name="GA_DisplayName">
     <value>Gabon</value>
   </data>
+  <data name="GA_Independent">
+    <value>true</value>
+  </data>
   <data name="GA_ISO">
     <value>266</value>
   </data>
@@ -1613,6 +1898,9 @@
   </data>
   <data name="GB_DisplayName">
     <value>United Kingdom</value>
+  </data>
+  <data name="GB_Independent">
+    <value>true</value>
   </data>
   <data name="GB_ISO">
     <value>826</value>
@@ -1632,6 +1920,9 @@
   <data name="GD_DisplayName">
     <value>Grenada</value>
   </data>
+  <data name="GD_Independent">
+    <value>true</value>
+  </data>
   <data name="GD_ISO">
     <value>308</value>
   </data>
@@ -1644,11 +1935,17 @@
   <data name="GD_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="GEHH_CallingCode">
+    <value />
+  </data>
   <data name="GEHH_DisplayName">
     <value>Gilbert Islands</value>
   </data>
   <data name="GEHH_EndDate">
     <value>1979-07-11</value>
+  </data>
+  <data name="GEHH_Independent">
+    <value>true</value>
   </data>
   <data name="GEHH_ISO">
     <value>000</value>
@@ -1668,6 +1965,9 @@
   <data name="GE_DisplayName">
     <value>Georgia</value>
   </data>
+  <data name="GE_Independent">
+    <value>true</value>
+  </data>
   <data name="GE_ISO">
     <value>268</value>
   </data>
@@ -1685,6 +1985,9 @@
   </data>
   <data name="GF_DisplayName">
     <value>French Guiana</value>
+  </data>
+  <data name="GF_Independent">
+    <value>false</value>
   </data>
   <data name="GF_ISO">
     <value>254</value>
@@ -1704,6 +2007,9 @@
   <data name="GG_DisplayName">
     <value>Guernsey</value>
   </data>
+  <data name="GG_Independent">
+    <value>false</value>
+  </data>
   <data name="GG_ISO">
     <value>831</value>
   </data>
@@ -1721,6 +2027,9 @@
   </data>
   <data name="GH_DisplayName">
     <value>Ghana</value>
+  </data>
+  <data name="GH_Independent">
+    <value>true</value>
   </data>
   <data name="GH_ISO">
     <value>288</value>
@@ -1740,6 +2049,9 @@
   <data name="GI_DisplayName">
     <value>Gibraltar</value>
   </data>
+  <data name="GI_Independent">
+    <value>false</value>
+  </data>
   <data name="GI_ISO">
     <value>292</value>
   </data>
@@ -1757,6 +2069,9 @@
   </data>
   <data name="GL_DisplayName">
     <value>Greenland</value>
+  </data>
+  <data name="GL_Independent">
+    <value>false</value>
   </data>
   <data name="GL_ISO">
     <value>304</value>
@@ -1776,6 +2091,9 @@
   <data name="GM_DisplayName">
     <value>Gambia</value>
   </data>
+  <data name="GM_Independent">
+    <value>true</value>
+  </data>
   <data name="GM_ISO">
     <value>270</value>
   </data>
@@ -1793,6 +2111,9 @@
   </data>
   <data name="GN_DisplayName">
     <value>Guinea</value>
+  </data>
+  <data name="GN_Independent">
+    <value>true</value>
   </data>
   <data name="GN_ISO">
     <value>324</value>
@@ -1812,6 +2133,9 @@
   <data name="GP_DisplayName">
     <value>Guadeloupe</value>
   </data>
+  <data name="GP_Independent">
+    <value>false</value>
+  </data>
   <data name="GP_ISO">
     <value>312</value>
   </data>
@@ -1829,6 +2153,9 @@
   </data>
   <data name="GQ_DisplayName">
     <value>Equatorial Guinea</value>
+  </data>
+  <data name="GQ_Independent">
+    <value>true</value>
   </data>
   <data name="GQ_ISO">
     <value>226</value>
@@ -1848,6 +2175,9 @@
   <data name="GR_DisplayName">
     <value>Greece</value>
   </data>
+  <data name="GR_Independent">
+    <value>true</value>
+  </data>
   <data name="GR_ISO">
     <value>300</value>
   </data>
@@ -1865,6 +2195,9 @@
   </data>
   <data name="GS_DisplayName">
     <value>South Georgia and the South Sandwich Islands</value>
+  </data>
+  <data name="GS_Independent">
+    <value>false</value>
   </data>
   <data name="GS_ISO">
     <value>239</value>
@@ -1884,6 +2217,9 @@
   <data name="GT_DisplayName">
     <value>Guatemala</value>
   </data>
+  <data name="GT_Independent">
+    <value>true</value>
+  </data>
   <data name="GT_ISO">
     <value>320</value>
   </data>
@@ -1901,6 +2237,9 @@
   </data>
   <data name="GU_DisplayName">
     <value>Guam</value>
+  </data>
+  <data name="GU_Independent">
+    <value>false</value>
   </data>
   <data name="GU_ISO">
     <value>316</value>
@@ -1920,6 +2259,9 @@
   <data name="GW_DisplayName">
     <value>Guinea-Bissau</value>
   </data>
+  <data name="GW_Independent">
+    <value>true</value>
+  </data>
   <data name="GW_ISO">
     <value>624</value>
   </data>
@@ -1937,6 +2279,9 @@
   </data>
   <data name="GY_DisplayName">
     <value>Guyana</value>
+  </data>
+  <data name="GY_Independent">
+    <value>true</value>
   </data>
   <data name="GY_ISO">
     <value>328</value>
@@ -1956,6 +2301,9 @@
   <data name="HK_DisplayName">
     <value>Hong Kong</value>
   </data>
+  <data name="HK_Independent">
+    <value>false</value>
+  </data>
   <data name="HK_ISO">
     <value>344</value>
   </data>
@@ -1973,6 +2321,9 @@
   </data>
   <data name="HM_DisplayName">
     <value>Heard Island and McDonald Islands</value>
+  </data>
+  <data name="HM_Independent">
+    <value>false</value>
   </data>
   <data name="HM_ISO">
     <value>334</value>
@@ -1992,6 +2343,9 @@
   <data name="HN_DisplayName">
     <value>Honduras</value>
   </data>
+  <data name="HN_Independent">
+    <value>true</value>
+  </data>
   <data name="HN_ISO">
     <value>340</value>
   </data>
@@ -2009,6 +2363,9 @@
   </data>
   <data name="HR_DisplayName">
     <value>Croatia</value>
+  </data>
+  <data name="HR_Independent">
+    <value>true</value>
   </data>
   <data name="HR_ISO">
     <value>191</value>
@@ -2028,6 +2385,9 @@
   <data name="HT_DisplayName">
     <value>Haiti</value>
   </data>
+  <data name="HT_Independent">
+    <value>true</value>
+  </data>
   <data name="HT_ISO">
     <value>332</value>
   </data>
@@ -2045,6 +2405,9 @@
   </data>
   <data name="HU_DisplayName">
     <value>Hungary</value>
+  </data>
+  <data name="HU_Independent">
+    <value>true</value>
   </data>
   <data name="HU_ISO">
     <value>348</value>
@@ -2067,6 +2430,9 @@
   <data name="HVBF_EndDate">
     <value>1984-08-03</value>
   </data>
+  <data name="HVBF_Independent">
+    <value>false</value>
+  </data>
   <data name="HVBF_ISO">
     <value>854</value>
   </data>
@@ -2084,6 +2450,9 @@
   </data>
   <data name="ID_DisplayName">
     <value>Indonesia</value>
+  </data>
+  <data name="ID_Independent">
+    <value>true</value>
   </data>
   <data name="ID_ISO">
     <value>360</value>
@@ -2103,6 +2472,9 @@
   <data name="IE_DisplayName">
     <value>Ireland</value>
   </data>
+  <data name="IE_Independent">
+    <value>true</value>
+  </data>
   <data name="IE_ISO">
     <value>372</value>
   </data>
@@ -2120,6 +2492,9 @@
   </data>
   <data name="IL_DisplayName">
     <value>Israel</value>
+  </data>
+  <data name="IL_Independent">
+    <value>true</value>
   </data>
   <data name="IL_ISO">
     <value>376</value>
@@ -2139,6 +2514,9 @@
   <data name="IM_DisplayName">
     <value>Isle of Man</value>
   </data>
+  <data name="IM_Independent">
+    <value>false</value>
+  </data>
   <data name="IM_ISO">
     <value>833</value>
   </data>
@@ -2156,6 +2534,9 @@
   </data>
   <data name="IN_DisplayName">
     <value>India</value>
+  </data>
+  <data name="IN_Independent">
+    <value>true</value>
   </data>
   <data name="IN_ISO">
     <value>356</value>
@@ -2175,6 +2556,9 @@
   <data name="IO_DisplayName">
     <value>British Indian Ocean Territory</value>
   </data>
+  <data name="IO_Independent">
+    <value>false</value>
+  </data>
   <data name="IO_ISO">
     <value>086</value>
   </data>
@@ -2192,6 +2576,9 @@
   </data>
   <data name="IQ_DisplayName">
     <value>Iraq</value>
+  </data>
+  <data name="IQ_Independent">
+    <value>true</value>
   </data>
   <data name="IQ_ISO">
     <value>368</value>
@@ -2211,6 +2598,9 @@
   <data name="IR_DisplayName">
     <value>Iran</value>
   </data>
+  <data name="IR_Independent">
+    <value>true</value>
+  </data>
   <data name="IR_ISO">
     <value>364</value>
   </data>
@@ -2228,6 +2618,9 @@
   </data>
   <data name="IS_DisplayName">
     <value>Iceland</value>
+  </data>
+  <data name="IS_Independent">
+    <value>true</value>
   </data>
   <data name="IS_ISO">
     <value>352</value>
@@ -2247,6 +2640,9 @@
   <data name="IT_DisplayName">
     <value>Italy</value>
   </data>
+  <data name="IT_Independent">
+    <value>true</value>
+  </data>
   <data name="IT_ISO">
     <value>380</value>
   </data>
@@ -2264,6 +2660,9 @@
   </data>
   <data name="JE_DisplayName">
     <value>Jersey</value>
+  </data>
+  <data name="JE_Independent">
+    <value>false</value>
   </data>
   <data name="JE_ISO">
     <value>832</value>
@@ -2283,6 +2682,9 @@
   <data name="JM_DisplayName">
     <value>Jamaica</value>
   </data>
+  <data name="JM_Independent">
+    <value>true</value>
+  </data>
   <data name="JM_ISO">
     <value>388</value>
   </data>
@@ -2300,6 +2702,9 @@
   </data>
   <data name="JO_DisplayName">
     <value>Jordan</value>
+  </data>
+  <data name="JO_Independent">
+    <value>true</value>
   </data>
   <data name="JO_ISO">
     <value>400</value>
@@ -2319,6 +2724,9 @@
   <data name="JP_DisplayName">
     <value>Japan</value>
   </data>
+  <data name="JP_Independent">
+    <value>true</value>
+  </data>
   <data name="JP_ISO">
     <value>392</value>
   </data>
@@ -2331,11 +2739,17 @@
   <data name="JP_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="JTUM_CallingCode">
+    <value />
+  </data>
   <data name="JTUM_DisplayName">
     <value>Johnston Island</value>
   </data>
   <data name="JTUM_EndDate">
     <value>1984-12-31</value>
+  </data>
+  <data name="JTUM_Independent">
+    <value>false</value>
   </data>
   <data name="JTUM_ISO">
     <value>396</value>
@@ -2355,6 +2769,9 @@
   <data name="KE_DisplayName">
     <value>Kenya</value>
   </data>
+  <data name="KE_Independent">
+    <value>true</value>
+  </data>
   <data name="KE_ISO">
     <value>404</value>
   </data>
@@ -2372,6 +2789,9 @@
   </data>
   <data name="KG_DisplayName">
     <value>Kyrgyzstan</value>
+  </data>
+  <data name="KG_Independent">
+    <value>true</value>
   </data>
   <data name="KG_ISO">
     <value>417</value>
@@ -2391,6 +2811,9 @@
   <data name="KH_DisplayName">
     <value>Cambodia</value>
   </data>
+  <data name="KH_Independent">
+    <value>true</value>
+  </data>
   <data name="KH_ISO">
     <value>116</value>
   </data>
@@ -2408,6 +2831,9 @@
   </data>
   <data name="KI_DisplayName">
     <value>Kiribati</value>
+  </data>
+  <data name="KI_Independent">
+    <value>true</value>
   </data>
   <data name="KI_ISO">
     <value>296</value>
@@ -2427,6 +2853,9 @@
   <data name="KM_DisplayName">
     <value>Comoros</value>
   </data>
+  <data name="KM_Independent">
+    <value>true</value>
+  </data>
   <data name="KM_ISO">
     <value>174</value>
   </data>
@@ -2445,6 +2874,9 @@
   <data name="KN_DisplayName">
     <value>Saint Kitts and Nevis</value>
   </data>
+  <data name="KN_Independent">
+    <value>true</value>
+  </data>
   <data name="KN_ISO">
     <value>659</value>
   </data>
@@ -2461,7 +2893,10 @@
     <value>+850</value>
   </data>
   <data name="KP_DisplayName">
-    <value>Korea</value>
+    <value>North Korea</value>
+  </data>
+  <data name="KP_Independent">
+    <value>true</value>
   </data>
   <data name="KP_ISO">
     <value>408</value>
@@ -2481,6 +2916,9 @@
   <data name="KR_DisplayName">
     <value>South Korea</value>
   </data>
+  <data name="KR_Independent">
+    <value>true</value>
+  </data>
   <data name="KR_ISO">
     <value>410</value>
   </data>
@@ -2498,6 +2936,9 @@
   </data>
   <data name="KW_DisplayName">
     <value>Kuwait</value>
+  </data>
+  <data name="KW_Independent">
+    <value>true</value>
   </data>
   <data name="KW_ISO">
     <value>414</value>
@@ -2517,6 +2958,9 @@
   <data name="KY_DisplayName">
     <value>Cayman Islands</value>
   </data>
+  <data name="KY_Independent">
+    <value>false</value>
+  </data>
   <data name="KY_ISO">
     <value>136</value>
   </data>
@@ -2535,6 +2979,9 @@
   <data name="KZ_DisplayName">
     <value>Kazakhstan</value>
   </data>
+  <data name="KZ_Independent">
+    <value>true</value>
+  </data>
   <data name="KZ_ISO">
     <value>398</value>
   </data>
@@ -2551,7 +2998,10 @@
     <value>+856</value>
   </data>
   <data name="LA_DisplayName">
-    <value>Laos</value>
+    <value>Lao People's Democratic Republic</value>
+  </data>
+  <data name="LA_Independent">
+    <value>true</value>
   </data>
   <data name="LA_ISO">
     <value>418</value>
@@ -2571,6 +3021,9 @@
   <data name="LB_DisplayName">
     <value>Lebanon</value>
   </data>
+  <data name="LB_Independent">
+    <value>true</value>
+  </data>
   <data name="LB_ISO">
     <value>422</value>
   </data>
@@ -2588,6 +3041,9 @@
   </data>
   <data name="LC_DisplayName">
     <value>Saint Lucia</value>
+  </data>
+  <data name="LC_Independent">
+    <value>true</value>
   </data>
   <data name="LC_ISO">
     <value>662</value>
@@ -2607,6 +3063,9 @@
   <data name="LI_DisplayName">
     <value>Liechtenstein</value>
   </data>
+  <data name="LI_Independent">
+    <value>true</value>
+  </data>
   <data name="LI_ISO">
     <value>438</value>
   </data>
@@ -2624,6 +3083,9 @@
   </data>
   <data name="LK_DisplayName">
     <value>Sri Lanka</value>
+  </data>
+  <data name="LK_Independent">
+    <value>true</value>
   </data>
   <data name="LK_ISO">
     <value>144</value>
@@ -2643,6 +3105,9 @@
   <data name="LR_DisplayName">
     <value>Liberia</value>
   </data>
+  <data name="LR_Independent">
+    <value>true</value>
+  </data>
   <data name="LR_ISO">
     <value>430</value>
   </data>
@@ -2660,6 +3125,9 @@
   </data>
   <data name="LS_DisplayName">
     <value>Lesotho</value>
+  </data>
+  <data name="LS_Independent">
+    <value>true</value>
   </data>
   <data name="LS_ISO">
     <value>426</value>
@@ -2679,6 +3147,9 @@
   <data name="LT_DisplayName">
     <value>Lithuania</value>
   </data>
+  <data name="LT_Independent">
+    <value>true</value>
+  </data>
   <data name="LT_ISO">
     <value>440</value>
   </data>
@@ -2696,6 +3167,9 @@
   </data>
   <data name="LU_DisplayName">
     <value>Luxembourg</value>
+  </data>
+  <data name="LU_Independent">
+    <value>true</value>
   </data>
   <data name="LU_ISO">
     <value>442</value>
@@ -2715,6 +3189,9 @@
   <data name="LV_DisplayName">
     <value>Latvia</value>
   </data>
+  <data name="LV_Independent">
+    <value>true</value>
+  </data>
   <data name="LV_ISO">
     <value>428</value>
   </data>
@@ -2732,6 +3209,9 @@
   </data>
   <data name="LY_DisplayName">
     <value>Libya</value>
+  </data>
+  <data name="LY_Independent">
+    <value>true</value>
   </data>
   <data name="LY_ISO">
     <value>434</value>
@@ -2751,6 +3231,9 @@
   <data name="MA_DisplayName">
     <value>Morocco</value>
   </data>
+  <data name="MA_Independent">
+    <value>true</value>
+  </data>
   <data name="MA_ISO">
     <value>504</value>
   </data>
@@ -2768,6 +3251,9 @@
   </data>
   <data name="MC_DisplayName">
     <value>Monaco</value>
+  </data>
+  <data name="MC_Independent">
+    <value>true</value>
   </data>
   <data name="MC_ISO">
     <value>492</value>
@@ -2787,6 +3273,9 @@
   <data name="MD_DisplayName">
     <value>Moldova</value>
   </data>
+  <data name="MD_Independent">
+    <value>true</value>
+  </data>
   <data name="MD_ISO">
     <value>498</value>
   </data>
@@ -2804,6 +3293,9 @@
   </data>
   <data name="ME_DisplayName">
     <value>Montenegro</value>
+  </data>
+  <data name="ME_Independent">
+    <value>true</value>
   </data>
   <data name="ME_ISO">
     <value>499</value>
@@ -2823,6 +3315,9 @@
   <data name="MF_DisplayName">
     <value>Saint Martin</value>
   </data>
+  <data name="MF_Independent">
+    <value>false</value>
+  </data>
   <data name="MF_ISO">
     <value>663</value>
   </data>
@@ -2840,6 +3335,9 @@
   </data>
   <data name="MG_DisplayName">
     <value>Madagascar</value>
+  </data>
+  <data name="MG_Independent">
+    <value>true</value>
   </data>
   <data name="MG_ISO">
     <value>450</value>
@@ -2859,6 +3357,9 @@
   <data name="MH_DisplayName">
     <value>Marshall Islands</value>
   </data>
+  <data name="MH_Independent">
+    <value>true</value>
+  </data>
   <data name="MH_ISO">
     <value>584</value>
   </data>
@@ -2871,11 +3372,17 @@
   <data name="MH_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="MIUM_CallingCode">
+    <value />
+  </data>
   <data name="MIUM_DisplayName">
     <value>Midway Islands</value>
   </data>
   <data name="MIUM_EndDate">
     <value>1984-12-31</value>
+  </data>
+  <data name="MIUM_Independent">
+    <value>false</value>
   </data>
   <data name="MIUM_ISO">
     <value>488</value>
@@ -2895,6 +3402,9 @@
   <data name="MK_DisplayName">
     <value>North Macedonia</value>
   </data>
+  <data name="MK_Independent">
+    <value>true</value>
+  </data>
   <data name="MK_ISO">
     <value>807</value>
   </data>
@@ -2912,6 +3422,9 @@
   </data>
   <data name="ML_DisplayName">
     <value>Mali</value>
+  </data>
+  <data name="ML_Independent">
+    <value>true</value>
   </data>
   <data name="ML_ISO">
     <value>466</value>
@@ -2931,6 +3444,9 @@
   <data name="MM_DisplayName">
     <value>Myanmar</value>
   </data>
+  <data name="MM_Independent">
+    <value>true</value>
+  </data>
   <data name="MM_ISO">
     <value>104</value>
   </data>
@@ -2948,6 +3464,9 @@
   </data>
   <data name="MN_DisplayName">
     <value>Mongolia</value>
+  </data>
+  <data name="MN_Independent">
+    <value>true</value>
   </data>
   <data name="MN_ISO">
     <value>496</value>
@@ -2967,6 +3486,9 @@
   <data name="MO_DisplayName">
     <value>Macao</value>
   </data>
+  <data name="MO_Independent">
+    <value>false</value>
+  </data>
   <data name="MO_ISO">
     <value>446</value>
   </data>
@@ -2984,6 +3506,9 @@
   </data>
   <data name="MP_DisplayName">
     <value>Northern Mariana Islands</value>
+  </data>
+  <data name="MP_Independent">
+    <value>false</value>
   </data>
   <data name="MP_ISO">
     <value>580</value>
@@ -3003,6 +3528,9 @@
   <data name="MQ_DisplayName">
     <value>Martinique</value>
   </data>
+  <data name="MQ_Independent">
+    <value>false</value>
+  </data>
   <data name="MQ_ISO">
     <value>474</value>
   </data>
@@ -3020,6 +3548,9 @@
   </data>
   <data name="MR_DisplayName">
     <value>Mauritania</value>
+  </data>
+  <data name="MR_Independent">
+    <value>true</value>
   </data>
   <data name="MR_ISO">
     <value>478</value>
@@ -3039,6 +3570,9 @@
   <data name="MS_DisplayName">
     <value>Montserrat</value>
   </data>
+  <data name="MS_Independent">
+    <value>false</value>
+  </data>
   <data name="MS_ISO">
     <value>500</value>
   </data>
@@ -3056,6 +3590,9 @@
   </data>
   <data name="MT_DisplayName">
     <value>Malta</value>
+  </data>
+  <data name="MT_Independent">
+    <value>true</value>
   </data>
   <data name="MT_ISO">
     <value>470</value>
@@ -3075,6 +3612,9 @@
   <data name="MU_DisplayName">
     <value>Mauritius</value>
   </data>
+  <data name="MU_Independent">
+    <value>true</value>
+  </data>
   <data name="MU_ISO">
     <value>480</value>
   </data>
@@ -3092,6 +3632,9 @@
   </data>
   <data name="MV_DisplayName">
     <value>Maldives</value>
+  </data>
+  <data name="MV_Independent">
+    <value>true</value>
   </data>
   <data name="MV_ISO">
     <value>462</value>
@@ -3111,6 +3654,9 @@
   <data name="MW_DisplayName">
     <value>Malawi</value>
   </data>
+  <data name="MW_Independent">
+    <value>true</value>
+  </data>
   <data name="MW_ISO">
     <value>454</value>
   </data>
@@ -3128,6 +3674,9 @@
   </data>
   <data name="MX_DisplayName">
     <value>Mexico</value>
+  </data>
+  <data name="MX_Independent">
+    <value>true</value>
   </data>
   <data name="MX_ISO">
     <value>484</value>
@@ -3147,6 +3696,9 @@
   <data name="MY_DisplayName">
     <value>Malaysia</value>
   </data>
+  <data name="MY_Independent">
+    <value>true</value>
+  </data>
   <data name="MY_ISO">
     <value>458</value>
   </data>
@@ -3164,6 +3716,9 @@
   </data>
   <data name="MZ_DisplayName">
     <value>Mozambique</value>
+  </data>
+  <data name="MZ_Independent">
+    <value>true</value>
   </data>
   <data name="MZ_ISO">
     <value>508</value>
@@ -3183,6 +3738,9 @@
   <data name="NA_DisplayName">
     <value>Namibia</value>
   </data>
+  <data name="NA_Independent">
+    <value>true</value>
+  </data>
   <data name="NA_ISO">
     <value>516</value>
   </data>
@@ -3200,6 +3758,9 @@
   </data>
   <data name="NC_DisplayName">
     <value>New Caledonia</value>
+  </data>
+  <data name="NC_Independent">
+    <value>false</value>
   </data>
   <data name="NC_ISO">
     <value>540</value>
@@ -3219,6 +3780,9 @@
   <data name="NE_DisplayName">
     <value>Niger</value>
   </data>
+  <data name="NE_Independent">
+    <value>true</value>
+  </data>
   <data name="NE_ISO">
     <value>562</value>
   </data>
@@ -3236,6 +3800,9 @@
   </data>
   <data name="NF_DisplayName">
     <value>Norfolk Island</value>
+  </data>
+  <data name="NF_Independent">
+    <value>false</value>
   </data>
   <data name="NF_ISO">
     <value>574</value>
@@ -3255,6 +3822,9 @@
   <data name="NG_DisplayName">
     <value>Nigeria</value>
   </data>
+  <data name="NG_Independent">
+    <value>true</value>
+  </data>
   <data name="NG_ISO">
     <value>566</value>
   </data>
@@ -3267,11 +3837,17 @@
   <data name="NG_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="NHVU_CallingCode">
+    <value />
+  </data>
   <data name="NHVU_DisplayName">
     <value>New Hebrides</value>
   </data>
   <data name="NHVU_EndDate">
     <value>1978-12-31</value>
+  </data>
+  <data name="NHVU_Independent">
+    <value>false</value>
   </data>
   <data name="NHVU_ISO">
     <value>000</value>
@@ -3291,6 +3867,9 @@
   <data name="NI_DisplayName">
     <value>Nicaragua</value>
   </data>
+  <data name="NI_Independent">
+    <value>true</value>
+  </data>
   <data name="NI_ISO">
     <value>558</value>
   </data>
@@ -3308,6 +3887,9 @@
   </data>
   <data name="NL_DisplayName">
     <value>Netherlands</value>
+  </data>
+  <data name="NL_Independent">
+    <value>true</value>
   </data>
   <data name="NL_ISO">
     <value>528</value>
@@ -3327,6 +3909,9 @@
   <data name="NO_DisplayName">
     <value>Norway</value>
   </data>
+  <data name="NO_Independent">
+    <value>true</value>
+  </data>
   <data name="NO_ISO">
     <value>578</value>
   </data>
@@ -3345,6 +3930,9 @@
   <data name="NP_DisplayName">
     <value>Nepal</value>
   </data>
+  <data name="NP_Independent">
+    <value>true</value>
+  </data>
   <data name="NP_ISO">
     <value>524</value>
   </data>
@@ -3357,11 +3945,17 @@
   <data name="NP_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="NQAQ_CallingCode">
+    <value />
+  </data>
   <data name="NQAQ_DisplayName">
     <value>Dronning Maud Land</value>
   </data>
   <data name="NQAQ_EndDate">
     <value>1981-12-31</value>
+  </data>
+  <data name="NQAQ_Independent">
+    <value>false</value>
   </data>
   <data name="NQAQ_ISO">
     <value>216</value>
@@ -3379,7 +3973,10 @@
     <value>+674</value>
   </data>
   <data name="NR_DisplayName">
-    <value>Nauru</value>
+    <value>Naoero</value>
+  </data>
+  <data name="NR_Independent">
+    <value>true</value>
   </data>
   <data name="NR_ISO">
     <value>520</value>
@@ -3393,11 +3990,17 @@
   <data name="NR_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="NTHH_CallingCode">
+    <value />
+  </data>
   <data name="NTHH_DisplayName">
     <value>Neutral Zone</value>
   </data>
   <data name="NTHH_EndDate">
     <value>1991-12-31</value>
+  </data>
+  <data name="NTHH_Independent">
+    <value>false</value>
   </data>
   <data name="NTHH_ISO">
     <value>536</value>
@@ -3417,6 +4020,9 @@
   <data name="NU_DisplayName">
     <value>Niue</value>
   </data>
+  <data name="NU_Independent">
+    <value>false</value>
+  </data>
   <data name="NU_ISO">
     <value>570</value>
   </data>
@@ -3434,6 +4040,9 @@
   </data>
   <data name="NZ_DisplayName">
     <value>New Zealand</value>
+  </data>
+  <data name="NZ_Independent">
+    <value>true</value>
   </data>
   <data name="NZ_ISO">
     <value>554</value>
@@ -3453,6 +4062,9 @@
   <data name="OM_DisplayName">
     <value>Oman</value>
   </data>
+  <data name="OM_Independent">
+    <value>true</value>
+  </data>
   <data name="OM_ISO">
     <value>512</value>
   </data>
@@ -3471,6 +4083,9 @@
   <data name="PA_DisplayName">
     <value>Panama</value>
   </data>
+  <data name="PA_Independent">
+    <value>true</value>
+  </data>
   <data name="PA_ISO">
     <value>591</value>
   </data>
@@ -3483,11 +4098,17 @@
   <data name="PA_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="PCHH_CallingCode">
+    <value />
+  </data>
   <data name="PCHH_DisplayName">
-    <value>Pacific Islands (Trust Territory)</value>
+    <value>Pacific Islands</value>
   </data>
   <data name="PCHH_EndDate">
     <value>1984-12-31</value>
+  </data>
+  <data name="PCHH_Independent">
+    <value>false</value>
   </data>
   <data name="PCHH_ISO">
     <value>582</value>
@@ -3507,6 +4128,9 @@
   <data name="PE_DisplayName">
     <value>Peru</value>
   </data>
+  <data name="PE_Independent">
+    <value>true</value>
+  </data>
   <data name="PE_ISO">
     <value>604</value>
   </data>
@@ -3524,6 +4148,9 @@
   </data>
   <data name="PF_DisplayName">
     <value>French Polynesia</value>
+  </data>
+  <data name="PF_Independent">
+    <value>false</value>
   </data>
   <data name="PF_ISO">
     <value>258</value>
@@ -3543,6 +4170,9 @@
   <data name="PG_DisplayName">
     <value>Papua New Guinea</value>
   </data>
+  <data name="PG_Independent">
+    <value>true</value>
+  </data>
   <data name="PG_ISO">
     <value>598</value>
   </data>
@@ -3560,6 +4190,9 @@
   </data>
   <data name="PH_DisplayName">
     <value>Philippines</value>
+  </data>
+  <data name="PH_Independent">
+    <value>true</value>
   </data>
   <data name="PH_ISO">
     <value>608</value>
@@ -3579,6 +4212,9 @@
   <data name="PK_DisplayName">
     <value>Pakistan</value>
   </data>
+  <data name="PK_Independent">
+    <value>true</value>
+  </data>
   <data name="PK_ISO">
     <value>586</value>
   </data>
@@ -3596,6 +4232,9 @@
   </data>
   <data name="PL_DisplayName">
     <value>Poland</value>
+  </data>
+  <data name="PL_Independent">
+    <value>true</value>
   </data>
   <data name="PL_ISO">
     <value>616</value>
@@ -3615,6 +4254,9 @@
   <data name="PM_DisplayName">
     <value>Saint Pierre and Miquelon</value>
   </data>
+  <data name="PM_Independent">
+    <value>false</value>
+  </data>
   <data name="PM_ISO">
     <value>666</value>
   </data>
@@ -3632,6 +4274,9 @@
   </data>
   <data name="PN_DisplayName">
     <value>Pitcairn</value>
+  </data>
+  <data name="PN_Independent">
+    <value>false</value>
   </data>
   <data name="PN_ISO">
     <value>612</value>
@@ -3651,6 +4296,9 @@
   <data name="PR_DisplayName">
     <value>Puerto Rico</value>
   </data>
+  <data name="PR_Independent">
+    <value>false</value>
+  </data>
   <data name="PR_ISO">
     <value>630</value>
   </data>
@@ -3668,6 +4316,9 @@
   </data>
   <data name="PS_DisplayName">
     <value>Palestine</value>
+  </data>
+  <data name="PS_Independent">
+    <value>false</value>
   </data>
   <data name="PS_ISO">
     <value>275</value>
@@ -3687,6 +4338,9 @@
   <data name="PT_DisplayName">
     <value>Portugal</value>
   </data>
+  <data name="PT_Independent">
+    <value>true</value>
+  </data>
   <data name="PT_ISO">
     <value>620</value>
   </data>
@@ -3699,11 +4353,17 @@
   <data name="PT_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="PUUM_CallingCode">
+    <value />
+  </data>
   <data name="PUUM_DisplayName">
     <value>United States Miscellaneous Pacific Islands</value>
   </data>
   <data name="PUUM_EndDate">
     <value>1984-12-31</value>
+  </data>
+  <data name="PUUM_Independent">
+    <value>false</value>
   </data>
   <data name="PUUM_ISO">
     <value>849</value>
@@ -3723,6 +4383,9 @@
   <data name="PW_DisplayName">
     <value>Palau</value>
   </data>
+  <data name="PW_Independent">
+    <value>true</value>
+  </data>
   <data name="PW_ISO">
     <value>585</value>
   </data>
@@ -3741,6 +4404,9 @@
   <data name="PY_DisplayName">
     <value>Paraguay</value>
   </data>
+  <data name="PY_Independent">
+    <value>true</value>
+  </data>
   <data name="PY_ISO">
     <value>600</value>
   </data>
@@ -3753,11 +4419,17 @@
   <data name="PY_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="PZPA_CallingCode">
+    <value />
+  </data>
   <data name="PZPA_DisplayName">
     <value>Panama Canal Zone</value>
   </data>
   <data name="PZPA_EndDate">
     <value>1978-12-31</value>
+  </data>
+  <data name="PZPA_Independent">
+    <value>false</value>
   </data>
   <data name="PZPA_ISO">
     <value>000</value>
@@ -3777,6 +4449,9 @@
   <data name="QA_DisplayName">
     <value>Qatar</value>
   </data>
+  <data name="QA_Independent">
+    <value>true</value>
+  </data>
   <data name="QA_ISO">
     <value>634</value>
   </data>
@@ -3795,6 +4470,9 @@
   <data name="RE_DisplayName">
     <value>Réunion</value>
   </data>
+  <data name="RE_Independent">
+    <value>false</value>
+  </data>
   <data name="RE_ISO">
     <value>638</value>
   </data>
@@ -3807,11 +4485,17 @@
   <data name="RE_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="RHZW_CallingCode">
+    <value />
+  </data>
   <data name="RHZW_DisplayName">
     <value>Southern Rhodesia</value>
   </data>
   <data name="RHZW_EndDate">
     <value>1978-12-31</value>
+  </data>
+  <data name="RHZW_Independent">
+    <value>false</value>
   </data>
   <data name="RHZW_ISO">
     <value>000</value>
@@ -3831,6 +4515,9 @@
   <data name="RO_DisplayName">
     <value>Romania</value>
   </data>
+  <data name="RO_Independent">
+    <value>true</value>
+  </data>
   <data name="RO_ISO">
     <value>642</value>
   </data>
@@ -3848,6 +4535,9 @@
   </data>
   <data name="RS_DisplayName">
     <value>Serbia</value>
+  </data>
+  <data name="RS_Independent">
+    <value>true</value>
   </data>
   <data name="RS_ISO">
     <value>688</value>
@@ -3867,6 +4557,9 @@
   <data name="RU_DisplayName">
     <value>Russia</value>
   </data>
+  <data name="RU_Independent">
+    <value>true</value>
+  </data>
   <data name="RU_ISO">
     <value>643</value>
   </data>
@@ -3884,6 +4577,9 @@
   </data>
   <data name="RW_DisplayName">
     <value>Rwanda</value>
+  </data>
+  <data name="RW_Independent">
+    <value>true</value>
   </data>
   <data name="RW_ISO">
     <value>646</value>
@@ -3903,6 +4599,9 @@
   <data name="SA_DisplayName">
     <value>Saudi Arabia</value>
   </data>
+  <data name="SA_Independent">
+    <value>true</value>
+  </data>
   <data name="SA_ISO">
     <value>682</value>
   </data>
@@ -3920,6 +4619,9 @@
   </data>
   <data name="SB_DisplayName">
     <value>Solomon Islands</value>
+  </data>
+  <data name="SB_Independent">
+    <value>true</value>
   </data>
   <data name="SB_ISO">
     <value>090</value>
@@ -3939,6 +4641,9 @@
   <data name="SC_DisplayName">
     <value>Seychelles</value>
   </data>
+  <data name="SC_Independent">
+    <value>true</value>
+  </data>
   <data name="SC_ISO">
     <value>690</value>
   </data>
@@ -3956,6 +4661,9 @@
   </data>
   <data name="SD_DisplayName">
     <value>Sudan</value>
+  </data>
+  <data name="SD_Independent">
+    <value>true</value>
   </data>
   <data name="SD_ISO">
     <value>729</value>
@@ -3975,6 +4683,9 @@
   <data name="SE_DisplayName">
     <value>Sweden</value>
   </data>
+  <data name="SE_Independent">
+    <value>true</value>
+  </data>
   <data name="SE_ISO">
     <value>752</value>
   </data>
@@ -3993,6 +4704,9 @@
   <data name="SG_DisplayName">
     <value>Singapore</value>
   </data>
+  <data name="SG_Independent">
+    <value>true</value>
+  </data>
   <data name="SG_ISO">
     <value>702</value>
   </data>
@@ -4009,7 +4723,10 @@
     <value>+290</value>
   </data>
   <data name="SH_DisplayName">
-    <value>Saint Helena, Ascension and Tristan da Cunha</value>
+    <value>Saint Helena</value>
+  </data>
+  <data name="SH_Independent">
+    <value>false</value>
   </data>
   <data name="SH_ISO">
     <value>654</value>
@@ -4029,6 +4746,9 @@
   <data name="SI_DisplayName">
     <value>Slovenia</value>
   </data>
+  <data name="SI_Independent">
+    <value>true</value>
+  </data>
   <data name="SI_ISO">
     <value>705</value>
   </data>
@@ -4047,6 +4767,9 @@
   <data name="SJ_DisplayName">
     <value>Svalbard and Jan Mayen</value>
   </data>
+  <data name="SJ_Independent">
+    <value>false</value>
+  </data>
   <data name="SJ_ISO">
     <value>744</value>
   </data>
@@ -4059,11 +4782,17 @@
   <data name="SJ_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="SKIN_CallingCode">
+    <value />
+  </data>
   <data name="SKIN_DisplayName">
     <value>Sikkim</value>
   </data>
   <data name="SKIN_EndDate">
-    <value>1973-12-31</value>
+    <value>1975-05-16</value>
+  </data>
+  <data name="SKIN_Independent">
+    <value>true</value>
   </data>
   <data name="SKIN_ISO">
     <value>000</value>
@@ -4083,6 +4812,9 @@
   <data name="SK_DisplayName">
     <value>Slovakia</value>
   </data>
+  <data name="SK_Independent">
+    <value>true</value>
+  </data>
   <data name="SK_ISO">
     <value>703</value>
   </data>
@@ -4100,6 +4832,9 @@
   </data>
   <data name="SL_DisplayName">
     <value>Sierra Leone</value>
+  </data>
+  <data name="SL_Independent">
+    <value>true</value>
   </data>
   <data name="SL_ISO">
     <value>694</value>
@@ -4119,6 +4854,9 @@
   <data name="SM_DisplayName">
     <value>San Marino</value>
   </data>
+  <data name="SM_Independent">
+    <value>true</value>
+  </data>
   <data name="SM_ISO">
     <value>674</value>
   </data>
@@ -4136,6 +4874,9 @@
   </data>
   <data name="SN_DisplayName">
     <value>Senegal</value>
+  </data>
+  <data name="SN_Independent">
+    <value>true</value>
   </data>
   <data name="SN_ISO">
     <value>686</value>
@@ -4155,6 +4896,9 @@
   <data name="SO_DisplayName">
     <value>Somalia</value>
   </data>
+  <data name="SO_Independent">
+    <value>true</value>
+  </data>
   <data name="SO_ISO">
     <value>706</value>
   </data>
@@ -4172,6 +4916,9 @@
   </data>
   <data name="SR_DisplayName">
     <value>Suriname</value>
+  </data>
+  <data name="SR_Independent">
+    <value>true</value>
   </data>
   <data name="SR_ISO">
     <value>740</value>
@@ -4191,6 +4938,9 @@
   <data name="SS_DisplayName">
     <value>South Sudan</value>
   </data>
+  <data name="SS_Independent">
+    <value>true</value>
+  </data>
   <data name="SS_ISO">
     <value>728</value>
   </data>
@@ -4207,7 +4957,10 @@
     <value>+239</value>
   </data>
   <data name="ST_DisplayName">
-    <value>São Tomé and Príncipe</value>
+    <value>Sao Tome and Principe</value>
+  </data>
+  <data name="ST_Independent">
+    <value>true</value>
   </data>
   <data name="ST_ISO">
     <value>678</value>
@@ -4230,6 +4983,9 @@
   <data name="SUHH_EndDate">
     <value>1991-12-31</value>
   </data>
+  <data name="SUHH_Independent">
+    <value>true</value>
+  </data>
   <data name="SUHH_ISO">
     <value>810</value>
   </data>
@@ -4247,6 +5003,9 @@
   </data>
   <data name="SV_DisplayName">
     <value>El Salvador</value>
+  </data>
+  <data name="SV_Independent">
+    <value>true</value>
   </data>
   <data name="SV_ISO">
     <value>222</value>
@@ -4266,6 +5025,9 @@
   <data name="SX_DisplayName">
     <value>Sint Maarten</value>
   </data>
+  <data name="SX_Independent">
+    <value>false</value>
+  </data>
   <data name="SX_ISO">
     <value>534</value>
   </data>
@@ -4283,6 +5045,9 @@
   </data>
   <data name="SY_DisplayName">
     <value>Syrian Arab Republic</value>
+  </data>
+  <data name="SY_Independent">
+    <value>true</value>
   </data>
   <data name="SY_ISO">
     <value>760</value>
@@ -4302,6 +5067,9 @@
   <data name="SZ_DisplayName">
     <value>Eswatini</value>
   </data>
+  <data name="SZ_Independent">
+    <value>true</value>
+  </data>
   <data name="SZ_ISO">
     <value>748</value>
   </data>
@@ -4319,6 +5087,9 @@
   </data>
   <data name="TC_DisplayName">
     <value>Turks and Caicos Islands</value>
+  </data>
+  <data name="TC_Independent">
+    <value>false</value>
   </data>
   <data name="TC_ISO">
     <value>796</value>
@@ -4338,6 +5109,9 @@
   <data name="TD_DisplayName">
     <value>Chad</value>
   </data>
+  <data name="TD_Independent">
+    <value>true</value>
+  </data>
   <data name="TD_ISO">
     <value>148</value>
   </data>
@@ -4355,6 +5129,9 @@
   </data>
   <data name="TF_DisplayName">
     <value>French Southern Territories</value>
+  </data>
+  <data name="TF_Independent">
+    <value>false</value>
   </data>
   <data name="TF_ISO">
     <value>260</value>
@@ -4374,6 +5151,9 @@
   <data name="TG_DisplayName">
     <value>Togo</value>
   </data>
+  <data name="TG_Independent">
+    <value>true</value>
+  </data>
   <data name="TG_ISO">
     <value>768</value>
   </data>
@@ -4391,6 +5171,9 @@
   </data>
   <data name="TH_DisplayName">
     <value>Thailand</value>
+  </data>
+  <data name="TH_Independent">
+    <value>true</value>
   </data>
   <data name="TH_ISO">
     <value>764</value>
@@ -4410,6 +5193,9 @@
   <data name="TJ_DisplayName">
     <value>Tajikistan</value>
   </data>
+  <data name="TJ_Independent">
+    <value>true</value>
+  </data>
   <data name="TJ_ISO">
     <value>762</value>
   </data>
@@ -4427,6 +5213,9 @@
   </data>
   <data name="TK_DisplayName">
     <value>Tokelau</value>
+  </data>
+  <data name="TK_Independent">
+    <value>false</value>
   </data>
   <data name="TK_ISO">
     <value>772</value>
@@ -4446,6 +5235,9 @@
   <data name="TL_DisplayName">
     <value>Timor-Leste</value>
   </data>
+  <data name="TL_Independent">
+    <value>true</value>
+  </data>
   <data name="TL_ISO">
     <value>626</value>
   </data>
@@ -4463,6 +5255,9 @@
   </data>
   <data name="TM_DisplayName">
     <value>Turkmenistan</value>
+  </data>
+  <data name="TM_Independent">
+    <value>true</value>
   </data>
   <data name="TM_ISO">
     <value>795</value>
@@ -4482,6 +5277,9 @@
   <data name="TN_DisplayName">
     <value>Tunisia</value>
   </data>
+  <data name="TN_Independent">
+    <value>true</value>
+  </data>
   <data name="TN_ISO">
     <value>788</value>
   </data>
@@ -4500,6 +5298,9 @@
   <data name="TO_DisplayName">
     <value>Tonga</value>
   </data>
+  <data name="TO_Independent">
+    <value>true</value>
+  </data>
   <data name="TO_ISO">
     <value>776</value>
   </data>
@@ -4512,11 +5313,17 @@
   <data name="TO_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="TPTL_CallingCode">
+    <value />
+  </data>
   <data name="TPTL_DisplayName">
     <value>East Timor</value>
   </data>
   <data name="TPTL_EndDate">
     <value>2000-12-31</value>
+  </data>
+  <data name="TPTL_Independent">
+    <value>false</value>
   </data>
   <data name="TPTL_ISO">
     <value>626</value>
@@ -4536,6 +5343,9 @@
   <data name="TR_DisplayName">
     <value>Türkiye</value>
   </data>
+  <data name="TR_Independent">
+    <value>true</value>
+  </data>
   <data name="TR_ISO">
     <value>792</value>
   </data>
@@ -4553,6 +5363,9 @@
   </data>
   <data name="TT_DisplayName">
     <value>Trinidad and Tobago</value>
+  </data>
+  <data name="TT_Independent">
+    <value>true</value>
   </data>
   <data name="TT_ISO">
     <value>780</value>
@@ -4572,6 +5385,9 @@
   <data name="TV_DisplayName">
     <value>Tuvalu</value>
   </data>
+  <data name="TV_Independent">
+    <value>true</value>
+  </data>
   <data name="TV_ISO">
     <value>798</value>
   </data>
@@ -4589,6 +5405,9 @@
   </data>
   <data name="TW_DisplayName">
     <value>Taiwan</value>
+  </data>
+  <data name="TW_Independent">
+    <value>false</value>
   </data>
   <data name="TW_ISO">
     <value>158</value>
@@ -4608,6 +5427,9 @@
   <data name="TZ_DisplayName">
     <value>Tanzania</value>
   </data>
+  <data name="TZ_Independent">
+    <value>true</value>
+  </data>
   <data name="TZ_ISO">
     <value>834</value>
   </data>
@@ -4625,6 +5447,9 @@
   </data>
   <data name="UA_DisplayName">
     <value>Ukraine</value>
+  </data>
+  <data name="UA_Independent">
+    <value>true</value>
   </data>
   <data name="UA_ISO">
     <value>804</value>
@@ -4644,6 +5469,9 @@
   <data name="UG_DisplayName">
     <value>Uganda</value>
   </data>
+  <data name="UG_Independent">
+    <value>true</value>
+  </data>
   <data name="UG_ISO">
     <value>800</value>
   </data>
@@ -4661,6 +5489,9 @@
   </data>
   <data name="UM_DisplayName">
     <value>United States Minor Outlying Islands</value>
+  </data>
+  <data name="UM_Independent">
+    <value>false</value>
   </data>
   <data name="UM_ISO">
     <value>581</value>
@@ -4680,6 +5511,9 @@
   <data name="US_DisplayName">
     <value>United States</value>
   </data>
+  <data name="US_Independent">
+    <value>true</value>
+  </data>
   <data name="US_ISO">
     <value>840</value>
   </data>
@@ -4697,6 +5531,9 @@
   </data>
   <data name="UY_DisplayName">
     <value>Uruguay</value>
+  </data>
+  <data name="UY_Independent">
+    <value>true</value>
   </data>
   <data name="UY_ISO">
     <value>858</value>
@@ -4716,6 +5553,9 @@
   <data name="UZ_DisplayName">
     <value>Uzbekistan</value>
   </data>
+  <data name="UZ_Independent">
+    <value>true</value>
+  </data>
   <data name="UZ_ISO">
     <value>860</value>
   </data>
@@ -4733,6 +5573,9 @@
   </data>
   <data name="VA_DisplayName">
     <value>Holy See</value>
+  </data>
+  <data name="VA_Independent">
+    <value>true</value>
   </data>
   <data name="VA_ISO">
     <value>336</value>
@@ -4752,6 +5595,9 @@
   <data name="VC_DisplayName">
     <value>Saint Vincent and the Grenadines</value>
   </data>
+  <data name="VC_Independent">
+    <value>true</value>
+  </data>
   <data name="VC_ISO">
     <value>670</value>
   </data>
@@ -4764,11 +5610,17 @@
   <data name="VC_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="VDVN_CallingCode">
+    <value />
+  </data>
   <data name="VDVN_DisplayName">
-    <value>Viet-Nam, Democratic Republic of</value>
+    <value>Viet-Nam</value>
   </data>
   <data name="VDVN_EndDate">
     <value>1975-12-31</value>
+  </data>
+  <data name="VDVN_Independent">
+    <value>false</value>
   </data>
   <data name="VDVN_ISO">
     <value>000</value>
@@ -4788,6 +5640,9 @@
   <data name="VE_DisplayName">
     <value>Venezuela</value>
   </data>
+  <data name="VE_Independent">
+    <value>true</value>
+  </data>
   <data name="VE_ISO">
     <value>862</value>
   </data>
@@ -4804,7 +5659,10 @@
     <value>+1 284</value>
   </data>
   <data name="VG_DisplayName">
-    <value>Virgin Islands</value>
+    <value>Virgin Islands (British)</value>
+  </data>
+  <data name="VG_Independent">
+    <value>false</value>
   </data>
   <data name="VG_ISO">
     <value>092</value>
@@ -4822,7 +5680,10 @@
     <value>+1 340</value>
   </data>
   <data name="VI_DisplayName">
-    <value>Virgin Islands</value>
+    <value>Virgin Islands (U.S.)</value>
+  </data>
+  <data name="VI_Independent">
+    <value>false</value>
   </data>
   <data name="VI_ISO">
     <value>850</value>
@@ -4842,6 +5703,9 @@
   <data name="VN_DisplayName">
     <value>Viet Nam</value>
   </data>
+  <data name="VN_Independent">
+    <value>true</value>
+  </data>
   <data name="VN_ISO">
     <value>704</value>
   </data>
@@ -4859,6 +5723,9 @@
   </data>
   <data name="VU_DisplayName">
     <value>Vanuatu</value>
+  </data>
+  <data name="VU_Independent">
+    <value>true</value>
   </data>
   <data name="VU_ISO">
     <value>548</value>
@@ -4878,6 +5745,9 @@
   <data name="WF_DisplayName">
     <value>Wallis and Futuna</value>
   </data>
+  <data name="WF_Independent">
+    <value>false</value>
+  </data>
   <data name="WF_ISO">
     <value>876</value>
   </data>
@@ -4890,11 +5760,17 @@
   <data name="WF_StartDate">
     <value>1974-01-01</value>
   </data>
+  <data name="WKUM_CallingCode">
+    <value />
+  </data>
   <data name="WKUM_DisplayName">
     <value>Wake Island</value>
   </data>
   <data name="WKUM_EndDate">
     <value>1984-12-31</value>
+  </data>
+  <data name="WKUM_Independent">
+    <value>false</value>
   </data>
   <data name="WKUM_ISO">
     <value>872</value>
@@ -4914,6 +5790,9 @@
   <data name="WS_DisplayName">
     <value>Samoa</value>
   </data>
+  <data name="WS_Independent">
+    <value>true</value>
+  </data>
   <data name="WS_ISO">
     <value>882</value>
   </data>
@@ -4932,6 +5811,9 @@
   <data name="XK_DisplayName">
     <value>Kosovo</value>
   </data>
+  <data name="XK_Independent">
+    <value>false</value>
+  </data>
   <data name="XK_ISO">
     <value>000</value>
   </data>
@@ -4944,11 +5826,17 @@
   <data name="XK_StartDate">
     <value>2008-02-01</value>
   </data>
+  <data name="YDYE_CallingCode">
+    <value />
+  </data>
   <data name="YDYE_DisplayName">
     <value>Yemen, Democratic</value>
   </data>
   <data name="YDYE_EndDate">
     <value>1988-12-31</value>
+  </data>
+  <data name="YDYE_Independent">
+    <value>true</value>
   </data>
   <data name="YDYE_ISO">
     <value>720</value>
@@ -4968,6 +5856,9 @@
   <data name="YE_DisplayName">
     <value>Yemen</value>
   </data>
+  <data name="YE_Independent">
+    <value>true</value>
+  </data>
   <data name="YE_ISO">
     <value>887</value>
   </data>
@@ -4985,6 +5876,9 @@
   </data>
   <data name="YT_DisplayName">
     <value>Mayotte</value>
+  </data>
+  <data name="YT_Independent">
+    <value>false</value>
   </data>
   <data name="YT_ISO">
     <value>175</value>
@@ -5007,6 +5901,9 @@
   <data name="YUCS_EndDate">
     <value>2002-12-31</value>
   </data>
+  <data name="YUCS_Independent">
+    <value>true</value>
+  </data>
   <data name="YUCS_ISO">
     <value>891</value>
   </data>
@@ -5025,6 +5922,9 @@
   <data name="ZA_DisplayName">
     <value>South Africa</value>
   </data>
+  <data name="ZA_Independent">
+    <value>true</value>
+  </data>
   <data name="ZA_ISO">
     <value>710</value>
   </data>
@@ -5042,6 +5942,9 @@
   </data>
   <data name="ZM_DisplayName">
     <value>Zambia</value>
+  </data>
+  <data name="ZM_Independent">
+    <value>true</value>
   </data>
   <data name="ZM_ISO">
     <value>894</value>
@@ -5064,6 +5967,9 @@
   <data name="ZRCD_EndDate">
     <value>1996-05-17</value>
   </data>
+  <data name="ZRCD_Independent">
+    <value>true</value>
+  </data>
   <data name="ZRCD_ISO">
     <value>180</value>
   </data>
@@ -5081,6 +5987,9 @@
   </data>
   <data name="ZW_DisplayName">
     <value>Zimbabwe</value>
+  </data>
+  <data name="ZW_Independent">
+    <value>true</value>
   </data>
   <data name="ZW_ISO">
     <value>716</value>

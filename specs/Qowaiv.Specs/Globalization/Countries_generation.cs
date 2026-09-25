@@ -157,7 +157,7 @@ public class Generates
         consts.Should().NotBeEmpty();
     }
 
-    private sealed record CounrtyConst(string Name, string Display, string EndDate);
+    private sealed record CountryConst(string Name, string Display, string EndDate);
 
     private static bool IsName(string s) => s.Length is >= 2 and <= 4 && s.All(char.IsAsciiLetterUpper);
 }

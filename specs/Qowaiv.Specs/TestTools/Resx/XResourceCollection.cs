@@ -9,7 +9,7 @@ public sealed class XResourceCollection : IReadOnlyDictionary<CultureInfo, XReso
     private readonly Dictionary<CultureInfo, XResourceFile> lookup = [];
 
     /// <inheritdoc />
-    public int Count =>lookup.Count;
+    public int Count => lookup.Count;
 
     /// <inheritdoc />
     public IEnumerable<CultureInfo> Keys => lookup.Keys;

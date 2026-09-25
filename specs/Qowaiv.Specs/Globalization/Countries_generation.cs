@@ -112,7 +112,7 @@ public class Generates
     {
         using var reader = new FileInfo("../../../../../Countries.md").OpenText();
 
-        var consts = new List<CounrtyConst>();
+        var consts = new List<CountryConst>();
 
         while (reader.ReadLine() is { } line)
         {

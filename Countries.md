@@ -319,7 +319,7 @@ contains all data in such that it can both be maintained by humans and agents.
 * The `Num` of a former country is taken from `ISO 3166-3` when available; otherwise `000` is used as a placeholder.
 * Only sources from the internet can be used, where Wikipedia is preferred over other sources.
 * Check `Columns` sections for details per column.
-* If possible use RAW data instead HTML.
+* If possible use RAW data instead of HTML.
 * It is advised to cache the sources locally (in `.cache` directory) before processing it.
 * Markdown tables are advised to split on `|`
 * If you get new insights on how to maintain and/or update this file, this section should be updated too to reflect this.

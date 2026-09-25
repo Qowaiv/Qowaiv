@@ -290,7 +290,7 @@ contains all data in such that it can both be maintained by humans and agents.
 ## Columns
 |Index| Name       | Primary source                           | Secondary source                         | Description
 |----:|------------|------------------------------------------|------------------------------------------|-----------------------------------------------------------------
-|   0 | Name       | https://en.wikipedia.org/wiki/ISO_3166-1 | https://en.wikipedia.org/wiki/ISO_3166-3 | The alpha-2 from either the `ISO 3166-1` or `ISO 3166-3`.
+|   0 | Name       | https://en.wikipedia.org/wiki/ISO_3166-1 | https://en.wikipedia.org/wiki/ISO_3166-3 | The code from either the `ISO 3166-1` or `ISO 3166-3`.
 |   1 | ISO2       | https://en.wikipedia.org/wiki/ISO_3166-1 | https://en.wikipedia.org/wiki/ISO_3166-3 | The alpha-2 code.
 |   2 | ISO3       | https://en.wikipedia.org/wiki/ISO_3166-1 | https://en.wikipedia.org/wiki/ISO_3166-3 | The alpha-3 code.
 |   3 | Num        | https://en.wikipedia.org/wiki/ISO_3166-1 | https://en.wikipedia.org/wiki/ISO_3166-3 | The numeric code.

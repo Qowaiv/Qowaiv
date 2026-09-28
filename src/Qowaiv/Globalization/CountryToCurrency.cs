@@ -1,33 +1,23 @@
 using Qowaiv.Financial;
+using System.Collections.ObjectModel;
+using static Qowaiv.Financial.Currency;
+using static Qowaiv.Globalization.Country;
 
 namespace Qowaiv.Globalization;
 
-internal readonly partial struct CountryToCurrency(Country country, Currency currency, Date startDate) : IEquatable<CountryToCurrency>
+internal readonly partial record struct CountryToCurrency(Country Country, Currency Currency, Date StartDate = default)
 {
-    public CountryToCurrency(Country country, Currency currency)
-        : this(country, currency, Date.MinValue) { }
-
-    public Country Country { get; } = country;
-
-    public Currency Currency { get; } = currency;
-
-    public Date StartDate { get; } = startDate;
-
-    /// <inheritdoc />
     [Pure]
-    public override int GetHashCode()
-        => Country.GetHashCode()
-        ^ Currency.GetHashCode()
-        ^ StartDate.GetHashCode();
+    private static IEnumerable<CountryToCurrency> New(Country country, Currency currency, int year = 0, int month = 0, int day = 0)
+        => [new(country, currency, year is 0 ? default : new Date(year, month, day))];
+}
 
-    /// <inheritdoc />
+file static class Extensions
+{
     [Pure]
-    public override bool Equals(object? obj) => obj is CountryToCurrency other && Equals(other);
-
-    /// <inheritdoc />
-    [Pure]
-    public bool Equals(CountryToCurrency other)
-        => Country.Equals(other.Country)
-        && Currency.Equals(other.Currency)
-        && StartDate.Equals(other.StartDate);
+    public static IEnumerable<CountryToCurrency> And(this IEnumerable<CountryToCurrency> mappings, Currency currency, int year = 0, int month = 0, int day = 0) =>
+    [
+        .. mappings,
+        new(mappings.FirstOrDefault().Country, currency, year is 0 ? default : new Date(year, month, day)),
+    ];
 }

@@ -21,7 +21,7 @@
     <PackageVersion Include="NUnit" Version="5.0.0" />
     <PackageVersion Include="NUnit.Analyzers" Version="4.15.0" />
     <PackageVersion Include="NUnit3TestAdapter" Version="6.3.0" />
-    <PackageVersion Include="Qowaiv.Validation.DataAnnotations" Version="6.0.0" />
+    <PackageVersion Include="Qowaiv.Validation.DataAnnotations" Version="6.2.0" />
     <PackageVersion Include="StyleCop.Analyzers.Unstable" Version="1.2.0.556" />
     <!-- Don't enforce newer versions -->
     <PackageVersion Include="System.Data.SqlClient" Version="[4.8.6]" />

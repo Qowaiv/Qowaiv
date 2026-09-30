@@ -176,7 +176,7 @@
         "dependencies": {
           "Newtonsoft.Json": "[13.0.4, )",
           "Qowaiv": "[8.2.0, )",
-          "Qowaiv.Validation.DataAnnotations": "[6.0.0, )"
+          "Qowaiv.Validation.DataAnnotations": "[6.2.0, )"
         }
       },
       "Newtonsoft.Json": {
@@ -187,11 +187,11 @@
       },
       "Qowaiv.Validation.DataAnnotations": {
         "type": "CentralTransitive",
-        "requested": "[6.0.0, )",
-        "resolved": "6.0.0",
-        "contentHash": "ICsu8DbgEQFlx3uZwd+WDtsyluCsDNUWEH4BD39uMY6UfHrZPIIBQYInoeovV3E0SZ+MuAqjL3XFK8a1TB1ANA==",
+        "requested": "[6.2.0, )",
+        "resolved": "6.2.0",
+        "contentHash": "QaHlcfZBdrktzyfBBbJwhN0AO/WwOWw0a0Cv6l+0BnuAe/kO3+fg370A4fNByBJhu+CSEGppxeY1mnd3U+XEeg==",
         "dependencies": {
-          "Qowaiv": "8.0.0",
+          "Qowaiv": "8.2.0",
           "Qowaiv.Validation.Abstractions": "2.1.0",
           "System.ComponentModel.Annotations": "5.0.0"
         }

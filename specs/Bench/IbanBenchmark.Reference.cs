@@ -7,6 +7,7 @@ namespace Bench;
 
 public partial class IbanBenchmark
 {
+    [ExcludeFromCodeCoverage(Justification = "Just for reference")]
     private static class RegexBasedParser
     {
         public static string? Parse(string str)

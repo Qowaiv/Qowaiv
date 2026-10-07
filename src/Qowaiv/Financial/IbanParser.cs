@@ -74,7 +74,8 @@ internal static class IbanParser
         for (var i = 0; i < iban.Length; i++)
             if (!IsMatch(iban[i], pattern[i])) return null;
 
-        return Mod97(iban) && (!bban.Currency || Currency.TryParse(iban[^3..]) is { IsKnown: true })
+        return (!bban.Currency || Currency.TryParse(iban[^3..]) is { IsKnown: true })
+            && Mod97(iban)
             ? iban
             : null;
     }

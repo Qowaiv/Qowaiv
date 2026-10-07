@@ -4,23 +4,23 @@ using Qowaiv.Globalization;
 namespace Qowaiv.Financial;
 
 [DebuggerDisplay("Pattern = {Pattern,nq}, Curr = {Currency}, Generic = {IsGeneric}, Country = {Country,nq}")]
-internal readonly record struct Bban(Country Country, uint[] Pattern, bool Currency = false, bool IsGeneric = false)
+internal readonly record struct Bban(Country Country, ushort[] Pattern, bool Currency = false, bool IsGeneric = false)
 {
-    public Bban(string country, uint[] pattern, bool currency = false, bool isGeneric = false) : this(Country.Parse(country), pattern, currency, isGeneric) { }
+    public Bban(string country, ushort[] pattern, bool currency = false, bool isGeneric = false) : this(Country.Parse(country), pattern, currency, isGeneric) { }
 
-    private const uint _0 = 1 << 0;
-    private const uint _1 = 1 << 1;
-    private const uint _2 = 1 << 2;
-    private const uint _3 = 1 << 3;
-    private const uint _4 = 1 << 4;
-    private const uint _5 = 1 << 5;
-    private const uint _6 = 1 << 6;
-    private const uint _7 = 1 << 7;
-    private const uint _8 = 1 << 8;
-    private const uint _9 = 1 << 9;
-    private const uint a = 1 << 10;
-    private const uint c = 1 << 11;
-    private const uint n = 1 << 12;
+    private const ushort _0 = 1 << 0;
+    private const ushort _1 = 1 << 1;
+    private const ushort _2 = 1 << 2;
+    private const ushort _3 = 1 << 3;
+    private const ushort _4 = 1 << 4;
+    private const ushort _5 = 1 << 5;
+    private const ushort _6 = 1 << 6;
+    private const ushort _7 = 1 << 7;
+    private const ushort _8 = 1 << 8;
+    private const ushort _9 = 1 << 9;
+    private const ushort a = 1 << 10;
+    private const ushort c = 1 << 11;
+    private const ushort n = 1 << 12;
 
 #pragma warning disable
 

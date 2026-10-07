@@ -2,6 +2,9 @@ namespace Qowaiv.Financial;
 
 internal static class IbanParser
 {
+    /// <summary>Catagories for different ASCII chars.</summary>
+    private static readonly ushort[] Catagory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6145, 6146, 6148, 6152, 6160, 6176, 6208, 6272, 6400, 6656, 0, 0, 0, 0, 0, 0, 0, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
     private const int MinLength = 12;
 
     /// <summary>Parses a string representing an <see cref="InternationalBankAccountNumber" />.</summary>
@@ -16,41 +19,6 @@ internal static class IbanParser
         => (MachineReadable(reader) ?? Normalize(reader)) is { } iban
         ? iban
         : null;
-
-    /// <summary>Strips markup and uppercases letters.</summary>
-    [Pure]
-    private static string? Normalize(ReadOnlySpan<char> reader)
-    {
-        reader = reader.Trim();
-
-        // Starts with "(IBAN)".
-        if (reader.StartsWith("(IBAN)", StringComparison.OrdinalIgnoreCase))
-            reader = reader[6..].TrimStart();
-
-        // Starts with "IBAN " or "IBAN:".
-        else if (reader.StartsWith("IBAN", StringComparison.OrdinalIgnoreCase)
-            && (IsMarkup(reader[4]) || reader[4] == ':'))
-            reader = reader[5..].TrimStart();
-
-        // The minimum length of an IBAN.
-        if (reader.Length < 12) return null;
-
-        Span<char> writer = stackalloc char[InternationalBankAccountNumber.MaxLength];
-
-        var (r, w) = (0, 0);
-        while (w < writer.Length && r < reader.Length)
-        {
-            var c = reader[r++];
-            if (IsDigit(c) || IsLetter(c)) writer[w++] = c;
-            else if (IsLower(c)) writer[w++] = (char)(c & 0x5F);
-            else if (IsMarkup(c) && w is not 1 and not 3) { /* Markup is allowed except for within the country or the checksum */ }
-            else return null;
-        }
-
-        return r == reader.Length && r >= MinLength
-            ? MachineReadable(writer[..w].ToString())
-            : null;
-    }
 
     /// <summary>Validates an IBAN assuming its normalized, and the BBAN is already resolved.</summary>
     [Pure]
@@ -111,8 +79,40 @@ internal static class IbanParser
         return mod % 97 is 1 ? iban : null;
     }
 
-    /// <summary>Catagories for different ASCII chars.</summary>
-    private static readonly uint[] Catagory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6145, 6146, 6148, 6152, 6160, 6176, 6208, 6272, 6400, 6656, 0, 0, 0, 0, 0, 0, 0, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    /// <summary>Strips markup and uppercases letters.</summary>
+    [Pure]
+    private static string? Normalize(ReadOnlySpan<char> reader)
+    {
+        reader = reader.Trim();
+
+        // Starts with "(IBAN)".
+        if (reader.StartsWith("(IBAN)", StringComparison.OrdinalIgnoreCase))
+            reader = reader[6..].TrimStart();
+
+        // Starts with "IBAN " or "IBAN:".
+        else if (reader.StartsWith("IBAN", StringComparison.OrdinalIgnoreCase)
+            && (IsMarkup(reader[4]) || reader[4] == ':'))
+            reader = reader[5..].TrimStart();
+
+        // The minimum length of an IBAN.
+        if (reader.Length < 12) return null;
+
+        Span<char> writer = stackalloc char[InternationalBankAccountNumber.MaxLength];
+
+        var (r, w) = (0, 0);
+        while (w < writer.Length && r < reader.Length)
+        {
+            var c = reader[r++];
+            if (IsDigit(c) || IsLetter(c)) writer[w++] = c;
+            else if (IsLower(c)) writer[w++] = (char)(c & 0x5F);
+            else if (IsMarkup(c) && w is not 1 and not 3) { /* Markup is allowed except for within the country or the checksum */ }
+            else return null;
+        }
+
+        return r == reader.Length && r >= MinLength
+            ? MachineReadable(writer[..w].ToString())
+            : null;
+    }
 
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

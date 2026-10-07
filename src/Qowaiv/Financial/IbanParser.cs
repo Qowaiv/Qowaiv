@@ -71,7 +71,7 @@ internal static class IbanParser
             ? iban.Length > InternationalBankAccountNumber.MaxLength
             : iban.Length != pattern.Length)) return null;
 
-        for (var i = 0; i < iban.Length; i++)
+        for (var i = 2; i < iban.Length; i++)
         {
             uint c = iban[i];
             var match = pattern[i] switch

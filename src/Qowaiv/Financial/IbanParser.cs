@@ -17,17 +17,6 @@ internal static class IbanParser
         ? iban
         : null;
 
-    [Pure]
-    private static string? MachineReadable(string reader)
-    {
-        if (reader.Length < MinLength) return null;
-
-        var (f, s) = (reader[0], reader[1]);
-        return IsLetter(f) && IsLetter(s)
-            ? Validate(reader, Bban.All[((f - 'A') * 26) + (s - 'A')])
-            : null;
-    }
-
     /// <summary>Strips markup and uppercases letters.</summary>
     [Pure]
     private static string? Normalize(ReadOnlySpan<char> reader)
@@ -65,24 +54,31 @@ internal static class IbanParser
 
     /// <summary>Validates an IBAN assuming its normalized, and the BBAN is already resolved.</summary>
     [Pure]
-    private static string? Validate(string iban, Bban bban)
+    private static string? MachineReadable(string iban)
     {
-        if (bban.Pattern is not { } pattern || (bban.IsGeneric
-            ? iban.Length > InternationalBankAccountNumber.MaxLength
-            : iban.Length != pattern.Length)) return null;
+        if (iban.Length < MinLength) return null;
 
+        var (f, s) = (iban[0], iban[1]);
+
+        // No valide country code.
+        if (!IsLetter(f) || !IsLetter(s)
+            || Bban.All[((f - 'A') * 26) + (s - 'A')] is not { Pattern: not null } bban) return null;
+
+        var pattern = bban.Pattern;
+
+        // Invalid length.
+        if (bban.IsGeneric
+            ? iban.Length > InternationalBankAccountNumber.MaxLength
+            : iban.Length != pattern.Length) return null;
+
+        // The first to characters are already checked by the bban.
         for (var i = 2; i < iban.Length; i++)
         {
-            uint c = iban[i];
-            var match = pattern[i] switch
-            {
-                'n' => c - '0' <= ('9' - '0'),
-                'a' => c - 'A' <= ('Z' - 'A'),
-                'c' => c - '0' <= ('9' - '0') || c - 'A' <= ('Z' - 'A'),
-                var t => t == c,
-            };
+            // Non-ASCII chars will be invalidated by the cast to byte.
+            var c = (byte)iban[i];
 
-            if (!match) return null;
+            // If there is a catagory missmatch, stop.
+            if ((Catagory[c] & pattern[i]) is 0) return null;
         }
 
         // Currency mismatch.
@@ -114,6 +110,9 @@ internal static class IbanParser
 
         return mod % 97 is 1 ? iban : null;
     }
+
+    /// <summary>Catagories for different ASCII chars.</summary>
+    private static readonly uint[] Catagory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6145, 6146, 6148, 6152, 6160, 6176, 6208, 6272, 6400, 6656, 0, 0, 0, 0, 0, 0, 0, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 3072, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -12,7 +12,7 @@ internal static class IbanParser
     /// This method is optimized for speed, hence some nesting, and inlining.
     /// </remarks>
     [Pure]
-    public static string? Parse(ReadOnlySpan<char> reader)
+    public static string? Parse(string reader)
         => reader.Length >= 12
         && (MachineReadable(reader) ?? HumanReadable(reader)) is { } iban
         && Mod97(iban)
@@ -21,39 +21,27 @@ internal static class IbanParser
 
     /// <summary>No spaces and uppercased.</summary>
     [Pure]
-    private static string? MachineReadable(ReadOnlySpan<char> reader)
+    private static string? MachineReadable(string reader)
     {
-        var (i, length) = (2, 2);
-        Span<char> buffer = stackalloc char[InternationalBankAccountNumber.MaxLength];
-
         var (f, s) = (reader[0], reader[1]);
 
         if (!IsLetter(f) || !IsLetter(s)) return null;
-        buffer[0] = f;
-        buffer[1] = s;
         var id = Id(f, s);
 
         // Not a known country.
-        if (Bban.All[id] is not { Pattern: not null } bban) return null;
+        // Or the patterns do not match.
+        if (Bban.All[id] is not { Pattern: not null } bban
+            || (bban.IsGeneric
+                ? reader.Length > InternationalBankAccountNumber.MaxLength
+                : reader.Length != bban.Pattern.Length)) return null;
 
         var pattern = bban.Pattern;
 
-        while (i < reader.Length && length < pattern.Length)
-        {
-            var (ch, type) = (reader[i++], pattern[length]);
+        for (var i = 0; i < pattern.Length; i++)
+            if (!IsMatch(reader[i], pattern[i])) return null;
 
-            if (IsMatch(ch, type)) buffer[length++] = ch;
-            else return null;
-        }
-
-        // Not everything consumed, or wrong length.
-        if (reader.Length != i
-            || !(bban.IsGeneric ? length >= 12 : length == pattern.Length)) return null;
-
-        var iban = buffer[..length].ToString();
-
-        return !bban.Currency || Currency.TryParse(iban[^3..]) is { IsKnown: true }
-            ? iban
+        return !bban.Currency || Currency.TryParse(reader[^3..]) is { IsKnown: true }
+            ? reader
             : null;
     }
 

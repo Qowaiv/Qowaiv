@@ -13,13 +13,12 @@ internal static class IbanParser
     /// </remarks>
     [Pure]
     public static string? Parse(string reader)
-        => (Normalized(reader) ?? Normalize(reader)) is { } iban
+        => (MachineReadable(reader) ?? Normalize(reader)) is { } iban
         ? iban
         : null;
 
-    /// <summary>No spaces and all assummed uppercased.</summary>
     [Pure]
-    private static string? Normalized(string reader)
+    private static string? MachineReadable(string reader)
     {
         if (reader.Length < MinLength) return null;
 
@@ -29,7 +28,7 @@ internal static class IbanParser
             : null;
     }
 
-    /// <summary>Supports markup, lowercase and prefixes.</summary>
+    /// <summary>Strips markup and uppercases letters.</summary>
     [Pure]
     private static string? Normalize(ReadOnlySpan<char> reader)
     {
@@ -60,7 +59,7 @@ internal static class IbanParser
         }
 
         return r == reader.Length && r >= MinLength
-            ? Normalized(writer[..w].ToString())
+            ? MachineReadable(writer[..w].ToString())
             : null;
     }
 

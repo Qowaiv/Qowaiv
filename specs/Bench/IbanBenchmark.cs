@@ -23,80 +23,80 @@ public partial class IbanBenchmark
     [GlobalSetup]
     public void Setup()
     {
-        Formatted = [.. Formatted.OrderBy(_ => Rnd.Next())];
-        Unformatted = [.. Unformatted.OrderBy(_ => Rnd.Next())];
+        HumanReadable = [.. HumanReadable.OrderBy(_ => Rnd.Next())];
+        MachineReadable = [.. MachineReadable.OrderBy(_ => Rnd.Next())];
     }
     [Benchmark(Description = "Qowaiv", Baseline = true)]
-    [BenchmarkCategory("Unformatted")]
-    public Iban[] Qowaiv_Unformatted()
+    [BenchmarkCategory("machine readable")]
+    public Iban[] Qowaiv_MachineReadable()
     {
-        for (var i = 0; i < Unformatted.Length; i++)
+        for (var i = 0; i < MachineReadable.Length; i++)
         {
-            Iban.TryParse(Unformatted[i], null, out var iban);
+            Iban.TryParse(MachineReadable[i], null, out var iban);
             Ibans[i] = iban;
         }
         return Ibans;
     }
 
     [Benchmark(Description = "Iban.NET")]
-    [BenchmarkCategory("Unformatted")]
-    public IbanObject?[] IbanNet_Unformatted()
+    [BenchmarkCategory("machine readable")]
+    public IbanObject?[] IbanNet_MachineReadable()
     {
-        for (var i = 0; i < Unformatted.Length; i++)
+        for (var i = 0; i < MachineReadable.Length; i++)
         {
-            _ = IbanParser.TryParse(Unformatted[i], out var iban);
+            _ = IbanParser.TryParse(MachineReadable[i], out var iban);
             IbanObjects[i] = iban;
         }
         return IbanObjects;
     }
 
     [Benchmark(Description = "Regex")]
-    [BenchmarkCategory("Unformatted")]
-    public string?[] Regex_Unformatted()
+    [BenchmarkCategory("machine readable")]
+    public string?[] Regex_MachineReadable()
     {
-        for (var i = 0; i < Unformatted.Length; i++)
+        for (var i = 0; i < MachineReadable.Length; i++)
         {
-            Strings[i] = RegexBasedParser.Parse(Unformatted[i]);
+            Strings[i] = RegexBasedParser.Parse(MachineReadable[i]);
         }
         return Strings;
     }
 
     [Benchmark(Description = "Qowaiv", Baseline = true)]
-    [BenchmarkCategory("Formatted")]
-    public Iban[] Qowaiv_Formatted()
+    [BenchmarkCategory("human readable")]
+    public Iban[] Qowaiv_HumanReadable()
     {
-        for (var i = 0; i < Formatted.Length; i++)
+        for (var i = 0; i < HumanReadable.Length; i++)
         {
-            Iban.TryParse(Formatted[i], null, out var iban);
+            Iban.TryParse(HumanReadable[i], null, out var iban);
             Ibans[i] = iban;
         }
         return Ibans;
     }
 
     [Benchmark(Description = "Iban.NET")]
-    [BenchmarkCategory("Formatted")]
-    public IbanObject?[] IbanNet_Formatted()
+    [BenchmarkCategory("human readable")]
+    public IbanObject?[] IbanNet_HumanReadable()
     {
-        for (var i = 0; i < Formatted.Length; i++)
+        for (var i = 0; i < HumanReadable.Length; i++)
         {
-            _ = IbanParser.TryParse(Formatted[i], out var iban);
+            _ = IbanParser.TryParse(HumanReadable[i], out var iban);
             IbanObjects[i] = iban;
         }
         return IbanObjects;
     }
 
     [Benchmark(Description = "Regex")]
-    [BenchmarkCategory("Formatted")]
-    public string?[] Regex_Formatted()
+    [BenchmarkCategory("human readable")]
+    public string?[] Regex_HumanReadable()
     {
-        for (var i = 0; i < Formatted.Length; i++)
+        for (var i = 0; i < HumanReadable.Length; i++)
         {
-            Strings[i] = RegexBasedParser.Parse(Formatted[i]);
+            Strings[i] = RegexBasedParser.Parse(HumanReadable[i]);
         }
         return Strings;
     }
 
-    private static string[] Formatted { get; set; } =
+    private static string[] HumanReadable { get; set; } =
     [
 "AD01 2241 3556 6486 5834 1478",
 "AD02 8216 6468 9451 1616 4402",
@@ -1100,7 +1100,7 @@ public partial class IbanBenchmark
 "YE94 OKZY 6248 1377 2609 2990 1388 69",
 ];
 
-    private static string[] Unformatted { get; set; } = [.. Formatted.Select(f => f.Replace(" ", string.Empty))];
+    private static string[] MachineReadable { get; set; } = [.. HumanReadable.Select(f => f.Replace(" ", string.Empty))];
 
     private readonly MersenneTwister Rnd = new(42);
 }

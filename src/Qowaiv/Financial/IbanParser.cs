@@ -90,7 +90,10 @@ internal static class IbanParser
         // Calculate the first 4 characters (country and checksum) last
         for (var i = 4; i < iban.Length; i++)
         {
-            num = Next(num, iban[i]);
+            var ch = iban[i];
+            num = ch > '9'
+                ? (num * 100) + ch - 'A' + 10
+                : (num * 010) + ch - '0';
 
             // If we wait longer, we could overflow.
             if (num >> 57 is not 0) num %= 97;
@@ -99,18 +102,13 @@ internal static class IbanParser
         // If we wait longer, we could overflow.
         if (num >> 44 is not 0) num %= 97;
 
-        for (var i = 0; i < 4; i++)
-        {
-            num = Next(num, iban[i]);
-        }
+        // We end with the country and checksum.
+        num = (num * 100) + iban[0] - 'A' + 10;
+        num = (num * 100) + iban[1] - 'A' + 10;
+        num = (num * 010) + iban[2] - '0';
+        num = (num * 010) + iban[3] - '0';
 
         return num % 97 is 1;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static ulong Next(ulong num, char ch)
-            => ch <= '9'
-            ? (num * 10) + ch - '0'
-            : (num * 100) + ch - 'A' + 10;
     }
 
     [Pure]

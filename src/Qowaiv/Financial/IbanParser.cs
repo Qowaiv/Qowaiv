@@ -2,7 +2,7 @@ namespace Qowaiv.Financial;
 
 internal static class IbanParser
 {
-    private const int IB = (('I' - 'A') * 26) + 'B' - 'A';
+    private const int MinLength = 12;
 
     /// <summary>Parses a string representing an <see cref="InternationalBankAccountNumber" />.</summary>
     /// <returns>
@@ -13,110 +13,71 @@ internal static class IbanParser
     /// </remarks>
     [Pure]
     public static string? Parse(string reader)
-        => reader.Length >= 12
-        && (MachineReadable(reader) ?? HumanReadable(reader)) is { } iban
-        && Mod97(iban)
+        => (Normalized(reader) ?? Normalize(reader)) is { } iban
         ? iban
         : null;
 
-    /// <summary>No spaces and uppercased.</summary>
+    /// <summary>No spaces and all assummed uppercased.</summary>
     [Pure]
-    private static string? MachineReadable(string reader)
+    private static string? Normalized(string reader)
     {
+        if (reader.Length < MinLength) return null;
+
         var (f, s) = (reader[0], reader[1]);
-
-        if (!IsLetter(f) || !IsLetter(s)) return null;
-        var id = Id(f, s);
-
-        // Not a known country.
-        // Or the patterns do not match.
-        if (Bban.All[id] is not { Pattern: not null } bban
-            || (bban.IsGeneric
-                ? reader.Length > InternationalBankAccountNumber.MaxLength
-                : reader.Length != bban.Pattern.Length)) return null;
-
-        var pattern = bban.Pattern;
-
-        for (var i = 0; i < pattern.Length; i++)
-            if (!IsMatch(reader[i], pattern[i])) return null;
-
-        return !bban.Currency || Currency.TryParse(reader[^3..]) is { IsKnown: true }
-            ? reader
+        return IsLetter(f) && IsLetter(s)
+            ? Validate(reader, Bban.All[((f - 'A') * 26) + (s - 'A')])
             : null;
     }
 
     /// <summary>Supports markup, lowercase and prefixes.</summary>
     [Pure]
-    private static string? HumanReadable(ReadOnlySpan<char> reader, bool prefixed = false)
+    private static string? Normalize(ReadOnlySpan<char> reader)
     {
         reader = reader.Trim();
+
+        // Starts with "(IBAN)".
+        if (reader.StartsWith("(IBAN)", StringComparison.OrdinalIgnoreCase))
+            reader = reader[6..].TrimStart();
+
+        // Starts with "IBAN " or "IBAN:".
+        else if (reader.StartsWith("IBAN", StringComparison.OrdinalIgnoreCase)
+            && (IsMarkup(reader[4]) || reader[4] == ':'))
+            reader = reader[5..].TrimStart();
 
         // The minimum length of an IBAN.
         if (reader.Length < 12) return null;
 
-        var (i, length) = (2, 2);
-        Span<char> buffer = stackalloc char[InternationalBankAccountNumber.MaxLength];
+        Span<char> writer = stackalloc char[InternationalBankAccountNumber.MaxLength];
 
-        var f = Id(reader[0]);
-
-        if (IsLetter(f)) buffer[0] = f;
-        else return !prefixed && Has_IBAN_Prefix(reader)
-            ? HumanReadable(reader[6..], true)
-            : null;
-
-        var s = Id(reader[1]);
-
-        if (IsLetter(s)) buffer[1] = s;
-        else return null;
-
-        var id = Id(f, s);
-
-        if (id == IB) return prefixed || !HasIBANPrefix(reader)
-            ? null
-            : HumanReadable(reader[5..], true);
-
-        // Not a known country.
-        if (Bban.All[id] is not { Pattern: not null } bban) return null;
-
-        var pattern = bban.Pattern;
-
-        while (i < reader.Length && length < pattern.Length)
+        var (r, w) = (0, 0);
+        while (w < writer.Length && r < reader.Length)
         {
-            var (ch, type) = (reader[i++], pattern[length]);
-            var up = char.ToUpperInvariant(ch);
-
-            if (IsMatch(up, type)) buffer[length++] = up;
-
-            // Markup within the ckecksum is not allowed.
-            else if (length is 3 || !IsMarkup(ch)) return null;
+            var c = reader[r++];
+            if (IsDigit(c) || IsLetter(c)) writer[w++] = c;
+            else if (IsLower(c)) writer[w++] = (char)(c & 0x5F);
+            else if (IsMarkup(c) && w is not 1 and not 3) { /* Markup is allowed except for within the country or the checksum */ }
+            else return null;
         }
 
-        // Not everything consumed, or wrong length.
-        if (reader.Length != i
-            || !(bban.IsGeneric ? length >= 12 : length == pattern.Length)) return null;
+        return r == reader.Length && r >= MinLength
+            ? Normalized(writer[..w].ToString())
+            : null;
+    }
 
-        var iban = buffer[..length].ToString();
+    /// <summary>Validates an IBAN assuming its normalized, and the BBAN is already resolved.</summary>
+    [Pure]
+    private static string? Validate(string iban, Bban bban)
+    {
+        if (bban.Pattern is not { } pattern || (bban.IsGeneric
+            ? iban.Length > InternationalBankAccountNumber.MaxLength
+            : iban.Length != pattern.Length)) return null;
 
-        return !bban.Currency || Currency.TryParse(iban[^3..]) is { IsKnown: true }
+        for (var i = 0; i < iban.Length; i++)
+            if (!IsMatch(iban[i], pattern[i])) return null;
+
+        return Mod97(iban) && (!bban.Currency || Currency.TryParse(iban[^3..]) is { IsKnown: true })
             ? iban
             : null;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool IsMarkup(char ch)
-            => ASCII.IsAscii(ch)
-            ? ASCII.IsMarkup(ch)
-            : char.IsWhiteSpace(ch);
-
-        // Starts with "(IBAN)".
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool Has_IBAN_Prefix(ReadOnlySpan<char> reader)
-            => reader.StartsWith("(IBAN)", StringComparison.OrdinalIgnoreCase);
-
-        // Starts with "IBAN " or "IBAN:".
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool HasIBANPrefix(ReadOnlySpan<char> reader)
-            => reader.StartsWith("IBAN", StringComparison.OrdinalIgnoreCase)
-            && (IsMarkup(reader[4]) || reader[4] == ':');
     }
 
     /// <summary>Checks the Mod97 constraint.</summary>
@@ -154,15 +115,10 @@ internal static class IbanParser
 
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int Id(char f, char s) => ((f - 'A') * 26) + (s - 'A');
-
-    /// <summary>Uppercases the char assuming it an ASCII character.</summary>
-    /// <remarks>
-    /// If an character is non-ASCII it stays non-ASCII but will be corrupted, which is fine.
-    /// </remarks>
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static char Id(char c) => (char)(c & 0b_1111_1111_1101_1111);
+    private static bool IsMarkup(char ch)
+        => ASCII.IsAscii(ch)
+        ? ASCII.IsMarkup(ch)
+        : char.IsWhiteSpace(ch);
 
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -181,6 +137,10 @@ internal static class IbanParser
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static bool IsLetter(char c) => IsBetween(c, 'A', 'Z' - 'A');
+
+    [Pure]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static bool IsLower(char c) => IsBetween(c, 'a', 'z' - 'a');
 
     /// <summary>Indicates whether a character is within the specified inclusive range.</summary>
     /// <remarks>

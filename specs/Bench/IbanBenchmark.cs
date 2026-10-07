@@ -10,12 +10,13 @@ namespace Bench;
 [CategoriesColumn]
 [MemoryDiagnoser(true)]
 [MinColumn]
-public class IbanBenchmark
+public partial class IbanBenchmark
 {
     public const int Iterations = 1000;
     public readonly string?[] Outputs = new string?[Iterations];
     public readonly Iban[] Ibans = new Iban[Iterations];
     public readonly IbanObject?[] IbanObjects = new IbanObject?[Iterations];
+    public readonly string?[] Strings = new string?[Iterations];
 
     private static readonly IbanParser IbanParser = new(IbanRegistry.Default);
 
@@ -49,6 +50,17 @@ public class IbanBenchmark
         return IbanObjects;
     }
 
+    [Benchmark(Description = "Regex")]
+    [BenchmarkCategory("Unformatted")]
+    public string?[] Regex_Unformatted()
+    {
+        for (var i = 0; i < Unformatted.Length; i++)
+        {
+            Strings[i] = RegexBasedParser.Parse(Unformatted[i]);
+        }
+        return Strings;
+    }
+
     [Benchmark(Description = "Qowaiv", Baseline = true)]
     [BenchmarkCategory("Formatted")]
     public Iban[] Qowaiv_Formatted()
@@ -71,6 +83,17 @@ public class IbanBenchmark
             IbanObjects[i] = iban;
         }
         return IbanObjects;
+    }
+
+    [Benchmark(Description = "Regex")]
+    [BenchmarkCategory("Formatted")]
+    public string?[] Regex_Formatted()
+    {
+        for (var i = 0; i < Formatted.Length; i++)
+        {
+            Strings[i] = RegexBasedParser.Parse(Formatted[i]);
+        }
+        return Strings;
     }
 
     private static string[] Formatted { get; set; } =

@@ -72,43 +72,47 @@ internal static class IbanParser
             : iban.Length != pattern.Length)) return null;
 
         for (var i = 0; i < iban.Length; i++)
-            if (!IsMatch(iban[i], pattern[i])) return null;
+        {
+            uint c = iban[i];
+            var match = pattern[i] switch
+            {
+                'n' => c - '0' <= ('9' - '0'),
+                'a' => c - 'A' <= ('Z' - 'A'),
+                'c' => c - '0' <= ('9' - '0') || c - 'A' <= ('Z' - 'A'),
+                var t => t == c,
+            };
 
-        return (!bban.Currency || Currency.TryParse(iban[^3..]) is { IsKnown: true })
-            && Mod97(iban)
-            ? iban
-            : null;
-    }
+            if (!match) return null;
+        }
 
-    /// <summary>Checks the Mod97 constraint.</summary>
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool Mod97(string iban)
-    {
-        ulong num = 0;
+        // Currency mismatch.
+        if (bban.Currency && Currency.TryParse(iban[^3..]) is not { IsKnown: true })
+            return null;
 
-        // Calculate the first 4 characters (country and checksum) last
+        ulong mod = 0;
+
+        // First check the BBAN part.
         for (var i = 4; i < iban.Length; i++)
         {
             var ch = iban[i];
-            num = ch > '9'
-                ? (num * 100) + ch - 'A' + 10
-                : (num * 010) + ch - '0';
+            mod = ch > '9'
+                ? (mod * 100) + ch - 'A' + 10
+                : (mod * 010) + ch - '0';
 
             // If we wait longer, we could overflow.
-            if (num >> 57 is not 0) num %= 97;
+            if (mod >> 57 is not 0) mod %= 97;
         }
 
         // If we wait longer, we could overflow.
-        if (num >> 44 is not 0) num %= 97;
+        if (mod >> 44 is not 0) mod %= 97;
 
         // We end with the country and checksum.
-        num = (num * 100) + iban[0] - 'A' + 10;
-        num = (num * 100) + iban[1] - 'A' + 10;
-        num = (num * 010) + iban[2] - '0';
-        num = (num * 010) + iban[3] - '0';
+        mod = (mod * 100) + iban[0] - 'A' + 10;
+        mod = (mod * 100) + iban[1] - 'A' + 10;
+        mod = (mod * 010) + iban[2] - '0';
+        mod = (mod * 010) + iban[3] - '0';
 
-        return num % 97 is 1;
+        return mod % 97 is 1 ? iban : null;
     }
 
     [Pure]
@@ -117,16 +121,6 @@ internal static class IbanParser
         => ASCII.IsAscii(ch)
         ? ASCII.IsMarkup(ch)
         : char.IsWhiteSpace(ch);
-
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsMatch(char c, char type) => type switch
-    {
-        'n' => IsDigit(c),
-        'a' => IsLetter(c),
-        'c' => IsDigit(c) || IsLetter(c),
-        _ => type == c,
-    };
 
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

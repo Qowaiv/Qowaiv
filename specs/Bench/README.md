@@ -12,18 +12,24 @@ Amount JSON serialization is equivalent to decimal JSON serialization:
 | Amount  | JSON Serialization   | 27.49 us |  1.02 |
 
 ## IBAN
-The first IBAN parse relied on regular expressions to validate the format. With
-the v6.6.0 rewrite, regexes were removed, among other improvements which
-made the parsing 14 times faster. With v8, the number of mod97 executions has
-been drastically reduced, leading to another major improvement.
+The IBAN parser has been rewritten multiple times. Unil v6.6.0 it was regex
+based. Since then, it is a specialized parser, that uses (read-only) spans,
+BBAN lookups, assumes normalized input first, and tries to skip minimializes
+the mod 97 to the bear minimum.
 
-| Method   | Categories  | Mean      | Ratio | Gen0    | Gen1   | Allocated | Alloc Ratio |
-|--------- |------------ |----------:|------:|--------:|-------:|----------:|------------:|
-| Qowaiv   | Formatted   | 130.85 ns |  1.00 |  5.6152 | 1.2207 |   70.9 KB |        1.00 |
-| Iban.NET | Formatted   | 280.17 ns |  2.14 | 12.2070 | 3.9063 |  155.3 KB |        2.19 |
-|          |             |           |       |         |        |           |             |
-| Qowaiv   | Unformatted |  92.95 ns |  1.00 |  5.7373 | 1.3428 |   70.9 KB |        1.00 |
-| Iban.NET | Unformatted | 271.90 ns |  2.93 | 12.2070 | 3.9063 |  155.3 KB |        2.19 |
+Bother Iban.NET and the regex implementation are added for reference. Notice
+that the regex implementation is already way faster than regex based version
+that was used within Qowaiv in the past.
+
+| Method   | Categories | Mean      | Ratio | Gen0    | Gen1   | Allocated | Alloc Ratio |
+|----------|------------|----------:|------:|--------:|-------:|----------:|------------:|
+| Qowaiv   | Normalized |  55.64 us |  1.00 |       - |      - |    0.3 kB |        1.00 |
+| Iban.NET | Normalized | 219.12 us |  3.94 | 12.4512 | 3.9063 |  159.0 kB |      473.31 |
+| Regex    | Normalized | 240.07 us |  4.32 | 23.4375 | 4.6387 |  294.0 kB |      875.19 |
+|          |            |           |       |         |        |           |             |
+| Qowaiv   | Formatted  |  95.10 us |  1.00 |  5.7373 | 1.3428 |   72.6 kB |        1.00 |
+| Iban.NET | Formatted  | 220.01 us |  2.32 | 12.4512 | 3.9063 |  159.0 kB |        2.19 |
+| Regex    | Formatted  | 244.84 us |  2.58 | 24.1699 | 4.6387 |  305.1 kB |        4.20 |
 
 ## Decimal round
 Custom rounding is slower than .NET's default implementation. A big part can

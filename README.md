@@ -49,6 +49,30 @@ Multiple scenarios are supported:
 * Domain-specific logic
 * Explicit and implicit casting
 
+#### Multi-language
+Qowaiv ships with localized labels for the following languages. English
+(American) is the default (neutral) language.
+
+| Language            | Culture |
+|---------------------|---------|
+| English (American)  | `en`    |
+| English (British)   | `en-GB` |
+| Arabic              | `ar`    |
+| Chinese             | `zh`    |
+| Chinese (Hong Kong) | `zh-HK` |
+| Chinese (Taiwan)    | `zh-TW` |
+| Dutch               | `nl`    |
+| French              | `fr`    |
+| German              | `de`    |
+| Italian             | `it`    |
+| Japanese            | `ja`    |
+| Portuguese          | `pt`    |
+| Russian             | `ru`    |
+| Spanish             | `es`    |
+
+Note that exceptions other than the `FormatException` are not translated as
+they are considered part of system, rather then a specific domain.
+
 ## Building your own
 If you need a Single Value Object that is not provided by Qowaiv you can build
 your own. How to do that can be read [here](README.Custom.SVO.md).

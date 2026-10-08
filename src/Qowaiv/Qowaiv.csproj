@@ -37,8 +37,7 @@
       <![CDATA[
 v8.*
 - IBAN supports Mongolia and Falkland Islands.
-- Country data update (display names, start dates, end dates).
-- Add missing translations for sex labels and yes-no labels, and translate FormatException messages.
+- Extended language support.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

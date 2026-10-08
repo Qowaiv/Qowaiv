@@ -9,11 +9,11 @@ internal class Markdown_file
 
     [Explicit]
     [Test]
-    public void Generate_Lookup()
+    public void Generate_char_Lookup()
     {
         const int a = 1 << 10;
-        const int c = 1 << 11;
-        const int n = 1 << 12;
+        const int n = 1 << 11;
+        const int l = 1 << 12;
 
         var values = new int[256];
 
@@ -21,14 +21,37 @@ internal class Markdown_file
         {
             // to allow specific digits
             values[ch] |= 1 << (ch - '0');
-            values[ch] |= c | n;
+            values[ch] |= n;
         }
         for (var ch = 'A'; ch <= 'Z'; ch++)
         {
-            values[ch] |= a | c;
+            values[ch] |= a;
         }
 
-        Console.WriteLine(string.Join(',', values));
+        for (var ch = 'a'; ch <= 'z'; ch++)
+        {
+            values[ch] |= l;
+        }
+
+        var sb = new StringBuilder();
+        sb.AppendLine("[");
+        for (uint i = 0; i <= 255; i++)
+        {
+            var cat = values[i];
+            sb.Append($"0x0{Convert.ToString(cat, 16)},");
+            if (i % 16 == 15)
+            {
+                sb.AppendLine();
+            }
+            else
+            {
+                sb.Append(' ');
+            }
+        }
+
+        sb.AppendLine("];");
+
+        Console.WriteLine(sb);
 
         Assert.Inconclusive("Copy output to code file.");
     }

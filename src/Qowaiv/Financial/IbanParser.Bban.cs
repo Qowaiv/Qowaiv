@@ -19,8 +19,8 @@ internal readonly record struct Bban(Country Country, ushort[] Pattern, bool Cur
     private const ushort _8 = 1 << 8;
     private const ushort _9 = 1 << 9;
     private const ushort a = 1 << 10;
-    private const ushort c = 1 << 11;
-    private const ushort n = 1 << 12;
+    private const ushort n = 1 << 11;
+    private const ushort c = a | n;
 
 #pragma warning disable
 

@@ -12,9 +12,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
+  <data name="char_Female">
+    <value>女</value>
+  </data>
+  <data name="char_Male">
+    <value>男</value>
+  </data>
   <data name="Female">
     <value>女性</value>
     <comment>Female (default)</comment>
+  </data>
+  <data name="honorific_Female">
+    <value>女士</value>
+  </data>
+  <data name="honorific_Male">
+    <value>先生</value>
+  </data>
+  <data name="honorific_NotKnown">
+    <value>先生/女士</value>
   </data>
   <data name="Male">
     <value>男性</value>

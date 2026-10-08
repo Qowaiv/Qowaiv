@@ -10,105 +10,105 @@
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
   <data name="FormatExceptionBusinessIdentifierCode">
-    <value>Geen geldige BIC</value>
+    <value>BIC non valide</value>
   </data>
   <data name="FormatExceptionCasRegistryNumber">
-    <value>Geen geldig CAS-nummer</value>
+    <value>Numéro de registre CAS non valide</value>
   </data>
   <data name="FormatExceptionCountry">
-    <value>Geen geldig land</value>
+    <value>Pays non valide</value>
   </data>
   <data name="FormatExceptionCryptographicSeed">
-    <value>Geen geldige cryptografische seed</value>
+    <value>Graine cryptographique non valide</value>
   </data>
   <data name="FormatExceptionCurrency">
-    <value>Geen geldige valuta</value>
+    <value>Devise non valide</value>
   </data>
   <data name="FormatExceptionDate">
-    <value>Geen geldige datum</value>
+    <value>Date non valide</value>
   </data>
   <data name="FormatExceptionDateSpan">
-    <value>Geen geldige tijdsduur</value>
+    <value>Période non valide</value>
   </data>
   <data name="FormatExceptionElo">
-    <value>Geen geldige Elo-rating</value>
+    <value>Classement Elo non valide</value>
   </data>
   <data name="FormatExceptionEmailAddress">
-    <value>Geen geldig e-mailadres</value>
+    <value>Adresse e-mail non valide</value>
   </data>
   <data name="FormatExceptionEmailAddressCollection">
-    <value>Geen geldige email adres(sen)</value>
+    <value>Adresses e-mail non valides</value>
   </data>
   <data name="FormatExceptionEnergyLabel">
-    <value>Geen geldig energielabel</value>
+    <value>Étiquette énergétique non valide</value>
   </data>
   <data name="FormatExceptionFinancialAmount">
-    <value>Geen geldig bedrag</value>
+    <value>Montant non valide</value>
   </data>
   <data name="FormatExceptionFraction">
-    <value>Geen geldige breuk</value>
+    <value>Fraction non valide</value>
   </data>
   <data name="FormatExceptionGender">
-    <value>Geen geldig geslacht</value>
+    <value>Genre non valide</value>
   </data>
   <data name="FormatExceptionHouseNumber">
-    <value>Geen geldig huisnummer</value>
+    <value>Numéro de rue non valide</value>
   </data>
   <data name="FormatExceptionIdentifier">
-    <value>Geen geldige identifier</value>
+    <value>Identifiant non valide</value>
   </data>
   <data name="FormatExceptionInternationalBankAccountNumber">
-    <value>Geen geldig IBAN</value>
+    <value>IBAN non valide</value>
   </data>
   <data name="FormatExceptionInternetMediaType">
-    <value>Geen geldig internet media type</value>
+    <value>Type de média Internet non valide</value>
   </data>
   <data name="FormatExceptionLocalDateTime">
-    <value>Geen geldige datum</value>
+    <value>Date non valide</value>
   </data>
   <data name="FormatExceptionMoney">
-    <value>Geen geldig bedrag</value>
+    <value>Montant non valide</value>
   </data>
   <data name="FormatExceptionMonth">
-    <value>Geen geldige maand</value>
+    <value>Mois non valide</value>
   </data>
   <data name="FormatExceptionMonthSpan">
-    <value>Geen geldige duur in maanden</value>
+    <value>Durée en mois non valide</value>
   </data>
   <data name="FormatExceptionPercentage">
-    <value>Geen geldig percentage</value>
+    <value>Pourcentage non valide</value>
   </data>
   <data name="FormatExceptionPostalCode">
-    <value>Geen geldige postcode</value>
+    <value>Code postal non valide</value>
   </data>
   <data name="FormatExceptionQGuid">
-    <value>Geen geldig GUID</value>
+    <value>GUID non valide</value>
   </data>
   <data name="FormatExceptionSex">
-    <value>Geen geldig geslacht</value>
+    <value>Sexe non valide</value>
   </data>
   <data name="FormatExceptionStreamSize">
-    <value>Geen geldige bestandsgrootte</value>
+    <value>Taille de flux non valide</value>
   </data>
   <data name="FormatExceptionTimestamp">
-    <value>Geen geldige SQL timestamp</value>
+    <value>Horodatage SQL non valide</value>
   </data>
   <data name="FormatExceptionUuid">
-    <value>Geen geldig GUID</value>
+    <value>GUID non valide</value>
   </data>
   <data name="FormatExceptionWeekDate">
-    <value>Geen geldige week datum</value>
+    <value>Date de semaine non valide</value>
   </data>
   <data name="FormatExceptionYear">
-    <value>Geen geldig jaartal</value>
+    <value>Année non valide</value>
   </data>
   <data name="FormatExceptionYearMonth">
-    <value>Geen geldige jaar/maand combinatie</value>
+    <value>Combinaison année-mois non valide</value>
   </data>
   <data name="FormatExceptionYearSpan">
-    <value>Geen geldige duur in jaren</value>
+    <value>Durée en années non valide</value>
   </data>
   <data name="FormatExceptionYesNo">
-    <value>Geen geldige ja/nee waarde</value>
+    <value>Valeur oui/non non valide</value>
   </data>
 </root>

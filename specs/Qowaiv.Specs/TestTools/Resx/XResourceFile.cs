@@ -93,7 +93,13 @@ public sealed class XResourceFile
     /// <param name="writer">
     /// The writer to save with.
     /// </param>
-    public void Save(XmlWriter writer) => serializer.Serialize(writer, this);
+    public void Save(XmlWriter writer)
+    {
+        serializer.Serialize(writer, this);
+
+        // XmlWriter does not write a final newline.
+        writer.WriteWhitespace(writer.Settings?.NewLineChars ?? Environment.NewLine);
+    }
 
     /// <summary>Loads a resource file from a stream.</summary>
     /// <param name="stream">

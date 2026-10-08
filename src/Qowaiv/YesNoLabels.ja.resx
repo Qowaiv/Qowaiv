@@ -18,6 +18,12 @@
   <data name="b_Yes">
     <value>本当の</value>
   </data>
+  <data name="ch_No">
+    <value>い</value>
+  </data>
+  <data name="ch_Yes">
+    <value>は</value>
+  </data>
   <data name="f_No">
     <value>いいえ</value>
   </data>

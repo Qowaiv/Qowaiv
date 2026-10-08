@@ -12,9 +12,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
+  <data name="char_Female">
+    <value>Ж</value>
+  </data>
+  <data name="char_Male">
+    <value>М</value>
+  </data>
   <data name="Female">
     <value>женщина</value>
     <comment>Female (default)</comment>
+  </data>
+  <data name="honorific_Female">
+    <value>Г-жа</value>
+  </data>
+  <data name="honorific_Male">
+    <value>Г-н</value>
+  </data>
+  <data name="honorific_NotKnown">
+    <value>Г-н/Г-жа</value>
   </data>
   <data name="Male">
     <value>мужчина</value>

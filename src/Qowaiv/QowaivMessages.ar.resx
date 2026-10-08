@@ -10,105 +10,105 @@
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
   <data name="FormatExceptionBusinessIdentifierCode">
-    <value>Geen geldige BIC</value>
+    <value>BIC غير صالح</value>
   </data>
   <data name="FormatExceptionCasRegistryNumber">
-    <value>Geen geldig CAS-nummer</value>
+    <value>رقم سجل CAS غير صالح</value>
   </data>
   <data name="FormatExceptionCountry">
-    <value>Geen geldig land</value>
+    <value>بلد غير صالح</value>
   </data>
   <data name="FormatExceptionCryptographicSeed">
-    <value>Geen geldige cryptografische seed</value>
+    <value>بذرة تشفير غير صالحة</value>
   </data>
   <data name="FormatExceptionCurrency">
-    <value>Geen geldige valuta</value>
+    <value>عملة غير صالحة</value>
   </data>
   <data name="FormatExceptionDate">
-    <value>Geen geldige datum</value>
+    <value>تاريخ غير صالح</value>
   </data>
   <data name="FormatExceptionDateSpan">
-    <value>Geen geldige tijdsduur</value>
+    <value>مدة تاريخ غير صالحة</value>
   </data>
   <data name="FormatExceptionElo">
-    <value>Geen geldige Elo-rating</value>
+    <value>تصنيف Elo غير صالح</value>
   </data>
   <data name="FormatExceptionEmailAddress">
-    <value>Geen geldig e-mailadres</value>
+    <value>عنوان بريد إلكتروني غير صالح</value>
   </data>
   <data name="FormatExceptionEmailAddressCollection">
-    <value>Geen geldige email adres(sen)</value>
+    <value>عناوين بريد إلكتروني غير صالحة</value>
   </data>
   <data name="FormatExceptionEnergyLabel">
-    <value>Geen geldig energielabel</value>
+    <value>ملصق طاقة غير صالح</value>
   </data>
   <data name="FormatExceptionFinancialAmount">
-    <value>Geen geldig bedrag</value>
+    <value>مبلغ غير صالح</value>
   </data>
   <data name="FormatExceptionFraction">
-    <value>Geen geldige breuk</value>
+    <value>كسر غير صالح</value>
   </data>
   <data name="FormatExceptionGender">
-    <value>Geen geldig geslacht</value>
+    <value>جنس غير صالح</value>
   </data>
   <data name="FormatExceptionHouseNumber">
-    <value>Geen geldig huisnummer</value>
+    <value>رقم منزل غير صالح</value>
   </data>
   <data name="FormatExceptionIdentifier">
-    <value>Geen geldige identifier</value>
+    <value>معرّف غير صالح</value>
   </data>
   <data name="FormatExceptionInternationalBankAccountNumber">
-    <value>Geen geldig IBAN</value>
+    <value>IBAN غير صالح</value>
   </data>
   <data name="FormatExceptionInternetMediaType">
-    <value>Geen geldig internet media type</value>
+    <value>نوع وسائط إنترنت غير صالح</value>
   </data>
   <data name="FormatExceptionLocalDateTime">
-    <value>Geen geldige datum</value>
+    <value>تاريخ غير صالح</value>
   </data>
   <data name="FormatExceptionMoney">
-    <value>Geen geldig bedrag</value>
+    <value>مبلغ غير صالح</value>
   </data>
   <data name="FormatExceptionMonth">
-    <value>Geen geldige maand</value>
+    <value>شهر غير صالح</value>
   </data>
   <data name="FormatExceptionMonthSpan">
-    <value>Geen geldige duur in maanden</value>
+    <value>مدة بالأشهر غير صالحة</value>
   </data>
   <data name="FormatExceptionPercentage">
-    <value>Geen geldig percentage</value>
+    <value>نسبة مئوية غير صالحة</value>
   </data>
   <data name="FormatExceptionPostalCode">
-    <value>Geen geldige postcode</value>
+    <value>رمز بريدي غير صالح</value>
   </data>
   <data name="FormatExceptionQGuid">
-    <value>Geen geldig GUID</value>
+    <value>GUID غير صالح</value>
   </data>
   <data name="FormatExceptionSex">
-    <value>Geen geldig geslacht</value>
+    <value>جنس غير صالح</value>
   </data>
   <data name="FormatExceptionStreamSize">
-    <value>Geen geldige bestandsgrootte</value>
+    <value>حجم تدفق غير صالح</value>
   </data>
   <data name="FormatExceptionTimestamp">
-    <value>Geen geldige SQL timestamp</value>
+    <value>طابع زمني SQL غير صالح</value>
   </data>
   <data name="FormatExceptionUuid">
-    <value>Geen geldig GUID</value>
+    <value>GUID غير صالح</value>
   </data>
   <data name="FormatExceptionWeekDate">
-    <value>Geen geldige week datum</value>
+    <value>تاريخ أسبوع غير صالح</value>
   </data>
   <data name="FormatExceptionYear">
-    <value>Geen geldig jaartal</value>
+    <value>سنة غير صالحة</value>
   </data>
   <data name="FormatExceptionYearMonth">
-    <value>Geen geldige jaar/maand combinatie</value>
+    <value>مزيج سنة وشهر غير صالح</value>
   </data>
   <data name="FormatExceptionYearSpan">
-    <value>Geen geldige duur in jaren</value>
+    <value>مدة بالسنوات غير صالحة</value>
   </data>
   <data name="FormatExceptionYesNo">
-    <value>Geen geldige ja/nee waarde</value>
+    <value>قيمة نعم/لا غير صالحة</value>
   </data>
 </root>

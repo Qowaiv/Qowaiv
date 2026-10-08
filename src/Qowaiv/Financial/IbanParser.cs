@@ -88,11 +88,12 @@ internal static class IbanParser
         // If we wait longer, we could overflow.
         if (mod >> 44 is not 0) mod %= 97;
 
-        // We end with the country and checksum.
-        mod = (mod * 100) + iban[0] - 'A' + 10;
-        mod = (mod * 100) + iban[1] - 'A' + 10;
-        mod = (mod * 010) + iban[2] - '0';
-        mod = (mod * 010) + iban[3] - '0';
+        // Pre-calculated Country code.
+        mod = (mod * 10000) + bban.Mod;
+
+        // Checksum.
+        mod = (mod * 10) + iban[2] - '0';
+        mod = (mod * 10) + iban[3] - '0';
 
         return mod % 97 is 1 ? iban : null;
     }

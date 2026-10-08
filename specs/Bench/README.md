@@ -23,13 +23,13 @@ that was used within Qowaiv in the past.
 
 | Method   | Readable | Mean      | Ratio | Gen0    | Gen1   | Allocated | Alloc Ratio |
 |----------|----------|----------:|------:|--------:|-------:|----------:|------------:|
-| Qowaiv   | machine  |  32.23 us |  1.00 |       - |      - |    0.3 kB |        1.00 |
-| Iban.NET | machine  | 220.85 us |  6.85 | 12.4512 | 3.9063 |  159.0 kB |      473.31 |
-| Regex    | machine  | 239.50 us |  7.43 | 23.4375 | 4.6387 |  294.0 kB |      875.19 |
+| Qowaiv   | machine  |  32.23 ns |  1.00 |       - |      - |    0.3 kB |        1.00 |
+| Iban.NET | machine  | 220.85 ns |  6.85 | 12.4512 | 3.9063 |  159.0 kB |      473.31 |
+| Regex    | machine  | 239.50 ns |  7.43 | 23.4375 | 4.6387 |  294.0 kB |      875.19 |
 |          |          |           |       |         |        |           |             |
-| Qowaiv   | human    |  81.42 us |  1.00 |  5.7373 | 1.0986 |   72.6 kB |        1.00 |
-| Iban.NET | human    | 216.51 us |  2.66 | 12.4512 | 3.9063 |  159.0 kB |        2.19 |
-| Regex    | human    | 238.68 us |  2.94 | 24.1699 | 4.6387 |  305.1 kB |        4.20 |
+| Qowaiv   | human    |  81.42 ns |  1.00 |  5.7373 | 1.0986 |   72.6 kB |        1.00 |
+| Iban.NET | human    | 216.51 ns |  2.66 | 12.4512 | 3.9063 |  159.0 kB |        2.19 |
+| Regex    | human    | 238.68 ns |  2.94 | 24.1699 | 4.6387 |  305.1 kB |        4.20 |
 
 ## Decimal round
 Custom rounding is slower than .NET's default implementation. A big part can

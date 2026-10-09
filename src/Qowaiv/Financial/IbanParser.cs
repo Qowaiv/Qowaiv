@@ -39,7 +39,7 @@ internal static class IbanParser
             ? iban.Length > InternationalBankAccountNumber.MaxLength
             : iban.Length != pattern.Length) return null;
 
-        // The first to characters are already checked by the bban.
+        // The first to characters are already checked by selecting the BBAN.
         for (var i = 2; i < iban.Length; i++)
         {
             // Non-ASCII chars will be invalidated by the cast to byte.

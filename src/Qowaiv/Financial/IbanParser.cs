@@ -24,7 +24,7 @@ internal static class IbanParser
 
     private static string? MachineReadable(string iban)
     {
-        if (iban.Length < MinLength) return null;
+        if (iban.Length is < MinLength or > InternationalBankAccountNumber.MaxLength) return null;
 
         var (f, s) = (iban[0], iban[1]);
 
@@ -35,9 +35,7 @@ internal static class IbanParser
         var pattern = bban.Pattern;
 
         // Invalid length.
-        if (bban.IsGeneric
-            ? iban.Length > InternationalBankAccountNumber.MaxLength
-            : iban.Length != pattern.Length) return null;
+        if (!bban.IsGeneric && iban.Length != pattern.Length) return null;
 
         // The first to characters are already checked by selecting the BBAN.
         for (var i = 2; i < iban.Length; i++)

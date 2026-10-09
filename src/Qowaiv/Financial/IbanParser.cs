@@ -1,28 +1,10 @@
+#pragma warning disable S1541 // Complexity as result of performance
+#pragma warning disable S3776 // Complexity as result of performance
+
 namespace Qowaiv.Financial;
 
 internal static class IbanParser
 {
-    /// <summary>Catagories for different ASCII chars.</summary>
-    private static readonly ushort[] Catagory =
-    [
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x0801, 0x0802, 0x0804, 0x0808, 0x0810, 0x0820, 0x0840, 0x0880, 0x0900, 0x0a00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400,
-        0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000,
-        0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    ];
-
     private const int MinLength = 12;
 
     /// <summary>Parses a string representing an <see cref="InternationalBankAccountNumber" />.</summary>
@@ -34,12 +16,12 @@ internal static class IbanParser
     /// </remarks>
     [Pure]
     public static string? Parse(string reader)
-        => (MachineReadable(reader) ?? Normalize(reader)) is { } iban
-        ? iban
-        : null;
+        => MachineReadable(reader)
+        ?? Normalize(reader);
 
     /// <summary>Validates an IBAN assuming its normalized, and the BBAN is already resolved.</summary>
     [Pure]
+
     private static string? MachineReadable(string iban)
     {
         if (iban.Length < MinLength) return null;
@@ -47,7 +29,7 @@ internal static class IbanParser
         var (f, s) = (iban[0], iban[1]);
 
         // No valide country code.
-        if (!IsLetter(f) || !IsLetter(s)
+        if (!Is.Letter(f) || !Is.Letter(s)
             || Bban.All[((f - 'A') * 26) + (s - 'A')] is not { Pattern: not null } bban) return null;
 
         var pattern = bban.Pattern;
@@ -110,7 +92,7 @@ internal static class IbanParser
 
         // Starts with "IBAN " or "IBAN:".
         else if (reader.StartsWith("IBAN", StringComparison.OrdinalIgnoreCase)
-            && (IsMarkup(reader[4]) || reader[4] == ':'))
+            && (Is.Markup(reader[4]) || reader[4] == ':'))
             reader = reader[5..].TrimStart();
 
         // The minimum length of an IBAN.
@@ -121,10 +103,10 @@ internal static class IbanParser
         var (r, w) = (0, 0);
         while (w < writer.Length && r < reader.Length)
         {
-            var c = reader[r++];
-            if (IsDigit(c) || IsLetter(c)) writer[w++] = c;
-            else if (IsLower(c)) writer[w++] = (char)(c & 0x5F);
-            else if (IsMarkup(c) && w is not 1 and not 3) { /* Markup is allowed except for within the country or the checksum */ }
+            var ch = reader[r++];
+            if (Is.DigitOrLetter(ch)) writer[w++] = ch;
+            else if (Is.Lower(ch)) writer[w++] = (char)(ch & 0x5F);
+            else if (Is.Markup(ch) && w is not 1 and not 3) { /* Markup is allowed except for within the country or the checksum */ }
             else return null;
         }
 
@@ -133,31 +115,47 @@ internal static class IbanParser
             : null;
     }
 
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsMarkup(char ch)
-        => ASCII.IsAscii(ch)
-        ? ASCII.IsMarkup(ch)
-        : char.IsWhiteSpace(ch);
+    private static class Is
+    {
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Letter(char ch) => (Catagory[(byte)ch] & (1 << 10)) is not 0;
 
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsDigit(char c) => IsBetween(c, '0', '9' - '0');
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DigitOrLetter(char ch) => (Catagory[(byte)ch] & (3 << 10)) is not 0;
 
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsLetter(char c) => IsBetween(c, 'A', 'Z' - 'A');
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Lower(char ch) => (Catagory[(byte)ch] & (1 << 12)) is not 0;
 
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsLower(char c) => IsBetween(c, 'a', 'z' - 'a');
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Markup(char ch) => ASCII.IsAscii(ch)
+            ? ASCII.IsMarkup(ch)
+            : char.IsWhiteSpace(ch);
+    }
 
-    /// <summary>Indicates whether a character is within the specified inclusive range.</summary>
-    /// <remarks>
-    /// This is a tweaked copy of .NET's char.IsBetween(). Is is not avialable for .NET standard 2.0.
-    /// </remarks>
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsBetween(char c, char min, uint delta) =>
-        (uint)(c - min) <= delta;
+    /// <summary>Catagories for different ASCII chars.</summary>
+    private static readonly ushort[] Catagory =
+    [
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x0801, 0x0802, 0x0804, 0x0808, 0x0810, 0x0820, 0x0840, 0x0880, 0x0900, 0x0a00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400,
+        0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000,
+        0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x00, 0x00, 0x00, 0x00, 0x00,
+
+        // Non-ASCII
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    ];
 }

@@ -16,6 +16,15 @@
     <value>أنثى</value>
     <comment>Female (default)</comment>
   </data>
+  <data name="honorific_Female">
+    <value>السيدة</value>
+  </data>
+  <data name="honorific_Male">
+    <value>السيد</value>
+  </data>
+  <data name="honorific_NotKnown">
+    <value>السيد/السيدة</value>
+  </data>
   <data name="Male">
     <value>ذكر</value>
     <comment>Male (default)</comment>

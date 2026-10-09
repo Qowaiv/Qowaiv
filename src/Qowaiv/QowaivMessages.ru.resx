@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="FormatExceptionBusinessIdentifierCode">
+    <value>Недопустимый BIC</value>
+  </data>
+  <data name="FormatExceptionCasRegistryNumber">
+    <value>Недопустимый регистрационный номер CAS</value>
+  </data>
+  <data name="FormatExceptionCountry">
+    <value>Недопустимая страна</value>
+  </data>
+  <data name="FormatExceptionCryptographicSeed">
+    <value>Недопустимое криптографическое начальное значение</value>
+  </data>
+  <data name="FormatExceptionCurrency">
+    <value>Недопустимая валюта</value>
+  </data>
+  <data name="FormatExceptionDate">
+    <value>Недопустимая дата</value>
+  </data>
+  <data name="FormatExceptionDateSpan">
+    <value>Недопустимый интервал дат</value>
+  </data>
+  <data name="FormatExceptionElo">
+    <value>Недопустимый рейтинг Эло</value>
+  </data>
+  <data name="FormatExceptionEmailAddress">
+    <value>Недопустимый адрес электронной почты</value>
+  </data>
+  <data name="FormatExceptionEmailAddressCollection">
+    <value>Недопустимые адреса электронной почты</value>
+  </data>
+  <data name="FormatExceptionEnergyLabel">
+    <value>Недопустимый класс энергоэффективности</value>
+  </data>
+  <data name="FormatExceptionFinancialAmount">
+    <value>Недопустимая сумма</value>
+  </data>
+  <data name="FormatExceptionFraction">
+    <value>Недопустимая дробь</value>
+  </data>
+  <data name="FormatExceptionGender">
+    <value>Недопустимый пол</value>
+  </data>
+  <data name="FormatExceptionHouseNumber">
+    <value>Недопустимый номер дома</value>
+  </data>
+  <data name="FormatExceptionIdentifier">
+    <value>Недопустимый идентификатор</value>
+  </data>
+  <data name="FormatExceptionInternationalBankAccountNumber">
+    <value>Недопустимый IBAN</value>
+  </data>
+  <data name="FormatExceptionInternetMediaType">
+    <value>Недопустимый тип интернет-медиа</value>
+  </data>
+  <data name="FormatExceptionLocalDateTime">
+    <value>Недопустимая дата</value>
+  </data>
+  <data name="FormatExceptionMoney">
+    <value>Недопустимая сумма</value>
+  </data>
+  <data name="FormatExceptionMonth">
+    <value>Недопустимый месяц</value>
+  </data>
+  <data name="FormatExceptionMonthSpan">
+    <value>Недопустимая продолжительность в месяцах</value>
+  </data>
+  <data name="FormatExceptionPercentage">
+    <value>Недопустимый процент</value>
+  </data>
+  <data name="FormatExceptionPostalCode">
+    <value>Недопустимый почтовый индекс</value>
+  </data>
+  <data name="FormatExceptionQGuid">
+    <value>Недопустимый GUID</value>
+  </data>
+  <data name="FormatExceptionSex">
+    <value>Недопустимый пол</value>
+  </data>
+  <data name="FormatExceptionStreamSize">
+    <value>Недопустимый размер потока</value>
+  </data>
+  <data name="FormatExceptionTimestamp">
+    <value>Недопустимая метка времени SQL</value>
+  </data>
+  <data name="FormatExceptionUuid">
+    <value>Недопустимый GUID</value>
+  </data>
+  <data name="FormatExceptionWeekDate">
+    <value>Недопустимая дата недели</value>
+  </data>
+  <data name="FormatExceptionYear">
+    <value>Недопустимый год</value>
+  </data>
+  <data name="FormatExceptionYearMonth">
+    <value>Недопустимое сочетание года и месяца</value>
+  </data>
+  <data name="FormatExceptionYearSpan">
+    <value>Недопустимая продолжительность в годах</value>
+  </data>
+  <data name="FormatExceptionYesNo">
+    <value>Недопустимое значение да/нет</value>
+  </data>
+</root>

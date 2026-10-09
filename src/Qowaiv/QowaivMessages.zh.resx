@@ -10,105 +10,105 @@
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
   <data name="FormatExceptionBusinessIdentifierCode">
-    <value>Geen geldige BIC</value>
+    <value>無效的 BIC</value>
   </data>
   <data name="FormatExceptionCasRegistryNumber">
-    <value>Geen geldig CAS-nummer</value>
+    <value>無效的 CAS 登錄號</value>
   </data>
   <data name="FormatExceptionCountry">
-    <value>Geen geldig land</value>
+    <value>無效的國家</value>
   </data>
   <data name="FormatExceptionCryptographicSeed">
-    <value>Geen geldige cryptografische seed</value>
+    <value>無效的加密種子</value>
   </data>
   <data name="FormatExceptionCurrency">
-    <value>Geen geldige valuta</value>
+    <value>無效的貨幣</value>
   </data>
   <data name="FormatExceptionDate">
-    <value>Geen geldige datum</value>
+    <value>無效的日期</value>
   </data>
   <data name="FormatExceptionDateSpan">
-    <value>Geen geldige tijdsduur</value>
+    <value>無效的日期跨度</value>
   </data>
   <data name="FormatExceptionElo">
-    <value>Geen geldige Elo-rating</value>
+    <value>無效的 Elo</value>
   </data>
   <data name="FormatExceptionEmailAddress">
-    <value>Geen geldig e-mailadres</value>
+    <value>無效的電子郵件地址</value>
   </data>
   <data name="FormatExceptionEmailAddressCollection">
-    <value>Geen geldige email adres(sen)</value>
+    <value>無效的電子郵件地址</value>
   </data>
   <data name="FormatExceptionEnergyLabel">
-    <value>Geen geldig energielabel</value>
+    <value>無效的能源標籤</value>
   </data>
   <data name="FormatExceptionFinancialAmount">
-    <value>Geen geldig bedrag</value>
+    <value>無效的金額</value>
   </data>
   <data name="FormatExceptionFraction">
-    <value>Geen geldige breuk</value>
+    <value>無效的分數</value>
   </data>
   <data name="FormatExceptionGender">
-    <value>Geen geldig geslacht</value>
+    <value>無效的性別</value>
   </data>
   <data name="FormatExceptionHouseNumber">
-    <value>Geen geldig huisnummer</value>
+    <value>無效的門牌號碼</value>
   </data>
   <data name="FormatExceptionIdentifier">
-    <value>Geen geldige identifier</value>
+    <value>無效的識別碼</value>
   </data>
   <data name="FormatExceptionInternationalBankAccountNumber">
-    <value>Geen geldig IBAN</value>
+    <value>無效的 IBAN</value>
   </data>
   <data name="FormatExceptionInternetMediaType">
-    <value>Geen geldig internet media type</value>
+    <value>無效的網際網路媒體類型</value>
   </data>
   <data name="FormatExceptionLocalDateTime">
-    <value>Geen geldige datum</value>
+    <value>無效的日期</value>
   </data>
   <data name="FormatExceptionMoney">
-    <value>Geen geldig bedrag</value>
+    <value>無效的金額</value>
   </data>
   <data name="FormatExceptionMonth">
-    <value>Geen geldige maand</value>
+    <value>無效的月份</value>
   </data>
   <data name="FormatExceptionMonthSpan">
-    <value>Geen geldige duur in maanden</value>
+    <value>無效的月數</value>
   </data>
   <data name="FormatExceptionPercentage">
-    <value>Geen geldig percentage</value>
+    <value>無效的百分比</value>
   </data>
   <data name="FormatExceptionPostalCode">
-    <value>Geen geldige postcode</value>
+    <value>無效的郵遞區號</value>
   </data>
   <data name="FormatExceptionQGuid">
-    <value>Geen geldig GUID</value>
+    <value>無效的 GUID</value>
   </data>
   <data name="FormatExceptionSex">
-    <value>Geen geldig geslacht</value>
+    <value>無效的性別</value>
   </data>
   <data name="FormatExceptionStreamSize">
-    <value>Geen geldige bestandsgrootte</value>
+    <value>無效的串流大小</value>
   </data>
   <data name="FormatExceptionTimestamp">
-    <value>Geen geldige SQL timestamp</value>
+    <value>無效的 SQL 時間戳記</value>
   </data>
   <data name="FormatExceptionUuid">
-    <value>Geen geldig GUID</value>
+    <value>無效的 GUID</value>
   </data>
   <data name="FormatExceptionWeekDate">
-    <value>Geen geldige week datum</value>
+    <value>無效的週日期</value>
   </data>
   <data name="FormatExceptionYear">
-    <value>Geen geldig jaartal</value>
+    <value>無效的年份</value>
   </data>
   <data name="FormatExceptionYearMonth">
-    <value>Geen geldige jaar/maand combinatie</value>
+    <value>無效的年月組合</value>
   </data>
   <data name="FormatExceptionYearSpan">
-    <value>Geen geldige duur in jaren</value>
+    <value>無效的年數</value>
   </data>
   <data name="FormatExceptionYesNo">
-    <value>Geen geldige ja/nee waarde</value>
+    <value>無效的是/否值</value>
   </data>
 </root>

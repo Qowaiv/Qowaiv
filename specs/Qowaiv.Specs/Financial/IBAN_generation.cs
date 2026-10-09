@@ -9,20 +9,69 @@ internal class Markdown_file
 
     [Explicit]
     [Test]
-    public void Generate_LocalizedPattern()
+    public void Generate_char_Lookup()
+    {
+        const int a = 1 << 10;
+        const int n = 1 << 11;
+        const int l = 1 << 12;
+
+        var values = new int[256];
+
+        for (var ch = '0'; ch <= '9'; ch++)
+        {
+            // to allow specific digits
+            values[ch] |= 1 << (ch - '0');
+            values[ch] |= n;
+        }
+        for (var ch = 'A'; ch <= 'Z'; ch++)
+        {
+            values[ch] |= a;
+        }
+
+        for (var ch = 'a'; ch <= 'z'; ch++)
+        {
+            values[ch] |= l;
+        }
+
+        var sb = new StringBuilder();
+        sb.AppendLine("[");
+        for (uint i = 0; i <= 255; i++)
+        {
+            var cat = values[i];
+            sb.Append($"0x0{Convert.ToString(cat, 16)},");
+            if (i % 16 == 15)
+            {
+                sb.AppendLine();
+            }
+            else
+            {
+                sb.Append(' ');
+            }
+        }
+
+        sb.AppendLine("];");
+
+        Console.WriteLine(sb);
+
+        Assert.Inconclusive("Copy output to code file.");
+    }
+
+    [Explicit]
+    [Test]
+    public void Generate_BBAN()
     {
         var writer = new StringBuilder();
 
-        for(var f = 'A'; f <='Z'; f++)
+        for (var f = 'A'; f <= 'Z'; f++)
         {
-            for(var s = 'A'; s <= 'Z'; s++)
+            for (var s = 'A'; s <= 'Z'; s++)
             {
                 writer.Append(new string(' ', 8));
-                if(Country.TryParse($"{f}{s}") is not { } country)
+                if (Country.TryParse($"{f}{s}") is not { } country)
                 {
                     writer.AppendLine("default,");
                 }
-                else if(Infos.FirstOrDefault(i => i.Country == country) is { } info)
+                else if (Infos.FirstOrDefault(i => i.Country == country) is { } info)
                 {
                     writer.AppendLine(info.BbanData());
                 }
@@ -32,7 +81,7 @@ internal class Markdown_file
                 }
             }
         }
-        
+
         Console.WriteLine(writer);
 
         Assert.Inconclusive("Copy output to code file.");
@@ -130,7 +179,7 @@ internal class Markdown_file
             .Select(kk => str.Replace("kk", kk.ToString("00")))
             .Select(Mod97)
             .First(i => i is { });
-        
+
         return iban;
     }
 
@@ -203,16 +252,26 @@ internal sealed record IbanInfo(Country Country, int Length, string Bban, int? C
             return total;
         }
     }
-    
+
     public string BbanData()
     {
         var sb = new StringBuilder()
-            .Append($@"new(""{LookupPattern}""");
+            .Append($@"new(""{LookupPattern[..2]}""")
+            .Append(", [0,0,");
+
+        var bban = string.Join(',', LookupPattern[2..].ToCharArray());
+        
+        for (var d = '0'; d <= '9'; d++)
+            bban = bban.Replace($"{d}", $"_{d}");
+
+
+        sb.Append($"{bban}]");
+
         if (Fields.EndsWith('m'))
             sb.Append(", true");
 
         sb.Append("), // ");
-        sb.Append(new string(' ', 49 - sb.Length));
+        sb.Append(new string(' ', 86 - sb.Length));
         sb.Append($"{Country.IsoAlpha2Code}: {Bban}");
         return sb.ToString();
     }

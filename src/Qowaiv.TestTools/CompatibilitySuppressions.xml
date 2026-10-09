@@ -77,6 +77,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.Globalization.TestCultures.get_zh_HK</Target>
+    <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.Globalization.TestCultures.get_zh_TW</Target>
+    <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.TestTools.JsonTester.Read_System_Text_JSON``1(System.Object)</Target>
     <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
@@ -126,6 +140,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.Globalization.TestCultures.get_zh_HK</Target>
+    <Left>lib/net8.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.Globalization.TestCultures.get_zh_TW</Target>
+    <Left>lib/net8.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.TestTools.JsonTester.Read_System_Text_JSON``1(System.Object,System.Text.Json.JsonSerializerOptions)</Target>
     <Left>lib/net8.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/net8.0/Qowaiv.TestTools.dll</Right>
@@ -176,6 +204,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.TestTools.ConvertTo`1.With``1</Target>
+    <Left>lib/net9.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net9.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.Globalization.TestCultures.get_zh_HK</Target>
+    <Left>lib/net9.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net9.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.Globalization.TestCultures.get_zh_TW</Target>
     <Left>lib/net9.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/net9.0/Qowaiv.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -244,6 +286,20 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.TestTools.ConvertTo`1.With``1</Target>
+    <Left>lib/netstandard2.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.Globalization.TestCultures.get_zh_HK</Target>
+    <Left>lib/netstandard2.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.TestTools.Globalization.TestCultures.get_zh_TW</Target>
     <Left>lib/netstandard2.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>

@@ -1,8 +1,11 @@
+#pragma warning disable S1541 // Complexity as result of performance
+#pragma warning disable S3776 // Complexity as result of performance
+
 namespace Qowaiv.Financial;
 
 internal static class IbanParser
 {
-    private const int IB = (('I' - 'A') * 26) + 'B' - 'A';
+    private const int MinLength = 12;
 
     /// <summary>Parses a string representing an <see cref="InternationalBankAccountNumber" />.</summary>
     /// <returns>
@@ -12,194 +15,145 @@ internal static class IbanParser
     /// This method is optimized for speed, hence some nesting, and inlining.
     /// </remarks>
     [Pure]
-    public static string? Parse(ReadOnlySpan<char> reader)
-        => reader.Length >= 12
-        && (MachineReadable(reader) ?? HumanReadable(reader)) is { } iban
-        && Mod97(iban)
-        ? iban
-        : null;
+    public static string? Parse(string reader)
+        => MachineReadable(reader)
+        ?? Normalize(reader);
 
-    /// <summary>No spaces and uppercased.</summary>
+    /// <summary>Validates an IBAN assuming its normalized, and the BBAN is already resolved.</summary>
     [Pure]
-    private static string? MachineReadable(ReadOnlySpan<char> reader)
+
+    private static string? MachineReadable(string iban)
     {
-        var (i, length) = (2, 2);
-        Span<char> buffer = stackalloc char[InternationalBankAccountNumber.MaxLength];
+        if (iban.Length is < MinLength or > InternationalBankAccountNumber.MaxLength) return null;
 
-        var (f, s) = (reader[0], reader[1]);
+        var (f, s) = (iban[0], iban[1]);
 
-        if (!IsLetter(f) || !IsLetter(s)) return null;
-        buffer[0] = f;
-        buffer[1] = s;
-        var id = Id(f, s);
-
-        // Not a known country.
-        if (Bban.All[id] is not { Pattern: not null } bban) return null;
+        // No valide country code.
+        if (!Is.Letter(f) || !Is.Letter(s)
+            || Bban.All[((f - 'A') * 26) + (s - 'A')] is not { Pattern: not null } bban) return null;
 
         var pattern = bban.Pattern;
 
-        while (i < reader.Length && length < pattern.Length)
-        {
-            var (ch, type) = (reader[i++], pattern[length]);
+        // Invalid length.
+        if (!bban.IsGeneric && iban.Length != pattern.Length) return null;
 
-            if (IsMatch(ch, type)) buffer[length++] = ch;
-            else return null;
+        // The first to characters are already checked by selecting the BBAN.
+        for (var i = 2; i < iban.Length; i++)
+        {
+            // Non-ASCII chars will be invalidated by the cast to byte.
+            var c = (byte)iban[i];
+
+            // If there is a catagory missmatch, stop.
+            if ((Catagory[c] & pattern[i]) is 0) return null;
         }
 
-        // Not everything consumed, or wrong length.
-        if (reader.Length != i
-            || !(bban.IsGeneric ? length >= 12 : length == pattern.Length)) return null;
+        // Currency mismatch.
+        if (bban.Currency && Currency.TryParse(iban[^3..]) is not { IsKnown: true })
+            return null;
 
-        var iban = buffer[..length].ToString();
+        ulong mod = 0;
 
-        return !bban.Currency || Currency.TryParse(iban[^3..]) is { IsKnown: true }
-            ? iban
-            : null;
+        // First check the BBAN part.
+        for (var i = 4; i < iban.Length; i++)
+        {
+            var ch = iban[i];
+            mod = ch > '9'
+                ? (mod * 100) + ch - 'A' + 10
+                : (mod * 010) + ch - '0';
+
+            // If we wait longer, we could overflow.
+            if (mod >> 57 is not 0) mod %= 97;
+        }
+
+        // If we wait longer, we could overflow.
+        if (mod >> 44 is not 0) mod %= 97;
+
+        // Pre-calculated Country code.
+        mod = (mod * 10000) + bban.Mod;
+
+        // Checksum.
+        mod = (mod * 10) + iban[2] - '0';
+        mod = (mod * 10) + iban[3] - '0';
+
+        return mod % 97 is 1 ? iban : null;
     }
 
-    /// <summary>Supports markup, lowercase and prefixes.</summary>
+    /// <summary>Strips markup and uppercases letters.</summary>
     [Pure]
-    private static string? HumanReadable(ReadOnlySpan<char> reader, bool prefixed = false)
+    private static string? Normalize(ReadOnlySpan<char> reader)
     {
         reader = reader.Trim();
+
+        // Starts with "(IBAN)".
+        if (reader.StartsWith("(IBAN)", StringComparison.OrdinalIgnoreCase))
+            reader = reader[6..].TrimStart();
+
+        // Starts with "IBAN " or "IBAN:".
+        else if (reader.StartsWith("IBAN", StringComparison.OrdinalIgnoreCase)
+            && (Is.Markup(reader[4]) || reader[4] == ':'))
+            reader = reader[5..].TrimStart();
 
         // The minimum length of an IBAN.
         if (reader.Length < 12) return null;
 
-        var (i, length) = (2, 2);
-        Span<char> buffer = stackalloc char[InternationalBankAccountNumber.MaxLength];
+        Span<char> writer = stackalloc char[InternationalBankAccountNumber.MaxLength];
 
-        var f = Id(reader[0]);
-
-        if (IsLetter(f)) buffer[0] = f;
-        else return !prefixed && Has_IBAN_Prefix(reader)
-            ? HumanReadable(reader[6..], true)
-            : null;
-
-        var s = Id(reader[1]);
-
-        if (IsLetter(s)) buffer[1] = s;
-        else return null;
-
-        var id = Id(f, s);
-
-        if (id == IB) return prefixed || !HasIBANPrefix(reader)
-            ? null
-            : HumanReadable(reader[5..], true);
-
-        // Not a known country.
-        if (Bban.All[id] is not { Pattern: not null } bban) return null;
-
-        var pattern = bban.Pattern;
-
-        while (i < reader.Length && length < pattern.Length)
+        var (r, w) = (0, 0);
+        while (w < writer.Length && r < reader.Length)
         {
-            var (ch, type) = (reader[i++], pattern[length]);
-            var up = char.ToUpperInvariant(ch);
-
-            if (IsMatch(up, type)) buffer[length++] = up;
-
-            // Markup within the ckecksum is not allowed.
-            else if (length is 3 || !IsMarkup(ch)) return null;
+            var ch = reader[r++];
+            if (Is.DigitOrLetter(ch)) writer[w++] = ch;
+            else if (Is.Lower(ch)) writer[w++] = (char)(ch & 0x5F);
+            else if (Is.Markup(ch) && w is not 1 and not 3) { /* Markup is allowed except for within the country or the checksum */ }
+            else return null;
         }
 
-        // Not everything consumed, or wrong length.
-        if (reader.Length != i
-            || !(bban.IsGeneric ? length >= 12 : length == pattern.Length)) return null;
-
-        var iban = buffer[..length].ToString();
-
-        return !bban.Currency || Currency.TryParse(iban[^3..]) is { IsKnown: true }
-            ? iban
+        return r == reader.Length && r >= MinLength
+            ? MachineReadable(writer[..w].ToString())
             : null;
+    }
 
+    private static class Is
+    {
+        [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool IsMarkup(char ch)
-            => ASCII.IsAscii(ch)
+        public static bool Letter(char ch) => (Catagory[(byte)ch] & (1 << 10)) is not 0;
+
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DigitOrLetter(char ch) => (Catagory[(byte)ch] & (3 << 10)) is not 0;
+
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Lower(char ch) => (Catagory[(byte)ch] & (1 << 12)) is not 0;
+
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Markup(char ch) => ASCII.IsAscii(ch)
             ? ASCII.IsMarkup(ch)
             : char.IsWhiteSpace(ch);
-
-        // Starts with "(IBAN)".
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool Has_IBAN_Prefix(ReadOnlySpan<char> reader)
-            => reader.StartsWith("(IBAN)", StringComparison.OrdinalIgnoreCase);
-
-        // Starts with "IBAN " or "IBAN:".
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool HasIBANPrefix(ReadOnlySpan<char> reader)
-            => reader.StartsWith("IBAN", StringComparison.OrdinalIgnoreCase)
-            && (IsMarkup(reader[4]) || reader[4] == ':');
     }
 
-    /// <summary>Checks the Mod97 constraint.</summary>
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool Mod97(string iban)
-    {
-        ulong num = 0;
+    /// <summary>Catagories for different ASCII chars.</summary>
+    private static readonly ushort[] Catagory =
+    [
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x0801, 0x0802, 0x0804, 0x0808, 0x0810, 0x0820, 0x0840, 0x0880, 0x0900, 0x0a00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400,
+        0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000,
+        0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x00, 0x00, 0x00, 0x00, 0x00,
 
-        // Calculate the first 4 characters (country and checksum) last
-        for (var i = 4; i < iban.Length; i++)
-        {
-            num = Next(num, iban[i]);
-
-            // If we wait longer, we could overflow.
-            if (num >> 57 is not 0) num %= 97;
-        }
-
-        // If we wait longer, we could overflow.
-        if (num >> 44 is not 0) num %= 97;
-
-        for (var i = 0; i < 4; i++)
-        {
-            num = Next(num, iban[i]);
-        }
-
-        return num % 97 is 1;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static ulong Next(ulong num, char ch)
-            => ch <= '9'
-            ? (num * 10) + ch - '0'
-            : (num * 100) + ch - 'A' + 10;
-    }
-
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int Id(char f, char s) => ((f - 'A') * 26) + (s - 'A');
-
-    /// <summary>Uppercases the char assuming it an ASCII character.</summary>
-    /// <remarks>
-    /// If an character is non-ASCII it stays non-ASCII but will be corrupted, which is fine.
-    /// </remarks>
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static char Id(char c) => (char)(c & 0b_1111_1111_1101_1111);
-
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsMatch(char c, char type) => type switch
-    {
-        'n' => IsDigit(c),
-        'a' => IsLetter(c),
-        'c' => IsDigit(c) || IsLetter(c),
-        _ => type == c,
-    };
-
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsDigit(char c) => IsBetween(c, '0', '9' - '0');
-
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsLetter(char c) => IsBetween(c, 'A', 'Z' - 'A');
-
-    /// <summary>Indicates whether a character is within the specified inclusive range.</summary>
-    /// <remarks>
-    /// This is a tweaked copy of .NET's char.IsBetween(). Is is not avialable for .NET standard 2.0.
-    /// </remarks>
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool IsBetween(char c, char min, uint delta) =>
-        (uint)(c - min) <= delta;
+        // Non-ASCII
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    ];
 }

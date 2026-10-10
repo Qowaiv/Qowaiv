@@ -94,19 +94,40 @@ internal ref struct DecCalc
     /// <summary>Removes its trailing zero's.</summary>
     public void RemoveTrailingZeros()
     {
-        var modulo = 10U;
-        var factor = 1U;
+        // 2^32 is even, so an odd low part means the value is odd.
+        if ((lo & 1) is not 0) return;
 
-        while (lo % modulo == 0 && factor < DecimalMath.Powers10[DecimalMath.MaxInt32Scale])
+        // Never trim beyond a scale of zero: that would only have to be undone.
+        var max = scale < DecimalMath.MaxInt32Scale ? scale : DecimalMath.MaxInt32Scale;
+        var removed = 0;
+
+        // Fast path: fits in 32 bits.
+        if ((hi | mi) is 0)
         {
-            factor = modulo;
-            modulo *= 10;
-            scale--;
+            while (removed < max && Math.DivRem(lo, 10U) is { Remainder: 0, Quotient: var quotient })
+            {
+                lo = quotient;
+                removed++;
+            }
+            scale -= removed;
+            return;
         }
-        if (factor != 1)
+
+        // Binary decomposition of the number of zeros (max 9): 8, 4, 2, 1.
+        for (var step = 8; step > 0; step >>= 1)
         {
-            Divide(factor);
+            if (removed + step <= max)
+            {
+                // Divide a copy, so a non-zero remainder does not alter this instance.
+                var copy = this;
+                if (copy.Divide(DecimalMath.Powers10[step]) is 0)
+                {
+                    this = copy;
+                    removed += step;
+                }
+            }
         }
+        scale -= removed;
     }
 
     [Pure]

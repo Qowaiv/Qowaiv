@@ -51,14 +51,21 @@ The specialized parser (not using any `Regex`) guarantees fast parsing.
 
 ## Percentage
 Apply a divide by 100, the default operation to convert a decimal to a
-percentage. Note that `DecimalMath` and the division trim, but the multiplication
-does not.
+percentage. Note that `DecimalMath` and the division trim (the latter only
+when the result allows it), but the multiplication does not.
 
-| Method            | 3.14     | 23.4326  | 100      |
-|------------------ |---------:|---------:|---------:|
-| DecimalMath.Scale | 11.10 ns | 13.96 ns | 16.05 ns |
-| value / 100m      | 27.63 ns | 31.83 ns | 14.22 ns |
-| value * 0.01m     | 10.31 ns | 12.26 ns | 13.87 ns |
+The benchmark converts 1,000 random (rounded) decimals per invocation.
+
+| Method  | Categories |  Per op.  | Ratio |
+|-------- |----------- |----------:|------:|
+| Trim    | 32 bit     | 13.379 ms |  2.40 |
+| No trim | 32 bit     |  5.579 us |  1.00 |
+|         |            |           |       |
+| Trim    | 96 bit     | 19.855 ms |  2.57 |
+| No trim | 96 bit     |  7.735 ms |  1.00 |
+
+`DecimalMath.Scale` is the fastest way to divide by 100 *and* remove trailing
+zeros. The plain multiplication is faster, but it does not normalize the scale.
 
 ### System.Text.Json Serialization
 | Method     | Categories           | Mean     | Ratio |

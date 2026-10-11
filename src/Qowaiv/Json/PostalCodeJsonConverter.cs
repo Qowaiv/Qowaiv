@@ -10,16 +10,7 @@ public class PostalCodeJsonConverter : SvoJsonConverter<PostalCode>
 {
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, PostalCode value, JsonSerializerOptions options)
-    {
-        if (value.ToJson() is { } json)
-        {
-            writer.WriteAsciiString(json);
-        }
-        else
-        {
-            writer.WriteNullValue();
-        }
-    }
+        => writer.WriteAsciiString(value.ToJson());
 
     /// <inheritdoc />
     [Pure]

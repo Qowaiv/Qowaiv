@@ -11,16 +11,7 @@ public class BusinessIdentifierCodeJsonConverter : SvoJsonConverter<BusinessIden
 {
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, BusinessIdentifierCode value, JsonSerializerOptions options)
-    {
-        if (value.ToJson() is { } json)
-        {
-            writer.WriteAsciiString(json);
-        }
-        else
-        {
-            writer.WriteNullValue();
-        }
-    }
+        => writer.WriteAsciiString(value.ToJson());
 
     /// <inheritdoc />
     [Pure]

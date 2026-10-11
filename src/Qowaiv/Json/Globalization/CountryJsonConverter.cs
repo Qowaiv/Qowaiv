@@ -12,16 +12,7 @@ public class CountryJsonConverter : SvoJsonConverter<Country>
 {
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, Country value, JsonSerializerOptions options)
-    {
-        if (value.ToJson() is { } json)
-        {
-            writer.WriteAsciiString(json);
-        }
-        else
-        {
-            writer.WriteNullValue();
-        }
-    }
+        => writer.WriteAsciiString(value.ToJson());
 
     /// <inheritdoc />
     [Pure]

@@ -8,18 +8,17 @@ namespace Bench;
 [MinColumn]
 public class JsonWriterBenchmark : IDisposable
 {
+    public JsonWriterBenchmark()
+    {
+        Stream = new MemoryStream(4096);
+        Writer = new(Stream);
+    }
+
     [IterationSetup]
     public void Setup()
     {
-        Stream = new(4096);
-        Writer = new Utf8JsonWriter(Stream);
-    }
-
-    [IterationCleanup]
-    public void Cleanup()
-    {
-        Writer.Dispose();
-        Stream.Dispose();
+        Stream.Position = 0;
+        Writer.Reset();
     }
 
     protected static JsonSerializerOptions Options(JsonConverter converter)
@@ -37,8 +36,8 @@ public class JsonWriterBenchmark : IDisposable
         WriteIndented = false,
     };
 
-    protected MemoryStream Stream = null!;
-    protected Utf8JsonWriter Writer = null!;
+    protected readonly MemoryStream Stream;
+    protected readonly Utf8JsonWriter Writer;
 
     protected virtual void Dispose(bool disposing)
     {
@@ -46,8 +45,8 @@ public class JsonWriterBenchmark : IDisposable
         {
             if (disposing)
             {
-                Stream?.Dispose();
-                Writer?.Dispose();
+                Stream.Dispose();
+                Writer.Dispose();
             }
             disposed = true;
         }

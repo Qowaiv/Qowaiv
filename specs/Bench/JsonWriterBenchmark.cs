@@ -6,7 +6,7 @@ namespace Bench;
 
 [MemoryDiagnoser(true)]
 [MinColumn]
-public class JsonWriterBenchmark
+public class JsonWriterBenchmark : IDisposable
 {
     [IterationSetup]
     public void Setup()
@@ -39,4 +39,26 @@ public class JsonWriterBenchmark
 
     protected MemoryStream Stream = null!;
     protected Utf8JsonWriter Writer = null!;
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposed)
+        {
+            if (disposing)
+            {
+                Stream?.Dispose();
+                Writer?.Dispose();
+            }
+            disposed = true;
+        }
+    }
+
+    private bool disposed;
+
+    public void Dispose()
+    {
+        // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
+    }
 }

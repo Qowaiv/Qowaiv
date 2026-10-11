@@ -101,3 +101,13 @@ The Base64 (default) implementation of a UUID is comparable with GUID.
 | UUID.Base32   | ToString() | 51.867 ns |  6.53 |
 | GUID based ID | ToString() |  3.420 ns |  0.43 |
 | UUID based ID | ToString() |  3.306 ns |  0.42 |
+
+## Yes-No
+
+Writting an array of 1000 items. The baseline is `YesNo`s as strings.
+
+| JSON write | Mean      |  Ratio | Allocated | Alloc Ratio |
+|----------- |----------:|-------:|----------:|------------:|
+| String     | 115.56 ns |   1.00 |      32 B |        1.00 |
+| Boolean?   |  89.04 ns |   0.77 |      32 B |        1.00 |
+| YesNo      |  87.00 ns |   0.75 |      32 B |        1.00 |

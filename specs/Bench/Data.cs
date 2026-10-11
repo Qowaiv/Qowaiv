@@ -1020,6 +1020,21 @@ internal static class Data
         public static readonly ImmutableArray<InternationalBankAccountNumber> Typed = [.. Raw.Select(InternationalBankAccountNumber.Parse)];
     }
 
+    public static class YN
+    {
+        public static readonly ImmutableArray<YesNo> Typed =
+        [
+            .. Enumerable.Repeat(YesNo.Yes, 450)
+            .Concat(Enumerable.Repeat(YesNo.No, 450))
+            .Concat(Enumerable.Repeat(YesNo.Unknown, 50))
+            .Concat(Enumerable.Repeat(YesNo.Empty, 50))
+            .OrderBy(_ => Rnd.Next())
+        ];
+
+        public static readonly ImmutableArray<bool?> Bools = [.. Typed.Select(t => (bool?)t)];
+
+        public static readonly ImmutableArray<string?> Raw = [.. Typed.Select(t => t.ToJson())];
+    }
 
     internal static readonly MersenneTwister Rnd = new(42);
 }

@@ -406,6 +406,8 @@ public class Supports_JSON_serialization
 
     [TestCase(null, null)]
     [TestCase("yes", "yes")]
+    [TestCase("no", "no")]
+    [TestCase("?", "?")]
     public void System_Text_JSON_serialization(YesNo svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif

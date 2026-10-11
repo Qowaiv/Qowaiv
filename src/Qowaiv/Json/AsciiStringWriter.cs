@@ -28,7 +28,7 @@ internal static class AsciiStringWriter
             }
             else
             {
-                writer.WriteNullValue();
+                writer!.WriteNullValue();
             }
         }
     }

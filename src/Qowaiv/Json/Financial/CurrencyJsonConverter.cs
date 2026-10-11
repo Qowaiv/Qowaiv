@@ -1,6 +1,7 @@
 #if NET8_0_OR_GREATER
 
 using Qowaiv.Financial;
+using System.Text.Json;
 
 namespace Qowaiv.Json.Financial;
 
@@ -8,6 +9,19 @@ namespace Qowaiv.Json.Financial;
 [Inheritable]
 public class CurrencyJsonConverter : SvoJsonConverter<Currency>
 {
+    /// <inheritdoc />
+    public override void Write(Utf8JsonWriter writer, Currency value, JsonSerializerOptions options)
+    {
+        if (value.ToJson() is { } json)
+        {
+            writer.WriteAsciiString(json);
+        }
+        else
+        {
+            writer.WriteNullValue();
+        }
+    }
+
     /// <inheritdoc />
     [Pure]
     protected override Currency FromJson(string? json) => Currency.FromJson(json);

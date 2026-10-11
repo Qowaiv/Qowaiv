@@ -14,7 +14,7 @@ public class InternationalBankAccountNumberJsonConverter : SvoJsonConverter<Inte
     {
         if (value.ToJson() is { } json)
         {
-            writer.WriteStringValue(json.AsSpan());
+            writer.WriteAsciiString(json);
         }
         else
         {

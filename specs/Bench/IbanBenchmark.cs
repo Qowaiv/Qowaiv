@@ -14,96 +14,49 @@ using IbanObject = IbanNet.Iban;
 
 namespace Bench;
 
-[GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
-[CategoriesColumn]
-[MemoryDiagnoser(true)]
-[MinColumn]
 public partial class IbanBenchmark
 {
-    [MemoryDiagnoser(true)]
-    [MinColumn]
-    public class JSON : IbanBenchmark
+    public class IBAN_JSON : JsonWriterBenchmark
     {
-        private static JsonSerializerOptions Options(JsonConverter converter)
-        {
-            var options = new JsonSerializerOptions(JsonSerializerDefaults.Strict)
-            {
-                WriteIndented = false,
-            };
-            options.Converters.Add(converter);
-            return options;
-                    }
-
-        private MemoryStream Stream = null!;
-        private Utf8JsonWriter Writer = null!;
-
-        private static readonly JsonSerializerOptions current = Options(new IbanJsonConverter());
-        private static readonly JsonSerializerOptions next = Options(new InternationalBankAccountNumberJsonConverter());
-
-        [IterationSetup]
-        public void Setup()
-        {
-            Stream = new(4096);
-            Writer = new Utf8JsonWriter(Stream);
-        }
-
-        [IterationCleanup]
-        public void Cleanup()
-        {
-            Writer.Dispose();
-            Stream.Dispose();
-        }
-
+        private static readonly JsonSerializerOptions qowaiv = Options(new InternationalBankAccountNumberJsonConverter());
 
         [Benchmark(Baseline = true)]
         public Stream Baseline()
         {
-            JsonSerializer.Serialize(Writer, Data.Iban.Raw, options: current);
-            Writer.Flush();
-            return Stream;
-        }
-
-
-        [Benchmark]
-        public Stream Current()
-        {
-            JsonSerializer.Serialize(Writer, Data.Iban.Typed, options: current);
+            JsonSerializer.Serialize(Writer, Data.Iban.Raw, options: Default);
             Writer.Flush();
             return Stream;
         }
 
         [Benchmark]
-        public Stream Next()
+        public Stream Qowaiv()
         {
-            JsonSerializer.Serialize(Writer, Data.Iban.Typed, options: next);
+            JsonSerializer.Serialize(Writer, Data.Iban.Typed, options: qowaiv);
             Writer.Flush();
             return Stream;
-        }
-
-        public class IbanJsonConverter : SvoJsonConverter<Iban>
-        {
-            protected override Iban FromJson(string? json) => Iban.FromJson(json);
-
-            protected override object? ToJson(Iban svo) => svo.ToJson();
         }
     }
 
-    public const int Iterations = 1000;
-    public readonly string?[] Outputs = new string?[Iterations];
-    public readonly Iban[] Ibans = new Iban[Iterations];
-    public readonly IbanObject?[] IbanObjects = new IbanObject?[Iterations];
-    public readonly string?[] Strings = new string?[Iterations];
-
-    private static readonly IbanParser IbanParser = new(IbanRegistry.Default);
-
-    public class Parse : IbanBenchmark
+    [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
+    [CategoriesColumn]
+    [MemoryDiagnoser(true)]
+    [MinColumn]
+    public class IBAN_Parse : IbanBenchmark
     {
+        public const int Iterations = 1000;
+        public readonly string?[] Outputs = new string?[Iterations];
+        public readonly Iban[] Ibans = new Iban[Iterations];
+        public readonly IbanObject?[] IbanObjects = new IbanObject?[Iterations];
+        public readonly string?[] Strings = new string?[Iterations];
+
+        private static readonly IbanParser IbanParser = new(IbanRegistry.Default);
+
         [Benchmark(Description = "Qowaiv", Baseline = true)]
         [BenchmarkCategory("machine readable")]
         public Iban[] Qowaiv_MachineReadable()
         {
             if (Ibans.Length < Data.Iban.Raw.Length) throw new NotSupportedException("Range check could not been removed");
-            
+
             for (var i = 0; i < Data.Iban.Raw.Length; i++)
             {
                 Iban.TryParse(Data.Iban.Raw[i], null, out var iban);

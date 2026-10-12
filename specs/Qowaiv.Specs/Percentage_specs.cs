@@ -18,6 +18,10 @@ public class Decimal_scale
     }
 
     [Test]
+    public void trims_full_range()
+        => Scale(1.234567890123456789012m.Percent()).Should().Be(23);
+
+    [Test]
     public void not_bigger_than_28()
     {
         var p = (100m / 3).Percent();

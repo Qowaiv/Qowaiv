@@ -184,7 +184,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     {
         result = default;
 
-        if (s is { } && IbanParser.Parse(s.AsSpan()) is { } iban)
+        if (s is { } && IbanParser.Parse(s) is { } iban)
         {
             result = new(iban);
             return true;

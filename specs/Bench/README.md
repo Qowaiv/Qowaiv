@@ -12,18 +12,31 @@ Amount JSON serialization is equivalent to decimal JSON serialization:
 | Amount  | JSON Serialization   | 27.49 us |  1.02 |
 
 ## IBAN
-The first IBAN parse relied on regular expressions to validate the format. With
-the v6.6.0 rewrite, regexes were removed, among other improvements which
-made the parsing 14 times faster. With v8, the number of mod97 executions has
-been drastically reduced, leading to another major improvement.
+The IBAN parser has been rewritten multiple times. Until v6.6.0 it was regex
+based. Since then, it is a specialized parser, that uses (read-only) spans,
+BBAN lookups, assumes machine readable input first, and tries to reduce the
+`mod 97` operations to the bare minimum.
 
-| Method   | Categories  | Mean      | Ratio | Gen0    | Gen1   | Allocated | Alloc Ratio |
-|--------- |------------ |----------:|------:|--------:|-------:|----------:|------------:|
-| Qowaiv   | Formatted   | 130.85 ns |  1.00 |  5.6152 | 1.2207 |   70.9 KB |        1.00 |
-| Iban.NET | Formatted   | 280.17 ns |  2.14 | 12.2070 | 3.9063 |  155.3 KB |        2.19 |
-|          |             |           |       |         |        |           |             |
-| Qowaiv   | Unformatted |  92.95 ns |  1.00 |  5.7373 | 1.3428 |   70.9 KB |        1.00 |
-| Iban.NET | Unformatted | 271.90 ns |  2.93 | 12.2070 | 3.9063 |  155.3 KB |        2.19 |
+Both the Iban.NET and the regex implementation are added for reference. Notice
+that the regex implementation is already way faster than regex based version
+that was used within Qowaiv in the past.
+
+| Parsing  | Readable | Mean      | Ratio | Gen0    | Gen1   | Allocated | Alloc Ratio |
+|----------|----------|----------:|------:|--------:|-------:|----------:|------------:|
+| Qowaiv   | machine  |  32.23 ns |  1.00 |       - |      - |    0.3 kB |        1.00 |
+| Iban.NET | machine  | 220.85 ns |  6.85 | 12.4512 | 3.9063 |  159.0 kB |      473.31 |
+| Regex    | machine  | 239.50 ns |  7.43 | 23.4375 | 4.6387 |  294.0 kB |      875.19 |
+|          |          |           |       |         |        |           |             |
+| Qowaiv   | human    |  81.42 ns |  1.00 |  5.7373 | 1.0986 |   72.6 kB |        1.00 |
+| Iban.NET | human    | 216.51 ns |  2.66 | 12.4512 | 3.9063 |  159.0 kB |        2.19 |
+| Regex    | human    | 238.68 ns |  2.94 | 24.1699 | 4.6387 |  305.1 kB |        4.20 |
+
+Writting an array of 1000 items. The baseline is IBANs as strings.
+
+| JSON write | Mean     | Ratio | Allocated |
+|----------- |---------:|------:|----------:|
+| Baseline   | 255.8 ns |  1.00 |  73.01 kB |
+| Qowaiv     | 115.5 ns |  0.45 |  73.57 kB |
 
 ## Decimal round
 Custom rounding is slower than .NET's default implementation. A big part can
@@ -45,14 +58,21 @@ The specialized parser (not using any `Regex`) guarantees fast parsing.
 
 ## Percentage
 Apply a divide by 100, the default operation to convert a decimal to a
-percentage. Note that `DecimalMath` and the division trim, but the multiplication
-does not.
+percentage. Note that `DecimalMath` and the division trim (the latter only
+when the result allows it), but the multiplication does not.
 
-| Method            | 3.14     | 23.4326  | 100      |
-|------------------ |---------:|---------:|---------:|
-| DecimalMath.Scale | 11.10 ns | 13.96 ns | 16.05 ns |
-| value / 100m      | 27.63 ns | 31.83 ns | 14.22 ns |
-| value * 0.01m     | 10.31 ns | 12.26 ns | 13.87 ns |
+The benchmark converts 1,000 random (rounded) decimals per invocation.
+
+| Method  | Categories |  Per op.  | Ratio |
+|-------- |----------- |----------:|------:|
+| Trim    | 32 bit     | 13.379 ms |  2.40 |
+| No trim | 32 bit     |  5.579 us |  1.00 |
+|         |            |           |       |
+| Trim    | 96 bit     | 19.855 ms |  2.57 |
+| No trim | 96 bit     |  7.735 ms |  1.00 |
+
+`DecimalMath.Scale` is the fastest way to divide by 100 *and* remove trailing
+zeros. The plain multiplication is faster, but it does not normalize the scale.
 
 ### System.Text.Json Serialization
 | Method     | Categories           | Mean     | Ratio |
@@ -81,3 +101,13 @@ The Base64 (default) implementation of a UUID is comparable with GUID.
 | UUID.Base32   | ToString() | 51.867 ns |  6.53 |
 | GUID based ID | ToString() |  3.420 ns |  0.43 |
 | UUID based ID | ToString() |  3.306 ns |  0.42 |
+
+## Yes-No
+
+Writting an array of 1000 items. The baseline is `YesNo`s as strings.
+
+| JSON write | Mean      |  Ratio | Allocated | Alloc Ratio |
+|----------- |----------:|-------:|----------:|------------:|
+| String     | 115.56 ns |   1.00 |      32 B |        1.00 |
+| Boolean?   |  89.04 ns |   0.77 |      32 B |        1.00 |
+| YesNo      |  87.00 ns |   0.75 |      32 B |        1.00 |

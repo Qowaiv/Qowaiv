@@ -1,6 +1,7 @@
 #if NET8_0_OR_GREATER
 
 using Qowaiv.Financial;
+using System.Text.Json;
 
 namespace Qowaiv.Json.Financial;
 
@@ -8,6 +9,10 @@ namespace Qowaiv.Json.Financial;
 [Inheritable]
 public class InternationalBankAccountNumberJsonConverter : SvoJsonConverter<InternationalBankAccountNumber>
 {
+    /// <inheritdoc />
+    public override void Write(Utf8JsonWriter writer, InternationalBankAccountNumber value, JsonSerializerOptions options)
+        => writer.WriteAsciiString(value.ToJson());
+
     /// <inheritdoc />
     [Pure]
     protected override InternationalBankAccountNumber FromJson(string? json) => InternationalBankAccountNumber.FromJson(json);

@@ -21,7 +21,7 @@ Both the Iban.NET and the regex implementation are added for reference. Notice
 that the regex implementation is already way faster than regex based version
 that was used within Qowaiv in the past.
 
-| Method   | Readable | Mean      | Ratio | Gen0    | Gen1   | Allocated | Alloc Ratio |
+| Parsing  | Readable | Mean      | Ratio | Gen0    | Gen1   | Allocated | Alloc Ratio |
 |----------|----------|----------:|------:|--------:|-------:|----------:|------------:|
 | Qowaiv   | machine  |  32.23 ns |  1.00 |       - |      - |    0.3 kB |        1.00 |
 | Iban.NET | machine  | 220.85 ns |  6.85 | 12.4512 | 3.9063 |  159.0 kB |      473.31 |
@@ -30,6 +30,13 @@ that was used within Qowaiv in the past.
 | Qowaiv   | human    |  81.42 ns |  1.00 |  5.7373 | 1.0986 |   72.6 kB |        1.00 |
 | Iban.NET | human    | 216.51 ns |  2.66 | 12.4512 | 3.9063 |  159.0 kB |        2.19 |
 | Regex    | human    | 238.68 ns |  2.94 | 24.1699 | 4.6387 |  305.1 kB |        4.20 |
+
+Writting an array of 1000 items. The baseline is IBANs as strings.
+
+| JSON write | Mean     | Ratio | Allocated |
+|----------- |---------:|------:|----------:|
+| Baseline   | 255.8 ns |  1.00 |  73.01 kB |
+| Qowaiv     | 115.5 ns |  0.45 |  73.57 kB |
 
 ## Decimal round
 Custom rounding is slower than .NET's default implementation. A big part can
@@ -94,3 +101,13 @@ The Base64 (default) implementation of a UUID is comparable with GUID.
 | UUID.Base32   | ToString() | 51.867 ns |  6.53 |
 | GUID based ID | ToString() |  3.420 ns |  0.43 |
 | UUID based ID | ToString() |  3.306 ns |  0.42 |
+
+## Yes-No
+
+Writting an array of 1000 items. The baseline is `YesNo`s as strings.
+
+| JSON write | Mean      |  Ratio | Allocated | Alloc Ratio |
+|----------- |----------:|-------:|----------:|------------:|
+| String     | 115.56 ns |   1.00 |      32 B |        1.00 |
+| Boolean?   |  89.04 ns |   0.77 |      32 B |        1.00 |
+| YesNo      |  87.00 ns |   0.75 |      32 B |        1.00 |

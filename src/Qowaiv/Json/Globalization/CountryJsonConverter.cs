@@ -1,6 +1,8 @@
 #if NET8_0_OR_GREATER
 
+using Qowaiv.Financial;
 using Qowaiv.Globalization;
+using System.Text.Json;
 
 namespace Qowaiv.Json.Globalization;
 
@@ -8,6 +10,10 @@ namespace Qowaiv.Json.Globalization;
 [Inheritable]
 public class CountryJsonConverter : SvoJsonConverter<Country>
 {
+    /// <inheritdoc />
+    public override void Write(Utf8JsonWriter writer, Country value, JsonSerializerOptions options)
+        => writer.WriteAsciiString(value.ToJson());
+
     /// <inheritdoc />
     [Pure]
     protected override Country FromJson(string? json) => Country.FromJson(json);

@@ -76,8 +76,7 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
     public static YesNo FromJson(bool json) => json ? Yes : No;
 
     [Pure]
-    private static YesNo FromJson<TFrom>(long val)
-    => val switch
+    private static YesNo FromJson<TFrom>(long val) => val switch
     {
         0 => No,
         1 => Yes,
@@ -92,8 +91,23 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
     /// <returns>
     /// The serialized JSON string.
     /// </returns>
+    /// <remarks>
+    /// Available for the convention based contract only.
+    /// </remarks>
     [Pure]
-    public string? ToJson() => SerializationValues[m_Value];
+    public string? ToJson()
+        => HasValue
+        ? Encoding.UTF8.GetString(ToUtf8Json()[1..^1].ToArray())
+        : null;
+
+    [Pure]
+    internal ReadOnlySpan<byte> ToUtf8Json() => m_Value switch
+    {
+        0 => "null"u8,
+        1 => "\"no\""u8,
+        2 => "\"yes\""u8,
+        _ => "\"?\""u8,
+    };
 
     /// <summary>Returns a <see cref="string" /> that represents the current yes-no for debug purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -199,7 +213,6 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
     /// Used for both serialization and resource lookups.
     /// </remarks>
     private static readonly string?[] LookupSuffix = [null, "No", "Yes", "Unknown"];
-    private static readonly string?[] SerializationValues = [null, "no", "yes", "?"];
 
     private sealed class YesNoValues : LocalizedValues<byte>
     {

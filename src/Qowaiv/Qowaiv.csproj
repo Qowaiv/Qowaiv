@@ -40,6 +40,7 @@ v8.*
 - IBAN parser skips allocation for normalized input.
 - Country data update (display names, start dates, end dates).
 - Percentage creation (.Percent(), Parse, Create) also remove trailing zero's for numbers with more then 8 digits. (BUG)
+- Reduce JSON serialization for ASCII only string based SVOs (BIC, Currency, IBAN, Country, PostalCode, YesNo).
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

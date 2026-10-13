@@ -8,8 +8,8 @@ namespace Qowaiv;
 /// <summary>Represents a yes-no.</summary>
 /// <remarks>
 /// A yes-no is a (bi-)polar that obviously has the values "yes" and "no". It also
-/// has an "empty"(unset) and "unknown" value.It maps easily with a <see cref="bool" />, but
-/// Supports all kind of formatting(and both empty and unknown) that can not be
+/// has an "empty" (unset) and "unknown" value. It maps easily with a <see cref="bool" />, but
+/// Supports all kind of formatting (and both empty and unknown) that can not be
 /// achieved when modeling a property as <see cref="bool" /> instead of an <see cref="YesNo" />.
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
@@ -187,20 +187,18 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
     public static bool TryParse(string? s, IFormatProvider? provider, out YesNo result)
     {
         result = Empty;
-        var str = s.Unify();
-
-        if (str.IsEmpty())
+        if (s.Unify() is not { Length: > 0 } str)
         {
-            return true;
-        }
-        else if (str.IsUnknown(provider))
-        {
-            result = Unknown;
             return true;
         }
         else if (ParseValues.TryGetValue(provider, str, out var val))
         {
             result = new YesNo(val);
+            return true;
+        }
+        else if (str.IsUnknown(provider))
+        {
+            result = Unknown;
             return true;
         }
         else return false;
@@ -216,32 +214,31 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
 
     private sealed class YesNoValues : LocalizedValues<byte>
     {
-        public YesNoValues() : base(new()
+        [Pure]
+        protected override Dictionary<string, byte> Init() => new()
         {
             [string.Empty] = 0,
-            ["0"] = 1,
-            ["N"] = 1,
-            ["NO"] = 1,
-            ["FALSE"] = 1,
-            ["1"] = 2,
-            ["Y"] = 2,
-            ["YES"] = 2,
-            ["TRUE"] = 2,
-        })
-        { }
+            ["0"] = 1, ["N"] = 1, ["NO"] = 1, ["FALSE"] = 1,
+            ["1"] = 2, ["Y"] = 2, ["YES"] = 2, ["TRUE"] = 2,
+        };
 
-        protected override void AddCulture(CultureInfo culture)
+        [Pure]
+        protected override Dictionary<string, byte> AddCulture(CultureInfo culture)
         {
+            var local = new Dictionary<string, byte>();
+
+            if (!ResourceManager.Contains(culture)) return local;
             foreach (var value in YesAndNo)
             {
                 var label = value.ToString(string.Empty, culture).Unify();
                 var @char = value.ToString("c", culture).Unify();
                 var @bool = value.ToString("b", culture).Unify();
 
-                this[culture][label] = value.m_Value;
-                this[culture][@char] = value.m_Value;
-                this[culture][@bool] = value.m_Value;
+                local[label] = value.m_Value;
+                local[@char] = value.m_Value;
+                local[@bool] = value.m_Value;
             }
+            return local;
         }
     }
 

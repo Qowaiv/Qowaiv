@@ -45,26 +45,26 @@ public readonly partial struct Currency : IXmlSerializable, IFormattable, IForma
     public string EnglishName => GetDisplayName(CultureInfo.InvariantCulture);
 
     /// <summary>Gets the code defined in ISO 4217 for the currency.</summary>
-    public string IsoCode => GetResourceString("ISO", CultureInfo.InvariantCulture);
+    public string IsoCode => GetResourceString("_ISO", CultureInfo.InvariantCulture);
 
     /// <summary>Gets the numeric code defined in ISO 4217 for the currency.</summary>
-    public int IsoNumericCode => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("Num", CultureInfo.InvariantCulture));
+    public int IsoNumericCode => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("_Num", CultureInfo.InvariantCulture));
 
     /// <summary>Gets the symbol for a currency.</summary>
-    public string Symbol => m_Value == default ? string.Empty : GetResourceString("Symbol", CultureInfo.InvariantCulture);
+    public string Symbol => m_Value == default ? string.Empty : GetResourceString("_Symbol", CultureInfo.InvariantCulture);
 
     /// <summary>Gets the number of after the decimal separator.</summary>
-    public int Digits => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("Digits", CultureInfo.InvariantCulture));
+    public int Digits => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("_Digits", CultureInfo.InvariantCulture));
 
     /// <summary>Gets the start date from witch the currency exists.</summary>
-    public Date StartDate => m_Value == default ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd");
+    public Date StartDate => m_Value == default ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("_StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd");
 
     /// <summary>If the currency does not exist anymore, the end date is given, otherwise null.</summary>
     public Date? EndDate
     {
         get
         {
-            var val = GetResourceString("EndDate", CultureInfo.InvariantCulture);
+            var val = GetResourceString("_EndDate", CultureInfo.InvariantCulture);
             return string.IsNullOrEmpty(val) ? null : (Date?)XmlConvert.ToDateTime(val, "yyyy-MM-dd");
         }
     }
@@ -74,7 +74,7 @@ public readonly partial struct Currency : IXmlSerializable, IFormattable, IForma
     /// The culture of the display name.
     /// </param>
     [Pure]
-    public string GetDisplayName(CultureInfo culture) => GetResourceString("DisplayName", culture);
+    public string GetDisplayName(CultureInfo culture) => GetResourceString("_DisplayName", culture);
 
     /// <summary>Returns true if the currency exists at the given date, otherwise false.</summary>
     /// <param name="measurement">
@@ -144,7 +144,7 @@ public readonly partial struct Currency : IXmlSerializable, IFormattable, IForma
     private static readonly Dictionary<char, Func<Currency, IFormatProvider, string>> FormatTokens = new()
     {
         { '0', (svo, provider) => svo.IsoNumericCode.ToString("000", provider) },
-        { 'f', (svo, provider) => svo.GetResourceString("DisplayName", provider) },
+        { 'f', (svo, provider) => svo.GetResourceString("_DisplayName", provider) },
         { 'n', (svo, _) => svo.Name },
         { 'i', (svo, _) => svo.IsoCode },
         { 's', (svo, _) => svo.Symbol },
@@ -248,34 +248,44 @@ public readonly partial struct Currency : IXmlSerializable, IFormattable, IForma
 
     private sealed class CurrencyValues : LocalizedValues<string?>
     {
-        public CurrencyValues() : base(new Dictionary<string, string?>
-            {
-                { "ZZZ", "ZZZ" },
-                { "999", "ZZZ" },
-                { "unknown", "ZZZ" },
-            })
+        [Pure]
+        protected override Dictionary<string, string?> Init()
         {
+            var invariant = new Dictionary<string, string?>
+            {
+                ["ZZZ"] = "ZZZ",
+                ["999"] = "ZZZ",
+                ["UNKNOWN"] = "ZZZ",
+            };
+
             foreach (var currency in AllCurrencies)
             {
                 var unified = currency.GetDisplayName(CultureInfo.InvariantCulture).Unify();
-                this[CultureInfo.InvariantCulture][currency.IsoCode.ToUpperInvariant()] = currency.m_Value;
-                this[CultureInfo.InvariantCulture][currency.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = currency.m_Value;
-                this[CultureInfo.InvariantCulture][unified] = currency.m_Value;
-                if (!string.IsNullOrEmpty(currency.Symbol))
+                invariant[currency.IsoCode.ToUpperInvariant()] = currency.m_Value;
+                invariant[currency.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = currency.m_Value;
+                invariant[unified] = currency.m_Value;
+
+                if (currency.Symbol is { Length: > 0 })
                 {
-                    this[CultureInfo.InvariantCulture][currency.Symbol] = currency.m_Value;
+                    invariant[currency.Symbol] = currency.m_Value;
                 }
             }
+            return invariant;
         }
 
-        protected override void AddCulture(CultureInfo culture)
+        [Pure]
+        protected override Dictionary<string, string?> AddCulture(CultureInfo culture)
         {
-            this[culture][Unknown.GetDisplayName(culture)] = Unknown.m_Value;
-            foreach (var country in AllCurrencies)
+            var local = new Dictionary<string, string?>();
+
+            if (!ResourceManager.Contains(culture)) return local;
+
+            foreach (var currency in AllCurrencies)
             {
-                var unified = country.GetDisplayName(culture).Unify();
-                this[culture][unified] = country.m_Value;
+                var unified = currency.GetDisplayName(culture).Unify();
+                local[unified] = currency.m_Value;
             }
+            return local;
         }
     }
 
@@ -293,7 +303,7 @@ public readonly partial struct Currency : IXmlSerializable, IFormattable, IForma
     /// </param>
     [Pure]
     private string GetResourceString(string postfix, IFormatProvider? formatProvider)
-        => ResourceManager.Localized(formatProvider, $"{m_Value}_{postfix}");
+        => ResourceManager.Localized(formatProvider, m_Value + postfix);
 
     /// <summary>Creates money based on the amount and the currency.</summary>
     public static Money operator +(Amount val, Currency currency) => Money.Create((decimal)val, currency);

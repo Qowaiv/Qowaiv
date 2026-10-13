@@ -44,25 +44,25 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     /// <returns>
     /// The two-letter code defined in ISO 3166-1 for the country.
     /// </returns>
-    public string IsoAlpha2Code => GetResourceString("ISO2", CultureInfo.InvariantCulture);
+    public string IsoAlpha2Code => GetResourceString("_ISO2", CultureInfo.InvariantCulture);
 
     /// <summary>Gets the three-letter code defined in ISO 3166-1 for the country.</summary>
     /// <returns>
     /// The three-letter code defined in ISO 3166-1 for the country.
     /// </returns>
-    public string IsoAlpha3Code => GetResourceString("ISO3", CultureInfo.InvariantCulture);
+    public string IsoAlpha3Code => GetResourceString("_ISO3", CultureInfo.InvariantCulture);
 
     /// <summary>Gets the numeric code defined in ISO 3166-1 for the country/region.</summary>
     /// <returns>
     /// The numeric code defined in ISO 3166-1 for the country/region.
     /// </returns>
-    public int IsoNumericCode => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("ISO", CultureInfo.InvariantCulture));
+    public int IsoNumericCode => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("_ISO", CultureInfo.InvariantCulture));
 
     /// <summary>Gets the country calling code as defined by ITU-T.</summary>
     /// <remarks>
     /// Recommendations E.123 and E.164, also called IDD (International Direct Dialing) or ISD (International Subscriber Dialling) codes.
     /// </remarks>
-    public string CallingCode => GetResourceString("CallingCode", CultureInfo.InvariantCulture);
+    public string CallingCode => GetResourceString("_CallingCode", CultureInfo.InvariantCulture);
 
     /// <summary>Gets true if the RegionInfo equivalent of this country exists, otherwise false.</summary>
     public bool RegionInfoExists
@@ -81,14 +81,14 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     }
 
     /// <summary>Gets the start date from witch the country exists.</summary>
-    public Date StartDate => m_Value == default ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd");
+    public Date StartDate => m_Value == default ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("_StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd");
 
     /// <summary>If the country does not exist anymore, the end date is given, otherwise null.</summary>
     public Date? EndDate
     {
         get
         {
-            var val = GetResourceString("EndDate", CultureInfo.InvariantCulture);
+            var val = GetResourceString("_EndDate", CultureInfo.InvariantCulture);
             return string.IsNullOrEmpty(val) ? null : (Date?)XmlConvert.ToDateTime(val, "yyyy-MM-dd");
         }
     }
@@ -105,7 +105,7 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     /// Returns a localized display name.
     /// </returns>
     [Pure]
-    public string GetDisplayName(CultureInfo? culture) => GetResourceString("DisplayName", culture);
+    public string GetDisplayName(CultureInfo? culture) => GetResourceString("_DisplayName", culture);
 
     /// <summary>Returns true if the country exists at the given date, otherwise false.</summary>
     /// <param name="measurement">
@@ -204,10 +204,10 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     {
         { 'n', (svo, _) => svo.Name },
         { 'e', (svo, _) => svo.EnglishName },
-        { '2', (svo, provider) => svo.GetResourceString("ISO2", provider) },
-        { '3', (svo, provider) => svo.GetResourceString("ISO3", provider) },
-        { '0', (svo, provider) => svo.GetResourceString("ISO", provider) },
-        { 'f', (svo, provider) => svo.GetResourceString("DisplayName", provider) },
+        { '2', (svo, provider) => svo.GetResourceString("_ISO2", provider) },
+        { '3', (svo, provider) => svo.GetResourceString("_ISO3", provider) },
+        { '0', (svo, provider) => svo.GetResourceString("_ISO", provider) },
+        { 'f', (svo, provider) => svo.GetResourceString("_DisplayName", provider) },
     };
 
     /// <summary>Casts a <see cref="RegionInfo" /> to a country.</summary>
@@ -313,39 +313,50 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
 
     private sealed class CountryValues : LocalizedValues<string?>
     {
-        public CountryValues() : base(new Dictionary<string, string?>
-            {
-                { "ZZ", "ZZ" },
-                { "ZZZ", "ZZ" },
-                { "999", "ZZ" },
-                { "unknown", "ZZ" },
-            })
+        [Pure]
+        protected override Dictionary<string, string?> Init()
         {
+            var invariant = new Dictionary<string, string?>
+            {
+                ["ZZ"] = "ZZ",
+                ["ZZZ"] = "ZZ",
+                ["999"] = "ZZ",
+                ["unknown"] = "ZZ",
+            };
+
             foreach (var country in All)
             {
                 var unified = country.GetDisplayName(CultureInfo.InvariantCulture).Unify();
                 if (country.Name.Length == 2)
                 {
-                    this[CultureInfo.InvariantCulture][country.IsoAlpha2Code.ToUpperInvariant()] = country.m_Value;
-                    this[CultureInfo.InvariantCulture][country.IsoAlpha3Code.ToUpperInvariant()] = country.m_Value;
-                    this[CultureInfo.InvariantCulture][country.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = country.m_Value;
+                    invariant[country.IsoAlpha2Code.ToUpperInvariant()] = country.m_Value;
+                    invariant[country.IsoAlpha3Code.ToUpperInvariant()] = country.m_Value;
+                    invariant[country.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = country.m_Value;
                 }
                 else
                 {
-                    this[CultureInfo.InvariantCulture][country.Name] = country.m_Value;
+                    invariant[country.Name] = country.m_Value;
                 }
-                this[CultureInfo.InvariantCulture][unified] = country.m_Value;
+                invariant[unified] = country.m_Value;
             }
+            return invariant;
         }
 
-        protected override void AddCulture(CultureInfo culture)
+        [Pure]
+        protected override Dictionary<string, string?> AddCulture(CultureInfo culture)
         {
-            this[culture][Unknown.GetDisplayName(culture)] = Unknown.m_Value;
+            var local = new Dictionary<string, string?>();
+
+            if (!ResourceManager.Contains(culture)) return local;
+
+            local[Unknown.GetDisplayName(culture)] = Unknown.m_Value;
+
             foreach (var country in All)
             {
                 var unified = country.GetDisplayName(culture).Unify();
-                this[culture][unified] = country.m_Value;
+                local[unified] = country.m_Value;
             }
+            return local;
         }
     }
 
@@ -360,5 +371,5 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     /// </param>
     [Pure]
     private string GetResourceString(string postfix, IFormatProvider? formatProvider)
-        => ResourceManager.Localized(formatProvider, $"{m_Value}_{postfix}");
+        => ResourceManager.Localized(formatProvider, m_Value + postfix);
 }

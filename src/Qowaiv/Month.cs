@@ -295,33 +295,36 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
 
     private sealed class MonthValues : LocalizedValues<byte>
     {
-        public MonthValues() : base(new()
+        [Pure]
+        protected override Dictionary<string, byte> Init() => new()
         {
-            { "JAN", 01 }, { "JANUARY", 1 },
-            { "FEB", 02 }, { "FEBRUARY", 2 },
-            { "MAR", 03 }, { "MARCH", 3 },
-            { "APR", 04 }, { "APRIL", 4 },
-            { "MAY", 05 },
-            { "JUN", 06 }, { "JUNE", 6 },
-            { "JUL", 07 }, { "JULY", 7 },
-            { "AUG", 08 }, { "AUGUST", 8 },
-            { "SEP", 09 }, { "SEPTEMBER", 9 },
-            { "OCT", 10 }, { "OCTOBER", 10 },
-            { "NOV", 11 }, { "NOVEMBER", 11 },
-            { "DEC", 12 }, { "DECEMBER", 12 },
-        })
-        { }
+            ["JAN"] = 01, ["JANUARY"] = 1,
+            ["FEB"] = 02, ["FEBRUARY"] = 2,
+            ["MAR"] = 03, ["MARCH"] = 3,
+            ["APR"] = 04, ["APRIL"] = 4,
+            ["MAY"] = 05,
+            ["JUN"] = 06, ["JUNE"] = 6,
+            ["JUL"] = 07, ["JULY"] = 7,
+            ["AUG"] = 08, ["AUGUST"] = 8,
+            ["SEP"] = 09, ["SEPTEMBER"] = 9,
+            ["OCT"] = 10, ["OCTOBER"] = 10,
+            ["NOV"] = 11, ["NOVEMBER"] = 11,
+            ["DEC"] = 12, ["DECEMBER"] = 12,
+        };
 
-        protected override void AddCulture(CultureInfo culture)
+        [Pure]
+        protected override Dictionary<string, byte> AddCulture(CultureInfo culture)
         {
+            var local = new Dictionary<string, byte>();
             foreach (var month in All)
             {
                 var m = (byte)(int)month;
                 var full = culture.DateTimeFormat.GetAbbreviatedMonthName(m).Unify();
                 var shrt = culture.DateTimeFormat.GetMonthName(m).Unify();
-                this[culture][full] = m;
-                this[culture][shrt] = m;
+                local[full] = m;
+                local[shrt] = m;
             }
+            return local;
         }
     }
 }

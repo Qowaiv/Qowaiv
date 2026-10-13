@@ -8,6 +8,7 @@ on:
   pull_request:
     branches:
       - master
+      - v11 # While working on the new version
   workflow_dispatch:
 env:
   NUGET_FEED: https://api.nuget.org/v3/index.json

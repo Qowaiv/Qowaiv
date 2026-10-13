@@ -6,6 +6,5 @@ internal sealed class FrozenDictionary<TKey, TValue>(IDictionary<TKey, TValue> d
 {
     /// <summary>Gets an empty <see cref="FrozenDictionary{TKey, TValue}"/>.</summary>
     public static FrozenDictionary<TKey, TValue> Empty => new(new Dictionary<TKey, TValue>());
-
 }
 #endif

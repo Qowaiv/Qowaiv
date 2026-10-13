@@ -58,6 +58,9 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     /// </returns>
     public int IsoNumericCode => Data.Iso;
 
+    /// <summary>True if the country is a sovereign state, otherwise false.</summary>
+    public bool IsIndependent => Data.Independent;
+
     /// <summary>Gets the country calling code as defined by ITU-T.</summary>
     /// <remarks>
     /// Recommendations E.123 and E.164, also called IDD (International Direct Dialing) or ISD (International Subscriber Dialling) codes.

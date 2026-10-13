@@ -248,34 +248,44 @@ public readonly partial struct Currency : IXmlSerializable, IFormattable, IForma
 
     private sealed class CurrencyValues : LocalizedValues<string?>
     {
-        public CurrencyValues() : base(new Dictionary<string, string?>
-            {
-                { "ZZZ", "ZZZ" },
-                { "999", "ZZZ" },
-                { "unknown", "ZZZ" },
-            })
+        [Pure]
+        protected override Dictionary<string, string?> Init()
         {
+            var invariant = new Dictionary<string, string?>
+            {
+                ["ZZZ"] = "ZZZ",
+                ["999"] = "ZZZ",
+                ["UNKNOWN"] = "ZZZ",
+            };
+
             foreach (var currency in AllCurrencies)
             {
                 var unified = currency.GetDisplayName(CultureInfo.InvariantCulture).Unify();
-                this[CultureInfo.InvariantCulture][currency.IsoCode.ToUpperInvariant()] = currency.m_Value;
-                this[CultureInfo.InvariantCulture][currency.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = currency.m_Value;
-                this[CultureInfo.InvariantCulture][unified] = currency.m_Value;
-                if (!string.IsNullOrEmpty(currency.Symbol))
+                invariant[currency.IsoCode.ToUpperInvariant()] = currency.m_Value;
+                invariant[currency.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = currency.m_Value;
+                invariant[unified] = currency.m_Value;
+
+                if (currency.Symbol is { Length: > 0 })
                 {
-                    this[CultureInfo.InvariantCulture][currency.Symbol] = currency.m_Value;
+                    invariant[currency.Symbol] = currency.m_Value;
                 }
             }
+            return invariant;
         }
 
-        protected override void AddCulture(CultureInfo culture)
+        [Pure]
+        protected override Dictionary<string, string?> AddCulture(CultureInfo culture)
         {
-            this[culture][Unknown.GetDisplayName(culture)] = Unknown.m_Value;
-            foreach (var country in AllCurrencies)
+            var local = new Dictionary<string, string?>();
+
+            if (!ResourceManager.Contains(culture)) return local;
+
+            foreach (var currency in AllCurrencies)
             {
-                var unified = country.GetDisplayName(culture).Unify();
-                this[culture][unified] = country.m_Value;
+                var unified = currency.GetDisplayName(culture).Unify();
+                local[unified] = currency.m_Value;
             }
+            return local;
         }
     }
 

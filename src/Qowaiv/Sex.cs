@@ -281,26 +281,31 @@ public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<
 
     private sealed class SexValues : LocalizedValues<byte>
     {
-        public SexValues()
-            : base(new()
-            {
-                { string.Empty, 0 },
-                { "0", 1 },  { "?", 1 },  { "NOTKNOWN", 1 }, { "UNKNOWN", 1 },
-                { "1", 2 },  { "M", 2 },  { "♂", 2 }, { "MALE", 2 },
-                { "2", 4 },  { "F", 4 },  { "♀", 4 }, { "FEMALE", 4 },
-                { "9", 18 }, { "X", 18 }, { "NOTAPPLICABLE", 18 },
-            })
-        { }
-
-        protected override void AddCulture(CultureInfo culture)
+        [Pure]
+        protected override Dictionary<string, byte> Init() => new()
         {
+            [string.Empty] = 0,
+            ["0"] = 01, ["?"] = 01, ["NOTKNOWN"] = 1, ["UNKNOWN"] = 1,
+            ["1"] = 02, ["M"] = 02, ["♂"] = 2, ["MALE"] = 2,
+            ["2"] = 04, ["F"] = 04, ["♀"] = 4, ["FEMALE"] = 4,
+            ["9"] = 18, ["X"] = 18, ["NOTAPPLICABLE"] = 18,
+        };
+
+        [Pure]
+        protected override Dictionary<string, byte> AddCulture(CultureInfo culture)
+        {
+            var local = new Dictionary<string, byte>();
+
+            if (!ResourceManager.Contains(culture)) return local;
+
             foreach (var sex in All)
             {
                 var full = sex.ToString(string.Empty, culture).Unify();
                 var shrt = sex.ToString("c", culture).Unify();
-                this[culture][full] = sex.m_Value;
-                this[culture][shrt] = sex.m_Value;
+                local[full] = sex.m_Value;
+                local[shrt] = sex.m_Value;
             }
+            return local;
         }
     }
 }

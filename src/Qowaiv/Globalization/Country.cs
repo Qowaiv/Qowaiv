@@ -313,39 +313,50 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
 
     private sealed class CountryValues : LocalizedValues<string?>
     {
-        public CountryValues() : base(new Dictionary<string, string?>
-            {
-                { "ZZ", "ZZ" },
-                { "ZZZ", "ZZ" },
-                { "999", "ZZ" },
-                { "unknown", "ZZ" },
-            })
+        [Pure]
+        protected override Dictionary<string, string?> Init()
         {
+            var invariant = new Dictionary<string, string?>
+            {
+                ["ZZ"] = "ZZ",
+                ["ZZZ"] = "ZZ",
+                ["999"] = "ZZ",
+                ["unknown"] = "ZZ",
+            };
+
             foreach (var country in All)
             {
                 var unified = country.GetDisplayName(CultureInfo.InvariantCulture).Unify();
                 if (country.Name.Length == 2)
                 {
-                    this[CultureInfo.InvariantCulture][country.IsoAlpha2Code.ToUpperInvariant()] = country.m_Value;
-                    this[CultureInfo.InvariantCulture][country.IsoAlpha3Code.ToUpperInvariant()] = country.m_Value;
-                    this[CultureInfo.InvariantCulture][country.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = country.m_Value;
+                    invariant[country.IsoAlpha2Code.ToUpperInvariant()] = country.m_Value;
+                    invariant[country.IsoAlpha3Code.ToUpperInvariant()] = country.m_Value;
+                    invariant[country.IsoNumericCode.ToString("000", CultureInfo.InvariantCulture)] = country.m_Value;
                 }
                 else
                 {
-                    this[CultureInfo.InvariantCulture][country.Name] = country.m_Value;
+                    invariant[country.Name] = country.m_Value;
                 }
-                this[CultureInfo.InvariantCulture][unified] = country.m_Value;
+                invariant[unified] = country.m_Value;
             }
+            return invariant;
         }
 
-        protected override void AddCulture(CultureInfo culture)
+        [Pure]
+        protected override Dictionary<string, string?> AddCulture(CultureInfo culture)
         {
-            this[culture][Unknown.GetDisplayName(culture)] = Unknown.m_Value;
+            var local = new Dictionary<string, string?>();
+
+            if (!ResourceManager.Contains(culture)) return local;
+
+            local[Unknown.GetDisplayName(culture)] = Unknown.m_Value;
+
             foreach (var country in All)
             {
                 var unified = country.GetDisplayName(culture).Unify();
-                this[culture][unified] = country.m_Value;
+                local[unified] = country.m_Value;
             }
+            return local;
         }
     }
 

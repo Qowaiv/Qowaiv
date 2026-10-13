@@ -26,10 +26,9 @@ internal static class IbanParser
 
     private static string? MachineReadable(string iban)
     {
-        if (iban.Length is < MinLength or > InternationalBankAccountNumber.MaxLength) return null;
-
         // No valide country code.
-        if (CountryId.TryIso(iban[0], iban[1]) is not { } id
+        if (iban.Length is < MinLength or > InternationalBankAccountNumber.MaxLength
+            || CountryId.TryIso(iban[0], iban[1]) is not { } id
             || Bban.All[id] is not { Pattern: not null } bban) return null;
 
         var pattern = bban.Pattern;

@@ -128,7 +128,8 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
             return Currency.Empty;
         }
         var country = this;
-        return CountryToCurrency.All.Where(map => map.Country == country && map.StartDate <= measurement)
+        return CountryToCurrency.All
+            .Where(map => map.Country == country && map.StartDate <= measurement)
             .Select(map => map.Currency)
             .LastOrDefault();
     }

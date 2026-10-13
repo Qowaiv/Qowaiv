@@ -8,6 +8,27 @@ internal readonly struct CountryLookup<T>(params T[] lookup) : IEnumerable<T>
 
     public T this[CountryId id] => Lookup[(int)id];
 
+    /// <inheritdoc cref="IDictionary{TKey, TValue}" />
+    [Pure]
+    public bool TryGetValue(Country country, out T instance)
+        => TryGetValue(CountryId.New(country), out instance);
+
+    /// <inheritdoc cref="IDictionary{TKey, TValue}" />
+    [Pure]
+    public bool TryGetValue(CountryId id, out T instance)
+    {
+        if ((int)id < Lookup.Length && this[id] is T found)
+        {
+            instance = found;
+            return true;
+        }
+        else
+        {
+            instance = default;
+            return false;
+        }
+    }
+
     [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
     private KeyValuePair<CountryId, T>[] DebuggerDisplay =>
     [

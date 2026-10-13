@@ -155,4 +155,15 @@ public sealed partial class PostalCodeCountryInfo
             formattingSearchPattern: string.IsNullOrEmpty(search) ? null : new(search, RegOptions.Default, RegOptions.Replacement),
             formattingReplacePattern: replace,
             isSingleValue: isSingle);
+
+    [Pure]
+    private static CountryLookup<PostalCodeCountryInfo> Init(params IEnumerable<PostalCodeCountryInfo> infos)
+    {
+        var lookup = new PostalCodeCountryInfo[CountryId.MaxSize];
+
+        foreach (var info in infos)
+            lookup[(int)CountryId.New(info.Country)] = info;
+
+        return new(lookup);
+    }
 }

@@ -44,7 +44,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     {
         null => Country.Empty,
         "ZZ" => Country.Unknown,
-        _ => Country.Parse(m_Value[..2], CultureInfo.InvariantCulture),
+        _ => CountryData.All[CountryId.Iso(m_Value)].Country,
     };
 
     /// <summary>Serializes the IBAN to a JSON node.</summary>
@@ -212,7 +212,7 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     public static readonly IReadOnlyCollection<Country> Supported = new ReadOnlyCollection<Country>(
     [
         .. Bban.All
-            .Where(d => d.Country.IsKnown && !d.IsGeneric)
-            .Select(p => p.Country)
+        .Where(d => d is { IsGeneric: false, Pattern: not null })
+        .Select(d => CountryData.All[d.Country].Country)
     ]);
 }

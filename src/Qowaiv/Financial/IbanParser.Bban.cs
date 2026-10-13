@@ -5,10 +5,10 @@ namespace Qowaiv.Financial;
 
 [StructLayout(LayoutKind.Auto)]
 [DebuggerDisplay("{ToString(),nq}")]
-internal readonly record struct Bban(Country Country, ushort Mod, ushort[] Pattern, bool Currency = false, bool IsGeneric = false)
+internal readonly record struct Bban(CountryId Country, ushort Mod, ushort[] Pattern, bool Currency = false, bool IsGeneric = false)
 {
     public Bban(string country, ushort[] pattern, bool currency = false, bool isGeneric = false) : this(
-        Country.Parse(country),
+        CountryId.Iso(country),
         Calc(country),
         pattern,
         currency,
@@ -23,7 +23,7 @@ internal readonly record struct Bban(Country Country, ushort Mod, ushort[] Patte
     [Pure]
     public override string ToString()
     {
-        var sb = new StringBuilder(Country.Name);
+        var sb = new StringBuilder(CountryData.All[Country].Country.Name);
 
         foreach (var m in Pattern.Skip(2))
         {
@@ -62,7 +62,7 @@ internal readonly record struct Bban(Country Country, ushort Mod, ushort[] Patte
     private const ushort n = 1 << 11;
     private const ushort c = a | n;
 
-    private static Bban gen(string country) => new(Country.Parse(country), Calc(country), [0, 0, n, n, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c], IsGeneric: true);
+    private static Bban gen(string country) => new(CountryId.Iso(country), Calc(country), [0, 0, n, n, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c], IsGeneric: true);
 
     public static readonly CountryLookup<Bban> All = new(
         default,

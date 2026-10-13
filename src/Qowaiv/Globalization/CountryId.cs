@@ -8,6 +8,7 @@ namespace Qowaiv.Globalization;
 internal readonly struct CountryId(int index) : IEquatable<CountryId>
 {
     public const int Regular = 26 * 26;
+    private const int Unknown = Regular - 1;
     private const int Empty = Regular + 1;
     private const int ANHH = Empty + 1;
     private const int CSXX = ANHH + 1;
@@ -40,8 +41,7 @@ internal readonly struct CountryId(int index) : IEquatable<CountryId>
     private const int VDVN = AIDJ + 1;
     private const int DYBJ = VDVN + 1;
     private const int SKIN = DYBJ + 1;
-    private const int Unknown = SKIN + 1;
-    public const int MaxSize = Unknown + 1;
+    public const int MaxSize = SKIN + 1;
     private readonly int Index = index;
 
     /// <inheritdoc />
@@ -73,7 +73,7 @@ internal readonly struct CountryId(int index) : IEquatable<CountryId>
     internal static CountryId New(Country c) => c switch
     {
         { HasValue: false } => new(Empty),
-        _ when c.Name is { Length: 2 } name => Iso(name[0], name[1]),
+        _ when c.Name is { Length: 2 } name => Iso(name),
         _ when c == Country.ANHH => new(ANHH),
         _ when c == Country.CSXX => new(CSXX),
         _ when c == Country.YUCS => new(YUCS),
@@ -112,6 +112,10 @@ internal readonly struct CountryId(int index) : IEquatable<CountryId>
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static CountryId Iso(char f, char s) => new(((f - 'A') * 26) + (s - 'A'));
+
+    [Pure]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static CountryId Iso(ReadOnlySpan<char> iso2) => Iso(iso2[0], iso2[1]);
 
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

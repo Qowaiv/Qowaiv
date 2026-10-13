@@ -8,6 +8,8 @@ internal readonly struct CountryLookup<T>(params T[] lookup) : IEnumerable<T>
 
     public T this[CountryId id] => Lookup[(int)id];
 
+    public T this[Country country] => Lookup[(int)CountryId.New(country)];
+
     /// <inheritdoc cref="IDictionary{TKey, TValue}" />
     [Pure]
     public bool TryGetValue(Country country, out T instance)

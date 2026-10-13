@@ -1,4 +1,5 @@
 using Qowaiv;
+using System.Buffers;
 
 namespace System;
 
@@ -75,15 +76,29 @@ public static class QowaivSystemExtensions
         if (str is { Length: > 0 })
         {
             ReadOnlySpan<char> span = str;
-            Span<char> buffer = stackalloc char[span.BufferSize()];
-            var length = span.Unify(buffer);
-            return buffer[..length].ToString();
+            var size = span.BufferSize();
+
+            if (size <= 256)
+            {
+                Span<char> buffer = stackalloc char[span.BufferSize()];
+                var length = span.Unify(buffer);
+                return buffer[..length].ToString();
+            }
+            else
+            {
+                char[] buffer = ArrayPool<char>.Shared.Rent(size);
+                var length = span.Unify(buffer);
+                var unified = buffer.AsSpan()[..length].ToString();
+                ArrayPool<char>.Shared.Return(buffer);
+                return unified;
+            }
         }
-        else { return str ?? string.Empty; }
+        else return str ?? string.Empty;
     }
 
     [Pure]
-    internal static bool IsEmpty(this string? str) => string.IsNullOrEmpty(str);
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal static bool IsEmpty(this string? str) => str is not { Length: > 0 };
 
     [Pure]
     internal static bool IsUnknown(this string? str, IFormatProvider? formatProvider)

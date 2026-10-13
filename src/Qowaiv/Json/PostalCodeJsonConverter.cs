@@ -9,10 +9,6 @@ namespace Qowaiv.Json;
 public class PostalCodeJsonConverter : SvoJsonConverter<PostalCode>
 {
     /// <inheritdoc />
-    public override void Write(Utf8JsonWriter writer, PostalCode value, JsonSerializerOptions options)
-        => writer.WriteAsciiString(value.ToJson());
-
-    /// <inheritdoc />
     [Pure]
     protected override PostalCode FromJson(string? json) => PostalCode.FromJson(json);
 

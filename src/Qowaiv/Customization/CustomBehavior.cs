@@ -41,19 +41,26 @@ public abstract class CustomBehavior<TRaw> : TypeConverter, IComparer<TRaw>
 
     /// <summary>Returns a formatted <see cref="string" /> that represents the underlying value of the identifier.</summary>
     [Pure]
+    [SuppressMessage("Critical Code Smell", "S1541:Methods and properties should not be too complex", Justification = "Splitting up would be worse.")]
     public virtual string ToString(TRaw value, string? format, IFormatProvider? formatProvider) => value switch
     {
+        null /*..........................*/ => string.Empty,
+        string str /*....................*/ => str,
+        Guid raw /*......................*/ => raw == Guid.Empty ? string.Empty : raw.ToString(format, formatProvider),
+        Uuid raw /*......................*/ => raw == Uuid.Empty ? string.Empty : raw.ToString(format, formatProvider),
+        long raw /*......................*/ => raw is 0 ? string.Empty : raw.ToString(format, formatProvider),
+        int raw /*.......................*/ => raw is 0 ? string.Empty : raw.ToString(format, formatProvider),
         _ when Equals(value, default(TRaw)) => string.Empty,
-        IFormattable formattable /*........*/ => formattable.ToString(format, formatProvider),
-        _ /*...............................*/ => value.ToString() ?? string.Empty,
+        IFormattable formattable /*......*/ => formattable.ToString(format, formatProvider),
+        _ /*.............................*/ => value.ToString() ?? string.Empty,
     };
 
     /// <summary>Serializes the underlying value to a JSON node.</summary>
     [Pure]
     public virtual object? ToJson(TRaw value)
-        => Equals(value, default(TRaw))
-        ? null
-        : ToString(value, null, CultureInfo.InvariantCulture);
+        => ToString(value, null, CultureInfo.InvariantCulture) is { Length: > 0 } json
+        ? json
+        : null;
 
     /// <summary>Serializes the identifier to an XML string.</summary>
     /// <param name="value">
@@ -61,9 +68,9 @@ public abstract class CustomBehavior<TRaw> : TypeConverter, IComparer<TRaw>
     /// </param>
     [Pure]
     public virtual string? ToXml(TRaw value)
-        => Equals(value, default(TRaw))
-        ? null
-        : ToString(value, null, CultureInfo.InvariantCulture);
+         => ToString(value, null, CultureInfo.InvariantCulture) is { Length: > 0 } json
+        ? json
+        : null;
 
     /// <summary>Creates a <see cref="FormatException" /> using the <see cref="InvalidFormatMessage(string?, IFormatProvider?)" />.</summary>
     [Pure]

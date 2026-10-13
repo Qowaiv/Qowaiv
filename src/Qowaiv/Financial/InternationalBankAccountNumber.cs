@@ -211,8 +211,8 @@ public readonly partial struct InternationalBankAccountNumber : IXmlSerializable
     /// <summary>A list with countries supporting IBAN.</summary>
     public static readonly IReadOnlyCollection<Country> Supported = new ReadOnlyCollection<Country>(
     [
-        .. Bban.All
+        .. Bbans.All
         .Where(d => d is { IsGeneric: false, Pattern: not null })
-        .Select(d => CountryData.All[d.Country].Country)
+        .Select(d => CountryData.All[d.Id].Country)
     ]);
 }

@@ -1,37 +1,38 @@
 using Qowaiv.Globalization;
 using System.Runtime.InteropServices;
-
 namespace Qowaiv.Financial;
 
 [StructLayout(LayoutKind.Auto)]
 [DebuggerDisplay("{ToString(),nq}")]
-internal readonly record struct Bban(CountryId Country, ushort Mod, ushort[] Pattern, bool Currency = false, bool IsGeneric = false)
+internal readonly record struct Bban(string Iso, ushort Mod, ushort[] Pattern, bool Currency = false, bool IsGeneric = false)
 {
-    public Bban(string country, ushort[] pattern, bool currency = false, bool isGeneric = false) : this(
-        CountryId.Iso(country),
-        Calc(country),
+    public Bban(string iso, ushort[] pattern, bool currency = false, bool isGeneric = false) : this(
+        iso,
+        Calc(iso),
         pattern,
         currency,
         isGeneric) { }
 
     [Pure]
-    private static ushort Calc(string country) => (ushort)(0
+    internal static ushort Calc(string country) => (ushort)(0
         + (country[0] - 'A' + 10) * 100
         + (country[1] - 'A' + 10));
+
+    public CountryId Id => CountryId.Iso(Iso);
 
     /// <remarks>Reverse engineers the pattern to something humans can easily read.</remarks>
     [Pure]
     public override string ToString()
     {
-        var sb = new StringBuilder(CountryData.All[Country].Country.Name);
+        var sb = new StringBuilder(Iso);
 
         foreach (var m in Pattern.Skip(2))
         {
             sb.Append(m switch
             {
-                a => 'a',
-                c => 'c',
-                n => 'n',
+                Bbans.a => 'a',
+                Bbans.c => 'c',
+                Bbans.n => 'n',
                 _ => ((int)Math.Log(m, 2)).ToString()[0],
             });
         }
@@ -44,9 +45,12 @@ internal readonly record struct Bban(CountryId Country, ushort Mod, ushort[] Pat
         else if (IsGeneric)
             sb.Append('*');
 
-        return sb.Append($" ({Country})").ToString();
+        return sb.Append($" ({Iso})").ToString();
     }
+}
 
+internal static class Bbans
+{
 #pragma warning disable
     private const ushort _0 = 1 << 0;
     private const ushort _1 = 1 << 1;
@@ -58,11 +62,11 @@ internal readonly record struct Bban(CountryId Country, ushort Mod, ushort[] Pat
     private const ushort _7 = 1 << 7;
     private const ushort _8 = 1 << 8;
     private const ushort _9 = 1 << 9;
-    private const ushort a = 1 << 10;
-    private const ushort n = 1 << 11;
-    private const ushort c = a | n;
+    internal const ushort a = 1 << 10;
+    internal const ushort n = 1 << 11;
+    internal const ushort c = a | n;
 
-    private static Bban gen(string country) => new(CountryId.Iso(country), Calc(country), [0, 0, n, n, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c], IsGeneric: true);
+    private static Bban gen(string iso) => new(iso, Bban.Calc(iso), [0, 0, n, n, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c], IsGeneric: true);
 
     public static readonly CountryLookup<Bban> All = new(
         default,

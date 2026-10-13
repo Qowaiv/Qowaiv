@@ -29,7 +29,7 @@ internal static class IbanParser
         // No valide country code.
         if (iban.Length is < MinLength or > InternationalBankAccountNumber.MaxLength
             || CountryId.TryIso(iban[0], iban[1]) is not { } id
-            || Bban.All[id] is not { Pattern: not null } bban) return null;
+            || Bbans.All[id] is not { Pattern: not null } bban) return null;
 
         var pattern = bban.Pattern;
 

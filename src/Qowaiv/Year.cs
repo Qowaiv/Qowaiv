@@ -5,11 +5,11 @@ namespace Qowaiv;
 [SingleValueObject(SingleValueStaticOptions.All, typeof(short))]
 [OpenApiDataType(description: "Year(-only) notation.", example: 1983, type: "integer", format: "year", nullable: true)]
 [TypeConverter(typeof(YearTypeConverter))]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.YearJsonConverter))]
 #endif
 public readonly partial struct Year : IXmlSerializable, IFormattable, IEquatable<Year>, IComparable, IComparable<Year>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IMinMaxValue<Year>
 #endif
 {

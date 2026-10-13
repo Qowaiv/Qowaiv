@@ -538,7 +538,7 @@ public class Supports_type_conversion
 
     public class Supports_JSON_serialization
     {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
         [TestCase("1234.56", 1234.56)]
         [TestCase(1234.56, 1234.56)]
         [TestCase(1234L, 1234.00)]

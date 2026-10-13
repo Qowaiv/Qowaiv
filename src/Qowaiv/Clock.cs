@@ -129,7 +129,7 @@ public static class Clock
     [OverloadResolutionPriority(2)]
     public static IDisposable SetTimeForCurrentContext(Func<DateTime> time) => new TimeScope(time);
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     /// <summary>Sets the <see cref="DateTime" /> function for current (execution) context only.</summary>
     [Impure]
     [OverloadResolutionPriority(1)]
@@ -145,7 +145,7 @@ public static class Clock
     [OverloadResolutionPriority(2)]
     public static IDisposable SetTimeAndTimeZoneForCurrentContext(Func<DateTime> time, TimeZoneInfo timeZone) => new ClockScope(time, timeZone);
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     /// <summary>Sets the <see cref="DateTime" /> function and <see cref="TimeZoneInfo" /> for current (execution) context only.</summary>
     [Impure]
     [OverloadResolutionPriority(1)]
@@ -215,7 +215,7 @@ public static class Clock
         }
     }
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     /// <summary>Converts a date provider to a time provider.</summary>
     [Pure]
     private static Func<DateTime> ToDateTime(this Func<DateOnly> time) => () => time().ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc);

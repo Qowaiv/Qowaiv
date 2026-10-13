@@ -105,7 +105,7 @@ public readonly partial struct Amount
     public static Amount operator %(Amount left, Amount right) => new(left.m_Value % right.m_Value);
 }
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 public readonly partial struct Amount : INumber<Amount>
     , IAdditionOperators<Amount, Percentage, Amount>, ISubtractionOperators<Amount, Percentage, Amount>

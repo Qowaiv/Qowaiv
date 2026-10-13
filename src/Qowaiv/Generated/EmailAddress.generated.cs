@@ -46,7 +46,7 @@ public partial struct EmailAddress : IEmpty<EmailAddress>
     public bool IsEmpty() => !HasValue;
 }
 public partial struct EmailAddress : IEquatable<EmailAddress>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<EmailAddress, EmailAddress, bool>
 #endif
 {
@@ -149,7 +149,7 @@ public partial struct EmailAddress : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct EmailAddress
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<EmailAddress>
 #endif
 {

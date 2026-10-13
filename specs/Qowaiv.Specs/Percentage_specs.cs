@@ -1,6 +1,6 @@
 namespace Percentage_specs;
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 public class Decimal_scale
 {
     [Test]
@@ -1151,7 +1151,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase("17.51%", "17.51%")]
     [TestCase("17.51", "17.51%")]
     [TestCase("175.1‰", "17.51%")]

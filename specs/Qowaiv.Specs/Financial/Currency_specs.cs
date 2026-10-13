@@ -70,7 +70,7 @@ public class Exists
     public void not_for_currency_not_exiting_on_Date()
         => Currency.EUR.ExistsOnDate(new Date(1992, 12, 31)).Should().BeFalse();
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [Test]
     public void for_currency_exiting_on_DateOnly()
         => Currency.EUR.ExistsOnDate(new DateOnly(2003, 01, 01)).Should().BeTrue();
@@ -87,7 +87,7 @@ public class Get_countries
     public void on_Date()
         => Currency.EUR.GetCountries(new Date(2003, 01, 01)).Should().HaveCount(25);
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [Test]
     public void on_DateOnly()
         => Currency.EUR.GetCountries(new DateOnly(2003, 01, 01)).Should().HaveCount(25);
@@ -365,7 +365,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase(null, null)]
     [TestCase(978L, "EUR")]
     [TestCase(978d, "EUR")]

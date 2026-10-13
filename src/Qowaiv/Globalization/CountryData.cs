@@ -5,6 +5,18 @@ internal sealed partial record CountryData(Country Country, string Iso2, string 
     private const bool Y = true;
     private const bool N = false;
 
+    public RegionInfo? RegionInfo { get; } = new Lazy<RegionInfo?>(() =>
+    {
+        try
+        {
+            return new RegionInfo(Iso2);
+        }
+        catch
+        {
+            return null;
+        }
+    }).Value;
+
     [Pure]
     private static CountryLookup<CountryData> Init(params IEnumerable<CountryData> items)
     {

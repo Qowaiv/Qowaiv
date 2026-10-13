@@ -68,20 +68,7 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     public string CallingCode => GetResourceString("_CallingCode", CultureInfo.InvariantCulture);
 
     /// <summary>Gets true if the RegionInfo equivalent of this country exists, otherwise false.</summary>
-    public bool RegionInfoExists
-    {
-        get
-        {
-            try
-            {
-                return ToRegionInfo() != null;
-            }
-            catch (NotSupportedException)
-            {
-                return false;
-            }
-        }
-    }
+    public bool RegionInfoExists => Data.RegionInfo is not null;
 
     /// <summary>Gets the start date from witch the country exists.</summary>
     public Date StartDate => Data.StartDate;
@@ -135,20 +122,12 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     /// <summary>Converts the CountryInfo to a RegionInfo.</summary>
     [Pure]
     public RegionInfo ToRegionInfo()
-    {
-        try
-        {
-            return new RegionInfo(IsoAlpha2Code);
-        }
-        catch
-        {
-            throw new NotSupportedException(string.Format(
-                CultureInfo.InvariantCulture,
-                QowaivMessages.NotSupportedExceptionCountryToRegionInfo,
-                EnglishName,
-                IsoAlpha2Code));
-        }
-    }
+        => Data.RegionInfo
+        ?? throw new NotSupportedException(string.Format(
+            CultureInfo.InvariantCulture,
+            QowaivMessages.NotSupportedExceptionCountryToRegionInfo,
+            EnglishName,
+            IsoAlpha2Code));
 
     /// <summary>Deserializes the country from a JSON number.</summary>
     /// <param name="json">

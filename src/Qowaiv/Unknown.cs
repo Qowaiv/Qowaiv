@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Reflection;
 
 namespace Qowaiv;
@@ -29,31 +30,8 @@ public static class Unknown
     /// </param>
     [Pure]
     public static bool IsUnknown(string? val, CultureInfo? culture)
-    {
-        if (val is { Length: > 0 })
-        {
-            var c = culture ?? CultureInfo.CurrentCulture;
-            if (!Strings.TryGetValue(c, out var values))
-            {
-                lock (addCulture)
-                {
-                    if (!Strings.TryGetValue(c, out values))
-                    {
-                        values = [.. ResourceManager
-                            .GetString("Values", c)
-                            .Split(';')
-                            .Select(v => v.ToUpper(c))];
-                        Strings[c] = values;
-                    }
-                }
-            }
-            return values.Contains(
-                val.ToUpper(c))
-                || (!c.Equals(CultureInfo.InvariantCulture)
-                    && Strings[CultureInfo.InvariantCulture].Contains(val.ToUpperInvariant()));
-        }
-        else return false;
-    }
+        => val is { Length: > 0 }
+        && ParseValues.Contains(culture ?? CultureInfo.CurrentCulture, val);
 
     /// <summary>Gets the value that represents set but unknown.</summary>
     /// <param name="type">
@@ -90,10 +68,65 @@ public static class Unknown
     /// <summary>The resource manager managing the culture based string values.</summary>
     private static readonly ResourceManager ResourceManager = new("Qowaiv.UnknownLabels", typeof(Unknown).Assembly);
 
-    private static readonly Dictionary<CultureInfo, string[]> Strings = new()
-    {
-        { CultureInfo.InvariantCulture, new[] { "?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN" } },
-    };
+    private static readonly UnknownValues ParseValues = new();
 
-    private static readonly Lock addCulture = new();
+#pragma warning disable S1121 // improves the readabillity in this case.
+    private sealed class UnknownValues : ConcurrentDictionary<CultureInfo, FrozenSet<string>>
+    {
+        private readonly FrozenSet<string> Invariant = new HashSet<string>(["?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN"]).ToFrozenSet(StringComparer.OrdinalIgnoreCase);
+
+        /// <summary>Adds a culture to the parsings.</summary>
+        /// <param name="culture">
+        /// The culture to add.
+        /// </param>
+        [Pure]
+        private static HashSet<string> AddCulture(CultureInfo culture)
+            => ResourceManager.Contains(culture)
+            && ResourceManager.GetString("Values", culture) is { Length: > 0 } values
+            ? new HashSet<string>([.. values.Split(';').Select(v => v.ToUpper(culture))])
+            : [];
+
+        [Impure]
+        public bool Contains(IFormatProvider? formatProvider, string value)
+            => (formatProvider != CultureInfo.InvariantCulture
+            && Local(formatProvider as CultureInfo ?? CultureInfo.CurrentCulture).Contains(value))
+            || Invariant.Contains(value);
+
+        [Impure]
+        private FrozenSet<string> Local(CultureInfo culture) => true switch
+        {
+            _ when TryGetValue(culture, out var existing) => existing,
+            _ when AddCulture(culture).ToFrozenSet(StringComparer.OrdinalIgnoreCase) is { Count: > 0 } localized => this[culture] = localized,
+            _ => Ancestors(culture),
+        };
+
+        [Impure]
+        private FrozenSet<string> Ancestors(CultureInfo culture)
+        {
+            var ancestor = culture.Parent;
+
+            while (ancestor != CultureInfo.InvariantCulture)
+            {
+                if (TryGetValue(ancestor, out var existing))
+                {
+                    // Ancestor and culture have the same existing localization.
+                    this[culture] = existing;
+                    return existing;
+                }
+                else if (AddCulture(ancestor).ToFrozenSet(StringComparer.OrdinalIgnoreCase) is { Count: > 0 } localized)
+                {
+                    // Ancestor and culture have the same localization.
+                    this[ancestor] = localized;
+                    this[culture] = localized;
+                    return localized;
+                }
+                else ancestor = ancestor.Parent;
+            }
+
+            // No localization for this culture.
+            var empty = FrozenSet<string>.Empty;
+            this[culture] = empty;
+            return empty;
+        }
+    }
 }

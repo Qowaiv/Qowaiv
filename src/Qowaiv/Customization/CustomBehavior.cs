@@ -44,6 +44,7 @@ public abstract class CustomBehavior<TRaw> : TypeConverter, IComparer<TRaw>
     [SuppressMessage("Critical Code Smell", "S1541:Methods and properties should not be too complex", Justification = "Splitting up would be worse.")]
     public virtual string ToString(TRaw value, string? format, IFormatProvider? formatProvider) => value switch
     {
+        null /*..........................*/ => string.Empty,
         string str /*....................*/ => str,
         Guid raw /*......................*/ => raw == Guid.Empty ? string.Empty : raw.ToString(format, formatProvider),
         Uuid raw /*......................*/ => raw == Uuid.Empty ? string.Empty : raw.ToString(format, formatProvider),

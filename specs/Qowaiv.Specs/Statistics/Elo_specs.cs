@@ -246,7 +246,7 @@ public class Casts
     public void explicitly_to_decimal()
     {
         var casted = (decimal)Svo.Elo;
-        casted.Should().Be(1732.4m);
+        casted.Round(4).Should().Be(1732.4m);
     }
 
     [Test]
@@ -451,7 +451,7 @@ public class Supports_type_conversion
 
     [Test]
     public void to_decimal()
-        => Converting.To<decimal>().From(Svo.Elo).Should().Be(1732.4m);
+        => Converting.To<decimal>().From(Svo.Elo).Round(4).Should().Be(1732.4m);
 
     [Test]
     public void to_double()

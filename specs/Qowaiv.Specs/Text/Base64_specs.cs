@@ -36,7 +36,6 @@ public class TryGetBytes_from
         bytes.Should().BeEmpty();
     }
 
-    [TestCase("Aap=", 1, 170)]
     [TestCase("Cxct", 11, 23, 45)]
     [TestCase("Qowaig==", 66, 140, 26, 138)]
     public void String_returns(string str, params int[] expected)

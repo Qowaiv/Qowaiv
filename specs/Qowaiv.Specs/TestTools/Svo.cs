@@ -7,7 +7,7 @@ namespace Qowaiv.TestTools;
 public static class Svo
 {
     /// <summary>¤42.17</summary>
-    public static Amount Amount => 42.17.Amount();
+    public static Amount Amount => 42.17m.Amount();
 
     /// <summary>AEGONL2UXXX</summary>
     public static BusinessIdentifierCode BusinessIdentifierCode => BusinessIdentifierCode.Parse("AEGONL2UXXX");
@@ -74,14 +74,16 @@ public static class Svo
 
     /// <summary>2017-06-11 06:15:00</summary>
     public static LocalDateTime LocalDateTime => new(2017, 06, 11, 06, 15, 00);
-    public static Money Money => 42.17 + Currency.EUR;
+
+    public static Money Money => 42.17m + Currency.EUR;
+
     public static Month Month => Month.February;
 
     /// <summary>5Y+9M</summary>
     public static MonthSpan MonthSpan => 5.Years() + 9.Months();
 
     /// <summary>17.51%</summary>
-    public static Percentage Percentage => 17.51.Percent();
+    public static Percentage Percentage => 17.51m.Percent();
 
     /// <summary>H0H0H0 (Canada)</summary>
     public static PostalCode PostalCode => PostalCode.Parse("H0H0H0");

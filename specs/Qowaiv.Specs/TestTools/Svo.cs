@@ -7,104 +7,104 @@ namespace Qowaiv.TestTools;
 public static class Svo
 {
     /// <summary>¤42.17</summary>
-    public static readonly Amount Amount = 42.17.Amount();
+    public static Amount Amount => 42.17.Amount();
 
     /// <summary>AEGONL2UXXX</summary>
-    public static readonly BusinessIdentifierCode BusinessIdentifierCode = BusinessIdentifierCode.Parse("AEGONL2UXXX");
+    public static BusinessIdentifierCode BusinessIdentifierCode => BusinessIdentifierCode.Parse("AEGONL2UXXX");
 
     /// <summary>10028-14-5 (Nobelium)</summary>
-    public static readonly CasRegistryNumber CasRegistryNumber = 10028_14_5.CasNr();
+    public static CasRegistryNumber CasRegistryNumber => 10028_14_5.CasNr();
 
     /// <summary>Holy See (VA)</summary>
-    public static readonly Country Country = Country.VA;
+    public static Country Country => Country.VA;
 
     /// <summary>Qowaiv==</summary>
-    public static readonly CryptographicSeed CryptographicSeed = CryptographicSeed.Parse("Qowaiv==");
+    public static CryptographicSeed CryptographicSeed => CryptographicSeed.Parse("Qowaig==");
 
     /// <summary>EUR</summary>
-    public static readonly Currency Currency = Currency.EUR;
+    public static Currency Currency => Currency.EUR;
 
     /// <summary>2017-06-11</summary>
-    public static readonly Date Date = new(2017, 06, 11);
+    public static Date Date => new(2017, 06, 11);
 
 #if NET10_0_OR_GREATER
     /// <summary>2017-06-11</summary>
-    public static readonly DateOnly DateOnly = new(2017, 06, 11);
+    public static DateOnly DateOnly => new(2017, 06, 11);
 #endif
     /// <summary>10Y+3M-5D</summary>
-    public static readonly DateSpan DateSpan = 10.Years() + 3.Months() - 5.Days();
+    public static DateSpan DateSpan => 10.Years() + 3.Months() - 5.Days();
 
     /// <summary>2017-06-11 06:15:00U</summary>
-    public static readonly DateTime DateTime = new(2017, 06, 11, 06, 15, 00, 000, DateTimeKind.Local);
+    public static DateTime DateTime => new(2017, 06, 11, 06, 15, 00, 000, DateTimeKind.Local);
 
     /// <summary>2017-06-11 06:15:00 +0:00</summary>
-    public static readonly DateTimeOffset DateTimeOffset = new(2017, 06, 11, 06, 15, 00, TimeSpan.Zero);
+    public static DateTimeOffset DateTimeOffset => new(2017, 06, 11, 06, 15, 00, TimeSpan.Zero);
 
     /// <summary>info@qowaiv.org</summary>
-    public static readonly EmailAddress EmailAddress = EmailAddress.Parse("info@qowaiv.org");
+    public static EmailAddress EmailAddress => EmailAddress.Parse("info@qowaiv.org");
 
     /// <summary>1732.4</summary>
-    public static readonly Elo Elo = 1732.4;
+    public static Elo Elo => 1732.4;
 
     /// <summary>A++</summary>
-    public static readonly EnergyLabel EnergyLabel = EnergyLabel.A(2);
+    public static EnergyLabel EnergyLabel => EnergyLabel.A(2);
 
     /// <summary>0.000 (fr-BE)</summary>
-    public static readonly FormattingArguments FormattingArguments = new("0.000", TestCultures.fr_BE);
+    public static FormattingArguments FormattingArguments => new("0.000", TestCultures.fr_BE);
 
     /// <summary>-69/17</summary>
-    public static readonly Fraction Fraction = -69.DividedBy(17);
+    public static Fraction Fraction => -69.DividedBy(17);
 
     /// <summary>8a1a8c42-d2ff-e254-e26e-b6abcbf19420</summary>
-    public static readonly Guid Guid = Guid.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+    public static Guid Guid => Guid.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
 
-    public static readonly Hash Hash = Hash.Code("QOWAIV");
+    public static Hash Hash => Hash.Code("QOWAIV");
 
     /// <summary>123.456.789</summary>
-    public static readonly HouseNumber HouseNumber = 123_456_789L;
+    public static HouseNumber HouseNumber => 123_456_789L;
 
     /// <summary>POST.</summary>
-    public static readonly HttpMethod HttpMethod = HttpMethod.Post;
+    public static HttpMethod HttpMethod => HttpMethod.Post;
 
     /// <summary>NL20 INGB 0001 2345 67</summary>
-    public static readonly InternationalBankAccountNumber Iban = InternationalBankAccountNumber.Parse("NL20 INGB 0001 2345 67");
+    public static InternationalBankAccountNumber Iban => InternationalBankAccountNumber.Parse("NL20 INGB 0001 2345 67");
 
     /// <summary>application/x-chess-pgn</summary>
-    public static readonly InternetMediaType InternetMediaType = InternetMediaType.Parse("application/x-chess-pgn");
+    public static InternetMediaType InternetMediaType => InternetMediaType.Parse("application/x-chess-pgn");
 
     /// <summary>2017-06-11 06:15:00</summary>
-    public static readonly LocalDateTime LocalDateTime = new(2017, 06, 11, 06, 15, 00);
-    public static readonly Money Money = 42.17 + Currency.EUR;
-    public static readonly Month Month = Month.February;
+    public static LocalDateTime LocalDateTime => new(2017, 06, 11, 06, 15, 00);
+    public static Money Money => 42.17 + Currency.EUR;
+    public static Month Month => Month.February;
 
     /// <summary>5Y+9M</summary>
-    public static readonly MonthSpan MonthSpan = 5.Years() + 9.Months();
+    public static MonthSpan MonthSpan => 5.Years() + 9.Months();
 
     /// <summary>17.51%</summary>
-    public static readonly Percentage Percentage = 17.51.Percent();
+    public static Percentage Percentage => 17.51.Percent();
 
     /// <summary>H0H0H0 (Canada)</summary>
-    public static readonly PostalCode PostalCode = PostalCode.Parse("H0H0H0");
+    public static PostalCode PostalCode => PostalCode.Parse("H0H0H0");
 
-    public static readonly Secret Secret = Secret.Parse("Ken sent me!");
-    public static readonly Sex Sex = Sex.Female;
-    public static readonly StreamSize StreamSize = 123456789.Bytes();
-    public static readonly TimeZoneInfo TimeZone = TestTimeZones.EastAustraliaStandardTime;
-    public static readonly Timestamp Timestamp = 1234567890L;
-    public static readonly Uuid Uuid = Uuid.Parse("Qowaiv_SVOLibrary_GUIA");
+    public static Secret Secret => Secret.Parse("Ken sent me!");
+    public static Sex Sex => Sex.Female;
+    public static StreamSize StreamSize => 123456789.Bytes();
+    public static TimeZoneInfo TimeZone => TestTimeZones.EastAustraliaStandardTime;
+    public static Timestamp Timestamp => 1234567890L;
+    public static Uuid Uuid => Uuid.Parse("Qowaiv_SVOLibrary_GUIA");
 
     /// <summary>2017-W23-7</summary>
-    public static readonly WeekDate WeekDate = new(2017, 23, 7);
-    public static readonly Year Year = 1979.CE();
+    public static WeekDate WeekDate => new(2017, 23, 7);
+    public static Year Year => 1979.CE();
 
     /// <summary>2017-06</summary>
-    public static readonly YearMonth YearMonth = new(year: 2017, month: 06);
+    public static YearMonth YearMonth => new(year: 2017, month: 06);
 
     /// <summary>17 years</summary>
-    public static readonly YearSpan YearSpan = 17.Years();
+    public static YearSpan YearSpan => 17.Years();
 
     /// <summary>Yes</summary>
-    public static readonly YesNo YesNo = YesNo.Yes;
+    public static YesNo YesNo => YesNo.Yes;
 
     public static IEnumerable<object> All() => typeof(Svo)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
@@ -115,22 +115,22 @@ public static class Svo
     public static class Generated
     {
         /// <summary>QOWAIV</summary>
-        public static readonly Specs_Generated.CustomSvo CustomSvo = Specs_Generated.CustomSvo.Parse("QOWAIV");
+        public static Specs_Generated.CustomSvo CustomSvo => Specs_Generated.CustomSvo.Parse("QOWAIV");
 
         /// <summary>8a1a8c42-d2ff-e254-e26e-b6abcbf19420</summary>
-        public static readonly Specs_Generated.GuidBasedId CustomGuid = Specs_Generated.GuidBasedId.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
+        public static Specs_Generated.GuidBasedId CustomGuid => Specs_Generated.GuidBasedId.Parse("8a1a8c42-d2ff-e254-e26e-b6abcbf19420");
 
         /// <summary>Qowaiv_SVOLibrary_GUIA</summary>
-        public static readonly Specs_Generated.UuidBasedId CustomUuid = Specs_Generated.UuidBasedId.Parse("Qowaiv_SVOLibrary_GUIA");
+        public static Specs_Generated.UuidBasedId CustomUuid => Specs_Generated.UuidBasedId.Parse("Qowaiv_SVOLibrary_GUIA");
 
         /// <summary>PREFIX17</summary>
-        public static readonly Specs_Generated.Int32BasedId Int32Id = Specs_Generated.Int32BasedId.Create(17);
+        public static Specs_Generated.Int32BasedId Int32Id => Specs_Generated.Int32BasedId.Create(17);
 
         /// <summary>PREFIX987654321</summary>
-        public static readonly Specs_Generated.Int64BasedId Int64Id = Specs_Generated.Int64BasedId.Create(987654321L);
+        public static Specs_Generated.Int64BasedId Int64Id => Specs_Generated.Int64BasedId.Create(987654321L);
 
         /// <summary>Qowaiv-ID</summary>
-        public static readonly Specs_Generated.StringBasedId StringId = Specs_Generated.StringBasedId.Parse("Qowaiv-ID");
+        public static Specs_Generated.StringBasedId StringId => Specs_Generated.StringBasedId.Parse("Qowaiv-ID");
     }
 #pragma warning restore S3218 // Inner class members should not shadow outer class "static" or type members
 }

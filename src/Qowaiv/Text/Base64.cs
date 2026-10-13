@@ -29,6 +29,7 @@ public static class Base64
     /// </remarks>
     public static bool TryGetBytes(string? s, out byte[] bytes)
     {
+#if NETSTANDARD2_0
         if (string.IsNullOrEmpty(s))
         {
             bytes = [];
@@ -44,7 +45,29 @@ public static class Base64
             bytes = [];
             return false;
         }
+#else
+        if (s is not {Length: > 0 })
+        {
+            bytes = [];
+            return true;
+        }
+        else
+        {
+            bytes = new byte[(s.Length / 4) * 3];
+            if (Convert.TryFromBase64Chars(s, bytes, out var length))
+            {
+                bytes = bytes[..length];
+                return true;
+            }
+            else
+            {
+                bytes = [];
+                return false;
+            }
+        }
+#endif
     }
+
 
     [Pure]
     internal static string ToString(Guid guid)

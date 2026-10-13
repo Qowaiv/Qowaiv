@@ -24,12 +24,12 @@ public class Not_computed
 
 public class With_domain_logic
 {
-    [TestCase(true, "Qowaiv==")]
+    [TestCase(true, "Qowaig==")]
     [TestCase(false, "")]
     public void HasValue_is(bool result, CryptographicSeed svo)
       => svo.HasValue.Should().Be(result);
 
-    [TestCase(false, "Qowaiv==")]
+    [TestCase(false, "Qowaig==")]
     [TestCase(true, "")]
     public void IsEmpty_returns(bool result, CryptographicSeed svo)
         => svo.IsEmpty().Should().Be(result);
@@ -67,7 +67,7 @@ public class equality_is_limited_to_empty
 
     [Test]
     public void not_equal_to_same_value()
-        => Svo.CryptographicSeed.Equals(CryptographicSeed.Parse("Qowaiv==")).Should().BeFalse();
+        => Svo.CryptographicSeed.Equals(CryptographicSeed.Parse("Qowaig==")).Should().BeFalse();
 
     [Test]
     public void equal_to_for_two_empties()
@@ -112,7 +112,7 @@ public class Can_be_parsed
     [Test]
     public void with_TryParse()
     {
-        CryptographicSeed.TryParse("Qowaiv==", out var seed).Should().BeTrue();
+        CryptographicSeed.TryParse("Qowaig==", out var seed).Should().BeTrue();
         seed.Value().Should().Be("Qowaig==");
     }
 }
@@ -142,7 +142,7 @@ public class Supports_type_conversion_from
 
     [Test]
     public void @string()
-        => Converting.From("Qowaiv==").To<CryptographicSeed>().Value()
+        => Converting.From("Qowaig==").To<CryptographicSeed>().Value()
         .Should().Be("Qowaig==");
 
     [Test]
@@ -168,11 +168,11 @@ public class Supports_JSON_deserialization
 #if NET10_0_OR_GREATER
     [Test]
     public void System_Text_JSON_deserialization()
-        => JsonTester.Read_System_Text_JSON<CryptographicSeed>("Qowaiv==").Value().Should().Be(Svo.CryptographicSeed.Value());
+        => JsonTester.Read_System_Text_JSON<CryptographicSeed>("Qowaig==").Value().Should().Be(Svo.CryptographicSeed.Value());
 #endif
     [Test]
     public void convention_based_deserialization()
-        => JsonTester.Read<CryptographicSeed>("Qowaiv==").Value().Should().Be(Svo.CryptographicSeed.Value());
+        => JsonTester.Read<CryptographicSeed>("Qowaig==").Value().Should().Be(Svo.CryptographicSeed.Value());
 }
 
 public class Does_not_supports_JSON_serialization
@@ -201,6 +201,6 @@ public class ToString
 public class Debugger
 {
     [TestCase("{empty}", "")]
-    [TestCase("Qowaig==", "Qowaiv==")]
+    [TestCase("Qowaig==", "Qowaig==")]
     public void has_custom_display(object display, CryptographicSeed svo) => svo.Should().HaveDebuggerDisplay(display);
 }

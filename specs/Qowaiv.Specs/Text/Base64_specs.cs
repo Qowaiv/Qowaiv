@@ -38,7 +38,7 @@ public class TryGetBytes_from
 
     [TestCase("Aap=", 1, 170)]
     [TestCase("Cxct", 11, 23, 45)]
-    [TestCase("Qowaiv==", 66, 140, 26, 138)]
+    [TestCase("Qowaig==", 66, 140, 26, 138)]
     public void String_returns(string str, params int[] expected)
     {
         var bytes = expected.Select(v => (byte)v).ToArray();

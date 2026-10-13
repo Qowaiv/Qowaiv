@@ -244,7 +244,7 @@ public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<
     /// </param>
     [Pure]
     private string GetResourceString(string prefix, IFormatProvider? formatProvider)
-        => ResourceManager.Localized(formatProvider, prefix, SexLabels[m_Value]);
+        => ResourceManager.Localized(formatProvider, prefix + SexLabels[m_Value]);
 
     /// <summary>Gets the valid values.</summary>
     private static readonly Dictionary<int, byte> FromInt32s = new()

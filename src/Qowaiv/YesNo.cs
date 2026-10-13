@@ -253,5 +253,5 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
     /// </param>
     [Pure]
     private string GetResourceString(string prefix, IFormatProvider formatProvider)
-        => ResourceManager.Localized(formatProvider, prefix, LookupSuffix[m_Value]);
+        => ResourceManager.Localized(formatProvider, prefix + LookupSuffix[m_Value]);
 }

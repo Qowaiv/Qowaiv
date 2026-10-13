@@ -9,8 +9,8 @@ internal static class QowaivResourceManagerExtensions
         /// <see cref="CultureInfo.CurrentCulture" /> if not a culture.
         /// </summary>
         [Pure]
-        public string Localized(IFormatProvider? provider, params string?[] keys)
-            => manager.GetString(string.Concat(keys), provider as CultureInfo ?? CultureInfo.CurrentCulture)
+        public string Localized(IFormatProvider? provider, string key)
+            => manager.GetString(key, provider as CultureInfo ?? CultureInfo.CurrentCulture)
             ?? string.Empty;
 
         /// <summary>Check if the managers contains resources for the specified culture.</summary>

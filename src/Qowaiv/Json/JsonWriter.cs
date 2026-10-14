@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace Qowaiv.Json;
 
-internal static class AsciiStringWriter
+internal static class JsonWriter
 {
     private const byte Quote = (byte)'"';
 

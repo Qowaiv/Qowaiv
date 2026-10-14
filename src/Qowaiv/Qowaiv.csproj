@@ -3,7 +3,7 @@
   <Import Project="../../props/package.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net8.0;net9.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DevelopmentDependency>false</DevelopmentDependency>
     <PackageId>Qowaiv</PackageId>
@@ -35,6 +35,9 @@
     <PackageValidationBaselineVersion>8.1.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
+v11.*
+- Add support for .NET 11.0.
+- Drop support for .NET 9.0 and 8.0. (BREAKING)
 v8.*
 - IBAN supports Mongolia and Falkland Islands.
 - IBAN parser skips allocation for normalized input.

@@ -1,7 +1,7 @@
 {
   "version": 2,
   "dependencies": {
-    "net10.0": {
+    "net11.0": {
       "AsyncFixer": {
         "type": "Direct",
         "requested": "[2.1.0, )",
@@ -169,11 +169,6 @@
         "resolved": "2.1.0",
         "contentHash": "YWX9tsoLOqRX+dg3XwcSkgUUA/PxPADgbkbLFEv1gr03bI7hNMbyYrl21gu3gYodmNdB90+a/MAm0S9oDlqkEQ=="
       },
-      "System.ComponentModel.Annotations": {
-        "type": "Transitive",
-        "resolved": "5.0.0",
-        "contentHash": "dMkqfy2el8A8/I76n2Hi1oBFEbG1SfxD2l5nhwXV3XjlnOmwxJlQbYpJH4W51odnU9sARCSAgv7S3CyAFMkpYg=="
-      },
       "qowaiv": {
         "type": "Project"
       },
@@ -198,8 +193,7 @@
         "contentHash": "QaHlcfZBdrktzyfBBbJwhN0AO/WwOWw0a0Cv6l+0BnuAe/kO3+fg370A4fNByBJhu+CSEGppxeY1mnd3U+XEeg==",
         "dependencies": {
           "Qowaiv": "8.2.0",
-          "Qowaiv.Validation.Abstractions": "2.1.0",
-          "System.ComponentModel.Annotations": "5.0.0"
+          "Qowaiv.Validation.Abstractions": "2.1.0"
         }
       }
     }

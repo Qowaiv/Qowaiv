@@ -1,4 +1,4 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 #pragma warning disable SA1403 // File may only contain a single namespace
 #pragma warning disable S1210 // "Equals" and the comparison operators should be overridden when implementing "IComparable"

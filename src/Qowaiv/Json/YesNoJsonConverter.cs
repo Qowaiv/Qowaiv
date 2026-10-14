@@ -5,8 +5,7 @@ using System.Text.Json;
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a yes-no.</summary>
-[Inheritable]
-public class YesNoJsonConverter : SvoJsonConverter<YesNo>
+internal sealed class YesNoJsonConverter : SvoJsonConverter<YesNo>
 {
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, YesNo value, JsonSerializerOptions options)

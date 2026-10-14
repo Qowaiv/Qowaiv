@@ -5,7 +5,7 @@ using Qowaiv.Sustainability;
 namespace Qowaiv.Json.Sustainability;
 
 /// <summary>Provides a JSON conversion for a EU energy label.</summary>
-public sealed class EnergyLabelJsonConverter : SvoJsonConverter<EnergyLabel>
+internal sealed class EnergyLabelJsonConverter : SvoJsonConverter<EnergyLabel>
 {
     /// <inheritdoc />
     [Pure]

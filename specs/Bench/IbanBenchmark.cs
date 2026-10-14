@@ -18,8 +18,6 @@ public partial class IbanBenchmark
 {
     public class IBAN_JSON : JsonWriterBenchmark
     {
-        private static readonly JsonSerializerOptions qowaiv = Options(new InternationalBankAccountNumberJsonConverter());
-
         [Benchmark(Baseline = true)]
         public Stream Baseline()
         {
@@ -31,7 +29,7 @@ public partial class IbanBenchmark
         [Benchmark]
         public Stream Qowaiv()
         {
-            JsonSerializer.Serialize(Writer, Data.Iban.Typed, options: qowaiv);
+            JsonSerializer.Serialize(Writer, Data.Iban.Typed, options: Default);
             Writer.Flush();
             return Stream;
         }

@@ -8,8 +8,6 @@ public class YesNoBenchmark
 {
     public class YesNo_JSON : JsonWriterBenchmark
     {
-        private static readonly JsonSerializerOptions qowaiv = Options(new YesNoJsonConverter());
-
         [Benchmark(Baseline = true)]
         public Stream String()
         {
@@ -29,7 +27,7 @@ public class YesNoBenchmark
         [Benchmark]
         public Stream Qowaiv()
         {
-            JsonSerializer.Serialize(Writer, Data.YN.Typed, options: qowaiv);
+            JsonSerializer.Serialize(Writer, Data.YN.Typed, options: Default);
             Writer.Flush();
             return Stream;
         }

@@ -328,7 +328,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase("?", "?")]
     [TestCase("info@qowaiv.org", "info@qowaiv.org")]
     public void System_Text_JSON_deserialization(object json, EmailAddress svo)

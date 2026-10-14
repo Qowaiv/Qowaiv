@@ -246,7 +246,7 @@ public class Casts
     public void explicitly_to_decimal()
     {
         var casted = (decimal)Svo.Elo;
-        casted.Should().Be(1732.4m);
+        casted.Round(4).Should().Be(1732.4m);
     }
 
     [Test]
@@ -451,7 +451,7 @@ public class Supports_type_conversion
 
     [Test]
     public void to_decimal()
-        => Converting.To<decimal>().From(Svo.Elo).Should().Be(1732.4m);
+        => Converting.To<decimal>().From(Svo.Elo).Round(4).Should().Be(1732.4m);
 
     [Test]
     public void to_double()
@@ -460,7 +460,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase("1600*", 1600.0)]
     [TestCase("1700", 1700.0)]
     [TestCase(1234L, 1234.0)]

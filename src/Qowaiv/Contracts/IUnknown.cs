@@ -12,7 +12,7 @@ namespace Qowaiv;
 /// </typeparam>
 public interface IUnknown<TSelf> : IEmpty<TSelf> where TSelf : struct, IEmpty<TSelf>
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     /// <summary>Represents an unknown (but set) <typeparamref name="TSelf" />.</summary>
     static abstract TSelf Unknown { get; }
 #endif

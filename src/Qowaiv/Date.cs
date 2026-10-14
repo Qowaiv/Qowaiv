@@ -5,11 +5,11 @@ namespace Qowaiv;
 [SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(DateTime))]
 [OpenApiDataType(description: "Full-date notation as defined by RFC 3339, section 5.6.", example: "2017-06-10", type: "string", format: "date")]
 [TypeConverter(typeof(DateTypeConverter))]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.DateJsonConverter))]
 #endif
 public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable<Date>, IComparable, IComparable<Date>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IIncrementOperators<Date>, IDecrementOperators<Date>
     , IAdditionOperators<Date, TimeSpan, DateTime>, ISubtractionOperators<Date, TimeSpan, DateTime>
     , IAdditionOperators<Date, MonthSpan, Date>, ISubtractionOperators<Date, MonthSpan, Date>

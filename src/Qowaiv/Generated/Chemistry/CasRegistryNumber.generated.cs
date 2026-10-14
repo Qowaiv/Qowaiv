@@ -46,7 +46,7 @@ public partial struct CasRegistryNumber : IEmpty<CasRegistryNumber>
     public bool IsEmpty() => !HasValue;
 }
 public partial struct CasRegistryNumber : IEquatable<CasRegistryNumber>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<CasRegistryNumber, CasRegistryNumber, bool>
 #endif
 {
@@ -149,7 +149,7 @@ public partial struct CasRegistryNumber : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct CasRegistryNumber
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<CasRegistryNumber>
 #endif
 {

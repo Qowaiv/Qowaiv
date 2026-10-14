@@ -12,12 +12,12 @@ internal readonly struct CountryLookup<T>(params T[] lookup) : IEnumerable<T>
 
     /// <inheritdoc cref="IDictionary{TKey, TValue}" />
     [Pure]
-    public bool TryGetValue(Country country, out T instance)
+    public bool TryGetValue(Country country, [NotNullWhen(true)] out T? instance)
         => TryGetValue(CountryId.New(country), out instance);
 
     /// <inheritdoc cref="IDictionary{TKey, TValue}" />
     [Pure]
-    public bool TryGetValue(CountryId id, out T instance)
+    public bool TryGetValue(CountryId id, [NotNullWhen(true)] out T? instance)
     {
         if ((int)id < Lookup.Length && this[id] is T found)
         {

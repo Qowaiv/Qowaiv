@@ -59,12 +59,9 @@ internal readonly struct CountryId(int index) : IEquatable<CountryId>
     /// <inheritdoc />
     [Pure]
     public override string ToString()
-    {
-        if (Index < Regular)
-            return $"{(char)((Index / 26) + 'A')}{(char)((Index % 26) + 'A')}";
-        else
-            return Index.ToString();
-    }
+        => Index is >= 0 and < Regular
+        ? $"{(char)((Index / 26) + 'A')}{(char)((Index % 26) + 'A')}"
+        : Index.ToString();
 
     public static explicit operator int(CountryId id) => id.Index;
 

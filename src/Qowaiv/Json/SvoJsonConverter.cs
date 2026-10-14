@@ -26,10 +26,9 @@ public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : 
                 _ => throw new JsonException($"Unexpected token parsing {typeToConvert?.FullName}. {reader.TokenType} is not supported."),
             };
         }
-        catch (Exception x)
+        catch (Exception x) when (x is not JsonException)
         {
-            if (x is JsonException) throw;
-            else throw new JsonException(x.Message, x);
+            throw new JsonException(x.Message, x);
         }
     }
 

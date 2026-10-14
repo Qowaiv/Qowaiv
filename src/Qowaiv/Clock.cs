@@ -67,19 +67,6 @@ public static class Clock
         return new DateTimeOffset(now.Ticks, now - utcNow);
     }
 
-    /// <summary>Gets the yesterday for the local <see cref="DateTime" />.</summary>
-    [Pure]
-    [Obsolete("Will be dropped dropped with Qowaiv 9.")]
-    public static Date Yesterday() => Yesterday(TimeZone);
-
-    /// <summary>Gets the yesterday for the specified time zone.</summary>
-    /// <param name="timeZone">
-    /// The specified time zone.
-    /// </param>
-    [Pure]
-    [Obsolete("Will be dropped dropped with Qowaiv 9.")]
-    public static Date Yesterday(TimeZoneInfo timeZone) => Today(timeZone).AddDays(-1);
-
     /// <summary>Gets the today for the <see cref="TimeZoneInfo.Utc" /> timezone.</summary>
     [Pure]
     public static Date UtcToday() => Today(TimeZoneInfo.Utc);
@@ -98,19 +85,6 @@ public static class Clock
         Guard.NotNull(timeZone);
         return (Date)TimeZoneInfo.ConvertTimeFromUtc(UtcNow(), timeZone);
     }
-
-    /// <summary>Gets the tomorrow for the local <see cref="DateTime" />.</summary>
-    [Pure]
-    [Obsolete("Will be dropped dropped with Qowaiv 9.")]
-    public static Date Tomorrow() => Tomorrow(TimeZone);
-
-    /// <summary>Gets the tomorrow for the specified time zone.</summary>
-    /// <param name="timeZone">
-    /// The specified time zone.
-    /// </param>
-    [Pure]
-    [Obsolete("Will be dropped dropped with Qowaiv 9.")]
-    public static Date Tomorrow(TimeZoneInfo timeZone) => Today(timeZone).AddDays(+1);
 
     /// <summary>Sets the <see cref="DateTime" /> function globally (for the full Application Domain).</summary>
     /// <remarks>

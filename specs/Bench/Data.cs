@@ -5,6 +5,18 @@ namespace Bench;
 
 internal static class Data
 {
+    public static class Date
+    {
+        public static readonly ImmutableArray<Qowaiv.Date> Typed =
+        [
+            .. Enumerable.Range(0, 1000)
+            .Select(i => new Qowaiv.Date(2017, 06, 11).AddDays(i))
+            .OrderBy(_ => Rnd.Next())
+        ];
+
+        public static readonly ImmutableArray<DateOnly> DateOnly = [.. Typed.Select(t => (DateOnly)t)];
+    }
+
     public static class Iban
     {
         public static readonly ImmutableArray<string> HumanReadable =

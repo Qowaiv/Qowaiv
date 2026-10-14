@@ -21,7 +21,7 @@ public partial struct YearSpan
 }
 
 public partial struct YearSpan : IEquatable<YearSpan>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<YearSpan, YearSpan, bool>
 #endif
 {
@@ -49,7 +49,7 @@ public partial struct YearSpan : IEquatable<YearSpan>
     public static bool operator !=(YearSpan left, YearSpan right) => !(left == right);
 }
 public partial struct YearSpan : IComparable, IComparable<YearSpan>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IComparisonOperators<YearSpan, YearSpan, bool>
 #endif
 {
@@ -138,7 +138,7 @@ public partial struct YearSpan : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct YearSpan
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<YearSpan>
 #endif
 {

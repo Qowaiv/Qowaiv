@@ -159,7 +159,7 @@ public readonly partial struct Fraction
     }
 }
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 public readonly partial struct Fraction : INumber<Fraction>
     , IAdditionOperators<Fraction, long, Fraction>, ISubtractionOperators<Fraction, long, Fraction>

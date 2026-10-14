@@ -17,7 +17,7 @@ internal static class RegOptions
 
     public static readonly TimeSpan Replacement = TimeSpan.FromMilliseconds(100);
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     public const RegexOptions Default = RegexOptions.Compiled | RegexOptions.NonBacktracking;
 #else
     public const RegexOptions Default = RegexOptions.Compiled | RegexOptions.CultureInvariant;

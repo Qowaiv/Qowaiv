@@ -9,6 +9,7 @@ public static class NumberToAmountExtensions
 
     /// <summary>Converts the <see cref="double" /> to a <see cref="Financial.Amount" />.</summary>
     [Pure]
+    [Obsolete("Use decimals instead.")]
     public static Amount Amount(this double number) => Financial.Amount.Create(number);
 
     /// <summary>Converts the <see cref="double" /> to a <see cref="Financial.Amount" />.</summary>

@@ -46,7 +46,7 @@ public partial struct HouseNumber : IEmpty<HouseNumber>
     public bool IsEmpty() => !HasValue;
 }
 public partial struct HouseNumber : IEquatable<HouseNumber>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<HouseNumber, HouseNumber, bool>
 #endif
 {
@@ -75,7 +75,7 @@ public partial struct HouseNumber : IEquatable<HouseNumber>
 }
 
 public partial struct HouseNumber : IComparable, IComparable<HouseNumber>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IComparisonOperators<HouseNumber, HouseNumber, bool>
 #endif
 {
@@ -163,7 +163,7 @@ public partial struct HouseNumber : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct HouseNumber
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<HouseNumber>
 #endif
 {

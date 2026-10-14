@@ -8,7 +8,7 @@ namespace Qowaiv;
 /// </typeparam>
 public interface INext<TSelf> where TSelf : struct, INext<TSelf>
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     /// <summary>Creates the next (random) instance.</summary>
     [Pure]
     static abstract TSelf Next();

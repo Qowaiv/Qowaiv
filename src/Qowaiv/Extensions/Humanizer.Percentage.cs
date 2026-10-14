@@ -20,6 +20,7 @@ public static class NumberToPercentageExtensions
     /// </example>
     /// </summary>
     [Pure]
+    [Obsolete("Use decimals instead.")]
     public static Percentage Percent(this double number) => Cast.ToDecimal<Percentage>(number).Percent();
 
     /// <summary>Interprets the <see cref="decimal" /> as if it was written with a '%' sign.

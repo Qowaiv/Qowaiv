@@ -16,11 +16,11 @@ namespace Qowaiv.IO;
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(long))]
 [OpenApiDataType(description: "Stream size notation (in byte).", example: 1024, type: "integer", format: "stream-size")]
 [TypeConverter(typeof(StreamSizeTypeConverter))]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.IO.StreamSizeJsonConverter))]
 #endif
 public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEquatable<StreamSize>, IComparable, IComparable<StreamSize>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IIncrementOperators<StreamSize>, IDecrementOperators<StreamSize>
     , IUnaryPlusOperators<StreamSize, StreamSize>, IUnaryNegationOperators<StreamSize, StreamSize>
     , IAdditionOperators<StreamSize, StreamSize, StreamSize>, ISubtractionOperators<StreamSize, StreamSize, StreamSize>
@@ -543,7 +543,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
     private static readonly string[] FullLabels1024 = ["byte", "kibibyte", "Mebibyte", "Gibibyte", "Tebibyte", "Pebibyte", "Exbibyte"];
     private static readonly Regex FormattedPattern = GetFormattedPattern();
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [GeneratedRegex("^(?<format>.*)(?<streamSizeMarker> ?[sSfF]i?)$", RegOptions.RightToLeft, RegOptions.TimeoutMilliseconds)]
     private static partial Regex GetFormattedPattern();
 #else

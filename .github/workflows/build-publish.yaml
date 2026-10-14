@@ -8,6 +8,7 @@ on:
   pull_request:
     branches:
       - master
+      - v11 # While working on the new version
   workflow_dispatch:
 env:
   NUGET_FEED: https://api.nuget.org/v3/index.json
@@ -33,9 +34,8 @@ jobs:
         uses: actions/setup-dotnet@v6
         with:
           dotnet-version: |
-            8.x
-            9.x
             10.x
+            11.x
 
       - name: Cache SonarCloud packages
         uses: actions/cache@v6

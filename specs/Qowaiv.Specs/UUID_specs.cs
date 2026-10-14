@@ -510,7 +510,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase("", null)]
     [TestCase(null, null)]
     [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]

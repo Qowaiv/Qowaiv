@@ -46,7 +46,7 @@ public partial struct BusinessIdentifierCode : IEmpty<BusinessIdentifierCode>
     public bool IsEmpty() => !HasValue;
 }
 public partial struct BusinessIdentifierCode : IEquatable<BusinessIdentifierCode>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<BusinessIdentifierCode, BusinessIdentifierCode, bool>
 #endif
 {
@@ -149,7 +149,7 @@ public partial struct BusinessIdentifierCode : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct BusinessIdentifierCode
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<BusinessIdentifierCode>
 #endif
 {

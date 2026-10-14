@@ -46,7 +46,7 @@ public partial struct Sex : IEmpty<Sex>
     public bool IsEmpty() => !HasValue;
 }
 public partial struct Sex : IEquatable<Sex>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<Sex, Sex, bool>
 #endif
 {
@@ -149,7 +149,7 @@ public partial struct Sex : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct Sex
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<Sex>
 #endif
 {

@@ -444,7 +444,7 @@ public class Supports_type_conversion
     public void from_DateTime()
         => Converting.From(new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local)).To<Date>().Should().Be(Svo.Date);
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [Test]
     public void from_DateOnly()
         => Converting.From(Svo.DateOnly).To<Date>().Should().Be(Svo.Date);
@@ -479,7 +479,7 @@ public class Supports_type_conversion
     public void to_DateTime()
         => Converting.To<DateTime>().From(Svo.Date).Should().Be(11.June(2017));
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [Test]
     public void to_DateOnly()
         => Converting.To<DateOnly>().From(Svo.Date).Should().Be(Svo.DateOnly);
@@ -504,7 +504,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase("2012-04-23", "2012-04-23")]
     [TestCase("2012-04-23T18:25:43.511Z", "2012-04-23")]
     [TestCase("2012-04-23T10:25:43-05:00", "2012-04-23")]
@@ -588,7 +588,7 @@ public class Supports_XML_serialization
     }
 }
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 public class Casts
 {
     [Test]

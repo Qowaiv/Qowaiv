@@ -25,7 +25,7 @@ namespace Qowaiv;
 [SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Sex as specified by ISO/IEC 5218.", example: "female", type: "string", format: "sex", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
 [TypeConverter(typeof(SexTypeConverter))]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.SexJsonConverter))]
 #endif
 public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<Sex>, IComparable, IComparable<Sex>

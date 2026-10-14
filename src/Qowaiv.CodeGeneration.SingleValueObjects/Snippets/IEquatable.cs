@@ -1,5 +1,5 @@
 partial struct @Svo : global::System.IEquatable<@Svo>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , global::System.Numerics.IEqualityOperators<@Svo, @Svo, bool>
 #endif
 {

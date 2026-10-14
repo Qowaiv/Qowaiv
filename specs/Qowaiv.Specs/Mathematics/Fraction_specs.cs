@@ -843,7 +843,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase(4L, "4/1")]
     [TestCase(0.25d, "1/4")]
     [TestCase("13%", "13/100")]

@@ -1,6 +1,6 @@
 using Qowaiv.Conversion.Web;
 using System.Net.Http;
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 using Qowaiv.Json.Web;
 using System.Text.Json;
 #endif
@@ -49,7 +49,7 @@ public class Supports_type_conversion
     }
 }
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 public class Supports_System_Text_JSON_serialization
 {
     [TestCase(null)]

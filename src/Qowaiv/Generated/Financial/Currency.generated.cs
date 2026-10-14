@@ -46,7 +46,7 @@ public partial struct Currency : IEmpty<Currency>
     public bool IsEmpty() => !HasValue;
 }
 public partial struct Currency : IEquatable<Currency>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<Currency, Currency, bool>
 #endif
 {
@@ -149,7 +149,7 @@ public partial struct Currency : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct Currency
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<Currency>
 #endif
 {

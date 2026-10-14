@@ -46,7 +46,7 @@ public partial struct YesNo : IEmpty<YesNo>
     public bool IsEmpty() => !HasValue;
 }
 public partial struct YesNo : IEquatable<YesNo>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<YesNo, YesNo, bool>
 #endif
 {
@@ -149,7 +149,7 @@ public partial struct YesNo : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct YesNo
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<YesNo>
 #endif
 {

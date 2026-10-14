@@ -21,7 +21,7 @@ public partial struct Amount
 }
 
 public partial struct Amount : IEquatable<Amount>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<Amount, Amount, bool>
 #endif
 {
@@ -50,7 +50,7 @@ public partial struct Amount : IEquatable<Amount>
 }
 
 public partial struct Amount : IComparable, IComparable<Amount>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IComparisonOperators<Amount, Amount, bool>
 #endif
 {
@@ -138,7 +138,7 @@ public partial struct Amount : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct Amount
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<Amount>
 #endif
 {

@@ -51,7 +51,7 @@ public class Open_API_data_type
         .Should().HaveDebuggerDisplay("{ type: string, desc: Custom description, example: custom example, format: custom-uuid, pattern: [0-9]{4}-[0-9]{2}-[0-9]{2} }");
 }
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [Explicit]
 public class README_md
 {

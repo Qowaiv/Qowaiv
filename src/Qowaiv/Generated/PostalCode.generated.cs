@@ -46,7 +46,7 @@ public partial struct PostalCode : IEmpty<PostalCode>
     public bool IsEmpty() => !HasValue;
 }
 public partial struct PostalCode : IEquatable<PostalCode>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<PostalCode, PostalCode, bool>
 #endif
 {
@@ -149,7 +149,7 @@ public partial struct PostalCode : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct PostalCode
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<PostalCode>
 #endif
 {

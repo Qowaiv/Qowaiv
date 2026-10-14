@@ -1,6 +1,6 @@
 namespace Percentage_specs;
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 public class Decimal_scale
 {
     [Test]
@@ -110,27 +110,27 @@ public class Is_equal_by_value
 
     [Test]
     public void not_equal_to_different_value()
-        => Svo.Percentage.Equals(84.17.Percent()).Should().BeFalse();
+        => Svo.Percentage.Equals(84.17m.Percent()).Should().BeFalse();
 
     [Test]
     public void equal_to_same_value()
-        => Svo.Percentage.Equals(17.51.Percent()).Should().BeTrue();
+        => Svo.Percentage.Equals(17.51m.Percent()).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
-        => (Svo.Percentage == 17.51.Percent()).Should().BeTrue();
+        => (Svo.Percentage == 17.51m.Percent()).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
-        => (Svo.Percentage == 6.66.Percent()).Should().BeFalse();
+        => (Svo.Percentage == 6.66m.Percent()).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
-        => (Svo.Percentage != 17.51.Percent()).Should().BeFalse();
+        => (Svo.Percentage != 17.51m.Percent()).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
-        => (Svo.Percentage != 6.66.Percent()).Should().BeTrue();
+        => (Svo.Percentage != 6.66m.Percent()).Should().BeTrue();
 
     [TestCase("0%", 0)]
     [TestCase("17.51%", 665367300)]
@@ -236,7 +236,7 @@ public class Can_be_created_with_percentage_extension
     public void from_double()
     {
         var p = 3.14.Percent();
-        p.ToString(CultureInfo.InvariantCulture).Should().Be("3.14%");
+        p.Round(4).ToString(CultureInfo.InvariantCulture).Should().Be("3.14%");
     }
 
     [Test]
@@ -429,7 +429,7 @@ public class Casts
     public void explicitly_from_double()
     {
         var casted = (Percentage)0.1751;
-        casted.Should().Be(Svo.Percentage);
+        casted.Round(4).Should().Be(Svo.Percentage);
     }
 
     [Test]
@@ -446,28 +446,28 @@ public class Can_be_multiplied_by
     public void _percentage()
     {
         var multiplied = 17.Percent() * 42.Percent();
-        multiplied.Should().Be(7.14.Percent());
+        multiplied.Should().Be(7.14m.Percent());
     }
 
     [Test]
     public void _decimal()
     {
         var multiplied = 17.Percent() * 0.42m;
-        multiplied.Should().Be(7.14.Percent());
+        multiplied.Should().Be(7.14m.Percent());
     }
 
     [Test]
     public void _double()
     {
         var multiplied = 17.Percent() * 0.42;
-        multiplied.Should().Be(7.14.Percent());
+        multiplied.Round(4).Should().Be(7.14m.Percent());
     }
 
     [Test]
     public void _float()
     {
         var multiplied = 17.Percent() * 0.42F;
-        multiplied.Should().Be(7.14.Percent());
+        multiplied.Round(4).Should().Be(7.14m.Percent());
     }
 
     [Test]
@@ -598,15 +598,15 @@ public class Can_be_added_to
     [Test]
     public void _amount()
     {
-        var addition = (Amount)44 + 50.Percent();
-        addition.Should().Be((Amount)66);
+        var addition = 44.Amount() + 50.Percent();
+        addition.Should().Be(66.Amount());
     }
 
     [Test]
     public void _money()
     {
-        var addition = (44.6 + Currency.EUR) + 50.Percent();
-        addition.Should().Be(66.9 + Currency.EUR);
+        var addition = (44.6m + Currency.EUR) + 50.Percent();
+        addition.Should().Be(66.9m + Currency.EUR);
     }
 
     [Test]
@@ -685,8 +685,8 @@ public class Can_be_subtracted_from
     [Test]
     public void _amount()
     {
-        var addition = (Amount)44.6 - 50.Percent();
-        addition.Should().Be((Amount)22.3);
+        var addition = 44.60.Amount() - 50.Percent();
+        addition.Should().Be(22.30.Amount());
     }
 
     [Test]
@@ -766,21 +766,21 @@ public class Can_get_a_percentage_of
     public void _percentage()
     {
         var addition = 13.Percent() * 34.Percent();
-        addition.Should().Be(4.42.Percent());
+        addition.Should().Be(4.42m.Percent());
     }
 
     [Test]
     public void _amount()
     {
-        var addition = (Amount)44.6 * 80.Percent();
-        addition.Should().Be((Amount)35.68);
+        var addition = 44.60m.Amount() * 80.Percent();
+        addition.Should().Be(35.68m.Amount());
     }
 
     [Test]
     public void _money()
     {
-        var addition = (44.6 + Currency.EUR) * 80.Percent();
-        addition.Should().Be(35.68 + Currency.EUR);
+        var addition = (44.6m + Currency.EUR) * 80.Percent();
+        addition.Should().Be(35.68m + Currency.EUR);
     }
 
     [Test]
@@ -859,15 +859,15 @@ public class Can_get_100_percent_based_on_percentage
     [Test]
     public void _amount()
     {
-        var addition = (Amount)44.6 / 80.Percent();
-        addition.Should().Be((Amount)55.75);
+        var addition = 44.60m.Amount() / 80.Percent();
+        addition.Should().Be(55.75m.Amount());
     }
 
     [Test]
     public void _money()
     {
-        var addition = (44.6 + Currency.EUR) / 80.Percent();
-        addition.Should().Be(55.75 + Currency.EUR);
+        var addition = (44.6m + Currency.EUR) / 80.Percent();
+        addition.Should().Be(55.75m + Currency.EUR);
     }
 
     [Test]
@@ -1014,7 +1014,7 @@ public class Can_be_increased
     {
         var increased = Svo.Percentage;
         increased++;
-        increased.Should().Be(18.51.Percent());
+        increased.Should().Be(18.51m.Percent());
     }
 }
 
@@ -1025,7 +1025,7 @@ public class Can_be_decreased
     {
         var decreased = Svo.Percentage;
         decreased--;
-        decreased.Should().Be(16.51.Percent());
+        decreased.Should().Be(16.51m.Percent());
     }
 }
 
@@ -1142,7 +1142,7 @@ public class Supports_type_conversion
 
     [Test]
     public void from_double()
-        => Converting.From(0.1751).To<Percentage>().Should().Be(Svo.Percentage);
+        => Converting.From(0.1751).To<Percentage>().Round(4).Should().Be(Svo.Percentage);
 
     [Test]
     public void to_double()
@@ -1151,14 +1151,14 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase("17.51%", "17.51%")]
     [TestCase("17.51", "17.51%")]
     [TestCase("175.1‰", "17.51%")]
     [TestCase(0.1751, "17.51%")]
     [TestCase(1L, "100%")]
     public void System_Text_JSON_deserialization(object json, Percentage svo)
-        => JsonTester.Read_System_Text_JSON<Percentage>(json).Should().Be(svo);
+        => JsonTester.Read_System_Text_JSON<Percentage>(json).Round(4).Should().Be(svo);
 
     [TestCase("17.51%", "17.51%")]
     public void System_Text_JSON_serialization(Percentage svo, object json)
@@ -1182,7 +1182,7 @@ public class Supports_JSON_serialization
     [TestCase("175.1‰", "17.51%")]
     [TestCase(0.1751, "17.51%")]
     public void convention_based_deserialization(object json, Percentage svo)
-        => JsonTester.Read<Percentage>(json).Should().Be(svo);
+        => JsonTester.Read<Percentage>(json).Round(4).Should().Be(svo);
 
     [TestCase("17.51%", "17.51%")]
     public void convention_based_serialization(Percentage svo, object json)

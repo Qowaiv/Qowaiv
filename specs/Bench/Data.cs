@@ -1036,7 +1036,7 @@ internal static class Data
 
     public static class YN
     {
-        public static readonly ImmutableArray<YesNo> Typed =
+        public static readonly ImmutableArray<YesNo> Svo =
         [
             .. Enumerable.Repeat(YesNo.Yes, 450)
             .Concat(Enumerable.Repeat(YesNo.No, 450))
@@ -1045,9 +1045,9 @@ internal static class Data
             .OrderBy(_ => Rnd.Next())
         ];
 
-        public static readonly ImmutableArray<bool?> Bools = [.. Typed.Select(t => (bool?)t)];
+        public static readonly ImmutableArray<bool?> Bool = [.. Svo.Select(t => (bool?)t)];
 
-        public static readonly ImmutableArray<string?> Raw = [.. Typed.Select(t => t.ToJson())];
+        public static readonly ImmutableArray<string?> Raw = [.. Svo.Select(t => t.ToJson())];
     }
 
     internal static readonly MersenneTwister Rnd = new(42);

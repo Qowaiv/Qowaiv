@@ -16,15 +16,15 @@ public partial class IbanBenchmark
     public class IBAN_read_JSON : JsonReaderBenchmark
     {
         public IBAN_read_JSON()
-            => JsonSerializer.Serialize(Stream, Data.Iban.String, options: Default);
+            => JsonSerializer.Serialize(Stream1, Data.Iban.String, options: Default);
 
         [Benchmark(Baseline = true)]
         public string[]? String()
-            => JsonSerializer.Deserialize<string[]>(Stream, options: Default);
+            => JsonSerializer.Deserialize<string[]>(Stream1, options: Default);
 
         [Benchmark]
         public Iban[]? Iban()
-            => JsonSerializer.Deserialize<Iban[]>(Stream, options: Default);
+            => JsonSerializer.Deserialize<Iban[]>(Stream1, options: Default);
     }
 
     [SimpleJob(RuntimeMoniker.Net10_0)]

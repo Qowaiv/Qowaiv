@@ -10,7 +10,12 @@ namespace Bench;
 public class JsonReaderBenchmark : IDisposable
 {
     [IterationSetup]
-    public void Setup() => Stream.Position = 0;
+    public void Setup()
+    {
+        Stream1.Position = 0;
+        Stream2.Position = 0;
+        Stream3.Position = 0;
+    }
 
     protected static JsonSerializerOptions Options(JsonConverter converter)
     {
@@ -27,15 +32,19 @@ public class JsonReaderBenchmark : IDisposable
         WriteIndented = false,
     };
 
-    protected readonly MemoryStream Stream = new();
-    
+    protected readonly MemoryStream Stream1 = new();
+    protected readonly MemoryStream Stream2 = new();
+    protected readonly MemoryStream Stream3 = new();
+
     protected virtual void Dispose(bool disposing)
     {
         if (!disposed)
         {
             if (disposing)
             {
-                Stream.Dispose();
+                Stream1.Dispose();
+                Stream2.Dispose();
+                Stream3.Dispose();
             }
             disposed = true;
         }

@@ -75,7 +75,7 @@ The benchmark converts 1,000 random (rounded) decimals per invocation.
 zeros. The plain multiplication is faster, but it does not normalize the scale.
 
 ## System.Text.Json (De)Serialization
-Reading or writen an array of 1000 items.
+Reading or writen an array of 1000 items, mean is a single operation.
 
 ### Date
 | Read     | Runtime   | Mean      | Ratio | Allocated |
@@ -105,11 +105,32 @@ Reading or writen an array of 1000 items.
 		   
 | Method   | Runtime   | Mean      | Ratio | Allocated |
 |--------- |---------- |----------:|------:|----------:|
-| String   | .NET 10.0 |  32.60 us |  1.00 |      32 B |
-| Iban     | .NET 10.0 |  29.25 us |  0.90 |      32 B |
+| String   | .NET 10.0 |  32.60 ns |  1.00 |      32 B |
+| Iban     | .NET 10.0 |  29.25 ns |  0.90 |      32 B |
 |          |           |           |       |           |
-| String   | .NET 11.0 |  27.76 us |  1.00 |      32 B |
-| Iban     | .NET 11.0 |  26.16 us |  0.95 |      32 B |
+| String   | .NET 11.0 |  27.76 ns |  1.00 |      32 B |
+| Iban     | .NET 11.0 |  26.16 ns |  0.95 |      32 B |
+
+### Yes/No
+| Read     | Runtime   | Mean      | Ratio | Allocated |
+|--------- |---------- |----------:|------:|----------:|
+| String   | .NET 10.0 |  37.98 ns |  1.00 |  69.37 KB |
+| Bool     | .NET 10.0 |  22.87 ns |  0.61 |  22.23 KB |
+| YesNo    | .NET 10.0 |  32.90 ns |  0.88 |  19.27 KB |
+|          |           |           |       |           |
+| String   | .NET 11.0 |  34.64 ns |  1.00 |  69.37 KB |
+| Bool     | .NET 11.0 |  22.51 ns |  0.66 |  22.23 KB |
+| YesNo    | .NET 11.0 |  34.78 ns |  1.01 |  19.27 KB |
+
+| Write    | Runtime   | Mean      | Ratio | Allocated |
+|--------- |---------- |----------:|------:|----------:|
+| String   | .NET 10.0 |  26.00 ns |  1.00 |      32 B |
+| Bool     | .NET 10.0 |  15.30 ns |  0.59 |      32 B |
+| YesNo    | .NET 10.0 |  16.92 ns |  0.65 |      32 B |
+|          |           |           |       |           |
+| String   | .NET 11.0 |  20.41 ns |  1.00 |      32 B |
+| Bool     | .NET 11.0 |  13.22 ns |  0.65 |      32 B |
+| YesNo    | .NET 11.0 |  15.83 ns |  0.78 |      32 B |
 
 ## UUID
 The Base64 (default) implementation of a UUID is comparable with GUID.
@@ -130,12 +151,3 @@ The Base64 (default) implementation of a UUID is comparable with GUID.
 | GUID based ID | ToString() |  3.420 ns |  0.43 |
 | UUID based ID | ToString() |  3.306 ns |  0.42 |
 
-## Yes-No
-
-Writting an array of 1000 items. The baseline is `YesNo`s as strings.
-
-| JSON write | Mean      |  Ratio | Allocated | Alloc Ratio |
-|----------- |----------:|-------:|----------:|------------:|
-| String     | 115.56 ns |   1.00 |      32 B |        1.00 |
-| Boolean?   |  89.04 ns |   0.77 |      32 B |        1.00 |
-| YesNo      |  87.00 ns |   0.75 |      32 B |        1.00 |

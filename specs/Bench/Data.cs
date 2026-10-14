@@ -1047,7 +1047,7 @@ internal static class Data
 
         public static readonly ImmutableArray<bool?> Bool = [.. Svo.Select(t => (bool?)t)];
 
-        public static readonly ImmutableArray<string?> Raw = [.. Svo.Select(t => t.ToJson())];
+        public static readonly ImmutableArray<string?> String = [.. Svo.Select(t => t.ToJson())];
     }
 
     internal static readonly MersenneTwister Rnd = new(42);

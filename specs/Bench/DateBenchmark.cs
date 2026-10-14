@@ -11,15 +11,15 @@ public class DateBenchmark
     public class Date_read_JSON : JsonReaderBenchmark
     {
         public Date_read_JSON()
-            => JsonSerializer.Serialize(Stream, Data.Date.Svo, options: Default);
+            => JsonSerializer.Serialize(Stream1, Data.Date.Svo, options: Default);
 
         [Benchmark(Baseline = true)]
         public DateOnly[]? DateOnly()
-            => JsonSerializer.Deserialize<DateOnly[]>(Stream, options: Default);
+            => JsonSerializer.Deserialize<DateOnly[]>(Stream1, options: Default);
 
         [Benchmark]
         public Date[]? Date()
-            => JsonSerializer.Deserialize<Date[]>(Stream, options: Default);
+            => JsonSerializer.Deserialize<Date[]>(Stream1, options: Default);
     }
 
     [SimpleJob(RuntimeMoniker.Net10_0)]

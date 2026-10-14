@@ -44,19 +44,22 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     /// <returns>
     /// The two-letter code defined in ISO 3166-1 for the country.
     /// </returns>
-    public string IsoAlpha2Code => GetResourceString("_ISO2", CultureInfo.InvariantCulture);
+    public string IsoAlpha2Code => Data.Iso2;
 
     /// <summary>Gets the three-letter code defined in ISO 3166-1 for the country.</summary>
     /// <returns>
     /// The three-letter code defined in ISO 3166-1 for the country.
     /// </returns>
-    public string IsoAlpha3Code => GetResourceString("_ISO3", CultureInfo.InvariantCulture);
+    public string IsoAlpha3Code => Data.Iso3;
 
     /// <summary>Gets the numeric code defined in ISO 3166-1 for the country/region.</summary>
     /// <returns>
     /// The numeric code defined in ISO 3166-1 for the country/region.
     /// </returns>
-    public int IsoNumericCode => m_Value == default ? 0 : XmlConvert.ToInt32(GetResourceString("_ISO", CultureInfo.InvariantCulture));
+    public int IsoNumericCode => Data.Iso;
+
+    /// <summary>True if the country is a sovereign state, otherwise false.</summary>
+    public bool IsIndependent => Data.Independent;
 
     /// <summary>Gets the country calling code as defined by ITU-T.</summary>
     /// <remarks>
@@ -65,33 +68,15 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     public string CallingCode => GetResourceString("_CallingCode", CultureInfo.InvariantCulture);
 
     /// <summary>Gets true if the RegionInfo equivalent of this country exists, otherwise false.</summary>
-    public bool RegionInfoExists
-    {
-        get
-        {
-            try
-            {
-                return ToRegionInfo() != null;
-            }
-            catch (NotSupportedException)
-            {
-                return false;
-            }
-        }
-    }
+    public bool RegionInfoExists => Data.RegionInfo is not null;
 
     /// <summary>Gets the start date from witch the country exists.</summary>
-    public Date StartDate => m_Value == default ? Date.MinValue : (Date)XmlConvert.ToDateTime(GetResourceString("_StartDate", CultureInfo.InvariantCulture), "yyyy-MM-dd");
+    public Date StartDate => Data.StartDate;
 
     /// <summary>If the country does not exist anymore, the end date is given, otherwise null.</summary>
-    public Date? EndDate
-    {
-        get
-        {
-            var val = GetResourceString("_EndDate", CultureInfo.InvariantCulture);
-            return string.IsNullOrEmpty(val) ? null : (Date?)XmlConvert.ToDateTime(val, "yyyy-MM-dd");
-        }
-    }
+    public Date? EndDate => Data.EndDate;
+
+    private CountryData Data => CountryData.All[this];
 
     /// <summary>Returns true if the country has a postal code system.</summary>
     [Pure]
@@ -128,7 +113,8 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
             return Currency.Empty;
         }
         var country = this;
-        return CountryToCurrency.All.Where(map => map.Country == country && map.StartDate <= measurement)
+        return CountryToCurrency.All
+            .Where(map => map.Country == country && map.StartDate <= measurement)
             .Select(map => map.Currency)
             .LastOrDefault();
     }
@@ -136,20 +122,12 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     /// <summary>Converts the CountryInfo to a RegionInfo.</summary>
     [Pure]
     public RegionInfo ToRegionInfo()
-    {
-        try
-        {
-            return new RegionInfo(IsoAlpha2Code);
-        }
-        catch
-        {
-            throw new NotSupportedException(string.Format(
-                CultureInfo.InvariantCulture,
-                QowaivMessages.NotSupportedExceptionCountryToRegionInfo,
-                EnglishName,
-                IsoAlpha2Code));
-        }
-    }
+        => Data.RegionInfo
+        ?? throw new NotSupportedException(string.Format(
+            CultureInfo.InvariantCulture,
+            QowaivMessages.NotSupportedExceptionCountryToRegionInfo,
+            EnglishName,
+            IsoAlpha2Code));
 
     /// <summary>Deserializes the country from a JSON number.</summary>
     /// <param name="json">
@@ -204,9 +182,9 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     {
         { 'n', (svo, _) => svo.Name },
         { 'e', (svo, _) => svo.EnglishName },
-        { '2', (svo, provider) => svo.GetResourceString("_ISO2", provider) },
-        { '3', (svo, provider) => svo.GetResourceString("_ISO3", provider) },
-        { '0', (svo, provider) => svo.GetResourceString("_ISO", provider) },
+        { '2', (svo, _) => svo.IsoAlpha2Code },
+        { '3', (svo, _) => svo.IsoAlpha3Code },
+        { '0', (svo, _) => svo.IsoNumericCode.ToString("000") },
         { 'f', (svo, provider) => svo.GetResourceString("_DisplayName", provider) },
     };
 
@@ -233,6 +211,14 @@ public readonly partial struct Country : IXmlSerializable, IFormattable, IEquata
     /// </returns>
     public static bool TryParse(string? s, IFormatProvider? provider, out Country result)
     {
+        if (s is { Length: 2 }
+            && CountryId.TryIso(s[0], s[1]) is { } id
+            && CountryData.All[id] is { } data)
+        {
+            result = data.Country;
+            return true;
+        }
+
         result = Empty;
         var str = s.Unify();
         if (str.IsEmpty())

@@ -39,6 +39,7 @@ v8.*
 - Extended language support.
 - IBAN supports Mongolia and Falkland Islands.
 - IBAN parser skips allocation for normalized input.
+- Country.IsIndepedent available based on ISO-3166-1 data.
 - Country data update (display names, start dates, end dates).
 - Percentage creation (.Percent(), Parse, Create) also remove trailing zero's for numbers with more then 8 digits. (BUG)
 - Reduce JSON serialization for ASCII only string based SVOs (BIC, Currency, IBAN, Country, YesNo).

@@ -113,6 +113,12 @@ public class With_domain_logic
     [TestCase(false, "")]
     public void IsKnown_is(bool result, Country svo) => svo.IsKnown.Should().Be(result);
 
+    [TestCase(true, "VA")]
+    [TestCase(false, "FO")]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void Indepedence(bool indepedent, Country svo) => svo.IsIndependent.Should().Be(indepedent);
+
     /// <remarks>
     /// As the regions available depend on the environment running, we can't
     /// predict the outcome.

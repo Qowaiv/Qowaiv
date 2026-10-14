@@ -138,7 +138,7 @@ public sealed class CSharpWriter(TextWriter writer, CSharpWriterSettings? settin
         Guard.NotNullOrEmpty(markers);
         Line(markers[0]);
         Indentation++;
-        return new ScopedCodeBlock(this, markers[1]);
+        return new ScopedCodeBlock(this, markers[1..]);
     }
 
     /// <summary>
@@ -147,7 +147,7 @@ public sealed class CSharpWriter(TextWriter writer, CSharpWriterSettings? settin
     /// </summary>
     public void Flush() => Writer.Flush();
 
-    private sealed record ScopedCodeBlock(CSharpWriter Writer, char Close) : IDisposable
+    private sealed record ScopedCodeBlock(CSharpWriter Writer, string Close) : IDisposable
     {
         /// <inheritdoc />
         public void Dispose()

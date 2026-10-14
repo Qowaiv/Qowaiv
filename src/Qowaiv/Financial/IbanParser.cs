@@ -1,6 +1,8 @@
 #pragma warning disable S1541 // Complexity as result of performance
 #pragma warning disable S3776 // Complexity as result of performance
 
+using Qowaiv.Globalization;
+
 namespace Qowaiv.Financial;
 
 internal static class IbanParser
@@ -24,13 +26,10 @@ internal static class IbanParser
 
     private static string? MachineReadable(string iban)
     {
-        if (iban.Length is < MinLength or > InternationalBankAccountNumber.MaxLength) return null;
-
-        var (f, s) = (iban[0], iban[1]);
-
         // No valide country code.
-        if (!Is.Letter(f) || !Is.Letter(s)
-            || Bban.All[((f - 'A') * 26) + (s - 'A')] is not { Pattern: not null } bban) return null;
+        if (iban.Length is < MinLength or > InternationalBankAccountNumber.MaxLength
+            || CountryId.TryIso(iban[0], iban[1]) is not { } id
+            || Bbans.All[id] is not { Pattern: not null } bban) return null;
 
         var pattern = bban.Pattern;
 

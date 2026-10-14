@@ -16,6 +16,15 @@
     <value>Feminino</value>
     <comment>Female (default)</comment>
   </data>
+  <data name="honorific_Female">
+    <value>Sra.</value>
+  </data>
+  <data name="honorific_Male">
+    <value>Sr.</value>
+  </data>
+  <data name="honorific_NotKnown">
+    <value>Sr./Sra.</value>
+  </data>
   <data name="Male">
     <value>Masculino</value>
     <comment>Male (default)</comment>

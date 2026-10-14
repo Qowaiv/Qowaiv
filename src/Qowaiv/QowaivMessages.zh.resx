@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="FormatExceptionBusinessIdentifierCode">
+    <value>无效的 BIC</value>
+  </data>
+  <data name="FormatExceptionCasRegistryNumber">
+    <value>无效的 CAS 登录号</value>
+  </data>
+  <data name="FormatExceptionCountry">
+    <value>无效的国家</value>
+  </data>
+  <data name="FormatExceptionCryptographicSeed">
+    <value>无效的加密种子</value>
+  </data>
+  <data name="FormatExceptionCurrency">
+    <value>无效的货币</value>
+  </data>
+  <data name="FormatExceptionDate">
+    <value>无效的日期</value>
+  </data>
+  <data name="FormatExceptionDateSpan">
+    <value>无效的日期跨度</value>
+  </data>
+  <data name="FormatExceptionElo">
+    <value>无效的 Elo</value>
+  </data>
+  <data name="FormatExceptionEmailAddress">
+    <value>无效的电子邮件地址</value>
+  </data>
+  <data name="FormatExceptionEmailAddressCollection">
+    <value>无效的电子邮件地址</value>
+  </data>
+  <data name="FormatExceptionEnergyLabel">
+    <value>无效的能源标签</value>
+  </data>
+  <data name="FormatExceptionFinancialAmount">
+    <value>无效的金额</value>
+  </data>
+  <data name="FormatExceptionFraction">
+    <value>无效的分数</value>
+  </data>
+  <data name="FormatExceptionGender">
+    <value>无效的性别</value>
+  </data>
+  <data name="FormatExceptionHouseNumber">
+    <value>无效的门牌号码</value>
+  </data>
+  <data name="FormatExceptionIdentifier">
+    <value>无效的识别码</value>
+  </data>
+  <data name="FormatExceptionInternationalBankAccountNumber">
+    <value>无效的 IBAN</value>
+  </data>
+  <data name="FormatExceptionInternetMediaType">
+    <value>无效的互联网媒体类型</value>
+  </data>
+  <data name="FormatExceptionLocalDateTime">
+    <value>无效的日期</value>
+  </data>
+  <data name="FormatExceptionMoney">
+    <value>无效的金额</value>
+  </data>
+  <data name="FormatExceptionMonth">
+    <value>无效的月份</value>
+  </data>
+  <data name="FormatExceptionMonthSpan">
+    <value>无效的月数</value>
+  </data>
+  <data name="FormatExceptionPercentage">
+    <value>无效的百分比</value>
+  </data>
+  <data name="FormatExceptionPostalCode">
+    <value>无效的邮递区号</value>
+  </data>
+  <data name="FormatExceptionQGuid">
+    <value>无效的 GUID</value>
+  </data>
+  <data name="FormatExceptionSex">
+    <value>无效的性别</value>
+  </data>
+  <data name="FormatExceptionStreamSize">
+    <value>无效的串流大小</value>
+  </data>
+  <data name="FormatExceptionTimestamp">
+    <value>无效的 SQL 时间戳记</value>
+  </data>
+  <data name="FormatExceptionUuid">
+    <value>无效的 GUID</value>
+  </data>
+  <data name="FormatExceptionWeekDate">
+    <value>无效的周日期</value>
+  </data>
+  <data name="FormatExceptionYear">
+    <value>无效的年份</value>
+  </data>
+  <data name="FormatExceptionYearMonth">
+    <value>无效的年月组合</value>
+  </data>
+  <data name="FormatExceptionYearSpan">
+    <value>无效的年数</value>
+  </data>
+  <data name="FormatExceptionYesNo">
+    <value>无效的是/否值</value>
+  </data>
+</root>

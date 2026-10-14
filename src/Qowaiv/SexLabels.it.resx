@@ -16,6 +16,15 @@
     <value>Femmina</value>
     <comment>Female (default)</comment>
   </data>
+  <data name="honorific_Female">
+    <value>Sig.ra</value>
+  </data>
+  <data name="honorific_Male">
+    <value>Sig.</value>
+  </data>
+  <data name="honorific_NotKnown">
+    <value>Sig./Sig.ra</value>
+  </data>
   <data name="Male">
     <value>Maschio</value>
     <comment>Male (default)</comment>

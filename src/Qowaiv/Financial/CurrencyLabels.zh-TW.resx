@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="CNY_DisplayName" xml:space="preserve">
+    <value>人民幣</value>
+  </data>
+  <data name="GBP_DisplayName" xml:space="preserve">
+    <value>英鎊</value>
+  </data>
+  <data name="HKD_DisplayName" xml:space="preserve">
+    <value>港幣</value>
+  </data>
+  <data name="JPY_DisplayName" xml:space="preserve">
+    <value>日圓</value>
+  </data>
+  <data name="NZD_DisplayName" xml:space="preserve">
+    <value>紐西蘭元</value>
+  </data>
+  <data name="TWD_DisplayName" xml:space="preserve">
+    <value>新台幣</value>
+  </data>
+  <data name="USD_DisplayName" xml:space="preserve">
+    <value>美金</value>
+  </data>
+</root>

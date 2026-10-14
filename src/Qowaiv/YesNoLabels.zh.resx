@@ -16,13 +16,19 @@
     <value>假</value>
   </data>
   <data name="b_Yes">
-    <value>真正</value>
+    <value>真</value>
+  </data>
+  <data name="ch_No">
+    <value>否</value>
+  </data>
+  <data name="ch_Yes">
+    <value>是</value>
   </data>
   <data name="f_No">
     <value>不</value>
   </data>
   <data name="f_Unknown">
-    <value>未知項</value>
+    <value>未知项</value>
   </data>
   <data name="f_Yes">
     <value>是</value>

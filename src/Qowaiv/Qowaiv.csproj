@@ -36,6 +36,7 @@
     <ToBeReleased>
       <![CDATA[
 v8.*
+- Extended language support.
 - IBAN supports Mongolia and Falkland Islands.
 - IBAN parser skips allocation for normalized input.
 - Country data update (display names, start dates, end dates).

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="FormatExceptionBusinessIdentifierCode">
+    <value>BIC non valido</value>
+  </data>
+  <data name="FormatExceptionCasRegistryNumber">
+    <value>Numero di registro CAS non valido</value>
+  </data>
+  <data name="FormatExceptionCountry">
+    <value>Paese non valido</value>
+  </data>
+  <data name="FormatExceptionCryptographicSeed">
+    <value>Seed crittografico non valido</value>
+  </data>
+  <data name="FormatExceptionCurrency">
+    <value>Valuta non valida</value>
+  </data>
+  <data name="FormatExceptionDate">
+    <value>Data non valida</value>
+  </data>
+  <data name="FormatExceptionDateSpan">
+    <value>Intervallo di date non valido</value>
+  </data>
+  <data name="FormatExceptionElo">
+    <value>Elo non valido</value>
+  </data>
+  <data name="FormatExceptionEmailAddress">
+    <value>Indirizzo e-mail non valido</value>
+  </data>
+  <data name="FormatExceptionEmailAddressCollection">
+    <value>Indirizzi e-mail non validi</value>
+  </data>
+  <data name="FormatExceptionEnergyLabel">
+    <value>Etichetta energetica non valida</value>
+  </data>
+  <data name="FormatExceptionFinancialAmount">
+    <value>Importo non valido</value>
+  </data>
+  <data name="FormatExceptionFraction">
+    <value>Frazione non valida</value>
+  </data>
+  <data name="FormatExceptionGender">
+    <value>Genere non valido</value>
+  </data>
+  <data name="FormatExceptionHouseNumber">
+    <value>Numero civico non valido</value>
+  </data>
+  <data name="FormatExceptionIdentifier">
+    <value>Identificatore non valido</value>
+  </data>
+  <data name="FormatExceptionInternationalBankAccountNumber">
+    <value>IBAN non valido</value>
+  </data>
+  <data name="FormatExceptionInternetMediaType">
+    <value>Tipo di media Internet non valido</value>
+  </data>
+  <data name="FormatExceptionLocalDateTime">
+    <value>Data non valida</value>
+  </data>
+  <data name="FormatExceptionMoney">
+    <value>Importo non valido</value>
+  </data>
+  <data name="FormatExceptionMonth">
+    <value>Mese non valido</value>
+  </data>
+  <data name="FormatExceptionMonthSpan">
+    <value>Durata in mesi non valida</value>
+  </data>
+  <data name="FormatExceptionPercentage">
+    <value>Percentuale non valida</value>
+  </data>
+  <data name="FormatExceptionPostalCode">
+    <value>Codice postale non valido</value>
+  </data>
+  <data name="FormatExceptionQGuid">
+    <value>GUID non valido</value>
+  </data>
+  <data name="FormatExceptionSex">
+    <value>Sesso non valido</value>
+  </data>
+  <data name="FormatExceptionStreamSize">
+    <value>Dimensione del flusso non valida</value>
+  </data>
+  <data name="FormatExceptionTimestamp">
+    <value>Timestamp SQL non valido</value>
+  </data>
+  <data name="FormatExceptionUuid">
+    <value>GUID non valido</value>
+  </data>
+  <data name="FormatExceptionWeekDate">
+    <value>Data della settimana non valida</value>
+  </data>
+  <data name="FormatExceptionYear">
+    <value>Anno non valido</value>
+  </data>
+  <data name="FormatExceptionYearMonth">
+    <value>Combinazione anno-mese non valida</value>
+  </data>
+  <data name="FormatExceptionYearSpan">
+    <value>Durata in anni non valida</value>
+  </data>
+  <data name="FormatExceptionYesNo">
+    <value>Valore sì/no non valido</value>
+  </data>
+</root>

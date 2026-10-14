@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="FormatExceptionBusinessIdentifierCode">
+    <value>No es un BIC válido</value>
+  </data>
+  <data name="FormatExceptionCasRegistryNumber">
+    <value>No es un número de registro CAS válido</value>
+  </data>
+  <data name="FormatExceptionCountry">
+    <value>No es un país válido</value>
+  </data>
+  <data name="FormatExceptionCryptographicSeed">
+    <value>No es una semilla criptográfica válida</value>
+  </data>
+  <data name="FormatExceptionCurrency">
+    <value>No es una moneda válida</value>
+  </data>
+  <data name="FormatExceptionDate">
+    <value>No es una fecha válida</value>
+  </data>
+  <data name="FormatExceptionDateSpan">
+    <value>No es un intervalo de fechas válido</value>
+  </data>
+  <data name="FormatExceptionElo">
+    <value>No es un Elo válido</value>
+  </data>
+  <data name="FormatExceptionEmailAddress">
+    <value>No es una dirección de correo electrónico válida</value>
+  </data>
+  <data name="FormatExceptionEmailAddressCollection">
+    <value>No son direcciones de correo electrónico válidas</value>
+  </data>
+  <data name="FormatExceptionEnergyLabel">
+    <value>No es una etiqueta energética válida</value>
+  </data>
+  <data name="FormatExceptionFinancialAmount">
+    <value>No es un importe válido</value>
+  </data>
+  <data name="FormatExceptionFraction">
+    <value>No es una fracción válida</value>
+  </data>
+  <data name="FormatExceptionGender">
+    <value>No es un género válido</value>
+  </data>
+  <data name="FormatExceptionHouseNumber">
+    <value>No es un número de casa válido</value>
+  </data>
+  <data name="FormatExceptionIdentifier">
+    <value>No es un identificador válido</value>
+  </data>
+  <data name="FormatExceptionInternationalBankAccountNumber">
+    <value>No es un IBAN válido</value>
+  </data>
+  <data name="FormatExceptionInternetMediaType">
+    <value>No es un tipo de medio de internet válido</value>
+  </data>
+  <data name="FormatExceptionLocalDateTime">
+    <value>No es una fecha válida</value>
+  </data>
+  <data name="FormatExceptionMoney">
+    <value>No es un importe válido</value>
+  </data>
+  <data name="FormatExceptionMonth">
+    <value>No es un mes válido</value>
+  </data>
+  <data name="FormatExceptionMonthSpan">
+    <value>No es una duración en meses válida</value>
+  </data>
+  <data name="FormatExceptionPercentage">
+    <value>No es un porcentaje válido</value>
+  </data>
+  <data name="FormatExceptionPostalCode">
+    <value>No es un código postal válido</value>
+  </data>
+  <data name="FormatExceptionQGuid">
+    <value>No es un GUID válido</value>
+  </data>
+  <data name="FormatExceptionSex">
+    <value>No es un sexo válido</value>
+  </data>
+  <data name="FormatExceptionStreamSize">
+    <value>No es un tamaño de flujo válido</value>
+  </data>
+  <data name="FormatExceptionTimestamp">
+    <value>No es una marca de tiempo SQL válida</value>
+  </data>
+  <data name="FormatExceptionUuid">
+    <value>No es un GUID válido</value>
+  </data>
+  <data name="FormatExceptionWeekDate">
+    <value>No es una fecha de semana válida</value>
+  </data>
+  <data name="FormatExceptionYear">
+    <value>No es un año válido</value>
+  </data>
+  <data name="FormatExceptionYearMonth">
+    <value>No es una combinación de año y mes válida</value>
+  </data>
+  <data name="FormatExceptionYearSpan">
+    <value>No es una duración en años válida</value>
+  </data>
+  <data name="FormatExceptionYesNo">
+    <value>No es un valor sí/no válido</value>
+  </data>
+</root>

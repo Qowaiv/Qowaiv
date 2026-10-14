@@ -18,6 +18,12 @@
   <data name="b_Yes">
     <value>صحيح</value>
   </data>
+  <data name="ch_No">
+    <value>ل</value>
+  </data>
+  <data name="ch_Yes">
+    <value>ن</value>
+  </data>
   <data name="f_No">
     <value>لا</value>
   </data>

@@ -7,8 +7,7 @@ using System.Text.Json;
 namespace Qowaiv.Json.Globalization;
 
 /// <summary>Provides a JSON conversion for a country.</summary>
-[Inheritable]
-public class CountryJsonConverter : SvoJsonConverter<Country>
+internal sealed class CountryJsonConverter : SvoJsonConverter<Country>
 {
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, Country value, JsonSerializerOptions options)

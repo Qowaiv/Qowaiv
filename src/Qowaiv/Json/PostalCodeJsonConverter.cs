@@ -5,8 +5,7 @@ using System.Text.Json;
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a postal code.</summary>
-[Inheritable]
-public class PostalCodeJsonConverter : SvoJsonConverter<PostalCode>
+internal sealed class PostalCodeJsonConverter : SvoJsonConverter<PostalCode>
 {
     /// <inheritdoc />
     [Pure]

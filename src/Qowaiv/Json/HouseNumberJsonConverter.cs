@@ -3,8 +3,7 @@
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a house number.</summary>
-[Inheritable]
-public class HouseNumberJsonConverter : SvoJsonConverter<HouseNumber>
+internal sealed class HouseNumberJsonConverter : SvoJsonConverter<HouseNumber>
 {
     /// <inheritdoc />
     [Pure]

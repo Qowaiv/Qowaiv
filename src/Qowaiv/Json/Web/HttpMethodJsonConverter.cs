@@ -8,8 +8,7 @@ using System.Text.Json.Serialization;
 namespace Qowaiv.Json.Web;
 
 /// <summary>Provides a JSON conversion for an HTTP Method.</summary>
-[Inheritable]
-public class HttpMethodJsonConverter : JsonConverter<HttpMethod>
+public sealed class HttpMethodJsonConverter : JsonConverter<HttpMethod>
 {
     /// <inheritdoc />
     [Pure]

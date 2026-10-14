@@ -13661,7 +13661,21 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Financial.NumberToAmountExtensions.Amount(System.Double):[T:System.ObsoleteAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Json.Mathematics.FractionJsonConverter.FromJson(System.Double):[T:System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.NumberToPercentageExtensions.Percent(System.Double):[T:System.ObsoleteAttribute]</Target>
     <Left>lib/net10.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -13675,7 +13689,35 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Financial.NumberToAmountExtensions.Amount(System.Double):[T:System.ObsoleteAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.NumberToPercentageExtensions.Percent(System.Double):[T:System.ObsoleteAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Financial.Amount.FromJson(System.Decimal):[T:System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute]</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Financial.NumberToAmountExtensions.Amount(System.Double):[T:System.ObsoleteAttribute]</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.NumberToPercentageExtensions.Percent(System.Double):[T:System.ObsoleteAttribute]</Target>
     <Left>lib/net9.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -18615,6 +18657,20 @@
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Financial.Amount.FromJson(System.Decimal):[T:System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Financial.NumberToAmountExtensions.Amount(System.Double):[T:System.ObsoleteAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.NumberToPercentageExtensions.Percent(System.Double):[T:System.ObsoleteAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>

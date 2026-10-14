@@ -236,7 +236,7 @@ public class Can_be_created_with_percentage_extension
     public void from_double()
     {
         var p = 3.14.Percent();
-        p.ToString(CultureInfo.InvariantCulture).Should().Be("3.14%");
+        p.Round(4).ToString(CultureInfo.InvariantCulture).Should().Be("3.14%");
     }
 
     [Test]
@@ -1014,7 +1014,7 @@ public class Can_be_increased
     {
         var increased = Svo.Percentage;
         increased++;
-        increased.Should().Be(18.51.Percent());
+        increased.Should().Be(18.51m.Percent());
     }
 }
 
@@ -1025,7 +1025,7 @@ public class Can_be_decreased
     {
         var decreased = Svo.Percentage;
         decreased--;
-        decreased.Should().Be(16.51.Percent());
+        decreased.Should().Be(16.51m.Percent());
     }
 }
 

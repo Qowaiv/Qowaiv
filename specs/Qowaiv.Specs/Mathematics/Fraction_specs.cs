@@ -361,8 +361,8 @@ public class Throws_when
         => dbl.Invoking(d => (Fraction)d).Should().Throw<OverflowException>()
         .WithMessage("Value was either too large or too small for a Fraction.");
 
-    [TestCase(-9223372036854775808)]
-    [TestCase(+9223372036854775808)]
+    [TestCase(-9223372036854775808.0)]
+    [TestCase(+9223372036854775808.0)]
     public void decimal_can_not_be_casted_to_fraction(decimal dec)
         => dec.Invoking(d => (Fraction)d).Should().Throw<OverflowException>()
         .WithMessage("Value was either too large or too small for a Fraction.");
@@ -373,8 +373,8 @@ public class Throws_when
         => dbl.Invoking(Fraction.Create).Should().Throw<ArgumentOutOfRangeException>()
         .WithMessage("Value was either too large or too small for a Fraction. *");
 
-    [TestCase(-9223372036854775808)]
-    [TestCase(+9223372036854775808)]
+    [TestCase(-9223372036854775808.0)]
+    [TestCase(+9223372036854775808.0)]
     public void fraction_can_no_be_created_form_decimal(decimal dec)
         => dec.Invoking(Fraction.Create).Should().Throw<ArgumentOutOfRangeException>()
         .WithMessage("Value was either too large or too small for a Fraction. *");

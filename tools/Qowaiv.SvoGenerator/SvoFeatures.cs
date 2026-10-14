@@ -15,8 +15,7 @@ public enum SvoFeatures
     IComparable = /*.........*/ 0x00200,
     ComparisonOperators = /*.*/ 0x00400,
     Parsing = /*.............*/ 0x00800,
-    Validation = /*..........*/ 0x01000,
-    Utf8 = /*................*/ 0x02000,
+    Utf8 = /*................*/ 0x01000,
     All = Field
         | GetHashCode
         | IsEmpty
@@ -28,12 +27,11 @@ public enum SvoFeatures
         | IFormattable
         | IComparable
         | ComparisonOperators
-        | Parsing
-        | Validation,
+        | Parsing,
 
     Structure = Field | IsEmpty | IsUnknown,
     EqualsSvoAndGetHashCode = EqualsSvo | GetHashCode,
     IsEmptyOrUnknown = IsEmpty | IsUnknown,
-    Default = All ^ ComparisonOperators ^ Validation,
-    Continuous = All ^ IsEmpty ^ IsUnknown ^ Validation,
+    Default = All ^ ComparisonOperators,
+    Continuous = All ^ IsEmpty ^ IsUnknown,
 }

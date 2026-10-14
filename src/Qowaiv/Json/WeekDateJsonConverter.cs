@@ -3,8 +3,7 @@
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a week date.</summary>
-[Inheritable]
-public class WeekDateJsonConverter : SvoJsonConverter<WeekDate>
+internal sealed class WeekDateJsonConverter : SvoJsonConverter<WeekDate>
 {
     /// <inheritdoc />
     [Pure]

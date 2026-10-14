@@ -9,8 +9,7 @@ using System.Text.Json.Serialization;
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a percentage.</summary>
-[Inheritable]
-public class PercentageJsonConverter : SvoJsonConverter<Percentage>
+internal sealed class PercentageJsonConverter : SvoJsonConverter<Percentage>
 {
     /// <inheritdoc />
     public override Percentage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

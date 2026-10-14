@@ -6,8 +6,7 @@ using System.Text.Json;
 namespace Qowaiv.Json.Financial;
 
 /// <summary>Provides a JSON conversion for an IBAN.</summary>
-[Inheritable]
-public class InternationalBankAccountNumberJsonConverter : SvoJsonConverter<InternationalBankAccountNumber>
+internal sealed class InternationalBankAccountNumberJsonConverter : SvoJsonConverter<InternationalBankAccountNumber>
 {
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, InternationalBankAccountNumber value, JsonSerializerOptions options)

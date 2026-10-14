@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="FormatExceptionBusinessIdentifierCode">
+    <value>無效的 BIC</value>
+  </data>
+  <data name="FormatExceptionCasRegistryNumber">
+    <value>無效的 CAS 登錄號</value>
+  </data>
+  <data name="FormatExceptionCountry">
+    <value>無效的國家</value>
+  </data>
+  <data name="FormatExceptionCryptographicSeed">
+    <value>無效的加密種子</value>
+  </data>
+  <data name="FormatExceptionCurrency">
+    <value>無效的貨幣</value>
+  </data>
+  <data name="FormatExceptionDate">
+    <value>無效的日期</value>
+  </data>
+  <data name="FormatExceptionDateSpan">
+    <value>無效的日期跨度</value>
+  </data>
+  <data name="FormatExceptionElo">
+    <value>無效的 Elo</value>
+  </data>
+  <data name="FormatExceptionEmailAddress">
+    <value>無效的電子郵件地址</value>
+  </data>
+  <data name="FormatExceptionEmailAddressCollection">
+    <value>無效的電子郵件地址</value>
+  </data>
+  <data name="FormatExceptionEnergyLabel">
+    <value>無效的能源標籤</value>
+  </data>
+  <data name="FormatExceptionFinancialAmount">
+    <value>無效的金額</value>
+  </data>
+  <data name="FormatExceptionFraction">
+    <value>無效的分數</value>
+  </data>
+  <data name="FormatExceptionGender">
+    <value>無效的性別</value>
+  </data>
+  <data name="FormatExceptionHouseNumber">
+    <value>無效的門牌號碼</value>
+  </data>
+  <data name="FormatExceptionIdentifier">
+    <value>無效的識別碼</value>
+  </data>
+  <data name="FormatExceptionInternationalBankAccountNumber">
+    <value>無效的 IBAN</value>
+  </data>
+  <data name="FormatExceptionInternetMediaType">
+    <value>無效的網際網路媒體類型</value>
+  </data>
+  <data name="FormatExceptionLocalDateTime">
+    <value>無效的日期時間</value>
+  </data>
+  <data name="FormatExceptionMoney">
+    <value>無效的金額</value>
+  </data>
+  <data name="FormatExceptionMonth">
+    <value>無效的月份</value>
+  </data>
+  <data name="FormatExceptionMonthSpan">
+    <value>無效的月跨度</value>
+  </data>
+  <data name="FormatExceptionPercentage">
+    <value>無效的百分比</value>
+  </data>
+  <data name="FormatExceptionPostalCode">
+    <value>無效的郵遞區號</value>
+  </data>
+  <data name="FormatExceptionQGuid">
+    <value>無效的 GUID</value>
+  </data>
+  <data name="FormatExceptionSex">
+    <value>無效的性別</value>
+  </data>
+  <data name="FormatExceptionStreamSize">
+    <value>無效的串流大小</value>
+  </data>
+  <data name="FormatExceptionTimestamp">
+    <value>無效的 SQL 時間戳記</value>
+  </data>
+  <data name="FormatExceptionUuid">
+    <value>無效的 UUID</value>
+  </data>
+  <data name="FormatExceptionWeekDate">
+    <value>無效的週日期</value>
+  </data>
+  <data name="FormatExceptionYear">
+    <value>無效的年份</value>
+  </data>
+  <data name="FormatExceptionYearMonth">
+    <value>無效的年月</value>
+  </data>
+  <data name="FormatExceptionYearSpan">
+    <value>無效的年跨度</value>
+  </data>
+  <data name="FormatExceptionYesNo">
+    <value>無效的是/否值</value>
+  </data>
+</root>

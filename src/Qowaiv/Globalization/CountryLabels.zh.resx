@@ -178,7 +178,7 @@
     <value>捷克斯洛伐克</value>
   </data>
   <data name="CSXX_DisplayName">
-    <value>塞爾維亞與蒙特內哥羅</value>
+    <value>塞尔维亚与蒙特内哥罗</value>
   </data>
   <data name="CTKI_DisplayName">
     <value>坎顿及恩德伯里群岛</value>
@@ -220,7 +220,7 @@
     <value>多米尼加</value>
   </data>
   <data name="DYBJ_DisplayName">
-    <value>達荷美</value>
+    <value>达荷美</value>
   </data>
   <data name="DZ_DisplayName">
     <value>阿尔及利亚</value>
@@ -268,7 +268,7 @@
     <value>法国</value>
   </data>
   <data name="FXFR_DisplayName">
-    <value>法國本土</value>
+    <value>法国本土</value>
   </data>
   <data name="GA_DisplayName">
     <value>加蓬</value>
@@ -484,7 +484,7 @@
     <value>马绍尔群岛</value>
   </data>
   <data name="MIUM_DisplayName">
-    <value>中途島</value>
+    <value>中途岛</value>
   </data>
   <data name="MK_DisplayName">
     <value>马其顿</value>
@@ -550,7 +550,7 @@
     <value>尼日利亚</value>
   </data>
   <data name="NHVU_DisplayName">
-    <value>新赫布里底群島</value>
+    <value>新赫布里底群岛</value>
   </data>
   <data name="NI_DisplayName">
     <value>尼加拉瓜</value>
@@ -586,7 +586,7 @@
     <value>巴拿马</value>
   </data>
   <data name="PCHH_DisplayName">
-    <value>太平洋群島託管地</value>
+    <value>太平洋群岛托管地</value>
   </data>
   <data name="PE_DisplayName">
     <value>秘鲁</value>
@@ -682,7 +682,7 @@
     <value>斯瓦尔巴群岛和扬马延岛</value>
   </data>
   <data name="SKIN_DisplayName">
-    <value>錫金</value>
+    <value>锡金</value>
   </data>
   <data name="SK_DisplayName">
     <value>斯洛伐克</value>
@@ -709,7 +709,7 @@
     <value>圣多美和普林西比</value>
   </data>
   <data name="SUHH_DisplayName">
-    <value>蘇聯</value>
+    <value>苏联</value>
   </data>
   <data name="SV_DisplayName">
     <value>萨尔瓦多</value>
@@ -853,6 +853,6 @@
     <value>津巴布韦</value>
   </data>
   <data name="ZZ_DisplayName">
-    <value>未知項</value>
+    <value>未知项</value>
   </data>
 </root>

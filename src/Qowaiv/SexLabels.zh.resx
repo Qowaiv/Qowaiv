@@ -36,11 +36,11 @@
     <comment>Male (default)</comment>
   </data>
   <data name="NotApplicable">
-    <value>未規定項</value>
+    <value>未规定项</value>
     <comment>Not applicable (default)</comment>
   </data>
   <data name="NotKnown">
-    <value>未知項</value>
+    <value>未知项</value>
     <comment>Not known (default)</comment>
   </data>
 </root>

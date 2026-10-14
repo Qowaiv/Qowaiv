@@ -8,7 +8,7 @@ internal static class AsciiStringWriter
 {
     private const byte Quote = (byte)'"';
 
-    extension(Utf8JsonWriter? writer)
+    extension(Utf8JsonWriter writer)
     {
         /// <summary>Writes UTF16 chars assuming all to be ASCII that not require JSON escaping.</summary>
         /// <remarks>

@@ -3,8 +3,7 @@
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a email address.</summary>
-[Inheritable]
-public class EmailAddressJsonConverter : SvoJsonConverter<EmailAddress>
+internal sealed class EmailAddressJsonConverter : SvoJsonConverter<EmailAddress>
 {
     /// <inheritdoc />
     [Pure]

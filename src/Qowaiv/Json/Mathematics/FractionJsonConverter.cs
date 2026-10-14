@@ -5,8 +5,7 @@ using Qowaiv.Mathematics;
 namespace Qowaiv.Json.Mathematics;
 
 /// <summary>Provides a JSON conversion for a fraction.</summary>
-[Inheritable]
-public class FractionJsonConverter : SvoJsonConverter<Fraction>
+internal sealed class FractionJsonConverter : SvoJsonConverter<Fraction>
 {
     /// <inheritdoc />
     [Pure]

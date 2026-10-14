@@ -6,8 +6,7 @@ using System.Text.Json;
 namespace Qowaiv.Json.Financial;
 
 /// <summary>Provides a JSON conversion for a currency.</summary>
-[Inheritable]
-public class CurrencyJsonConverter : SvoJsonConverter<Currency>
+internal sealed class CurrencyJsonConverter : SvoJsonConverter<Currency>
 {
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, Currency value, JsonSerializerOptions options)

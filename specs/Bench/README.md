@@ -74,14 +74,27 @@ The benchmark converts 1,000 random (rounded) decimals per invocation.
 `DecimalMath.Scale` is the fastest way to divide by 100 *and* remove trailing
 zeros. The plain multiplication is faster, but it does not normalize the scale.
 
-### System.Text.Json Serialization
-| Method     | Categories           | Mean     | Ratio |
-|----------- |--------------------- |---------:|------:|
-| Decimal    | JSON Deserialization | 42.65 us |  1.00 |
-| Percentage | JSON Deserialization | 52.71 us |  1.24 |
-|            |                      |          |       |
-| Decimal    | JSON Serialization   | 25.65 us |  1.00 |
-| Percentage | JSON Serialization   | 39.77 us |  1.55 |
+## System.Text.Json (De)Serialization
+Reading or writen an array of 1000 items.
+
+### Date
+| Read     | Runtime   | Mean     | Ratio | Allocated | Alloc Ratio |
+|--------- |---------- |---------:|------:|----------:|------------:|
+| DateOnly | .NET 10.0 | 34.42 ns |  1.00 |  28.18 KB |        1.00 |
+| Date     | .NET 10.0 | 37.62 ns |  1.10 |  40.07 KB |        1.42 |
+|          |           |          |       |           |             |
+| DateOnly | .NET 11.0 | 29.01 ns |  1.00 |  28.18 KB |        1.00 |
+| Date     | .NET 11.0 | 32.98 ns |  1.15 |  40.07 KB |        1.42 |
+
+| Write    | Runtime   | Mean     | Ratio | Allocated | Alloc Ratio |
+|--------- |---------- |---------:|------:|----------:|------------:|
+| DateOnly | .NET 10.0 | 27.80 ns |  1.00 |      32 B |        1.00 |
+| Date     | .NET 10.0 | 53.96 ns |  1.95 |      32 B |        1.00 |
+|          |           |          |       |           |             |
+| DateOnly | .NET 11.0 | 22.07 ns |  1.00 |      32 B |        1.00 |
+| Date     | .NET 11.0 | 43.82 ns |  1.99 |      32 B |        1.00 |
+
+
 
 ## UUID
 The Base64 (default) implementation of a UUID is comparable with GUID.

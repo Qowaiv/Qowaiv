@@ -7,6 +7,9 @@ namespace Qowaiv.Text;
 
 internal static class ASCII
 {
+    /// <summary>ASCII " 48 | 0x22.</summary>
+    public const byte Quote = (byte)'"';
+
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsAscii(char c) => c < 127;

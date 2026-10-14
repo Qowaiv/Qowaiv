@@ -71,14 +71,13 @@ internal sealed class PercentageJsonConverter : JsonConverter<Percentage>
         var dec = DecimalMath.ChangeScale((decimal)value, 2);
 
         Span<byte> buffer = stackalloc byte[34];
-        buffer[0] = Quote;
+        buffer[0] = ASCII.Quote;
         Utf8Formatter.TryFormat(dec, buffer[1..], out var length);
         buffer[++length] = Symbol;
-        buffer[++length] = Quote;
+        buffer[++length] = ASCII.Quote;
         writer.WriteRawValue(buffer[..++length], skipInputValidation: true);
     }
 
-    private const byte Quote = (byte)'"';
     private const byte Symbol = (byte)'%';
 }
 

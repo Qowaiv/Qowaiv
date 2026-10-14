@@ -14,20 +14,24 @@ internal sealed class InternationalBankAccountNumberJsonConverter : JsonConverte
         => writer.WriteAsciiString(value.ToJson());
 
     /// <inheritdoc />
+    public override void WriteAsPropertyName(Utf8JsonWriter writer, [DisallowNull] InternationalBankAccountNumber value, JsonSerializerOptions options)
+        => writer.WriteAsciiString(value.ToJson());
+
+    /// <inheritdoc />
     public override InternationalBankAccountNumber Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         => reader.TokenType switch
         {
             JsonTokenType.Null => default,
-            JsonTokenType.String => Read(ref reader),
+            JsonTokenType.String => ReadString(ref reader),
             _ => reader.UnexpectedToken<InternationalBankAccountNumber>(),
         };
 
     /// <inheritdoc />
     public override InternationalBankAccountNumber ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        => Read(ref reader);
+        => ReadString(ref reader);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static InternationalBankAccountNumber Read(ref Utf8JsonReader reader)
+    private static InternationalBankAccountNumber ReadString(ref Utf8JsonReader reader)
         => InternationalBankAccountNumber.TryParse(reader.GetString(), null, out var iban)
         ? iban
         : throw new JsonException(QowaivMessages.FormatExceptionInternationalBankAccountNumber);

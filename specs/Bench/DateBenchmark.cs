@@ -8,9 +8,9 @@ public class DateBenchmark
 {
     [SimpleJob(RuntimeMoniker.Net10_0)]
     [SimpleJob(RuntimeMoniker.Net11_0)]
-    public class Date_Read_JSON : JsonReaderBenchmark
+    public class Date_read_JSON : JsonReaderBenchmark
     {
-        public Date_Read_JSON()
+        public Date_read_JSON()
             => JsonSerializer.Serialize(Stream, Data.Date.Svo, options: Default);
 
         [Benchmark(Baseline = true)]
@@ -24,13 +24,12 @@ public class DateBenchmark
 
     [SimpleJob(RuntimeMoniker.Net10_0)]
     [SimpleJob(RuntimeMoniker.Net11_0)]
-    public class Date_Wite_JSON : JsonWriterBenchmark
+    public class Date_write_JSON : JsonWriterBenchmark
     {
         [Benchmark(Baseline = true)]
         public Stream DateOnly()
         {
             JsonSerializer.Serialize(Writer, Data.Date.DateOnly, options: Default);
-            Writer.Flush();
             return Stream;
         }
 
@@ -38,7 +37,6 @@ public class DateBenchmark
         public Stream Date()
         {
             JsonSerializer.Serialize(Writer, Data.Date.Svo, options: Default);
-            Writer.Flush();
             return Stream;
         }
     }

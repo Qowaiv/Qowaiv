@@ -1,3 +1,5 @@
+using IbanNet;
+using IbanNet.Registry;
 using Qowaiv.Financial;
 using System.Collections.Immutable;
 
@@ -1027,9 +1029,9 @@ internal static class Data
     .OrderBy(_ => Rnd.Next()),
 ];
 
-        public static readonly ImmutableArray<string> Raw = [.. HumanReadable.Select(f => f.Replace(" ", string.Empty))];
+        public static readonly ImmutableArray<InternationalBankAccountNumber> Svo = [.. HumanReadable.Select(InternationalBankAccountNumber.Parse)];
 
-        public static readonly ImmutableArray<InternationalBankAccountNumber> Typed = [.. Raw.Select(InternationalBankAccountNumber.Parse)];
+        public static readonly ImmutableArray<string> String = [.. Svo.Select(s => s.ToJson()!)];
     }
 
     public static class YN

@@ -78,23 +78,38 @@ zeros. The plain multiplication is faster, but it does not normalize the scale.
 Reading or writen an array of 1000 items.
 
 ### Date
-| Read     | Runtime   | Mean     | Ratio | Allocated | Alloc Ratio |
-|--------- |---------- |---------:|------:|----------:|------------:|
-| DateOnly | .NET 10.0 | 34.42 ns |  1.00 |  28.18 KB |        1.00 |
-| Date     | .NET 10.0 | 37.62 ns |  1.10 |  40.07 KB |        1.42 |
-|          |           |          |       |           |             |
-| DateOnly | .NET 11.0 | 29.01 ns |  1.00 |  28.18 KB |        1.00 |
-| Date     | .NET 11.0 | 32.98 ns |  1.15 |  40.07 KB |        1.42 |
+| Read     | Runtime   | Mean      | Ratio | Allocated |
+|--------- |---------- |----------:|------:|----------:|
+| DateOnly | .NET 10.0 |  34.42 ns |  1.00 |  28.18 KB |
+| Date     | .NET 10.0 |  37.62 ns |  1.10 |  40.07 KB |
+|          |           |           |       |           |
+| DateOnly | .NET 11.0 |  29.01 ns |  1.00 |  28.18 KB | 
+| Date     | .NET 11.0 |  32.98 ns |  1.15 |  40.07 KB |
 
-| Write    | Runtime   | Mean     | Ratio | Allocated | Alloc Ratio |
-|--------- |---------- |---------:|------:|----------:|------------:|
-| DateOnly | .NET 10.0 | 27.80 ns |  1.00 |      32 B |        1.00 |
-| Date     | .NET 10.0 | 53.96 ns |  1.95 |      32 B |        1.00 |
-|          |           |          |       |           |             |
-| DateOnly | .NET 11.0 | 22.07 ns |  1.00 |      32 B |        1.00 |
-| Date     | .NET 11.0 | 43.82 ns |  1.99 |      32 B |        1.00 |
+| Write    | Runtime   | Mean      | Ratio | Allocated |
+|--------- |---------- |----------:|------:|----------:|
+| DateOnly | .NET 10.0 |  27.80 ns |  1.00 |      32 B |
+| Date     | .NET 10.0 |  53.96 ns |  1.95 |      32 B |
+|          |           |           |       |           |
+| DateOnly | .NET 11.0 |  22.07 ns |  1.00 |      32 B |
+| Date     | .NET 11.0 |  43.82 ns |  1.99 |      32 B |
 
-
+### IBAN
+| Read     | Runtime   | Mean      | Ratio | Allocated |
+|--------- |---------- |----------:|------:|----------:|
+| String   | .NET 10.0 |  66.14 ns |  1.00 | 110.64 KB |
+| Iban     | .NET 10.0 | 112.94 ns |  1.71 | 110.86 KB |
+|          |           |           |       |           |
+| String   | .NET 11.0 |  63.85 ns |  1.00 | 110.64 KB |
+| Iban     | .NET 11.0 | 111.69 ns |  1.75 | 110.86 KB |
+		   
+| Method   | Runtime   | Mean      | Ratio | Allocated |
+|--------- |---------- |----------:|------:|----------:|
+| String   | .NET 10.0 |  32.60 us |  1.00 |      32 B |
+| Iban     | .NET 10.0 |  29.25 us |  0.90 |      32 B |
+|          |           |           |       |           |
+| String   | .NET 11.0 |  27.76 us |  1.00 |      32 B |
+| Iban     | .NET 11.0 |  26.16 us |  0.95 |      32 B |
 
 ## UUID
 The Base64 (default) implementation of a UUID is comparable with GUID.

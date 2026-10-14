@@ -26,7 +26,7 @@ public static class QowaivType
         return code is >= TypeCode.SByte and <= TypeCode.Decimal;
     }
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     /// <summary>Returns true if the object type is a date (of any kind).</summary>
     /// <param name="objectType">
     /// The type to test for.
@@ -68,7 +68,7 @@ public static class QowaivType
     private static readonly Type[] DateTypes =
     [
         typeof(DateTime),
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
         typeof(DateOnly),
 #endif
         typeof(DateTimeOffset),

@@ -210,7 +210,7 @@ public readonly partial struct Percentage
     public static ushort operator -(ushort d, Percentage p) => (ushort)(d - (d * p));
 }
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 public readonly partial struct Percentage : INumber<Percentage>
     , IMultiplyOperators<Percentage, decimal, Percentage>, IDivisionOperators<Percentage, decimal, Percentage>
     , IMultiplyOperators<Percentage, double, Percentage>, IDivisionOperators<Percentage, double, Percentage>

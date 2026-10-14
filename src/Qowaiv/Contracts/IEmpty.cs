@@ -8,7 +8,7 @@ namespace Qowaiv;
 /// </typeparam>
 public interface IEmpty<TSelf> where TSelf : struct, IEmpty<TSelf>
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     /// <summary>Represents an empty/not set <typeparamref name="TSelf" />.</summary>
     static abstract TSelf Empty { get; }
 #endif

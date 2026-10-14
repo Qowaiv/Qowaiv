@@ -21,7 +21,7 @@ public partial struct YearMonth
 }
 
 public partial struct YearMonth : IEquatable<YearMonth>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<YearMonth, YearMonth, bool>
 #endif
 {
@@ -50,7 +50,7 @@ public partial struct YearMonth : IEquatable<YearMonth>
 }
 
 public partial struct YearMonth : IComparable, IComparable<YearMonth>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IComparisonOperators<YearMonth, YearMonth, bool>
 #endif
 {
@@ -138,7 +138,7 @@ public partial struct YearMonth : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct YearMonth
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<YearMonth>
 #endif
 {

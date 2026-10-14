@@ -30,7 +30,7 @@ internal class Get_Currency
     public void NLG_for_NL_on_the_last_day_of_its_validity()
         => Country.NL.GetCurrency(new Date(2001, 12, 31)).Should().Be(Currency.NLG);
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [Test]
     public void based_on_DateOnly()
         => Country.NL.GetCurrency(Svo.DateOnly).Should().Be(Currency.EUR);

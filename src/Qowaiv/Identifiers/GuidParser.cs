@@ -19,7 +19,7 @@ internal static class GuidParser
 
         var success = true;
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
         GuidLayout layout = default;
         Span<byte> bytes = System.Runtime.InteropServices.MemoryMarshal.AsBytes(new Span<GuidLayout>(ref layout));
 #else
@@ -48,7 +48,7 @@ internal static class GuidParser
         success &= Write0(s[20], bytes, 15);
         success &= WriteLast(s[21], bytes);
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
         guid = layout.ToGuid();
 #else
         guid = new Guid(bytes);

@@ -5,11 +5,11 @@ namespace Qowaiv;
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(ulong))]
 [OpenApiDataType(description: "Date span, specified in years, months and days.", example: "1Y+10M+16D", type: "string", format: "date-span", pattern: @"[+-]?[0-9]+Y[+-][0-9]+M[+-][0-9]+D")]
 [TypeConverter(typeof(DateSpanTypeConverter))]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.DateSpanJsonConverter))]
 #endif
 public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquatable<DateSpan>, IComparable, IComparable<DateSpan>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IUnaryPlusOperators<DateSpan, DateSpan>, IUnaryNegationOperators<DateSpan, DateSpan>
     , IAdditionOperators<DateSpan, DateSpan, DateSpan>, ISubtractionOperators<DateSpan, DateSpan, DateSpan>
     , IMinMaxValue<DateSpan>
@@ -18,7 +18,7 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     /// <summary>Represents the pattern of a (potential) valid year.</summary>
     private static readonly Regex Pattern = GetPattern();
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [GeneratedRegex(@"^(?<Years>([+-]?[0-9]{1,4}))Y(?<Months>([+-][0-9]{1,6}))M((?<Days>([+-][0-9]{1,7}))D)?$", RegOptions.IgnoreCase, RegOptions.TimeoutMilliseconds)]
     private static partial Regex GetPattern();
 #else

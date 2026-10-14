@@ -46,7 +46,7 @@ public partial struct Year : IEmpty<Year>
     public bool IsEmpty() => !HasValue;
 }
 public partial struct Year : IEquatable<Year>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<Year, Year, bool>
 #endif
 {
@@ -149,7 +149,7 @@ public partial struct Year : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct Year
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<Year>
 #endif
 {

@@ -95,10 +95,13 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
     /// Available for the convention based contract only.
     /// </remarks>
     [Pure]
-    public string? ToJson()
-        => HasValue
-        ? Encoding.UTF8.GetString(ToUtf8Json()[1..^1].ToArray())
-        : null;
+    public string? ToJson() => m_Value switch
+    {
+        0 => null,
+        1 => "no",
+        2 => "yes",
+        _ => "?",
+    };
 
     [Pure]
     internal ReadOnlySpan<byte> ToUtf8Json() => m_Value switch

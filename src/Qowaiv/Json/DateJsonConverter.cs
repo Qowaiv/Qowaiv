@@ -1,22 +1,47 @@
 #if NET10_0_OR_GREATER
 
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a date.</summary>
-internal sealed class DateJsonConverter : SvoJsonConverter<Date>
+internal sealed class DateJsonConverter : JsonConverter<Date>
 {
     /// <inheritdoc />
-    [Pure]
-    protected override Date FromJson(string? json) => Date.FromJson(json);
+    public override Date Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        => reader.TokenType switch
+        {
+            JsonTokenType.String => Read(ref reader),
+            JsonTokenType.Null => default,
+            _ => reader.UnexpectedToken<Date>(),
+        };
 
     /// <inheritdoc />
+    public override Date ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        => Read(ref reader);
+
     [Pure]
-    protected override Date FromJson(long json) => Date.FromJson(json);
+    private static Date Read(ref Utf8JsonReader reader)
+        => reader.TryGetDateTime(out var date)
+        ? (Date)date
+        : throw new JsonException(QowaivMessages.FormatExceptionDate);
 
     /// <inheritdoc />
-    [Pure]
-    protected override object? ToJson(Date svo) => svo.ToJson();
+    public override void Write(Utf8JsonWriter writer, Date value, JsonSerializerOptions options)
+        => Write(writer, value);
+
+    /// <inheritdoc />
+    public override void WriteAsPropertyName(Utf8JsonWriter writer, [DisallowNull] Date value, JsonSerializerOptions options)
+        => Write(writer, value);
+
+    private static void Write(Utf8JsonWriter writer, Date value)
+    {
+        // yyyy-MM-dd
+        Span<byte> buffer = stackalloc byte[10];
+        ((DateTime)value).TryFormat(buffer, out _, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+        writer.WriteStringValue(buffer);
+    }
 }
 
 #endif
-

@@ -1,14 +1,9 @@
 using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Jobs;
 using IbanNet;
 using IbanNet.Registry;
-using Microsoft.Diagnostics.Tracing.Parsers.Kernel;
-using Qowaiv.Json;
-using Qowaiv.Json.Financial;
-using System.Buffers;
-using System.Collections.Immutable;
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Iban = Qowaiv.Financial.InternationalBankAccountNumber;
 using IbanObject = IbanNet.Iban;
 
@@ -16,22 +11,38 @@ namespace Bench;
 
 public partial class IbanBenchmark
 {
-    public class IBAN_JSON : JsonWriterBenchmark
+    [SimpleJob(RuntimeMoniker.Net10_0)]
+    [SimpleJob(RuntimeMoniker.Net11_0)]
+    public class IBAN_read_JSON : JsonReaderBenchmark
+    {
+        public IBAN_read_JSON()
+            => JsonSerializer.Serialize(Stream1, Data.Iban.String, options: Default);
+
+        [Benchmark(Baseline = true)]
+        public string[]? String()
+            => JsonSerializer.Deserialize<string[]>(Stream1, options: Default);
+
+        [Benchmark]
+        public Iban[]? Iban()
+            => JsonSerializer.Deserialize<Iban[]>(Stream1, options: Default);
+    }
+
+    [SimpleJob(RuntimeMoniker.Net10_0)]
+    [SimpleJob(RuntimeMoniker.Net11_0)]
+    public class IBAN_write_JSON : JsonWriterBenchmark
     {
         [Benchmark(Baseline = true)]
-        public Stream Baseline()
+        public Stream String()
         {
-            JsonSerializer.Serialize(Writer, Data.Iban.Raw, options: Default);
-            Writer.Flush();
-            return Stream;
+            JsonSerializer.Serialize(Writer1, Data.Iban.String, options: Default);
+            return Stream1;
         }
 
         [Benchmark]
-        public Stream Qowaiv()
+        public Stream Iban()
         {
-            JsonSerializer.Serialize(Writer, Data.Iban.Typed, options: Default);
-            Writer.Flush();
-            return Stream;
+            JsonSerializer.Serialize(Writer1, Data.Iban.Svo, options: Default);
+            return Stream1;
         }
     }
 
@@ -53,11 +64,11 @@ public partial class IbanBenchmark
         [BenchmarkCategory("machine readable")]
         public Iban[] Qowaiv_MachineReadable()
         {
-            if (Ibans.Length < Data.Iban.Raw.Length) throw new NotSupportedException("Range check could not been removed");
+            if (Ibans.Length < Data.Iban.String.Length) throw new NotSupportedException("Range check could not been removed");
 
-            for (var i = 0; i < Data.Iban.Raw.Length; i++)
+            for (var i = 0; i < Data.Iban.String.Length; i++)
             {
-                Iban.TryParse(Data.Iban.Raw[i], null, out var iban);
+                Iban.TryParse(Data.Iban.String[i], null, out var iban);
                 Ibans[i] = iban;
             }
             return Ibans;
@@ -67,11 +78,11 @@ public partial class IbanBenchmark
         [BenchmarkCategory("machine readable")]
         public IbanObject?[] IbanNet_MachineReadable()
         {
-            if (IbanObjects.Length < Data.Iban.Raw.Length) throw new NotSupportedException("Range check could not been removed");
+            if (IbanObjects.Length < Data.Iban.String.Length) throw new NotSupportedException("Range check could not been removed");
 
-            for (var i = 0; i < Data.Iban.Raw.Length; i++)
+            for (var i = 0; i < Data.Iban.String.Length; i++)
             {
-                _ = IbanParser.TryParse(Data.Iban.Raw[i], out var iban);
+                _ = IbanParser.TryParse(Data.Iban.String[i], out var iban);
                 IbanObjects[i] = iban;
             }
             return IbanObjects;
@@ -81,11 +92,11 @@ public partial class IbanBenchmark
         [BenchmarkCategory("machine readable")]
         public string?[] Regex_MachineReadable()
         {
-            if (Strings.Length < Data.Iban.Raw.Length) throw new NotSupportedException("Range check could not been removed");
+            if (Strings.Length < Data.Iban.String.Length) throw new NotSupportedException("Range check could not been removed");
 
-            for (var i = 0; i < Data.Iban.Raw.Length; i++)
+            for (var i = 0; i < Data.Iban.String.Length; i++)
             {
-                Strings[i] = RegexBasedParser.Parse(Data.Iban.Raw[i]);
+                Strings[i] = RegexBasedParser.Parse(Data.Iban.String[i]);
             }
             return Strings;
         }

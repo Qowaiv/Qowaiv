@@ -1034,6 +1034,15 @@ internal static class Data
         public static readonly ImmutableArray<string> String = [.. Svo.Select(s => s.ToJson()!)];
     }
 
+    public static class Percentage
+    {
+        public static readonly ImmutableArray<decimal> Decimal = [.. Enumerable.Range(0, 1000).Select(_ => (Rnd.NextDecimal() * Rnd.NextDecimal() * 200m).Round(2))];
+        public static readonly ImmutableArray<Qowaiv.Percentage> Svo = [.. Decimal.Select(d => d.Percent())];
+
+        public static readonly ImmutableArray<string> String = [.. Svo.Select(p => p.ToJson())];
+    }
+
+
     public static class YN
     {
         public static readonly ImmutableArray<YesNo> Svo =

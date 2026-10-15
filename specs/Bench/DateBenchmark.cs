@@ -29,15 +29,15 @@ public class DateBenchmark
         [Benchmark(Baseline = true)]
         public Stream DateOnly()
         {
-            JsonSerializer.Serialize(Writer, Data.Date.DateOnly, options: Default);
-            return Stream;
+            JsonSerializer.Serialize(Writer1, Data.Date.DateOnly, options: Default);
+            return Stream1;
         }
 
         [Benchmark]
         public Stream Date()
         {
-            JsonSerializer.Serialize(Writer, Data.Date.Svo, options: Default);
-            return Stream;
+            JsonSerializer.Serialize(Writer1, Data.Date.Svo, options: Default);
+            return Stream1;
         }
     }
 }

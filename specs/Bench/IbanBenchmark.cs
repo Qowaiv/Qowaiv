@@ -34,15 +34,15 @@ public partial class IbanBenchmark
         [Benchmark(Baseline = true)]
         public Stream String()
         {
-            JsonSerializer.Serialize(Writer, Data.Iban.String, options: Default);
-            return Stream;
+            JsonSerializer.Serialize(Writer1, Data.Iban.String, options: Default);
+            return Stream1;
         }
 
         [Benchmark]
         public Stream Iban()
         {
-            JsonSerializer.Serialize(Writer, Data.Iban.Svo, options: Default);
-            return Stream;
+            JsonSerializer.Serialize(Writer1, Data.Iban.Svo, options: Default);
+            return Stream1;
         }
     }
 

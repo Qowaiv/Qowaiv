@@ -37,23 +37,22 @@ public class YesNoBenchmark
         [Benchmark(Baseline = true)]
         public Stream String()
         {
-            JsonSerializer.Serialize(Writer, Data.YN.String, options: Default);
-            return Stream;
+            JsonSerializer.Serialize(Writer1, Data.YN.String, options: Default);
+            return Stream1;
         }
 
         [Benchmark]
         public Stream Bool()
         {
-            JsonSerializer.Serialize(Writer, Data.YN.Bool, options: Default);
-            return Stream;
+            JsonSerializer.Serialize(Writer1, Data.YN.Bool, options: Default);
+            return Stream1;
         }
 
         [Benchmark]
         public Stream YesNo()
         {
-            JsonSerializer.Serialize(Writer, Data.YN.Svo, options: Default);
-            return Stream;
+            JsonSerializer.Serialize(Writer1, Data.YN.Svo, options: Default);
+            return Stream1;
         }
     }
-
 }

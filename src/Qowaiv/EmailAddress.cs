@@ -40,15 +40,9 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     /// Email Addresses are not considered to be single-label.
     /// </remarks>
     public bool HasSingleLabelDomain
-    {
-        get
-        {
-            var domain = GetDomain();
-            return domain.Length is not 0
-                && !domain.Contains('.')
-                && domain[^1] is not ']';
-        }
-    }
+        => GetDomain() is { Length: > 0 } domain
+        && !domain.Contains('.')
+        && domain[^1] is not ']';
 
     /// <summary>True if the domain part of the Email Address is an IP-address.</summary>
     /// <remarks>

@@ -36,12 +36,12 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     /// <summary>Indicates if the domain is a single-label domain (SLD).</summary>
     /// <remarks>
     /// Single-label (dotless) domains are syntactically valid, but are
-    /// rejected by most SMTP servers (e.g. info@localhost). IP-based 
+    /// rejected by most SMTP servers (e.g. info@localhost). IP-based
     /// Email Addresses are not considered to be single-label.
     /// </remarks>
     public bool HasSingleLabelDomain
     {
-        get 
+        get
         {
             var domain = GetDomain();
             return domain.Length is not 0
@@ -68,7 +68,11 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
                 var ip = domain.StartsWith("[IPv6:", StringComparison.Ordinal)
                     ? domain[6..^1]
                     : domain[1..^1];
+#if NETSTANDARD2_0
+                return IPAddress.Parse(ip.ToString());
+#else
                 return IPAddress.Parse(ip);
+#endif
             }
             else return IPAddress.None;
         }
@@ -76,8 +80,8 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
 
     [Pure]
     private ReadOnlySpan<char> GetDomain()
-        => m_Value is { Length: > 1 } 
-        ? m_Value.AsSpan(m_Value.IndexOf('@') + 1) 
+        => m_Value is { Length: > 1 }
+        ? m_Value.AsSpan(m_Value.IndexOf('@') + 1)
         : string.Empty;
 
     /// <summary>Gets the email address with a (prefix) display name.</summary>

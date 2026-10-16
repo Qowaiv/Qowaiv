@@ -31,7 +31,18 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     public string Local => m_Value is { Length: > 1 } ? m_Value[..m_Value.IndexOf('@')] : string.Empty;
 
     /// <summary>Gets the domain part of the Email Address.</summary>
-    public string Domain => m_Value is { Length: > 1 } ? m_Value[(m_Value.IndexOf('@') + 1)..] : string.Empty;
+    public string Domain => GetDomain().ToString();
+
+    /// <summary>Indicates if the domain is a single-label domain (SLD).</summary>
+    /// <remarks>
+    /// Single-label (dotless) domains are syntactically valid, but are
+    /// rejected by most SMTP servers (e.g. info@localhost). IP-based
+    /// Email Addresses are not considered to be single-label.
+    /// </remarks>
+    public bool HasSingleLabelDomain
+        => GetDomain() is { Length: > 0 } domain
+        && !domain.Contains('.')
+        && domain[^1] is not ']';
 
     /// <summary>True if the domain part of the Email Address is an IP-address.</summary>
     /// <remarks>
@@ -39,23 +50,33 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     /// can simply be checked by checking the last character of the string
     /// value.
     /// </remarks>
-    public bool IsIPBased => m_Value is { Length: > 1 } && m_Value[^1] == ']';
+    public bool IsIPBased => GetDomain() is [.., ']'];
 
     /// <summary>Gets the IP-Address if the Email Address is IP-based, otherwise <see cref="IPAddress.None" />.</summary>
     public IPAddress IPDomain
     {
         get
         {
-            if (IsIPBased)
+            if (GetDomain() is [.., ']'] domain)
             {
-                var ip = Domain.StartsWith("[IPv6:", StringComparison.Ordinal)
-                    ? Domain[6..^1]
-                    : Domain[1..^1];
+                var ip = domain.StartsWith("[IPv6:", StringComparison.Ordinal)
+                    ? domain[6..^1]
+                    : domain[1..^1];
+#if NETSTANDARD2_0
+                return IPAddress.Parse(ip.ToString());
+#else
                 return IPAddress.Parse(ip);
+#endif
             }
             else return IPAddress.None;
         }
     }
+
+    [Pure]
+    private ReadOnlySpan<char> GetDomain()
+        => m_Value is { Length: > 1 }
+        ? m_Value.AsSpan(m_Value.IndexOf('@') + 1)
+        : string.Empty;
 
     /// <summary>Gets the email address with a (prefix) display name.</summary>
     /// <param name="displayName">

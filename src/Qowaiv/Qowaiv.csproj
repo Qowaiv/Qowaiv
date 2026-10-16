@@ -46,6 +46,7 @@ v8.*
 - Drop boxing for ToString(), ToJson(), and ToXml().
 - LocalizedValues (for parsing) initalization and thread safety has been improved.
 - Unify string input only on stack when it fits.
+- Add EmailAddress.HasSingleLabelDomain.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

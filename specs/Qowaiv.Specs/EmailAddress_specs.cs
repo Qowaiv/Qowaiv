@@ -46,6 +46,17 @@ public class With_domain_logic
     public void IsIPBased_returns(bool result, EmailAddress svo)
         => svo.IsIPBased.Should().Be(result);
 
+    [TestCase(true, "info@localhost")]
+    [TestCase(true, "info.qowaiv@localhost")]
+    [TestCase(false, "info@qowaiv.org")]
+    [TestCase(false, "info@sub.qowaiv.org")]
+    [TestCase(false, "info@[192.0.2.1]")]
+    [TestCase(false, "info@[IPv6:2001:0db8:0000:0000:0000:ff00:0042:8329]")]
+    [TestCase(false, "?")]
+    [TestCase(false, "")]
+    public void HasSingleLabelDomain_returns(bool result, EmailAddress svo)
+        => svo.HasSingleLabelDomain.Should().Be(result);
+
     [TestCase("info@qowaiv.org", "255.255.255.255")]
     [TestCase("info@[192.0.2.1]", "192.0.2.1")]
     [TestCase("info@[IPv6:2001:0db8:0000:0000:0000:ff00:0042:8329]", "2001:db8::ff00:42:8329")]

@@ -41,6 +41,17 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     /// </remarks>
     public bool IsIPBased => m_Value is { Length: > 1 } && m_Value[^1] == ']';
 
+    /// <summary>True if the domain part of the Email Address consists of a single label (e.g. info@localhost).</summary>
+    /// <remarks>
+    /// Single-label (dotless) domains are syntactically valid, but are
+    /// rejected by most SMTP servers. IP-based Email Addresses are not
+    /// considered to be single-label.
+    /// </remarks>
+    public bool HasSingleLabelDomain
+        => m_Value is { Length: > 1 }
+        && !IsIPBased
+        && m_Value.IndexOf('.', m_Value.IndexOf('@')) == -1;
+
     /// <summary>Gets the IP-Address if the Email Address is IP-based, otherwise <see cref="IPAddress.None" />.</summary>
     public IPAddress IPDomain
     {

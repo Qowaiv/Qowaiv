@@ -40,6 +40,7 @@ v11.*
 - Drop support for .NET 9.0 and 8.0. (BREAKING)
 - Drop Clock.Yesterday() and Clock.Tomorrow(). (BREAKING)
 - Qowaiv SVO specific JSON converters have become internal. (BREAKING)
+- IEmpty<TSvo>, IUnknown<TSvo> inherrit from non-generic parents.
 v8.*
 - Extended language support.
 - IBAN supports Mongolia and Falkland Islands.

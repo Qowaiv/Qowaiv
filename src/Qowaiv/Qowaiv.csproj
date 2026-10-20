@@ -42,6 +42,7 @@ v11.*
 - Qowaiv SVO specific JSON converters have become internal. (BREAKING)
 - IEmpty<TSvo>, IUnknown<TSvo> inherit from non-generic parents.
 - double.ToDecimal(int, Qowaiv.DecimalRounding) and double.ToDecimal() in Qowaiv.Extensions, to simplify going from double to decimal.
+- Public extensions on decimal are moved from System.QowaivDecimalExtensions to Qowaiv.Mathematics.DecimalMath. (BREAKING)
 v8.*
 - Extended language support.
 - IBAN supports Mongolia and Falkland Islands.

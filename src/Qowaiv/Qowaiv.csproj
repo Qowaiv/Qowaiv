@@ -41,7 +41,7 @@ v11.*
 - Drop Clock.Yesterday() and Clock.Tomorrow(). (BREAKING)
 - Qowaiv SVO specific JSON converters have become internal. (BREAKING)
 - IEmpty<TSvo>, IUnknown<TSvo> inherit from non-generic parents.
-- double.Round(int, Qowaiv.DecimalRounding) in Qowaiv.Extensions, to simplify going from double to decimal.
+- double.ToDecimal(int, Qowaiv.DecimalRounding) and double.ToDecimal() in Qowaiv.Extensions, to simplify going from double to decimal.
 v8.*
 - Extended language support.
 - IBAN supports Mongolia and Falkland Islands.

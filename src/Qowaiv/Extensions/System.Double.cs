@@ -12,10 +12,17 @@ public static class QowaivDoubleExtensions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal bool IsInRange(double low, double max) => value >= low && value <= max;
 
-        /// <inheritdoc  cref="DecimalMath.Round(decimal, int, DecimalRounding)" />
+        /// <summary>Casts to a <see cref="decimal" /> keeping all floating point info.</summary>
         [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public decimal Round(int decimals, DecimalRounding mode)
+        public decimal ToDecimal() => (decimal)value;
+
+        /// <summary>
+        /// Casts with applying <see cref="DecimalMath.Round(decimal, int, DecimalRounding)" />.
+        /// </summary>
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public decimal ToDecimal(int decimals, DecimalRounding mode)
             => DecimalMath.Round((decimal)value, decimals, mode);
     }
 }

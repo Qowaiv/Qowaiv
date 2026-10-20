@@ -10,7 +10,259 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Extensions.QowaivDoubleExtensions</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.IEmpty</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.IUnknown</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.Chemistry.CasRegistryNumberJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.DateJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.DateSpanJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.EmailAddressJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.Financial.AmountJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.Financial.BusinessIdentifierCodeJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.Financial.CurrencyJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.Financial.InternationalBankAccountNumberJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.Financial.MoneyJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.Globalization.CountryJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.HouseNumberJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.IO.StreamSizeJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.LocalDateTimeJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.Mathematics.FractionJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.MonthJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.MonthSpanJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.PercentageJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.PostalCodeJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.Security.Cryptography.CryptographicSeedJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.Security.SecretJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.SexJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.Statistics.EloJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.Sustainability.EnergyLabelJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.UuidJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.Web.InternetMediaTypeJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.WeekDateJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.YearJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.YearMonthJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.YearSpanJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Json.YesNoJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.DecimalRoundingExtensions.&lt;G&gt;$F26A5AA8AFA93E9784606ADC62B1079B.&lt;M&gt;$190034D3B0B9E1998DA8420C557DA021</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Extensions.QowaivDoubleExtensions</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.IEmpty</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.IUnknown</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -290,6 +542,27 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Extensions.QowaivDoubleExtensions</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.IEmpty</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.IUnknown</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Json.Chemistry.CasRegistryNumberJsonConverter</Target>
     <Left>lib/net9.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
@@ -556,91 +829,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.Chemistry.CasRegistryNumberJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.DateJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.DateSpanJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.EmailAddressJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.Financial.AmountJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.Financial.BusinessIdentifierCodeJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.Financial.CurrencyJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.Financial.InternationalBankAccountNumberJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.Financial.MoneyJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.Globalization.CountryJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Json.Globalization.CultureInfoJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.HouseNumberJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.IO.StreamSizeJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.LocalDateTimeJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.Mathematics.FractionJsonConverter</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
   </Suppression>
@@ -652,109 +841,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.MonthJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.MonthSpanJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.PercentageJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.PostalCodeJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.Security.Cryptography.CryptographicSeedJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.Security.SecretJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.SexJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.Statistics.EloJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.Sustainability.EnergyLabelJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Json.SvoJsonConverter`1</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.UuidJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Json.Web.HttpMethodJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.Web.InternetMediaTypeJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.WeekDateJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.YearJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.YearMonthJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.YearSpanJsonConverter</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Json.YesNoJsonConverter</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
   </Suppression>
@@ -790,8 +883,71 @@
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Extensions.QowaivDoubleExtensions</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.IEmpty</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.IUnknown</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.Tomorrow</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.Tomorrow(System.TimeZoneInfo)</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.Yesterday</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.Yesterday(System.TimeZoneInfo)</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.EmailAddress.get_HasSingleLabelDomain</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Globalization.Country.get_IsIndependent</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Percentage.Complement</Target>
     <Left>lib/net10.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -813,6 +969,34 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Clock.SetTimeForCurrentContext(System.Func{System.DateOnly})</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.Tomorrow</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.Tomorrow(System.TimeZoneInfo)</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.Yesterday</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.Yesterday(System.TimeZoneInfo)</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -861,6 +1045,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.EmailAddress.get_HasSingleLabelDomain</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Financial.Currency.ExistsOnDate(System.DateOnly)</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
@@ -890,6 +1081,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Globalization.Country.ExistsOnDate(System.DateOnly)</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.Country.get_IsIndependent</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -974,13 +1172,6 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Percentage.Complement</Target>
-    <Left>lib/net10.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.Country.get_IsIndependent</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1050,6 +1241,34 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.Tomorrow</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.Tomorrow(System.TimeZoneInfo)</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.Yesterday</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.Yesterday(System.TimeZoneInfo)</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Date.op_Explicit(System.DateOnly)~Qowaiv.Date</Target>
     <Left>lib/net9.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
@@ -1092,6 +1311,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.EmailAddress.get_HasSingleLabelDomain</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Financial.Currency.ExistsOnDate(System.DateOnly)</Target>
     <Left>lib/net9.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
@@ -1121,6 +1347,13 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Globalization.Country.ExistsOnDate(System.DateOnly)</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.Country.get_IsIndependent</Target>
     <Left>lib/net9.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1205,20 +1438,6 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Percentage.Complement</Target>
-    <Left>lib/net8.0/Qowaiv.dll</Left>
-    <Right>lib/net8.0/Qowaiv.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.Country.get_IsIndependent</Target>
-    <Left>lib/net9.0/Qowaiv.dll</Left>
-    <Right>lib/net9.0/Qowaiv.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0002</DiagnosticId>
-    <Target>M:Qowaiv.Percentage.Complement</Target>
     <Left>lib/net9.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1453,6 +1672,41 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.Tomorrow</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.Tomorrow(System.TimeZoneInfo)</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.Yesterday</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.Clock.Yesterday(System.TimeZoneInfo)</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Qowaiv.EmailAddress.get_HasSingleLabelDomain</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Qowaiv.Globalization.Country.get_IsIndependent</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
@@ -1491,6 +1745,139 @@
     <Target>Qowaiv, Version=8.1.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Chemistry.CasRegistryNumber</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.EmailAddress</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Financial.BusinessIdentifierCode</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Financial.Currency</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Financial.InternationalBankAccountNumber</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Globalization.Country</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.HouseNumber</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.IEmpty`1</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.IUnknown`1</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Month</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.PostalCode</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Security.Cryptography.CryptographicSeed</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Security.Secret</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Sex</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Sustainability.EnergyLabel</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Uuid</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Web.InternetMediaType</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Year</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.YesNo</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -1586,7 +1973,21 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.IEmpty`1</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
     <Target>T:Qowaiv.IO.StreamSize</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.IUnknown`1</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1629,6 +2030,20 @@
   <Suppression>
     <DiagnosticId>CP0008</DiagnosticId>
     <Target>T:Qowaiv.PostalCode</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Security.Cryptography.CryptographicSeed</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Security.Secret</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1831,7 +2246,21 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.IEmpty`1</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
     <Target>T:Qowaiv.IO.StreamSize</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.IUnknown`1</Target>
     <Left>lib/net9.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1874,6 +2303,20 @@
   <Suppression>
     <DiagnosticId>CP0008</DiagnosticId>
     <Target>T:Qowaiv.PostalCode</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Security.Cryptography.CryptographicSeed</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Security.Secret</Target>
     <Left>lib/net9.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -2192,6 +2635,181 @@
     <Target>T:Qowaiv.YesNo</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Chemistry.CasRegistryNumber</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.EmailAddress</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Financial.BusinessIdentifierCode</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Financial.Currency</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Financial.InternationalBankAccountNumber</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Globalization.Country</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.HouseNumber</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.IEmpty`1</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.IUnknown`1</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Month</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.PostalCode</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Security.Cryptography.CryptographicSeed</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Security.Secret</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Sex</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Sustainability.EnergyLabel</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Uuid</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Web.InternetMediaType</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Year</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.YesNo</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0009</DiagnosticId>
+    <Target>T:Qowaiv.Json.Web.HttpMethodJsonConverter</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>T:Qowaiv.HouseNumber:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>T:Qowaiv.HouseNumber:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>T:Qowaiv.Sustainability.EnergyLabel:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0014</DiagnosticId>
+    <Target>T:Qowaiv.Sustainability.EnergyLabel:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0014</DiagnosticId>
@@ -13696,7 +14314,77 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Json.Mathematics.FractionJsonConverter.FromJson(System.Double):[T:System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute]</Target>
+    <Target>M:Qowaiv.HouseNumber.CompareTo(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.Equals(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.FromJson(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.Parse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.Parse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.ToJson:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.ToString(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.TryParse(System.String,Qowaiv.HouseNumber@):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.TryParse(System.String,System.IFormatProvider,Qowaiv.HouseNumber@):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.TryParse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.TryParse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/net10.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -13704,6 +14392,83 @@
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.NumberToPercentageExtensions.Percent(System.Double):[T:System.ObsoleteAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.CompareTo(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.Equals(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.FromJson(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.Parse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.Parse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.ToJson:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.ToString(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.TryParse(System.String,Qowaiv.Sustainability.EnergyLabel@):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.TryParse(System.String,System.IFormatProvider,Qowaiv.Sustainability.EnergyLabel@):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.TryParse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.TryParse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/net10.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -15774,7 +16539,43 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.CompareTo(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.Equals(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.HouseNumber.Equals(System.Object)$0:[T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.FromJson(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.Parse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.Parse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.ToJson:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
   </Suppression>
@@ -15804,6 +16605,12 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.ToString(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.HouseNumber.ToString(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
@@ -15811,6 +16618,30 @@
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.HouseNumber.ToString(System.String)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.TryParse(System.String,Qowaiv.HouseNumber@):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.TryParse(System.String,System.IFormatProvider,Qowaiv.HouseNumber@):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.TryParse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.HouseNumber.TryParse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
   </Suppression>
@@ -16968,7 +17799,25 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.CompareTo(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.Equals(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Sustainability.EnergyLabel.Equals(System.Object)$0:[T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.FromJson(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
   </Suppression>
@@ -16981,6 +17830,24 @@
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Sustainability.EnergyLabel.op_Explicit(System.String)~Qowaiv.Sustainability.EnergyLabel:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.Parse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.Parse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.ToJson:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
   </Suppression>
@@ -17010,6 +17877,12 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.ToString(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Sustainability.EnergyLabel.ToString(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
@@ -17017,6 +17890,30 @@
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.Sustainability.EnergyLabel.ToString(System.String)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.TryParse(System.String,Qowaiv.Sustainability.EnergyLabel@):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.TryParse(System.String,System.IFormatProvider,Qowaiv.Sustainability.EnergyLabel@):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.TryParse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Sustainability.EnergyLabel.TryParse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
   </Suppression>
@@ -18192,18 +19089,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>T:Qowaiv.HouseNumber:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>T:Qowaiv.HouseNumber:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
     <Target>T:Qowaiv.HouseNumber:[T:System.Text.Json.Serialization.JsonConverterAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
@@ -18391,18 +19276,6 @@
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>T:Qowaiv.Statistics.Elo:[T:System.Text.Json.Serialization.JsonConverterAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>T:Qowaiv.Sustainability.EnergyLabel:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
-    <Right>lib/net10.0/Qowaiv.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>T:Qowaiv.Sustainability.EnergyLabel:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
   </Suppression>

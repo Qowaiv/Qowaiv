@@ -200,8 +200,6 @@ public class Can_be_operated_on
     public void increment()
     {
         Amount amount = 41.17m.Amount();
-        var dec = (decimal)amount;
-        var scale = dec.Scale;
         amount++;
         amount.Should().Be(Svo.Amount);
     }

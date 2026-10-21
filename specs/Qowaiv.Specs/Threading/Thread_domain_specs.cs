@@ -31,14 +31,14 @@ public class Gets
     [Test]
     public void value_only_for_current_thread()
     {
-        ThreadDomain.Current.Set(3.1418.Percent());
+        ThreadDomain.Current.Set(3.1418m.Percent());
 
         Task.Factory.StartNew
         (
-            () => ThreadDomain.Current.Get<Percentage>().Should().Be(0.Percent(), because: "Retrieved in another thread.")
+            () => ThreadDomain.Current.Get<Percentage>().Should().Be(0m.Percent(), because: "Retrieved in another thread.")
         );
 
-        ThreadDomain.Current.Get<Percentage>().Should().Be(3.1418.Percent(), because: "This thread has a set value.");
+        ThreadDomain.Current.Get<Percentage>().Should().Be(3.1418m.Percent(), because: "This thread has a set value.");
     }
 
     [Test]

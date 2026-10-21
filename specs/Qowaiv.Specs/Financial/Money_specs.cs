@@ -428,7 +428,7 @@ public class Can_be_operated_on
     public void add_percentage()
     {
         var money = 16 + Currency.EUR;
-        (money + 25.Percent()).Should().Be(20 + Currency.EUR);
+        (money + 25m.Percent()).Should().Be(20 + Currency.EUR);
     }
 
     [Test]
@@ -443,14 +443,14 @@ public class Can_be_operated_on
     public void subtract_percentage()
     {
         var money = 16 + Currency.EUR;
-        (money - 25.Percent()).Should().Be(12 + Currency.EUR);
+        (money - 25m.Percent()).Should().Be(12 + Currency.EUR);
     }
 
     [Test]
     public void multiply_percentage()
     {
         var money = 100.40m + Currency.USD;
-        (money * 50.Percent()).Should().Be(50.20m + Currency.USD);
+        (money * 50m.Percent()).Should().Be(50.20m + Currency.USD);
     }
 
     [Test]
@@ -520,7 +520,7 @@ public class Can_be_operated_on
     public void divide_percentage()
     {
         var money = 100.40m + Currency.USD;
-        (money / 50.Percent()).Should().Be(200.8m + Currency.USD);
+        (money / 50m.Percent()).Should().Be(200.8m + Currency.USD);
     }
 
     [Test]

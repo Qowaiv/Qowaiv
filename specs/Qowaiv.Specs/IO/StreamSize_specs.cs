@@ -617,7 +617,7 @@ public class Can_be_operated_on
     public void multiply_by_percentage()
     {
         StreamSize act = 42;
-        act *= 50.Percent();
+        act *= 50m.Percent();
         act.Should().Be(21);
     }
 

@@ -14,8 +14,8 @@ public class Formats
     [Test]
     public void Percentage()
     {
-        var formatted = 14.17.Percent().ToString();
-        var interpolated = $"{14.17.Percent()}";
+        var formatted = 14.17m.Percent().ToString();
+        var interpolated = $"{14.17m.Percent()}";
         interpolated.Should().Be(formatted);
     }
 

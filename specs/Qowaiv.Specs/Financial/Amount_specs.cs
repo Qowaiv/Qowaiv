@@ -200,8 +200,6 @@ public class Can_be_operated_on
     public void increment()
     {
         Amount amount = 41.17m.Amount();
-        var dec = (decimal)amount;
-        var scale = dec.Scale;
         amount++;
         amount.Should().Be(Svo.Amount);
     }
@@ -218,7 +216,7 @@ public class Can_be_operated_on
     public void add_percentage()
     {
         Amount amount = 40.00m.Amount();
-        (amount + 10.Percent()).Should().Be(44.00m.Amount());
+        (amount + 10m.Percent()).Should().Be(44.00m.Amount());
     }
 
     [Test]
@@ -233,12 +231,12 @@ public class Can_be_operated_on
     public void subtract_percentage()
     {
         Amount amount = 40.00m.Amount();
-        (amount - 25.Percent()).Should().Be(30.00m.Amount());
+        (amount - 25m.Percent()).Should().Be(30.00m.Amount());
     }
 
     [Test]
     public void multiply_percentage()
-        => (100.40m.Amount() * 50.Percent()).Should().Be(50.20m.Amount());
+        => (100.40m.Amount() * 50m.Percent()).Should().Be(50.20m.Amount());
 
     [Test]
     public void multiply_float()
@@ -278,7 +276,7 @@ public class Can_be_operated_on
 
     [Test]
     public void divide_percentage()
-        => (100.40m.Amount() / 50.Percent()).Should().Be(200.80m.Amount());
+        => (100.40m.Amount() / 50m.Percent()).Should().Be(200.80m.Amount());
 
     [Test]
     public void divide_float()

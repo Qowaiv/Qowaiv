@@ -21,11 +21,11 @@ public class Percentage_as_INumber
 
     [Test]
     public void Additive_identity_Is_1_percent()
-    => Number.AdditiveIdentity<Percentage>().Should().Be(1.Percent());
+    => Number.AdditiveIdentity<Percentage>().Should().Be(1m.Percent());
 
     [Test]
     public void Multiplicative_identity_is_100_percent()
-        => Number.MultiplicativeIdentity<Percentage>().Should().Be(100.Percent());
+        => Number.MultiplicativeIdentity<Percentage>().Should().Be(100m.Percent());
 
     [Test]
     public void Is_canonical_equal_to_decimal([Random(Min, Max, Count)] double d)

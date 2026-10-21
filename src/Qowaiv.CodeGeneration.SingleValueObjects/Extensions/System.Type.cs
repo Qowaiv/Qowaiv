@@ -105,8 +105,7 @@ internal static class QowaivCodeGenerationTypeExtensions
                 .AppendPrefix(type, withNamespace)
                 .Append(type.Name)
                 .Append('<')
-                .Append(new string(',', type.GetGenericArguments().Length - 1))
-                .Append('>');
+                .Append(',', type.GetGenericArguments().Length - 1).Append('>');
         }
         else if (type.GetGenericArguments() is { Length: > 0 } genericArguments)
         {

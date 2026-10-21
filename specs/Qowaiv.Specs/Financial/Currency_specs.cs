@@ -240,7 +240,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.en_GB.Scoped())
         {
-            var number = (Amount)1200.34m;
+            var number = 1_200.34m.Amount();
             number.ToString("C", Currency.BYR).Should().Be("BYR1,200");
         }
     }
@@ -250,7 +250,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.en_GB.Scoped())
         {
-            var number = (Amount)12.34m;
+            var number = 12.34m.Amount();
             number.ToString("C", Currency.ANG).Should().Be("NAf.12.34");
         }
     }

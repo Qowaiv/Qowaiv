@@ -10,11 +10,10 @@ public class Decimal_scale
     [Test]
     public void _0_for_100_Percent()
     {
-        Scale(100.Percent()).Should().Be(0);
-        Scale(100d.Percent()).Should().Be(0);
         Scale(100m.Percent()).Should().Be(0);
         Scale(100.0m.Percent()).Should().Be(0);
         Scale(100.00m.Percent()).Should().Be(0);
+        Scale(100.000m.Percent()).Should().Be(0);
     }
 
     [Test]
@@ -228,14 +227,14 @@ public class Can_be_created_with_percentage_extension
     [Test]
     public void from_int()
     {
-        var p = 3.Percent();
+        var p = 3m.Percent();
         p.ToString(CultureInfo.InvariantCulture).Should().Be("3%");
     }
 
     [Test]
     public void from_double()
     {
-        var p = 3.14.Percent();
+        var p = 3.14m.Percent();
         p.Round(4).ToString(CultureInfo.InvariantCulture).Should().Be("3.14%");
     }
 
@@ -376,9 +375,9 @@ public class Is_comparable
         {
                 Percentage.Zero,
                 Percentage.One,
-                17.51.Percent(),
-                33.33.Percent(),
-                84.17.Percent(),
+                17.51m.Percent(),
+                33.33m.Percent(),
+                84.17m.Percent(),
                 Percentage.Hundred,
             };
         var list = new List<Percentage> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
@@ -389,8 +388,8 @@ public class Is_comparable
     [Test]
     public void _operators_for_different_values()
     {
-        Percentage smaller = 17.51.Percent();
-        Percentage bigger = 84.17.Percent();
+        Percentage smaller = 17.51m.Percent();
+        Percentage bigger = 84.17m.Percent();
         (smaller < bigger).Should().BeTrue();
         (smaller <= bigger).Should().BeTrue();
         (smaller > bigger).Should().BeFalse();
@@ -400,8 +399,8 @@ public class Is_comparable
     [Test]
     public void _operators_for_equal_values()
     {
-        Percentage left = 17.51.Percent();
-        Percentage right = 17.51.Percent();
+        Percentage left = 17.51m.Percent();
+        Percentage right = 17.51m.Percent();
         (left < right).Should().BeFalse();
         (left <= right).Should().BeTrue();
         (left > right).Should().BeFalse();
@@ -445,71 +444,71 @@ public class Can_be_multiplied_by
     [Test]
     public void _percentage()
     {
-        var multiplied = 17.Percent() * 42.Percent();
+        var multiplied = 17m.Percent() * 42m.Percent();
         multiplied.Should().Be(7.14m.Percent());
     }
 
     [Test]
     public void _decimal()
     {
-        var multiplied = 17.Percent() * 0.42m;
+        var multiplied = 17m.Percent() * 0.42m;
         multiplied.Should().Be(7.14m.Percent());
     }
 
     [Test]
     public void _double()
     {
-        var multiplied = 17.Percent() * 0.42;
+        var multiplied = 17m.Percent() * 0.42;
         multiplied.Round(4).Should().Be(7.14m.Percent());
     }
 
     [Test]
     public void _float()
     {
-        var multiplied = 17.Percent() * 0.42F;
+        var multiplied = 17m.Percent() * 0.42F;
         multiplied.Round(4).Should().Be(7.14m.Percent());
     }
 
     [Test]
     public void _int()
     {
-        var multiplied = 17.Percent() * 2;
-        multiplied.Should().Be(34.Percent());
+        var multiplied = 17m.Percent() * 2;
+        multiplied.Should().Be(34m.Percent());
     }
 
     [Test]
     public void _uint()
     {
-        var multiplied = 17.Percent() * 2U;
-        multiplied.Should().Be(34.Percent());
+        var multiplied = 17m.Percent() * 2U;
+        multiplied.Should().Be(34m.Percent());
     }
 
     [Test]
     public void _long()
     {
-        var multiplied = 17.Percent() * 2L;
-        multiplied.Should().Be(34.Percent());
+        var multiplied = 17m.Percent() * 2L;
+        multiplied.Should().Be(34m.Percent());
     }
 
     [Test]
     public void _ulong()
     {
-        var multiplied = 17.Percent() * 2UL;
-        multiplied.Should().Be(34.Percent());
+        var multiplied = 17m.Percent() * 2UL;
+        multiplied.Should().Be(34m.Percent());
     }
 
     [Test]
     public void _short()
     {
-        var multiplied = 17.Percent() * ((short)2);
-        multiplied.Should().Be(34.Percent());
+        var multiplied = 17m.Percent() * ((short)2);
+        multiplied.Should().Be(34m.Percent());
     }
 
     [Test]
     public void _ushort()
     {
-        var multiplied = 17.Percent() * ((ushort)2);
-        multiplied.Should().Be(34.Percent());
+        var multiplied = 17m.Percent() * ((ushort)2);
+        multiplied.Should().Be(34m.Percent());
     }
 }
 
@@ -518,71 +517,71 @@ public class Can_be_divided_by
     [Test]
     public void _percentage()
     {
-        var multiplied = 17.Percent() / 50.Percent();
-        multiplied.Should().Be(34.Percent());
+        var multiplied = 17m.Percent() / 50m.Percent();
+        multiplied.Should().Be(34m.Percent());
     }
 
     [Test]
     public void _decimal()
     {
-        var multiplied = 17.Percent() / 0.5m;
-        multiplied.Should().Be(34.Percent());
+        var multiplied = 17m.Percent() / 0.5m;
+        multiplied.Should().Be(34m.Percent());
     }
 
     [Test]
     public void _double()
     {
-        var multiplied = 17.Percent() / 0.5;
-        multiplied.Should().Be(34.Percent());
+        var multiplied = 17m.Percent() / 0.5;
+        multiplied.Should().Be(34m.Percent());
     }
 
     [Test]
     public void _float()
     {
-        var multiplied = 17.Percent() / 0.5F;
-        multiplied.Should().Be(34.Percent());
+        var multiplied = 17m.Percent() / 0.5F;
+        multiplied.Should().Be(34m.Percent());
     }
 
     [Test]
     public void _int()
     {
-        var multiplied = 17.Percent() / 2;
-        multiplied.Should().Be(8.5.Percent());
+        var multiplied = 17m.Percent() / 2;
+        multiplied.Should().Be(8.5m.Percent());
     }
 
     [Test]
     public void _uint()
     {
-        var multiplied = 17.Percent() / 2U;
-        multiplied.Should().Be(8.5.Percent());
+        var multiplied = 17m.Percent() / 2U;
+        multiplied.Should().Be(8.5m.Percent());
     }
 
     [Test]
     public void _long()
     {
-        var multiplied = 17.Percent() / 2L;
-        multiplied.Should().Be(8.5.Percent());
+        var multiplied = 17m.Percent() / 2L;
+        multiplied.Should().Be(8.5m.Percent());
     }
 
     [Test]
     public void _ulong()
     {
-        var multiplied = 17.Percent() / 2UL;
-        multiplied.Should().Be(8.5.Percent());
+        var multiplied = 17m.Percent() / 2UL;
+        multiplied.Should().Be(8.5m.Percent());
     }
 
     [Test]
     public void _short()
     {
-        var multiplied = 17.Percent() / ((short)2);
-        multiplied.Should().Be(8.5.Percent());
+        var multiplied = 17m.Percent() / ((short)2);
+        multiplied.Should().Be(8.5m.Percent());
     }
 
     [Test]
     public void _ushort()
     {
-        var multiplied = 17.Percent() / ((ushort)2);
-        multiplied.Should().Be(8.5.Percent());
+        var multiplied = 17m.Percent() / ((ushort)2);
+        multiplied.Should().Be(8.5m.Percent());
     }
 }
 
@@ -591,84 +590,84 @@ public class Can_be_added_to
     [Test]
     public void _percentage()
     {
-        var addition = 13.Percent() + 34.Percent();
-        addition.Should().Be(47.Percent());
+        var addition = 13m.Percent() + 34m.Percent();
+        addition.Should().Be(47m.Percent());
     }
 
     [Test]
     public void _amount()
     {
-        var addition = 44.Amount() + 50.Percent();
+        var addition = 44.Amount() + 50m.Percent();
         addition.Should().Be(66.Amount());
     }
 
     [Test]
     public void _money()
     {
-        var addition = (44.6m + Currency.EUR) + 50.Percent();
+        var addition = (44.6m + Currency.EUR) + 50m.Percent();
         addition.Should().Be(66.9m + Currency.EUR);
     }
 
     [Test]
     public void _decimal()
     {
-        var addition = 34.586m + 75.Percent();
+        var addition = 34.586m + 75m.Percent();
         addition.Should().Be(60.5255m);
     }
 
     [Test]
     public void _double()
     {
-        var addition = 34.586 + 75.Percent();
+        var addition = 34.586 + 75m.Percent();
         addition.Should().BeApproximately(60.5255, 0.00001);
     }
 
     [Test]
     public void _float()
     {
-        var addition = 34.586f + 75.Percent();
+        var addition = 34.586f + 75m.Percent();
         addition.Should().BeApproximately(60.5255f, 0.00001f);
     }
 
     [Test]
     public void _int()
     {
-        var addition = 400 + 17.Percent();
+        var addition = 400 + 17m.Percent();
         addition.Should().Be(468);
     }
 
     [Test]
     public void _uint()
     {
-        var addition = 400U + 17.Percent();
+        var addition = 400U + 17m.Percent();
         addition.Should().Be(468U);
     }
 
     [Test]
     public void _long()
     {
-        var addition = 400L + 17.Percent();
+        var addition = 400L + 17m.Percent();
         addition.Should().Be(468L);
     }
 
     [Test]
     public void _ulong()
     {
-        var addition = 400UL + 17.Percent();
+        var addition = 400UL + 17m.Percent();
         addition.Should().Be(468UL);
     }
 
     [Test]
     public void _short()
     {
-        var addition = ((short)400) + 17.Percent();
+        var addition = ((short)400) + 17m.Percent();
         addition.Should().Be(468);
     }
 
     [Test]
     public void _ushort()
     {
-        var addition = ((ushort)400) + 17.Percent();
+        var addition = ((ushort)400) + 17m.Percent();
         addition.Should().Be(468);
     }
 }
@@ -678,84 +677,84 @@ public class Can_be_subtracted_from
     [Test]
     public void _percentage()
     {
-        var addition = 13.Percent() - 34.Percent();
-        addition.Should().Be(-21.Percent());
+        var addition = 13m.Percent() - 34m.Percent();
+        addition.Should().Be(-21m.Percent());
     }
 
     [Test]
     public void _amount()
     {
-        var addition = 44.60.Amount() - 50.Percent();
-        addition.Should().Be(22.30.Amount());
+        var addition = 44.60m.Amount() - 50m.Percent();
+        addition.Should().Be(22.30m.Amount());
     }
 
     [Test]
     public void _money()
     {
-        var addition = (44.6 + Currency.EUR) - 50.Percent();
+        var addition = (44.6 + Currency.EUR) - 50m.Percent();
         addition.Should().Be(22.3 + Currency.EUR);
     }
 
     [Test]
     public void _decimal()
     {
-        var addition = 34.586m - 75.Percent();
+        var addition = 34.586m - 75m.Percent();
         addition.Should().Be(8.6465m);
     }
 
     [Test]
     public void _double()
     {
-        var addition = 34.586 - 75.Percent();
+        var addition = 34.586 - 75m.Percent();
         addition.Should().BeApproximately(8.6465, 0.00001);
     }
 
     [Test]
     public void _float()
     {
-        var addition = 34.586f - 75.Percent();
+        var addition = 34.586f - 75m.Percent();
         addition.Should().BeApproximately(8.6465f, 0.00001f);
     }
 
     [Test]
     public void _int()
     {
-        var addition = 400 - 17.Percent();
+        var addition = 400 - 17m.Percent();
         addition.Should().Be(332);
     }
 
     [Test]
     public void _uint()
     {
-        var addition = 400U - 17.Percent();
+        var addition = 400U - 17m.Percent();
         addition.Should().Be(332U);
     }
 
     [Test]
     public void _long()
     {
-        var addition = 400L - 17.Percent();
+        var addition = 400L - 17m.Percent();
         addition.Should().Be(332L);
     }
 
     [Test]
     public void _ulong()
     {
-        var addition = 400UL - 17.Percent();
+        var addition = 400UL - 17m.Percent();
         addition.Should().Be(332UL);
     }
 
     [Test]
     public void _short()
     {
-        var addition = ((short)400) - 17.Percent();
+        var addition = ((short)400) - 17m.Percent();
         addition.Should().Be(332);
     }
 
     [Test]
     public void _ushort()
     {
-        var addition = ((ushort)400) - 17.Percent();
+        var addition = ((ushort)400) - 17m.Percent();
         addition.Should().Be(332);
     }
 }
@@ -765,84 +764,84 @@ public class Can_get_a_percentage_of
     [Test]
     public void _percentage()
     {
-        var addition = 13.Percent() * 34.Percent();
+        var addition = 13m.Percent() * 34m.Percent();
         addition.Should().Be(4.42m.Percent());
     }
 
     [Test]
     public void _amount()
     {
-        var addition = 44.60m.Amount() * 80.Percent();
+        var addition = 44.60m.Amount() * 80m.Percent();
         addition.Should().Be(35.68m.Amount());
     }
 
     [Test]
     public void _money()
     {
-        var addition = (44.6m + Currency.EUR) * 80.Percent();
+        var addition = (44.6m + Currency.EUR) * 80m.Percent();
         addition.Should().Be(35.68m + Currency.EUR);
     }
 
     [Test]
     public void _decimal()
     {
-        var addition = 34.586m * 75.Percent();
+        var addition = 34.586m * 75m.Percent();
         addition.Should().Be(25.9395m);
     }
 
     [Test]
     public void _double()
     {
-        var addition = 34.586 * 75.Percent();
+        var addition = 34.586 * 75m.Percent();
         addition.Should().BeApproximately(25.9395, 0.00001);
     }
 
     [Test]
     public void _float()
     {
-        var addition = 34.586f * 75.Percent();
+        var addition = 34.586f * 75m.Percent();
         addition.Should().BeApproximately(25.9395f, 0.00001f);
     }
 
     [Test]
     public void _int()
     {
-        var addition = 400 * 17.Percent();
+        var addition = 400 * 17m.Percent();
         addition.Should().Be(68);
     }
 
     [Test]
     public void _uint()
     {
-        var addition = 400U * 17.Percent();
+        var addition = 400U * 17m.Percent();
         addition.Should().Be(68U);
     }
 
     [Test]
     public void _long()
     {
-        var addition = 400L * 17.Percent();
+        var addition = 400L * 17m.Percent();
         addition.Should().Be(68L);
     }
 
     [Test]
     public void _ulong()
     {
-        var addition = 400UL * 17.Percent();
+        var addition = 400UL * 17m.Percent();
         addition.Should().Be(68UL);
     }
 
     [Test]
     public void _short()
     {
-        var addition = ((short)400) * 17.Percent();
+        var addition = ((short)400) * 17m.Percent();
         addition.Should().Be(68);
     }
 
     [Test]
     public void _ushort()
     {
-        var addition = ((ushort)400) * 17.Percent();
+        var addition = ((ushort)400) * 17m.Percent();
         addition.Should().Be(68);
     }
 }
@@ -852,84 +851,84 @@ public class Can_get_100_percent_based_on_percentage
     [Test]
     public void _percentage()
     {
-        var addition = 13.Percent() / 25.Percent();
-        addition.Should().Be(52.Percent());
+        var addition = 13m.Percent() / 25m.Percent();
+        addition.Should().Be(52m.Percent());
     }
 
     [Test]
     public void _amount()
     {
-        var addition = 44.60m.Amount() / 80.Percent();
+        var addition = 44.60m.Amount() / 80m.Percent();
         addition.Should().Be(55.75m.Amount());
     }
 
     [Test]
     public void _money()
     {
-        var addition = (44.6m + Currency.EUR) / 80.Percent();
+        var addition = (44.6m + Currency.EUR) / 80m.Percent();
         addition.Should().Be(55.75m + Currency.EUR);
     }
 
     [Test]
     public void _decimal()
     {
-        var addition = 34.586m / 75.Percent();
+        var addition = 34.586m / 75m.Percent();
         addition.Should().BeApproximately(46.11467m, 0.00001m);
     }
 
     [Test]
     public void _double()
     {
-        var addition = 34.586 / 75.Percent();
+        var addition = 34.586 / 75m.Percent();
         addition.Should().BeApproximately(46.11467, 0.00001);
     }
 
     [Test]
     public void _float()
     {
-        var addition = 34.586f / 75.Percent();
+        var addition = 34.586f / 75m.Percent();
         addition.Should().BeApproximately(46.11467f, 0.00001f);
     }
 
     [Test]
     public void _int()
     {
-        var addition = 400 / 17.Percent();
+        var addition = 400 / 17m.Percent();
         addition.Should().Be(2352);
     }
 
     [Test]
     public void _uint()
     {
-        var addition = 400U / 17.Percent();
+        var addition = 400U / 17m.Percent();
         addition.Should().Be(2352U);
     }
 
     [Test]
     public void _long()
     {
-        var addition = 400L / 17.Percent();
+        var addition = 400L / 17m.Percent();
         addition.Should().Be(2352L);
     }
 
     [Test]
     public void _ulong()
     {
-        var addition = 400UL / 17.Percent();
+        var addition = 400UL / 17m.Percent();
         addition.Should().Be(2352UL);
     }
 
     [Test]
     public void _short()
     {
-        var addition = ((short)400) / 17.Percent();
+        var addition = ((short)400) / 17m.Percent();
         addition.Should().Be(2352);
     }
 
     [Test]
     public void _ushort()
     {
-        var addition = ((ushort)400) / 17.Percent();
+        var addition = ((ushort)400) / 17m.Percent();
         addition.Should().Be(2352);
     }
 }
@@ -956,35 +955,35 @@ public class Can_be_rounded
     public void zero_decimals()
     {
         var actual = Svo.Percentage.Round();
-        actual.Should().Be(18.Percent());
+        actual.Should().Be(18m.Percent());
     }
 
     [Test]
     public void one_decimal()
     {
         var actual = Svo.Percentage.Round(1);
-        actual.Should().Be(17.5.Percent());
+        actual.Should().Be(17.5m.Percent());
     }
 
     [Test]
     public void away_from_zero()
     {
-        var actual = 16.5.Percent().Round(0, DecimalRounding.AwayFromZero);
-        actual.Should().Be(17.Percent());
+        var actual = 16.5m.Percent().Round(0, DecimalRounding.AwayFromZero);
+        actual.Should().Be(17m.Percent());
     }
 
     [Test]
     public void to_even()
     {
-        var actual = 16.5.Percent().Round(0, DecimalRounding.ToEven);
-        actual.Should().Be(16.Percent());
+        var actual = 16.5m.Percent().Round(0, DecimalRounding.ToEven);
+        actual.Should().Be(16m.Percent());
     }
 
     [Test]
     public void to_multiple()
     {
-        var actual = 16.4.Percent().RoundToMultiple(3.Percent());
-        actual.Should().Be(15.Percent());
+        var actual = 16.4m.Percent().RoundToMultiple(3m.Percent());
+        actual.Should().Be(15m.Percent());
     }
 
     [TestCase(27)]
@@ -1003,7 +1002,7 @@ public class Can_be_rounded
     public void using_system_midpoint_rounding()
     {
         var rounded = Svo.Percentage.Round(0, MidpointRounding.AwayFromZero);
-        rounded.Should().Be(18.Percent());
+        rounded.Should().Be(18m.Percent());
     }
 }
 
@@ -1070,8 +1069,8 @@ public class Can_get_maximum_of
     [Test]
     public void multiple_values()
     {
-        var max = Percentage.Max(15.Percent(), 66.Percent(), -117.Percent());
-        max.Should().Be(66.Percent());
+        var max = Percentage.Max(15m.Percent(), 66m.Percent(), -117m.Percent());
+        max.Should().Be(66m.Percent());
     }
 }
 
@@ -1086,8 +1085,8 @@ public class Can_get_minimum_of
     [Test]
     public void multiple_values()
     {
-        var min = Percentage.Min(15.Percent(), 66.Percent(), -117.Percent());
-        min.Should().Be(-117.Percent());
+        var min = Percentage.Min(15m.Percent(), 66m.Percent(), -117m.Percent());
+        min.Should().Be(-117m.Percent());
     }
 }
 
@@ -1126,11 +1125,11 @@ public class Supports_type_conversion
 
     [Test]
     public void from_int()
-        => Converting.From(-17).To<Percentage>().Should().Be(-1700.Percent());
+        => Converting.From(-17).To<Percentage>().Should().Be(-1700m.Percent());
 
     [Test]
     public void to_int()
-        => Converting.To<int>().From(1700.Percent()).Should().Be(17);
+        => Converting.To<int>().From(1700m.Percent()).Should().Be(17);
 
     [Test]
     public void from_decimal()

@@ -12,25 +12,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
-  <data name="CNY_DisplayName" xml:space="preserve">
+  <data name="CNY_DisplayName">
     <value>人民幣</value>
   </data>
-  <data name="GBP_DisplayName" xml:space="preserve">
+  <data name="GBP_DisplayName">
     <value>英鎊</value>
   </data>
-  <data name="HKD_DisplayName" xml:space="preserve">
+  <data name="HKD_DisplayName">
     <value>港幣</value>
   </data>
-  <data name="JPY_DisplayName" xml:space="preserve">
+  <data name="JPY_DisplayName">
     <value>日圓</value>
   </data>
-  <data name="NZD_DisplayName" xml:space="preserve">
+  <data name="NZD_DisplayName">
     <value>紐西蘭元</value>
   </data>
-  <data name="TWD_DisplayName" xml:space="preserve">
+  <data name="TWD_DisplayName">
     <value>新台幣</value>
   </data>
-  <data name="USD_DisplayName" xml:space="preserve">
+  <data name="USD_DisplayName">
     <value>美金</value>
   </data>
 </root>

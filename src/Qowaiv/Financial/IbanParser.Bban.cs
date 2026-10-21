@@ -1,5 +1,6 @@
 using Qowaiv.Globalization;
 using System.Runtime.InteropServices;
+
 namespace Qowaiv.Financial;
 
 [StructLayout(LayoutKind.Auto)]

@@ -21,7 +21,7 @@ internal sealed class PercentageJsonConverter : JsonConverter<Percentage>
         };
 
     /// <inheritdoc />
-    public override Percentage ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) 
+    public override Percentage ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         => ReadString(ref reader);
 
     private static Percentage ReadString(ref Utf8JsonReader reader)

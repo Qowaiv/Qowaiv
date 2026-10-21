@@ -119,7 +119,6 @@ public partial class PostalCodeCountryInfo
         New(Country.CZ, @"^[1-7][0-9]{4}$", "^(...)(..)$", "$1 $2"),
 
         // DE: Germany, http://en.wikipedia.org/wiki/List_of_postal_codes_in_Germany
-
         New(Country.DE, @"^([0-9]{2})(?<!00)[0-9]{3}$"),
 
         // DK: Denmark, http://en.wikipedia.org/wiki/List_of_postal_codes_in_Denmark

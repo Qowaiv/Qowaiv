@@ -382,8 +382,8 @@ public class Can_be_operated_on
     public void sign(int expected, Money value)
         => value.Sign().Should().Be(expected);
 
-    [TestCase(23.1234, -23.1234)]
-    [TestCase(23.1234, +23.1234)]
+    [TestCase("23.1234", "-23.1234")]
+    [TestCase("23.1234", "+23.1234")]
     public void abs(decimal expected, decimal value)
     {
         var money = value + Currency.USD;
@@ -396,9 +396,7 @@ public class Can_be_operated_on
 
     [Test]
     public void negate()
-    {
-        (-Svo.Money).Should().Be(-42.17m + Currency.EUR);
-    }
+        => (-Svo.Money).Should().Be(-42.17m + Currency.EUR);
 
     [Test]
     public void increment()

@@ -1,5 +1,3 @@
-using Qowaiv.Mathematics;
-
 namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="double" />.</summary>

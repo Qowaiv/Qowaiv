@@ -12,13 +12,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter</value>
   </resheader>
-  <data name="HKD_DisplayName" xml:space="preserve">
+  <data name="HKD_DisplayName">
     <value>港幣</value>
   </data>
-  <data name="NZD_DisplayName" xml:space="preserve">
+  <data name="NZD_DisplayName">
     <value>紐西蘭元</value>
   </data>
-  <data name="TWD_DisplayName" xml:space="preserve">
+  <data name="TWD_DisplayName">
     <value>新台幣</value>
   </data>
 </root>

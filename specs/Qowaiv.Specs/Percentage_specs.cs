@@ -684,8 +684,8 @@ public class Can_be_subtracted_from
     [Test]
     public void _amount()
     {
-        var addition = 44.60.Amount() - 50m.Percent();
-        addition.Should().Be(22.30.Amount());
+        var addition = 44.60m.Amount() - 50m.Percent();
+        addition.Should().Be(22.30m.Amount());
     }
 
     [Test]

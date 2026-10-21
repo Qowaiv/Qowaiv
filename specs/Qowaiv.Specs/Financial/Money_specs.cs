@@ -12,7 +12,7 @@ public class Has_properties
     public void Currency_is_set() => (42 + Currency.EUR).Currency.Should().Be(Currency.EUR);
 
     [Test]
-    public void Amount_is_set() => (42 + Currency.EUR).Amount.Should().Be((Amount)42);
+    public void Amount_is_set() => (42 + Currency.EUR).Amount.Should().Be(42.Amount());
 }
 
 public class Is_comparable

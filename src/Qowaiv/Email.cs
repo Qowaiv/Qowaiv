@@ -115,8 +115,9 @@ internal static partial class Email
 
             while (index < Input.Length && len <= PartLength + 1)
             {
+                // Not .. and not starting with a dot.
                 if (Is.Local(ch)
-                    || (ch is Dot && prev is not Dot and not default(char))) // Not .. and not starting with a dot.
+                    || (ch is Dot && prev is not Dot and not default(char)))
                 {
                     prev = ch;
                     (ch, index, len) = Next(index, len);

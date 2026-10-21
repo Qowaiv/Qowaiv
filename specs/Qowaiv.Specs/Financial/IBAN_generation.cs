@@ -66,7 +66,7 @@ internal class Markdown_file
         {
             for (var s = 'A'; s <= 'Z'; s++)
             {
-                writer.Append(new string(' ', 8));
+                writer.Append(' ', 8);
                 if (Country.TryParse($"{f}{s}") is not { } country)
                 {
                     writer.AppendLine("default,");
@@ -271,7 +271,7 @@ internal sealed record IbanInfo(Country Country, int Length, string Bban, int? C
             sb.Append(", true");
 
         sb.Append("), // ");
-        sb.Append(new string(' ', 86 - sb.Length));
+        sb.Append(' ', 86 - sb.Length);
         sb.Append($"{Country.IsoAlpha2Code}: {Bban}");
         return sb.ToString();
     }
@@ -294,7 +294,7 @@ internal sealed record IbanInfo(Country Country, int Length, string Bban, int? C
                 }
                 else
                 {
-                    pattern.Append(new string(type, length));
+                    pattern.Append(type, length);
                 }
             }
             return pattern.ToString();

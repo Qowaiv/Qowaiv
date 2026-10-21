@@ -12,7 +12,7 @@ public class Has_properties
     public void Currency_is_set() => (42 + Currency.EUR).Currency.Should().Be(Currency.EUR);
 
     [Test]
-    public void Amount_is_set() => (42 + Currency.EUR).Amount.Should().Be((Amount)42);
+    public void Amount_is_set() => (42 + Currency.EUR).Amount.Should().Be(42.Amount());
 }
 
 public class Is_comparable
@@ -382,8 +382,8 @@ public class Can_be_operated_on
     public void sign(int expected, Money value)
         => value.Sign().Should().Be(expected);
 
-    [TestCase(23.1234, -23.1234)]
-    [TestCase(23.1234, +23.1234)]
+    [TestCase("23.1234", "-23.1234")]
+    [TestCase("23.1234", "+23.1234")]
     public void abs(decimal expected, decimal value)
     {
         var money = value + Currency.USD;
@@ -396,9 +396,7 @@ public class Can_be_operated_on
 
     [Test]
     public void negate()
-    {
-        (-Svo.Money).Should().Be(-42.17m + Currency.EUR);
-    }
+        => (-Svo.Money).Should().Be(-42.17m + Currency.EUR);
 
     [Test]
     public void increment()
@@ -428,7 +426,7 @@ public class Can_be_operated_on
     public void add_percentage()
     {
         var money = 16 + Currency.EUR;
-        (money + 25.Percent()).Should().Be(20 + Currency.EUR);
+        (money + 25m.Percent()).Should().Be(20 + Currency.EUR);
     }
 
     [Test]
@@ -443,14 +441,14 @@ public class Can_be_operated_on
     public void subtract_percentage()
     {
         var money = 16 + Currency.EUR;
-        (money - 25.Percent()).Should().Be(12 + Currency.EUR);
+        (money - 25m.Percent()).Should().Be(12 + Currency.EUR);
     }
 
     [Test]
     public void multiply_percentage()
     {
         var money = 100.40m + Currency.USD;
-        (money * 50.Percent()).Should().Be(50.20m + Currency.USD);
+        (money * 50m.Percent()).Should().Be(50.20m + Currency.USD);
     }
 
     [Test]
@@ -520,7 +518,7 @@ public class Can_be_operated_on
     public void divide_percentage()
     {
         var money = 100.40m + Currency.USD;
-        (money / 50.Percent()).Should().Be(200.8m + Currency.USD);
+        (money / 50m.Percent()).Should().Be(200.8m + Currency.USD);
     }
 
     [Test]

@@ -34,7 +34,7 @@ public class Can_create_SQL_parameter
 
     [Test]
     public void Percentage_as_decimal()
-        => SvoParameter.CreateForSql("par", 100.Percent())
+        => SvoParameter.CreateForSql("par", 100m.Percent())
         .Should().Be("par", 1m, DbType.Decimal);
 
     [Test]

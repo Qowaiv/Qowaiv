@@ -9,9 +9,6 @@ namespace Qowaiv.Json;
 /// <summary>Provides a JSON conversion for a yes-no.</summary>
 internal sealed class YesNoJsonConverter : JsonConverter<YesNo>
 {
-    private static readonly byte[] Yes = [.. "yes"u8];
-    private static readonly byte[] No = [.. "no"u8];
-
     /// <inheritdoc />
     public override YesNo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         => reader.TokenType switch

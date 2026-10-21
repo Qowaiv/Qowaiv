@@ -46,7 +46,7 @@ public static class Base64
             return false;
         }
 #else
-        if (s is not {Length: > 0 })
+        if (s is not { Length: > 0 })
         {
             bytes = [];
             return true;
@@ -67,7 +67,6 @@ public static class Base64
         }
 #endif
     }
-
 
     [Pure]
     internal static string ToString(Guid guid)

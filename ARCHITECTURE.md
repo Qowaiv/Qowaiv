@@ -1,24 +1,35 @@
 # Architecture/Design
-This document is intended to write down architectural and design descisions.
-Is is intended for both contributers as [agents](https://en.wikipedia.org/wiki/AI_agent).
+This document is intended to write down architectural and design decisions.
+It is intended for both contributors and [agents](https://en.wikipedia.org/wiki/AI_agent).
 
 ## Documentation
-The `docs` contain information about the packages that is targeted to the
+The `docs` contain information about the package that is targeted to the
 users. It explains the types and their methods, illustrated with examples and
 relevant (Wikipedia) URLs.
 
 ## Extensions
-The `Extensions` directory contains `extension` methods and properties that
-act as interaction between the core libaries of .NET and Qowaiv. the all should
+The `src/Qowaiv/Extensions` directory contains `extension` methods and properties that
+act as interactions between the core libraries of .NET and Qowaiv. They should
 have the namespace `Qowaiv.Extensions`, a filename that reflects the type
-that is exctend, including its namespace. The static class should have a name
+that is extended, including its namespace (e.g. `System.String.cs`). The static class should have a name
 that starts with `Qowaiv` and is followed by the type name. This type can be
-plural in case of an extension an array or collection. Linq like extensions
-should be in the `Linq` directory, and part of  `QowaivEnumerable`.
-Although `DecimalMath` exposes all methods also as extensions, it is primary a
-utility class that provides `Symstem.Math` functions on `decimal`.
+plural in case of extensions on an array or collection.
+
+Linq-like extensions live in `src/Qowaiv/Linq` and are part of the static class `QowaivEnumerable`
+in namespace `Qowaiv.Linq`.
+
+Although `DecimalMath` (in `Qowaiv.Mathematics`) exposes all methods also as extensions, it is primarily a
+utility class that provides `System.Math` functions on `decimal`. Its extensions are available in
+the `Qowaiv.Mathematics` namespace (and via `global using Qowaiv.Mathematics;`).
+
+## Humanizer
+Inspired by [Humanizer.NET](https://humanizr.net), Qowaiv provides humanizer
+extension methods in the `Qowaiv.Humanizer` namespace that help to create SVO instances.
+All humanizer extensions are consolidated into the single `public static partial class Humanize` in `src/Qowaiv/Humanizer/`
+(split across multiple files per target type). The namespace remains `Qowaiv.Humanizer`.
 
 ## Polyfill
-The `Polyfill` directory contains both [polyfill](https://en.wikipedia.org/wiki/Polyfill_(programming))
-implementations, as internal extensions that allow write cleaner code but are
-not part of Qowaiv's public API. None of this code should be `public`.
+The `src/Qowaiv/Polyfill` directory contains both [polyfill](https://en.wikipedia.org/wiki/Polyfill_(programming))
+implementations and internal extensions that allow writing cleaner code but are
+not part of Qowaiv's public API. None of this code should be `public`. Polyfills are typically
+conditional on target frameworks (`#if !NET8_0_OR_GREATER`, `#if NETSTANDARD2_0`, etc.).

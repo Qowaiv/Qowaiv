@@ -1,4 +1,6 @@
-namespace Qowaiv.Financial;
+using Qowaiv.Financial;
+
+namespace Qowaiv.Humanizer;
 
 /// <summary>Extensions to create <see cref="Financial.Amount" />s, inspired by Humanizer.NET.</summary>
 public static class NumberToAmountExtensions

@@ -1,3 +1,5 @@
+using Qowaiv.Humanizer;
+
 namespace Extensions.Enumerable_specs;
 
 public class Average

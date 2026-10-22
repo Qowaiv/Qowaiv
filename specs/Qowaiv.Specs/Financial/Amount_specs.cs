@@ -1,5 +1,7 @@
 #pragma warning disable QW0031 // .NET 11, cast from double to decimal has changed.
 
+using Qowaiv.Humanizer;
+
 namespace Financial.Amount_specs;
 
 public class Has_constant

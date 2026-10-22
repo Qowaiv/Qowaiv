@@ -1,3 +1,5 @@
+using Qowaiv.Humanizer;
+
 namespace Collection_extensions_specs;
 
 public class Amounts

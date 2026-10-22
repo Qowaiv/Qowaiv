@@ -1,3 +1,5 @@
+using Qowaiv.Humanizer;
+
 namespace Formatting.String_interpolation_specs;
 
 [SetCulture("en-US")]

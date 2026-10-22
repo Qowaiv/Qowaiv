@@ -1,4 +1,4 @@
-namespace Qowaiv;
+namespace Qowaiv.Humanizer;
 
 /// <summary>Extensions to create <see cref="Year" />s, inspired by Humanizer.NET.</summary>
 public static class NumberToYearExtensions

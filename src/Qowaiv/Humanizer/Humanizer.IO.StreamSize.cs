@@ -1,4 +1,6 @@
-namespace Qowaiv.IO;
+using Qowaiv.IO;
+
+namespace Qowaiv.Humanizer;
 
 /// <summary>Extensions to create <see cref="StreamSize" />s, inspired by Humanizer.NET.</summary>
 public static class NumberToStreamSizeExtensions

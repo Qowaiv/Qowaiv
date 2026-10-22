@@ -1,5 +1,6 @@
 #if NET10_0_OR_GREATER
 
+using Qowaiv.Humanizer;
 using Qowaiv.TestTools.Numerics;
 
 namespace Financial.Amount_specs;

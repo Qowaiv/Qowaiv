@@ -1,6 +1,6 @@
 namespace Qowaiv.Mathematics;
 
-/// <summary>Math similar to <see cref="Math" /> but with <see cref="decimal" /> pression.</summary>
+/// <summary>Math similar to <see cref="Math" /> but with <see cref="decimal" /> precision.</summary>
 public static partial class DecimalMath
 {
     /// <summary>
@@ -33,7 +33,7 @@ public static partial class DecimalMath
         /// <summary>Rounds a decimal value to the nearest integer.</summary>
         /// <returns>
         /// The integer that is nearest to the <paramref name="value" /> parameter. If the <paramref name="value" /> is halfway between two integers,
-        /// it is rounded away from zero.
+        /// it is rounded toward the nearest even integer.
         /// </returns>
         [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

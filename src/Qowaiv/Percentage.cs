@@ -1,5 +1,3 @@
-using System.Security.Cryptography;
-
 namespace Qowaiv;
 
 /// <summary>Represents a Percentage.</summary>
@@ -26,10 +24,10 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
 
     private const string DefaultFormat = "0.############################";
 
-    /// <summary>Th minimum decimal value is <see cref="decimal.MinValue"/> divided by 10,000.</summary>
+    /// <summary>The minimum decimal value is <see cref="decimal.MinValue"/> divided by 10,000.</summary>
     private const decimal MinDecimal = -7_922_816_251_426_433_759_354_395.0335m;
 
-    /// <summary>Th maximum decimal value is <see cref="decimal.MaxValue"/> divided by 10,000.</summary>
+    /// <summary>The maximum decimal value is <see cref="decimal.MaxValue"/> divided by 10,000.</summary>
     private const decimal MaxDecimal = +7_922_816_251_426_433_759_354_395.0335m;
 
     /// <summary>Represents 0 percent.</summary>

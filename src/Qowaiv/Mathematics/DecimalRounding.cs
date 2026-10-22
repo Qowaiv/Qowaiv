@@ -1,4 +1,4 @@
-namespace Qowaiv;
+namespace Qowaiv.Mathematics;
 
 /// <summary>Methods of rounding <see cref="decimal" />s.</summary>
 /// <remarks>

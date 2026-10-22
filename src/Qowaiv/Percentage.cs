@@ -1,5 +1,3 @@
-using Qowaiv.Mathematics;
-
 namespace Qowaiv;
 
 /// <summary>Represents a Percentage.</summary>
@@ -26,6 +24,12 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
 
     private const string DefaultFormat = "0.############################";
 
+    /// <summary>The minimum decimal value is <see cref="decimal.MinValue"/> divided by 10,000.</summary>
+    private const decimal MinDecimal = -7_922_816_251_426_433_759_354_395.0335m;
+
+    /// <summary>The maximum decimal value is <see cref="decimal.MaxValue"/> divided by 10,000.</summary>
+    private const decimal MaxDecimal = +7_922_816_251_426_433_759_354_395.0335m;
+
     /// <summary>Represents 0 percent.</summary>
     public static Percentage Zero => default;
 
@@ -36,10 +40,10 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     public static Percentage Hundred => new(1);
 
     /// <summary>Gets the minimum value of a percentage.</summary>
-    public static Percentage MinValue => new(-7_922_816_251_426_433_759_354_395.0335m);
+    public static Percentage MinValue => new(MinDecimal);
 
     /// <summary>Gets the maximum value of a percentage.</summary>
-    public static Percentage MaxValue => new(+7_922_816_251_426_433_759_354_395.0335m);
+    public static Percentage MaxValue => new(MaxDecimal);
 
     /// <summary>Gets the sign of the percentage.</summary>
     [Pure]
@@ -321,7 +325,7 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
         if (s is { Length: > 0 }
             && FormatInfo.TryParse(s, provider, out var info)
             && TryDecimal(info, style, out var dec)
-            && dec.IsInRange(MinValue.m_Value, MaxValue.m_Value))
+            && dec is >= MinDecimal and <= MaxDecimal)
         {
             result = new(dec);
             return true;
@@ -362,7 +366,7 @@ public readonly partial struct Percentage : IXmlSerializable, IFormattable, IEqu
     /// </param >
     [Pure]
     public static Percentage Create(decimal val)
-    => val.IsInRange(MinValue.m_Value, MaxValue.m_Value)
+        => val is >= MinDecimal and <= MaxDecimal
         ? new(val)
         : throw new ArgumentOutOfRangeException(QowaivMessages.ArgumentOutOfRange_Percentage, (Exception?)null);
 

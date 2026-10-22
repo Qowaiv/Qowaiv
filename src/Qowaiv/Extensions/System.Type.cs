@@ -1,9 +1,9 @@
 using Qowaiv;
 
-namespace System;
+namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="Type" />.</summary>
-public static class QowaivTypeExtensions
+public static class TypeExtensions
 {
     private static readonly Lock ShortNameLocker = new();
     private static readonly Lock LongNameLocker = new();

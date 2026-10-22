@@ -1,9 +1,7 @@
-using System.Runtime.CompilerServices;
-
-namespace System;
+namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="long" />.</summary>
-internal static class QowaivInt64Extensions
+internal static class Int64Extensions
 {
     extension(long number)
     {

@@ -1,7 +1,7 @@
 #if !NET8_0_OR_GREATER
 namespace System.Collections.Generic;
 
-internal static class QowaivSetExtensions
+internal static class SetExtensions
 {
     extension<TValue>(ISet<TValue> @set) where TValue : notnull
     {

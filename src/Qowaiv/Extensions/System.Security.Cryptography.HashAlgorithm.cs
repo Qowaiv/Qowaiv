@@ -1,10 +1,11 @@
 using Qowaiv;
 using Qowaiv.Security.Cryptography;
+using System.Security.Cryptography;
 
-namespace System.Security.Cryptography;
+namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="HashAlgorithm" />.</summary>
-public static class QowaivHashAlgorithmExtensions
+public static class HashAlgorithmExtensions
 {
     extension(HashAlgorithm algorithm)
     {

@@ -2,7 +2,7 @@
 
 namespace System;
 
-internal static class QowaivReadOnlySpanExtensions
+internal static class ReadOnlySpanExtensions
 {
     extension(ReadOnlySpan<char> span)
     {

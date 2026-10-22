@@ -1,9 +1,7 @@
-using System.Runtime.CompilerServices;
-
-namespace System;
+namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="int" />.</summary>
-internal static class QowaivInt32Extensions
+internal static class Int32Extensions
 {
     extension(int num)
     {

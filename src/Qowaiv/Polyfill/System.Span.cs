@@ -1,7 +1,7 @@
 #if NET10_0_OR_GREATER
 namespace System;
 
-internal static class QowaivSpanExtensions
+internal static class SpanExtensions
 {
     extension(Span<char> span)
     {

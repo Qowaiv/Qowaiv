@@ -1,7 +1,7 @@
-using Qowaiv;
 using Qowaiv.IO;
+using System.IO;
 
-namespace System.IO;
+namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="DirectoryInfo" />.</summary>
 public static class QowaivDirectoryInfoExtensions

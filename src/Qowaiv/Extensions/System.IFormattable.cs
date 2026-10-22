@@ -1,7 +1,7 @@
-namespace System;
+namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="IFormattable" />.</summary>
-public static class QowaivFormattableExtensions
+public static class FormattableExtensions
 {
     extension(IFormattable? formattable)
     {

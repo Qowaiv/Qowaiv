@@ -11,9 +11,11 @@ relevant (Wikipedia) URLs.
 The `src/Qowaiv/Extensions` directory contains `extension` methods and properties that
 act as interactions between the core libraries of .NET and Qowaiv. They should
 have the namespace `Qowaiv.Extensions`, a filename that reflects the type
-that is extended, including its namespace (e.g. `System.String.cs`). The static class should have a name
-that starts with `Qowaiv` and is followed by the type name. This type can be
-plural in case of extensions on an array or collection.
+that is extended, including its namespace (e.g. `System.String.cs`). The static
+class should have a name that starts with `Qowaiv`, followed by the type name,
+without any suffix (e.g. `QowaivDateTime` for `DateTime` and `QowaivType` for
+`Type`). For extensions on an array or collection the type name is plural
+(e.g. `QowaivBytes` for `byte[]`).
 
 Linq-like extensions live in `src/Qowaiv/Linq` and are part of the static class `QowaivEnumerable`
 in namespace `Qowaiv.Linq`.

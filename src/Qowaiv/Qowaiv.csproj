@@ -47,7 +47,7 @@ v11.*
 - Public extensions on decimal are moved from System.QowaivDecimalExtensions to Qowaiv.Mathematics.DecimalMath. (BREAKING)
 - Add IUnknown<TSvo> interfaces to applicalbe SVOs.
 - Humanizer extensions (Days(), Months(), Years(), Percent(), Amount(), Bytes(), CasNr(), Elo(), Fraction(), CE()) are merged into Qowaiv.Humanizer.Humanize. (BREAKING)
-- Extension classes in Qowaiv.Extensions are renamed to start with Qowaiv, e.g. GuidExtensions becomes QowaivGuidExtensions. (BREAKING)
+- Extension classes in Qowaiv.Extensions are renamed to a name without suffix, e.g. GuidExtensions becomes QowaivGuid. (BREAKING)
 v8.*
 - Extended language support.
 - IBAN supports Mongolia and Falkland Islands.

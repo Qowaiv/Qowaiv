@@ -331,10 +331,9 @@ public static class QowaivEnumerable
     {
         /// <summary>Gets the average Elo.</summary>
         [Pure]
-#pragma warning disable IDE0120 // Simplify LINQ expression: Average only exists on Elo due to this method.
-        public Elo Average() => elos.Select(elo => (double)elo).Average();
-#pragma warning restore IDE0120 // Simplify LINQ expression
+        public Elo Average(elo => (double)elo);
     }
+}
 
     /// <typeparam name="TSource">
     /// The type of the elements of source.

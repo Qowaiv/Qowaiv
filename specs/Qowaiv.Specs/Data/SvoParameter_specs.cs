@@ -1,5 +1,6 @@
 using AwesomeAssertions.Primitives;
 using Qowaiv.Data;
+using Qowaiv.Humanizer;
 using System.Data;
 using System.Data.SqlClient;
 

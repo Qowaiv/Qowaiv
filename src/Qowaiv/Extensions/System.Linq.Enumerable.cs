@@ -1,5 +1,6 @@
 using Qowaiv;
 using Qowaiv.Financial;
+using Qowaiv.Humanizer;
 using Qowaiv.IO;
 using Qowaiv.Statistics;
 

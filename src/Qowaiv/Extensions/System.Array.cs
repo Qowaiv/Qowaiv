@@ -4,12 +4,15 @@ namespace System;
 
 internal static class QowaivArrayExtensions
 {
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Exists<T>(this T[] array, Predicate<T> match)
-        => Array.Exists(array, match);
+    extension<T>(T[] array)
+    {
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Exists(Predicate<T> match)
+            => Array.Exists(array, match);
 
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool None<T>(this T[] array) => array.Length == 0;
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool None() => array.Length == 0;
+    }
 }

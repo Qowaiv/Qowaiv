@@ -1,6 +1,6 @@
 namespace System;
 
-internal static class QowaivFormatProviderExtensions
+internal static class FormatProviderExtensions
 {
     extension(IFormatProvider? provider)
     {

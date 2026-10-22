@@ -22,6 +22,7 @@ public static class DateOnlyExtensions
         /// than <see cref="DateOnly.MaxValue" />.
         /// </exception>
         [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DateOnly Add(DateSpan value) => date.Add(value, DateSpanSettings.Default);
 
         /// <summary>Returns a new date that adds the value of the specified <see cref="DateSpan" />
@@ -45,6 +46,7 @@ public static class DateOnlyExtensions
         /// The provided settings have different value then <see cref="DateSpanSettings.DaysFirst" /> or <see cref="DateSpanSettings.Default" />.
         /// </exception>
         [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DateOnly Add(DateSpan value, DateSpanSettings settings) => settings switch
         {
             DateSpanSettings.DaysFirst => date.AddDays(value.Days).AddMonths(value.TotalMonths),
@@ -66,6 +68,7 @@ public static class DateOnlyExtensions
         /// than <see cref="DateOnly.MaxValue" />.
         /// </exception>
         [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DateOnly Add(MonthSpan value) => date.AddMonths(value.TotalMonths);
 
         /// <summary>Returns a new date that adds the value of the specified <see cref="YearSpan" />
@@ -82,6 +85,7 @@ public static class DateOnlyExtensions
         /// than <see cref="DateTime.MaxValue" />.
         /// </exception>
         [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DateOnly Add(YearSpan value) => date.AddYears((int)value);
 
         /// <summary>Returns true if the date is in the specified month, otherwise false.</summary>
@@ -89,6 +93,7 @@ public static class DateOnlyExtensions
         /// The <see cref="Month" /> the date should be in.
         /// </param>
         [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsIn(Month month) => !month.IsEmptyOrUnknown() && date.Month == (int)month;
 
         /// <summary>Returns true if the date is in the specified year, otherwise false.</summary>
@@ -96,6 +101,7 @@ public static class DateOnlyExtensions
         /// The <see cref="Year" /> the date should be in.
         /// </param>
         [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsIn(Year year) => !year.IsEmptyOrUnknown() && date.Year == (int)year;
     }
 }

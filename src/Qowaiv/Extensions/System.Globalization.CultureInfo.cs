@@ -1,9 +1,9 @@
 using Qowaiv.Globalization;
 
-namespace System.Globalization;
+namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="CultureInfo" />.</summary>
-public static class QowaivCultureInfoExtensions
+public static class CultureInfoExtensions
 {
     extension(CultureInfo culture)
     {

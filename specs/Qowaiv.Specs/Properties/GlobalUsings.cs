@@ -4,6 +4,7 @@ global using Qowaiv;
 global using Qowaiv.Conversion.Security;
 global using Qowaiv.Conversion.Security.Cryptography;
 global using Qowaiv.Diagnostics.Contracts;
+global using Qowaiv.Extensions;
 global using Qowaiv.Financial;
 global using Qowaiv.Formatting;
 global using Qowaiv.Globalization;

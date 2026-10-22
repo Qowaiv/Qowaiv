@@ -32,7 +32,7 @@ public static class ModifyTypeInfo
         => prop.PropertyType is { IsValueType: true, IsGenericType: false }
         && prop.PropertyType
             .GetInterfaces()
-            .Exists(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEmpty<>));
+            .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEmpty<>));
 }
 
 #endif

@@ -1,13 +1,11 @@
-using Qowaiv;
 using Qowaiv.Financial;
-using Qowaiv.Humanizer;
 using Qowaiv.IO;
 using Qowaiv.Statistics;
 
-namespace System.Linq;
+namespace Qowaiv.Linq;
 
 /// <summary>Extensions on <see cref="IEnumerable{T}" />.</summary>
-public static class QowaivEnumerableExtensions
+public static class QowaivEnumerable
 {
     /// <typeparam name="TSource">
     /// The type of the elements of source.

@@ -1,9 +1,9 @@
 using Qowaiv.Threading;
 
-namespace System.Threading;
+namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="Thread" />.</summary>
-public static class QowaivThreadExtensions
+public static class ThreadExtensions
 {
     extension(Thread thread)
     {

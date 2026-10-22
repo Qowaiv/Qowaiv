@@ -1,11 +1,11 @@
 using Qowaiv;
 
-namespace System;
+namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="DateTime" />.</summary>
-public static class QowaivDateTimeExtensions
+public static class DateTimeExtensions
 {
-    extension(DateTime d)
+    extension(DateTime date)
     {
         /// <summary>Returns a new date time that adds the value of the specified <see cref="DateSpan" />
         /// to the value of this instance.
@@ -22,7 +22,8 @@ public static class QowaivDateTimeExtensions
         /// than <see cref="DateTime.MaxValue" />.
         /// </exception>
         [Pure]
-        public DateTime Add(DateSpan value) => d.Add(value, DateSpanSettings.Default);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public DateTime Add(DateSpan value) => date.Add(value, DateSpanSettings.Default);
 
         /// <summary>Returns a new date time that adds the value of the specified <see cref="DateSpan" />
         /// to the value of this instance.
@@ -45,10 +46,11 @@ public static class QowaivDateTimeExtensions
         /// The provided settings have different value then <see cref="DateSpanSettings.DaysFirst" /> or <see cref="DateSpanSettings.Default" />.
         /// </exception>
         [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DateTime Add(DateSpan value, DateSpanSettings settings) => settings switch
         {
-            DateSpanSettings.DaysFirst => d.AddDays(value.Days).AddMonths(value.TotalMonths),
-            DateSpanSettings.Default => d.AddMonths(value.TotalMonths).AddDays(value.Days),
+            DateSpanSettings.DaysFirst => date.AddDays(value.Days).AddMonths(value.TotalMonths),
+            DateSpanSettings.Default => date.AddMonths(value.TotalMonths).AddDays(value.Days),
             _ => throw new ArgumentOutOfRangeException(nameof(settings), QowaivMessages.ArgumentOutOfRangeException_AddDateSpan),
         };
 
@@ -67,7 +69,8 @@ public static class QowaivDateTimeExtensions
         /// than <see cref="DateTime.MaxValue" />.
         /// </exception>
         [Pure]
-        public DateTime Add(MonthSpan value) => d.AddMonths(value.TotalMonths);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public DateTime Add(MonthSpan value) => date.AddMonths(value.TotalMonths);
 
         /// <summary>Returns a new date time that adds the value of the specified <see cref="YearSpan" />
         /// to the value of this instance.
@@ -84,20 +87,23 @@ public static class QowaivDateTimeExtensions
         /// than <see cref="DateTime.MaxValue" />.
         /// </exception>
         [Pure]
-        public DateTime Add(YearSpan value) => d.AddYears((int)value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public DateTime Add(YearSpan value) => date.AddYears((int)value);
 
         /// <summary>Returns true if the date is in the specified month, otherwise false.</summary>
         /// <param name="month">
         /// The <see cref="Month" /> the date should be in.
         /// </param>
         [Pure]
-        public bool IsIn(Month month) => !month.IsEmptyOrUnknown() && d.Month == (int)month;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool IsIn(Month month) => !month.IsEmptyOrUnknown() && date.Month == (int)month;
 
         /// <summary>Returns true if the date is in the specified year, otherwise false.</summary>
         /// <param name="year">
         /// The <see cref="Year" /> the date should be in.
         /// </param>
         [Pure]
-        public bool IsIn(Year year) => !year.IsEmptyOrUnknown() && d.Year == (int)year;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool IsIn(Year year) => !year.IsEmptyOrUnknown() && date.Year == (int)year;
     }
 }

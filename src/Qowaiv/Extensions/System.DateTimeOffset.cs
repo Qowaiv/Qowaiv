@@ -1,9 +1,9 @@
 using Qowaiv;
 
-namespace System;
+namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="DateTimeOffset" />.</summary>
-public static class QowaivDateTimeOffsetExtensions
+public static class DateTimeOffsetExtensions
 {
     extension(DateTimeOffset d)
     {

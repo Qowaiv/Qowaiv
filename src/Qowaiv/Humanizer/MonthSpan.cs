@@ -1,7 +1,6 @@
 namespace Qowaiv.Humanizer;
 
-/// <summary>Extensions to create <see cref="MonthSpan" />s, inspired by Humanizer.NET.</summary>
-public static class NumberToMonthSpanExtensions
+public static partial class Humanize
 {
     extension(int months)
     {

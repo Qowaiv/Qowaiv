@@ -1,7 +1,6 @@
 namespace Qowaiv.Humanizer;
 
-/// <summary>Extensions to create <see cref="YearSpan" />s, inspired by Humanizer.NET.</summary>
-public static class NumberToYearSpanExtensions
+public static partial class Humanize
 {
     extension(int years)
     {

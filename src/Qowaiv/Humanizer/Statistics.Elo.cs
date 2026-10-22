@@ -2,8 +2,7 @@ using Qowaiv.Statistics;
 
 namespace Qowaiv.Humanizer;
 
-/// <summary>Extensions to create <see cref="Statistics.Elo" />s, inspired by Humanizer.NET.</summary>
-public static class NumberToEloExtensions
+public static partial class Humanize
 {
     extension(int number)
     {

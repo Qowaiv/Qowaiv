@@ -2,8 +2,7 @@ using Qowaiv.Chemistry;
 
 namespace Qowaiv.Humanizer;
 
-/// <summary>Extensions to create <see cref="CasRegistryNumber" />s, inspired by Humanizer.NET.</summary>
-public static class NumberToCasRegistryNumberExtensions
+public static partial class Humanize
 {
     extension(int number)
     {

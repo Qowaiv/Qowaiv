@@ -1,7 +1,6 @@
 namespace Qowaiv.Humanizer;
 
-/// <summary>Extensions to create <see cref="Percentage" />s, inspired by Humanizer.NET.</summary>
-public static class NumberToFractionExtensions
+public static partial class Humanize
 {
     extension(int numerator)
     {

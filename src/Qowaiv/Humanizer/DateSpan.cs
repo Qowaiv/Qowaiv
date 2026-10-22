@@ -1,7 +1,6 @@
 namespace Qowaiv.Humanizer;
 
-/// <summary>Extensions to create <see cref="DateSpan" />s, inspired by Humanizer.NET.</summary>
-public static class NumberToDateSpanExtensions
+public static partial class Humanize
 {
     extension(int days)
     {

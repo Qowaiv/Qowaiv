@@ -1041,7 +1041,6 @@ internal static class Data
         public static readonly ImmutableArray<string> String = [.. Svo.Select(p => p.ToJson())];
     }
 
-
     public static class YN
     {
         public static readonly ImmutableArray<YesNo> Svo =

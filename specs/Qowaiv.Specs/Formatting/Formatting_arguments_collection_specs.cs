@@ -91,7 +91,7 @@ public class Formats
 
 public class Does_not_support_formats
 {
-    private static readonly FormattingArgumentsCollection Collection = new(TestCultures.en_GB);
+    private static readonly FormattingArgumentsCollection Collection = [with(TestCultures.en_GB)];
 
     [Test]
     public void with_length_not_being_a_number()
@@ -313,7 +313,7 @@ public class Can_be_queried
 
 public class Does_not_support
 {
-    private static readonly FormattingArgumentsCollection Collection = new(TestCultures.en_GB);
+    private static readonly FormattingArgumentsCollection Collection = [with(TestCultures.en_GB)];
 
     [Test]
     public void types_who_are_not_formattable()

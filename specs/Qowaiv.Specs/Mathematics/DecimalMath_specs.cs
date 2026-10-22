@@ -1,20 +1,32 @@
-namespace Decimal_round_specs;
+namespace Mathematics.DecimalMath_specs;
+
+public class Constants
+{
+    [Test]
+    public void Epsilon() => DecimalMath.Epsilon.Should().Be(new decimal(1, 0, 0, isNegative: false, scale: 28));
+
+    [Test]
+    public void E() => DecimalMath.E.Should().Be(2.7182818284590452353602874714m);
+
+    [Test]
+    public void Pi() => DecimalMath.Pi.Should().Be(3.1415926535897932384626433833m);
+}
+
+public class Abs
+{
+    [TestCase(0, 0)]
+    [TestCase(+1.5, 1.5)]
+    [TestCase(-1.5, 1.5)]
+    public void returns_absolute_value(decimal value, decimal absolute)
+        => DecimalMath.Abs(value).Should().Be(absolute);
+}
 
 public class Rounds
 {
-    [Test]
-    public void To_even_by_default_for_positive()
-    {
-        var rounded = 24.5m.Round();
-        rounded.Should().Be(24m);
-    }
-
-    [Test]
-    public void To_even_by_default_for_negative()
-    {
-        var rounded = -24.5m.Round();
-        rounded.Should().Be(-24m);
-    }
+    [TestCase("+24.5", "+24")]
+    [TestCase("-24.5", "-24")]
+    public void To_even_by_default(decimal value, decimal rounded)
+        => DecimalMath.Round(value).Should().Be(rounded);
 
     /// <remarks>Use strings as doubles lack precision.</remarks>
     [TestCase("123456789123456789.1234567890", +10)]
@@ -48,7 +60,7 @@ public class Rounds
     [TestCase(0, -18)]
     public void Takes_digits_into_account(decimal exp, int digits)
     {
-        var act = 123456789123456789.123456789m.Round(digits, DecimalRounding.AwayFromZero);
+        var act = DecimalMath.Round(123456789123456789.123456789m, digits, DecimalRounding.AwayFromZero);
         act.Should().Be(exp);
     }
 
@@ -110,10 +122,7 @@ public class Rounds
     [TestCase(-25, -25.1, DecimalRounding.Truncate)]
     [TestCase(+25, +25.1, DecimalRounding.Truncate)]
     public void Takes_strategy_into_account(decimal rounded, decimal value, DecimalRounding mode)
-    {
-        var act = value.Round(0, mode);
-        act.Should().Be(rounded);
-    }
+        => DecimalMath.Round(value, 0, mode).Should().Be(rounded);
 
     [TestCase(17.1)]
     [TestCase(17.3)]
@@ -126,7 +135,7 @@ public class Rounds
 
         for (var i = 0; i < runs; i++)
         {
-            var rounded = value.Round(0, DecimalRounding.StochasticRounding);
+            var rounded = DecimalMath.Round(value, 0, DecimalRounding.StochasticRounding);
             (rounded == 17 || rounded == 18).Should().BeTrue();
             sum += rounded;
         }
@@ -145,7 +154,7 @@ public class Rounds
 
         for (var i = 0; i < runs; i++)
         {
-            var rounded = value.Round(0, DecimalRounding.RandomTieBreaking);
+            var rounded = DecimalMath.Round(value, 0, DecimalRounding.RandomTieBreaking);
             (rounded == 17 || rounded == 18).Should().BeTrue();
             sum += rounded;
         }
@@ -159,7 +168,7 @@ public class Rounds
     {
         // initializes a decimal with scale of 4, instead of 0.
         var value = decimal.Parse("1000.0000", CultureInfo.InvariantCulture);
-        var rounded = value.Round(-2);
+        var rounded = DecimalMath.Round(value, -2);
         rounded.Should().Be(1000m);
     }
 
@@ -167,36 +176,33 @@ public class Rounds
     public void Round_ALotOf3s_WithoutIssues()
     {
         var value = 9_876_543_210m + 1m / 3m;
-        var rounded = value.Round(-9);
+        var rounded = DecimalMath.Round(value, -9);
         var expected = 10_000_000_000m;
 
         rounded.Should().Be(expected);
     }
 }
 
-public class Rounds_to_multiple
+public class Rounds_to_multple_of
 {
-    [Test]
-    public void To_even_by_default_for_positive()
-    {
-        var rounded = 24.5m.RoundToMultiple(1m);
-        rounded.Should().Be(24m);
-    }
-
-    [Test]
-    public void To_even_by_default_for_negative()
-    {
-        var rounded = -26.5m.RoundToMultiple(1m);
-        rounded.Should().Be(-26m);
-    }
+    [TestCase("+24.5", "+24")]
+    [TestCase("-24.5", "-24")]
+    public void To_even_by_default_for_positive(decimal value, decimal rounded)
+        => DecimalMath.RoundToMultiple(value, 1).Should().Be(rounded);
 
     [TestCase(150.0, 125.0, 50, DecimalRounding.AwayFromZero)]
     [TestCase(125.0, 123.0, 5, DecimalRounding.AwayFromZero)]
     [TestCase(123.25, 123.3085, 0.25, DecimalRounding.AwayFromZero)]
     [TestCase(666, 666, 3, DecimalRounding.AwayFromZero)]
-    public void Supports_rouding_stratgies(decimal rounded, decimal value, decimal factor, DecimalRounding mode)
-    {
-        var act = value.RoundToMultiple(factor, mode);
-        act.Should().Be(rounded);
-    }
+    public void Supports_rouding_stratgies(decimal rounded, decimal value, decimal multipleOf, DecimalRounding mode)
+        => DecimalMath.RoundToMultiple(value, multipleOf, mode).Should().Be(rounded);
+}
+
+public class Signs
+{
+    [TestCase(-1, -1.5)]
+    [TestCase(+0, 0)]
+    [TestCase(+1, +1.5)]
+    public void returns_the_sign(int sign, decimal value)
+        => DecimalMath.Sign(value).Should().Be(sign);
 }

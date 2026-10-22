@@ -8,408 +8,445 @@ namespace System.Linq;
 /// <summary>Extensions on <see cref="IEnumerable{T}" />.</summary>
 public static class QowaivEnumerableExtensions
 {
-    /// <summary>Computes the average of a sequence of <see cref="Amount" /> values that are obtained
-    /// by invoking a transform function on each element of the input sequence.
-    /// </summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an average.
-    /// </param>
-    /// <param name="selector">
-    /// A transform function to apply to each element.
-    /// </param>
     /// <typeparam name="TSource">
     /// The type of the elements of source.
     /// </typeparam>
-    /// <returns>
-    /// The average of the sequence of values.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    /// <exception cref="InvalidOperationException">
-    /// source contains no elements.
-    /// </exception>
-    [Pure]
-    public static Amount Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Amount> selector)
+    extension<TSource>(IEnumerable<TSource> source)
     {
-        Guard.NotNull(source);
-        Guard.NotNull(selector);
-
-        var total = decimal.Zero;
-        var count = 0L;
-
-        foreach (var item in source)
+        /// <summary>Computes the average of a sequence of <see cref="Amount" /> values that are obtained
+        /// by invoking a transform function on each element of the input sequence.
+        /// </summary>
+        /// <param name="selector">
+        /// A transform function to apply to each element.
+        /// </param>
+        /// <returns>
+        /// The average of the sequence of values.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        /// source contains no elements.
+        /// </exception>
+        [Pure]
+        public Amount Average(Func<TSource, Amount> selector)
         {
-            count++;
-            var amount = selector(item);
-            checked
-            {
-                total += (decimal)amount;
-            }
-        }
+            Guard.NotNull(source);
+            Guard.NotNull(selector);
 
-        return count == 0
-            ? throw NoElements()
-            : (total / count).Amount();
-    }
+            var total = decimal.Zero;
+            var count = 0L;
 
-    /// <summary>Computes the average of a sequence of nullable <see cref="Amount" /> values that are
-    /// obtained by invoking a transform function on each element of the input sequence.
-    /// </summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an average.
-    /// </param>
-    /// <param name="selector">
-    /// A transform function to apply to each element.
-    /// </param>
-    /// <typeparam name="TSource">
-    /// The type of the elements of source.
-    /// </typeparam>
-    /// <returns>
-    /// The average of the sequence of values, or null if the source sequence is empty
-    /// or contains only values that are null.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    [Pure]
-    public static Amount? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Amount?> selector)
-    {
-        Guard.NotNull(source);
-        Guard.NotNull(selector);
-
-        var total = decimal.Zero;
-        var count = 0L;
-
-        foreach (var item in source)
-        {
-            var value = selector(item);
-
-            if (value.HasValue)
+            foreach (var item in source)
             {
                 count++;
-                var amount = value.GetValueOrDefault();
+                var amount = selector(item);
                 checked
                 {
                     total += (decimal)amount;
                 }
             }
+
+            return count == 0
+                ? throw NoElements()
+                : (total / count).Amount();
         }
-        return count is 0
-            ? null
-            : (total / count).Amount();
     }
 
-    /// <summary>Computes the average of a sequence of <see cref="Amount" /> values.</summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an average.
-    /// </param>
-    /// <returns>
-    /// The average of the sequence of values.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    /// <exception cref="InvalidOperationException">
-    /// source contains no elements.
-    /// </exception>
-    [Pure]
-    public static Amount Average(this IEnumerable<Amount> source)
+    /// <typeparam name="TSource">
+    /// The type of the elements of source.
+    /// </typeparam>
+    extension<TSource>(IEnumerable<TSource> source)
     {
-        Guard.NotNull(source);
-
-        var total = decimal.Zero;
-        var count = 0L;
-
-        foreach (var amount in source)
+        /// <summary>Computes the average of a sequence of nullable <see cref="Amount" /> values that are
+        /// obtained by invoking a transform function on each element of the input sequence.
+        /// </summary>
+        /// <param name="selector">
+        /// A transform function to apply to each element.
+        /// </param>
+        /// <returns>
+        /// The average of the sequence of values, or null if the source sequence is empty
+        /// or contains only values that are null.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        [Pure]
+        public Amount? Average(Func<TSource, Amount?> selector)
         {
-            count++;
-            checked
+            Guard.NotNull(source);
+            Guard.NotNull(selector);
+
+            var total = decimal.Zero;
+            var count = 0L;
+
+            foreach (var item in source)
             {
-                total += (decimal)amount;
+                var value = selector(item);
+
+                if (value.HasValue)
+                {
+                    count++;
+                    var amount = value.GetValueOrDefault();
+                    checked
+                    {
+                        total += (decimal)amount;
+                    }
+                }
             }
+            return count is 0
+                ? null
+                : (total / count).Amount();
         }
-        return count == 0
-            ? throw NoElements()
-            : (total / count).Amount();
     }
 
-    /// <summary>Computes the average of a sequence of nullable <see cref="Amount" /> values.</summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an average.
-    /// </param>
-    /// <returns>
-    /// The average of the sequence of values, or null if the source sequence is empty
-    /// or contains only values that are null.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    [Pure]
-    public static Amount? Average(this IEnumerable<Amount?> source)
+    extension(IEnumerable<Amount> source)
     {
-        Guard.NotNull(source);
-
-        var total = decimal.Zero;
-        var count = 0L;
-
-        foreach (var value in source)
+        /// <summary>Computes the average of a sequence of <see cref="Amount" /> values.</summary>
+        /// <returns>
+        /// The average of the sequence of values.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        /// source contains no elements.
+        /// </exception>
+        [Pure]
+        public Amount Average()
         {
-            if (value.HasValue)
+            Guard.NotNull(source);
+
+            var total = decimal.Zero;
+            var count = 0L;
+
+            foreach (var amount in source)
             {
                 count++;
-                var amount = value.GetValueOrDefault();
                 checked
                 {
                     total += (decimal)amount;
                 }
             }
+            return count == 0
+                ? throw NoElements()
+                : (total / count).Amount();
         }
-        return count is 0
-            ? null
-            : (total / count).Amount();
     }
 
-    /// <summary>Computes the average of a sequence of <see cref="Money" /> values that are obtained
-    /// by invoking a transform function on each element of the input sequence.
-    /// </summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an average.
-    /// </param>
-    /// <param name="selector">
-    /// A transform function to apply to each element.
-    /// </param>
+    extension(IEnumerable<Amount?> source)
+    {
+        /// <summary>Computes the average of a sequence of nullable <see cref="Amount" /> values.</summary>
+        /// <returns>
+        /// The average of the sequence of values, or null if the source sequence is empty
+        /// or contains only values that are null.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        [Pure]
+        public Amount? Average()
+        {
+            Guard.NotNull(source);
+
+            var total = decimal.Zero;
+            var count = 0L;
+
+            foreach (var value in source)
+            {
+                if (value.HasValue)
+                {
+                    count++;
+                    var amount = value.GetValueOrDefault();
+                    checked
+                    {
+                        total += (decimal)amount;
+                    }
+                }
+            }
+            return count is 0
+                ? null
+                : (total / count).Amount();
+        }
+    }
+
     /// <typeparam name="TSource">
     /// The type of the elements of source.
     /// </typeparam>
-    /// <returns>
-    /// The average of the sequence of values.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    /// <exception cref="InvalidOperationException">
-    /// source contains no elements.
-    /// </exception>
-    /// <exception cref="CurrencyMismatchException">
-    /// not all money elements have the same currency.
-    /// </exception>
-    [Pure]
-    public static Money Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Money> selector)
+    extension<TSource>(IEnumerable<TSource> source)
     {
-        Guard.NotNull(source);
-        Guard.NotNull(selector);
-
-        var total = Money.Zero;
-        var count = 0L;
-
-        foreach (var item in source)
+        /// <summary>Computes the average of a sequence of <see cref="Money" /> values that are obtained
+        /// by invoking a transform function on each element of the input sequence.
+        /// </summary>
+        /// <param name="selector">
+        /// A transform function to apply to each element.
+        /// </param>
+        /// <returns>
+        /// The average of the sequence of values.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        /// source contains no elements.
+        /// </exception>
+        /// <exception cref="CurrencyMismatchException">
+        /// not all money elements have the same currency.
+        /// </exception>
+        [Pure]
+        public Money Average(Func<TSource, Money> selector)
         {
-            count++;
-            total = total.Add(selector(item), nameof(Average));
-        }
+            Guard.NotNull(source);
+            Guard.NotNull(selector);
 
-        return count is 0
-            ? throw NoElements()
-            : total / count;
+            var total = Money.Zero;
+            var count = 0L;
+
+            foreach (var item in source)
+            {
+                count++;
+                total = total.Add(selector(item), nameof(Average));
+            }
+
+            return count is 0
+                ? throw NoElements()
+                : total / count;
+        }
     }
 
-    /// <summary>Computes the average of a sequence of nullable <see cref="Money" /> values that are
-    /// obtained by invoking a transform function on each element of the input sequence.
-    /// </summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an average.
-    /// </param>
-    /// <param name="selector">
-    /// A transform function to apply to each element.
-    /// </param>
     /// <typeparam name="TSource">
     /// The type of the elements of source.
     /// </typeparam>
-    /// <returns>
-    /// The average of the sequence of values, or null if the source sequence is empty
-    /// or contains only values that are null.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    /// <exception cref="CurrencyMismatchException">
-    /// not all money elements have the same currency.
-    /// </exception>
-    [Pure]
-    public static Money? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Money?> selector)
+    extension<TSource>(IEnumerable<TSource> source)
     {
-        Guard.NotNull(source);
-        Guard.NotNull(selector);
-
-        var total = Money.Zero;
-        var count = 0L;
-
-        foreach (var item in source)
+        /// <summary>Computes the average of a sequence of nullable <see cref="Money" /> values that are
+        /// obtained by invoking a transform function on each element of the input sequence.
+        /// </summary>
+        /// <param name="selector">
+        /// A transform function to apply to each element.
+        /// </param>
+        /// <returns>
+        /// The average of the sequence of values, or null if the source sequence is empty
+        /// or contains only values that are null.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        /// <exception cref="CurrencyMismatchException">
+        /// not all money elements have the same currency.
+        /// </exception>
+        [Pure]
+        public Money? Average(Func<TSource, Money?> selector)
         {
-            if (selector(item) is { } money)
+            Guard.NotNull(source);
+            Guard.NotNull(selector);
+
+            var total = Money.Zero;
+            var count = 0L;
+
+            foreach (var item in source)
+            {
+                if (selector(item) is { } money)
+                {
+                    count++;
+                    total = total.Add(money, nameof(Average));
+                }
+            }
+            return count is 0
+                ? null
+                : total / count;
+        }
+    }
+
+    extension(IEnumerable<Money> source)
+    {
+        /// <summary>Computes the average of a sequence of <see cref="Money" /> values.</summary>
+        /// <returns>
+        /// The average of the sequence of values.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        /// source contains no elements.
+        /// </exception>
+        /// <exception cref="CurrencyMismatchException">
+        /// not all money elements have the same currency.
+        /// </exception>
+        [Pure]
+        public Money Average()
+        {
+            Guard.NotNull(source);
+
+            var total = Money.Zero;
+            var count = 0L;
+
+            foreach (var money in source)
             {
                 count++;
                 total = total.Add(money, nameof(Average));
             }
+
+            return count is 0
+                ? throw NoElements()
+                : total / count;
         }
-        return count is 0
-            ? null
-            : total / count;
     }
 
-    /// <summary>Computes the average of a sequence of <see cref="Money" /> values.</summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an average.
-    /// </param>
-    /// <returns>
-    /// The average of the sequence of values.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    /// <exception cref="InvalidOperationException">
-    /// source contains no elements.
-    /// </exception>
-    /// <exception cref="CurrencyMismatchException">
-    /// not all money elements have the same currency.
-    /// </exception>
-    [Pure]
-    public static Money Average(this IEnumerable<Money> source)
+    extension(IEnumerable<Money?> source)
     {
-        Guard.NotNull(source);
-
-        var total = Money.Zero;
-        var count = 0L;
-
-        foreach (var money in source)
+        /// <summary>Computes the average of a sequence of nullable <see cref="Money" /> values.</summary>
+        /// <returns>
+        /// The average of the sequence of values, or null if the source sequence is empty
+        /// or contains only values that are null.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        /// <exception cref="CurrencyMismatchException">
+        /// not all money elements have the same currency.
+        /// </exception>
+        [Pure]
+        public Money? Average()
         {
-            count++;
-            total = total.Add(money, nameof(Average));
-        }
+            Guard.NotNull(source);
 
-        return count is 0
-            ? throw NoElements()
-            : total / count;
-    }
+            var total = Money.Zero;
+            var count = 0L;
 
-    /// <summary>Computes the average of a sequence of nullable <see cref="Money" /> values.</summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an average.
-    /// </param>
-    /// <returns>
-    /// The average of the sequence of values, or null if the source sequence is empty
-    /// or contains only values that are null.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    /// <exception cref="CurrencyMismatchException">
-    /// not all money elements have the same currency.
-    /// </exception>
-    [Pure]
-    public static Money? Average(this IEnumerable<Money?> source)
-    {
-        Guard.NotNull(source);
-
-        var total = Money.Zero;
-        var count = 0L;
-
-        foreach (var value in source)
-        {
-            if (value is { } money)
+            foreach (var value in source)
             {
-                count++;
-                total = total.Add(money, nameof(Average));
+                if (value is { } money)
+                {
+                    count++;
+                    total = total.Add(money, nameof(Average));
+                }
             }
+            return count is 0
+                ? null
+                : total / count;
         }
-        return count is 0
-            ? null
-            : total / count;
     }
 
-    /// <summary>Gets the average Elo.</summary>
-    [Pure]
+    extension(IEnumerable<Elo> elos)
+    {
+        /// <summary>Gets the average Elo.</summary>
+        [Pure]
 #pragma warning disable IDE0120 // Simplify LINQ expression: Average only exists on Elo due to this method.
-    public static Elo Average(this IEnumerable<Elo> elos) => elos.Select(elo => (double)elo).Average();
+        public Elo Average() => elos.Select(elo => (double)elo).Average();
 #pragma warning restore IDE0120 // Simplify LINQ expression
-
-    /// <summary>Computes the average of a sequence of <see cref="Percentage" /> values that are obtained
-    /// by invoking a transform function on each element of the input sequence.
-    /// </summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an average.
-    /// </param>
-    /// <param name="selector">
-    /// A transform function to apply to each element.
-    /// </param>
-    /// <typeparam name="TSource">
-    /// The type of the elements of source.
-    /// </typeparam>
-    /// <returns>
-    /// The average of the sequence of values.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    /// <exception cref="InvalidOperationException">
-    /// source contains no elements.
-    /// </exception>
-    [Pure]
-    public static Percentage Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Percentage> selector)
-    {
-        Guard.NotNull(source);
-        Guard.NotNull(selector);
-
-        var total = decimal.Zero;
-        var count = 0L;
-
-        foreach (var item in source)
-        {
-            count++;
-            var percentage = selector(item);
-            checked
-            {
-                total += (decimal)percentage;
-            }
-        }
-
-        return count == 0
-            ? throw NoElements()
-            : Percentage.Create(total / count);
     }
 
-    /// <summary>Computes the average of a sequence of nullable <see cref="Percentage" /> values that are
-    /// obtained by invoking a transform function on each element of the input sequence.
-    /// </summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an average.
-    /// </param>
-    /// <param name="selector">
-    /// A transform function to apply to each element.
-    /// </param>
     /// <typeparam name="TSource">
     /// The type of the elements of source.
     /// </typeparam>
-    /// <returns>
-    /// The average of the sequence of values, or null if the source sequence is empty
-    /// or contains only values that are null.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    [Pure]
-    public static Percentage? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, Percentage?> selector)
+    extension<TSource>(IEnumerable<TSource> source)
     {
-        Guard.NotNull(source);
-        Guard.NotNull(selector);
-
-        var total = decimal.Zero;
-        var count = 0L;
-
-        foreach (var item in source)
+        /// <summary>Computes the average of a sequence of <see cref="Percentage" /> values that are obtained
+        /// by invoking a transform function on each element of the input sequence.
+        /// </summary>
+        /// <param name="selector">
+        /// A transform function to apply to each element.
+        /// </param>
+        /// <returns>
+        /// The average of the sequence of values.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        /// source contains no elements.
+        /// </exception>
+        [Pure]
+        public Percentage Average(Func<TSource, Percentage> selector)
         {
-            if (selector(item) is Percentage percentage)
+            Guard.NotNull(source);
+            Guard.NotNull(selector);
+
+            var total = decimal.Zero;
+            var count = 0L;
+
+            foreach (var item in source)
+            {
+                count++;
+                var percentage = selector(item);
+                checked
+                {
+                    total += (decimal)percentage;
+                }
+            }
+
+            return count == 0
+                ? throw NoElements()
+                : Percentage.Create(total / count);
+        }
+    }
+
+    /// <typeparam name="TSource">
+    /// The type of the elements of source.
+    /// </typeparam>
+    extension<TSource>(IEnumerable<TSource> source)
+    {
+        /// <summary>Computes the average of a sequence of nullable <see cref="Percentage" /> values that are
+        /// obtained by invoking a transform function on each element of the input sequence.
+        /// </summary>
+        /// <param name="selector">
+        /// A transform function to apply to each element.
+        /// </param>
+        /// <returns>
+        /// The average of the sequence of values, or null if the source sequence is empty
+        /// or contains only values that are null.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        [Pure]
+        public Percentage? Average(Func<TSource, Percentage?> selector)
+        {
+            Guard.NotNull(source);
+            Guard.NotNull(selector);
+
+            var total = decimal.Zero;
+            var count = 0L;
+
+            foreach (var item in source)
+            {
+                if (selector(item) is Percentage percentage)
+                {
+                    count++;
+                    checked
+                    {
+                        total += (decimal)percentage;
+                    }
+                }
+            }
+            return count is 0
+                ? null
+                : Percentage.Create(total / count);
+        }
+    }
+
+    extension(IEnumerable<Percentage> source)
+    {
+        /// <summary>Computes the average of a sequence of <see cref="Percentage" /> values.</summary>
+        /// <returns>
+        /// The average of the sequence of values.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        /// source contains no elements.
+        /// </exception>
+        [Pure]
+        public Percentage Average()
+        {
+            Guard.NotNull(source);
+
+            var total = decimal.Zero;
+            var count = 0L;
+
+            foreach (var percentage in source)
             {
                 count++;
                 checked
@@ -417,323 +454,232 @@ public static class QowaivEnumerableExtensions
                     total += (decimal)percentage;
                 }
             }
+            return count == 0
+                ? throw NoElements()
+                : Percentage.Create(total / count);
         }
-        return count is 0
-            ? null
-            : Percentage.Create(total / count);
     }
 
-    /// <summary>Computes the average of a sequence of <see cref="Percentage" /> values.</summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an average.
-    /// </param>
-    /// <returns>
-    /// The average of the sequence of values.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    /// <exception cref="InvalidOperationException">
-    /// source contains no elements.
-    /// </exception>
-    [Pure]
-    public static Percentage Average(this IEnumerable<Percentage> source)
+    extension(IEnumerable<Percentage?> source)
     {
-        Guard.NotNull(source);
-
-        var total = decimal.Zero;
-        var count = 0L;
-
-        foreach (var percentage in source)
+        /// <summary>Computes the average of a sequence of nullable <see cref="Percentage" /> values.</summary>
+        /// <returns>
+        /// The average of the sequence of values, or null if the source sequence is empty
+        /// or contains only values that are null.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        [Pure]
+        public Percentage? Average()
         {
-            count++;
-            checked
+            Guard.NotNull(source);
+
+            var total = decimal.Zero;
+            var count = 0L;
+
+            foreach (var value in source)
             {
-                total += (decimal)percentage;
-            }
-        }
-        return count == 0
-            ? throw NoElements()
-            : Percentage.Create(total / count);
-    }
-
-    /// <summary>Computes the average of a sequence of nullable <see cref="Percentage" /> values.</summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an average.
-    /// </param>
-    /// <returns>
-    /// The average of the sequence of values, or null if the source sequence is empty
-    /// or contains only values that are null.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    [Pure]
-    public static Percentage? Average(this IEnumerable<Percentage?> source)
-    {
-        Guard.NotNull(source);
-
-        var total = decimal.Zero;
-        var count = 0L;
-
-        foreach (var value in source)
-        {
-            if (value is Percentage percentage)
-            {
-                count++;
-                checked
+                if (value is Percentage percentage)
                 {
-                    total += (decimal)percentage;
+                    count++;
+                    checked
+                    {
+                        total += (decimal)percentage;
+                    }
                 }
             }
+            return count is 0
+                ? null
+                : Percentage.Create(total / count);
         }
-        return count is 0
-            ? null
-            : Percentage.Create(total / count);
     }
 
-    /// <summary>Computes the average of a sequence of stream sizes.</summary>
-    [Pure]
-    public static StreamSize Average(this IEnumerable<StreamSize> streamSizes)
-        => new((long)streamSizes.Average(streamSize => (long)streamSize));
+    extension(IEnumerable<StreamSize> streamSizes)
+    {
+        /// <summary>Computes the average of a sequence of stream sizes.</summary>
+        [Pure]
+        public StreamSize Average()
+            => new((long)streamSizes.Average(streamSize => (long)streamSize));
+    }
 
-    /// <summary>Computes the sum of a sequence of <see cref="Amount" /> values that are obtained
-    /// by invoking a transform function on each element of the input sequence.
-    /// </summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an sum.
-    /// </param>
-    /// <param name="selector">
-    /// A transform function to apply to each element.
-    /// </param>
     /// <typeparam name="TSource">
     /// The type of the elements of source.
     /// </typeparam>
-    /// <returns>
-    /// The sum of the sequence of values.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    [Pure]
-    public static Amount Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Amount> selector)
+    extension<TSource>(IEnumerable<TSource> source)
     {
-        Guard.NotNull(source);
-        Guard.NotNull(selector);
-
-        var total = decimal.Zero;
-
-        foreach (var item in source)
+        /// <summary>Computes the sum of a sequence of <see cref="Amount" /> values that are obtained
+        /// by invoking a transform function on each element of the input sequence.
+        /// </summary>
+        /// <param name="selector">
+        /// A transform function to apply to each element.
+        /// </param>
+        /// <returns>
+        /// The sum of the sequence of values.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        [Pure]
+        public Amount Sum(Func<TSource, Amount> selector)
         {
-            var amount = selector(item);
-            checked
+            Guard.NotNull(source);
+            Guard.NotNull(selector);
+
+            var total = decimal.Zero;
+
+            foreach (var item in source)
             {
-                total += (decimal)amount;
-            }
-        }
-
-        return total.Amount();
-    }
-
-    /// <summary>Computes the sum of a sequence of nullable <see cref="Amount" /> values that are
-    /// obtained by invoking a transform function on each element of the input sequence.
-    /// </summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an sum.
-    /// </param>
-    /// <param name="selector">
-    /// A transform function to apply to each element.
-    /// </param>
-    /// <typeparam name="TSource">
-    /// The type of the elements of source.
-    /// </typeparam>
-    /// <returns>
-    /// The sum of the sequence of values, or null if the source sequence is empty
-    /// or contains only values that are null.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    [Pure]
-    public static Amount? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Amount?> selector)
-    {
-        Guard.NotNull(source);
-        Guard.NotNull(selector);
-
-        var total = decimal.Zero;
-        var none = true;
-
-        foreach (var item in source)
-        {
-            var value = selector(item);
-
-            if (value.HasValue)
-            {
-                none = false;
-                var amount = value.GetValueOrDefault();
+                var amount = selector(item);
                 checked
                 {
                     total += (decimal)amount;
                 }
             }
+
+            return total.Amount();
         }
-        return none ? null : total.Amount();
     }
 
-    /// <summary>Computes the sum of a sequence of <see cref="Amount" /> values.</summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an sum.
-    /// </param>
-    /// <returns>
-    /// The sum of the sequence of values.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    [Pure]
-    public static Amount Sum(this IEnumerable<Amount> source)
+    /// <typeparam name="TSource">
+    /// The type of the elements of source.
+    /// </typeparam>
+    extension<TSource>(IEnumerable<TSource> source)
     {
-        Guard.NotNull(source);
-
-        var total = decimal.Zero;
-
-        foreach (var amount in source)
+        /// <summary>Computes the sum of a sequence of nullable <see cref="Amount" /> values that are
+        /// obtained by invoking a transform function on each element of the input sequence.
+        /// </summary>
+        /// <param name="selector">
+        /// A transform function to apply to each element.
+        /// </param>
+        /// <returns>
+        /// The sum of the sequence of values, or null if the source sequence is empty
+        /// or contains only values that are null.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        [Pure]
+        public Amount? Sum(Func<TSource, Amount?> selector)
         {
-            checked
+            Guard.NotNull(source);
+            Guard.NotNull(selector);
+
+            var total = decimal.Zero;
+            var none = true;
+
+            foreach (var item in source)
             {
-                total += (decimal)amount;
+                var value = selector(item);
+
+                if (value.HasValue)
+                {
+                    none = false;
+                    var amount = value.GetValueOrDefault();
+                    checked
+                    {
+                        total += (decimal)amount;
+                    }
+                }
             }
+            return none ? null : total.Amount();
         }
-        return total.Amount();
     }
 
-    /// <summary>Computes the sum of a sequence of nullable <see cref="Amount" /> values.</summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an sum.
-    /// </param>
-    /// <returns>
-    /// The sum of the sequence of values, or null if the source sequence is empty
-    /// or contains only values that are null.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    [Pure]
-    public static Amount? Sum(this IEnumerable<Amount?> source)
+    extension(IEnumerable<Amount> source)
     {
-        Guard.NotNull(source);
-
-        var total = decimal.Zero;
-        var none = true;
-
-        foreach (var value in source)
+        /// <summary>Computes the sum of a sequence of <see cref="Amount" /> values.</summary>
+        /// <returns>
+        /// The sum of the sequence of values.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        [Pure]
+        public Amount Sum()
         {
-            if (value.HasValue)
+            Guard.NotNull(source);
+
+            var total = decimal.Zero;
+
+            foreach (var amount in source)
             {
-                none = false;
-                var amount = value.GetValueOrDefault();
                 checked
                 {
                     total += (decimal)amount;
                 }
             }
+            return total.Amount();
         }
-        return none ? null : total.Amount();
     }
 
-    /// <summary>Computes the sum of a sequence of <see cref="Money" /> values that are obtained
-    /// by invoking a transform function on each element of the input sequence.
-    /// </summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an sum.
-    /// </param>
-    /// <param name="selector">
-    /// A transform function to apply to each element.
-    /// </param>
+    extension(IEnumerable<Amount?> source)
+    {
+        /// <summary>Computes the sum of a sequence of nullable <see cref="Amount" /> values.</summary>
+        /// <returns>
+        /// The sum of the sequence of values, or null if the source sequence is empty
+        /// or contains only values that are null.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        [Pure]
+        public Amount? Sum()
+        {
+            Guard.NotNull(source);
+
+            var total = decimal.Zero;
+            var none = true;
+
+            foreach (var value in source)
+            {
+                if (value.HasValue)
+                {
+                    none = false;
+                    var amount = value.GetValueOrDefault();
+                    checked
+                    {
+                        total += (decimal)amount;
+                    }
+                }
+            }
+            return none ? null : total.Amount();
+        }
+    }
+
     /// <typeparam name="TSource">
     /// The type of the elements of source.
     /// </typeparam>
-    /// <returns>
-    /// The sum of the sequence of values.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    /// <exception cref="CurrencyMismatchException">
-    /// not all money elements have the same currency.
-    /// </exception>
-    [Pure]
-    public static Money Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Money> selector)
+    extension<TSource>(IEnumerable<TSource> source)
     {
-        Guard.NotNull(source);
-        Guard.NotNull(selector);
-
-        var currency = Currency.Empty;
-        var first = true;
-        var total = decimal.Zero;
-
-        foreach (var item in source)
+        /// <summary>Computes the sum of a sequence of <see cref="Money" /> values that are obtained
+        /// by invoking a transform function on each element of the input sequence.
+        /// </summary>
+        /// <param name="selector">
+        /// A transform function to apply to each element.
+        /// </param>
+        /// <returns>
+        /// The sum of the sequence of values.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        /// <exception cref="CurrencyMismatchException">
+        /// not all money elements have the same currency.
+        /// </exception>
+        [Pure]
+        public Money Sum(Func<TSource, Money> selector)
         {
-            var money = selector(item);
+            Guard.NotNull(source);
+            Guard.NotNull(selector);
 
-            if (first)
+            var currency = Currency.Empty;
+            var first = true;
+            var total = decimal.Zero;
+
+            foreach (var item in source)
             {
-                first = false;
-                currency = money.Currency;
-            }
-            if (currency != money.Currency)
-            {
-                throw new CurrencyMismatchException(currency, money.Currency, nameof(Sum));
-            }
-            checked
-            {
-                total += (decimal)money;
-            }
-        }
-        return total + currency;
-    }
-
-    /// <summary>Computes the sum of a sequence of nullable <see cref="Money" /> values that are
-    /// obtained by invoking a transform function on each element of the input sequence.
-    /// </summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an sum.
-    /// </param>
-    /// <param name="selector">
-    /// A transform function to apply to each element.
-    /// </param>
-    /// <typeparam name="TSource">
-    /// The type of the elements of source.
-    /// </typeparam>
-    /// <returns>
-    /// The sum of the sequence of values, or null if the source sequence is empty
-    /// or contains only values that are null.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    /// <exception cref="CurrencyMismatchException">
-    /// not all money elements have the same currency.
-    /// </exception>
-    [Pure]
-    public static Money? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Money?> selector)
-    {
-        Guard.NotNull(source);
-        Guard.NotNull(selector);
-
-        var currency = Currency.Empty;
-        var first = true;
-        var total = decimal.Zero;
-        var none = true;
-
-        foreach (var item in source)
-        {
-            var value = selector(item);
-
-            if (value.HasValue)
-            {
-                none = false;
-                var money = value.GetValueOrDefault();
+                var money = selector(item);
 
                 if (first)
                 {
@@ -749,82 +695,93 @@ public static class QowaivEnumerableExtensions
                     total += (decimal)money;
                 }
             }
+            return total + currency;
         }
-        return none ? null : total + currency;
     }
 
-    /// <summary>Computes the sum of a sequence of <see cref="Money" /> values.</summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an sum.
-    /// </param>
-    /// <returns>
-    /// The sum of the sequence of values.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    /// <exception cref="CurrencyMismatchException">
-    /// not all money elements have the same currency.
-    /// </exception>
-    [Pure]
-    public static Money Sum(this IEnumerable<Money> source)
+    /// <typeparam name="TSource">
+    /// The type of the elements of source.
+    /// </typeparam>
+    extension<TSource>(IEnumerable<TSource> source)
     {
-        Guard.NotNull(source);
-
-        var currency = Currency.Empty;
-        var first = true;
-        var total = decimal.Zero;
-
-        foreach (var money in source)
+        /// <summary>Computes the sum of a sequence of nullable <see cref="Money" /> values that are
+        /// obtained by invoking a transform function on each element of the input sequence.
+        /// </summary>
+        /// <param name="selector">
+        /// A transform function to apply to each element.
+        /// </param>
+        /// <returns>
+        /// The sum of the sequence of values, or null if the source sequence is empty
+        /// or contains only values that are null.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        /// <exception cref="CurrencyMismatchException">
+        /// not all money elements have the same currency.
+        /// </exception>
+        [Pure]
+        public Money? Sum(Func<TSource, Money?> selector)
         {
-            if (first)
+            Guard.NotNull(source);
+            Guard.NotNull(selector);
+
+            var currency = Currency.Empty;
+            var first = true;
+            var total = decimal.Zero;
+            var none = true;
+
+            foreach (var item in source)
             {
-                first = false;
-                currency = money.Currency;
+                var value = selector(item);
+
+                if (value.HasValue)
+                {
+                    none = false;
+                    var money = value.GetValueOrDefault();
+
+                    if (first)
+                    {
+                        first = false;
+                        currency = money.Currency;
+                    }
+                    if (currency != money.Currency)
+                    {
+                        throw new CurrencyMismatchException(currency, money.Currency, nameof(Sum));
+                    }
+                    checked
+                    {
+                        total += (decimal)money;
+                    }
+                }
             }
-            if (currency != money.Currency)
-            {
-                throw new CurrencyMismatchException(currency, money.Currency, nameof(Sum));
-            }
-            checked
-            {
-                total += (decimal)money;
-            }
+            return none ? null : total + currency;
         }
-        return total + currency;
     }
 
-    /// <summary>Computes the sum of a sequence of nullable <see cref="Money" /> values.</summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an sum.
-    /// </param>
-    /// <returns>
-    /// The sum of the sequence of values, or null if the source sequence is empty
-    /// or contains only values that are null.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    /// <exception cref="CurrencyMismatchException">
-    /// not all money elements have the same currency.
-    /// </exception>
-    [Pure]
-    public static Money? Sum(this IEnumerable<Money?> source)
+    extension(IEnumerable<Money> source)
     {
-        Guard.NotNull(source);
-
-        var currency = Currency.Empty;
-        var first = true;
-        var total = decimal.Zero;
-        var none = true;
-
-        foreach (var value in source)
+        /// <summary>Computes the sum of a sequence of <see cref="Money" /> values.</summary>
+        /// <returns>
+        /// The sum of the sequence of values.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        /// <exception cref="CurrencyMismatchException">
+        /// not all money elements have the same currency.
+        /// </exception>
+        [Pure]
+        public Money Sum()
         {
-            if (value.HasValue)
-            {
-                none = false;
-                var money = value.GetValueOrDefault();
+            Guard.NotNull(source);
 
+            var currency = Currency.Empty;
+            var first = true;
+            var total = decimal.Zero;
+
+            foreach (var money in source)
+            {
                 if (first)
                 {
                     first = false;
@@ -839,156 +796,208 @@ public static class QowaivEnumerableExtensions
                     total += (decimal)money;
                 }
             }
+            return total + currency;
         }
-        return none ? null : total + currency;
     }
 
-    /// <summary>Computes the sum of a sequence of <see cref="Percentage" /> values that are obtained
-    /// by invoking a transform function on each element of the input sequence.
-    /// </summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an sum.
-    /// </param>
-    /// <param name="selector">
-    /// A transform function to apply to each element.
-    /// </param>
-    /// <typeparam name="TSource">
-    /// The type of the elements of source.
-    /// </typeparam>
-    /// <returns>
-    /// The sum of the sequence of values.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    [Pure]
-    public static Percentage Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Percentage> selector)
+    extension(IEnumerable<Money?> source)
     {
-        Guard.NotNull(source);
-        Guard.NotNull(selector);
-
-        var total = decimal.Zero;
-
-        foreach (var item in source)
+        /// <summary>Computes the sum of a sequence of nullable <see cref="Money" /> values.</summary>
+        /// <returns>
+        /// The sum of the sequence of values, or null if the source sequence is empty
+        /// or contains only values that are null.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        /// <exception cref="CurrencyMismatchException">
+        /// not all money elements have the same currency.
+        /// </exception>
+        [Pure]
+        public Money? Sum()
         {
-            var percentage = selector(item);
-            checked
+            Guard.NotNull(source);
+
+            var currency = Currency.Empty;
+            var first = true;
+            var total = decimal.Zero;
+            var none = true;
+
+            foreach (var value in source)
             {
-                total += (decimal)percentage;
+                if (value.HasValue)
+                {
+                    none = false;
+                    var money = value.GetValueOrDefault();
+
+                    if (first)
+                    {
+                        first = false;
+                        currency = money.Currency;
+                    }
+                    if (currency != money.Currency)
+                    {
+                        throw new CurrencyMismatchException(currency, money.Currency, nameof(Sum));
+                    }
+                    checked
+                    {
+                        total += (decimal)money;
+                    }
+                }
             }
+            return none ? null : total + currency;
         }
-
-        return Percentage.Create(total);
     }
 
-    /// <summary>Computes the sum of a sequence of nullable <see cref="Percentage" /> values that are
-    /// obtained by invoking a transform function on each element of the input sequence.
-    /// </summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an sum.
-    /// </param>
-    /// <param name="selector">
-    /// A transform function to apply to each element.
-    /// </param>
     /// <typeparam name="TSource">
     /// The type of the elements of source.
     /// </typeparam>
-    /// <returns>
-    /// The sum of the sequence of values, or null if the source sequence is empty
-    /// or contains only values that are null.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    [Pure]
-    public static Percentage? Sum<TSource>(this IEnumerable<TSource> source, Func<TSource, Percentage?> selector)
+    extension<TSource>(IEnumerable<TSource> source)
     {
-        Guard.NotNull(source);
-        Guard.NotNull(selector);
-
-        var total = decimal.Zero;
-        var none = true;
-
-        foreach (var item in source)
+        /// <summary>Computes the sum of a sequence of <see cref="Percentage" /> values that are obtained
+        /// by invoking a transform function on each element of the input sequence.
+        /// </summary>
+        /// <param name="selector">
+        /// A transform function to apply to each element.
+        /// </param>
+        /// <returns>
+        /// The sum of the sequence of values.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        [Pure]
+        public Percentage Sum(Func<TSource, Percentage> selector)
         {
-            var value = selector(item);
+            Guard.NotNull(source);
+            Guard.NotNull(selector);
 
-            if (value is Percentage percentage)
+            var total = decimal.Zero;
+
+            foreach (var item in source)
             {
-                none = false;
+                var percentage = selector(item);
                 checked
                 {
                     total += (decimal)percentage;
                 }
             }
+
+            return Percentage.Create(total);
         }
-        return none ? null : Percentage.Create(total);
     }
 
-    /// <summary>Computes the sum of a sequence of <see cref="Percentage" /> values.</summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an sum.
-    /// </param>
-    /// <returns>
-    /// The sum of the sequence of values.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    [Pure]
-    public static Percentage Sum(this IEnumerable<Percentage> source)
+    /// <typeparam name="TSource">
+    /// The type of the elements of source.
+    /// </typeparam>
+    extension<TSource>(IEnumerable<TSource> source)
     {
-        Guard.NotNull(source);
-
-        var total = decimal.Zero;
-
-        foreach (var percentage in source)
+        /// <summary>Computes the sum of a sequence of nullable <see cref="Percentage" /> values that are
+        /// obtained by invoking a transform function on each element of the input sequence.
+        /// </summary>
+        /// <param name="selector">
+        /// A transform function to apply to each element.
+        /// </param>
+        /// <returns>
+        /// The sum of the sequence of values, or null if the source sequence is empty
+        /// or contains only values that are null.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        [Pure]
+        public Percentage? Sum(Func<TSource, Percentage?> selector)
         {
-            checked
+            Guard.NotNull(source);
+            Guard.NotNull(selector);
+
+            var total = decimal.Zero;
+            var none = true;
+
+            foreach (var item in source)
             {
-                total += (decimal)percentage;
+                var value = selector(item);
+
+                if (value is Percentage percentage)
+                {
+                    none = false;
+                    checked
+                    {
+                        total += (decimal)percentage;
+                    }
+                }
             }
+            return none ? null : Percentage.Create(total);
         }
-        return Percentage.Create(total);
     }
 
-    /// <summary>Computes the sum of a sequence of nullable <see cref="Percentage" /> values.</summary>
-    /// <param name="source">
-    /// A sequence of values that are used to calculate an sum.
-    /// </param>
-    /// <returns>
-    /// The sum of the sequence of values, or null if the source sequence is empty
-    /// or contains only values that are null.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// source or selector is null.
-    /// </exception>
-    [Pure]
-    public static Percentage? Sum(this IEnumerable<Percentage?> source)
+    extension(IEnumerable<Percentage> source)
     {
-        Guard.NotNull(source);
-
-        var total = decimal.Zero;
-        var none = true;
-
-        foreach (var value in source)
+        /// <summary>Computes the sum of a sequence of <see cref="Percentage" /> values.</summary>
+        /// <returns>
+        /// The sum of the sequence of values.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        [Pure]
+        public Percentage Sum()
         {
-            if (value is Percentage percentage)
+            Guard.NotNull(source);
+
+            var total = decimal.Zero;
+
+            foreach (var percentage in source)
             {
-                none = false;
                 checked
                 {
                     total += (decimal)percentage;
                 }
             }
+            return Percentage.Create(total);
         }
-        return none ? null : Percentage.Create(total);
     }
 
-    /// <summary>Computes the sum of a sequence of stream sizes.</summary>
-    [Pure]
-    public static StreamSize Sum(this IEnumerable<StreamSize> streamSizes)
-        => new(streamSizes.Sum(streamSize => (long)streamSize));
+    extension(IEnumerable<Percentage?> source)
+    {
+        /// <summary>Computes the sum of a sequence of nullable <see cref="Percentage" /> values.</summary>
+        /// <returns>
+        /// The sum of the sequence of values, or null if the source sequence is empty
+        /// or contains only values that are null.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// source or selector is null.
+        /// </exception>
+        [Pure]
+        public Percentage? Sum()
+        {
+            Guard.NotNull(source);
+
+            var total = decimal.Zero;
+            var none = true;
+
+            foreach (var value in source)
+            {
+                if (value is Percentage percentage)
+                {
+                    none = false;
+                    checked
+                    {
+                        total += (decimal)percentage;
+                    }
+                }
+            }
+            return none ? null : Percentage.Create(total);
+        }
+    }
+
+    extension(IEnumerable<StreamSize> streamSizes)
+    {
+        /// <summary>Computes the sum of a sequence of stream sizes.</summary>
+        [Pure]
+        public StreamSize Sum()
+            => new(streamSizes.Sum(streamSize => (long)streamSize));
+    }
 
     [Pure]
     private static InvalidOperationException NoElements() => new(QowaivMessages.InvalidOperationException_NoElements);

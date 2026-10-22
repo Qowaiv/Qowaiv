@@ -11,132 +11,142 @@ public static class QowaivTypeExtensions
     private static readonly ConditionalWeakTable<Type, string> ShortNames = new();
     private static readonly ConditionalWeakTable<Type, string> LongNames = new();
 
-    /// <summary>Gets a C# formatted <see cref="string" /> representing the <see cref="Type" />.</summary>
-    /// <param name="type">
-    /// The type to format as C# string.
-    /// </param>
-    [Pure]
-    public static string ToCSharpString(this Type type) => type.ToCSharpString(false);
-
-    /// <summary>Gets a C# formatted <see cref="string" /> representing the <see cref="Type" />.</summary>
-    /// <param name="type">
-    /// The type to format as C# string.
-    /// </param>
-    /// <param name="withNamespace">
-    /// Should the namespace be displayed or not.
-    /// </param>
-    [Pure]
-    public static string ToCSharpString(this Type type, bool withNamespace)
+    extension(Type type)
     {
-        Guard.NotNull(type);
-        return withNamespace ? type.ToCSharpStringLong() : type.ToCSharpStringShort();
-    }
+        /// <summary>Gets a C# formatted <see cref="string" /> representing the <see cref="Type" />.</summary>
+        [Pure]
+        public string ToCSharpString() => type.ToCSharpString(false);
 
-    [Pure]
-    private static string ToCSharpStringShort(this Type type)
-    {
-        if (ShortNames.TryGetValue(type, out var result))
+        /// <summary>Gets a C# formatted <see cref="string" /> representing the <see cref="Type" />.</summary>
+        /// <param name="withNamespace">
+        /// Should the namespace be displayed or not.
+        /// </param>
+        [Pure]
+        public string ToCSharpString(bool withNamespace)
         {
+            Guard.NotNull(type);
+            return withNamespace ? type.ToCSharpStringLong() : type.ToCSharpStringShort();
+        }
+
+        [Pure]
+        private string ToCSharpStringShort()
+        {
+            if (ShortNames.TryGetValue(type, out var result))
+            {
+                return result;
+            }
+
+            lock (ShortNameLocker)
+            {
+                if (!ShortNames.TryGetValue(type, out result))
+                {
+                    result = new StringBuilder().AppendType(TypeInfo.New(type), false).ToString();
+                    ShortNames.Add(type, result);
+                }
+            }
+
             return result;
         }
 
-        lock (ShortNameLocker)
+        [Pure]
+        private string ToCSharpStringLong()
         {
-            if (!ShortNames.TryGetValue(type, out result))
+            if (LongNames.TryGetValue(type, out var result))
             {
-                result = new StringBuilder().AppendType(TypeInfo.New(type), false).ToString();
-                ShortNames.Add(type, result);
+                return result;
             }
-        }
 
-        return result;
-    }
+            lock (LongNameLocker)
+            {
+                if (!LongNames.TryGetValue(type, out result))
+                {
+                    result = new StringBuilder().AppendType(TypeInfo.New(type), true).ToString();
+                    LongNames.Add(type, result);
+                }
+            }
 
-    [Pure]
-    private static string ToCSharpStringLong(this Type type)
-    {
-        if (LongNames.TryGetValue(type, out var result))
-        {
             return result;
         }
 
-        lock (LongNameLocker)
-        {
-            if (!LongNames.TryGetValue(type, out result))
-            {
-                result = new StringBuilder().AppendType(TypeInfo.New(type), true).ToString();
-                LongNames.Add(type, result);
-            }
-        }
-
-        return result;
+        [Pure]
+        private bool IsGenericTypeParameter()
+            => type.IsGenericParameter && type.DeclaringMethod is null;
     }
 
-    [Pure]
-    internal static bool IsAnyOf(this Type? type, params Type[] types) => types.Contains(type);
-
-    [FluentSyntax]
-    private static StringBuilder AppendType(this StringBuilder sb, TypeInfo type, bool withNamespace)
+    extension([NotNullIfNotNull(nameof(type))] Type? type)
     {
-        if (Primitives.TryGetValue(type.Type, out var primitive))
-        {
-            return sb.Append(primitive);
-        }
-        else if (type.NotNullable is { } notNullable)
-        {
-            return sb.AppendType(notNullable, withNamespace).Append('?');
-        }
-        else if (type.IsArray)
-        {
-            var array = new StringBuilder();
+        [Pure]
+        internal bool IsAnyOf(params Type[] types) => types.Contains(type);
 
-            do
-            {
-                array.Append('[').Append(',', type.ArrayRank - 1).Append(']');
-                type = type.ElementType!;
-            }
-            while (type.IsArray);
-
-            return sb.AppendType(type, withNamespace).Append(array);
-        }
-        else if (type.IsGenericTypeDefinition)
-        {
-            return sb
-                .AppendPrefix(type, withNamespace)
-                .Append(type.Name)
-                .Append('<')
-                .Append(',', type.GetGenericArguments().Length - 1)
-                .Append('>');
-        }
-        else if (type.GetGenericArguments() is { Length: > 0 } genericArguments)
-        {
-            sb.AppendPrefix(type, withNamespace)
-               .Append(type.Name)
-               .Append('<')
-               .AppendType(genericArguments[0], withNamespace);
-
-            for (var i = 1; i < genericArguments.Length; i++)
-            {
-                sb.Append(", ").AppendType(genericArguments[i], withNamespace);
-            }
-            return sb.Append('>');
-        }
-        else return sb.AppendPrefix(type, withNamespace).Append(type.Name);
+        [Pure]
+        private TypeInfo? Info() => type is { } ? TypeInfo.New(type) : null;
     }
 
-    /// <summary>Appends namespace and/or declaring type.</summary>
-    [FluentSyntax]
-    private static StringBuilder AppendPrefix(this StringBuilder sb, TypeInfo type, bool withNamespace)
+    extension(StringBuilder sb)
     {
-        if (type.IsNestedType)
+        [FluentSyntax]
+        private StringBuilder AppendType(TypeInfo type, bool withNamespace)
         {
-            sb.AppendType(type.DeclaringType!, withNamespace).Append('.');
+            if (Primitives.TryGetValue(type.Type, out var primitive))
+            {
+                return sb.Append(primitive);
+            }
+            else if (type.NotNullable is { } notNullable)
+            {
+                return sb.AppendType(notNullable, withNamespace).Append('?');
+            }
+            else if (type.IsArray)
+            {
+                var array = new StringBuilder();
+
+                do
+                {
+                    array.Append('[').Append(',', type.ArrayRank - 1).Append(']');
+                    type = type.ElementType!;
+                }
+                while (type.IsArray);
+
+                return sb.AppendType(type, withNamespace).Append(array);
+            }
+            else if (type.IsGenericTypeDefinition)
+            {
+                return sb
+                    .AppendPrefix(type, withNamespace)
+                    .Append(type.Name)
+                    .Append('<')
+                    .Append(',', type.GetGenericArguments().Length - 1)
+                    .Append('>');
+            }
+            else if (type.GetGenericArguments() is { Length: > 0 } genericArguments)
+            {
+                sb.AppendPrefix(type, withNamespace)
+                   .Append(type.Name)
+                   .Append('<')
+                   .AppendType(genericArguments[0], withNamespace);
+
+                for (var i = 1; i < genericArguments.Length; i++)
+                {
+                    sb.Append(", ").AppendType(genericArguments[i], withNamespace);
+                }
+                return sb.Append('>');
+            }
+            else return sb.AppendPrefix(type, withNamespace).Append(type.Name);
         }
-        else if (withNamespace && !string.IsNullOrEmpty(type.Namespace))
+
+        /// <summary>Appends namespace and/or declaring type.</summary>
+        [FluentSyntax]
+        private StringBuilder AppendPrefix(TypeInfo type, bool withNamespace)
         {
-            sb.Append(type.Namespace).Append('.');
+            if (type.IsNestedType)
+            {
+                sb.AppendType(type.DeclaringType!, withNamespace).Append('.');
+            }
+            else if (withNamespace && !string.IsNullOrEmpty(type.Namespace))
+            {
+                sb.Append(type.Namespace).Append('.');
+            }
+            return sb;
         }
-        return sb;
     }
 
     private static readonly FrozenDictionary<Type, string> Primitives = new Dictionary<Type, string>()
@@ -159,13 +169,6 @@ public static class QowaivTypeExtensions
         [typeof(decimal)] = "decimal",
     }
     .ToFrozenDictionary();
-
-    [Pure]
-    private static TypeInfo? Info([NotNullIfNotNull(nameof(type))] this Type? type) => type is { } ? TypeInfo.New(type) : null;
-
-    [Pure]
-    private static bool IsGenericTypeParameter(this Type type)
-        => type.IsGenericParameter && type.DeclaringMethod is null;
 
     private sealed class TypeInfo
     {

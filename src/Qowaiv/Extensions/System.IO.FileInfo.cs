@@ -5,8 +5,11 @@ namespace System.IO;
 /// <summary>Extensions on <see cref="FileInfo" />.</summary>
 public static class QowaivFileInfoExtensions
 {
-    /// <summary>Gets the size of the current file.</summary>
-    [Pure]
-    public static StreamSize GetStreamSize(this FileInfo fileInfo)
-        => StreamSize.FromFileInfo(fileInfo);
+    extension(FileInfo fileInfo)
+    {
+        /// <summary>Gets the size of the current file.</summary>
+        [Pure]
+        public StreamSize GetStreamSize()
+            => StreamSize.FromFileInfo(fileInfo);
+    }
 }

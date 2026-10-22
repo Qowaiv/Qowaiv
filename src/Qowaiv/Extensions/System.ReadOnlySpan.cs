@@ -4,17 +4,20 @@ namespace System;
 
 internal static class QowaivReadOnlySpanExtensions
 {
-    [Pure]
-    public static bool Contains(this ReadOnlySpan<char> span, char value)
+    extension(ReadOnlySpan<char> span)
     {
-        for (var i = 0; i < span.Length; i++)
+        [Pure]
+        public bool Contains(char value)
         {
-            if (span[i] == value)
+            for (var i = 0; i < span.Length; i++)
             {
-                return true;
+                if (span[i] == value)
+                {
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
     }
 }
 #endif

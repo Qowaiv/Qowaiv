@@ -1,8 +1,8 @@
 #if NET10_0_OR_GREATER
 
-using Qowaiv.Humanizer;
+using Qowaiv.Extensions;
 
-namespace Date_only_specs;
+namespace Extensions.Date_only_specs;
 
 public class Can_be_adjusted_with
 {

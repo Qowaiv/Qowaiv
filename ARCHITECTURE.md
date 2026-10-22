@@ -15,6 +15,8 @@ that is exctend, including its namespace. The static class should have a name
 that starts with `Qowaiv` and is followed by the type name. This type can be
 plural in case of an extension an array or collection. Linq like extensions
 should be in the `Linq` directory, and part of  `QowaivEnumerable`.
+Although `DecimalMath` exposes all methods also as extensions, it is primary a
+utility class that provides `Symstem.Math` functions on `decimal`.
 
 ## Polyfill
 The `Polyfill` directory contains both [polyfill](https://en.wikipedia.org/wiki/Polyfill_(programming))

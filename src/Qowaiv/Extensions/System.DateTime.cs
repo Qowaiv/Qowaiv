@@ -3,7 +3,7 @@ using Qowaiv;
 namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="DateTime" />.</summary>
-public static class DateTimeExtensions
+public static class QowaivDateTime
 {
     extension(DateTime date)
     {

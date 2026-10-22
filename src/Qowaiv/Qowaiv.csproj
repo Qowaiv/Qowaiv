@@ -46,6 +46,7 @@ v11.*
 - DecimalMath (Qowaiv.Mathematics) exposes E, Epsilon, and Pi, as well as public Abs() and Sign() extensions on decimal.
 - Public extensions on decimal are moved from System.QowaivDecimalExtensions to Qowaiv.Mathematics.DecimalMath. (BREAKING)
 - Humanizer extensions (Days(), Months(), Years(), Percent(), Amount(), Bytes(), CasNr(), Elo(), Fraction(), CE()) are merged into Qowaiv.Humanizer.Humanize. (BREAKING)
+- Extension classes in Qowaiv.Extensions are renamed to start with Qowaiv, e.g. GuidExtensions becomes QowaivGuidExtensions. (BREAKING)
 v8.*
 - Extended language support.
 - IBAN supports Mongolia and Falkland Islands.

@@ -3,7 +3,7 @@
 namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="DateOnly" />.</summary>
-public static class DateOnlyExtensions
+public static class QowaivDateOnly
 {
     extension(DateOnly date)
     {

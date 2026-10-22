@@ -3,7 +3,7 @@ using Qowaiv.Threading;
 namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="Thread" />.</summary>
-public static class ThreadExtensions
+public static class QowaivThread
 {
     extension(Thread thread)
     {

@@ -3,7 +3,7 @@
 namespace System.Numerics;
 
 /// <summary>Extensions on <see cref="INumberBase{TSelf}" />.</summary>
-public static class QowaivNumberBase
+public static class QowaivINumberBase
 {
     /// <typeparam name="TSelf">
     /// Type of the number.

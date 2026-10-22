@@ -3,7 +3,7 @@ using Qowaiv;
 namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="DateTimeOffset" />.</summary>
-public static class DateTimeOffsetExtensions
+public static class QowaivDateTimeOffset
 {
     extension(DateTimeOffset d)
     {

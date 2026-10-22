@@ -4,7 +4,7 @@ using Qowaiv.IO;
 namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="Stream" />.</summary>
-public static class QowaivStreamExtensions
+public static class QowaivStream
 {
     extension(Stream stream)
     {

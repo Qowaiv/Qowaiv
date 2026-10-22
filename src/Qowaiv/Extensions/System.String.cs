@@ -4,7 +4,7 @@ using System.Buffers;
 namespace System;
 
 /// <summary>Extensions on <see cref="string" />.</summary>
-public static class QowaivSystemExtensions
+public static class QowaivString
 {
     extension(string str)
     {

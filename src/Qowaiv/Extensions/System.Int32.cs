@@ -1,7 +1,7 @@
 namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="int" />.</summary>
-internal static class Int32Extensions
+internal static class QowaivInt32
 {
     extension(int num)
     {

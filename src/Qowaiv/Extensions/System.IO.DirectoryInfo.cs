@@ -4,7 +4,7 @@ using System.IO;
 namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="DirectoryInfo" />.</summary>
-public static class QowaivDirectoryInfoExtensions
+public static class QowaivDirectoryInfo
 {
     extension(DirectoryInfo directoryInfo)
     {

@@ -1,7 +1,7 @@
 namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="long" />.</summary>
-internal static class Int64Extensions
+internal static class QowaivInt64
 {
     extension(long number)
     {

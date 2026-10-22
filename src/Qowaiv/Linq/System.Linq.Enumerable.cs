@@ -331,9 +331,8 @@ public static class QowaivEnumerable
     {
         /// <summary>Gets the average Elo.</summary>
         [Pure]
-        public Elo Average(elo => (double)elo);
+        public Elo Average() => elos.Average(elo => (double)elo);
     }
-}
 
     /// <typeparam name="TSource">
     /// The type of the elements of source.

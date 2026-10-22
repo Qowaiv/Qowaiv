@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="HashAlgorithm" />.</summary>
-public static class HashAlgorithmExtensions
+public static class QowaivHashAlgorithm
 {
     extension(HashAlgorithm algorithm)
     {

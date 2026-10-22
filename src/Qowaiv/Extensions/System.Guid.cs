@@ -4,7 +4,7 @@ using Qowaiv.Identifiers;
 namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="Guid" />.</summary>
-public static class GuidExtensions
+public static class QowaivGuid
 {
     extension(Guid guid)
     {

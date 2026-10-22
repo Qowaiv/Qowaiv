@@ -3,7 +3,7 @@ using Qowaiv;
 namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="Type" />.</summary>
-public static class TypeExtensions
+public static class QowaivType
 {
     private static readonly Lock ShortNameLocker = new();
     private static readonly Lock LongNameLocker = new();

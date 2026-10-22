@@ -3,7 +3,7 @@ using Qowaiv.Globalization;
 namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="CultureInfo" />.</summary>
-public static class CultureInfoExtensions
+public static class QowaivCultureInfo
 {
     extension(CultureInfo culture)
     {

@@ -4,7 +4,7 @@ using System.IO;
 namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="FileInfo" />.</summary>
-public static class QowaivFileInfoExtensions
+public static class QowaivFileInfo
 {
     extension(FileInfo fileInfo)
     {

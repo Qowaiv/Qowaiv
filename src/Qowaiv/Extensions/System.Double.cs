@@ -1,7 +1,7 @@
 namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="double" />.</summary>
-public static class DoubleExtensions
+public static class QowaivDouble
 {
     extension(double value)
     {

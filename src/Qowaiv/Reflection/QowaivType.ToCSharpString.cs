@@ -1,16 +1,7 @@
-using Qowaiv;
+namespace Qowaiv.Reflection;
 
-namespace Qowaiv.Extensions;
-
-/// <summary>Extensions on <see cref="Type" />.</summary>
-public static class QowaivType
+public static partial class QowaivType
 {
-    private static readonly Lock ShortNameLocker = new();
-    private static readonly Lock LongNameLocker = new();
-
-    private static readonly ConditionalWeakTable<Type, string> ShortNames = new();
-    private static readonly ConditionalWeakTable<Type, string> LongNames = new();
-
     extension(Type type)
     {
         /// <summary>Gets a C# formatted <see cref="string" /> representing the <see cref="Type" />.</summary>
@@ -75,9 +66,6 @@ public static class QowaivType
 
     extension([NotNullIfNotNull(nameof(type))] Type? type)
     {
-        [Pure]
-        internal bool IsAnyOf(params Type[] types) => types.Contains(type);
-
         [Pure]
         private TypeInfo? Info() => type is { } ? TypeInfo.New(type) : null;
     }
@@ -148,6 +136,14 @@ public static class QowaivType
             return sb;
         }
     }
+
+    private static readonly Lock ShortNameLocker = new();
+    private static readonly Lock LongNameLocker = new();
+
+#pragma warning disable IDE0028 // Simplify collection initialization // not supported
+    private static readonly ConditionalWeakTable<Type, string> ShortNames = new();
+    private static readonly ConditionalWeakTable<Type, string> LongNames = new();
+#pragma warning restore IDE0028 // Simplify collection initialization
 
     private static readonly FrozenDictionary<Type, string> Primitives = new Dictionary<Type, string>()
     {

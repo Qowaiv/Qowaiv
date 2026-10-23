@@ -39,7 +39,7 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
     /// <inheritdoc />
     [Pure]
     public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
-        => (destinationType != typeof(T) && QowaivType.IsDate(destinationType))
+        => (destinationType != typeof(T) && destinationType is { IsDate: true })
         || base.CanConvertTo(context, destinationType);
 
     /// <inheritdoc />
@@ -54,7 +54,7 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
 
     [Pure]
     private static object? ConverToDefault(Type destinationType)
-        => QowaivType.IsNullable(destinationType)
+        => destinationType.IsNullable
         ? null
         : Activator.CreateInstance(destinationType);
 
@@ -121,7 +121,7 @@ public abstract class DateTypeConverter<T> : TypeConverter where T : struct, IFo
     [Pure]
     private static bool IsConvertable(Type type)
         => type != typeof(T)
-        && (type == typeof(string) || QowaivType.IsDate(type));
+        && (type == typeof(string) || type is { IsDate: true });
 
     private static readonly Dictionary<Type, Func<DateTypeConverter<T>, T, object>> ConvertTos = new()
     {

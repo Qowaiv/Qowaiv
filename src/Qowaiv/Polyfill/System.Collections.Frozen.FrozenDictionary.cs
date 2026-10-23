@@ -1,4 +1,4 @@
-#if !NET8_0_OR_GREATER
+#if NETSTANDARD2_0
 namespace System.Collections.Frozen;
 
 internal sealed class FrozenDictionary<TKey, TValue>(IDictionary<TKey, TValue> dictionary)

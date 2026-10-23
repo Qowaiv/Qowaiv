@@ -48,7 +48,7 @@ public abstract class NumericTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo, 
         // If the value is null or default value.
         if (QowaivType.IsNullOrDefaultValue(value))
         {
-            return QowaivType.IsNullable(destinationType) ? null : Activator.CreateInstance(destinationType);
+            return destinationType.IsNullable ? null : Activator.CreateInstance(destinationType);
         }
         else if (IsConvertible(destinationType))
         {
@@ -64,5 +64,5 @@ public abstract class NumericTypeConverter<TSvo, TRaw> : SvoTypeConverter<TSvo, 
     protected virtual bool IsConvertible(Type? type)
         => type is not null
         && type != typeof(TSvo)
-        && QowaivType.IsNumeric(type);
+        && type.IsNumeric;
 }

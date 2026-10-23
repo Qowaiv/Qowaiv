@@ -21,6 +21,7 @@ internal readonly record struct Bban(string Iso, ushort Mod, ushort[] Pattern, b
 
     public CountryId Id => CountryId.Iso(Iso);
 
+    /// <inheritdoc />
     /// <remarks>Reverse engineers the pattern to something humans can easily read.</remarks>
     [Pure]
     public override string ToString()

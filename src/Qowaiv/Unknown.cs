@@ -83,7 +83,7 @@ public static class Unknown
         private static HashSet<string> AddCulture(CultureInfo culture)
             => ResourceManager.Contains(culture)
             && ResourceManager.GetString("Values", culture) is { Length: > 0 } values
-            ? new HashSet<string>([.. values.Split(';').Select(v => v.ToUpper(culture))])
+            ? [with([.. values.Split(';').Select(v => v.ToUpper(culture))])]
             : [];
 
         [Impure]

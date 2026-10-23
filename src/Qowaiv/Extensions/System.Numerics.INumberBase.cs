@@ -1,6 +1,6 @@
 #if NET10_0_OR_GREATER
 
-namespace System.Numerics;
+namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="INumberBase{TSelf}" />.</summary>
 public static class QowaivINumberBase

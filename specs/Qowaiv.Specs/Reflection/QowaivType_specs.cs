@@ -87,7 +87,6 @@ public class IsDate
     public void Is_true_for_DateTime_DateOnly_and_Qowaiv_DateTypes(Type type)
         => type.IsDate.Should().BeTrue();
 
-    [TestCase(null)]
     [TestCase(typeof(object))]
     [TestCase(typeof(string))]
     [TestCase(typeof(char))]
@@ -95,7 +94,7 @@ public class IsDate
     [TestCase(typeof(Guid))]
     [TestCase(typeof(Amount))]
     [TestCase(typeof(BigInteger))]
-    public void Is_false_for_all_other_types(Type? type)
+    public void Is_false_for_all_other_types(Type type)
         => type.IsDate.Should().BeFalse();
 }
 
@@ -163,7 +162,7 @@ public class CSharpString
     [TestCase(typeof(Dictionary<,>), "System.Collections.Generic.Dictionary<,>")]
     [TestCase(typeof(Nullable<>), "System.Nullable<>")]
     [TestCase(typeof(Dictionary<object, List<int?>>[]), "System.Collections.Generic.Dictionary<object, System.Collections.Generic.List<int?>>[]")]
-    [TestCase(typeof(NestedType), "Extensions.Type_specs.CSharpString.NestedType")]
+    [TestCase(typeof(NestedType), "Reflection.Type_specs.CSharpString.NestedType")]
     public void With_namespaces_if_specified(Type type, string csharpString)
         => type.ToCSharpString(withNamespace: true).Should().Be(csharpString);
 

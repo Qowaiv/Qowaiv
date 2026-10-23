@@ -1,6 +1,6 @@
 # Extensions
 The Qowaiv core library comes with multiple extensions. They are added to improve
-the day to day usagage of the SVOs provided.
+the day to day usage of the SVOs provided.
 
 ## Humanizer
 Inspired by [Humanizer.NET](https://humanizr.net), humanizer extension methods
@@ -111,7 +111,7 @@ fileInfo.GetStreamSize();
 stream.GetStreamSize();
 ```
 
-### ToCSharpString
+## ToCSharpString
 Gets a C# formatted string representation of a `Type`.
 
 ```csharp

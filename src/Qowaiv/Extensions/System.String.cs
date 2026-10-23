@@ -1,7 +1,6 @@
-using Qowaiv;
 using System.Buffers;
 
-namespace System;
+namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="string" />.</summary>
 public static class QowaivString

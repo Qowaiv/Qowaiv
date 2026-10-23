@@ -31,11 +31,11 @@
   </ItemGroup>
   
   <PropertyGroup>
-    <Version>8.2.0</Version>
-    <PackageValidationBaselineVersion>8.1.0</PackageValidationBaselineVersion>
+    <Version>11.0.0-rc1</Version>
+    <PackageValidationBaselineVersion>8.2.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
-v11.*
+v11.0.0
 - Add support for .NET 11.0.
 - Drop support for .NET 9.0 and 8.0. (BREAKING)
 - Drop Clock.Yesterday() and Clock.Tomorrow(). (BREAKING)

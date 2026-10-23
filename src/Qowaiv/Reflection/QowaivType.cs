@@ -48,6 +48,12 @@ public static partial class QowaivType
 #endif
         [Pure]
         public bool IsDate => DateTypes.Contains(GetNotNullableType(type));
+
+        /// <summary>Gets the not null-able type if it is a null-able, otherwise the provided type.</summary>
+        [Pure]
+        public Type GetNotNullableType()
+            => Nullable.GetUnderlyingType(type) ?? type;
+
     }
 
     extension([NotNullIfNotNull(nameof(type))] Type? type)
@@ -60,14 +66,6 @@ public static partial class QowaivType
     [Pure]
     public static bool IsNullOrDefaultValue(object? value)
         => value is null || value.Equals(Activator.CreateInstance(value.GetType()));
-
-    /// <summary>Gets the not null-able type if it is a null-able, otherwise the provided type.</summary>
-    /// <param name="objectType">
-    /// The type to test for.
-    /// </param>
-    [Pure]
-    public static Type GetNotNullableType(Type objectType)
-        => Nullable.GetUnderlyingType(objectType) ?? objectType;
 
     private static readonly Type[] DateTypes =
     [

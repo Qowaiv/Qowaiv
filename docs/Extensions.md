@@ -1,70 +1,108 @@
 # Extensions
+The Qowaiv core library comes with multiple extensions. They are added to improve
+the day to day usagage of the SVOs provided.
 
-The Qowaiv core library comes with multiple extensions.
+## Humanizer
+Inspired by [Humanizer.NET](https://humanizr.net), humanizer extension methods
+create SVO instances:
+
+```csharp
+305_500.50m.Amount();       // Amount
+4.DividedBy(7);             // Fraction
+12.14m.Percent();           // Percentage
+123_456_789.Bytes();        // StreamSize
+
+5.Years();                  // YearSpan
+5.Years() + 3.Months();     // MonthSpan
+3.Months() + 5.Days();      // DateSpan
+2017.CE();                  // Year
+
+12345.CasNr();              // CasRegistryNumber
+1500.Elo();                 // Elo
+```
 
 ## Date and time
 
-### Add
-Adds a `DateSpan`, `MonthSpan`, or `YearSpan` to a date/time value.
+### Adding
+The `DateSpan`, `MonthSpan`, and `YearSpan` can be added to `System.DateTime`,
+`System.DateTimeOffset`, and `System.DateOnly`:
 
 ```csharp
-DateTime.Now.Add(new DateSpan(1, 2, 3));
-DateTime.Now.Add(1.Months());
-DateTimeOffset.Now.Add(1.Years());
-DateOnly.MaxValue.Add(1.Days()); // available on .NET 6+
+var date = new DateTime(2017, 06, 11);
+date.Add(4.Days());
+date.Add(3.Months());
+date.Add(10.Years());
 ```
 
-### IsIn
-Checks if a date is in a specific month or year.
+### Range checks
+`System.DateTime`, `System.DateTimeOffset`, and `System.DateOnly`, can be
+checked to be in a specific month or year:
 
 ```csharp
-DateTime.Today.IsIn(Month.January);
-DateOnly.Today.IsIn(2025.CE());
+var date = new DateOnly(2017, 06, 11);
+date.IsIn(Month.January);
+date.IsIn(2025.CE());
 ```
-
-### ToLocal
-Converts a `DateTimeOffset` to a `LocalDateTime`.
+### Local date time
+A `System.DateTimeOffset` can be converted to a `Qowaiv.LocalDateTime`:
 
 ```csharp
-DateTimeOffset.UtcNow.ToLocal();
+var date = new DateTimeOffset(2017, 06, 11);
+var local = date.ToLocal();
 ```
+
+## Conversion
+
+### ToDecimal
+Casts a `double` to a `decimal`, optionally rounding with `DecimalRounding`.
+
+```csharp
+1.2345.ToDecimal();
+1.2345.ToDecimal(2, DecimalRounding.ToEven);
+```
+
+### ZeroIfNull
+Returns zero if a nullable `INumberBase<T>` is null.
+
+```csharp
+int? value = null;
+value.ZeroIfNull(); // 0
+```
+
+## Decimal math
+All methods of `Qowaiv.Mathematics.DecimalMath` are available as extension methods.
+
+## Reflection
+All methods of `Qowaiv.Reflection.QowaivType` on `System.Type` are available as extension methods.
 
 ## Formatting
 
-### ToString
-Formats an `IFormattable` using `FormattingArguments` or `FormattingArgumentsCollection`.
+### Uppercase
+Converts a string to uppercase using `System.Globalization.TextInfo` provided
+by the specified format `System.IFormatProvider`.
 
 ```csharp
-someAmount.ToString(new FormattingArguments("0.00"));
+"hello".ToUpper(new CultureInfo("nl"));
 ```
 
-## Strings
-
-### ToUpper
-Converts a string to uppercase using a specific format provider.
-
-```csharp
-"hello".ToUpper(CultureInfo.InvariantCulture);
-```
-
-### ToTitleCase
-Converts a string to title case using a specific format provider.
+### Title case
+Applies the title case using `System.Globalization.TextInfo` provided
+by the specified format `System.IFormatProvider`.
 
 ```csharp
-"hello world".ToTitleCase(CultureInfo.CurrentCulture);
+"hello world".ToTitleCase(new CultureInfo("nl"));
 ```
 
 ### GetFormat
-Gets a formatting service instance of the specified type from an `IFormatProvider`.
+Gets a typed formatting service instance from an `IFormatProvider`.
 
 ```csharp
-formatProvider.GetFormat<NumberFormatInfo>();
+TextInfo info = formatProvider.GetFormat<TextInfo>();
 ```
 
-## System types
-
-### GetStreamSize
-Gets the size as a `StreamSize` for a byte array, directory, file, or stream.
+## Stream Size
+The `StreamSize` can be achieved from a `byte[]`, `System.IO.DirectoryInfo`,
+`System.IO.FileInfo`, or `System.IO.Stream`.
 
 ```csharp
 byteArray.GetStreamSize();
@@ -79,40 +117,6 @@ Gets a C# formatted string representation of a `Type`.
 ```csharp
 typeof(List<string>).ToCSharpString();
 typeof(List<string>).ToCSharpString(withNamespace: true);
-```
-
-### UuidVersion
-Gets the version of a `Guid`.
-
-```csharp
-guid.UuidVersion;
-```
-
-## Conversion
-
-### ToDecimal
-Casts a `double` to a `decimal`, optionally rounding with `DecimalRounding`.
-
-```csharp
-1.2345.ToDecimal();
-1.2345.ToDecimal(2, DecimalRounding.ToEven);
-```
-
-### ZeroIfNull
-Returns zero if a nullable `INumberBase<T>` is null (.NET 10+).
-
-```csharp
-int? value = null;
-value.ZeroIfNull(); // 0
-```
-
-### Decimal math
-All methods of `DecimalMath` are available as extension methods.
-
-### Decimal rounding helpers
-```csharp
-DecimalRounding.ToEven.IsDirectRounding();
-DecimalRounding.ToEven.IsNearestRounding();
 ```
 
 ## Security
@@ -167,22 +171,4 @@ streamSizes.Average();
 streamSizes.Sum();
 
 elos.Average();
-```
-
-Nullable sequences are also supported where applicable (returning `null` if empty).
-
-## Humanizer
-Inspired by [Humanizer.NET](https://humanizr.net), humanizer extension methods create SVO instances.
-
-```csharp
-305_500.50m.Amount();       // Amount
-4.DividedBy(7);             // Fraction
-3.Months() + 5.Days();      // DateSpan
-5.Years() + 3.Months();     // MonthSpan
-12.14m.Percent();           // Percentage
-2017.CE();                  // Year
-5.Years();                  // YearSpan
-123_456_789.Bytes();        // StreamSize
-12345.CasNr();              // CasRegistryNumber
-1500.Elo();                 // Elo
 ```

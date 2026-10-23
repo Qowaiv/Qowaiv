@@ -9,8 +9,8 @@ public static class QowaivTypeExtensions
     private static readonly Lock ShortNameLocker = new();
     private static readonly Lock LongNameLocker = new();
 
-    private static readonly ConditionalWeakTable<Type, string> ShortNames = [];
-    private static readonly ConditionalWeakTable<Type, string> LongNames = [];
+    private static readonly ConditionalWeakTable<Type, string> ShortNames = new();
+    private static readonly ConditionalWeakTable<Type, string> LongNames = new();
 
     /// <summary>Gets a C# formatted <see cref="string" /> representing the <see cref="Type" />.</summary>
     /// <param name="type">

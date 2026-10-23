@@ -29,7 +29,6 @@ public static partial class QowaivType
         /// * <see cref="DateTimeOffset" />
         /// * <see cref="LocalDateTime" />
         /// * <see cref="Date" />
-        /// * <see cref="Date" />
         /// * <see cref="WeekDate" />.
         /// * <see cref="YearMonth" />.
         /// </remarks>
@@ -40,7 +39,6 @@ public static partial class QowaivType
         /// * <see cref="DateTime" />
         /// * <see cref="DateTimeOffset" />
         /// * <see cref="LocalDateTime" />
-        /// * <see cref="Date" />
         /// * <see cref="Date" />
         /// * <see cref="WeekDate" />.
         /// * <see cref="YearMonth" />.

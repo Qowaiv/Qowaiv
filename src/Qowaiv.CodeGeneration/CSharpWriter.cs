@@ -1,6 +1,5 @@
 using Qowaiv.CodeGeneration.Syntax;
 using System.IO;
-using Qowaiv.Extensions;
 
 namespace Qowaiv.CodeGeneration;
 

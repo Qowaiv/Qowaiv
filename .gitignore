@@ -1,6 +1,6 @@
-# custom additions
-packages/
 .nuget/
+.temp/
+packages/
 
 #################
 ## Visual Studio
@@ -148,41 +148,12 @@ Desktop.ini
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
-# Mac crap
-.DS_Store
-
-
-#############
-## Python
-#############
-
-*.py[co]
-
-# Packages
-*.egg
-*.egg-info
-dist/
-build/
-eggs/
-parts/
-var/
-sdist/
-develop-eggs/
-.installed.cfg
-
-# Installer logs
-pip-log.txt
-
 # Unit test / coverage reports
 .coverage
 .tox
 
 #Translations
 *.mo
-
-#Mr Developer
-.mr.developer.cfg
-nuget/packages/
 
 # Exclude build folder at root level
 !/build

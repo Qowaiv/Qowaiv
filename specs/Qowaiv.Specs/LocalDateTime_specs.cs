@@ -1,3 +1,5 @@
+using Qowaiv.Humanizer;
+
 namespace Local_DateTime_specs;
 
 public class Has_constant

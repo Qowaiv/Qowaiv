@@ -1,5 +1,6 @@
 using BenchmarkDotNet.Configs;
 using Qowaiv.Financial;
+using Qowaiv.Humanizer;
 using Qowaiv.Mathematics;
 using System.IO;
 using System.Text.Json;

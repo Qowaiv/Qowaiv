@@ -1,3 +1,5 @@
+using Qowaiv.Humanizer;
+
 namespace Financial.Currency_specs;
 
 public class Has_constant

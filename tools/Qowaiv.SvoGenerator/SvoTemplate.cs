@@ -1,5 +1,6 @@
 using Qowaiv.CodeGeneration;
 using Qowaiv.CodeGeneration.Syntax;
+using Qowaiv.Reflection;
 
 namespace Qowaiv.SvoGenerator;
 

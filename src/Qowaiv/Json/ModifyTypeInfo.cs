@@ -9,7 +9,7 @@ public static class ModifyTypeInfo
 {
     /// <summary>
     /// Updates all properties that implement <see cref="IEmpty{TSelf}"/> not
-    /// to serialize when <see cref="IEmpty{TSelf}.HasValue"/> is false.
+    /// to serialize when <see cref="IEmpty.HasValue"/> is false.
     /// </summary>
     public static void IgnoreEmptySvos(JsonTypeInfo info)
     {
@@ -32,7 +32,7 @@ public static class ModifyTypeInfo
         => prop.PropertyType is { IsValueType: true, IsGenericType: false }
         && prop.PropertyType
             .GetInterfaces()
-            .Exists(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEmpty<>));
+            .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEmpty<>));
 }
 
 #endif

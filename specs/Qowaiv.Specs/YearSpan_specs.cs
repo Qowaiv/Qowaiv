@@ -1,3 +1,5 @@
+using Qowaiv.Humanizer;
+
 namespace YearSpan_specs;
 
 public class Has_constant

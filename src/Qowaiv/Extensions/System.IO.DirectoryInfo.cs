@@ -1,15 +1,18 @@
-using Qowaiv;
 using Qowaiv.IO;
+using System.IO;
 
-namespace System.IO;
+namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="DirectoryInfo" />.</summary>
-public static class QowaivDirectoryInfoExtensions
+public static class QowaivDirectoryInfo
 {
-    /// <summary>Gets the stream size of the current directory.</summary>
-    [Pure]
-    public static StreamSize GetStreamSize(this DirectoryInfo directoryInfo)
-        => Guard.NotNull(directoryInfo)
-        .EnumerateFiles("*", SearchOption.AllDirectories)
-        .Sum(file => file.Length);
+    extension(DirectoryInfo directoryInfo)
+    {
+        /// <summary>Gets the stream size of the current directory.</summary>
+        [Pure]
+        public StreamSize GetStreamSize()
+            => Guard.NotNull(directoryInfo)
+            .EnumerateFiles("*", SearchOption.AllDirectories)
+            .Sum(file => file.Length);
+    }
 }

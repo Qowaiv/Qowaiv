@@ -25,10 +25,13 @@ namespace Qowaiv;
 [SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Sex as specified by ISO/IEC 5218.", example: "female", type: "string", format: "sex", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
 [TypeConverter(typeof(SexTypeConverter))]
-#if NET10_0_OR_GREATER
+#if !NETSTANDARD2_0
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.SexJsonConverter))]
 #endif
 public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<Sex>, IComparable, IComparable<Sex>
+#if !NETSTANDARD2_0
+    , IEnumerated<Sex>
+#endif
 {
     /// <summary>Represents a not known/unknown sex.</summary>
     public static Sex Unknown => new(1);
@@ -50,6 +53,9 @@ public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<
 
     /// <summary>Contains male, female, not applicable.</summary>
     public static IReadOnlyCollection<Sex> MaleFemaleAndNotApplicable { get; } = [Male, Female, NotApplicable];
+
+    /// <summary>Contains male, female, not applicable.</summary>
+    public static IReadOnlyCollection<Sex> DefinedValues => MaleFemaleAndNotApplicable;
 
     /// <summary>Gets the display name.</summary>
     public string DisplayName => GetDisplayName(null);

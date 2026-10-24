@@ -8,7 +8,7 @@ namespace Qowaiv.Json;
 public static class ModifyTypeInfo
 {
     /// <summary>
-    /// Updates all properties that implement <see cref="IEmpty{TSelf}"/> not
+    /// Updates all properties that implement <see cref="IEmpty" /> not
     /// to serialize when <see cref="IEmpty.HasValue"/> is false.
     /// </summary>
     public static void IgnoreEmptySvos(JsonTypeInfo info)

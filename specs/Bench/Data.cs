@@ -1,10 +1,23 @@
 using Qowaiv.Financial;
 using System.Collections.Immutable;
+using Qowaiv.Mathematics;
 
 namespace Bench;
 
 internal static class Data
 {
+    public static class Date
+    {
+        public static readonly ImmutableArray<Qowaiv.Date> Svo =
+        [
+            .. Enumerable.Range(0, 1000)
+            .Select(i => new Qowaiv.Date(2017, 06, 11).AddDays(i))
+            .OrderBy(_ => Rnd.Next())
+        ];
+
+        public static readonly ImmutableArray<DateOnly> DateOnly = [.. Svo.Select(t => (DateOnly)t)];
+    }
+
     public static class Iban
     {
         public static readonly ImmutableArray<string> HumanReadable =
@@ -1015,14 +1028,22 @@ internal static class Data
     .OrderBy(_ => Rnd.Next()),
 ];
 
-        public static readonly ImmutableArray<string> Raw = [.. HumanReadable.Select(f => f.Replace(" ", string.Empty))];
+        public static readonly ImmutableArray<InternationalBankAccountNumber> Svo = [.. HumanReadable.Select(InternationalBankAccountNumber.Parse)];
 
-        public static readonly ImmutableArray<InternationalBankAccountNumber> Typed = [.. Raw.Select(InternationalBankAccountNumber.Parse)];
+        public static readonly ImmutableArray<string> String = [.. Svo.Select(s => s.ToJson()!)];
+    }
+
+    public static class Percentage
+    {
+        public static readonly ImmutableArray<decimal> Decimal = [.. Enumerable.Range(0, 1000).Select(_ => (Rnd.NextDecimal() * Rnd.NextDecimal() * 200m).Round(2))];
+        public static readonly ImmutableArray<Qowaiv.Percentage> Svo = [.. Decimal.Select(d => d.Percent())];
+
+        public static readonly ImmutableArray<string> String = [.. Svo.Select(p => p.ToJson())];
     }
 
     public static class YN
     {
-        public static readonly ImmutableArray<YesNo> Typed =
+        public static readonly ImmutableArray<YesNo> Svo =
         [
             .. Enumerable.Repeat(YesNo.Yes, 450)
             .Concat(Enumerable.Repeat(YesNo.No, 450))
@@ -1031,9 +1052,9 @@ internal static class Data
             .OrderBy(_ => Rnd.Next())
         ];
 
-        public static readonly ImmutableArray<bool?> Bools = [.. Typed.Select(t => (bool?)t)];
+        public static readonly ImmutableArray<bool?> Bool = [.. Svo.Select(t => (bool?)t)];
 
-        public static readonly ImmutableArray<string?> Raw = [.. Typed.Select(t => t.ToJson())];
+        public static readonly ImmutableArray<string?> String = [.. Svo.Select(t => t.ToJson())];
     }
 
     internal static readonly MersenneTwister Rnd = new(42);

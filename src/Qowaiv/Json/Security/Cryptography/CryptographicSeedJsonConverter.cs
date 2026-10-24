@@ -1,11 +1,11 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 using Qowaiv.Security.Cryptography;
 
 namespace Qowaiv.Json.Security.Cryptography;
 
 /// <summary>Provides a JSON conversion for a cryptographic seed.</summary>
-public sealed class CryptographicSeedJsonConverter : SvoJsonConverter<CryptographicSeed>
+internal sealed class CryptographicSeedJsonConverter : SvoJsonConverter<CryptographicSeed>
 {
     /// <inheritdoc />
     [Pure]

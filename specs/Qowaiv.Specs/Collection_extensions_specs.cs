@@ -218,16 +218,16 @@ public class Moneys
 
 public class Percentages
 {
-    private static readonly Percentage[] collection = [1.Percent(), 23.Percent(), Percentage.Zero];
-    private static readonly Percentage?[] nullables = [1.Percent(), 23.Percent(), Percentage.Zero, null];
+    private static readonly Percentage[] collection = [1m.Percent(), 23m.Percent(), Percentage.Zero];
+    private static readonly Percentage?[] nullables = [1m.Percent(), 23m.Percent(), Percentage.Zero, null];
 
     [Test]
     public void Average_on_collection_is_calculated()
-        => collection.Average().Should().Be(8.Percent());
+        => collection.Average().Should().Be(8m.Percent());
 
     [Test]
     public void Average_on_nullables_can_be_calculated()
-        => nullables.Average().Should().Be(8.Percent());
+        => nullables.Average().Should().Be(8m.Percent());
 
     [Test]
     public void Average_on_empty_nullables_is_null()
@@ -242,11 +242,11 @@ public class Percentages
 
     [Test]
     public void Average_on_selected_collection_is_calculated()
-        => collection.Average(Selection).Should().Be(8.Percent());
+        => collection.Average(Selection).Should().Be(8m.Percent());
 
     [Test]
     public void Average_on_selected_nullables_can_be_calculated()
-        => nullables.Average(Selection).Should().Be(8.Percent());
+        => nullables.Average(Selection).Should().Be(8m.Percent());
 
     [Test]
     public void Average_on_selected_empty_collection_throws()
@@ -265,11 +265,11 @@ public class Percentages
 
     [Test]
     public void Sum_on_collection_is_calculated()
-       => collection.Sum().Should().Be(24.Percent());
+       => collection.Sum().Should().Be(24m.Percent());
 
     [Test]
     public void Sum_on_nullables_can_be_calculated()
-        => nullables.Sum().Should().Be(24.Percent());
+        => nullables.Sum().Should().Be(24m.Percent());
 
     [Test]
     public void Sum_on_empty_collection_is_zero()
@@ -281,11 +281,11 @@ public class Percentages
 
     [Test]
     public void Sum_on_selected_collection_is_calculated()
-        => collection.Sum(Selection).Should().Be(24.Percent());
+        => collection.Sum(Selection).Should().Be(24m.Percent());
 
     [Test]
     public void Sum_on_selected_nullables_can_be_calculated()
-        => nullables.Sum(Selection).Should().Be(24.Percent());
+        => nullables.Sum(Selection).Should().Be(24m.Percent());
 
     [Test]
     public void Sum_on_selected_empty_collection_is_zero()

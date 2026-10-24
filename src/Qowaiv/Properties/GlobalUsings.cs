@@ -1,8 +1,10 @@
 global using Qowaiv.Conversion;
 global using Qowaiv.Diagnostics;
 global using Qowaiv.Diagnostics.Contracts;
+global using Qowaiv.Extensions;
 global using Qowaiv.Formatting;
 global using Qowaiv.Hashing;
+global using Qowaiv.Mathematics;
 global using Qowaiv.OpenApi;
 global using Qowaiv.Security;
 global using Qowaiv.Text;
@@ -16,7 +18,7 @@ global using System.Diagnostics.CodeAnalysis;
 global using System.Diagnostics.Contracts;
 global using System.Globalization;
 global using System.Linq;
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 global using System.Numerics;
 #endif
 global using System.Resources;

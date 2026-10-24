@@ -12,7 +12,7 @@
 namespace Qowaiv;
 
 public partial struct Date : IEquatable<Date>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<Date, Date, bool>
 #endif
 {
@@ -41,7 +41,7 @@ public partial struct Date : IEquatable<Date>
 }
 
 public partial struct Date : IComparable, IComparable<Date>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IComparisonOperators<Date, Date, bool>
 #endif
 {
@@ -129,7 +129,7 @@ public partial struct Date : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct Date
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<Date>
 #endif
 {

@@ -46,7 +46,7 @@ public partial struct Month : IEmpty<Month>
     public bool IsEmpty() => !HasValue;
 }
 public partial struct Month : IEquatable<Month>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<Month, Month, bool>
 #endif
 {
@@ -149,7 +149,7 @@ public partial struct Month : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct Month
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<Month>
 #endif
 {

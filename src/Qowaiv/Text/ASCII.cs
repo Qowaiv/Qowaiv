@@ -7,13 +7,16 @@ namespace Qowaiv.Text;
 
 internal static class ASCII
 {
+    /// <summary>ASCII " 48 | 0x22.</summary>
+    public const byte Quote = (byte)'"';
+
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsAscii(char c) => c < 127;
 
     [Pure]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsDigit(char c) => c is >= '0' and <= '9';
+    public static bool IsDigit(uint c) => c - '0' <= '9' - '0';
 
     /// <summary>Returns the digit value of the char.</summary>
     /// <remarks>

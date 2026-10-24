@@ -1,3 +1,5 @@
+#pragma warning disable QW0031 // .NET 11, cast from double to decimal has changed.
+
 namespace Financial.Amount_specs;
 
 public class Has_constant
@@ -28,23 +30,23 @@ public class Is_equal_by_value
 
     [Test]
     public void equal_to_same_value()
-        => Svo.Amount.Equals(42.17.Amount()).Should().BeTrue();
+        => Svo.Amount.Equals(42.17m.Amount()).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
-        => (42.17.Amount() == Svo.Amount).Should().BeTrue();
+        => (42.17m.Amount() == Svo.Amount).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
-        => (42.17.Amount() == Amount.Zero).Should().BeFalse();
+        => (42.17m.Amount() == Amount.Zero).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
-        => (42.17.Amount() != Svo.Amount).Should().BeFalse();
+        => (42.17m.Amount() != Svo.Amount).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
-        => (42.17.Amount() != Amount.Zero).Should().BeTrue();
+        => (42.17m.Amount() != Amount.Zero).Should().BeTrue();
 
     [Test]
     public void formatted_and_unformatted_are_equal()
@@ -72,7 +74,7 @@ public class Can_be_parsed
 {
     [Test]
     public void from_amount_string()
-        => Amount.Parse("14.1804", CultureInfo.InvariantCulture).Should().Be((Amount)14.1804m);
+        => Amount.Parse("14.1804", CultureInfo.InvariantCulture).Should().Be(14.1804m.Amount());
 
     [TestCase("en-GB", "42.17")]
     [TestCase("es-EC", "42,17")]
@@ -92,7 +94,7 @@ public class Can_be_parsed
             CurrencyGroupSeparator = "#",
             CurrencyDecimalSeparator = "*",
         };
-        Amount.Parse("5#123*34", info).Should().Be((Amount)5123.34m);
+        Amount.Parse("5#123*34", info).Should().Be(5_123.34m.Amount());
     }
 
     [Test]
@@ -130,21 +132,21 @@ public class Min_and_max
     [TestCase(17, 18)]
     [TestCase(18, 17)]
     public void Min_of_two_returns_minimum(Amount a1, Amount a2)
-        => Amount.Min(a1, a2).Should().Be(17.Amount());
+        => Amount.Min(a1, a2).Should().Be(17m.Amount());
 
     [Test]
     public void Min_of_collection_returns_minimum()
-        => Amount.Min(700.Amount(), 17.Amount(), 48.Amount()).Should().Be(17.Amount());
+        => Amount.Min(700m.Amount(), 17m.Amount(), 48m.Amount()).Should().Be(17m.Amount());
 
     [TestCase(17, 17)]
     [TestCase(17, 16)]
     [TestCase(16, 17)]
     public void Max_of_two_returns_minimum(Amount a1, Amount a2)
-        => Amount.Max(a1, a2).Should().Be(17.Amount());
+        => Amount.Max(a1, a2).Should().Be(17m.Amount());
 
     [Test]
     public void Max_of_collection_returns_maximum()
-        => Amount.Max(7.Amount(), 17.Amount(), -48.Amount()).Should().Be(17.Amount());
+        => Amount.Max(7m.Amount(), 17m.Amount(), -48m.Amount()).Should().Be(17m.Amount());
 }
 
 public class Can_not_be_parsed
@@ -189,7 +191,7 @@ public class Can_be_operated_on
     [Test]
     public void decrement()
     {
-        Amount amount = (Amount)43.17;
+        Amount amount = 43.17m.Amount();
         amount--;
         amount.Should().Be(Svo.Amount);
     }
@@ -197,7 +199,7 @@ public class Can_be_operated_on
     [Test]
     public void increment()
     {
-        Amount amount = (Amount)41.17;
+        Amount amount = 41.17m.Amount();
         amount++;
         amount.Should().Be(Svo.Amount);
     }
@@ -205,127 +207,127 @@ public class Can_be_operated_on
     [Test]
     public void add_amount()
     {
-        Amount amount = (Amount)40.10;
-        Amount other = (Amount)2.07;
+        Amount amount = 40.10m.Amount();
+        Amount other = 2.07m.Amount();
         (amount + other).Should().Be(Svo.Amount);
     }
 
     [Test]
     public void add_percentage()
     {
-        Amount amount = (Amount)40.00;
-        (amount + 10.Percent()).Should().Be((Amount)44.00);
+        Amount amount = 40.00m.Amount();
+        (amount + 10m.Percent()).Should().Be(44.00m.Amount());
     }
 
     [Test]
     public void subtract_amount()
     {
-        Amount amount = (Amount)43.20;
-        Amount other = (Amount)1.03;
+        Amount amount = 43.20m.Amount();
+        Amount other = 1.03m.Amount();
         (amount - other).Should().Be(Svo.Amount);
     }
 
     [Test]
     public void subtract_percentage()
     {
-        Amount amount = (Amount)40.00;
-        (amount - 25.Percent()).Should().Be((Amount)30.00);
+        Amount amount = 40.00m.Amount();
+        (amount - 25m.Percent()).Should().Be(30.00m.Amount());
     }
 
     [Test]
     public void multiply_percentage()
-        => ((Amount)100.40m * 50.Percent()).Should().Be((Amount)50.20m);
+        => (100.40m.Amount() * 50m.Percent()).Should().Be(50.20m.Amount());
 
     [Test]
     public void multiply_float()
-        => ((Amount)100.40m * 0.5F).Should().Be((Amount)50.20m);
+        => (100.40m.Amount() * 0.5F).Should().Be(50.20m.Amount());
 
     [Test]
     public void multiply_double()
-        => ((Amount)100.40m * 0.5).Should().Be((Amount)50.20m);
+        => (100.40m.Amount() * 0.5).Should().Be(50.20m.Amount());
 
     [Test]
     public void multiply_decimal()
-        => ((Amount)100.40m * 0.5m).Should().Be((Amount)50.20m);
+        => (100.40m.Amount() * 0.5m).Should().Be(50.20m.Amount());
 
     [Test]
     public void multiply_short()
-        => ((Amount)100.40m * (short)2).Should().Be((Amount)200.80m);
+        => (100.40m.Amount() * (short)2).Should().Be(200.80m.Amount());
 
     [Test]
     public void multiply_int()
-        => ((Amount)100.40m * 2).Should().Be((Amount)200.80m);
+        => (100.40m.Amount() * 2).Should().Be(200.80m.Amount());
 
     [Test]
     public void multiply_long()
-        => ((Amount)100.40m * 2L).Should().Be((Amount)200.80m);
+        => (100.40m.Amount() * 2L).Should().Be(200.80m.Amount());
 
     [Test]
     public void multiply_ushort()
-        => ((Amount)100.40m * (ushort)2).Should().Be((Amount)200.80m);
+        => (100.40m.Amount() * (ushort)2).Should().Be(200.80m.Amount());
 
     [Test]
     public void multiply_uint()
-        => ((Amount)100.40m * 2u).Should().Be((Amount)200.80m);
+        => (100.40m.Amount() * 2u).Should().Be(200.80m.Amount());
 
     [Test]
     public void multiply_ulong()
-        => ((Amount)100.40m * 2ul).Should().Be((Amount)200.80m);
+        => (100.40m.Amount() * 2ul).Should().Be(200.80m.Amount());
 
     [Test]
     public void divide_percentage()
-        => ((Amount)100.40m / 50.Percent()).Should().Be((Amount)200.80m);
+        => (100.40m.Amount() / 50m.Percent()).Should().Be(200.80m.Amount());
 
     [Test]
     public void divide_float()
-        => ((Amount)100.40m / 0.5F).Should().Be((Amount)200.80m);
+        => (100.40m.Amount() / 0.5F).Should().Be(200.80m.Amount());
 
     [Test]
     public void divide_double()
-        => ((Amount)100.40m / 0.5).Should().Be((Amount)200.80m);
+        => (100.40m.Amount() / 0.5).Should().Be(200.80m.Amount());
 
     [Test]
     public void divide_decimal()
-        => ((Amount)100.40m / 0.5m).Should().Be((Amount)200.80m);
+        => (100.40m.Amount() / 0.5m).Should().Be(200.80m.Amount());
 
     [Test]
     public void divide_short()
-        => ((Amount)100.40m / (short)2).Should().Be((Amount)50.20m);
+        => (100.40m.Amount() / (short)2).Should().Be(50.20m.Amount());
 
     [Test]
     public void divide_int()
-        => ((Amount)100.40m / 2).Should().Be((Amount)50.20m);
+        => (100.40m.Amount() / 2).Should().Be(50.20m.Amount());
 
     [Test]
     public void divide_long()
-        => ((Amount)100.40m / 2L).Should().Be((Amount)50.20m);
+        => (100.40m.Amount() / 2L).Should().Be(50.20m.Amount());
 
     [Test]
     public void divide_ushort()
-        => ((Amount)100.40m / (ushort)2).Should().Be((Amount)50.20m);
+        => (100.40m.Amount() / (ushort)2).Should().Be(50.20m.Amount());
 
     [Test]
     public void divide_uint()
-        => ((Amount)100.40m / 2u).Should().Be((Amount)50.20m);
+        => (100.40m.Amount() / 2u).Should().Be(50.20m.Amount());
 
     [Test]
     public void divide_ulong()
-        => ((Amount)100.40m / 2ul).Should().Be((Amount)50.20m);
+        => (100.40m.Amount() / 2ul).Should().Be(50.20m.Amount());
 }
 
 public class Can_be_rounded
 {
     [Test]
     public void without_digits()
-        => ((Amount)123.4567m).Round().Should().Be((Amount)123m);
+        => (123.4567m.Amount()).Round().Should().Be(123.Amount());
 
     [Test]
     public void with_1_digit()
-        => ((Amount)123.4567m).Round(1).Should().Be((Amount)123.5m);
+        => (123.4567m.Amount()).Round(1).Should().Be(123.50m.Amount());
 
     [Test]
     public void to_multiple_of_0d25()
-        => ((Amount)123.6567m).RoundToMultiple(0.25m).Should().Be((Amount)123.75m);
+        => (123.6567m.Amount()).RoundToMultiple(0.25m).Should().Be(123.75m.Amount());
 }
 
 public class Has_custom_formatting
@@ -400,7 +402,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.fr_FR.Scoped())
         {
-            ((Amount)170.42).ToString("C").Should().Be("170,42 €");
+            (170.42m.Amount()).ToString("C").Should().Be("170,42 €");
         }
     }
 
@@ -412,7 +414,7 @@ public class Has_custom_formatting
             CurrencyGroupSeparator = "#",
             CurrencyDecimalSeparator = "*",
         };
-        var formatted = ((Amount)12345678.235m).ToString("#,##0.0000", info);
+        var formatted = (12_345_678.235m.Amount()).ToString("#,##0.0000", info);
         formatted.Should().Be("12#345#678*2350");
     }
 
@@ -449,10 +451,10 @@ public class Is_comparable
         [
             Amount.Zero,
             Amount.Zero,
-            0.23.Amount(),
-            1.24.Amount(),
-            2.27.Amount(),
-            1300.Amount(),
+            0.23m.Amount(),
+            1.24m.Amount(),
+            2.27m.Amount(),
+            1300m.Amount(),
         ];
 
         var list = new List<Amount> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
@@ -464,8 +466,8 @@ public class Is_comparable
     [Test]
     public void by_operators_for_different_values()
     {
-        var smaller = 17.Amount();
-        var bigger = 19.Amount();
+        var smaller = 17m.Amount();
+        var bigger = 19m.Amount();
 
         (smaller < bigger).Should().BeTrue();
         (smaller <= bigger).Should().BeTrue();
@@ -476,8 +478,8 @@ public class Is_comparable
     [Test]
     public void by_operators_for_equal_values()
     {
-        var left = 17.Amount();
-        var right = 17.Amount();
+        var left = 17m.Amount();
+        var right = 17m.Amount();
 
         (left < right).Should().BeFalse();
         (left <= right).Should().BeTrue();
@@ -525,7 +527,7 @@ public class Supports_type_conversion
 
     [Test]
     public void from_double()
-        => Converting.From(42.17).To<Amount>().Should().Be(Svo.Amount);
+        => Converting.From(42.17).To<Amount>().Round(4).Should().Be(Svo.Amount);
 
     [Test]
     public void to_decimal()
@@ -538,12 +540,12 @@ public class Supports_type_conversion
 
     public class Supports_JSON_serialization
     {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
         [TestCase("1234.56", 1234.56)]
         [TestCase(1234.56, 1234.56)]
         [TestCase(1234L, 1234.00)]
         public void System_Text_JSON_deserialization(object json, Amount svo)
-            => JsonTester.Read_System_Text_JSON<Amount>(json).Should().Be(svo);
+            => JsonTester.Read_System_Text_JSON<Amount>(json).Should().Be(svo.Round(4));
 
         [Test]
         public void System_Text_JSON_deserialization_min_value()
@@ -571,11 +573,11 @@ public class Supports_type_conversion
             json.Should().Be("79228162514264337593543950335");
         }
 #endif
-        [TestCase("1234.56", 1234.56)]
-        [TestCase(1234.56, 1234.56)]
-        [TestCase(1234L, 1234.00)]
+        [TestCase("1234.56", "1234.56")]
+        [TestCase(1234.56, "1234.56")]
+        [TestCase(1234L, "1234.00")]
         public void convention_based_deserialization(object json, Amount svo)
-          => JsonTester.Read<Amount>(json).Should().Be(svo);
+          => JsonTester.Read<Amount>(json).Round(4).Should().Be(svo);
 
         [TestCase(1234.56, 1234.56)]
         public void convention_based_serialization(Amount svo, object json)
@@ -598,32 +600,34 @@ public class Supports_type_conversion
     {
         public class From
         {
+#pragma warning disable QW0031 // Use formatted amount literals
             [Test]
-            public void Int32() => ((Amount)42).Should().Be(42.Amount());
+            public void Int32() => ((Amount)42).Should().Be(42m.Amount());
 
             [Test]
-            public void Int64() => ((Amount)42L).Should().Be(42.Amount());
+            public void Int64() => ((Amount)42L).Should().Be(42m.Amount());
 
             [Test]
-            public void Decimal() => ((Amount)42.0m).Should().Be(42.Amount());
+            public void Decimal() => ((Amount)42.0m).Should().Be(42m.Amount());
 
             [Test]
-            public void Double() => ((Amount)42.0).Should().Be(42.Amount());
+            public void Double() => ((Amount)42.0).Should().Be(42m.Amount());
+#pragma warning restore QW0031 // Use formatted amount literals
         }
 
         public class To
         {
             [Test]
-            public void Int32() => ((int)42.Amount()).Should().Be(42);
+            public void Int32() => ((int)42m.Amount()).Should().Be(42);
 
             [Test]
-            public void Int64() => ((long)42.Amount()).Should().Be(42L);
+            public void Int64() => ((long)42m.Amount()).Should().Be(42L);
 
             [Test]
-            public void Decimal() => ((decimal)42.Amount()).Should().Be(42m);
+            public void Decimal() => ((decimal)42m.Amount()).Should().Be(42m);
 
             [Test]
-            public void Double() => ((double)42.Amount()).Should().Be(42.0);
+            public void Double() => ((double)42m.Amount()).Should().Be(42.0);
         }
     }
     public class Has_operators
@@ -631,7 +635,7 @@ public class Supports_type_conversion
         [Test]
         public void to_divide_amount_by_amount_as_decimal()
         {
-            var ratio = Svo.Amount / 2.Amount();
+            var ratio = Svo.Amount / 2m.Amount();
             ratio.Should().Be(21.085m);
         }
     }

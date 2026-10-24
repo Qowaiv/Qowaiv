@@ -1,9 +1,9 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 namespace Qowaiv.Json.Security;
 
 /// <summary>Provides a JSON conversion for a secret.</summary>
-public sealed class SecretJsonConverter : SvoJsonConverter<Secret>
+internal sealed class SecretJsonConverter : SvoJsonConverter<Secret>
 {
     /// <inheritdoc />
     [Pure]

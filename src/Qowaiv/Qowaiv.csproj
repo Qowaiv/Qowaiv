@@ -3,7 +3,7 @@
   <Import Project="../../props/package.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net8.0;net9.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DevelopmentDependency>false</DevelopmentDependency>
     <PackageId>Qowaiv</PackageId>
@@ -35,6 +35,17 @@
     <PackageValidationBaselineVersion>8.1.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
+v11.0.0
+- Add support for .NET 11.0.
+- Drop support for .NET 9.0 and 8.0. (BREAKING)
+- Drop Clock.Yesterday() and Clock.Tomorrow(). (BREAKING)
+- Qowaiv SVO specific JSON converters have become internal. (BREAKING)
+- IEmpty<TSvo>, IUnknown<TSvo> inherit from non-generic parents.
+- double.ToDecimal(int, Qowaiv.Mathematics.DecimalRounding) and double.ToDecimal() in Qowaiv.Extensions, to simplify going from double to decimal.
+- DecimalRounding is moved to Qowaiv.Mathematics, and DecimalRoundingExtensions is renamed to DecimalRoundings. (BREAKING)
+- DecimalMath (Qowaiv.Mathematics) exposes E, Epsilon, and Pi, as well as public Abs() and Sign() extensions on decimal.
+- Public extensions on decimal are moved from System.QowaivDecimalExtensions to Qowaiv.Mathematics.DecimalMath. (BREAKING)
+- Introduction Enumerated<TSelf>.
 v8.*
 - Extended language support.
 - IBAN supports Mongolia and Falkland Islands.

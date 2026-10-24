@@ -1,10 +1,9 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a date span.</summary>
-[Inheritable]
-public class DateSpanJsonConverter : SvoJsonConverter<DateSpan>
+internal sealed class DateSpanJsonConverter : SvoJsonConverter<DateSpan>
 {
     /// <inheritdoc />
     [Pure]

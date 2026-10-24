@@ -12,7 +12,7 @@ public class Has_properties
     public void Currency_is_set() => (42 + Currency.EUR).Currency.Should().Be(Currency.EUR);
 
     [Test]
-    public void Amount_is_set() => (42 + Currency.EUR).Amount.Should().Be((Amount)42);
+    public void Amount_is_set() => (42 + Currency.EUR).Amount.Should().Be(42.Amount());
 }
 
 public class Is_comparable
@@ -91,11 +91,11 @@ public class Is_equal_by_value
 
     [Test]
     public void equal_to_same_value()
-        => Svo.Money.Equals(42.17 + Currency.EUR).Should().BeTrue();
+        => Svo.Money.Equals(42.17m + Currency.EUR).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
-        => (Svo.Money == 42.17 + Currency.EUR).Should().BeTrue();
+        => (Svo.Money == 42.17m + Currency.EUR).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
@@ -103,7 +103,7 @@ public class Is_equal_by_value
 
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
-        => (Svo.Money != 42.17 + Currency.EUR).Should().BeFalse();
+        => (Svo.Money != 42.17m + Currency.EUR).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
@@ -162,13 +162,13 @@ public class Can_be_parsed
     {
         using (TestCultures.fr_FR.Scoped())
         {
-            Money.Parse("-12,765 €").Should().Be(-12.765 + Currency.EUR);
+            Money.Parse("-12,765 €").Should().Be(-12.765m + Currency.EUR);
         }
     }
 
     [Test]
     public void with_out_currency()
-        => Money.Parse("42.17", CultureInfo.InvariantCulture).Should().Be(42.17 + Currency.Empty);
+        => Money.Parse("42.17", CultureInfo.InvariantCulture).Should().Be(42.17m + Currency.Empty);
 
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
@@ -323,14 +323,14 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase("EUR 42.17", "EUR 42.17")]
     [TestCase("EUR42.17", "EUR 42.17")]
     [TestCase("€42.17", "EUR 42.17")]
     [TestCase(100L, "100.00")]
     [TestCase(42.17, "42.17")]
     public void System_Text_JSON_deserialization(object json, Money svo)
-        => JsonTester.Read_System_Text_JSON<Money>(json).Should().Be(svo);
+        => JsonTester.Read_System_Text_JSON<Money>(json).Round(4).Should().Be(svo);
 
     [TestCase("EUR42.17", "EUR42.17")]
     public void System_Text_JSON_serialization(Money svo, object json)
@@ -342,7 +342,7 @@ public class Supports_JSON_serialization
     [TestCase(100L, "100.00")]
     [TestCase(42.17, "42.17")]
     public void convention_based_deserialization(object json, Money svo)
-        => JsonTester.Read<Money>(json).Should().Be(svo);
+        => JsonTester.Read<Money>(json).Round(4).Should().Be(svo);
 
     [TestCase("EUR42.17", "EUR42.17")]
     public void convention_based_serialization(Money svo, object json)
@@ -382,8 +382,8 @@ public class Can_be_operated_on
     public void sign(int expected, Money value)
         => value.Sign().Should().Be(expected);
 
-    [TestCase(23.1234, -23.1234)]
-    [TestCase(23.1234, +23.1234)]
+    [TestCase("23.1234", "-23.1234")]
+    [TestCase("23.1234", "+23.1234")]
     public void abs(decimal expected, decimal value)
     {
         var money = value + Currency.USD;
@@ -396,16 +396,14 @@ public class Can_be_operated_on
 
     [Test]
     public void negate()
-    {
-        (-Svo.Money).Should().Be(-42.17 + Currency.EUR);
-    }
+        => (-Svo.Money).Should().Be(-42.17m + Currency.EUR);
 
     [Test]
     public void increment()
     {
         var act = Svo.Money;
         act++;
-        act.Should().Be(43.17 + Currency.EUR);
+        act.Should().Be(43.17m + Currency.EUR);
     }
 
     [Test]
@@ -413,7 +411,7 @@ public class Can_be_operated_on
     {
         var act = Svo.Money;
         act--;
-        act.Should().Be(41.17 + Currency.EUR);
+        act.Should().Be(41.17m + Currency.EUR);
     }
 
     [Test]
@@ -428,7 +426,7 @@ public class Can_be_operated_on
     public void add_percentage()
     {
         var money = 16 + Currency.EUR;
-        (money + 25.Percent()).Should().Be(20 + Currency.EUR);
+        (money + 25m.Percent()).Should().Be(20 + Currency.EUR);
     }
 
     [Test]
@@ -443,14 +441,14 @@ public class Can_be_operated_on
     public void subtract_percentage()
     {
         var money = 16 + Currency.EUR;
-        (money - 25.Percent()).Should().Be(12 + Currency.EUR);
+        (money - 25m.Percent()).Should().Be(12 + Currency.EUR);
     }
 
     [Test]
     public void multiply_percentage()
     {
         var money = 100.40m + Currency.USD;
-        (money * 50.Percent()).Should().Be(50.20m + Currency.USD);
+        (money * 50m.Percent()).Should().Be(50.20m + Currency.USD);
     }
 
     [Test]
@@ -520,7 +518,7 @@ public class Can_be_operated_on
     public void divide_percentage()
     {
         var money = 100.40m + Currency.USD;
-        (money / 50.Percent()).Should().Be(200.8m + Currency.USD);
+        (money / 50m.Percent()).Should().Be(200.8m + Currency.USD);
     }
 
     [Test]

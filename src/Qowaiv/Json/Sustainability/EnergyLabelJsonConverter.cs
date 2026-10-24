@@ -1,11 +1,11 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 using Qowaiv.Sustainability;
 
 namespace Qowaiv.Json.Sustainability;
 
 /// <summary>Provides a JSON conversion for a EU energy label.</summary>
-public sealed class EnergyLabelJsonConverter : SvoJsonConverter<EnergyLabel>
+internal sealed class EnergyLabelJsonConverter : SvoJsonConverter<EnergyLabel>
 {
     /// <inheritdoc />
     [Pure]

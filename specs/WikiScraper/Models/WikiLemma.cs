@@ -33,7 +33,7 @@ public sealed record WikiLemma
     [Pure]
     public async Task<string> Content()
     {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
         if (HasExpired)
         {
             await Update();
@@ -58,7 +58,7 @@ public sealed record WikiLemma
     public async Task<IReadOnlyCollection<T>> TransformRange<T>(Func<string, IEnumerable<T>> tryParse) where T : class
         => [.. tryParse(await Content())];
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     private async Task Update()
     {
         var client = new HttpClient();

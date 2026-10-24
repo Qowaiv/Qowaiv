@@ -1,6 +1,3 @@
-#pragma warning disable S5773 // Types allowed to be deserialized should be restricted
-// Test code, so no risk
-
 using System.IO;
 
 namespace Qowaiv.TestTools;

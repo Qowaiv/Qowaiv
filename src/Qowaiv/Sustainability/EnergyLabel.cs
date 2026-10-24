@@ -17,14 +17,21 @@ namespace Qowaiv.Sustainability;
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(int))]
-[OpenApiDataType(description: "EU energy label", type: "string", format: "energy-label", example: "A++", pattern: @"[A-H]|A\+{1,4}", nullable: true)]
+[OpenApiDataType(
+    description: "EU energy label",
+    type: "string",
+    format: "energy-label",
+    example: "A++",
+    pattern: @"[B-H]|A\+{0,4}",
+    @enum: "G,F,E,D,C,B,A,A+,A++,A+++,A++++",
+    nullable: true)]
 [TypeConverter(typeof(Conversion.Sustainability.EnergyLabelTypeConverter))]
-#if NET8_0_OR_GREATER
+#if !NETSTANDARD2_0
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Sustainability.EnergyLabelJsonConverter))]
 #endif
 public readonly partial struct EnergyLabel : IXmlSerializable, IEquatable<EnergyLabel>, IComparable, IComparable<EnergyLabel>
-#if NET8_0_OR_GREATER
-    , ISpanFormattable
+#if !NETSTANDARD2_0
+    , ISpanFormattable, IEnumerated<EnergyLabel>
 #else
     , IFormattable
 #endif
@@ -60,6 +67,9 @@ public readonly partial struct EnergyLabel : IXmlSerializable, IEquatable<Energy
 
     /// <summary>Represents an unknown (but set) EU energy label.</summary>
     public static EnergyLabel Unknown => new(int.MinValue);
+
+    /// <summary>Represents all allowed lables (G, F, E, D, C, B, A, A+, A++, A+++. A++++.</summary>
+    public static IReadOnlyCollection<EnergyLabel> DefinedValues => [G, F, E, D, C, B, A(), A(1), A(2), A(3), A(4)];
 
     /// <summary>Returns a <see cref="string" /> that represents the EU energy label for DEBUG purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -101,7 +111,7 @@ public readonly partial struct EnergyLabel : IXmlSerializable, IEquatable<Energy
         }
     }
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     /// <inheritdoc />
     public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
     {

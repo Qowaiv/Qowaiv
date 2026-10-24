@@ -1,10 +1,9 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a local date time.</summary>
-[Inheritable]
-public class LocalDateTimeJsonConverter : SvoJsonConverter<LocalDateTime>
+internal sealed class LocalDateTimeJsonConverter : SvoJsonConverter<LocalDateTime>
 {
     /// <inheritdoc />
     [Pure]

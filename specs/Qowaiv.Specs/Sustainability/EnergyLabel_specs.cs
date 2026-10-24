@@ -287,7 +287,7 @@ public class Has_custom_formatting
     public void format_dependent(string format, EnergyLabel svo, string formatted)
         => svo.ToString(format).Should().Be(formatted);
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
     public class Span_formattable
     {
@@ -453,7 +453,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase("?", "?")]
     [TestCase("C", "C")]
     [TestCase("A++", "A++")]
@@ -532,13 +532,14 @@ public class Is_Open_API_data_type
     [Test]
     public void with_info()
        => OpenApiDataType.FromType(typeof(EnergyLabel))
-       .Should().Be(new OpenApiDataType(
+       .Should().BeEquivalentTo(new OpenApiDataType(
            dataType: typeof(EnergyLabel),
            description: "EU energy label",
            example: "A++",
            type: "string",
            format: "energy-label",
-           pattern: @"[A-H]|A\+{1,4}",
+           pattern: @"[B-H]|A\+{0,4}",
+           @enum: ["G", "F", "E", "D", "C", "B", "A", "A+", "A++", "A+++", "A++++"],
            nullable: true));
 
     [TestCase("G")]
@@ -549,7 +550,6 @@ public class Is_Open_API_data_type
     public void pattern_matches(string input)
         => OpenApiDataType.FromType(typeof(EnergyLabel))!.Matches(input).Should().BeTrue();
 }
-
 
 public class Debugger
 {

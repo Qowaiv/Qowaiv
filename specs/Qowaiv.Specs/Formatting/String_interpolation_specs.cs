@@ -6,16 +6,16 @@ public class Formats
     [Test]
     public void Amount()
     {
-        var formatted = 14.17.Amount().ToString("C");
-        var interpolated = $"{14.17.Amount():C}";
+        var formatted = 14.17m.Amount().ToString("C");
+        var interpolated = $"{14.17m.Amount():C}";
         interpolated.Should().Be(formatted);
     }
 
     [Test]
     public void Percentage()
     {
-        var formatted = 14.17.Percent().ToString();
-        var interpolated = $"{14.17.Percent()}";
+        var formatted = 14.17m.Percent().ToString();
+        var interpolated = $"{14.17m.Percent()}";
         interpolated.Should().Be(formatted);
     }
 

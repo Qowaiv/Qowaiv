@@ -1,7 +1,6 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 using Qowaiv.Mathematics;
-using System.Buffers;
 using System.Buffers.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -9,27 +8,51 @@ using System.Text.Json.Serialization;
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a percentage.</summary>
-[Inheritable]
-public class PercentageJsonConverter : SvoJsonConverter<Percentage>
+internal sealed class PercentageJsonConverter : JsonConverter<Percentage>
 {
     /// <inheritdoc />
     public override Percentage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-    {
-        if (reader.TokenType == JsonTokenType.String)
+        => reader.TokenType switch
         {
-            var span = reader.ValueSpan;
-            if (span[^1] is Symbol
-                && Utf8Parser.TryParse(span[..^1], out decimal dec, out int bytesConsumed)
-                && bytesConsumed == span.Length - 1)
-            {
-                return dec.Percent();
-            }
-        }
-
-        return base.Read(ref reader, typeToConvert, options);
-    }
+            JsonTokenType.String => ReadString(ref reader),
+            JsonTokenType.Number => ReadNumber(ref reader),
+            JsonTokenType.Null => default,
+            _ => reader.UnexpectedToken<Percentage>(),
+        };
 
     /// <inheritdoc />
+    public override Percentage ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        => ReadString(ref reader);
+
+    private static Percentage ReadString(ref Utf8JsonReader reader)
+    {
+        var span = reader.ValueSpan;
+        return true switch
+        {
+            _ when span[^1] is Symbol
+                && Utf8Parser.TryParse(span[..^1], out decimal dec, out int bytesConsumed)
+                && bytesConsumed == span.Length - 1 => dec.Percent(),
+
+            _ when Percentage.TryParse(reader.GetString(), CultureInfo.InvariantCulture) is { } percentage
+                => percentage,
+            _ => throw new JsonException(QowaivMessages.FormatExceptionPercentage),
+        };
+    }
+
+    private static Percentage ReadNumber(ref Utf8JsonReader reader)
+        => reader.TryGetDecimal(out var dec)
+        && dec >= (decimal)Percentage.MinValue && dec <= (decimal)Percentage.MaxValue
+            ? Percentage.Create(dec)
+            : throw new JsonException(QowaivMessages.ArgumentOutOfRange_Percentage);
+
+    /// <inheritdoc />
+    public override void Write(Utf8JsonWriter writer, Percentage value, JsonSerializerOptions options)
+        => Write(writer, value);
+
+    // <inheritdoc />
+    public override void WriteAsPropertyName(Utf8JsonWriter writer, [DisallowNull] Percentage value, JsonSerializerOptions options)
+        => Write(writer, value);
+
     /// <remarks>
     /// Uses <see cref="Utf8JsonWriter.WriteRawValue(string, bool)"/>:
     /// Writes '"'
@@ -43,36 +66,19 @@ public class PercentageJsonConverter : SvoJsonConverter<Percentage>
     ///  1 byte  for decimal separator
     ///  1 byte  for minus sign.
     /// </remarks>
-    public override void Write(Utf8JsonWriter writer, Percentage value, JsonSerializerOptions options)
+    private static void Write(Utf8JsonWriter writer, Percentage value)
     {
         var dec = DecimalMath.ChangeScale((decimal)value, 2);
 
         Span<byte> buffer = stackalloc byte[34];
-        buffer[0] = Quote;
+        buffer[0] = ASCII.Quote;
         Utf8Formatter.TryFormat(dec, buffer[1..], out var length);
         buffer[++length] = Symbol;
-        buffer[++length] = Quote;
+        buffer[++length] = ASCII.Quote;
         writer.WriteRawValue(buffer[..++length], skipInputValidation: true);
     }
 
-    private const byte Quote = (byte)'"';
     private const byte Symbol = (byte)'%';
-
-    /// <inheritdoc />
-    [Pure]
-    protected override Percentage FromJson(string? json) => Percentage.FromJson(json);
-
-    /// <inheritdoc />
-    [Pure]
-    protected override Percentage FromJson(long json) => Percentage.FromJson(json);
-
-    /// <inheritdoc />
-    [Pure]
-    protected override Percentage FromJson(double json) => Percentage.FromJson(json);
-
-    /// <inheritdoc />
-    [Pure]
-    protected override object? ToJson(Percentage svo) => svo.ToJson();
 }
 
 #endif

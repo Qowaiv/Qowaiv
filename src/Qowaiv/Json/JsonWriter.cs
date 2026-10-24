@@ -1,14 +1,12 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 using System.Text.Json;
 
 namespace Qowaiv.Json;
 
-internal static class AsciiStringWriter
+internal static class JsonWriter
 {
-    private const byte Quote = (byte)'"';
-
-    extension(Utf8JsonWriter? writer)
+    extension(Utf8JsonWriter writer)
     {
         /// <summary>Writes UTF16 chars assuming all to be ASCII that not require JSON escaping.</summary>
         /// <remarks>
@@ -21,14 +19,14 @@ internal static class AsciiStringWriter
             {
                 ReadOnlySpan<char> ascii = value;
                 Span<byte> utf8 = stackalloc byte[ascii.Length + 2];
-                utf8[0] = Quote;
+                utf8[0] = ASCII.Quote;
                 Ascii.FromUtf16(ascii, utf8[1..], out _);
-                utf8[^1] = Quote;
-                writer!.WriteRawValue(utf8, skipInputValidation: true);
+                utf8[^1] = ASCII.Quote;
+                writer.WriteRawValue(utf8, skipInputValidation: true);
             }
             else
             {
-                writer!.WriteNullValue();
+                writer.WriteNullValue();
             }
         }
     }

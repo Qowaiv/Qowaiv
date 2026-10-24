@@ -1,4 +1,4 @@
-namespace DecimalRounding_specs;
+namespace Mathematics.DecimalRounding_specs;
 
 public class DirectRounding
 {

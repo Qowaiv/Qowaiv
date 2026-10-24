@@ -8,7 +8,7 @@ namespace Qowaiv.Mathematics;
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(Tuple<long, long>))]
 [OpenApiDataType(description: "Fraction", type: "string", format: "fraction", pattern: "-?[0-9]+(/[0-9]+)?", example: "13/42")]
 [TypeConverter(typeof(FractionTypeConverter))]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Mathematics.FractionJsonConverter))]
 #endif
 [StructLayout(LayoutKind.Sequential)]
@@ -70,7 +70,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
 
         public static readonly Regex Pattern = GetPattern();
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
         [GeneratedRegex(@"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$", RegOptions.Default, RegOptions.TimeoutMilliseconds)]
         private static partial Regex GetPattern();
 #else

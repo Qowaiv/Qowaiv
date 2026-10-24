@@ -17,7 +17,14 @@ namespace Qowaiv.Sustainability;
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(int))]
-[OpenApiDataType(description: "EU energy label", type: "string", format: "energy-label", example: "A++", pattern: @"[A-H]|A\+{0,4}", nullable: true)]
+[OpenApiDataType(
+    description: "EU energy label",
+    type: "string",
+    format: "energy-label",
+    example: "A++",
+    pattern: @"[B-H]|A\+{0,4}",
+    @enum: "G,F,E,D,C,B,A,A+,A++,A+++,A++++",
+    nullable: true)]
 [TypeConverter(typeof(Conversion.Sustainability.EnergyLabelTypeConverter))]
 #if !NETSTANDARD2_0
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Sustainability.EnergyLabelJsonConverter))]

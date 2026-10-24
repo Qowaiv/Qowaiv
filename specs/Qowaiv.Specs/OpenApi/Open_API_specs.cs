@@ -1,3 +1,5 @@
+using Specs_Generated;
+
 namespace Open_API_specs;
 
 public class Open_API_data_types
@@ -52,6 +54,15 @@ public class Open_API_data_type
 }
 
 #if NET10_0_OR_GREATER
+
+public class Enumerated
+{
+    [Test]
+    public void Resolves_defined_values()
+         => OpenApiDataType.FromType(typeof(AbcEnum))
+            .Enum.Should().BeEquivalentTo("A", "B", "C");
+}
+
 [Explicit]
 public class README_md
 {
@@ -95,4 +106,5 @@ public class README_md
         DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
     };
 }
+
 #endif

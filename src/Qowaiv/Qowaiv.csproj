@@ -35,7 +35,7 @@
     <PackageValidationBaselineVersion>8.1.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
-v11.*
+v11.0.0
 - Add support for .NET 11.0.
 - Drop support for .NET 9.0 and 8.0. (BREAKING)
 - Drop Clock.Yesterday() and Clock.Tomorrow(). (BREAKING)
@@ -45,6 +45,7 @@ v11.*
 - DecimalRounding is moved to Qowaiv.Mathematics, and DecimalRoundingExtensions is renamed to DecimalRoundings. (BREAKING)
 - DecimalMath (Qowaiv.Mathematics) exposes E, Epsilon, and Pi, as well as public Abs() and Sign() extensions on decimal.
 - Public extensions on decimal are moved from System.QowaivDecimalExtensions to Qowaiv.Mathematics.DecimalMath. (BREAKING)
+- Introduction Enumerated<TSelf>.
 v8.*
 - Extended language support.
 - IBAN supports Mongolia and Falkland Islands.

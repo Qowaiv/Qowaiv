@@ -1,3 +1,6 @@
+#pragma warning disable S107 // Methods should not have too many parameters
+// To overcome the lack of the init key word in netstandard2.0.
+
 using System.Reflection;
 
 namespace Qowaiv.OpenApi;
@@ -7,8 +10,6 @@ namespace Qowaiv.OpenApi;
 public sealed record OpenApiDataType
 {
     /// <summary>Initializes a new instance of the <see cref="OpenApiDataType" /> class.</summary>
-#pragma warning disable S107 // Methods should not have too many parameters
-    // To overcome the lack of the init key word in netstandard2.0.
     public OpenApiDataType(
         Type dataType,
         string description,
@@ -108,6 +109,65 @@ public sealed record OpenApiDataType
             format: attr.Format,
             nullable: attr.Nullable,
             pattern: attr.Pattern,
-            @enum: attr.Enum)
+            @enum: attr.Enum ?? DefinedValues(type))
         : null;
+
+    [Pure]
+    private static IReadOnlyCollection<string>? DefinedValues(Type type)
+#if NETSTANDARD2_0
+        => null;
+#else
+    {
+        if (Interface() is { } contract && type.GetInterfaces().Contains(contract))
+        {
+            var values = new List<string>();
+            try
+            {
+                foreach (var member in DefinedValues())
+                {
+                    values.Add(member is IFormattable formattable ? formattable.ToString(null, CultureInfo.InvariantCulture) : member.ToString());
+                }
+            }
+            catch { return null; }
+            return values;
+        }
+        return null;
+
+        Type? Interface()
+        {
+            try { return typeof(IEnumerated<>).MakeGenericType(type); }
+            catch { return null; }
+        }
+
+        IEnumerable DefinedValues()
+            => (IEnumerable)type
+            .GetProperty(nameof(IEnumerated<>.DefinedValues), BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)!
+            .GetValue(null)!;
+    }
+#endif
+
+    /// <inheritdoc cref="IEquatable{T}" />
+    [Pure]
+    public bool Equals(OpenApiDataType? other)
+        => other is not null
+        && DataType == other.DataType
+        && Description == other.Description
+        && Type == other.Type
+        && Example == other.Example
+        && Format == other.Format
+        && Nullable == other.Nullable
+        && Pattern == other.Pattern
+        && Enumerable.SequenceEqual(Enum ?? [], other.Enum ?? []);
+
+    /// <inheritdoc />
+    [Pure]
+    public override int GetHashCode() => Hash
+        .Code(DataType)
+        .And(Description)
+        .And(Type)
+        .And(Example)
+        .And(Format)
+        .And(Nullable)
+        .And(Pattern)
+        .And(Enum);
 }

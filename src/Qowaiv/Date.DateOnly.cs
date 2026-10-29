@@ -2,8 +2,12 @@
 
 namespace Qowaiv;
 
-public readonly partial struct Date
+public readonly partial struct Date : IEquatable<DateOnly>
 {
+    /// <inheritdoc />
+    [Pure]
+    public bool Equals(DateOnly other) => DateOnly.FromDateTime(m_Value) == other;
+
     /// <summary>Casts a <see cref="Date" /> implicitly to a <see cref="DateOnly" />.</summary>
     public static implicit operator DateOnly(Date date) => new(date.Year, date.Month, date.Day);
 

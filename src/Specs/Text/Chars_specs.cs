@@ -1,4 +1,3 @@
-using AwesomeAssertions;
 using System.Linq;
 
 namespace Text.Chars_specs;

@@ -1,132 +1,110 @@
-using System.Diagnostics.SymbolStore;
+#pragma warning disable S3218 // Inner class members should not shadow outer class "static" or type members: Naming safes the day here.
 
 namespace Qowaiv.Text;
 
 /// <summary>Represents an ANSI instruction.</summary>
+/// <remarks>
+/// Layout: <c>m_Styles</c> has one bit per SGR code (bit n == code n), so 0-9 are
+/// the styles (0 is reset), and 21-29 are the styles that disable. Bits 10-13 are flags
+/// that indicate if the foreground/background is specified, and if it is RGB or a 256-color
+/// palette index (instead of an SGR color code). <c>m_Fore</c> and <c>m_Back</c> contain the
+/// SGR color code, the palette index, or the 24-bit RGB value, and are 0 if not specified.
+/// </remarks>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 public readonly partial struct Ansi : IEquatable<Ansi>
 {
-    private Ansi(params byte[] codes) => Codes = codes;
+    private static class Bits
+    {
+        // 0-9 and 21-29 except 26
+        public const uint Style = 0b11101_11110_00000_00000_11111_11111;
+        public const uint Reset = 1u << 0;
+
+        public static class Fore
+        {
+            public const uint Set = 1u << 10;
+            public const uint Rgb = 1u << 11;
+            public const uint Pal = 1u << 12;
+        }
+
+        public static class Back
+        {
+            public const uint Set = 1u << 13;
+            public const uint Rgb = 1u << 14;
+            public const uint Pal = 1u << 15;
+        }
+    }
+
+    /// <summary>Masks of the styles that replace each other.</summary>
+    private static class Group
+    {
+        public const uint Weight /*....*/ = 1u << 1 | 1u << 2 | 1u << 21 | 1u << 22;
+        public const uint Italic /*....*/ = 1u << 3 | 1u << 23;
+        public const uint Underline /*.*/ = 1u << 4 | 1u << 24;
+        public const uint Blink /*.....*/ = 1u << 5 | 1u << 6 | 1u << 25;
+        public const uint Invert /*....*/ = 1u << 7 | 1u << 27;
+        public const uint Hide /*......*/ = 1u << 8 | 1u << 28;
+        public const uint Strike /*....*/ = 1u << 9 | 1u << 29;
+    }
+
+    private Ansi(uint styles, uint fore, uint back)
+    {
+        m_Styles = styles;
+        m_Fore = fore;
+        m_Back = back;
+    }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly byte[] Codes;
+    private readonly uint m_Styles;
 
-    /// <summary>Adds to ANSI instructions together.</summary>
-    /// <param name="other">
-    /// The ANSI instruction to add.
-    /// </param>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private readonly uint m_Fore;
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private readonly uint m_Back;
+
+    /// <summary>The default (nothing set) is a reset.</summary>
+    private bool IsReset => (m_Styles & Bits.Reset) is not 0 || (m_Styles | m_Fore | m_Back) is 0;
+
+    /// <summary>Merges the two instructions, the second one wins on conflicts.</summary>
     [Pure]
     private Ansi Merge(Ansi other)
     {
-        // Other is/starts with a reset.
-        if (other.Codes is null || other.Codes[0] is 0) return other;
+        if (other.IsReset) return other;
 
-        Span<byte> buffer = stackalloc byte[32];
-        var size = 0;
-        var f = (Codes ?? [0]).AsSpan();
-        var s = (other.Codes ?? [0]).AsSpan();
+        var replaced = Replace(other.m_Styles);
 
-        var styles = 0u;
+        if ((other.m_Styles & Bits.Fore.Set) is not 0) replaced |= Bits.Fore.Set | Bits.Fore.Rgb | Bits.Fore.Pal;
+        if ((other.m_Styles & Bits.Back.Set) is not 0) replaced |= Bits.Back.Set | Bits.Back.Rgb | Bits.Back.Pal;
 
-        for (var i = 0; i < f.Length; i++)
-        {
-            if (f[i] is not { IsStyle: true } c) break;
-            styles |= 1u << c;
-            styles &= Replacements[c];
-        }
+        var styles = (m_Styles & ~replaced) | other.m_Styles;
 
-        for (var i = 0; i < s.Length; i++)
-        {
-            if (s[i] is not { IsStyle: true } c) break;
-            styles |= 1u << c;
-            styles &= Replacements[c];
-        }
+        // Merging onto a reset, remains a reset.
+        if (IsReset) styles |= Bits.Reset;
 
-        byte style = 0;
-        while (styles is not 0)
-        {
-            if ((styles & 1) is 1)
-                buffer[size++] = style;
-
-            style++;
-            styles >>= 1;
-        }
-
-        var fore = s.Foreground;
-        if (fore.Length is 0)
-            fore = f.Foreground;
-
-        var back = s.Background;
-        if (back.Length is 0)
-            back = f.Background;
-
-        fore.CopyTo(buffer[size..]);
-        size += fore.Length;
-        back.CopyTo(buffer[size..]);
-        size += back.Length;
-
-        return size is 0
-            ? Reset
-            : new(buffer[..size].ToArray());
+        return new(
+            styles,
+            (other.m_Styles & Bits.Fore.Set) is 0 ? m_Fore : other.m_Fore,
+            (other.m_Styles & Bits.Back.Set) is 0 ? m_Back : other.m_Back);
     }
 
-    private static readonly uint[] Replacements =
-    [
-        1,
-        // Bold        (1) => Not Bold, Dim   (2, 21)
-        0b11111_11110_00000_00000_01111_11101_1,
-        // Dim         (2) => Bold                (1)
-        0b11111_11111_00000_00000_01111_11110_1,
-        // Italic      (3) => Not Italic         (23)
-        0b11111_11011_00000_00000_01111_11111_1,
-        // Underline   (4) => Not Underline      (24)
-        0b11111_10111_00000_00000_01111_11111_1,
-        // Slow blink  (5) => Fast/Not Blink  (6, 25)
-        0b11111_01111_00000_00000_01110_11111_1,
-        // Rapid blink (6) => Rapid/Not Blink (5, 25)
-        0b11111_01111_00000_00000_01111_01111_1,
-        // Invert     (7) => Not Invert          (27)
-        0b11101_11111_00000_00000_01111_11111_1,
-        // Hide       (8) => Not Hide            (28)
-        0b11011_11111_00000_00000_01111_11111_1,
-        // Strike     (9) => Not Strike          (29)
-        0b10111_11111_00000_00000_01111_11111_1,
-
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-
-        // Not Bold      (21) => Bold                (1)
-        0b11111_11111_00000_00000_01111_11110_1,
-        // Not Bold/Dim  (22) => Bold, Dim        (1, 2)
-        0b11111_11111_00000_00000_01111_11100_1,
-        // Not Italic    (23) => Italic              (3)
-        0b11111_11111_00000_00000_01111_11011_1,
-        // Not Underline (24) => Underline           (4)
-        0b11111_11111_00000_00000_01111_10111_1,
-        // Not Blink     (25) => Rapid/SLow Blink (5, 6)
-        0b11111_11111_00000_00000_01110_01111_1,
-        0,
-        // Not Invert     (27) => Invert             (7)
-        0b11111_11111_00000_00000_01101_11111_1,
-        // Not Hide       (28) => Hide               (8)
-        0b11111_11111_00000_00000_01011_11111_1,
-        // Not Strike     (29) => Strike             (9)
-        0b11111_11111_00000_00000_00111_11111_1,
-    ];
-
-    /// <inheritdoc />
     [Pure]
-    public override string ToString()
-#if NETSTANDARD2_0
-        => Codes is not { Length: > 0 }
-        ? "\x1b[0m"
-        : $"\x1b[{string.Join(";", Codes)}m";
-#else
+    private static uint Replace(uint styles)
+        => ((styles & Group.Weight) is 0 ? 0 : Group.Weight)
+        | ((styles & Group.Italic) is 0 ? 0 : Group.Italic)
+        | ((styles & Group.Underline) is 0 ? 0 : Group.Underline)
+        | ((styles & Group.Blink) is 0 ? 0 : Group.Blink)
+        | ((styles & Group.Invert) is 0 ? 0 : Group.Invert)
+        | ((styles & Group.Hide) is 0 ? 0 : Group.Hide)
+        | ((styles & Group.Strike) is 0 ? 0 : Group.Strike);
+
+    /// <summary>Creates an instruction for a single SGR (color or style) code.</summary>
+    [Pure]
+    private static Ansi Single(byte sgr) => sgr switch
     {
-        Span<char> buffer = stackalloc char[128];
-        TryFormat(buffer, out var length, default, null);
-        return buffer[..length].ToString();
-    }
-#endif
+        <= 29 => new(1u << sgr, 0, 0),
+        <= 39 or (>= 90 and <= 97) => new(Bits.Fore.Set, sgr, 0),
+        _ => new(Bits.Back.Set, 0, sgr),
+    };
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => $"""\x1b{ToString()[1..]}""";
@@ -137,80 +115,21 @@ public readonly partial struct Ansi : IEquatable<Ansi>
 
     /// <inheritdoc />
     [Pure]
-    public bool Equals(Ansi other) => (Codes, other.Codes) switch
-    {
-        ({ }, { }) => Enumerable.SequenceEqual(Codes, other.Codes),
-        (null, null) => true,
-        _ => false,
-    };
+    public bool Equals(Ansi other)
+        => m_Styles == other.m_Styles
+        && m_Fore == other.m_Fore
+        && m_Back == other.m_Back;
 
     /// <inheritdoc />
     [Pure]
-    public override int GetHashCode() => Hash.Code(Codes);
+    public override int GetHashCode() => Hash.Code(m_Styles).And(m_Fore).And(m_Back);
 
     /// <summary>Merges the two instructions.</summary>
     public static Ansi operator |(Ansi l, Ansi r) => l.Merge(r);
-}
 
-file static class Extensions
-{
-    extension(ReadOnlySpan<byte> bytes)
-    {
-        public ReadOnlySpan<byte> Foreground
-        {
-            get
-            {
-                var span = bytes;
-                while (span.Length is not 0 && span[0].IsStyle) span = span[1..];
+    /// <summary>Returns true if the two instructions are equal.</summary>
+    public static bool operator ==(Ansi l, Ansi r) => l.Equals(r);
 
-                return span switch
-                {
-                    { Length: 0 } => [],
-                    _ when span[0].IsForeground => span[0] switch
-                    {
-                        38 when span[1].IsRgb => span[..5],
-                        38 when span[1].IsGray => span[..2],
-                        _ => span[..1],
-                    },
-                    _ => [],
-                };
-            }
-        }
-
-        public ReadOnlySpan<byte> Background
-        {
-            get
-            {
-                var span = bytes;
-                while (span.Length is not 0 && span[0] is { IsBackground: false }) span = span[1..];
-
-                return span switch
-                {
-                    { Length: 0 } => [],
-                    _ when span[0].IsBackground => span[0] switch
-                    {
-                        48 when span[1].IsRgb => span[..5],
-                        48 when span[1].IsGray => span[..2],
-                        _ => span[..1],
-                    },
-                    _ => [],
-                };
-            }
-        }
-
-        public bool HasReset => bytes.Length > 0 && bytes[0] is 0;
-    }
-
-    extension(byte c)
-    {
-        public bool IsGray => c is 5;
-
-        public bool IsRgb => c is 2;
-
-        public bool IsStyle => c is <= 29;
-
-        public bool IsForeground => c is >= 30 and <= 39 or >= 90 and <= 97;
-
-        public bool IsBackground => c is >= 40 and <= 49 or >= 100 and <= 107;
-    }
+    /// <summary>Returns false if the two instructions are equal.</summary>
+    public static bool operator !=(Ansi l, Ansi r) => !(l == r);
 }

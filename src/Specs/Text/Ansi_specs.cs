@@ -52,7 +52,7 @@ public class RGB
     {
         [Test]
         public void Grayscale()
-            => Ansi.Gray(42).Should().Be("\x1b[38;5;42m");
+            => Ansi.Gray(42).Should().Be("\x1b[38;2;42;42;42m");
 
         [Test]
         public void Red_Green_Blue()
@@ -67,7 +67,7 @@ public class RGB
     {
         [Test]
         public void Grayscale()
-            => Ansi.BG.Gray(42).Should().Be("\x1b[48;5;42m");
+            => Ansi.BG.Gray(42).Should().Be("\x1b[48;2;42;42;42m");
 
         [Test]
         public void Red_Green_Blue()
@@ -181,43 +181,126 @@ public class Merges
 
     [Test]
     public void Reset_skips_previous_formatting()
-        => ((Ansi.Green | Ansi.BG.Cyan) | Ansi.Reset).Should().Be("\x1b[0m");
+        => (Ansi.Green | Ansi.BG.Cyan | Ansi.Reset).Should().Be("\x1b[0m");
 
     public class Foreground_with
     {
         [Test]
-        public void Foreground() =>
-           (Ansi.Red | Ansi.Blue).Should().Be("\x1b[34m");
+        public void Foreground()
+            => (Ansi.Red | Ansi.Blue).Should().Be("\x1b[34m");
 
         [Test]
-        public void Forground_RGB() =>
-           (Ansi.Rgb(20, 17, 129) | Ansi.Rgb(200, 12, 16)).Should().Be("\x1b[38;2;200;12;16m");
+        public void Forground_RGB()
+            => (Ansi.Rgb(20, 17, 129) | Ansi.Rgb(200, 12, 16)).Should().Be("\x1b[38;2;200;12;16m");
 
         [Test]
-        public void Background() =>
-            (Ansi.Red | Ansi.BG.Blue).Should().Be("\x1b[31;44m");
+        public void Background()
+            => (Ansi.Red | Ansi.BG.Blue).Should().Be("\x1b[31;44m");
 
         [Test]
-        public void Background_RGB() =>
-           (Ansi.Rgb(20, 17, 129) | Ansi.BG.Rgb(200, 12, 16)).Should().Be("\x1b[38;2;20;17;129;48;2;200;12;16m");
+        public void Background_RGB()
+            => (Ansi.Rgb(20, 17, 129) | Ansi.BG.Rgb(200, 12, 16)).Should().Be("\x1b[38;2;20;17;129;48;2;200;12;16m");
     }
 
     public class Background_with
     {
         [Test]
-        public void Foreground() =>
-           (Ansi.BG.Red | Ansi.Blue).Should().Be("\x1b[34;41m");
+        public void Foreground()
+            => (Ansi.BG.Red | Ansi.Blue).Should().Be("\x1b[34;41m");
 
         [Test]
-        public void Forground_RGB() =>
-           (Ansi.BG.Rgb(20, 17, 129) | Ansi.Rgb(200, 12, 16)).Should().Be("\x1b[38;2;200;12;16;48;2;20;17;129m");
+        public void Forground_RGB()
+            => (Ansi.BG.Rgb(20, 17, 129) | Ansi.Rgb(200, 12, 16)).Should().Be("\x1b[38;2;200;12;16;48;2;20;17;129m");
 
         [Test]
-        public void Background() =>
-            (Ansi.BG.Red | Ansi.BG.Blue).Should().Be("\x1b[44m");
+        public void Background()
+            => (Ansi.BG.Red | Ansi.BG.Blue).Should().Be("\x1b[44m");
 
         [Test]
-        public void Background_RGB() =>
-           (Ansi.BG.Rgb(20, 17, 129) | Ansi.BG.Rgb(200, 12, 16)).Should().Be("\x1b[48;2;200;12;16m");
+        public void Background_RGB()
+            => (Ansi.BG.Rgb(20, 17, 129) | Ansi.BG.Rgb(200, 12, 16)).Should().Be("\x1b[48;2;200;12;16m");
     }
+}
+
+public class Representation
+{
+    [Test]
+    public void Rgb_payload_is_not_a_background()
+        => (Ansi.Rgb(0, 41, 0) | Ansi.Bold).Should().Be("\x1b[1;38;2;0;41;0m");
+    
+    [Test]
+    public void Gray_is_true_gray()
+        => Ansi.Rgb(100, 100, 100).Should().Be("\x1b[38;2;100;100;100m");
+    
+    [Test]
+    public void Reset_then_bold()
+        => (Ansi.Reset | Ansi.Bold).Should().Be("\x1b[0;1m");
+    
+    [Test]
+    public void Format_is_ignored()
+        => string.Format("{0:X}", Ansi.Rgb(255, 10, 200)).Should().Be("\x1b[38;2;255;10;200m");
+    
+    [Test]
+    public void Black_rgb_is_not_none()
+        => (Ansi.Red | Ansi.Rgb(0, 0, 0)).Should().Be("\x1b[38;5;16m");
+    
+    [Test]
+    public void Equal_values_have_equal_hash()
+        => Ansi.Rgb(1, 2, 3).GetHashCode().Should().Be(Ansi.Rgb(1, 2, 3).GetHashCode());
+}
+
+public class Palette
+{
+    [TestCase(000, "[30m")]
+    [TestCase(001, "[31m")]
+    [TestCase(007, "[37m")]
+    [TestCase(008, "[90m")]
+    [TestCase(015, "[97m")]
+    [TestCase(016, "[38;5;16m")]
+    [TestCase(200, "[38;5;200m")]
+    public void Foreground(byte index, string code)
+        => Ansi.Pal(index).Should().Be("\x1b" + code);
+
+    [TestCase(000, "[40m")]
+    [TestCase(003, "[43m")]
+    [TestCase(008, "[100m")]
+    [TestCase(015, "[107m")]
+    [TestCase(200, "[48;5;200m")]
+    public void Background(byte index, string code)
+        => Ansi.BG.Pal(index).Should().Be("\x1b" + code);
+
+    [Test]
+    public void Simple_colors_equal_their_codes()
+        => Ansi.Pal(1).Equals(Ansi.Red).Should().BeTrue();
+
+    [Test]
+    public void Merges_with_simple_colors()
+    {
+        (Ansi.Pal(200) | Ansi.Red).Should().Be("\x1b[31m");
+        (Ansi.Red | Ansi.Pal(200)).Should().Be("\x1b[38;5;200m");
+        (Ansi.Pal(200) | Ansi.Rgb(1, 2, 3)).Should().Be("\x1b[38;2;1;2;3m");
+        (Ansi.Rgb(1, 2, 3) | Ansi.Pal(200)).Should().Be("\x1b[38;5;200m");
+    }
+}
+
+public class Gray
+{
+    [TestCase(000, "38;5;16")]
+    [TestCase(008, "38;5;232")]
+    [TestCase(018, "38;5;233")]
+    [TestCase(095, "38;5;59")]
+    [TestCase(238, "38;5;255")]
+    [TestCase(255, "38;5;231")]
+    [TestCase(001, "38;2;1;1;1")]
+    [TestCase(100, "38;2;100;100;100")]
+    [TestCase(248, "38;2;248;248;248")]
+    public void Uses_palette_only_if_exact(byte gray, string code)
+    {
+        var expected = $"\x1b[{code}m";
+        Ansi.Gray(gray).Should().Be(expected);
+        Ansi.Rgb(gray, gray, gray).Should().Be(expected);
+    }
+
+    [Test]
+    public void Background() => Ansi.BG.Rgb(8, 8, 8).Should().Be("\x1b[48;5;232m");
 }

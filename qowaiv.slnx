@@ -25,4 +25,5 @@
     <Project Path="tools/Qowaiv.SvoGenerator/Qowaiv.SvoGenerator.csproj" />
   </Folder>
   <Project Path=".net.csproj" />
+  <Project Path="src/Specs/Specs.csproj" />
 </Solution>

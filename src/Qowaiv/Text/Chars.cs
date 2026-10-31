@@ -1,29 +1,97 @@
 namespace Qowaiv.Text;
 
-/// <summary>Lightweight <see cref="char" /> buffer.</summary>
+/// <summary>Char extension to help whith parsing.</summary>
 /// <remarks>
-/// Keep in mind that the char array is shared.
+/// The _ after the Is ensures that we do not colide with methods on <see cref="char"/>.
 /// </remarks>
-internal readonly struct Chars(char[] value, int length)
+internal static class Chars
 {
-    private readonly char[] m_Value = value;
-
-    public readonly int Length = length;
-
-    [Pure]
-    private Chars Add(char c)
+    extension(char ch)
     {
-        var l = Length;
-        m_Value[l++] = c;
-        return new(m_Value, l);
+        /// <summary>Gets the digit (assumes it to be an ASCII-digit).</summary>
+        public int Digit => ch - '0';
+
+        public char With_UpperMask => (char)(ch & 0x5F);
+
+        public Catagories Categories => Cat(ch);
+
+        public bool Is_Digit => ch is >= '0' and <= '9';
+
+        public bool Is_A_Z => ch is >= 'A' and <= 'Z';
+
+        public bool Is_a_z => ch is >= 'a' and <= 'z';
+
+        public bool Is_Markup => Cat(ch) switch
+        {
+            var c when (c & (Catagories.Markup | Catagories.Whitespace)) is not 0 => true,
+            _ when ch <= (char)127 => false,
+            _ when char.IsWhiteSpace(ch) => true,
+            _ => Is_NonAsciiMarkup(ch),
+        };
+
+        /// <summary>Is [0-9A-Z] (not [a-z]).</summary>
+        public bool Is_IBAN => (Cat(ch) & (Catagories.Upper | Catagories.Digit)) is not 0;
     }
 
-    /// <inheritdoc />
     [Pure]
-    public override string ToString() => new(m_Value, 0, Length);
-
-    public static Chars operator +(Chars chars, char ch) => chars.Add(ch);
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static bool Is_NonAsciiMarkup(char ch) => ch
+        is (char)0x00B7 // middle dot
+        or (char)0x22C5 // dot operator
+        or (char)0x2202 // bullet
+        or (char)0x2012 // figure dash / minus
+        or (char)0x2013 // en dash
+        or (char)0x2014 // em dash
+        or (char)0x2015; // horizontal bar
 
     [Pure]
-    public static Chars Init(int capacity) => new(new char[capacity], 0);
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static Catagories Cat(char c) => (Catagories)Lookup[(byte)c];
+
+    [Flags]
+    public enum Catagories : uint
+    {
+        _0 /*.........*/ = 1 << 00,
+        _1 /*.........*/ = 1 << 01,
+        _2 /*.........*/ = 1 << 02,
+        _3 /*.........*/ = 1 << 03,
+        _4 /*.........*/ = 1 << 04,
+        _5 /*.........*/ = 1 << 05,
+        _6 /*.........*/ = 1 << 06,
+        _7 /*.........*/ = 1 << 07,
+        _8 /*.........*/ = 1 << 08,
+        _9 /*.........*/ = 1 << 09,
+        Upper /*......*/ = 1 << 10,
+        Lower /*......*/ = 1 << 11,
+        Whitespace /*.*/ = 1 << 12,
+        Markup /*.....*/ = 1 << 13,
+        Letter = Upper | Lower,
+        Digit = _0 | _1 | _2 | _3 | _4 | _5 | _6 | _7 | _8 | _9,
+    }
+
+#if NETSTANDARD2_0
+    private static readonly uint[] Lookup =
+#else
+    private static ReadOnlySpan<uint> Lookup =>
+#endif
+    [
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x1000, 0x1000, 0x1000, 0x1000, 0x1000, 0x0000, 0x0000,
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+        0x1000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x2000, 0x2000, 0x0000,
+        0x0001, 0x0002, 0x0004, 0x0008, 0x0010, 0x0020, 0x0040, 0x0080, 0x0100, 0x0200, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+        0x0000, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400,
+        0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0000, 0x0000, 0x0000, 0x0000, 0x2000,
+        0x0000, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800,
+        0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+
+        // Non-ASCII
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    ];
 }

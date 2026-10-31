@@ -49,7 +49,7 @@ public readonly struct Secret : IEquatable<Secret>, IEmpty<Secret>
     /// Secrets are supposed to be passed around, without knowing its content.
     /// </remarks>
     [Pure]
-    public bool Equals(Secret other) => IsEmpty() && other.IsEmpty();
+    public bool Equals(Secret other) => !HasValue && !other.HasValue;
 
     /// <inheritdoc />
     [DoesNotReturn]

@@ -131,8 +131,7 @@ public readonly partial struct BusinessIdentifierCode : IXmlSerializable, IForma
             return true;
         }
         else if (Pattern.IsMatch(str)
-            && Country.TryParse(str.Substring(4, 2), out var country)
-            && !country.IsEmptyOrUnknown())
+            && Country.TryParse(str.Substring(4, 2)) is { IsKnown: true })
         {
             result = new BusinessIdentifierCode(str);
             return true;

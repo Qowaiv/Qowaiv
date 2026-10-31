@@ -18,18 +18,6 @@ public partial struct HouseNumber
     /// <summary>The inner value of the house number.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly int m_Value;
-
-    /// <summary>False if the house number is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the house number is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the house number is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct HouseNumber : IEmpty<HouseNumber>
@@ -45,6 +33,22 @@ public partial struct HouseNumber : IEmpty<HouseNumber>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
+
+public partial struct HouseNumber : IUnknown<HouseNumber>
+{
+    /// <summary>False if the house number is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the house number is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the house number is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+}
+
 public partial struct HouseNumber : IEquatable<HouseNumber>
 #if NET10_0_OR_GREATER
     , IEqualityOperators<HouseNumber, HouseNumber, bool>

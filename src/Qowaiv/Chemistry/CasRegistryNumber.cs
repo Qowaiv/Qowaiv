@@ -23,7 +23,7 @@ public readonly partial struct CasRegistryNumber : IXmlSerializable, IFormattabl
     public static CasRegistryNumber Unknown => new(long.MaxValue);
 
     /// <summary>Gets the number of characters of CAS Registry Number.</summary>
-    public int Length => IsEmptyOrUnknown() ? 0 : (int)Math.Ceiling(Math.Log10(m_Value));
+    public int Length => IsKnown ? (int)Math.Ceiling(Math.Log10(m_Value)) : 0;
 
     /// <summary>Returns a <see cref="string" /> that represents the CAS Registry Number for DEBUG purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

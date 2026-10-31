@@ -317,7 +317,7 @@ achieved when modeling a property as `bool` instead of a `YesNo`.
 var yn = YesNo.Parse("ja", new CultureInfo("nl-NL"));
 var answer = YesNo.Yes;
 
-if (answer.IsEmptyOrUnknown())
+if (!answer.Known)
 {
    // Do logic.
 }

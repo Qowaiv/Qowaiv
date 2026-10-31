@@ -33,6 +33,7 @@ public partial struct Uuid : IEmpty<Uuid>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
+
 public partial struct Uuid : IEquatable<Uuid>
 #if NET10_0_OR_GREATER
     , IEqualityOperators<Uuid, Uuid, bool>

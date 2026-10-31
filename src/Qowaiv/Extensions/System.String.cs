@@ -1,112 +1,98 @@
-using Qowaiv;
 using System.Buffers;
 
-namespace System;
+namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="string" />.</summary>
-public static class QowaivSystemExtensions
+public static class QowaivString
 {
-    /// <summary>Converts the specified string to an uppercase string.</summary>
-    /// <param name="str">
-    /// The string to convert to uppercase.
-    /// </param>
-    /// <param name="provider">
-    /// The format provider to apply.
-    /// </param>
-    /// <returns>
-    /// The uppercase equivalent of the current string.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// str is null or the provider is null.
-    /// </exception>
-    [Pure]
-    public static string ToUpper(this string str, IFormatProvider provider)
+    extension(string str)
     {
-        Guard.NotNull(provider);
-        var textInfo = provider.GetFormat<TextInfo>() ?? CultureInfo.CurrentCulture.TextInfo;
-        return textInfo.ToUpper(str);
-    }
-
-    /// <summary>Converts the specified string to title case (except for words that are entirely
-    /// in uppercase, which are considered to be acronyms).
-    /// </summary>
-    /// <param name="str">The string to convert to title case.</param>
-    /// <param name="provider">
-    /// The format provider to apply.
-    /// </param>
-    /// <returns>
-    /// The specified string converted to title case.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">
-    /// str is null or the provider is null.
-    /// </exception>
-    [Pure]
-    public static string ToTitleCase(this string str, IFormatProvider provider)
-    {
-        Guard.NotNull(provider);
-        var textInfo = provider.GetFormat<TextInfo>() ?? CultureInfo.CurrentCulture.TextInfo;
-        return textInfo.ToTitleCase(str);
-    }
-
-    /// <summary>Returns an object that provides formatting services for the specified type.</summary>
-    /// <typeparam name="TFormat">
-    /// An object that specifies the type of format object to return.
-    /// </typeparam>
-    /// <returns>
-    /// An instance of the object specified by formatType, if the System.IFormatProvider
-    /// implementation can supply that type of object; otherwise, null.
-    /// </returns>
-    [Pure]
-    public static TFormat? GetFormat<TFormat>(this IFormatProvider provider)
-    {
-        Guard.NotNull(provider);
-        return (TFormat?)provider.GetFormat(typeof(TFormat));
-    }
-
-    /// <summary>Returns the provided default if <see cref="string.IsNullOrEmpty(string)" />,
-    /// otherwise the string value.
-    /// </summary>
-    [Pure]
-    internal static string WithDefault(this string? str, string @default = "")
-        => str is { Length: > 0 } ? str : @default;
-
-    [Pure]
-    internal static string Unify(this string? str)
-    {
-        if (str is { Length: > 0 })
+        /// <summary>Converts the specified string to an uppercase string.</summary>
+        /// <param name="provider">
+        /// The format provider to apply.
+        /// </param>
+        /// <returns>
+        /// The uppercase equivalent of the current string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// str is null or the provider is null.
+        /// </exception>
+        [Pure]
+        public string ToUpper(IFormatProvider provider)
         {
-            ReadOnlySpan<char> span = str;
-            var size = span.BufferSize();
-
-            if (size <= 256)
-            {
-                Span<char> buffer = stackalloc char[span.BufferSize()];
-                var length = span.Unify(buffer);
-                return buffer[..length].ToString();
-            }
-            else
-            {
-                char[] buffer = ArrayPool<char>.Shared.Rent(size);
-                var length = span.Unify(buffer);
-                var unified = buffer.AsSpan()[..length].ToString();
-                ArrayPool<char>.Shared.Return(buffer);
-                return unified;
-            }
+            Guard.NotNull(provider);
+            var textInfo = provider.GetFormat<TextInfo>() ?? CultureInfo.CurrentCulture.TextInfo;
+            return textInfo.ToUpper(str);
         }
-        else return str ?? string.Empty;
+
+        /// <summary>Converts the specified string to title case (except for words that are entirely
+        /// in uppercase, which are considered to be acronyms).
+        /// </summary>
+        /// <param name="provider">
+        /// The format provider to apply.
+        /// </param>
+        /// <returns>
+        /// The specified string converted to title case.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// str is null or the provider is null.
+        /// </exception>
+        [Pure]
+        public string ToTitleCase(IFormatProvider provider)
+        {
+            Guard.NotNull(provider);
+            var textInfo = provider.GetFormat<TextInfo>() ?? CultureInfo.CurrentCulture.TextInfo;
+            return textInfo.ToTitleCase(str);
+        }
+
+        [Pure]
+        internal bool Matches(Regex pattern) => pattern.IsMatch(str);
     }
 
-    [Pure]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal static bool IsEmpty(this string? str) => str is not { Length: > 0 };
+    extension(string? str)
+    {
+        /// <summary>Returns the provided default if <see cref="string.IsNullOrEmpty(string)" />,
+        /// otherwise the string value.
+        /// </summary>
+        [Pure]
+        internal string WithDefault(string @default = "")
+            => str is { Length: > 0 } ? str : @default;
 
-    [Pure]
-    internal static bool IsUnknown(this string? str, IFormatProvider? formatProvider)
-        => Unknown.IsUnknown(str, formatProvider as CultureInfo);
+        [Pure]
+        internal string Unify()
+        {
+            if (str is { Length: > 0 })
+            {
+                ReadOnlySpan<char> span = str;
+                var size = span.BufferSize();
 
-    [Pure]
-    internal static bool Matches(this string str, Regex pattern) => pattern.IsMatch(str);
+                if (size <= 256)
+                {
+                    Span<char> buffer = stackalloc char[span.BufferSize()];
+                    var length = span.Unify(buffer);
+                    return buffer[..length].ToString();
+                }
+                else
+                {
+                    char[] buffer = ArrayPool<char>.Shared.Rent(size);
+                    var length = span.Unify(buffer);
+                    var unified = buffer.AsSpan()[..length].ToString();
+                    ArrayPool<char>.Shared.Return(buffer);
+                    return unified;
+                }
+            }
+            else return str ?? string.Empty;
+        }
 
-    [Pure]
-    internal static CharSpan CharSpan(this string? str) => new(str ?? string.Empty);
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal bool IsEmpty() => str is not { Length: > 0 };
+
+        [Pure]
+        internal bool IsUnknown(IFormatProvider? formatProvider)
+            => Unknown.IsUnknown(str, formatProvider as CultureInfo);
+
+        [Pure]
+        internal CharSpan CharSpan() => new(str ?? string.Empty);
+    }
 }

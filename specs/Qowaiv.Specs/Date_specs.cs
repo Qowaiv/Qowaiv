@@ -1,4 +1,5 @@
 using AwesomeAssertions.Extensions;
+using Qowaiv.Humanizer;
 
 namespace Date_specs;
 
@@ -73,6 +74,14 @@ public class Is_equal_by_value
             svo.GetHashCode().Should().Be(hash);
         }
     }
+
+    [Test]
+    public void equal_to_to_equivelant_date_only()
+        => Svo.Date.Equals(Svo.DateOnly).Should().BeTrue();
+
+    [Test]
+    public void not_equal_to_to_different_date_only()
+        => Svo.Date.Equals(Svo.DateOnly.AddDays(1)).Should().BeTrue();
 }
 
 public class Can_be_parsed

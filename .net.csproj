@@ -9,6 +9,7 @@
     <None Include="build/**" />
     <None Include="docs/**" />
     <None Include="design/**" />
+    <None Include="docs/**" />
     <None Include="shared/**" />
   </ItemGroup>
 

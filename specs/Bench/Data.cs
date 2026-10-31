@@ -1,6 +1,7 @@
 using Qowaiv.Financial;
 using System.Collections.Immutable;
 using Qowaiv.Mathematics;
+using Qowaiv.Humanizer;
 
 namespace Bench;
 

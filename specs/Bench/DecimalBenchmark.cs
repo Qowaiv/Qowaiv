@@ -1,6 +1,7 @@
 #pragma warning disable QW0013 // Qowaiv rounding here.
 
 using BenchmarkDotNet.Configs;
+using Qowaiv.Humanizer;
 
 namespace Bench;
 

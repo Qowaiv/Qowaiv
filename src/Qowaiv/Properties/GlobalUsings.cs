@@ -4,6 +4,7 @@ global using Qowaiv.Diagnostics.Contracts;
 global using Qowaiv.Extensions;
 global using Qowaiv.Formatting;
 global using Qowaiv.Hashing;
+global using Qowaiv.Humanizer;
 global using Qowaiv.Mathematics;
 global using Qowaiv.OpenApi;
 global using Qowaiv.Security;

@@ -1,11 +1,21 @@
 using Qowaiv.Financial;
 using System.Collections.Immutable;
 using Qowaiv.Mathematics;
+using Qowaiv.Text;
 
 namespace Bench;
 
 internal static class Data
 {
+    public static class Ansis
+    {
+        public static readonly ImmutableArray<Ansi> Svo =
+        [
+            .. Enumerable.Range(0, 1000)
+            .Select(i => Ansi.Rgb(((uint)Rnd.Next()) & 0xFF_FF_FF))
+        ];
+    }
+
     public static class Date
     {
         public static readonly ImmutableArray<Qowaiv.Date> Svo =

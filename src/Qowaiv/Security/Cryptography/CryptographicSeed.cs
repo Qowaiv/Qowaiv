@@ -52,7 +52,7 @@ public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>, IEmpty
     /// Secrets are supposed to be passed around, without knowing its content.
     /// </remarks>
     [Pure]
-    public bool Equals(CryptographicSeed other) => IsEmpty() && other.IsEmpty();
+    public bool Equals(CryptographicSeed other) => !HasValue && !other.HasValue;
 
     /// <inheritdoc />
     [DoesNotReturn]

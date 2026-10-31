@@ -85,19 +85,20 @@ public readonly partial struct Year : IXmlSerializable, IFormattable, IEquatable
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-    public static bool operator <(Year l, Year r) => HaveValue(l, r) && l.CompareTo(r) < 0;
+    public static bool operator <(Year l, Year r) => AreKnown(l, r) && l.CompareTo(r) < 0;
 
     /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-    public static bool operator >(Year l, Year r) => HaveValue(l, r) && l.CompareTo(r) > 0;
+    public static bool operator >(Year l, Year r) => AreKnown(l, r) && l.CompareTo(r) > 0;
 
     /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-    public static bool operator <=(Year l, Year r) => HaveValue(l, r) && l.CompareTo(r) <= 0;
+    public static bool operator <=(Year l, Year r) => AreKnown(l, r) && l.CompareTo(r) <= 0;
 
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-    public static bool operator >=(Year l, Year r) => HaveValue(l, r) && l.CompareTo(r) >= 0;
+    public static bool operator >=(Year l, Year r) => AreKnown(l, r) && l.CompareTo(r) >= 0;
 
     [Pure]
-    private static bool HaveValue(Year l, Year r) => !l.IsEmptyOrUnknown() && !r.IsEmptyOrUnknown();
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static bool AreKnown(Year l, Year r) => l.IsKnown && r.IsKnown;
 
     /// <summary>Casts a year to a System.Int32.</summary>
     public static explicit operator int(Year val) => val.m_Value;

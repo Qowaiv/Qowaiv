@@ -18,18 +18,6 @@ public partial struct InternetMediaType
     /// <summary>The inner value of the Internet media type.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? m_Value;
-
-    /// <summary>False if the Internet media type is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the Internet media type is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the Internet media type is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct InternetMediaType : IEmpty<InternetMediaType>
@@ -45,6 +33,22 @@ public partial struct InternetMediaType : IEmpty<InternetMediaType>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
+
+public partial struct InternetMediaType : IUnknown<InternetMediaType>
+{
+    /// <summary>False if the Internet media type is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the Internet media type is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the Internet media type is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+}
+
 public partial struct InternetMediaType : IEquatable<InternetMediaType>
 #if NET10_0_OR_GREATER
     , IEqualityOperators<InternetMediaType, InternetMediaType, bool>

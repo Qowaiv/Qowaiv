@@ -18,18 +18,6 @@ public partial struct Country
     /// <summary>The inner value of the country.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? m_Value;
-
-    /// <summary>False if the country is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the country is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the country is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct Country : IEmpty<Country>
@@ -45,6 +33,22 @@ public partial struct Country : IEmpty<Country>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
+
+public partial struct Country : IUnknown<Country>
+{
+    /// <summary>False if the country is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the country is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the country is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+}
+
 public partial struct Country : IEquatable<Country>
 #if NET10_0_OR_GREATER
     , IEqualityOperators<Country, Country, bool>

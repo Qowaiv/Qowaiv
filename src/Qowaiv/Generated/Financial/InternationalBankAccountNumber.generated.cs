@@ -18,18 +18,6 @@ public partial struct InternationalBankAccountNumber
     /// <summary>The inner value of the IBAN.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? m_Value;
-
-    /// <summary>False if the IBAN is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the IBAN is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the IBAN is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct InternationalBankAccountNumber : IEmpty<InternationalBankAccountNumber>
@@ -45,6 +33,22 @@ public partial struct InternationalBankAccountNumber : IEmpty<InternationalBankA
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
+
+public partial struct InternationalBankAccountNumber : IUnknown<InternationalBankAccountNumber>
+{
+    /// <summary>False if the IBAN is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the IBAN is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the IBAN is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+}
+
 public partial struct InternationalBankAccountNumber : IEquatable<InternationalBankAccountNumber>
 #if NET10_0_OR_GREATER
     , IEqualityOperators<InternationalBankAccountNumber, InternationalBankAccountNumber, bool>

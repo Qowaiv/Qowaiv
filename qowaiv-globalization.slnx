@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path=".net.csproj" />
+  <Project Path="src/Qowaiv.Globalization.NL/Qowaiv.Globalization.NL.csproj" />
+  <Project Path="src/Qowaiv/Qowaiv.csproj" />
+  <Project Path="src/Specs.Globalization/Specs.Globalization.csproj" />
+</Solution>

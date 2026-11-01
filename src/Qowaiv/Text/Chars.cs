@@ -15,12 +15,16 @@ internal static class Chars
 
         public Catagories Categories => Cat(ch);
 
-        public bool Is_Digit => ch is >= '0' and <= '9';
+        /// <summary>True if [0-9].</summary>
+        public bool Is_0_9 => (uint)(ch - '0') <= '9' - '0';
 
-        public bool Is_A_Z => ch is >= 'A' and <= 'Z';
+        /// <summary>True if [A-Z].</summary>
+        public bool Is_A_Z => (uint)(ch - 'A') <= 'Z' - 'A';
 
-        public bool Is_a_z => ch is >= 'a' and <= 'z';
+        /// <summary>True if [a-z].</summary>
+        public bool Is_a_z => (uint)(ch - 'a') <= 'z' - 'a';
 
+        /// <summary>True if markup (including whitespace).</summary>
         public bool Is_Markup => Cat(ch) switch
         {
             var c when (c & (Catagories.Markup | Catagories.Whitespace)) is not 0 => true,

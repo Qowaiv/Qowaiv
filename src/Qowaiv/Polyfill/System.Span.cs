@@ -1,4 +1,4 @@
-#if NET10_0_OR_GREATER
+#if !NETSTANDARD2_0
 namespace System;
 
 internal static class SpanExtensions

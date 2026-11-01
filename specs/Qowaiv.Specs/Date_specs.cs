@@ -81,7 +81,7 @@ public class Is_equal_by_value
 
     [Test]
     public void not_equal_to_to_different_date_only()
-        => Svo.Date.Equals(Svo.DateOnly.AddDays(1)).Should().BeTrue();
+        => Svo.Date.Equals(Svo.DateOnly.AddDays(1)).Should().BeFalse();
 }
 
 public class Can_be_parsed
@@ -378,7 +378,7 @@ public class Is_comparable
     }
 
     [Test]
-    public void to_Date_only()
+    public void throws_on_compare_to_object_of_other_type()
         => new object().Invoking(Svo.Date.CompareTo).Should().Throw<ArgumentException>();
 
     [Test]

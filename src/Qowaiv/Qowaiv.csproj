@@ -48,6 +48,11 @@ v11.0.0
 - Add IUnknown<TSvo> interfaces to applicalbe SVOs.
 - Humanizer extensions (Days(), Months(), Years(), Percent(), Amount(), Bytes(), CasNr(), Elo(), Fraction(), CE()) are merged into Qowaiv.Humanizer.Humanize. (BREAKING)
 - Extension classes in Qowaiv.Extensions are renamed to a name without suffix, e.g. GuidExtensions becomes QowaivGuid. (BREAKING)
+- Extensions on System types (string, Guid, Stream, Thread, DateTime, DateTimeOffset, DateOnly, CultureInfo, HashAlgorithm, IFormatProvider, IFormattable, byte[], INumberBase<T>) are moved to the Qowaiv.Extensions namespace; add using Qowaiv.Extensions. (BREAKING)
+- Linq-like extensions (Sum(), Average(), ...) on Qowaiv types are moved to Qowaiv.Linq.QowaivEnumerable; add using Qowaiv.Linq. (BREAKING)
+- Guid.GetVersion() is replaced by the extension property Guid.UuidVersion. (BREAKING)
+- QowaivType.IsNullable(), IsNumeric(), IsDate(), and GetNotNullableType() are now extensions on Type (IsNullable, IsNumeric, and IsDate are properties); IsDate no longer accepts null. (BREAKING)
+- Date implements IEquatable<DateOnly>.
 v8.*
 - Extended language support.
 - IBAN supports Mongolia and Falkland Islands.

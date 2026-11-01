@@ -4,134 +4,92 @@ namespace Qowaiv.Humanizer;
 
 public static partial class Humanize
 {
-    extension(int bytes)
+    extension(int size)
     {
         /// <summary>Creates a <see cref="StreamSize" /> as bytes.</summary>
         [Pure]
-        public StreamSize Bytes() => new(bytes);
+        public StreamSize Bytes() => new(size);
+
+        /// <summary>Creates a <see cref="StreamSize" /> as kilobytes.</summary>
+        [Pure]
+        public StreamSize KB() => StreamSize.FromKilobytes(size);
+
+        /// <summary>Creates a <see cref="StreamSize" /> as megabytes.</summary>
+        [Pure]
+        public StreamSize MB() => StreamSize.FromMegabytes(size);
+
+        /// <summary>Creates a <see cref="StreamSize" /> as gigabytes.</summary>
+        [Pure]
+        public StreamSize GB() => StreamSize.FromGigabytes(size);
+
+        /// <summary>Creates a <see cref="StreamSize" /> as kibibytes.</summary>
+        [Pure]
+        public StreamSize KiB() => StreamSize.FromKibibytes(size);
+
+        /// <summary>Creates a <see cref="StreamSize" /> as mebibytes.</summary>
+        [Pure]
+        public StreamSize MiB() => StreamSize.FromMebibytes(size);
+
+        /// <summary>Creates a <see cref="StreamSize" /> as gibibytes.</summary>
+        [Pure]
+        public StreamSize GiB() => StreamSize.FromGibibytes(size);
     }
 
-    extension(long bytes)
+    extension(long size)
     {
         /// <summary>Creates a <see cref="StreamSize" /> as bytes.</summary>
         [Pure]
-        public StreamSize Bytes() => new(bytes);
-    }
+        public StreamSize Bytes() => new(size);
 
-    extension(int kb)
-    {
         /// <summary>Creates a <see cref="StreamSize" /> as kilobytes.</summary>
         [Pure]
-        public StreamSize KB() => StreamSize.FromKilobytes(kb);
-    }
+        public StreamSize KB() => StreamSize.FromKilobytes(size);
 
-    extension(long kb)
-    {
-        /// <summary>Creates a <see cref="StreamSize" /> as kilobytes.</summary>
-        [Pure]
-        public StreamSize KB() => StreamSize.FromKilobytes(kb);
-    }
-
-    extension(double kb)
-    {
-        /// <summary>Creates a <see cref="StreamSize" /> as kilobytes.</summary>
-        [Pure]
-        public StreamSize KB() => StreamSize.FromKilobytes(kb);
-    }
-
-    extension(int mb)
-    {
         /// <summary>Creates a <see cref="StreamSize" /> as megabytes.</summary>
         [Pure]
-        public StreamSize MB() => StreamSize.FromMegabytes(mb);
+        public StreamSize MB() => StreamSize.FromMegabytes(size);
 
         /// <summary>Creates a <see cref="StreamSize" /> as gigabytes.</summary>
         [Pure]
-        public StreamSize GB() => StreamSize.FromGigabytes(mb);
+        public StreamSize GB() => StreamSize.FromGigabytes(size);
+
+        /// <summary>Creates a <see cref="StreamSize" /> as kibibytes.</summary>
+        [Pure]
+        public StreamSize KiB() => StreamSize.FromKibibytes(size);
+
+        /// <summary>Creates a <see cref="StreamSize" /> as mebibytes.</summary>
+        [Pure]
+        public StreamSize MiB() => StreamSize.FromMebibytes(size);
+
+        /// <summary>Creates a <see cref="StreamSize" /> as gibibytes.</summary>
+        [Pure]
+        public StreamSize GiB() => StreamSize.FromGibibytes(size);
     }
 
-    extension(long mb)
+    extension(double size)
     {
+        /// <summary>Creates a <see cref="StreamSize" /> as kilobytes.</summary>
+        [Pure]
+        public StreamSize KB() => StreamSize.FromKilobytes(size);
+
         /// <summary>Creates a <see cref="StreamSize" /> as megabytes.</summary>
         [Pure]
-        public StreamSize MB() => StreamSize.FromMegabytes(mb);
+        public StreamSize MB() => StreamSize.FromMegabytes(size);
 
         /// <summary>Creates a <see cref="StreamSize" /> as gigabytes.</summary>
         [Pure]
-        public StreamSize GB() => StreamSize.FromGigabytes(mb);
-    }
+        public StreamSize GB() => StreamSize.FromGigabytes(size);
 
-    extension(double mb)
-    {
-        /// <summary>Creates a <see cref="StreamSize" /> as megabytes.</summary>
-        [Pure]
-        public StreamSize MB() => StreamSize.FromMegabytes(mb);
-
-        /// <summary>Creates a <see cref="StreamSize" /> as gigabytes.</summary>
-        [Pure]
-        public StreamSize GB() => StreamSize.FromGigabytes(mb);
-    }
-
-    extension(int kib)
-    {
         /// <summary>Creates a <see cref="StreamSize" /> as kibibytes.</summary>
         [Pure]
-        public StreamSize KiB() => StreamSize.FromKibibytes(kib);
-    }
+        public StreamSize KiB() => StreamSize.FromKibibytes(size);
 
-    extension(long kib)
-    {
-        /// <summary>Creates a <see cref="StreamSize" /> as kibibytes.</summary>
-        [Pure]
-        public StreamSize KiB() => StreamSize.FromKibibytes(kib);
-    }
-
-    extension(double kib)
-    {
-        /// <summary>Creates a <see cref="StreamSize" /> as kibibytes.</summary>
-        [Pure]
-        public StreamSize KiB() => StreamSize.FromKibibytes(kib);
-    }
-
-    extension(int mib)
-    {
         /// <summary>Creates a <see cref="StreamSize" /> as mebibytes.</summary>
         [Pure]
-        public StreamSize MiB() => StreamSize.FromMebibytes(mib);
-    }
+        public StreamSize MiB() => StreamSize.FromMebibytes(size);
 
-    extension(long mib)
-    {
-        /// <summary>Creates a <see cref="StreamSize" /> as mebibytes.</summary>
-        [Pure]
-        public StreamSize MiB() => StreamSize.FromMebibytes(mib);
-    }
-
-    extension(double mib)
-    {
-        /// <summary>Creates a <see cref="StreamSize" /> as mebibytes.</summary>
-        [Pure]
-        public StreamSize MiB() => StreamSize.FromMebibytes(mib);
-    }
-
-    extension(int gib)
-    {
         /// <summary>Creates a <see cref="StreamSize" /> as gibibytes.</summary>
         [Pure]
-        public StreamSize GiB() => StreamSize.FromGibibytes(gib);
-    }
-
-    extension(long gib)
-    {
-        /// <summary>Creates a <see cref="StreamSize" /> as gibibytes.</summary>
-        [Pure]
-        public StreamSize GiB() => StreamSize.FromGibibytes(gib);
-    }
-
-    extension(double gib)
-    {
-        /// <summary>Creates a <see cref="StreamSize" /> as gibibytes.</summary>
-        [Pure]
-        public StreamSize GiB() => StreamSize.FromGibibytes(gib);
+        public StreamSize GiB() => StreamSize.FromGibibytes(size);
     }
 }

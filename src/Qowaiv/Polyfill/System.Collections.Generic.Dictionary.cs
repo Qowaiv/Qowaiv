@@ -1,7 +1,7 @@
 #if !NET8_0_OR_GREATER
 namespace System.Collections.Generic;
 
-internal static class QowaivDictionaryExtensions
+internal static class DictionaryExtensions
 {
     extension<TKey, TValue>(IDictionary<TKey, TValue> dictionary) where TKey : notnull
     {

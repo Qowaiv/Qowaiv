@@ -1,17 +1,25 @@
 using Qowaiv.Threading;
 
-namespace System.Threading;
+namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="Thread" />.</summary>
-public static class QowaivThreadExtensions
+public static class QowaivThread
 {
-    /// <summary>Gets the value of T.</summary>
-    [Pure]
-    public static T? GetValue<T>(this Thread thread) => ThreadDomain.Current.Get<T>();
+    extension(Thread thread)
+    {
+        /// <summary>Gets the value of T.</summary>
+        [Pure]
+        [SuppressMessage("Performance", "CA1822", Justification = "Extension members can not be static.")]
+        public T? GetValue<T>() => ThreadDomain.Current.Get<T>();
 
-    /// <summary>Sets the value for T.</summary>
-    public static void SetValue<T>(this Thread thread, T value) => ThreadDomain.Current.Set(value);
+        /// <summary>Sets the value for T.</summary>
+        [SuppressMessage("Performance", "CA1822", Justification = "Extension members can not be static.")]
+        [SuppressMessage("Critical Code Smell", "S2325", Justification = "Extension members can not be static.")]
+        public void SetValue<T>(T value) => ThreadDomain.Current.Set(value);
 
-    /// <summary>Removes the value of T.</summary>
-    public static void RemoveValue(this Thread thread, Type type) => ThreadDomain.Current.Remove(type);
+        /// <summary>Removes the value of T.</summary>
+        [SuppressMessage("Performance", "CA1822", Justification = "Extension members can not be static.")]
+        [SuppressMessage("Critical Code Smell", "S2325", Justification = "Extension members can not be static.")]
+        public void RemoveValue(Type type) => ThreadDomain.Current.Remove(type);
+    }
 }

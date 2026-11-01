@@ -1,4 +1,6 @@
-namespace Collection_extensions_specs;
+using Qowaiv.Linq;
+
+namespace Linq_QowaivLinq_specs;
 
 public class Amounts
 {
@@ -76,6 +78,16 @@ public class Amounts
         => Array.Empty<Amount?>().Sum(Selection).Should().BeNull();
 
     private static T Selection<T>(T value) => value;
+}
+
+public class Elos
+{
+    [Test]
+    public void Average()
+    {
+        var elos = new Elo[] { 1400, 1600 };
+        elos.Average().Should().Be(1500.Elo());
+    }
 }
 
 public class Moneys

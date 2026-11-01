@@ -1,12 +1,17 @@
 using Qowaiv.IO;
+using System.IO;
 
-namespace System.IO;
+namespace Qowaiv.Extensions;
 
 /// <summary>Extensions on <see cref="FileInfo" />.</summary>
-public static class QowaivFileInfoExtensions
+public static class QowaivFileInfo
 {
-    /// <summary>Gets the size of the current file.</summary>
-    [Pure]
-    public static StreamSize GetStreamSize(this FileInfo fileInfo)
-        => StreamSize.FromFileInfo(fileInfo);
+    extension(FileInfo fileInfo)
+    {
+        /// <summary>Gets the size of the current file.</summary>
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public StreamSize GetStreamSize()
+            => StreamSize.FromFileInfo(fileInfo);
+    }
 }

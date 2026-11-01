@@ -1,13 +1,14 @@
 using Qowaiv.Globalization;
 using System.Runtime.InteropServices;
+using static Qowaiv.Text.Chars.Categories;
 
 namespace Qowaiv.Financial;
 
 [StructLayout(LayoutKind.Auto)]
 [DebuggerDisplay("{ToString(),nq}")]
-internal readonly record struct Bban(string Iso, ushort Mod, ushort[] Pattern, bool Currency = false, bool IsGeneric = false)
+internal readonly record struct Bban(string Iso, ushort Mod, Chars.Categories[] Pattern, bool Currency = false, bool IsGeneric = false)
 {
-    public Bban(string iso, ushort[] pattern, bool currency = false, bool isGeneric = false) : this(
+    public Bban(string iso, Chars.Categories[] pattern, bool currency = false, bool isGeneric = false) : this(
         iso,
         Calc(iso),
         pattern,
@@ -35,7 +36,7 @@ internal readonly record struct Bban(string Iso, ushort Mod, ushort[] Pattern, b
                 Bbans.a => 'a',
                 Bbans.c => 'c',
                 Bbans.n => 'n',
-                _ => ((int)Math.Log(m, 2)).ToString()[0],
+                _ => ((int)Math.Log((int)m, 2)).ToString()[0],
             });
         }
 
@@ -54,19 +55,9 @@ internal readonly record struct Bban(string Iso, ushort Mod, ushort[] Pattern, b
 internal static class Bbans
 {
 #pragma warning disable
-    private const ushort _0 = 1 << 0;
-    private const ushort _1 = 1 << 1;
-    private const ushort _2 = 1 << 2;
-    private const ushort _3 = 1 << 3;
-    private const ushort _4 = 1 << 4;
-    private const ushort _5 = 1 << 5;
-    private const ushort _6 = 1 << 6;
-    private const ushort _7 = 1 << 7;
-    private const ushort _8 = 1 << 8;
-    private const ushort _9 = 1 << 9;
-    internal const ushort a = 1 << 10;
-    internal const ushort n = 1 << 11;
-    internal const ushort c = a | n;
+    internal const Chars.Categories a = Upper;
+    internal const Chars.Categories n = Digit;
+    internal const Chars.Categories c = a | n;
 
     private static Bban gen(string iso) => new(iso, Bban.Calc(iso), [0, 0, n, n, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c], IsGeneric: true);
 

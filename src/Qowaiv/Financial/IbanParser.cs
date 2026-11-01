@@ -39,11 +39,8 @@ internal static class IbanParser
         // The first to characters are already checked by selecting the BBAN.
         for (var i = 2; i < iban.Length; i++)
         {
-            // Non-ASCII chars will be invalidated by the cast to byte.
-            var c = (byte)iban[i];
-
             // If there is a catagory missmatch, stop.
-            if ((Catagory[c] & pattern[i]) is 0) return null;
+            if ((iban[i].Categories & pattern[i]) is 0) return null;
         }
 
         // Currency mismatch.
@@ -89,7 +86,7 @@ internal static class IbanParser
 
         // Starts with "IBAN " or "IBAN:".
         else if (reader.StartsWith("IBAN", StringComparison.OrdinalIgnoreCase)
-            && (Is.Markup(reader[4]) || reader[4] == ':'))
+            && (reader[4].Is_Markup || reader[4] == ':'))
             reader = reader[5..].TrimStart();
 
         // The minimum length of an IBAN.
@@ -101,9 +98,9 @@ internal static class IbanParser
         while (w < writer.Length && r < reader.Length)
         {
             var ch = reader[r++];
-            if (Is.DigitOrLetter(ch)) writer[w++] = ch;
-            else if (Is.Lower(ch)) writer[w++] = (char)(ch & 0x5F);
-            else if (Is.Markup(ch) && w is not 1 and not 3) { /* Markup is allowed except for within the country or the checksum */ }
+            if (ch.Is_IBAN) writer[w++] = ch;
+            else if (ch.Is_a_z) writer[w++] = ch.To_Upper_ASCII;
+            else if (ch.Is_Markup && w is not 1 and not 3) { /* Markup is allowed except for within the country or the checksum */ }
             else return null;
         }
 
@@ -111,48 +108,4 @@ internal static class IbanParser
             ? MachineReadable(writer[..w].ToString())
             : null;
     }
-
-    private static class Is
-    {
-        [Pure]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Letter(char ch) => (Catagory[(byte)ch] & (1 << 10)) is not 0;
-
-        [Pure]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool DigitOrLetter(char ch) => (Catagory[(byte)ch] & (3 << 10)) is not 0;
-
-        [Pure]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Lower(char ch) => (Catagory[(byte)ch] & (1 << 12)) is not 0;
-
-        [Pure]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Markup(char ch) => ASCII.IsAscii(ch)
-            ? ASCII.IsMarkup(ch)
-            : char.IsWhiteSpace(ch);
-    }
-
-    /// <summary>Catagories for different ASCII chars.</summary>
-    private static readonly ushort[] Catagory =
-    [
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x0801, 0x0802, 0x0804, 0x0808, 0x0810, 0x0820, 0x0840, 0x0880, 0x0900, 0x0a00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400,
-        0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x0400, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000,
-        0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x01000, 0x00, 0x00, 0x00, 0x00, 0x00,
-
-        // Non-ASCII
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    ];
 }

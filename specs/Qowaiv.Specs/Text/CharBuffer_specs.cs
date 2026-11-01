@@ -7,7 +7,7 @@ public class Unify
     [TestCase('_')]
     [TestCase((char)0x00B7)] // middle dot
     [TestCase((char)0x22C5)] // dot operator
-    [TestCase((char)0x2202)] // bullet
+    [TestCase((char)0x2022)] // bullet
     [TestCase((char)0x2012)] // figure dash / minus
     [TestCase((char)0x2013)] // en dash
     [TestCase((char)0x2014)] // em dash

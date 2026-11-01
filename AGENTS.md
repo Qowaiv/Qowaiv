@@ -41,5 +41,8 @@ Country names are localized via `src/Qowaiv/Globalization/CountryLabels*.resx`. 
 ## Temporary files
 - If a temp location is needed, use `.temp` in the repository root (not the OS temp directory).
 
+## Ignored files
+- Always ignore `CompatibilitySuppressions.xml` (e.g. `src/Qowaiv/CompatibilitySuppressions.xml`): do not review, edit, or mention it in diffs and reviews.
+
 ## Releases
 - Version, `PackageReleaseNotes` and the `ToBeReleased` notes live in `src/Qowaiv/Qowaiv.csproj`. Update the notes for user-facing changes.

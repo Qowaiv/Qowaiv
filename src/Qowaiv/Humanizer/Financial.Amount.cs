@@ -22,7 +22,7 @@ public static partial class Humanize
 
     extension(int number)
     {
-        /// <summary>Converts the <see cref="double" /> to a <see cref="Financial.Amount" />.</summary>
+        /// <summary>Converts the <see cref="int" /> to a <see cref="Financial.Amount" />.</summary>
         [Pure]
         public Amount Amount() => Financial.Amount.Create((decimal)number);
     }

@@ -6,7 +6,7 @@ public static partial class Humanize
 {
     extension(int number)
     {
-        /// <summary>Interprets the <see cref="int" /> if it was written with a '%' sign.</summary>
+        /// <summary>Interprets the <see cref="int" /> as an <see cref="Elo" /> rating.</summary>
         [Pure]
         public Elo Elo() => number;
     }

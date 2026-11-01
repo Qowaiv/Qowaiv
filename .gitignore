@@ -1,6 +1,6 @@
-# custom additions
 packages/
 .nuget/
+.temp/
 
 #################
 ## Visual Studio

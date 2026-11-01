@@ -99,7 +99,7 @@ internal static class IbanParser
         {
             var ch = reader[r++];
             if (ch.Is_IBAN) writer[w++] = ch;
-            else if (ch.Is_a_z) writer[w++] = ch.With_UpperMask;
+            else if (ch.Is_a_z) writer[w++] = ch.To_Upper_ASCII;
             else if (ch.Is_Markup && w is not 1 and not 3) { /* Markup is allowed except for within the country or the checksum */ }
             else return null;
         }

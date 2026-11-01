@@ -1,14 +1,14 @@
 using Qowaiv.Globalization;
 using System.Runtime.InteropServices;
-using static Qowaiv.Text.Chars.Catagories;
+using static Qowaiv.Text.Chars.Categories;
 
 namespace Qowaiv.Financial;
 
 [StructLayout(LayoutKind.Auto)]
 [DebuggerDisplay("{ToString(),nq}")]
-internal readonly record struct Bban(string Iso, ushort Mod, Chars.Catagories[] Pattern, bool Currency = false, bool IsGeneric = false)
+internal readonly record struct Bban(string Iso, ushort Mod, Chars.Categories[] Pattern, bool Currency = false, bool IsGeneric = false)
 {
-    public Bban(string iso, Chars.Catagories[] pattern, bool currency = false, bool isGeneric = false) : this(
+    public Bban(string iso, Chars.Categories[] pattern, bool currency = false, bool isGeneric = false) : this(
         iso,
         Calc(iso),
         pattern,
@@ -55,9 +55,9 @@ internal readonly record struct Bban(string Iso, ushort Mod, Chars.Catagories[] 
 internal static class Bbans
 {
 #pragma warning disable
-    internal const Chars.Catagories a = Upper;
-    internal const Chars.Catagories n = Digit;
-    internal const Chars.Catagories c = a | n;
+    internal const Chars.Categories a = Upper;
+    internal const Chars.Categories n = Digit;
+    internal const Chars.Categories c = a | n;
 
     private static Bban gen(string iso) => new(iso, Bban.Calc(iso), [0, 0, n, n, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c, c], IsGeneric: true);
 

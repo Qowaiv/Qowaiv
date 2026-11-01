@@ -24,7 +24,7 @@ internal static class CharBuffer
         {
             if (IsMarkup(ch)) continue;
 
-            if (!ASCII.IsAscii(ch) && DiacriticLookup.TryGetValue(ch, out var chs))
+            if (!ch.Is_ASCII && DiacriticLookup.TryGetValue(ch, out var chs))
             {
                 buffer[length++] = char.ToUpperInvariant(chs[0]);
 
@@ -51,7 +51,7 @@ internal static class CharBuffer
                 continue;
             }
 
-            if (!ASCII.IsAscii(ch) && DiacriticLookup.TryGetValue(ch, out var chs))
+            if (!ch.Is_ASCII && DiacriticLookup.TryGetValue(ch, out var chs))
             {
                 buffer[length++] = chs[0];
                 if (chs.Length == 2) buffer[length++] = chs[1];

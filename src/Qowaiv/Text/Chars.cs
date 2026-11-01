@@ -6,6 +6,9 @@ namespace Qowaiv.Text;
 /// </remarks>
 internal static class Chars
 {
+    /// <summary>ASCII " (48 | 0x22).</summary>
+    public const byte Quote = (byte)'"';
+
     extension(char ch)
     {
         /// <summary>Gets the digit (assumes it to be an ASCII-digit).</summary>
@@ -14,6 +17,8 @@ internal static class Chars
         public char With_UpperMask => (char)(ch & 0x5F);
 
         public Catagories Categories => Cat(ch);
+
+        public bool Is_ASCII => ch <= 127;
 
         /// <summary>True if [0-9].</summary>
         public bool Is_0_9 => (uint)(ch - '0') <= '9' - '0';

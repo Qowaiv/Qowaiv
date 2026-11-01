@@ -15,10 +15,14 @@ that is extended, including its namespace (e.g. `System.String.cs`). The static
 class should have a name that starts with `Qowaiv`, followed by the type name,
 without any suffix (e.g. `QowaivDateTime` for `DateTime` and `QowaivType` for
 `Type`). For extensions on an array or collection the type name is plural
-(e.g. `QowaivBytes` for `byte[]`).
+(e.g. `QowaivBytes` for `byte[]`, in the file `System.Bytes.cs`).
 
 Linq-like extensions live in `src/Qowaiv/Linq` and are part of the static class `QowaivEnumerable`
 in namespace `Qowaiv.Linq`.
+
+`QowaivType` is the exception to the `Qowaiv.Extensions` namespace: it stays in `Qowaiv.Reflection`,
+because it also contains non-extension reflection helpers (e.g. `IsNullOrDefaultValue`).
+The same holds for `QowaivEnumerable` in `Qowaiv.Linq`.
 
 Although `DecimalMath` (in `Qowaiv.Mathematics`) exposes all methods also as extensions, it is primarily a
 utility class that provides `System.Math` functions on `decimal`. Its extensions are available in

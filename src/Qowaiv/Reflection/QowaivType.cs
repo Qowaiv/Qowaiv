@@ -51,13 +51,6 @@ public static partial class QowaivType
         [Pure]
         public Type GetNotNullableType()
             => Nullable.GetUnderlyingType(type) ?? type;
-
-    }
-
-    extension([NotNullIfNotNull(nameof(type))] Type? type)
-    {
-        [Pure]
-        internal bool IsAnyOf(params Type[] types) => type is { } && types.Contains(type);
     }
 
     /// <summary>Returns true if the value is null or equal to the default value.</summary>
@@ -67,7 +60,7 @@ public static partial class QowaivType
 
     private static readonly Type[] DateTypes =
     [
-       typeof(DateTime),
+        typeof(DateTime),
 #if NET10_0_OR_GREATER
         typeof(DateOnly),
 #endif

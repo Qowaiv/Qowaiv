@@ -7,14 +7,6 @@ internal static partial class Email
     private static class Is
     {
         [Pure]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Local(char ch) => !ASCII.IsAscii(ch) || ASCII.EmailAddress.IsLocal(ch);
-
-        [Pure]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Domain(char ch) => !ASCII.IsAscii(ch) || ASCII.EmailAddress.IsDomain(ch);
-
-        [Pure]
         public static bool FinalPart(ReadOnlySpan<char> part)
             => TopDomain(part) || Punycode(part);
 
@@ -24,7 +16,7 @@ internal static partial class Email
             for (var i = 0; i < part.Length; i++)
             {
                 var ch = part[i];
-                if (ASCII.IsAscii(ch) && !ASCII.EmailAddress.IsTopDomain(ch)) return false;
+                if (!ch.Is_EMAIL_TopDomain) return false;
             }
             return true;
         }
@@ -37,7 +29,7 @@ internal static partial class Email
             for (var i = 4; i < part.Length; i++)
             {
                 var ch = part[i];
-                if (!ASCII.IsAscii(ch) || !ASCII.EmailAddress.IsPunycode(ch)) return false;
+                if (!ch.Is_EMAIL_Punycode) return false;
             }
             return true;
         }

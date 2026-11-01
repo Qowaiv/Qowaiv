@@ -116,7 +116,7 @@ internal static partial class Email
             while (index < Input.Length && len <= PartLength + 1)
             {
                 // Not .. and not starting with a dot.
-                if (Is.Local(ch)
+                if (ch.Is_EMAIL_Local
                     || (ch is Dot && prev is not Dot and not default(char)))
                 {
                     prev = ch;
@@ -161,7 +161,7 @@ internal static partial class Email
             {
                 part++;
                 if (len > TotalLength) return None();
-                else if (Is.Domain(ch)) { /* Continue. */ }
+                else if (ch.Is_EMAIL_Domain) { /* Continue. */ }
                 else if (ch is Dot)
                 {
                     if (prev is Dot or Dash or default(char)) return None();

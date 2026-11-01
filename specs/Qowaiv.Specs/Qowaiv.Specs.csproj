@@ -10,8 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="../../src/Qowaiv/Text/ASCII.cs" Link="Qowaiv.Internal/Text/ASCII.cs" />
-    <Compile Include="../../src/Qowaiv/Text/CharBuffer.cs" Link="Qowaiv.Internal/Text/CharBuffer.cs" />
+    <Compile Include="../../src/Qowaiv/Text/CharBuffer.cs" Link="_Internal/Text/CharBuffer.cs" />
+    <Compile Include="../../src/Qowaiv/Text/Chars.cs" Link="_Internal/Text/Chars.cs" />
   </ItemGroup>
 
   <ItemGroup Label="Test Tools">

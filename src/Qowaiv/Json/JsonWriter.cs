@@ -19,9 +19,9 @@ internal static class JsonWriter
             {
                 ReadOnlySpan<char> ascii = value;
                 Span<byte> utf8 = stackalloc byte[ascii.Length + 2];
-                utf8[0] = ASCII.Quote;
+                utf8[0] = Chars.Quote;
                 Ascii.FromUtf16(ascii, utf8[1..], out _);
-                utf8[^1] = ASCII.Quote;
+                utf8[^1] = Chars.Quote;
                 writer.WriteRawValue(utf8, skipInputValidation: true);
             }
             else

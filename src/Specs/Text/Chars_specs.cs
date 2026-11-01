@@ -1,4 +1,5 @@
 using AwesomeAssertions;
+using System.Linq;
 
 namespace Text.Chars_specs;
 
@@ -44,4 +45,47 @@ public class Is_Not
     [TestCase('9')]
     [TestCase('!')]
     public void _A_Z(char c) => Chars.get_Is_A_Z(c).Should().BeFalse();
+}
+
+public class Is_Email
+{
+    [Test]
+    public void is_local_contains_81_chars()
+    {
+        var local = new string([.. Enumerable.Range(0, 127)
+            .Select(i => (char)i)
+            .Where(Chars.get_Is_EMAIL_Local)]);
+
+        local.Should().Be("!#$%&'*+-/0123456789=?ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz{|}~");
+    }
+
+    [Test]
+    public void is_domain_contains_63_chars()
+    {
+        var domain = new string([.. Enumerable.Range(0, 127)
+            .Select(i => (char)i)
+            .Where(Chars.get_Is_EMAIL_Domain)]);
+
+        domain.Should().Be("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz");
+    }
+
+    [Test]
+    public void is_top_domain_contains_52_chars()
+    {
+        var topDomain = new string([.. Enumerable.Range(0, 127)
+            .Select(i => (char)i)
+            .Where(Chars.get_Is_EMAIL_TopDomain)]);
+
+        topDomain.Should().Be("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+    }
+
+    [Test]
+    public void is_punycode_contains_63_chars()
+    {
+        var punycode = new string([.. Enumerable.Range(0, 127)
+            .Select(i => (char)i)
+            .Where(Chars.get_Is_EMAIL_Punycode)]);
+
+        punycode.Should().Be("-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+    }
 }

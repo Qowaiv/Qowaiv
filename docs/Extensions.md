@@ -2,15 +2,34 @@
 The Qowaiv core library comes with multiple extensions. They are added to improve
 the day to day usage of the SVOs provided.
 
+| Namespace            | Contains                                                     |
+| -------------------- | ------------------------------------------------------------ |
+| `Qowaiv.Extensions`  | Extensions on .NET types (`string`, `Guid`, `DateOnly`, ...) |
+| `Qowaiv.Humanizer`   | Humanizer extensions (`5.Years()`, `12.Percent()`, ...)    |
+| `Qowaiv.Linq`        | LINQ-like extensions (`Sum()`, `Average()`)                |
+| `Qowaiv.Mathematics` | `DecimalMath` and its decimal extensions                     |
+| `Qowaiv.Reflection`  | `QowaivType` extensions on `System.Type`                   |
+
+Add the matching `using` directive to use them, for example:
+
+```csharp
+using Qowaiv.Extensions;
+using Qowaiv.Humanizer;
+```
+
 ## Humanizer
 Inspired by [Humanizer.NET](https://humanizr.net), humanizer extension methods
-create SVO instances:
+create SVO instances. They live in `Qowaiv.Humanizer`. Some names (`Bytes()`,
+`Years()`, ...) also exist in Humanizer.NET, so an ambiguity can occur if both
+namespaces are imported.
 
 ```csharp
 305_500.50m.Amount();       // Amount
 4.DividedBy(7);             // Fraction
+0.75m.Fraction();           // Fraction
 12.14m.Percent();           // Percentage
 123_456_789.Bytes();        // StreamSize
+5.KB();                     // StreamSize (also MB, GB, KiB, MiB, GiB)
 
 5.Years();                  // YearSpan
 5.Years() + 3.Months();     // MonthSpan
@@ -32,6 +51,7 @@ var date = new DateTime(2017, 06, 11);
 date.Add(4.Days());
 date.Add(3.Months());
 date.Add(10.Years());
+date.Add(1.Months() + 2.Days(), DateSpanSettings.DaysFirst);
 ```
 
 ### Range checks
@@ -41,7 +61,7 @@ checked to be in a specific month or year:
 ```csharp
 var date = new DateOnly(2017, 06, 11);
 date.IsIn(Month.January);
-date.IsIn(2025.CE());
+date.IsIn(2025.CE());       // requires `using Qowaiv.Humanizer;`
 ```
 ### Local date time
 A `System.DateTimeOffset` can be converted to a `Qowaiv.LocalDateTime`:
@@ -69,11 +89,27 @@ int? value = null;
 value.ZeroIfNull(); // 0
 ```
 
+### Guid
+Gets the `UuidVersion` of a `System.Guid`.
+
+```csharp
+Guid.NewGuid().UuidVersion; // UuidVersion.Random
+```
+
 ## Decimal math
 All methods of `Qowaiv.Mathematics.DecimalMath` are available as extension methods.
 
 ## Reflection
-All methods of `Qowaiv.Reflection.QowaivType` on `System.Type` are available as extension methods.
+Extensions on `System.Type` are available via `Qowaiv.Reflection`:
+
+```csharp
+typeof(int?).IsNullable;            // true
+typeof(int?).IsNumeric;             // true
+typeof(DateOnly).IsDate;            // true
+typeof(int?).GetNotNullableType();  // typeof(int)
+```
+
+`QowaivType.IsNullOrDefaultValue(object?)` is a plain static method.
 
 ## Formatting
 
@@ -98,6 +134,13 @@ Gets a typed formatting service instance from an `IFormatProvider`.
 
 ```csharp
 TextInfo info = formatProvider.GetFormat<TextInfo>();
+```
+
+### ToString with FormattingArguments
+Formats an `IFormattable` using `FormattingArguments` or a `FormattingArgumentsCollection`.
+
+```csharp
+formattable.ToString(new FormattingArguments("0.00", CultureInfo.InvariantCulture));
 ```
 
 ## Stream Size
@@ -133,6 +176,8 @@ var seed = sha.ComputeCryptographicSeed(bytes);
 
 ### GetValue / SetValue / RemoveValue
 Gets, sets, or removes values in the current thread's logical context.
+The `Thread` instance is only used as the extension target; the values always
+belong to the current thread.
 
 ```csharp
 Thread.CurrentThread.SetValue("value");

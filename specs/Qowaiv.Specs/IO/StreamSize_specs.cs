@@ -1,3 +1,5 @@
+using Qowaiv.Humanizer;
+
 namespace IO.StreamSize_specs;
 
 public class Has_constant

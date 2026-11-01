@@ -1,4 +1,5 @@
 using Qowaiv.Chemistry;
+using Qowaiv.Humanizer;
 using Qowaiv.Sustainability;
 using System.Net.Http;
 

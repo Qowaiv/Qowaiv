@@ -32,7 +32,7 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
     private const int IndexOfVersion = 7;
 
     /// <summary>Get the version of the UUID.</summary>
-    public UuidVersion Version => m_Value.GetVersion();
+    public UuidVersion Version => m_Value.UuidVersion;
 
     /// <summary>Returns a 16-element byte array that contains the value of this instance.</summary>
     [Pure]

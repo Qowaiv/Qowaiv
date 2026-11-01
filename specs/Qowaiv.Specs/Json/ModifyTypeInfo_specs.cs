@@ -3,7 +3,6 @@
 using Qowaiv.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
-using static Extensions.Type_specs.CSharpString;
 
 namespace Json.ModifyTypeInfo_specs;
 

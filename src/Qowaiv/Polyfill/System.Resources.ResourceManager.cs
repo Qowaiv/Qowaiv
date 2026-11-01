@@ -1,6 +1,6 @@
 namespace System.Resources;
 
-internal static class QowaivResourceManagerExtensions
+internal static class ResourceManagerExtensions
 {
     extension(ResourceManager manager)
     {

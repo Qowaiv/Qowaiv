@@ -1,3 +1,5 @@
+using Qowaiv.Extensions;
+
 namespace Specs_Generated;
 
 [OpenApiDataType(description: "Custom SVO Example", type: "string", example: "QOWAIV", format: "custom")]

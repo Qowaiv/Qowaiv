@@ -53,6 +53,7 @@ v11.0.0
 - Guid.GetVersion() is replaced by the extension property Guid.UuidVersion. (BREAKING)
 - QowaivType.IsNullable(), IsNumeric(), IsDate(), and GetNotNullableType() are now extensions on Type (IsNullable, IsNumeric, and IsDate are properties); IsDate no longer accepts null. (BREAKING)
 - Date implements IEquatable<DateOnly>.
+- Ansi SVO to allow allow ANSI insturctions to the console.
 v8.*
 - Extended language support.
 - IBAN supports Mongolia and Falkland Islands.

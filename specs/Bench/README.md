@@ -11,6 +11,17 @@ Amount JSON serialization is equivalent to decimal JSON serialization:
 | Decimal | JSON Serialization   | 26.88 ns |  1.00 |
 | Amount  | JSON Serialization   | 27.49 ns |  1.02 |
 
+## ANSI
+Durations per 1000 writes, so in the order of 11 ns.
+
+| Method    | Runtime   | Mean     | Ratio | Gen0   | Allocated |
+|---------- |---------- |---------:|------:|-------:|----------:|
+| String    | .NET 10.0 | 20.25 us |  1.79 | 4.8523 |   60888 B |
+| TryFormat | .NET 10.0 | 11.34 us |  1.00 |      - |         - |
+|           |           |          |       |        |           |
+| String    | .NET 11.0 | 16.88 us |  1.52 | 4.8523 |   60888 B |
+| TryFormat | .NET 11.0 | 11.13 us |  1.00 |      - |         - |
+
 ## IBAN
 The IBAN parser has been rewritten multiple times. Until v6.6.0 it was regex
 based. Since then, it is a specialized parser, that uses (read-only) spans,

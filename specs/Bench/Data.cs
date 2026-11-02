@@ -1,12 +1,36 @@
 using Qowaiv.Financial;
 using System.Collections.Immutable;
 using Qowaiv.Mathematics;
+using Qowaiv.Text;
 using Qowaiv.Humanizer;
 
 namespace Bench;
 
 internal static class Data
 {
+    public static class Ansis
+    {
+        private static readonly ImmutableArray<Ansi> Styles = [Ansi.Bold, Ansi.Dim, Ansi.Italic, Ansi.Underline, Ansi.SlowBlink, Ansi.RapidBlink, Ansi.Invert, Ansi.Hide, Ansi.Strike, Ansi.Not.Bold, Ansi.Not.BoldOrDim, Ansi.Not.Italic, Ansi.Not.Underline, Ansi.Not.Blink, Ansi.Not.Invert, Ansi.Not.Hide, Ansi.Not.Strike];
+
+        public static readonly ImmutableArray<Ansi> Svo =
+        [
+            .. Enumerable
+                .Range(0, 750).Select(i => Ansi.Rgb(((uint)Rnd.Next()) & 0xFF_FF_FF))
+                .Concat(Enumerable.Range(0, 250).Select(RandomStyle))
+                .OrderBy(_ => Rnd.Next())
+        ];
+
+        private static Ansi RandomStyle(int _)
+        {
+            var style = Styles[Rnd.Next(Styles.Length)];
+
+            while(Rnd.Next(16) < 16)
+                style |= Styles[Rnd.Next(Styles.Length)];
+
+            return style;
+        }
+    }
+
     public static class Date
     {
         public static readonly ImmutableArray<Qowaiv.Date> Svo =

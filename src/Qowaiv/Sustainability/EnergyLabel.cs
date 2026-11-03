@@ -68,7 +68,7 @@ public readonly partial struct EnergyLabel : IXmlSerializable, IEquatable<Energy
     /// <summary>Represents an unknown (but set) EU energy label.</summary>
     public static EnergyLabel Unknown => new(int.MinValue);
 
-    /// <summary>Represents all allowed lables (G, F, E, D, C, B, A, A+, A++, A+++. A++++.</summary>
+    /// <summary>Represents all allowed labels (G, F, E, D, C, B, A, A+, A++, A+++, A++++).</summary>
     public static IReadOnlyCollection<EnergyLabel> DefinedValues { get; } = [G, F, E, D, C, B, A(), A(1), A(2), A(3), A(4)];
 
     /// <summary>Returns a <see cref="string" /> that represents the EU energy label for DEBUG purposes.</summary>

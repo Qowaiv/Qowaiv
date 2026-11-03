@@ -33,7 +33,7 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
     /// <summary>Represents an unknown (but set) yes-no.</summary>
     public static YesNo Unknown => new(3);
 
-    /// <summary>Contains yes and no.</summary>
+    /// <inheritdoc cref="DefinedValues" />
     public static readonly IReadOnlyCollection<YesNo> YesAndNo = [Yes, No];
 
     /// <summary>Contains yes and no.</summary>

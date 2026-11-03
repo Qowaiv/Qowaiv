@@ -10,10 +10,13 @@ namespace Qowaiv;
 #if !NETSTANDARD2_0
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.MonthJsonConverter))]
 #endif
-public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
-#if !NETSTANDARD2_0
-    , IEnumerated<Month>
-#endif
+public readonly partial struct Month :
+    IXmlSerializable,
+    IFormattable,
+    IEquatable<Month>,
+    IComparable,
+    IComparable<Month>,
+    IEnumerated<Month>
 {
     /// <summary>Represents an unknown (but set) month.</summary>
     public static Month Unknown => new(byte.MaxValue);
@@ -54,7 +57,7 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
     /// <summary>Represents December (12).</summary>
     public static Month December /*..*/ => new(12);
 
-    /// <inheritdoc cref="DefinedValues"`/>
+    /// <inheritdoc cref="DefinedValues" />
     public static IReadOnlyList<Month> All { get; } =
     [
         January,

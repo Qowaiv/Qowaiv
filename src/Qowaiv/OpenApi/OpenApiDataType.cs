@@ -56,7 +56,7 @@ public sealed record OpenApiDataType
     [StringSyntax(StringSyntaxAttribute.Regex)]
     public string? Pattern { get; }
 
-    /// <summary>Gets the Pattern of the OpenAPI Data Type.</summary>
+    /// <summary>Gets the allowed values of the OpenAPI Data Type.</summary>
     public IReadOnlyCollection<string>? Enum { get; }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -91,6 +91,29 @@ public sealed record OpenApiDataType
         => Pattern is null
         || (str is { Length: > 0 } && Regex.IsMatch(str, '^' + Pattern + '$', RegexOptions.None, RegOptions.Timeout));
 
+    /// <inheritdoc cref="IEquatable{T}" />
+    [Pure]
+    public bool Equals([NotNullWhen(true)]OpenApiDataType? other)
+        => other is not null
+        && DataType == other.DataType
+        && Description == other.Description
+        && Type == other.Type
+        && Equals(Example, other.Example)
+        && Format == other.Format
+        && Pattern == other.Pattern
+        && Enumerable.SequenceEqual(Enum ?? [], other.Enum ?? []);
+
+    /// <inheritdoc />
+    [Pure]
+    public override int GetHashCode() => Hash
+        .Code(DataType)
+        .And(Description)
+        .And(Type)
+        .And(Example)
+        .And(Format)
+        .And(Pattern)
+        .And(Enum ?? []);
+
     /// <summary>
     /// Creates an <see cref="OpenApiDataType" /> based on a type, null if not
     /// decorated with a <see cref="OpenApiDataTypeAttribute" />.
@@ -112,6 +135,8 @@ public sealed record OpenApiDataType
             @enum: attr.Enum ?? DefinedValues(type))
         : null;
 
+    // This is a convenience helper for specifying Open API specs. Failing to resolve the
+    // defined values should not crash the generation of those specs, hence no exception is thrown.
     [Pure]
     private static IReadOnlyCollection<string>? DefinedValues(Type type)
 #if NETSTANDARD2_0
@@ -143,27 +168,4 @@ public sealed record OpenApiDataType
             .GetValue(null)!;
     }
 #endif
-
-    /// <inheritdoc cref="IEquatable{T}" />
-    [Pure]
-    public bool Equals(OpenApiDataType? other)
-        => other is not null
-        && DataType == other.DataType
-        && Description == other.Description
-        && Type == other.Type
-        && Equals(Example, other.Example)
-        && Format == other.Format
-        && Pattern == other.Pattern
-        && Enumerable.SequenceEqual(Enum ?? [], other.Enum ?? []);
-
-    /// <inheritdoc />
-    [Pure]
-    public override int GetHashCode() => Hash
-        .Code(DataType)
-        .And(Description)
-        .And(Type)
-        .And(Example)
-        .And(Format)
-        .And(Pattern)
-        .And(Enum);
 }

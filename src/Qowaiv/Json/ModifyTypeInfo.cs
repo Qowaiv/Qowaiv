@@ -30,9 +30,7 @@ public static class ModifyTypeInfo
     [Pure]
     private static bool IsApplicable(JsonPropertyInfo prop)
         => prop.PropertyType is { IsValueType: true, IsGenericType: false }
-        && prop.PropertyType
-            .GetInterfaces()
-            .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEmpty<>));
+        && prop.PropertyType.GetInterfaces().Contains(typeof(IEmpty));
 }
 
 #endif

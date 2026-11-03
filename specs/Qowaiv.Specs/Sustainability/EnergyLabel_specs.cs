@@ -532,7 +532,7 @@ public class Is_Open_API_data_type
     [Test]
     public void with_info()
        => OpenApiDataType.FromType(typeof(EnergyLabel))
-       .Should().BeEquivalentTo(new OpenApiDataType(
+       .Should().Be(new OpenApiDataType(
            dataType: typeof(EnergyLabel),
            description: "EU energy label",
            example: "A++",

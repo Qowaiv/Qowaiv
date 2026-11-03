@@ -486,7 +486,7 @@ public class Is_Open_API_data_type
     [Test]
     public void with_info()
         => OpenApiDataType.FromType(typeof(YesNo))
-        .Should().BeEquivalentTo(new OpenApiDataType(
+        .Should().Be(new OpenApiDataType(
             dataType: typeof(YesNo),
             description: "Yes-No notation.",
             example: "yes",

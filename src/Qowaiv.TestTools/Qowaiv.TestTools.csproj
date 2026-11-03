@@ -19,16 +19,17 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>8.0.0</Version>
+    <Version>11.0.0</Version>
     <PackageValidationBaselineVersion>8.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
-v9.0.0
-- Add support for .NET 10.
-- Drop support for .NET 6. (BREAKING)
+v11.0.0
+- Add support for .NET 11.0.
+- Drop support for .NET 9.0 and 8.0. (BREAKING)
 - Drop binary serialization support. (BREAKING)
 - Hide Guard methods from stacktrace.
 - Introduction of Converting.From(Type).To<To>() to check CanConvertTo.
+- Added Should().Be(OpenApiDataType).
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

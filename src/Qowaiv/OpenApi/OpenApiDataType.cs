@@ -118,26 +118,20 @@ public sealed record OpenApiDataType
         => null;
 #else
     {
-        if (Interface() is { } contract && type.GetInterfaces().Contains(contract))
+        if (type.GetInterfaces().Contains(typeof(IEnumerated)))
         {
             var values = new List<string>();
             try
             {
                 foreach (var member in DefinedValues())
                 {
-                    values.Add(member is IFormattable formattable ? formattable.ToString(null, CultureInfo.InvariantCulture) : member.ToString());
+                    values.Add(member is IFormattable formattable ? formattable.ToString(null, CultureInfo.InvariantCulture) : member.ToString()!);
                 }
             }
             catch { return null; }
             return values;
         }
         return null;
-
-        Type? Interface()
-        {
-            try { return typeof(IEnumerated<>).MakeGenericType(type); }
-            catch { return null; }
-        }
 
         IEnumerable DefinedValues()
             => (IEnumerable)type
@@ -153,9 +147,8 @@ public sealed record OpenApiDataType
         && DataType == other.DataType
         && Description == other.Description
         && Type == other.Type
-        && Example == other.Example
+        && Equals(Example, other.Example)
         && Format == other.Format
-        && Nullable == other.Nullable
         && Pattern == other.Pattern
         && Enumerable.SequenceEqual(Enum ?? [], other.Enum ?? []);
 
@@ -167,7 +160,6 @@ public sealed record OpenApiDataType
         .And(Type)
         .And(Example)
         .And(Format)
-        .And(Nullable)
         .And(Pattern)
         .And(Enum);
 }

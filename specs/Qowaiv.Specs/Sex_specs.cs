@@ -419,7 +419,7 @@ public class Is_Open_API_data_type
     [Test]
     public void with_info()
        => OpenApiDataType.FromType(typeof(Sex))
-       .Should().BeEquivalentTo(new OpenApiDataType(
+       .Should().Be(new OpenApiDataType(
            dataType: typeof(Sex),
            description: "Sex as specified by ISO/IEC 5218.",
            type: "string",

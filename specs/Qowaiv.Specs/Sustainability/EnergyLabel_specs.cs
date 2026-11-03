@@ -4,6 +4,13 @@ namespace Energy_label_specs;
 
 public class With_domain_logic
 {
+    [Test]
+    public void DefinedValues_are_G_till_A_with_up_to_4_plusses()
+        => EnergyLabel.DefinedValues.Should().Equal(
+            EnergyLabel.G, EnergyLabel.F, EnergyLabel.E, EnergyLabel.D,
+            EnergyLabel.C, EnergyLabel.B, EnergyLabel.A(), EnergyLabel.A(1),
+            EnergyLabel.A(2), EnergyLabel.A(3), EnergyLabel.A(4));
+
     [TestCase(true, "A++")]
     [TestCase(true, "?")]
     [TestCase(false, "")]

@@ -2,6 +2,10 @@ namespace Sex_specs;
 
 public class With_domain_logic
 {
+    [Test]
+    public void DefinedValues_are_Male_Female_and_NotApplicable()
+        => Sex.DefinedValues.Should().Equal(Sex.Male, Sex.Female, Sex.NotApplicable);
+
     [TestCase(true, "Male")]
     [TestCase(true, "Female")]
     [TestCase(true, "?")]

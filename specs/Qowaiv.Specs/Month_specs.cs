@@ -2,6 +2,13 @@ namespace Month_specs;
 
 public class With_domain_logic
 {
+    [Test]
+    public void DefinedValues_are_January_till_December()
+        => Month.DefinedValues.Should().Equal(
+            Month.January, Month.February, Month.March, Month.April,
+            Month.May, Month.June, Month.July, Month.August,
+            Month.September, Month.October, Month.November, Month.December);
+
     [TestCase(true, "February")]
     [TestCase(true, "?")]
     [TestCase(false, "")]

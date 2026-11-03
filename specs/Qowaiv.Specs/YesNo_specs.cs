@@ -2,6 +2,10 @@ namespace YesNo_specs;
 
 public class With_domain_logic
 {
+    [Test]
+    public void DefinedValues_are_Yes_and_No()
+        => YesNo.DefinedValues.Should().Equal(YesNo.Yes, YesNo.No);
+
     [TestCase(true, "yes")]
     [TestCase(true, "no")]
     [TestCase(true, "?")]

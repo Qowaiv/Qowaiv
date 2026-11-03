@@ -60,7 +60,7 @@ public class Enumerated
     [Test]
     public void Resolves_defined_values()
          => OpenApiDataType.FromType(typeof(AbcEnum))
-            .Enum.Should().BeEquivalentTo("A", "B", "C");
+            .Enum.Should().BeEquivalentTo("A", "B", "C", "?");
 }
 
 [Explicit]

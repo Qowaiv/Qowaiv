@@ -22,7 +22,7 @@ namespace Qowaiv.Sustainability;
     type: "string",
     format: "energy-label",
     example: "A++",
-    pattern: @"[B-G]|A\+{0,4}",
+    pattern: @"A\+{0,4}|[B-G]",
     @enum: "G,F,E,D,C,B,A,A+,A++,A+++,A++++",
     nullable: true)]
 [TypeConverter(typeof(Conversion.Sustainability.EnergyLabelTypeConverter))]

@@ -538,7 +538,7 @@ public class Is_Open_API_data_type
            example: "A++",
            type: "string",
            format: "energy-label",
-           pattern: @"[B-H]|A\+{0,4}",
+           pattern: @"A\+{0,4}|[B-G]",
            @enum: ["G", "F", "E", "D", "C", "B", "A", "A+", "A++", "A+++", "A++++"],
            nullable: true));
 

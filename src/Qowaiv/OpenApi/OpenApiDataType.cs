@@ -123,15 +123,19 @@ public sealed record OpenApiDataType
             var values = new List<string>();
             try
             {
-                foreach (var member in DefinedValues())
-                {
-                    values.Add(member is IFormattable formattable ? formattable.ToString(null, CultureInfo.InvariantCulture) : member.ToString()!);
-                }
+                foreach (var value in DefinedValues())
+                    Add(value, values);
             }
             catch { return null; }
+
+            if (Unknown.Value(type) is { } unknown)
+                Add(unknown, values);
+
             return values;
         }
         return null;
+
+        void Add(object value, List<string> values) => values.Add(value is IFormattable formattable ? formattable.ToString(null, CultureInfo.InvariantCulture) : value.ToString()!);
 
         IEnumerable DefinedValues()
             => (IEnumerable)type

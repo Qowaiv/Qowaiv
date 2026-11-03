@@ -28,10 +28,13 @@ namespace Qowaiv;
 #if !NETSTANDARD2_0
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.SexJsonConverter))]
 #endif
-public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<Sex>, IComparable, IComparable<Sex>
-#if !NETSTANDARD2_0
-    , IEnumerated<Sex>
-#endif
+public readonly partial struct Sex :
+    IXmlSerializable,
+    IFormattable,
+    IEquatable<Sex>,
+    IComparable,
+    IComparable<Sex>,
+    IEnumerated<Sex>
 {
     /// <summary>Represents a not known/unknown sex.</summary>
     public static Sex Unknown => new(1);

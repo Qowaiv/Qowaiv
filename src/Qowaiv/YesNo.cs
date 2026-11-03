@@ -19,10 +19,13 @@ namespace Qowaiv;
 #if !NETSTANDARD2_0
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.YesNoJsonConverter))]
 #endif
-public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatable<YesNo>, IComparable, IComparable<YesNo>
-#if !NETSTANDARD2_0
-    , IEnumerated<YesNo>
-#endif
+public readonly partial struct YesNo :
+    IXmlSerializable,
+    IFormattable,
+    IEquatable<YesNo>,
+    IComparable,
+    IComparable<YesNo>,
+    IEnumerated<YesNo>
 {
     /// <summary>Represents an unknown (but set) yes-no.</summary>
     public static YesNo No => new(1);

@@ -29,12 +29,17 @@ namespace Qowaiv.Sustainability;
 #if !NETSTANDARD2_0
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Sustainability.EnergyLabelJsonConverter))]
 #endif
-public readonly partial struct EnergyLabel : IXmlSerializable, IEquatable<EnergyLabel>, IComparable, IComparable<EnergyLabel>
+public readonly partial struct EnergyLabel :
+    IXmlSerializable,
 #if !NETSTANDARD2_0
-    , ISpanFormattable, IEnumerated<EnergyLabel>
+    ISpanFormattable,
 #else
-    , IFormattable
+    IFormattable,
 #endif
+    IEquatable<EnergyLabel>,
+    IComparable,
+    IComparable<EnergyLabel>,
+    IEnumerated<EnergyLabel>
 {
     private const int MaxPlusses = 4;
 

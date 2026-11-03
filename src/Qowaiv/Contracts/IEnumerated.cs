@@ -2,10 +2,10 @@
 
 namespace Qowaiv;
 
-/// <summary>Indicates that the SVO as a limited well defined set of values.</summary>
+/// <summary>Indicates that the SVO has a limited well defined set of values.</summary>
 public interface IEnumerated;
 
-/// <summary>Indicates that the SVO as a limited well defined set of values.</summary>
+/// <summary>Indicates that the SVO has a limited well defined set of values.</summary>
 /// <typeparam name="TSelf">
 /// The type of the SVO.
 /// </typeparam>

@@ -1,6 +1,4 @@
 #if !NETSTANDARD2_0
-
-
 namespace Specs_Generated;
 
 /// <summary>Simple 'smart' enum.</summary>
@@ -10,7 +8,7 @@ namespace Specs_Generated;
 public readonly partial struct AbcEnum : IEnumerated<AbcEnum>
 {
     /// <inheritdoc />
-    public static IReadOnlyCollection<AbcEnum> DefinedValues => [new("A"), new("B"), new("C")];
+    public static IReadOnlyCollection<AbcEnum> DefinedValues { get; } = [new("A"), new("B"), new("C")];
 
     private sealed class Behavior : SvoBehavior
     {

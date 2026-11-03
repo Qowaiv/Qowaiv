@@ -54,7 +54,7 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
     /// <summary>Represents December (12).</summary>
     public static Month December /*..*/ => new(12);
 
-    /// <summary>Represents all months (January till December).</summary>
+    /// <inheritdoc cref="DefinedValues"`/>
     public static IReadOnlyList<Month> All { get; } =
     [
         January,

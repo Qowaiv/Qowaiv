@@ -51,10 +51,10 @@ public readonly partial struct Sex : IXmlSerializable, IFormattable, IEquatable<
     /// <summary>Contains male and female.</summary>
     public static IReadOnlyCollection<Sex> MaleAndFemale { get; } = [Male, Female];
 
-    /// <summary>Contains male, female, not applicable.</summary>
+    /// <inheritdoc cref="DefinedValues" />
     public static IReadOnlyCollection<Sex> MaleFemaleAndNotApplicable { get; } = [Male, Female, NotApplicable];
 
-    /// <summary>Contains male, female, not applicable.</summary>
+    /// <summary>Contains male, female, and not applicable.</summary>
     public static IReadOnlyCollection<Sex> DefinedValues => MaleFemaleAndNotApplicable;
 
     /// <summary>Gets the display name.</summary>

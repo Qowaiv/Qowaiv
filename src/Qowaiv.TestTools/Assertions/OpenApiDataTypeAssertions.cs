@@ -2,7 +2,7 @@ using Qowaiv.OpenApi;
 
 namespace Qowaiv.TestTools.Assertions;
 
-/// <summary>Specialiced assertions for <see cref="OpenApiDataType"/>.</summary>
+/// <summary>Specialized assertions for <see cref="OpenApiDataType"/>.</summary>
 public sealed class OpenApiDataTypeAssertions(OpenApiDataType? subject)
 {
     /// <summary>The subject under test.</summary>
@@ -17,7 +17,7 @@ public sealed class OpenApiDataTypeAssertions(OpenApiDataType? subject)
         Guard.NotNull(expected);
 
         if (Subject is null) Assertion.New()
-            .Line("Expected OpenApiDataType not to")
+            .Line("Expected Open API data type to be")
             .Value(expected)
             .Line(',')
             .Append("but found null.")

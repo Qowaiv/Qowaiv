@@ -34,22 +34,22 @@ public class Open_API_data_type
         => new OpenApiDataType(typeof(int), "descrption", "type", null, pattern: null).Matches(value).Should().BeTrue();
 
     [Test]
-    public void DebuggerDisplay_shows_minimum() => ((object)new OpenApiDataType(typeof(int), "descrption", "type", null))
+    public void DebuggerDisplay_shows_minimum() => new OpenApiDataType(typeof(int), "descrption", "type", null)
         .Should().HaveDebuggerDisplay("""{ type: type, desc: descrption, example:  }""");
 
     [Test]
-    public void DebuggerDisplay_shows_maximum() => ((object)new OpenApiDataType(typeof(int), "descrption", "type", "example", "format", true, "pattern"))
+    public void DebuggerDisplay_shows_maximum() => new OpenApiDataType(typeof(int), "descrption", "type", "example", "format", true, "pattern")
         .Should().HaveDebuggerDisplay("""{ type: type, desc: descrption, example: example, format: format, pattern: pattern, nullable: true }""");
 
     [Test]
     public void has_custom_debug_display()
-            => ((object)new OpenApiDataType(
+            => new OpenApiDataType(
             dataType: typeof(Date),
             description: "Custom description",
             type: "string",
             example: "custom example",
             format: "custom-uuid",
-            pattern: "[0-9]{4}-[0-9]{2}-[0-9]{2}"))
+            pattern: "[0-9]{4}-[0-9]{2}-[0-9]{2}")
         .Should().HaveDebuggerDisplay("{ type: string, desc: Custom description, example: custom example, format: custom-uuid, pattern: [0-9]{4}-[0-9]{2}-[0-9]{2} }");
 }
 

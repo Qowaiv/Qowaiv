@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>11.0.0</Version>
+    <Version>11.0.0-rc1</Version>
     <PackageValidationBaselineVersion>8.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
@@ -29,7 +29,6 @@ v11.0.0
 - Drop binary serialization support. (BREAKING)
 - Hide Guard methods from stacktrace.
 - Introduction of Converting.From(Type).To<To>() to check CanConvertTo.
-- Added Should().Be(OpenApiDataType).
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

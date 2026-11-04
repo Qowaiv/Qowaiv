@@ -4,6 +4,23 @@ namespace Energy_label_specs;
 
 public class With_domain_logic
 {
+    [Test]
+    public void DefinedValues_are_G_till_A_with_up_to_4_plusses()
+        => EnergyLabel.DefinedValues.Should().BeEquivalentTo(
+        [
+            EnergyLabel.G,
+            EnergyLabel.F,
+            EnergyLabel.E,
+            EnergyLabel.D,
+            EnergyLabel.C,
+            EnergyLabel.B,
+            EnergyLabel.A(),
+            EnergyLabel.A(1),
+            EnergyLabel.A(2),
+            EnergyLabel.A(3),
+            EnergyLabel.A(4),
+        ]);
+
     [TestCase(true, "A++")]
     [TestCase(true, "?")]
     [TestCase(false, "")]
@@ -538,7 +555,8 @@ public class Is_Open_API_data_type
            example: "A++",
            type: "string",
            format: "energy-label",
-           pattern: @"[A-H]|A\+{1,4}",
+           pattern: @"A\+{0,4}|[B-G]",
+           @enum: ["G", "F", "E", "D", "C", "B", "A", "A+", "A++", "A+++", "A++++"],
            nullable: true));
 
     [TestCase("G")]
@@ -549,7 +567,6 @@ public class Is_Open_API_data_type
     public void pattern_matches(string input)
         => OpenApiDataType.FromType(typeof(EnergyLabel))!.Matches(input).Should().BeTrue();
 }
-
 
 public class Debugger
 {

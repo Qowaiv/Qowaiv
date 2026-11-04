@@ -1,3 +1,6 @@
+#pragma warning disable S107 // Methods should not have too many parameters
+// To overcome the lack of the init key word in netstandard2.0.
+
 using System.Reflection;
 
 namespace Qowaiv.OpenApi;
@@ -7,8 +10,6 @@ namespace Qowaiv.OpenApi;
 public sealed record OpenApiDataType
 {
     /// <summary>Initializes a new instance of the <see cref="OpenApiDataType" /> class.</summary>
-#pragma warning disable S107 // Methods should not have too many parameters
-    // To overcome the lack of the init key word in netstandard2.0.
     public OpenApiDataType(
         Type dataType,
         string description,
@@ -55,7 +56,7 @@ public sealed record OpenApiDataType
     [StringSyntax(StringSyntaxAttribute.Regex)]
     public string? Pattern { get; }
 
-    /// <summary>Gets the Pattern of the OpenAPI Data Type.</summary>
+    /// <summary>Gets the allowed values of the OpenAPI Data Type.</summary>
     public IReadOnlyCollection<string>? Enum { get; }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -90,6 +91,29 @@ public sealed record OpenApiDataType
         => Pattern is null
         || (str is { Length: > 0 } && Regex.IsMatch(str, '^' + Pattern + '$', RegexOptions.None, RegOptions.Timeout));
 
+    /// <inheritdoc cref="IEquatable{T}" />
+    [Pure]
+    public bool Equals([NotNullWhen(true)]OpenApiDataType? other)
+        => other is not null
+        && DataType == other.DataType
+        && Description == other.Description
+        && Type == other.Type
+        && Equals(Example, other.Example)
+        && Format == other.Format
+        && Pattern == other.Pattern
+        && Enumerable.SequenceEqual(Enum ?? [], other.Enum ?? []);
+
+    /// <inheritdoc />
+    [Pure]
+    public override int GetHashCode() => Hash
+        .Code(DataType)
+        .And(Description)
+        .And(Type)
+        .And(Example)
+        .And(Format)
+        .And(Pattern)
+        .And(Enum ?? []);
+
     /// <summary>
     /// Creates an <see cref="OpenApiDataType" /> based on a type, null if not
     /// decorated with a <see cref="OpenApiDataTypeAttribute" />.
@@ -108,6 +132,40 @@ public sealed record OpenApiDataType
             format: attr.Format,
             nullable: attr.Nullable,
             pattern: attr.Pattern,
-            @enum: attr.Enum)
+            @enum: attr.Enum ?? DefinedValues(type))
         : null;
+
+    // This is a convenience helper for specifying Open API specs. Failing to resolve the
+    // defined values should not crash the generation of those specs, hence no exception is thrown.
+    [Pure]
+    private static IReadOnlyCollection<string>? DefinedValues(Type type)
+#if NETSTANDARD2_0
+        => null;
+#else
+    {
+        if (type.GetInterfaces().Contains(typeof(IEnumerated)))
+        {
+            var values = new List<string>();
+            try
+            {
+                foreach (var value in DefinedValues())
+                    Add(value, values);
+            }
+            catch { return null; }
+
+            if (Unknown.Value(type) is { } unknown)
+                Add(unknown, values);
+
+            return values;
+        }
+        return null;
+
+        void Add(object value, List<string> values) => values.Add(value is IFormattable formattable ? formattable.ToString(null, CultureInfo.InvariantCulture) : value.ToString()!);
+
+        IEnumerable DefinedValues()
+            => (IEnumerable)type
+            .GetProperty(nameof(IEnumerated<>.DefinedValues), BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)!
+            .GetValue(null)!;
+    }
+#endif
 }

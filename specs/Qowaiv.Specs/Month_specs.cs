@@ -2,6 +2,24 @@ namespace Month_specs;
 
 public class With_domain_logic
 {
+    [Test]
+    public void DefinedValues_are_January_till_December()
+        => Month.DefinedValues.Should().BeEquivalentTo(
+        [
+            Month.January,
+            Month.February,
+            Month.March,
+            Month.April,
+            Month.May,
+            Month.June,
+            Month.July,
+            Month.August,
+            Month.September,
+            Month.October,
+            Month.November,
+            Month.December,
+        ]);
+
     [TestCase(true, "February")]
     [TestCase(true, "?")]
     [TestCase(false, "")]
@@ -488,7 +506,7 @@ public class Is_Open_API_data_type
     [Test]
     public void with_info()
         => OpenApiDataType.FromType(typeof(Month))
-        .Should().BeEquivalentTo(new OpenApiDataType(
+        .Should().Be(new OpenApiDataType(
             dataType: typeof(Month),
             description: "Month(-only) notation.",
             type: "string",

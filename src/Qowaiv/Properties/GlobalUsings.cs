@@ -31,3 +31,4 @@ global using System.Threading;
 global using System.Xml;
 global using System.Xml.Schema;
 global using System.Xml.Serialization;
+global using static Qowaiv.Statics;

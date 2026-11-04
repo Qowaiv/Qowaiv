@@ -73,7 +73,7 @@ jobs:
           /o:"qowaiv" \
           /d:sonar.token="$SONAR_TOKEN" \
           /d:sonar.host.url="https://sonarcloud.io" \
-          /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" \
+          /d:sonar.cs.cobertura.reportsPaths="**/coverage.cobertura.xml" \
           /d:sonar.cs.vstest.reportsPaths="**/*.trx"
 
       - name: Build
@@ -81,9 +81,9 @@ jobs:
 
       - name: Test
         run: |
-          dotnet test specs/Qowaiv.Specs --configuration Release --no-build \
+          dotnet test qowaiv.slnx --configuration Release --no-build \
           --logger "trx;LogFileName=test-results.trx" \
-          --collect:"XPlat Code Coverage;Format=opencover"
+          --collect:"XPlat Code Coverage;Format=cobertura"
 
       - name: Stop SonarCloud scanner
         if: ${{ !cancelled() && steps.sonar-begin.outcome == 'success' }}

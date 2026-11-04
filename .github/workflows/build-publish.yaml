@@ -123,6 +123,11 @@ jobs:
         with:
           name: nupkg
 
+      - name: DotNet NuGet Push
+        env:
+          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push "*.nupkg" --source "$NUGET_FEED" --api-key "$NUGET_KEY" --skip-duplicate --no-symbols
+
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -137,8 +142,3 @@ jobs:
             --title "$TAG" \
             --generate-notes \
             $prerelease
-
-      - name: DotNet NuGet Push
-        env:
-          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: dotnet nuget push "*.nupkg" --source "$NUGET_FEED" --api-key "$NUGET_KEY" --skip-duplicate --no-symbols

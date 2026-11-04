@@ -3,7 +3,9 @@ namespace System.Collections.Frozen;
 
 [ExcludeFromCodeCoverage/*(Justification = "Fallback for lacking frozen set, but is just a wrapper arround a hashset.")*/]
 [DebuggerDisplay("Count = {Count}")]
-internal sealed class FrozenSet<T>(IEnumerable<T> collection, IEqualityComparer<T> comparer) : ICollection<T> where T: notnull
+internal sealed class FrozenSet<T>(IEnumerable<T> collection, IEqualityComparer<T> comparer) :
+    ICollection<T>,
+    IReadOnlyCollection<T> where T : notnull
 {
     /// <summary>Gets an empty <see cref="FrozenSet{T}"/>.</summary>
     public static FrozenSet<T> Empty { get; } = new FrozenSet<T>([], EqualityComparer<T>.Default);

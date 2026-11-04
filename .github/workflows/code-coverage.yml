@@ -15,6 +15,7 @@ jobs:
         with:
           global-json-file: global.json
           cache: true
+          cache-dependency-path: '**/packages.lock.json'
       - name: Generate coverage report
         run: |
           dotnet test qowaiv.slnx \

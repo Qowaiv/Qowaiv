@@ -73,4 +73,4 @@ jobs:
             --title "$TAG" \
             --generate-notes \
             $prerelease \
-            *.nupkg *.snupkg
+            ./*.nupkg ./*.snupkg

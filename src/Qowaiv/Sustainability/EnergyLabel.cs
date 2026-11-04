@@ -74,7 +74,7 @@ public readonly partial struct EnergyLabel :
     public static EnergyLabel Unknown => new(int.MinValue);
 
     /// <summary>Represents all allowed labels (G, F, E, D, C, B, A, A+, A++, A+++, A++++).</summary>
-    public static IReadOnlyCollection<EnergyLabel> DefinedValues { get; } = [G, F, E, D, C, B, A(), A(1), A(2), A(3), A(4)];
+    public static IReadOnlyCollection<EnergyLabel> DefinedValues { get; } = frozen(G, F, E, D, C, B, A(), A(1), A(2), A(3), A(4));
 
     /// <summary>Returns a <see cref="string" /> that represents the EU energy label for DEBUG purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

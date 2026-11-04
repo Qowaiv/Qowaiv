@@ -58,8 +58,7 @@ public readonly partial struct Month :
     public static Month December /*..*/ => new(12);
 
     /// <inheritdoc cref="DefinedValues" />
-    public static IReadOnlyList<Month> All { get; } =
-    [
+    public static IReadOnlyCollection<Month> All { get; } = frozen(
         January,
         February,
         March,
@@ -71,8 +70,8 @@ public readonly partial struct Month :
         September,
         October,
         November,
-        December,
-    ];
+        December
+    );
 
     /// <summary>Represents all months (January till December).</summary>
     public static IReadOnlyCollection<Month> DefinedValues => All;

@@ -1,12 +1,12 @@
-#if !NET8_0_OR_GREATER
+#if NETSTANDARD2_0
 namespace System.Collections.Generic;
 
 internal static class SetExtensions
 {
-    extension<TValue>(ISet<TValue> @set) where TValue : notnull
+    extension<TValue>(IEnumerable<TValue> @set) where TValue : notnull
     {
         [Pure]
-        public FrozenSet<TValue> ToFrozenSet(IEqualityComparer<TValue> comparer) => new(@set, comparer);
+        public FrozenSet<TValue> ToFrozenSet(IEqualityComparer<TValue>? comparer = null) => new(@set, comparer ?? EqualityComparer<TValue>.Default);
     }
 }
 #endif

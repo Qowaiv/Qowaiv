@@ -229,3 +229,56 @@ public static class SwaggerGenOptionsSvoExtensions
         };
 }
 ```
+
+## Open API using Microsoft.OpenApi
+When using the OpenAPI support of ASP.NET Core (`Microsoft.AspNetCore.OpenApi`,
+based on `Microsoft.OpenApi` v2), the generated document can be enriched with
+a schema transformer:
+
+``` C#
+builder.Services.AddOpenApi(options => options.AddSvoSchemas());
+
+/// <summary>Extensions on <see cref="OpenApiOptions" />.</summary>
+public static class OpenApiOptionsSvoExtensions
+{
+    /// <summary>Describes Qowaiv SVOs in the OpenAPI document.</summary>
+    public static OpenApiOptions AddSvoSchemas(this OpenApiOptions options)
+        => options.AddSchemaTransformer((schema, context, _) =>
+        {
+            var type = context.JsonTypeInfo.Type;
+            var info = OpenApiDataType.FromType(Nullable.GetUnderlyingType(type) ?? type);
+
+            if (info is not null)
+            {
+                // Keep "null" if the generator added it (OpenAPI 3.1: type: ["string", "null"]).
+                var nullable = schema.Type.GetValueOrDefault() & JsonSchemaType.Null;
+
+                schema.Type = info.Type switch
+                {
+                    "integer" => JsonSchemaType.Integer,
+                    "number" => JsonSchemaType.Number,
+                    _ => JsonSchemaType.String,
+                } | nullable;
+
+                schema.Description = info.Description;
+                schema.Format = info.Format;
+                schema.Pattern = info.Pattern;
+                schema.Example = Example(info);
+                schema.Properties?.Clear();
+
+                if (info.Enum is { } values)
+                {
+                    schema.Enum = [.. values.Select(JsonValue.Create).OfType<JsonNode>()];
+                }
+            }
+            return Task.CompletedTask;
+        });
+
+    private static JsonNode? Example(OpenApiDataType info) => info.Example switch
+    {
+        int integer => JsonValue.Create(integer),
+        double floating => JsonValue.Create(floating),
+        _ => JsonValue.Create(info.Example?.ToString()),
+    };
+}
+```

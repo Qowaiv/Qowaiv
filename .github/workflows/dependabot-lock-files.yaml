@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - master
-      - v11 # While working on the new version
+      - 'release/**'
     paths:
       - Directory.Packages.props
       - "**/*.csproj"

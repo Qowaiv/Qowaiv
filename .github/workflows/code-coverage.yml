@@ -16,15 +16,19 @@ jobs:
           global-json-file: global.json
       - name: Generate coverage report
         run: |
-          dotnet test ./specs/Qowaiv.Specs -f net10.0 \
+          dotnet test qowaiv.slnx \
           --configuration Release \
           --collect:"XPlat Code Coverage;Format=cobertura"
-      - name: Get path to coverage file
-        shell: bash
-        run: echo "COVERAGE_PATH=$(find "$GITHUB_WORKSPACE/specs/Qowaiv.Specs/TestResults" -name coverage.cobertura.xml)" >> $GITHUB_ENV
+      - name: Merge coverage reports
+        run: |
+          dotnet tool install dotnet-reportgenerator-globaltool --version 5.5.12 --tool-path ./.report-generator
+          ./.report-generator/reportgenerator \
+          -reports:"**/TestResults/**/coverage.cobertura.xml" \
+          -targetdir:"coverage" \
+          -reporttypes:Cobertura
       - name: Publish coverage report to coveralls.io
         uses: coverallsapp/github-action@v2.3.8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ env.COVERAGE_PATH }}
+          file: coverage/Cobertura.xml
           format: cobertura

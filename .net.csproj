@@ -6,6 +6,7 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <None Include="*.rsp" />
     <None Include="build/**" />
     <None Include="design/**" />
     <None Include="docs/**" />

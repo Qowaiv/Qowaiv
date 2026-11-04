@@ -38,8 +38,8 @@ public class Open_API_data_type
         .Should().HaveDebuggerDisplay("""{ type: type, desc: descrption, example:  }""");
 
     [Test]
-    public void DebuggerDisplay_shows_maximum() => new OpenApiDataType(typeof(int), "descrption", "type", "example", "format", true, "pattern")
-        .Should().HaveDebuggerDisplay("""{ type: type, desc: descrption, example: example, format: format, pattern: pattern, nullable: true }""");
+    public void DebuggerDisplay_shows_maximum() => new OpenApiDataType(typeof(int), "descrption", "type", "example", "format", "pattern")
+        .Should().HaveDebuggerDisplay("""{ type: type, desc: descrption, example: example, format: format, pattern: pattern, }""");
 
     [Test]
     public void has_custom_debug_display()
@@ -59,7 +59,7 @@ public class Enumerated
 {
     [Test]
     public void Resolves_defined_values()
-         => OpenApiDataType.FromType(typeof(AbcEnum))
+         => OpenApiDataType.FromType(typeof(AbcEnum))!
             .Enum.Should().BeEquivalentTo("A", "B", "C", "?");
 }
 
@@ -81,7 +81,6 @@ public class README_md
                     type = info.Type,
                     format = info.Format,
                     pattern = info.Pattern,
-                    nullable = info.Nullable,
                     @enum = info.Enum?.ToArray(),
                 });
 

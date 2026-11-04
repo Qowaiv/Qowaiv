@@ -558,8 +558,7 @@ public class Is_Open_API_data_type
             example: "BE71096123456769",
             type: "string",
             format: "iban",
-            pattern: "[A-Z]{2}[0-9]{2}[A-Z0-9]{8,32}",
-            nullable: true));
+            pattern: "[A-Z]{2}[0-9]{2}[A-Z0-9]{8,32}"));
 
     [TestCase("NL20INGB0001234567")]
     public void pattern_matches(string input)

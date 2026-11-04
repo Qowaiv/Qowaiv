@@ -23,8 +23,7 @@ namespace Qowaiv.Sustainability;
     format: "energy-label",
     example: "A++",
     pattern: @"A\+{0,4}|[B-G]",
-    @enum: "G,F,E,D,C,B,A,A+,A++,A+++,A++++",
-    nullable: true)]
+    @enum: "G,F,E,D,C,B,A,A+,A++,A+++,A++++")]
 [TypeConverter(typeof(Conversion.Sustainability.EnergyLabelTypeConverter))]
 #if !NETSTANDARD2_0
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Sustainability.EnergyLabelJsonConverter))]

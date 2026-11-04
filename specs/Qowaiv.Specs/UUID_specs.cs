@@ -587,8 +587,7 @@ public class Is_Open_API_data_type
            description: "Universally unique identifier, Base64 encoded.",
            example: "lmZO_haEOTCwGsCcbIZFFg",
            type: "string",
-           format: "uuid-base64",
-           nullable: true));
+           format: "uuid-base64"));
 }
 
 public class Debugger

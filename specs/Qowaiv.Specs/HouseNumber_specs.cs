@@ -432,15 +432,13 @@ public class Supports_JSON_serialization
 public class Is_Open_API_data_type
 {
     [Test]
-    public void with_info()
-       => OpenApiDataType.FromType(typeof(HouseNumber))
+    public void with_info() => OpenApiDataType.FromType(typeof(HouseNumber))
        .Should().Be(new OpenApiDataType(
-           dataType: typeof(HouseNumber),
-           description: "House number notation.",
-           example: "13",
-           type: "string",
-format: "house-number",
-            nullable: true));
+        dataType: typeof(HouseNumber),
+        description: "House number notation.",
+        example: "13",
+        type: "string",
+        format: "house-number"));
 }
 
 public class Supports_XML_serialization

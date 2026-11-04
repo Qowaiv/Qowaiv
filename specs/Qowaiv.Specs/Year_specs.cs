@@ -457,8 +457,7 @@ public class Is_Open_API_data_type
           description: "Year(-only) notation.",
           example: 1983,
           type: "integer",
-          format: "year",
-          nullable: true));
+          format: "year"));
 }
 
 public class Debugger

@@ -449,8 +449,7 @@ public class Is_Open_API_data_type
            example: "7732-18-5",
            type: "string",
            format: "cas-nr",
-           pattern: "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]",
-           nullable: true));
+           pattern: "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]"));
 
     [TestCase("7732-18-5")]
     [TestCase("10028-14-5")]

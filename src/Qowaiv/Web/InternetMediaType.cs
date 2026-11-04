@@ -37,7 +37,11 @@ namespace Qowaiv.Web;
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.AllExcludingCulture, typeof(string))]
-[OpenApiDataType(description: "Media type notation as defined by RFC 6838.", example: "text/html", type: "string", format: "internet-media-type", nullable: true)]
+[OpenApiDataType(
+    description: "Media type notation as defined by RFC 6838.",
+    example: "text/html",
+    type: "string",
+    format: "internet-media-type")]
 [TypeConverter(typeof(InternetMediaTypeTypeConverter))]
 #if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Web.InternetMediaTypeJsonConverter))]

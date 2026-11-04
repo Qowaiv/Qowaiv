@@ -22,6 +22,7 @@ jobs:
         uses: actions/setup-dotnet@v6
         with:
           global-json-file: global.json
+          cache: true
 
       - name: Build
         run: dotnet build qowaiv.slnx --configuration Release
@@ -30,7 +31,7 @@ jobs:
         run: dotnet test qowaiv.slnx --configuration Release --no-build
 
       - name: DotNet Pack
-        run: dotnet pack qowaiv.slnx -v normal --no-build --no-restore -c Release --output packages
+        run: dotnet pack qowaiv.slnx --no-build --no-restore -c Release --output packages
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v7

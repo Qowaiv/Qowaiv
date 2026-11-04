@@ -36,6 +36,7 @@ jobs:
         uses: actions/setup-dotnet@v6
         with:
           global-json-file: global.json
+          cache: true
 
       - name: Cache SonarCloud packages
         uses: actions/cache@v6

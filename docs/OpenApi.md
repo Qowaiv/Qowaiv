@@ -7,6 +7,9 @@ SVOs. To make this as simple as possible, Qowaiv SVOs are decorated with the
 `[OpenApiDataType]` attribute. It specifies the type, format, (regex) pattern,
 example, and enum values, all when applicable.
 
+If no `enum` is specified explicitly on the attribute, `OpenApiDataType.FromType()`
+resolves it from the defined values of the SVO (see [Contracts](Contracts.md)).
+
 ``` json
 {
   "Date": {
@@ -102,7 +105,7 @@ example, and enum values, all when applicable.
   "YearSpan": {
     "description": "Year span",
     "example": 17,
-    "type": "int",
+    "type": "integer",
     "format": "year-span"
   },
   "YesNo": {
@@ -181,7 +184,7 @@ example, and enum values, all when applicable.
     "example": "A++",
     "type": "string",
     "format": "energy-label",
-    "pattern": "A\\+{0,4}|[B-G]"
+    "pattern": "A\\+{0,4}|[B-G]",
     "enum": ["G", "F", "E", "D", "C", "B", "A", "A+", "A++", "A+++", "A++++"]
   },
   "Web.InternetMediaType": {
@@ -212,7 +215,6 @@ public static class SwaggerGenOptionsSvoExtensions
                 Example = info.Example(),
                 Format = info.Format,
                 Pattern = info.Pattern,
-                Nullable = info.Nullable,
             });
         }
         return options;

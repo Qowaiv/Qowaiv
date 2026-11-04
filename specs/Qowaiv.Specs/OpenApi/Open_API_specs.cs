@@ -39,7 +39,7 @@ public class Open_API_data_type
 
     [Test]
     public void DebuggerDisplay_shows_maximum() => new OpenApiDataType(typeof(int), "descrption", "type", "example", "format", "pattern")
-        .Should().HaveDebuggerDisplay("""{ type: type, desc: descrption, example: example, format: format, pattern: pattern, }""");
+        .Should().HaveDebuggerDisplay("""{ type: type, desc: descrption, example: example, format: format, pattern: pattern }""");
 
     [Test]
     public void has_custom_debug_display()

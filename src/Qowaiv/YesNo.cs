@@ -16,10 +16,16 @@ namespace Qowaiv;
 [SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Yes-No notation.", example: "yes", type: "string", format: "yes-no", nullable: true, @enum: "yes,no,?")]
 [TypeConverter(typeof(YesNoTypeConverter))]
-#if NET10_0_OR_GREATER
+#if !NETSTANDARD2_0
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.YesNoJsonConverter))]
 #endif
-public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatable<YesNo>, IComparable, IComparable<YesNo>
+public readonly partial struct YesNo :
+    IXmlSerializable,
+    IFormattable,
+    IEquatable<YesNo>,
+    IComparable,
+    IComparable<YesNo>,
+    IEnumerated<YesNo>
 {
     /// <summary>Represents an unknown (but set) yes-no.</summary>
     public static YesNo No => new(1);
@@ -30,8 +36,11 @@ public readonly partial struct YesNo : IXmlSerializable, IFormattable, IEquatabl
     /// <summary>Represents an unknown (but set) yes-no.</summary>
     public static YesNo Unknown => new(3);
 
-    /// <summary>Contains yes and no.</summary>
+    /// <inheritdoc cref="DefinedValues" />
     public static readonly IReadOnlyCollection<YesNo> YesAndNo = [Yes, No];
+
+    /// <summary>Contains yes and no.</summary>
+    public static IReadOnlyCollection<YesNo> DefinedValues => YesAndNo;
 
     /// <summary>Returns true if the yes-no value represents no, otherwise false.</summary>
     [Pure]

@@ -333,6 +333,34 @@
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv.TestTools, Version=8.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv.TestTools, Version=8.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/net8.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv.TestTools, Version=8.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/net9.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv.TestTools, Version=8.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/netstandard2.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
     <DiagnosticId>CP0007</DiagnosticId>
     <Target>T:Qowaiv.TestTools.ConvertTo`1</Target>
     <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>

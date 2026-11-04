@@ -7,10 +7,16 @@ namespace Qowaiv;
 [SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
 [OpenApiDataType(description: "Month(-only) notation.", example: "Jun", type: "string", format: "month", nullable: true, @enum: "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,?")]
 [TypeConverter(typeof(MonthTypeConverter))]
-#if NET10_0_OR_GREATER
+#if !NETSTANDARD2_0
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.MonthJsonConverter))]
 #endif
-public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
+public readonly partial struct Month :
+    IXmlSerializable,
+    IFormattable,
+    IEquatable<Month>,
+    IComparable,
+    IComparable<Month>,
+    IEnumerated<Month>
 {
     /// <summary>Represents an unknown (but set) month.</summary>
     public static Month Unknown => new(byte.MaxValue);
@@ -51,9 +57,8 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
     /// <summary>Represents December (12).</summary>
     public static Month December /*..*/ => new(12);
 
-    /// <summary>Represents all months (January till December).</summary>
-    public static IReadOnlyList<Month> All { get; } =
-    [
+    /// <inheritdoc cref="DefinedValues" />
+    public static IReadOnlyCollection<Month> All { get; } = frozen(
         January,
         February,
         March,
@@ -65,8 +70,11 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
         September,
         October,
         November,
-        December,
-    ];
+        December
+    );
+
+    /// <summary>Represents all months (January till December).</summary>
+    public static IReadOnlyCollection<Month> DefinedValues => All;
 
     /// <summary>Gets the full name of the month.</summary>
     public string FullName => GetFullName(formatProvider: null);

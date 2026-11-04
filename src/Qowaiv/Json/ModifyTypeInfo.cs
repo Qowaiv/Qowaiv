@@ -8,7 +8,7 @@ namespace Qowaiv.Json;
 public static class ModifyTypeInfo
 {
     /// <summary>
-    /// Updates all properties that implement <see cref="IEmpty{TSelf}"/> not
+    /// Updates all properties that implement <see cref="IEmpty" /> not
     /// to serialize when <see cref="IEmpty.HasValue"/> is false.
     /// </summary>
     public static void IgnoreEmptySvos(JsonTypeInfo info)
@@ -30,9 +30,7 @@ public static class ModifyTypeInfo
     [Pure]
     private static bool IsApplicable(JsonPropertyInfo prop)
         => prop.PropertyType is { IsValueType: true, IsGenericType: false }
-        && prop.PropertyType
-            .GetInterfaces()
-            .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEmpty<>));
+        && prop.PropertyType.GetInterfaces().Contains(typeof(IEmpty));
 }
 
 #endif

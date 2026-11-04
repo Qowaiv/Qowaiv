@@ -1,0 +1,75 @@
+name: Release
+on:
+  push:
+    tags:
+      - 'v*'
+env:
+  NUGET_FEED: https://api.nuget.org/v3/index.json
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Build
+        run: dotnet build qowaiv.slnx --configuration Release
+
+      - name: Test
+        run: dotnet test qowaiv.slnx --configuration Release --no-build
+
+      - name: DotNet Pack
+        run: dotnet pack qowaiv.slnx -v normal --no-build --no-restore -c Release --output packages
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: nupkg
+          path: |
+            packages/*.nupkg
+            packages/*.snupkg
+
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write # Needed to create the GitHub release
+    needs: build
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: nupkg
+
+      - name: DotNet NuGet Push
+        env:
+          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push "*.nupkg" --source "$NUGET_FEED" --api-key "$NUGET_KEY" --skip-duplicate
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          prerelease=""
+          if [[ "$TAG" == *-* ]]; then
+            prerelease="--prerelease"
+          fi
+          gh release create "$TAG" \
+            --title "$TAG" \
+            --generate-notes \
+            $prerelease \
+            *.nupkg *.snupkg

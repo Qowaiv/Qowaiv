@@ -3,15 +3,11 @@ on:
   push:
     branches:
       - master
-    tags:
-      - 'v*'
   pull_request:
     branches:
       - master
       - v11 # While working on the new version
   workflow_dispatch:
-env:
-  NUGET_FEED: https://api.nuget.org/v3/index.json
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -101,55 +97,3 @@ jobs:
           name: Unit test results
           path: "**/*.trx"
           reporter: dotnet-trx
-
-      - name: DotNet Pack
-        if: startsWith(github.ref, 'refs/tags/v')
-        run: |
-          dotnet pack qowaiv.slnx -v normal --no-build --no-restore -c Release --output packages
-
-      - name: Upload Artifact
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: actions/upload-artifact@v7
-        with:
-          name: nupkg
-          path: |
-            packages/*.nupkg
-            packages/*.snupkg
-
-  publish:
-    name: Publish
-    if: startsWith(github.ref, 'refs/tags/v')
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    permissions:
-      contents: write # Needed to create the GitHub release
-    needs: build
-    concurrency:
-      group: publish-${{ github.ref }}
-      cancel-in-progress: false
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v8
-        with:
-          name: nupkg
-
-      - name: DotNet NuGet Push
-        env:
-          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: dotnet nuget push "*.nupkg" --source "$NUGET_FEED" --api-key "$NUGET_KEY" --skip-duplicate
-
-      - name: Create GitHub Release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          TAG: ${{ github.ref_name }}
-        run: |
-          prerelease=""
-          if [[ "$TAG" == *-* ]]; then
-            prerelease="--prerelease"
-          fi
-          gh release create "$TAG" \
-            --title "$TAG" \
-            --generate-notes \
-            $prerelease \
-            *.nupkg *.snupkg

@@ -105,7 +105,9 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: nupkg
-          path: packages/*.nupkg
+          path: |
+            packages/*.nupkg
+            packages/*.snupkg
 
   publish:
     name: Publish
@@ -126,7 +128,7 @@ jobs:
       - name: DotNet NuGet Push
         env:
           NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: dotnet nuget push "*.nupkg" --source "$NUGET_FEED" --api-key "$NUGET_KEY" --skip-duplicate --no-symbols
+        run: dotnet nuget push "*.nupkg" --source "$NUGET_FEED" --api-key "$NUGET_KEY" --skip-duplicate
 
       - name: Create GitHub Release
         env:
@@ -141,4 +143,5 @@ jobs:
           gh release create "$TAG" \
             --title "$TAG" \
             --generate-notes \
-            $prerelease
+            $prerelease \
+            *.nupkg *.snupkg

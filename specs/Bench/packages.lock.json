@@ -40,9 +40,9 @@
       },
       "IbanNet": {
         "type": "Direct",
-        "requested": "[6.2.0, )",
-        "resolved": "6.2.0",
-        "contentHash": "EYGwdAtVNm+C0+FxLfRsW2I2SLGRa1AuK95ED5u7t7B8TYYpWe0+8IWwmzeGD3MQ83PvIwytg6yXpYcCA2fLJA=="
+        "requested": "[6.2.1, )",
+        "resolved": "6.2.1",
+        "contentHash": "Kpm9AthDe5hod8iMHvnx7LU3shCuzwfrQ0YlENN0BGNxMGQxDFFFvB4USm0OxNMP5CdOoE+VPX/y1KkGA6rZIw=="
       },
       "MathNet.Numerics": {
         "type": "Direct",

@@ -1,3 +1,5 @@
+using AwesomeAssertions.Extensions;
+
 namespace UUID_specs;
 
 public class With_domain_logic
@@ -242,8 +244,7 @@ public class Can_be_created_sequential
     [Test]
     public void from_1_Jan_1970_on()
     {
-        using (Clock.SetTimeForCurrentContext(()
-        => Svo.UnixEpoch.AddTicks(-1)))
+        using (Clock.SetTimeForCurrentContext(() => Dates.UnixEpoch.AddTicks(-1)))
         {
             Func<Uuid> next = Uuid.NewSequential;
             next.Should().Throw<InvalidOperationException>();
@@ -264,8 +265,7 @@ public class Can_be_created_sequential
     [Test]
     public void on_min_Date_first_6_bytes_are_0_for_default()
     {
-        using (Clock.SetTimeForCurrentContext(()
-        => Svo.UnixEpoch))
+        using (Clock.SetTimeForCurrentContext(() => Dates.UnixEpoch))
         {
             Uuid.NewSequential().Should().HavePattern(
                 0, 0, 0, 0,
@@ -278,8 +278,7 @@ public class Can_be_created_sequential
     [Test]
     public void on_min_Date_last_6_bytes_are_0_for_SQL_Server()
     {
-        using (Clock.SetTimeForCurrentContext(()
-        => Svo.UnixEpoch))
+        using (Clock.SetTimeForCurrentContext(() => Dates.UnixEpoch))
         {
             Uuid.NewSequential(UuidComparer.SqlServer).Should().HavePattern(
                 null, null, null, null,
@@ -292,8 +291,7 @@ public class Can_be_created_sequential
     [Test]
     public void on_max_Date_first_6_bytes_are_255_for_default()
     {
-        using (Clock.SetTimeForCurrentContext(()
-        => MaxDate))
+        using (Clock.SetTimeForCurrentContext(() => MaxDate))
         {
             Uuid.NewSequential().Should().HavePattern(
                 0xFF, 0xFF, 0xFF, 0xFF,
@@ -306,8 +304,7 @@ public class Can_be_created_sequential
     [Test]
     public void on_max_Date_last_6_bytes_are_255_for_SQL_Server()
     {
-        using (Clock.SetTimeForCurrentContext(()
-        => MaxDate))
+        using (Clock.SetTimeForCurrentContext(() => MaxDate))
         {
             Uuid.NewSequential(UuidComparer.SqlServer).Should().HavePattern(
                 null, null, null, null,
@@ -339,8 +336,7 @@ public class Can_be_created_sequential
 
         foreach (var date in GetTimes().Take(MultipleCount))
         {
-            using (Clock.SetTimeForCurrentContext(()
-        => date))
+            using (Clock.SetTimeForCurrentContext(() => date))
             {
                 ids.Add(Uuid.NewSequential(comparer));
             }
@@ -353,7 +349,7 @@ public class Can_be_created_sequential
     {
         var i = 17;
 
-        var date = Svo.UnixEpoch;
+        var date = Dates.UnixEpoch;
 
         while (date < DateTime.MaxValue)
         {

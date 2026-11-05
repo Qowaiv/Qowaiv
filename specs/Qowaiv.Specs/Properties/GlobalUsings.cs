@@ -15,7 +15,6 @@ global using Qowaiv.Mathematics;
 global using Qowaiv.OpenApi;
 global using Qowaiv.Security;
 global using Qowaiv.Security.Cryptography;
-global using Qowaiv.Sql;
 global using Qowaiv.Statistics;
 global using Qowaiv.TestTools;
 global using Qowaiv.TestTools.Globalization;

@@ -487,20 +487,6 @@ The default format (so if you do not specify anything) is:
 var basic = 3.DividedBy(4).ToString("0/0"); // 3/4
 ```
 
-## Qowaiv SQL types
-
-### Timestamp
-Represents a (MS SQL) timestamp, which is a data type that exposes automatically generated
-binary numbers, guaranteed to be unique within a database. A timestamp is used
-typically as a mechanism for version-stamping table rows. The storage size is
-8 bytes. See: https://technet.microsoft.com/en-us/library/aa260631%28v=sql.80%29.aspx
-
-## Qowaiv Data
-
-### SVO Parameter factory class
-To create a (SQL) parameter with an SVO as its value, use the `SvoParameter` factory
-class. It will return a SQL parameter with a converted database-proof value.
-
 ## Qowaiv identifiers
 
 ### Strongly-typed identifiers

@@ -11,7 +11,6 @@
 
   <ItemGroup Label="Projects under test">
     <ProjectReference Include="../Qowaiv/Qowaiv.csproj" />
-    <ProjectReference Include="../Qowaiv.Data.SqlClient/Qowaiv.Data.SqlClient.csproj" />
   </ItemGroup>
 
   <ItemGroup Label="Internals under test">

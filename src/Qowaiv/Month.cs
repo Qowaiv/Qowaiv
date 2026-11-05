@@ -75,8 +75,7 @@ public readonly partial struct Month :
         September,
         October,
         November,
-        December
-    );
+        December);
 
     /// <summary>Represents all months (January till December).</summary>
     public static IReadOnlyCollection<Month> DefinedValues => All;

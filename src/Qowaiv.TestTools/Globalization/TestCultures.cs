@@ -125,6 +125,7 @@ public static class TestCultures
         return custom;
     }
 
+    [Pure]
     private static CultureInfo New(string name, Action<CultureInfo> update)
     {
         var culture = new CultureInfo(name);

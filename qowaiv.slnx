@@ -10,7 +10,6 @@
   </Project>
   <Project Path="specs/Qowaiv.Specs.Generated/Qowaiv.Specs.Generated.csproj" />
   <Project Path="specs/Qowaiv.Specs/Qowaiv.Specs.csproj" />
-  <Project Path="specs/Qowaiv.Wikipedia/Qowaiv.Wikipedia.csproj" />
   <Project Path="specs/WikiScraper/WikiScraper.csproj" />
   <Project Path="src/Qowaiv.Data.SqlClient/Qowaiv.Data.SqlClient.csproj" />
   <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />

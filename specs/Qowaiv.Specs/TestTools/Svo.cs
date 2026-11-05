@@ -93,7 +93,6 @@ public static class Svo
     public static Sex Sex => Sex.Female;
     public static StreamSize StreamSize => 123456789.Bytes();
     public static TimeZoneInfo TimeZone => TestTimeZones.EastAustraliaStandardTime;
-    public static Timestamp Timestamp => 1234567890L;
     public static Uuid Uuid => Uuid.Parse("Qowaiv_SVOLibrary_GUIA");
 
     /// <summary>2017-W23-7</summary>

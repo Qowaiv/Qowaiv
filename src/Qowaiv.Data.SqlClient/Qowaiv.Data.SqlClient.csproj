@@ -14,7 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" />
+    <PackageReference Include="Microsoft.Data.SqlClient" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +31,7 @@
 v11.0.0
 - Add support for .NET 11.0.
 - Drop support for .NET 9.0 and 8.0. (BREAKING)
+- Depend on Microsoft.Data.SqlClient. (BREAKING)
 -
 ]]>
     </ToBeReleased>

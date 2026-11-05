@@ -23,5 +23,6 @@
   <Project Path="specs/Qowaiv.Specs/Qowaiv.Specs.csproj" />
   <Project Path="specs/Qowaiv.Wikipedia/Qowaiv.Wikipedia.csproj" />
   <Project Path="specs/WikiScraper/WikiScraper.csproj" />
+  <Project Path="src/Specs.Data.SqlClient/Specs.Data.SqlClient.csproj" />
   <Project Path="src/Specs/Specs.csproj" />
 </Solution>

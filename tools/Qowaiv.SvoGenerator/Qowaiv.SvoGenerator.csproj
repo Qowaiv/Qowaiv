@@ -2,10 +2,13 @@
 
   <PropertyGroup>
     <RunNetfx>false</RunNetfx>
-    <TargetFrameworks>net11.0</TargetFrameworks>
   </PropertyGroup>
 
   <Import Project="../../props/specs.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net11.0</TargetFrameworks>
+  </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />

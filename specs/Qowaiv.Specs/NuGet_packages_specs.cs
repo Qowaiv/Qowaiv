@@ -12,7 +12,6 @@ public class All_NuGet_Packages
         get
         {
             yield return typeof(SingleValueObjectAttribute).Assembly;
-            yield return typeof(Qowaiv.Data.SvoParameter).Assembly;
             yield return typeof(JsonTester).Assembly;
         }
     }

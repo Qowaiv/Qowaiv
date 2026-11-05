@@ -22,8 +22,7 @@ public class Will_seal
     [Test]
     public void _0_types()
     {
-        var decorated = typeof(Date).Assembly.GetTypes().Concat(
-        typeof(Qowaiv.Data.SvoParameter).Assembly.GetTypes())
+        var decorated = typeof(Date).Assembly.GetTypes()
         .Where(tp => tp.GetCustomAttributes<WillBeSealedAttribute>().Any())
         .OrderBy(tp => tp.FullName);
 

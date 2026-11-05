@@ -30,12 +30,23 @@ jobs:
           cache: true
           cache-dependency-path: '**/packages.lock.json'
 
+      # Not every project supports net48, so
+      # `dotnet test qowaiv.slnx --framework net48` fails. Select the projects
+      # that target it instead.
       - name: Test
-        run: >
-          dotnet test qowaiv.slnx
-          --configuration Release
-          --framework net48
-          --logger "trx;LogFilePrefix=test-results"
+        shell: pwsh
+        run: |
+          $projects = Get-ChildItem -Recurse -Filter *.csproj -Path specs, src, tools |
+            Where-Object { (dotnet msbuild $_.FullName -getProperty:TargetFrameworks) -split ';' -contains 'net48' }
+
+          if (-not $projects) { throw 'No projects found that target net48.' }
+
+          $failed = $false
+          foreach ($project in $projects) {
+            dotnet test $project.FullName --configuration Release --framework net48 --logger "trx;LogFilePrefix=test-results"
+            if ($LASTEXITCODE -ne 0) { $failed = $true }
+          }
+          if ($failed) { exit 1 }
 
       - name: Test Report
         # Fork and Dependabot PRs have a read-only token, which cannot create check runs.

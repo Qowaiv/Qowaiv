@@ -45,7 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="$(MSBuildThisFileFullPath)" />
+    <AdditionalFiles Include="$(MSBuildThisFileFullPath)" Visible="false" />
   </ItemGroup>
   
 </Project>

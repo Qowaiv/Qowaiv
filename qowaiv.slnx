@@ -15,7 +15,8 @@
   <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
   <Project Path="src/Qowaiv/Qowaiv.csproj" />
   <Project Path="src/Specs.Data.SqlClient/Specs.Data.SqlClient.csproj" />
-  <Project Path="src/Specs.Diagnostics.Contracts/Specs.Diagnostics.Contracts.csproj" Id="2341b826-fdbf-4951-9d02-3095ca306d99" />
+  <Project Path="src/Specs.Diagnostics.Contracts/Specs.Diagnostics.Contracts.csproj" />
+  <Project Path="src/Specs.TestTools/Specs.TestTools.csproj" />
   <Project Path="src/Specs/Specs.csproj" />
   <Project Path="tools/Qowaiv.SvoGenerator/Qowaiv.SvoGenerator.csproj" />
 </Solution>

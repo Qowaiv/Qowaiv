@@ -384,8 +384,7 @@ public class Is_Open_API_data_type
             description: "Media type notation as defined by RFC 6838.",
             example: "text/html",
             type: "string",
-            format: "internet-media-type",
-            nullable: true));
+            format: "internet-media-type"));
 }
 
 public class Supports_XML_serialization

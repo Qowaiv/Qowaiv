@@ -429,8 +429,7 @@ public class Is_Open_API_data_type
            type: "string",
            example: "female",
            format: "sex",
-           @enum: ["NotKnown", "Male", "Female", "NotApplicable"],
-           nullable: true));
+           @enum: ["NotKnown", "Male", "Female", "NotApplicable"]));
 }
 
 public class Debugger

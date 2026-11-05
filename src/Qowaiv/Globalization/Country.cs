@@ -10,7 +10,11 @@ namespace Qowaiv.Globalization;
 /// <summary>Represents a country.</summary>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
-[OpenApiDataType(description: "Country notation as defined by ISO 3166-1 alpha-2.", example: "NL", type: "string", format: "country", nullable: true)]
+[OpenApiDataType(
+    description: "Country notation as defined by ISO 3166-1 alpha-2.",
+    example: "NL",
+    type: "string",
+    format: "country")]
 [TypeConverter(typeof(CountryTypeConverter))]
 #if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Globalization.CountryJsonConverter))]

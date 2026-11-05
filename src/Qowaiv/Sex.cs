@@ -23,7 +23,12 @@ namespace Qowaiv;
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
-[OpenApiDataType(description: "Sex as specified by ISO/IEC 5218.", example: "female", type: "string", format: "sex", nullable: true, @enum: "NotKnown,Male,Female,NotApplicable")]
+[OpenApiDataType(
+    description: "Sex as specified by ISO/IEC 5218.",
+    example: "female",
+    type: "string",
+    format: "sex",
+    @enum: "NotKnown,Male,Female,NotApplicable")]
 [TypeConverter(typeof(SexTypeConverter))]
 #if !NETSTANDARD2_0
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.SexJsonConverter))]

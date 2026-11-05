@@ -556,8 +556,7 @@ public class Is_Open_API_data_type
            type: "string",
            format: "energy-label",
            pattern: @"A\+{0,4}|[B-G]",
-           @enum: ["G", "F", "E", "D", "C", "B", "A", "A+", "A++", "A+++", "A++++"],
-           nullable: true));
+           @enum: ["G", "F", "E", "D", "C", "B", "A", "A+", "A++", "A+++", "A++++"]));
 
     [TestCase("G")]
     [TestCase("B")]

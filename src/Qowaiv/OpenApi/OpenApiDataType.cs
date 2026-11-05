@@ -1,6 +1,3 @@
-#pragma warning disable S107 // Methods should not have too many parameters
-// To overcome the lack of the init key word in netstandard2.0.
-
 using System.Reflection;
 
 namespace Qowaiv.OpenApi;
@@ -16,17 +13,14 @@ public sealed record OpenApiDataType
         string type,
         object? example,
         string? format = null,
-        bool nullable = false,
         [StringSyntax(StringSyntaxAttribute.Regex)] string? pattern = null,
         IReadOnlyCollection<string>? @enum = null)
-#pragma warning restore S107 // Methods should not have too many parameters
     {
         DataType = Guard.NotNull(dataType);
         Description = Guard.NotNullOrEmpty(description);
         Type = Guard.NotNullOrEmpty(type);
         Example = example;
         Format = format;
-        Nullable = nullable;
         Pattern = pattern;
         Enum = @enum;
     }
@@ -49,9 +43,6 @@ public sealed record OpenApiDataType
     /// <summary>Gets the format of the OpenAPI Data Type.</summary>
     public string? Format { get; }
 
-    /// <summary>Gets if the OpenAPI Data Type is nullable or not.</summary>
-    public bool Nullable { get; }
-
     /// <summary>Gets the Pattern of the OpenAPI Data Type.</summary>
     [StringSyntax(StringSyntaxAttribute.Regex)]
     public string? Pattern { get; }
@@ -67,18 +58,12 @@ public sealed record OpenApiDataType
             var sb = new StringBuilder();
             sb.Append($@"{{ type: {Type}, desc: {Description}, example: {Example}");
 
-            if (!string.IsNullOrEmpty(Format))
-            {
+            if (Format is { Length: > 0 })
                 sb.Append($@", format: {Format}");
-            }
-            if (!string.IsNullOrEmpty(Pattern))
-            {
+
+            if (Pattern is { Length: > 0 })
                 sb.Append($@", pattern: {Pattern}");
-            }
-            if (Nullable)
-            {
-                sb.Append($", nullable: true");
-            }
+
             sb.Append(" }");
 
             return sb.ToString();
@@ -130,7 +115,6 @@ public sealed record OpenApiDataType
             type: attr.Type,
             example: attr.Example,
             format: attr.Format,
-            nullable: attr.Nullable,
             pattern: attr.Pattern,
             @enum: attr.Enum ?? DefinedValues(type))
         : null;

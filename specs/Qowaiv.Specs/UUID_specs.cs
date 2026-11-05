@@ -239,7 +239,7 @@ public class Can_be_created_sequential
     public void from_1_Jan_1970_on()
     {
         using (Clock.SetTimeForCurrentContext(()
-        => DateTime.UnixEpoch.AddTicks(-1)))
+        => Svo.UnixEpoch.AddTicks(-1)))
         {
             Func<Uuid> next = Uuid.NewSequential;
             next.Should().Throw<InvalidOperationException>();
@@ -261,7 +261,7 @@ public class Can_be_created_sequential
     public void on_min_Date_first_6_bytes_are_0_for_default()
     {
         using (Clock.SetTimeForCurrentContext(()
-        => DateTime.UnixEpoch))
+        => Svo.UnixEpoch))
         {
             Uuid.NewSequential().Should().HavePattern(
                 0, 0, 0, 0,
@@ -275,7 +275,7 @@ public class Can_be_created_sequential
     public void on_min_Date_last_6_bytes_are_0_for_SQL_Server()
     {
         using (Clock.SetTimeForCurrentContext(()
-        => DateTime.UnixEpoch))
+        => Svo.UnixEpoch))
         {
             Uuid.NewSequential(UuidComparer.SqlServer).Should().HavePattern(
                 null, null, null, null,
@@ -349,7 +349,7 @@ public class Can_be_created_sequential
     {
         var i = 17;
 
-        var date = DateTime.UnixEpoch;
+        var date = Svo.UnixEpoch;
 
         while (date < DateTime.MaxValue)
         {

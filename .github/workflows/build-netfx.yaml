@@ -1,0 +1,49 @@
+name: Build .NET Framework
+on:
+  push:
+    branches:
+      - master
+      - 'release/**'
+  pull_request:
+    branches:
+      - master
+      - 'release/**'
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+  test:
+    name: Test net48
+    runs-on: windows-2025
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      checks: write # Needed by dorny/test-reporter to publish the check run
+    env:
+      TestNetFramework: true # Adds net48 to the target frameworks of the specs, see props/netframework.props
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
+        with:
+          global-json-file: global.json
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
+
+      - name: Test
+        run: >
+          dotnet test qowaiv-netfx.slnx
+          --configuration Release
+          --framework net48
+          --logger "trx;LogFilePrefix=test-results"
+
+      - name: Test Report
+        # Fork and Dependabot PRs have a read-only token, which cannot create check runs.
+        if: ${{ !cancelled() && github.actor != 'dependabot[bot]' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
+        uses: dorny/test-reporter@d1b5dff021aa968b288b02285a8bf47471c5928a # v3.2.0
+        with:
+          name: .NET Framework test results
+          path: "**/*.trx"
+          reporter: dotnet-trx

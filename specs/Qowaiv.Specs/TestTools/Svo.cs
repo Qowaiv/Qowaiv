@@ -25,6 +25,9 @@ public static class Svo
     /// <summary>EUR</summary>
     public static Currency Currency => Currency.EUR;
 
+    /// <summary>1970-01-01 (UTC), as <c>DateTime.UnixEpoch</c> is not available for .NET Framework.</summary>
+    public static DateTime UnixEpoch => new(1970, 01, 01, 00, 00, 00, DateTimeKind.Utc);
+
     /// <summary>2017-06-11</summary>
     public static Date Date => new(2017, 06, 11);
 

@@ -1,0 +1,5 @@
+﻿<Solution>
+  <Project Path="specs/Qowaiv.Specs/Qowaiv.Specs.csproj" />
+  <Project Path="src/Specs.Data.SqlClient/Specs.Data.SqlClient.csproj" />
+  <Project Path="src/Specs/Specs.csproj" />
+</Solution>

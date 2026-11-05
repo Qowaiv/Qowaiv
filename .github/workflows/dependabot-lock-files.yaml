@@ -1,11 +1,13 @@
 name: Dependabot lock files
 
 # Repairs packages.lock.json after a Dependabot update; Dependabot leaves it
-# broken for projects with more than two target frameworks.
+# broken for projects with more than one target framework: it keeps the
+# section of only one of them.
 on:
   pull_request:
     branches:
       - master
+      - 'release/**'
     paths:
       - Directory.Packages.props
       - "**/*.csproj"
@@ -19,7 +21,7 @@ jobs:
   lock-files:
     name: Regenerate lock files
     if: github.event.pull_request.user.login == 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     permissions:
       contents: write
     steps:
@@ -34,18 +36,16 @@ jobs:
             && echo "exists=true" >> "$GITHUB_OUTPUT" \
             || echo "Branch is gone; nothing to do."
 
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         if: steps.check.outputs.exists
         with:
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Setup .NET core versions
+      - name: Setup .NET SDK
         if: steps.check.outputs.exists
-        uses: actions/setup-dotnet@v6
+        uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
         with:
-          dotnet-version: |
-            10.x
-            11.x
+          global-json-file: global.json
 
       - name: Regenerate lock files
         if: steps.check.outputs.exists

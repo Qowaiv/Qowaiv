@@ -34,7 +34,7 @@ jobs:
 
       - name: Test
         run: >
-          dotnet test qowaiv-netfx.slnx
+          dotnet test qowaiv.slnx
           --configuration Release
           --framework net48
           --logger "trx;LogFilePrefix=test-results"

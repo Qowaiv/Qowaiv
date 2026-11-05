@@ -1,5 +1,4 @@
 using System.Reflection;
-using System.Text.RegularExpressions;
 
 namespace Qowaiv.TestTools.Globalization;
 

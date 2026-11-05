@@ -11,5 +11,5 @@ global using System;
 global using System.Collections.Generic;
 global using System.Globalization;
 global using System.Xml.Serialization;
-global using Svo = Qowaiv.TestTools.Svo;
+global using Svo = Specs.Data.SqlClient.TestTools.Svo;
 

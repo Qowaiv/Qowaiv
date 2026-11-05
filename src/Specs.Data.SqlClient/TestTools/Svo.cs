@@ -1,4 +1,4 @@
-namespace Qowaiv.TestTools;
+namespace Specs.Data.SqlClient.TestTools;
 
 public static class Svo
 {

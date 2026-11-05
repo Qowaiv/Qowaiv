@@ -20,8 +20,6 @@ jobs:
     permissions:
       contents: read
       checks: write # Needed by dorny/test-reporter to publish the check run
-    env:
-      TestNetFramework: true # Adds net48 to the target frameworks of the specs, see props/netframework.props
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 

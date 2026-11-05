@@ -18,11 +18,11 @@
   <Project Path="specs/Bench/Bench.csproj">
     <Build Solution="Debug|*" Project="false" />
   </Project>
-  <Project Path="specs/Qowaiv.Diagnostics.Contracts.Specs/Qowaiv.Diagnostics.Contracts.Specs.csproj" />
   <Project Path="specs/Qowaiv.Specs.Generated/Qowaiv.Specs.Generated.csproj" />
   <Project Path="specs/Qowaiv.Specs/Qowaiv.Specs.csproj" />
   <Project Path="specs/Qowaiv.Wikipedia/Qowaiv.Wikipedia.csproj" />
   <Project Path="specs/WikiScraper/WikiScraper.csproj" />
   <Project Path="src/Specs.Data.SqlClient/Specs.Data.SqlClient.csproj" />
+  <Project Path="src/Specs.Diagnostics.Contracts/Specs.Diagnostics.Contracts.csproj" Id="2341b826-fdbf-4951-9d02-3095ca306d99" />
   <Project Path="src/Specs/Specs.csproj" />
 </Solution>

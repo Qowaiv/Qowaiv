@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/specs.props" />
+
+  <PropertyGroup>
+    <LangVersion>9</LangVersion>
+    <RootNamespace>Specs</RootNamespace>
+    <NoWarn>Proj0220</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference
+      Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj"
+      OutputItemType="Analyzer"
+      ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+</Project>

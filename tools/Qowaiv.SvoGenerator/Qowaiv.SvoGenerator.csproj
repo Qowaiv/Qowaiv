@@ -1,5 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <RunNetfx>false</RunNetfx>
+  </PropertyGroup>
+
   <Import Project="../../props/specs.props" />
 
   <ItemGroup>

@@ -20,8 +20,7 @@
     <RestoreLockedMode>false</RestoreLockedMode>
   </PropertyGroup>
 
-  <!-- Code generation specs rely on APIs that are not available on .NET Framework. -->
-  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+  <ItemGroup Label="Not available for netfx" Condition="'$(TargetFramework)' == 'net48'">
     <Compile Remove="**/*_generation.cs" />
   </ItemGroup>
 

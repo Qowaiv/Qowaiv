@@ -115,7 +115,11 @@ public class Is_equal_by_value
         => (Svo.Year != 2017.CE()).Should().BeTrue();
 
     [TestCase("", 0)]
+#if NET48
+    [TestCase("1979", 538423912)]
+#else
     [TestCase("1979", 665629288)]
+#endif
     public void hash_code_is_value_based(Year svo, int hash)
     {
         using (Hash.WithoutRandomizer())

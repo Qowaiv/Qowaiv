@@ -75,6 +75,7 @@ public class Is_equal_by_value
         }
     }
 
+#if NET10_0_OR_GREATER
     [Test]
     public void equal_to_to_equivelant_date_only()
         => Svo.Date.Equals(Svo.DateOnly).Should().BeTrue();
@@ -82,6 +83,7 @@ public class Is_equal_by_value
     [Test]
     public void not_equal_to_to_different_date_only()
         => Svo.Date.Equals(Svo.DateOnly.AddDays(1)).Should().BeFalse();
+#endif
 }
 
 public class Can_be_parsed

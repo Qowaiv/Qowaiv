@@ -1,4 +1,4 @@
-using Qowaiv.Text;
+#if !NET48
 
 namespace Text.Chars_generation;
 
@@ -75,3 +75,4 @@ public class Generates
             || c == '-';
     }
 }
+#endif

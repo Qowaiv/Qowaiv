@@ -1,28 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="../../props/nopackage.props" />
-
   <PropertyGroup>
-    <TargetFramework>net11.0</TargetFramework>
-    <IsTestProject>true</IsTestProject>
-    <Nullable>enable</Nullable>
+    <RunNetfx>false</RunNetfx>
   </PropertyGroup>
 
-  <ItemGroup Label="Test Tools">
-    <PackageReference Include="AwesomeAssertions" />
-    <PackageReference Include="NUnit" />
-  </ItemGroup>
+  <Import Project="../../props/specs.props" />
 
-  <ItemGroup Label="Build Tools">
-    <PackageReference Include="coverlet.collector" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" PrivateAssets="all" />
-    <PackageReference Include="NUnit3TestAdapter" PrivateAssets="all" />
-  </ItemGroup>
-
-  <ItemGroup Label="Analyzers">
-    <PackageReference Include="AwesomeAssertions.Analyzers" PrivateAssets="all" />
-    <PackageReference Include="NUnit.Analyzers" PrivateAssets="all" />
-  </ItemGroup>
+  <PropertyGroup>
+    <TargetFrameworks>net11.0</TargetFrameworks>
+  </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />

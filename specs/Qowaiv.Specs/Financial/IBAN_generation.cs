@@ -1,3 +1,4 @@
+#if !NET48
 namespace Financial.IBAN_generation;
 
 internal class Markdown_file
@@ -330,3 +331,4 @@ internal sealed record IbanInfo(Country Country, int Length, string Bban, int? C
         }
     }
 }
+#endif

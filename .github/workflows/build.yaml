@@ -81,7 +81,7 @@ jobs:
       - name: Test
         run: |
           dotnet test qowaiv.slnx --configuration Release --no-build \
-          --logger "trx;LogFileName=test-results.trx" \
+          --logger "trx;LogFilePrefix=test-results" \
           --collect:"XPlat Code Coverage;Format=cobertura"
 
       - name: Stop SonarCloud scanner

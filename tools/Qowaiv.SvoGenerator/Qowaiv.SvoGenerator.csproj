@@ -1,7 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <RunNetfx>false</RunNetfx>
+    <TargetFrameworks>net11.0</TargetFrameworks>
   </PropertyGroup>
 
   <Import Project="../../props/specs.props" />

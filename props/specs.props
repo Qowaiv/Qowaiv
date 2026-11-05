@@ -20,10 +20,6 @@
     <RestoreLockedMode>false</RestoreLockedMode>
   </PropertyGroup>
 
-  <ItemGroup Label="Not available for netfx" Condition="'$(TargetFramework)' == 'net48'">
-    <Compile Remove="**/*_generation.cs" />
-  </ItemGroup>
-
   <ItemGroup Label="Test Tools">
     <PackageReference Include="AwesomeAssertions" />
     <PackageReference Include="NUnit" />

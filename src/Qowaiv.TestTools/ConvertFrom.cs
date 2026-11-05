@@ -29,7 +29,7 @@ public sealed class ConvertFrom<TFrom>
             null => (To?)converter.ConvertFrom(Nil.Object!),
             var s when !converter.CanConvertFrom(s.GetType()) => throw new NotSupportedException($"Converter {converter} can not convert from {Subject}."),
             string s => (To?)converter.ConvertFromString(s),
-            var s => (To?)converter.ConvertFrom(s),
+            _ => (To?)converter.ConvertFrom(Subject),
         };
     }
 

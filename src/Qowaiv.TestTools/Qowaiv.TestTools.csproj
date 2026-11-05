@@ -29,6 +29,7 @@ v11.0.0
 - Drop binary serialization support. (BREAKING)
 - Hide Guard methods from stacktrace.
 - Introduction of Converting.From(Type).To<To>() to check CanConvertTo.
+- Introduction of Nil helper to allow explict nil test values to be used.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

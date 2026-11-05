@@ -59,7 +59,11 @@ public class Is_equal_by_value
         => (Svo.Generated.CustomGuid != GuidBasedId.Next()).Should().BeTrue();
 
     [TestCase("", 0)]
+#if NET48
+    [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", -917906459)]
+#else
     [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", -994020281)]
+#endif
     public void hash_code_is_value_based(GuidBasedId svo, int hashCode)
     {
         using (Hash.WithoutRandomizer())

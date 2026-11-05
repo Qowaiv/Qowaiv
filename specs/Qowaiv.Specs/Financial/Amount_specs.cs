@@ -62,7 +62,11 @@ public class Is_equal_by_value
     }
 
     [TestCase("0", 0)]
+#if NET48
+    [TestCase("42.17", -390756127)]
+#else
     [TestCase("42.17", 665757098)]
+#endif
     public void hash_code_is_value_based(Amount svo, int hash)
     {
         using (Hash.WithoutRandomizer())

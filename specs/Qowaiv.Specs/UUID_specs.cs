@@ -84,7 +84,11 @@ public class Is_equal_by_value
         => (Svo.Uuid != Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeTrue();
 
     [TestCase("", 0)]
+#if NET48
+    [TestCase("Qowaiv_SVOLibrary_GUIA", -917906459)]
+#else
     [TestCase("Qowaiv_SVOLibrary_GUIA", -994020281)]
+#endif
     public void hash_code_is_value_based(Uuid svo, int hash)
     {
         using (Hash.WithoutRandomizer())

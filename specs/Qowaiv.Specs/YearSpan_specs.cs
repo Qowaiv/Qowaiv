@@ -412,7 +412,7 @@ public class Has_custom_formatting
                dataType: typeof(YearSpan),
                description: "Year span",
                example: 17,
-               type: "int",
+               type: "integer",
                format: "year-span",
                pattern: null));
     }

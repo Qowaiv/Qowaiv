@@ -21,7 +21,11 @@ namespace Qowaiv.Financial;
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
-[OpenApiDataType(description: "Business Identifier Code, as defined by ISO 9362.", example: "DEUTDEFF", type: "string", format: "bic", nullable: true)]
+[OpenApiDataType(
+    description: "Business Identifier Code, as defined by ISO 9362.",
+    example: "DEUTDEFF",
+    type: "string",
+    format: "bic")]
 [TypeConverter(typeof(BusinessIdentifierCodeTypeConverter))]
 #if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.BusinessIdentifierCodeJsonConverter))]

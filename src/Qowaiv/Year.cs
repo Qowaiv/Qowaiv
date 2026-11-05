@@ -3,7 +3,11 @@ namespace Qowaiv;
 /// <summary>Represents a year.</summary>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(short))]
-[OpenApiDataType(description: "Year(-only) notation.", example: 1983, type: "integer", format: "year", nullable: true)]
+[OpenApiDataType(
+    description: "Year(-only) notation.",
+    example: 1983,
+    type: "integer",
+    format: "year")]
 [TypeConverter(typeof(YearTypeConverter))]
 #if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.YearJsonConverter))]

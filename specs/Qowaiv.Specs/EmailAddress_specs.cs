@@ -439,8 +439,7 @@ public class Is_Open_API_data_type
            description: "Email notation as defined by RFC 5322.",
            type: "string",
            example: "svo@qowaiv.org",
-           format: "email",
-           nullable: true));
+           format: "email"));
 }
 
 public class Debugger

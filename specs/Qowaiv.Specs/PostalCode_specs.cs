@@ -454,8 +454,7 @@ public class Is_Open_API_data_type
             description: "Postal code notation.",
             type: "string",
             example: "2624DP",
-            format: "postal-code",
-            nullable: true));
+            format: "postal-code"));
 }
 
 public class Not_supported_by

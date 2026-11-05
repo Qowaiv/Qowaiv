@@ -79,7 +79,7 @@ public class Generation_of
         var path = $@"{Root}\src\Qowaiv.Data.SqlClient\Generated\{name}.generated.cs";
         var init = $@"{Root}\src\Qowaiv.Data.SqlClient\Sql\{name}.cs";
         var json = $@"{Root}\src\Qowaiv.Data.SqlClient\Json\{name}JsonConverter.cs";
-        var spec = $@"{Root}\specs\Qowaiv.Specs\Sql\{name}_specs.cs".Replace(@"\\", @"\");
+        var spec = $@"{Root}\src\Specs.Data.SqlClient\{name}_specs.cs".Replace(@"\\", @"\");
         Generate(name, underlying, fulleName, ns, features, path, init, json, spec, formatExceptionMessage)
             .Should().BeTrue();
     }

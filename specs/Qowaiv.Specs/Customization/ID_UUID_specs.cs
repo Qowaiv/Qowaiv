@@ -59,7 +59,11 @@ public class Is_equal_by_value
         => (Svo.Generated.CustomUuid != UuidBasedId.Next()).Should().BeTrue();
 
     [TestCase("", 0)]
+#if NET48
+    [TestCase("Qowaiv_SVOLibrary_GUIA", -286953930)]
+#else
     [TestCase("Qowaiv_SVOLibrary_GUIA", -479411820)]
+#endif
     public void hash_code_is_value_based(UuidBasedId svo, int hashCode)
     {
         using (Hash.WithoutRandomizer())

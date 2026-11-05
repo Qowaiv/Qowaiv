@@ -1,7 +1,7 @@
+#if !NET48
 using Qowaiv.CodeGeneration;
 using Qowaiv.CodeGeneration.Syntax;
 using Qowaiv.TestTools.Resx;
-using System.Xml.Linq;
 
 namespace Globalization.Countries_generation;
 
@@ -252,3 +252,4 @@ file static class Extensions
             => files.TryGetValue($"{country.Name}_DisplayName", culture);
     }
 }
+#endif

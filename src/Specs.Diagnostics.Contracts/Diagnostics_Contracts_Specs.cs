@@ -10,7 +10,7 @@ namespace Diagnostics_Contracts_Specs
         private static bool IsGenerated(Type t)
             => !t.IsAbstract
             && t.IsAssignableTo(typeof(Attribute))
-            && t.Namespace.StartsWith("Qowaiv.Diagnostics.Contracts");
+            && t.Namespace!.StartsWith("Qowaiv.Diagnostics.Contracts");
 
         [Test]
         public void Contains_attributes()

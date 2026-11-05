@@ -81,6 +81,7 @@ public class For_current_execution_context_and_scope
         Clock.UtcNow().Should().NotBe(Svo.DateTime);
     }
 
+#if NET10_0_OR_GREATER
     [Test]
     public void Can_Be_set_with_date_only()
     {
@@ -90,6 +91,7 @@ public class For_current_execution_context_and_scope
         }
         Clock.UtcNow().Should().NotBe(Svo.Date);
     }
+#endif
 
     [Test]
     public void TimeZone_can_be_set()
@@ -112,6 +114,7 @@ public class For_current_execution_context_and_scope
         Clock.TimeZone.Should().NotBe(Svo.TimeZone);
     }
 
+#if NET10_0_OR_GREATER
     [Test]
     public void UtcNow_and_TimeZone_with_DateOnly()
     {
@@ -123,6 +126,7 @@ public class For_current_execution_context_and_scope
         Clock.UtcNow().Should().NotBe(Svo.Date);
         Clock.TimeZone.Should().NotBe(Svo.TimeZone);
     }
+#endif
 }
 
 public class Today

@@ -10,6 +10,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.TestTools.Nil</Target>
+    <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:System.Runtime.CompilerServices.IsExternalInit</Target>
     <Left>lib/net6.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
@@ -24,6 +31,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.TestTools.Nil</Target>
+    <Left>lib/net8.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.TestTools.Numerics.Number</Target>
     <Left>lib/net8.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
@@ -52,6 +66,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.TestTools.Nil</Target>
+    <Left>lib/net9.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.TestTools.Numerics.Number</Target>
     <Left>lib/net9.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
@@ -92,6 +113,13 @@
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.TestTools.ConvertTo</Target>
+    <Left>lib/netstandard2.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.TestTools.Nil</Target>
     <Left>lib/netstandard2.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1257,6 +1285,18 @@
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>T:Qowaiv.TestTools.JsonTester:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net10.0/Qowaiv.TestTools.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.TestTools.Nil:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.TestTools.dll</Left>
+    <Right>lib/net10.0/Qowaiv.TestTools.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.TestTools.Nil:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.TestTools.dll</Left>
     <Right>lib/net10.0/Qowaiv.TestTools.dll</Right>
   </Suppression>

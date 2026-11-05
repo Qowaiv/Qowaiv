@@ -122,7 +122,7 @@ public sealed record OpenApiDataType
     // This is a convenience helper for specifying Open API specs. Failing to resolve the
     // defined values should not crash the generation of those specs, hence no exception is thrown.
     [Pure]
-    private static IReadOnlyCollection<string>? DefinedValues(Type type)
+    private static IReadOnlyList<string>? DefinedValues(Type type)
 #if NETSTANDARD2_0
         => null;
 #else
@@ -148,8 +148,11 @@ public sealed record OpenApiDataType
 
         IEnumerable DefinedValues()
             => (IEnumerable)type
-            .GetProperty(nameof(IEnumerated<>.DefinedValues), BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)!
+            .GetProperty(nameof(IEnumerated<>.DefinedValues), Flags)!
             .GetValue(null)!;
     }
+
+#pragma warning disable S3011 // We also want to catch explitly defined.
+    private const BindingFlags Flags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 #endif
 }

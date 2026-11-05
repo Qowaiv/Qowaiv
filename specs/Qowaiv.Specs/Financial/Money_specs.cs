@@ -112,7 +112,11 @@ public class Is_equal_by_value
         => (Svo.Money != 42.17 + Currency.USD).Should().BeTrue();
 
     [TestCase("USD 0.00", 931756561)]
+#if NET48
+    [TestCase("EUR 42.00", -2013578063)]
+#else
     [TestCase("EUR 42.00", -943833957)]
+#endif
     public void hash_code_is_value_based(Money svo, int hash)
     {
         using (Hash.WithoutRandomizer())

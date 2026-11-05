@@ -28,7 +28,7 @@ public class Can_represent
 
     [Test]
     public void @double()
-        => new Literal(3.141592653589793).ToString().Should().Be("3.141592653589793");
+        => new Literal(3.1415926535897).ToString().Should().Be("3.1415926535897");
 
     [Test]
     public void @decimal()

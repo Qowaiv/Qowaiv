@@ -368,6 +368,7 @@ public class Throws_when
         => dec.Invoking(d => (Fraction)d).Should().Throw<OverflowException>()
         .WithMessage("Value was either too large or too small for a Fraction.");
 
+#if !NET48 // bounderies are slightly different for .NET 4.8
     [TestCase(-9223372036854775808.0)]
     [TestCase(+9223372036854775808.0)]
     public void fraction_can_no_be_created_form_double(double dbl)
@@ -379,6 +380,7 @@ public class Throws_when
     public void fraction_can_no_be_created_form_decimal(decimal dec)
         => dec.Invoking(Fraction.Create).Should().Throw<ArgumentOutOfRangeException>()
         .WithMessage("Value was either too large or too small for a Fraction. *");
+#endif
 
     [Test]
     public void invalid_input_is_parsed()

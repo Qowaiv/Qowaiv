@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Qowaiv.TestTools.Globalization;
 
@@ -64,16 +65,11 @@ public static class TestCultures
     public static CultureInfo es_EC => new("es-EC");
 
     /// <summary>Gets the Iranian (fa-IR) <see cref="CultureInfo" />.</summary>
-    public static CultureInfo fa_IR
+    public static CultureInfo fa_IR => New("fa-IR", c =>
     {
-        get
-        {
-            var culture = new CultureInfo("fa-IR");
-            culture.NumberFormat.PercentSymbol = "٪";
-            culture.NumberFormat.PercentDecimalSeparator = ",";
-            return culture;
-        }
-    }
+        c.NumberFormat.PercentSymbol = "٪";
+        c.NumberFormat.PercentDecimalSeparator = ",";
+    });
 
     /// <summary>Gets the French (fr-BE) <see cref="CultureInfo" />.</summary>
     public static CultureInfo fr_BE => new("fr-BE");
@@ -82,7 +78,10 @@ public static class TestCultures
     public static CultureInfo fr_FR => new("fr-FR");
 
     /// <summary>Gets the Dutch (nl-NL) <see cref="CultureInfo" />.</summary>
-    public static CultureInfo nl_NL => new("nl-NL");
+    public static CultureInfo nl_NL => New("nl-NL", c =>
+    {
+        c.DateTimeFormat.ShortDatePattern = "dd-MM-yyyy";
+    });
 
     /// <summary>Gets the Flemish (nl-BE) <see cref="CultureInfo" />.</summary>
     public static CultureInfo nl_BE
@@ -124,5 +123,12 @@ public static class TestCultures
         info.PerMilleSymbol = perMilleSymbol;
         custom.NumberFormat = info;
         return custom;
+    }
+
+    private static CultureInfo New(string name, Action<CultureInfo> update)
+    {
+        var culture = new CultureInfo(name);
+        update(culture);
+        return culture;
     }
 }

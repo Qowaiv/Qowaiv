@@ -11,7 +11,7 @@ Qowaiv is a (Single) Value Object library for DDD (Date, EmailAddress, IBAN, Mon
 ## Build & test
 - Build: `dotnet build qowaiv.slnx --configuration Release`
 - Test: `dotnet test qowaiv.slnx --configuration Release` (all test projects, as CI does); `dotnet test specs/Qowaiv.Specs --configuration Release` for the main project only.
-- .NET Framework: the netstandard2.0 code paths are tested on .NET Framework 4.8 (Windows only, opt-in). Set `TestNetFramework=true` (env var or `-p:`) to add `net48` to the specs that import `props/netframework.props`; use `qowaiv-netfx.slnx`, e.g. `dotnet test qowaiv-netfx.slnx -c Release -f net48`. Restore is then not locked for those projects (no lock file with net48). Only `build-netfx.yaml` does this; coverage, release and Dependabot builds do not. Code that can't run on net48 is guarded with `#if NET10_0_OR_GREATER`, and `*_generation.cs` specs are excluded.
+- .NET Framework: the netstandard2.0 code paths are tested on .NET Framework 4.8. The test projects import `props/specs.props`, which adds `net48` to their target frameworks when `RunNetfx` is `true`; by default that is the case on Windows only, so `dotnet test` there includes net48 and Linux/macOS builds do not. Disable it with `-p:RunNetfx=false`. For net48 restore is not locked and the lock file is written to `obj/`, so the committed `packages.lock.json` files are unaffected. Code that can't run on net48 is guarded with `#if NET10_0_OR_GREATER`, and `*_generation.cs` specs are excluded.
 - Pack: `dotnet pack qowaiv.slnx -c Release --output packages` (CI does this on `v*` tags)
 - SDK pinned in `global.json`; see the `.csproj` files for the target frameworks. LangVersion 14; PolySharp supplies polyfills.
 - `Directory.Build.rsp` (`/graphBuild`, `/v:minimal`) applies to builds started from the repository root; switches on the command line override it. `/m` is left out on purpose (measured: no effect).
@@ -51,7 +51,7 @@ Country names are localized via `src/Qowaiv/Globalization/CountryLabels*.resx`. 
 - Pushing a `v*` tag releases: `release.yaml` builds, tests, packs, pushes the packages (and symbol packages) to NuGet, and then creates the GitHub release. Packages may have different versions; the tag alone is sufficient.
 
 ## CI
-- Workflows live in `.github/workflows`: `build.yaml` (pushes and pull requests for `master` and `release/**`: build, tests, coverage, Sonar), `build-netfx.yaml` (same triggers, Windows: the specs on .NET Framework 4.8), `release.yaml` (tags), `code-coverage.yml` (pushes to `master`: Coveralls), `dependabot-lock-files.yaml`.
+- Workflows live in `.github/workflows`: `build.yaml` (pushes and pull requests for `master` and `release/**`: build, tests, coverage, Sonar), `build-netfx.yaml` (same triggers, Windows: runs the specs on .NET Framework 4.8), `release.yaml` (tags), `code-coverage.yml` (pushes to `master`: Coveralls), `dependabot-lock-files.yaml`.
 - Major versions are developed in `release/<version>` branches (e.g. `release/v11`).
 - Everything is pinned: actions by full commit SHA with a `# vX.Y.Z` comment, `runs-on` to a specific Ubuntu version, `dotnet-sonarscanner` via `SONAR_SCANNER_VERSION`, the SDK via `global.json`. Dependabot updates the actions; the runner image and Sonar scanner are bumped by hand.
 - Coverage is collected as Cobertura (used by both Sonar and Coveralls).

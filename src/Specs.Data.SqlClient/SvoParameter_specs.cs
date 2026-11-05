@@ -4,7 +4,7 @@ using Qowaiv.Data;
 using Qowaiv.Financial;
 using Qowaiv.Humanizer;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 namespace Data.SvoParameter_specs;
 

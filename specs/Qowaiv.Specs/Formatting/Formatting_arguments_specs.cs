@@ -35,6 +35,7 @@ public class Is_equal_by_value
         => (new FormattingArguments("0.000", TestCultures.fr_BE) != FormattingArguments.None).Should().BeTrue();
 
     [Test]
+    [NotInParallel]
     public void hash_code_is_value_based_for_none()
     {
         using (Hash.WithoutRandomizer())
@@ -44,6 +45,7 @@ public class Is_equal_by_value
     }
 
     [Test]
+    [NotInParallel]
     public void hash_code_is_value_based_for_value()
     {
         using (Hash.WithoutRandomizer())

@@ -452,6 +452,7 @@ public class Is_equal_by_value
     }
 
     [Test]
+    [NotInParallel]
     [Arguments("", 0)]
     [Arguments("EUR", -943833935)]
     public void hash_code_is_value_based(Currency svo, int hash)

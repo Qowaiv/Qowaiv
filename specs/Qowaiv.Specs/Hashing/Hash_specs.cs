@@ -1,5 +1,6 @@
 namespace Hashing.Hash_specs;
 
+[NotInParallel]
 public class Get_hash_code
 {
     [Test]
@@ -81,6 +82,7 @@ public class Get_hash_code
     }
 }
 
+[NotInParallel]
 public class Get_hash_code_with_fixed_randomizer
 {
     [Test]
@@ -114,6 +116,7 @@ public class Get_hash_code_with_fixed_randomizer
     }
 }
 
+[NotInParallel]
 public class Get_hash_code_without_fixed_randomizer
 {
     [Test]
@@ -182,6 +185,7 @@ public class Not_supported
     }
 }
 
+[NotInParallel]
 public class Is_equal_by_value
 {
     [Test]
@@ -201,6 +205,7 @@ public class Is_equal_by_value
         => Svo.Hash.Equals(Hash.Code("QOWAIV")).Should().BeTrue();
 }
 
+[NotInParallel]
 public class To_string
 {
     [Test]

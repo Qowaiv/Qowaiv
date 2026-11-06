@@ -532,6 +532,7 @@ public class Is_equal_by_value
     }
 
     [Test]
+    [NotInParallel]
     [Arguments("", 0)]
     [Arguments("NL", -1174190069)]
     public void hash_code_is_value_based(Country svo, int hash)

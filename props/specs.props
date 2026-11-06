@@ -40,8 +40,8 @@
     <AppConfig>$(MSBuildThisFileDirectory)specs.netfx.config</AppConfig>
   </PropertyGroup>
 
-  <ItemGroup Label="NUnit ran the tests sequentially, TUnit runs them in parallel by default.">
-    <AssemblyAttribute Include="TUnit.Core.NotInParallelAttribute" />
+  <ItemGroup Label="NUnit registry">
+    <Compile Include="../../shared/ConvetionBasedConverters.cs" Link="Properties/ConvetionBasedConverters.cs" />
   </ItemGroup>
 
   <ItemGroup Label="Test Tools">
@@ -67,5 +67,5 @@
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileFullPath)" Visible="false" />
   </ItemGroup>
-  
+
 </Project>

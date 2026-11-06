@@ -41,7 +41,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="NUnit registry">
-    <Compile Include="../../shared/ConvetionBasedConverters.cs" Link="Properties/ConvetionBasedConverters.cs" />
+    <Compile Include="../../shared/ConventionBasedConverters.cs" Link="Properties/ConventionBasedConverters.cs" />
   </ItemGroup>
 
   <ItemGroup Label="Test Tools">

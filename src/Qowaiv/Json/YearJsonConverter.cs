@@ -1,10 +1,9 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a year.</summary>
-[Inheritable]
-public class YearJsonConverter : SvoJsonConverter<Year>
+internal sealed class YearJsonConverter : SvoJsonConverter<Year>
 {
     /// <inheritdoc />
     [Pure]

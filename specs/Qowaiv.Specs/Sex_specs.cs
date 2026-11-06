@@ -2,6 +2,10 @@ namespace Sex_specs;
 
 public class With_domain_logic
 {
+    [Test]
+    public void DefinedValues_are_Male_Female_and_NotApplicable()
+        => Sex.DefinedValues.Should().Equal(Sex.Male, Sex.Female, Sex.NotApplicable);
+
     [TestCase(true, "Male")]
     [TestCase(true, "Female")]
     [TestCase(true, "?")]
@@ -338,7 +342,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase("?", "?")]
     [TestCase(null, null)]
     [TestCase(2L, "Female")]
@@ -419,14 +423,13 @@ public class Is_Open_API_data_type
     [Test]
     public void with_info()
        => OpenApiDataType.FromType(typeof(Sex))
-       .Should().BeEquivalentTo(new OpenApiDataType(
+       .Should().Be(new OpenApiDataType(
            dataType: typeof(Sex),
            description: "Sex as specified by ISO/IEC 5218.",
            type: "string",
            example: "female",
            format: "sex",
-           @enum: ["NotKnown", "Male", "Female", "NotApplicable"],
-           nullable: true));
+           @enum: ["NotKnown", "Male", "Female", "NotApplicable"]));
 }
 
 public class Debugger

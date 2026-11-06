@@ -1,3 +1,5 @@
+using Qowaiv.Reflection;
+
 namespace Qowaiv.Text;
 
 /// <summary>The exception that is thrown when a value could not be parsed.</summary>
@@ -17,7 +19,7 @@ public class Unparsable : FormatException
     [ExcludeFromCodeCoverage/* Justification = Required for extensibility. */]
     public Unparsable(string? message, Exception? innerException) : base(message, innerException) { }
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 #else
     /// <summary>Initializes a new instance of the <see cref="Unparsable" /> class.</summary>
     protected Unparsable(SerializationInfo info, StreamingContext context) : base(info, context)

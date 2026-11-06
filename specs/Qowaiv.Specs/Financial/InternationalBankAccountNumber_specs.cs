@@ -373,7 +373,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase(null, null)]
     [TestCase("NL20INGB0001234567", "NL20INGB0001234567")]
     public void System_Text_JSON_deserialization(object json, InternationalBankAccountNumber svo)
@@ -558,8 +558,7 @@ public class Is_Open_API_data_type
             example: "BE71096123456769",
             type: "string",
             format: "iban",
-            pattern: "[A-Z]{2}[0-9]{2}[A-Z0-9]{8,32}",
-            nullable: true));
+            pattern: "[A-Z]{2}[0-9]{2}[A-Z0-9]{8,32}"));
 
     [TestCase("NL20INGB0001234567")]
     public void pattern_matches(string input)

@@ -59,7 +59,11 @@ public class Is_equal_by_value
         => (Svo.Generated.CustomUuid != UuidBasedId.Next()).Should().BeTrue();
 
     [TestCase("", 0)]
+#if NET48
+    [TestCase("Qowaiv_SVOLibrary_GUIA", -286953930)]
+#else
     [TestCase("Qowaiv_SVOLibrary_GUIA", -479411820)]
+#endif
     public void hash_code_is_value_based(UuidBasedId svo, int hashCode)
     {
         using (Hash.WithoutRandomizer())
@@ -263,7 +267,7 @@ public class Supports_JSON_serialization
     public void writes_Base64_string_for_non_default_value()
         => JsonTester.Write(Svo.Generated.CustomUuid).Should().Be("Qowaiv_SVOLibrary_GUIA");
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
     [Test]
     public void System_Text_JSON_deserialization_of_dictionary_keys()

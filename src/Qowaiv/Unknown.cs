@@ -73,7 +73,7 @@ public static class Unknown
 #pragma warning disable S1121 // improves the readabillity in this case.
     private sealed class UnknownValues : ConcurrentDictionary<CultureInfo, FrozenSet<string>>
     {
-        private readonly FrozenSet<string> Invariant = new HashSet<string>(["?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN"]).ToFrozenSet(StringComparer.OrdinalIgnoreCase);
+        private readonly FrozenSet<string> Invariant = frozen_case_insensitive("?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN");
 
         /// <summary>Adds a culture to the parsings.</summary>
         /// <param name="culture">
@@ -83,7 +83,7 @@ public static class Unknown
         private static HashSet<string> AddCulture(CultureInfo culture)
             => ResourceManager.Contains(culture)
             && ResourceManager.GetString("Values", culture) is { Length: > 0 } values
-            ? new HashSet<string>([.. values.Split(';').Select(v => v.ToUpper(culture))])
+            ? [with([.. values.Split(';').Select(v => v.ToUpper(culture))])]
             : [];
 
         [Impure]
@@ -96,7 +96,7 @@ public static class Unknown
         private FrozenSet<string> Local(CultureInfo culture) => true switch
         {
             _ when TryGetValue(culture, out var existing) => existing,
-            _ when AddCulture(culture).ToFrozenSet(StringComparer.OrdinalIgnoreCase) is { Count: > 0 } localized => this[culture] = localized,
+            _ when frozen_case_insensitive(AddCulture(culture)) is { Count: > 0 } localized => this[culture] = localized,
             _ => Ancestors(culture),
         };
 
@@ -113,7 +113,7 @@ public static class Unknown
                     this[culture] = existing;
                     return existing;
                 }
-                else if (AddCulture(ancestor).ToFrozenSet(StringComparer.OrdinalIgnoreCase) is { Count: > 0 } localized)
+                else if (frozen_case_insensitive(AddCulture(ancestor)) is { Count: > 0 } localized)
                 {
                     // Ancestor and culture have the same localization.
                     this[ancestor] = localized;

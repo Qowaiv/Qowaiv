@@ -385,7 +385,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase("?", "?")]
     [TestCase(null, null)]
     [TestCase("1234", "1234")]
@@ -454,8 +454,7 @@ public class Is_Open_API_data_type
             description: "Postal code notation.",
             type: "string",
             example: "2624DP",
-            format: "postal-code",
-            nullable: true));
+            format: "postal-code"));
 }
 
 public class Not_supported_by

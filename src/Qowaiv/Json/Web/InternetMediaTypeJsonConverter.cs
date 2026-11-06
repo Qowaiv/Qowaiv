@@ -1,12 +1,11 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 using Qowaiv.Web;
 
 namespace Qowaiv.Json.Web;
 
 /// <summary>Provides a JSON conversion for an Internet media type.</summary>
-[Inheritable]
-public class InternetMediaTypeJsonConverter : SvoJsonConverter<InternetMediaType>
+internal sealed class InternetMediaTypeJsonConverter : SvoJsonConverter<InternetMediaType>
 {
     /// <inheritdoc />
     [Pure]

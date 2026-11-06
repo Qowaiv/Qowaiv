@@ -4,6 +4,23 @@ namespace Energy_label_specs;
 
 public class With_domain_logic
 {
+    [Test]
+    public void DefinedValues_are_G_till_A_with_up_to_4_plusses()
+        => EnergyLabel.DefinedValues.Should().BeEquivalentTo(
+        [
+            EnergyLabel.G,
+            EnergyLabel.F,
+            EnergyLabel.E,
+            EnergyLabel.D,
+            EnergyLabel.C,
+            EnergyLabel.B,
+            EnergyLabel.A(),
+            EnergyLabel.A(1),
+            EnergyLabel.A(2),
+            EnergyLabel.A(3),
+            EnergyLabel.A(4),
+        ]);
+
     [TestCase(true, "A++")]
     [TestCase(true, "?")]
     [TestCase(false, "")]
@@ -287,7 +304,7 @@ public class Has_custom_formatting
     public void format_dependent(string format, EnergyLabel svo, string formatted)
         => svo.ToString(format).Should().Be(formatted);
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
     public class Span_formattable
     {
@@ -453,7 +470,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase("?", "?")]
     [TestCase("C", "C")]
     [TestCase("A++", "A++")]
@@ -538,8 +555,8 @@ public class Is_Open_API_data_type
            example: "A++",
            type: "string",
            format: "energy-label",
-           pattern: @"[A-H]|A\+{1,4}",
-           nullable: true));
+           pattern: @"A\+{0,4}|[B-G]",
+           @enum: ["G", "F", "E", "D", "C", "B", "A", "A+", "A++", "A+++", "A++++"]));
 
     [TestCase("G")]
     [TestCase("B")]
@@ -549,7 +566,6 @@ public class Is_Open_API_data_type
     public void pattern_matches(string input)
         => OpenApiDataType.FromType(typeof(EnergyLabel))!.Matches(input).Should().BeTrue();
 }
-
 
 public class Debugger
 {

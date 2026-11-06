@@ -1,9 +1,9 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a year span.</summary>
-public sealed class YearSpanJsonConverter : SvoJsonConverter<YearSpan>
+internal sealed class YearSpanJsonConverter : SvoJsonConverter<YearSpan>
 {
     /// <inheritdoc />
     [Pure]

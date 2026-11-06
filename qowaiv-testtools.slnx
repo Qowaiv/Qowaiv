@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path=".net.csproj" />
+  <Project Path="src/Qowaiv/Qowaiv.csproj" />
+  <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
+  <Project Path="src/Specs.Diagnostics.Contracts/Specs.Diagnostics.Contracts.csproj" />
+  <Project Path="src/Specs.TestTools/Specs.TestTools.csproj"/>
+</Solution>

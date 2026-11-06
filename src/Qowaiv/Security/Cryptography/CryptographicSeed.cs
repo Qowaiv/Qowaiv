@@ -5,7 +5,7 @@ namespace Qowaiv.Security.Cryptography;
 /// <summary>Represents a cryptographic seed.</summary>
 [TypeConverter(typeof(CryptographicSeedTypeConverter))]
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Security.Cryptography.CryptographicSeedJsonConverter))]
 #endif
 public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>, IEmpty<CryptographicSeed>
@@ -52,7 +52,7 @@ public readonly struct CryptographicSeed : IEquatable<CryptographicSeed>, IEmpty
     /// Secrets are supposed to be passed around, without knowing its content.
     /// </remarks>
     [Pure]
-    public bool Equals(CryptographicSeed other) => IsEmpty() && other.IsEmpty();
+    public bool Equals(CryptographicSeed other) => !HasValue && !other.HasValue;
 
     /// <inheritdoc />
     [DoesNotReturn]

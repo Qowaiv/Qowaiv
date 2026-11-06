@@ -1,3 +1,4 @@
+#if !NET48
 namespace Financial.IBAN_generation;
 
 internal class Markdown_file
@@ -9,55 +10,6 @@ internal class Markdown_file
 
     [Explicit]
     [Test]
-    public void Generate_char_Lookup()
-    {
-        const int a = 1 << 10;
-        const int n = 1 << 11;
-        const int l = 1 << 12;
-
-        var values = new int[256];
-
-        for (var ch = '0'; ch <= '9'; ch++)
-        {
-            // to allow specific digits
-            values[ch] |= 1 << (ch - '0');
-            values[ch] |= n;
-        }
-        for (var ch = 'A'; ch <= 'Z'; ch++)
-        {
-            values[ch] |= a;
-        }
-
-        for (var ch = 'a'; ch <= 'z'; ch++)
-        {
-            values[ch] |= l;
-        }
-
-        var sb = new StringBuilder();
-        sb.AppendLine("[");
-        for (uint i = 0; i <= 255; i++)
-        {
-            var cat = values[i];
-            sb.Append($"0x0{Convert.ToString(cat, 16)},");
-            if (i % 16 == 15)
-            {
-                sb.AppendLine();
-            }
-            else
-            {
-                sb.Append(' ');
-            }
-        }
-
-        sb.AppendLine("];");
-
-        Console.WriteLine(sb);
-
-        Assert.Inconclusive("Copy output to code file.");
-    }
-
-    [Explicit]
-    [Test]
     public void Generate_BBAN()
     {
         var writer = new StringBuilder();
@@ -66,7 +18,7 @@ internal class Markdown_file
         {
             for (var s = 'A'; s <= 'Z'; s++)
             {
-                writer.Append(new string(' ', 8));
+                writer.Append(' ', 8);
                 if (Country.TryParse($"{f}{s}") is not { } country)
                 {
                     writer.AppendLine("default,");
@@ -271,7 +223,7 @@ internal sealed record IbanInfo(Country Country, int Length, string Bban, int? C
             sb.Append(", true");
 
         sb.Append("), // ");
-        sb.Append(new string(' ', 86 - sb.Length));
+        sb.Append(' ', 86 - sb.Length);
         sb.Append($"{Country.IsoAlpha2Code}: {Bban}");
         return sb.ToString();
     }
@@ -294,7 +246,7 @@ internal sealed record IbanInfo(Country Country, int Length, string Bban, int? C
                 }
                 else
                 {
-                    pattern.Append(new string(type, length));
+                    pattern.Append(type, length);
                 }
             }
             return pattern.ToString();
@@ -379,3 +331,4 @@ internal sealed record IbanInfo(Country Country, int Length, string Bban, int? C
         }
     }
 }
+#endif

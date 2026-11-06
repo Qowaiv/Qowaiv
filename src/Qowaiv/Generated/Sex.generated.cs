@@ -18,18 +18,6 @@ public partial struct Sex
     /// <summary>The inner value of the sex.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly byte m_Value;
-
-    /// <summary>False if the sex is empty or unknown, otherwise true.</summary>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
-
-    /// <summary>Returns true if the sex is unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsUnknown() => m_Value == Unknown.m_Value;
-
-    /// <summary>Returns true if the sex is empty or unknown, otherwise false.</summary>
-    [Pure]
-    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
 
 public partial struct Sex : IEmpty<Sex>
@@ -45,8 +33,24 @@ public partial struct Sex : IEmpty<Sex>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
+
+public partial struct Sex : IUnknown<Sex>
+{
+    /// <summary>False if the sex is empty or unknown, otherwise true.</summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
+
+    /// <summary>Returns true if the sex is unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsUnknown() => m_Value == Unknown.m_Value;
+
+    /// <summary>Returns true if the sex is empty or unknown, otherwise false.</summary>
+    [Pure]
+    public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
+}
+
 public partial struct Sex : IEquatable<Sex>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<Sex, Sex, bool>
 #endif
 {
@@ -149,7 +153,7 @@ public partial struct Sex : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct Sex
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<Sex>
 #endif
 {

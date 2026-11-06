@@ -3,7 +3,7 @@
   <Import Project="../../props/package.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net8.0;net9.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DevelopmentDependency>false</DevelopmentDependency>
     <PackageId>Qowaiv</PackageId>
@@ -31,10 +31,31 @@
   </ItemGroup>
   
   <PropertyGroup>
-    <Version>8.2.0</Version>
-    <PackageValidationBaselineVersion>8.1.0</PackageValidationBaselineVersion>
+    <Version>11.0.0-rc1</Version>
+    <PackageValidationBaselineVersion>8.2.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
+v11.0.0
+- Add support for .NET 11.0.
+- Drop support for .NET 9.0 and 8.0. (BREAKING)
+- Drop Clock.Yesterday() and Clock.Tomorrow(). (BREAKING)
+- Qowaiv SVO specific JSON converters have become internal. (BREAKING)
+- Drop of OpenApiDataType(Attribute).Nullable. (BREAKING)
+- IEmpty<TSvo>, IUnknown<TSvo> inherit from non-generic parents.
+- double.ToDecimal(int, Qowaiv.Mathematics.DecimalRounding) and double.ToDecimal() in Qowaiv.Extensions, to simplify going from double to decimal.
+- DecimalRounding is moved to Qowaiv.Mathematics, and DecimalRoundingExtensions is renamed to DecimalRoundings. (BREAKING)
+- DecimalMath (Qowaiv.Mathematics) exposes E, Epsilon, and Pi, as well as public Abs() and Sign() extensions on decimal.
+- Public extensions on decimal are moved from System.QowaivDecimalExtensions to Qowaiv.Mathematics.DecimalMath. (BREAKING)
+- Add IUnknown<TSvo> interfaces to applicalbe SVOs.
+- Humanizer extensions (Days(), Months(), Years(), Percent(), Amount(), Bytes(), CasNr(), Elo(), Fraction(), CE()) are merged into Qowaiv.Humanizer.Humanize. (BREAKING)
+- Extension classes in Qowaiv.Extensions are renamed to a name without suffix, e.g. GuidExtensions becomes QowaivGuid. (BREAKING)
+- Extensions on System types (string, Guid, Stream, Thread, DateTime, DateTimeOffset, DateOnly, CultureInfo, HashAlgorithm, IFormatProvider, IFormattable, byte[], INumberBase<T>) are moved to the Qowaiv.Extensions namespace; add using Qowaiv.Extensions. (BREAKING)
+- Linq-like extensions (Sum(), Average(), ...) on Qowaiv types are moved to Qowaiv.Linq.QowaivEnumerable; add using Qowaiv.Linq. (BREAKING)
+- Guid.GetVersion() is replaced by the extension property Guid.UuidVersion. (BREAKING)
+- QowaivType.IsNullable(), IsNumeric(), IsDate(), and GetNotNullableType() are now extensions on Type (IsNullable, IsNumeric, and IsDate are properties); IsDate no longer accepts null. (BREAKING)
+- Date implements IEquatable<DateOnly>.
+- Introduction of IEnumerated<TSelf> and IEnumerated, with DefinedValues.
+- OpenApiDataType resolves its enum from the defined values (and unknown) of IEnumerated<TSelf> types.
 v8.*
 - Extended language support.
 - IBAN supports Mongolia and Falkland Islands.

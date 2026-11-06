@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Reflection;
 
 namespace Qowaiv.Data;
@@ -25,29 +26,26 @@ public static class SvoParameter
         {
             var sourceType = value.GetType();
 
-            lock (locker)
+            if (!Attributes.TryGetValue(sourceType, out var attr))
             {
-                if (!Attributes.TryGetValue(sourceType, out var attr))
-                {
-                    attr = sourceType.GetCustomAttribute<SingleValueObjectAttribute>();
-                }
+                attr = sourceType.GetCustomAttribute<SingleValueObjectAttribute>();
+            }
 
-                // No attribute, so not supported.
-                if (attr is null)
-                {
-                    Attributes[sourceType] = null;
-                    return new SqlParameter(parameterName, value);
-                }
-                else if (IsDbNullValue(value, sourceType, attr))
-                {
-                    return new SqlParameter(parameterName, DBNull.Value);
-                }
-                else
-                {
-                    MethodInfo cast = GetCast(sourceType, attr);
-                    var casted = cast.Invoke(null, [value]);
-                    return new SqlParameter(parameterName, casted);
-                }
+            // No attribute, so not supported.
+            if (attr is null)
+            {
+                Attributes[sourceType] = null;
+                return new SqlParameter(parameterName, value);
+            }
+            else if (IsDbNullValue(value, sourceType, attr))
+            {
+                return new SqlParameter(parameterName, DBNull.Value);
+            }
+            else
+            {
+                MethodInfo cast = GetCast(sourceType, attr);
+                var casted = cast.Invoke(null, [value]);
+                return new SqlParameter(parameterName, casted);
             }
         }
     }
@@ -75,7 +73,7 @@ public static class SvoParameter
         {
             var returnType = attr.DatabaseType ?? attr.UnderlyingType;
             cast = sourceType.GetMethods(BindingFlags.Public | BindingFlags.Static)
-                .Find(m =>
+                .FirstOrDefault(m =>
                     m.IsHideBySig &&
                     m.IsSpecialName &&
                     m.GetParameters().Length == 1 &&
@@ -86,9 +84,6 @@ public static class SvoParameter
         return cast;
     }
 
-    private static readonly Dictionary<Type, SingleValueObjectAttribute?> Attributes = [];
-    private static readonly Dictionary<Type, MethodInfo> Casts = [];
-
-    /// <summary>The locker for adding a casts and unsupported types.</summary>
-    private static readonly Lock locker = new();
+    private static readonly ConcurrentDictionary<Type, SingleValueObjectAttribute?> Attributes = [];
+    private static readonly ConcurrentDictionary<Type, MethodInfo> Casts = [];
 }

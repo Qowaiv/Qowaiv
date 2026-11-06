@@ -1,4 +1,4 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -23,21 +23,18 @@ public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : 
                 JsonTokenType.False => FromJson(false),
                 JsonTokenType.Number => ReadNumber(ref reader),
                 JsonTokenType.Null => default,
-                _ => throw new JsonException($"Unexpected token parsing {typeToConvert?.FullName}. {reader.TokenType} is not supported."),
+                _ => reader.UnexpectedToken<TSvo>(),
             };
         }
-        catch (Exception x)
+        catch (Exception x) when (x is not JsonException)
         {
-            if (x is JsonException) throw;
-            else throw new JsonException(x.Message, x);
+            throw new JsonException(x.Message, x);
         }
     }
 
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, TSvo value, JsonSerializerOptions options)
     {
-        Guard.NotNull(writer);
-
         var obj = ToJson(value);
 
         if (obj is null)
@@ -82,8 +79,6 @@ public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : 
         }
     }
 
-#if NET8_0_OR_GREATER
-
     /// <inheritdoc />
     public override TSvo ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         => FromJson(reader.GetString());
@@ -91,7 +86,6 @@ public abstract class SvoJsonConverter<TSvo> : JsonConverter<TSvo> where TSvo : 
     /// <inheritdoc />
     public override void WriteAsPropertyName(Utf8JsonWriter writer, TSvo value, JsonSerializerOptions options)
         => writer.WritePropertyName(ToJson(value)?.ToString() ?? string.Empty);
-#endif
 
     /// <summary>Represents the SVO as a JSON node.</summary>
     [Pure]

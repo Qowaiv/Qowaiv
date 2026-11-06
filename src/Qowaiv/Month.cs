@@ -5,12 +5,23 @@ namespace Qowaiv;
 /// <summary>Represents a month.</summary>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(byte))]
-[OpenApiDataType(description: "Month(-only) notation.", example: "Jun", type: "string", format: "month", nullable: true, @enum: "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,?")]
+[OpenApiDataType(
+    description: "Month(-only) notation.",
+    example: "Jun",
+    type: "string",
+    format: "month",
+    @enum: "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,?")]
 [TypeConverter(typeof(MonthTypeConverter))]
-#if NET8_0_OR_GREATER
+#if !NETSTANDARD2_0
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.MonthJsonConverter))]
 #endif
-public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatable<Month>, IComparable, IComparable<Month>
+public readonly partial struct Month :
+    IXmlSerializable,
+    IFormattable,
+    IEquatable<Month>,
+    IComparable,
+    IComparable<Month>,
+    IEnumerated<Month>
 {
     /// <summary>Represents an unknown (but set) month.</summary>
     public static Month Unknown => new(byte.MaxValue);
@@ -51,9 +62,8 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
     /// <summary>Represents December (12).</summary>
     public static Month December /*..*/ => new(12);
 
-    /// <summary>Represents all months (January till December).</summary>
-    public static IReadOnlyList<Month> All { get; } =
-    [
+    /// <inheritdoc cref="DefinedValues" />
+    public static IReadOnlyCollection<Month> All { get; } = frozen(
         January,
         February,
         March,
@@ -65,8 +75,10 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
         September,
         October,
         November,
-        December,
-    ];
+        December);
+
+    /// <summary>Represents all months (January till December).</summary>
+    public static IReadOnlyCollection<Month> DefinedValues => All;
 
     /// <summary>Gets the full name of the month.</summary>
     public string FullName => GetFullName(formatProvider: null);
@@ -97,9 +109,9 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
     /// </remarks>
     [Pure]
     public int Days(Year year)
-        => year.IsEmptyOrUnknown() || IsEmptyOrUnknown()
-        ? -1
-        : DateTime.DaysInMonth((int)year, m_Value);
+        => IsKnown && year.IsKnown
+        ? DateTime.DaysInMonth((int)year, m_Value)
+        : -1;
 
     /// <summary>Deserializes the month from a JSON number.</summary>
     /// <param name="json">
@@ -165,8 +177,8 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
     {
         { 'f', (svo, provider) => svo.GetFullName(provider) },
         { 's', (svo, provider) => svo.GetShortName(provider) },
-        { 'M', (svo, provider) => svo.IsEmptyOrUnknown() ? svo.ToDefaultString() : svo.m_Value.ToString("0", provider) },
-        { 'm', (svo, provider) => svo.IsEmptyOrUnknown() ? svo.ToDefaultString() : svo.m_Value.ToString("00", provider) },
+        { 'M', (svo, provider) => svo.IsKnown ? svo.m_Value.ToString("0", provider) : svo.ToDefaultString() },
+        { 'm', (svo, provider) => svo.IsKnown ? svo.m_Value.ToString("00", provider) : svo.ToDefaultString() },
     };
 
     /// <summary>Casts a month to a System.Int32.</summary>
@@ -176,19 +188,20 @@ public readonly partial struct Month : IXmlSerializable, IFormattable, IEquatabl
     public static explicit operator Month(int val) => Cast.Primitive<int, Month>(TryCreate, val);
 
     /// <summary>Returns true if the left operator is less then the right operator, otherwise false.</summary>
-    public static bool operator <(Month l, Month r) => HaveValue(l, r) && l.CompareTo(r) < 0;
+    public static bool operator <(Month l, Month r) => AreKnwown(l, r) && l.CompareTo(r) < 0;
 
     /// <summary>Returns true if the left operator is greater then the right operator, otherwise false.</summary>
-    public static bool operator >(Month l, Month r) => HaveValue(l, r) && l.CompareTo(r) > 0;
+    public static bool operator >(Month l, Month r) => AreKnwown(l, r) && l.CompareTo(r) > 0;
 
     /// <summary>Returns true if the left operator is less then or equal the right operator, otherwise false.</summary>
-    public static bool operator <=(Month l, Month r) => HaveValue(l, r) && l.CompareTo(r) <= 0;
+    public static bool operator <=(Month l, Month r) => AreKnwown(l, r) && l.CompareTo(r) <= 0;
 
     /// <summary>Returns true if the left operator is greater then or equal the right operator, otherwise false.</summary>
-    public static bool operator >=(Month l, Month r) => HaveValue(l, r) && l.CompareTo(r) >= 0;
+    public static bool operator >=(Month l, Month r) => AreKnwown(l, r) && l.CompareTo(r) >= 0;
 
     [Pure]
-    private static bool HaveValue(Month l, Month r) => !l.IsEmptyOrUnknown() && !r.IsEmptyOrUnknown();
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static bool AreKnwown(Month l, Month r) => l.IsKnown && r.IsKnown;
 
     /// <summary>Converts the string to a month.
     /// A return value indicates whether the conversion succeeded.

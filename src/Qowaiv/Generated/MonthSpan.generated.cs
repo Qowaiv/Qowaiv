@@ -21,7 +21,7 @@ public partial struct MonthSpan
 }
 
 public partial struct MonthSpan : IEquatable<MonthSpan>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<MonthSpan, MonthSpan, bool>
 #endif
 {
@@ -50,7 +50,7 @@ public partial struct MonthSpan : IEquatable<MonthSpan>
 }
 
 public partial struct MonthSpan : IComparable, IComparable<MonthSpan>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IComparisonOperators<MonthSpan, MonthSpan, bool>
 #endif
 {
@@ -138,7 +138,7 @@ public partial struct MonthSpan : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct MonthSpan
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<MonthSpan>
 #endif
 {

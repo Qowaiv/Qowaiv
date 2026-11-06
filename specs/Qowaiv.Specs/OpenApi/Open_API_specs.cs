@@ -1,3 +1,5 @@
+using Specs_Generated;
+
 namespace Open_API_specs;
 
 public class Open_API_data_types
@@ -36,8 +38,8 @@ public class Open_API_data_type
         .Should().HaveDebuggerDisplay("""{ type: type, desc: descrption, example:  }""");
 
     [Test]
-    public void DebuggerDisplay_shows_maximum() => new OpenApiDataType(typeof(int), "descrption", "type", "example", "format", true, "pattern")
-        .Should().HaveDebuggerDisplay("""{ type: type, desc: descrption, example: example, format: format, pattern: pattern, nullable: true }""");
+    public void DebuggerDisplay_shows_maximum() => new OpenApiDataType(typeof(int), "descrption", "type", "example", "format", "pattern")
+        .Should().HaveDebuggerDisplay("""{ type: type, desc: descrption, example: example, format: format, pattern: pattern }""");
 
     [Test]
     public void has_custom_debug_display()
@@ -51,7 +53,16 @@ public class Open_API_data_type
         .Should().HaveDebuggerDisplay("{ type: string, desc: Custom description, example: custom example, format: custom-uuid, pattern: [0-9]{4}-[0-9]{2}-[0-9]{2} }");
 }
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
+
+public class Enumerated
+{
+    [Test]
+    public void Resolves_defined_values()
+         => OpenApiDataType.FromType(typeof(AbcEnum))!
+            .Enum.Should().BeEquivalentTo("A", "B", "C", "?");
+}
+
 [Explicit]
 public class README_md
 {
@@ -70,7 +81,6 @@ public class README_md
                     type = info.Type,
                     format = info.Format,
                     pattern = info.Pattern,
-                    nullable = info.Nullable,
                     @enum = info.Enum?.ToArray(),
                 });
 
@@ -85,7 +95,6 @@ public class README_md
         public string? type { get; init; }
         public string? format { get; init; }
         public string? pattern { get; init; }
-        public bool nullable { get; init; }
         public string[]? @enum { get; init; } = [];
     }
 
@@ -95,4 +104,5 @@ public class README_md
         DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
     };
 }
+
 #endif

@@ -1,3 +1,4 @@
+using Qowaiv.Humanizer;
 using Qowaiv.Specs.TestTools;
 
 namespace Mathematics.Fraction_specs;
@@ -367,6 +368,7 @@ public class Throws_when
         => dec.Invoking(d => (Fraction)d).Should().Throw<OverflowException>()
         .WithMessage("Value was either too large or too small for a Fraction.");
 
+#if !NET48 // bounderies are slightly different for .NET 4.8
     [TestCase(-9223372036854775808.0)]
     [TestCase(+9223372036854775808.0)]
     public void fraction_can_no_be_created_form_double(double dbl)
@@ -378,6 +380,7 @@ public class Throws_when
     public void fraction_can_no_be_created_form_decimal(decimal dec)
         => dec.Invoking(Fraction.Create).Should().Throw<ArgumentOutOfRangeException>()
         .WithMessage("Value was either too large or too small for a Fraction. *");
+#endif
 
     [Test]
     public void invalid_input_is_parsed()
@@ -646,7 +649,7 @@ public class Can_be_casted_explicit
     public void to_decimal(Fraction fraction, decimal casted) => ((decimal)fraction).Should().Be(casted);
 
     [Test]
-    public void to_percent() => ((Percentage)1.DividedBy(4)).Should().Be(25.Percent());
+    public void to_percent() => ((Percentage)1.DividedBy(4)).Should().Be(25m.Percent());
 
     [Test]
     public void from_Int32() => ((Fraction)42).Should().Be(42.DividedBy(1));
@@ -661,7 +664,7 @@ public class Can_be_casted_explicit
     public void from_decimal() => ((Fraction)(-69m / 17m)).Should().Be(Svo.Fraction);
 
     [Test]
-    public void from_percent() => ((Fraction)25.Percent()).Should().Be(1.DividedBy(4));
+    public void from_percent() => ((Fraction)25m.Percent()).Should().Be(1.DividedBy(4));
 }
 
 public class Is_comparable
@@ -843,7 +846,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase(4L, "4/1")]
     [TestCase(0.25d, "1/4")]
     [TestCase("13%", "13/100")]

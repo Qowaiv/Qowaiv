@@ -1,4 +1,4 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 using Qowaiv.Web;
 using System.Net.Http;
@@ -8,8 +8,7 @@ using System.Text.Json.Serialization;
 namespace Qowaiv.Json.Web;
 
 /// <summary>Provides a JSON conversion for an HTTP Method.</summary>
-[Inheritable]
-public class HttpMethodJsonConverter : JsonConverter<HttpMethod>
+public sealed class HttpMethodJsonConverter : JsonConverter<HttpMethod>
 {
     /// <inheritdoc />
     [Pure]

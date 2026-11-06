@@ -1,3 +1,5 @@
+using Qowaiv.Humanizer;
+
 namespace Year_specs;
 
 public class With_domain_logic
@@ -113,7 +115,11 @@ public class Is_equal_by_value
         => (Svo.Year != 2017.CE()).Should().BeTrue();
 
     [TestCase("", 0)]
+#if NET48
+    [TestCase("1979", 538423912)]
+#else
     [TestCase("1979", 665629288)]
+#endif
     public void hash_code_is_value_based(Year svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -369,7 +375,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase("?", "?")]
     [TestCase(null, null)]
     [TestCase(2017d, 2017)]
@@ -455,8 +461,7 @@ public class Is_Open_API_data_type
           description: "Year(-only) notation.",
           example: 1983,
           type: "integer",
-          format: "year",
-          nullable: true));
+          format: "year"));
 }
 
 public class Debugger

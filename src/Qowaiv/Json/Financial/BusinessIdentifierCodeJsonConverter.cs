@@ -1,4 +1,4 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 using Qowaiv.Financial;
 using System.Text.Json;
@@ -6,8 +6,7 @@ using System.Text.Json;
 namespace Qowaiv.Json.Financial;
 
 /// <summary>Provides a JSON conversion for a BIC.</summary>
-[Inheritable]
-public class BusinessIdentifierCodeJsonConverter : SvoJsonConverter<BusinessIdentifierCode>
+internal sealed class BusinessIdentifierCodeJsonConverter : SvoJsonConverter<BusinessIdentifierCode>
 {
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, BusinessIdentifierCode value, JsonSerializerOptions options)

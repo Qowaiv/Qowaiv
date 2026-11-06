@@ -1,12 +1,11 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 using Qowaiv.Financial;
 
 namespace Qowaiv.Json.Financial;
 
 /// <summary>Provides a JSON conversion for money.</summary>
-[Inheritable]
-public class MoneyJsonConverter : SvoJsonConverter<Money>
+internal sealed class MoneyJsonConverter : SvoJsonConverter<Money>
 {
     /// <inheritdoc />
     [Pure]

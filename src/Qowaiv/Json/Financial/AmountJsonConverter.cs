@@ -1,4 +1,4 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 using Qowaiv.Financial;
 using System.Buffers.Text;
@@ -7,8 +7,7 @@ using System.Text.Json;
 namespace Qowaiv.Json.Financial;
 
 /// <summary>Provides a JSON conversion for an amount.</summary>
-[Inheritable]
-public class AmountJsonConverter : SvoJsonConverter<Amount>
+internal sealed class AmountJsonConverter : SvoJsonConverter<Amount>
 {
     /// <inheritdoc />
     public override Amount Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

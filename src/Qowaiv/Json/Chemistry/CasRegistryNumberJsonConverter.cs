@@ -1,12 +1,11 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 using Qowaiv.Chemistry;
 
 namespace Qowaiv.Json.Chemistry;
 
 /// <summary>Provides a JSON conversion for a CAS registry.</summary>
-[Inheritable]
-public class CasRegistryNumberJsonConverter : SvoJsonConverter<CasRegistryNumber>
+internal sealed class CasRegistryNumberJsonConverter : SvoJsonConverter<CasRegistryNumber>
 {
     /// <inheritdoc />
     [Pure]

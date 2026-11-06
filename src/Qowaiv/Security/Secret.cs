@@ -7,7 +7,7 @@ namespace Qowaiv.Security;
 /// <summary>Represents a secret.</summary>
 [TypeConverter(typeof(SecretTypeConverter))]
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Security.SecretJsonConverter))]
 #endif
 public readonly struct Secret : IEquatable<Secret>, IEmpty<Secret>
@@ -49,7 +49,7 @@ public readonly struct Secret : IEquatable<Secret>, IEmpty<Secret>
     /// Secrets are supposed to be passed around, without knowing its content.
     /// </remarks>
     [Pure]
-    public bool Equals(Secret other) => IsEmpty() && other.IsEmpty();
+    public bool Equals(Secret other) => !HasValue && !other.HasValue;
 
     /// <inheritdoc />
     [DoesNotReturn]

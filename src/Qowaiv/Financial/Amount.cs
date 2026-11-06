@@ -7,11 +7,11 @@ namespace Qowaiv.Financial;
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(decimal))]
 [OpenApiDataType(description: "Decimal representation of a currency amount.", example: 15.95, type: "number", format: "amount")]
 [TypeConverter(typeof(AmountTypeConverter))]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Financial.AmountJsonConverter))]
 #endif
 public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatable<Amount>, IComparable, IComparable<Amount>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IMinMaxValue<Amount>
 #endif
 {
@@ -61,6 +61,7 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// The factor of which the number should be multiple of.
     /// </param>
     [Pure]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Amount RoundToMultiple(decimal multipleOf) => RoundToMultiple(multipleOf, DecimalRounding.BankersRound);
 
     /// <summary>Rounds the amount value to the closed number that is a multiple of the specified factor.</summary>
@@ -71,7 +72,8 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// The rounding method used to determine the closed by number.
     /// </param>
     [Pure]
-    public Amount RoundToMultiple(decimal multipleOf, DecimalRounding mode) => (Amount)m_Value.RoundToMultiple(multipleOf, mode);
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public Amount RoundToMultiple(decimal multipleOf, DecimalRounding mode) => m_Value.RoundToMultiple(multipleOf, mode).Amount();
 
     /// <summary>Returns the larger of two amounts.</summary>
     /// <param name="val1">
@@ -287,6 +289,7 @@ public readonly partial struct Amount : IXmlSerializable, IFormattable, IEquatab
     /// A decimal describing an Amount.
     /// </param >
     [Pure]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Amount Create(decimal val) => new(val);
 
     /// <summary>Creates an Amount from a Double.</summary >

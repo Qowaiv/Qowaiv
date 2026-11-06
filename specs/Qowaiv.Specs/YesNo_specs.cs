@@ -2,6 +2,10 @@ namespace YesNo_specs;
 
 public class With_domain_logic
 {
+    [Test]
+    public void DefinedValues_are_Yes_and_No()
+        => YesNo.DefinedValues.Should().Equal(YesNo.Yes, YesNo.No);
+
     [TestCase(true, "yes")]
     [TestCase(true, "no")]
     [TestCase(true, "?")]
@@ -387,7 +391,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase(null, null)]
     [TestCase("yes", "yes")]
     [TestCase("no", "no")]
@@ -486,14 +490,13 @@ public class Is_Open_API_data_type
     [Test]
     public void with_info()
         => OpenApiDataType.FromType(typeof(YesNo))
-        .Should().BeEquivalentTo(new OpenApiDataType(
+        .Should().Be(new OpenApiDataType(
             dataType: typeof(YesNo),
             description: "Yes-No notation.",
             example: "yes",
             type: "string",
             format: "yes-no",
-            @enum: ["yes", "no", "?"],
-            nullable: true));
+            @enum: ["yes", "no", "?"]));
 }
 
 public class Debugger

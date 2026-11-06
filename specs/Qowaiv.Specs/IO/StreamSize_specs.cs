@@ -1,3 +1,5 @@
+using Qowaiv.Humanizer;
+
 namespace IO.StreamSize_specs;
 
 public class Has_constant
@@ -617,7 +619,7 @@ public class Can_be_operated_on
     public void multiply_by_percentage()
     {
         StreamSize act = 42;
-        act *= 50.Percent();
+        act *= 50m.Percent();
         act.Should().Be(21);
     }
 
@@ -744,7 +746,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase("1600", 1_600)]
     [TestCase("17MB", 17_000_000)]
     [TestCase("1.766Kb", 1_766)]

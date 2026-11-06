@@ -33,8 +33,9 @@ public partial struct Uuid : IEmpty<Uuid>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
+
 public partial struct Uuid : IEquatable<Uuid>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IEqualityOperators<Uuid, Uuid, bool>
 #endif
 {
@@ -137,7 +138,7 @@ public partial struct Uuid : IXmlSerializable
         => Guard.NotNull(writer).WriteString(ToXmlString());
 }
 public partial struct Uuid
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     : IParsable<Uuid>
 #endif
 {

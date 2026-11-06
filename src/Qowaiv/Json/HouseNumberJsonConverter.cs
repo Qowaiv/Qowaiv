@@ -1,10 +1,9 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 namespace Qowaiv.Json;
 
 /// <summary>Provides a JSON conversion for a house number.</summary>
-[Inheritable]
-public class HouseNumberJsonConverter : SvoJsonConverter<HouseNumber>
+internal sealed class HouseNumberJsonConverter : SvoJsonConverter<HouseNumber>
 {
     /// <inheritdoc />
     [Pure]

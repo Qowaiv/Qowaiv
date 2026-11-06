@@ -5,11 +5,11 @@ namespace Qowaiv;
 [SingleValueObject(SingleValueStaticOptions.All ^ SingleValueStaticOptions.HasEmptyValue ^ SingleValueStaticOptions.HasUnknownValue, typeof(DateTime))]
 [OpenApiDataType(description: "Full-date notation as defined by RFC 3339, section 5.6.", example: "2017-06-10", type: "string", format: "date")]
 [TypeConverter(typeof(DateTypeConverter))]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.DateJsonConverter))]
 #endif
 public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable<Date>, IComparable, IComparable<Date>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IIncrementOperators<Date>, IDecrementOperators<Date>
     , IAdditionOperators<Date, TimeSpan, DateTime>, ISubtractionOperators<Date, TimeSpan, DateTime>
     , IAdditionOperators<Date, MonthSpan, Date>, ISubtractionOperators<Date, MonthSpan, Date>
@@ -389,14 +389,14 @@ public readonly partial struct Date : IXmlSerializable, IFormattable, IEquatable
     /// The <see cref="Qowaiv.Month" /> the date should be in.
     /// </param>
     [Pure]
-    public bool IsIn(Month month) => !month.IsEmptyOrUnknown() && Month == (int)month;
+    public bool IsIn(Month month) => month.IsKnown && Month == (int)month;
 
     /// <summary>Returns true if the date is in the specified year, otherwise false.</summary>
     /// <param name="year">
     /// The <see cref="Qowaiv.Year" /> the date should be in.
     /// </param>
     [Pure]
-    public bool IsIn(Year year) => !year.IsEmptyOrUnknown() && Year == (int)year;
+    public bool IsIn(Year year) => year.IsKnown && Year == (int)year;
 
     /// <summary>Deserializes the date from a JSON number.</summary>
     /// <param name="json">

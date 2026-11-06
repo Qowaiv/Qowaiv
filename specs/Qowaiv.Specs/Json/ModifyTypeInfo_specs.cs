@@ -1,9 +1,8 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 using Qowaiv.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
-using static Extensions.Type_specs.CSharpString;
 
 namespace Json.ModifyTypeInfo_specs;
 

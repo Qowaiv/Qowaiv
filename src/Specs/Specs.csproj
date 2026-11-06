@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/specs.props" />
+
+  <ItemGroup Label="Internals under test">
+    <Compile Include="../Qowaiv/Text/Chars.cs" Link="_Internal/Text/Chars.cs" />
+  </ItemGroup>
+  
+  <ItemGroup Label="Projects under test">
+    <ProjectReference Include="../Qowaiv/Qowaiv.csproj" />
+  </ItemGroup>
+
+</Project>

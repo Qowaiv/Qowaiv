@@ -4,6 +4,9 @@ using System.Runtime.CompilerServices;
 namespace System;
 
 /// <summary>Extensions on <see cref="Type" />.</summary>
+/// <remarks>
+/// Copy of that one in Qowaiv.Refelction, but internal and without a FrozenDictionary.
+/// </remarks>
 internal static class QowaivCodeGenerationTypeExtensions
 {
     private static readonly object _shortNameCacheLocker = new();
@@ -105,8 +108,7 @@ internal static class QowaivCodeGenerationTypeExtensions
                 .AppendPrefix(type, withNamespace)
                 .Append(type.Name)
                 .Append('<')
-                .Append(new string(',', type.GetGenericArguments().Length - 1))
-                .Append('>');
+                .Append(',', type.GetGenericArguments().Length - 1).Append('>');
         }
         else if (type.GetGenericArguments() is { Length: > 0 } genericArguments)
         {

@@ -340,7 +340,7 @@ public class Is_comparable
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase(null, null)]
     [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
     public void System_Text_JSON_deserialization(object json, InternetMediaType svo)
@@ -384,8 +384,7 @@ public class Is_Open_API_data_type
             description: "Media type notation as defined by RFC 6838.",
             example: "text/html",
             type: "string",
-            format: "internet-media-type",
-            nullable: true));
+            format: "internet-media-type"));
 }
 
 public class Supports_XML_serialization

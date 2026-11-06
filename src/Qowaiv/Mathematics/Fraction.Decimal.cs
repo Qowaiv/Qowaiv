@@ -15,11 +15,11 @@ public readonly partial struct Fraction
     [Pure]
     public static Fraction Create(decimal number, decimal error)
     {
-        if (!number.IsInRange(long.MinValue, long.MaxValue))
+        if (number is not (>= -long.MaxValue and <= long.MaxValue))
         {
             throw new ArgumentOutOfRangeException(nameof(number), QowaivMessages.OverflowException_Fraction);
         }
-        else if (!error.IsInRange(MinimumError, 1))
+        else if (error is not (>= MinimumError and <= 1))
         {
             throw new ArgumentOutOfRangeException(nameof(error), QowaivMessages.ArgumentOutOfRange_FractionError);
         }

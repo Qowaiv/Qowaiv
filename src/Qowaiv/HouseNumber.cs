@@ -3,13 +3,17 @@ namespace Qowaiv;
 /// <summary>Represents a house number.</summary>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(int))]
-[OpenApiDataType(description: "House number notation.", example: "13", type: "string", format: "house-number", nullable: true)]
+[OpenApiDataType(
+    description: "House number notation.",
+    example: "13",
+    type: "string",
+    format: "house-number")]
 [TypeConverter(typeof(HouseNumberTypeConverter))]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.HouseNumberJsonConverter))]
 #endif
 public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEquatable<HouseNumber>, IComparable, IComparable<HouseNumber>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IMinMaxValue<HouseNumber>
 #endif
 {
@@ -145,9 +149,7 @@ public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEq
             result = Unknown;
             return true;
         }
-        else if (int.TryParse(s, NumberStyles.None, culture, out var number)
-            && number >= MinValue.m_Value
-            && number <= MaxValue.m_Value)
+        else if (int.TryParse(s, NumberStyles.None, culture, out var number) && IsValid(number))
         {
             result = new(number);
             return true;

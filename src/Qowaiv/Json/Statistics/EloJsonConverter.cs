@@ -1,12 +1,11 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 using Qowaiv.Statistics;
 
 namespace Qowaiv.Json.Statistics;
 
 /// <summary>Provides a JSON conversion for an Elo.</summary>
-[Inheritable]
-public class EloJsonConverter : SvoJsonConverter<Elo>
+internal sealed class EloJsonConverter : SvoJsonConverter<Elo>
 {
     /// <inheritdoc />
     [Pure]

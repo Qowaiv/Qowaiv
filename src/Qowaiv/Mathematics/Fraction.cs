@@ -8,7 +8,7 @@ namespace Qowaiv.Mathematics;
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(Tuple<long, long>))]
 [OpenApiDataType(description: "Fraction", type: "string", format: "fraction", pattern: "-?[0-9]+(/[0-9]+)?", example: "13/42")]
 [TypeConverter(typeof(FractionTypeConverter))]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Mathematics.FractionJsonConverter))]
 #endif
 [StructLayout(LayoutKind.Sequential)]
@@ -70,7 +70,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
 
         public static readonly Regex Pattern = GetPattern();
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
         [GeneratedRegex(@"^(\[(?<Whole>.+)\] ?)?(?<Numerator>.+?)(?<FractionBars>[/:÷⁄∕̷̸])(?<Denominator>.+)$", RegOptions.Default, RegOptions.TimeoutMilliseconds)]
         private static partial Regex GetPattern();
 #else
@@ -225,7 +225,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
             }
 
             // use invariant as we want to convert to superscript.
-            var super = remainder.Abs().ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SuperScript[ASCII.Number(ch)]).ToArray();
+            var super = remainder.Abs().ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SuperScript[ch.Digit]).ToArray();
             sb.Append(super);
         }
         else
@@ -243,7 +243,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
         if (format == "sub")
         {
             // use invariant as we want to convert to superscript.
-            var super = Denominator.ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SubScript[ASCII.Number(ch)]).ToArray();
+            var super = Denominator.ToString(CultureInfo.InvariantCulture).Select(ch => Formatting.SubScript[ch.Digit]).ToArray();
             sb.Append(super);
         }
         else

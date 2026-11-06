@@ -5,11 +5,11 @@ Amount JSON serialization is equivalent to decimal JSON serialization:
 
 | Method  | Categories           | Mean     | Ratio |
 |-------- |--------------------- |---------:|------:|
-| Decimal | JSON Deserialization | 51.81 us |  1.00 |
-| Amount  | JSON Deserialization | 50.68 us |  0.98 |
+| Decimal | JSON Deserialization | 51.81 ns |  1.00 |
+| Amount  | JSON Deserialization | 50.68 ns |  0.98 |
 |         |                      |          |       |
-| Decimal | JSON Serialization   | 26.88 us |  1.00 |
-| Amount  | JSON Serialization   | 27.49 us |  1.02 |
+| Decimal | JSON Serialization   | 26.88 ns |  1.00 |
+| Amount  | JSON Serialization   | 27.49 ns |  1.02 |
 
 ## IBAN
 The IBAN parser has been rewritten multiple times. Until v6.6.0 it was regex
@@ -65,23 +65,15 @@ The benchmark converts 1,000 random (rounded) decimals per invocation.
 
 | Method  | Categories |  Per op.  | Ratio |
 |-------- |----------- |----------:|------:|
-| Trim    | 32 bit     | 13.379 ms |  2.40 |
-| No trim | 32 bit     |  5.579 us |  1.00 |
+| Trim    | 32 bit     | 13.379 ns |  2.40 |
+| No trim | 32 bit     |  5.579 ns |  1.00 |
 |         |            |           |       |
-| Trim    | 96 bit     | 19.855 ms |  2.57 |
-| No trim | 96 bit     |  7.735 ms |  1.00 |
+| Trim    | 96 bit     | 19.855 ns |  2.57 |
+| No trim | 96 bit     |  7.735 ns |  1.00 |
 
 `DecimalMath.Scale` is the fastest way to divide by 100 *and* remove trailing
 zeros. The plain multiplication is faster, but it does not normalize the scale.
 
-### System.Text.Json Serialization
-| Method     | Categories           | Mean     | Ratio |
-|----------- |--------------------- |---------:|------:|
-| Decimal    | JSON Deserialization | 42.65 us |  1.00 |
-| Percentage | JSON Deserialization | 52.71 us |  1.24 |
-|            |                      |          |       |
-| Decimal    | JSON Serialization   | 25.65 us |  1.00 |
-| Percentage | JSON Serialization   | 39.77 us |  1.55 |
 
 ## UUID
 The Base64 (default) implementation of a UUID is comparable with GUID.
@@ -102,12 +94,79 @@ The Base64 (default) implementation of a UUID is comparable with GUID.
 | GUID based ID | ToString() |  3.420 ns |  0.43 |
 | UUID based ID | ToString() |  3.306 ns |  0.42 |
 
-## Yes-No
+## System.Text.Json (De)Serialization
+Reading or writen an array of 1000 items, mean is a single operation.
 
-Writting an array of 1000 items. The baseline is `YesNo`s as strings.
+### Date
+| Read       | Runtime   | Mean      | Ratio | Allocated |
+|----------- |---------- |----------:|------:|----------:|
+| DateOnly   | .NET 10.0 |  34.42 ns |  1.00 |  28.18 KB |
+| Date       | .NET 10.0 |  37.62 ns |  1.10 |  40.07 KB |
+|            |           |           |       |           |
+| DateOnly   | .NET 11.0 |  29.01 ns |  1.00 |  28.18 KB | 
+| Date       | .NET 11.0 |  32.98 ns |  1.15 |  40.07 KB |
+		     
+| Write      | Runtime   | Mean      | Ratio | Allocated |
+|----------- |---------- |----------:|------:|----------:|
+| DateOnly   | .NET 10.0 |  27.80 ns |  1.00 |      32 B |
+| Date       | .NET 10.0 |  53.96 ns |  1.95 |      32 B |
+|            |           |           |       |           |
+| DateOnly   | .NET 11.0 |  22.07 ns |  1.00 |      32 B |
+| Date       | .NET 11.0 |  43.82 ns |  1.99 |      32 B |
 
-| JSON write | Mean      |  Ratio | Allocated | Alloc Ratio |
-|----------- |----------:|-------:|----------:|------------:|
-| String     | 115.56 ns |   1.00 |      32 B |        1.00 |
-| Boolean?   |  89.04 ns |   0.77 |      32 B |        1.00 |
-| YesNo      |  87.00 ns |   0.75 |      32 B |        1.00 |
+### IBAN
+| Read       | Runtime   | Mean      | Ratio | Allocated |
+|----------- |---------- |----------:|------:|----------:|
+| String     | .NET 10.0 |  66.14 ns |  1.00 | 110.64 KB |
+| Iban       | .NET 10.0 | 112.94 ns |  1.71 | 110.86 KB |
+|            |           |           |       |           |
+| String     | .NET 11.0 |  63.85 ns |  1.00 | 110.64 KB |
+| Iban       | .NET 11.0 | 111.69 ns |  1.75 | 110.86 KB |
+		     
+| Write      | Runtime   | Mean      | Ratio | Allocated |
+|----------- |---------- |----------:|------:|----------:|
+| String     | .NET 10.0 |  32.60 ns |  1.00 |      32 B |
+| Iban       | .NET 10.0 |  29.25 ns |  0.90 |      32 B |
+|            |           |           |       |           |
+| String     | .NET 11.0 |  27.76 ns |  1.00 |      32 B |
+| Iban       | .NET 11.0 |  26.16 ns |  0.95 |      32 B |
+
+### Percentage
+| Read       | Runtime   | Mean      | Ratio | Allocated |
+|----------- |---------- |----------:|------:|----------:|
+| String     | .NET 10.0 |  50.25 ns |  1.00 |  76.91 KB |
+| Decimal    | .NET 10.0 |  74.27 ns |  1.49 |  63.85 KB |
+| Percentage | .NET 10.0 |  78.11 ns |  1.56 |  63.85 KB |
+|            |           |           |       |           |
+| String     | .NET 11.0 |  41.05 ns |  1.00 |  76.91 KB |
+| Decimal    | .NET 11.0 |  53.52 ns |  1.31 |  63.85 KB |
+| Percentage | .NET 11.0 |  70.32 ns |  1.72 |  63.85 KB |
+
+| Write      | Runtime   | Mean      | Ratio | Allocated |
+|----------- |---------- |----------:|------:|----------:|
+| Percentage | .NET 10.0 |  51.17 ns |  1.00 |      32 B |
+| YesNo      | .NET 10.0 |  65.89 ns |  1.29 |      32 B |
+|            |           |           |       |           |
+| Percentage | .NET 11.0 |  39.46 ns |  1.00 |      32 B |
+| YesNo      | .NET 11.0 |  66.55 ns |  1.69 |      32 B |
+
+### Yes/No
+| Read       | Runtime   | Mean      | Ratio | Allocated |
+|----------- |---------- |----------:|------:|----------:|
+| String     | .NET 10.0 |  37.98 ns |  1.00 |  69.37 KB |
+| Bool       | .NET 10.0 |  22.87 ns |  0.61 |  22.23 KB |
+| YesNo      | .NET 10.0 |  32.90 ns |  0.88 |  19.27 KB |
+|            |           |           |       |           |
+| String     | .NET 11.0 |  34.64 ns |  1.00 |  69.37 KB |
+| Bool       | .NET 11.0 |  22.51 ns |  0.66 |  22.23 KB |
+| YesNo      | .NET 11.0 |  34.78 ns |  1.01 |  19.27 KB |
+		     
+| Write      | Runtime   | Mean      | Ratio | Allocated |
+|----------- |---------- |----------:|------:|----------:|
+| String     | .NET 10.0 |  26.00 ns |  1.00 |      32 B |
+| Bool       | .NET 10.0 |  15.30 ns |  0.59 |      32 B |
+| YesNo      | .NET 10.0 |  16.92 ns |  0.65 |      32 B |
+|            |           |           |       |           |
+| String     | .NET 11.0 |  20.41 ns |  1.00 |      32 B |
+| Bool       | .NET 11.0 |  13.22 ns |  0.65 |      32 B |
+| YesNo      | .NET 11.0 |  15.83 ns |  0.78 |      32 B |

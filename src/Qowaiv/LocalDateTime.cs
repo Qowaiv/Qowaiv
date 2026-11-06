@@ -5,11 +5,11 @@ namespace Qowaiv;
 [SingleValueObject(SingleValueStaticOptions.Continuous, typeof(DateTime))]
 [OpenApiDataType(description: "Date-time notation as defined by RFC 3339, without time zone information.", example: "2017-06-10 15:00", type: "string", format: "local-date-time")]
 [TypeConverter(typeof(LocalDateTimeTypeConverter))]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.LocalDateTimeJsonConverter))]
 #endif
 public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, IEquatable<LocalDateTime>, IComparable, IComparable<LocalDateTime>
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     , IIncrementOperators<LocalDateTime>, IDecrementOperators<LocalDateTime>
     , IAdditionOperators<LocalDateTime, TimeSpan, LocalDateTime>, ISubtractionOperators<LocalDateTime, TimeSpan, LocalDateTime>
     , IAdditionOperators<LocalDateTime, MonthSpan, LocalDateTime>, ISubtractionOperators<LocalDateTime, MonthSpan, LocalDateTime>
@@ -454,14 +454,14 @@ public readonly partial struct LocalDateTime : IXmlSerializable, IFormattable, I
     /// The <see cref="Qowaiv.Month" /> the date should be in.
     /// </param>
     [Pure]
-    public bool IsIn(Month month) => !month.IsEmptyOrUnknown() && Month == (int)month;
+    public bool IsIn(Month month) => month.IsKnown && Month == (int)month;
 
     /// <summary>Returns true if the local date time is in the specified year, otherwise false.</summary>
     /// <param name="year">
     /// The <see cref="Qowaiv.Year" /> the date should be in.
     /// </param>
     [Pure]
-    public bool IsIn(Year year) => !year.IsEmptyOrUnknown() && Year == (int)year;
+    public bool IsIn(Year year) => year.IsKnown && Year == (int)year;
 
     /// <summary>Deserializes the local date time from a JSON number.</summary>
     /// <param name="json">

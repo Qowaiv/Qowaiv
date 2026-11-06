@@ -1,0 +1,5 @@
+# Build the dependency tree first
+/graphBuild
+
+# Displays errors, warnings, and high-level build summaries
+/v:minimal

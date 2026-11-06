@@ -10,7 +10,6 @@ public sealed class OpenApiDataTypeAttribute(
     string type,
     object example,
     string? format = null,
-    bool nullable = false,
     [StringSyntax(StringSyntaxAttribute.Regex)] string? pattern = null,
     string? @enum = null) : Attribute
 {
@@ -25,9 +24,6 @@ public sealed class OpenApiDataTypeAttribute(
 
     /// <summary>Gets the format of the OpenAPI Data Type.</summary>
     public string? Format { get; } = format;
-
-    /// <summary>Gets if the OpenAPI Data Type is nullable or not.</summary>
-    public bool Nullable { get; } = nullable;
 
     /// <summary>Gets the Pattern of the OpenAPI Data Type.</summary>
     [StringSyntax(StringSyntaxAttribute.Regex)]

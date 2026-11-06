@@ -1,13 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net11.0</TargetFramework>
     <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
   </PropertyGroup>
   
   <ItemGroup>
+    <None Include="*.rsp" />
     <None Include="build/**" />
     <None Include="design/**" />
+    <None Include="docs/**" />
     <None Include="shared/**" />
   </ItemGroup>
 

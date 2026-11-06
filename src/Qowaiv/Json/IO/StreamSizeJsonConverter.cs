@@ -1,12 +1,11 @@
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 
 using Qowaiv.IO;
 
 namespace Qowaiv.Json.IO;
 
 /// <summary>Provides a JSON conversion for a stream size.</summary>
-[Inheritable]
-public class StreamSizeJsonConverter : SvoJsonConverter<StreamSize>
+internal sealed class StreamSizeJsonConverter : SvoJsonConverter<StreamSize>
 {
     /// <inheritdoc />
     [Pure]

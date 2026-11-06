@@ -1,3 +1,5 @@
+using AwesomeAssertions.Extensions;
+
 namespace UUID_specs;
 
 public class With_domain_logic
@@ -84,7 +86,11 @@ public class Is_equal_by_value
         => (Svo.Uuid != Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeTrue();
 
     [TestCase("", 0)]
+#if NET48
+    [TestCase("Qowaiv_SVOLibrary_GUIA", -917906459)]
+#else
     [TestCase("Qowaiv_SVOLibrary_GUIA", -994020281)]
+#endif
     public void hash_code_is_value_based(Uuid svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -238,8 +244,7 @@ public class Can_be_created_sequential
     [Test]
     public void from_1_Jan_1970_on()
     {
-        using (Clock.SetTimeForCurrentContext(()
-        => DateTime.UnixEpoch.AddTicks(-1)))
+        using (Clock.SetTimeForCurrentContext(() => Dates.UnixEpoch.AddTicks(-1)))
         {
             Func<Uuid> next = Uuid.NewSequential;
             next.Should().Throw<InvalidOperationException>();
@@ -260,8 +265,7 @@ public class Can_be_created_sequential
     [Test]
     public void on_min_Date_first_6_bytes_are_0_for_default()
     {
-        using (Clock.SetTimeForCurrentContext(()
-        => DateTime.UnixEpoch))
+        using (Clock.SetTimeForCurrentContext(() => Dates.UnixEpoch))
         {
             Uuid.NewSequential().Should().HavePattern(
                 0, 0, 0, 0,
@@ -274,8 +278,7 @@ public class Can_be_created_sequential
     [Test]
     public void on_min_Date_last_6_bytes_are_0_for_SQL_Server()
     {
-        using (Clock.SetTimeForCurrentContext(()
-        => DateTime.UnixEpoch))
+        using (Clock.SetTimeForCurrentContext(() => Dates.UnixEpoch))
         {
             Uuid.NewSequential(UuidComparer.SqlServer).Should().HavePattern(
                 null, null, null, null,
@@ -288,8 +291,7 @@ public class Can_be_created_sequential
     [Test]
     public void on_max_Date_first_6_bytes_are_255_for_default()
     {
-        using (Clock.SetTimeForCurrentContext(()
-        => MaxDate))
+        using (Clock.SetTimeForCurrentContext(() => MaxDate))
         {
             Uuid.NewSequential().Should().HavePattern(
                 0xFF, 0xFF, 0xFF, 0xFF,
@@ -302,8 +304,7 @@ public class Can_be_created_sequential
     [Test]
     public void on_max_Date_last_6_bytes_are_255_for_SQL_Server()
     {
-        using (Clock.SetTimeForCurrentContext(()
-        => MaxDate))
+        using (Clock.SetTimeForCurrentContext(() => MaxDate))
         {
             Uuid.NewSequential(UuidComparer.SqlServer).Should().HavePattern(
                 null, null, null, null,
@@ -335,8 +336,7 @@ public class Can_be_created_sequential
 
         foreach (var date in GetTimes().Take(MultipleCount))
         {
-            using (Clock.SetTimeForCurrentContext(()
-        => date))
+            using (Clock.SetTimeForCurrentContext(() => date))
             {
                 ids.Add(Uuid.NewSequential(comparer));
             }
@@ -349,7 +349,7 @@ public class Can_be_created_sequential
     {
         var i = 17;
 
-        var date = DateTime.UnixEpoch;
+        var date = Dates.UnixEpoch;
 
         while (date < DateTime.MaxValue)
         {
@@ -510,7 +510,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase("", null)]
     [TestCase(null, null)]
     [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
@@ -587,8 +587,7 @@ public class Is_Open_API_data_type
            description: "Universally unique identifier, Base64 encoded.",
            example: "lmZO_haEOTCwGsCcbIZFFg",
            type: "string",
-           format: "uuid-base64",
-           nullable: true));
+           format: "uuid-base64"));
 }
 
 public class Debugger

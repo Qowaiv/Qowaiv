@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  
+  <Import Project="../../props/specs.props" />
+
+  <ItemGroup Label="Projects under test">
+    <ProjectReference Include="../Qowaiv.Data.SqlClient/Qowaiv.Data.SqlClient.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -18,9 +18,13 @@ namespace Qowaiv;
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.AllExcludingCulture ^ SingleValueStaticOptions.HasUnknownValue, typeof(Guid))]
-[OpenApiDataType(description: "Universally unique identifier, Base64 encoded.", example: "lmZO_haEOTCwGsCcbIZFFg", type: "string", format: "uuid-base64", nullable: true)]
+[OpenApiDataType(
+    description: "Universally unique identifier, Base64 encoded.",
+    example: "lmZO_haEOTCwGsCcbIZFFg",
+    type: "string",
+    format: "uuid-base64")]
 [TypeConverter(typeof(UuidTypeConverter))]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.UuidJsonConverter))]
 #endif
 public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable<Uuid>, IComparable, IComparable<Uuid>, INext<Uuid>
@@ -32,7 +36,7 @@ public readonly partial struct Uuid : IXmlSerializable, IFormattable, IEquatable
     private const int IndexOfVersion = 7;
 
     /// <summary>Get the version of the UUID.</summary>
-    public UuidVersion Version => m_Value.GetVersion();
+    public UuidVersion Version => m_Value.UuidVersion;
 
     /// <summary>Returns a 16-element byte array that contains the value of this instance.</summary>
     [Pure]

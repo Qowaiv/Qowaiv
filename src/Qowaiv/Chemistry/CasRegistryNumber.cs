@@ -12,9 +12,14 @@ namespace Qowaiv.Chemistry;
 /// </summary>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(long))]
-[OpenApiDataType(description: "CAS Registry Number", type: "string", format: "cas-nr", example: "7732-18-5", pattern: "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]", nullable: true)]
+[OpenApiDataType(
+    description: "CAS Registry Number",
+    type: "string",
+    format: "cas-nr",
+    example: "7732-18-5",
+    pattern: "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]")]
 [TypeConverter(typeof(Conversion.Chemistry.CasRegistryNumberTypeConverter))]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.Chemistry.CasRegistryNumberJsonConverter))]
 #endif
 public readonly partial struct CasRegistryNumber : IXmlSerializable, IFormattable, IEquatable<CasRegistryNumber>, IComparable, IComparable<CasRegistryNumber>
@@ -23,7 +28,7 @@ public readonly partial struct CasRegistryNumber : IXmlSerializable, IFormattabl
     public static CasRegistryNumber Unknown => new(long.MaxValue);
 
     /// <summary>Gets the number of characters of CAS Registry Number.</summary>
-    public int Length => IsEmptyOrUnknown() ? 0 : (int)Math.Ceiling(Math.Log10(m_Value));
+    public int Length => IsKnown ? (int)Math.Ceiling(Math.Log10(m_Value)) : 0;
 
     /// <summary>Returns a <see cref="string" /> that represents the CAS Registry Number for DEBUG purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

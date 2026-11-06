@@ -10,15 +10,17 @@ Qowaiv is a (Single) Value Object library for DDD (Date, EmailAddress, IBAN, Mon
 
 ## Build & test
 - Build: `dotnet build qowaiv.slnx --configuration Release`
-- Test: `dotnet test specs/Qowaiv.Specs --configuration Release`
+- Test: `dotnet test qowaiv.slnx --configuration Release` (all test projects, as CI does); `dotnet test specs/Qowaiv.Specs --configuration Release` for the main project only.
+- .NET Framework: the netstandard2.0 code paths are tested on .NET Framework 4.8. The test projects import `props/specs.props`, which adds `net48` to their target frameworks when `RunNetfx` is `true`; by default that is the case on Windows only, so `dotnet test` there includes net48 and Linux/macOS builds do not. Disable it with `-p:RunNetfx=false`, or per project by setting `RunNetfx` to `false` before importing `specs.props`. For net48 restore is not locked and its lock file is written to `obj/`. `dotnet restore --force-evaluate` leaves net48 out, so it refreshes the committed `packages.lock.json` files (net10.0/net11.0 only) on every OS. Code that can't run on net48 is guarded with `#if NET10_0_OR_GREATER`, and `*_generation.cs` specs are excluded.
 - Pack: `dotnet pack qowaiv.slnx -c Release --output packages` (CI does this on `v*` tags)
-- SDK pinned in `global.json` (10.0.x); core targets `netstandard2.0;net8.0;net9.0;net10.0`, tests `net8.0;net9.0;net10.0`. LangVersion 14; PolySharp supplies polyfills.
+- SDK pinned in `global.json`; see the `.csproj` files for the target frameworks. LangVersion 14; PolySharp supplies polyfills.
+- `Directory.Build.rsp` (`/graphBuild`, `/v:minimal`) applies to builds started from the repository root; switches on the command line override it. `/m` is left out on purpose (measured: no effect).
 
 ## Conventions
 - Follow `.editorconfig`: CRLF, UTF-8, final newline, 4 spaces for `.cs`, 2 for `.csproj`/`.props`. Prefer expression-bodied members.
 - Nullable is enabled. Analyzers (Sonar, StyleCop, Qowaiv.Analyzers, .NET analyzers) run during build; `.globalconfig` sets rule severities. Fix warnings rather than suppress.
 - Spell-check dictionary: `dictionary.dic`.
-- Central package management (`Directory.Packages.props`); lock files (`packages.lock.json`) are used and CI restores in locked mode, so commit updated lock files when changing dependencies.
+- Central package management (`Directory.Packages.props`); lock files (`packages.lock.json`) are used and CI restores in locked mode, so commit updated lock files when changing dependencies. Dependabot keeps only one target framework in the lock file of multi-target projects; `dependabot-lock-files.yaml` repairs that, locally use `dotnet restore qowaiv.slnx --force-evaluate`.
 - Assemblies are strong-name signed (`build/Qowaiv.snk`).
 
 ## Country languages
@@ -41,5 +43,15 @@ Country names are localized via `src/Qowaiv/Globalization/CountryLabels*.resx`. 
 ## Temporary files
 - If a temp location is needed, use `.temp` in the repository root (not the OS temp directory).
 
+## Ignored files
+- Always ignore `CompatibilitySuppressions.xml` (e.g. `src/Qowaiv/CompatibilitySuppressions.xml`): do not review, edit, or mention it in diffs and reviews.
+
 ## Releases
 - Version, `PackageReleaseNotes` and the `ToBeReleased` notes live in `src/Qowaiv/Qowaiv.csproj`. Update the notes for user-facing changes.
+- Pushing a `v*` tag releases: `release.yaml` builds, tests, packs, pushes the packages (and symbol packages) to NuGet, and then creates the GitHub release. Packages may have different versions; the tag alone is sufficient.
+
+## CI
+- Workflows live in `.github/workflows`: `build.yaml` (pushes and pull requests for `master` and `release/**`: build, tests, coverage, Sonar), `build-netfx.yaml` (same triggers, Windows: runs the specs on .NET Framework 4.8), `release.yaml` (tags), `code-coverage.yml` (pushes to `master`: Coveralls), `dependabot-lock-files.yaml`.
+- Major versions are developed in `release/<version>` branches (e.g. `release/v11`).
+- Everything is pinned: actions by full commit SHA with a `# vX.Y.Z` comment, `runs-on` to a specific Ubuntu version, `dotnet-sonarscanner` via `SONAR_SCANNER_VERSION`, the SDK via `global.json`. Dependabot updates the actions; the runner image and Sonar scanner are bumped by hand.
+- Coverage is collected as Cobertura (used by both Sonar and Coveralls).

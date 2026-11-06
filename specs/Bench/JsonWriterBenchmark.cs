@@ -1,3 +1,4 @@
+using BenchmarkDotNet.Columns;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -5,20 +6,24 @@ using System.Text.Json.Serialization;
 namespace Bench;
 
 [MemoryDiagnoser(true)]
-[MinColumn]
+[HideColumns(Column.StdDev, Column.Error, Column.Median, Column.RatioSD, Column.AllocRatio)]
 public class JsonWriterBenchmark : IDisposable
 {
     public JsonWriterBenchmark()
     {
-        Stream = new MemoryStream(4096);
-        Writer = new(Stream);
+        Stream1 = new MemoryStream(4096);
+        Stream2 = new MemoryStream(4096);
+        Writer1 = new(Stream1);
+        Writer2 = new(Stream2);
     }
 
     [IterationSetup]
     public void Setup()
     {
-        Stream.Position = 0;
-        Writer.Reset();
+        Stream1.Position = 0;
+        Stream2.Position = 0;
+        Writer1.Reset();
+        Writer2.Reset();
     }
 
     protected static JsonSerializerOptions Options(JsonConverter converter)
@@ -36,8 +41,10 @@ public class JsonWriterBenchmark : IDisposable
         WriteIndented = false,
     };
 
-    protected readonly MemoryStream Stream;
-    protected readonly Utf8JsonWriter Writer;
+    protected readonly MemoryStream Stream1;
+    protected readonly MemoryStream Stream2;
+    protected readonly Utf8JsonWriter Writer1;
+    protected readonly Utf8JsonWriter Writer2;
 
     protected virtual void Dispose(bool disposing)
     {
@@ -45,8 +52,10 @@ public class JsonWriterBenchmark : IDisposable
         {
             if (disposing)
             {
-                Stream.Dispose();
-                Writer.Dispose();
+                Stream1.Dispose();
+                Stream2.Dispose();
+                Writer1.Dispose();
+                Writer2.Dispose();
             }
             disposed = true;
         }

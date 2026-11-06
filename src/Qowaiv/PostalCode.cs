@@ -8,9 +8,13 @@ namespace Qowaiv;
 /// <summary>Represents a postal code.</summary>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
-[OpenApiDataType(description: "Postal code notation.", example: "2624DP", type: "string", format: "postal-code", nullable: true)]
+[OpenApiDataType(
+    description: "Postal code notation.",
+    example: "2624DP",
+    type: "string",
+    format: "postal-code")]
 [TypeConverter(typeof(PostalCodeTypeConverter))]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.PostalCodeJsonConverter))]
 #endif
 public readonly partial struct PostalCode : IXmlSerializable, IFormattable, IEquatable<PostalCode>, IComparable, IComparable<PostalCode>

@@ -1,4 +1,5 @@
 using Qowaiv.Chemistry;
+using Qowaiv.Humanizer;
 
 namespace Chemistry.CAS_Registry_Number_specs;
 
@@ -367,7 +368,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase("?", "?")]
     [TestCase(10028_14_5L, "10028-14-5")]
     public void System_Text_JSON_deserialization(object json, CasRegistryNumber svo)
@@ -448,8 +449,7 @@ public class Is_Open_API_data_type
            example: "7732-18-5",
            type: "string",
            format: "cas-nr",
-           pattern: "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]",
-           nullable: true));
+           pattern: "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]"));
 
     [TestCase("7732-18-5")]
     [TestCase("10028-14-5")]

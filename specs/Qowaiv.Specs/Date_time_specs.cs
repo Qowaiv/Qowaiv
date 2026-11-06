@@ -1,3 +1,5 @@
+using Qowaiv.Humanizer;
+
 namespace Date_time_specs;
 
 public class Can_be_adjusted_with

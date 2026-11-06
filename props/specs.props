@@ -1,0 +1,61 @@
+<Project>
+
+  <Import Project="nopackage.props" />
+
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <IsTestProject>true</IsTestProject>
+    <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
+    <DefineConstants>CONTRACTS_FULL</DefineConstants>
+  </PropertyGroup>
+
+  <!--
+    By default, net48 is added on Windows only. It is not added when restoring with
+    'force evaluate' (used to refresh the committed packages.lock.json files), so
+    those files only contain the target frameworks we ship, on every OS.
+    A project can opt out by setting RunNetfx to false before importing this file.
+  -->
+  <PropertyGroup Condition="'$(RunNetfx)' == ''">
+    <RunNetfx Condition="'$(RestoreForceEvaluate)' != 'true'">$([MSBuild]::IsOSPlatform('Windows'))</RunNetfx>
+    <RunNetfx Condition="'$(RunNetfx)' == ''">false</RunNetfx>
+  </PropertyGroup>
+
+  <!--
+    .NET Framework 4.8 target for test projects, to run the netstandard2.0
+    code paths of the libraries. It requires Windows.
+  -->
+  <PropertyGroup Condition="'$(RunNetfx)' == 'true'">
+    <TargetFrameworks>$(TargetFrameworks);net48</TargetFrameworks>
+    <NuGetLockFilePath>$(MSBuildProjectDirectory)/obj/packages.net48.lock.json</NuGetLockFilePath>
+    <RestoreLockedMode>false</RestoreLockedMode>
+  </PropertyGroup>
+
+  <ItemGroup Label="Test Tools">
+    <PackageReference Include="AwesomeAssertions" />
+    <PackageReference Include="NUnit" />
+    <PackageReference Include="NUnit3TestAdapter" NoWarn="NU1701" />
+  </ItemGroup>
+
+  <ItemGroup Label="Build Tools">
+    <PackageReference PrivateAssets="all" Include="coverlet.collector" />
+    <PackageReference PrivateAssets="all" Include="Microsoft.NET.Test.Sdk" />
+  </ItemGroup>
+
+  <ItemGroup Label="Analyzers">
+    <PackageReference PrivateAssets="all" Include="AwesomeAssertions.Analyzers" />
+    <PackageReference PrivateAssets="all" Include="NUnit.Analyzers" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="Diagnostics contracts code generation">
+    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileFullPath)" Visible="false" />
+  </ItemGroup>
+  
+</Project>

@@ -1,4 +1,5 @@
 using AwesomeAssertions.Extensions;
+using Qowaiv.Humanizer;
 
 namespace YearMonth_specs;
 
@@ -376,7 +377,7 @@ public class Casts
     public void explicitly_from_LocalDateTime()
         => ((YearMonth)Svo.LocalDateTime).Should().Be(Svo.YearMonth);
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [Test]
     public void explicitly_from_DateOnly()
         => ((YearMonth)Svo.DateOnly).Should().Be(Svo.YearMonth);
@@ -394,7 +395,7 @@ public class Casts
     public void explicitly_to_LocalDateTime()
         => ((LocalDateTime)Svo.YearMonth).Should().Be(new LocalDateTime(2017, 06, 01));
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [Test]
     public void explicitly_to_DateOnly()
         => ((DateOnly)Svo.YearMonth).Should().Be(new DateOnly(2017, 06, 01));
@@ -429,7 +430,7 @@ public class Supports_type_conversion
     public void from_DateTime()
         => Converting.From(Svo.DateTime).To<YearMonth>().Should().Be(Svo.YearMonth);
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [Test]
     public void from_DateOnly()
         => Converting.From(Svo.DateOnly).To<YearMonth>().Should().Be(Svo.YearMonth);
@@ -461,7 +462,7 @@ public class Supports_type_conversion
         => Converting.To<DateTime>().From(Svo.YearMonth).Should().Be(01.June(2017));
 
 
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [Test]
     public void to_DateOnly()
         => Converting.To<DateOnly>().From(Svo.YearMonth).Should().Be(new DateOnly(2017, 06, 01));
@@ -482,7 +483,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase("2017-06", "2017-06")]
     public void System_Text_JSON_deserialization(object json, YearMonth svo)
         => JsonTester.Read_System_Text_JSON<YearMonth>(json).Should().Be(svo);

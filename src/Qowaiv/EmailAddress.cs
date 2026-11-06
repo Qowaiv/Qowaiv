@@ -8,9 +8,13 @@ namespace Qowaiv;
 /// <summary>Represents an email address.</summary>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
-[OpenApiDataType(description: "Email notation as defined by RFC 5322.", example: "svo@qowaiv.org", type: "string", format: "email", nullable: true)]
+[OpenApiDataType(
+    description: "Email notation as defined by RFC 5322.",
+    example: "svo@qowaiv.org",
+    type: "string",
+    format: "email")]
 [TypeConverter(typeof(EmailAddressTypeConverter))]
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.EmailAddressJsonConverter))]
 #endif
 public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IEquatable<EmailAddress>, IComparable, IComparable<EmailAddress>

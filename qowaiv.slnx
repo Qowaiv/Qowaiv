@@ -1,28 +1,22 @@
 <Solution>
-  <Folder Name="/Core/">
-    <Project Path="src/Qowaiv.Data.SqlClient/Qowaiv.Data.SqlClient.csproj" />
-    <Project Path="src/Qowaiv/Qowaiv.csproj" />
-  </Folder>
   <Folder Name="/Generation/">
     <Project Path="src/Qowaiv.CodeGeneration.SingleValueObjects/Qowaiv.CodeGeneration.SingleValueObjects.csproj" />
     <Project Path="src/Qowaiv.CodeGeneration/Qowaiv.CodeGeneration.csproj" />
     <Project Path="src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" />
   </Folder>
-  <Folder Name="/Specs/">
-    <Project Path="specs/Bench/Bench.csproj">
-      <Build Solution="Debug|*" Project="false" />
-    </Project>
-    <Project Path="specs/Qowaiv.Diagnostics.Contracts.Specs/Qowaiv.Diagnostics.Contracts.Specs.csproj" />
-    <Project Path="specs/Qowaiv.Specs.Generated/Qowaiv.Specs.Generated.csproj" />
-    <Project Path="specs/Qowaiv.Specs/Qowaiv.Specs.csproj" />
-    <Project Path="specs/Qowaiv.Wikipedia/Qowaiv.Wikipedia.csproj" />
-    <Project Path="specs/WikiScraper/WikiScraper.csproj" />
-  </Folder>
-  <Folder Name="/Tooling/">
-    <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
-  </Folder>
-  <Folder Name="/tools/">
-    <Project Path="tools/Qowaiv.SvoGenerator/Qowaiv.SvoGenerator.csproj" />
-  </Folder>
   <Project Path=".net.csproj" />
+  <Project Path="specs/Bench/Bench.csproj">
+    <Build Solution="Debug|*" Project="false" />
+  </Project>
+  <Project Path="specs/Qowaiv.Specs.Generated/Qowaiv.Specs.Generated.csproj" />
+  <Project Path="specs/Qowaiv.Specs/Qowaiv.Specs.csproj" />
+  <Project Path="specs/WikiScraper/WikiScraper.csproj" />
+  <Project Path="src/Qowaiv.Data.SqlClient/Qowaiv.Data.SqlClient.csproj" />
+  <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
+  <Project Path="src/Qowaiv/Qowaiv.csproj" />
+  <Project Path="src/Specs.Data.SqlClient/Specs.Data.SqlClient.csproj" />
+  <Project Path="src/Specs.Diagnostics.Contracts/Specs.Diagnostics.Contracts.csproj" />
+  <Project Path="src/Specs.TestTools/Specs.TestTools.csproj" />
+  <Project Path="src/Specs/Specs.csproj" />
+  <Project Path="tools/Qowaiv.SvoGenerator/Qowaiv.SvoGenerator.csproj" />
 </Solution>

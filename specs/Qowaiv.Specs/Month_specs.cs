@@ -2,6 +2,24 @@ namespace Month_specs;
 
 public class With_domain_logic
 {
+    [Test]
+    public void DefinedValues_are_January_till_December()
+        => Month.DefinedValues.Should().BeEquivalentTo(
+        [
+            Month.January,
+            Month.February,
+            Month.March,
+            Month.April,
+            Month.May,
+            Month.June,
+            Month.July,
+            Month.August,
+            Month.September,
+            Month.October,
+            Month.November,
+            Month.December,
+        ]);
+
     [TestCase(true, "February")]
     [TestCase(true, "?")]
     [TestCase(false, "")]
@@ -407,7 +425,7 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-#if NET8_0_OR_GREATER
+#if NET10_0_OR_GREATER
     [TestCase(null, null)]
     [TestCase("?", "?")]
     [TestCase(2.0, "February")]
@@ -488,14 +506,13 @@ public class Is_Open_API_data_type
     [Test]
     public void with_info()
         => OpenApiDataType.FromType(typeof(Month))
-        .Should().BeEquivalentTo(new OpenApiDataType(
+        .Should().Be(new OpenApiDataType(
             dataType: typeof(Month),
             description: "Month(-only) notation.",
             type: "string",
             example: "Jun",
             format: "month",
-            @enum: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "?"],
-            nullable: true));
+            @enum: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "?"]));
 }
 
 public class Debugger

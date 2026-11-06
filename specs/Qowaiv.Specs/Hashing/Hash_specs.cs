@@ -12,27 +12,16 @@ public class Get_hash_code
     }
 
     [Test]
-    public void Supports_fluent_syntax()
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            int hash = Hash.Code(12)
-                .And(Svo.EmailAddress)
-                .And(Svo.DateTime);
-            hash.Should().Be(-1238227536);
-        }
-    }
+    public void Supports_fluent_syntax() => true
+        .Invoking(_ => Hash.Code(12)
+            .And(Svo.EmailAddress)
+            .And(Svo.DateTime))
+        .Should().NotThrow();
 
     [Test]
-    public void Supports_fluent_syntax_empty_collection()
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            int hash = Hash.Code(12)
-                .And(Array.Empty<byte>());
-            hash.Should().Be(490959278);
-        }
-    }
+    public void Supports_fluent_syntax_empty_collection() => true
+        .Invoking(_ => Hash.Code(12).And(Array.Empty<byte>()))
+        .Should().NotThrow();
 
     [Test]
     public void Supports_fluent_syntax_null_collection()

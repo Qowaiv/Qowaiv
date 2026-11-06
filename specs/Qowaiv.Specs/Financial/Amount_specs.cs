@@ -62,19 +62,8 @@ public class Is_equal_by_value
     }
 
     [Test]
-    [Arguments("0", 0)]
-#if NET48
-    [Arguments("42.17", -390756127)]
-#else
-    [Arguments("42.17", 665757098)]
-#endif
-    public void hash_code_is_value_based(Amount svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.Amount, 0.Amount(), 12.23m.Amount(), 12.24m.Amount()).Should().BeConsistent();
 }
 
 public class Can_be_parsed

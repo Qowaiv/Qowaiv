@@ -532,15 +532,8 @@ public class Is_equal_by_value
     }
 
     [Test]
-    [Arguments("", 0)]
-    [Arguments("NL", -1174190069)]
-    public void hash_code_is_value_based(Country svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Country.NL, Country.BE, Country.BF).Should().BeConsistent();
 }
 
 public class Supports_XML_serialization

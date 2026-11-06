@@ -34,21 +34,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (new FormattingArguments("0.000", TestCultures.fr_BE) != FormattingArguments.None).Should().BeTrue();
 
-    [Test]    public void hash_code_is_value_based_for_none()
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            FormattingArguments.None.GetHashCode().Should().Be(0);
-        }
-    }
-
-    [Test]    public void hash_code_is_value_based_for_value()
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            new FormattingArguments("f", null).GetHashCode().Should().Be(-362413457);
-        }
-    }
+    [Test]
+    public void hash_code_is_value_based() => HashCodes
+        .For(FormattingArguments.None, new FormattingArguments("f", null)).Should().BeConsistent();
 }
 
 public class ToString

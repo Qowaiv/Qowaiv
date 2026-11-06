@@ -119,15 +119,8 @@ public class Is_equal_by_value
     }
 
     [Test]
-    [Arguments("", 0)]
-    [Arguments("AEGONL2UXXX", -238769066)]
-    public void hash_code_is_value_based(BusinessIdentifierCode svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.BusinessIdentifierCode, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed

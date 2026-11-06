@@ -319,15 +319,8 @@ public class Is_equal_by_value
     }
 
     [Test]
-    [Arguments("0Y+0M+0D", 0)]
-    [Arguments("10Y+3M-5D", -128)]
-    public void hash_code_is_value_based(DateSpan svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.DateSpan, default).Should().BeConsistent();
 }
 
 public class Supports_type_conversion

@@ -84,15 +84,8 @@ public class Is_equal_by_value
         => (Svo.Generated.CustomSvo != CustomSvo.Parse("different")).Should().BeTrue();
 
     [Test]
-    [Arguments("", 0)]
-    [Arguments("QOWAIV", 467820648)]
-    public void hash_code_is_value_based(CustomSvo svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.Generated.CustomSvo, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed

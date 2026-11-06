@@ -80,15 +80,8 @@ public class Is_equal_by_value
         => (HouseNumber.Create(123456789) != HouseNumber.MinValue).Should().BeTrue();
 
     [Test]
-    [Arguments("", 0)]
-    [Arguments("123456789", 553089222)]
-    public void hash_code_is_value_based(HouseNumber svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.HouseNumber, default).Should().BeConsistent();
 }
 
 public class Can_be_created

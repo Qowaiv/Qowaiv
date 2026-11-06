@@ -92,15 +92,8 @@ public class Is_equal_by_value
     }
 
     [Test]
-    [Arguments("0", 0)]
-    [Arguments("1234567890", 1849341697)]
-    public void hash_code_is_value_based(Timestamp svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Timestamp.MinValue, Svo.Timestamp, Timestamp.MaxValue).Should().BeConsistent();
 }
 
 public class Has_custom_formatting

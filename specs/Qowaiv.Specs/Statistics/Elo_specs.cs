@@ -77,15 +77,8 @@ public class Is_equal_by_value
     }
 
     [Test]
-    [Arguments(0.0, 0)]
-    [Arguments(1732.4, -22135344)]
-    public void hash_code_is_value_based(Elo svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.Elo, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed

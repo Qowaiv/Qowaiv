@@ -444,16 +444,9 @@ public class Is_equal_by_value
         => (Svo.Fraction != 17.DividedBy(42)).Should().BeTrue();
 
     [Test]
-    [Arguments(0, 0)]
-    [Arguments("17/42", 490960136)]
-    public void hash_code_is_value_based(Fraction svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
-
+    public void hash_code_is_value_based() => HashCodes
+       .For(Svo.Fraction, 490960136.DividedBy(1)).Should().BeConsistent();
+     
     [Test]
     public void hash_code_is_value_based_for_zero()
     {

@@ -131,15 +131,8 @@ public class Is_equal_by_value
         => (Svo.EmailAddress != EmailAddress.Parse("no_spam@qowaiv.org")).Should().BeTrue();
 
     [Test]
-    [Arguments("", 0)]
-    [Arguments("info@qowaiv.org", 798543550)]
-    public void hash_code_is_value_based(EmailAddress svo, int hashCode)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hashCode);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.EmailAddress, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed

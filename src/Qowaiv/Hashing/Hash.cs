@@ -7,7 +7,7 @@ namespace Qowaiv.Hashing;
 public readonly struct Hash : IEquatable<Hash>
 {
     /// <summary>Randomizer hash based on <see cref="string.GetHashCode()" />.</summary>
-    private static int Randomized = "QOWAIV".GetHashCode();
+    private static readonly int Randomized = "QOWAIV".GetHashCode();
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly int Value;
@@ -65,8 +65,9 @@ public readonly struct Hash : IEquatable<Hash>
     /// <remarks>
     /// This should only be used in tests.
     /// </remarks>
-    [Impure]
-    public static IDisposable WithoutRandomizer() => new Scope();
+    [DoesNotReturn]
+    [Obsolete("Use Qowaiv.TestTools.HashCodes.For() instead.")]
+    public static IDisposable WithoutRandomizer() => throw new NotSupportedException();
 
     /// <summary>Combines two hashes with `((h1 &lt;&lt; 5) + h1) ^ h2`.</summary>
     [Pure]
@@ -120,36 +121,5 @@ public readonly struct Hash : IEquatable<Hash>
             return updated;
         }
         else return 17;
-    }
-
-#pragma warning disable S3010 // Static fields should not be updated in constructors
-#pragma warning disable S2696 // Instance members should not write to "static" fields
-    /// <summary>Fixes the base hash for the scope of its life-time.</
-    /// <remarks>This class deals with temporary changing the state of a private static field.</remarks>
-    private sealed class Scope : IDisposable
-    {
-        private static readonly object Lock = new();
-
-        private readonly int Current;
-
-        public Scope()
-        {
-            Monitor.Enter(Lock);
-            Current = Randomized;
-            Randomized = 20170611;
-        }
-
-        /// <inheritdoc />
-        public void Dispose()
-        {
-            if (!Disposed)
-            {
-                Randomized = Current;
-                Disposed = true;
-                Monitor.Exit(Lock);
-            }
-        }
-
-        private bool Disposed;
     }
 }

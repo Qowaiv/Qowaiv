@@ -28,12 +28,10 @@ public class Default_behavior
             now.Should().Be(new DateTimeOffset(2017, 06, 11, 06, 48, 00, TimeSpan.FromMinutes(+33)));
         }
     }
-}
-
-[NotInParallel]
-public class Globally
+}public class Globally
 {
     [Test]
+    [NotInParallel]
     public void UtcNow_can_be_set()
     {
         Clock.SetTime(() => Svo.DateTime);
@@ -41,6 +39,7 @@ public class Globally
     }
 
     [Test]
+    [NotInParallel]
     public void TimeZone_can_be_set()
     {
         Clock.SetTimeZone(Svo.TimeZone);

@@ -34,9 +34,7 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (new FormattingArguments("0.000", TestCultures.fr_BE) != FormattingArguments.None).Should().BeTrue();
 
-    [Test]
-    [NotInParallel]
-    public void hash_code_is_value_based_for_none()
+    [Test]    public void hash_code_is_value_based_for_none()
     {
         using (Hash.WithoutRandomizer())
         {
@@ -44,9 +42,7 @@ public class Is_equal_by_value
         }
     }
 
-    [Test]
-    [NotInParallel]
-    public void hash_code_is_value_based_for_value()
+    [Test]    public void hash_code_is_value_based_for_value()
     {
         using (Hash.WithoutRandomizer())
         {

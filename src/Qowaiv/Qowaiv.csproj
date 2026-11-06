@@ -56,6 +56,7 @@ v11.0.0
 - Date implements IEquatable<DateOnly>.
 - Introduction of IEnumerated<TSelf> and IEnumerated, with DefinedValues.
 - OpenApiDataType resolves its enum from the defined values (and unknown) of IEnumerated<TSelf> types.
+- Hash.WithoutRandomizer() is thread-safe.
 v8.*
 - Extended language support.
 - IBAN supports Mongolia and Falkland Islands.

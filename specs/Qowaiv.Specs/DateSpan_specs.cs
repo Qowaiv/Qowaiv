@@ -319,7 +319,6 @@ public class Is_equal_by_value
     }
 
     [Test]
-    [NotInParallel]
     [Arguments("0Y+0M+0D", 0)]
     [Arguments("10Y+3M-5D", -128)]
     public void hash_code_is_value_based(DateSpan svo, int hash)

@@ -77,7 +77,6 @@ public class Is_equal_by_value
     }
 
     [Test]
-    [NotInParallel]
     [Arguments(0.0, 0)]
     [Arguments(1732.4, -22135344)]
     public void hash_code_is_value_based(Elo svo, int hash)

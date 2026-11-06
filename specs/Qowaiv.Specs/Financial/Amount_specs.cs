@@ -62,7 +62,6 @@ public class Is_equal_by_value
     }
 
     [Test]
-    [NotInParallel]
     [Arguments("0", 0)]
 #if NET48
     [Arguments("42.17", -390756127)]

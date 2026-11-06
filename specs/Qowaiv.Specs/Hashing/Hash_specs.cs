@@ -1,6 +1,7 @@
+using System.Threading;
+
 namespace Hashing.Hash_specs;
 
-[NotInParallel]
 public class Get_hash_code
 {
     [Test]
@@ -80,10 +81,7 @@ public class Get_hash_code
         Func<int> call = () => Hash.Code(12).GetHashCode();
         call.Should().Throw<HashingNotSupported>();
     }
-}
-
-[NotInParallel]
-public class Get_hash_code_with_fixed_randomizer
+}public class Get_hash_code_with_fixed_randomizer
 {
     [Test]
     public void String_is_fixed()
@@ -114,10 +112,7 @@ public class Get_hash_code_with_fixed_randomizer
             hash.Should().Be(1415769949);
         }
     }
-}
-
-[NotInParallel]
-public class Get_hash_code_without_fixed_randomizer
+}public class Get_hash_code_without_fixed_randomizer
 {
     [Test]
     public void String_is_different_from_fixed()
@@ -183,10 +178,7 @@ public class Not_supported
         hash.Should().Throw<HashingNotSupported>()
             .WithMessage("Hashing is not supported by System.String.");
     }
-}
-
-[NotInParallel]
-public class Is_equal_by_value
+}public class Is_equal_by_value
 {
     [Test]
     public void not_equal_to_null()
@@ -203,10 +195,7 @@ public class Is_equal_by_value
     [Test]
     public void equal_to_same_value()
         => Svo.Hash.Equals(Hash.Code("QOWAIV")).Should().BeTrue();
-}
-
-[NotInParallel]
-public class To_string
+}public class To_string
 {
     [Test]
     public void displays_the_hash()

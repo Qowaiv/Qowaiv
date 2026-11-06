@@ -34,7 +34,7 @@ public static class TUnitTypeConversions
     {
         if (ArgumentsAttributeType is null) yield break;
 
-        foreach (var values in method.GetCustomAttributes(ArgumentsAttributeType).Select(GetValues).OfType<object?[]>())
+        foreach (var values in method.GetCustomAttributes(ArgumentsAttributeType).Select(Values).OfType<object?[]>())
         {
             if (ParameterTypes(method) is not { } parameters || parameters.Length != values.Length) continue;
 
@@ -59,10 +59,9 @@ public static class TUnitTypeConversions
     private static bool IsSupported(Type type) => type is { IsClass: true, IsPublic: true, IsAbstract: false };
 
     [Pure]
-    private static object?[]? GetValues(Attribute attr)
-        => (Values ??= attr
+    private static object?[]? Values(Attribute attr) => attr
         .GetType()
-        .GetProperty(nameof(Values)))?
+        .GetProperty(nameof(Values))?
         .GetValue(attr) as object?[];
 
     [Pure]
@@ -70,6 +69,4 @@ public static class TUnitTypeConversions
     [
         ..method.GetParameters().Select(p => p.ParameterType.GetNotNullableType())
     ];
-
-    private static PropertyInfo? Values;
 }

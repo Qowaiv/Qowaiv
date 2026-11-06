@@ -5,6 +5,12 @@
   <PropertyGroup>
     <Nullable>enable</Nullable>
     <IsTestProject>true</IsTestProject>
+    <OutputType>exe</OutputType>
+    <!--
+      TUnit0001: arguments are converted to the parameter type, see shared/ArgumentConverters.cs.
+      TUnit0005: specs pass null to not-nullable parameters on purpose.
+    -->
+    <NoWarn>$(NoWarn);TUnit0001;TUnit0005</NoWarn>
     <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
   </PropertyGroup>
@@ -30,24 +36,25 @@
     <RestoreLockedMode>false</RestoreLockedMode>
   </PropertyGroup>
 
-  <ItemGroup Label="Test Tools">
-    <PackageReference Include="AwesomeAssertions" />
-    <PackageReference Include="NUnit" />
-    <PackageReference Include="NUnit3TestAdapter" NoWarn="NU1701" />
+  <PropertyGroup Condition="'$(RunNetfx)' == 'true'">
+    <AppConfig>$(MSBuildThisFileDirectory)specs.netfx.config</AppConfig>
+  </PropertyGroup>
+
+  <ItemGroup Label="NUnit ran the tests sequentially, TUnit runs them in parallel by default.">
+    <AssemblyAttribute Include="TUnit.Core.NotInParallelAttribute" />
   </ItemGroup>
 
-  <ItemGroup Label="Build Tools">
-    <PackageReference PrivateAssets="all" Include="coverlet.collector" />
-    <PackageReference PrivateAssets="all" Include="Microsoft.NET.Test.Sdk" />
+  <ItemGroup Label="Test Tools">
+    <PackageReference Include="AwesomeAssertions" />
+    <PackageReference Include="TUnit" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">
     <PackageReference PrivateAssets="all" Include="AwesomeAssertions.Analyzers" />
-    <PackageReference PrivateAssets="all" Include="NUnit.Analyzers" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
+    <ProjectReference Include="../../src/Specs.Shared/Specs.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup Label="Diagnostics contracts code generation">

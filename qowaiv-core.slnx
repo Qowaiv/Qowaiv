@@ -3,4 +3,5 @@
   <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
   <Project Path="src/Qowaiv/Qowaiv.csproj" />
   <Project Path="src/Specs/Specs.csproj" />
+  <Project Path="src/Specs.Shared/Specs.Shared.csproj" />
 </Solution>

@@ -10,9 +10,10 @@ public class ToString
     public void EmptyArray_StringEmpty()
         => Base64.ToString([]).Should().Be(string.Empty);
 
-    [TestCase("Aao=", 1, 170)]
-    [TestCase("Cxct", 11, 23, 45)]
-    [TestCase("Qowaig==", 66, 140, 26, 138)]
+    [Test]
+    [Arguments("Aao=", 1, 170)]
+    [Arguments("Cxct", 11, 23, 45)]
+    [Arguments("Qowaig==", 66, 140, 26, 138)]
     public void bytes(string base64, params int[] data)
     {
         var bytes = data.Select(v => (byte)v).ToArray();
@@ -36,8 +37,9 @@ public class TryGetBytes_from
         bytes.Should().BeEmpty();
     }
 
-    [TestCase("Cxct", 11, 23, 45)]
-    [TestCase("Qowaig==", 66, 140, 26, 138)]
+    [Test]
+    [Arguments("Cxct", 11, 23, 45)]
+    [Arguments("Qowaig==", 66, 140, 26, 138)]
     public void String_returns(string str, params int[] expected)
     {
         var bytes = expected.Select(v => (byte)v).ToArray();

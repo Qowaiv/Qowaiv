@@ -108,8 +108,8 @@ public static class Svo
     public static YesNo YesNo => YesNo.Yes;
 
     public static IEnumerable<object> All() => typeof(Svo)
-        .GetFields(BindingFlags.Public | BindingFlags.Static)
-        .Select(field => field.GetValue(null)!);
+        .GetProperties(BindingFlags.Public | BindingFlags.Static)
+        .Select(property => property.GetValue(null)!);
 
 #pragma warning disable S3218 // Inner class members should not shadow outer class "static" or type members    
     // They have equivilent meaning, other naming would not make tings better.

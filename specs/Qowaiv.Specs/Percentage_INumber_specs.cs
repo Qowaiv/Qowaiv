@@ -7,9 +7,10 @@ namespace Percentage_specs;
 
 public class Defines
 {
-    [TestCase("-34%", "30%", "-4%")]
-    [TestCase("34%", "30%", "4%")]
-    [TestCase("34%", "2%", "0%")]
+    [Test]
+    [Arguments("-34%", "30%", "-4%")]
+    [Arguments("34%", "30%", "4%")]
+    [Arguments("34%", "2%", "0%")]
     public void modulo(Percentage p, Percentage mod, Percentage remainder)
         => (p % mod).Should().Be(remainder);
 }
@@ -29,6 +30,7 @@ public class Percentage_as_INumber
         => Number.MultiplicativeIdentity<Percentage>().Should().Be(100m.Percent());
 
     [Test]
+    [CombinedDataSources]
     public void Is_canonical_equal_to_decimal([Random(Min, Max, Count)] double d)
     {
         var n = (decimal)d;
@@ -36,6 +38,7 @@ public class Percentage_as_INumber
     }
 
     [Test]
+    [CombinedDataSources]
     public void Abs_equal_to_percentage_Abs([Random(Min, Max, Count)] double d)
     {
         var p = (Percentage)d;
@@ -43,54 +46,63 @@ public class Percentage_as_INumber
     }
 
     [Test]
+    [CombinedDataSources]
     public void is_never_a_complex_number([Random(Min, Max, Count)] double d)
         => Number.IsComplexNumber((Percentage)d).Should().BeFalse();
 
-    [TestCase("4%", true)]
-    [TestCase("9%", true)]
-    [TestCase("1%", true)]
-    [TestCase("-1%", true)]
-    [TestCase("-2%", true)]
-    [TestCase("3.3%", false)]
-    [TestCase("-4.4%", false)]
+    [Test]
+    [Arguments("4%", true)]
+    [Arguments("9%", true)]
+    [Arguments("1%", true)]
+    [Arguments("-1%", true)]
+    [Arguments("-2%", true)]
+    [Arguments("3.3%", false)]
+    [Arguments("-4.4%", false)]
     public void is_integer(Percentage p, bool isEvenInteger)
         => Number.IsInteger(p).Should().Be(isEvenInteger);
 
-    [TestCase("4%", true)]
-    [TestCase("8%", true)]
-    [TestCase("0%", true)]
-    [TestCase("-2%", true)]
-    [TestCase("-1%", false)]
-    [TestCase("2.2%", false)]
+    [Test]
+    [Arguments("4%", true)]
+    [Arguments("8%", true)]
+    [Arguments("0%", true)]
+    [Arguments("-2%", true)]
+    [Arguments("-1%", false)]
+    [Arguments("2.2%", false)]
     public void is_even_integer(Percentage p, bool isEvenInteger)
         => Number.IsEvenInteger(p).Should().Be(isEvenInteger);
 
-    [TestCase("5%", true)]
-    [TestCase("9%", true)]
-    [TestCase("1%", true)]
-    [TestCase("-1%", true)]
-    [TestCase("-2%", false)]
-    [TestCase("3.3%", false)]
+    [Test]
+    [Arguments("5%", true)]
+    [Arguments("9%", true)]
+    [Arguments("1%", true)]
+    [Arguments("-1%", true)]
+    [Arguments("-2%", false)]
+    [Arguments("3.3%", false)]
     public void is_odd_integer(Percentage p, bool isEvenInteger)
         => Number.IsOddInteger(p).Should().Be(isEvenInteger);
 
     [Test]
+    [CombinedDataSources]
     public void is_always_real([Random(Min, Max, Count)] double d)
        => Number.IsRealNumber((Percentage)d).Should().BeTrue();
 
     [Test]
+    [CombinedDataSources]
     public void is_never_complex([Random(Min, Max, Count)] double d)
        => Number.IsComplexNumber((Percentage)d).Should().BeFalse();
 
     [Test]
+    [CombinedDataSources]
     public void is_never_imaginary([Random(Min, Max, Count)] double d)
         => Number.IsImaginaryNumber((Percentage)d).Should().BeFalse();
 
     [Test]
+    [CombinedDataSources]
     public void is_always_finite([Random(Min, Max, Count)] double d)
         => Number.IsFinite((Percentage)d).Should().BeTrue();
 
     [Test]
+    [CombinedDataSources]
     public void is_never_infinite([Random(Min, Max, Count)] double d)
     {
         Number.IsInfinity((Percentage)d).Should().BeFalse();
@@ -99,10 +111,12 @@ public class Percentage_as_INumber
     }
 
     [Test]
+    [CombinedDataSources]
     public void is_never_NaN([Random(Min, Max, Count)] double d)
         => Number.IsNaN((Percentage)d).Should().BeFalse();
 
     [Test]
+    [CombinedDataSources]
     public void is_negative_equal_to_decimal([Random(Min, Max, Count)] double d)
     {
         var n = (decimal)d;
@@ -120,6 +134,7 @@ public class Percentage_as_INumber
     }
 
     [Test]
+    [CombinedDataSources]
     public void is_zero_is_false_for_all_but_zero([Random(Min, Max, Count)] double d)
     {
         var n = (decimal)d;
@@ -127,6 +142,7 @@ public class Percentage_as_INumber
     }
 
     [Test]
+    [CombinedDataSources]
     public void is_positive_equal_to_decimal([Random(Min, Max, Count)] double d)
     {
         var n = (decimal)d;
@@ -138,10 +154,12 @@ public class Percentage_as_INumber
         => Number.IsNormal(Percentage.Zero).Should().BeFalse();
 
     [Test]
+    [CombinedDataSources]
     public void Is_never_subnormal([Random(Min, Max, Count)] double d)
         => Number.IsSubnormal((Percentage)d).Should().BeFalse();
 
     [Test]
+    [CombinedDataSources]
     public void Is_normal_when_not_zero([Random(Min, Max, Count)] double d)
     {
         var n = (decimal)d;
@@ -149,6 +167,7 @@ public class Percentage_as_INumber
     }
 
     [Test]
+    [CombinedDataSources]
     public void max_maginiute_equal_to_decimal([Random(Min, Max, 3)] double x, [Random(Min, Max, 3)] double y)
     {
         var x_ = (decimal)x;
@@ -159,6 +178,7 @@ public class Percentage_as_INumber
     }
 
     [Test]
+    [CombinedDataSources]
     public void min_maginiute_equal_to_decimal([Random(Min, Max, 3)] double x, [Random(Min, Max, 3)] double y)
     {
         var x_ = (decimal)x;

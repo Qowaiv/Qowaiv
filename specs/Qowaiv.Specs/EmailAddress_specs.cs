@@ -2,77 +2,89 @@ namespace Email_address_specs;
 
 public class With_domain_logic
 {
-    [TestCase(true, "info@qowaiv.org")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "info@qowaiv.org")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, EmailAddress svo) => svo.HasValue.Should().Be(result);
 
-    [TestCase(true, "info@qowaiv.org")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "info@qowaiv.org")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsKnown_is(bool result, EmailAddress svo) => svo.IsKnown.Should().Be(result);
 
-    [TestCase("")]
-    [TestCase("?")]
+    [Test]
+    [Arguments("")]
+    [Arguments("?")]
     public void has_length_zero_for_empty_and_unknown(EmailAddress svo)
         => svo.Length.Should().Be(0);
 
-    [TestCase(15, "info@qowaiv.org")]
+    [Test]
+    [Arguments(15, "info@qowaiv.org")]
     public void has_length(int length, EmailAddress svo)
         => svo.Length.Should().Be(length);
 
-    [TestCase(false, "info@qowaiv.org")]
-    [TestCase(false, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "info@qowaiv.org")]
+    [Arguments(false, "?")]
+    [Arguments(true, "")]
     public void IsEmpty_returns(bool result, EmailAddress svo)
         => svo.IsEmpty().Should().Be(result);
 
-    [TestCase(false, "info@qowaiv.org")]
-    [TestCase(true, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "info@qowaiv.org")]
+    [Arguments(true, "?")]
+    [Arguments(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, EmailAddress svo)
             => svo.IsEmptyOrUnknown().Should().Be(result);
 
-    [TestCase(false, "info@qowaiv.org")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(false, "info@qowaiv.org")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void IsUnknown_returns(bool result, EmailAddress svo)
         => svo.IsUnknown().Should().Be(result);
 
-    [TestCase(false, "info@qowaiv.org")]
-    [TestCase(true, "info@[192.0.2.1]")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(false, "info@qowaiv.org")]
+    [Arguments(true, "info@[192.0.2.1]")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsIPBased_returns(bool result, EmailAddress svo)
         => svo.IsIPBased.Should().Be(result);
 
-    [TestCase(true, "info@localhost")]
-    [TestCase(true, "info.qowaiv@localhost")]
-    [TestCase(false, "info@qowaiv.org")]
-    [TestCase(false, "info@sub.qowaiv.org")]
-    [TestCase(false, "info@[192.0.2.1]")]
-    [TestCase(false, "info@[IPv6:2001:0db8:0000:0000:0000:ff00:0042:8329]")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "info@localhost")]
+    [Arguments(true, "info.qowaiv@localhost")]
+    [Arguments(false, "info@qowaiv.org")]
+    [Arguments(false, "info@sub.qowaiv.org")]
+    [Arguments(false, "info@[192.0.2.1]")]
+    [Arguments(false, "info@[IPv6:2001:0db8:0000:0000:0000:ff00:0042:8329]")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void HasSingleLabelDomain_returns(bool result, EmailAddress svo)
         => svo.HasSingleLabelDomain.Should().Be(result);
 
-    [TestCase("info@qowaiv.org", "255.255.255.255")]
-    [TestCase("info@[192.0.2.1]", "192.0.2.1")]
-    [TestCase("info@[IPv6:2001:0db8:0000:0000:0000:ff00:0042:8329]", "2001:db8::ff00:42:8329")]
+    [Test]
+    [Arguments("info@qowaiv.org", "255.255.255.255")]
+    [Arguments("info@[192.0.2.1]", "192.0.2.1")]
+    [Arguments("info@[IPv6:2001:0db8:0000:0000:0000:ff00:0042:8329]", "2001:db8::ff00:42:8329")]
     public void IP_domain(EmailAddress email, string address)
         => email.IPDomain.ToString().Should().Be(address);
 
-    [TestCase("info", "info@qowaiv.org")]
-    [TestCase("", "?")]
-    [TestCase("", "")]
+    [Test]
+    [Arguments("info", "info@qowaiv.org")]
+    [Arguments("", "?")]
+    [Arguments("", "")]
     public void Local_part_returns(string local, EmailAddress email)
         => email.Local.Should().Be(local);
 
-    [TestCase("qowaiv.org", "info@qowaiv.org")]
-    [TestCase("[192.0.2.1]", "info@192.0.2.1")]
-    [TestCase("", "?")]
-    [TestCase("", "")]
+    [Test]
+    [Arguments("qowaiv.org", "info@qowaiv.org")]
+    [Arguments("[192.0.2.1]", "info@192.0.2.1")]
+    [Arguments("", "?")]
+    [Arguments("", "")]
     public void Domain_part_returns(string local, EmailAddress email)
         => email.Domain.Should().Be(local);
 }
@@ -118,8 +130,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.EmailAddress != EmailAddress.Parse("no_spam@qowaiv.org")).Should().BeTrue();
 
-    [TestCase("", 0)]
-    [TestCase("info@qowaiv.org", 798543550)]
+    [Test]
+    [Arguments("", 0)]
+    [Arguments("info@qowaiv.org", 798543550)]
     public void hash_code_is_value_based(EmailAddress svo, int hashCode)
     {
         using (Hash.WithoutRandomizer())
@@ -139,10 +152,11 @@ public class Can_be_parsed
     public void from_empty_string_represents_Empty()
         => EmailAddress.Parse(string.Empty).Should().Be(EmailAddress.Empty);
 
-    [TestCase("  ")]
-    [TestCase("\r")]
-    [TestCase("\t  ")]
-    [TestCase("\t  \n")]
+    [Test]
+    [Arguments("  ")]
+    [Arguments("\r")]
+    [Arguments("\t  ")]
+    [Arguments("\t  \n")]
     public void from_whitespace_represents_Empty(string ws)
         => EmailAddress.Parse(ws).Should().Be(EmailAddress.Empty);
 
@@ -150,7 +164,8 @@ public class Can_be_parsed
     public void from_question_mark_represents_Unknown()
         => EmailAddress.Parse("?").Should().Be(EmailAddress.Unknown);
 
-    [TestCase("en", "info@qowaiv.org")]
+    [Test]
+    [Arguments("en", "info@qowaiv.org")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -228,8 +243,9 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: 'info@qowaiv.org', format: 'f'");
     }
 
-    [TestCase("en-GB", null, "info@qowaiv.org", "info@qowaiv.org")]
-    [TestCase("nl-BE", "f", "info@qowaiv.org", "info@qowaiv.org")]
+    [Test]
+    [Arguments("en-GB", null, "info@qowaiv.org", "info@qowaiv.org")]
+    [Arguments("nl-BE", "f", "info@qowaiv.org", "info@qowaiv.org")]
     public void culture_dependent(CultureInfo culture, string format, EmailAddress svo, string expected)
     {
         using (culture.Scoped())
@@ -247,15 +263,16 @@ public class Has_custom_formatting
         }
     }
 
-    [TestCase("info@qowaiv.org", null)]
-    [TestCase("info@qowaiv.org", "")]
-    [TestCase("info@qowaiv.org", "f")]
-    [TestCase("INFO@QOWAIV.ORG", "U")]
-    [TestCase("INFO", "L")]
-    [TestCase("info", "l")]
-    [TestCase("qowaiv.org", "d")]
-    [TestCase("QOWAIV.ORG", "D")]
-    [TestCase("info@qowaiv.org", "l@d")]
+    [Test]
+    [Arguments("info@qowaiv.org", null)]
+    [Arguments("info@qowaiv.org", "")]
+    [Arguments("info@qowaiv.org", "f")]
+    [Arguments("INFO@QOWAIV.ORG", "U")]
+    [Arguments("INFO", "L")]
+    [Arguments("info", "l")]
+    [Arguments("qowaiv.org", "d")]
+    [Arguments("QOWAIV.ORG", "D")]
+    [Arguments("info@qowaiv.org", "l@d")]
     public void with_format(string formatted, string format)
         => Svo.EmailAddress.ToString(format).Should().Be(formatted);
 }
@@ -340,13 +357,15 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase("?", "?")]
-    [TestCase("info@qowaiv.org", "info@qowaiv.org")]
+    [Test]
+    [Arguments("?", "?")]
+    [Arguments("info@qowaiv.org", "info@qowaiv.org")]
     public void System_Text_JSON_deserialization(object json, EmailAddress svo)
         => JsonTester.Read_System_Text_JSON<EmailAddress>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("info@qowaiv.org", "info@qowaiv.org")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("info@qowaiv.org", "info@qowaiv.org")]
     public void System_Text_JSON_serialization(object json, EmailAddress svo)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
@@ -371,18 +390,21 @@ public class Supports_JSON_serialization
     }
 #endif
 
-    [TestCase("?", "?")]
-    [TestCase("info@qowaiv.org", "info@qowaiv.org")]
+    [Test]
+    [Arguments("?", "?")]
+    [Arguments("info@qowaiv.org", "info@qowaiv.org")]
     public void convention_based_deserialization(object json, EmailAddress svo)
         => JsonTester.Read<EmailAddress>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("info@qowaiv.org", "info@qowaiv.org")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("info@qowaiv.org", "info@qowaiv.org")]
     public void convention_based_serialization(object json, EmailAddress svo)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<EmailAddress>)
@@ -444,9 +466,10 @@ public class Is_Open_API_data_type
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("{unknown}", "?")]
-    [TestCase("info@qowaiv.org", "info@qowaiv.org")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("{unknown}", "?")]
+    [Arguments("info@qowaiv.org", "info@qowaiv.org")]
     public void has_custom_display(object display, EmailAddress svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }

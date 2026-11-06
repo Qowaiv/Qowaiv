@@ -65,8 +65,9 @@ public class Is_equal_by_value
         l.Equals(r).Should().BeTrue();
     }
 
-    [TestCase("0001-01-01", 0)]
-    [TestCase("2017-06-11", -489585265)]
+    [Test]
+    [Arguments("0001-01-01", 0)]
+    [Arguments("2017-06-11", -489585265)]
     public void hash_code_is_value_based(Date svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -92,9 +93,10 @@ public class Can_be_parsed
     public void from_ISO_8601_notation()
         => Date.Parse("1983-05-02", CultureInfo.InvariantCulture).Should().Be(new Date(1983, 05, 02));
 
-    [TestCase("en-US", "06/11/2017")]
-    [TestCase("en-GB", "11/06/2017")]
-    [TestCase("nl-NL", "11-06-2017")]
+    [Test]
+    [Arguments("en-US", "06/11/2017")]
+    [Arguments("en-GB", "11/06/2017")]
+    [Arguments("nl-NL", "11-06-2017")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -144,7 +146,8 @@ public class Can_be_created
 
 public class Has_properties
 {
-    [TestCase(1970, 02, 14)]
+    [Test]
+    [Arguments(1970, 02, 14)]
     public void year_month_and_day(int year, int month, int day)
     {
         var date = new Date(year, month, day);
@@ -247,8 +250,9 @@ public class Can_be_adjusted_with
 
 public class Can_not_be_adjusted_with
 {
-    [TestCase(DateSpanSettings.WithoutMonths)]
-    [TestCase(DateSpanSettings.DaysFirst | DateSpanSettings.MixedSigns)]
+    [Test]
+    [Arguments(DateSpanSettings.WithoutMonths)]
+    [Arguments(DateSpanSettings.DaysFirst | DateSpanSettings.MixedSigns)]
     public void Date_span_with(DateSpanSettings settings)
         => new Date(2017, 06, 11).Invoking(d => d.Add(new DateSpan(2, 20), settings))
         .Should().Throw<ArgumentOutOfRangeException>().WithMessage("Adding a date span only supports 'Default' and 'DaysFirst'.*");
@@ -346,9 +350,10 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '14_2_70', format: 'd_M_yy'");
     }
 
-    [TestCase("en-GB", 1988, 8, 8, "yy-M-d", "88-8-8")]
-    [TestCase("es-EC", 1988, 8, 8, "d", "8/8/1988")]
-    [TestCase("nl-BE", 1970, 2, 14, "", "14/02/1970")]
+    [Test]
+    [Arguments("en-GB", 1988, 8, 8, "yy-M-d", "88-8-8")]
+    [Arguments("es-EC", 1988, 8, 8, "d", "8/8/1988")]
+    [Arguments("nl-BE", 1970, 2, 14, "", "14/02/1970")]
     public void culture_dependent(CultureInfo culture, int year, int month, int day, string format, string formatted)
     {
         using (culture.Scoped())
@@ -516,29 +521,34 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase("2012-04-23", "2012-04-23")]
-    [TestCase("2012-04-23T18:25:43.511Z", "2012-04-23")]
-    [TestCase("2012-04-23T10:25:43-05:00", "2012-04-23")]
+    [Test]
+    [Arguments("2012-04-23", "2012-04-23")]
+    [Arguments("2012-04-23T18:25:43.511Z", "2012-04-23")]
+    [Arguments("2012-04-23T10:25:43-05:00", "2012-04-23")]
     public void System_Text_JSON_deserialization(object json, Date svo)
         => JsonTester.Read_System_Text_JSON<Date>(json).Should().Be(svo);
 
-    [TestCase("2012-04-23", "2012-04-23")]
+    [Test]
+    [Arguments("2012-04-23", "2012-04-23")]
     public void System_Text_JSON_serialization(Date svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("2012-04-23", "2012-04-23")]
-    [TestCase("2012-04-23T18:25:43.511Z", "2012-04-23")]
-    [TestCase("2012-04-23T10:25:43-05:00", "2012-04-23")]
+    [Test]
+    [Arguments("2012-04-23", "2012-04-23")]
+    [Arguments("2012-04-23T18:25:43.511Z", "2012-04-23")]
+    [Arguments("2012-04-23T10:25:43-05:00", "2012-04-23")]
     public void convention_based_deserialization(object json, Date svo)
       => JsonTester.Read<Date>(json).Should().Be(svo);
 
-    [TestCase("2012-04-23", "2012-04-23")]
+    [Test]
+    [Arguments("2012-04-23", "2012-04-23")]
     public void convention_based_serialization(Date svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("yyyy-06-11", typeof(FormatException))]
-    [TestCase(true, typeof(InvalidOperationException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("yyyy-06-11", typeof(FormatException))]
+    [Arguments(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<Date>)

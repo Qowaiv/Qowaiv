@@ -8,14 +8,16 @@ public class Has_constant
 
 public class Has_properties
 {
-    [TestCase("", "")]
-    [TestCase("", "?")]
-    [TestCase("+379", "VA")]
+    [Test]
+    [Arguments("", "")]
+    [Arguments("", "?")]
+    [Arguments("+379", "VA")]
     public void CallingCode(string code, Country svo) => svo.CallingCode.Should().Be(code);
 
-    [TestCase("", "")]
-    [TestCase("?", "?")]
-    [TestCase("VA", "VA")]
+    [Test]
+    [Arguments("", "")]
+    [Arguments("?", "?")]
+    [Arguments("VA", "VA")]
     public void Name(string name, Country svo)
     {
         using (TestCultures.en_GB.Scoped())
@@ -24,9 +26,10 @@ public class Has_properties
         }
     }
 
-    [TestCase(0, "")]
-    [TestCase(999, "?")]
-    [TestCase(336, "VA")]
+    [Test]
+    [Arguments(0, "")]
+    [Arguments(999, "?")]
+    [Arguments(336, "VA")]
     public void IsoNumericCode(int code, Country svo) => svo.IsoNumericCode.Should().Be(code);
 }
 
@@ -93,37 +96,43 @@ public class Can_be_created
 
 public class With_domain_logic
 {
-    [TestCase(true, "")]
-    [TestCase(false, "?")]
-    [TestCase(false, "VA")]
+    [Test]
+    [Arguments(true, "")]
+    [Arguments(false, "?")]
+    [Arguments(false, "VA")]
     public void IsEmpty_returns(bool result, Country svo) => svo.IsEmpty().Should().Be(result);
 
-    [TestCase(true, "")]
-    [TestCase(true, "?")]
-    [TestCase(false, "VA")]
+    [Test]
+    [Arguments(true, "")]
+    [Arguments(true, "?")]
+    [Arguments(false, "VA")]
     public void IsEmptyOrUnknown_returns(bool result, Country svo) => svo.IsEmptyOrUnknown().Should().Be(result);
 
-    [TestCase(true, "VA")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "VA")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, Country svo) => svo.HasValue.Should().Be(result);
 
-    [TestCase(true, "VA")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "VA")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsKnown_is(bool result, Country svo) => svo.IsKnown.Should().Be(result);
 
-    [TestCase(true, "VA")]
-    [TestCase(false, "FO")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "VA")]
+    [Arguments(false, "FO")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void Indepedence(bool indepedent, Country svo) => svo.IsIndependent.Should().Be(indepedent);
 
     /// <remarks>
     /// As the regions available depend on the environment running, we can't
     /// predict the outcome.
     /// </remarks>
-    [TestCaseSource(typeof(Country), nameof(Country.All))]
+    [Test]
+    [MethodDataSource(typeof(Country), nameof(Country.All))]
     public void RegionInfo_exists_indicates_counterpart_exists(Country country)
         => country.Invoking(c => c.RegionInfoExists).Should().NotThrow();
 }
@@ -232,8 +241,9 @@ public class Can_be_parsed
     public void from_question_mark_represents_Unknown()
         => Country.Parse("?").Should().Be(Country.Unknown);
 
-    [TestCase("en-GB", "VA")]
-    [TestCase("nl-NL", "VA")]
+    [Test]
+    [Arguments("en-GB", "VA")]
+    [Arguments("nl-NL", "VA")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -325,13 +335,14 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: 'VA', format: '2'");
     }
 
-    [TestCase("MZ", "nl", "0", "508")]
-    [TestCase("MZ", "nl", "2", "MZ")]
-    [TestCase("MZ", "nl", "3", "MOZ")]
-    [TestCase("MZ", "ja-JP", "e", "Mozambique")]
-    [TestCase("MZ", "ja-JP", "f", "モザンビーク")]
-    [TestCase("CSHH", "nl", "2", "CS")]
-    [TestCase("CSHH", "nl", "n", "CSHH")]
+    [Test]
+    [Arguments("MZ", "nl", "0", "508")]
+    [Arguments("MZ", "nl", "2", "MZ")]
+    [Arguments("MZ", "nl", "3", "MOZ")]
+    [Arguments("MZ", "ja-JP", "e", "Mozambique")]
+    [Arguments("MZ", "ja-JP", "f", "モザンビーク")]
+    [Arguments("CSHH", "nl", "2", "CS")]
+    [Arguments("CSHH", "nl", "n", "CSHH")]
     public void format_dependent(Country svo, CultureInfo culture, string format, string formatted)
         => svo.ToString(format, culture).Should().Be(formatted);
 }
@@ -435,34 +446,39 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase("Netherlands", "NL")]
-    [TestCase("nl", "NL")]
-    [TestCase(100L, "BG")]
-    [TestCase(null, null)]
-    [TestCase("?", "?")]
+    [Test]
+    [Arguments("Netherlands", "NL")]
+    [Arguments("nl", "NL")]
+    [Arguments(100L, "BG")]
+    [Arguments(null, null)]
+    [Arguments("?", "?")]
     public void System_Text_JSON_deserialization(object json, Country svo)
         => JsonTester.Read_System_Text_JSON<Country>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("NL", "NL")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("NL", "NL")]
     public void System_Text_JSON_serialization(Country svo, object json)
     => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("Netherlands", "NL")]
-    [TestCase("nl", "NL")]
-    [TestCase(100L, "BG")]
-    [TestCase("?", "?")]
+    [Test]
+    [Arguments("Netherlands", "NL")]
+    [Arguments("nl", "NL")]
+    [Arguments(100L, "BG")]
+    [Arguments("?", "?")]
     public void convention_based_deserialization(object json, Country svo)
         => JsonTester.Read<Country>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("NL", "NL")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("NL", "NL")]
     public void convention_based_serialization(Country svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
-    [TestCase(true, typeof(InvalidOperationException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
+    [Arguments(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<Country>)
@@ -515,8 +531,9 @@ public class Is_equal_by_value
         }
     }
 
-    [TestCase("", 0)]
-    [TestCase("NL", -1174190069)]
+    [Test]
+    [Arguments("", 0)]
+    [Arguments("NL", -1174190069)]
     public void hash_code_is_value_based(Country svo, int hash)
     {
         using (Hash.WithoutRandomizer())

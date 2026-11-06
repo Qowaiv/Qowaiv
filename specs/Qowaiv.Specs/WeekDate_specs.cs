@@ -32,13 +32,15 @@ public class Has_properties
     public void Year_of_MaxValue()
         => WeekDate.MaxValue.Year.Should().Be(9999);
 
-    [TestCase(2010, 52, 7, 2010)]
-    [TestCase(2020, 01, 1, 2020)]
+    [Test]
+    [Arguments(2010, 52, 7, 2010)]
+    [Arguments(2020, 01, 1, 2020)]
     public void Year(int year, int week, int day, int expected)
         => new WeekDate(year, week, day).Year.Should().Be(expected);
 
-    [TestCase(1997, 14, 6, 6)]
-    [TestCase(1990, 40, 7, 7)]
+    [Test]
+    [Arguments(1997, 14, 6, 6)]
+    [Arguments(1990, 40, 7, 7)]
     public void Day(int year, int week, int day, int expected)
         => new WeekDate(year, week, day).Day.Should().Be(expected);
 
@@ -89,8 +91,9 @@ public class Is_equal_by_value
         l.Equals(r).Should().BeTrue();
     }
 
-    [TestCase("0001-W01-1", 0)]
-    [TestCase("2017-W23-7", -981651364)]
+    [Test]
+    [Arguments("0001-W01-1", 0)]
+    [Arguments("2017-W23-7", -981651364)]
     public void hash_code_is_value_based(WeekDate svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -106,8 +109,9 @@ public class Can_be_parsed
     public void from_week_date_string()
         => WeekDate.Parse("1234-W50-6", CultureInfo.InvariantCulture).Should().Be(new WeekDate(1234, 50, 6));
 
-    [TestCase("en-GB", "2017-W23-7")]
-    [TestCase("nl-NL", "2017-W23-7")]
+    [Test]
+    [Arguments("en-GB", "2017-W23-7")]
+    [Arguments("nl-NL", "2017-W23-7")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -127,8 +131,9 @@ public class Can_be_parsed
         }
     }
 
-    [TestCase("0000-W21-7")]
-    [TestCase("2000-W53-7")]
+    [Test]
+    [Arguments("0000-W21-7")]
+    [Arguments("2000-W53-7")]
     public void from_valid_input_only_otherwise_return_false_on_TryParse(string input)
         => WeekDate.TryParse(input, out _).Should().BeFalse();
 
@@ -155,8 +160,9 @@ public class Can_be_created
 }
 public class Can_not_be_created
 {
-    [TestCase(0)]
-    [TestCase(10000)]
+    [Test]
+    [Arguments(0)]
+    [Arguments(10000)]
     public void for_years_below_1_or_above_9999(int year)
     {
         Func<WeekDate> create = () => new WeekDate(year, 10, 4);
@@ -165,8 +171,9 @@ public class Can_not_be_created
             .WithMessage("Year should be in range [1,9999].*");
     }
 
-    [TestCase(0)]
-    [TestCase(54)]
+    [Test]
+    [Arguments(0)]
+    [Arguments(54)]
     public void for_weeks_below_1_or_above_53(int week)
     {
         Func<WeekDate> create = () => new WeekDate(1980, week, 4);
@@ -175,8 +182,9 @@ public class Can_not_be_created
             .WithMessage("Week should be in range [1,53].*");
     }
 
-    [TestCase(0)]
-    [TestCase(8)]
+    [Test]
+    [Arguments(0)]
+    [Arguments(8)]
     public void for_days_below_1_or_above_7(int day)
     {
         Func<WeekDate> create = () => new WeekDate(1980, 10, day);
@@ -258,10 +266,11 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '1997#14', format: 'y#W'");
     }
 
-    [TestCase("en-US", @"y-\WW-d", 1997, 14, 6, "1997-W14-6")]
-    [TestCase("en-GB", "", 1997, 14, 6, "1997-W14-6")]
-    [TestCase("en-GB", @"y-\WW-d", 1979, 3, 5, "1979-W3-5")]
-    [TestCase("en-GB", @"y-\Ww-d", 1979, 3, 5, "1979-W03-5")]
+    [Test]
+    [Arguments("en-US", @"y-\WW-d", 1997, 14, 6, "1997-W14-6")]
+    [Arguments("en-GB", "", 1997, 14, 6, "1997-W14-6")]
+    [Arguments("en-GB", @"y-\WW-d", 1979, 3, 5, "1979-W3-5")]
+    [Arguments("en-GB", @"y-\Ww-d", 1979, 3, 5, "1979-W03-5")]
     public void culture_dependent(CultureInfo culture, string format, int year, int week, int day, string formatted)
     {
         using (culture.Scoped())
@@ -421,26 +430,31 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase("1997-W14-6", "1997-W14-6")]
+    [Test]
+    [Arguments("1997-W14-6", "1997-W14-6")]
     public void System_Text_JSON_deserialization(object json, WeekDate svo)
         => JsonTester.Read_System_Text_JSON<WeekDate>(json).Should().Be(svo);
 
-    [TestCase("1997-W14-6", "1997-W14-6")]
+    [Test]
+    [Arguments("1997-W14-6", "1997-W14-6")]
     public void System_Text_JSON_serialization(WeekDate svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
 
-    [TestCase("1997-W14-6", "1997-W14-6")]
+    [Test]
+    [Arguments("1997-W14-6", "1997-W14-6")]
     public void convention_based_deserialization(object json, WeekDate svo)
         => JsonTester.Read<WeekDate>(json).Should().Be(svo);
 
-    [TestCase("1997-W14-6", "1997-W14-6")]
+    [Test]
+    [Arguments("1997-W14-6", "1997-W14-6")]
     public void convention_based_serialization(WeekDate svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("yyyy-06-11", typeof(FormatException))]
-    [TestCase(true, typeof(InvalidOperationException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("yyyy-06-11", typeof(FormatException))]
+    [Arguments(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<WeekDate>)

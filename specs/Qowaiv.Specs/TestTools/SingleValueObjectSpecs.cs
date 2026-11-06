@@ -7,10 +7,17 @@ public class SingleValueObjectSpecs
     public static IEnumerable<Type> AllSvos
         => AppDomain.CurrentDomain.GetAssemblies()
         .Where(assembly => assembly.FullName!.Contains("Qowaiv"))
-        .SelectMany(assembly => assembly.GetExportedTypes())
+        .SelectMany(ExportedTypes)
         .Where(type
             => type.GetCustomAttributes<SingleValueObjectAttribute>().Any()
             && !type.GetCustomAttributes<ObsoleteAttribute>().Any());
+
+    // TUnit loads all referenced assemblies, including those that can not be loaded completely (Roslyn).
+    private static Type[] ExportedTypes(Assembly assembly)
+    {
+        try { return assembly.GetExportedTypes(); }
+        catch (Exception ex) when (ex is FileNotFoundException or FileLoadException or ReflectionTypeLoadException) { return []; }
+    }
 
     public static IEnumerable<Type> AllSvosExceptGeneric
         => AllSvos.Where(svo => !svo.IsGenericType);

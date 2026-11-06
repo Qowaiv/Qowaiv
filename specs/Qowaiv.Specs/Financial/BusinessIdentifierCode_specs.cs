@@ -8,29 +8,34 @@ public class Has_constant
 
 public class Has_properties
 {
-    [TestCase(0, "")]
-    [TestCase(0, "?")]
-    [TestCase(11, "AEGONL2UXXX")]
+    [Test]
+    [Arguments(0, "")]
+    [Arguments(0, "?")]
+    [Arguments(11, "AEGONL2UXXX")]
     public void Length(int length, BusinessIdentifierCode svo) => svo.Length.Should().Be(length);
 
-    [TestCase("", "")]
-    [TestCase("", "?")]
-    [TestCase("AEGO", "AEGONL2UXXX")]
+    [Test]
+    [Arguments("", "")]
+    [Arguments("", "?")]
+    [Arguments("AEGO", "AEGONL2UXXX")]
     public void Business_code(string business, BusinessIdentifierCode svo) => svo.Business.Should().Be(business);
 
-    [TestCase("", "")]
-    [TestCase("?", "?")]
-    [TestCase("NL", "AEGONL2UXXX")]
+    [Test]
+    [Arguments("", "")]
+    [Arguments("?", "?")]
+    [Arguments("NL", "AEGONL2UXXX")]
     public void Country_is(Country country, BusinessIdentifierCode svo) => svo.Country.Should().Be(country);
 
-    [TestCase("", "")]
-    [TestCase("", "?")]
-    [TestCase("2U", "AEGONL2UXXX")]
+    [Test]
+    [Arguments("", "")]
+    [Arguments("", "?")]
+    [Arguments("2U", "AEGONL2UXXX")]
     public void Location_code(string location, BusinessIdentifierCode svo) => svo.Location.Should().Be(location);
 
-    [TestCase("", "")]
-    [TestCase("", "?")]
-    [TestCase("XXX", "AEGONL2UXXX")]
+    [Test]
+    [Arguments("", "")]
+    [Arguments("", "?")]
+    [Arguments("XXX", "AEGONL2UXXX")]
     public void Branch_code(string branch, BusinessIdentifierCode svo) => svo.Branch.Should().Be(branch);
 
     [Test]
@@ -40,29 +45,34 @@ public class Has_properties
 
 public class With_domain_logic
 {
-    [TestCase(true, "")]
-    [TestCase(false, "?")]
-    [TestCase(false, "AEGONL2UXXX")]
+    [Test]
+    [Arguments(true, "")]
+    [Arguments(false, "?")]
+    [Arguments(false, "AEGONL2UXXX")]
     public void IsEmpty_returns(bool result, BusinessIdentifierCode svo) => svo.IsEmpty().Should().Be(result);
 
-    [TestCase(false, "")]
-    [TestCase(true, "?")]
-    [TestCase(false, "AEGONL2UXXX")]
+    [Test]
+    [Arguments(false, "")]
+    [Arguments(true, "?")]
+    [Arguments(false, "AEGONL2UXXX")]
     public void IsUnknown_returns(bool result, BusinessIdentifierCode svo) => svo.IsUnknown().Should().Be(result);
 
-    [TestCase(true, "")]
-    [TestCase(true, "?")]
-    [TestCase(false, "AEGONL2UXXX")]
+    [Test]
+    [Arguments(true, "")]
+    [Arguments(true, "?")]
+    [Arguments(false, "AEGONL2UXXX")]
     public void IsEmptyOrUnknown_returns(bool result, BusinessIdentifierCode svo) => svo.IsEmptyOrUnknown().Should().Be(result);
 
-    [TestCase(true, "AEGONL2UXXX")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "AEGONL2UXXX")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, BusinessIdentifierCode svo) => svo.HasValue.Should().Be(result);
 
-    [TestCase(true, "AEGONL2UXXX")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "AEGONL2UXXX")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsKnown_is(bool result, BusinessIdentifierCode svo) => svo.IsKnown.Should().Be(result);
 }
 
@@ -108,8 +118,9 @@ public class Is_equal_by_value
         l.Equals(r).Should().BeTrue();
     }
 
-    [TestCase("", 0)]
-    [TestCase("AEGONL2UXXX", -238769066)]
+    [Test]
+    [Arguments("", 0)]
+    [Arguments("AEGONL2UXXX", -238769066)]
     public void hash_code_is_value_based(BusinessIdentifierCode svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -133,8 +144,9 @@ public class Can_be_parsed
     public void from_question_mark_represents_Unknown()
         => BusinessIdentifierCode.Parse("?").Should().Be(BusinessIdentifierCode.Unknown);
 
-    [TestCase("en-GB", "AEGONL2UXXX")]
-    [TestCase("es-EC", "AEGONL2UXXX")]
+    [Test]
+    [Arguments("en-GB", "AEGONL2UXXX")]
+    [Arguments("es-EC", "AEGONL2UXXX")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -311,26 +323,28 @@ public class Supports_type_conversion
 
 public class Is_valid
 {
-    [TestCase("PSTBNL21")]
-    [TestCase("ABNANL2A")]
-    [TestCase("BACBBEBB")]
-    [TestCase("GEBABEBB36A")]
-    [TestCase("DEUTDEFF")]
-    [TestCase("NEDSZAJJ")]
-    [TestCase("DABADKKK")]
-    [TestCase("UNCRIT2B912")]
-    [TestCase("DSBACNBXSHA")]
-    [TestCase("AAAANLBË")]
+    [Test]
+    [Arguments("PSTBNL21")]
+    [Arguments("ABNANL2A")]
+    [Arguments("BACBBEBB")]
+    [Arguments("GEBABEBB36A")]
+    [Arguments("DEUTDEFF")]
+    [Arguments("NEDSZAJJ")]
+    [Arguments("DABADKKK")]
+    [Arguments("UNCRIT2B912")]
+    [Arguments("DSBACNBXSHA")]
+    [Arguments("AAAANLBË")]
     public void For(string str)
         => BusinessIdentifierCode.Parse(str).IsEmptyOrUnknown().Should().BeFalse();
 }
 
 public class Is_invalid
 {
-    [TestCase("1AAANL01", "digit in first four characters")]
-    [TestCase("AAAANLBB1", "Branch length of 1")]
-    [TestCase("AAAANLBB12", "Branch length of 2")]
-    [TestCase("ABCDXX01", "Not existing country")]
+    [Test]
+    [Arguments("1AAANL01", "digit in first four characters")]
+    [Arguments("AAAANLBB1", "Branch length of 1")]
+    [Arguments("AAAANLBB12", "Branch length of 2")]
+    [Arguments("ABCDXX01", "Not existing country")]
     public void For(string str, string because)
     {
         BusinessIdentifierCode.TryParse(str).Should().BeNull(because);
@@ -341,28 +355,33 @@ public class Is_invalid
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase(null, null)]
-    [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("AEGONL2UXXX", "AEGONL2UXXX")]
     public void System_Text_JSON_deserialization(object json, BusinessIdentifierCode svo)
         => JsonTester.Read_System_Text_JSON<BusinessIdentifierCode>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("AEGONL2UXXX", "AEGONL2UXXX")]
     public void System_Text_JSON_serialization(BusinessIdentifierCode svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
+    [Test]
+    [Arguments("AEGONL2UXXX", "AEGONL2UXXX")]
     public void convention_based_deserialization(object json, BusinessIdentifierCode svo)
         => JsonTester.Read<BusinessIdentifierCode>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("AEGONL2UXXX", "AEGONL2UXXX")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("AEGONL2UXXX", "AEGONL2UXXX")]
     public void convention_based_serialization(BusinessIdentifierCode svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
-    [TestCase(true, typeof(InvalidOperationException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
+    [Arguments(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<BusinessIdentifierCode>)

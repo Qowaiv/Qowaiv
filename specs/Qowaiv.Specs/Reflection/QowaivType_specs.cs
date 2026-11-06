@@ -25,8 +25,9 @@ public class NullOrDefault
 
 public class IsNullable
 {
-    [TestCase(typeof(string))]
-    [TestCase(typeof(int))]
+    [Test]
+    [Arguments(typeof(string))]
+    [Arguments(typeof(int))]
     public void False_for_not_nullable(Type type)
         => type.IsNullable.Should().BeFalse();
 
@@ -37,8 +38,9 @@ public class IsNullable
 
 public class NotNullableType
 {
-    [TestCase(typeof(string))]
-    [TestCase(typeof(int))]
+    [Test]
+    [Arguments(typeof(string))]
+    [Arguments(typeof(int))]
     public void Returns_type_for_non_nullable(Type type)
         => QowaivType.GetNotNullableType(type).Should().Be(type);
 
@@ -49,62 +51,67 @@ public class NotNullableType
 
 public class IsNumeric
 {
-    [TestCase(typeof(byte))]
-    [TestCase(typeof(sbyte))]
-    [TestCase(typeof(short))]
-    [TestCase(typeof(ushort))]
-    [TestCase(typeof(int))]
-    [TestCase(typeof(uint))]
-    [TestCase(typeof(long))]
-    [TestCase(typeof(ulong))]
-    [TestCase(typeof(float))]
-    [TestCase(typeof(double))]
-    [TestCase(typeof(decimal))]
+    [Test]
+    [Arguments(typeof(byte))]
+    [Arguments(typeof(sbyte))]
+    [Arguments(typeof(short))]
+    [Arguments(typeof(ushort))]
+    [Arguments(typeof(int))]
+    [Arguments(typeof(uint))]
+    [Arguments(typeof(long))]
+    [Arguments(typeof(ulong))]
+    [Arguments(typeof(float))]
+    [Arguments(typeof(double))]
+    [Arguments(typeof(decimal))]
     public void Is_true_for_primitive_numerics(Type type)
         => type.IsNumeric.Should().BeTrue();
 
-    [TestCase(typeof(object))]
-    [TestCase(typeof(string))]
-    [TestCase(typeof(char))]
-    [TestCase(typeof(bool))]
-    [TestCase(typeof(Guid))]
-    [TestCase(typeof(Amount))]
-    [TestCase(typeof(BigInteger))]
+    [Test]
+    [Arguments(typeof(object))]
+    [Arguments(typeof(string))]
+    [Arguments(typeof(char))]
+    [Arguments(typeof(bool))]
+    [Arguments(typeof(Guid))]
+    [Arguments(typeof(Amount))]
+    [Arguments(typeof(BigInteger))]
     public void Is_false_for_all_other_types(Type type)
         => type.IsNumeric.Should().BeFalse();
 }
 public class IsDate
 {
-    [TestCase(typeof(DateTime))]
+    [Test]
+    [Arguments(typeof(DateTime))]
 #if NET10_0_OR_GREATER
-    [TestCase(typeof(DateOnly))]
+    [Arguments(typeof(DateOnly))]
 #endif
-    [TestCase(typeof(DateTimeOffset))]
-    [TestCase(typeof(LocalDateTime))]
-    [TestCase(typeof(Date))]
-    [TestCase(typeof(WeekDate))]
-    [TestCase(typeof(YearMonth))]
+    [Arguments(typeof(DateTimeOffset))]
+    [Arguments(typeof(LocalDateTime))]
+    [Arguments(typeof(Date))]
+    [Arguments(typeof(WeekDate))]
+    [Arguments(typeof(YearMonth))]
     public void Is_true_for_DateTime_DateOnly_and_Qowaiv_DateTypes(Type type)
         => type.IsDate.Should().BeTrue();
 
-    [TestCase(typeof(object))]
-    [TestCase(typeof(string))]
-    [TestCase(typeof(char))]
-    [TestCase(typeof(bool))]
-    [TestCase(typeof(Guid))]
-    [TestCase(typeof(Amount))]
-    [TestCase(typeof(BigInteger))]
+    [Test]
+    [Arguments(typeof(object))]
+    [Arguments(typeof(string))]
+    [Arguments(typeof(char))]
+    [Arguments(typeof(bool))]
+    [Arguments(typeof(Guid))]
+    [Arguments(typeof(Amount))]
+    [Arguments(typeof(BigInteger))]
     public void Is_false_for_all_other_types(Type type)
         => type.IsDate.Should().BeFalse();
 }
 
 public class CSharpString
 {
-    [TestCase(typeof(void), "void")]
-    [TestCase(typeof(byte), "byte")]
-    [TestCase(typeof(float), "float")]
-    [TestCase(typeof(double), "double")]
-    [TestCase(typeof(object), "object")]
+    [Test]
+    [Arguments(typeof(void), "void")]
+    [Arguments(typeof(byte), "byte")]
+    [Arguments(typeof(float), "float")]
+    [Arguments(typeof(double), "double")]
+    [Arguments(typeof(object), "object")]
     public void Uses_primitive_names(Type primitive, string csharpString)
         => primitive.ToCSharpString().Should().Be(csharpString);
 
@@ -112,38 +119,49 @@ public class CSharpString
     public void Uses_question_mark_for_nullables()
         => (typeof(int?)).ToCSharpString().Should().Be("int?");
 
-    [TestCase(typeof(int[]), "int[]")]
-    [TestCase(typeof(int[,]), "int[,]")]
-    [TestCase(typeof(int[,,]), "int[,,]")]
+    [Test]
+    [Arguments(typeof(int[]), "int[]")]
+    [Arguments(typeof(int[,]), "int[,]")]
+    [Arguments(typeof(int[,,]), "int[,,]")]
     public void Supports_arrays(Type array, string csharpString)
         => array.ToCSharpString().Should().Be(csharpString);
 
-    [TestCase(typeof(int[][]), "int[][]")]
-    [TestCase(typeof(int[][,]), "int[][,]")]
-    [TestCase(typeof(int[][][]), "int[][][]")]
+    [Test]
+    [Arguments(typeof(int[][]), "int[][]")]
+    [Arguments(typeof(int[][,]), "int[][,]")]
+    [Arguments(typeof(int[][][]), "int[][][]")]
     public void Supports_jagged_arrays(Type jaggedArray, string csharpString)
         => jaggedArray.ToCSharpString().Should().Be(csharpString);
 
-    [TestCase(typeof(Nullable<>), "Nullable<>")]
-    [TestCase(typeof(Dictionary<,>), "Dictionary<,>")]
-    [TestCase(typeof(GenericBase<>.NestedType), "GenericBase<>.NestedType")]
-    [TestCase(typeof(Nested0<>.Nested1<>.Nested2<>), "Nested0<>.Nested1<>.Nested2<>")]
+    [Test]
+    [MethodDataSource(nameof(GenericTypeDefinitions))]
     public void Supports_generic_type_definitions(Type definition, string csharpString)
         => definition.ToCSharpString().Should().Be(csharpString);
 
-    [TestCase(typeof(IList<Guid>), "IList<Guid>")]
-    [TestCase(typeof(Dictionary<int, string>), "Dictionary<int, string>")]
-    [TestCase(typeof(Dictionary<object, List<int?>>[]), "Dictionary<object, List<int?>>[]")]
+    // The TUnit source generator can not handle typeof(Nested0<>.Nested1<>.Nested2<>) as attribute argument.
+    public static IEnumerable<(Type, string)> GenericTypeDefinitions()
+    {
+        yield return (typeof(Nullable<>), "Nullable<>");
+        yield return (typeof(Dictionary<,>), "Dictionary<,>");
+        yield return (typeof(GenericBase<>.NestedType), "GenericBase<>.NestedType");
+        yield return (typeof(Nested0<>.Nested1<>.Nested2<>), "Nested0<>.Nested1<>.Nested2<>");
+    }
+
+    [Test]
+    [Arguments(typeof(IList<Guid>), "IList<Guid>")]
+    [Arguments(typeof(Dictionary<int, string>), "Dictionary<int, string>")]
+    [Arguments(typeof(Dictionary<object, List<int?>>[]), "Dictionary<object, List<int?>>[]")]
     public void Supports_generic_type(Type definition, string csharpString)
         => definition.ToCSharpString().Should().Be(csharpString);
 
-    [TestCase(typeof(NestedType), "CSharpString.NestedType")]
-    [TestCase(typeof(GenericBase<int>.NestedType), "GenericBase<int>.NestedType")]
-    [TestCase(typeof(GenericBase<int>.GenericNested<long>), "GenericBase<int>.GenericNested<long>")]
-    [TestCase(typeof(Nested0<int>.Nested1<long>.Nested2<bool>), "Nested0<int>.Nested1<long>.Nested2<bool>")]
-    [TestCase(typeof(Nested0<int>.Nested1<long>.Nested2<bool>.Nested3<string, char>), "Nested0<int>.Nested1<long>.Nested2<bool>.Nested3<string, char>")]
-    [TestCase(typeof(NonGenericBase.GenericNested<int>), "NonGenericBase.GenericNested<int>")]
-    [TestCase(typeof(GenericBase<NonGenericBase.GenericNested<int>>.NestedType), "GenericBase<NonGenericBase.GenericNested<int>>.NestedType")]
+    [Test]
+    [Arguments(typeof(NestedType), "CSharpString.NestedType")]
+    [Arguments(typeof(GenericBase<int>.NestedType), "GenericBase<int>.NestedType")]
+    [Arguments(typeof(GenericBase<int>.GenericNested<long>), "GenericBase<int>.GenericNested<long>")]
+    [Arguments(typeof(Nested0<int>.Nested1<long>.Nested2<bool>), "Nested0<int>.Nested1<long>.Nested2<bool>")]
+    [Arguments(typeof(Nested0<int>.Nested1<long>.Nested2<bool>.Nested3<string, char>), "Nested0<int>.Nested1<long>.Nested2<bool>.Nested3<string, char>")]
+    [Arguments(typeof(NonGenericBase.GenericNested<int>), "NonGenericBase.GenericNested<int>")]
+    [Arguments(typeof(GenericBase<NonGenericBase.GenericNested<int>>.NestedType), "GenericBase<NonGenericBase.GenericNested<int>>.NestedType")]
     public void Supports_nested_types(Type nestedType, string csharpString)
         => nestedType.ToCSharpString().Should().Be(csharpString);
 
@@ -154,15 +172,16 @@ public class CSharpString
         generic.ToCSharpString().Should().Be("TModel");
     }
 
-    [TestCase(typeof(string), "string")]
-    [TestCase(typeof(byte[]), "byte[]")]
-    [TestCase(typeof(Guid), "System.Guid")]
-    [TestCase(typeof(Dictionary<string, Action>), "System.Collections.Generic.Dictionary<string, System.Action>")]
-    [TestCase(typeof(long?), "long?")]
-    [TestCase(typeof(Dictionary<,>), "System.Collections.Generic.Dictionary<,>")]
-    [TestCase(typeof(Nullable<>), "System.Nullable<>")]
-    [TestCase(typeof(Dictionary<object, List<int?>>[]), "System.Collections.Generic.Dictionary<object, System.Collections.Generic.List<int?>>[]")]
-    [TestCase(typeof(NestedType), "Reflection.QowaivType_specs.CSharpString.NestedType")]
+    [Test]
+    [Arguments(typeof(string), "string")]
+    [Arguments(typeof(byte[]), "byte[]")]
+    [Arguments(typeof(Guid), "System.Guid")]
+    [Arguments(typeof(Dictionary<string, Action>), "System.Collections.Generic.Dictionary<string, System.Action>")]
+    [Arguments(typeof(long?), "long?")]
+    [Arguments(typeof(Dictionary<,>), "System.Collections.Generic.Dictionary<,>")]
+    [Arguments(typeof(Nullable<>), "System.Nullable<>")]
+    [Arguments(typeof(Dictionary<object, List<int?>>[]), "System.Collections.Generic.Dictionary<object, System.Collections.Generic.List<int?>>[]")]
+    [Arguments(typeof(NestedType), "Reflection.QowaivType_specs.CSharpString.NestedType")]
     public void With_namespaces_if_specified(Type type, string csharpString)
         => type.ToCSharpString(withNamespace: true).Should().Be(csharpString);
 

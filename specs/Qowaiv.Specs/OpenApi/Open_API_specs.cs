@@ -25,11 +25,12 @@ public class Open_API_data_type
         type.Should().Be(copy);
     }
 
-    [TestCase(null)]
-    [TestCase("")]
-    [TestCase("42")]
-    [TestCase("Hello, world!")]
-    [TestCase("Qowaiv")]
+    [Test]
+    [Arguments((object?)null)]
+    [Arguments("")]
+    [Arguments("42")]
+    [Arguments("Hello, world!")]
+    [Arguments("Qowaiv")]
     public void Match_null_regex_is_always_true(string? value)
         => new OpenApiDataType(typeof(int), "descrption", "type", null, pattern: null).Matches(value).Should().BeTrue();
 

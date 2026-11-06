@@ -30,7 +30,7 @@ public class Default_behavior
     }
 }
 
-[NonParallelizable]
+[NotInParallel]
 public class Globally
 {
     [Test]
@@ -47,7 +47,7 @@ public class Globally
         Clock.TimeZone.Should().Be(Svo.TimeZone);
     }
 
-    [TearDown]
+    [After(Test)]
     public void TearDown()
     {
         Clock.SetTime(() => DateTime.UtcNow);
@@ -57,9 +57,10 @@ public class Globally
 
 public class Date_time_kind
 {
-    [TestCase(DateTimeKind.Utc)]
-    [TestCase(DateTimeKind.Local)]
-    [TestCase(DateTimeKind.Unspecified)]
+    [Test]
+    [Arguments(DateTimeKind.Utc)]
+    [Arguments(DateTimeKind.Local)]
+    [Arguments(DateTimeKind.Unspecified)]
     public void UTC_for_UtcNow(DateTimeKind kind)
     {
         using (Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11, 06, 15, 00, kind)))

@@ -4,55 +4,65 @@ namespace Year_specs;
 
 public class With_domain_logic
 {
-    [TestCase(true, 1979)]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, 1979)]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, Year svo) => svo.HasValue.Should().Be(result);
 
-    [TestCase(true, 1979)]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, 1979)]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsKnown_is(bool result, Year svo) => svo.IsKnown.Should().Be(result);
 
-    [TestCase(false, 1979)]
-    [TestCase(false, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, 1979)]
+    [Arguments(false, "?")]
+    [Arguments(true, "")]
     public void IsEmpty_returns(bool result, Year svo) => svo.IsEmpty().Should().Be(result);
 
-    [TestCase(false, 1979)]
-    [TestCase(true, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, 1979)]
+    [Arguments(true, "?")]
+    [Arguments(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, Year svo) => svo.IsEmptyOrUnknown().Should().Be(result);
 
-    [TestCase(false, 1979)]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(false, 1979)]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void IsUnknown_returns(bool result, Year svo) => svo.IsUnknown().Should().Be(result);
 }
 
 public class Is_not_leap_year_when
 {
-    [TestCase("")]
-    [TestCase("?")]
+    [Test]
+    [Arguments("")]
+    [Arguments("?")]
     public void empty_or_unknown(Year year) => year.IsLeapYear.Should().BeFalse();
 
-    [TestCase(1979)]
-    [TestCase(2017)]
+    [Test]
+    [Arguments(1979)]
+    [Arguments(2017)]
     public void not_dividable_by_4(Year year) => year.IsLeapYear.Should().BeFalse();
 
-    [TestCase(1800)]
-    [TestCase(1900)]
+    [Test]
+    [Arguments(1800)]
+    [Arguments(1900)]
     public void dividable_by_100_not_by_400(Year year) => year.IsLeapYear.Should().BeFalse();
 }
 
 public class Is_leap_year
 {
-    [TestCase(1988)]
-    [TestCase(2004)]
+    [Test]
+    [Arguments(1988)]
+    [Arguments(2004)]
     public void dividable_by_4_not_by_100(Year year) => year.IsLeapYear.Should().BeTrue();
 
-    [TestCase(1600)]
-    [TestCase(2000)]
+    [Test]
+    [Arguments(1600)]
+    [Arguments(2000)]
     public void dividable_by_400(Year year) => year.IsLeapYear.Should().BeTrue();
 }
 
@@ -114,11 +124,12 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.Year != 2017.CE()).Should().BeTrue();
 
-    [TestCase("", 0)]
+    [Test]
+    [Arguments("", 0)]
 #if NET48
-    [TestCase("1979", 538423912)]
+    [Arguments("1979", 538423912)]
 #else
-    [TestCase("1979", 665629288)]
+    [Arguments("1979", 665629288)]
 #endif
     public void hash_code_is_value_based(Year svo, int hash)
     {
@@ -188,8 +199,9 @@ public class Can_be_created_from_int
     public void within_range()
         => Year.TryCreate(1979).Should().Be(Svo.Year);
 
-    [TestCase(0)]
-    [TestCase(10000)]
+    [Test]
+    [Arguments(0)]
+    [Arguments(10000)]
     public void but_not_outside_1_to_9999(int year) => Year.TryCreate(year, out _).Should().BeFalse();
 }
 
@@ -210,9 +222,10 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '1,979', format: '#,##0'");
     }
 
-    [TestCase("en-GB", null, 1979, "1979")]
-    [TestCase("nl-BE", "#,##0", 1979, "1.979")]
-    [TestCase("en-US", "00000", 1979, "01979")]
+    [Test]
+    [Arguments("en-GB", null, 1979, "1979")]
+    [Arguments("nl-BE", "#,##0", 1979, "1.979")]
+    [Arguments("en-US", "00000", 1979, "01979")]
     public void culture_dependent(CultureInfo culture, string format, Year svo, string expected)
     {
         using (culture.Scoped())
@@ -288,10 +301,11 @@ public class Is_comparable
         (left >= right).Should().BeTrue();
     }
 
-    [TestCase("", 1979)]
-    [TestCase("?", 1979)]
-    [TestCase(1979, "")]
-    [TestCase(1979, "?")]
+    [Test]
+    [Arguments("", 1979)]
+    [Arguments("?", 1979)]
+    [Arguments(1979, "")]
+    [Arguments(1979, "?")]
     public void by_operators_for_empty_or_unknown_always_false(Year l, Year r)
     {
         (l <= r).Should().BeFalse();
@@ -376,35 +390,40 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase("?", "?")]
-    [TestCase(null, null)]
-    [TestCase(2017d, 2017)]
-    [TestCase(2017L, 2017)]
-    [TestCase("2017", 2017)]
+    [Test]
+    [Arguments("?", "?")]
+    [Arguments(null, null)]
+    [Arguments(2017d, 2017)]
+    [Arguments(2017L, 2017)]
+    [Arguments("2017", 2017)]
     public void System_Text_JSON_deserialization(object json, Year svo)
         => JsonTester.Read_System_Text_JSON<Year>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase(2017, 2017L)]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments(2017, 2017L)]
     public void System_Text_JSON_serialization(Year svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("?", "?")]
-    [TestCase(2017d, 2017)]
-    [TestCase(2017L, 2017)]
-    [TestCase("2017", 2017)]
+    [Test]
+    [Arguments("?", "?")]
+    [Arguments(2017d, 2017)]
+    [Arguments(2017L, 2017)]
+    [Arguments("2017", 2017)]
     public void convention_based_deserialization(object json, Year svo)
         => JsonTester.Read<Year>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase(2017, 2017L)]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments(2017, 2017L)]
     public void convention_based_serialization(Year svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
-    [TestCase(-5L, typeof(ArgumentOutOfRangeException))]
-    [TestCase(-2.3, typeof(ArgumentOutOfRangeException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
+    [Arguments(-5L, typeof(ArgumentOutOfRangeException))]
+    [Arguments(-2.3, typeof(ArgumentOutOfRangeException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<Year>)
@@ -466,9 +485,10 @@ public class Is_Open_API_data_type
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("{unknown}", "?")]
-    [TestCase("1979", (short)1979)]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("{unknown}", "?")]
+    [Arguments("1979", (short)1979)]
     public void has_custom_display(object display, Year svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }

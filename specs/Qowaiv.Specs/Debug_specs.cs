@@ -2,10 +2,11 @@ namespace Debug_specs;
 
 public class Type_is
 {
-    [TestCase(typeof(CultureInfoScope))]
-    [TestCase(typeof(FormattingArguments))]
-    [TestCase(typeof(PostalCodeCountryInfo))]
-    [TestCase(typeof(WildcardPattern))]
+    [Test]
+    [Arguments(typeof(CultureInfoScope))]
+    [Arguments(typeof(FormattingArguments))]
+    [Arguments(typeof(PostalCodeCountryInfo))]
+    [Arguments(typeof(WildcardPattern))]
     public void decorated_with_DebuggerDisplay_attribute(Type svoType)
     => svoType.Should().BeDecoratedWith<DebuggerDisplayAttribute>();
 }

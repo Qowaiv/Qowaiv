@@ -5,14 +5,16 @@ namespace Mathematics.Fraction_specs;
 
 public class Defines
 {
-    [TestCase("0", "0")]
-    [TestCase("17/3", "17/3")]
-    [TestCase("-7/3", "-7/3")]
+    [Test]
+    [Arguments("0", "0")]
+    [Arguments("17/3", "17/3")]
+    [Arguments("-7/3", "-7/3")]
     public void plus(Fraction fraction, Fraction negated) => (+fraction).Should().Be(negated);
 
-    [TestCase("0", "0")]
-    [TestCase("-7/3", "+7/3")]
-    [TestCase("+7/3", "-7/3")]
+    [Test]
+    [Arguments("0", "0")]
+    [Arguments("-7/3", "+7/3")]
+    [Arguments("+7/3", "-7/3")]
     public void negation(Fraction fraction, Fraction negated) => (-fraction).Should().Be(negated);
 
     [Test]
@@ -33,14 +35,15 @@ public class Defines
 
     public class Multiplication
     {
-        [TestCase("1/3", "0", "0")]
-        [TestCase("0", "5/7", "0")]
-        [TestCase("1/3", "1/4", "1/12")]
-        [TestCase("-1/3", "-1/4", "1/12")]
-        [TestCase("1/4", "4/7", "1/7")]
-        [TestCase("2/5", "11/16", "11/40")]
-        [TestCase("-2/5", "4", "-8/5")]
-        [TestCase("2/3", "-8/9", "-16/27")]
+        [Test]
+        [Arguments("1/3", "0", "0")]
+        [Arguments("0", "5/7", "0")]
+        [Arguments("1/3", "1/4", "1/12")]
+        [Arguments("-1/3", "-1/4", "1/12")]
+        [Arguments("1/4", "4/7", "1/7")]
+        [Arguments("2/5", "11/16", "11/40")]
+        [Arguments("-2/5", "4", "-8/5")]
+        [Arguments("2/3", "-8/9", "-16/27")]
         public void between_fractions(Fraction left, Fraction right, Fraction product)
             => (left * right).Should().Be(product);
 
@@ -64,17 +67,19 @@ public class Defines
 
     public class Division
     {
-        [TestCase("0", "1/3", "0")]
-        [TestCase("1/3", "1/4", "4/3")]
-        [TestCase("-1/3", "-1/4", "4/3")]
-        [TestCase("1/4", "4/7", "7/16")]
-        [TestCase("2/5", "11/16", "32/55")]
-        [TestCase("-2/5", "4", "-1/10")]
-        [TestCase("2/3", "-8/9", "-3/4")]
+        [Test]
+        [Arguments("0", "1/3", "0")]
+        [Arguments("1/3", "1/4", "4/3")]
+        [Arguments("-1/3", "-1/4", "4/3")]
+        [Arguments("1/4", "4/7", "7/16")]
+        [Arguments("2/5", "11/16", "32/55")]
+        [Arguments("-2/5", "4", "-1/10")]
+        [Arguments("2/3", "-8/9", "-3/4")]
         public void between_Fractions(Fraction left, Fraction right, Fraction division)
             => (left / right).Should().Be(division);
 
         [Test]
+        [CombinedDataSources]
         public void between_fractions([RandomFraction(3)] Fraction left, [RandomFraction(3, false)] Fraction right)
         {
             var division = ((decimal)left) / ((decimal)right);
@@ -101,20 +106,22 @@ public class Defines
 
     public class Addition
     {
-        [TestCase("1/4", "0", "1/4")]
-        [TestCase("0", "1/4", "1/4")]
-        [TestCase("5/7", "0", "5/7")]
-        [TestCase("1/3", "1/4", "7/12")]
-        [TestCase("1/4", "1/3", "7/12")]
-        [TestCase("1/4", "1/12", "1/3")]
-        [TestCase("-1/4", "-1/12", "-1/3")]
-        [TestCase("-1/4", "1/12", "-1/6")]
-        [TestCase("1/5", "2/5", "3/5")]
-        [TestCase("8/3", "1/2", "19/6")]
+        [Test]
+        [Arguments("1/4", "0", "1/4")]
+        [Arguments("0", "1/4", "1/4")]
+        [Arguments("5/7", "0", "5/7")]
+        [Arguments("1/3", "1/4", "7/12")]
+        [Arguments("1/4", "1/3", "7/12")]
+        [Arguments("1/4", "1/12", "1/3")]
+        [Arguments("-1/4", "-1/12", "-1/3")]
+        [Arguments("-1/4", "1/12", "-1/6")]
+        [Arguments("1/5", "2/5", "3/5")]
+        [Arguments("8/3", "1/2", "19/6")]
         public void between_fractions(Fraction left, Fraction right, Fraction addition)
             => (left + right).Should().Be(addition);
 
         [Test]
+        [CombinedDataSources]
         public void between_fractions([RandomFraction(3)] Fraction left, [RandomFraction(3)] Fraction right)
         {
             var sum = ((decimal)left) + ((decimal)right);
@@ -141,17 +148,19 @@ public class Defines
 
     public class Subtraction
     {
-        [TestCase("1/4", "0", "1/4")]
-        [TestCase("0", "1/4", "-1/4")]
-        [TestCase("1/3", "1/4", "1/12")]
-        [TestCase("1/4", "1/3", "-1/12")]
-        [TestCase("1/4", "1/12", "1/6")]
-        [TestCase("-1/4", "-1/12", "-1/6")]
-        [TestCase("-1/4", "1/12", "-1/3")]
+        [Test]
+        [Arguments("1/4", "0", "1/4")]
+        [Arguments("0", "1/4", "-1/4")]
+        [Arguments("1/3", "1/4", "1/12")]
+        [Arguments("1/4", "1/3", "-1/12")]
+        [Arguments("1/4", "1/12", "1/6")]
+        [Arguments("-1/4", "-1/12", "-1/6")]
+        [Arguments("-1/4", "1/12", "-1/3")]
         public void between_fractions(Fraction left, Fraction right, Fraction subtraction)
             => (left - right).Should().Be(subtraction);
 
         [Test]
+        [CombinedDataSources]
         public void between_fractions([RandomFraction(3)] Fraction left, [RandomFraction(3)] Fraction right)
         {
             var subtraction = ((decimal)left) - ((decimal)right);
@@ -177,13 +186,15 @@ public class Defines
 
     public class Modulation
     {
-        [TestCase("5/4", "1/1", "1/4")]
-        [TestCase("-5/4", "1/1", "-1/4")]
-        [TestCase("5/3", "2/3", "1/3")]
+        [Test]
+        [Arguments("5/4", "1/1", "1/4")]
+        [Arguments("-5/4", "1/1", "-1/4")]
+        [Arguments("5/3", "2/3", "1/3")]
         public void between_fractions(Fraction fraction, Fraction divider, Fraction remainder)
             => (fraction % divider).Should().Be(remainder);
 
         [Test]
+        [CombinedDataSources]
         public void between_fractions([RandomFraction(3)] Fraction fraction, [RandomFraction(3, false)] Fraction divider)
         {
             var modulo = ((decimal)fraction) % ((decimal)divider);
@@ -207,32 +218,37 @@ public class Defines
            => (4 % 3.DividedBy(1)).Should().Be(1.DividedBy(1));
     }
 
-    [TestCase("0", "0")]
-    [TestCase("17/3", "17/3")]
-    [TestCase("-7/3", "+7/3")]
+    [Test]
+    [Arguments("0", "0")]
+    [Arguments("17/3", "17/3")]
+    [Arguments("-7/3", "+7/3")]
     public void abs(Fraction fraction, Fraction absolute)
         => fraction.Abs().Should().Be(absolute);
 
-    [TestCase("+1/4", "4/1")]
-    [TestCase("-2/3", "-3/2")]
+    [Test]
+    [Arguments("+1/4", "4/1")]
+    [Arguments("-2/3", "-3/2")]
     public void inverse(Fraction faction, Fraction inverse)
         => faction.Inverse().Should().Be(inverse);
 
-    [TestCase("0", 0)]
-    [TestCase("-1/4", -1)]
-    [TestCase("+1/4", +1)]
+    [Test]
+    [Arguments("0", 0)]
+    [Arguments("-1/4", -1)]
+    [Arguments("+1/4", +1)]
     public void sign(Fraction fraction, int sign)
         => fraction.Sign().Should().Be(sign);
 
-    [TestCase("-69/17", 1)]
-    [TestCase("+69/17", 1)]
-    [TestCase("0", 0)]
+    [Test]
+    [Arguments("-69/17", 1)]
+    [Arguments("+69/17", 1)]
+    [Arguments("0", 0)]
     public void remainder_as_positive_value(Fraction fraction, int remainder)
         => fraction.Remainder.Should().Be(remainder);
 
-    [TestCase("-69/17", -4)]
-    [TestCase("+69/17", +4)]
-    [TestCase("0", 0)]
+    [Test]
+    [Arguments("-69/17", -4)]
+    [Arguments("+69/17", +4)]
+    [Arguments("0", 0)]
     public void whole(Fraction fraction, int remainder)
         => fraction.Whole.Should().Be(remainder);
 }
@@ -356,27 +372,31 @@ public class Throws_when
             .WithMessage("Arithmetic operation resulted in an overflow.*");
     }
 
-    [TestCase(-19223372036854775809.0)]
-    [TestCase(+19223372036854775809.0)]
+    [Test]
+    [Arguments(-19223372036854775809.0)]
+    [Arguments(+19223372036854775809.0)]
     public void double_can_not_be_casted_to_fraction(double dbl)
         => dbl.Invoking(d => (Fraction)d).Should().Throw<OverflowException>()
         .WithMessage("Value was either too large or too small for a Fraction.");
 
-    [TestCase(-9223372036854775808.0)]
-    [TestCase(+9223372036854775808.0)]
+    [Test]
+    [Arguments(-9223372036854775808.0)]
+    [Arguments(+9223372036854775808.0)]
     public void decimal_can_not_be_casted_to_fraction(decimal dec)
         => dec.Invoking(d => (Fraction)d).Should().Throw<OverflowException>()
         .WithMessage("Value was either too large or too small for a Fraction.");
 
 #if !NET48 // bounderies are slightly different for .NET 4.8
-    [TestCase(-9223372036854775808.0)]
-    [TestCase(+9223372036854775808.0)]
+    [Test]
+    [Arguments(-9223372036854775808.0)]
+    [Arguments(+9223372036854775808.0)]
     public void fraction_can_no_be_created_form_double(double dbl)
         => dbl.Invoking(Fraction.Create).Should().Throw<ArgumentOutOfRangeException>()
         .WithMessage("Value was either too large or too small for a Fraction. *");
 
-    [TestCase(-9223372036854775808.0)]
-    [TestCase(+9223372036854775808.0)]
+    [Test]
+    [Arguments(-9223372036854775808.0)]
+    [Arguments(+9223372036854775808.0)]
     public void fraction_can_no_be_created_form_decimal(decimal dec)
         => dec.Invoking(Fraction.Create).Should().Throw<ArgumentOutOfRangeException>()
         .WithMessage("Value was either too large or too small for a Fraction. *");
@@ -423,8 +443,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.Fraction != 17.DividedBy(42)).Should().BeTrue();
 
-    [TestCase(0, 0)]
-    [TestCase("17/42", 490960136)]
+    [Test]
+    [Arguments(0, 0)]
+    [Arguments("17/42", 490960136)]
     public void hash_code_is_value_based(Fraction svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -442,59 +463,67 @@ public class Is_equal_by_value
 }
 public class Can_be_parsed
 {
-    [TestCase(17, 1, "17")]
-    [TestCase(17, 1, "+17")]
-    [TestCase(-12, 1, "-12")]
+    [Test]
+    [Arguments(17, 1, "17")]
+    [Arguments(17, 1, "+17")]
+    [Arguments(-12, 1, "-12")]
     public void from_integer(long numerator, long denominator, string num)
         => Fraction.Parse(num, CultureInfo.InvariantCulture).Should().Be(numerator.DividedBy(denominator));
 
-    [TestCase(12_345, 1, "12,345")]
-    [TestCase(-1, 4, "-0.25")]
+    [Test]
+    [Arguments(12_345, 1, "12,345")]
+    [Arguments(-1, 4, "-0.25")]
     public void from_decimal(long numerator, long denominator, string dec)
         => Fraction.Parse(dec, CultureInfo.InvariantCulture).Should().Be(numerator.DividedBy(denominator));
 
-    [TestCase(487, 1000, "48.70%")]
-    [TestCase(487, 1000, "487.0‰")]
+    [Test]
+    [Arguments(487, 1000, "48.70%")]
+    [Arguments(487, 1000, "487.0‰")]
     public void from_percentage(long numerator, long denominator, string percentage)
         => Fraction.Parse(percentage, CultureInfo.InvariantCulture).Should().Be(numerator.DividedBy(denominator));
 
-    [TestCase(+1, 2, "½")]
-    [TestCase(-1, 2, "-½")]
-    [TestCase(+3, 4, "¾")]
-    [TestCase(11, 4, "2¾")]
-    [TestCase(11, 4, "2 ¾")]
+    [Test]
+    [Arguments(+1, 2, "½")]
+    [Arguments(-1, 2, "-½")]
+    [Arguments(+3, 4, "¾")]
+    [Arguments(11, 4, "2¾")]
+    [Arguments(11, 4, "2 ¾")]
     public void from_vulgar(long numerator, long denominator, string vulgar)
         => Fraction.Parse(vulgar).Should().Be(numerator.DividedBy(denominator));
 
-    [TestCase(9, 7, "1²/₇")]
-    [TestCase(3, 7, "³/7")]
-    [TestCase(9, 7, "1 ²/7")]
-    [TestCase(23, 47, "²³/₄₇")]
+    [Test]
+    [Arguments(9, 7, "1²/₇")]
+    [Arguments(3, 7, "³/7")]
+    [Arguments(9, 7, "1 ²/7")]
+    [Arguments(23, 47, "²³/₄₇")]
     public void from_super_script_numerator(long numerator, long denominator, string superScript)
         => Fraction.Parse(superScript).Should().Be(numerator.DividedBy(denominator));
 
-    [TestCase(-2, 7, "-²/₇")]
-    [TestCase(+9, 7, "1 2/₇")]
-    [TestCase(+3, 7, "3/₇")]
-    [TestCase(23, 47, "23/₄₇")]
+    [Test]
+    [Arguments(-2, 7, "-²/₇")]
+    [Arguments(+9, 7, "1 2/₇")]
+    [Arguments(+3, 7, "3/₇")]
+    [Arguments(23, 47, "23/₄₇")]
     public void from_sub_script_denominator(long numerator, long denominator, string subScript)
         => Fraction.Parse(subScript).Should().Be(numerator.DividedBy(denominator));
 
-    [TestCase(1, 3, "+1/3")]
-    [TestCase(-1, 3, "-1/3")]
-    [TestCase(11, 43, "11/43")]
-    [TestCase(4, 3, "1 1/3")]
-    [TestCase(21, 2, "10 1/2")]
+    [Test]
+    [Arguments(1, 3, "+1/3")]
+    [Arguments(-1, 3, "-1/3")]
+    [Arguments(11, 43, "11/43")]
+    [Arguments(4, 3, "1 1/3")]
+    [Arguments(21, 2, "10 1/2")]
     public void from_fraction_strings(long numerator, long denominator, string str)
         => Fraction.Parse(str, CultureInfo.InvariantCulture).Should().Be(numerator.DividedBy(denominator));
 
-    [TestCase("1/3")]
-    [TestCase("1:3")]
-    [TestCase("1÷3")]
-    [TestCase("1⁄3")]
-    [TestCase("1⁄3")]
-    [TestCase("1⁄3")]
-    [TestCase("1∕3")]
+    [Test]
+    [Arguments("1/3")]
+    [Arguments("1:3")]
+    [Arguments("1÷3")]
+    [Arguments("1⁄3")]
+    [Arguments("1⁄3")]
+    [Arguments("1⁄3")]
+    [Arguments("1∕3")]
     public void from_multiple_bar_chars(string bar)
        => Fraction.Parse(bar, CultureInfo.InvariantCulture).Should().Be(1.DividedBy(3));
 
@@ -515,37 +544,41 @@ public class Can_not_be_parsed
     public void string_empty() => Fraction.TryParse(string.Empty).Should().BeNull();
 
     [Test]
-    public void @null() => Fraction.TryParse(null).Should().BeNull();
+    public void _null() => Fraction.TryParse(null).Should().BeNull();
 
-    [TestCase("--3/7")]
-    [TestCase("-+3/7")]
-    [TestCase("+-3/7")]
-    [TestCase("++3/7")]
+    [Test]
+    [Arguments("--3/7")]
+    [Arguments("-+3/7")]
+    [Arguments("+-3/7")]
+    [Arguments("++3/7")]
     public void multiple_signs(string multiple) => Fraction.TryParse(multiple).Should().BeNull();
 
-    [TestCase("3/+7")]
+    [Test]
+    [Arguments("3/+7")]
     public void plus_sign_denominator(string denominator) => Fraction.TryParse(denominator).Should().BeNull();
 
-    [TestCase("3/0")]
-    [TestCase("²/₀")]
+    [Test]
+    [Arguments("3/0")]
+    [Arguments("²/₀")]
     public void zero_denominator(string divideByZero) => Fraction.TryParse(divideByZero).Should().BeNull();
 
-    [TestCase("NaN", "NaN")]
-    [TestCase("-Infinity", "-Infinity")]
-    [TestCase("+Infinity", "+Infinity")]
-    [TestCase("0xFF", "Hexa-decimal")]
-    [TestCase("15/", "Ends with an operator")]
-    [TestCase("1//4", "Two division operators")]
-    [TestCase("1/½", "Vulgar with division operator")]
-    [TestCase("½1", "Vulgar not at the end")]
-    [TestCase("²3/₇", "Normal and superscript mixed")]
-    [TestCase("²/₇3", "Normal and subscript mixed")]
-    [TestCase("²/3₇", "Normal and subscript mixed")]
-    [TestCase("₇/3", "Subscript first")]
-    [TestCase("92233720368547758 17/32464364", "Numerator overflow")]
-    [TestCase("9223372036854775808", "Long.MaxValue + 1")]
-    [TestCase("-9223372036854775808", "Long.MinValue")]
-    [TestCase("-9223372036854775809", "Long.MinValue - 1")]
+    [Test]
+    [Arguments("NaN", "NaN")]
+    [Arguments("-Infinity", "-Infinity")]
+    [Arguments("+Infinity", "+Infinity")]
+    [Arguments("0xFF", "Hexa-decimal")]
+    [Arguments("15/", "Ends with an operator")]
+    [Arguments("1//4", "Two division operators")]
+    [Arguments("1/½", "Vulgar with division operator")]
+    [Arguments("½1", "Vulgar not at the end")]
+    [Arguments("²3/₇", "Normal and superscript mixed")]
+    [Arguments("²/₇3", "Normal and subscript mixed")]
+    [Arguments("²/3₇", "Normal and subscript mixed")]
+    [Arguments("₇/3", "Subscript first")]
+    [Arguments("92233720368547758 17/32464364", "Numerator overflow")]
+    [Arguments("9223372036854775808", "Long.MaxValue + 1")]
+    [Arguments("-9223372036854775808", "Long.MinValue")]
+    [Arguments("-9223372036854775809", "Long.MinValue - 1")]
     public void non_fractional_strings(string str, string because)
         => Fraction.TryParse(str).Should().BeNull(because);
 
@@ -555,37 +588,41 @@ public class Can_not_be_parsed
 
 public class Can_be_created
 {
-    [TestCase("0/1", 0, 8, "Should set zero")]
-    [TestCase("1/4", 2, 8, "Should reduce")]
-    [TestCase("-1/4", -2, 8, "Should reduce")]
-    [TestCase("1/4", 3, 12, "Should reduce")]
-    [TestCase("-1/4", -3, 12, "Should reduce")]
-    [TestCase("3/7", -3, -7, "Should have no signs")]
-    [TestCase("-3/7", 3, -7, "Should have no sign on denominator")]
-    [TestCase("-3/7", -3, 7, "Should have no sign on denominator")]
+    [Test]
+    [Arguments("0/1", 0, 8, "Should set zero")]
+    [Arguments("1/4", 2, 8, "Should reduce")]
+    [Arguments("-1/4", -2, 8, "Should reduce")]
+    [Arguments("1/4", 3, 12, "Should reduce")]
+    [Arguments("-1/4", -3, 12, "Should reduce")]
+    [Arguments("3/7", -3, -7, "Should have no signs")]
+    [Arguments("-3/7", 3, -7, "Should have no sign on denominator")]
+    [Arguments("-3/7", -3, 7, "Should have no sign on denominator")]
     public void with_constructor(Fraction fraction, long numerator, long denominator, string because)
         => new Fraction(numerator, denominator).Should().Be(fraction, because);
 
-    [TestCase(0, 1, "0")]
-    [TestCase(00000003, 000000010, "0.3")]
-    [TestCase(00000033, 000000100, "0.33")]
-    [TestCase(00000333, 000001000, "0.333")]
-    [TestCase(00003333, 000010000, "0.3333")]
-    [TestCase(00033333, 000100000, "0.33333")]
-    [TestCase(00333333, 001000000, "0.333333")]
-    [TestCase(03333333, 010000000, "0.3333333")]
-    [TestCase(33333333, 100000000, "0.33333333")]
-    [TestCase(333333333, 1000000000, "0.333333333")]
-    [TestCase(1, 3, "0.33333333333333333333333")]
+    [Test]
+    [Arguments(0, 1, "0")]
+    [Arguments(00000003, 000000010, "0.3")]
+    [Arguments(00000033, 000000100, "0.33")]
+    [Arguments(00000333, 000001000, "0.333")]
+    [Arguments(00003333, 000010000, "0.3333")]
+    [Arguments(00033333, 000100000, "0.33333")]
+    [Arguments(00333333, 001000000, "0.333333")]
+    [Arguments(03333333, 010000000, "0.3333333")]
+    [Arguments(33333333, 100000000, "0.33333333")]
+    [Arguments(333333333, 1000000000, "0.333333333")]
+    [Arguments(1, 3, "0.33333333333333333333333")]
     public void from_decimals(long numerator, long denominator, decimal number)
         => Fraction.Create(number).Should().Be(numerator.DividedBy(denominator));
 
-    [TestCase(0, 1, 0.5, 0.6)]
-    [TestCase(1, 1, 0.6, 0.5)]
+    [Test]
+    [Arguments(0, 1, 0.5, 0.6)]
+    [Arguments(1, 1, 0.6, 0.5)]
     public void from_decimals_with_error(long numerator, long denominator, decimal number, decimal error)
         => Fraction.Create(number, error).Should().Be(numerator.DividedBy(denominator));
 
-    [TestCase(100)]
+    [Test]
+    [Arguments(100)]
     public void from_decimals_without_precision_loss(int runs)
     {
         var rnd = new Random();
@@ -613,16 +650,18 @@ public class Can_be_created
 
 public class Can_not_be_created
 {
-    [TestCase(-10e18)]
-    [TestCase(+10e18)]
+    [Test]
+    [Arguments(-10e18)]
+    [Arguments(+10e18)]
     public void from_decimal_out_of_long_range(decimal dec)
     {
         Func<Fraction> create = () => Fraction.Create(dec);
         create.Should().Throw<ArgumentOutOfRangeException>();
     }
 
-    [TestCase(1e-19)]
-    [TestCase(+1.000001)]
+    [Test]
+    [Arguments(1e-19)]
+    [Arguments(+1.000001)]
     public void from_decimal_with_error_out_of_range(decimal error)
     {
         Func<Fraction> create = () => Fraction.Create(0, error);
@@ -632,20 +671,24 @@ public class Can_not_be_created
 
 public class Can_be_casted_explicit
 {
-    [TestCase(0, 0)]
-    [TestCase("-69/17", -69 / 17)]
+    [Test]
+    [Arguments(0, 0)]
+    [Arguments("-69/17", -69 / 17)]
     public void to_Int32(Fraction fraction, int casted) => ((int)(long)fraction).Should().Be(casted);
 
-    [TestCase(0, 0)]
-    [TestCase("-69/17", -69 / 17)]
+    [Test]
+    [Arguments(0, 0)]
+    [Arguments("-69/17", -69 / 17)]
     public void to_Int64(Fraction fraction, long casted) => ((long)fraction).Should().Be(casted);
 
-    [TestCase(0, 0)]
-    [TestCase("-69/17", -69.0 / 17.0)]
+    [Test]
+    [Arguments(0, 0)]
+    [Arguments("-69/17", -69.0 / 17.0)]
     public void to_double(Fraction fraction, double casted) => ((double)fraction).Should().Be(casted);
 
-    [TestCase(0, 0)]
-    [TestCase(-84, -84)]
+    [Test]
+    [Arguments(0, 0)]
+    [Arguments(-84, -84)]
     public void to_decimal(Fraction fraction, decimal casted) => ((decimal)fraction).Should().Be(casted);
 
     [Test]
@@ -775,23 +818,24 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '-4¹⁄₁₇', format: '[0]super⁄sub'");
     }
 
-    [TestCase(null, /*............*/ "-2/7", "-2/7")]
-    [TestCase("", /*..............*/ "-2/7", "-2/7")]
-    [TestCase("0:0", /*...........*/ "-2:7", "-2/7")]
-    [TestCase("0÷0", /*...........*/ "4÷3", "4/3")]
-    [TestCase("[0]0/0", /*........*/ "1 1/3", "4/3")]
-    [TestCase("[0]0/0", /*........*/ "-1 1/3", "-4/3")]
-    [TestCase("[0 ]0/0",/*........*/ "-1 1/3", "-4/3")]
-    [TestCase("#.00", /*..........*/ ".33", "1/3")]
-    [TestCase("[0]super⁄sub", /*..*/ "5¹¹⁄₁₂", "71/12")]
-    [TestCase("[0]super⁄0", /*....*/ "5¹¹⁄12", "71/12")]
-    [TestCase("[0] 0⁄sub", /*.....*/ "5 11⁄₁₂", "71/12")]
-    [TestCase("[0]super⁄sub", /*..*/ "-3¹⁄₂", "-7/2")]
-    [TestCase("[0 ]super⁄sub", /*.*/ "-3 ¹⁄₂", "-7/2")]
-    [TestCase("[#]super⁄sub", /*..*/ "-¹⁄₂", "-1/2")]
-    [TestCase("[0]super⁄sub", /*..*/ "-0¹⁄₂", "-1/2")]
-    [TestCase("super⁄sub", /*.....*/ "⁷¹⁄₁₂", "71/12")]
-    [TestCase("super⁄sub", /*.....*/ "-⁷⁄₂", "-7/2")]
+    [Test]
+    [Arguments(null, /*............*/ "-2/7", "-2/7")]
+    [Arguments("", /*..............*/ "-2/7", "-2/7")]
+    [Arguments("0:0", /*...........*/ "-2:7", "-2/7")]
+    [Arguments("0÷0", /*...........*/ "4÷3", "4/3")]
+    [Arguments("[0]0/0", /*........*/ "1 1/3", "4/3")]
+    [Arguments("[0]0/0", /*........*/ "-1 1/3", "-4/3")]
+    [Arguments("[0 ]0/0",/*........*/ "-1 1/3", "-4/3")]
+    [Arguments("#.00", /*..........*/ ".33", "1/3")]
+    [Arguments("[0]super⁄sub", /*..*/ "5¹¹⁄₁₂", "71/12")]
+    [Arguments("[0]super⁄0", /*....*/ "5¹¹⁄12", "71/12")]
+    [Arguments("[0] 0⁄sub", /*.....*/ "5 11⁄₁₂", "71/12")]
+    [Arguments("[0]super⁄sub", /*..*/ "-3¹⁄₂", "-7/2")]
+    [Arguments("[0 ]super⁄sub", /*.*/ "-3 ¹⁄₂", "-7/2")]
+    [Arguments("[#]super⁄sub", /*..*/ "-¹⁄₂", "-1/2")]
+    [Arguments("[0]super⁄sub", /*..*/ "-0¹⁄₂", "-1/2")]
+    [Arguments("super⁄sub", /*.....*/ "⁷¹⁄₁₂", "71/12")]
+    [Arguments("super⁄sub", /*.....*/ "-⁷⁄₂", "-7/2")]
     public void for_format(string format, string formatted, Fraction fraction)
         => fraction.ToString(format, CultureInfo.InvariantCulture).Should().Be(formatted);
 
@@ -847,34 +891,39 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase(4L, "4/1")]
-    [TestCase(0.25d, "1/4")]
-    [TestCase("13%", "13/100")]
-    [TestCase("14/42", "1/3")]
+    [Test]
+    [Arguments(4L, "4/1")]
+    [Arguments(0.25d, "1/4")]
+    [Arguments("13%", "13/100")]
+    [Arguments("14/42", "1/3")]
     public void System_Text_JSON_deserialization(object json, Fraction svo)
         => JsonTester.Read_System_Text_JSON<Fraction>(json).Should().Be(svo);
 
-    [TestCase("1/3", "1/3")]
-    [TestCase("4/3", "4/3")]
+    [Test]
+    [Arguments("1/3", "1/3")]
+    [Arguments("4/3", "4/3")]
     public void System_Text_JSON_serialization(Fraction svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase(4L, "4/1")]
-    [TestCase(3d, "3/1")]
-    [TestCase("13%", "13/100")]
-    [TestCase("14/42", "1/3")]
+    [Test]
+    [Arguments(4L, "4/1")]
+    [Arguments(3d, "3/1")]
+    [Arguments("13%", "13/100")]
+    [Arguments("14/42", "1/3")]
     public void convention_based_deserialization(object json, Fraction svo)
         => JsonTester.Read<Fraction>(json).Should().Be(svo);
 
-    [TestCase("1/3", "1/3")]
-    [TestCase("4/3", "4/3")]
+    [Test]
+    [Arguments("1/3", "1/3")]
+    [Arguments("4/3", "4/3")]
     public void convention_based_serialization(Fraction svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase(double.MaxValue, typeof(OverflowException))]
-    [TestCase(double.MinValue, typeof(OverflowException))]
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
+    [Test]
+    [Arguments(double.MaxValue, typeof(OverflowException))]
+    [Arguments(double.MinValue, typeof(OverflowException))]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<Fraction>)
@@ -937,8 +986,9 @@ public class Is_Open_API_data_type
 
 public class Debugger
 {
-    [TestCase("⁰⁄₁ = 0", "0")]
-    [TestCase("-⁴²⁄₁₇ = -2.47058824", "-42/17")]
+    [Test]
+    [Arguments("⁰⁄₁ = 0", "0")]
+    [Arguments("-⁴²⁄₁₇ = -2.47058824", "-42/17")]
     public void has_custom_display(object display, Fraction svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }

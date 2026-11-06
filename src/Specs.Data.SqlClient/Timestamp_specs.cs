@@ -14,8 +14,9 @@ public class Is_invalid
 
 public class Can_be_parsed
 {
-    [TestCase("en-GB", "0x00000000499602D2")]
-    [TestCase("en-GB", "1234567890")]
+    [Test]
+    [Arguments("en-GB", "0x00000000499602D2")]
+    [Arguments("en-GB", "1234567890")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -90,8 +91,9 @@ public class Is_equal_by_value
         l.Equals(r).Should().BeTrue();
     }
 
-    [TestCase("0", 0)]
-    [TestCase("1234567890", 1849341697)]
+    [Test]
+    [Arguments("0", 0)]
+    [Arguments("1234567890", 1849341697)]
     public void hash_code_is_value_based(Timestamp svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -154,10 +156,11 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '123,456,789', format: '#,##0'");
     }
 
-    [TestCase("nl-BE", null, "1600", "0x0000000000000640")]
-    [TestCase("nl-BE", "0000", "800", "0800")]
-    [TestCase("en-GB", "0000", "800", "0800")]
-    [TestCase("es-EC", "00000.0", "1700", "01700,0")]
+    [Test]
+    [Arguments("nl-BE", null, "1600", "0x0000000000000640")]
+    [Arguments("nl-BE", "0000", "800", "0800")]
+    [Arguments("en-GB", "0000", "800", "0800")]
+    [Arguments("es-EC", "00000.0", "1700", "01700,0")]
     public void culture_dependent(CultureInfo culture, string format, string input, string formatted)
     {
         using (culture.Scoped())
@@ -301,8 +304,9 @@ public class Can_be_converted
 
 public class Can_not_be_created
 {
-    [TestCase(7)]
-    [TestCase(9)]
+    [Test]
+    [Arguments(7)]
+    [Arguments(9)]
     public void form_byte_arrays_with_a_length_other_than_8(int length)
     {
         Func<Timestamp> create = () => Timestamp.Create(new byte[length]);
@@ -314,34 +318,39 @@ public class Can_not_be_created
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase(null, null)]
-    [TestCase(1849341697d, "0x000000006E3AB701")]
-    [TestCase(1849341697L, "0x000000006E3AB701")]
-    [TestCase("1849341697", "0x000000006E3AB701")]
-    [TestCase("0x000000006E3AB701", "0x000000006E3AB701")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments(1849341697d, "0x000000006E3AB701")]
+    [Arguments(1849341697L, "0x000000006E3AB701")]
+    [Arguments("1849341697", "0x000000006E3AB701")]
+    [Arguments("0x000000006E3AB701", "0x000000006E3AB701")]
     public void System_Text_JSON_deserialization(object json, Timestamp svo)
         => JsonTester.Read_System_Text_JSON<Timestamp>(json).Should().Be(svo);
 
-    [TestCase(null, "0x0000000000000000")]
-    [TestCase("0x000000006E3AB701", "0x000000006E3AB701")]
+    [Test]
+    [Arguments(null, "0x0000000000000000")]
+    [Arguments("0x000000006E3AB701", "0x000000006E3AB701")]
     public void System_Text_JSON_serialization(Timestamp svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase(1849341697d, "0x000000006E3AB701")]
-    [TestCase(1849341697L, "0x000000006E3AB701")]
-    [TestCase("1849341697", "0x000000006E3AB701")]
-    [TestCase("0x000000006E3AB701", "0x000000006E3AB701")]
+    [Test]
+    [Arguments(1849341697d, "0x000000006E3AB701")]
+    [Arguments(1849341697L, "0x000000006E3AB701")]
+    [Arguments("1849341697", "0x000000006E3AB701")]
+    [Arguments("0x000000006E3AB701", "0x000000006E3AB701")]
     public void convention_based_deserialization(object json, Timestamp svo)
         => JsonTester.Read<Timestamp>(json).Should().Be(svo);
 
-    [TestCase(null, "0x0000000000000000")]
-    [TestCase("0x000000006E3AB701", "0x000000006E3AB701")]
+    [Test]
+    [Arguments(null, "0x0000000000000000")]
+    [Arguments("0x000000006E3AB701", "0x000000006E3AB701")]
     public void convention_based_serialization(Timestamp svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
-    [TestCase(true, typeof(InvalidOperationException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
+    [Arguments(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<Timestamp>)

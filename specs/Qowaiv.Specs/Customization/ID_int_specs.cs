@@ -18,8 +18,9 @@ public class Has_constant
     public void Empty_represent_default_value()
         => Int32BasedId.Empty.Should().Be(default);
 
-    [TestCase(true, 17)]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, 17)]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, Int32BasedId svo) => svo.HasValue.Should().Be(result);
 }
 
@@ -64,8 +65,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.Generated.Int32Id != Int32BasedId.Create(42)).Should().BeTrue();
 
-    [TestCase("", 0)]
-    [TestCase(17, 665630146)]
+    [Test]
+    [Arguments("", 0)]
+    [Arguments(17, 665630146)]
     public void hash_code_is_value_based(Int32BasedId svo, int hashCode)
     {
         using (Hash.WithoutRandomizer())
@@ -125,9 +127,10 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: 'PREFIX0017', format: '0000'");
     }
 
-    [TestCase(null, "PREFIX17")]
-    [TestCase("", "PREFIX17")]
-    [TestCase("000", "PREFIX017")]
+    [Test]
+    [Arguments(null, "PREFIX17")]
+    [Arguments("", "PREFIX17")]
+    [Arguments("000", "PREFIX017")]
     public void with_current_thread_culture_as_default(string? format, string formattted)
     {
         using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
@@ -189,22 +192,25 @@ public class Is_comparable
 #if NET10_0_OR_GREATER
 public class Supports_JSON_serialization
 {
-    [TestCase("", "")]
-    [TestCase(12345678L, 12345678)]
-    [TestCase("PREFIX12345678", 12345678)]
-    [TestCase("12345678", 12345678)]
+    [Test]
+    [Arguments("", "")]
+    [Arguments(12345678L, 12345678)]
+    [Arguments("PREFIX12345678", 12345678)]
+    [Arguments("12345678", 12345678)]
     public void System_Text_JSON_deserialization(object json, Int32BasedId svo)
         => JsonTester.Read_System_Text_JSON<Int32BasedId>(json).Should().Be(svo);
 
-    [TestCase("", null)]
-    [TestCase("12345678", 12345678L)]
+    [Test]
+    [Arguments("", null)]
+    [Arguments("12345678", 12345678L)]
     public void System_Text_JSON_serialization(Int32BasedId svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
-    [TestCase(-2)]
-    [TestCase(17)]
-    [TestCase("17")]
-    [TestCase(int.MaxValue + 1L)]
+    [Test]
+    [Arguments(-2)]
+    [Arguments(17)]
+    [Arguments("17")]
+    [Arguments(int.MaxValue + 1L)]
     public void taking_constrains_into_account(object json)
         => json.Invoking(j => JsonTester.Read_System_Text_JSON<EvenOnlyId>(j))
             .Should().Throw<System.Text.Json.JsonException>()
@@ -262,8 +268,9 @@ public class Supports_type_conversion
     public void to_int()
         => Converting.To<int>().From(Svo.Generated.Int32Id).Should().Be(17);
 
-    [TestCase(typeof(int))]
-    [TestCase(typeof(string))]
+    [Test]
+    [Arguments(typeof(int))]
+    [Arguments(typeof(string))]
     public void to(Type type)
         => Converting.To(type).From<Int32BasedId>().Should().BeTrue();
 
@@ -316,8 +323,9 @@ public class Supports_XML_serialization
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("PREFIX42", "42")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("PREFIX42", "42")]
     public void has_custom_display(object display, Int32BasedId id)
         => id.Should().HaveDebuggerDisplay(display);
 }

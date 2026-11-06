@@ -4,34 +4,40 @@ namespace Specs.Customization.CustomSvo_specs;
 
 public class With_domain_logic
 {
-    [TestCase(true, "QOWAIV")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "QOWAIV")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, CustomSvo svo) => svo.HasValue.Should().Be(result);
 
-    [TestCase(true, "QOWAIV")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "QOWAIV")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsKnown_is(bool result, CustomSvo svo) => svo.IsKnown.Should().Be(result);
 
-    [TestCase("")]
-    [TestCase("?")]
+    [Test]
+    [Arguments("")]
+    [Arguments("?")]
     public void has_length_zero_for_empty_and_unknown(CustomSvo svo)
         => svo.Length.Should().Be(0);
 
-    [TestCase(6, "QOWAIV")]
+    [Test]
+    [Arguments(6, "QOWAIV")]
     public void has_length(int length, CustomSvo svo)
         => svo.Length.Should().Be(length);
 
-    [TestCase(true, "QOWAIV")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "QOWAIV")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void IsEmpty_returns(bool result, CustomSvo svo)
         => svo.HasValue.Should().Be(result);
 
-    [TestCase(true, "QOWAIV")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "QOWAIV")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsEmptyOrUnknown_returns(bool result, CustomSvo svo)
         => svo.IsKnown.Should().Be(result);
 }
@@ -77,8 +83,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.Generated.CustomSvo != CustomSvo.Parse("different")).Should().BeTrue();
 
-    [TestCase("", 0)]
-    [TestCase("QOWAIV", 467820648)]
+    [Test]
+    [Arguments("", 0)]
+    [Arguments("QOWAIV", 467820648)]
     public void hash_code_is_value_based(CustomSvo svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -102,7 +109,8 @@ public class Can_be_parsed
     public void from_question_mark_represents_Unknown()
         => CustomSvo.Parse("?").Should().Be(CustomSvo.Unknown);
 
-    [TestCase("en", "QOWAIV")]
+    [Test]
+    [Arguments("en", "QOWAIV")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -188,8 +196,9 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: 'QOWAIV', format: 'SomeFormat'");
     }
 
-    [TestCase("en-GB", null, "QOWAIV", "QOWAIV")]
-    [TestCase("nl-BE", "f", "QOWAIV", "QOWAIV")]
+    [Test]
+    [Arguments("en-GB", null, "QOWAIV", "QOWAIV")]
+    [Arguments("nl-BE", "f", "QOWAIV", "QOWAIV")]
     public void culture_dependent(CultureInfo culture, string format, CustomSvo svo, string expected)
     {
         using (culture.Scoped())
@@ -309,36 +318,42 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase(null, null)]
-    [TestCase("?", "?")]
-    [TestCase("QOWAIV", "QOWAIV")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("?", "?")]
+    [Arguments("QOWAIV", "QOWAIV")]
     public void System_Text_JSON_deserialization(object json, CustomSvo svo)
         => JsonTester.Read_System_Text_JSON<CustomSvo>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("QOWAIV", "QOWAIV")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("QOWAIV", "QOWAIV")]
     public void System_Text_JSON_serialization(CustomSvo svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
-    [TestCase("{}")]
+    [Test]
+    [Arguments("{}")]
     public void System_Text_JSON_throws_on(string json)
         => json.Invoking(json => System.Text.Json.JsonSerializer.Deserialize<CustomSvo>(json))
             .Should().Throw<System.Text.Json.JsonException>();
 #endif
 
-    [TestCase("?", "?")]
-    [TestCase("QOWAIV", "QOWAIV")]
+    [Test]
+    [Arguments("?", "?")]
+    [Arguments("QOWAIV", "QOWAIV")]
     public void convention_based_deserialization(object json, CustomSvo svo)
        => JsonTester.Read<CustomSvo>(json).Should().Be(svo);
 
 
-    [TestCase(null, null)]
-    [TestCase("QOWAIV", "QOWAIV")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("QOWAIV", "QOWAIV")]
     public void convention_based_serialization(CustomSvo svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input!", typeof(FormatException))]
-    [TestCase(5L, typeof(InvalidOperationException))]
+    [Test]
+    [Arguments("Invalid input!", typeof(FormatException))]
+    [Arguments(5L, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
     {
         Func<CustomSvo> read = () => JsonTester.Read<CustomSvo>(json);

@@ -65,7 +65,7 @@ public class Gets
         }
     }
 
-    [TearDown]
+    [After(Test)]
     public void TearDown() => ThreadDomain.Current.Clear();
 }
 
@@ -83,6 +83,6 @@ public class Does_not_support
            .Should().Throw<NotSupportedException>()
            .WithMessage("Converter can not convert from System.String.");
 
-    [TearDown]
+    [After(Test)]
     public void TearDown() => ThreadDomain.Current.Clear();
 }

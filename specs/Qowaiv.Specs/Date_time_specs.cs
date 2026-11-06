@@ -27,8 +27,9 @@ public class Can_be_adjusted_with
 
 public class Can_not_be_adjusted_with
 {
-    [TestCase(DateSpanSettings.WithoutMonths)]
-    [TestCase(DateSpanSettings.DaysFirst | DateSpanSettings.MixedSigns)]
+    [Test]
+    [Arguments(DateSpanSettings.WithoutMonths)]
+    [Arguments(DateSpanSettings.DaysFirst | DateSpanSettings.MixedSigns)]
     public void Date_span_with(DateSpanSettings settings)
         => new DateTime(2017, 06, 11, 00, 00, 000, DateTimeKind.Local).Invoking(d => d.Add(new DateSpan(2, 20), settings))
         .Should().Throw<ArgumentOutOfRangeException>().WithMessage("Adding a date span only supports 'Default' and 'DaysFirst'.*");

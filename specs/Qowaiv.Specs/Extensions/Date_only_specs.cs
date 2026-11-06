@@ -25,8 +25,9 @@ public class Can_be_adjusted_with
 
 public class Can_not_be_adjusted_with
 {
-    [TestCase(DateSpanSettings.WithoutMonths)]
-    [TestCase(DateSpanSettings.DaysFirst | DateSpanSettings.MixedSigns)]
+    [Test]
+    [Arguments(DateSpanSettings.WithoutMonths)]
+    [Arguments(DateSpanSettings.DaysFirst | DateSpanSettings.MixedSigns)]
     public void Date_span_with(DateSpanSettings settings)
         => Svo.DateOnly.Invoking(d => d.Add(new DateSpan(2, 20), settings))
         .Should().Throw<ArgumentOutOfRangeException>().WithMessage("Adding a date span only supports 'Default' and 'DaysFirst'.*");
@@ -75,7 +76,8 @@ public class Method : SingleValueObjectSpecs
     private static readonly IReadOnlyCollection<MethodInfo> DateMethods =
         [.. AllSvos.SelectMany(t => t.GetMethods().Where(WithDateParameter))];
 
-    [TestCaseSource(nameof(DateMethods))]
+    [Test]
+    [MethodDataSource(nameof(DateMethods))]
     public void Exist_with_DateOnly_overload(MethodInfo method)
     {
         var type = method.DeclaringType!;

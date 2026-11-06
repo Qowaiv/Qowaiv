@@ -19,8 +19,9 @@ public class Has_constant
     public void Empty_represent_default_value()
         => GuidBasedId.Empty.Should().Be(default);
 
-    [TestCase(true, "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, GuidBasedId svo) => svo.HasValue.Should().Be(result);
 }
 
@@ -58,11 +59,12 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.Generated.CustomGuid != GuidBasedId.Next()).Should().BeTrue();
 
-    [TestCase("", 0)]
+    [Test]
+    [Arguments("", 0)]
 #if NET48
-    [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", -917906459)]
+    [Arguments("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", -917906459)]
 #else
-    [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", -994020281)]
+    [Arguments("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", -994020281)]
 #endif
     public void hash_code_is_value_based(GuidBasedId svo, int hashCode)
     {
@@ -122,10 +124,11 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}', format: 'B'");
     }
 
-    [TestCase(null, "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
-    [TestCase("", "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
-    [TestCase("P", "(8a1a8c42-d2ff-e254-e26e-b6abcbf19420)")]
-    [TestCase("B", "{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}")]
+    [Test]
+    [Arguments(null, "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
+    [Arguments("", "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
+    [Arguments("P", "(8a1a8c42-d2ff-e254-e26e-b6abcbf19420)")]
+    [Arguments("B", "{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}")]
     public void with_current_thread_culture_as_default(string? format, string formattted)
     {
         using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
@@ -137,13 +140,15 @@ public class Has_custom_formatting
 
 public class Bytes
 {
-    [TestCase("")]
-    [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", (byte)0x42, (byte)0x8C, (byte)0x1A, (byte)0x8A, (byte)0xFF, (byte)0xD2, (byte)0x54, (byte)0xE2, (byte)0xE2, (byte)0x6E, (byte)0xB6, (byte)0xAB, (byte)0xCB, (byte)0xF1, (byte)0x94, (byte)0x20)]
+    [Test]
+    [Arguments("")]
+    [Arguments("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", (byte)0x42, (byte)0x8C, (byte)0x1A, (byte)0x8A, (byte)0xFF, (byte)0xD2, (byte)0x54, (byte)0xE2, (byte)0xE2, (byte)0x6E, (byte)0xB6, (byte)0xAB, (byte)0xCB, (byte)0xF1, (byte)0x94, (byte)0x20)]
     public void describe_the_id(GuidBasedId svo, params byte[] bytes)
         => svo.ToByteArray().Should().BeEquivalentTo(bytes);
 
-    [TestCase("")]
-    [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", (byte)0x42, (byte)0x8C, (byte)0x1A, (byte)0x8A, (byte)0xFF, (byte)0xD2, (byte)0x54, (byte)0xE2, (byte)0xE2, (byte)0x6E, (byte)0xB6, (byte)0xAB, (byte)0xCB, (byte)0xF1, (byte)0x94, (byte)0x20)]
+    [Test]
+    [Arguments("")]
+    [Arguments("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", (byte)0x42, (byte)0x8C, (byte)0x1A, (byte)0x8A, (byte)0xFF, (byte)0xD2, (byte)0x54, (byte)0xE2, (byte)0xE2, (byte)0x6E, (byte)0xB6, (byte)0xAB, (byte)0xCB, (byte)0xF1, (byte)0x94, (byte)0x20)]
     public void init_the_id(GuidBasedId svo, params byte[] bytes)
         => GuidBasedId.FromBytes(bytes)
         .Should().Be(svo);
@@ -243,9 +248,10 @@ public class Supports_type_conversion
     public void to_Uuid()
         => Converting.To<Uuid>().From(Svo.Generated.CustomGuid).Should().Be(Svo.Uuid);
 
-    [TestCase(typeof(Guid))]
-    [TestCase(typeof(Uuid))]
-    [TestCase(typeof(string))]
+    [Test]
+    [Arguments(typeof(Guid))]
+    [Arguments(typeof(Uuid))]
+    [Arguments(typeof(string))]
     public void to(Type type)
         => Converting.To(type).From<GuidBasedId>().Should().BeTrue();
 
@@ -331,8 +337,9 @@ public class Supports_XML_serialization
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("8a1a8c42-d2ff-e254-e26e-b6abcbf19420", "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
     public void has_custom_display(object display, GuidBasedId id)
         => id.Should().HaveDebuggerDisplay(display);
 }

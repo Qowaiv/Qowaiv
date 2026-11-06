@@ -6,42 +6,48 @@ public class With_domain_logic
     public void DefinedValues_are_Male_Female_and_NotApplicable()
         => Sex.DefinedValues.Should().Equal(Sex.Male, Sex.Female, Sex.NotApplicable);
 
-    [TestCase(true, "Male")]
-    [TestCase(true, "Female")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "Male")]
+    [Arguments(true, "Female")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, Sex svo) => svo.HasValue.Should().Be(result);
 
-    [TestCase(true, "Male")]
-    [TestCase(true, "Female")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "Male")]
+    [Arguments(true, "Female")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsKnown_is(bool result, Sex svo) => svo.IsKnown.Should().Be(result);
 
-    [TestCase(false, "Male")]
-    [TestCase(false, "Female")]
-    [TestCase(false, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "Male")]
+    [Arguments(false, "Female")]
+    [Arguments(false, "?")]
+    [Arguments(true, "")]
     public void IsEmpty_returns(bool result, Sex svo)
         => svo.IsEmpty().Should().Be(result);
 
-    [TestCase(false, "Male")]
-    [TestCase(false, "Female")]
-    [TestCase(true, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "Male")]
+    [Arguments(false, "Female")]
+    [Arguments(true, "?")]
+    [Arguments(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, Sex svo)
         => svo.IsEmptyOrUnknown().Should().Be(result);
 
-    [TestCase(false, "Male")]
-    [TestCase(false, "Female")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(false, "Male")]
+    [Arguments(false, "Female")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void IsUnknown_returns(bool result, Sex svo) => svo.IsUnknown().Should().Be(result);
 
-    [TestCase(true, "Male")]
-    [TestCase(true, "Female")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "Male")]
+    [Arguments(true, "Female")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsMaleOrFemale_returns(bool result, Sex svo) => svo.IsMaleOrFemale().Should().Be(result);
 }
 
@@ -102,9 +108,10 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.Sex != Sex.Male).Should().BeTrue();
 
-    [TestCase("", 0)]
-    [TestCase("Male", 665630161)]
-    [TestCase("Female", 665630167)]
+    [Test]
+    [Arguments("", 0)]
+    [Arguments("Male", 665630161)]
+    [Arguments("Female", 665630167)]
     public void hash_code_is_value_based(Sex svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -128,7 +135,8 @@ public class Can_be_parsed
     public void from_question_mark_represents_Unknown()
        => Sex.Parse("?").Should().Be(Sex.Unknown);
 
-    [TestCase("en", "Female")]
+    [Test]
+    [Arguments("en", "Female")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -202,12 +210,13 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '♀', format: 's'");
     }
 
-    [TestCase("en-GB", null, "Female", "Female")]
-    [TestCase("en-GB", "c", "Female", "F")]
-    [TestCase("ru-RU", "s", "Female", "♀")]
-    [TestCase("nl-BE", "i", "Female", "2")]
-    [TestCase("nl-BE", "h", "Female", "Mevr.")]
-    [TestCase("nl-BE", "f", "Female", "Vrouwelijk")]
+    [Test]
+    [Arguments("en-GB", null, "Female", "Female")]
+    [Arguments("en-GB", "c", "Female", "F")]
+    [Arguments("ru-RU", "s", "Female", "♀")]
+    [Arguments("nl-BE", "i", "Female", "2")]
+    [Arguments("nl-BE", "h", "Female", "Mevr.")]
+    [Arguments("nl-BE", "f", "Female", "Vrouwelijk")]
     public void culture_dependent(CultureInfo culture, string format, Sex svo, string expected)
     {
         using (culture.Scoped())
@@ -276,20 +285,23 @@ public class Casts
         casted.Should().Be(2);
     }
 
-    [TestCase(2, "Female")]
-    [TestCase(null, "?")]
+    [Test]
+    [Arguments(2, "Female")]
+    [Arguments(null, "?")]
     public void explicitly_to_nullable_int(int casted, Sex sex) => ((int?)sex).Should().Be(casted);
 
-    [TestCase("Female", 2)]
-    [TestCase("", null)]
+    [Test]
+    [Arguments("Female", 2)]
+    [Arguments("", null)]
     public void implicitly_from_nullable_int(Sex casted, int? value)
     {
         Sex sex = value;
         sex.Should().Be(casted);
     }
 
-    [TestCase("Female", 2)]
-    [TestCase("?", 0)]
+    [Test]
+    [Arguments("Female", 2)]
+    [Arguments("?", 0)]
     public void implicitly_from_int(Sex casted, int value)
     {
         Sex sex = value;
@@ -343,35 +355,40 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase("?", "?")]
-    [TestCase(null, null)]
-    [TestCase(2L, "Female")]
-    [TestCase(2d, "Female")]
-    [TestCase("Female", "Female")]
+    [Test]
+    [Arguments("?", "?")]
+    [Arguments(null, null)]
+    [Arguments(2L, "Female")]
+    [Arguments(2d, "Female")]
+    [Arguments("Female", "Female")]
     public void System_Text_JSON_deserialization(object json, Sex svo)
         => JsonTester.Read_System_Text_JSON<Sex>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("Female", "Female")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("Female", "Female")]
     public void System_Text_JSON_serialization(Sex svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("?", "?")]
-    [TestCase(2L, "Female")]
-    [TestCase(2d, "Female")]
-    [TestCase("Female", "Female")]
+    [Test]
+    [Arguments("?", "?")]
+    [Arguments(2L, "Female")]
+    [Arguments(2d, "Female")]
+    [Arguments("Female", "Female")]
     public void convention_based_deserialization(object json, Sex svo)
         => JsonTester.Read<Sex>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("Female", "Female")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("Female", "Female")]
     public void convention_based_serialization(Sex svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
-    [TestCase(5L, typeof(ArgumentOutOfRangeException))]
-    [TestCase(long.MaxValue, typeof(ArgumentOutOfRangeException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
+    [Arguments(5L, typeof(ArgumentOutOfRangeException))]
+    [Arguments(long.MaxValue, typeof(ArgumentOutOfRangeException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<Sex>)
@@ -434,9 +451,10 @@ public class Is_Open_API_data_type
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("Not known", "?")]
-    [TestCase("Female", "Female")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("Not known", "?")]
+    [Arguments("Female", "Female")]
     public void has_custom_display(object display, Sex svo)
        => svo.Should().HaveDebuggerDisplay(display);
 }

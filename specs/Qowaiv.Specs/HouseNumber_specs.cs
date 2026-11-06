@@ -14,29 +14,34 @@ public class Has_constant
 
 public class With_domain_logic
 {
-    [TestCase(true, 123456789)]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, 123456789)]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, HouseNumber svo) => svo.HasValue.Should().Be(result);
 
-    [TestCase(true, 123456789)]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, 123456789)]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsKnown_is(bool result, HouseNumber svo) => svo.IsKnown.Should().Be(result);
 
-    [TestCase(false, 123456789)]
-    [TestCase(false, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, 123456789)]
+    [Arguments(false, "?")]
+    [Arguments(true, "")]
     public void IsEmpty_is(bool result, HouseNumber svo) => svo.IsEmpty().Should().Be(result);
 
-    [TestCase(false, 123456789)]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(false, 123456789)]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void IsUnknown_is(bool result, HouseNumber svo) => svo.IsUnknown().Should().Be(result);
 
-    [TestCase(false, 123456789)]
-    [TestCase(true, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, 123456789)]
+    [Arguments(true, "?")]
+    [Arguments(true, "")]
     public void IsEmptyOrUnknown_is(bool result, HouseNumber svo) => svo.IsEmptyOrUnknown().Should().Be(result);
 }
 
@@ -74,8 +79,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (HouseNumber.Create(123456789) != HouseNumber.MinValue).Should().BeTrue();
 
-    [TestCase("", 0)]
-    [TestCase("123456789", 553089222)]
+    [Test]
+    [Arguments("", 0)]
+    [Arguments("123456789", 553089222)]
     public void hash_code_is_value_based(HouseNumber svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -116,22 +122,25 @@ public class Can_be_created
 
 public class Has_properties
 {
-    [TestCase(123456789, true)]
-    [TestCase(1234, false)]
-    [TestCase("", false)]
-    [TestCase("?", false)]
+    [Test]
+    [Arguments(123456789, true)]
+    [Arguments(1234, false)]
+    [Arguments("", false)]
+    [Arguments("?", false)]
     public void IsOdd_is(HouseNumber svo, bool isOdd) => svo.IsOdd.Should().Be(isOdd);
 
-    [TestCase(123456789, false)]
-    [TestCase(1234, true)]
-    [TestCase("", false)]
-    [TestCase("?", false)]
+    [Test]
+    [Arguments(123456789, false)]
+    [Arguments(1234, true)]
+    [Arguments("", false)]
+    [Arguments("?", false)]
     public void IsEven_is(HouseNumber svo, bool isEven) => svo.IsEven.Should().Be(isEven);
 
-    [TestCase(123456789, 9)]
-    [TestCase(1234, 4)]
-    [TestCase("", 0)]
-    [TestCase("?", 0)]
+    [Test]
+    [Arguments(123456789, 9)]
+    [Arguments(1234, 4)]
+    [Arguments("", 0)]
+    [Arguments("?", 0)]
     public void Length_is(HouseNumber svo, int length) => svo.Length.Should().Be(length);
 }
 
@@ -153,8 +162,9 @@ public class Can_be_parsed
     public void from_house_number_string()
         => HouseNumber.Parse("123").Should().Be(HouseNumber.Create(123));
 
-    [TestCase("en-GB", "123456789")]
-    [TestCase("es-EC", "123456789")]
+    [Test]
+    [Arguments("en-GB", "123456789")]
+    [Arguments("es-EC", "123456789")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -245,9 +255,10 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '123,456,789', format: '#,##0'");
     }
 
-    [TestCase("nl-BE", "0000", "800", "0800")]
-    [TestCase("en-GB", "0000", "800", "0800")]
-    [TestCase("es-EC", "00000.0", "1700", "01700,0")]
+    [Test]
+    [Arguments("nl-BE", "0000", "800", "0800")]
+    [Arguments("en-GB", "0000", "800", "0800")]
+    [Arguments("es-EC", "00000.0", "1700", "01700,0")]
     public void culture_dependent(CultureInfo culture, string format, string input, string formatted)
     {
         using (culture.Scoped())
@@ -394,34 +405,39 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase(null, null)]
-    [TestCase("?", "?")]
-    [TestCase("17", "17")]
-    [TestCase(17d, "17")]
-    [TestCase(17L, "17")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("?", "?")]
+    [Arguments("17", "17")]
+    [Arguments(17d, "17")]
+    [Arguments(17L, "17")]
     public void System_Text_JSON_deserialization(object json, HouseNumber svo)
         => JsonTester.Read_System_Text_JSON<HouseNumber>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase(17, "17")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments(17, "17")]
     public void System_Text_JSON_serialization(HouseNumber svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("?", "?")]
-    [TestCase("17", "17")]
-    [TestCase(17d, "17")]
-    [TestCase(17L, "17")]
+    [Test]
+    [Arguments("?", "?")]
+    [Arguments("17", "17")]
+    [Arguments(17d, "17")]
+    [Arguments(17L, "17")]
     public void convention_based_deserialization(HouseNumber svo, object json)
         => JsonTester.Read<HouseNumber>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase(17, "17")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments(17, "17")]
     public void convention_based_serialization(HouseNumber svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
-    [TestCase(true, typeof(InvalidOperationException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
+    [Arguments(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<HouseNumber>)

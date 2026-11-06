@@ -61,11 +61,12 @@ public class Is_equal_by_value
         }
     }
 
-    [TestCase("0", 0)]
+    [Test]
+    [Arguments("0", 0)]
 #if NET48
-    [TestCase("42.17", -390756127)]
+    [Arguments("42.17", -390756127)]
 #else
-    [TestCase("42.17", 665757098)]
+    [Arguments("42.17", 665757098)]
 #endif
     public void hash_code_is_value_based(Amount svo, int hash)
     {
@@ -82,8 +83,9 @@ public class Can_be_parsed
     public void from_amount_string()
         => Amount.Parse("14.1804", CultureInfo.InvariantCulture).Should().Be(14.1804m.Amount());
 
-    [TestCase("en-GB", "42.17")]
-    [TestCase("es-EC", "42,17")]
+    [Test]
+    [Arguments("en-GB", "42.17")]
+    [Arguments("es-EC", "42,17")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -134,9 +136,10 @@ public class Can_be_parsed
 
 public class Min_and_max
 {
-    [TestCase(17, 17)]
-    [TestCase(17, 18)]
-    [TestCase(18, 17)]
+    [Test]
+    [Arguments(17, 17)]
+    [Arguments(17, 18)]
+    [Arguments(18, 17)]
     public void Min_of_two_returns_minimum(Amount a1, Amount a2)
         => Amount.Min(a1, a2).Should().Be(17m.Amount());
 
@@ -144,9 +147,10 @@ public class Min_and_max
     public void Min_of_collection_returns_minimum()
         => Amount.Min(700m.Amount(), 17m.Amount(), 48m.Amount()).Should().Be(17m.Amount());
 
-    [TestCase(17, 17)]
-    [TestCase(17, 16)]
-    [TestCase(16, 17)]
+    [Test]
+    [Arguments(17, 17)]
+    [Arguments(17, 16)]
+    [Arguments(16, 17)]
     public void Max_of_two_returns_minimum(Amount a1, Amount a2)
         => Amount.Max(a1, a2).Should().Be(17m.Amount());
 
@@ -157,14 +161,16 @@ public class Min_and_max
 
 public class Can_not_be_parsed
 {
-    [TestCase(NumberStyles.Number)]
-    [TestCase(NumberStyles.Integer)]
+    [Test]
+    [Arguments(NumberStyles.Number)]
+    [Arguments(NumberStyles.Integer)]
     public void strings_with_currency_if_style_does_not_allow_currency_sign(NumberStyles style)
         => Amount.TryParse("42 EUR", style, CultureInfo.InvariantCulture, out _)
             .Should().BeFalse();
 
-    [TestCase(NumberStyles.HexNumber)]
-    [TestCase(NumberStyles.AllowExponent)]
+    [Test]
+    [Arguments(NumberStyles.HexNumber)]
+    [Arguments(NumberStyles.AllowExponent)]
     public void using_a_number_style_other_then_Curency(NumberStyles style)
          => style.Invoking(s => Amount.TryParse("4.50", s, CultureInfo.InvariantCulture, out _))
              .Should().Throw<ArgumentOutOfRangeException>()
@@ -173,24 +179,28 @@ public class Can_not_be_parsed
 
 public class Can_be_operated_on
 {
-    [TestCase(-1, -1000)]
-    [TestCase(0, 0)]
-    [TestCase(+1, 1600)]
+    [Test]
+    [Arguments(-1, -1000)]
+    [Arguments(0, 0)]
+    [Arguments(+1, 1600)]
     public void sign(int expected, Amount value)
         => value.Sign().Should().Be(expected);
 
-    [TestCase(1234.01, -1234.01)]
-    [TestCase(1234.01, +1234.01)]
+    [Test]
+    [Arguments(1234.01, -1234.01)]
+    [Arguments(1234.01, +1234.01)]
     public void abs(Amount expected, Amount value)
         => value.Abs().Should().Be(expected);
 
-    [TestCase(+1234.01)]
-    [TestCase(-1234.01)]
+    [Test]
+    [Arguments(+1234.01)]
+    [Arguments(-1234.01)]
     public void plus(Amount value)
         => (+value).Should().Be(value);
 
-    [TestCase(+1234.01, -1234.01)]
-    [TestCase(-1234.01, +1234.01)]
+    [Test]
+    [Arguments(+1234.01, -1234.01)]
+    [Arguments(-1234.01, +1234.01)]
     public void negate(Amount expected, Amount value)
         => (-value).Should().Be(expected);
 
@@ -390,11 +400,12 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '42.2', format: '#.0'");
     }
 
-    [TestCase("nl-BE", null, "1600,1", "1600,1")]
-    [TestCase("en-GB", null, "1600.1", "1600.1")]
-    [TestCase("nl-BE", "0000", "800", "0800")]
-    [TestCase("en-GB", "0000", "800", "0800")]
-    [TestCase("es-EC", "00000.0", "1700", "01700,0")]
+    [Test]
+    [Arguments("nl-BE", null, "1600,1", "1600,1")]
+    [Arguments("en-GB", null, "1600.1", "1600.1")]
+    [Arguments("nl-BE", "0000", "800", "0800")]
+    [Arguments("en-GB", "0000", "800", "0800")]
+    [Arguments("es-EC", "00000.0", "1700", "01700,0")]
     public void culture_dependent(CultureInfo culture, string format, string input, string formatted)
     {
         using (culture.Scoped())
@@ -547,9 +558,10 @@ public class Supports_type_conversion
     public class Supports_JSON_serialization
     {
 #if NET10_0_OR_GREATER
-        [TestCase("1234.56", 1234.56)]
-        [TestCase(1234.56, 1234.56)]
-        [TestCase(1234L, 1234.00)]
+        [Test]
+        [Arguments("1234.56", 1234.56)]
+        [Arguments(1234.56, 1234.56)]
+        [Arguments(1234L, 1234.00)]
         public void System_Text_JSON_deserialization(object json, Amount svo)
             => JsonTester.Read_System_Text_JSON<Amount>(json).Should().Be(svo.Round(4));
 
@@ -560,15 +572,17 @@ public class Supports_type_conversion
             amount.Should().Be(Amount.MinValue);
         }
 
-        [TestCase("7.922816251426434E+28")]
-        [TestCase("79228162514264337593543950335")]
+        [Test]
+        [Arguments("7.922816251426434E+28")]
+        [Arguments("79228162514264337593543950335")]
         public void System_Text_JSON_deserialization_max_value(string json)
         {
             var amount = System.Text.Json.JsonSerializer.Deserialize<Amount>(json);
             amount.Should().Be(Amount.MaxValue);
         }
 
-        [TestCase(1234.56, 1234.56)]
+        [Test]
+        [Arguments(1234.56, 1234.56)]
         public void System_Text_JSON_serialization(Amount svo, object json)
             => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
@@ -579,13 +593,15 @@ public class Supports_type_conversion
             json.Should().Be("79228162514264337593543950335");
         }
 #endif
-        [TestCase("1234.56", "1234.56")]
-        [TestCase(1234.56, "1234.56")]
-        [TestCase(1234L, "1234.00")]
+        [Test]
+        [Arguments("1234.56", "1234.56")]
+        [Arguments(1234.56, "1234.56")]
+        [Arguments(1234L, "1234.00")]
         public void convention_based_deserialization(object json, Amount svo)
           => JsonTester.Read<Amount>(json).Round(4).Should().Be(svo);
 
-        [TestCase(1234.56, 1234.56)]
+        [Test]
+        [Arguments(1234.56, 1234.56)]
         public void convention_based_serialization(Amount svo, object json)
             => JsonTester.Write(svo).Should().Be(json);
 
@@ -593,8 +609,9 @@ public class Supports_type_conversion
         public void convention_based_serialization_max_value()
             => JsonTester.Write(Amount.MaxValue).Should().Be(79228162514264337593543950335M);
 
-        [TestCase("Invalid input", typeof(FormatException))]
-        [TestCase("2017-06-11", typeof(FormatException))]
+        [Test]
+        [Arguments("Invalid input", typeof(FormatException))]
+        [Arguments("2017-06-11", typeof(FormatException))]
         public void throws_for_invalid_json(object json, Type exceptionType)
             => json
                 .Invoking(JsonTester.Read<Amount>)

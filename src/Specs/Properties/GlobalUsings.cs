@@ -1,4 +1,4 @@
-global using NUnit.Framework;
+global using TUnit.Core;
 global using System;
 global using System.Text;
 global using Qowaiv.Text;

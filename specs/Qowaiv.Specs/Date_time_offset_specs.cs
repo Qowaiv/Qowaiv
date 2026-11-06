@@ -23,8 +23,9 @@ public class Can_be_adjusted_with
 
 public class With_local
 {
-    [TestCase(-234)]
-    [TestCase(+283)]
+    [Test]
+    [Arguments(-234)]
+    [Arguments(+283)]
     public void represents_a_local_date_time(int offset)
     {
         var date = new DateTimeOffset(year: 2017, month: 06, day: 11, hour: 06, minute: 15, second: 00, TimeSpan.FromMinutes(offset));
@@ -34,8 +35,9 @@ public class With_local
 
 public class Can_not_be_adjusted_with
 {
-    [TestCase(DateSpanSettings.WithoutMonths)]
-    [TestCase(DateSpanSettings.DaysFirst | DateSpanSettings.MixedSigns)]
+    [Test]
+    [Arguments(DateSpanSettings.WithoutMonths)]
+    [Arguments(DateSpanSettings.DaysFirst | DateSpanSettings.MixedSigns)]
     public void Date_span_with(DateSpanSettings settings)
     {
         var date = 11.June(2017).At(06, 15).WithOffset(TimeSpan.FromHours(+2));

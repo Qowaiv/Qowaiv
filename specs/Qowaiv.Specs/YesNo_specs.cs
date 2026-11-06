@@ -6,71 +6,81 @@ public class With_domain_logic
     public void DefinedValues_are_Yes_and_No()
         => YesNo.DefinedValues.Should().Equal(YesNo.Yes, YesNo.No);
 
-    [TestCase(true, "yes")]
-    [TestCase(true, "no")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "yes")]
+    [Arguments(true, "no")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, YesNo svo) => svo.HasValue.Should().Be(result);
 
-    [TestCase(true, "yes")]
-    [TestCase(true, "no")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "yes")]
+    [Arguments(true, "no")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsKnown_is(bool result, YesNo svo) => svo.IsKnown.Should().Be(result);
 
-    [TestCase(false, "yes")]
-    [TestCase(false, "no")]
-    [TestCase(false, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "yes")]
+    [Arguments(false, "no")]
+    [Arguments(false, "?")]
+    [Arguments(true, "")]
     public void IsEmpty_returns(bool result, YesNo svo) => svo.IsEmpty().Should().Be(result);
 
-    [TestCase(false, "yes")]
-    [TestCase(false, "no")]
-    [TestCase(true, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "yes")]
+    [Arguments(false, "no")]
+    [Arguments(true, "?")]
+    [Arguments(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, YesNo svo) => svo.IsEmptyOrUnknown().Should().Be(result);
 
-    [TestCase(false, "yes")]
-    [TestCase(false, "no")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(false, "yes")]
+    [Arguments(false, "no")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void IsUnknown_returns(bool result, YesNo svo) => svo.IsUnknown().Should().Be(result);
 
-    [TestCase(true, "yes")]
-    [TestCase(true, "no")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "yes")]
+    [Arguments(true, "no")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsYesOrNo_returns(bool result, YesNo svo) => svo.IsYesOrNo().Should().Be(result);
 
 
-    [TestCase(false, "")]
-    [TestCase(false, "N")]
-    [TestCase(true, "Y")]
-    [TestCase(false, "?")]
+    [Test]
+    [Arguments(false, "")]
+    [Arguments(false, "N")]
+    [Arguments(true, "Y")]
+    [Arguments(false, "?")]
 
     public void IsYes_returns(bool result, YesNo svo) => svo.IsYes().Should().Be(result);
 
-    [TestCase(false, "")]
-    [TestCase(true, "N")]
-    [TestCase(false, "Y")]
-    [TestCase(false, "?")]
+    [Test]
+    [Arguments(false, "")]
+    [Arguments(true, "N")]
+    [Arguments(false, "Y")]
+    [Arguments(false, "?")]
 
     public void IsNo_returns(bool result, YesNo svo) => svo.IsNo().Should().Be(result);
 }
 
 public class Is_valid_for
 {
-    [TestCase("ja", "nl")]
-    [TestCase("yes", "en-GB")]
-    [TestCase("y", null)]
-    [TestCase("true", null)]
+    [Test]
+    [Arguments("ja", "nl")]
+    [Arguments("yes", "en-GB")]
+    [Arguments("y", null)]
+    [Arguments("true", null)]
     public void strings_representing_yes(string input, CultureInfo culture)
         => YesNo.Parse(input, culture).Should().Be(YesNo.Yes);
 
-    [TestCase("nee", "nl")]
-    [TestCase("no", "en-GB")]
-    [TestCase("n", null)]
-    [TestCase("false", null)]
+    [Test]
+    [Arguments("nee", "nl")]
+    [Arguments("no", "en-GB")]
+    [Arguments("n", null)]
+    [Arguments("false", null)]
     public void strings_representing_no(string input, CultureInfo culture)
         => YesNo.Parse(input, culture).Should().Be(YesNo.No);
 }
@@ -116,8 +126,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (YesNo.Yes != YesNo.No).Should().BeTrue();
 
-    [TestCase("", 0)]
-    [TestCase("yes", 665630161)]
+    [Test]
+    [Arguments("", 0)]
+    [Arguments("yes", 665630161)]
     public void hash_code_is_value_based(YesNo svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -141,10 +152,11 @@ public class Can_be_parsed
     public void from_question_mark_represents_Unknown()
         => YesNo.Parse("?").Should().Be(YesNo.Unknown);
 
-    [TestCase("en", "y")]
-    [TestCase("nl", "j")]
-    [TestCase("nl", "ja")]
-    [TestCase("fr", "oui")]
+    [Test]
+    [Arguments("en", "y")]
+    [Arguments("nl", "j")]
+    [Arguments("nl", "ja")]
+    [Arguments("fr", "oui")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -204,23 +216,24 @@ public class Has_custom_formatting
         }
     }
 
-    [TestCase("en-GB", null, "Yes", "yes")]
-    [TestCase("nl-BE", "f", "Yes", "ja")]
-    [TestCase("es-EQ", "F", "Yes", "Si")]
-    [TestCase("en-GB", null, "No", "no")]
-    [TestCase("nl-BE", "f", "No", "nee")]
-    [TestCase("es-EQ", "F", "No", "No")]
-    [TestCase("en-GB", "C", "Yes", "Y")]
-    [TestCase("nl-BE", "C", "Yes", "J")]
-    [TestCase("es-EQ", "C", "Yes", "S")]
-    [TestCase("en-GB", "C", "No", "N")]
-    [TestCase("nl-BE", "c", "No", "n")]
-    [TestCase("es-EQ", "c", "No", "n")]
-    [TestCase("en-US", "B", "Yes", "True")]
-    [TestCase("en-US", "b", "No", "false")]
-    [TestCase("en-US", "i", "Yes", "1")]
-    [TestCase("en-US", "i", "No", "0")]
-    [TestCase("en-US", "i", "?", "?")]
+    [Test]
+    [Arguments("en-GB", null, "Yes", "yes")]
+    [Arguments("nl-BE", "f", "Yes", "ja")]
+    [Arguments("es-EQ", "F", "Yes", "Si")]
+    [Arguments("en-GB", null, "No", "no")]
+    [Arguments("nl-BE", "f", "No", "nee")]
+    [Arguments("es-EQ", "F", "No", "No")]
+    [Arguments("en-GB", "C", "Yes", "Y")]
+    [Arguments("nl-BE", "C", "Yes", "J")]
+    [Arguments("es-EQ", "C", "Yes", "S")]
+    [Arguments("en-GB", "C", "No", "N")]
+    [Arguments("nl-BE", "c", "No", "n")]
+    [Arguments("es-EQ", "c", "No", "n")]
+    [Arguments("en-US", "B", "Yes", "True")]
+    [Arguments("en-US", "b", "No", "false")]
+    [Arguments("en-US", "i", "Yes", "1")]
+    [Arguments("en-US", "i", "No", "0")]
+    [Arguments("en-US", "i", "?", "?")]
     public void culture_dependent(CultureInfo culture, string format, YesNo svo, string expected)
     {
         using (culture.Scoped())
@@ -278,8 +291,9 @@ public class Is_comparable
 
 public class Casts
 {
-    [TestCase("yes", true)]
-    [TestCase("no", false)]
+    [Test]
+    [Arguments("yes", true)]
+    [Arguments("no", false)]
     public void explicitly_from_boolean(YesNo casted, bool boolean) => ((YesNo)boolean).Should().Be(casted);
 
     [Test]
@@ -296,29 +310,32 @@ public class Casts
         result.Should().Be("failed");
     }
 
-    [TestCase(null, "")]
-    [TestCase(true, "y")]
-    [TestCase(false, "n")]
+    [Test]
+    [Arguments(null, "")]
+    [Arguments(true, "y")]
+    [Arguments(false, "n")]
     public void explicitly_from_nullable_boolean(bool? value, YesNo expected)
     {
         var casted = (YesNo)value;
         casted.Should().Be(expected);
     }
 
-    [TestCase("", null)]
-    [TestCase("y", true)]
-    [TestCase("n", false)]
-    [TestCase("?", null)]
+    [Test]
+    [Arguments("", null)]
+    [Arguments("y", true)]
+    [Arguments("n", false)]
+    [Arguments("?", null)]
     public void explicitly_to_nullable_boolean(YesNo svo, bool? expected)
     {
         var casted = (bool?)svo;
         casted.Should().Be(expected);
     }
 
-    [TestCase("", null)]
-    [TestCase("y", true)]
-    [TestCase("n", false)]
-    [TestCase("?", false)]
+    [Test]
+    [Arguments("", null)]
+    [Arguments("y", true)]
+    [Arguments("n", false)]
+    [Arguments("?", false)]
     public void explicitly_to_boolean(YesNo svo, bool expected)
     {
         var casted = (bool)svo;
@@ -368,8 +385,9 @@ public class Supports_type_conversion
         }
     }
 
-    [TestCase(true, "yes")]
-    [TestCase(false, "no")]
+    [Test]
+    [Arguments(true, "yes")]
+    [Arguments(false, "no")]
     public void from_boolean(bool from, YesNo yesNo)
     {
         using (TestCultures.en_GB.Scoped())
@@ -378,8 +396,9 @@ public class Supports_type_conversion
         }
     }
 
-    [TestCase("yes", true)]
-    [TestCase("no", false)]
+    [Test]
+    [Arguments("yes", true)]
+    [Arguments("no", false)]
     public void to_boolean(YesNo yesNo, bool boolean)
     {
         using (TestCultures.en_GB.Scoped())
@@ -392,52 +411,57 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase(null, null)]
-    [TestCase("yes", "yes")]
-    [TestCase("no", "no")]
-    [TestCase(true, "yes")]
-    [TestCase(false, "no")]
-    [TestCase(1L, "yes")]
-    [TestCase(1.0, "yes")]
-    [TestCase(0.0, "no")]
-    [TestCase((long)byte.MaxValue, "?")]
-    [TestCase((long)short.MaxValue, "?")]
-    [TestCase((long)int.MaxValue, "?")]
-    [TestCase(long.MaxValue, "?")]
-    [TestCase("?", "?")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("yes", "yes")]
+    [Arguments("no", "no")]
+    [Arguments(true, "yes")]
+    [Arguments(false, "no")]
+    [Arguments(1L, "yes")]
+    [Arguments(1.0, "yes")]
+    [Arguments(0.0, "no")]
+    [Arguments((long)byte.MaxValue, "?")]
+    [Arguments((long)short.MaxValue, "?")]
+    [Arguments((long)int.MaxValue, "?")]
+    [Arguments(long.MaxValue, "?")]
+    [Arguments("?", "?")]
     public void System_Text_JSON_deserialization(object json, YesNo svo)
         => JsonTester.Read_System_Text_JSON<YesNo>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("yes", "yes")]
-    [TestCase("no", "no")]
-    [TestCase("?", "?")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("yes", "yes")]
+    [Arguments("no", "no")]
+    [Arguments("?", "?")]
     public void System_Text_JSON_serialization(YesNo svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("yes", "yes")]
-    [TestCase("no", "no")]
-    [TestCase(true, "yes")]
-    [TestCase(false, "no")]
-    [TestCase(1L, "yes")]
-    [TestCase(1.0, "yes")]
-    [TestCase(0.0, "no")]
-    [TestCase((long)byte.MaxValue, "?")]
-    [TestCase((long)short.MaxValue, "?")]
-    [TestCase((long)int.MaxValue, "?")]
-    [TestCase(long.MaxValue, "?")]
-    [TestCase("?", "?")]
+    [Test]
+    [Arguments("yes", "yes")]
+    [Arguments("no", "no")]
+    [Arguments(true, "yes")]
+    [Arguments(false, "no")]
+    [Arguments(1L, "yes")]
+    [Arguments(1.0, "yes")]
+    [Arguments(0.0, "no")]
+    [Arguments((long)byte.MaxValue, "?")]
+    [Arguments((long)short.MaxValue, "?")]
+    [Arguments((long)int.MaxValue, "?")]
+    [Arguments(long.MaxValue, "?")]
+    [Arguments("?", "?")]
     public void convention_based_deserialization(object json, YesNo svo)
         => JsonTester.Read<YesNo>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("yes", "yes")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("yes", "yes")]
     public void convention_based_serialization(YesNo svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
-    [TestCase(5L, typeof(InvalidCastException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
+    [Arguments(5L, typeof(InvalidCastException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<YesNo>)
@@ -501,9 +525,10 @@ public class Is_Open_API_data_type
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("{unknown}", "?")]
-    [TestCase("yes", "Y")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("{unknown}", "?")]
+    [Arguments("yes", "Y")]
     public void has_custom_display(object display, YesNo svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }

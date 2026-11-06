@@ -41,46 +41,54 @@ public class With_domain_logic
     [Test]
     public void has_max_length_of_34() => InternationalBankAccountNumber.MaxLength.Should().Be(34);
 
-    [TestCase("")]
-    [TestCase("?")]
+    [Test]
+    [Arguments("")]
+    [Arguments("?")]
     public void has_length_zero_for_empty_and_unknown(InternationalBankAccountNumber svo)
       => svo.Length.Should().Be(0);
 
-    [TestCase(18, "NL20INGB0001234567")]
+    [Test]
+    [Arguments(18, "NL20INGB0001234567")]
     public void has_length(int length, InternationalBankAccountNumber svo)
         => svo.Length.Should().Be(length);
 
-    [TestCase(false, "NL20INGB0001234567")]
-    [TestCase(false, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "NL20INGB0001234567")]
+    [Arguments(false, "?")]
+    [Arguments(true, "")]
     public void IsEmpty_returns(bool result, InternationalBankAccountNumber svo)
        => svo.IsEmpty().Should().Be(result);
 
-    [TestCase(false, "NL20INGB0001234567")]
-    [TestCase(true, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "NL20INGB0001234567")]
+    [Arguments(true, "?")]
+    [Arguments(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, InternationalBankAccountNumber svo)
         => svo.IsEmptyOrUnknown().Should().Be(result);
 
-    [TestCase(false, "NL20INGB0001234567")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(false, "NL20INGB0001234567")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void IsUnknown_returns(bool result, InternationalBankAccountNumber svo)
         => svo.IsUnknown().Should().Be(result);
 
-    [TestCase(true, "NL20INGB0001234567")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "NL20INGB0001234567")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, InternationalBankAccountNumber svo) => svo.HasValue.Should().Be(result);
 
-    [TestCase(true, "NL20INGB0001234567")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "NL20INGB0001234567")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsKnown_is(bool result, InternationalBankAccountNumber svo) => svo.IsKnown.Should().Be(result);
 
-    [TestCase("", "")]
-    [TestCase("?", "?")]
-    [TestCase("NL", "NL20INGB0001234567")]
+    [Test]
+    [Arguments("", "")]
+    [Arguments("?", "?")]
+    [Arguments("NL", "NL20INGB0001234567")]
     public void with_county(Country country, InternationalBankAccountNumber svo)
         => svo.Country.Should().Be(country);
 }
@@ -128,8 +136,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_other_values()
         => (Svo.Iban != InternationalBankAccountNumber.Parse("DE68210501700012345678")).Should().BeTrue();
 
-    [TestCase("", 0)]
-    [TestCase("NL20INGB0001234567", 684896179)]
+    [Test]
+    [Arguments("", 0)]
+    [Arguments("NL20INGB0001234567", 684896179)]
     public void hash_code_is_value_based(InternationalBankAccountNumber svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -227,24 +236,25 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: 'NL20 INGB 0001 2345 67', format: 'F'");
     }
 
-    [TestCase(null, "NL20INGB0001234567", "NL20INGB0001234567")]
-    [TestCase("f", "NL20INGB0001234567", "nl20 ingb 0001 2345 67")]
-    [TestCase("h", "NL20INGB0001234567", "nl20 ingb 0001 2345 67")]
-    [TestCase("H", "NL20INGB0001234567", "NL20 INGB 0001 2345 67")]
-    [TestCase("u", "NL20INGB0001234567", "nl20ingb0001234567")]
-    [TestCase("U", "NL20INGB0001234567", "NL20INGB0001234567")]
-    [TestCase("m", "NL20INGB0001234567", "nl20ingb0001234567")]
-    [TestCase("M", "NL20INGB0001234567", "NL20INGB0001234567")]
-    [TestCase("F", "HR1723600001101234565", /*.......*/ "HR17 2360 0001 1012 3456 5")]
-    [TestCase("F", "NL20INGB0001234567", /*..........*/ "NL20 INGB 0001 2345 67")]
-    [TestCase("F", "FR1420041010050500013M02606", /*.*/ "FR14 2004 1010 0505 0001 3M02 606")]
-    [TestCase("F", "EE382200221020145685", /*........*/ "EE38 2200 2210 2014 5685")]
-    [TestCase("F", "", "")]
-    [TestCase("F", "?", "?")]
-    [TestCase("o", "NL20INGB0001234567", "nl20xxxxxxxxxxx567")]
-    [TestCase("O", "NL20INGB0001234567", "NL20XXXXXXXXXXX567")]
-    [TestCase("O", "", "")]
-    [TestCase("O", "?", "?")]
+    [Test]
+    [Arguments(null, "NL20INGB0001234567", "NL20INGB0001234567")]
+    [Arguments("f", "NL20INGB0001234567", "nl20 ingb 0001 2345 67")]
+    [Arguments("h", "NL20INGB0001234567", "nl20 ingb 0001 2345 67")]
+    [Arguments("H", "NL20INGB0001234567", "NL20 INGB 0001 2345 67")]
+    [Arguments("u", "NL20INGB0001234567", "nl20ingb0001234567")]
+    [Arguments("U", "NL20INGB0001234567", "NL20INGB0001234567")]
+    [Arguments("m", "NL20INGB0001234567", "nl20ingb0001234567")]
+    [Arguments("M", "NL20INGB0001234567", "NL20INGB0001234567")]
+    [Arguments("F", "HR1723600001101234565", /*.......*/ "HR17 2360 0001 1012 3456 5")]
+    [Arguments("F", "NL20INGB0001234567", /*..........*/ "NL20 INGB 0001 2345 67")]
+    [Arguments("F", "FR1420041010050500013M02606", /*.*/ "FR14 2004 1010 0505 0001 3M02 606")]
+    [Arguments("F", "EE382200221020145685", /*........*/ "EE38 2200 2210 2014 5685")]
+    [Arguments("F", "", "")]
+    [Arguments("F", "?", "?")]
+    [Arguments("o", "NL20INGB0001234567", "nl20xxxxxxxxxxx567")]
+    [Arguments("O", "NL20INGB0001234567", "NL20XXXXXXXXXXX567")]
+    [Arguments("O", "", "")]
+    [Arguments("O", "?", "?")]
     public void with_format(string format, InternationalBankAccountNumber svo, string formatted)
         => svo.ToString(format).Should().Be(formatted);
 
@@ -279,25 +289,27 @@ public class Can_be_parsed
     public void with_TryParse_returns_SVO()
         => InternationalBankAccountNumber.TryParse("NL20INGB0001234567").Should().Be(Svo.Iban);
 
-    [TestCase(' ')]
-    [TestCase((char)160)]
-    [TestCase('\t')]
-    [TestCase('\r')]
-    [TestCase('\n')]
-    [TestCase('-')]
-    [TestCase('_')]
-    [TestCase('.')]
+    [Test]
+    [Arguments(' ')]
+    [Arguments((char)160)]
+    [Arguments('\t')]
+    [Arguments('\r')]
+    [Arguments('\n')]
+    [Arguments('-')]
+    [Arguments('_')]
+    [Arguments('.')]
     public void ignoring_formatting(char ch)
     {
         var iban = InternationalBankAccountNumber.Parse($"NL{ch}20{ch}INGB00{ch}{ch}0123456{ch}7");
         iban.Should().Be(Svo.Iban);
     }
 
-    [TestCase(' ')]
-    [TestCase((char)160)]
-    [TestCase('\t')]
-    [TestCase('\r')]
-    [TestCase('\n')]
+    [Test]
+    [Arguments(' ')]
+    [Arguments((char)160)]
+    [Arguments('\t')]
+    [Arguments('\r')]
+    [Arguments('\n')]
 
     public void trims_input(char ch)
     {
@@ -308,8 +320,9 @@ public class Can_be_parsed
 
 public class Can_not_be_parsed
 {
-    [TestCase("N L20INGB0001234567", "with_markup_within_the_country_code")]
-    [TestCase("NL2 0INGB0001234567", "with_markup_within_the_checksum_code")]
+    [Test]
+    [Arguments("N L20INGB0001234567", "with_markup_within_the_country_code")]
+    [Arguments("NL2 0INGB0001234567", "with_markup_within_the_checksum_code")]
     public void for_invalid_IBANs(string str, string because)
     {
         InternationalBankAccountNumber.TryParse(str).Should().BeNull(because);
@@ -374,28 +387,33 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase(null, null)]
-    [TestCase("NL20INGB0001234567", "NL20INGB0001234567")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("NL20INGB0001234567", "NL20INGB0001234567")]
     public void System_Text_JSON_deserialization(object json, InternationalBankAccountNumber svo)
         => JsonTester.Read_System_Text_JSON<InternationalBankAccountNumber>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("NL20INGB0001234567", "NL20INGB0001234567")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("NL20INGB0001234567", "NL20INGB0001234567")]
     public void System_Text_JSON_serialization(InternationalBankAccountNumber svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("NL20INGB0001234567", "NL20INGB0001234567")]
+    [Test]
+    [Arguments("NL20INGB0001234567", "NL20INGB0001234567")]
     public void convention_based_deserialization(object json, InternationalBankAccountNumber svo)
         => JsonTester.Read<InternationalBankAccountNumber>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("NL20INGB0001234567", "NL20INGB0001234567")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("NL20INGB0001234567", "NL20INGB0001234567")]
     public void convention_based_serialization(InternationalBankAccountNumber svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
-    [TestCase(true, typeof(InvalidOperationException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
+    [Arguments(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<InternationalBankAccountNumber>)
@@ -448,8 +466,9 @@ public class Input_is_invalid_when
     public void country_does_not_exist()
         => InternationalBankAccountNumber.TryParse("XX950210000000693123456").Should().BeNull();
 
-    [TestCase("           X")]
-    [TestCase("US34 5678 9AB")]
+    [Test]
+    [Arguments("           X")]
+    [Arguments("US34 5678 9AB")]
     public void shorter_than_12(string iban)
         => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
 
@@ -457,8 +476,9 @@ public class Input_is_invalid_when
     public void longer_than_36()
         => InternationalBankAccountNumber.TryParse("US00 2222 3333 4444 5555 6666 7777 8888 9999 A").Should().BeNull();
 
-    [TestCase("NL76 CZHQ 9695 4545 9")]
-    [TestCase("NL45 HEQN 0564 4242 147")]
+    [Test]
+    [Arguments("NL76 CZHQ 9695 4545 9")]
+    [Arguments("NL45 HEQN 0564 4242 147")]
     public void length_does_not_match_country_BBAN(string iban)
         => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
 
@@ -466,61 +486,67 @@ public class Input_is_invalid_when
     public void other_than_alpha_numeric()
         => InternationalBankAccountNumber.TryParse("AE20 #$12 0070 3456 7890 1234 5678").Should().BeNull();
 
-    [TestCase("ibanNL20INGB0001234567")]
-    [TestCase("iban :NL20INGB0001234567")]
-    [TestCase("iban : NL20INGB0001234567")]
-    [TestCase("(IB AN) NL20INGB0001234567")]
-    [TestCase("IBA-N NL20INGB0001234567")]
-    [TestCase("IBAN IBAN NL20INGB0001234567")]
-    [TestCase("(IBAN) IBAN NL20INGB0001234567")]
-    [TestCase("IBAN (IBAN) NL20INGB0001234567")]
+    [Test]
+    [Arguments("ibanNL20INGB0001234567")]
+    [Arguments("iban :NL20INGB0001234567")]
+    [Arguments("iban : NL20INGB0001234567")]
+    [Arguments("(IB AN) NL20INGB0001234567")]
+    [Arguments("IBA-N NL20INGB0001234567")]
+    [Arguments("IBAN IBAN NL20INGB0001234567")]
+    [Arguments("(IBAN) IBAN NL20INGB0001234567")]
+    [Arguments("IBAN (IBAN) NL20INGB0001234567")]
     public void string_with_malformed_IBAN_prefix(string str)
         => InternationalBankAccountNumber.TryParse(str).Should().BeNull();
 
-    [TestCase("MU60 BOMM 0835 4151 5881 3959 000A BC")]
-    [TestCase("MU53 BOMM 0835 4151 5881 3959 000Z ZZ")]
+    [Test]
+    [Arguments("MU60 BOMM 0835 4151 5881 3959 000A BC")]
+    [Arguments("MU53 BOMM 0835 4151 5881 3959 000Z ZZ")]
     public void Mauritius_does_not_end_with_currency_code(string iban)
         => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
 
-    [TestCase("SC96 BANK 0835 4151 5881 3959 8706 ABC")]
-    [TestCase("SC89 BANK 0835 4151 5881 3959 8706 ZZZ")]
+    [Test]
+    [Arguments("SC96 BANK 0835 4151 5881 3959 8706 ABC")]
+    [Arguments("SC89 BANK 0835 4151 5881 3959 8706 ZZZ")]
     public void Seychelles_does_not_end_with_currency_code(string iban)
         => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
 
-    [TestCase("BA23 1973 0058 1527 443")]
-    [TestCase("ME74 0986 4623 4212 3918 5")]
-    [TestCase("MK14 3935 0032 6437 91")]
-    [TestCase("MR34 8380 0832 4152 5888 3958 87")]
-    [TestCase("PT43 1185 0586 3461 2219 4930")]
-    [TestCase("RS07 8688 9281 0642 3946 9")]
-    [TestCase("SI72 3749 8042 5870 17")]
-    [TestCase("TL96 4551 5574 6824 5444 05")]
-    [TestCase("TN33 6926 5530 1193 5329 855")]
+    [Test]
+    [Arguments("BA23 1973 0058 1527 443")]
+    [Arguments("ME74 0986 4623 4212 3918 5")]
+    [Arguments("MK14 3935 0032 6437 91")]
+    [Arguments("MR34 8380 0832 4152 5888 3958 87")]
+    [Arguments("PT43 1185 0586 3461 2219 4930")]
+    [Arguments("RS07 8688 9281 0642 3946 9")]
+    [Arguments("SI72 3749 8042 5870 17")]
+    [Arguments("TL96 4551 5574 6824 5444 05")]
+    [Arguments("TN33 6926 5530 1193 5329 855")]
     public void IBANs_with_fixed_checksum_have_a_different_one(string iban)
         => InternationalBankAccountNumber.TryParse(iban).Should().BeNull();
 }
 
 public class Input_is_valid
 {
-    [TestCase("iban NL20INGB0001234567")]
-    [TestCase("iban:NL20INGB0001234567")]
-    [TestCase("iban: NL20INGB0001234567")]
-    [TestCase("(iban)NL20INGB0001234567")]
-    [TestCase("(iban) NL20INGB0001234567")]
-    [TestCase("(Iban) NL20INGB0001234567")]
-    [TestCase("(IBAN) NL20INGB0001234567")]
-    [TestCase("Iban-NL20INGB0001234567")]
-    [TestCase("Iban NL20INGB0001234567")]
-    [TestCase("IBAN NL20INGB0001234567")]
-    [TestCase(" IBAN NL20INGB0001234567")]
-    [TestCase(" IBAN\tNL20INGB0001234567")]
-    [TestCase(" IBAN  NL20INGB0001234567")]
+    [Test]
+    [Arguments("iban NL20INGB0001234567")]
+    [Arguments("iban:NL20INGB0001234567")]
+    [Arguments("iban: NL20INGB0001234567")]
+    [Arguments("(iban)NL20INGB0001234567")]
+    [Arguments("(iban) NL20INGB0001234567")]
+    [Arguments("(Iban) NL20INGB0001234567")]
+    [Arguments("(IBAN) NL20INGB0001234567")]
+    [Arguments("Iban-NL20INGB0001234567")]
+    [Arguments("Iban NL20INGB0001234567")]
+    [Arguments("IBAN NL20INGB0001234567")]
+    [Arguments(" IBAN NL20INGB0001234567")]
+    [Arguments(" IBAN\tNL20INGB0001234567")]
+    [Arguments(" IBAN  NL20INGB0001234567")]
     public void string_with_IBAN_prefix(string str)
         => InternationalBankAccountNumber.Parse(str).Should().Be(Svo.Iban);
 
-    [TestCase("US70 ABCD 1234")]
-    [TestCase("US41 1234 5678 90AB CDEF GHIJ KLMN OPQR")]
-    [TestCase("US78 590A 55XL 4071 0933 7937 5649 3947 97")]
+    [Test]
+    [Arguments("US70 ABCD 1234")]
+    [Arguments("US41 1234 5678 90AB CDEF GHIJ KLMN OPQR")]
+    [Arguments("US78 590A 55XL 4071 0933 7937 5649 3947 97")]
     public void for_countries_without_IBAN(string str)
     {
         var iban = InternationalBankAccountNumber.Parse(str);
@@ -531,18 +557,19 @@ public class Input_is_valid
     public void despite_irregular_white_spacing()
         => InternationalBankAccountNumber.Parse("AE950 2100000006  93123456").IsEmptyOrUnknown().Should().BeFalse();
 
-    [TestCase("CZ55 0800 0000 0012 3456 7899")]
-    [TestCase("CZ65 0800 0000 1920 0014 5399")]
-    [TestCase("EE86 2200 2210 6411 5891")]
-    [TestCase("HR17 2360 0001 1012 3456 5")]
-    [TestCase("HU13 1176 3842 0065 8885 0000 0000")]
-    [TestCase("HU39 1176 3842 0073 9012 0000 0000")]
-    [TestCase("HU32 1040 5004 0002 6548 0000 0009")]
-    [TestCase("HU32 1170 5008 2046 4565 0000 0000")]
-    [TestCase("PL02 2490 0005 0000 4600 8316 8772")]
-    [TestCase("PL16 1160 2202 0000 0002 7718 3060")]
-    [TestCase("PL53 1240 4650 1787 0010 7345 2383")]
-    [TestCase("PL83 2030 0045 1110 0000 0390 3540")]
+    [Test]
+    [Arguments("CZ55 0800 0000 0012 3456 7899")]
+    [Arguments("CZ65 0800 0000 1920 0014 5399")]
+    [Arguments("EE86 2200 2210 6411 5891")]
+    [Arguments("HR17 2360 0001 1012 3456 5")]
+    [Arguments("HU13 1176 3842 0065 8885 0000 0000")]
+    [Arguments("HU39 1176 3842 0073 9012 0000 0000")]
+    [Arguments("HU32 1040 5004 0002 6548 0000 0009")]
+    [Arguments("HU32 1170 5008 2046 4565 0000 0000")]
+    [Arguments("PL02 2490 0005 0000 4600 8316 8772")]
+    [Arguments("PL16 1160 2202 0000 0002 7718 3060")]
+    [Arguments("PL53 1240 4650 1787 0010 7345 2383")]
+    [Arguments("PL83 2030 0045 1110 0000 0390 3540")]
     public void for_countries_with_extended_validation(string iban)
         => InternationalBankAccountNumber.TryParse(iban).Should().NotBeNull();
 }
@@ -560,24 +587,27 @@ public class Is_Open_API_data_type
             format: "iban",
             pattern: "[A-Z]{2}[0-9]{2}[A-Z0-9]{8,32}"));
 
-    [TestCase("NL20INGB0001234567")]
+    [Test]
+    [Arguments("NL20INGB0001234567")]
     public void pattern_matches(string input)
         => OpenApiDataType.FromType(typeof(InternationalBankAccountNumber))!.Matches(input).Should().BeTrue();
 }
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("{unknown}", "?")]
-    [TestCase("NL20 INGB 0001 2345 67", "NL20INGB0001234567")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("{unknown}", "?")]
+    [Arguments("NL20 INGB 0001 2345 67", "NL20INGB0001234567")]
     public void has_custom_display(object display, InternationalBankAccountNumber svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }
 
 public class Mod97
 {
-    [TestCase(55)]
-    [TestCase(56)]
+    [Test]
+    [Arguments(55)]
+    [Arguments(56)]
     public void No_overflow_until(int bits)
     {
         var max = (1UL << (bits + 1)) - 1d;
@@ -587,8 +617,9 @@ public class Mod97
         max.Should().BeLessThanOrEqualTo(ulong.MaxValue);
     }
 
-    [TestCase(42)]
-    [TestCase(43)]
+    [Test]
+    [Arguments(42)]
+    [Arguments(43)]
     public void No_checsum_overflow_until(int bits)
     {
         var max = (1UL << (bits + 1)) - 1d;

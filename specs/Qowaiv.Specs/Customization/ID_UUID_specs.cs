@@ -19,8 +19,9 @@ public class Has_constant
     public void Empty_represent_default_value()
         => UuidBasedId.Empty.Should().Be(default);
 
-    [TestCase(true, "Qowaiv_SVOLibrary_GUIA")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "Qowaiv_SVOLibrary_GUIA")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, UuidBasedId svo) => svo.HasValue.Should().Be(result);
 }
 
@@ -58,11 +59,12 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.Generated.CustomUuid != UuidBasedId.Next()).Should().BeTrue();
 
-    [TestCase("", 0)]
+    [Test]
+    [Arguments("", 0)]
 #if NET48
-    [TestCase("Qowaiv_SVOLibrary_GUIA", -286953930)]
+    [Arguments("Qowaiv_SVOLibrary_GUIA", -286953930)]
 #else
-    [TestCase("Qowaiv_SVOLibrary_GUIA", -479411820)]
+    [Arguments("Qowaiv_SVOLibrary_GUIA", -479411820)]
 #endif
     public void hash_code_is_value_based(UuidBasedId svo, int hashCode)
     {
@@ -122,10 +124,11 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}', format: 'B'");
     }
 
-    [TestCase(null, "Qowaiv_SVOLibrary_GUIA")]
-    [TestCase("", "Qowaiv_SVOLibrary_GUIA")]
-    [TestCase("P", "(8A1A8C42-D2FF-E254-E26E-B6ABCBF19420)")]
-    [TestCase("B", "{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}")]
+    [Test]
+    [Arguments(null, "Qowaiv_SVOLibrary_GUIA")]
+    [Arguments("", "Qowaiv_SVOLibrary_GUIA")]
+    [Arguments("P", "(8A1A8C42-D2FF-E254-E26E-B6ABCBF19420)")]
+    [Arguments("B", "{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}")]
     public void with_current_thread_culture_as_default(string? format, string formattted)
     {
         using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
@@ -137,13 +140,15 @@ public class Has_custom_formatting
 
 public class Bytes
 {
-    [TestCase("")]
-    [TestCase("Qowaiv_SVOLibrary_GUIA", (byte)0x42, (byte)0x8C, (byte)0x1A, (byte)0x8A, (byte)0xFF, (byte)0xD2, (byte)0x54, (byte)0xE2, (byte)0xE2, (byte)0x6E, (byte)0xB6, (byte)0xAB, (byte)0xCB, (byte)0xF1, (byte)0x94, (byte)0x20)]
+    [Test]
+    [Arguments("")]
+    [Arguments("Qowaiv_SVOLibrary_GUIA", (byte)0x42, (byte)0x8C, (byte)0x1A, (byte)0x8A, (byte)0xFF, (byte)0xD2, (byte)0x54, (byte)0xE2, (byte)0xE2, (byte)0x6E, (byte)0xB6, (byte)0xAB, (byte)0xCB, (byte)0xF1, (byte)0x94, (byte)0x20)]
     public void describe_the_id(UuidBasedId svo, params byte[] bytes)
          => svo.ToByteArray().Should().BeEquivalentTo(bytes);
 
-    [TestCase("")]
-    [TestCase("Qowaiv_SVOLibrary_GUIA", (byte)0x42, (byte)0x8C, (byte)0x1A, (byte)0x8A, (byte)0xFF, (byte)0xD2, (byte)0x54, (byte)0xE2, (byte)0xE2, (byte)0x6E, (byte)0xB6, (byte)0xAB, (byte)0xCB, (byte)0xF1, (byte)0x94, (byte)0x20)]
+    [Test]
+    [Arguments("")]
+    [Arguments("Qowaiv_SVOLibrary_GUIA", (byte)0x42, (byte)0x8C, (byte)0x1A, (byte)0x8A, (byte)0xFF, (byte)0xD2, (byte)0x54, (byte)0xE2, (byte)0xE2, (byte)0x6E, (byte)0xB6, (byte)0xAB, (byte)0xCB, (byte)0xF1, (byte)0x94, (byte)0x20)]
     public void init_the_id(UuidBasedId svo, params byte[] bytes)
         => UuidBasedId.FromBytes(bytes)
         .Should().Be(svo);
@@ -243,9 +248,10 @@ public class Supports_type_conversion
     public void to_Uuid()
         => Converting.To<Uuid>().From(Svo.Generated.CustomUuid).Should().Be(Svo.Uuid);
 
-    [TestCase(typeof(Guid))]
-    [TestCase(typeof(Uuid))]
-    [TestCase(typeof(string))]
+    [Test]
+    [Arguments(typeof(Guid))]
+    [Arguments(typeof(Uuid))]
+    [Arguments(typeof(string))]
     public void to(Type type)
         => Converting.To(type).From<UuidBasedId>().Should().BeTrue();
 
@@ -332,8 +338,9 @@ public class Supports_XML_serialization
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
     public void has_custom_display(object display, UuidBasedId id)
         => id.Should().HaveDebuggerDisplay(display);
 }

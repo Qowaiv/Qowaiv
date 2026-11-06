@@ -29,10 +29,11 @@ public class Decimal_scale
         Scale(p).Should().Be(28);
     }
 
-    [TestCase("3.14%")]
-    [TestCase("3.140%")]
-    [TestCase("3.1400%")]
-    [TestCase("3.14000%")]
+    [Test]
+    [Arguments("3.14%")]
+    [Arguments("3.140%")]
+    [Arguments("3.1400%")]
+    [Arguments("3.14000%")]
     public void _minimum_for_parsed(string str)
         => Scale(Percentage.Parse(str, TestCultures.en)).Should().Be(4);
 
@@ -42,16 +43,18 @@ public class Decimal_scale
 
 public class Is_valid_for
 {
-    [TestCase("1751‱", "en")]
-    [TestCase("175.1‰", "en")]
-    [TestCase("17.51", "en")]
-    [TestCase("17.51%", "en")]
-    [TestCase("17,51%", "nl")]
+    [Test]
+    [Arguments("1751‱", "en")]
+    [Arguments("175.1‰", "en")]
+    [Arguments("17.51", "en")]
+    [Arguments("17.51%", "en")]
+    [Arguments("17,51%", "nl")]
     public void strings_representing_SVO(string input, CultureInfo culture)
         => Percentage.TryParse(input, culture).Should().NotBeNull();
 
-    [TestCase("175.1<>", "en")]
-    [TestCase("17,51#", "nl")]
+    [Test]
+    [Arguments("175.1<>", "en")]
+    [Arguments("17,51#", "nl")]
     public void custom_culture_with_different_symbols(string input, CultureInfo culture)
     {
         using (culture.WithPercentageSymbols("#", "<>").Scoped())
@@ -63,15 +66,17 @@ public class Is_valid_for
 
 public class Is_not_valid_for
 {
-    [TestCase("‱1‱")]
-    [TestCase("‱1‰")]
-    [TestCase("‱1%")]
+    [Test]
+    [Arguments("‱1‱")]
+    [Arguments("‱1‰")]
+    [Arguments("‱1%")]
     public void two_symbols(string str)
         => Percentage.TryParse(str).Should().BeNull();
 
-    [TestCase("1‱1")]
-    [TestCase("1‰1")]
-    [TestCase("1%1")]
+    [Test]
+    [Arguments("1‱1")]
+    [Arguments("1‰1")]
+    [Arguments("1%1")]
     public void symbol_in_the_middle(string str)
         => Percentage.TryParse(str).Should().BeNull();
 }
@@ -133,11 +138,12 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.Percentage != 6.66m.Percent()).Should().BeTrue();
 
-    [TestCase("0%", 0)]
+    [Test]
+    [Arguments("0%", 0)]
 #if NET48
-    [TestCase("17.51%", 1521030558)]
+    [Arguments("17.51%", 1521030558)]
 #else
-    [TestCase("17.51%", 665367300)]
+    [Arguments("17.51%", 665367300)]
 #endif
     public void hash_code_is_value_based(Percentage svo, int hash)
     {
@@ -150,13 +156,14 @@ public class Is_equal_by_value
 
 public class Can_be_parsed
 {
-    [TestCase("en", "17.51")]
-    [TestCase("nl", "17,51")]
-    [TestCase("en", "175.1‰")]
-    [TestCase("en", "175.1‰")]
-    [TestCase("en", "1751‱")]
-    [TestCase("nl", "17,51%")]
-    [TestCase("fr-FR", "%17,51")]
+    [Test]
+    [Arguments("en", "17.51")]
+    [Arguments("nl", "17,51")]
+    [Arguments("en", "175.1‰")]
+    [Arguments("en", "175.1‰")]
+    [Arguments("en", "1751‱")]
+    [Arguments("nl", "17,51%")]
+    [Arguments("fr-FR", "%17,51")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -166,8 +173,9 @@ public class Can_be_parsed
         }
     }
 
-    [TestCase("175.1<>", "en")]
-    [TestCase("17,51#", "nl")]
+    [Test]
+    [Arguments("175.1<>", "en")]
+    [Arguments("17,51#", "nl")]
     public void with_custom_culture_with_different_symbols(string input, CultureInfo culture)
     {
         var parsed = Percentage.Parse(input, culture.WithPercentageSymbols("#", "<>"));
@@ -210,8 +218,9 @@ public class Can_be_parsed
 
 public class Can_not_be_parsed
 {
-    [TestCase(NumberStyles.HexNumber)]
-    [TestCase(NumberStyles.AllowExponent)]
+    [Test]
+    [Arguments(NumberStyles.HexNumber)]
+    [Arguments(NumberStyles.AllowExponent)]
     public void using_a_number_style_other_then_Number(NumberStyles style)
         => style.Invoking(s => Percentage.TryParse("4.5%", s, CultureInfo.InvariantCulture, out _))
             .Should().Throw<ArgumentOutOfRangeException>()
@@ -220,8 +229,9 @@ public class Can_not_be_parsed
 
 public class Can_be_created
 {
-    [TestCase("-7922816251426433759354395.0336")]
-    [TestCase("+7922816251426433759354395.0336")]
+    [Test]
+    [Arguments("-7922816251426433759354395.0336")]
+    [Arguments("+7922816251426433759354395.0336")]
     public void when_within_the_boundries(decimal d)
         => d.Invoking(Percentage.Create).Should()
         .Throw<ArgumentOutOfRangeException>()
@@ -288,15 +298,16 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '17.510%', format: '0.000%'");
     }
 
-    [TestCase("en-GB", null, "17.51%", "17.51%")]
-    [TestCase("nl-BE", "0.000%", "17.51%", "17,510%")]
-    [TestCase("en", "%0.###", "17.51%", "%17.51")]
-    [TestCase("en", "‰0.###", "17.51%", "‰175.1")]
-    [TestCase("en", "‱0.###", "17.51%", "‱1751")]
-    [TestCase("en", "0.###%", "17.51%", "17.51%")]
-    [TestCase("en", "0.###‰", "17.51%", "175.1‰")]
-    [TestCase("en", "0.###‱", "17.51%", "1751‱")]
-    [TestCase("en", "0.###", "17.51%", "17.51")]
+    [Test]
+    [Arguments("en-GB", null, "17.51%", "17.51%")]
+    [Arguments("nl-BE", "0.000%", "17.51%", "17,510%")]
+    [Arguments("en", "%0.###", "17.51%", "%17.51")]
+    [Arguments("en", "‰0.###", "17.51%", "‰175.1")]
+    [Arguments("en", "‱0.###", "17.51%", "‱1751")]
+    [Arguments("en", "0.###%", "17.51%", "17.51%")]
+    [Arguments("en", "0.###‰", "17.51%", "175.1‰")]
+    [Arguments("en", "0.###‱", "17.51%", "1751‱")]
+    [Arguments("en", "0.###", "17.51%", "17.51")]
     public void culture_dependent(CultureInfo culture, string format, Percentage svo, string expected)
     {
         using (culture.Scoped())
@@ -314,8 +325,9 @@ public class Has_custom_formatting
         }
     }
 
-    [TestCase("fr-FR", "%")]
-    [TestCase("fa-IR", "٪")]
+    [Test]
+    [Arguments("fr-FR", "%")]
+    [Arguments("fa-IR", "٪")]
     public void with_percent_sign_before_for(string culture, string sign)
         => Svo.Percentage.ToString(TestCultures.Select(culture)).Should().StartWith(sign);
 
@@ -337,15 +349,17 @@ public class Has_custom_formatting
         }
     }
 
-    [TestCase("0.##%", "792281625142643375935439503.35%")]
-    [TestCase("0.#‰", "7922816251426433759354395033.5‰")]
-    [TestCase("0‱", "79228162514264337593543950335‱")]
+    [Test]
+    [Arguments("0.##%", "792281625142643375935439503.35%")]
+    [Arguments("0.#‰", "7922816251426433759354395033.5‰")]
+    [Arguments("0‱", "79228162514264337593543950335‱")]
     public void for_max_value(string format, string formatted)
         => Percentage.MaxValue.ToString(format, CultureInfo.InvariantCulture).Should().Be(formatted);
 
-    [TestCase("0.##%", "-792281625142643375935439503.35%")]
-    [TestCase("0.#‰", "-7922816251426433759354395033.5‰")]
-    [TestCase("0‱", "-79228162514264337593543950335‱")]
+    [Test]
+    [Arguments("0.##%", "-792281625142643375935439503.35%")]
+    [Arguments("0.#‰", "-7922816251426433759354395033.5‰")]
+    [Arguments("0‱", "-79228162514264337593543950335‱")]
     public void for_min_value(string format, string formatted)
         => Percentage.MinValue.ToString(format, CultureInfo.InvariantCulture).Should().Be(formatted);
 }
@@ -942,15 +956,17 @@ public class Can_get_100_percent_based_on_percentage
 public class can_be_transformed
 {
 
-    [TestCase("0%", "0%")]
-    [TestCase("-3%", "3%")]
-    [TestCase("10%", "10%")]
+    [Test]
+    [Arguments("0%", "0%")]
+    [Arguments("-3%", "3%")]
+    [Arguments("10%", "10%")]
     public void absolute_value(Percentage percentage, Percentage absolute)
         => percentage.Abs().Should().Be(absolute);
 
-    [TestCase("42%", "58%")]
-    [TestCase("-10%", "110%")]
-    [TestCase("110%", "-10%")]
+    [Test]
+    [Arguments("42%", "58%")]
+    [Arguments("-10%", "110%")]
+    [Arguments("110%", "-10%")]
     public void Complement(Percentage percentage, Percentage complement)
         => percentage.Complement().Should().Be(complement);
 }
@@ -992,8 +1008,9 @@ public class Can_be_rounded
         actual.Should().Be(15m.Percent());
     }
 
-    [TestCase(27)]
-    [TestCase(28)]
+    [Test]
+    [Arguments(27)]
+    [Arguments(28)]
     public void up_to_26_digits(int decimals)
         => decimals.Invoking(Svo.Percentage.Round)
             .Should().Throw<ArgumentOutOfRangeException>()
@@ -1036,16 +1053,18 @@ public class Can_be_decreased
 
 public class Can_be_negated
 {
-    [TestCase("17.51%", "-17.51%")]
-    [TestCase("-17.51%", "17.51%")]
+    [Test]
+    [Arguments("17.51%", "-17.51%")]
+    [Arguments("-17.51%", "17.51%")]
     public void negate(Percentage negated, Percentage input)
         => (-input).Should().Be(negated);
 }
 
 public class Can_be_plussed
 {
-    [TestCase("-17.51%", "-17.51%")]
-    [TestCase("17.51%", "17.51%")]
+    [Test]
+    [Arguments("-17.51%", "-17.51%")]
+    [Arguments("17.51%", "17.51%")]
     public void plus(Percentage plussed, Percentage input)
         => (+input).Should().Be(plussed);
 }
@@ -1053,9 +1072,10 @@ public class Can_be_plussed
 
 public class Can_get
 {
-    [TestCase(-1, "-3%")]
-    [TestCase(0, "0%")]
-    [TestCase(+1, "10%")]
+    [Test]
+    [Arguments(-1, "-3%")]
+    [Arguments(0, "0%")]
+    [Arguments(+1, "10%")]
     public void Sign(int expected, Percentage percentage)
     {
         var actual = percentage.Sign();
@@ -1066,9 +1086,10 @@ public class Can_get
 
 public class Can_get_maximum_of
 {
-    [TestCase("12%", "12%", "5%")]
-    [TestCase("15%", "5%", "15%")]
-    [TestCase("12%", "12%", "12%")]
+    [Test]
+    [Arguments("12%", "12%", "5%")]
+    [Arguments("15%", "5%", "15%")]
+    [Arguments("12%", "12%", "12%")]
     public void two_values(Percentage max, Percentage p0, Percentage p1)
         => Percentage.Max(p0, p1).Should().Be(max);
 
@@ -1082,9 +1103,10 @@ public class Can_get_maximum_of
 
 public class Can_get_minimum_of
 {
-    [TestCase("5%", "12%", "5%")]
-    [TestCase("5%", "5%", "15%")]
-    [TestCase("5%", "5%", "5%")]
+    [Test]
+    [Arguments("5%", "12%", "5%")]
+    [Arguments("5%", "5%", "15%")]
+    [Arguments("5%", "5%", "5%")]
     public void two_values(Percentage min, Percentage p0, Percentage p1)
         => Percentage.Min(p0, p1).Should().Be(min);
 
@@ -1157,15 +1179,17 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase("17.51%", "17.51%")]
-    [TestCase("17.51", "17.51%")]
-    [TestCase("175.1‰", "17.51%")]
-    [TestCase(0.1751, "17.51%")]
-    [TestCase(1L, "100%")]
+    [Test]
+    [Arguments("17.51%", "17.51%")]
+    [Arguments("17.51", "17.51%")]
+    [Arguments("175.1‰", "17.51%")]
+    [Arguments(0.1751, "17.51%")]
+    [Arguments(1L, "100%")]
     public void System_Text_JSON_deserialization(object json, Percentage svo)
         => JsonTester.Read_System_Text_JSON<Percentage>(json).Round(4).Should().Be(svo);
 
-    [TestCase("17.51%", "17.51%")]
+    [Test]
+    [Arguments("17.51%", "17.51%")]
     public void System_Text_JSON_serialization(Percentage svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 
@@ -1183,17 +1207,20 @@ public class Supports_JSON_serialization
         => JsonTester.Write_System_Text_JSON(Percentage.MinValue).Should().Be("-792281625142643375935439503.35%");
 
 #endif
-    [TestCase("17.51", "17.51%")]
-    [TestCase("175.1‰", "17.51%")]
-    [TestCase(0.1751, "17.51%")]
+    [Test]
+    [Arguments("17.51", "17.51%")]
+    [Arguments("175.1‰", "17.51%")]
+    [Arguments(0.1751, "17.51%")]
     public void convention_based_deserialization(object json, Percentage svo)
         => JsonTester.Read<Percentage>(json).Round(4).Should().Be(svo);
 
-    [TestCase("17.51%", "17.51%")]
+    [Test]
+    [Arguments("17.51%", "17.51%")]
     public void convention_based_serialization(Percentage svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<Percentage>)
@@ -1253,17 +1280,19 @@ public class Is_Open_API_data_type
              format: "percentage",
              pattern: @"-?[0-9]+(\.[0-9]+)?%"));
 
-    [TestCase("17.51%")]
-    [TestCase("-4.1%")]
-    [TestCase("-0.1%")]
-    [TestCase("31%")]
+    [Test]
+    [Arguments("17.51%")]
+    [Arguments("-4.1%")]
+    [Arguments("-0.1%")]
+    [Arguments("31%")]
     public void pattern_matches(string input)
         => OpenApiDataType.FromType(typeof(Percentage))!.Matches(input).Should().BeTrue();
 }
 
 public class Debugger
 {
-    [TestCase("17.51%", "17.51%")]
+    [Test]
+    [Arguments("17.51%", "17.51%")]
     public void has_custom_display(object display, Percentage svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }

@@ -76,8 +76,9 @@ public class Is_equal_by_value
         l.Equals(r).Should().BeTrue();
     }
 
-    [TestCase(0.0, 0)]
-    [TestCase(1732.4, -22135344)]
+    [Test]
+    [Arguments(0.0, 0)]
+    [Arguments(1732.4, -22135344)]
     public void hash_code_is_value_based(Elo svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -93,8 +94,9 @@ public class Can_be_parsed
     public void from_elo_string()
         => Elo.Parse("1400", CultureInfo.InvariantCulture).Should().Be(Elo.Create(1400));
 
-    [TestCase("en-GB", "1732.4")]
-    [TestCase("es-EC", "1732,4")]
+    [Test]
+    [Arguments("en-GB", "1732.4")]
+    [Arguments("es-EC", "1732,4")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -196,11 +198,12 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '01732', format: '00000'");
     }
 
-    [TestCase("nl-BE", null, "1600,1", "1600,1")]
-    [TestCase("en-GB", null, "1600.1", "1600.1")]
-    [TestCase("nl-BE", "0000", "800", "0800")]
-    [TestCase("en-GB", "0000", "800", "0800")]
-    [TestCase("es-EC", "00000.0", "1700", "01700,0")]
+    [Test]
+    [Arguments("nl-BE", null, "1600,1", "1600,1")]
+    [Arguments("en-GB", null, "1600.1", "1600.1")]
+    [Arguments("nl-BE", "0000", "800", "0800")]
+    [Arguments("en-GB", "0000", "800", "0800")]
+    [Arguments("es-EC", "00000.0", "1700", "01700,0")]
     public void culture_dependent(CultureInfo culture, string format, string input, string formatted)
     {
         using (culture.Scoped())
@@ -392,17 +395,19 @@ public class Can_be_operated_on
 
 public class Is_Finite_only
 {
-    [TestCase(double.NaN)]
-    [TestCase(double.PositiveInfinity)]
-    [TestCase(double.NegativeInfinity)]
+    [Test]
+    [Arguments(double.NaN)]
+    [Arguments(double.PositiveInfinity)]
+    [Arguments(double.NegativeInfinity)]
     public void Can_not_create(double dbl)
         => dbl.Invoking(Elo.Create)
         .Should().Throw<ArgumentException>()
         .WithMessage("The number can not represent an Elo.*");
 
-    [TestCase(double.NaN)]
-    [TestCase(double.PositiveInfinity)]
-    [TestCase(double.NegativeInfinity)]
+    [Test]
+    [Arguments(double.NaN)]
+    [Arguments(double.PositiveInfinity)]
+    [Arguments(double.NegativeInfinity)]
     public void Can_not_parse(double dbl)
         => dbl.Invoking(dbl => Elo.Parse(dbl.ToString(CultureInfo.InvariantCulture)))
         .Should().Throw<FormatException>();
@@ -461,30 +466,35 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase("1600*", 1600.0)]
-    [TestCase("1700", 1700.0)]
-    [TestCase(1234L, 1234.0)]
-    [TestCase(1258.9, 1258.9)]
+    [Test]
+    [Arguments("1600*", 1600.0)]
+    [Arguments("1700", 1700.0)]
+    [Arguments(1234L, 1234.0)]
+    [Arguments(1258.9, 1258.9)]
     public void System_Text_JSON_deserialization(object json, Elo svo)
         => JsonTester.Read_System_Text_JSON<Elo>(json).Should().Be(svo);
 
-    [TestCase(1258.9, 1258.9)]
+    [Test]
+    [Arguments(1258.9, 1258.9)]
     public void System_Text_JSON_serialization(Elo svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("1600*", 1600.0)]
-    [TestCase("1700", 1700.0)]
-    [TestCase(1234L, 1234.0)]
-    [TestCase(1258.9, 1258.9)]
+    [Test]
+    [Arguments("1600*", 1600.0)]
+    [Arguments("1700", 1700.0)]
+    [Arguments(1234L, 1234.0)]
+    [Arguments(1258.9, 1258.9)]
     public void convention_based_deserialization(object json, Elo svo)
        => JsonTester.Read<Elo>(json).Should().Be(svo);
 
-    [TestCase(1258.9, 1258.9)]
+    [Test]
+    [Arguments(1258.9, 1258.9)]
     public void convention_based_serialization(Elo svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase(double.NaN, typeof(ArgumentOutOfRangeException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments(double.NaN, typeof(ArgumentOutOfRangeException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<Elo>)

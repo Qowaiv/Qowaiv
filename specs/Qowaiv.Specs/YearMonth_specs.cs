@@ -57,8 +57,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.YearMonth != new YearMonth(2000, 09)).Should().BeTrue();
 
-    [TestCase("2000-09", 665643119)]
-    [TestCase("2017-06", 665643862)]
+    [Test]
+    [Arguments("2000-09", 665643119)]
+    [Arguments("2017-06", 665643862)]
     public void hash_code_is_value_based(YearMonth svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -170,16 +171,18 @@ public class Can_not_be_related_to
 
 public class Can_not_be_created
 {
-    [TestCase(0)]
-    [TestCase(10000)]
+    [Test]
+    [Arguments(0)]
+    [Arguments(10000)]
     public void for_year_before_1_or_after_9999(int year)
         => year.Invoking(y => new YearMonth(y, 06))
         .Should().Throw<ArgumentOutOfRangeException>()
         .WithMessage("Year, and Month parameters describe an un-representable year-month.*")
         .And.ParamName.Should().Be("year");
 
-    [TestCase(0)]
-    [TestCase(13)]
+    [Test]
+    [Arguments(0)]
+    [Arguments(13)]
     public void for_month_smaller_than_1_or_bigger_than_12(int month)
         => month.Invoking(m => new YearMonth(2017, m))
         .Should().Throw<ArgumentOutOfRangeException>()
@@ -204,7 +207,8 @@ public class Can_not_be_parsed
 
 public class Can_be_parsed
 {
-    [TestCase("en", "2017-06")]
+    [Test]
+    [Arguments("en", "2017-06")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -282,8 +286,9 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '2017 Jun', format: 'yyyy MMM'");
     }
 
-    [TestCase("en-GB", "yyyy MMMM", "2017-06", "2017 June")]
-    [TestCase("nl-BE", "MMMM yyyy", "2017-06", "juni 2017")]
+    [Test]
+    [Arguments("en-GB", "yyyy MMMM", "2017-06", "2017 June")]
+    [Arguments("nl-BE", "MMMM yyyy", "2017-06", "juni 2017")]
     public void culture_dependent(CultureInfo culture, string format, YearMonth svo, string formatted)
     {
         using (culture.Scoped())
@@ -484,26 +489,31 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase("2017-06", "2017-06")]
+    [Test]
+    [Arguments("2017-06", "2017-06")]
     public void System_Text_JSON_deserialization(object json, YearMonth svo)
         => JsonTester.Read_System_Text_JSON<YearMonth>(json).Should().Be(svo);
 
-    [TestCase("2017-06", "2017-06")]
+    [Test]
+    [Arguments("2017-06", "2017-06")]
     public void System_Text_JSON_serialization(YearMonth svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
 
-    [TestCase("2017-06", "2017-06")]
+    [Test]
+    [Arguments("2017-06", "2017-06")]
     public void convention_based_deserialization(YearMonth svo, object json)
         => JsonTester.Read<YearMonth>(json).Should().Be(svo);
 
-    [TestCase("2017-06", "2017-06")]
+    [Test]
+    [Arguments("2017-06", "2017-06")]
     public void convention_based_serialization(object json, YearMonth svo)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017.15", typeof(FormatException))]
-    [TestCase(5L, typeof(InvalidOperationException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017.15", typeof(FormatException))]
+    [Arguments(5L, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
     {
         Func<YearMonth> read = () => JsonTester.Read<YearMonth>(json);
@@ -563,23 +573,26 @@ public class Is_Open_API_data_type
            format: "year-month",
            pattern: "[0-9]{4}-(0?[1-9]|1[0-2])"));
 
-    [TestCase("2017-6")]
-    [TestCase("2017-06")]
-    [TestCase("1900-10")]
-    [TestCase("1900-11")]
-    [TestCase("1979-12")]
+    [Test]
+    [Arguments("2017-6")]
+    [Arguments("2017-06")]
+    [Arguments("1900-10")]
+    [Arguments("1900-11")]
+    [Arguments("1979-12")]
     public void pattern_matches(string input)
         => OpenApiDataType.FromType(typeof(YearMonth))!.Matches(input).Should().BeTrue();
 
-    [TestCase("1900-00")]
-    [TestCase("1979-13")]
+    [Test]
+    [Arguments("1900-00")]
+    [Arguments("1979-13")]
     public void pattern_does_not_match(string input)
         => OpenApiDataType.FromType(typeof(YearMonth))!.Matches(input).Should().BeFalse();
 }
 
 public class Debugger
 {
-    [TestCase("2017-06", "2017-06")]
+    [Test]
+    [Arguments("2017-06", "2017-06")]
     public void has_custom_display(object display, YearMonth svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }

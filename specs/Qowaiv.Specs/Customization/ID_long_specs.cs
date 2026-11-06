@@ -18,8 +18,9 @@ public class Has_constant
     public void Empty_represent_default_value()
         => Int64BasedId.Empty.Should().Be(default);
 
-    [TestCase(true, 17)]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, 17)]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, Int64BasedId svo) => svo.HasValue.Should().Be(result);
 }
 
@@ -57,8 +58,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.Generated.Int64Id != Int64BasedId.Create(42)).Should().BeTrue();
 
-    [TestCase("", 0)]
-    [TestCase(17, 665630146)]
+    [Test]
+    [Arguments("", 0)]
+    [Arguments(17, 665630146)]
     public void hash_code_is_value_based(Int64BasedId svo, int hashCode)
     {
         using (Hash.WithoutRandomizer())
@@ -117,9 +119,10 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: 'PREFIX3ADE68B1', format: 'X'");
     }
 
-    [TestCase(null, "PREFIX987654321")]
-    [TestCase("", "PREFIX987654321")]
-    [TestCase("X", "PREFIX3ADE68B1")]
+    [Test]
+    [Arguments(null, "PREFIX987654321")]
+    [Arguments("", "PREFIX987654321")]
+    [Arguments("X", "PREFIX3ADE68B1")]
     public void with_current_thread_culture_as_default(string? format, string formattted)
     {
         using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
@@ -181,15 +184,17 @@ public class Is_comparable
 #if NET10_0_OR_GREATER
 public class Supports_JSON_serialization
 {
-    [TestCase("", null)]
-    [TestCase(null, null)]
-    [TestCase(123456789L, 123456789L)]
-    [TestCase("123456789", 123456789L)]
+    [Test]
+    [Arguments("", null)]
+    [Arguments(null, null)]
+    [Arguments(123456789L, 123456789L)]
+    [Arguments("123456789", 123456789L)]
     public void System_Text_JSON_deserialization(object json, Int64BasedId svo)
         => JsonTester.Read_System_Text_JSON<Int64BasedId>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase(123456789L, 123456789)]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments(123456789L, 123456789)]
     public void System_Text_JSON_serialization(Int64BasedId svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 }
@@ -248,8 +253,9 @@ public class Supports_type_conversion
     public void to_long()
         => Converting.To<long>().From(Svo.Generated.Int64Id).Should().Be(987654321L);
 
-    [TestCase("8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
-    [TestCase("PREF17")]
+    [Test]
+    [Arguments("8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
+    [Arguments("PREF17")]
     public void from_invalid_string(string str)
     {
         Func<Int64BasedId> convert = () => Converting.From(str).To<Int64BasedId>();
@@ -265,9 +271,10 @@ public class Supports_type_conversion
             .WithMessage("Cast from long to Specs_Generated.Int64BasedId is not valid.");
     }
 
-    [TestCase(typeof(int))]
-    [TestCase(typeof(long))]
-    [TestCase(typeof(string))]
+    [Test]
+    [Arguments(typeof(int))]
+    [Arguments(typeof(long))]
+    [Arguments(typeof(string))]
     public void to(Type type)
         => Converting.To(type).From<Int64BasedId>().Should().BeTrue();
 }
@@ -320,8 +327,9 @@ public class Supports_XML_serialization
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("PREFIX42", "42")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("PREFIX42", "42")]
     public void has_custom_display(object display, Int64BasedId id)
         => id.Should().HaveDebuggerDisplay(display);
 }

@@ -2,20 +2,21 @@ namespace Diagnostics.Contracts.Conditional_specs;
 
 public class Is_decorated_with
 {
-    [TestCase(typeof(CollectionMutationAttribute))]
-    [TestCase(typeof(FluentSyntaxAttribute))]
-    [TestCase(typeof(ImpureAttribute))]
-    [TestCase(typeof(InheritableAttribute))]
-    [TestCase(typeof(MutableAttribute))]
-    [TestCase(typeof(EmptyTypeAttribute))]
-    [TestCase(typeof(EmptyClassAttribute))]
-    [TestCase(typeof(EmptyEnumAttribute))]
-    [TestCase(typeof(EmptyInterfaceAttribute))]
-    [TestCase(typeof(EmptyStructAttribute))]
-    [TestCase(typeof(EmptyTestClassAttribute))]
-    [TestCase(typeof(EmptyTestEnumAttribute))]
-    [TestCase(typeof(EmptyTestInterfaceAttribute))]
-    [TestCase(typeof(EmptyTestStructAttribute))]
+    [Test]
+    [Arguments(typeof(CollectionMutationAttribute))]
+    [Arguments(typeof(FluentSyntaxAttribute))]
+    [Arguments(typeof(ImpureAttribute))]
+    [Arguments(typeof(InheritableAttribute))]
+    [Arguments(typeof(MutableAttribute))]
+    [Arguments(typeof(EmptyTypeAttribute))]
+    [Arguments(typeof(EmptyClassAttribute))]
+    [Arguments(typeof(EmptyEnumAttribute))]
+    [Arguments(typeof(EmptyInterfaceAttribute))]
+    [Arguments(typeof(EmptyStructAttribute))]
+    [Arguments(typeof(EmptyTestClassAttribute))]
+    [Arguments(typeof(EmptyTestEnumAttribute))]
+    [Arguments(typeof(EmptyTestInterfaceAttribute))]
+    [Arguments(typeof(EmptyTestStructAttribute))]
     public void condtional_CONTRACTS_FULL(Type attribute)
         => attribute.Should().BeDecoratedWith<ConditionalAttribute>()
             .Which.ConditionString.Should().Be("CONTRACTS_FULL");

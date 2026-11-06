@@ -2,30 +2,35 @@ namespace @TSvo_specs;
 
 public class With_domain_logic
 {
-    [TestCase("")]
-    [TestCase("?")]
+    [Test]
+    [Arguments("")]
+    [Arguments("?")]
     public void has_length_zero_for_empty_and_unknown(@TSvo svo)
         => svo.Length.Should().Be(0);
 
-    [TestCase(-17, "svoValue")]
+    [Test]
+    [Arguments(-17, "svoValue")]
     public void has_length(int length, @TSvo svo)
         => svo.Length.Should().Be(length);
 
-    [TestCase(false, "svoValue")]
-    [TestCase(false, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "svoValue")]
+    [Arguments(false, "?")]
+    [Arguments(true, "")]
     public void IsEmpty_returns(bool result, @TSvo svo)
         => svo.IsEmpty().Should().Be(result);
 
-    [TestCase(false, "svoValue")]
-    [TestCase(true, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "svoValue")]
+    [Arguments(true, "?")]
+    [Arguments(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, @TSvo svo)
         => svo.IsEmptyOrUnknown().Should().Be(result);
 
-    [TestCase(false, "svoValue")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(false, "svoValue")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void IsUnknown_returns(bool result, @TSvo svo)
         => svo.IsUnknown().Should().Be(result);
 }
@@ -33,13 +38,15 @@ public class With_domain_logic
 [Obsolete("Will be dropped")]
 public class Is_valid_for
 {
-    [TestCase("?")]
-    [TestCase("unknown")]
+    [Test]
+    [Arguments("?")]
+    [Arguments("unknown")]
     public void strings_representing_unknown(string input)
         => @TSvo.IsValid(input).Should().BeTrue();
 
-    [TestCase("svoValue", "nl")]
-    [TestCase("svoValue", "nl")]
+    [Test]
+    [Arguments("svoValue", "nl")]
+    [Arguments("svoValue", "nl")]
     public void strings_representing_SVO(string input, CultureInfo culture)
         => @TSvo.IsValid(input, culture).Should().BeTrue();
 }
@@ -107,8 +114,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.@TSvo != @TSvo.Parse("different")).Should().BeTrue();
 
-    [TestCase("", 0)]
-    [TestCase("svoValue", 2)]
+    [Test]
+    [Arguments("", 0)]
+    [Arguments("svoValue", 2)]
     public void hash_code_is_value_based(@TSvo svo, int hash)
     {
         using (Hash.WithoutRandomizer())
@@ -132,7 +140,8 @@ public class Can_be_parsed
     public void from_question_mark_represents_Unknown()
         => @TSvo.Parse("?").Should().Be(@TSvo.Unknown);
 
-    [TestCase("en", "svoValue")]
+    [Test]
+    [Arguments("en", "svoValue")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -218,8 +227,9 @@ public class Has_custom_formatting
         Assert.AreEqual("Unit Test Formatter, value: 'svoValue', format: 'SomeFormat'", formatted);
     }
 
-    [TestCase("en-GB", null, "svoValue", "SvoFormat")]
-    [TestCase("nl-BE", "f", "svoValue", "SvoFormat")]
+    [Test]
+    [Arguments("en-GB", null, "svoValue", "SvoFormat")]
+    [Arguments("nl-BE", "f", "svoValue", "SvoFormat")]
     public void culture_dependent(CultureInfo culture, string format, @TSvo svo, string formatted)
     {
         using (culture.Scoped())
@@ -298,10 +308,11 @@ public class Is_comparable
         (left >= right).Should().BeTrue();
     }
 
-    [TestCase("", "svoValue")]
-    [TestCase("?", "svoValue")]
-    [TestCase("svoValue", "")]
-    [TestCase("svoValue", "?")]
+    [Test]
+    [Arguments("", "svoValue")]
+    [Arguments("?", "svoValue")]
+    [Arguments("svoValue", "")]
+    [Arguments("svoValue", "?")]
     public void by_operators_for_empty_or_unknown_always_false(@TSvo l, @TSvo r)
     {
         (l < r).Should().BeFalse();
@@ -381,17 +392,20 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
-    [TestCase("?", "unknown")]
+    [Test]
+    [Arguments("?", "unknown")]
     public void convention_based_deserialization(@TSvo svo, object json)
         => JsonTester.Read<@TSvo>(json).Should().Be(svo);
 
-    [TestCase(null, "")]
+    [Test]
+    [Arguments(null, "")]
     public void convention_based_serialization(object json, @TSvo svo)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
-    [TestCase(5L, typeof(InvalidCastException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
+    [Arguments(5L, typeof(InvalidCastException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
     {
         Func<@TSvo> read = () => JsonTester.Read<@TSvo>(json);
@@ -451,16 +465,18 @@ public class Is_Open_API_data_type
            format: "format",
            pattern: null));
 
-    [TestCase("svoValue")]
+    [Test]
+    [Arguments("svoValue")]
     public void pattern_matches(string input)
         => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(@TSvo))!.Matches(input).Should().BeTrue();
 }
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("{unknown}", "?")]
-    [TestCase("DebuggerDisplay", "svoValue")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("{unknown}", "?")]
+    [Arguments("DebuggerDisplay", "svoValue")]
     public void has_custom_display(object display, @TSvo svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }

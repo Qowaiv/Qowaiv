@@ -48,8 +48,9 @@ public class Formats
         collection.Format("Value: '{0}'", args).Should().Be("Value: ''");
     }
 
-    [TestCase("{{", "{")]
-    [TestCase("}}", "}")]
+    [Test]
+    [Arguments("{{", "{")]
+    [Arguments("}}", "}")]
     public void with_escaped_placehodlers(string format, string formatted)
     {
         var collection = new FormattingArgumentsCollection();
@@ -105,9 +106,10 @@ public class Does_not_support_formats
     public void with_index_not_being_negative()
         => "{-1}".Invoking(format => Collection.Format(format)).Should().Throw<FormatException>();
 
-    [TestCase("{")]
-    [TestCase("{0")]
-    [TestCase("}")]
+    [Test]
+    [Arguments("{")]
+    [Arguments("{0")]
+    [Arguments("}")]
     public void with_mallformed_placeholders(string format)
         => format.Invoking(f => Collection.Format(f)).Should().Throw<FormatException>();
 

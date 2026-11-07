@@ -21,6 +21,8 @@ public static class TUnitTypeConversions
     /// </param>
     /// <remarks>
     /// Only scans public non-static methods on public  non-static classes.
+    /// Upcast conversions and conversions that can be done with a specified
+    /// conversion are skipped as TUNit handles them already.
     /// </remarks>
     [Pure]
     public static ISet<TypeConversion> Scan(Assembly assembly) => new HashSet<TypeConversion>(Guard.NotNull(assembly)
@@ -41,7 +43,7 @@ public static class TUnitTypeConversions
             for (var i = 0; i < values.Length; i++)
             {
                 if (values[i]?.GetType() is { } source &&
-                    new TypeConversion(source, parameters[i]) is { IsUpcast: false } conversion)
+                    new TypeConversion(source, parameters[i]) is { SupportedByTUnit: false } conversion)
                     yield return conversion;
             }
         }
@@ -50,13 +52,13 @@ public static class TUnitTypeConversions
     [Pure]
     private static IEnumerable<MethodInfo> TestMethods(Type type) => type.GetMethods().Where(IsSupported);
 
-    /// <summary>Public non-static methods only.</summary>
+    /// <summary>Non-static methods only.</summary>
     [Pure]
-    private static bool IsSupported(MethodInfo method) => method is { IsPublic: true, IsStatic: false };
+    private static bool IsSupported(MethodInfo method) => method is { IsStatic: false };
 
-    /// <summary>Public non-static, non-abstract classes only.</summary>
+    /// <summary>Non-static, non-abstract classes only.</summary>
     [Pure]
-    private static bool IsSupported(Type type) => type is { IsClass: true, IsPublic: true, IsAbstract: false };
+    private static bool IsSupported(Type type) => type is { IsClass: true, IsAbstract: false };
 
     [Pure]
     private static object?[]? Values(Attribute attr) => attr
@@ -69,4 +71,9 @@ public static class TUnitTypeConversions
     [
         ..method.GetParameters().Select(p => p.ParameterType.GetNotNullableType())
     ];
+
+    extension(TypeConversion conversion)
+    {
+        private bool SupportedByTUnit => conversion.IsUpcast || conversion.Cast is not null;
+    }
 }

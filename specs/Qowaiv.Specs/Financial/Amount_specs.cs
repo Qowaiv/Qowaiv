@@ -587,7 +587,7 @@ public class Supports_type_conversion
         [Arguments(1234.56, "1234.56")]
         [Arguments(1234L, "1234.00")]
         public void convention_based_deserialization(object json, Amount svo)
-          => JsonTester.Read<Amount>(json).Round(4).Should().Be(svo);
+            => JsonTester.Read<Amount>(json).Round(4).Should().Be(svo);
 
         [Test]
         [Arguments(1234.56, 1234.56)]

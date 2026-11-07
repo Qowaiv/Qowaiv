@@ -771,35 +771,6 @@ void IXmlSerializable.WriteXml(XmlWriter writer)
 
 ## Qowaiv SVO options
 
-### Hashing
-To support hashing (`object.GetHashCode()`) the hash code should always return 
-the same value for the same object. As SVOs are equal by value, the hash
-is calculated based on the underlying value.
-
-For security measures, however, this is only true within the same app domain.
-By having different hashes for the same value for different app domains, there
-is good defense against hash flooding.
-
-For test purposes, it is possible to generate a hashcode without using the randomizer:
-``` C#
-using (Hash.WithoutRandomizer())
-{
-    var hash = Hash.Code("QOWAIV string");
-    hash.Should().Be(1211348473);
-}
-```
-
-`Hash.Code()` also supports a fluent syntax, to get hashcodes for complex objects:
-``` C#
-public int GetHashCode()
-    => Hash.Code(Prop)
-    .And(Other)
-    .And(Collection); // takes all items into account
-```
-
-This works _out-of-the-box_ because `Hash` can be implicitly cast to an `int`.
-Calling `Hash.GetHashCode()` is not allowed, just use the implicit cast.
-
 ### Sortable
 SVOs support sorting. So, LINQ expressions like `OrderBy()` and `OrderByDescending()`
 work out-of-the-box, just like `Array.Sort()`, and `List.Sort()`. However, the

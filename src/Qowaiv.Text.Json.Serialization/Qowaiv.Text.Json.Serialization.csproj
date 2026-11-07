@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/package-json.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>Qowaiv.Text.Json.Serialization</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>5.0.0</Version>
+    <PackageReleaseNotes>
+      <![CDATA[
+v5.0.0
+- Only support net6.0 and net8.0. (BREAKING)
+v4.2.0
+- Multi-targeted to netstandard2.0, .NET 5.0, and .NET 6.0. #12
+]]>
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>

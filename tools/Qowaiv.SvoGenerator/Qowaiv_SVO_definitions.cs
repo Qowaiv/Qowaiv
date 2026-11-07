@@ -1,5 +1,5 @@
 using AwesomeAssertions;
-using NUnit.Framework;
+using TUnit.Core;
 using Qowaiv;
 using Qowaiv.CodeGeneration;
 using Qowaiv.IO;
@@ -14,48 +14,49 @@ public class Generation_of
 {
     private static readonly string Root = @"c:\code\Qowaiv";
 
-    [TestCase("Date", typeof(DateTime), "date", "Qowaiv", SvoFeatures.Continuous ^ SvoFeatures.Field)]
-    [TestCase("DateSpan", typeof(ulong), "date span", "Qowaiv", SvoFeatures.Continuous ^ SvoFeatures.EqualsSvo)]
-    [TestCase("EmailAddress", typeof(string), "email address", "Qowaiv", SvoFeatures.Default)]
-    [TestCase("HouseNumber", typeof(int), "house number", "Qowaiv", SvoFeatures.Default | SvoFeatures.ComparisonOperators)]
-    [TestCase("LocalDateTime", typeof(DateTime), "local date time", "Qowaiv", SvoFeatures.Continuous ^ SvoFeatures.Field)]
-    [TestCase("Month", typeof(byte), "month", "Qowaiv", SvoFeatures.Default)]
-    [TestCase("MonthSpan", typeof(int), "month span", "Qowaiv", SvoFeatures.Continuous)]
-    [TestCase("Percentage", typeof(decimal), "percentage", "Qowaiv", SvoFeatures.Continuous)]
-    [TestCase("PostalCode", typeof(string), "postal code", "Qowaiv", SvoFeatures.Default)]
-    [TestCase("Sex", typeof(byte), "sex", "Qowaiv", SvoFeatures.Default)]
-    [TestCase("Uuid", typeof(Guid), "UUID", "Qowaiv", SvoFeatures.Default ^ SvoFeatures.IsUnknown)]
-    [TestCase("WeekDate", typeof(Date), "week date", "Qowaiv", SvoFeatures.Continuous ^ SvoFeatures.Field ^ SvoFeatures.ISerializable)]
-    [TestCase("Year", typeof(short), "year", "Qowaiv", SvoFeatures.Default)]
-    [TestCase("YearMonth", typeof(int), "year-month", "Qowaiv", SvoFeatures.Continuous)]
-    [TestCase("YesNo", typeof(byte), "yes-no", "Qowaiv", SvoFeatures.Default)]
+    [Test]
+    [Arguments("Date", typeof(DateTime), "date", "Qowaiv", SvoFeatures.Continuous ^ SvoFeatures.Field)]
+    [Arguments("DateSpan", typeof(ulong), "date span", "Qowaiv", SvoFeatures.Continuous ^ SvoFeatures.EqualsSvo)]
+    [Arguments("EmailAddress", typeof(string), "email address", "Qowaiv", SvoFeatures.Default)]
+    [Arguments("HouseNumber", typeof(int), "house number", "Qowaiv", SvoFeatures.Default | SvoFeatures.ComparisonOperators)]
+    [Arguments("LocalDateTime", typeof(DateTime), "local date time", "Qowaiv", SvoFeatures.Continuous ^ SvoFeatures.Field)]
+    [Arguments("Month", typeof(byte), "month", "Qowaiv", SvoFeatures.Default)]
+    [Arguments("MonthSpan", typeof(int), "month span", "Qowaiv", SvoFeatures.Continuous)]
+    [Arguments("Percentage", typeof(decimal), "percentage", "Qowaiv", SvoFeatures.Continuous)]
+    [Arguments("PostalCode", typeof(string), "postal code", "Qowaiv", SvoFeatures.Default)]
+    [Arguments("Sex", typeof(byte), "sex", "Qowaiv", SvoFeatures.Default)]
+    [Arguments("Uuid", typeof(Guid), "UUID", "Qowaiv", SvoFeatures.Default ^ SvoFeatures.IsUnknown)]
+    [Arguments("WeekDate", typeof(Date), "week date", "Qowaiv", SvoFeatures.Continuous ^ SvoFeatures.Field ^ SvoFeatures.ISerializable)]
+    [Arguments("Year", typeof(short), "year", "Qowaiv", SvoFeatures.Default)]
+    [Arguments("YearMonth", typeof(int), "year-month", "Qowaiv", SvoFeatures.Continuous)]
+    [Arguments("YesNo", typeof(byte), "yes-no", "Qowaiv", SvoFeatures.Default)]
 
-    [TestCase("Amount", typeof(decimal), "amount", "Qowaiv.Financial", SvoFeatures.Continuous, "QowaivMessages.FormatExceptionFinancialAmount")]
-    [TestCase("BusinessIdentifierCode", typeof(string), "BIC", "Qowaiv.Financial", SvoFeatures.Default)]
-    [TestCase("Currency", typeof(string), "currency", "Qowaiv.Financial", SvoFeatures.Default)]
-    [TestCase("InternationalBankAccountNumber", typeof(string), "IBAN", "Qowaiv.Financial", SvoFeatures.Default)]
-    [TestCase("Money", typeof(decimal), "money", "Qowaiv.Financial", (SvoFeatures.Continuous)
+    [Arguments("Amount", typeof(decimal), "amount", "Qowaiv.Financial", SvoFeatures.Continuous, "QowaivMessages.FormatExceptionFinancialAmount")]
+    [Arguments("BusinessIdentifierCode", typeof(string), "BIC", "Qowaiv.Financial", SvoFeatures.Default)]
+    [Arguments("Currency", typeof(string), "currency", "Qowaiv.Financial", SvoFeatures.Default)]
+    [Arguments("InternationalBankAccountNumber", typeof(string), "IBAN", "Qowaiv.Financial", SvoFeatures.Default)]
+    [Arguments("Money", typeof(decimal), "money", "Qowaiv.Financial", (SvoFeatures.Continuous)
         ^ SvoFeatures.ISerializable
         ^ SvoFeatures.EqualsSvo
         ^ SvoFeatures.Field
         ^ SvoFeatures.GetHashCode)]
 
-    [TestCase("CasRegistryNumber", typeof(long), "CAS Registry Number", "Qowaiv.Chemistry", SvoFeatures.Default)]
+    [Arguments("CasRegistryNumber", typeof(long), "CAS Registry Number", "Qowaiv.Chemistry", SvoFeatures.Default)]
 
-    [TestCase("Country", typeof(string), "country", "Qowaiv.Globalization", SvoFeatures.Default)]
+    [Arguments("Country", typeof(string), "country", "Qowaiv.Globalization", SvoFeatures.Default)]
 
-    [TestCase("StreamSize", typeof(long), "stream size", "Qowaiv.IO", SvoFeatures.Continuous ^ SvoFeatures.Field ^ SvoFeatures.IFormattable)]
+    [Arguments("StreamSize", typeof(long), "stream size", "Qowaiv.IO", SvoFeatures.Continuous ^ SvoFeatures.Field ^ SvoFeatures.IFormattable)]
 
-    [TestCase("EnergyLabel", typeof(int), "EU energy label", "Qowaiv.Sustainability", SvoFeatures.Default)]
+    [Arguments("EnergyLabel", typeof(int), "EU energy label", "Qowaiv.Sustainability", SvoFeatures.Default)]
 
-    [TestCase("Elo", typeof(double), "elo", "Qowaiv.Statistics", SvoFeatures.Continuous)]
+    [Arguments("Elo", typeof(double), "elo", "Qowaiv.Statistics", SvoFeatures.Continuous)]
 
-    [TestCase("Fraction", typeof(long), "fraction", "Qowaiv.Mathematics", (SvoFeatures.Continuous)
+    [Arguments("Fraction", typeof(long), "fraction", "Qowaiv.Mathematics", (SvoFeatures.Continuous)
         ^ SvoFeatures.ISerializable
         ^ SvoFeatures.EqualsSvo
         ^ SvoFeatures.Field)]
 
-    [TestCase("InternetMediaType", typeof(string), "Internet media type", "Qowaiv.Web", SvoFeatures.All)]
+    [Arguments("InternetMediaType", typeof(string), "Internet media type", "Qowaiv.Web", SvoFeatures.All)]
     public void Qowaiv(
         string name,
         Type underlying,
@@ -73,7 +74,8 @@ public class Generation_of
             .Should().BeTrue();
     }
 
-    [TestCase("Timestamp", typeof(ulong), "timestamp", "Qowaiv.Sql", SvoFeatures.Continuous)]
+    [Test]
+    [Arguments("Timestamp", typeof(ulong), "timestamp", "Qowaiv.Sql", SvoFeatures.Continuous)]
     public void Qowaiv_DataClient(string name, Type underlying, string fulleName, string ns, SvoFeatures features, string? formatExceptionMessage = null)
     {
         var path = $@"{Root}\src\Qowaiv.Data.SqlClient\Generated\{name}.generated.cs";

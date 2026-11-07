@@ -20,45 +20,51 @@ public class With_domain_logic
             Month.December,
         ]);
 
-    [TestCase(true, "February")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "February")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, Month svo)
         => svo.HasValue.Should().Be(result);
 
-    [TestCase(true, "February")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "February")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsKnown_is(bool result, Month svo)
         => svo.IsKnown.Should().Be(result);
 
-    [TestCase(false, "February")]
-    [TestCase(false, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "February")]
+    [Arguments(false, "?")]
+    [Arguments(true, "")]
     public void IsEmpty_returns(bool result, Month svo)
         => svo.IsEmpty().Should().Be(result);
 
-    [TestCase(false, "February")]
-    [TestCase(true, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "February")]
+    [Arguments(true, "?")]
+    [Arguments(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, Month svo)
         => svo.IsEmptyOrUnknown().Should().Be(result);
 
-    [TestCase(false, "February")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(false, "February")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void IsUnknown_returns(bool result, Month svo)
         => svo.IsUnknown().Should().Be(result);
 }
 
 public class Days
 {
-    [TestCase(-1, "", 1999)]
-    [TestCase(-1, "February", "?")]
-    [TestCase(28, "February", 1999)]
-    [TestCase(29, "February", 2020)]
-    [TestCase(31, "January", 2020)]
-    [TestCase(30, "November", 2020)]
+    [Test]
+    [Arguments(-1, "", 1999)]
+    [Arguments(-1, "February", "?")]
+    [Arguments(28, "February", 1999)]
+    [Arguments(29, "February", 2020)]
+    [Arguments(31, "January", 2020)]
+    [Arguments(30, "November", 2020)]
     public void per_year(int days, Month month, Year year)
         => month.Days(year).Should().Be(days);
 }
@@ -146,15 +152,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.Month != Month.December).Should().BeTrue();
 
-    [TestCase("", 0)]
-    [TestCase("February", 665630161)]
-    public void hash_code_is_value_based(Month svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    [Test]
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.Month, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed
@@ -171,9 +171,10 @@ public class Can_be_parsed
     public void from_question_mark_represents_Unknown()
         => Month.Parse("?").Should().Be(Month.Unknown);
 
-    [TestCase("en", "February")]
-    [TestCase("en", "02")]
-    [TestCase("en", "2")]
+    [Test]
+    [Arguments("en", "February")]
+    [Arguments("en", "02")]
+    [Arguments("en", "2")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -260,13 +261,14 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: 'February', format: 'f'");
     }
 
-    [TestCase("en-GB", null, "February", "February")]
-    [TestCase("en-GB", "s", "February", "Feb")]
-    [TestCase("en-GB", "M", "February", "2")]
-    [TestCase("en-GB", "m", "February", "02")]
-    [TestCase("nl-BE", "f", "February", "februari")]
-    [TestCase("en-GB", "M", "?", "?")]
-    [TestCase("en-GB", "m", "", "")]
+    [Test]
+    [Arguments("en-GB", null, "February", "February")]
+    [Arguments("en-GB", "s", "February", "Feb")]
+    [Arguments("en-GB", "M", "February", "2")]
+    [Arguments("en-GB", "m", "February", "02")]
+    [Arguments("nl-BE", "f", "February", "februari")]
+    [Arguments("en-GB", "M", "?", "?")]
+    [Arguments("en-GB", "m", "", "")]
     public void culture_dependent(CultureInfo culture, string format, Month svo, string expected)
     {
         using (culture.Scoped())
@@ -341,10 +343,11 @@ public class Is_comparable
         (left >= right).Should().BeTrue();
     }
 
-    [TestCase("", "February")]
-    [TestCase("?", "February")]
-    [TestCase("February", "")]
-    [TestCase("February", "?")]
+    [Test]
+    [Arguments("", "February")]
+    [Arguments("?", "February")]
+    [Arguments("February", "")]
+    [Arguments("February", "?")]
     public void by_operators_for_empty_or_unknown_always_false(Month l, Month r)
     {
         (l < r).Should().BeFalse();
@@ -426,35 +429,40 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase(null, null)]
-    [TestCase("?", "?")]
-    [TestCase(2.0, "February")]
-    [TestCase(2L, "February")]
-    [TestCase("feb", "February")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("?", "?")]
+    [Arguments(2.0, "February")]
+    [Arguments(2L, "February")]
+    [Arguments("feb", "February")]
     public void System_Text_JSON_deserialization(object json, Month svo)
         => JsonTester.Read_System_Text_JSON<Month>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("Feb", "Feb")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("Feb", "Feb")]
     public void System_Text_JSON_serialization(Month svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("?", "?")]
-    [TestCase(2.0, "February")]
-    [TestCase(2L, "February")]
-    [TestCase("feb", "February")]
+    [Test]
+    [Arguments("?", "?")]
+    [Arguments(2.0, "February")]
+    [Arguments(2L, "February")]
+    [Arguments("feb", "February")]
     public void convention_based_deserialization(object json, Month svo)
         => JsonTester.Read<Month>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("Feb", "Feb")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("Feb", "Feb")]
     public void convention_based_serialization(Month svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
-    [TestCase(-1L, typeof(ArgumentOutOfRangeException))]
-    [TestCase(long.MaxValue, typeof(ArgumentOutOfRangeException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
+    [Arguments(-1L, typeof(ArgumentOutOfRangeException))]
+    [Arguments(long.MaxValue, typeof(ArgumentOutOfRangeException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<Month>)
@@ -517,9 +525,10 @@ public class Is_Open_API_data_type
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("{unknown}", "?")]
-    [TestCase("February (02)", "February")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("{unknown}", "?")]
+    [Arguments("February (02)", "February")]
     public void has_custom_display(object display, Month svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }

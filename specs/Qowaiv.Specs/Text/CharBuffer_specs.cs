@@ -2,16 +2,17 @@ namespace Text.CharBuffer_specs;
 
 public class Unify
 {
-    [TestCase('.')]
-    [TestCase('-')]
-    [TestCase('_')]
-    [TestCase((char)0x00B7)] // middle dot
-    [TestCase((char)0x22C5)] // dot operator
-    [TestCase((char)0x2022)] // bullet
-    [TestCase((char)0x2012)] // figure dash / minus
-    [TestCase((char)0x2013)] // en dash
-    [TestCase((char)0x2014)] // em dash
-    [TestCase((char)0x2015)] // horizontal bar
+    [Test]
+    [Arguments('.')]
+    [Arguments('-')]
+    [Arguments('_')]
+    [Arguments((char)0x00B7)] // middle dot
+    [Arguments((char)0x22C5)] // dot operator
+    [Arguments((char)0x2022)] // bullet
+    [Arguments((char)0x2012)] // figure dash / minus
+    [Arguments((char)0x2013)] // en dash
+    [Arguments((char)0x2014)] // em dash
+    [Arguments((char)0x2015)] // horizontal bar
     public void removes_markup_diacritics_and_converts_to_uppercases(char ch)
     {
         ReadOnlySpan<char> span = $"{ch} Héllo,{ch}world!  ";

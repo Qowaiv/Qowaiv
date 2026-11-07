@@ -4,8 +4,9 @@ namespace Extensions.Double_specs;
 
 public class ToDecimal
 {
-    [TestCase(1.2345, "1.234")]
-    [TestCase(-1.2345, "-1.234")]
+    [Test]
+    [Arguments(1.2345, "1.234")]
+    [Arguments(-1.2345, "-1.234")]
     public void Floating_points_with_rounding(double dbl, decimal dec)
         => dbl.ToDecimal(3, DecimalRounding.ToEven).Should().Be(dec);
 

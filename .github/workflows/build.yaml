@@ -72,17 +72,17 @@ jobs:
           /o:"qowaiv" \
           /d:sonar.token="$SONAR_TOKEN" \
           /d:sonar.host.url="https://sonarcloud.io" \
-          /d:sonar.cs.cobertura.reportsPaths="**/coverage.cobertura.xml" \
-          /d:sonar.cs.vstest.reportsPaths="**/*.trx"
+          /d:sonar.cs.cobertura.reportsPaths="TestResults/merged/*.cobertura.xml" \
+          /d:sonar.cs.vstest.reportsPaths="TestResults/*.trx"
 
       - name: Build
         run: dotnet build qowaiv.slnx --configuration Release
 
       - name: Test
         run: |
-          dotnet test qowaiv.slnx --configuration Release --no-build \
-          --logger "trx;LogFilePrefix=test-results" \
-          --collect:"XPlat Code Coverage;Format=cobertura"
+          dotnet test --solution qowaiv.slnx --configuration Release --no-build \
+          --report-trx \
+          --coverage --coverage-output-format cobertura
 
       - name: Stop SonarCloud scanner
         if: ${{ !cancelled() && steps.sonar-begin.outcome == 'success' }}
@@ -98,5 +98,5 @@ jobs:
         uses: dorny/test-reporter@d1b5dff021aa968b288b02285a8bf47471c5928a # v3.2.0
         with:
           name: Unit test results
-          path: "**/*.trx"
+          path: "TestResults/*.trx"
           reporter: dotnet-trx

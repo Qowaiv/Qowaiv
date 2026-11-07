@@ -2,7 +2,8 @@ namespace TestTools.ConvertTo_specs;
 
 public class From_type
 {
-    [TestCase(typeof(string))]
+    [Test]
+    [Arguments(typeof(string))]
     public void tests_CanConvertTo(Type type)
         => Converting.To(type).From<int>().Should().BeTrue();
 }

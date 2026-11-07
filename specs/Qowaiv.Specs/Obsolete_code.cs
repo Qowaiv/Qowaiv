@@ -12,6 +12,11 @@ public class Will_be_dropped
     [Test]
     public void double_Percent_humanizer()
         => 12.00m.Percent().Should().NotBe(0m.Percent());
+
+    [Test]
+    public void Hash_WithoutRandomizer()
+        => true.Invoking(_ => Hash.WithoutRandomizer())
+            .Should().Throw<NotSupportedException>();
 }
 
 [Obsolete("Will become private when the next major version is released.")]

@@ -1,8 +1,9 @@
 using Qowaiv.Humanizer;
+using TUnit.Core.Executors;
 
 namespace Formatting.String_interpolation_specs;
 
-[SetCulture("en-US")]
+[Culture("en-US")]
 public class Formats
 {
     [Test]

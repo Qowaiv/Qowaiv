@@ -21,12 +21,14 @@ public class Cryptographic_seed_can_be_created
 
 public class With_domain_logic
 {
-    [TestCase(true, "Ken sent me!")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "Ken sent me!")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, Secret svo) => svo.HasValue.Should().Be(result);
 
-    [TestCase(false, "Ken sent me!")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "Ken sent me!")]
+    [Arguments(true, "")]
     public void IsEmpty_returns(bool result, Secret svo)
         => svo.IsEmpty().Should().Be(result);
 
@@ -99,7 +101,7 @@ public class Supports_type_conversion_from
         => Converting.From(string.Empty).To<Secret>().Should().Be(Secret.Empty);
 
     [Test]
-    public void @string()
+    public void _string()
         => Converting.From("Ken sent me!").To<Secret>().Value()
         .Should().Be("Ken sent me!");
 }
@@ -110,8 +112,9 @@ public class Does_not_support_type_conversion_to
     public void converted_is_null()
         => Converting.ToString().From(Svo.Secret).Should().BeNull();
 
-    [TestCase(typeof(string))]
-    [TestCase(typeof(byte[]))]
+    [Test]
+    [Arguments(typeof(string))]
+    [Arguments(typeof(byte[]))]
     public void can_convert_to_always_return_false(Type type)
         => new SecretTypeConverter().CanConvertTo(type).Should().BeFalse();
 }
@@ -153,7 +156,8 @@ public class ToString
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("Ken sent me!", "Ken sent me!")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("Ken sent me!", "Ken sent me!")]
     public void has_custom_display(object display, Secret svo) => svo.Should().HaveDebuggerDisplay(display);
 }

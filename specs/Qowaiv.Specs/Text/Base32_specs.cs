@@ -10,19 +10,20 @@ public class ToString
     public void EmptyArray_StringEmpty()
         => Base32.ToString([]).Should().Be(string.Empty);
 
-    [TestCase("BQ", 12)]
-    [TestCase("BQRA", 12, 34)]
-    [TestCase("QOWAI", 131, 172, 4)]
-    [TestCase("BQRDQTQ", 12, 34, 56, 78)]
-    [TestCase("BQRDQTS2", 12, 34, 56, 78, 90)]
-    [TestCase("BQRDQTS2N4", 12, 34, 56, 78, 90, 111)]
-    [TestCase("BQRDQTS2N55Q", 12, 34, 56, 78, 90, 111, 123)]
-    [TestCase("BQRDQTS2N55YM", 12, 34, 56, 78, 90, 111, 123, 134)]
-    [TestCase("BQRDQTS2N55YNEI", 12, 34, 56, 78, 90, 111, 123, 134, 145)]
-    [TestCase("BQRDQTS2N55YNEM4", 12, 34, 56, 78, 90, 111, 123, 134, 145, 156)]
-    [TestCase("BQRDQTS2N55YNEM4U4", 12, 34, 56, 78, 90, 111, 123, 134, 145, 156, 167)]
-    [TestCase("BQRDQTS2N55YNEM4U6ZA", 12, 34, 56, 78, 90, 111, 123, 134, 145, 156, 167, 178)]
-    [TestCase("THEQUICKBROWNFOXJUMBSOVERTHELAZYDOG2345674", 153, 201, 010, 032, 074, 012, 093, 102, 149, 215, 077, 024, 025, 058, 164, 140, 206, 069, 131, 056, 027, 141, 173, 243, 190, 255)]
+    [Test]
+    [Arguments("BQ", 12)]
+    [Arguments("BQRA", 12, 34)]
+    [Arguments("QOWAI", 131, 172, 4)]
+    [Arguments("BQRDQTQ", 12, 34, 56, 78)]
+    [Arguments("BQRDQTS2", 12, 34, 56, 78, 90)]
+    [Arguments("BQRDQTS2N4", 12, 34, 56, 78, 90, 111)]
+    [Arguments("BQRDQTS2N55Q", 12, 34, 56, 78, 90, 111, 123)]
+    [Arguments("BQRDQTS2N55YM", 12, 34, 56, 78, 90, 111, 123, 134)]
+    [Arguments("BQRDQTS2N55YNEI", 12, 34, 56, 78, 90, 111, 123, 134, 145)]
+    [Arguments("BQRDQTS2N55YNEM4", 12, 34, 56, 78, 90, 111, 123, 134, 145, 156)]
+    [Arguments("BQRDQTS2N55YNEM4U4", 12, 34, 56, 78, 90, 111, 123, 134, 145, 156, 167)]
+    [Arguments("BQRDQTS2N55YNEM4U6ZA", 12, 34, 56, 78, 90, 111, 123, 134, 145, 156, 167, 178)]
+    [Arguments("THEQUICKBROWNFOXJUMBSOVERTHELAZYDOG2345674", 153, 201, 010, 032, 074, 012, 093, 102, 149, 215, 077, 024, 025, 058, 164, 140, 206, 069, 131, 056, 027, 141, 173, 243, 190, 255)]
     public void bytes(string base32, params int[] data)
     {
         var bytes = data.Select(v => (byte)v).ToArray();
@@ -39,19 +40,20 @@ public class ToString
 
 public class TryGetBytes_from
 {
-    [TestCase("BQ", 12)]
-    [TestCase("BQRA", 12, 34)]
-    [TestCase("QOWAI", 131, 172, 4)]
-    [TestCase("BQRDQTQ", 12, 34, 56, 78)]
-    [TestCase("BQRDQTS2", 12, 34, 56, 78, 90)]
-    [TestCase("BQRDQTS2N4", 12, 34, 56, 78, 90, 111)]
-    [TestCase("BQRDQTS2N55Q", 12, 34, 56, 78, 90, 111, 123)]
-    [TestCase("BQRDQTS2N55YM", 12, 34, 56, 78, 90, 111, 123, 134)]
-    [TestCase("BQRDQTS2N55YNEI", 12, 34, 56, 78, 90, 111, 123, 134, 145)]
-    [TestCase("BQRDQTS2N55YNEM4", 12, 34, 56, 78, 90, 111, 123, 134, 145, 156)]
-    [TestCase("BQRDQTS2N55YNEM4U4", 12, 34, 56, 78, 90, 111, 123, 134, 145, 156, 167)]
-    [TestCase("BQRDQTS2N55YNEM4U6ZA", 12, 34, 56, 78, 90, 111, 123, 134, 145, 156, 167, 178)]
-    [TestCase("THEQUICKBROWNFOXJUMBSOVERTHELAZYDOG2345674", 153, 201, 010, 032, 074, 012, 093, 102, 149, 215, 077, 024, 025, 058, 164, 140, 206, 069, 131, 056, 027, 141, 173, 243, 190, 255)]
+    [Test]
+    [Arguments("BQ", 12)]
+    [Arguments("BQRA", 12, 34)]
+    [Arguments("QOWAI", 131, 172, 4)]
+    [Arguments("BQRDQTQ", 12, 34, 56, 78)]
+    [Arguments("BQRDQTS2", 12, 34, 56, 78, 90)]
+    [Arguments("BQRDQTS2N4", 12, 34, 56, 78, 90, 111)]
+    [Arguments("BQRDQTS2N55Q", 12, 34, 56, 78, 90, 111, 123)]
+    [Arguments("BQRDQTS2N55YM", 12, 34, 56, 78, 90, 111, 123, 134)]
+    [Arguments("BQRDQTS2N55YNEI", 12, 34, 56, 78, 90, 111, 123, 134, 145)]
+    [Arguments("BQRDQTS2N55YNEM4", 12, 34, 56, 78, 90, 111, 123, 134, 145, 156)]
+    [Arguments("BQRDQTS2N55YNEM4U4", 12, 34, 56, 78, 90, 111, 123, 134, 145, 156, 167)]
+    [Arguments("BQRDQTS2N55YNEM4U6ZA", 12, 34, 56, 78, 90, 111, 123, 134, 145, 156, 167, 178)]
+    [Arguments("THEQUICKBROWNFOXJUMBSOVERTHELAZYDOG2345674", 153, 201, 010, 032, 074, 012, 093, 102, 149, 215, 077, 024, 025, 058, 164, 140, 206, 069, 131, 056, 027, 141, 173, 243, 190, 255)]
     public void String_returns(string str, params int[] expected)
     {
         var bytes = expected.Select(v => (byte)v).ToArray();

@@ -4,12 +4,14 @@ namespace UUID_specs;
 
 public class With_domain_logic
 {
-    [TestCase(true, "Qowaiv_SVOLibrary_GUIA")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "Qowaiv_SVOLibrary_GUIA")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, Uuid svo) => svo.HasValue.Should().Be(result);
 
-    [TestCase(false, "Qowaiv_SVOLibrary_GUIA")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "Qowaiv_SVOLibrary_GUIA")]
+    [Arguments(true, "")]
     public void IsEmpty_returns(bool result, Uuid svo) => svo.IsEmpty().Should().Be(result);
 }
 
@@ -85,19 +87,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.Uuid != Uuid.Parse("6D775128-6365-4A96-BDE8-0972CE6CB0BC")).Should().BeTrue();
 
-    [TestCase("", 0)]
-#if NET48
-    [TestCase("Qowaiv_SVOLibrary_GUIA", -917906459)]
-#else
-    [TestCase("Qowaiv_SVOLibrary_GUIA", -994020281)]
-#endif
-    public void hash_code_is_value_based(Uuid svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    [Test]
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.Uuid, Uuid.NewUuid(), default).Should().BeConsistent();
 }
 
 public class Can_be_parsed
@@ -135,8 +127,9 @@ public class Can_be_parsed
 
     public class from_Base64
     {
-        [TestCase("Qowaiv_SVOLibrary_GUIA=")]
-        [TestCase("Qowaiv_SVOLibrary_GUIA==")]
+        [Test]
+        [Arguments("Qowaiv_SVOLibrary_GUIA=")]
+        [Arguments("Qowaiv_SVOLibrary_GUIA==")]
         public void with_equal_sign_suffix(string s)
             => Uuid.Parse(s).Should().Be(Svo.Uuid);
 
@@ -172,8 +165,9 @@ public class Can_be_parsed
 #pragma warning restore QW0025 // Use compliant UUID literals
     }
 
-    [TestCase("en", "Qowaiv_SVOLibrary_GUIA")]
-    [TestCase("en", "8A1A8C42-D2FF-E254-E26E-B6ABCBF19420")]
+    [Test]
+    [Arguments("en", "Qowaiv_SVOLibrary_GUIA")]
+    [Arguments("en", "8A1A8C42-D2FF-E254-E26E-B6ABCBF19420")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -372,21 +366,22 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}', format: 'B'");
     }
 
-    [TestCase("en-GB", null, "Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
-    [TestCase("en-GB", "S", "Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
-    [TestCase("en-GB", "H", "Qowaiv_SVOLibrary_GUIA", "IKGBVCX72JKOFYTOW2V4X4MUEA")]
-    [TestCase("en-GB", "h", "Qowaiv_SVOLibrary_GUIA", "ikgbvcx72jkofytow2v4x4muea")]
-    [TestCase("en-GB", "N", "Qowaiv_SVOLibrary_GUIA", "8A1A8C42D2FFE254E26EB6ABCBF19420")]
-    [TestCase("en-GB", "n", "Qowaiv_SVOLibrary_GUIA", "8a1a8c42d2ffe254e26eb6abcbf19420")]
-    [TestCase("en-GB", "D", "Qowaiv_SVOLibrary_GUIA", "8A1A8C42-D2FF-E254-E26E-B6ABCBF19420")]
-    [TestCase("en-GB", "d", "Qowaiv_SVOLibrary_GUIA", "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
-    [TestCase("nl-BE", "B", "Qowaiv_SVOLibrary_GUIA", "{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}")]
-    [TestCase("nl-BE", "b", "Qowaiv_SVOLibrary_GUIA", "{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}")]
-    [TestCase("nl-BE", "B", "Qowaiv_SVOLibrary_GUIA", "{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}")]
-    [TestCase("nl-BE", "b", "Qowaiv_SVOLibrary_GUIA", "{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}")]
-    [TestCase("nl-BE", "P", "Qowaiv_SVOLibrary_GUIA", "(8A1A8C42-D2FF-E254-E26E-B6ABCBF19420)")]
-    [TestCase("nl-BE", "p", "Qowaiv_SVOLibrary_GUIA", "(8a1a8c42-d2ff-e254-e26e-b6abcbf19420)")]
-    [TestCase("nl-BE", "X", "Qowaiv_SVOLibrary_GUIA", "{0x8A1A8C42,0xD2FF,0xE254,{0xE2,0x6E,0xB6,0xAB,0xCB,0xF1,0x94,0x20}}")]
+    [Test]
+    [Arguments("en-GB", null, "Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
+    [Arguments("en-GB", "S", "Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
+    [Arguments("en-GB", "H", "Qowaiv_SVOLibrary_GUIA", "IKGBVCX72JKOFYTOW2V4X4MUEA")]
+    [Arguments("en-GB", "h", "Qowaiv_SVOLibrary_GUIA", "ikgbvcx72jkofytow2v4x4muea")]
+    [Arguments("en-GB", "N", "Qowaiv_SVOLibrary_GUIA", "8A1A8C42D2FFE254E26EB6ABCBF19420")]
+    [Arguments("en-GB", "n", "Qowaiv_SVOLibrary_GUIA", "8a1a8c42d2ffe254e26eb6abcbf19420")]
+    [Arguments("en-GB", "D", "Qowaiv_SVOLibrary_GUIA", "8A1A8C42-D2FF-E254-E26E-B6ABCBF19420")]
+    [Arguments("en-GB", "d", "Qowaiv_SVOLibrary_GUIA", "8a1a8c42-d2ff-e254-e26e-b6abcbf19420")]
+    [Arguments("nl-BE", "B", "Qowaiv_SVOLibrary_GUIA", "{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}")]
+    [Arguments("nl-BE", "b", "Qowaiv_SVOLibrary_GUIA", "{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}")]
+    [Arguments("nl-BE", "B", "Qowaiv_SVOLibrary_GUIA", "{8A1A8C42-D2FF-E254-E26E-B6ABCBF19420}")]
+    [Arguments("nl-BE", "b", "Qowaiv_SVOLibrary_GUIA", "{8a1a8c42-d2ff-e254-e26e-b6abcbf19420}")]
+    [Arguments("nl-BE", "P", "Qowaiv_SVOLibrary_GUIA", "(8A1A8C42-D2FF-E254-E26E-B6ABCBF19420)")]
+    [Arguments("nl-BE", "p", "Qowaiv_SVOLibrary_GUIA", "(8a1a8c42-d2ff-e254-e26e-b6abcbf19420)")]
+    [Arguments("nl-BE", "X", "Qowaiv_SVOLibrary_GUIA", "{0x8A1A8C42,0xD2FF,0xE254,{0xE2,0x6E,0xB6,0xAB,0xCB,0xF1,0x94,0x20}}")]
     public void culture_independent(CultureInfo culture, string format, Uuid svo, string expected)
     {
         using (culture.Scoped())
@@ -511,26 +506,31 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase("", null)]
-    [TestCase(null, null)]
-    [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
+    [Test]
+    [Arguments("", null)]
+    [Arguments(null, null)]
+    [Arguments("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
     public void System_Text_JSON_deserialization(object json, Uuid svo)
         => JsonTester.Read_System_Text_JSON<Uuid>(json).Should().Be(svo);
-    [TestCase(null, null)]
-    [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
     public void System_Text_JSON_serialization(Uuid svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
+    [Test]
+    [Arguments("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
     public void convention_based_deserialization(object json, Uuid svo)
        => JsonTester.Read<Uuid>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
     public void convention_based_serialization(Uuid svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<Uuid>)
@@ -592,8 +592,9 @@ public class Is_Open_API_data_type
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("Qowaiv_SVOLibrary_GUIA", "Qowaiv_SVOLibrary_GUIA")]
     public void has_custom_display(object display, Uuid svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }

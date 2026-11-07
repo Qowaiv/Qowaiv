@@ -10,14 +10,16 @@ public class Has_constant
 
 public class Guards
 {
-    [TestCase(10_000)]
-    [TestCase(20_000)]
+    [Test]
+    [Arguments(10_000)]
+    [Arguments(20_000)]
     public void year_not_to_exceed_9999(int years)
         => years.Invoking(MonthSpan.FromYears)
         .Should().Throw<ArgumentOutOfRangeException>();
 
-    [TestCase(10_000 * 12)]
-    [TestCase(200_000)]
+    [Test]
+    [Arguments(10_000 * 12)]
+    [Arguments(200_000)]
     public void months_not_to_exceed_9999(int months)
         => months.Invoking(MonthSpan.FromMonths)
         .Should().Throw<ArgumentOutOfRangeException>();
@@ -64,15 +66,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (MonthSpan.FromMonths(69) != MonthSpan.MinValue).Should().BeTrue();
 
-    [TestCase("0Y+0M", 0)]
-    [TestCase("5Y+9M", 665630102)]
-    public void hash_code_is_value_based(MonthSpan svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    [Test]
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.MonthSpan, default).Should().BeConsistent();
 
     [Test]
     public void formatted_and_unformatted_are_equal()
@@ -210,13 +206,15 @@ public class Can_be_transformed
         span.Should().Be(MonthSpan.FromMonths(68));
     }
 
-    [TestCase(-17, 17)]
-    [TestCase(+17, 17)]
+    [Test]
+    [Arguments(-17, 17)]
+    [Arguments(+17, 17)]
     public void Abs(MonthSpan span, MonthSpan abs) => span.Abs().Should().Be(abs);
 
-    [TestCase(-2, -1)]
-    [TestCase(+0, +0)]
-    [TestCase(+7, +1)]
+    [Test]
+    [Arguments(-2, -1)]
+    [Arguments(+0, +0)]
+    [Arguments(+7, +1)]
     public void Sign(MonthSpan span, int sign) => span.Sign().Should().Be(sign);
 
     [Test]
@@ -307,25 +305,27 @@ public class Can_modify
 
 public class Can_subtract
 {
-    [TestCase("2020-04-30", "1710-02-01", "310Y+2M")]
-    [TestCase("2020-04-30", "2020-04-01", 00)]
-    [TestCase("2020-04-30", "2020-03-31", 01)]
-    [TestCase("2020-01-01", "2019-01-02", 11)]
-    [TestCase("2020-01-01", "2019-03-13", 09)]
-    [TestCase("2020-01-01", "2019-03-01", 10)]
-    [TestCase("2020-01-01", "2020-02-20", -1)]
-    [TestCase("2020-01-01", "2023-02-20", "-3Y-1M")]
+    [Test]
+    [Arguments("2020-04-30", "1710-02-01", "310Y+2M")]
+    [Arguments("2020-04-30", "2020-04-01", 00)]
+    [Arguments("2020-04-30", "2020-03-31", 01)]
+    [Arguments("2020-01-01", "2019-01-02", 11)]
+    [Arguments("2020-01-01", "2019-03-13", 09)]
+    [Arguments("2020-01-01", "2019-03-01", 10)]
+    [Arguments("2020-01-01", "2020-02-20", -1)]
+    [Arguments("2020-01-01", "2023-02-20", "-3Y-1M")]
     public void two_Dates(Date d1, Date d2, MonthSpan expected)
         => MonthSpan.Subtract(d1, d2).Should().Be(expected);
 
 #if NET10_0_OR_GREATER
-    [TestCase("2020-04-30", "1710-02-01", "310Y+2M")]
-    [TestCase("2020-04-30", "2020-04-01", 00)]
-    [TestCase("2020-04-30", "2020-03-31", 01)]
-    [TestCase("2020-01-01", "2019-01-02", 11)]
-    [TestCase("2020-01-01", "2019-03-13", 09)]
-    [TestCase("2020-01-01", "2019-03-01", 10)]
-    [TestCase("2020-01-01", "2020-02-20", -1)]
+    [Test]
+    [Arguments("2020-04-30", "1710-02-01", "310Y+2M")]
+    [Arguments("2020-04-30", "2020-04-01", 00)]
+    [Arguments("2020-04-30", "2020-03-31", 01)]
+    [Arguments("2020-01-01", "2019-01-02", 11)]
+    [Arguments("2020-01-01", "2019-03-13", 09)]
+    [Arguments("2020-01-01", "2019-03-01", 10)]
+    [Arguments("2020-01-01", "2020-02-20", -1)]
     public void two_DateOnlys(Date d1, Date d2, MonthSpan expected)
         => MonthSpan.Subtract((DateOnly)d1, (DateOnly)d2).Should().Be(expected);
 #endif
@@ -444,28 +444,33 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase(69d, "5Y+9M")]
-    [TestCase(69L, "5Y+9M")]
-    [TestCase("5Y+9M", "5Y+9M")]
+    [Test]
+    [Arguments(69d, "5Y+9M")]
+    [Arguments(69L, "5Y+9M")]
+    [Arguments("5Y+9M", "5Y+9M")]
     public void System_Text_JSON_deserialization(object json, MonthSpan svo)
         => JsonTester.Read_System_Text_JSON<MonthSpan>(json).Should().Be(svo);
 
-    [TestCase("5Y+9M", "5Y+9M")]
+    [Test]
+    [Arguments("5Y+9M", "5Y+9M")]
     public void System_Text_JSON_serialization(MonthSpan svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase(69L, "5Y+9M")]
-    [TestCase("5Y+9M", "5Y+9M")]
+    [Test]
+    [Arguments(69L, "5Y+9M")]
+    [Arguments("5Y+9M", "5Y+9M")]
     public void convention_based_deserialization(object json, MonthSpan svo)
         => JsonTester.Read<MonthSpan>(json).Should().Be(svo);
 
-    [TestCase("5Y+9M", "5Y+9M")]
+    [Test]
+    [Arguments("5Y+9M", "5Y+9M")]
     public void convention_based_serialization(MonthSpan svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
-    [TestCase(true, typeof(InvalidOperationException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
+    [Arguments(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json.Invoking(JsonTester.Read<MonthSpan>)
             .Should().Throw<Exception>().Which.Should().BeOfType(exceptionType);

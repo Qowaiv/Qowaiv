@@ -18,14 +18,14 @@ jobs:
           cache-dependency-path: '**/packages.lock.json'
       - name: Generate coverage report
         run: |
-          dotnet test qowaiv.slnx \
+          dotnet test --solution qowaiv.slnx \
           --configuration Release \
-          --collect:"XPlat Code Coverage;Format=cobertura"
+          --coverage --coverage-output-format cobertura
       - name: Merge coverage reports
         run: |
           dotnet tool install dotnet-reportgenerator-globaltool --version 5.5.12 --tool-path ./.report-generator
           ./.report-generator/reportgenerator \
-          -reports:"**/TestResults/**/coverage.cobertura.xml" \
+          -reports:"TestResults/merged/*.cobertura.xml" \
           -targetdir:"coverage" \
           -reporttypes:Cobertura
       - name: Publish coverage report to coveralls.io

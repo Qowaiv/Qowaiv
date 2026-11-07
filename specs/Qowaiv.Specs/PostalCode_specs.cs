@@ -2,43 +2,50 @@ namespace Globalization.Postal_code_specs;
 
 public class With_domain_logic
 {
-    [TestCase(true, "H0H0H0")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "H0H0H0")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, PostalCode svo) => svo.HasValue.Should().Be(result);
 
-    [TestCase(true, "H0H0H0")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "H0H0H0")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsKnown_is(bool result, PostalCode svo) => svo.IsKnown.Should().Be(result);
 
-    [TestCase("")]
-    [TestCase("?")]
+    [Test]
+    [Arguments("")]
+    [Arguments("?")]
     public void has_length_zero_for_empty_and_unknown(PostalCode svo)
         => svo.Length.Should().Be(0);
 
-    [TestCase(3, "123")]
-    [TestCase(5, "12345")]
-    [TestCase(6, "H0H0H0")]
+    [Test]
+    [Arguments(3, "123")]
+    [Arguments(5, "12345")]
+    [Arguments(6, "H0H0H0")]
     public void has_length(int length, PostalCode svo)
         => svo.Length.Should().Be(length);
 
-    [TestCase(false, "H0H0H0")]
-    [TestCase(false, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "H0H0H0")]
+    [Arguments(false, "?")]
+    [Arguments(true, "")]
     public void IsEmpty_returns(bool result, PostalCode svo)
         => svo.IsEmpty().Should().Be(result);
 
 
-    [TestCase(false, "H0H0H0")]
-    [TestCase(true, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "H0H0H0")]
+    [Arguments(true, "?")]
+    [Arguments(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, PostalCode svo)
         => svo.IsEmptyOrUnknown().Should().Be(result);
 
-    [TestCase(false, "H0H0H0")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(false, "H0H0H0")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void IsUnknown_returns(bool result, PostalCode svo)
         => svo.IsUnknown().Should().Be(result);
 }
@@ -49,11 +56,13 @@ public class Is_valid_for
 
     private static readonly IEnumerable<Country> CountriesWithoutPostalCodeSystem = PostalCodeCountryInfo.GetCountriesWithoutPostalCode();
 
-    [TestCaseSource(nameof(ValidForCountry))]
+    [Test]
+    [MethodDataSource(nameof(ValidForCountry))]
     public void country(Country country, PostalCode postalCode)
         => postalCode.IsValid(country).Should().BeTrue();
 
-    [TestCaseSource(nameof(CountriesWithoutPostalCodeSystem))]
+    [Test]
+    [MethodDataSource(nameof(CountriesWithoutPostalCodeSystem))]
     public void countries_without_postal_code_when_empty(Country country)
         => PostalCode.Empty.IsValid(country).Should().BeTrue();
 
@@ -84,7 +93,8 @@ public class Is_not_valid_for
     public void country_with_different_system()
         => Svo.PostalCode.IsValid(Country.NL).Should().BeFalse();
 
-    [TestCaseSource(nameof(CountriesWithoutPostalCodeSystem))]
+    [Test]
+    [MethodDataSource(nameof(CountriesWithoutPostalCodeSystem))]
     public void countries_without_postal_code(Country country)
         => PostalCode.Parse("1234").IsValid(country).Should().BeFalse();
 }
@@ -130,8 +140,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.PostalCode != PostalCode.Parse("different")).Should().BeTrue();
 
-    [TestCase("")]
-    [TestCase("H0H0H0")]
+    [Test]
+    [Arguments("")]
+    [Arguments("H0H0H0")]
     public void hash_code_is_value_based(string svo)
     {
         var first = PostalCode.Parse(svo);
@@ -155,7 +166,8 @@ public class Can_be_parsed
     public void from_question_mark_represents_Unknown()
         => PostalCode.Parse("?").Should().Be(PostalCode.Unknown);
 
-    [TestCase("en", "H0H0H0")]
+    [Test]
+    [Arguments("en", "H0H0H0")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -206,9 +218,10 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: 'H0H0H0', format: 'SomeFormat'");
     }
 
-    [TestCase("en-GB", null, "H0H0H0", "H0H0H0")]
-    [TestCase("nl-BE", "NL", "2624DP", "2624 DP")]
-    [TestCase("es-ES", "AD", "765", "AD-765")]
+    [Test]
+    [Arguments("en-GB", null, "H0H0H0", "H0H0H0")]
+    [Arguments("nl-BE", "NL", "2624DP", "2624 DP")]
+    [Arguments("es-ES", "AD", "765", "AD-765")]
     public void culture_dependent(CultureInfo culture, string format, PostalCode svo, string formatted)
     {
         using (culture.Scoped())
@@ -217,7 +230,8 @@ public class Has_custom_formatting
         }
     }
 
-    [TestCaseSource(nameof(FormattedPostalCodes))]
+    [Test]
+    [MethodDataSource(nameof(FormattedPostalCodes))]
     public void per_country(Country country, PostalCode svo, string expected)
         => svo.ToString(country).Should().Be(expected);
 
@@ -225,7 +239,8 @@ public class Has_custom_formatting
     public void for_59_countries()
         => PostalCodeCountryInfo.GetCountriesWithFormatting().Should().HaveCount(59);
 
-    [TestCaseSource(nameof(FormattedPostalCodes))]
+    [Test]
+    [MethodDataSource(nameof(FormattedPostalCodes))]
     public void with_formatting(Country country, PostalCode code, string formatted)
         => code.ToString(country).Should().Be(formatted);
 
@@ -386,28 +401,33 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase("?", "?")]
-    [TestCase(null, null)]
-    [TestCase("1234", "1234")]
+    [Test]
+    [Arguments("?", "?")]
+    [Arguments(null, null)]
+    [Arguments("1234", "1234")]
     public void System_Text_JSON_deserialization(object json, PostalCode svo)
         => JsonTester.Read_System_Text_JSON<PostalCode>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("1234", "1234")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("1234", "1234")]
     public void System_Text_JSON_based_serialization(PostalCode svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("?", "?")]
-    [TestCase("1234", "1234")]
+    [Test]
+    [Arguments("?", "?")]
+    [Arguments("1234", "1234")]
     public void convention_based_deserialization(object json, PostalCode svo)
       => JsonTester.Read<PostalCode>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("1234", "1234")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("1234", "1234")]
     public void convention_based_serialization(PostalCode svo, string json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("01234567890", typeof(FormatException))]
+    [Test]
+    [Arguments("01234567890", typeof(FormatException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json.Invoking(JsonTester.Read<PostalCode>)
             .Should().Throw<Exception>()
@@ -562,16 +582,18 @@ public class For_10_countries
     public void only_1_postal_code_exists()
         => PostalCodeCountryInfo.GetCountriesWithSingleValue().Should().BeEquivalentTo(SingleCodes.Keys);
 
-    [TestCaseSource(nameof(SingleCodes))]
+    [Test]
+    [MethodDataSource(nameof(SingleCodes))]
     public void with_single_value(KeyValuePair<Country, string> kvp)
         => PostalCodeCountryInfo.GetInstance(kvp.Key).GetSingleValue().Should().Be(kvp.Value);
 }
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("{unknown}", "?")]
-    [TestCase("H0H0H0", "H0H0H0")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("{unknown}", "?")]
+    [Arguments("H0H0H0", "H0H0H0")]
     public void has_custom_display(object display, PostalCode svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }

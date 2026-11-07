@@ -39,8 +39,9 @@ public class Formattable
 
 public class Convertable
 {
-    [TestCase("")]
-    [TestCase(null)]
+    [Test]
+    [Arguments("")]
+    [Arguments((object?)null)]
     public void From_empty_strings_with_casting(string? str)
     {
         Namespace ns = str;

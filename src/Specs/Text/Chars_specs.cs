@@ -5,87 +5,100 @@ namespace Text.Chars_specs;
 
 public class Is
 {
-    [TestCase('0')]
-    [TestCase('1')]
-    [TestCase('8')]
-    [TestCase('9')]
+    [Test]
+    [Arguments('0')]
+    [Arguments('1')]
+    [Arguments('8')]
+    [Arguments('9')]
     public void _0_9(char c) => c.Is_0_9.Should().BeTrue();
 
-    [TestCase('a')]
-    [TestCase('b')]
-    [TestCase('y')]
-    [TestCase('z')]
+    [Test]
+    [Arguments('a')]
+    [Arguments('b')]
+    [Arguments('y')]
+    [Arguments('z')]
     public void _a_z(char c) => c.Is_a_z.Should().BeTrue();
 
-    [TestCase('A')]
-    [TestCase('B')]
-    [TestCase('Y')]
-    [TestCase('Z')]
+    [Test]
+    [Arguments('A')]
+    [Arguments('B')]
+    [Arguments('Y')]
+    [Arguments('Z')]
     public void _A_Z(char c) => c.Is_A_Z.Should().BeTrue();
 
-    [TestCase('_')]
-    [TestCase('-')]
-    [TestCase('.')]
-    [TestCase(' ')]
-    [TestCase('\t')]
-    [TestCase('\u00A0')]
-    [TestCase('\u00B7')]
-    [TestCase('\u2013')]
-    [TestCase('\u2022')]
+    [Test]
+    [Arguments('_')]
+    [Arguments('-')]
+    [Arguments('.')]
+    [Arguments(' ')]
+    [Arguments('\t')]
+    [Arguments('\u00A0')]
+    [Arguments('\u00B7')]
+    [Arguments('\u2013')]
+    [Arguments('\u2022')]
     public void Markup(char c) => c.Is_Markup.Should().BeTrue();
 
-    [TestCase('0')]
-    [TestCase('A')]
+    [Test]
+    [Arguments('0')]
+    [Arguments('A')]
     public void IBAN(char c) => c.Is_IBAN.Should().BeTrue();
 
-    [TestCase('\u007F')]
-    [TestCase('A')]
+    [Test]
+    [Arguments('\u007F')]
+    [Arguments('A')]
     public void ASCII(char c) => c.Is_ASCII.Should().BeTrue();
 }
 
 public class Is_Not
 {
-    [TestCase((char)('0' - 1))]
-    [TestCase((char)('9' + 1))]
-    [TestCase('A')]
-    [TestCase('a')]
+    [Test]
+    [Arguments((char)('0' - 1))]
+    [Arguments((char)('9' + 1))]
+    [Arguments('A')]
+    [Arguments('a')]
     public void _0_9(char c) => c.Is_0_9.Should().BeFalse();
 
-    [TestCase((char)('a' - 1))]
-    [TestCase((char)('z' + 1))]
-    [TestCase('A')]
-    [TestCase('9')]
-    [TestCase('!')]
+    [Test]
+    [Arguments((char)('a' - 1))]
+    [Arguments((char)('z' + 1))]
+    [Arguments('A')]
+    [Arguments('9')]
+    [Arguments('!')]
     public void _a_z(char c) => c.Is_a_z.Should().BeFalse();
 
-    [TestCase((char)('A' - 1))]
-    [TestCase((char)('Z' + 1))]
-    [TestCase('a')]
-    [TestCase('9')]
-    [TestCase('!')]
+    [Test]
+    [Arguments((char)('A' - 1))]
+    [Arguments((char)('Z' + 1))]
+    [Arguments('a')]
+    [Arguments('9')]
+    [Arguments('!')]
     public void _A_Z(char c) => c.Is_A_Z.Should().BeFalse();
 
-    [TestCase('a')]
-    [TestCase('0')]
-    [TestCase('\u007F')]
-    [TestCase('\u2202')]
+    [Test]
+    [Arguments('a')]
+    [Arguments('0')]
+    [Arguments('\u007F')]
+    [Arguments('\u2202')]
     public void Markup(char c) => c.Is_Markup.Should().BeFalse();
 
-    [TestCase('a')]
-    [TestCase('z')]
-    [TestCase('-')]
+    [Test]
+    [Arguments('a')]
+    [Arguments('z')]
+    [Arguments('-')]
     public void IBAN(char c) => c.Is_IBAN.Should().BeFalse();
 
-    [TestCase('\u0080')]
-    [TestCase('\u0141')]
+    [Test]
+    [Arguments('\u0080')]
+    [Arguments('\u0141')]
     public void ASCII(char c) => c.Is_ASCII.Should().BeFalse();
 }
 
 public class Non_ASCII
 {
-    [TestCase('\u0141')] // 'A' when truncated to a byte.
-    [TestCase('\u015F')] // '_' when truncated to a byte.
-    [TestCase('\u012E')] // '.' when truncated to a byte.
+    [Test]
+    [Arguments('\u0141')] // 'A' when truncated to a byte.
+    [Arguments('\u015F')] // '_' when truncated to a byte.
+    [Arguments('\u012E')] // '.' when truncated to a byte.
     public void is_not_categorized(char c)
     {
         c.Categories.Should().Be(default);

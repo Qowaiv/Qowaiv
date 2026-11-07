@@ -10,7 +10,8 @@ public class All
 
     public static FileInfo[] Resources => Root.GetFiles("*.resx", SearchOption.AllDirectories);
 
-    [TestCaseSource(nameof(Resources))]
+    [Test]
+    [MethodDataSource(nameof(Resources))]
     public void IsOrded(FileInfo file)
     {
         using var read = file.OpenRead();

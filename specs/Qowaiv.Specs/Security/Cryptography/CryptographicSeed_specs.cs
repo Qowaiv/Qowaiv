@@ -24,13 +24,15 @@ public class Not_computed
 
 public class With_domain_logic
 {
-    [TestCase(true, "Qowaig==")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "Qowaig==")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, CryptographicSeed svo)
       => svo.HasValue.Should().Be(result);
 
-    [TestCase(false, "Qowaig==")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "Qowaig==")]
+    [Arguments(true, "")]
     public void IsEmpty_returns(bool result, CryptographicSeed svo)
         => svo.IsEmpty().Should().Be(result);
 
@@ -141,7 +143,7 @@ public class Supports_type_conversion_from
         => Converting.From(string.Empty).To<CryptographicSeed>().Should().Be(CryptographicSeed.Empty);
 
     [Test]
-    public void @string()
+    public void _string()
         => Converting.From("Qowaig==").To<CryptographicSeed>().Value()
         .Should().Be("Qowaig==");
 
@@ -157,8 +159,9 @@ public class Does_not_support_type_conversion_to
     public void converted_is_null()
         => Converting.ToString().From(Svo.CryptographicSeed).Should().BeNull();
 
-    [TestCase(typeof(string))]
-    [TestCase(typeof(byte[]))]
+    [Test]
+    [Arguments(typeof(string))]
+    [Arguments(typeof(byte[]))]
     public void can_convert_to_always_return_false(Type type)
         => new CryptographicSeedTypeConverter().CanConvertTo(type).Should().BeFalse();
 }
@@ -200,7 +203,8 @@ public class ToString
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("Qowaig==", "Qowaig==")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("Qowaig==", "Qowaig==")]
     public void has_custom_display(object display, CryptographicSeed svo) => svo.Should().HaveDebuggerDisplay(display);
 }

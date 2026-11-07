@@ -1,0 +1,1 @@
+dotnet restore qowaiv.slnx --force-evaluate

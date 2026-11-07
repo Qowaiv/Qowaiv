@@ -36,7 +36,7 @@ internal class Markdown_file
 
         Console.WriteLine(writer);
 
-        Assert.Inconclusive("Copy output to code file.");
+        Skip.Test("Copy output to code file.");
     }
 
     [Explicit]
@@ -47,14 +47,16 @@ internal class Markdown_file
         {
             Console.WriteLine(info.JsRegex());
         }
-        Assert.Inconclusive("Copy output to code file.");
+        Skip.Test("Copy output to code file.");
     }
 
-    [TestCaseSource(nameof(Infos))]
+    [Test]
+    [MethodDataSource(nameof(Infos))]
     public void BBan_length_equals_length(IbanInfo info)
         => info.BbanLength.Should().Be(info.Length);
 
-    [TestCaseSource(nameof(Infos))]
+    [Test]
+    [MethodDataSource(nameof(Infos))]
     public void Reserved_zeros_match(IbanInfo info)
     {
         var fields = Regex.Split(info.Fields, "[^0]").Where(s => s.Length > 0).ToArray();
@@ -63,7 +65,8 @@ internal class Markdown_file
         bban.IsMatch(info.Bban).Should().BeTrue(because: $"Zero's of {info.Bban} and {info.Fields} should match");
     }
 
-    [TestCaseSource(nameof(Infos))]
+    [Test]
+    [MethodDataSource(nameof(Infos))]
     public void Example_is_valid(IbanInfo info)
         => InternationalBankAccountNumber.TryParse(info.Example)
         .Should().NotBeNull(because: $"{info.Example} should be valid for {info.Country}.")
@@ -74,30 +77,31 @@ internal class Markdown_file
         => InternationalBankAccountNumber.Supported
             .Should().BeEquivalentTo(Infos.Select(i => i.Country));
 
-    [TestCase("ALkk 2121 1007 nnnn nnnn nnnn nnnn", "AL with invalid weighted checksum.")]
-    [TestCase("BEkk nnnn nnnn nnnn", "BE with invalid MOD97 checksum.")]
-    [TestCase("CZkk nnnn nnnn nnnn nnnn nnnn", "CZ with invalid MOD11 10 checksum.")]
-    [TestCase("EEkk 0nnn nnnn nnnn nnnn", "EE bankcode can not start with 0.")]
-    [TestCase("EEkk nnnn nnnn nnnn nnnn", "EE with invalid checksum.")]
-    [TestCase("FIkk 1234 5600 0007 89", "FI with invalid Luhn checksum.")]
-    [TestCase("MUkk BOMM nnnn nnnn nnnn nnnn 000Z ZZ", "MU with a non-existing currency.")]
-    [TestCase("NLkk aaaa nnnn nnnn n", "NL too short.")]
-    [TestCase("NLkk aaaa nnnn nnnn nnn", "NL too long.")]
-    [TestCase("SCkk BANK nnnn nnnn nnnn nnnn nnnn ZZZ", "SC with a non-existing currency.")]
-    [TestCase("USkk cccc aann ", "A non IBAN country with length 12.")]
-    [TestCase("USkk cccc cccc nnnn nnnn nnnn nnnn nnnn nn", "A non IBAN country with length 34.")]
-    [TestCase("BAkk nnnn nnnn nnnn nnnn", "BA with non-fixed checksum.")]
-    [TestCase("MEkk nnnn nnnn nnnn nnnn nn", "ME with non-fixed checksum.")]
-    [TestCase("MKkk nnnn nnnn nnnn nnn", "MK with non-fixed checksum.")]
-    [TestCase("MRkk nnnn nnnn nnnn nnnn nnnn nnn", "MR with non-fixed checksum.")]
-    [TestCase("PLkk nnnn nnnn nnnn nnnn nnnn nnnn", "PL with invalid checksum.")]
-    [TestCase("PTkk nnnn nnnn nnnn nnnn nnnn n", "PT with non-fixed checksum.")]
-    [TestCase("RSkk nnnn nnnn nnnn nnnn nn", "RS with non-fixed checksum.")]
-    [TestCase("SIkk nnnn nnnn nnnn nnn", "SI with non-fixed checksum.")]
-    [TestCase("SKkk nnnn nnnn nnnn nnnn nnnn", "SK with invalid MOD11 10 checksum.")]
-    [TestCase("TLkk nnnn nnnn nnnn nnnn nnn", "TL with non-fixed checksum.")]
-    [TestCase("TNkk nnnn nnnn nnnn nnnn nnnn", "TN with non-fixed checksum.")]
-    [TestCase("CIkkaannnnnnnnnnnnnnnnnnnnnn")]
+    [Test]
+    [Arguments("ALkk 2121 1007 nnnn nnnn nnnn nnnn", "AL with invalid weighted checksum.")]
+    [Arguments("BEkk nnnn nnnn nnnn", "BE with invalid MOD97 checksum.")]
+    [Arguments("CZkk nnnn nnnn nnnn nnnn nnnn", "CZ with invalid MOD11 10 checksum.")]
+    [Arguments("EEkk 0nnn nnnn nnnn nnnn", "EE bankcode can not start with 0.")]
+    [Arguments("EEkk nnnn nnnn nnnn nnnn", "EE with invalid checksum.")]
+    [Arguments("FIkk 1234 5600 0007 89", "FI with invalid Luhn checksum.")]
+    [Arguments("MUkk BOMM nnnn nnnn nnnn nnnn 000Z ZZ", "MU with a non-existing currency.")]
+    [Arguments("NLkk aaaa nnnn nnnn n", "NL too short.")]
+    [Arguments("NLkk aaaa nnnn nnnn nnn", "NL too long.")]
+    [Arguments("SCkk BANK nnnn nnnn nnnn nnnn nnnn ZZZ", "SC with a non-existing currency.")]
+    [Arguments("USkk cccc aann ", "A non IBAN country with length 12.")]
+    [Arguments("USkk cccc cccc nnnn nnnn nnnn nnnn nnnn nn", "A non IBAN country with length 34.")]
+    [Arguments("BAkk nnnn nnnn nnnn nnnn", "BA with non-fixed checksum.")]
+    [Arguments("MEkk nnnn nnnn nnnn nnnn nn", "ME with non-fixed checksum.")]
+    [Arguments("MKkk nnnn nnnn nnnn nnn", "MK with non-fixed checksum.")]
+    [Arguments("MRkk nnnn nnnn nnnn nnnn nnnn nnn", "MR with non-fixed checksum.")]
+    [Arguments("PLkk nnnn nnnn nnnn nnnn nnnn nnnn", "PL with invalid checksum.")]
+    [Arguments("PTkk nnnn nnnn nnnn nnnn nnnn n", "PT with non-fixed checksum.")]
+    [Arguments("RSkk nnnn nnnn nnnn nnnn nn", "RS with non-fixed checksum.")]
+    [Arguments("SIkk nnnn nnnn nnnn nnn", "SI with non-fixed checksum.")]
+    [Arguments("SKkk nnnn nnnn nnnn nnnn nnnn", "SK with invalid MOD11 10 checksum.")]
+    [Arguments("TLkk nnnn nnnn nnnn nnnn nnn", "TL with non-fixed checksum.")]
+    [Arguments("TNkk nnnn nnnn nnnn nnnn nnnn", "TN with non-fixed checksum.")]
+    [Arguments("CIkkaannnnnnnnnnnnnnnnnnnnnn")]
     public void Generate_IBAN(string bban, string? because = null)
     {
         var rnd = new Random(bban.GetHashCode());

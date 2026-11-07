@@ -39,7 +39,7 @@ public class Generates
 
         Console.WriteLine(sb);
 
-        Assert.Inconclusive("Copy output to code file.");
+        Skip.Test("Copy output to code file.");
     }
 
     private static void AppendRows(StringBuilder sb, Chars.Categories[] chars, int from, int to, Func<Chars.Categories, string> format)

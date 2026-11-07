@@ -111,41 +111,34 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.Money != 42.17 + Currency.USD).Should().BeTrue();
 
-    [TestCase("USD 0.00", 931756561)]
-#if NET48
-    [TestCase("EUR 42.00", -2013578063)]
-#else
-    [TestCase("EUR 42.00", -943833957)]
-#endif
-    public void hash_code_is_value_based(Money svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    [Test]
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.Money, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed
 {
-    [TestCase("€ 42.17")]
-    [TestCase("€42.17")]
-    [TestCase("€+42.17")]
-    [TestCase("EUR42.17")]
-    [TestCase("EUR+42.17")]
-    [TestCase("EUR 42.17")]
+    [Test]
+    [Arguments("€ 42.17")]
+    [Arguments("€42.17")]
+    [Arguments("€+42.17")]
+    [Arguments("EUR42.17")]
+    [Arguments("EUR+42.17")]
+    [Arguments("EUR 42.17")]
     public void with_currency_before(string before)
         => Money.Parse(before, CultureInfo.InvariantCulture).Should().Be(Svo.Money);
 
-    [TestCase("42.17 €")]
-    [TestCase("42.17€")]
-    [TestCase("42.17 EUR")]
-    [TestCase("42.17EUR")]
+    [Test]
+    [Arguments("42.17 €")]
+    [Arguments("42.17€")]
+    [Arguments("42.17 EUR")]
+    [Arguments("42.17EUR")]
     public void with_currency_after(string after)
         => Money.Parse(after, CultureInfo.InvariantCulture).Should().Be(Svo.Money);
 
-    [TestCase("en-GB", "€42.17")]
-    [TestCase("nl-NL", "€42,17")]
+    [Test]
+    [Arguments("en-GB", "€42.17")]
+    [Arguments("nl-NL", "€42,17")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -268,12 +261,13 @@ public class Has_custom_formatting
         }
     }
 
-    [TestCase("nl-BE", null, "ALL 1600,1", "Lekë 1.600,10")]
-    [TestCase("en-GB", null, "EUR 1600.1", "€1,600.10")]
-    [TestCase("en-GB", null, "AED 1600.1", "AED1,600.10")]
-    [TestCase("nl-BE", "0000", "800", "0800")]
-    [TestCase("en-GB", "0000", "800", "0800")]
-    [TestCase("es-EC", "00000.0", "1700", "01700,0")]
+    [Test]
+    [Arguments("nl-BE", null, "ALL 1600,1", "Lekë 1.600,10")]
+    [Arguments("en-GB", null, "EUR 1600.1", "€1,600.10")]
+    [Arguments("en-GB", null, "AED 1600.1", "AED1,600.10")]
+    [Arguments("nl-BE", "0000", "800", "0800")]
+    [Arguments("en-GB", "0000", "800", "0800")]
+    [Arguments("es-EC", "00000.0", "1700", "01700,0")]
     public void culture_dependent(CultureInfo culture, string format, string input, string formatted)
     {
         using (culture.Scoped())
@@ -330,33 +324,38 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase("EUR 42.17", "EUR 42.17")]
-    [TestCase("EUR42.17", "EUR 42.17")]
-    [TestCase("€42.17", "EUR 42.17")]
-    [TestCase(100L, "100.00")]
-    [TestCase(42.17, "42.17")]
+    [Test]
+    [Arguments("EUR 42.17", "EUR 42.17")]
+    [Arguments("EUR42.17", "EUR 42.17")]
+    [Arguments("€42.17", "EUR 42.17")]
+    [Arguments(100L, "100.00")]
+    [Arguments(42.17, "42.17")]
     public void System_Text_JSON_deserialization(object json, Money svo)
         => JsonTester.Read_System_Text_JSON<Money>(json).Round(4).Should().Be(svo);
 
-    [TestCase("EUR42.17", "EUR42.17")]
+    [Test]
+    [Arguments("EUR42.17", "EUR42.17")]
     public void System_Text_JSON_serialization(Money svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("EUR 42.17", "EUR 42.17")]
-    [TestCase("EUR42.17", "EUR 42.17")]
-    [TestCase("€42.17", "EUR 42.17")]
-    [TestCase(100L, "100.00")]
-    [TestCase(42.17, "42.17")]
+    [Test]
+    [Arguments("EUR 42.17", "EUR 42.17")]
+    [Arguments("EUR42.17", "EUR 42.17")]
+    [Arguments("€42.17", "EUR 42.17")]
+    [Arguments(100L, "100.00")]
+    [Arguments(42.17, "42.17")]
     public void convention_based_deserialization(object json, Money svo)
         => JsonTester.Read<Money>(json).Round(4).Should().Be(svo);
 
-    [TestCase("EUR42.17", "EUR42.17")]
+    [Test]
+    [Arguments("EUR42.17", "EUR42.17")]
     public void convention_based_serialization(Money svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
-    [TestCase(true, typeof(InvalidOperationException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
+    [Arguments(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<Money>)
@@ -382,14 +381,16 @@ public class Has_operators
 
 public class Can_be_operated_on
 {
-    [TestCase(-1, "EUR -1000")]
-    [TestCase(0, "EUR 0")]
-    [TestCase(+1, "EUR 100")]
+    [Test]
+    [Arguments(-1, "EUR -1000")]
+    [Arguments(0, "EUR 0")]
+    [Arguments(+1, "EUR 100")]
     public void sign(int expected, Money value)
         => value.Sign().Should().Be(expected);
 
-    [TestCase("23.1234", "-23.1234")]
-    [TestCase("23.1234", "+23.1234")]
+    [Test]
+    [Arguments("23.1234", "-23.1234")]
+    [Arguments("23.1234", "+23.1234")]
     public void abs(decimal expected, decimal value)
     {
         var money = value + Currency.USD;

@@ -10,19 +10,22 @@ public class Has_constant
 
 public class With_domain_logic
 {
-    [TestCase(true, "")]
-    [TestCase(false, "?")]
-    [TestCase(false, "EUR")]
+    [Test]
+    [Arguments(true, "")]
+    [Arguments(false, "?")]
+    [Arguments(false, "EUR")]
     public void IsEmpty_returns(bool result, Currency svo) => svo.IsEmpty().Should().Be(result);
 
-    [TestCase(false, "")]
-    [TestCase(true, "?")]
-    [TestCase(false, "EUR")]
+    [Test]
+    [Arguments(false, "")]
+    [Arguments(true, "?")]
+    [Arguments(false, "EUR")]
     public void IsUnknown_returns(bool result, Currency svo) => svo.IsUnknown().Should().Be(result);
 
-    [TestCase(true, "")]
-    [TestCase(true, "?")]
-    [TestCase(false, "EUR")]
+    [Test]
+    [Arguments(true, "")]
+    [Arguments(true, "?")]
+    [Arguments(false, "EUR")]
     public void IsEmptyOrUnknown_returns(bool result, Currency svo) => svo.IsEmptyOrUnknown().Should().Be(result);
 }
 
@@ -118,8 +121,9 @@ public class Can_be_parsed
     public void from_euro_symbol()
         => Currency.Parse("€").Should().Be(Currency.EUR);
 
-    [TestCase("en-GB", "EUR")]
-    [TestCase("es-EC", "EUR")]
+    [Test]
+    [Arguments("en-GB", "EUR")]
+    [Arguments("es-EC", "EUR")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -368,31 +372,36 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase(null, null)]
-    [TestCase(978L, "EUR")]
-    [TestCase(978d, "EUR")]
-    [TestCase("EUR", "EUR")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments(978L, "EUR")]
+    [Arguments(978d, "EUR")]
+    [Arguments("EUR", "EUR")]
     public void System_Text_JSON_deserialization(object json, Currency svo)
         => JsonTester.Read_System_Text_JSON<Currency>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("EUR", "EUR")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("EUR", "EUR")]
     public void System_Text_JSON_serialization(Currency svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase(978L, "EUR")]
-    [TestCase("EUR", "EUR")]
+    [Test]
+    [Arguments(978L, "EUR")]
+    [Arguments("EUR", "EUR")]
     public void convention_based_deserialization(object json, Currency svo)
        => JsonTester.Read<Currency>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("EUR", "EUR")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("EUR", "EUR")]
     public void convention_based_serialization(Currency svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
-    [TestCase(true, typeof(InvalidOperationException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
+    [Arguments(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<Currency>)
@@ -442,15 +451,9 @@ public class Is_equal_by_value
         l.Equals(r).Should().BeTrue();
     }
 
-    [TestCase("", 0)]
-    [TestCase("EUR", -943833935)]
-    public void hash_code_is_value_based(Currency svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    [Test]
+    public void hash_code_is_value_based() => HashCodes
+        .For(Currency.NAD, Currency.EUR, Currency.NGN).Should().BeConsistent();
 }
 
 public class Supports_XML_serialization

@@ -28,12 +28,10 @@ public class Default_behavior
             now.Should().Be(new DateTimeOffset(2017, 06, 11, 06, 48, 00, TimeSpan.FromMinutes(+33)));
         }
     }
-}
-
-[NonParallelizable]
-public class Globally
+}public class Globally
 {
     [Test]
+    [NotInParallel]
     public void UtcNow_can_be_set()
     {
         Clock.SetTime(() => Svo.DateTime);
@@ -41,13 +39,14 @@ public class Globally
     }
 
     [Test]
+    [NotInParallel]
     public void TimeZone_can_be_set()
     {
         Clock.SetTimeZone(Svo.TimeZone);
         Clock.TimeZone.Should().Be(Svo.TimeZone);
     }
 
-    [TearDown]
+    [After(Test)]
     public void TearDown()
     {
         Clock.SetTime(() => DateTime.UtcNow);
@@ -57,9 +56,10 @@ public class Globally
 
 public class Date_time_kind
 {
-    [TestCase(DateTimeKind.Utc)]
-    [TestCase(DateTimeKind.Local)]
-    [TestCase(DateTimeKind.Unspecified)]
+    [Test]
+    [Arguments(DateTimeKind.Utc)]
+    [Arguments(DateTimeKind.Local)]
+    [Arguments(DateTimeKind.Unspecified)]
     public void UTC_for_UtcNow(DateTimeKind kind)
     {
         using (Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11, 06, 15, 00, kind)))

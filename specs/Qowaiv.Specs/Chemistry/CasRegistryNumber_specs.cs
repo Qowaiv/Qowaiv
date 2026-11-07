@@ -5,50 +5,58 @@ namespace Chemistry.CAS_Registry_Number_specs;
 
 public class With_domain_logic
 {
-    [TestCase(true, "73–24–5")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "73–24–5")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, CasRegistryNumber svo) => svo.HasValue.Should().Be(result);
 
-    [TestCase(true, "73–24–5")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "73–24–5")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsKnown_is(bool result, CasRegistryNumber svo) => svo.IsKnown.Should().Be(result);
 
-    [TestCase("")]
-    [TestCase("?")]
+    [Test]
+    [Arguments("")]
+    [Arguments("?")]
     public void has_length_zero_for_empty_and_unknown(CasRegistryNumber svo)
         => svo.Length.Should().Be(0);
 
-    [TestCase(5, "73–24–5")]
-    [TestCase(7, "7732-18-5")]
-    [TestCase(8, "10028-14-5")]
+    [Test]
+    [Arguments(5, "73–24–5")]
+    [Arguments(7, "7732-18-5")]
+    [Arguments(8, "10028-14-5")]
     public void has_length(int length, CasRegistryNumber svo)
         => svo.Length.Should().Be(length);
 
-    [TestCase(false, "10028-14-5")]
-    [TestCase(false, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "10028-14-5")]
+    [Arguments(false, "?")]
+    [Arguments(true, "")]
     public void IsEmpty_returns(bool result, CasRegistryNumber svo)
         => svo.IsEmpty().Should().Be(result);
 
-    [TestCase(false, "10028-14-5")]
-    [TestCase(true, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "10028-14-5")]
+    [Arguments(true, "?")]
+    [Arguments(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, CasRegistryNumber svo)
         => svo.IsEmptyOrUnknown().Should().Be(result);
 
-    [TestCase(false, "10028-14-5")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(false, "10028-14-5")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void IsUnknown_returns(bool result, CasRegistryNumber svo)
         => svo.IsUnknown().Should().Be(result);
 }
 
 public class Is_valid_for
 {
-    [TestCase("10028-14-5")]
-    [TestCase("10028-14-5")]
+    [Test]
+    [Arguments("10028-14-5")]
+    [Arguments("10028-14-5")]
     public void strings_representing_SVO(string input)
         => CasRegistryNumber.Parse(input).IsEmptyOrUnknown().Should().BeFalse();
 }
@@ -63,13 +71,14 @@ public class Is_not_valid_for
     public void Numbers_with_more_then_10_digits()
         => CasRegistryNumber.TryParse("10000000-00-0").Should().BeNull();
 
-    [TestCase("10028-14-3")]
-    [TestCase("10028-15-5")]
-    [TestCase("10028-84-5")]
-    [TestCase("10020-14-5")]
-    [TestCase("10068-14-5")]
-    [TestCase("10128-14-5")]
-    [TestCase("32028-14-5")]
+    [Test]
+    [Arguments("10028-14-3")]
+    [Arguments("10028-15-5")]
+    [Arguments("10028-84-5")]
+    [Arguments("10020-14-5")]
+    [Arguments("10068-14-5")]
+    [Arguments("10128-14-5")]
+    [Arguments("32028-14-5")]
     public void checksum_mismatches(string number)
         => CasRegistryNumber.TryParse(number).Should().BeNull();
 }
@@ -115,15 +124,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.CasRegistryNumber != 7732_18_5.CasNr()).Should().BeTrue();
 
-    [TestCase("", 0)]
-    [TestCase("10028-14-5", 657830306)]
-    public void hash_code_is_value_based(CasRegistryNumber svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    [Test]
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.CasRegistryNumber, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed
@@ -140,12 +143,13 @@ public class Can_be_parsed
     public void from_question_mark_represents_Unknown()
         => CasRegistryNumber.Parse("?").Should().Be(CasRegistryNumber.Unknown);
 
-    [TestCase("en-US", "10028145")]
-    [TestCase("en-GB", "10028-14-5")]
-    [TestCase("en-US", "10028.14.5")]
-    [TestCase("en-GB", "10028 14 5")]
-    [TestCase("en-CA", "100.281.45")]
-    [TestCase("nl-BE", "10028-14-5")]
+    [Test]
+    [Arguments("en-US", "10028145")]
+    [Arguments("en-GB", "10028-14-5")]
+    [Arguments("en-US", "10028.14.5")]
+    [Arguments("en-GB", "10028 14 5")]
+    [Arguments("en-CA", "100.281.45")]
+    [Arguments("nl-BE", "10028-14-5")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -369,29 +373,34 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase("?", "?")]
-    [TestCase(10028_14_5L, "10028-14-5")]
+    [Test]
+    [Arguments("?", "?")]
+    [Arguments(10028_14_5L, "10028-14-5")]
     public void System_Text_JSON_deserialization(object json, CasRegistryNumber svo)
         => JsonTester.Read_System_Text_JSON<CasRegistryNumber>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("10028-14-5", "10028-14-5")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("10028-14-5", "10028-14-5")]
     public void System_Text_JSON_serialization(CasRegistryNumber svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("?", "?")]
-    [TestCase(10028_14_5L, "10028-14-5")]
+    [Test]
+    [Arguments("?", "?")]
+    [Arguments(10028_14_5L, "10028-14-5")]
     public void convention_based_deserialization(object json, CasRegistryNumber svo)
        => JsonTester.Read<CasRegistryNumber>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("10028-14-5", "10028-14-5")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("10028-14-5", "10028-14-5")]
     public void convention_based_serialization(CasRegistryNumber svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
-    [TestCase(true, typeof(InvalidOperationException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
+    [Arguments(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<CasRegistryNumber>)
@@ -451,17 +460,19 @@ public class Is_Open_API_data_type
            format: "cas-nr",
            pattern: "[1-9][0-9]+\\-[0-9]{2}\\-[0-9]"));
 
-    [TestCase("7732-18-5")]
-    [TestCase("10028-14-5")]
+    [Test]
+    [Arguments("7732-18-5")]
+    [Arguments("10028-14-5")]
     public void pattern_matches(string input)
         => OpenApiDataType.FromType(typeof(CasRegistryNumber))!.Matches(input).Should().BeTrue();
 }
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("{unknown}", "?")]
-    [TestCase("10028-14-5", "10028-14-5")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("{unknown}", "?")]
+    [Arguments("10028-14-5", "10028-14-5")]
     public void has_custom_display(object display, CasRegistryNumber svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }

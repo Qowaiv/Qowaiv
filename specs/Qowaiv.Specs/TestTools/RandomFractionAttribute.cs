@@ -1,32 +1,34 @@
-using NUnit.Framework.Interfaces;
-using NUnit.Framework.Internal;
-
 namespace Qowaiv.Specs.TestTools;
 
+/// <summary>Generates random <see cref="Fraction" />s as arguments for a test parameter.</summary>
+/// <remarks>
+/// Requires the test method to be decorated with <see cref="CombinedDataSourcesAttribute" />.
+/// </remarks>
 [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
-public sealed class RandomFractionAttribute(int count, bool includeZero = false) : NUnitAttribute, IParameterDataSource
+public sealed class RandomFractionAttribute(int count, bool includeZero = false) : UntypedDataSourceGeneratorAttribute
 {
-    public int Count { get; } = count;
-
-    public bool IncludeZero { get; } = includeZero;
-
     /// <inheritdoc />
     [Pure]
-    public IEnumerable GetData(IParameterInfo parameter)
+    protected override IEnumerable<Func<object?[]?>> GenerateDataSources(DataGeneratorMetadata dataGeneratorMetadata)
     {
-        var rnd = Randomizer.GetRandomizer(parameter.ParameterInfo);
+        var rnd = new Random();
 
-        return Enumerable.Range(0, Count).Select(_ => Fraction(rnd));
-
-        Fraction Fraction(Randomizer rnd)
+        for (var i = 0; i < count; i++)
         {
-            var num = rnd.Next(-255, 255) * rnd.Next(255);
-            while (num == 0 && !IncludeZero)
-            {
-                num = rnd.Next(-255, 255) * rnd.Next(255);
-            }
-            var den = rnd.Next(1, 255) * rnd.Next(1, 255);
-            return num.DividedBy(den);
+            var fraction = Fraction(rnd);
+            yield return () => [fraction];
         }
+    }
+
+    [Pure]
+    private Fraction Fraction(Random rnd)
+    {
+        var num = rnd.Next(-255, 255) * rnd.Next(255);
+        while (num == 0 && !includeZero)
+        {
+            num = rnd.Next(-255, 255) * rnd.Next(255);
+        }
+        var den = rnd.Next(1, 255) * rnd.Next(1, 255);
+        return num.DividedBy(den);
     }
 }

@@ -21,37 +21,43 @@ public class With_domain_logic
             EnergyLabel.A(4),
         ]);
 
-    [TestCase(true, "A++")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "A++")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, EnergyLabel svo) => svo.HasValue.Should().Be(result);
 
-    [TestCase(true, "A++")]
-    [TestCase(false, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "A++")]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
     public void IsKnown_is(bool result, EnergyLabel svo) => svo.IsKnown.Should().Be(result);
 
-    [TestCase(false, "A++")]
-    [TestCase(false, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "A++")]
+    [Arguments(false, "?")]
+    [Arguments(true, "")]
     public void IsEmpty_returns(bool result, EnergyLabel svo)
         => svo.IsEmpty().Should().Be(result);
 
-    [TestCase(false, "A++")]
-    [TestCase(true, "?")]
-    [TestCase(true, "")]
+    [Test]
+    [Arguments(false, "A++")]
+    [Arguments(true, "?")]
+    [Arguments(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, EnergyLabel svo)
         => svo.IsEmptyOrUnknown().Should().Be(result);
 
-    [TestCase(false, "A++")]
-    [TestCase(true, "?")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(false, "A++")]
+    [Arguments(true, "?")]
+    [Arguments(false, "")]
     public void IsUnknown_returns(bool result, EnergyLabel svo)
         => svo.IsUnknown().Should().Be(result);
 
-    [TestCase(-1)]
-    [TestCase(5)]
-    [TestCase(6)]
+    [Test]
+    [Arguments(-1)]
+    [Arguments(5)]
+    [Arguments(6)]
     public void with_zero_to_four_plusses(int plusses)
         => plusses.Invoking(_ => EnergyLabel.A(plusses))
         .Should().Throw<ArgumentOutOfRangeException>();
@@ -71,41 +77,45 @@ public class Is_valid_for
     public void string_null()
         => EnergyLabel.TryParse(null).Should().NotBeNull();
 
-    [TestCase("?")]
-    [TestCase("unknown")]
+    [Test]
+    [Arguments("?")]
+    [Arguments("unknown")]
     public void strings_representing_unknown(string input)
         => EnergyLabel.TryParse(input).Should().NotBeNull();
 
-    [TestCase("g", "de")]
-    [TestCase("G", "de")]
-    [TestCase("F", "fr")]
-    [TestCase("E", "es")]
-    [TestCase("D", "nl")]
-    [TestCase("C", "nl")]
-    [TestCase("B", "nl")]
-    [TestCase("A", "nl")]
-    [TestCase("A+", "nl")]
-    [TestCase("A++", "nl")]
-    [TestCase("A+++", "nl")]
-    [TestCase("A++++", "nl")]
-    [TestCase("a++++", "pt")]
-    public void @string(string input, CultureInfo culture)
+    [Test]
+    [Arguments("g", "de")]
+    [Arguments("G", "de")]
+    [Arguments("F", "fr")]
+    [Arguments("E", "es")]
+    [Arguments("D", "nl")]
+    [Arguments("C", "nl")]
+    [Arguments("B", "nl")]
+    [Arguments("A", "nl")]
+    [Arguments("A+", "nl")]
+    [Arguments("A++", "nl")]
+    [Arguments("A+++", "nl")]
+    [Arguments("A++++", "nl")]
+    [Arguments("a++++", "pt")]
+    public void _string(string input, CultureInfo culture)
         => EnergyLabel.TryParse(input, culture).Should().NotBeNull();
 }
 
 public class Is_not_valid_for
 {
-    [TestCase("H")]
-    [TestCase("I")]
+    [Test]
+    [Arguments("H")]
+    [Arguments("I")]
     public void H_and_lower(string label)
     {
         EnergyLabel.TryParse(label).Should().BeNull();
         EnergyLabel.TryParse(label, TestCultures.en_GB).Should().BeNull();
     }
 
-    [TestCase("G+")]
-    [TestCase("A+++++")]
-    [TestCase("A++++++")]
+    [Test]
+    [Arguments("G+")]
+    [Arguments("A+++++")]
+    [Arguments("A++++++")]
     public void Plus_overload(string label)
         => EnergyLabel.TryParse(label).Should().BeNull();
 
@@ -123,7 +133,8 @@ public class Has_constant
     public void A() => EnergyLabel.A().Should().Be(EnergyLabel.Parse("A"));
 
     [Test]
-    public void A_plus([Range(1, 4)] int plus) => EnergyLabel.A(plus).Should().Be(EnergyLabel.Parse("A" + new string('+', plus)));
+    [MatrixDataSource]
+    public void A_plus([Matrix(1, 2, 3, 4)] int plus) => EnergyLabel.A(plus).Should().Be(EnergyLabel.Parse("A" + new string('+', plus)));
 
     [Test]
     public void B() => EnergyLabel.B.Should().Be(EnergyLabel.Parse("B"));
@@ -181,15 +192,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.EnergyLabel != EnergyLabel.G).Should().BeTrue();
 
-    [TestCase("", 0)]
-    [TestCase("A++", 665630170)]
-    public void hash_code_is_value_based(EnergyLabel svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    [Test]
+    public void hash_code_is_value_based() => HashCodes
+        .For(EnergyLabel.DefinedValues).Should().BeConsistent();
 }
 
 public class Can_be_parsed
@@ -206,7 +211,8 @@ public class Can_be_parsed
     public void from_question_mark_represents_Unknown()
         => EnergyLabel.Parse("?").Should().Be(EnergyLabel.Unknown);
 
-    [TestCase("en", "a++")]
+    [Test]
+    [Arguments("en", "a++")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -241,17 +247,18 @@ public class Can_be_parsed
 
 public class Has_custom_formatting
 {
-    [TestCase("G")]
-    [TestCase("F")]
-    [TestCase("E")]
-    [TestCase("D")]
-    [TestCase("C")]
-    [TestCase("B")]
-    [TestCase("A")]
-    [TestCase("A+")]
-    [TestCase("A++")]
-    [TestCase("A+++")]
-    [TestCase("A++++")]
+    [Test]
+    [Arguments("G")]
+    [Arguments("F")]
+    [Arguments("E")]
+    [Arguments("D")]
+    [Arguments("C")]
+    [Arguments("B")]
+    [Arguments("A")]
+    [Arguments("A+")]
+    [Arguments("A++")]
+    [Arguments("A+++")]
+    [Arguments("A++++")]
     public void _default(string label)
         => EnergyLabel.Parse(label).ToString().Should().Be(label);
 
@@ -297,10 +304,11 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: 'A++', format: 'SomeFormat'");
     }
 
-    [TestCase(null, "A++", "A++")]
-    [TestCase("U", "B", "B")]
-    [TestCase("l", "G", "g")]
-    [TestCase("l", "A++", "a++")]
+    [Test]
+    [Arguments(null, "A++", "A++")]
+    [Arguments("U", "B", "B")]
+    [Arguments("l", "G", "g")]
+    [Arguments("l", "A++", "a++")]
     public void format_dependent(string format, EnergyLabel svo, string formatted)
         => svo.ToString(format).Should().Be(formatted);
 
@@ -394,11 +402,12 @@ public class Is_comparable
         (left >= right).Should().BeTrue();
     }
 
-    [TestCase("?", "A++")]
-    [TestCase("?", "")]
-    [TestCase("A++", "?")]
-    [TestCase("", "?")]
-    [TestCase("?", "?")]
+    [Test]
+    [Arguments("?", "A++")]
+    [Arguments("?", "")]
+    [Arguments("A++", "?")]
+    [Arguments("", "?")]
+    [Arguments("?", "?")]
     public void by_operators_unknown_always_false(EnergyLabel l, EnergyLabel r)
     {
         (l < r).Should().BeFalse();
@@ -471,33 +480,38 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase("?", "?")]
-    [TestCase("C", "C")]
-    [TestCase("A++", "A++")]
+    [Test]
+    [Arguments("?", "?")]
+    [Arguments("C", "C")]
+    [Arguments("A++", "A++")]
     public void System_Text_JSON_deserialization(object json, EnergyLabel svo)
         => JsonTester.Read_System_Text_JSON<EnergyLabel>(json).Should().Be(svo);
 
-    [TestCase("?", "?")]
-    [TestCase("C", "C")]
-    [TestCase("A++", "A++")]
+    [Test]
+    [Arguments("?", "?")]
+    [Arguments("C", "C")]
+    [Arguments("A++", "A++")]
     public void System_Text_JSON_serialization(EnergyLabel svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("?", "unknown")]
-    [TestCase("C", "C")]
-    [TestCase("A++", "A++")]
+    [Test]
+    [Arguments("?", "unknown")]
+    [Arguments("C", "C")]
+    [Arguments("A++", "A++")]
     public void convention_based_deserialization(EnergyLabel svo, object json)
         => JsonTester.Read<EnergyLabel>(json).Should().Be(svo);
 
-    [TestCase(null, "")]
-    [TestCase("C", "C")]
-    [TestCase("A++", "A++")]
+    [Test]
+    [Arguments(null, "")]
+    [Arguments("C", "C")]
+    [Arguments("A++", "A++")]
     public void convention_based_serialization(object json, EnergyLabel svo)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
-    [TestCase(5L, typeof(InvalidOperationException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
+    [Arguments(5L, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
     {
         Func<EnergyLabel> read = () => JsonTester.Read<EnergyLabel>(json);
@@ -558,20 +572,22 @@ public class Is_Open_API_data_type
            pattern: @"A\+{0,4}|[B-G]",
            @enum: ["G", "F", "E", "D", "C", "B", "A", "A+", "A++", "A+++", "A++++"]));
 
-    [TestCase("G")]
-    [TestCase("B")]
-    [TestCase("A")]
-    [TestCase("A+")]
-    [TestCase("A++++")]
+    [Test]
+    [Arguments("G")]
+    [Arguments("B")]
+    [Arguments("A")]
+    [Arguments("A+")]
+    [Arguments("A++++")]
     public void pattern_matches(string input)
         => OpenApiDataType.FromType(typeof(EnergyLabel))!.Matches(input).Should().BeTrue();
 }
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("{unknown}", "?")]
-    [TestCase("A++", "A++")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("{unknown}", "?")]
+    [Arguments("A++", "A++")]
     public void has_custom_display(object display, EnergyLabel svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }

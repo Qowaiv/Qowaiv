@@ -19,8 +19,9 @@ public class Has_constant
     public void Empty_represent_default_value()
         => StringBasedId.Empty.Should().Be(default);
 
-    [TestCase(true, "Qowaiv-ID")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "Qowaiv-ID")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, StringBasedId svo) => svo.HasValue.Should().Be(result);
 }
 
@@ -58,15 +59,9 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.Generated.StringId != StringBasedId.Next()).Should().BeTrue();
 
-    [TestCase("", 0)]
-    [TestCase("Qowaiv-ID", 890829876)]
-    public void hash_code_is_value_based(StringBasedId svo, int hashCode)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hashCode);
-        }
-    }
+    [Test]
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.Generated.StringId, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed
@@ -79,7 +74,8 @@ public class Can_be_parsed
     public void from_empty_string_represents_Empty()
         => StringBasedId.Parse(string.Empty).Should().Be(StringBasedId.Empty);
 
-    [TestCase("en", "Qowaiv-ID")]
+    [Test]
+    [Arguments("en", "Qowaiv-ID")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -143,9 +139,10 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: 'Qowaiv-ID', format: 'B'");
     }
 
-    [TestCase(null, "Qowaiv-ID")]
-    [TestCase("", "Qowaiv-ID")]
-    [TestCase("P", "Qowaiv-ID")]
+    [Test]
+    [Arguments(null, "Qowaiv-ID")]
+    [Arguments("", "Qowaiv-ID")]
+    [Arguments("P", "Qowaiv-ID")]
     public void with_current_thread_culture_as_default(string? format, string formattted)
     {
         using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
@@ -247,7 +244,8 @@ public class Supports_type_conversion
         }
     }
 
-    [TestCase(typeof(string))]
+    [Test]
+    [Arguments(typeof(string))]
     public void to(Type type)
         => Converting.To(type).From<StringBasedId>().Should().BeTrue();
 }
@@ -305,8 +303,9 @@ public class Supports_XML_serialization
 
 public class Debugger
 {
-    [TestCase("{empty}", "")]
-    [TestCase("Qowaiv-ID", "Qowaiv-ID")]
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("Qowaiv-ID", "Qowaiv-ID")]
     public void has_custom_display(object display, StringBasedId id)
         => id.Should().HaveDebuggerDisplay(display);
 }

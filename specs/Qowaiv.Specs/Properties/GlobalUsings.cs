@@ -1,5 +1,5 @@
 global using AwesomeAssertions;
-global using NUnit.Framework;
+global using TUnit.Core;
 global using Qowaiv;
 global using Qowaiv.Conversion.Security;
 global using Qowaiv.Conversion.Security.Cryptography;
@@ -16,6 +16,7 @@ global using Qowaiv.OpenApi;
 global using Qowaiv.Security;
 global using Qowaiv.Security.Cryptography;
 global using Qowaiv.Statistics;
+global using Qowaiv.Specs.TestTools;
 global using Qowaiv.TestTools;
 global using Qowaiv.TestTools.Globalization;
 global using Qowaiv.TestTools.IO;
@@ -39,5 +40,5 @@ global using System.Text;
 global using System.Text.RegularExpressions;
 global using System.Threading.Tasks;
 global using System.Xml.Serialization;
+global using AssertionException = TUnit.Assertions.Exceptions.AssertionException;
 global using Svo = Qowaiv.TestTools.Svo;
-

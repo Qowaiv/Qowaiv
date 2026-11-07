@@ -30,6 +30,7 @@ v11.0.0
 - Hide Guard methods from stacktrace.
 - Introduction of Converting.From(Type).To<To>() to check CanConvertTo.
 - Introduction of Nil helper to allow explict nil test values to be used.
+- Introduction of ConventionBasedConverter (to support TUnit).
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

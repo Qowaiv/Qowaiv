@@ -15,13 +15,15 @@ public class Supports_type_conversion
 #if NET10_0_OR_GREATER
 public class Supports_System_Text_JSON_serialization
 {
-    [TestCase(null, null)]
-    [TestCase("es-EC", "es-EC")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("es-EC", "es-EC")]
     public void Value_deserialization(object? json, CultureInfo? svo)
         => JsonTester.Read_System_Text_JSON<CultureInfo>(json, Options()).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("es-EC", "es-EC")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("es-EC", "es-EC")]
     public void Value_serialization(object? json, CultureInfo? svo)
         => JsonTester.Write_System_Text_JSON(svo, Options()).Should().Be(json);
 

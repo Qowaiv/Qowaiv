@@ -4,6 +4,7 @@
   <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
   <Project Path="src/Qowaiv/Qowaiv.csproj" />
   <Project Path="src/Specs.Data.SqlClient/Specs.Data.SqlClient.csproj" />
+  <Project Path="src/Specs.Shared/Specs.Shared.csproj" />
   <Project Path="tools/Qowaiv.SvoGenerator/Qowaiv.SvoGenerator.csproj" />
 </Solution>
 

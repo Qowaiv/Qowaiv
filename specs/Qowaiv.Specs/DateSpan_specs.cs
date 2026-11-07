@@ -78,35 +78,39 @@ public class Has_constant
 
 public class Has_properties
 {
-    [TestCase(1, 2, +3)]
-    [TestCase(0, 0, +3)]
-    [TestCase(9, 6, +0)]
-    [TestCase(9, 6, -1)]
-    [TestCase(-9, -6, -1)]
+    [Test]
+    [Arguments(1, 2, +3)]
+    [Arguments(0, 0, +3)]
+    [Arguments(9, 6, +0)]
+    [Arguments(9, 6, -1)]
+    [Arguments(-9, -6, -1)]
     public void days(int years, int months, int days)
         => new DateSpan(years, months, days).Days.Should().Be(days);
 
-    [TestCase(1, 2, +3)]
-    [TestCase(0, 0, +3)]
-    [TestCase(9, 6, +0)]
-    [TestCase(9, 6, -1)]
-    [TestCase(-9, -6, -1)]
+    [Test]
+    [Arguments(1, 2, +3)]
+    [Arguments(0, 0, +3)]
+    [Arguments(9, 6, +0)]
+    [Arguments(9, 6, -1)]
+    [Arguments(-9, -6, -1)]
     public void months(int years, int months, int days)
         => new DateSpan(years, months, days).Months.Should().Be(months);
 
-    [TestCase(1, 2, +3)]
-    [TestCase(0, 0, +3)]
-    [TestCase(9, 6, +0)]
-    [TestCase(9, 6, -1)]
-    [TestCase(-9, -6, -1)]
+    [Test]
+    [Arguments(1, 2, +3)]
+    [Arguments(0, 0, +3)]
+    [Arguments(9, 6, +0)]
+    [Arguments(9, 6, -1)]
+    [Arguments(-9, -6, -1)]
     public void years(int years, int months, int days)
         => new DateSpan(years, months, days).Years.Should().Be(years);
 
-    [TestCase(014, 1, 2, +3)]
-    [TestCase(012, 1, 0, +3)]
-    [TestCase(117, 9, 9, +0)]
-    [TestCase(006, 0, 6, -1)]
-    [TestCase(-19, -1, -7, -1)]
+    [Test]
+    [Arguments(014, 1, 2, +3)]
+    [Arguments(012, 1, 0, +3)]
+    [Arguments(117, 9, 9, +0)]
+    [Arguments(006, 0, 6, -1)]
+    [Arguments(-19, -1, -7, -1)]
     public void total_months(int total, int years, int months, int days)
         => new DateSpan(years, months, days).TotalMonths.Should().Be(total);
 }
@@ -117,8 +121,9 @@ public class Can_be_parsed
     public void from_date_span_string()
         => DateSpan.Parse("5Y+3M+2D", CultureInfo.InvariantCulture).Should().Be(new DateSpan(5, 3, 2));
 
-    [TestCase("en-GB", "10Y+3M-5D")]
-    [TestCase("es-EC", "10Y+3M-5D")]
+    [Test]
+    [Arguments("en-GB", "10Y+3M-5D")]
+    [Arguments("es-EC", "10Y+3M-5D")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -210,16 +215,17 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '10Y+3M-5D', format: 'Unit Test Format'");
     }
 
-    [TestCase("0Y+0M+0D", 0, 0)]
-    [TestCase("0Y+0M+1D", 0, 1)]
-    [TestCase("0Y+1M+0D", 1, 0)]
-    [TestCase("1Y+0M+0D", 12, 0)]
-    [TestCase("1Y+0M+1D", 12, 1)]
-    [TestCase("1Y+1M+1D", 13, 1)]
-    [TestCase("0Y+0M-11D", 0, -11)]
-    [TestCase("0Y+1M-12D", +1, -12)]
-    [TestCase("0Y-1M-12D", -1, -12)]
-    [TestCase("-1Y-1M+1D", -13, 1)]
+    [Test]
+    [Arguments("0Y+0M+0D", 0, 0)]
+    [Arguments("0Y+0M+1D", 0, 1)]
+    [Arguments("0Y+1M+0D", 1, 0)]
+    [Arguments("1Y+0M+0D", 12, 0)]
+    [Arguments("1Y+0M+1D", 12, 1)]
+    [Arguments("1Y+1M+1D", 13, 1)]
+    [Arguments("0Y+0M-11D", 0, -11)]
+    [Arguments("0Y+1M-12D", +1, -12)]
+    [Arguments("0Y-1M-12D", -1, -12)]
+    [Arguments("-1Y-1M+1D", -13, 1)]
     public void format_dependent(string formatted, int months, int days)
     {
         using (CultureInfoScope.NewInvariant())
@@ -240,13 +246,14 @@ public class Has_custom_formatting
 
 public class Is_valid
 {
-    [TestCase("23Y+0M+0D", "Without starting sign")]
-    [TestCase("+9998Y+0M+0D", "A lot of years")]
-    [TestCase("-9998Y+0M+0D", "A lot of years")]
-    [TestCase("0Y+100000M+1D", "A lot of months")]
-    [TestCase("0Y-100000M+1D", "A lot of months")]
-    [TestCase("0Y+0M+3650000D", "A lot of days")]
-    [TestCase("0Y+0M-3650000D", "A lot of days")]
+    [Test]
+    [Arguments("23Y+0M+0D", "Without starting sign")]
+    [Arguments("+9998Y+0M+0D", "A lot of years")]
+    [Arguments("-9998Y+0M+0D", "A lot of years")]
+    [Arguments("0Y+100000M+1D", "A lot of months")]
+    [Arguments("0Y-100000M+1D", "A lot of months")]
+    [Arguments("0Y+0M+3650000D", "A lot of days")]
+    [Arguments("0Y+0M-3650000D", "A lot of days")]
     public void For(string str, string because)
         => DateSpan.TryParse(str).Should().NotBeNull(because);
 }
@@ -259,11 +266,12 @@ public class Is_invalid
     [Test]
     public void for_null() => DateSpan.TryParse(Nil.String).Should().BeNull();
 
-    [TestCase("+9999Y+0M+0D", "Years out of reach")]
-    [TestCase("-9999Y+0M+0D", "Years out of reach")]
-    [TestCase("0Y+0M+4650000D", "Days out of reach")]
-    [TestCase("0Y+0M-4650000D", "Days out of reach")]
-    [TestCase("Not a date span", "Garbage")]
+    [Test]
+    [Arguments("+9999Y+0M+0D", "Years out of reach")]
+    [Arguments("-9999Y+0M+0D", "Years out of reach")]
+    [Arguments("0Y+0M+4650000D", "Days out of reach")]
+    [Arguments("0Y+0M-4650000D", "Days out of reach")]
+    [Arguments("Not a date span", "Garbage")]
     public void For(string str, string because)
         => DateSpan.TryParse(str).Should().BeNull(because);
 }
@@ -310,15 +318,9 @@ public class Is_equal_by_value
         l.Equals(r).Should().BeTrue();
     }
 
-    [TestCase("0Y+0M+0D", 0)]
-    [TestCase("10Y+3M-5D", -128)]
-    public void hash_code_is_value_based(DateSpan svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    [Test]
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.DateSpan, default).Should().BeConsistent();
 }
 
 public class Supports_type_conversion
@@ -349,30 +351,35 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase(null, "0Y+0M+0D")]
-    [TestCase(0L, "0Y+0M+0D")]
-    [TestCase("0Y+0M+0D", "0Y+0M+0D")]
-    [TestCase("1Y+8M+3D", "1Y+8M+3D")]
+    [Test]
+    [Arguments(null, "0Y+0M+0D")]
+    [Arguments(0L, "0Y+0M+0D")]
+    [Arguments("0Y+0M+0D", "0Y+0M+0D")]
+    [Arguments("1Y+8M+3D", "1Y+8M+3D")]
     public void System_Text_JSON_deserialization(object json, DateSpan svo)
         => JsonTester.Read_System_Text_JSON<DateSpan>(json).Should().Be(svo);
 
-    [TestCase("1Y+8M+3D", "1Y+8M+3D")]
+    [Test]
+    [Arguments("1Y+8M+3D", "1Y+8M+3D")]
     public void System_Text_JSON_serialization(DateSpan svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase(0L, "0Y+0M+0D")]
-    [TestCase("0Y+0M+0D", "0Y+0M+0D")]
-    [TestCase("1Y+8M+3D", "1Y+8M+3D")]
+    [Test]
+    [Arguments(0L, "0Y+0M+0D")]
+    [Arguments("0Y+0M+0D", "0Y+0M+0D")]
+    [Arguments("1Y+8M+3D", "1Y+8M+3D")]
     public void convention_based_deserialization(object json, DateSpan svo)
         => JsonTester.Read<DateSpan>(json).Should().Be(svo);
 
-    [TestCase("1Y+8M+3D", "1Y+8M+3D")]
+    [Test]
+    [Arguments("1Y+8M+3D", "1Y+8M+3D")]
     public void convention_based_serialization(DateSpan svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
-    [TestCase(true, typeof(InvalidOperationException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
+    [Arguments(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<DateSpan>)
@@ -553,18 +560,19 @@ public class Can_subtract
         => DateSpan.Subtract(new Date(2023, 11, 17), Svo.Date)
         .Should().Be(new DateSpan(years: 6, months: 5, days: 6));
 
-    [TestCase(+0, +364, "2018-06-10", "2017-06-11", DateSpanSettings.DaysOnly)]
-    [TestCase(+0, -364, "2017-06-11", "2018-06-10", DateSpanSettings.DaysOnly)]
-    [TestCase(+11, +30, "2018-06-10", "2017-06-11", DateSpanSettings.Default)]
-    [TestCase(+12, -01, "2018-06-10", "2017-06-11", DateSpanSettings.MixedSigns)]
-    [TestCase(+15, +14, "2018-06-10", "2017-02-27", DateSpanSettings.Default)]
-    [TestCase(+15, +11, "2018-06-10", "2017-02-27", DateSpanSettings.DaysFirst)]
-    [TestCase(+24, +119, "2019-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
-    [TestCase(+36, +120, "2020-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
-    [TestCase(+12, +331, "2019-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
-    [TestCase(+24, +332, "2020-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
-    [TestCase(-11, -30, "2017-06-11", "2018-06-10", DateSpanSettings.Default)]
-    [TestCase(-12, +01, "2017-06-11", "2018-06-10", DateSpanSettings.MixedSigns)]
+    [Test]
+    [Arguments(+0, +364, "2018-06-10", "2017-06-11", DateSpanSettings.DaysOnly)]
+    [Arguments(+0, -364, "2017-06-11", "2018-06-10", DateSpanSettings.DaysOnly)]
+    [Arguments(+11, +30, "2018-06-10", "2017-06-11", DateSpanSettings.Default)]
+    [Arguments(+12, -01, "2018-06-10", "2017-06-11", DateSpanSettings.MixedSigns)]
+    [Arguments(+15, +14, "2018-06-10", "2017-02-27", DateSpanSettings.Default)]
+    [Arguments(+15, +11, "2018-06-10", "2017-02-27", DateSpanSettings.DaysFirst)]
+    [Arguments(+24, +119, "2019-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+    [Arguments(+36, +120, "2020-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+    [Arguments(+12, +331, "2019-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+    [Arguments(+24, +332, "2020-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+    [Arguments(-11, -30, "2017-06-11", "2018-06-10", DateSpanSettings.Default)]
+    [Arguments(-12, +01, "2017-06-11", "2018-06-10", DateSpanSettings.MixedSigns)]
     public void two_Dates_based_on_settings(int months, int days, Date d1, Date d2, DateSpanSettings settings)
     {
         var expected = new DateSpan(0, months, days);
@@ -577,18 +585,19 @@ public class Can_subtract
         => DateSpan.Subtract(new DateOnly(2023, 11, 17), Svo.DateOnly)
         .Should().Be(new DateSpan(years: 6, months: 5, days: 6));
 
-    [TestCase(+0, +364, "2018-06-10", "2017-06-11", DateSpanSettings.DaysOnly)]
-    [TestCase(+0, -364, "2017-06-11", "2018-06-10", DateSpanSettings.DaysOnly)]
-    [TestCase(+11, +30, "2018-06-10", "2017-06-11", DateSpanSettings.Default)]
-    [TestCase(+12, -01, "2018-06-10", "2017-06-11", DateSpanSettings.MixedSigns)]
-    [TestCase(+15, +14, "2018-06-10", "2017-02-27", DateSpanSettings.Default)]
-    [TestCase(+15, +11, "2018-06-10", "2017-02-27", DateSpanSettings.DaysFirst)]
-    [TestCase(+24, +119, "2019-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
-    [TestCase(+36, +120, "2020-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
-    [TestCase(+12, +331, "2019-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
-    [TestCase(+24, +332, "2020-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
-    [TestCase(-11, -30, "2017-06-11", "2018-06-10", DateSpanSettings.Default)]
-    [TestCase(-12, +01, "2017-06-11", "2018-06-10", DateSpanSettings.MixedSigns)]
+    [Test]
+    [Arguments(+0, +364, "2018-06-10", "2017-06-11", DateSpanSettings.DaysOnly)]
+    [Arguments(+0, -364, "2017-06-11", "2018-06-10", DateSpanSettings.DaysOnly)]
+    [Arguments(+11, +30, "2018-06-10", "2017-06-11", DateSpanSettings.Default)]
+    [Arguments(+12, -01, "2018-06-10", "2017-06-11", DateSpanSettings.MixedSigns)]
+    [Arguments(+15, +14, "2018-06-10", "2017-02-27", DateSpanSettings.Default)]
+    [Arguments(+15, +11, "2018-06-10", "2017-02-27", DateSpanSettings.DaysFirst)]
+    [Arguments(+24, +119, "2019-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+    [Arguments(+36, +120, "2020-10-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+    [Arguments(+12, +331, "2019-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+    [Arguments(+24, +332, "2020-05-08", "2017-06-11", DateSpanSettings.WithoutMonths)]
+    [Arguments(-11, -30, "2017-06-11", "2018-06-10", DateSpanSettings.Default)]
+    [Arguments(-12, +01, "2017-06-11", "2018-06-10", DateSpanSettings.MixedSigns)]
     public void two_DateOnlys_based_on_settings(int months, int days, Date d1, Date d2, DateSpanSettings settings)
     {
         var expected = new DateSpan(0, months, days);

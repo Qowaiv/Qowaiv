@@ -16,37 +16,43 @@ public class Has_constant
 
 public class Can_be_transformed
 {
-    [TestCase(+17, -17)]
-    [TestCase(-17, +17)]
+    [Test]
+    [Arguments(+17, -17)]
+    [Arguments(-17, +17)]
     public void Negate(YearSpan span, YearSpan negated) => (-span).Should().Be(negated);
 
-    [TestCase(+17, +17)]
-    [TestCase(-17, -17)]
+    [Test]
+    [Arguments(+17, +17)]
+    [Arguments(-17, -17)]
     public void Plus(YearSpan span, YearSpan negated) => (+span).Should().Be(negated);
 
-    [TestCase(+17, +18)]
-    [TestCase(-17, -16)]
+    [Test]
+    [Arguments(+17, +18)]
+    [Arguments(-17, -16)]
     public void Increase(YearSpan span, YearSpan increase)
     {
         span++;
         span.Should().Be(increase);
     }
 
-    [TestCase(+17, +16)]
-    [TestCase(-17, -18)]
+    [Test]
+    [Arguments(+17, +16)]
+    [Arguments(-17, -18)]
     public void Decrease(YearSpan span, YearSpan decrease)
     {
         span--;
         span.Should().Be(decrease);
     }
 
-    [TestCase(-17, 17)]
-    [TestCase(+17, 17)]
+    [Test]
+    [Arguments(-17, 17)]
+    [Arguments(+17, 17)]
     public void Abs(YearSpan span, YearSpan abs) => span.Abs().Should().Be(abs);
 
-    [TestCase(-2, -1)]
-    [TestCase(+0, +0)]
-    [TestCase(+7, +1)]
+    [Test]
+    [Arguments(-2, -1)]
+    [Arguments(+0, +0)]
+    [Arguments(+7, +1)]
     public void Sign(YearSpan span, int sign) => span.Sign().Should().Be(sign);
 
     [Test]
@@ -108,20 +114,15 @@ public class Is_equal_by_value
     public void not_equal_operator_returns_true_for_different_values()
         => (Svo.YearSpan != YearSpan.Create(42)).Should().BeTrue();
 
-    [TestCase("0", 0)]
-    [TestCase("17", 665630146)]
-    public void hash_code_is_value_based(YearSpan svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    [Test]
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.YearSpan, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed
 {
-    [TestCase("en", "17")]
+    [Test]
+    [Arguments("en", "17")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -199,8 +200,9 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '_00_01_7', format: '#_00_00_0'");
     }
 
-    [TestCase("en-GB", null, "17", "17")]
-    [TestCase("nl-BE", "0.0", "17", "17,0")]
+    [Test]
+    [Arguments("en-GB", null, "17", "17")]
+    [Arguments("nl-BE", "0.0", "17", "17,0")]
     public void culture_dependent(CultureInfo culture, string format, YearSpan svo, string formatted)
     {
         using (culture.Scoped())
@@ -345,18 +347,21 @@ public class Has_custom_formatting
 
     public class Supports_JSON_serialization
     {
-        [TestCase(17, 17.0)]
-        [TestCase(17, 17L)]
-        [TestCase(17, "17")]
+        [Test]
+        [Arguments(17, 17.0)]
+        [Arguments(17, 17L)]
+        [Arguments(17, "17")]
         public void convention_based_deserialization(YearSpan svo, object json)
             => JsonTester.Read<YearSpan>(json).Should().Be(svo);
 
-        [TestCase(17, 17)]
+        [Test]
+        [Arguments(17, 17)]
         public void convention_based_serialization(object json, YearSpan svo)
             => JsonTester.Write(svo).Should().Be(json);
 
-        [TestCase("Invalid input", typeof(FormatException))]
-        [TestCase("2017-06-11", typeof(FormatException))]
+        [Test]
+        [Arguments("Invalid input", typeof(FormatException))]
+        [Arguments("2017-06-11", typeof(FormatException))]
         public void throws_for_invalid_json(object json, Type exceptionType)
         {
             Func<YearSpan> read = () => JsonTester.Read<YearSpan>(json);

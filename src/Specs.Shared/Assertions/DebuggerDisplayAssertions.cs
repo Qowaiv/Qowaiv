@@ -1,10 +1,11 @@
 using AwesomeAssertions.Numeric;
 using AwesomeAssertions.Primitives;
+using System.Reflection;
 
 namespace AwesomeAssertions;
 
 /// <summary>Extensions to assert debugger display behavior.</summary>
-internal static class QowaivDebuggerDisplayAssertions
+public static class DebuggerDisplayAssertions
 {
     /// <summary>Verifies the outcome of the <see cref="DebuggerDisplayAttribute" /> of a certain <see cref="object" />.</summary>
     [CustomAssertion]

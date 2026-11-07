@@ -1,5 +1,5 @@
 global using AwesomeAssertions;
-global using NUnit.Framework;
+global using TUnit.Core;
 global using Qowaiv;
 global using Qowaiv.Globalization;
 global using Qowaiv.TestTools;

@@ -8,66 +8,77 @@ public class Has_constant
 
 public class With_domain_logic
 {
-    [TestCase(true, "application/x-chess-pgn")]
-    [TestCase(true, "application/octet-stream")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "application/x-chess-pgn")]
+    [Arguments(true, "application/octet-stream")]
+    [Arguments(false, "")]
     public void HasValue_is(bool result, InternetMediaType svo) => svo.HasValue.Should().Be(result);
 
-    [TestCase(true, "application/x-chess-pgn")]
-    [TestCase(false, "application/octet-stream")]
-    [TestCase(false, "")]
+    [Test]
+    [Arguments(true, "application/x-chess-pgn")]
+    [Arguments(false, "application/octet-stream")]
+    [Arguments(false, "")]
     public void IsKnown_is(bool result, InternetMediaType svo) => svo.IsKnown.Should().Be(result);
 
-    [TestCase(true, "")]
-    [TestCase(false, "?")]
-    [TestCase(false, "application/x-chess-pgn")]
+    [Test]
+    [Arguments(true, "")]
+    [Arguments(false, "?")]
+    [Arguments(false, "application/x-chess-pgn")]
     public void IsEmpty_is(bool result, InternetMediaType svo) => svo.IsEmpty().Should().Be(result);
 
-    [TestCase(false, "")]
-    [TestCase(true, "?")]
-    [TestCase(false, "application/x-chess-pgn")]
+    [Test]
+    [Arguments(false, "")]
+    [Arguments(true, "?")]
+    [Arguments(false, "application/x-chess-pgn")]
     public void IsUnknown_is(bool result, InternetMediaType svo) => svo.IsUnknown().Should().Be(result);
 
-    [TestCase(true, "")]
-    [TestCase(true, "?")]
-    [TestCase(false, "application/x-chess-pgn")]
+    [Test]
+    [Arguments(true, "")]
+    [Arguments(true, "?")]
+    [Arguments(false, "application/x-chess-pgn")]
     public void IsEmptyOrUnknown_is(bool result, InternetMediaType svo) => svo.IsEmptyOrUnknown().Should().Be(result);
 }
 
 public class Has_properties
 {
-    [TestCase("", 0)]
-    [TestCase("application/x-chess-pgn", 23)]
+    [Test]
+    [Arguments("", 0)]
+    [Arguments("application/x-chess-pgn", 23)]
     public void Length_is(InternetMediaType svo, int length) => svo.Length.Should().Be(length);
 
-    [TestCase("", "")]
-    [TestCase("text/html", "text")]
-    [TestCase("x-conference/x-cooltalk", "x-conference")]
-    [TestCase("application/x-chess-pgn", "application")]
+    [Test]
+    [Arguments("", "")]
+    [Arguments("text/html", "text")]
+    [Arguments("x-conference/x-cooltalk", "x-conference")]
+    [Arguments("application/x-chess-pgn", "application")]
     public void TopLevel_is(InternetMediaType svo, string topLevel) => svo.TopLevel.Should().Be(topLevel);
 
-    [TestCase("", InternetMediaTopLevelType.None)]
-    [TestCase("text/html", InternetMediaTopLevelType.Text)]
-    [TestCase("x-conference/x-cooltalk", InternetMediaTopLevelType.Unregistered)]
-    [TestCase("application/x-chess-pgn", InternetMediaTopLevelType.Application)]
+    [Test]
+    [Arguments("", InternetMediaTopLevelType.None)]
+    [Arguments("text/html", InternetMediaTopLevelType.Text)]
+    [Arguments("x-conference/x-cooltalk", InternetMediaTopLevelType.Unregistered)]
+    [Arguments("application/x-chess-pgn", InternetMediaTopLevelType.Application)]
     public void TopLevelType_is(InternetMediaType svo, InternetMediaTopLevelType type) => svo.TopLevelType.Should().Be(type);
 
-    [TestCase("", "")]
-    [TestCase("text/html", "html")]
-    [TestCase("x-conference/x-cooltalk", "x-cooltalk")]
-    [TestCase("application/x-chess-pgn", "x-chess-pgn")]
+    [Test]
+    [Arguments("", "")]
+    [Arguments("text/html", "html")]
+    [Arguments("x-conference/x-cooltalk", "x-cooltalk")]
+    [Arguments("application/x-chess-pgn", "x-chess-pgn")]
     public void Subtype_is(InternetMediaType svo, string subtype) => svo.Subtype.Should().Be(subtype);
 
-    [TestCase("", false)]
-    [TestCase("text/html", true)]
-    [TestCase("x-conference/x-cooltalk", false)]
-    [TestCase("application/x-chess-pgn", false)]
-    [TestCase("video/x.test", false)]
+    [Test]
+    [Arguments("", false)]
+    [Arguments("text/html", true)]
+    [Arguments("x-conference/x-cooltalk", false)]
+    [Arguments("application/x-chess-pgn", false)]
+    [Arguments("video/x.test", false)]
     public void IsRegistered_is(InternetMediaType svo, bool isRegistered) => svo.IsRegistered.Should().Be(isRegistered);
 
-    [TestCase("", InternetMediaSuffixType.None)]
-    [TestCase("application/x-chess-pgn", InternetMediaSuffixType.None)]
-    [TestCase("application/atom+xml", InternetMediaSuffixType.xml)]
+    [Test]
+    [Arguments("", InternetMediaSuffixType.None)]
+    [Arguments("application/x-chess-pgn", InternetMediaSuffixType.None)]
+    [Arguments("application/atom+xml", InternetMediaSuffixType.xml)]
     public void Suffix_is(InternetMediaType svo, InternetMediaSuffixType suffix) => svo.Suffix.Should().Be(suffix);
 }
 
@@ -77,8 +88,9 @@ public class Created_from_file
     public void IO_File_info()
         => InternetMediaType.FromFile(new FileInfo("games.pgn")).Should().Be(Svo.InternetMediaType);
 
-    [TestCase(".unknown")]
-    [TestCase(".other")]
+    [Test]
+    [Arguments(".unknown")]
+    [Arguments(".other")]
     public void IO_File_info_with_unknown_extension(string extension)
        => InternetMediaType.FromFile(new FileInfo($"file{extension}")).Should().Be(InternetMediaType.Unknown);
 
@@ -137,15 +149,9 @@ public class Is_equal_by_value
         l.Equals(r).Should().BeTrue();
     }
 
-    [TestCase("", 0)]
-    [TestCase("application/x-chess-pgn", 787633777)]
-    public void hash_code_is_value_based(InternetMediaType svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    [Test]
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.InternetMediaType, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed
@@ -162,8 +168,9 @@ public class Can_be_parsed
     public void from_question_mark_represents_Unknown()
         => InternetMediaType.Parse("?").Should().Be(InternetMediaType.Unknown);
 
-    [TestCase("en-GB", "application/x-chess-pgn")]
-    [TestCase("es-EC", "application/x-chess-pgn")]
+    [Test]
+    [Arguments("en-GB", "application/x-chess-pgn")]
+    [Arguments("es-EC", "application/x-chess-pgn")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -341,34 +348,40 @@ public class Is_comparable
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase(null, null)]
-    [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("application/x-chess-pgn", "application/x-chess-pgn")]
     public void System_Text_JSON_deserialization(object json, InternetMediaType svo)
         => JsonTester.Read_System_Text_JSON<InternetMediaType>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("application/x-chess-pgn", "application/x-chess-pgn")]
     public void System_Text_JSON_serialization(InternetMediaType svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
+    [Test]
+    [Arguments("application/x-chess-pgn", "application/x-chess-pgn")]
     public void convention_based_deserialization(object json, InternetMediaType svo)
         => JsonTester.Read<InternetMediaType>(json).Should().Be(svo);
 
-    [TestCase(null, null)]
-    [TestCase("application/x-chess-pgn", "application/x-chess-pgn")]
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("application/x-chess-pgn", "application/x-chess-pgn")]
     public void convention_based_serialization(InternetMediaType svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<InternetMediaType>)
             .Should().Throw<Exception>()
             .And.Should().BeOfType(exceptionType);
 
-    [TestCase("Invalid input")]
-    [TestCase("2017-06-11")]
+    [Test]
+    [Arguments("Invalid input")]
+    [Arguments("2017-06-11")]
     public void FromJson_Invalid_Throws(object json)
         => json.Invoking(JsonTester.Read<InternetMediaType>)
             .Should().Throw<FormatException>();

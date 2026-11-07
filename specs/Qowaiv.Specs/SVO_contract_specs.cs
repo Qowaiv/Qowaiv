@@ -2,42 +2,52 @@ namespace SVO_contract_specs;
 
 public class Implements : SingleValueObjectSpecs
 {
-    [TestCaseSource(nameof(AllSvos))]
+    [Test]
+    [MethodDataSource(nameof(AllSvos))]
     public void IEquatable(Type type) => type.Should().Implement(typeof(IEquatable<>).MakeGenericType(type));
 
-    [TestCaseSource(nameof(AllSvos))]
+    [Test]
+    [MethodDataSource(nameof(AllSvos))]
     public void IComparable(Type type) => type.Should().Implement<IComparable>();
 
-    [TestCaseSource(nameof(AllSvos))]
+    [Test]
+    [MethodDataSource(nameof(AllSvos))]
     public void IComparable_TSelf(Type type) => type.Should().Implement(typeof(IComparable<>).MakeGenericType(type));
 
-    [TestCaseSource(nameof(AllSvos))]
+    [Test]
+    [MethodDataSource(nameof(AllSvos))]
     public void IFormattable(Type type) => type.Should().Implement<IFormattable>();
 
 
-    [TestCaseSource(nameof(AllSvos))]
+    [Test]
+    [MethodDataSource(nameof(AllSvos))]
     public void Not_ISerializable(Type type) => type.Should().NotImplement<ISerializable>();
 
-    [TestCaseSource(nameof(AllSvos))]
+    [Test]
+    [MethodDataSource(nameof(AllSvos))]
     public void IXmlSerializable(Type type) => type.Should().Implement<IXmlSerializable>();
 
 #if NET10_0_OR_GREATER
-    [TestCaseSource(nameof(AllSvosExceptGeneric))]
+    [Test]
+    [MethodDataSource(nameof(AllSvosExceptGeneric))]
     public void IEqualityOperators(Type type) => type.Should().Implement(typeof(System.Numerics.IEqualityOperators<,,>).MakeGenericType(type, type, typeof(bool)));
 
-    [TestCaseSource(nameof(AllSvosExceptGeneric))]
+    [Test]
+    [MethodDataSource(nameof(AllSvosExceptGeneric))]
     public void IParsable(Type type) => type.Should().Implement(typeof(IParsable<>).MakeGenericType(type));
 #endif
 }
 
 public class Is_decorated_with : SingleValueObjectSpecs
 {
-    [TestCaseSource(nameof(AllSvosExceptGeneric))]
+    [Test]
+    [MethodDataSource(nameof(AllSvosExceptGeneric))]
     public void Type_converter(Type svo)
         => svo.Should().HaveTypeConverterDefined();
 
 #if NET10_0_OR_GREATER
-    [TestCaseSource(nameof(AllSvos))]
+    [Test]
+    [MethodDataSource(nameof(AllSvos))]
     public void NotNullWhen_attribute_on_Equals_object(Type svo)
     {
         var equals_object = svo
@@ -56,12 +66,14 @@ public class Is_decorated_with : SingleValueObjectSpecs
     }
 #endif
 
-    [TestCaseSource(nameof(AllSvosExceptGeneric))]
+    [Test]
+    [MethodDataSource(nameof(AllSvosExceptGeneric))]
     public void Open_API_data_type(Type svo)
         => svo.Should().BeDecoratedWith<OpenApiDataTypeAttribute>();
 
 #if NET10_0_OR_GREATER
-    [TestCaseSource(nameof(AllSvos))]
+    [Test]
+    [MethodDataSource(nameof(AllSvos))]
     public void System_Text_Json_JsonConverter(Type type)
     {
         type.Should().BeDecoratedWith<System.Text.Json.Serialization.JsonConverterAttribute>();

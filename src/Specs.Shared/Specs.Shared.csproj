@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/nopackage.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
+    <RootNamespace>Specs</RootNamespace>
+    <Nullable>enable</Nullable>
+    <IsTestCode>true</IsTestCode>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="Test Tools">
+    <PackageReference Include="AwesomeAssertions" />
+  </ItemGroup>
+
+  <ItemGroup Label="Analyzers">
+    <PackageReference PrivateAssets="all" Include="AwesomeAssertions.Analyzers" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+</Project>

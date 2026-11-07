@@ -72,15 +72,9 @@ public class Is_equal_by_value
         }
     }
 
-    [TestCase("0001-01-01", 0)]
-    [TestCase("2017-06-11 06:15", 533532482)]
-    public void hash_code_is_value_based(LocalDateTime svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    [Test]
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.LocalDateTime, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed
@@ -90,8 +84,9 @@ public class Can_be_parsed
         => LocalDateTime.Parse("26-4-2015 17:07:13", TestCultures.nl_NL)
         .Should().Be(new LocalDateTime(2015, 04, 26, 17, 07, 13));
 
-    [TestCase("en-GB", "11/06/2017 06:15:00")]
-    [TestCase("nl-NL", "11-06-2017 06:15:00")]
+    [Test]
+    [Arguments("en-GB", "11/06/2017 06:15:00")]
+    [Arguments("nl-NL", "11-06-2017 06:15:00")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -222,8 +217,9 @@ public class Can_be_adjusted_with
 
 public class Can_not_be_adjusted_with
 {
-    [TestCase(DateSpanSettings.WithoutMonths)]
-    [TestCase(DateSpanSettings.DaysFirst | DateSpanSettings.MixedSigns)]
+    [Test]
+    [Arguments(DateSpanSettings.WithoutMonths)]
+    [Arguments(DateSpanSettings.DaysFirst | DateSpanSettings.MixedSigns)]
     public void Date_span_with(DateSpanSettings settings)
         => new LocalDateTime(2017, 06, 11).Invoking(d => d.Add(new DateSpan(2, 20), settings))
         .Should().Throw<ArgumentOutOfRangeException>().WithMessage("Adding a date span only supports 'Default' and 'DaysFirst'.*");
@@ -464,27 +460,32 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase(627178398050010000L, "1988-06-13 22:10:05.001")]
-    [TestCase("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
+    [Test]
+    [Arguments(627178398050010000L, "1988-06-13 22:10:05.001")]
+    [Arguments("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
     public void System_Text_JSON_deserialization(object json, LocalDateTime svo)
         => JsonTester.Read_System_Text_JSON<LocalDateTime>(json).Should().Be(svo);
 
-    [TestCase("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
+    [Test]
+    [Arguments("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
     public void System_Text_JSON_serialization(LocalDateTime svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase(627178398050010000L, "1988-06-13 22:10:05.001")]
-    [TestCase("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
+    [Test]
+    [Arguments(627178398050010000L, "1988-06-13 22:10:05.001")]
+    [Arguments("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
     public void convention_based_deserialization(object json, LocalDateTime svo)
       => JsonTester.Read<LocalDateTime>(json).Should().Be(svo);
 
-    [TestCase("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
+    [Test]
+    [Arguments("1988-06-13 22:10:05.001", "1988-06-13 22:10:05.001")]
     public void convention_based_serialization(LocalDateTime svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("yyyy-06-11", typeof(FormatException))]
-    [TestCase(true, typeof(InvalidOperationException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("yyyy-06-11", typeof(FormatException))]
+    [Arguments(true, typeof(InvalidOperationException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<LocalDateTime>)

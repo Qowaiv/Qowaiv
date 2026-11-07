@@ -76,12 +76,13 @@ public class Is_comparable
 
 public class Can_be_parsed
 {
-    [TestCase("en", "123456789")]
-    [TestCase("en", "123456.789 kB")]
-    [TestCase("en", "123456.789 kilobyte")]
-    [TestCase("en", "123.456789 MB")]
-    [TestCase("nl", "123,456789 MB")]
-    [TestCase("nl", "0,123456789 GB")]
+    [Test]
+    [Arguments("en", "123456789")]
+    [Arguments("en", "123456.789 kB")]
+    [Arguments("en", "123456.789 kilobyte")]
+    [Arguments("en", "123.456789 MB")]
+    [Arguments("nl", "123,456789 MB")]
+    [Arguments("nl", "0,123456789 GB")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -167,21 +168,22 @@ public class Has_custom_formatting
         formatted.Should().Be("Unit Test Formatter, value: '123.5 Megabyte', format: '0.0 F'");
     }
 
-    [TestCase("nl-NL", "#,##0b", 123456789, "123.456.789b")]
-    [TestCase("nl-NL", "#,##0.00 kB", 123456789, "123.456,79 kB")]
-    [TestCase("nl-BE", "0.0 MegaByte", 123456789, "123,5 MegaByte")]
-    [TestCase("nl-BE", "0.0 F", -123456789, "-123,5 Megabyte")]
-    [TestCase("nl-BE", "0.00GB", 123456789, "0,12GB")]
-    [TestCase("de-DE", "0.0000 GiB", 123456789, "0,1150 GiB")]
-    [TestCase("nl-BE", "tb", 1_000_000_000_000_000L, "1000tb")]
-    [TestCase("nl-BE", " petabyte", 1_000_000_000_000L, "0,001 petabyte")]
-    [TestCase("nl-BE", "#,##0.## Exabyte", long.MaxValue, "9,22 Exabyte")]
-    [TestCase("nl-BE", "#,##0.## F", 123456789, "123,46 Megabyte")]
-    [TestCase("nl-BE", "0 f", 123456789, "123 megabyte")]
-    [TestCase("nl-BE", "0000 S", 123456789, "0123 MB")]
-    [TestCase("nl-BE", "0 s", 123456789, "123 mb")]
-    [TestCase("nl-BE", "0s", 123456789, "123mb")]
-    [TestCase("nl-BE", "0.0 si", 123456789, "117,7 mib")]
+    [Test]
+    [Arguments("nl-NL", "#,##0b", 123456789, "123.456.789b")]
+    [Arguments("nl-NL", "#,##0.00 kB", 123456789, "123.456,79 kB")]
+    [Arguments("nl-BE", "0.0 MegaByte", 123456789, "123,5 MegaByte")]
+    [Arguments("nl-BE", "0.0 F", -123456789, "-123,5 Megabyte")]
+    [Arguments("nl-BE", "0.00GB", 123456789, "0,12GB")]
+    [Arguments("de-DE", "0.0000 GiB", 123456789, "0,1150 GiB")]
+    [Arguments("nl-BE", "tb", 1_000_000_000_000_000L, "1000tb")]
+    [Arguments("nl-BE", " petabyte", 1_000_000_000_000L, "0,001 petabyte")]
+    [Arguments("nl-BE", "#,##0.## Exabyte", long.MaxValue, "9,22 Exabyte")]
+    [Arguments("nl-BE", "#,##0.## F", 123456789, "123,46 Megabyte")]
+    [Arguments("nl-BE", "0 f", 123456789, "123 megabyte")]
+    [Arguments("nl-BE", "0000 S", 123456789, "0123 MB")]
+    [Arguments("nl-BE", "0 s", 123456789, "123 mb")]
+    [Arguments("nl-BE", "0s", 123456789, "123mb")]
+    [Arguments("nl-BE", "0.0 si", 123456789, "117,7 mib")]
     public void format_dependent(CultureInfo culture, string format, long bytes, string formatted)
     {
         using (culture.Scoped())
@@ -190,11 +192,12 @@ public class Has_custom_formatting
         }
     }
 
-    [TestCase("nl-BE", null, "1600,1", "1600 byte")]
-    [TestCase("en-GB", null, "1600.1", "1600 byte")]
-    [TestCase("nl-BE", "0000 byte", "800", "0800 byte")]
-    [TestCase("en-GB", "0000", "800", "0800")]
-    [TestCase("es-EC", "00000.0", "1700", "01700,0")]
+    [Test]
+    [Arguments("nl-BE", null, "1600,1", "1600 byte")]
+    [Arguments("en-GB", null, "1600.1", "1600 byte")]
+    [Arguments("nl-BE", "0000 byte", "800", "0800 byte")]
+    [Arguments("en-GB", "0000", "800", "0800")]
+    [Arguments("es-EC", "00000.0", "1700", "01700,0")]
     public void culture_dependent(CultureInfo culture, string format, string input, string formatted)
     {
         using (culture.Scoped())
@@ -380,48 +383,58 @@ public class Created_from
 
 public class From_byte_factories
 {
-    [TestCase(2, 2000L)]
+    [Test]
+    [Arguments(2, 2000L)]
     public void Kilobytes(double kilobytes, long bytes)
         => ((long)StreamSize.FromKilobytes(kilobytes)).Should().Be(bytes);
 
-    [TestCase(3.5, 3500000L)]
+    [Test]
+    [Arguments(3.5, 3500000L)]
     public void Megabytes(double megabytes, long bytes)
         => ((long)StreamSize.FromMegabytes(megabytes)).Should().Be(bytes);
 
-    [TestCase(0.8, 800000000L)]
+    [Test]
+    [Arguments(0.8, 800000000L)]
     public void Gigabytes(double gigabytes, long bytes)
         => ((long)StreamSize.FromGigabytes(gigabytes)).Should().Be(bytes);
 
-    [TestCase(10, 10000000000000L)]
+    [Test]
+    [Arguments(10, 10000000000000L)]
     public void Terabytes(double terabytes, long bytes)
         => ((long)StreamSize.FromTerabytes(terabytes)).Should().Be(bytes);
 
-    [TestCase(2, 2048L)]
+    [Test]
+    [Arguments(2, 2048L)]
     public void Kibibytes(double kibibytes, long bytes)
         => ((long)StreamSize.FromKibibytes(kibibytes)).Should().Be(bytes);
 
-    [TestCase(3.5, 3670016L)]
+    [Test]
+    [Arguments(3.5, 3670016L)]
     public void Mebibytes(double mebibytes, long bytes)
         => ((long)StreamSize.FromMebibytes(mebibytes)).Should().Be(bytes);
 
-    [TestCase(0.8, 858993459L)]
+    [Test]
+    [Arguments(0.8, 858993459L)]
     public void Gibibytes(double gibibytes, long bytes)
         => ((long)StreamSize.FromGibibytes(gibibytes)).Should().Be(bytes);
 
-    [TestCase(10, 10995116277760L)]
+    [Test]
+    [Arguments(10, 10995116277760L)]
     public void Tebibytes(double tebibytes, long bytes)
         => ((long)StreamSize.FromTebibytes(tebibytes)).Should().Be(bytes);
 }
 
 public class Can_be_operated_on
 {
-    [TestCase(-1, "-23KB")]
-    [TestCase(0, "0KB")]
-    [TestCase(1, "16KB")]
+    [Test]
+    [Arguments(-1, "-23KB")]
+    [Arguments(0, "0KB")]
+    [Arguments(1, "16KB")]
     public void get_sign(int sign, StreamSize size) => size.Sign().Should().Be(sign);
 
-    [TestCase("1234", "-1234")]
-    [TestCase("1234", "1234")]
+    [Test]
+    [Arguments("1234", "-1234")]
+    [Arguments("1234", "1234")]
     public void get_absolute(StreamSize expected, StreamSize value) => value.Abs().Should().Be(expected);
 
     [Test]
@@ -690,15 +703,9 @@ public class Is_equal_by_value
         l.Equals(r).Should().BeTrue();
     }
 
-    [TestCase("0 byte", 0)]
-    [TestCase("123456789 byte", 553089222)]
-    public void hash_code_is_value_based(StreamSize svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    [Test]
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.StreamSize, default).Should().BeConsistent();
 }
 
 public class Supports_type_conversion
@@ -716,8 +723,9 @@ public class Supports_type_conversion
         }
     }
 
-    [TestCase("123456789")]
-    [TestCase("123456.789 kB")]
+    [Test]
+    [Arguments("123456789")]
+    [Arguments("123456.789 kB")]
     public void from_string(string str)
     {
         using (TestCultures.en_GB.Scoped())
@@ -747,32 +755,37 @@ public class Supports_type_conversion
 public class Supports_JSON_serialization
 {
 #if NET10_0_OR_GREATER
-    [TestCase("1600", 1_600)]
-    [TestCase("17MB", 17_000_000)]
-    [TestCase("1.766Kb", 1_766)]
-    [TestCase(1234L, 1234)]
-    [TestCase(1258.9, 1258)]
+    [Test]
+    [Arguments("1600", 1_600)]
+    [Arguments("17MB", 17_000_000)]
+    [Arguments("1.766Kb", 1_766)]
+    [Arguments(1234L, 1234)]
+    [Arguments(1258.9, 1258)]
     public void System_Text_JSON_deserialization(object json, StreamSize svo)
         => JsonTester.Read_System_Text_JSON<StreamSize>(json).Should().Be(svo);
 
-    [TestCase(17L, 17L)]
+    [Test]
+    [Arguments(17L, 17L)]
     public void System_Text_JSON_serialization(StreamSize svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
-    [TestCase("1600", 1_600)]
-    [TestCase("17MB", 17_000_000)]
-    [TestCase("1.766Kb", 1_766)]
-    [TestCase(1234L, 1234)]
-    [TestCase(1258.9, 1258)]
+    [Test]
+    [Arguments("1600", 1_600)]
+    [Arguments("17MB", 17_000_000)]
+    [Arguments("1.766Kb", 1_766)]
+    [Arguments(1234L, 1234)]
+    [Arguments(1258.9, 1258)]
     public void convention_based_deserialization(object json, StreamSize svo)
        => JsonTester.Read<StreamSize>(json).Should().Be(svo);
 
-    [TestCase(17L, 17L)]
+    [Test]
+    [Arguments(17L, 17L)]
     public void convention_based_serialization(StreamSize svo, object json)
         => JsonTester.Write(svo).Should().Be(json);
 
-    [TestCase("Invalid input", typeof(FormatException))]
-    [TestCase("2017-06-11", typeof(FormatException))]
+    [Test]
+    [Arguments("Invalid input", typeof(FormatException))]
+    [Arguments("2017-06-11", typeof(FormatException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
         => json
             .Invoking(JsonTester.Read<StreamSize>)

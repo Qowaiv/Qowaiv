@@ -8,21 +8,22 @@ public class Compares
     /// <summary>Proves that the<paramref name="index0" /> has an higher priority than the paired
     /// <paramref name="index1" />.
     /// </summary>
-    [TestCase(10, 11)]
-    [TestCase(11, 12)]
-    [TestCase(12, 13)]
-    [TestCase(13, 14)]
-    [TestCase(14, 15)]
-    [TestCase(15, 08)]
-    [TestCase(08, 09)]
-    [TestCase(09, 06)]
-    [TestCase(06, 07)]
-    [TestCase(07, 04)]
-    [TestCase(04, 05)]
-    [TestCase(05, 00)]
-    [TestCase(00, 01)]
-    [TestCase(01, 02)]
-    [TestCase(02, 03)]
+    [Test]
+    [Arguments(10, 11)]
+    [Arguments(11, 12)]
+    [Arguments(12, 13)]
+    [Arguments(13, 14)]
+    [Arguments(14, 15)]
+    [Arguments(15, 08)]
+    [Arguments(08, 09)]
+    [Arguments(09, 06)]
+    [Arguments(06, 07)]
+    [Arguments(07, 04)]
+    [Arguments(04, 05)]
+    [Arguments(05, 00)]
+    [Arguments(00, 01)]
+    [Arguments(01, 02)]
+    [Arguments(02, 03)]
     public void SQL_Server(int index0, int index1)
     {
         var l = Simple(index0, index1, 1, 2);

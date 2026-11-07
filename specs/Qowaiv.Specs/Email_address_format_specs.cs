@@ -2,13 +2,15 @@ namespace Email_address_format_specs;
 
 public class Length
 {
-    [TestCase("the-total-length@of-an-entire-address.cannot-be-longer-than-two-hundred-and-fifty-four-characters.and-this-address-is-254-characters-exactly.so-it-should-be-valid.and-im-going-to-add-some-more-words-here.to-increase-the-length-blah-blah-blah-blah-bla.org")]
-    [TestCase("i234567890_234567890_234567890_234567890_234567890_234567890_234@long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long")]
-    [TestCase("Display name is ignored <i234567890(comments are ignored)_234567890_234567890_234567890_234567890_234567890_234@long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long>")]
+    [Test]
+    [Arguments("the-total-length@of-an-entire-address.cannot-be-longer-than-two-hundred-and-fifty-four-characters.and-this-address-is-254-characters-exactly.so-it-should-be-valid.and-im-going-to-add-some-more-words-here.to-increase-the-length-blah-blah-blah-blah-bla.org")]
+    [Arguments("i234567890_234567890_234567890_234567890_234567890_234567890_234@long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long")]
+    [Arguments("Display name is ignored <i234567890(comments are ignored)_234567890_234567890_234567890_234567890_234567890_234@long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long>")]
     public void maximum_is_254(string max)
         => EmailAddress.Parse(max).Length.Should().Be(254);
 
-    [TestCase("i234567890_234567890_234567890_234567890_234567890_234567890_234@long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long1")]
+    [Test]
+    [Arguments("i234567890_234567890_234567890_234567890_234567890_234567890_234@long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long.long1")]
     public void not_255_or_longer(string max)
     {
         max.Length.Should().BeGreaterThanOrEqualTo(255);
@@ -19,13 +21,14 @@ public class Length
 public class Local_part
 {
     public static IEnumerable<char> WithoutLimitations
-     => "0123456789"
+     => ("0123456789"
      + "abcdefghijklmnopqrstuvwxyz"
      + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-     + "!#$%&'*+-/=?^_`{}|~";
+     + "!#$%&'*+-/=?^_`{}|~").ToCharArray();
 
-    [TestCase("")]
-    [TestCase(@"""""")]
+    [Test]
+    [Arguments("")]
+    [Arguments(@"""""")]
     public void not_empty(string empty)
         => Email.ShouldBeInvalid($"{empty}@qowaiv.org");
 
@@ -33,39 +36,44 @@ public class Local_part
     public void can_contain_emoji()
         => Email.ShouldBeValid("❤️@qowaiv.org");
 
-    [TestCase(1)]
-    [TestCase(2)]
-    [TestCase(17)]
-    [TestCase(64)]
+    [Test]
+    [Arguments(1)]
+    [Arguments(2)]
+    [Arguments(17)]
+    [Arguments(64)]
     public void length_between_1_and_64(int length)
         => Email.ShouldBeValid($"{new string('a', length)}@qowaiv.org");
 
-    [TestCase(1)]
-    [TestCase(2)]
-    [TestCase(17)]
-    [TestCase(62)]
+    [Test]
+    [Arguments(1)]
+    [Arguments(2)]
+    [Arguments(17)]
+    [Arguments(62)]
     public void length_between_1_and_62_quoted(int length)
     {
         Email.ShouldBeValid($@"""{new string('a', length)}""@qowaiv.org");
         Email.ShouldBeValid($@"Display <""{new string('a', length)}""@qowaiv.org>");
     }
 
-    [TestCase(65)]
-    [TestCase(66)]
-    [TestCase(99)]
+    [Test]
+    [Arguments(65)]
+    [Arguments(66)]
+    [Arguments(99)]
     public void length_not_above_64(int length)
         => Email.ShouldBeInvalid($"{new string('a', length)}@qowaiv.org");
 
-    [TestCase(63)]
-    [TestCase(64)]
-    [TestCase(99)]
+    [Test]
+    [Arguments(63)]
+    [Arguments(64)]
+    [Arguments(99)]
     public void length_above_62_quoted(int length)
     {
         Email.ShouldBeInvalid($@"""{new string('a', length)}""@qowaiv.org");
         Email.ShouldBeInvalid($@"Display <""{new string('a', length)}""@qowaiv.org>");
     }
 
-    [TestCaseSource(nameof(WithoutLimitations))]
+    [Test]
+    [MethodDataSource(nameof(WithoutLimitations))]
     public void char_without_limitations(char ch)
         => Email.ShouldBeValid($"{new string(ch, 64)}@qowaiv.org");
 
@@ -85,37 +93,42 @@ public class Local_part
     public void dot_dot_is_forbidden_sequence()
         => Email.ShouldBeInvalid("in..fo@qowaiv.org");
 
-    [TestCase(@""" ""@qowaiv.org")]
-    [TestCase(@"""info@qowaiv.org""@qowaiv.org")]
-    [TestCase(@"""i n f o""@qowaiv.org")]
+    [Test]
+    [Arguments(@""" ""@qowaiv.org")]
+    [Arguments(@"""info@qowaiv.org""@qowaiv.org")]
+    [Arguments(@"""i n f o""@qowaiv.org")]
     public void quoted_allows_anything(string quoted)
          => Email.ShouldBeValid(quoted);
 }
 
 public class Domain_part
 {
-    [TestCase(1)]
-    [TestCase(2)]
-    [TestCase(17)]
-    [TestCase(63)]
+    [Test]
+    [Arguments(1)]
+    [Arguments(2)]
+    [Arguments(17)]
+    [Arguments(63)]
     public void part_between_1_and_63(int length)
       => Email.ShouldBeValid($"info@{new string('a', length)}.qowaiv.org");
 
-    [TestCase(64)]
-    [TestCase(65)]
-    [TestCase(99)]
+    [Test]
+    [Arguments(64)]
+    [Arguments(65)]
+    [Arguments(99)]
     public void part_not_above_63(int length)
         => Email.ShouldBeInvalid($"info@{new string('a', length)}.qowaiv.org");
 
-    [TestCase(64)]
-    [TestCase(65)]
-    [TestCase(99)]
+    [Test]
+    [Arguments(64)]
+    [Arguments(65)]
+    [Arguments(99)]
     public void last_part_not_above_63(int length)
        => Email.ShouldBeInvalid($"info@{new string('a', length)}");
 
-    public static IEnumerable<char> Forbidden => "!#$%&'*+/=?^`{}|~";
+    public static IEnumerable<char> Forbidden => "!#$%&'*+/=?^`{}|~".ToCharArray();
 
-    [TestCaseSource(nameof(Forbidden))]
+    [Test]
+    [MethodDataSource(nameof(Forbidden))]
     public void forbidden_char(char ch)
          => Email.ShouldBeInvalid($"info@qo{ch}waiv.org");
 
@@ -127,23 +140,26 @@ public class Domain_part
     public void not_length_1()
         => Email.ShouldBeInvalid("info@q");
 
-    [TestCase("org")]
-    [TestCase("com")]
-    [TestCase("museum")]
-    [TestCase("topleveldomain")]
-    [TestCase("co.jp")]
+    [Test]
+    [Arguments("org")]
+    [Arguments("com")]
+    [Arguments("museum")]
+    [Arguments("topleveldomain")]
+    [Arguments("co.jp")]
     public void top_level_domain_can_contain_any_letter(string topLevelDomain)
         => Email.ShouldBeValid($"info@qowaiv.{topLevelDomain}");
 
-    [TestCase("xn--bcher-kva8445foa")]
-    [TestCase("xn--eckwd4c7cu47r2wf")]
-    [TestCase("xn--3e0b707e")]
+    [Test]
+    [Arguments("xn--bcher-kva8445foa")]
+    [Arguments("xn--eckwd4c7cu47r2wf")]
+    [Arguments("xn--3e0b707e")]
     public void can_be_punycode(string punyCode)
         => Email.ShouldBeValid($"info@qowaiv.{punyCode}");
 
-    [TestCase("xn-bcher-kva8445foa")]
-    [TestCase("xn--e")]
-    [TestCase("xn--")]
+    [Test]
+    [Arguments("xn-bcher-kva8445foa")]
+    [Arguments("xn--e")]
+    [Arguments("xn--")]
     public void can_not_be_pseude_punycode(string pseudo)
          => Email.ShouldBeInvalid($"info@qowaiv.{pseudo}");
 
@@ -151,7 +167,7 @@ public class Domain_part
     public void dots_can_separate_parts()
         => Email.ShouldBeValid("info@one.two.three.4.5.qowaiv.org");
 
-    [TestCase]
+    [Test]
     public void dot_is_optional()
         => Email.ShouldBeValid("info@qowaiv");
 
@@ -171,13 +187,15 @@ public class Domain_part
     public void dashes_can_separate_parts()
        => Email.ShouldBeValid("info@one-two-three-4-5-qowaiv.org");
 
-    [TestCase("info@-qowaiv.org")]
-    [TestCase("info@qowaiv.-org")]
+    [Test]
+    [Arguments("info@-qowaiv.org")]
+    [Arguments("info@qowaiv.-org")]
     public void can_not_start_with_dash(string mail)
         => Email.ShouldBeInvalid(mail);
 
-    [TestCase("info@qowaiv.org-")]
-    [TestCase("info@qowaiv-.org")]
+    [Test]
+    [Arguments("info@qowaiv.org-")]
+    [Arguments("info@qowaiv-.org")]
     public void can_not_end_with_dash(string mail)
         => Email.ShouldBeInvalid(mail);
 
@@ -188,7 +206,8 @@ public class Domain_part
 
 public class Address_sign
 {
-    [TestCase("info_at_qowaiv.org")]
+    [Test]
+    [Arguments("info_at_qowaiv.org")]
     public void is_required(string email)
         => Email.ShouldBeInvalid(email);
 
@@ -199,11 +218,12 @@ public class Address_sign
 
 public class Display_name
 {
-    [TestCase(@"""Joe Smith"" info@qowaiv.org")]
-    [TestCase(@"""Joe Smith""  info@qowaiv.org")]
-    [TestCase("\"Joe Smith\"\tinfo@qowaiv.org")]
-    [TestCase(@"""Joe\\tSmith"" info@qowaiv.org")]
-    [TestCase(@"""Joe\""Smith"" info@qowaiv.org")]
+    [Test]
+    [Arguments(@"""Joe Smith"" info@qowaiv.org")]
+    [Arguments(@"""Joe Smith""  info@qowaiv.org")]
+    [Arguments("\"Joe Smith\"\tinfo@qowaiv.org")]
+    [Arguments(@"""Joe\\tSmith"" info@qowaiv.org")]
+    [Arguments(@"""Joe\""Smith"" info@qowaiv.org")]
     public void Quoted(string quoted)
         => EmailAddress.Parse(quoted).Should().Be(Svo.EmailAddress);
 
@@ -223,47 +243,52 @@ public class Display_name
     public void not_with_encoded_brackets()
         => Email.ShouldBeInvalid("Joe Smith &lt;info@qowaiv.org&gt;");
 
-    [TestCase("Joe Smith <info@qowaiv.org>")]
-    [TestCase(@"Test |<gaaf <info@qowaiv.org>")]
+    [Test]
+    [Arguments("Joe Smith <info@qowaiv.org>")]
+    [Arguments(@"Test |<gaaf <info@qowaiv.org>")]
     public void Brackets(string brackets)
         => EmailAddress.Parse(brackets).Should().Be(Svo.EmailAddress);
 
-    [TestCase("info@qowaiv.org (Joe Smith)")]
+    [Test]
+    [Arguments("info@qowaiv.org (Joe Smith)")]
     public void Comments_afterwards(string comments)
         => EmailAddress.Parse(comments).Should().Be(Svo.EmailAddress);
 
-    [TestCase("Display Name <info@qowaiv.org> (after name with display)")]
-    [TestCase(@"""With extra  display name"" Display Name<info@qowaiv.org>")]
+    [Test]
+    [Arguments("Display Name <info@qowaiv.org> (after name with display)")]
+    [Arguments(@"""With extra  display name"" Display Name<info@qowaiv.org>")]
     public void mixing_not_allowed(string mixed)
         => Email.ShouldBeInvalid(mixed);
 
-    [TestCase("Display Name info@qowaiv.org>")]
-    [TestCase("Display Name <info@qowaiv.org>>")]
-    [TestCase("Display Name >info@qowaiv.org<")]
-    [TestCase("Display Name info@qowaiv.org<>")]
-    [TestCase("info@qowaiv.org (")]
-    [TestCase("info@qowaiv.org )")]
-    [TestCase("info@qowaiv.org ))")]
-    [TestCase("info@qowaiv.org ())")]
-    [TestCase("info@qowaiv.org (()")]
-    [TestCase("info@qowaiv.org )(")]
-    [TestCase(@"""Display Name info@qowaiv.org")]
-    [TestCase(@"Display Name <""Display Name info@qowaiv.org>")]
-    [TestCase(@"Display"" info@qowaiv.org")]
+    [Test]
+    [Arguments("Display Name info@qowaiv.org>")]
+    [Arguments("Display Name <info@qowaiv.org>>")]
+    [Arguments("Display Name >info@qowaiv.org<")]
+    [Arguments("Display Name info@qowaiv.org<>")]
+    [Arguments("info@qowaiv.org (")]
+    [Arguments("info@qowaiv.org )")]
+    [Arguments("info@qowaiv.org ))")]
+    [Arguments("info@qowaiv.org ())")]
+    [Arguments("info@qowaiv.org (()")]
+    [Arguments("info@qowaiv.org )(")]
+    [Arguments(@"""Display Name info@qowaiv.org")]
+    [Arguments(@"Display Name <""Display Name info@qowaiv.org>")]
+    [Arguments(@"Display"" info@qowaiv.org")]
     public void mismatches(string mismatch)
         => Email.ShouldBeInvalid(mismatch);
 }
 
 public class Comments
 {
-    [TestCase("info@qowaiv.org(afterwards)")]
-    [TestCase("(before)info@qowaiv.org")]
-    [TestCase("in(local part)fo@qowaiv.org")]
-    [TestCase("info@qow(domain part)aiv.org")]
-    [TestCase("in(with @)fo@qowaiv.org")]
-    [TestCase("info@qow(with @)aiv.org")]
-    [TestCase("info(direct)(attached)@qowaiv.org")]
-    [TestCase("in(multiple 1)fo@qow(multiple 2)aiv.or(multiple 3)g")]
+    [Test]
+    [Arguments("info@qowaiv.org(afterwards)")]
+    [Arguments("(before)info@qowaiv.org")]
+    [Arguments("in(local part)fo@qowaiv.org")]
+    [Arguments("info@qow(domain part)aiv.org")]
+    [Arguments("in(with @)fo@qowaiv.org")]
+    [Arguments("info@qow(with @)aiv.org")]
+    [Arguments("info(direct)(attached)@qowaiv.org")]
+    [Arguments("in(multiple 1)fo@qow(multiple 2)aiv.or(multiple 3)g")]
     public void are_ignored(string email)
         => EmailAddress.Parse(email).Should().Be(Svo.EmailAddress);
 
@@ -272,8 +297,9 @@ public class Comments
         => EmailAddress.Parse(@"""comments""(are ignored)@qowaiv.org")
         .ToString().Should().Be(@"""comments""@qowaiv.org");
 
-    [TestCase("ipv4.addr@[123.1.7(some comment)2.10]")]
-    [TestCase("ipv4.addr@123.1.7(some comment)2.10")]
+    [Test]
+    [Arguments("ipv4.addr@[123.1.7(some comment)2.10]")]
+    [Arguments("ipv4.addr@123.1.7(some comment)2.10")]
     public void are_ignored_in_ip_based_domain(string email)
         => EmailAddress.Parse(email).Should().Be(EmailAddress.Parse("ipv4.addr@[123.1.72.10]"));
 
@@ -281,9 +307,10 @@ public class Comments
     public void not_nested()
         => Email.ShouldBeInvalid("in( nested(extra) )fo@qowaiv.org");
 
-    [TestCase("inf(o@qowaiv.org")]
-    [TestCase("info)@qowaiv.org")]
-    [TestCase("in)wrong order(fo@qowaiv.org")]
+    [Test]
+    [Arguments("inf(o@qowaiv.org")]
+    [Arguments("info)@qowaiv.org")]
+    [Arguments("in)wrong order(fo@qowaiv.org")]
     public void not_matching(string notMatching)
        => Email.ShouldBeInvalid(notMatching);
 }
@@ -318,16 +345,18 @@ public class MailTo_prefix
     public void ignored_in_display_name()
         => EmailAddress.Parse("mailto:DisplayNames <info@qowaiv.org>").Should().Be(Svo.EmailAddress);
 
-    [TestCase("mailto")]
-    [TestCase("MailTo")]
-    [TestCase("MAILTO")]
+    [Test]
+    [Arguments("mailto")]
+    [Arguments("MailTo")]
+    [Arguments("MAILTO")]
     public void case_insensitive(string prefix)
         => EmailAddress.Parse($"{prefix}:info@qowaiv.org").Should().Be(Svo.EmailAddress);
 
-    [TestCase("in_domain@mailto:qowaiv.org")]
-    [TestCase("mailto:mailto:twice@qowaiv.org")]
-    [TestCase("not_at_start_mailto:info@qowaiv.org")]
-    [TestCase("at_end_mailto:@qowaiv.org")]
+    [Test]
+    [Arguments("in_domain@mailto:qowaiv.org")]
+    [Arguments("mailto:mailto:twice@qowaiv.org")]
+    [Arguments("not_at_start_mailto:info@qowaiv.org")]
+    [Arguments("at_end_mailto:@qowaiv.org")]
     public void only_once_at_start(string mail)
        => Email.ShouldBeInvalid(mail);
 
@@ -338,24 +367,26 @@ public class MailTo_prefix
 
 public class Escape_character
 {
-    [TestCase("\" \"@qowaiv.org")]
-    [TestCase("\"quoted\"@qowaiv.org")]
-    [TestCase("\"quoted-at-sign@sld.org\"@qowaiv.org")]
-    [TestCase("\"very.(),:;<>[]\\\".VERY.\\\"very@\\\\ \\\"very\\\".unusual\"@qowaiv.org")]
-    [TestCase("\"()<>[]:,;@\\\\\\\"!#$%&'*+-/=?^_`{}| ~.a\"@qowaiv.org")]
-    [TestCase("\"\\e\\s\\c\\a\\p\\e\\d\"@qowaiv.org")]
+    [Test]
+    [Arguments("\" \"@qowaiv.org")]
+    [Arguments("\"quoted\"@qowaiv.org")]
+    [Arguments("\"quoted-at-sign@sld.org\"@qowaiv.org")]
+    [Arguments("\"very.(),:;<>[]\\\".VERY.\\\"very@\\\\ \\\"very\\\".unusual\"@qowaiv.org")]
+    [Arguments("\"()<>[]:,;@\\\\\\\"!#$%&'*+-/=?^_`{}| ~.a\"@qowaiv.org")]
+    [Arguments("\"\\e\\s\\c\\a\\p\\e\\d\"@qowaiv.org")]
     public void supported(string str) => Email.ShouldBeValid(str);
 }
 
 public class Different_alphabets
 {
-    [TestCase("Chinese  <伊昭傑@郵件.商務>")]
-    [TestCase("Greek    <θσερ@εχαμπλε.ψομ>")]
-    [TestCase("Hindi    <राम@मोहन.ईन्फो>")]
-    [TestCase("Japanese <あいうえお@あいうえお.com>")]
-    [TestCase("Ukranian <юзер@екзампл.ком>")]
-    [TestCase("Mixed    <あいうえお@domain.com>")]
-    [TestCase("Mixed    <local@あいうえお.com>")]
+    [Test]
+    [Arguments("Chinese  <伊昭傑@郵件.商務>")]
+    [Arguments("Greek    <θσερ@εχαμπλε.ψομ>")]
+    [Arguments("Hindi    <राम@मोहन.ईन्फो>")]
+    [Arguments("Japanese <あいうえお@あいうえお.com>")]
+    [Arguments("Ukranian <юзер@екзампл.ком>")]
+    [Arguments("Mixed    <あいうえお@domain.com>")]
+    [Arguments("Mixed    <local@あいうえお.com>")]
     public void supported(string email) => Email.ShouldBeValid(email);
 }
 
@@ -369,24 +400,27 @@ public class IP_based
     public void ip_v4_valid_without_brackets()
         => Email.ShouldBeValid("valid.ipv4.without-brackets@123.1.72.010");
 
-    [TestCase("email@111.222.333")]
-    [TestCase("email@111.222.333.256")]
+    [Test]
+    [Arguments("email@111.222.333")]
+    [Arguments("email@111.222.333.256")]
     public void ip_v4_four_groups_within_range(string ip4Based)
         => Email.ShouldBeInvalid(ip4Based);
 
-    [TestCase("email@[123.123.123.123")]
-    [TestCase("email@[123.123.123].123")]
-    [TestCase("email@123.123.123.123]")]
-    [TestCase("email@123.123.[123.123]")]
+    [Test]
+    [Arguments("email@[123.123.123.123")]
+    [Arguments("email@[123.123.123].123")]
+    [Arguments("email@123.123.123.123]")]
+    [Arguments("email@123.123.[123.123]")]
     public void brackets_must_match(string ip4Based)
         => Email.ShouldBeInvalid(ip4Based);
 
-    [TestCase("user@[IPv6:2001:db8:1ff::a0b:dbd0]")]
-    [TestCase("valid.ipv6.addr@[IPv6:0::1]")]
-    [TestCase("valid.ipv6.addr@[IPv6:2607:f0d0:1002:51::4]")]
-    [TestCase("valid.ipv6.addr@[IPv6:fe80::230:48ff:fe33:bc33]")]
-    [TestCase("valid.ipv6.addr@[IPv6:fe80:0000:0000:0000:0202:b3ff:fe1e:8329]")]
-    [TestCase("valid.ipv6v4.addr@[IPv6:aaaa:aaaa:aaaa:aaaa:aaaa:aaaa:127.0.0.1]")]
+    [Test]
+    [Arguments("user@[IPv6:2001:db8:1ff::a0b:dbd0]")]
+    [Arguments("valid.ipv6.addr@[IPv6:0::1]")]
+    [Arguments("valid.ipv6.addr@[IPv6:2607:f0d0:1002:51::4]")]
+    [Arguments("valid.ipv6.addr@[IPv6:fe80::230:48ff:fe33:bc33]")]
+    [Arguments("valid.ipv6.addr@[IPv6:fe80:0000:0000:0000:0202:b3ff:fe1e:8329]")]
+    [Arguments("valid.ipv6v4.addr@[IPv6:aaaa:aaaa:aaaa:aaaa:aaaa:aaaa:127.0.0.1]")]
     public void ip_v6_with_prefix(string ipv6) => Email.ShouldBeValid(ipv6);
 
     [Test]
@@ -397,16 +431,17 @@ public class IP_based
     public void ip_v6_valid_without_brackets()
         => Email.ShouldBeValid("valid.ipv6.without-brackets@2607:f0d0:1002:51::4");
 
-    [TestCase("IP-and-port@127.0.0.1:25")]
-    [TestCase("another-invalid-ip@127.0.0.256")]
-    [TestCase("invalid-ip@127.0.0.1.26")]
-    [TestCase("ipv4.with.ipv6prefix.addr@[IPv6:123.1.72.10]")]
-    [TestCase("ab@988.120.150.10")]
-    [TestCase("ab@120.256.256.120")]
-    [TestCase("ab@120.25.1111.120")]
-    [TestCase("ab@[188.120.150.10")]
-    [TestCase("ab@188.120.150.10]")]
-    [TestCase("ab@[188.120.150.10].com")]
+    [Test]
+    [Arguments("IP-and-port@127.0.0.1:25")]
+    [Arguments("another-invalid-ip@127.0.0.256")]
+    [Arguments("invalid-ip@127.0.0.1.26")]
+    [Arguments("ipv4.with.ipv6prefix.addr@[IPv6:123.1.72.10]")]
+    [Arguments("ab@988.120.150.10")]
+    [Arguments("ab@120.256.256.120")]
+    [Arguments("ab@120.25.1111.120")]
+    [Arguments("ab@[188.120.150.10")]
+    [Arguments("ab@188.120.150.10]")]
+    [Arguments("ab@[188.120.150.10].com")]
     public void ip_v6_valid_without_brackets(string invalid)
         => Email.ShouldBeInvalid(invalid);
 }

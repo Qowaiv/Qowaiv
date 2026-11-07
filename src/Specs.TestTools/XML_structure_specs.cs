@@ -6,9 +6,10 @@ public class Is_equatable
     public void with_same_type_only()
         => XmlStructure.New(18).Equals(new object()).Should().BeFalse();
 
-    [TestCase(42, "2017-06-11", false)]
-    [TestCase(17, "2042-06-11", false)]
-    [TestCase(17, "2017-06-11", true)]
+    [Test]
+    [Arguments(42, "2017-06-11", false)]
+    [Arguments(17, "2042-06-11", false)]
+    [Arguments(17, "2017-06-11", true)]
     public void by_value(int id, DateTime date, bool svo)
         => new XmlStructure<bool>()
         .Should().NotBe(new XmlStructure<bool>

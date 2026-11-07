@@ -59,15 +59,8 @@ public class Is_equal_by_value
         => (Svo.Generated.Int64Id != Int64BasedId.Create(42)).Should().BeTrue();
 
     [Test]
-    [Arguments("", 0)]
-    [Arguments(17, 665630146)]
-    public void hash_code_is_value_based(Int64BasedId svo, int hashCode)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hashCode);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.Generated.Int64Id, default).Should().BeConsistent();
 }
 
 public class Has_custom_formatting

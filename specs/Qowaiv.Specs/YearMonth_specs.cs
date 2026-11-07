@@ -58,15 +58,8 @@ public class Is_equal_by_value
         => (Svo.YearMonth != new YearMonth(2000, 09)).Should().BeTrue();
 
     [Test]
-    [Arguments("2000-09", 665643119)]
-    [Arguments("2017-06", 665643862)]
-    public void hash_code_is_value_based(YearMonth svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.YearMonth, default).Should().BeConsistent();
 }
 public class Can_be_adjusted_with
 {

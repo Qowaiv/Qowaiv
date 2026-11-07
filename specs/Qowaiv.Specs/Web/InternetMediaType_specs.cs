@@ -150,15 +150,8 @@ public class Is_equal_by_value
     }
 
     [Test]
-    [Arguments("", 0)]
-    [Arguments("application/x-chess-pgn", 787633777)]
-    public void hash_code_is_value_based(InternetMediaType svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.InternetMediaType, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed

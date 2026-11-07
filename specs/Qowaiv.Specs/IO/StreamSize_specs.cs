@@ -704,15 +704,8 @@ public class Is_equal_by_value
     }
 
     [Test]
-    [Arguments("0 byte", 0)]
-    [Arguments("123456789 byte", 553089222)]
-    public void hash_code_is_value_based(StreamSize svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.StreamSize, default).Should().BeConsistent();
 }
 
 public class Supports_type_conversion

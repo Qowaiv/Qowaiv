@@ -194,7 +194,7 @@ public class Is_equal_by_value
 
     [Test]
     public void hash_code_is_value_based() => HashCodes
-     .For(EnergyLabel.DefinedValues).Should().BeConsistent();
+        .For(EnergyLabel.DefinedValues).Should().BeConsistent();
 }
 
 public class Can_be_parsed

@@ -533,7 +533,7 @@ public class Is_equal_by_value
 
     [Test]
     public void hash_code_is_value_based() => HashCodes
-        .For(Country.NL, Country.BE, Country.BF).Should().BeConsistent();
+        .For(Country.All).Should().BeConsistent();
 }
 
 public class Supports_XML_serialization

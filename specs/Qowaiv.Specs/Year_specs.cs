@@ -125,19 +125,8 @@ public class Is_equal_by_value
         => (Svo.Year != 2017.CE()).Should().BeTrue();
 
     [Test]
-    [Arguments("", 0)]
-#if NET48
-    [Arguments("1979", 538423912)]
-#else
-    [Arguments("1979", 665629288)]
-#endif
-    public void hash_code_is_value_based(Year svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.Year, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed

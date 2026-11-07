@@ -73,15 +73,8 @@ public class Is_equal_by_value
     }
 
     [Test]
-    [Arguments("0001-01-01", 0)]
-    [Arguments("2017-06-11 06:15", 533532482)]
-    public void hash_code_is_value_based(LocalDateTime svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.LocalDateTime, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed

@@ -137,15 +137,8 @@ public class Is_equal_by_value
         => (Svo.Iban != InternationalBankAccountNumber.Parse("DE68210501700012345678")).Should().BeTrue();
 
     [Test]
-    [Arguments("", 0)]
-    [Arguments("NL20INGB0001234567", 684896179)]
-    public void hash_code_is_value_based(InternationalBankAccountNumber svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.Iban, default).Should().BeConsistent();
 }
 
 public class Is_comparable

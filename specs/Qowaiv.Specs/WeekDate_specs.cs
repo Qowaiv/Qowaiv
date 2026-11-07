@@ -92,15 +92,8 @@ public class Is_equal_by_value
     }
 
     [Test]
-    [Arguments("0001-W01-1", 0)]
-    [Arguments("2017-W23-7", -981651364)]
-    public void hash_code_is_value_based(WeekDate svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.WeekDate, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed

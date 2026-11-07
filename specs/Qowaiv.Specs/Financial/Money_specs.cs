@@ -112,19 +112,8 @@ public class Is_equal_by_value
         => (Svo.Money != 42.17 + Currency.USD).Should().BeTrue();
 
     [Test]
-    [Arguments("USD 0.00", 931756561)]
-#if NET48
-    [Arguments("EUR 42.00", -2013578063)]
-#else
-    [Arguments("EUR 42.00", -943833957)]
-#endif
-    public void hash_code_is_value_based(Money svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.Money, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed

@@ -127,15 +127,8 @@ public class Is_equal_by_value
         => (YesNo.Yes != YesNo.No).Should().BeTrue();
 
     [Test]
-    [Arguments("", 0)]
-    [Arguments("yes", 665630161)]
-    public void hash_code_is_value_based(YesNo svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.YesNo, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed

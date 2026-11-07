@@ -67,15 +67,8 @@ public class Is_equal_by_value
         => (MonthSpan.FromMonths(69) != MonthSpan.MinValue).Should().BeTrue();
 
     [Test]
-    [Arguments("0Y+0M", 0)]
-    [Arguments("5Y+9M", 665630102)]
-    public void hash_code_is_value_based(MonthSpan svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.MonthSpan, default).Should().BeConsistent();
 
     [Test]
     public void formatted_and_unformatted_are_equal()

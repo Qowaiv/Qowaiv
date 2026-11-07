@@ -60,15 +60,8 @@ public class Is_equal_by_value
         => (Svo.Generated.StringId != StringBasedId.Next()).Should().BeTrue();
 
     [Test]
-    [Arguments("", 0)]
-    [Arguments("Qowaiv-ID", 890829876)]
-    public void hash_code_is_value_based(StringBasedId svo, int hashCode)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hashCode);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.Generated.StringId, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed

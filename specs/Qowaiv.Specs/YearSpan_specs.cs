@@ -115,15 +115,8 @@ public class Is_equal_by_value
         => (Svo.YearSpan != YearSpan.Create(42)).Should().BeTrue();
 
     [Test]
-    [Arguments("0", 0)]
-    [Arguments("17", 665630146)]
-    public void hash_code_is_value_based(YearSpan svo, int hash)
-    {
-        using (Hash.WithoutRandomizer())
-        {
-            svo.GetHashCode().Should().Be(hash);
-        }
-    }
+    public void hash_code_is_value_based() => HashCodes
+        .For(Svo.YearSpan, default).Should().BeConsistent();
 }
 
 public class Can_be_parsed

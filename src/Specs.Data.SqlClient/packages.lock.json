@@ -326,6 +326,13 @@
           "Qowaiv": "[11.0.0-rc1, )"
         }
       },
+      "specs.shared": {
+        "type": "Project",
+        "dependencies": {
+          "AwesomeAssertions": "[9.6.0, )",
+          "Qowaiv.TestTools": "[11.0.0-rc1, )"
+        }
+      },
       "Microsoft.Data.SqlClient": {
         "type": "CentralTransitive",
         "requested": "[7.1.1, )",
@@ -632,6 +639,13 @@
         "type": "Project",
         "dependencies": {
           "Qowaiv": "[11.0.0-rc1, )"
+        }
+      },
+      "specs.shared": {
+        "type": "Project",
+        "dependencies": {
+          "AwesomeAssertions": "[9.6.0, )",
+          "Qowaiv.TestTools": "[11.0.0-rc1, )"
         }
       },
       "Microsoft.Data.SqlClient": {

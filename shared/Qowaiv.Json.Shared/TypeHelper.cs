@@ -23,7 +23,7 @@ internal static class TypeHelper
     public static Type? GetCandidateType(Type? type)
     {
         return NotNullable(type) is { } tp && IsSupported(tp)
-            ? Transform(tp)
+            ? tp
             : null;
 
         static bool IsSupported(Type type)
@@ -31,55 +31,5 @@ internal static class TypeHelper
             && !type.IsGenericTypeDefinition
             && !type.ContainsGenericParameters
             && !type.IsGenericTypeDefinition;
-
-        static Type Transform(Type type)
-            => IdBehavior(type)
-            ?? SvoBehavior(type)
-            ?? type;
-    }
-
-    [Pure]
-    public static Type? IdBehavior(Type type)
-        => Id.Is(type)
-        ? Type.GetType(Id.Generic)?.MakeGenericType(type)
-        : null;
-
-    [Pure]
-    public static Type? SvoBehavior(Type type)
-        => Svo.Is(type)
-        ? Type.GetType(Svo.Generic)?.MakeGenericType(type)
-        : null;
-
-    private static class Id
-    {
-        [Pure]
-        public static bool Is(Type type)
-            => type.GetInterfaces().Any(i => i.FullName == Behavior)
-            && type.GetConstructors().Any(ctor => ctor.GetParameters().Length is 0);
-
-        public const string Generic = "Qowaiv.Identifiers.Id`1, Qowaiv";
-        public const string Behavior = "Qowaiv.Identifiers.IIdentifierBehavior";
-    }
-
-    private static class Svo
-    {
-        [Pure]
-        public static bool Is(Type type)
-           => type.BaseTypes().Any(i => i.FullName == Behavior)
-           && type.GetConstructors().Any(ctor => ctor.GetParameters().Length is 0);
-
-        public const string Generic = "Qowaiv.Customization.Svo`1, Qowaiv";
-        public const string Behavior = "Qowaiv.Customization.SvoBehavior";
-    }
-
-    [Pure]
-    private static IEnumerable<Type> BaseTypes(this Type type)
-    {
-        var current = type.BaseType;
-        while (current is { })
-        {
-            yield return current;
-            current = current.BaseType;
-        }
     }
 }

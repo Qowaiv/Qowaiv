@@ -1,5 +1,7 @@
-#if NET10_0_OR_GREATER
+#if !NET48
 
+using AwesomeAssertions;
+using Qowaiv.Financial;
 using Qowaiv.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
@@ -33,7 +35,7 @@ public class IgnoreEmptySvos
     [Test]
     public void serializes_non_empty_svos()
     {
-        var json = JsonSerializer.Serialize(new Container<InternationalBankAccountNumber>(Svo.Iban), Options);
+        var json = JsonSerializer.Serialize(new Container<InternationalBankAccountNumber>(InternationalBankAccountNumber.Parse("NL20INGB0001234567")), Options);
         json.Should().Be("""{"Val":"NL20INGB0001234567"}""");
     }
 

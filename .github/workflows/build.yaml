@@ -19,25 +19,6 @@ jobs:
     timeout-minutes: 30
     permissions:
       contents: read
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
-        with:
-          global-json-file: global.json
-          cache: true
-          cache-dependency-path: '**/packages.lock.json'
-
-      - name: Build
-        run: dotnet build qowaiv.slnx --configuration Release
-
-  test:
-    name: Test
-    runs-on: ubuntu-26.04
-    timeout-minutes: 30
-    permissions:
-      contents: read
       checks: write # Needed by dorny/test-reporter to publish the check run
     env:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Empty for fork and Dependabot PRs
@@ -138,4 +119,4 @@ jobs:
           path: "TestResults/*.trx"
           reporter: dotnet-trx
           use-actions-summary: false # Publish a check run with annotations instead
-          fail-on-empty: false # A failing build means there are no results to report
+          fail-on-empty: false # Do not fail when no test results were produced

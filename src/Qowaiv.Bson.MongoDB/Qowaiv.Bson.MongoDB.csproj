@@ -17,9 +17,12 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>5.0.0</Version>
+    <Version>11.0.0-rc.1</Version>
     <PackageReleaseNotes>
       <![CDATA[
+v11.0.0
+- Only support netstandard2.0;net10.0;net11.0. (BREAKING)
+- Drop support for Id<TBehavior> and Svo<TSvoBehavior>. (BREAKING)
 v5.0.0
 - Only support netstandard2.0, net6.0, and net8.0. (BREAKING)
 v4.3.1
@@ -30,10 +33,10 @@ v4.3.0
 - Marked QowaivBsonConverter as obsolete. #18
 - Support .NET 7.0. #16
 v4.2.0
-- Registered SvoBehavior as Svo&lt;TSvoBehavior&gt;. #13
+- Registered SvoBehavior as Svo<TSvoBehavior>. #13
 - Multi-targeted to netstandard2.0, .NET 5.0, and .NET 6.0. #12
 v4.1.0
-- Registered IIdentifierBehavior as Id&lt;TBehavior&gt;. #7
+- Registered IIdentifierBehavior as Id<TBehavior>. #7
 v4.0.2
 - Only register exported.
 v4.0.1

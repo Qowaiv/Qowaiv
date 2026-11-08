@@ -91,5 +91,5 @@ public static class JsonTester
     private static bool ToJson(MethodInfo method)
         => method.Name == nameof(ToJson)
         && method.GetParameters().Length == 0
-        && method.ReturnType != null;
+        && method.ReturnType != typeof(void);
 }

@@ -60,7 +60,7 @@ internal sealed partial class ConventionBasedSerializer<TSvo>
     private static bool IsToJson(MethodInfo method)
         => method.Name == nameof(ToJson)
         && method.GetParameters().Length is 0
-        && method.ReturnType != null;
+        && method.ReturnType != typeof(void);
 
     [Pure]
     private Func<TSvo, object> CompileSerialize(MethodInfo? method)

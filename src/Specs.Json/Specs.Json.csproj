@@ -4,7 +4,7 @@
 
   <PropertyGroup>
     <RootNamespace>Specs</RootNamespace>
-    <NoWarn>QW0020</NoWarn>
+    <NoWarn>$(NoWarn);QW0020</NoWarn>
   </PropertyGroup>
 
   <ItemGroup Label="Projects under test">

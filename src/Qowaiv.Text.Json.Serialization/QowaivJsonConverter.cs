@@ -15,13 +15,10 @@ public sealed class QowaivJsonConverter : JsonConverterFactory
     [Pure]
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions? options)
     {
-        var type = typeToConvert.NotNullable;
-
         if (!converters.TryGetValue(typeToConvert, out var converter))
         {
             var converterType = typeof(ConventionBasedSerializer<>).MakeGenericType(typeToConvert);
-
-            converter = (JsonConverter)Activator.CreateInstance(converterType);
+            converter = (JsonConverter)Activator.CreateInstance(converterType)!;
 
             if (converter.CanConvert(typeToConvert))
             {
@@ -29,7 +26,7 @@ public sealed class QowaivJsonConverter : JsonConverterFactory
             }
             else
             {
-                converters[type] = null;
+                converters[typeToConvert] = null;
                 return null;
             }
         }

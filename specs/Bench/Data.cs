@@ -1034,6 +1034,16 @@ internal static class Data
         public static readonly ImmutableArray<string> String = [.. Svo.Select(s => s.ToJson()!)];
     }
 
+    public static class ModifyTypeInfo
+    {
+        public static readonly EmailAddress[] Svo =
+        [
+            .. Enumerable.Range(0, 1_000_000)
+            .Select(i => (i %10 is 0) ? EmailAddress.Empty : EmailAddress.Parse($"info.{i}@qowaiv.org"))
+            .OrderBy(_ => Rnd.Next())
+        ];
+    }
+
     public static class Percentage
     {
         public static readonly ImmutableArray<decimal> Decimal = [.. Enumerable.Range(0, 1000).Select(_ => (Rnd.NextDecimal() * Rnd.NextDecimal() * 200m).Round(2))];

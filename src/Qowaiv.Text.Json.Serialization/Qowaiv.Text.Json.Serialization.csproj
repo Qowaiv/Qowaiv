@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>11.0.0-rc.1</Version>
+    <VersionMajor>11</VersionMajor>
+    <Version>$(VersionMajor).0.0-rc.1</Version>
     <PackageReleaseNotes>
       <![CDATA[
 v11.0.0

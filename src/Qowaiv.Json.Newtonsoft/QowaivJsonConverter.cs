@@ -1,3 +1,5 @@
+using System.Collections.Concurrent;
+
 namespace Qowaiv.Json.Newtonsoft;
 
 /// <summary>A JSON converter that converts Single Value Objects based on naming conventions.</summary>
@@ -24,17 +26,14 @@ public class QowaivJsonConverter : JsonConverter
     /// <inheritdoc />
     [Pure]
     public override bool CanConvert(Type objectType)
-    {
-        var type = TypeHelper.NotNullable(objectType);
-        return type != null
-            && !type.IsPrimitive
-            && CreateConverter(type) != null;
-    }
+        => objectType.NotNullable is { IsPrimitive: false } type
+        && CreateConverter(type) is { };
 
     /// <inheritdoc />
+    [Impure]
     public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
     {
-        Guard.NotNull(objectType, nameof(objectType));
+        Guard.NotNull(objectType);
         var converter = CreateConverter(objectType) ?? throw new NotSupportedException($"Type '{objectType}' is not supported.");
         return converter.ReadJson(reader, objectType, existingValue, serializer);
     }
@@ -42,7 +41,7 @@ public class QowaivJsonConverter : JsonConverter
     /// <inheritdoc />
     public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
-        var objectType = Guard.NotNull(value, nameof(value)).GetType();
+        var objectType = Guard.NotNull(value).GetType();
         var converter = CreateConverter(objectType) ?? throw new NotSupportedException($"Type '{objectType}' is not supported.");
         converter.WriteJson(writer, value, serializer);
     }
@@ -50,38 +49,25 @@ public class QowaivJsonConverter : JsonConverter
     [Pure]
     private JsonConverter? CreateConverter(Type objectType)
     {
-        var type = TypeHelper.NotNullable(objectType)!;
-
-        if (notSupported.Contains(type))
-        {
-            return null;
-        }
+        var type = objectType.NotNullable!;
 
         if (!converters.TryGetValue(type, out var converter))
         {
-            lock (locker)
-            {
-                if (!converters.TryGetValue(type, out converter))
-                {
-                    var converterType = typeof(ConventionBasedSerializer<>).MakeGenericType(type);
-                    converter = (JsonConverter)Activator.CreateInstance(converterType)!;
+            var converterType = typeof(ConventionBasedSerializer<>).MakeGenericType(type);
+            converter = (JsonConverter)Activator.CreateInstance(converterType)!;
 
-                    if (converter.CanConvert(type))
-                    {
-                        converters[type] = converter;
-                    }
-                    else
-                    {
-                        notSupported.Add(type);
-                        return null;
-                    }
-                }
+            if (converter.CanConvert(type))
+            {
+                converters[type] = converter;
+            }
+            else
+            {
+                converters[type] = null;
+                return null;
             }
         }
         return converter;
     }
 
-    private readonly object locker = new();
-    private readonly Dictionary<Type, JsonConverter> converters = new();
-    private readonly HashSet<Type> notSupported = new();
+    private readonly ConcurrentDictionary<Type, JsonConverter?> converters = [];
 }

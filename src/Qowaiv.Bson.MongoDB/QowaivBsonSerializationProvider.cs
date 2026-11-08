@@ -46,24 +46,14 @@ public sealed class QowaivBsonSerializationProvider : IBsonSerializationProvider
     /// <summary>Returns true if a name based convention is supported.</summary>
     [Pure]
     private static bool IsSupported(IBsonSerializer converter)
-        => (bool)converter
+        => converter
         .GetType()
-        .GetProperty(nameof(QowaivBsonSerializer<object>.TypeIsSupported), NonPublicInstance)!
-        .GetValue(converter, Array.Empty<object>())!;
+        .GetProperty(nameof(QowaivBsonSerializer<>.TypeIsSupported), NonPublicInstance)!
+        .GetValue(converter, []) is true;
 
     [Pure]
     private static Type? GetCandidateType(Type? type)
-    {
-        return TypeHelper.NotNullable(type) is { } tp && IsSupported(tp)
-            ? tp
-            : null;
-
-        static bool IsSupported(Type type)
-            => !type.IsAbstract
-            && !type.IsGenericTypeDefinition
-            && !type.ContainsGenericParameters
-            && !type.IsGenericTypeDefinition;
-    }
+        => TypeHelper.GetCandidateType(type);
 
 #pragma warning disable S3011
 

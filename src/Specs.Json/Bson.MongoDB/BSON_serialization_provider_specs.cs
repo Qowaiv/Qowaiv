@@ -45,7 +45,7 @@ public class Gets_null
         => provider.GetSerializer(typeof(DtoClass)).Should().BeNull();
 }
 
-class Caches_for_performance_reasons
+public class Caches_for_performance_reasons
 {
     [Test]
     public void serializers_already_requested()

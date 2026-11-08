@@ -5,11 +5,7 @@ namespace Qowaiv.Internals;
 
 internal sealed partial class ConventionBasedSerializer<TSvo>
 {
-#pragma warning disable S2743 // Static fields should not be used in generic types
-    private static readonly Type[] NodeTypes = new[] { typeof(string), typeof(double), typeof(long), typeof(bool) };
-#pragma warning restore S2743 // Static fields should not be used in generic types
-
-    private Type SvoType { get; } = TypeHelper.NotNullable(typeof(TSvo))!;
+    private Type SvoType { get; } = typeof(TSvo).NotNullable;
 
     private void Initialize()
     {
@@ -56,14 +52,14 @@ internal sealed partial class ConventionBasedSerializer<TSvo>
     [Pure]
     private bool IsFactory(MethodInfo method)
         => method.ReturnType == SvoType
-        && method.Name == nameof(ConventionBasedSerializer<object>.FromJson)
-        && method.GetParameters().Length == 1
-        && NodeTypes.Contains(method.GetParameters()[0].ParameterType);
+        && method.Name == nameof(FromJson)
+        && method.GetParameters() is [var param]
+        && IsSuportedNodeType(param.ParameterType);
 
     [Pure]
     private static bool IsToJson(MethodInfo method)
-        => method.Name == nameof(ConventionBasedSerializer<object>.ToJson)
-        && method.GetParameters().Length == 0
+        => method.Name == nameof(ToJson)
+        && method.GetParameters().Length is 0
         && method.ReturnType != null;
 
     [Pure]
@@ -102,4 +98,11 @@ internal sealed partial class ConventionBasedSerializer<TSvo>
         var expression = Expression.Lambda<Func<TNode, TSvo>>(body, node);
         return expression.Compile();
     }
+
+    [Pure]
+    private static bool IsSuportedNodeType(Type type)
+        => type == typeof(string)
+        || type == typeof(double)
+        || type == typeof(long)
+        || type == typeof(bool);
 }

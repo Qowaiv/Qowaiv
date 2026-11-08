@@ -4,11 +4,8 @@
 
   <PropertyGroup>
     <RootNamespace>Specs</RootNamespace>
+    <NoWarn>QW0020</NoWarn>
   </PropertyGroup>
-
-  <ItemGroup Label="Internals under test">
-    <Compile Include="../../shared/Qowaiv.Json.Shared/TypeHelper.cs" Link="Qowaiv.Json.Shared/TypeHelper.cs" />
-  </ItemGroup>
 
   <ItemGroup Label="Projects under test">
     <ProjectReference Include="../../src/Qowaiv.Bson.MongoDB/Qowaiv.Bson.MongoDB.csproj" />

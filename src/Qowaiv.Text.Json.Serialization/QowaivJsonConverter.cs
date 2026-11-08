@@ -6,15 +6,14 @@ public class QowaivJsonConverter : JsonConverterFactory
     /// <inheritdoc />
     [Pure]
     public override bool CanConvert(Type typeToConvert)
-        => typeToConvert is { }
-        && !TypeHelper.NotNullable(typeToConvert)!.IsPrimitive
+        => typeToConvert is { NotNullable.IsPrimitive: false }
         && CreateConverter(typeToConvert, null) is { };
 
     /// <inheritdoc />
     [Pure]
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions? options)
     {
-        var type = TypeHelper.NotNullable(typeToConvert)!;
+        var type = typeToConvert.NotNullable;
 
         if (notSupported.Contains(type))
         {
@@ -47,6 +46,6 @@ public class QowaivJsonConverter : JsonConverterFactory
     }
 
     private readonly object locker = new();
-    private readonly Dictionary<Type, JsonConverter> converters = new();
-    private readonly HashSet<Type> notSupported = new();
+    private readonly Dictionary<Type, JsonConverter> converters = [];
+    private readonly HashSet<Type> notSupported = [];
 }

@@ -8,13 +8,10 @@ namespace Qowaiv.Json.UnitTests;
 [InheritsTests]
 public class BsonMongoDBSerializeTest : JsonSerializeTestBase<FormatException>
 {
-    public BsonMongoDBSerializeTest()
-    {
-        BsonSerializer.RegisterSerializationProvider(new QowaivBsonSerializationProvider());
-    }
+    public BsonMongoDBSerializeTest() => BsonSerializer.RegisterSerializationProvider(new QowaivBsonSerializationProvider());
 
     [Test, Skip("For BSON a Date() is generated, that is default behaviour we don't want to interfere with.")]
-    public override void Serialize_DateTime_Successful() { }
+    public override void Serialize_DateTime_Successful() => throw new NotSupportedException();
 
     [Test]
     public void Serialize_LongBiggerThanIntMax_Successful()

@@ -13,6 +13,9 @@
 |![v](https://img.shields.io/nuget/v/Qowaiv.Diagnostics.Contracts?color=118)            |![v](https://img.shields.io/nuget/dt/Qowaiv.Diagnostics.Contracts)            |[Qowaiv.Diagnostics.Contracts](https://www.nuget.org/packages/Qowaiv.Diagnostics.Contracts/)                        |
 |![v](https://img.shields.io/nuget/v/Qowaiv.TestTools?color=118)                        |![v](https://img.shields.io/nuget/dt/Qowaiv.TestTools)                        |[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)                                                |
 |![v](https://img.shields.io/nuget/v/Qowaiv.CodeGeneration.SingleValueObjects?color=118)|![v](https://img.shields.io/nuget/dt/Qowaiv.CodeGeneration.SingleValueObjects)|[Qowaiv.CodeGeneration.SingleValueObjects](https://www.nuget.org/packages/Qowaiv.CodeGeneration.SingleValueObjects/)|
+|![v](https://img.shields.io/nuget/v/Qowaiv.Json.Newtonsoft?color=18C)                  |![v](https://img.shields.io/nuget/dt/Qowaiv.Json.Newtonsoft)                  |[Qowaiv.Json.Newtonsoft](https://www.nuget.org/packages/Qowaiv.Json.Newtonsoft/)                                    |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Text.Json.Serialization?color=18C)          |![v](https://img.shields.io/nuget/dt/Qowaiv.Text.Json.Serialization)          |[Qowaiv.Text.Json.Serialization](https://www.nuget.org/packages/Qowaiv.Text.Json.Serialization/)                    |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Bson.MongoDB?color=18C)                     |![v](https://img.shields.io/nuget/dt/Qowaiv.Bson.MongoDB)                     |[Qowaiv.Bson.MongoDB](https://www.nuget.org/packages/Qowaiv.Bson.MongoDB/)                                          |
 
 # Qowaiv
 

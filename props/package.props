@@ -34,7 +34,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package files">
-    <None Pack="true" PackagePath="/" Include="$(MSBuildThisFileDirectory)../design/package-icon.png" />
+    <None Pack="true" PackagePath="/" Include="$(MSBuildThisFileDirectory)../design/$(PackageIcon)" />
     <None Pack="true" PackagePath="/" Include="README.md" />
   </ItemGroup>
 
@@ -50,7 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="$(MSBuildThisFileFullPath)" />
+    <AdditionalFiles Include="$(MSBuildThisFileFullPath)" Link="Properties/$(MSBuildThisFile)" />
   </ItemGroup>
 
 </Project>

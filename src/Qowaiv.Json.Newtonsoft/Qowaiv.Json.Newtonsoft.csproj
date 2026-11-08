@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/package-json.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
+    <PackageId>Qowaiv.Json.Newtonsoft</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>5.0.0</Version>
+    <PackageReleaseNotes>
+      <![CDATA[
+v5.0.0
+- Only support netstandard2.0, net6.0, and net8.0. (BREAKING)
+v4.2.0
+- Multi-targeted to netstandard2.0, .NET 5.0, and .NET 6.0. #12
+]]>
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>

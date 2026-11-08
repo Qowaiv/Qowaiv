@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/package-json.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
+    <PackageId>Qowaiv.Bson.MongoDB</PackageId>
+    <PackageIcon>package-icon-bson.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" NoWarn="NU1701" />
+  </ItemGroup>
+
+  <ItemGroup Label="Analyzers">
+    <PackageReference PrivateAssets="all" Include="MongoDB.Analyzer" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>5.0.0</Version>
+    <PackageReleaseNotes>
+      <![CDATA[
+v5.0.0
+- Only support netstandard2.0, net6.0, and net8.0. (BREAKING)
+v4.3.1
+- QowaivBsonSerializationProvider support nullable value-types. #21
+- QowaivBsonSerializationProvider thread-safe. #20
+v4.3.0
+- Introduction of QowaivBsonSerializationProvider. #18
+- Marked QowaivBsonConverter as obsolete. #18
+- Support .NET 7.0. #16
+v4.2.0
+- Registered SvoBehavior as Svo&lt;TSvoBehavior&gt;. #13
+- Multi-targeted to netstandard2.0, .NET 5.0, and .NET 6.0. #12
+v4.1.0
+- Registered IIdentifierBehavior as Id&lt;TBehavior&gt;. #7
+v4.0.2
+- Only register exported.
+v4.0.1
+- Fix reading null nodes.
+]]>
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/specs.props" />
+
+  <PropertyGroup>
+    <RootNamespace>Specs</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup Label="Internals under test">
+    <Compile Include="../../shared/Qowaiv.Json.Shared/TypeHelper.cs" Link="Qowaiv.Json.Shared/TypeHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup Label="Projects under test">
+    <ProjectReference Include="../../src/Qowaiv.Bson.MongoDB/Qowaiv.Bson.MongoDB.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Json.Newtonsoft/Qowaiv.Json.Newtonsoft.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Text.Json.Serialization/Qowaiv.Text.Json.Serialization.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="../Specs.Shared/Specs.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

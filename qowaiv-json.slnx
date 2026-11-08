@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path=".net.csproj" />
+  <Project Path="src/Qowaiv.Bson.MongoDB/Qowaiv.Bson.MongoDB.csproj" />
+  <Project Path="src/Qowaiv.Json.Newtonsoft/Qowaiv.Json.Newtonsoft.csproj" />
+  <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
+  <Project Path="src/Qowaiv.Text.Json.Serialization/Qowaiv.Text.Json.Serialization.csproj" />
+  <Project Path="src/Qowaiv/Qowaiv.csproj" />
+  <Project Path="src/Specs.Json/Specs.Json.csproj" />
+  <Project Path="src/Specs.Shared/Specs.Shared.csproj" />
+</Solution>

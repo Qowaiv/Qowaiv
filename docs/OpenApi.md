@@ -204,7 +204,7 @@ an Open API definition, this could be done like below:
 public static class SwaggerGenOptionsSvoExtensions
 {
     /// <summary>Maps Qowaiv SVOs.</summary>
-    public static SwaggerGenOptions MapSVOs(this SwaggerGenOptions options)
+    public static SwaggerGenOptions MapSingleValueObjects(this SwaggerGenOptions options)
     {
         var infos = OpenApiDataTypes.FromAssemblies(typeof(Date).Assembly);
         foreach (var info in infos)

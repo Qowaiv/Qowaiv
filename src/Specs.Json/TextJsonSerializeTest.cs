@@ -14,10 +14,8 @@ public class TextJsonSerializeTest : JsonSerializeTestBase<JsonException>
 
     private static readonly JsonSerializerOptions options = GetOptions();
 
-    private static JsonSerializerOptions GetOptions()
+    private static JsonSerializerOptions GetOptions() => new()
     {
-        var o = new JsonSerializerOptions();
-        o.Converters.Add(new QowaivJsonConverter());
-        return o;
-    }
+        Converters = { new QowaivJsonConverter() },
+    };
 }

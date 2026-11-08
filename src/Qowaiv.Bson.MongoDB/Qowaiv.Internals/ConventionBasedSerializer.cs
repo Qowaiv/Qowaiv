@@ -81,7 +81,7 @@ internal partial class ConventionBasedSerializer<TSvo> : SerializerBase<TSvo>
         }
         else if (obj is long num)
         {
-            if (num >= int.MinValue && num <= int.MaxValue)
+            if (num is >= int.MinValue and <= int.MaxValue)
             {
                 writer.WriteInt32((int)num);
             }

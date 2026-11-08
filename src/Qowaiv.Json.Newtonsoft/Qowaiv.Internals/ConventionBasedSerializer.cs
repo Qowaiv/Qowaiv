@@ -37,7 +37,7 @@ internal partial class ConventionBasedSerializer<TSvo> : JsonConverter
         // We want to communicate exceptions as JSON serialization exceptions.
         catch (Exception x)
         {
-            if (x is JsonSerializationException || x is JsonReaderException)
+            if (x is JsonSerializationException or JsonReaderException)
             {
                 throw;
             }
@@ -49,7 +49,7 @@ internal partial class ConventionBasedSerializer<TSvo> : JsonConverter
     /// <inheritdoc />
     public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
-        Guard.NotNull(writer, nameof(writer));
+        Guard.NotNull(writer);
 
         if (value is TSvo json && ToJson(json) is { } node)
         {

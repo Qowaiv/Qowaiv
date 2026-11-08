@@ -65,8 +65,8 @@ public static class QowaivBsonConverter
     private static bool TypeIsSupported(IBsonSerializer converter)
         => (bool)converter
         .GetType()
-        .GetProperty(nameof(QowaivBsonConverter<object>.TypeIsSupported), NonPublicInstance)!
-        .GetValue(converter, Array.Empty<object>())!;
+        .GetProperty(nameof(QowaivBsonConverter<>.TypeIsSupported), NonPublicInstance)!
+        .GetValue(converter, [])!;
 
     /// <summary>Creates an instance of <see cref="QowaivBsonConverter{TSvo}"/> based on the specified type.</summary>
     [Pure]

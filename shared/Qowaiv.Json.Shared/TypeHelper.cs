@@ -3,13 +3,14 @@ namespace Qowaiv.Internals;
 /// <summary>Internal helper class for analyzing <see cref="Type"/>s.</summary>
 internal static class TypeHelper
 {
-    /// <summary>Gets the not null-able type if it is a null-able, otherwise the provided type.</summary>
-    /// <param name="objectType">
-    /// The type to test for.
-    /// </param>
-    [Pure]
-    public static Type? NotNullable(Type? objectType)
-        => objectType is { } ? Nullable.GetUnderlyingType(objectType) ?? objectType : null;
+    extension(Type type)
+    {
+        /// <summary>Gets the not null-able type if it is a null-able, otherwise the provided type.</summary>
+        [Pure]
+        public Type NotNullable
+            => Nullable.GetUnderlyingType(type)
+            ?? type;
+    }
 
     /// <summary>Gets the candidate types.</summary>
     /// <param name="types">
@@ -20,16 +21,16 @@ internal static class TypeHelper
         => types.Select(GetCandidateType).OfType<Type>();
 
     [Pure]
-    public static Type? GetCandidateType(Type? type)
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Type? GetCandidateType(Type? type) => type is
     {
-        return NotNullable(type) is { } tp && IsSupported(tp)
-            ? tp
-            : null;
-
-        static bool IsSupported(Type type)
-            => !type.IsAbstract
-            && !type.IsGenericTypeDefinition
-            && !type.ContainsGenericParameters
-            && !type.IsGenericTypeDefinition;
+        NotNullable:
+        {
+            IsAbstract: false,
+            IsGenericTypeDefinition: false,
+            ContainsGenericParameters: false,
+            IsGenericTypeDefinition: false,
+        } tp
     }
+    ? tp : null;
 }

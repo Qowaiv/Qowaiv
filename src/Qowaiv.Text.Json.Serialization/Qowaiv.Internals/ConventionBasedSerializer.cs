@@ -28,18 +28,12 @@ internal partial class ConventionBasedSerializer<TSvo> : JsonConverter<TSvo>
             else throw new JsonException(x.Message, x);
         }
 
-        TSvo ReadNumber(ref Utf8JsonReader reader)
+        TSvo ReadNumber(ref Utf8JsonReader reader) => true switch
         {
-            if (reader.TryGetInt64(out long num))
-            {
-                return FromJson(num);
-            }
-            else if (reader.TryGetDouble(out double dec))
-            {
-                return FromJson(dec);
-            }
-            else throw new JsonException($"QowaivJsonConverter does not support writing from {reader.GetString()}.");
-        }
+            _ when reader.TryGetInt64(out long num) => FromJson(num),
+            _ when reader.TryGetDouble(out double dec) => FromJson(dec),
+            _ => throw new JsonException($"QowaivJsonConverter does not support writing from {reader.GetString()}."),
+        };
     }
 
     /// <inheritdoc />

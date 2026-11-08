@@ -26,6 +26,10 @@ public abstract class JsonSerializeTestBase<TException>  where TException: Excep
         => Deserialize<SvoWithFromJson>(@"""test""").Should().Be(new SvoWithFromJson("test"));
 
     [Test]
+    public void Deserialize_nullable_String_Successful()
+       => Deserialize<SvoWithFromJson?>(@"""test""").Should().Be(new SvoWithFromJson("test"));
+
+    [Test]
     public void Deserialize_Long_Successful()
         => Deserialize<SvoWithFromJson>("666").Should().Be(new SvoWithFromJson(666L));
 

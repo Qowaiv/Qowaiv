@@ -1,9 +1,13 @@
 <Project>
- 
- <ItemGroup>
-   <Compile Include="../../shared/Qowaiv.Json.Shared/ConventionBasedSerializer.Initialize.cs" Link="Internal/ConventionBasedSerializer.Initialize.cs" />
-   <Compile Include="../../shared/Qowaiv.Json.Shared/ConventionBasedSerializer.Serialization.cs" Link="Internal/ConventionBasedSerializer.Serialization.cs" />
-   <Compile Include="../../shared/Qowaiv.Json.Shared/TypeHelper.cs" Link="Internal/TypeHelper.cs" />
- </ItemGroup>
- 
+
+  <ItemGroup>
+    <Compile Include="../../shared/Qowaiv.Json.Shared/ConventionBasedSerializer.Initialize.cs" Link="Internal/ConventionBasedSerializer.Initialize.cs" />
+    <Compile Include="../../shared/Qowaiv.Json.Shared/ConventionBasedSerializer.Serialization.cs" Link="Internal/ConventionBasedSerializer.Serialization.cs" />
+    <Compile Include="../../shared/Qowaiv.Json.Shared/TypeHelper.cs" Link="Internal/TypeHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileFullPath)" Link="Properties/$(MSBuildThisFile)" />
+  </ItemGroup>
+  
 </Project>

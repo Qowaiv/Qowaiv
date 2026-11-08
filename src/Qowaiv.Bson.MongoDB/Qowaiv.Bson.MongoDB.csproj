@@ -1,9 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/package-json.props" />
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageId>Qowaiv.Bson.MongoDB</PackageId>
     <PackageIcon>package-icon-bson.png</PackageIcon>
   </PropertyGroup>
@@ -17,10 +18,11 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>11.0.0-rc.1</Version>
+    <VersionMajor>6</VersionMajor>
+    <Version>$(VersionMajor).0.0-rc.1</Version>
     <PackageReleaseNotes>
       <![CDATA[
-v11.0.0
+v6.0.0
 - Only support netstandard2.0;net10.0;net11.0. (BREAKING)
 - Drop support for Id<TBehavior> and Svo<TSvoBehavior>. (BREAKING)
 v5.0.0

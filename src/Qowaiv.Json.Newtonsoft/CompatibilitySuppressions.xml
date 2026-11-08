@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- https://learn.microsoft.com/dotnet/fundamentals/package-validation/diagnostic-ids -->
+<Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:System.Runtime.CompilerServices.IsExternalInit</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Json.Newtonsoft.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Json.Newtonsoft.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:System.Runtime.CompilerServices.RequiresLocationAttribute</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Json.Newtonsoft.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Json.Newtonsoft.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Json.Newtonsoft.QowaivJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)-&gt;object?:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Json.Newtonsoft.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Json.Newtonsoft.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Json.Newtonsoft.QowaivJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)$2:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Json.Newtonsoft.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Json.Newtonsoft.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Json.Newtonsoft.QowaivJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)$1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Json.Newtonsoft.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Json.Newtonsoft.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.Json.Newtonsoft.QowaivJsonConverter:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Json.Newtonsoft.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Json.Newtonsoft.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.Json.Newtonsoft.QowaivJsonConverter:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Json.Newtonsoft.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Json.Newtonsoft.dll</Right>
+  </Suppression>
+</Suppressions>

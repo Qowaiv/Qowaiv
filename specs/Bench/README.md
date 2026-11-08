@@ -56,6 +56,20 @@ The specialized parser (not using any `Regex`) guarantees fast parsing.
 |------- |---------:|
 | Parse  | 74.35 ns |
 
+## JSON ModifyTypeInfo
+Checking if a emptyo SVO should be serialized. Numbers are on 1m values of
+which 10% is empty.
+
+| ShouldSerialize | Runtime   | Mean     | Ratio |
+|---------------- |---------- |---------:|------:|
+| Use Equals      | .NET 10.0 | 6.714 ms |  1.00 |
+| Use Cast        | .NET 10.0 | 3.132 ms |  0.47 |
+| Use Inteface    | .NET 10.0 | 2.967 ms |  0.44 |
+|                 |           |          |       |
+| Use Equals      | .NET 11.0 | 6.434 ms |  1.00 |
+| Use Cast        | .NET 11.0 | 2.802 ms |  0.44 |
+| Use Inteface    | .NET 11.0 | 2.958 ms |  0.46 |
+
 ## Percentage
 Apply a divide by 100, the default operation to convert a decimal to a
 percentage. Note that `DecimalMath` and the division trim (the latter only

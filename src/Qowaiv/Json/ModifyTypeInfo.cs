@@ -1,6 +1,7 @@
 #if NET10_0_OR_GREATER
 
 using System.Text.Json.Serialization.Metadata;
+using static System.Linq.Expressions.Expression;
 
 namespace Qowaiv.Json;
 
@@ -17,14 +18,21 @@ public static class ModifyTypeInfo
 
         foreach (var prop in info.Properties.Where(IsApplicable))
         {
-            prop.ShouldSerialize = ShouldSerialize(Activator.CreateInstance(prop.PropertyType)!);
+            prop.ShouldSerialize = ShouldSerialize(prop.PropertyType);
         }
     }
 
     /// <summary>True when the propValue is not equal to the empty/default value.</summary>
     [Pure]
-    private static Func<object, object?, bool> ShouldSerialize(object emptyValue) =>
-        (_, propValue) => !emptyValue.Equals(propValue);
+    private static Func<object, object?, bool> ShouldSerialize(Type propertyType)
+    {
+        var model = Parameter(typeof(object), "_");
+        var prop = Parameter(typeof(object), "prop");
+        var cast = Convert(prop, propertyType);
+        var empty = Default(propertyType);
+        var body = NotEqual(cast, empty);
+        return Lambda<Func<object, object?, bool>>(body, model, prop).Compile();
+    }
 
     /// <summary>Is applicable for structs implementing <see cref="IEmpty{TSelf}"/>.</summary>
     [Pure]

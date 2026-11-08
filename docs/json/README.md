@@ -1,9 +1,9 @@
 # Qowaiv JSON
-Serializing data using JSON has become the defacto default. All Qowaiv SVOs
-support JSON serialization; they are all decorated with [`JsonConverter(typeof(SvoJsonConverter))]`](https://docs.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverterattribute).
+Serializing data using JSON has become the de facto default. All Qowaiv SVOs
+support JSON serialization; they are all decorated with [`JsonConverter(Type)]`](https://docs.microsoft.com/dotnet/api/system.text.json.serialization.jsonconverterattribute).
 
-## Skip serializion of empty SVOs
-Since .NET 8.0, it is possible to register modifiers for the [`System.Text.Json.TypeInfoResolver`](https://docs.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions.typeinforesolver).
+## Skip serialization of empty SVOs
+Since .NET 7.0, it is possible to register modifiers for the [`System.Text.Json.JsonSerializerOptions.TypeInfoResolver`](https://docs.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions.typeinforesolver).
 This allows you to change serialization behavior, for example by editing
 `ShouldSerialize(object model, object? prop)`. This can be useful if you do not
 want to serialize empty SVOs (such as `EmailAddress.Empty`). To get this
@@ -20,18 +20,18 @@ var options = new JsonSerializerOptions()
 ```
 
 ## Other JSON frameworks
-If you you need JSON/BSON serialization but can not use `System.Text.Json` (as
-part of the .NET framework) Qowaiv provides an alternative.
+If you need JSON/BSON serialization but can not use `System.Text.Json` (as part
+of the .NET framework) Qowaiv provides an alternative.
 
 ### Convention based contract
 When an SVO follows the following contract (all Qowaiv SVOs do)
-framework specific converters can be build:
+framework specific converters can be built:
 
 1. Has a public static factory method `FromJson(string)` returning a new
    instance of the SVO.
 2. Optional factory methods for `double`, `long`, and `bool` can be provided.
    If not, the `string` factory method is used.
-3. If a none `void` method `ToJson()` is provided, this one is used for
+3. If a non-`void` method `ToJson()` is provided, this one is used for
    serialization, otherwise `svo.ToString()`.
 
 ``` C#
@@ -40,10 +40,10 @@ public struct/class/record SVO
     // Required.
     public static SVO FromJson(string json);
 
-    // Optional, otherwise FromJson(json.ToString(CultureInfo.Invariant)) is called.
+    // Optional, otherwise FromJson(json.ToString(CultureInfo.InvariantCulture)) is called.
     public static SVO FromJson(double json);
 
-    // Optional, otherwise FromJson(json.ToString(CultureInfo.Invariant)) is called.
+    // Optional, otherwise FromJson(json.ToString(CultureInfo.InvariantCulture)) is called.
     public static SVO FromJson(long json);
 
     // Optional, otherwise FromJson(json ? "true": "false") is called.
@@ -56,7 +56,7 @@ public struct/class/record SVO
 
 
 #### Implementations
-There are two _out-of-the-box_ implementations that support this convention-
+There are three _out-of-the-box_ implementations that support this convention-
 based contract.
 * [Qowaiv.Bson.MongoDB ](Qowaiv.Bson.MongoDB.md)  
 * [Qowaiv.Json.Newtonsoft](Qowaiv.Json.Newtonsoft.md)  

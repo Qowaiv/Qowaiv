@@ -1,10 +1,10 @@
 # Qowaiv.Json.Newtonsoft
 [Newtonsoft.Json](https://www.newtonsoft.com/json)'s converter was the .NET
-defacto default, until .NET Core 3.0. Qowaiv has not _out-of-the-box_ support
-for Newtonsoft, but with the `Qowaiv.Json.Newtonsoft` package, seamless
+de facto default, until .NET Core 3.0. Qowaiv does not have _out-of-the-box_
+support for Newtonsoft, but with the `Qowaiv.Json.Newtonsoft` package, seamless
 integration can be added.
 
-## Instalation
+## Installation
 ``` bash
 dotnet add package Qowaiv.Json.Newtonsoft
 ```
@@ -28,7 +28,7 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services) => services
         .AddMvc()
-        .AddNewtonsoftJson(options => 
+        .AddNewtonsoftJson(options =>
         {
             options.SerializerSettings.Converters.Add(new QowaivJsonConverter());
         });

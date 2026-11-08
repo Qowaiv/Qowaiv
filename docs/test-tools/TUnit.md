@@ -1,4 +1,4 @@
-# TUnit convetion based conversions
+# TUnit convention based conversions
 When running test with [`TUnit`](https://tunit.dev), test arguments provided with
 `[Arguments(..)]` are not automatically converted using a `TypeConverter`. By
 registering some custom converters, provided by `Qowaiv.TestTools` this omissions
@@ -25,7 +25,7 @@ internal static class ConventionBasedConverters
 ```
 
 ## ConventionBasedConverter
-The convetion based converter converts with the following priority:
+The convention based converter converts with the following priority:
 1. `System.ComponentModel.TypeConverter`
 2. `implicit` or `explict` cast
 3. `System.Convert.ChangeType(object, Type, IFormatProvider)`

@@ -4,6 +4,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageId>Qowaiv.Json.Newtonsoft</PackageId>
     <NoWarn>QW0020</NoWarn>
   </PropertyGroup>

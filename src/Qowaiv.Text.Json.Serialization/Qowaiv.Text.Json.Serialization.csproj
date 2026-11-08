@@ -4,6 +4,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageId>Qowaiv.Text.Json.Serialization</PackageId>
   </PropertyGroup>
 
@@ -19,6 +20,7 @@
 v11.0.0
 - Only support netstandard2.0. (BREAKING)
 - Drop support for Id<TBehavior> and Svo<TSvoBehavior>. (BREAKING)
+- Seale QowaivJsonConverter. (BREAKING)
 v5.0.0
 - Only support net6.0 and net8.0. (BREAKING)
 v4.2.0

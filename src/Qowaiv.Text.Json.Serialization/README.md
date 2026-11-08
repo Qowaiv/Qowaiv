@@ -1,20 +1,12 @@
 # [System.Text.Json](https://docs.microsoft.com/en-us/dotnet/api/system.text.json)
-Since .NET Core 3.0, Microsoft provides a built-in JSON serialization. To use
-the `Qowaiv.Text.Json.Serialization` package the following code can be used:
+When running TFM .NET 10.0 or later, JSON seralization works _out-of-the-box_.
+If you are stuck to an older TFM, you have to register JSON converters
+yourself. By registering `QowaivJsonConverter` you register a convetion-based
+serializer that handles all SVOs following that convetion.
 
 ``` C#
-using Qowaiv.Text.Json.Serialization;
-
-public class Startup
+var options = new JsonSerializerOptions()
 {
-    public void ConfigureServices(IServiceCollection services)
-    {
-        services
-            .AddMvc() 
-            .AddJsonOptions(options => 
-            {
-                options.JsonSerializerOptions.Converters.Add(new QowaivJsonConverter());
-            });
-    }
-}
+    Converters = { new QowaivJsonConverter() },
+};
 ```

@@ -3,3 +3,6 @@
 
 # Displays errors, warnings, and high-level build summaries
 /v:minimal
+
+# Keep the console output clean
+/nologo

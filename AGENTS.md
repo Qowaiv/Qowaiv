@@ -2,6 +2,9 @@
 
 Qowaiv is a (Single) Value Object library for DDD (Date, EmailAddress, IBAN, Money, Percentage, UUID, etc.), with serialization (JSON, SQL) and code-generation support. MIT licensed, NuGet package `Qowaiv`.
 
+## Version control
+- **Do NOT commit or push changes unless explicitly asked to.** Leave all changes uncommitted and unpushed for review.
+
 ## Layout
 - `qowaiv.slnx` - solution.
 - `src/` - libraries: `Qowaiv` (core), `Qowaiv.Data.SqlClient`, `Qowaiv.EntityFrameworkCore`, `Qowaiv.CodeGeneration*`, `Qowaiv.Diagnostics.Contracts` (analyzer used by core), `Qowaiv.TestTools`.

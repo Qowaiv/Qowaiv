@@ -61,6 +61,7 @@ public partial class Attributes
     }
 
     [AttributeUsage(AttributeTargets.All)]
+    [Validates(typeof(Enum))]
     public sealed class NotCachedAttribute : ValidationAttribute
     {
         public override bool IsValid(object? value) => value switch
@@ -72,6 +73,7 @@ public partial class Attributes
     }
 
     [AttributeUsage(AttributeTargets.All)]
+    [Validates(typeof(Enum))]
     public sealed class NotCachedAttribute<T> : ValidationAttribute where T: struct, Enum
     {
         public override bool IsValid(object? value) => value switch

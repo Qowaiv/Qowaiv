@@ -4,7 +4,6 @@ namespace Qowaiv.Validation.DataAnnotations;
 
 /// <summary>Represents a <see cref="ValidationResult"/> as a <see cref="IValidationMessage"/>.</summary>
 [Inheritable]
-[Serializable]
 public class ValidationMessage : ValidationResult, IValidationMessage
 {
     /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>

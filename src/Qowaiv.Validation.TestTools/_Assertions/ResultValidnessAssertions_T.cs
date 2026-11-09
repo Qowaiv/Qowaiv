@@ -14,7 +14,7 @@ public class ResultValidnessAssertions<TModel> : ResultValidnessAssertionsBase<R
     public AndConstraint And => new() { Value = Subject.Value };
 
     /// <summary>Constraint builder.</summary>
-    public sealed class AndConstraint 
+    public sealed class AndConstraint
     {
         /// <summary>Expose the value, so that the chain of assertions can be continued.</summary>
         public required TModel Value { get; init; }

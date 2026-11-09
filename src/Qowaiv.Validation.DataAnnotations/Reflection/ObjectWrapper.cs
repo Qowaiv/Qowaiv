@@ -35,7 +35,7 @@ internal static class ObjectWrapper
             return null;
 
         var obj = Parameter(typeof(object), "obj");
-        var val = (Expression)Property(Convert(obj, prop.DeclaringType!), info);
+        var val = (Expression)Property(Convert(obj, prop.DeclaringType), info);
         if (info.PropertyType != typeof(long))
         {
             val = Convert(val, typeof(long));

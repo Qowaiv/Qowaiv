@@ -110,7 +110,7 @@ public sealed class ChildValdator : Fluent.ModelValidator<BenchmarkModel.Child>
     {
         RuleFor(m => m.Email).Required();
         RuleFor(m => m).Must(AddUp);
-        RuleFor(m => m.SomeChild).SetValidator(this!);
+        RuleFor(m => m.SomeChild).SetValidator(this);
     }
 
     private static bool AddUp(BenchmarkModel.Child child) => child.JustIgnore1 + child.JustIgnore2 + child.JustIgnore3 <= short.MaxValue;

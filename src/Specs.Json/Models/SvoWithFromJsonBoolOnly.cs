@@ -1,6 +1,6 @@
 namespace Qowaiv.Json.UnitTests.Models;
 
-internal struct SvoWithFromJsonBoolOnly
+internal readonly struct SvoWithFromJsonBoolOnly
 {
     public bool ToJson() => this is { };
 

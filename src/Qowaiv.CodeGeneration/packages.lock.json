@@ -34,15 +34,15 @@
       },
       "PolySharp": {
         "type": "Direct",
-        "requested": "[1.16.0, )",
-        "resolved": "1.16.0",
-        "contentHash": "3kdIIceBPumwjw279FuiVMfVENT2cGASXJgcigdySsbX2dJB8ofUgG6i47yqF/k1qu6fvNR3csrSekZPviR6kQ=="
+        "requested": "[1.17.0, )",
+        "resolved": "1.17.0",
+        "contentHash": "hpdcKtrgf4AUYGEDuOuF0uvQN1tTuRkvu0e55JyEU/a8UrU152vheAvCjgisLpyRP6NvJO8EumLlMIu5+ZXg5w=="
       },
       "Qowaiv.Analyzers.CSharp": {
         "type": "Direct",
-        "requested": "[2.7.2, )",
-        "resolved": "2.7.2",
-        "contentHash": "MKqmAZj+gKvbLk1pqjdDaDQ3QnnuyjBKQoIT+ysqXi43GqhWmkvW1QqpBmx5QMUeLfb0ViQDGWz/s9E5d1Ih/Q=="
+        "requested": "[2.8.0, )",
+        "resolved": "2.8.0",
+        "contentHash": "dIfINtzgZSfegRxfboZmA2m+P/d2G+QFTuBk61ME+wsumgLNZ7xrWaWNuIW4dSu1f43FdMlK8XuebOsoDy6AKg=="
       },
       "Qowaiv.Validation.DataAnnotations": {
         "type": "Direct",
@@ -72,13 +72,14 @@
         "resolved": "2.1.0",
         "contentHash": "YWX9tsoLOqRX+dg3XwcSkgUUA/PxPADgbkbLFEv1gr03bI7hNMbyYrl21gu3gYodmNdB90+a/MAm0S9oDlqkEQ=="
       },
-      "System.ComponentModel.Annotations": {
-        "type": "Transitive",
-        "resolved": "5.0.0",
-        "contentHash": "dMkqfy2el8A8/I76n2Hi1oBFEbG1SfxD2l5nhwXV3XjlnOmwxJlQbYpJH4W51odnU9sARCSAgv7S3CyAFMkpYg=="
-      },
       "qowaiv": {
         "type": "Project"
+      },
+      "System.ComponentModel.Annotations": {
+        "type": "CentralTransitive",
+        "requested": "[5.0.0, )",
+        "resolved": "5.0.0",
+        "contentHash": "dMkqfy2el8A8/I76n2Hi1oBFEbG1SfxD2l5nhwXV3XjlnOmwxJlQbYpJH4W51odnU9sARCSAgv7S3CyAFMkpYg=="
       }
     },
     "net11.0": {
@@ -114,15 +115,15 @@
       },
       "PolySharp": {
         "type": "Direct",
-        "requested": "[1.16.0, )",
-        "resolved": "1.16.0",
-        "contentHash": "3kdIIceBPumwjw279FuiVMfVENT2cGASXJgcigdySsbX2dJB8ofUgG6i47yqF/k1qu6fvNR3csrSekZPviR6kQ=="
+        "requested": "[1.17.0, )",
+        "resolved": "1.17.0",
+        "contentHash": "hpdcKtrgf4AUYGEDuOuF0uvQN1tTuRkvu0e55JyEU/a8UrU152vheAvCjgisLpyRP6NvJO8EumLlMIu5+ZXg5w=="
       },
       "Qowaiv.Analyzers.CSharp": {
         "type": "Direct",
-        "requested": "[2.7.2, )",
-        "resolved": "2.7.2",
-        "contentHash": "MKqmAZj+gKvbLk1pqjdDaDQ3QnnuyjBKQoIT+ysqXi43GqhWmkvW1QqpBmx5QMUeLfb0ViQDGWz/s9E5d1Ih/Q=="
+        "requested": "[2.8.0, )",
+        "resolved": "2.8.0",
+        "contentHash": "dIfINtzgZSfegRxfboZmA2m+P/d2G+QFTuBk61ME+wsumgLNZ7xrWaWNuIW4dSu1f43FdMlK8XuebOsoDy6AKg=="
       },
       "Qowaiv.Validation.DataAnnotations": {
         "type": "Direct",

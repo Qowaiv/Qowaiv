@@ -3,6 +3,13 @@
 <Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Xml.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Xml.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:System.Xml.Linq.QowaivXObjectExtensions.&lt;G&gt;$48C7AB062EA07C289C4D6AAFC58A5E45.&lt;M&gt;$1329DDCAAAFA1BE7EB98670CD46476A4</Target>
     <Left>lib/net10.0/Qowaiv.Validation.Xml.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Xml.dll</Right>
@@ -41,6 +48,19 @@
     <Target>T:System.Xml.Schema.QowaivXmlSchemaSetExtensions.&lt;G&gt;$590E4D8BBF9CE74A3D27CF47880021B5.&lt;M&gt;$137838DF818A32DC20531AEEE4DD2A1A</Target>
     <Left>lib/net10.0/Qowaiv.Validation.Xml.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Xml.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Xml.dll</Left>
+    <Right>lib/net11.0/Qowaiv.Validation.Xml.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute</Target>
+    <Left>lib/net8.0/Qowaiv.Validation.Xml.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
@@ -110,6 +130,13 @@
     <Target>T:System.Runtime.CompilerServices.RequiresLocationAttribute</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Xml.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
@@ -340,6 +367,18 @@
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>T:Qowaiv.Validation.Xml.XmlValidationHandler:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Xml.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Xml.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Validation.Xml.dll</Left>
     <Right>lib/net10.0/Qowaiv.Validation.Xml.dll</Right>
   </Suppression>

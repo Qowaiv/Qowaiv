@@ -170,6 +170,19 @@
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Fluent.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Validation.Fluent.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute</Target>
+    <Left>lib/net10.0/Qowaiv.Validation.Fluent.dll</Left>
+    <Right>lib/net11.0/Qowaiv.Validation.Fluent.dll</Right>
+  </Suppression>
+  <Suppression>
     <DiagnosticId>CP0003</DiagnosticId>
     <Target>Qowaiv.Validation.Fluent, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
     <Left>lib/net10.0/Qowaiv.Validation.Fluent.dll</Left>

@@ -1,7 +1,6 @@
 namespace Qowaiv.Validation.Abstractions;
 
 /// <summary>Implementation of an <see cref="IValidationMessage"/>.</summary>
-[Serializable]
 public sealed class ValidationMessage : IValidationMessage, IEquatable<ValidationMessage>
 {
     /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>

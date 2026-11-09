@@ -80,5 +80,5 @@ public class ToString_as_type
     }
 }
 
-[Serializable]
+
 internal class TestModel { }

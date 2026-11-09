@@ -1,7 +1,6 @@
 namespace Qowaiv.Validation.Fluent;
 
 /// <summary>Represents a <see cref="ValidationFailure"/> as a <see cref="IValidationMessage"/>.</summary>
-[Serializable]
 public class ValidationMessage : ValidationFailure, IValidationMessage
 {
     /// <summary>Initializes a new instance of the <see cref="ValidationMessage"/> class.</summary>

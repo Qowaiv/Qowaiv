@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Package info">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageIcon>package-icon-validation.png</PackageIcon>
   </PropertyGroup>
 

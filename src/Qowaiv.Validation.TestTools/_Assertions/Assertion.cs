@@ -37,7 +37,7 @@ internal sealed record Assertion
             var error = (Message ?? string.Empty).Replace("{context}", Expression);
 
             error = Because is { Length: > 0 }
-                ? error.Replace("{reason}", " because " + string.Format(Because ?? string.Empty, BecauseArgs))
+                ? error.Replace("{reason}", " because " + string.Format(Because, BecauseArgs))
                 : error.Replace("{reason}", string.Empty);
 
             throw new AssertionFailed(error);

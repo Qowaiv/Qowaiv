@@ -1,5 +1,3 @@
-using Qowaiv.Humanizer;
-
 namespace Percentage_specs;
 
 #if NET10_0_OR_GREATER

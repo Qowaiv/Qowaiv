@@ -1,5 +1,3 @@
-using Qowaiv.Humanizer;
-
 namespace Year_specs;
 
 public class With_domain_logic

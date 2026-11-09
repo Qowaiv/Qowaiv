@@ -31,5 +31,5 @@ internal static class Data
 
     public static readonly MersenneTwister Rnd = new(42);
 
-    private static IEnumerable<int> Seeds(int count = 1_000_000) => System.Linq.Enumerable.Range(0, count);
+    private static IEnumerable<int> Seeds(int count = 1_000_000) => Enumerable.Range(0, count);
 }

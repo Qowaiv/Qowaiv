@@ -1,5 +1,3 @@
-using AwesomeAssertions.Extensions;
-
 namespace UUID_specs;
 
 public class With_domain_logic

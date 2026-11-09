@@ -14,6 +14,7 @@ public class Set_value
 
 public class Unknown
 {
+    [Test]
     [Arguments("'Country' must not be empty or unknown.", "en-GB")]
     [Arguments("'Country' mag niet leeg of onbekend zijn.", "nl-BE")]
     public void Not_valid(string message, CultureInfo culture)
@@ -37,6 +38,7 @@ public class Unknown
 
 public class Empty
 {
+    [Test]
     [Arguments("'Country' must not be empty or unknown.", "en-GB")]
     [Arguments("'Country' mag niet leeg of onbekend zijn.", "nl-BE")]
     public void Is_not_valid(string message, CultureInfo culture)

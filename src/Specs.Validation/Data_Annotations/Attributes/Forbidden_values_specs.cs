@@ -51,6 +51,7 @@ public class Is_not_valid_for
 
 public class With_message
 {
+    [Test]
     [Arguments("nl", "De waarde van het veld Country is niet toegestaan.")]
     [Arguments("en", "The value of the Country field is not allowed.")]
     public void culture_dependent(CultureInfo culture, string message)

@@ -112,6 +112,7 @@ public class Valid_for_not_set
 
 public class Invalid_for_not_in_past
 {
+    [Test]
     [Arguments("'Prop' moet in het verleden liggen.", "nl-NL")]
     [Arguments("'Prop' should be in the past.", "en-GB")]
     public void Date(string message, CultureInfo culture)
@@ -128,6 +129,7 @@ public class Invalid_for_not_in_past
         }
     }
 
+    [Test]
     [Arguments("'Prop' moet in het verleden liggen.", "nl-NL")]
     [Arguments("'Prop' should be in the past.", "en-GB")]
     public void DateOnly(string message, CultureInfo culture)
@@ -144,6 +146,7 @@ public class Invalid_for_not_in_past
         }
     }
 
+    [Test]
     [Arguments("'Prop' moet in het verleden liggen.", "nl-NL")]
     [Arguments("'Prop' should be in the past.", "en-GB")]
     public void DateTime(string message, CultureInfo culture)
@@ -160,6 +163,7 @@ public class Invalid_for_not_in_past
         }
     }
 
+    [Test]
     [Arguments("'Prop' moet in het verleden liggen.", "nl-NL")]
     [Arguments("'Prop' should be in the past.", "en-GB")]
     public void Nullable_Date(string message, CultureInfo culture)
@@ -176,6 +180,7 @@ public class Invalid_for_not_in_past
         }
     }
 
+    [Test]
     [Arguments("'Prop' moet in het verleden liggen.", "nl-NL")]
     [Arguments("'Prop' should be in the past.", "en-GB")]
     public void Nullable_DateOnly(string message, CultureInfo culture)
@@ -192,6 +197,7 @@ public class Invalid_for_not_in_past
         }
     }
 
+    [Test]
     [Arguments("'Prop' moet in het verleden liggen.", "nl-NL")]
     [Arguments("'Prop' should be in the past.", "en-GB")]
     public void Nullable_DateTime(string message, CultureInfo culture)

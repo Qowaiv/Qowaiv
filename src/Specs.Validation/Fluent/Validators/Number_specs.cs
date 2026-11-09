@@ -14,6 +14,7 @@ public class IsPositive
     .ValidateWith(new IsPositiveValidator())
     .Should().BeValid().WithoutMessages();
 
+    [Test]
     [Arguments(double.Epsilon)]
     [Arguments(double.PositiveInfinity)]
     [Arguments(1.0)]
@@ -26,6 +27,7 @@ public class IsPositive
     .ValidateWith(new IsPositiveValidator())
     .Should().BeValid().WithoutMessages();
 
+    [Test]
     [Arguments(double.NaN)]
     [Arguments(0)]
     [Arguments(-1.0)]
@@ -46,6 +48,7 @@ public class IsPositive
             ValidationMessage.Error("'Number' must be positive.", "Number"));
     }
 
+    [Test]
     [Arguments("'Number' must be positive.", "en-GB")]
     [Arguments("'Number' moet positief zijn.", "nl-NL")]
     public void Invalid_with_message(string message, CultureInfo culture) {

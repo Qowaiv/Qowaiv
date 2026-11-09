@@ -5,12 +5,14 @@ namespace Fluent_validation.NotBefore_specs;
 
 public class Is_valid
 {
+    [Test]
     [MethodDataSource(nameof(Validators))]
     public void When_not_before(ModelValidator<Model> validator)
         => new Model { DateOfBirth = new(2010, 11, 27), DateOfDeath = new Date(2010, 09, 18) }
         .ValidateWith(validator)
         .Should().BeValid();
 
+    [Test]
     [MethodDataSource(nameof(Validators))]
     public void When_nullable_not_set(ModelValidator<Model> validator)
         => new Model { DateOfBirth = new(2010, 11, 27), DateOfDeath = null }
@@ -22,6 +24,7 @@ public class Is_valid
 
 public class Is_not_valid
 {
+    [Test]
     [Arguments("1983-05-02", "'Date Of Birth' is before 01/01/2000.", "en-GB")]
     [Arguments("1999-12-31", "'Date Of Birth' is voor 01-01-2000.", "nl-NL")]
     public void When_before_fixed(Date dt, string message, CultureInfo culture)
@@ -34,6 +37,7 @@ public class Is_not_valid
             .WithMessage(ValidationMessage.Error(message, "DateOfBirth"));
     }
 
+    [Test]
     [Arguments("1983-05-02", "'Date Of Death' is before 01/01/2000.", "en-GB")]
     [Arguments("1999-12-31", "'Date Of Death' is voor 01-01-2000.", "nl-NL")]
     public void When_nullable_before_fixed(Date dt, string message, CultureInfo culture)
@@ -46,6 +50,7 @@ public class Is_not_valid
             .WithMessage(ValidationMessage.Error(message, "DateOfDeath"));
     }
 
+    [Test]
     [Arguments("1983-05-02", "'Date Of Birth' is before 01/01/2000.", "en-GB")]
     [Arguments("1999-12-31", "'Date Of Birth' is voor 01-01-2000.", "nl-NL")]
     public void When_before_expression(Date dt, string message, CultureInfo culture)
@@ -58,6 +63,7 @@ public class Is_not_valid
             .WithMessage(ValidationMessage.Error(message, "DateOfBirth"));
     }
 
+    [Test]
     [Arguments("1983-05-02", "'Date Of Death' is before 01/01/2000.", "en-GB")]
     [Arguments("1999-12-31", "'Date Of Death' is voor 01-01-2000.", "nl-NL")]
     public void When_nullable_before_expression(Date dt, string message, CultureInfo culture)
@@ -70,6 +76,7 @@ public class Is_not_valid
             .WithMessage(ValidationMessage.Error(message, "DateOfDeath"));
     }
 
+    [Test]
     [Arguments("1983-05-02", "'Date Of Birth' is before 01/01/2000.", "en-GB")]
     [Arguments("1999-12-31", "'Date Of Birth' is voor 01-01-2000.", "nl-NL")]
     public void When_before_nullable_expression(Date dt, string message, CultureInfo culture)
@@ -82,6 +89,7 @@ public class Is_not_valid
             .WithMessage(ValidationMessage.Error(message, "DateOfBirth"));
     }
 
+    [Test]
     [Arguments("1983-05-02", "'Date Of Death' is before 01/01/2000.", "en-GB")]
     [Arguments("1999-12-31", "'Date Of Death' is voor 01-01-2000.", "nl-NL")]
     public void When_nullable_before_nullable_expression(Date dt, string message, CultureInfo culture)

@@ -97,6 +97,7 @@ public class Supports
                 ValidationMessage.Error("The Value field is required.", "Records[1].Value"));
     }
 
+    [Test]
     [Arguments(ValidationSeverity.Info)]
     [Arguments(ValidationSeverity.Warning)]
     [Arguments(ValidationSeverity.Error)]

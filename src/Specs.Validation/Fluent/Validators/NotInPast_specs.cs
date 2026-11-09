@@ -194,6 +194,7 @@ public class Invalid_for_not_past
         }
     }
 
+    [Test]
     [Arguments("'Prop' mag niet in het verleden liggen.", "nl-NL")]
     [Arguments("'Prop' should not be in the past.", "en-GB")]
     public void Nullable_DateTime(string message, CultureInfo culture)

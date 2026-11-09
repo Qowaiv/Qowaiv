@@ -76,6 +76,7 @@ file sealed class Model
 
 public class With_message
 {
+    [Test]
     [Arguments("nl-NL", "Het veld TestField is verplicht.")]
     [Arguments("en-GB", "The TestField field is required.")]
     public void culture_dependent(CultureInfo culture, string message)

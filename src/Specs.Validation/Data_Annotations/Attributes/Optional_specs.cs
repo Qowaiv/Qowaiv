@@ -4,11 +4,12 @@ namespace Data_annotations.Attributes.Optional_specs;
 
 public class Is_valid_for
 {
-    [Arguments(nameof(Models))]
+    [Test]
+    [MethodDataSource(nameof(Models))]
     public void Not_empty_collection(object model)
        => new OptionalAttribute().IsValid(model).Should().BeTrue();
 
-    private static IEnumerable<object?> Models()
+    public static IEnumerable<object?> Models()
     {
         yield return null;
         yield return string.Empty;

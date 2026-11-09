@@ -13,6 +13,7 @@ public class Known
 }
 public class Uknown
 {
+    [Test]
     [Arguments("'Email' is required.", "en-GB")]
     [Arguments("'Email' is verplicht.", "nl-BE")]
     public void Not_valid_by_default(string message, CultureInfo culture)

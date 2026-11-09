@@ -30,7 +30,7 @@ public class At_least
     public class Ignores
     {
         [Test]
-        public void @null() => new Size.AtLeastAttribute(0).IsValid(null).Should().BeTrue();
+        public void _null() => new Size.AtLeastAttribute(0).IsValid(null).Should().BeTrue();
 
         [Test]
         public void length_zero() => new Size.AtLeastAttribute(4).IsValid(System.IO.Stream.Null).Should().BeTrue();
@@ -44,6 +44,7 @@ public class At_least
     [MatrixDataSource]
     public void invalidates([MatrixRange<int>(1, 10)] int value) => new Size.AtLeastAttribute(11).IsValid(new byte[value]).Should().BeFalse();
 
+    [Test]
     [Arguments("nl", "De grootte van het veld AtLeastProp moet minstens 4 byte zijn.")]
     [Arguments("en", "The size of the AtLeastProp field should be at least 4 byte.")]
     public void with_message(CultureInfo culture, string message)
@@ -83,7 +84,7 @@ public class At_most
     public class Ignores
     {
         [Test]
-        public void @null() => new Size.AtMostAttribute(0).IsValid(null).Should().BeTrue();
+        public void _null() => new Size.AtMostAttribute(0).IsValid(null).Should().BeTrue();
     }
 
     [Test]
@@ -94,6 +95,7 @@ public class At_most
     [MatrixDataSource]
     public void invalidates([MatrixRange<int>(12, 20)] int value) => new Size.AtMostAttribute(11).IsValid(new byte[value]).Should().BeFalse();
 
+    [Test]
     [Arguments("nl", "De grootte van het veld AtMostProp mag niet meer dan 4 byte zijn.")]
     [Arguments("en", "The size of the AtMostProp field should be at most 4 byte.")]
     public void with_message(CultureInfo culture, string message)
@@ -134,7 +136,7 @@ public class In_range
     public class Ignores
     {
         [Test]
-        public void @null() => new Size.InRangeAttribute(2, 4).IsValid(null).Should().BeTrue();
+        public void _null() => new Size.InRangeAttribute(2, 4).IsValid(null).Should().BeTrue();
 
         [Test]
         public void length_zero() => new Size.InRangeAttribute(2, 4).IsValid(System.IO.Stream.Null).Should().BeTrue();
@@ -153,6 +155,7 @@ public class In_range
     [Arguments(7)]
     public void invalidates(int value) => new Size.InRangeAttribute(3, 4).IsValid(new byte[value]).Should().BeFalse();
 
+    [Test]
     [Arguments("nl", "De grootte van het veld InRangeProp moet tussen de 3 byte en 4 byte zijn.")]
     [Arguments("en", "The size of the InRangeProp field should be between 3 byte and 4 byte.")]
     public void with_message(CultureInfo culture, string message)

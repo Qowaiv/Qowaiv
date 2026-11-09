@@ -5,6 +5,7 @@ namespace Fluent_validation.Is_finite_specs;
 
 public class Valid_for
 {
+    [Test]
     [Arguments(double.MinValue)]
     [Arguments(0.33)]
     [Arguments(0)]
@@ -15,6 +16,7 @@ public class Valid_for
         .ValidateWith(new FloatingPointsValidator())
         .Should().BeValid();
 
+    [Test]
     [Arguments(double.MinValue)]
     [Arguments(0.33f)]
     [Arguments(0)]
@@ -25,6 +27,7 @@ public class Valid_for
         .ValidateWith(new FloatingPointsValidator())
         .Should().BeValid();
 
+    [Test]
     [Arguments(float.MinValue)]
     [Arguments(0.33f)]
     [Arguments(0)]
@@ -35,6 +38,7 @@ public class Valid_for
         .ValidateWith(new FloatingPointsValidator())
         .Should().BeValid();
 
+    [Test]
     [Arguments(float.MinValue)]
     [Arguments(0.33f)]
     [Arguments(0)]
@@ -60,6 +64,7 @@ public class Valid_for
 
 public class Invalid_for
 {
+    [Test]
     [Arguments(double.NaN)]
     [Arguments(double.NegativeInfinity)]
     [Arguments(double.PositiveInfinity)]
@@ -75,6 +80,7 @@ public class Invalid_for
                 ValidationMessage.Error("'Nullable Double' must be a finite number.", "NullableDouble"));
     }
 
+    [Test]
     [Arguments(float.NaN)]
     [Arguments(float.NegativeInfinity)]
     [Arguments(float.PositiveInfinity)]
@@ -90,6 +96,7 @@ public class Invalid_for
                 ValidationMessage.Error("'Nullable Float' must be a finite number.", "NullableFloat"));
     }
 
+    [Test]
     [Arguments("nl", "'Double' moet een eindig getal zijn.")]
     [Arguments("en", "'Double' must be a finite number.")]
     public void with_localized_message(CultureInfo culture, string message)

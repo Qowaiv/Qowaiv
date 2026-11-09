@@ -58,6 +58,7 @@ public class Messages
         => ValidationMessages.New([Warning1, ValidationMessage.None, Error1])
         .Should().BeEquivalentTo([Error1, Warning1]);
 
+    [Test]
     [Arguments((ValidationSeverity)(-2))]
     [Arguments((ValidationSeverity)(+4))]
     public void throws_on_invalid_severity(ValidationSeverity severity)

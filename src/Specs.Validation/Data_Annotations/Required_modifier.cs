@@ -51,6 +51,7 @@ public class Required_modifier
             .WithMessages();
     }
 
+    [Test]
     [Arguments(null)]
     [Arguments("")]
     public void does_not_alter_nullable_references_types(string? value)

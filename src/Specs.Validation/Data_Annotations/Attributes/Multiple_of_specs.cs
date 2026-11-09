@@ -8,6 +8,7 @@ public class Valid_for
     [Test]
     public void Null() => new MultipleOfAttribute(0.1).IsValid(null).Should().BeTrue();
 
+    [Test]
     [Arguments(45, 5.000)]
     [Arguments(45, 1.000)]
     [Arguments(45, 0.100)]
@@ -16,6 +17,7 @@ public class Valid_for
     public void shorts(short value, double factor)
       => new MultipleOfAttribute(factor).IsValid(value).Should().BeTrue();
 
+    [Test]
     [Arguments(45, 5.000)]
     [Arguments(45, 1.000)]
     [Arguments(45, 0.100)]
@@ -24,6 +26,7 @@ public class Valid_for
     public void ints(int value, double factor)
        => new MultipleOfAttribute(factor).IsValid(value).Should().BeTrue();
 
+    [Test]
     [Arguments(45, 5.000)]
     [Arguments(45, 1.000)]
     [Arguments(45, 0.100)]
@@ -32,6 +35,7 @@ public class Valid_for
     public void longs(long value, double factor)
         => new MultipleOfAttribute(factor).IsValid(value).Should().BeTrue();
 
+    [Test]
     [Arguments("45.000", 5.000)]
     [Arguments("45.000", 1.000)]
     [Arguments("45.100", 0.100)]
@@ -40,6 +44,7 @@ public class Valid_for
     public void decimals(decimal value, double factor)
         => new MultipleOfAttribute(factor).IsValid(value).Should().BeTrue();
 
+    [Test]
     [Arguments("45.000", 5.000)]
     [Arguments("45.000", 1.000)]
     [Arguments("45.100", 0.100)]
@@ -48,6 +53,7 @@ public class Valid_for
     public void amounts(Amount value, double factor)
         => new MultipleOfAttribute(factor).IsValid(value).Should().BeTrue();
 
+    [Test]
     [Arguments("EUR 45.000", 5.000)]
     [Arguments("EUR 45.000", 1.000)]
     [Arguments("EUR 45.100", 0.100)]
@@ -56,6 +62,7 @@ public class Valid_for
     public void money(Money value, double factor)
         => new MultipleOfAttribute(factor).IsValid(value).Should().BeTrue();
 
+    [Test]
     [Arguments("45.000%", 5.000)]
     [Arguments("45.000%", 1.000)]
     [Arguments("45.100%", 0.100)]
@@ -66,11 +73,13 @@ public class Valid_for
 }
 
 public class Not_valid_for{
+    [Test]
     [Arguments(45, 06)]
     [Arguments(45, 10)]
     public void integers(long value, double factor)
         => new MultipleOfAttribute(factor).IsValid(value).Should().BeFalse();
 
+    [Test]
     [Arguments("45.000", 6.00)]
     [Arguments("45.500", 1.00)]
     [Arguments("45.120", 0.10)]
@@ -78,6 +87,7 @@ public class Not_valid_for{
     public void decimals(decimal value, double factor)
         => new MultipleOfAttribute(factor).IsValid(value).Should().BeFalse();
 
+    [Test]
     [Arguments("45.000", 6.00)]
     [Arguments("45.500", 1.00)]
     [Arguments("45.120", 0.10)]
@@ -85,6 +95,7 @@ public class Not_valid_for{
     public void amounts(Amount value, double factor)
         => new MultipleOfAttribute(factor).IsValid(value).Should().BeFalse();
 
+    [Test]
     [Arguments("EUR 45.000", 6.00)]
     [Arguments("EUR 45.500", 1.00)]
     [Arguments("EUR 45.120", 0.10)]
@@ -92,6 +103,7 @@ public class Not_valid_for{
     public void money(Money value, double factor)
         => new MultipleOfAttribute(factor).IsValid(value).Should().BeFalse();
 
+    [Test]
     [Arguments("45.000%", 6.00)]
     [Arguments("45.500%", 1.00)]
     [Arguments("45.120%", 0.10)]
@@ -99,6 +111,7 @@ public class Not_valid_for{
     public void percentages(Percentage value, double factor)
        => new MultipleOfAttribute(factor).IsValid(value).Should().BeFalse();
 
+    [Test]
     [Arguments(45.0f)]
     [Arguments(float.NaN)]
     [Arguments(float.PositiveInfinity)]
@@ -127,12 +140,13 @@ public class Does_not_support
         => (new object()).Invoking(v => new MultipleOfAttribute(0.1).IsValid(v))
         .Should().Throw<UnsupportedType>();
 
+    [Test]
     [MethodDataSource(nameof(NotSupportedIConvertables))]
     public void not_supported_IConvertables(object value)
         => value.Invoking(v => new MultipleOfAttribute(10).IsValid(v))
         .Should().Throw<UnsupportedType>();
 
-    private static IEnumerable<object?> NotSupportedIConvertables()
+    public static IEnumerable<object?> NotSupportedIConvertables()
     {
         yield return true;
         yield return "Hello, World!";
@@ -154,6 +168,7 @@ public class Initialization
 
 public class With_message
 {
+    [Test]
     [Arguments("nl", "De waarde van veld Total is geen veelvoud van 0,001.")]
     [Arguments("en", "The value of the Total field is not a multiple of 0.001.")]
     public void culture_dependent(CultureInfo culture, string message)

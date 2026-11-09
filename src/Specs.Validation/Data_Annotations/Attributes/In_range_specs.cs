@@ -44,6 +44,7 @@ public class Is_culture_independent
 
 public class With_message
 {
+    [Test]
     [Arguments("nl", "De waarde van het Total veld moet een waarde hebben tussen 0 en 1000.")]
     [Arguments("en", "The field Total must be between 0 and 1000.")]
     public void culture_dependent(CultureInfo culture, string message)

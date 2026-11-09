@@ -11,6 +11,7 @@ public class Valid_for
         .ValidateWith(new NoIPBasedEmailAddressModelValidator())
         .Should().BeValid();
 
+    [Test]
     [Arguments("'Email' has an IP address based domain.", "en-GB")]
     [Arguments("'Email' heeft een IP-adres als domein.", "nl-BE")]
     public void IPBased(string message, CultureInfo culture)

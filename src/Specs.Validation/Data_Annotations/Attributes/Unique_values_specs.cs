@@ -59,6 +59,7 @@ public class Is_not_valid_for
 
 public class With_message
 {
+    [Test]
     [Arguments("nl", "Alle waarden van het veld Values zouden verschillend moeten zijn.")]
     [Arguments("en", "All values of the Values field should be unique.")]
     public void culture_dependent(CultureInfo culture, string message)

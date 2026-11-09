@@ -7,6 +7,7 @@ public class Is_valid_for
     [Test]
     public void Null() => new IsFiniteAttribute().IsValid(null).Should().BeTrue();
 
+    [Test]
     [Arguments(double.MinValue)]
     [Arguments(0.33)]
     [Arguments(0.0)]
@@ -23,6 +24,7 @@ public class Is_valid_for
 
 public class Is_invalid_for
 {
+    [Test]
     [Arguments(float.NaN)]
     [Arguments(float.NegativeInfinity)]
     [Arguments(float.PositiveInfinity)]
@@ -32,6 +34,7 @@ public class Is_invalid_for
     public void not_finite(object value)
         => new IsFiniteAttribute().IsValid(value).Should().BeFalse();
 
+    [Test]
     [Arguments("Hello")]
     [Arguments(42)]
     [Arguments(128L)]
@@ -42,6 +45,7 @@ public class Is_invalid_for
 }
 public class With_message
 {
+    [Test]
     [Arguments("nl", "De waarde van het Total veld is geen eindig getal.")]
     [Arguments("en", "The value of the Total field is not a finite number.")]
     public void culture_dependent(CultureInfo culture, string message)

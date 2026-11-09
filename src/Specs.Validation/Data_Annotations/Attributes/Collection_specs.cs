@@ -24,7 +24,7 @@ public class At_least
     public class Ignores
     {
         [Test]
-        public void @null() => new Collection.AtLeastAttribute(0).IsValid(null).Should().BeTrue();
+        public void _null() => new Collection.AtLeastAttribute(0).IsValid(null).Should().BeTrue();
 
         [Test]
         public void length_zero() => new Collection.AtLeastAttribute(4).IsValid(string.Empty).Should().BeTrue();
@@ -72,7 +72,7 @@ public class At_most
     public class Ignores
     {
         [Test]
-        public void @null() => new Collection.AtMostAttribute(0).IsValid(null).Should().BeTrue();
+        public void _null() => new Collection.AtMostAttribute(0).IsValid(null).Should().BeTrue();
     }
 
     [Test]
@@ -118,7 +118,7 @@ public class In_range
     public class Ignores
     {
         [Test]
-        public void @null() => new Collection.InRangeAttribute(2, 4).IsValid(null).Should().BeTrue();
+        public void _null() => new Collection.InRangeAttribute(2, 4).IsValid(null).Should().BeTrue();
 
         [Test]
         public void length_zero() => new Collection.InRangeAttribute(2, 4).IsValid(string.Empty).Should().BeTrue();

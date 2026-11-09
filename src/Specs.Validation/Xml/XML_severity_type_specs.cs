@@ -11,7 +11,7 @@ public class Maps
 
     [Test]
     [Arguments(XmlSeverityType.Error)]
-    [Arguments(666)]
+    [Arguments((XmlSeverityType)666)]
     public void others_as_error(XmlSeverityType severityType)
       => severityType.ValidationSeverity.Should().Be(ValidationSeverity.Error);
 }

@@ -229,6 +229,7 @@ public enum Concurrent
 }
 public class With_message
 {
+    [Test]
     [Arguments("nl", "De waarde van het veld Banners is niet toegestaan.")]
     [Arguments("en", "The value of the Banners field is not allowed.")]
     public void culture_dependent(CultureInfo culture, string message)

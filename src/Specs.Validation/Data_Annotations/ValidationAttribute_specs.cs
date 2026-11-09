@@ -9,6 +9,7 @@ public class All
         .GetExportedTypes()
         .Where(t => !t.IsAbstract && t.IsAssignableTo(typeof(ValidationAttribute)));
 
+    [Test]
     [MethodDataSource(nameof(Attributes))]
     public void are_decorated_with_ValidatesAttribute(Type attribute)
         => attribute.Should().BeDecoratedWith<ValidatesAttribute>();

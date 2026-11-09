@@ -9,6 +9,7 @@ public class Positive
         [Test]
         public void Null() => new PositiveAttribute().IsValid(null).Should().BeTrue();
 
+        [Test]
         [Arguments(0.001)]
         [Arguments(1)]
         [Arguments(42)]
@@ -28,6 +29,7 @@ public class Positive
 
     public class Is_invalid_for
     {
+        [Test]
         [Arguments(0)]
         [Arguments(-1)]
         [Arguments(-42)]
@@ -45,6 +47,7 @@ public class Positive
         public void zero_or_negative_numbers(object value)
             => new PositiveAttribute().IsValid(value).Should().BeFalse();
 
+        [Test]
         [Arguments("Hello")]
         [Arguments(true)]
         public void non_numeric_types(object value)
@@ -54,6 +57,7 @@ public class Positive
 
     public class With_message
     {
+        [Test]
         [Arguments("nl", "De waarde van het Quantity veld moet positief zijn.")]
         [Arguments("en", "The value of the Quantity field must be positive.")]
         public void culture_dependent(CultureInfo culture, string message)
@@ -79,6 +83,7 @@ public class NotPositive
         [Test]
         public void Null() => new NotPositiveAttribute().IsValid(null).Should().BeTrue();
 
+        [Test]
         [Arguments(0)]
         [Arguments(-1)]
         [Arguments(-42)]
@@ -100,6 +105,7 @@ public class NotPositive
 
     public class Is_invalid_for
     {
+        [Test]
         [Arguments(0.001)]
         [Arguments(1)]
         [Arguments(42)]
@@ -118,6 +124,7 @@ public class NotPositive
         public void positive_numbers(object value)
             => new NotPositiveAttribute().IsValid(value).Should().BeFalse();
 
+        [Test]
         [Arguments("Hello")]
         [Arguments(true)]
         public void non_numeric_types(object value)
@@ -127,6 +134,7 @@ public class NotPositive
 
     public class With_message
     {
+        [Test]
         [Arguments("nl", "De waarde van het Adjustment veld mag niet positief zijn.")]
         [Arguments("en", "The value of the Adjustment field must not be positive.")]
         public void culture_dependent(CultureInfo culture, string message)
@@ -152,6 +160,7 @@ public class Negative
         [Test]
         public void Null() => new NegativeAttribute().IsValid(null).Should().BeTrue();
 
+        [Test]
         [Arguments(-0.001)]
         [Arguments(-1)]
         [Arguments(-42)]
@@ -172,6 +181,7 @@ public class Negative
 
     public class Is_invalid_for
     {
+        [Test]
         [Arguments(0)]
         [Arguments(0.001)]
         [Arguments(1)]
@@ -194,6 +204,7 @@ public class Negative
         public void zero_or_positive_numbers(object value)
             => new NegativeAttribute().IsValid(value).Should().BeFalse();
 
+        [Test]
         [Arguments("Hello")]
         [Arguments(true)]
         public void non_numeric_types(object value)
@@ -203,6 +214,7 @@ public class Negative
 
     public class With_message
     {
+        [Test]
         [Arguments("nl", "De waarde van het Temperature veld moet negatief zijn.")]
         [Arguments("en", "The value of the Temperature field must be negative.")]
         public void culture_dependent(CultureInfo culture, string message)
@@ -228,6 +240,7 @@ public class NotNegative
         [Test]
         public void Null() => new NotNegativeAttribute().IsValid(null).Should().BeTrue();
 
+        [Test]
         [Arguments(0)]
         [Arguments(0.001)]
         [Arguments(1)]
@@ -253,6 +266,7 @@ public class NotNegative
 
     public class Is_invalid_for
     {
+        [Test]
         [Arguments(-0.001)]
         [Arguments(-1)]
         [Arguments(-42)]
@@ -272,6 +286,7 @@ public class NotNegative
         public void negative_numbers(object value)
             => new NotNegativeAttribute().IsValid(value).Should().BeFalse();
 
+        [Test]
         [Arguments("Hello")]
         [Arguments(true)]
         public void non_numeric_types(object value)
@@ -281,6 +296,7 @@ public class NotNegative
 
     public class With_message
     {
+        [Test]
         [Arguments("nl", "De waarde van het Count veld mag niet negatief zijn.")]
         [Arguments("en", "The value of the Count field must not be negative.")]
         public void culture_dependent(CultureInfo culture, string message)

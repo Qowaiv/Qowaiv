@@ -20,6 +20,7 @@ public class Is_not_valid_for
 }
 public class With_message
 {
+    [Test]
     [Arguments("nl-NL", "Het veld Property mag niet onbekend zijn.")]
     [Arguments("en-GB", "The field Property must not be unknown.")]
     public void culture_dependent(CultureInfo culture, string message)

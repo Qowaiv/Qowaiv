@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccessDenied" xml:space="preserve">
+    <value>访问被拒绝。</value>
+  </data>
+  <data name="ConcurrencyIssue" xml:space="preserve">
+    <value>发生了并发问题。</value>
+  </data>
+  <data name="EntityNotFound" xml:space="preserve">
+    <value>找不到实体。</value>
+  </data>
+  <data name="EntityNotFound_ForId" xml:space="preserve">
+    <value>找不到 ID 为 {0} 的实体。</value>
+  </data>
+  <data name="EntityNotFound_ForTypeAndId" xml:space="preserve">
+    <value>找不到 ID 为 {1} 的实体 {0}。</value>
+  </data>
+  <data name="MidAirCollision" xml:space="preserve">
+    <value>检测到 mid-air collision。</value>
+  </data>
+  <data name="PaymentRequired" xml:space="preserve">
+    <value>需要付款。</value>
+  </data>
+  <data name="ServiceUnavailable" xml:space="preserve">
+    <value>请求的服务不可用。</value>
+  </data>
+  <data name="ServiceUnavailable_WithName" xml:space="preserve">
+    <value>服务 '{0}' 不可用。</value>
+  </data>
+  <data name="VersionMismatch" xml:space="preserve">
+    <value>预期版本 {0}，但获得版本 {1}。</value>
+  </data>
+</root>

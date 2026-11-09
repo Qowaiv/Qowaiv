@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/package-validation.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
+    <PackageId>Qowaiv.Validation.Guarding</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
+    <ProjectReference Include="../Qowaiv.Validation.Messages/Qowaiv.Validation.Messages.csproj" />
+  </ItemGroup>
+  
+  <PropertyGroup>
+    <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
+    <Version>2.2.0</Version>
+    <ToBeReleased>
+      <![CDATA[
+v11.0.0
+- Add .NET 11.0 target.
+- Drop .NET 8.0 targets (BREAKING)
+- AsyncResult<TModel>. (BREAKING)
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
+      <![CDATA[
+v2.2.0
+- Update dependencies.
+v2.1.0
+- Add notnull constraint to Result.For<T>().
+v2.0.0
+- Add .NET 10.0 target.
+- Drop .NET9.0 targets. (BREAKING)
+v1.0.0
+- Add .NET 9.0 target.
+- Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
+V0.3.1
+- Fixed lacking nullable annotations. #67
+v0.3.0
+- Support .NET 7.0. #62
+v0.2.1
+- Nullable anotations. #48
+v0.1.2
+- Initial version
+- Introduction of the Must() guarding mechanism #41.
+]]>
+    </PackageReleaseNotes>
+  </PropertyGroup>
+  
+</Project>

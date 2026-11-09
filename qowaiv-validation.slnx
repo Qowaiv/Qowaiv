@@ -1,0 +1,15 @@
+<Solution>
+  <Project Path=".net.csproj" />
+  <Project Path="src/Bench.Validation/Bench.Validation.csproj" />
+  <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
+  <Project Path="src/Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
+  <Project Path="src/Qowaiv.Validation.DataAnnotations/Qowaiv.Validation.DataAnnotations.csproj" />
+  <Project Path="src/Qowaiv.Validation.Fluent/Qowaiv.Validation.Fluent.csproj" />
+  <Project Path="src/Qowaiv.Validation.Guarding/Qowaiv.Validation.Guarding.csproj" />
+  <Project Path="src/Qowaiv.Validation.Messages/Qowaiv.Validation.Messages.csproj" />
+  <Project Path="src/Qowaiv.Validation.TestTools/Qowaiv.Validation.TestTools.csproj" />
+  <Project Path="src/Qowaiv.Validation.Xml/Qowaiv.Validation.Xml.csproj" />
+  <Project Path="src/Specs.Shared/Specs.Shared.csproj" />
+  <Project Path="src/Specs.Validation.TestData/Specs.Validation.TestData.csproj" />
+  <Project Path="src/Specs.Validation/Specs.Validation.csproj" />
+</Solution>

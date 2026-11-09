@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/package-validation.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
+    <PackageId>Qowaiv.Validation.Xml</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>2.1.0</Version>
+    <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
+    <ToBeReleased>
+      <![CDATA[
+v11.0.0
+- Add .NET 11.0 target.
+- Drop .NET 8.0 targets (BREAKING)
+- AsyncResult<TModel>. (BREAKING)
+- SchemaValidator is sealed. (BREAKING)
+- XmlValidationHandler is sealed. (BREAKING)
+- Explicitly prohibited DTD.
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
+      <![CDATA[
+v2.1.0
+- Add notnull constraint to Result.For<T>().
+v2.0.0
+- Add .NET 10.0 target.
+- Drop .NET9.0 targets. (BREAKING)
+v1.0.0
+- Add .NET 9.0 target.
+- Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
+v0.3.0
+- Support .NET 7.0. #62
+v0.2.1
+- Support validation via XSD Schemas. #56
+]]>
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="AllowedValuesAttribute_ValidationError">
+    <value>欄位 {0} 的值不被允許。</value>
+  </data>
+  <data name="ArgumentException_TypeIsNotEqualityComparer">
+    <value>類型 {0} 未實現 IEqualityComparer 或 IEqualityComarer&lt;object&gt;。</value>
+  </data>
+  <data name="Collection_AtLeast_ValidationError">
+    <value>欄位 {0} 應該至少有 {1} 個元素。</value>
+  </data>
+  <data name="Collection_AtMost_ValidationError">
+    <value>欄位 {0} 應該最多有 {1} 個元素。</value>
+  </data>
+  <data name="Collection_InRange_ValidationError">
+    <value>欄位 {0} 的元素數應該在 {1} 到 {2} 之間。</value>
+  </data>
+  <data name="DistinctValuesAttribute_ValidationError">
+    <value>欄位 {0} 的所有值應該是不同的。</value>
+  </data>
+  <data name="InFuture">
+    <value>欄位 {0} 的值應該在未來。</value>
+  </data>
+  <data name="InPast">
+    <value>欄位 {0} 的值應該在過去。</value>
+  </data>
+  <data name="InRange">
+    <value>欄位 {0} 必須在 {1} 到 {2} 之間。</value>
+  </data>
+  <data name="IsFiniteAttribute_ValidationError">
+    <value>欄位 {0} 的值不是有限數。</value>
+  </data>
+  <data name="Length_AtLeast_ValidationError">
+    <value>欄位 {0} 的長度應該至少為 {1}。</value>
+  </data>
+  <data name="Length_AtMost_ValidationError">
+    <value>欄位 {0} 的長度應該最多為 {1}。</value>
+  </data>
+  <data name="Length_InRange_ValidationError">
+    <value>欄位 {0} 的長度應該在 {1} 到 {2} 之間。</value>
+  </data>
+  <data name="MandatoryAttribute_ValidationError">
+    <value>欄位 {0} 是必需的。</value>
+  </data>
+  <data name="MultipleOfAttribute_ValidationError">
+    <value>欄位 {0} 的值不是 {1} 的倍數。</value>
+  </data>
+  <data name="NegativeAttribute_ValidationError">
+    <value>欄位 {0} 的值必須是負數。</value>
+  </data>
+  <data name="NotInFuture">
+    <value>欄位 {0} 的值不應該在未來。</value>
+  </data>
+  <data name="NotInPast">
+    <value>欄位 {0} 的值不應該在過去。</value>
+  </data>
+  <data name="NotNegativeAttribute_ValidationError">
+    <value>欄位 {0} 的值不能是負數。</value>
+  </data>
+  <data name="NotPositiveAttribute_ValidationError">
+    <value>欄位 {0} 的值不能是正數。</value>
+  </data>
+  <data name="NotUnknown">
+    <value>欄位 {0} 不能是未知。</value>
+  </data>
+  <data name="PositiveAttribute_ValidationError">
+    <value>欄位 {0} 的值必須是正數。</value>
+  </data>
+  <data name="Size_AtLeast_ValidationError">
+    <value>欄位 {0} 的大小應該至少為 {1: F}。</value>
+  </data>
+  <data name="Size_AtMost_ValidationError">
+    <value>欄位 {0} 的大小應該最多為 {1: F}。</value>
+  </data>
+  <data name="Size_InRange_ValidationError">
+    <value>欄位 {0} 的大小應該在 {1: F} 到 {2: F} 之間。</value>
+  </data>
+  <data name="UniqueValuesAttribute_ValidationError">
+    <value>欄位 {0} 的所有值應該是唯一的。</value>
+  </data>
+  <data name="UnsupportedType_ForAttribute">
+    <value>{0} 不支持 {1} 類型的屬性。</value>
+  </data>
+</root>

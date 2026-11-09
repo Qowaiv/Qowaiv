@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="AllowedValuesAttribute_ValidationError">
+    <value>Значение поля {0} не допускается.</value>
+  </data>
+  <data name="ArgumentException_TypeIsNotEqualityComparer">
+    <value>Тип {0} не реализует IEqualityComparer или IEqualityComarer&lt;object&gt;.</value>
+  </data>
+  <data name="Collection_AtLeast_ValidationError">
+    <value>Поле {0} должно содержать как минимум {1} элементов.</value>
+  </data>
+  <data name="Collection_AtMost_ValidationError">
+    <value>Поле {0} должно содержать не более {1} элементов.</value>
+  </data>
+  <data name="Collection_InRange_ValidationError">
+    <value>Количество элементов поля {0} должно быть между {1} и {2}.</value>
+  </data>
+  <data name="DistinctValuesAttribute_ValidationError">
+    <value>Все значения поля {0} должны быть различными.</value>
+  </data>
+  <data name="InFuture">
+    <value>Значение поля {0} должно быть в будущем.</value>
+  </data>
+  <data name="InPast">
+    <value>Значение поля {0} должно быть в прошлом.</value>
+  </data>
+  <data name="InRange">
+    <value>Поле {0} должно быть между {1} и {2}.</value>
+  </data>
+  <data name="IsFiniteAttribute_ValidationError">
+    <value>Значение поля {0} не является конечным числом.</value>
+  </data>
+  <data name="Length_AtLeast_ValidationError">
+    <value>Длина поля {0} должна быть как минимум {1}.</value>
+  </data>
+  <data name="Length_AtMost_ValidationError">
+    <value>Длина поля {0} должна быть не более {1}.</value>
+  </data>
+  <data name="Length_InRange_ValidationError">
+    <value>Длина поля {0} должна быть между {1} и {2}.</value>
+  </data>
+  <data name="MandatoryAttribute_ValidationError">
+    <value>Поле {0} обязательно.</value>
+  </data>
+  <data name="MultipleOfAttribute_ValidationError">
+    <value>Значение поля {0} не является кратным {1}.</value>
+  </data>
+  <data name="NegativeAttribute_ValidationError">
+    <value>Значение поля {0} должно быть отрицательным.</value>
+  </data>
+  <data name="NotInFuture">
+    <value>Значение поля {0} не должно быть в будущем.</value>
+  </data>
+  <data name="NotInPast">
+    <value>Значение поля {0} не должно быть в прошлом.</value>
+  </data>
+  <data name="NotNegativeAttribute_ValidationError">
+    <value>Значение поля {0} не должно быть отрицательным.</value>
+  </data>
+  <data name="NotPositiveAttribute_ValidationError">
+    <value>Значение поля {0} не должно быть положительным.</value>
+  </data>
+  <data name="NotUnknown">
+    <value>Поле {0} не должно быть неизвестно.</value>
+  </data>
+  <data name="PositiveAttribute_ValidationError">
+    <value>Значение поля {0} должно быть положительным.</value>
+  </data>
+  <data name="Size_AtLeast_ValidationError">
+    <value>Размер поля {0} должен быть как минимум {1: F}.</value>
+  </data>
+  <data name="Size_AtMost_ValidationError">
+    <value>Размер поля {0} должен быть не более {1: F}.</value>
+  </data>
+  <data name="Size_InRange_ValidationError">
+    <value>Размер поля {0} должен быть между {1: F} и {2: F}.</value>
+  </data>
+  <data name="UniqueValuesAttribute_ValidationError">
+    <value>Все значения поля {0} должны быть уникальными.</value>
+  </data>
+  <data name="UnsupportedType_ForAttribute">
+    <value>{0} не поддерживает свойства типа {1}.</value>
+  </data>
+</root>

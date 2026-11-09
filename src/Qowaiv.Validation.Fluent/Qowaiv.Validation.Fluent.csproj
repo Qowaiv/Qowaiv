@@ -1,0 +1,98 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/package-validation.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
+    <PackageId>Qowaiv.Validation.Fluent</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="QowaivValidationFluentMessages.Designer.cs" DependentUpon="QowaivValidationFluentMessages.resx" AutoGen="True" DesignTime="True" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="QowaivValidationFluentMessages.resx" LastGenOutput="QowaivValidationFluentMessages.Designer.cs" Generator="ResXFileCodeGenerator" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Qowaiv/Qowaiv.csproj" />
+    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>4.2.0</Version>
+    <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
+    <ToBeReleased>
+      <![CDATA[
+v5.0.0
+- Add .NET 11.0 target.
+- Drop .NET 8.0 targets (BREAKING)
+- AsyncResult<TModel>. (BREAKING)
+- Drop FloatingPointValidation (covered by NumberValidation). (BREAKING)
+- Changed namespace from FluentValidation to Qowaiv.Validation.Fluent. (BREAKING)
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
+      <![CDATA[
+v4.2.0
+- Add support for ar, de, es, fr, it, ja, ru, zh languages.
+v4.1.0
+- Added `IsFinite`, `IsPostive`, `IsNegative`, `IsNotPostive` and `IsNotNegative` for `INumber`.
+v4.0.0
+- Update to Qowaiv v8.0.0. (BREAKING)
+v3.0.0
+- `Before`, `After`, `NotBefore`, and `NotAfter` available for `IComparable`.
+- Update to Qowaiv v7.4.7.
+- Add .NET 10.0 target.
+- Drop .NET standard, .NET 7.0, and .NET 9.0 targets. (BREAKING)
+- Update to FluentValidation 12.1.0. (BREAKING)
+v2.0.0
+- Add .NET 9.0 target.
+- Drop .NET 6.0 target. (BREAKING)
+v1.0.0
+- Drop support .NET 5.0 and .NET 7.0. (BREAKING)
+- Update to Qowaiv v6.0.0.
+- Update to FluentValidation v11.9.2. (BREAKING)
+- ullable anotations. #48
+- `InPast`, `NotInPast`, `InFuture`, and `NotInFuture` is now `Clock.UtcNow()`.
+v0.3.1
+- FIx so that Required to be current culture dependent. #74
+- `.IsFinite()` for doubles and floats.
+v0.3.0
+- Support .NET 7.0. #62
+v0.2.1
+- Nullable anotations. #48
+- `InPast`, `NotInPast`, `InFuture`, and `NotInFuture` available for `DateOnly`. #49
+v0.2.0
+- Updated Qowaiv dependency.
+v0.1.1
+- Decorate pure methods with attribute. #38
+v0.1.0
+- Qowaiv.Validation.Abstractions dependency.
+v0.0.7
+- Update to FluentValidation v10.2.0.
+v0.0.6
+- ModelValidator instead of FluentModelValidator. #18
+- Drop FluentValidator. #19
+- Required with allow unknown is one rule now. #19 (fix)
+v0.0.5
+- Update to FluentValidation v9.0.1
+v0.0.4
+- Support `SetSeverity` and `WithMessage` on `NotEmptyOrUnknown`. #12 (fix)
+v0.0.3
+- Added `Required()`. #4
+- Severity taken into account. #5 (fix)
+v0.0.2
+- Added Guards for null
+v0.0.1
+- Initial version
+]]>
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/package.props" />
 
@@ -7,6 +7,8 @@
     <LangVersion>10.0</LangVersion>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <NoWarn>Proj0220</NoWarn>
+    <IncludeDiagnostics>false</IncludeDiagnostics>
+    <IncludeGuard>false</IncludeGuard>
   </PropertyGroup>
 
   <PropertyGroup>

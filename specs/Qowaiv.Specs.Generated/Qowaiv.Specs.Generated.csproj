@@ -8,6 +8,8 @@
     <RootNamespace>Specs_Generated</RootNamespace>
     <Nullable>enable</Nullable>
     <IsTestCode>true</IsTestCode>
+    <IncludeDiagnostics>false</IncludeDiagnostics>
+    <IncludeGuard>false</IncludeGuard>
   </PropertyGroup>
 
   <ItemGroup>

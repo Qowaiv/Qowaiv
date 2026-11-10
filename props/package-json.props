@@ -3,11 +3,6 @@
   <Import Project="../props/package.props" />
   <Import Project="../shared/Qowaiv.Json.Shared/Qowaiv.Json.Shared.props" />
 
-  <PropertyGroup>
-    <IncludeDiagnostics>true</IncludeDiagnostics>
-    <IncludeGuard>true</IncludeGuard>
-  </PropertyGroup>
-
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileFullPath)" Link="Properties/$(MSBuildThisFile)" />
   </ItemGroup>

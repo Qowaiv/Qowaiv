@@ -6,8 +6,6 @@
     <TargetFramework>net11.0</TargetFramework>
     <NoWarn>CA1861;QW0016</NoWarn>
     <Nullable>enable</Nullable>
-    <IncludeDiagnostics>true</IncludeDiagnostics>
-    <IncludeGuard>true</IncludeGuard>
   </PropertyGroup>
 
   <ItemGroup>

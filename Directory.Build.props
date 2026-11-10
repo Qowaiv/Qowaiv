@@ -9,8 +9,6 @@
     <LangVersion>15.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
-    <IncludeDiagnostics>false</IncludeDiagnostics>
-    <IncludeGuard>false</IncludeGuard>
   </PropertyGroup>
 
   <PropertyGroup Label="Diagnostics">
@@ -68,6 +66,11 @@ inside and outside a Domain-driven context.
     <Copyright>Copyright © Qowaiv community 2013-current</Copyright>
   </PropertyGroup>
 
+  <PropertyGroup Label="Include variables">
+    <IncludeDiagnostics>true</IncludeDiagnostics>
+    <IncludeGuard>true</IncludeGuard>
+  </PropertyGroup>
+
   <PropertyGroup Label="Signing">
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
@@ -85,16 +88,5 @@ inside and outside a Domain-driven context.
   <PropertyGroup>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
-
-  <ItemGroup Condition="'$(IncludeGuard)' == 'true'">
-    <Compile Include="../../shared/Guard.cs" Link="Properties/Guard.cs" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(IncludeDiagnostics)' == 'true'">
-    <ProjectReference
-      Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj"
-      OutputItemType="Analyzer"
-      ReferenceOutputAssembly="false" />
-  </ItemGroup>
 
 </Project>

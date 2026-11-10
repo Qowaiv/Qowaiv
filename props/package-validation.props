@@ -2,11 +2,6 @@
 
   <Import Project="../props/package.props" />
 
-  <PropertyGroup>
-    <IncludeDiagnostics>true</IncludeDiagnostics>
-    <IncludeGuard>true</IncludeGuard>
-  </PropertyGroup>
-
   <PropertyGroup Label="Package info">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageIcon>package-icon-validation.png</PackageIcon>

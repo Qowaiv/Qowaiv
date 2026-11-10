@@ -1,3 +1,6 @@
+using Qowaiv.Extensions;
+using Specs;
+
 namespace Qowaiv.Specs.TestTools;
 
 /// <summary>Generates random values between <c>min</c> and <c>max</c> as arguments for a (numeric) test parameter.</summary>
@@ -13,25 +16,8 @@ public sealed class RandomAttribute(double min, double max, int count) : Untyped
     [Pure]
     protected override IEnumerable<Func<object?[]?>> GenerateDataSources(DataGeneratorMetadata dataGeneratorMetadata)
     {
-        var type = ((ParameterMetadata)dataGeneratorMetadata.MembersToGenerate[0]).Type;
-        var rnd = new Random();
-
-        for (var i = 0; i < count; i++)
-        {
-            var value = Convert(min + (rnd.NextDouble() * (max - min)), type);
-            yield return () => [value];
-        }
+        for (var i = 0; i < count; i++) yield return Next;
     }
 
-    [Pure]
-    private static object Convert(double value, Type type)
-        => type == typeof(decimal)
-        ? ToDecimal(value)
-        : System.Convert.ChangeType(value, type, CultureInfo.InvariantCulture);
-
-    [Pure]
-    private static decimal ToDecimal(double value)
-        => value >= (double)decimal.MaxValue ? decimal.MaxValue
-        : value <= (double)decimal.MinValue ? decimal.MinValue
-        : (decimal)value;
+    private object?[] Next() => [(min + (Rnd.Shared.NextDouble() * (max - min))).ToDecimal()];
 }

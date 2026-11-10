@@ -1,17 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/specs.props" />
 
-  <ItemGroup Label="Internals under test">
-    <Compile Include="../../src/Qowaiv/Text/CharBuffer.cs" Link="_Internal/Text/CharBuffer.cs" />
-    <Compile Include="../../src/Qowaiv/Text/Chars.cs" Link="_Internal/Text/Chars.cs" />
-  </ItemGroup>
-
   <ItemGroup Label="Projects under test">
-    <ProjectReference Include="../../src/Qowaiv/Qowaiv.csproj" />
     <ProjectReference Include="../../src/Qowaiv.CodeGeneration.SingleValueObjects/Qowaiv.CodeGeneration.SingleValueObjects.csproj" />
     <ProjectReference Include="../../src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
-    <ProjectReference Include="../Qowaiv.Specs.Generated/Qowaiv.Specs.Generated.csproj" />
   </ItemGroup>
 
 </Project>

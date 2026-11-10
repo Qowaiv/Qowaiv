@@ -6,7 +6,7 @@ name: Dependabot lock files
 on:
   pull_request:
     branches:
-      - master
+      - main
       - 'release/**'
     paths:
       - Directory.Packages.props

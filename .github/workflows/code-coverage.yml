@@ -2,8 +2,7 @@ name: Code coverage
 on:
   push:
     branches:
-      - master
-
+      - main
 jobs:
   build:
     name: Build

@@ -2,11 +2,11 @@ name: Build .NET Framework
 on:
   push:
     branches:
-      - master
+      - main
       - 'release/**'
   pull_request:
     branches:
-      - master
+      - main
       - 'release/**'
   workflow_dispatch:
 concurrency:

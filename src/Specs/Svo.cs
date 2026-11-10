@@ -1,6 +1,19 @@
 using Qowaiv.Chemistry;
+using Qowaiv.Financial;
+using Qowaiv.Formatting;
+using Qowaiv.Hashing;
+using Qowaiv.Humanizer;
+using Qowaiv.IO;
+using Qowaiv.Mathematics;
+using Qowaiv.Security;
+using Qowaiv.Statistics;
 using Qowaiv.Sustainability;
+using Qowaiv.TestTools.Globalization;
+using Qowaiv.Web;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 
 namespace Qowaiv.TestTools;
 
@@ -88,14 +101,25 @@ public static class Svo
     /// <summary>H0H0H0 (Canada)</summary>
     public static PostalCode PostalCode => PostalCode.Parse("H0H0H0");
 
+    /// <summary>*****</summary>
     public static Secret Secret => Secret.Parse("Ken sent me!");
+    
+    /// <summary>Female (F)</summary>
     public static Sex Sex => Sex.Female;
+
+    /// <summary>123,456.789 MB</summary>
     public static StreamSize StreamSize => 123456789.Bytes();
+
+    /// <summary>Australian Eastern Standard Time (UTC+10)</summary>
     public static TimeZoneInfo TimeZone => TestTimeZones.EastAustraliaStandardTime;
+
+    /// <summary>Qowaiv_SVOLibrary_GUIA</summary>
     public static Uuid Uuid => Uuid.Parse("Qowaiv_SVOLibrary_GUIA");
 
     /// <summary>2017-W23-7</summary>
     public static WeekDate WeekDate => new(2017, 23, 7);
+
+    /// <summary>1979 CE</summary>
     public static Year Year => 1979.CE();
 
     /// <summary>2017-06</summary>

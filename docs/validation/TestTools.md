@@ -8,16 +8,16 @@ These assertions could look like this:
 ``` C#
 Result.For(17).Should().BeValid()
     .WithoutMessages()
-    .Value.Should().Be(17); 
+    .And.Value.Should().Be(17); 
 ```
-Where the chain after `.Value` exposes the value.
+Where the chain after `.And.Value` exposes the value.
 
 Other options for `.BeValid()` are:
 
 ``` C#
 Result.For(17).Should().BeValid()
     .WithMessage(ValidationMessage.Warn("Are you sure?"))
-    .Value.Should().Be(17);
+    .And.Value.Should().Be(17);
 ```
 and
 
@@ -48,7 +48,7 @@ var model = new MyModel();
 
 Result<MyModel> result = model.ValidateWith(new ValidatorForMyModel());
 ```
-And this result can be changed with the assertions described on top:
+And this result can be chained with the assertions described above:
 
 ``` C#
 var model = new MyModel();

@@ -30,7 +30,7 @@ public class Model
 ```
 
 ## Allowed values
-The `[Allowed<TValue>]` attribute allows to define a subset of allowed values. It
+The `[Allowed<TValue>]` attribute allows defining a subset of allowed values. It
 supports type converters to get the allowed values based on a primitive value.
 
 ``` C#
@@ -42,7 +42,7 @@ public class Model
 ```
 
 ## Forbidden values
-The `[Forbidden<TValue>]` attribute allows to define a subset of forbidden values. It
+The `[Forbidden<TValue>]` attribute allows defining a subset of forbidden values. It
 supports type converters to get the forbidden values based on a primitive value.
 
 ``` C#
@@ -120,7 +120,9 @@ whose type is not an enum, instead of reporting a validation error.
 ## In future
 The `[InFuture]` attribute requires a `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value to be in the future. The current time is resolved
-using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
+using [`Qowaiv.Clock`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock):
+`Clock.UtcNow()` for `DateTime`, `Clock.Now()` for `DateTimeOffset`, and
+`Clock.Today()` for `Date`, `DateOnly`, and `Year`.
 
 ``` C#
 public class Model
@@ -133,7 +135,9 @@ public class Model
 ## In past
 The `[InPast]` attribute requires a `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value to be in the past. The current time is resolved
-using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
+using [`Qowaiv.Clock`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock):
+`Clock.UtcNow()` for `DateTime`, `Clock.Now()` for `DateTimeOffset`, and
+`Clock.Today()` for `Date`, `DateOnly`, and `Year`.
 
 ``` C#
 public class Model
@@ -175,7 +179,7 @@ those values are set to the `TValidator` allowing full control of the error mess
 
 ## Is finite
 The `[IsFinite]` attribute validates that the floating point value of the field
-represents a finite (i.e. not NaN, or infinity).
+represents a finite number (i.e. not NaN or infinity).
 
 ``` C#
 public class Model
@@ -186,7 +190,7 @@ public class Model
 ```
 
 ## Skip validation
-The `[SkipValidation]` attribute allows to skip the validation of a property
+The `[SkipValidation]` attribute allows skipping the validation of a property
 or type.
 
 ``` C#
@@ -201,8 +205,8 @@ public class Model
 ## Multiple of
 The `[MultipleOf]` attribute validates that the value of a field is a multiple
 of the specified factor. It supports types such as `decimal`, `Percentage`, and
-`Amount`, but not `double` or `float`, as their [decimal representation](https://0.30000000000000004.com)
-does not commonly fit with decimal based multiples such as `0.1`, or `0.001`.
+`Amount`, but not `double` or `float`, as their [binary representation](https://0.30000000000000004.com)
+commonly does not fit decimal based multiples such as `0.1`, or `0.001`.
 Note that the specified factor in the attribute is a `double` but rounded to
 overcome those floating point issues.
 
@@ -277,7 +281,9 @@ public class Model
 ## Not in future
 The `[NotInFuture]` attribute requires a `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value not to be in the future. The current time is resolved
-using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
+using [`Qowaiv.Clock`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock):
+`Clock.UtcNow()` for `DateTime`, `Clock.Now()` for `DateTimeOffset`, and
+`Clock.Today()` for `Date`, `DateOnly`, and `Year`.
 
 ``` C#
 public class Model
@@ -290,7 +296,9 @@ public class Model
 ## Not in past
 The `[NotInPast]` attribute requires a `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value not to be in the past. The current time is resolved
-using [`Qowaiv.Clock.UtcNow()`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock).
+using [`Qowaiv.Clock`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock):
+`Clock.UtcNow()` for `DateTime`, `Clock.Now()` for `DateTimeOffset`, and
+`Clock.Today()` for `Date`, `DateOnly`, and `Year`.
 
 ``` C#
 public class Model
@@ -387,12 +395,13 @@ public class Model
 ```
 
 ## Validates attribute
-The `[Validates]` attribute is designed to help the [QW0102](https://github.com/Qowaiv/qowaiv-analyzers/blob/main/rules/QW0102.md)
-to report on misusage of the attribute. By decorating a `ValidationAttribute`
-the analyzer knows on which member types the attribute can be set, and report
-an issue when used on a field of an not supported type. Note that the attribute
-is decorated with `[Conditional("CONTRACTS_FULL")]` so unless `CONTRACTS_FULL`
-is set during the build, that argument only acts as contract annotation.
+The `[Validates]` attribute is designed to help [QW0102](https://github.com/Qowaiv/qowaiv-analyzers/blob/main/docs/rules/QW0102.md)
+report misuse of validation attributes. By decorating a `ValidationAttribute`
+the analyzer knows on which member types the attribute can be set, and can
+report an issue when it is used on a member of an unsupported type. Note that
+the attribute is decorated with `[Conditional("CONTRACTS_FULL")]`, so unless
+`CONTRACTS_FULL` is set during the build, it is not emitted and only acts as
+a contract annotation.
 
 ``` C#
 [Validates(typeof(string))]

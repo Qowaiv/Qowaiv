@@ -95,7 +95,7 @@ public class CustomValidator : AbstractValidator<Model>
 
 The `ClockValidation` validates if a date (time) is in the past, or future.
 It supports `Date`, `DateTime`, `Date?`, and `DateTime?`, and the provision
-of custom date (time) provider. By Default, `Clock.UtcNow()` and `Clock.Today()`
+of custom date (time) provider. By default, `Clock.UtcNow()` and `Clock.Today()`
 are used.
 
 ``` C#

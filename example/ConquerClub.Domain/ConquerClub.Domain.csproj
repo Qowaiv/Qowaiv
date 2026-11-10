@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/nopackage.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net11.0</TargetFramework>
+    <NoWarn>CA1861;QW0016</NoWarn>
+    <Nullable>enable</Nullable>
+    <IncludeDiagnostics>true</IncludeDiagnostics>
+    <IncludeGuard>true</IncludeGuard>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Qowaiv/Qowaiv.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.DomainModel/Qowaiv.DomainModel.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Validation.Fluent/Qowaiv.Validation.Fluent.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Validation.Messages/Qowaiv.Validation.Messages.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference
+      Include="../../src/Qowaiv.CodeGeneration.SingleValueObjects/Qowaiv.CodeGeneration.SingleValueObjects.csproj"
+      OutputItemType="Analyzer"
+      ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MathNet.Numerics" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Messages.Designer.cs" DependentUpon="Messages.resx" DesignTime="True" AutoGen="True" />
+    <EmbeddedResource Update="Messages.resx" LastGenOutput="Messages.Designer.cs" Generator="ResXFileCodeGenerator" />
+  </ItemGroup>
+
+</Project>

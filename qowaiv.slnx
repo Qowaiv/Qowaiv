@@ -24,6 +24,7 @@
   <Project Path="src/Qowaiv.Data.SqlClient/Qowaiv.Data.SqlClient.csproj" />
   <Project Path="src/Qowaiv.DomainModel.TestTools/Qowaiv.DomainModel.TestTools.csproj" />
   <Project Path="src/Qowaiv.DomainModel/Qowaiv.DomainModel.csproj" />
+  <Project Path="src/Qowaiv.Globalization.NL/Qowaiv.Globalization.NL.csproj" />
   <Project Path="src/Qowaiv.Json.Newtonsoft/Qowaiv.Json.Newtonsoft.csproj" />
   <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
   <Project Path="src/Qowaiv.Text.Json.Serialization/Qowaiv.Text.Json.Serialization.csproj" />

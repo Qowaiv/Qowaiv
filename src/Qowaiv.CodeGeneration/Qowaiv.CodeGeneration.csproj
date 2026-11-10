@@ -31,10 +31,6 @@ v0.0.1
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" />
   </ItemGroup>
 

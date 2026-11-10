@@ -46,8 +46,8 @@ public class SingleValueObjectSpecs
     private static bool IsJsonSerializable(Type type)
         => type
             .GetMethods(BindingFlags.Static | BindingFlags.Public)
-            .Exists(m => m.Name == nameof(Date.FromJson)
+            .Any(m => m.Name == nameof(Date.FromJson)
                 && m.ReturnType == type
-                && m.GetParameters().Length == 1
-                && m.GetParameters()[0].ParameterType == typeof(string));
+                && m.GetParameters() is [var param]
+                && param.ParameterType == typeof(string));
 }

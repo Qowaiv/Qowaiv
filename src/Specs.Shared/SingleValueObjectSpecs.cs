@@ -1,0 +1,57 @@
+using Qowaiv.Security;
+using Qowaiv.Security.Cryptography;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+
+namespace Qowaiv.TestTools;
+
+public class SingleValueObjectSpecs
+{
+    protected SingleValueObjectSpecs() { }
+
+    public static IEnumerable<Type> AllSvos
+        => AppDomain.CurrentDomain.GetAssemblies()
+        .Where(assembly => assembly.FullName!.Contains("Qowaiv"))
+        .SelectMany(ExportedTypes)
+        .Where(type
+            => type.GetCustomAttributes<SingleValueObjectAttribute>().Any()
+            && !type.GetCustomAttributes<ObsoleteAttribute>().Any());
+
+    // TUnit loads all referenced assemblies, including those that can not be loaded completely (Roslyn).
+    private static Type[] ExportedTypes(Assembly assembly)
+    {
+        try { return assembly.GetExportedTypes(); }
+        catch (Exception ex) when (ex is FileNotFoundException or FileLoadException or ReflectionTypeLoadException) { return []; }
+    }
+
+    public static IEnumerable<Type> AllSvosExceptGeneric
+        => AllSvos.Where(svo => !svo.IsGenericType);
+
+    public static IEnumerable<Type> SvosWithEmpty
+        => AllSvos.Where(svo
+            => !svo.IsGenericType
+            && svo.GetCustomAttribute<SingleValueObjectAttribute>() is { } attr
+            && attr.StaticOptions.HasFlag(SingleValueStaticOptions.HasEmptyValue));
+
+    public static IEnumerable<Type> SvosWithUnknown
+        => AllSvos.Where(svo
+            => !svo.IsGenericType
+            && svo.GetCustomAttribute<SingleValueObjectAttribute>() is { } attr
+            && attr.StaticOptions.HasFlag(SingleValueStaticOptions.HasUnknownValue));
+
+    public static IEnumerable<Type> JsonSerializable => AllSvos
+        .Where(IsJsonSerializable)
+        .Except(
+        [
+            typeof(Secret),
+            typeof(CryptographicSeed)
+        ]);
+
+    private static bool IsJsonSerializable(Type type) => type
+        .GetMethods(BindingFlags.Static | BindingFlags.Public)
+        .Any(m => m.Name == nameof(Date.FromJson)
+            && m.ReturnType == type
+            && m.GetParameters() is [var param]
+            && param.ParameterType == typeof(string));
+}

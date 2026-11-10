@@ -15,6 +15,7 @@
 
   <ItemGroup Label="Test Tools">
     <PackageReference Include="AwesomeAssertions" />
+    <PackageReference Include="TUnit.Core" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">

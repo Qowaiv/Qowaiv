@@ -1,8 +1,8 @@
-using AwesomeAssertions.Numeric;
+using Qowaiv;
 
 namespace AwesomeAssertions;
 
-internal static class UuidAssertions
+public static class UuidAssertions
 {
     public static AndConstraint<ComparableTypeAssertions<Uuid>> HavePattern(this ComparableTypeAssertions<Uuid> assertions, params byte?[] pattern)
     {

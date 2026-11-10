@@ -3,11 +3,13 @@
   <Import Project="../../props/specs.props" />
 
   <ItemGroup Label="Internals under test">
+    <Compile Include="../Qowaiv/Text/CharBuffer.cs" Link="_Internal/Text/CharBuffer.cs" />
     <Compile Include="../Qowaiv/Text/Chars.cs" Link="_Internal/Text/Chars.cs" />
   </ItemGroup>
   
   <ItemGroup Label="Projects under test">
     <ProjectReference Include="../Qowaiv/Qowaiv.csproj" />
+    <ProjectReference Include="../Specs.Generated/Specs.Generated.csproj" />
   </ItemGroup>
 
 </Project>

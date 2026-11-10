@@ -152,7 +152,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
     /// The factor to multiply with.
     /// </param>
     [Pure]
-    public StreamSize Multiply(double factor) => Multiply((decimal)factor);
+    public StreamSize Multiply(double factor) => Multiply(factor.ToDecimal());
 
     /// <summary>Multiplies the stream size with a specified factor.</summary>
     /// <param name="factor">
@@ -225,7 +225,7 @@ public readonly partial struct StreamSize : IXmlSerializable, IFormattable, IEqu
     /// The factor to multiply with.
     /// </param>
     [Pure]
-    public StreamSize Divide(double factor) => Divide((decimal)factor);
+    public StreamSize Divide(double factor) => Divide(factor.ToDecimal());
 
     /// <summary>Divide the stream size by a specified factor.</summary>
     /// <param name="factor">

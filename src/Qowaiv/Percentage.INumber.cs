@@ -33,7 +33,7 @@ public readonly partial struct Percentage
     public static Percentage operator *(Percentage p, decimal factor) => Create(p.m_Value * factor);
 
     /// <summary>Multiplies the percentage with the factor.</summary>
-    public static Percentage operator *(Percentage p, double factor) => Create(p.m_Value * (decimal)factor);
+    public static Percentage operator *(Percentage p, double factor) => Create(p.m_Value * factor.ToDecimal());
 
     /// <summary>Multiplies the percentage with the factor.</summary>
     public static Percentage operator *(Percentage p, float factor) => Create(p.m_Value * (decimal)factor);
@@ -63,7 +63,7 @@ public readonly partial struct Percentage
     public static Percentage operator /(Percentage p, decimal factor) => Create(p.m_Value / factor);
 
     /// <summary>Divides the percentage by the factor.</summary>
-    public static Percentage operator /(Percentage p, double factor) => Create(p.m_Value / (decimal)factor);
+    public static Percentage operator /(Percentage p, double factor) => Create(p.m_Value / factor.ToDecimal());
 
     /// <summary>Divides the percentage by the factor.</summary>
     public static Percentage operator /(Percentage p, float factor) => Create(p.m_Value / (decimal)factor);

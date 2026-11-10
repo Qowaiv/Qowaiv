@@ -339,7 +339,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     private static Fraction Cast(double number)
         => number < MinValue.numerator || number > MaxValue.numerator
         ? throw new OverflowException(QowaivMessages.OverflowException_Fraction)
-        : Create((decimal)number, MinimumError);
+        : Create(number.ToDecimal(), MinimumError);
 
     /// <summary>Casts a <see cref="decimal" /> to a <see cref="Fraction" />.</summary>
     public static explicit operator Fraction(decimal number) => Cast(number);
@@ -409,7 +409,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     public static Fraction Create(double number)
         => number is < Decimal_MinValue or > Decimal_MaxValue
         ? throw new ArgumentOutOfRangeException(nameof(number), QowaivMessages.OverflowException_Fraction)
-        : Create((decimal)number, MinimumError);
+        : Create(number.ToDecimal(), MinimumError);
 
     private const double Decimal_MinValue = (double)decimal.MinValue;
     private const double Decimal_MaxValue = (double)decimal.MaxValue;

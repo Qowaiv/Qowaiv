@@ -182,7 +182,7 @@ public readonly partial struct Elo : IXmlSerializable, IFormattable, IEquatable<
     public static implicit operator Elo(int val) => new(val);
 
     /// <summary>Casts an Elo to a decimal.</summary>
-    public static explicit operator decimal(Elo val) => (decimal)val.m_Value;
+    public static explicit operator decimal(Elo val) => val.m_Value.ToDecimal();
 
     /// <summary>Casts an Elo to a double.</summary>
     public static explicit operator double(Elo val) => val.m_Value;

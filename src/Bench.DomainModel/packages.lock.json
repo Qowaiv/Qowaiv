@@ -38,6 +38,12 @@
         "resolved": "1.19.1",
         "contentHash": "AurPfke1r9v1HJGNE+Yi3ywuLFmOCCaGnnbRUQLPHJSeFtRjKxoQFR2qdpAr400XPQ/VazIuOTNSSXlD8jKayw=="
       },
+      "MathNet.Numerics": {
+        "type": "Direct",
+        "requested": "[5.0.0, )",
+        "resolved": "5.0.0",
+        "contentHash": "pg1W2VwaEQMAiTpGK840hZgzavnqjlCMTVSbtVCXVyT+7AX4mc1o89SPv4TBlAjhgCOo9c1Y+jZ5m3ti2YgGgA=="
+      },
       "PolySharp": {
         "type": "Direct",
         "requested": "[1.17.0, )",

@@ -1,6 +1,3 @@
-using Qowaiv.Humanizer;
-using Qowaiv.Specs.TestTools;
-
 namespace Mathematics.Fraction_specs;
 
 public class Defines

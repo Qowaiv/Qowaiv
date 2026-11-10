@@ -1,4 +1,3 @@
-using Qowaiv.Humanizer;
 using TUnit.Core.Executors;
 
 namespace Formatting.String_interpolation_specs;

@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/package-validation.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
+    <PackageId>Qowaiv.Validation.TestTools</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
+    <ProjectReference Include="../Qowaiv.Validation.DataAnnotations/Qowaiv.Validation.DataAnnotations.csproj" />
+    <ProjectReference Include="../Qowaiv.Validation.Fluent/Qowaiv.Validation.Fluent.csproj" />
+  </ItemGroup>
+  
+  <PropertyGroup>
+    <Version>4.1.0</Version>
+    <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
+    <ToBeReleased>
+      <![CDATA[
+v11.0.0
+- Add .NET 11.0 target.
+- Drop .NET 8.0 targets (BREAKING)
+- BeValid().And.Value and-constraint syntax.
+- Allow Sync Should() an async Results.
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
+<![CDATA[
+v4.2.0
+- Update to Qowaiv v8.2.0.
+v4.0.0
+- Update to Qowaiv v8.0.0. (BREAKING)
+v3.0.0
+- Add .NET 10.0 target.
+- Drop .NET9.0 targets. (BREAKING)
+v2.0.1
+- Hide assertion chain from stack trace.
+v2.0.0
+- Drop FluentAssertions depedency. (BREAKING)
+- API change: model.ShouldBeValidFor<Validator>() => model.ValidateWith<Validator>().Should().BeValid() (BREAKING)
+- Drop .NET standard 2.0. (BREAKING)
+v1.0.0
+- Add .NET 9.0 target.
+- Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
+- Drop public Diagnostics.Contracts. BREAKING)
+v0.3.0
+- Support .NET 7.0. #62
+v0.2.1
+- Nullable anotations. #48
+v0.1.1
+- Use FluentAssertions to validate Result and Result<T> (#37)
+v0.1.0
+- Qowaiv.Validation.Abstractions dependency
+v0.0.3
+- FluentValidation 10.2.0 dependency.
+v0.0.2
+- ValidationMessageAssert.IsValid() returns the model (#20)
+]]>
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>

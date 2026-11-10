@@ -1,0 +1,19 @@
+<Project>
+
+  <Import Project="../props/package.props" />
+
+  <PropertyGroup>
+    <IncludeDiagnostics>true</IncludeDiagnostics>
+    <IncludeGuard>true</IncludeGuard>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package info">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageIcon>package-icon-validation.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileFullPath)" Link="Properties/$(MSBuildThisFile)" />
+  </ItemGroup>
+  
+</Project>

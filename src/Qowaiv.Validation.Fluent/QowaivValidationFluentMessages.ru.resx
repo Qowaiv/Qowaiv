@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="After" xml:space="preserve">
+    <value>'{PropertyName}' не является после {ComparisonValue}.</value>
+  </data>
+  <data name="Before" xml:space="preserve">
+    <value>'{PropertyName}' не является перед {ComparisonValue}.</value>
+  </data>
+  <data name="InFuture" xml:space="preserve">
+    <value>'{PropertyName}' должно быть в будущем.</value>
+  </data>
+  <data name="InPast" xml:space="preserve">
+    <value>'{PropertyName}' должно быть в прошлом.</value>
+  </data>
+  <data name="IsFinite" xml:space="preserve">
+    <value>'{PropertyName}' должно быть конечным числом.</value>
+  </data>
+  <data name="IsNegative" xml:space="preserve">
+    <value>'{PropertyName}' должно быть отрицательным.</value>
+  </data>
+  <data name="IsNotNegative" xml:space="preserve">
+    <value>'{PropertyName}' не должно быть отрицательным.</value>
+  </data>
+  <data name="IsNotPositive" xml:space="preserve">
+    <value>'{PropertyName}' не должно быть положительным.</value>
+  </data>
+  <data name="IsPositive" xml:space="preserve">
+    <value>'{PropertyName}' должно быть положительным.</value>
+  </data>
+  <data name="NoIPBasedEmailAddress" xml:space="preserve">
+    <value>'{PropertyName}' имеет домен на основе IP-адреса.</value>
+  </data>
+  <data name="NotAfter" xml:space="preserve">
+    <value>'{PropertyName}' является после {ComparisonValue}.</value>
+  </data>
+  <data name="NotBefore" xml:space="preserve">
+    <value>'{PropertyName}' является перед {ComparisonValue}.</value>
+  </data>
+  <data name="NotEmptyOrUnknown" xml:space="preserve">
+    <value>'{PropertyName}' не должно быть пусто или неизвестно.</value>
+  </data>
+  <data name="NotInFuture" xml:space="preserve">
+    <value>'{PropertyName}' не должно быть в будущем.</value>
+  </data>
+  <data name="NotInPast" xml:space="preserve">
+    <value>'{PropertyName}' не должно быть в прошлом.</value>
+  </data>
+  <data name="NotUnknown" xml:space="preserve">
+    <value>'{PropertyName}' не должно быть неизвестно.</value>
+  </data>
+  <data name="PostalCodeValidForCountry" xml:space="preserve">
+    <value>'{PropertyName}' {ComparisonValue} не действительно для {Country}.</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>'{PropertyName}' обязательно.</value>
+  </data>
+</root>

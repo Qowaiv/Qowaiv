@@ -1,0 +1,69 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/package-validation.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
+    <PackageId>Qowaiv.Validation.Messages</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="ValidationMessages.Designer.cs" DependentUpon="ValidationMessages.resx" AutoGen="True" DesignTime="True" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="ValidationMessages.resx" LastGenOutput="ValidationMessages.Designer.cs" Generator="ResXFileCodeGenerator" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>11.0.0-rc.1</Version>
+    <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
+    <ToBeReleased>
+      <![CDATA[
+v11.0.0
+- Add .NET 11.0 target.
+- Drop .NET 8.0 targets (BREAKING)
+- AsyncResult<TModel>. (BREAKING)
+- AccessDenied, ConcurrencyIssue, EntityNotFound, and ServiceUnavailable implement IHttpStatusMessage.
+- Drop [Serializable] attributes. (BREAKING)
+- Add PaymentRequired message.
+- Fix ConcurrencyIssue translations.
+- Fix MidAirCollision translations.
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
+      <![CDATA[
+v2.2.0
+- Add support for ar, de, es, fr, it, ja, ru, zh languages.
+v2.1.0
+- Add EntityNotFound.ForId<TEntity>().
+v2.0.0
+- Add .NET 10.0 target.
+- Drop .NET 9.0 targets. (BREAKING)
+v1.0.0
+- Add .NET 9.0 target.
+- Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
+- Drop binary serialization on exceptions. (BREAKING)
+v0.3.1
+- Extend ConcurrencyIssue factory method with innerException overload.
+v0.3.0
+- Support .NET 7.0. #62
+v0.2.1
+- Nullable anotations. #48
+v0.1.0
+- Qowaiv.Validation.Abstractions dependency
+v0.0.2
+- AccessDenied (#30)
+v0.0.1
+- AccessDenied (#22)
+- ConcurrencyIssue (#22)
+- EntityNotFound (#22)
+]]>
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>

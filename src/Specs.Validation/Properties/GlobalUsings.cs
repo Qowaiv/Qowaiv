@@ -1,0 +1,18 @@
+global using AwesomeAssertions;
+global using Qowaiv;
+global using Qowaiv.Extensions;
+global using Qowaiv.Globalization;
+global using Qowaiv.Humanizer;
+global using Qowaiv.Validation.TestTools;
+global using Specs.TestTools;
+global using System;
+global using System.Collections;
+global using System.Collections.Generic;
+global using System.Globalization;
+global using System.Linq;
+global using System.Runtime.CompilerServices;
+global using System.Threading.Tasks;
+global using TUnit.Core.Executors;
+global using AsyncResult = System.Threading.Tasks.Task<Qowaiv.Validation.Abstractions.Result>;
+global using AsyncResult_string = System.Threading.Tasks.Task<Qowaiv.Validation.Abstractions.Result<string>>;
+global using AsyncResult_TestModel = System.Threading.Tasks.Task<Qowaiv.Validation.Abstractions.Result<Abstractions.Result_Act_specs.TestModel>>;

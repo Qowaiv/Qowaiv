@@ -20,7 +20,7 @@ public class QowaivBsonSerializer<TSvo> : SerializerBase<TSvo>
 
     /// <inheritdoc />
     [Pure]
-    public override string ToString() => $"{GetType().Namespace}.{nameof(QowaivBsonSerializer<TSvo>)}<{typeof(TSvo)}>";
+    public override string ToString() => $"{GetType().Namespace}.{nameof(QowaivBsonSerializer<>)}<{typeof(TSvo)}>";
 
     /// <summary>Returns true if <typeparamref name="TSvo"/> is supported.</summary>
     internal bool TypeIsSupported => serializer.TypeIsSupported;

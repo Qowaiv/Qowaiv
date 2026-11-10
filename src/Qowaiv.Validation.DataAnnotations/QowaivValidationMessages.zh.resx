@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="AllowedValuesAttribute_ValidationError">
+    <value>字段 {0} 的值不被允许。</value>
+  </data>
+  <data name="ArgumentException_TypeIsNotEqualityComparer">
+    <value>类型 {0} 未实现 IEqualityComparer 或 IEqualityComarer&lt;object&gt;。</value>
+  </data>
+  <data name="Collection_AtLeast_ValidationError">
+    <value>字段 {0} 应该至少有 {1} 个元素。</value>
+  </data>
+  <data name="Collection_AtMost_ValidationError">
+    <value>字段 {0} 应该最多有 {1} 个元素。</value>
+  </data>
+  <data name="Collection_InRange_ValidationError">
+    <value>字段 {0} 的元素数应该在 {1} 到 {2} 之间。</value>
+  </data>
+  <data name="DistinctValuesAttribute_ValidationError">
+    <value>字段 {0} 的所有值应该是不同的。</value>
+  </data>
+  <data name="InFuture">
+    <value>字段 {0} 的值应该在未来。</value>
+  </data>
+  <data name="InPast">
+    <value>字段 {0} 的值应该在过去。</value>
+  </data>
+  <data name="InRange">
+    <value>字段 {0} 必须在 {1} 到 {2} 之间。</value>
+  </data>
+  <data name="IsFiniteAttribute_ValidationError">
+    <value>字段 {0} 的值不是有限数。</value>
+  </data>
+  <data name="Length_AtLeast_ValidationError">
+    <value>字段 {0} 的长度应该至少为 {1}。</value>
+  </data>
+  <data name="Length_AtMost_ValidationError">
+    <value>字段 {0} 的长度应该最多为 {1}。</value>
+  </data>
+  <data name="Length_InRange_ValidationError">
+    <value>字段 {0} 的长度应该在 {1} 到 {2} 之间。</value>
+  </data>
+  <data name="MandatoryAttribute_ValidationError">
+    <value>字段 {0} 是必需的。</value>
+  </data>
+  <data name="MultipleOfAttribute_ValidationError">
+    <value>字段 {0} 的值不是 {1} 的倍数。</value>
+  </data>
+  <data name="NegativeAttribute_ValidationError">
+    <value>字段 {0} 的值必须是负数。</value>
+  </data>
+  <data name="NotInFuture">
+    <value>字段 {0} 的值不应该在未来。</value>
+  </data>
+  <data name="NotInPast">
+    <value>字段 {0} 的值不应该在过去。</value>
+  </data>
+  <data name="NotNegativeAttribute_ValidationError">
+    <value>字段 {0} 的值不能是负数。</value>
+  </data>
+  <data name="NotPositiveAttribute_ValidationError">
+    <value>字段 {0} 的值不能是正数。</value>
+  </data>
+  <data name="NotUnknown">
+    <value>字段 {0} 不能是未知。</value>
+  </data>
+  <data name="PositiveAttribute_ValidationError">
+    <value>字段 {0} 的值必须是正数。</value>
+  </data>
+  <data name="Size_AtLeast_ValidationError">
+    <value>字段 {0} 的大小应该至少为 {1: F}。</value>
+  </data>
+  <data name="Size_AtMost_ValidationError">
+    <value>字段 {0} 的大小应该最多为 {1: F}。</value>
+  </data>
+  <data name="Size_InRange_ValidationError">
+    <value>字段 {0} 的大小应该在 {1: F} 到 {2: F} 之间。</value>
+  </data>
+  <data name="UniqueValuesAttribute_ValidationError">
+    <value>字段 {0} 的所有值应该是唯一的。</value>
+  </data>
+  <data name="UnsupportedType_ForAttribute">
+    <value>{0} 不支持 {1} 类型的属性。</value>
+  </data>
+</root>

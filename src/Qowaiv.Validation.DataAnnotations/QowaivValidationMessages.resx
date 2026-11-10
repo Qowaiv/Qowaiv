@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="AllowedValuesAttribute_ValidationError">
+    <value>The value of the {0} field is not allowed.</value>
+  </data>
+  <data name="ArgumentException_TypeIsNotEqualityComparer">
+    <value>The type {0} does not implement IEqualityComparer or IEqualityComarer&lt;object&gt;.</value>
+  </data>
+  <data name="Collection_AtLeast_ValidationError">
+    <value>The {0} field should have at least {1} items.</value>
+  </data>
+  <data name="Collection_AtMost_ValidationError">
+    <value>The {0} field should have at most {1} items.</value>
+  </data>
+  <data name="Collection_InRange_ValidationError">
+    <value>The number of items of the {0} field should be between {1} and {2}.</value>
+  </data>
+  <data name="DistinctValuesAttribute_ValidationError">
+    <value>All values of the {0} field should be distinct.</value>
+  </data>
+  <data name="InFuture">
+    <value>The value of the {0} field should be in the future.</value>
+  </data>
+  <data name="InPast">
+    <value>The value of the {0} field should be in the past.</value>
+  </data>
+  <data name="InRange">
+    <value>The field {0} must be between {1} and {2}.</value>
+  </data>
+  <data name="IsFiniteAttribute_ValidationError">
+    <value>The value of the {0} field is not a finite number.</value>
+  </data>
+  <data name="Length_AtLeast_ValidationError">
+    <value>The length of the {0} field should be at least {1}.</value>
+  </data>
+  <data name="Length_AtMost_ValidationError">
+    <value>The length of the {0} field should be at most {1}.</value>
+  </data>
+  <data name="Length_InRange_ValidationError">
+    <value>The length of the {0} field should be between {1} and {2}.</value>
+  </data>
+  <data name="MandatoryAttribute_ValidationError">
+    <value>The {0} field is required.</value>
+  </data>
+  <data name="MultipleOfAttribute_ValidationError">
+    <value>The value of the {0} field is not a multiple of {1}.</value>
+  </data>
+  <data name="NegativeAttribute_ValidationError">
+    <value>The value of the {0} field must be negative.</value>
+  </data>
+  <data name="NotInFuture">
+    <value>The value of the {0} field should not be in the future.</value>
+  </data>
+  <data name="NotInPast">
+    <value>The value of the {0} field should not be in the past.</value>
+  </data>
+  <data name="NotNegativeAttribute_ValidationError">
+    <value>The value of the {0} field must not be negative.</value>
+  </data>
+  <data name="NotPositiveAttribute_ValidationError">
+    <value>The value of the {0} field must not be positive.</value>
+  </data>
+  <data name="NotUnknown">
+    <value>The field {0} must not be unknown.</value>
+  </data>
+  <data name="PositiveAttribute_ValidationError">
+    <value>The value of the {0} field must be positive.</value>
+  </data>
+  <data name="Size_AtLeast_ValidationError">
+    <value>The size of the {0} field should be at least {1: F}.</value>
+  </data>
+  <data name="Size_AtMost_ValidationError">
+    <value>The size of the {0} field should be at most {1: F}.</value>
+  </data>
+  <data name="Size_InRange_ValidationError">
+    <value>The size of the {0} field should be between {1: F} and {2: F}.</value>
+  </data>
+  <data name="UniqueValuesAttribute_ValidationError">
+    <value>All values of the {0} field should be unique.</value>
+  </data>
+  <data name="UnsupportedType_ForAttribute">
+    <value>{0} does not support the type {1}.</value>
+  </data>
+</root>

@@ -1,5 +1,3 @@
-using static System.Net.WebRequestMethods;
-
 namespace Qowaiv.TestTools.Resx;
 
 /// <summary>Represents a collection of RESX resource files.</summary>

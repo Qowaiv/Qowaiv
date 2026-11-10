@@ -1,5 +1,3 @@
-using Qowaiv.Extensions;
-
 namespace Extensions.Double_specs;
 
 public class ToDecimal

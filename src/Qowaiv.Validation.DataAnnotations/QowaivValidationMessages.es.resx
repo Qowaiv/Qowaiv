@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="AllowedValuesAttribute_ValidationError">
+    <value>El valor del campo {0} no está permitido.</value>
+  </data>
+  <data name="ArgumentException_TypeIsNotEqualityComparer">
+    <value>El tipo {0} no implementa IEqualityComparer o IEqualityComarer&lt;object&gt;.</value>
+  </data>
+  <data name="Collection_AtLeast_ValidationError">
+    <value>El campo {0} debe tener al menos {1} elementos.</value>
+  </data>
+  <data name="Collection_AtMost_ValidationError">
+    <value>El campo {0} debe tener como máximo {1} elementos.</value>
+  </data>
+  <data name="Collection_InRange_ValidationError">
+    <value>El número de elementos del campo {0} debe estar entre {1} y {2}.</value>
+  </data>
+  <data name="DistinctValuesAttribute_ValidationError">
+    <value>Todos los valores del campo {0} deben ser distintos.</value>
+  </data>
+  <data name="InFuture">
+    <value>El valor del campo {0} debe estar en el futuro.</value>
+  </data>
+  <data name="InPast">
+    <value>El valor del campo {0} debe estar en el pasado.</value>
+  </data>
+  <data name="InRange">
+    <value>El campo {0} debe estar entre {1} y {2}.</value>
+  </data>
+  <data name="IsFiniteAttribute_ValidationError">
+    <value>El valor del campo {0} no es un número finito.</value>
+  </data>
+  <data name="Length_AtLeast_ValidationError">
+    <value>La longitud del campo {0} debe ser de al menos {1}.</value>
+  </data>
+  <data name="Length_AtMost_ValidationError">
+    <value>La longitud del campo {0} debe ser de como máximo {1}.</value>
+  </data>
+  <data name="Length_InRange_ValidationError">
+    <value>La longitud del campo {0} debe estar entre {1} y {2}.</value>
+  </data>
+  <data name="MandatoryAttribute_ValidationError">
+    <value>El campo {0} es requerido.</value>
+  </data>
+  <data name="MultipleOfAttribute_ValidationError">
+    <value>El valor del campo {0} no es un múltiplo de {1}.</value>
+  </data>
+  <data name="NegativeAttribute_ValidationError">
+    <value>El valor del campo {0} debe ser negativo.</value>
+  </data>
+  <data name="NotInFuture">
+    <value>El valor del campo {0} no debe estar en el futuro.</value>
+  </data>
+  <data name="NotInPast">
+    <value>El valor del campo {0} no debe estar en el pasado.</value>
+  </data>
+  <data name="NotNegativeAttribute_ValidationError">
+    <value>El valor del campo {0} no debe ser negativo.</value>
+  </data>
+  <data name="NotPositiveAttribute_ValidationError">
+    <value>El valor del campo {0} no debe ser positivo.</value>
+  </data>
+  <data name="NotUnknown">
+    <value>El campo {0} no debe ser desconocido.</value>
+  </data>
+  <data name="PositiveAttribute_ValidationError">
+    <value>El valor del campo {0} debe ser positivo.</value>
+  </data>
+  <data name="Size_AtLeast_ValidationError">
+    <value>El tamaño del campo {0} debe ser de al menos {1: F}.</value>
+  </data>
+  <data name="Size_AtMost_ValidationError">
+    <value>El tamaño del campo {0} debe ser de como máximo {1: F}.</value>
+  </data>
+  <data name="Size_InRange_ValidationError">
+    <value>El tamaño del campo {0} debe estar entre {1: F} y {2: F}.</value>
+  </data>
+  <data name="UniqueValuesAttribute_ValidationError">
+    <value>Todos los valores del campo {0} deben ser únicos.</value>
+  </data>
+  <data name="UnsupportedType_ForAttribute">
+    <value>{0} no soporta propiedades de tipo {1}.</value>
+  </data>
+</root>

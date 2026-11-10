@@ -1,5 +1,3 @@
-using Qowaiv.Extensions;
-
 namespace Extensions.Guid_specs;
 
 public class Has_UuidVersion

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="After" xml:space="preserve">
+    <value>'{PropertyName}' 不在 {ComparisonValue} 之后。</value>
+  </data>
+  <data name="Before" xml:space="preserve">
+    <value>'{PropertyName}' 不在 {ComparisonValue} 之前。</value>
+  </data>
+  <data name="InFuture" xml:space="preserve">
+    <value>'{PropertyName}' 应该在未来。</value>
+  </data>
+  <data name="InPast" xml:space="preserve">
+    <value>'{PropertyName}' 应该在过去。</value>
+  </data>
+  <data name="IsFinite" xml:space="preserve">
+    <value>'{PropertyName}' 必须是有限数。</value>
+  </data>
+  <data name="IsNegative" xml:space="preserve">
+    <value>'{PropertyName}' 必须是负数。</value>
+  </data>
+  <data name="IsNotNegative" xml:space="preserve">
+    <value>'{PropertyName}' 不能是负数。</value>
+  </data>
+  <data name="IsNotPositive" xml:space="preserve">
+    <value>'{PropertyName}' 不能是正数。</value>
+  </data>
+  <data name="IsPositive" xml:space="preserve">
+    <value>'{PropertyName}' 必须是正数。</value>
+  </data>
+  <data name="NoIPBasedEmailAddress" xml:space="preserve">
+    <value>'{PropertyName}' 有基于IP地址的域。</value>
+  </data>
+  <data name="NotAfter" xml:space="preserve">
+    <value>'{PropertyName}' 在 {ComparisonValue} 之后。</value>
+  </data>
+  <data name="NotBefore" xml:space="preserve">
+    <value>'{PropertyName}' 在 {ComparisonValue} 之前。</value>
+  </data>
+  <data name="NotEmptyOrUnknown" xml:space="preserve">
+    <value>'{PropertyName}' 不能为空或未知。</value>
+  </data>
+  <data name="NotInFuture" xml:space="preserve">
+    <value>'{PropertyName}' 不应该在未来。</value>
+  </data>
+  <data name="NotInPast" xml:space="preserve">
+    <value>'{PropertyName}' 不应该在过去。</value>
+  </data>
+  <data name="NotUnknown" xml:space="preserve">
+    <value>'{PropertyName}' 不能是未知。</value>
+  </data>
+  <data name="PostalCodeValidForCountry" xml:space="preserve">
+    <value>'{PropertyName}' {ComparisonValue} 对于 {Country} 无效。</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>'{PropertyName}' 是必需的。</value>
+  </data>
+</root>

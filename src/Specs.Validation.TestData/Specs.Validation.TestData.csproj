@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/nopackage.props" />
+  
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
+    <IsTestCode>true</IsTestCode>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MathNet.Numerics" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Qowaiv.Validation.DataAnnotations/Qowaiv.Validation.DataAnnotations.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Validation.Fluent/Qowaiv.Validation.Fluent.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Validation.Guarding/Qowaiv.Validation.Guarding.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Validation.Messages/Qowaiv.Validation.Messages.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Validation.Xml/Qowaiv.Validation.Xml.csproj" />
+  </ItemGroup>
+
+</Project>

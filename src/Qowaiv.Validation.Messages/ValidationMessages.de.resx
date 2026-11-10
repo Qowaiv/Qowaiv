@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccessDenied" xml:space="preserve">
+    <value>Zugriff verweigert.</value>
+  </data>
+  <data name="ConcurrencyIssue" xml:space="preserve">
+    <value>Ein Concurrency-Problem ist aufgetreten.</value>
+  </data>
+  <data name="EntityNotFound" xml:space="preserve">
+    <value>Entität konnte nicht gefunden werden.</value>
+  </data>
+  <data name="EntityNotFound_ForId" xml:space="preserve">
+    <value>Entität mit ID {0} konnte nicht gefunden werden.</value>
+  </data>
+  <data name="EntityNotFound_ForTypeAndId" xml:space="preserve">
+    <value>Entität {0} mit ID {1} konnte nicht gefunden werden.</value>
+  </data>
+  <data name="MidAirCollision" xml:space="preserve">
+    <value>Eine Mid-Air Collision wurde erkannt.</value>
+  </data>
+  <data name="PaymentRequired" xml:space="preserve">
+    <value>Zahlung erforderlich.</value>
+  </data>
+  <data name="ServiceUnavailable" xml:space="preserve">
+    <value>Der angeforderte Service ist nicht verfügbar.</value>
+  </data>
+  <data name="ServiceUnavailable_WithName" xml:space="preserve">
+    <value>Der Service '{0}' ist nicht verfügbar.</value>
+  </data>
+  <data name="VersionMismatch" xml:space="preserve">
+    <value>Es wurde Version {0} erwartet, aber Version {1} erhalten.</value>
+  </data>
+</root>

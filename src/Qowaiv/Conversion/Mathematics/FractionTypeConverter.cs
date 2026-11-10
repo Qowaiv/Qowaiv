@@ -1,5 +1,3 @@
-using Qowaiv.Mathematics;
-
 namespace Qowaiv.Conversion.Mathematics;
 
 /// <summary>Provides a conversion for an email address.</summary>

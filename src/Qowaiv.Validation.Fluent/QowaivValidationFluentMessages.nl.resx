@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="After" xml:space="preserve">
+    <value>'{PropertyName}' is niet na {ComparisonValue}.</value>
+  </data>
+  <data name="Before" xml:space="preserve">
+    <value>'{PropertyName}' is niet voor {ComparisonValue}.</value>
+  </data>
+  <data name="InFuture" xml:space="preserve">
+    <value>'{PropertyName}' moet in de toekomst liggen.</value>
+  </data>
+  <data name="InPast" xml:space="preserve">
+    <value>'{PropertyName}' moet in het verleden liggen.</value>
+  </data>
+  <data name="IsFinite" xml:space="preserve">
+    <value>'{PropertyName}' moet een eindig getal zijn.</value>
+  </data>
+  <data name="IsNegative" xml:space="preserve">
+    <value>'{PropertyName}' moet negatief zijn.</value>
+  </data>
+  <data name="IsNotNegative" xml:space="preserve">
+    <value>'{PropertyName}' mag niet negatief zijn.</value>
+  </data>
+  <data name="IsNotPositive" xml:space="preserve">
+    <value>'{PropertyName}' mag niet positief zijn.</value>
+  </data>
+  <data name="IsPositive" xml:space="preserve">
+    <value>'{PropertyName}' moet positief zijn.</value>
+  </data>
+  <data name="NoIPBasedEmailAddress" xml:space="preserve">
+    <value>'{PropertyName}' heeft een IP-adres als domein.</value>
+  </data>
+  <data name="NotAfter" xml:space="preserve">
+    <value>'{PropertyName}' is na {ComparisonValue}.</value>
+  </data>
+  <data name="NotBefore" xml:space="preserve">
+    <value>'{PropertyName}' is voor {ComparisonValue}.</value>
+  </data>
+  <data name="NotEmptyOrUnknown" xml:space="preserve">
+    <value>'{PropertyName}' mag niet leeg of onbekend zijn.</value>
+  </data>
+  <data name="NotInFuture" xml:space="preserve">
+    <value>'{PropertyName}' mag niet in de toekomst liggen.</value>
+  </data>
+  <data name="NotInPast" xml:space="preserve">
+    <value>'{PropertyName}' mag niet in het verleden liggen.</value>
+  </data>
+  <data name="NotUnknown" xml:space="preserve">
+    <value>'{PropertyName}' mag niet onbekend zijn.</value>
+  </data>
+  <data name="PostalCodeValidForCountry" xml:space="preserve">
+    <value>'{PropertyName}' {ComparisonValue} is niet geldig voor {Country}.</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>'{PropertyName}' is verplicht.</value>
+  </data>
+</root>

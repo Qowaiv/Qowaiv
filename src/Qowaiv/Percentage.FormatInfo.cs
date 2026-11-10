@@ -1,5 +1,3 @@
-using Qowaiv.Mathematics;
-
 namespace Qowaiv;
 
 public readonly partial struct Percentage

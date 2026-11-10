@@ -1,0 +1,137 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/package-validation.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
+    <PackageId>Qowaiv.Validation.DataAnnotations</PackageId>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Update="QowaivValidationMessages.Designer.cs" DependentUpon="QowaivValidationMessages.resx" AutoGen="True" DesignTime="True" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="QowaivValidationMessages.resx" LastGenOutput="QowaivValidationMessages.Designer.cs" Generator="ResXFileCodeGenerator" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Qowaiv/Qowaiv.csproj" />
+    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="Microsoft.CSharp" />
+    <PackageReference Include="System.ComponentModel.Annotations" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>11.0.0-rc.1</Version>
+    <PackageValidationBaselineVersion>6.2.0</PackageValidationBaselineVersion>
+    <ToBeReleased>
+      <![CDATA[
+v11.0.0
+- Add .NET 11.0 target.
+- Drop .NET 8.0 targets. (BREAKING)
+- [MultipleOf] not longers supports double or float. (BREAKING)
+- [DefinedEnumValuesOnly] has been sealed. (BREAKING)
+- [DefinedOnly<TEnum>] has been sealed. (BREAKING)
+- AnnotatedModelValidator speed improvements.
+- [Mandatory], [Length.*], [Count.*], [DefinedEnumValuesOnly] speed improvements.
+- Sign based attributes don't crash on NaN. (BUG)
+- Required keyword on string requires it to be set, but string empty is allowed. (BUG)
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
+      <![CDATA[
+v6.2.0
+- Introduction of [Negative] validation attribute.
+- Introduction of [Positive] validation attribute.
+- Introduction of [NotPositive] validation attribute.
+- Introduction of [NotNegative] validation attribute.
+- Add support for ar, de, es, fr, it, ja, ru, zh languages.
+v6.0.0
+- Add [NotUnknown] to indicate that the unknown value is not allowed.
+- Update to Qowaiv v8.0.0. (BREAKING)
+v5.0.1
+- Validation attributes support both ErrorMessage as ErrorMessageResourceName and ErrorMessageResourceType. (BUG)
+v5.0.0
+- Add .NET 10.0 target.
+- Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
+v4.0.3
+- Type conversions done by DataAnotations are culture independent. (BUG)
+v4.0.2
+- Support custom TypeConverters for [Allowed<T>] and [Forbidden<T>].
+- Support System.Net.Http.HttpMethod without custom TypeConverter for [Allowed<T>] and [Forbidden<T>].
+v4.0.1
+- Introduction of [InRange<TValue>] validation attribute.
+v4.0.0
+- Validate public fields.
+- Support primitives of the same type on [ValueOf<TValue>] attributes.
+- Support requiredness via the required modifier.
+- Introduction of [InPast] validation attribute.
+- Introduction of [InFuture] validation attribute.
+- Introduction of [NotInPast] validation attribute.
+- Introduction of [NotInFuture] validation attribute.
+- Introduction of [Items<TValidator>] to define a validator on the items of a collection.
+- Introduction of [SkipValidation] to explictly skip validation of types and properties.
+- Introduction of the [Validates(type)] attribute to decorate [Validation] attributes.
+- Qowaiv.Validation.DataAnnotations.ValidationMessage.None returns null. (BREAKING)
+- Refactor annotations resolving.
+- Dropped AnnotatedModel. (BREAKING)
+- Dropped AnnotatedProperty. (BREAKING)
+- Dropped AnnotatedValidator. (BREAKING)
+- Drop support on ValidationAttributes defined on types. (BREAKING)
+- Update to Qowaiv v7.4.3.
+v3.0.0
+- Introduction of AllowedAttribute<T> as alternative to AllowedValuesAttribute.
+- Introduction of DefinedOnlyAttribute<T> as alternative to DefinedEnumValuesOnlyAttribute.
+- Introduction of ForbiddenAttribute<T> as alternative to ForbiddenValuesAttribute.
+- Introduction of UniqueAttribute<T> as alternative to DistinctValuesAttribute.
+- Marked AllowedValuesAttribute as obsolete.
+- Marked DefinedEnumValuesOnlyAttribute as obsolete.
+- Marked DistinctValuesAttribute as obsolete.
+- Marked ForbiddenValuesAttribute as obsolete.
+- Add .NET 9.0 target.
+- Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
+- Drop binary serialization on exceptions. (BREAKING)
+v2.0.0.
+- Drop support .NET 5.0 and .NET 7.0. (breaking)
+- Update to Qowaiv v7.0.0. (breaking)
+- Introduction of [IsFinite] validation attribute.
+- Introduction of [Length.AtLeast], [Length.AtMost], [Length.InRange].
+- Introduction of [Collection.AtLeast], [Collection.AtMost], [Collection.InRange].
+- Introduction of [Size.AtLeast], [Size.AtMost], [Size.InRange].
+v1.4.0
+- Introduced [MultipleOf] validation attribute. #69
+- Marked [NestedModel] attribute as obsolete. #70
+v1.3.0
+- Support .NET 7.0. #62
+v1.0.1
+- Inaccessible properties do not crash but validate as invalid #58
+- Indexed properties are ignored
+v1.0.0
+- Properties are considered validatable objects without [NestedModel] attribute #55
+- Removed unused properties from NestedModel
+v0.2.4
+- Roll back of change #53
+v0.2.3
+- All models are considered to be nested. #52
+- Fix crash on validation models with properties with generic types. #53
+v0.2.2
+- Mandatory attribute supports Dutch messages. #51
+v0.2.1
+- Nullable anotations. #48
+v0.2.0
+- Updated Qowaiv dependency.
+v0.1.1
+- Decorate pure methods with attribute (#38)
+v0.1.0
+- Qowaiv.Validation.Abstractions dependency
+v0.0.4
+- Fix double dots in paths for nested properties.
+]]>
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>

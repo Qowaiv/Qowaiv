@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="AllowedValuesAttribute_ValidationError">
+    <value>フィールド {0} の値は許可されていません。</value>
+  </data>
+  <data name="ArgumentException_TypeIsNotEqualityComparer">
+    <value>タイプ {0} は IEqualityComparer または IEqualityComarer&lt;object&gt; を実装していません。</value>
+  </data>
+  <data name="Collection_AtLeast_ValidationError">
+    <value>フィールド {0} には少なくとも {1} 個の項目が必要です。</value>
+  </data>
+  <data name="Collection_AtMost_ValidationError">
+    <value>フィールド {0} には最大で {1} 個の項目が必要です。</value>
+  </data>
+  <data name="Collection_InRange_ValidationError">
+    <value>フィールド {0} の項目数は {1} から {2} の間である必要があります。</value>
+  </data>
+  <data name="DistinctValuesAttribute_ValidationError">
+    <value>フィールド {0} のすべての値は個別である必要があります。</value>
+  </data>
+  <data name="InFuture">
+    <value>フィールド {0} の値は将来の日時である必要があります。</value>
+  </data>
+  <data name="InPast">
+    <value>フィールド {0} の値は過去の日時である必要があります。</value>
+  </data>
+  <data name="InRange">
+    <value>フィールド {0} は {1} から {2} の間である必要があります。</value>
+  </data>
+  <data name="IsFiniteAttribute_ValidationError">
+    <value>フィールド {0} の値は有限数ではありません。</value>
+  </data>
+  <data name="Length_AtLeast_ValidationError">
+    <value>フィールド {0} の長さは少なくとも {1} である必要があります。</value>
+  </data>
+  <data name="Length_AtMost_ValidationError">
+    <value>フィールド {0} の長さは最大で {1} である必要があります。</value>
+  </data>
+  <data name="Length_InRange_ValidationError">
+    <value>フィールド {0} の長さは {1} から {2} の間である必要があります。</value>
+  </data>
+  <data name="MandatoryAttribute_ValidationError">
+    <value>フィールド {0} は必須です。</value>
+  </data>
+  <data name="MultipleOfAttribute_ValidationError">
+    <value>フィールド {0} の値は {1} の倍数ではありません。</value>
+  </data>
+  <data name="NegativeAttribute_ValidationError">
+    <value>フィールド {0} の値は負数である必要があります。</value>
+  </data>
+  <data name="NotInFuture">
+    <value>フィールド {0} の値は将来の日時であってはいけません。</value>
+  </data>
+  <data name="NotInPast">
+    <value>フィールド {0} の値は過去の日時であってはいけません。</value>
+  </data>
+  <data name="NotNegativeAttribute_ValidationError">
+    <value>フィールド {0} の値は負数であってはいけません。</value>
+  </data>
+  <data name="NotPositiveAttribute_ValidationError">
+    <value>フィールド {0} の値は正数であってはいけません。</value>
+  </data>
+  <data name="NotUnknown">
+    <value>フィールド {0} は不明であってはいけません。</value>
+  </data>
+  <data name="PositiveAttribute_ValidationError">
+    <value>フィールド {0} の値は正数である必要があります。</value>
+  </data>
+  <data name="Size_AtLeast_ValidationError">
+    <value>フィールド {0} のサイズは少なくとも {1: F} である必要があります。</value>
+  </data>
+  <data name="Size_AtMost_ValidationError">
+    <value>フィールド {0} のサイズは最大で {1: F} である必要があります。</value>
+  </data>
+  <data name="Size_InRange_ValidationError">
+    <value>フィールド {0} のサイズは {1: F} から {2: F} の間である必要があります。</value>
+  </data>
+  <data name="UniqueValuesAttribute_ValidationError">
+    <value>フィールド {0} のすべての値は一意である必要があります。</value>
+  </data>
+  <data name="UnsupportedType_ForAttribute">
+    <value>{0} は {1} 型のプロパティをサポートしていません。</value>
+  </data>
+</root>

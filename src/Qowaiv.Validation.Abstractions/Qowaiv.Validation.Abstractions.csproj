@@ -1,0 +1,79 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/package-validation.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
+    <PackageId>Qowaiv.Validation.Abstractions</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="QowaivValidationMessages.Designer.cs" DependentUpon="QowaivValidationMessages.resx" AutoGen="True" DesignTime="True" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="QowaivValidationMessages.resx" LastGenOutput="QowaivValidationMessages.Designer.cs" Generator="ResXFileCodeGenerator" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.Memory" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>11.0.0-rc.1</Version>
+    <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
+    <ToBeReleased>
+      <![CDATA[
+v11.0.0
+- Add .NET 11.0 target.
+- Drop .NET 8.0 targets (BREAKING)
+- InvalidModelException renamed to InvalidModel. (BREAKING)
+- Rely on built-in collection merging isntead of home-brew collection.
+- Prevent creation of a valid Result<T> without setting T when struct. (BUG)
+- ValidationMessages is an immutable collection, and type of Messages in Result. (BREAKING)
+- Act(Async)(Func<TModel, TOut>) to simplify applying transforms.
+- Validator.Composite<TModel>() creates a composite Ivalidator<<TModel>.
+- IHttpStatusMessage to bind an IValidationMessage to an HTTP status.
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
+      <![CDATA[
+v2.1.0
+- Add notnull constraint to Result.For<T>().
+v2.0.0
+- Add Result.ThrowIfInvalid().
+- Add .NET 10.0 target.
+- Drop .NET9.0 targets. (BREAKING)
+v1.0.0
+- Add .NET 9.0 target.
+- Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
+- Drop public Diagnostics.Contracts. (BREAKING)
+- Drop binary serialization on exceptions. (BREAKING)
+v0.3.0
+- Add Result<T>.Cast<TOut>(). #61
+- Support .NET 7.0. #62
+v0.2.1
+- Nullable anotations. #48
+v0.1.3
+- Result.Null() also for (nullable) structs. #46
+v0.1.2
+- Dealing with Result.Null() values internally should not throw. #42
+v0.1.1
+- Decorate pure methods with attribute. #38
+v0.1.0
+- ContinueOnCapturedContext is configurable. #35
+- Introduction of Result.Null<T>(). #34
+- Disallow Result<T>.For(null). #34
+- Act() and ActAsync() are also executed for null values. #34
+- Result.OK is static readonly field (was static property). #32
+- Improvements on InvalidModelException. #31
+v0.0.5
+- Act() methods on context. #29
+- AsTask() method for Result<T>. #28
+v0.0.4
+- Act() methods have pipe notation alternatives.
+]]>
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>

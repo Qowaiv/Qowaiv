@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="AllowedValuesAttribute_ValidationError">
+    <value>قيمة الحقل {0} غير مسموحة.</value>
+  </data>
+  <data name="ArgumentException_TypeIsNotEqualityComparer">
+    <value>النوع {0} لا يطبق IEqualityComparer أو IEqualityComarer&lt;object&gt;.</value>
+  </data>
+  <data name="Collection_AtLeast_ValidationError">
+    <value>يجب أن يحتوي الحقل {0} على {1} عناصر على الأقل.</value>
+  </data>
+  <data name="Collection_AtMost_ValidationError">
+    <value>يجب أن يحتوي الحقل {0} على {1} عنصر بحد أقصى.</value>
+  </data>
+  <data name="Collection_InRange_ValidationError">
+    <value>يجب أن يكون عدد عناصر الحقل {0} بين {1} و {2}.</value>
+  </data>
+  <data name="DistinctValuesAttribute_ValidationError">
+    <value>جميع قيم الحقل {0} يجب أن تكون مختلفة.</value>
+  </data>
+  <data name="InFuture">
+    <value>يجب أن تكون قيمة الحقل {0} في المستقبل.</value>
+  </data>
+  <data name="InPast">
+    <value>يجب أن تكون قيمة الحقل {0} في الماضي.</value>
+  </data>
+  <data name="InRange">
+    <value>الحقل {0} يجب أن يكون بين {1} و {2}.</value>
+  </data>
+  <data name="IsFiniteAttribute_ValidationError">
+    <value>قيمة الحقل {0} ليست رقماً محدوداً.</value>
+  </data>
+  <data name="Length_AtLeast_ValidationError">
+    <value>يجب أن تكون طول الحقل {0} {1} على الأقل.</value>
+  </data>
+  <data name="Length_AtMost_ValidationError">
+    <value>يجب أن تكون طول الحقل {0} {1} بحد أقصى.</value>
+  </data>
+  <data name="Length_InRange_ValidationError">
+    <value>يجب أن يكون طول الحقل {0} بين {1} و {2}.</value>
+  </data>
+  <data name="MandatoryAttribute_ValidationError">
+    <value>الحقل {0} مطلوب.</value>
+  </data>
+  <data name="MultipleOfAttribute_ValidationError">
+    <value>قيمة الحقل {0} ليست مضاعفة من {1}.</value>
+  </data>
+  <data name="NegativeAttribute_ValidationError">
+    <value>يجب أن تكون قيمة الحقل {0} سالبة.</value>
+  </data>
+  <data name="NotInFuture">
+    <value>يجب ألا تكون قيمة الحقل {0} في المستقبل.</value>
+  </data>
+  <data name="NotInPast">
+    <value>يجب ألا تكون قيمة الحقل {0} في الماضي.</value>
+  </data>
+  <data name="NotNegativeAttribute_ValidationError">
+    <value>يجب ألا تكون قيمة الحقل {0} سالبة.</value>
+  </data>
+  <data name="NotPositiveAttribute_ValidationError">
+    <value>يجب ألا تكون قيمة الحقل {0} موجبة.</value>
+  </data>
+  <data name="NotUnknown">
+    <value>الحقل {0} يجب ألا يكون غير معروف.</value>
+  </data>
+  <data name="PositiveAttribute_ValidationError">
+    <value>يجب أن تكون قيمة الحقل {0} موجبة.</value>
+  </data>
+  <data name="Size_AtLeast_ValidationError">
+    <value>يجب أن تكون حجم الحقل {0} {1: F} على الأقل.</value>
+  </data>
+  <data name="Size_AtMost_ValidationError">
+    <value>يجب أن تكون حجم الحقل {0} {1: F} بحد أقصى.</value>
+  </data>
+  <data name="Size_InRange_ValidationError">
+    <value>يجب أن يكون حجم الحقل {0} بين {1: F} و {2: F}.</value>
+  </data>
+  <data name="UniqueValuesAttribute_ValidationError">
+    <value>يجب أن تكون جميع قيم الحقل {0} فريدة.</value>
+  </data>
+  <data name="UnsupportedType_ForAttribute">
+    <value>{0} لا يدعم خصائص النوع {1}.</value>
+  </data>
+</root>

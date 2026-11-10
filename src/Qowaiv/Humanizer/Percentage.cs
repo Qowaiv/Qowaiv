@@ -1,5 +1,3 @@
-using Qowaiv.Mathematics;
-
 namespace Qowaiv.Humanizer;
 
 public static partial class Humanize

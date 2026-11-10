@@ -3,6 +3,7 @@ namespace Clock_specs;
 public class Default_behavior
 {
     [Test]
+    [SuppressMessage("Major Code Smell", "S6354:Use a testable date/time provider", Justification = "We test its working")]
     public void UtcNow_equals_DateTime_UtcNow()
         => Clock.UtcNow().Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromMilliseconds(10));
 

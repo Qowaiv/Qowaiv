@@ -65,7 +65,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="$(MSBuildThisFileFullPath)" Visible="false" />
+    <AdditionalFiles Include="$(MSBuildThisFileFullPath)" Link="Properties/$(MSBuildThisFile)" />
   </ItemGroup>
 
 </Project>

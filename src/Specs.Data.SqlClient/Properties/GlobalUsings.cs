@@ -1,7 +1,6 @@
 global using AwesomeAssertions;
 global using Qowaiv.Extensions;
 global using Qowaiv.Globalization;
-global using Qowaiv.Hashing;
 global using Qowaiv.OpenApi;
 global using Qowaiv.Sql;
 global using Qowaiv.TestTools;

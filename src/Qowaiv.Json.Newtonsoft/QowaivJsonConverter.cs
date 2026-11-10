@@ -49,7 +49,7 @@ public class QowaivJsonConverter : JsonConverter
     [Pure]
     private JsonConverter? CreateConverter(Type objectType)
     {
-        var type = objectType.NotNullable!;
+        var type = objectType.NotNullable;
 
         if (!converters.TryGetValue(type, out var converter))
         {

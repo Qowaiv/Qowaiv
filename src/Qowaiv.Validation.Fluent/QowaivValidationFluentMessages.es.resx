@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+  <data name="After" xml:space="preserve">
+    <value>'{PropertyName}' no está después de {ComparisonValue}.</value>
+  </data>
+  <data name="Before" xml:space="preserve">
+    <value>'{PropertyName}' no está antes de {ComparisonValue}.</value>
+  </data>
+  <data name="InFuture" xml:space="preserve">
+    <value>'{PropertyName}' debe estar en el futuro.</value>
+  </data>
+  <data name="InPast" xml:space="preserve">
+    <value>'{PropertyName}' debe estar en el pasado.</value>
+  </data>
+  <data name="IsFinite" xml:space="preserve">
+    <value>'{PropertyName}' debe ser un número finito.</value>
+  </data>
+  <data name="IsNegative" xml:space="preserve">
+    <value>'{PropertyName}' debe ser negativo.</value>
+  </data>
+  <data name="IsNotNegative" xml:space="preserve">
+    <value>'{PropertyName}' no debe ser negativo.</value>
+  </data>
+  <data name="IsNotPositive" xml:space="preserve">
+    <value>'{PropertyName}' no debe ser positivo.</value>
+  </data>
+  <data name="IsPositive" xml:space="preserve">
+    <value>'{PropertyName}' debe ser positivo.</value>
+  </data>
+  <data name="NoIPBasedEmailAddress" xml:space="preserve">
+    <value>'{PropertyName}' tiene un dominio basado en dirección IP.</value>
+  </data>
+  <data name="NotAfter" xml:space="preserve">
+    <value>'{PropertyName}' está después de {ComparisonValue}.</value>
+  </data>
+  <data name="NotBefore" xml:space="preserve">
+    <value>'{PropertyName}' está antes de {ComparisonValue}.</value>
+  </data>
+  <data name="NotEmptyOrUnknown" xml:space="preserve">
+    <value>'{PropertyName}' no debe estar vacío o desconocido.</value>
+  </data>
+  <data name="NotInFuture" xml:space="preserve">
+    <value>'{PropertyName}' no debe estar en el futuro.</value>
+  </data>
+  <data name="NotInPast" xml:space="preserve">
+    <value>'{PropertyName}' no debe estar en el pasado.</value>
+  </data>
+  <data name="NotUnknown" xml:space="preserve">
+    <value>'{PropertyName}' no debe ser desconocido.</value>
+  </data>
+  <data name="PostalCodeValidForCountry" xml:space="preserve">
+    <value>'{PropertyName}' {ComparisonValue} no es válido para {Country}.</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>'{PropertyName}' es requerido.</value>
+  </data>
+</root>

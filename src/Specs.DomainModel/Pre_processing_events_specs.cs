@@ -13,7 +13,7 @@ internal class Pre_processing_events_specs
         var result = aggregate.Add1().Act(a => a.Add2());
 
         result.Should().BeValid().WithoutMessages()
-            .Value.Buffer.Should().BeEquivalentTo(new object[]
+            .And.Value.Buffer.Should().BeEquivalentTo(new object[]
             {
                 new Event1(TestId),
                 new Event2(TestId),

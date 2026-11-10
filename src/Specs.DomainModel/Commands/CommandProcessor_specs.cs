@@ -11,28 +11,28 @@ public class Cancelation_token
         => (await new CancelableCommandProcessor(new AsyncCancelableCommandHandler())
         .Send(new EmptyCommand(), token: default))
         .Should().BeValid()
-        .Value.Should().Be("AsyncCancelableCommandHandler.Handle(token)");
+        .And.Value.Should().Be("AsyncCancelableCommandHandler.Handle(token)");
 
     [Test]
     public async Task ignored_when_not_in_contract()
         => (await new AsyncCommandProcessor(new AsyncCommandHandler())
         .Send(new EmptyCommand(), token: default))
         .Should().BeValid()
-        .Value.Should().Be("AsyncCommandHandler.Handle()");
+        .And.Value.Should().Be("AsyncCommandHandler.Handle()");
 
     [Test]
     public async Task added_when_method_with_token_is_available()
         => (await new CancelableCommandProcessor(new AsyncCancelableCommandHandler())
         .Send(new EmptyCommand()))
         .Should().BeValid()
-        .Value.Should().Be("AsyncCancelableCommandHandler.Handle(token)");
+        .And.Value.Should().Be("AsyncCancelableCommandHandler.Handle(token)");
 
     [Test]
     public async Task not_added_when_not_available()
         => (await new AsyncCommandProcessor(new AsyncCommandHandler())
         .Send(new EmptyCommand()))
         .Should().BeValid()
-        .Value.Should().Be("AsyncCommandHandler.Handle()");
+        .And.Value.Should().Be("AsyncCommandHandler.Handle()");
 }
 
 public class Throws_when
@@ -103,7 +103,7 @@ internal record EmptyCommand();
 
 internal class AsyncCommandHandler : CommandHandler<EmptyCommand>
 {
-    public Task<Result<string>> Handle(EmptyCommand command) => Result.For("AsyncCommandHandler.Handle()").AsTask();
+    public Task<Result<string>> Handle(EmptyCommand command) => Result.For("AsyncCommandHandler.Handle()").Async();
 }
 
 #pragma warning disable S2325 // Methods and properties that don't access instance data should be static

@@ -26,7 +26,7 @@ public class Applies_events
     public void changes_for_single_event()
     {
         var origin = new SimpleEventSourcedAggregate();
-        var updated = origin.SetName("Jimi Hendrix").Should().BeValid().Value;
+        var updated = origin.SetName("Jimi Hendrix").Should().BeValid().And.Value;
 
         updated.Name.Should().Be("Jimi Hendrix");
         updated.Buffer.Uncommitted.Should().BeEquivalentTo([new NameUpdated("Jimi Hendrix")]);
@@ -36,7 +36,7 @@ public class Applies_events
     public void changes_for_multiple_events()
     {
         var origin = new SimpleEventSourcedAggregate();
-        var updated = origin.SetPerson("Jimi Hendrix", new Date(1942, 11, 27)).Should().BeValid().Value;
+        var updated = origin.SetPerson("Jimi Hendrix", new Date(1942, 11, 27)).Should().BeValid().And.Value;
 
         updated.Buffer.Uncommitted.Should().BeEquivalentTo(new object[]
         {
@@ -49,7 +49,7 @@ public class Applies_events
     public void as_uncommitted_to_the_buffer()
     {
         var origin = new SimpleEventSourcedAggregate();
-        var updated =origin.SetName("Jimi Hendrix").Should().BeValid().Value;
+        var updated = origin.SetName("Jimi Hendrix").Should().BeValid().And.Value;
         updated.Buffer.Uncommitted.Should().ContainSingle();
     }
 
@@ -58,7 +58,7 @@ public class Applies_events
     {
         var origin = new SimpleEventSourcedAggregate();
         origin.SetName("Jimi Hendrix");
-        var updated = origin.SetName("Jimi Hendrix").Should().BeValid().Value;
+        var updated = origin.SetName("Jimi Hendrix").Should().BeValid().And.Value;
         origin.Name.Should().BeNull();
         updated.Name.Should().Be("Jimi Hendrix");
     }
@@ -67,7 +67,7 @@ public class Applies_events
     public void skips_unknown_event_types()
     {
         var aggregate = new TestApplyChangeAggregate();
-        var updated = aggregate.TestApplyChange(new NameUpdated("unknown")).Should().BeValid().Value;
+        var updated = aggregate.TestApplyChange(new NameUpdated("unknown")).Should().BeValid().And.Value;
         updated.Version.Should().Be(1);
     }
 
@@ -77,7 +77,7 @@ public class Applies_events
         var aggregate = new TestPreProcessEventAggregate();
         var updated = aggregate
             .TestPreprocessEvents(new NameUpdated("Jimi Hendrix"), new NameUpdated("unknown"))
-            .Should().BeValid().Value;
+            .Should().BeValid().And.Value;
 
         updated.Buffer.Uncommitted.Should().BeEquivalentTo(new object[]
         {

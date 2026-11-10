@@ -82,7 +82,7 @@ public class Adds_armies_to_target
             Game_Id,
             ExpectedVersion: 4);
 
-        var game = Handle(command, Benelux()).Should().BeValid().Value;
+        var game = Handle(command, Benelux()).Should().BeValid().And.Value;
 
         game.Countries.ById(Netherlands).Army.Should().Be(Player.P1.Army(5));
         game.ArmyBuffer.Should().Be(Player.P1.Army(1));
@@ -98,7 +98,7 @@ public class Adds_armies_to_target
             Game_Id,
             ExpectedVersion: 4);
 
-        var game = Handle(command, Benelux()).Should().BeValid().Value;
+        var game = Handle(command, Benelux()).Should().BeValid().And.Value;
 
         game.Countries.ById(Netherlands).Army.Should().Be(Player.P1.Army(6));
         game.ArmyBuffer.Should().Be(Army.None);

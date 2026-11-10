@@ -20,7 +20,7 @@ public class Resign_result_in
             })
             .Add(new TurnStarted(Player.P1.Army(3)));
         
-        var game = Handle(command, buffer).Should().BeValid().Value;
+        var game = Handle(command, buffer).Should().BeValid().And.Value;
 
         game.Phase.Should().Be(GamePhase.Deploy);
         game.Countries.ById(Netherlands).Army.Should().Be(Player.Neutral.Army(1));
@@ -34,6 +34,6 @@ public class Resign_result_in
         var command = new Resign(Game_Id, 4);
 
         Handle(command, Benelux()).Should().BeValid()
-            .Value.Phase.Should().Be(GamePhase.Finished);
+            .And.Value.Phase.Should().Be(GamePhase.Finished);
     }
 }

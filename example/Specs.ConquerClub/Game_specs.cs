@@ -32,7 +32,7 @@ public class Start_Game
             ]);
 
         Handle(command).Should().BeValid()
-            .Value.Countries.Select(c => c.Owner).Should().BeEquivalentTo(
+            .And.Value.Countries.Select(c => c.Owner).Should().BeEquivalentTo(
         [
             Player.P1,
             Player.P2,
@@ -66,7 +66,7 @@ public class Deploy
             ExpectedVersion: 4);
 
         Handle(command, Benelux()).Should().BeValid()
-            .Value.Countries.ById(Netherlands).Army.Should().Be(Player.P1.Army(6));
+            .And.Value.Countries.ById(Netherlands).Army.Should().Be(Player.P1.Army(6));
     }
 
     [Test]

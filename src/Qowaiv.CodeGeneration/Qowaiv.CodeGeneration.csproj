@@ -31,6 +31,7 @@ v0.0.1
 
   <ItemGroup>
     <ProjectReference Include="../Qowaiv/Qowaiv.csproj" />
+    <ProjectReference Include="../Qowaiv.Validation.DataAnnotations/Qowaiv.Validation.DataAnnotations.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,7 +40,6 @@ v0.0.1
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" />
-    <PackageReference Include="Qowaiv.Validation.DataAnnotations" />
   </ItemGroup>
 
 </Project>

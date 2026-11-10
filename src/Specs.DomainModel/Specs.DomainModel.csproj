@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/specs.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup Label="Projects under test">
+    <ProjectReference Include="../Qowaiv.DomainModel/Qowaiv.DomainModel.csproj" />
+    <ProjectReference Include="../Qowaiv.DomainModel.TestTools/Qowaiv.DomainModel.TestTools.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="Test tools">
+    <ProjectReference Include="../Qowaiv.Validation.TestTools/Qowaiv.Validation.TestTools.csproj" />
+  </ItemGroup>
+
+</Project>

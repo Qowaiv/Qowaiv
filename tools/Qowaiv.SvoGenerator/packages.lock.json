@@ -133,11 +133,6 @@
         "resolved": "0.11.6",
         "contentHash": "f33RkDtZO8VlGXCtmQIviOtxgnUdym9xx/b1p9h91CRGOsJFxCFOFK1FDbVt1OCf1aWwYejUFa2MOQyFWTFjbA=="
       },
-      "Qowaiv.Validation.Abstractions": {
-        "type": "Transitive",
-        "resolved": "2.1.0",
-        "contentHash": "YWX9tsoLOqRX+dg3XwcSkgUUA/PxPADgbkbLFEv1gr03bI7hNMbyYrl21gu3gYodmNdB90+a/MAm0S9oDlqkEQ=="
-      },
       "TUnit.Assertions": {
         "type": "Transitive",
         "resolved": "1.81.16",
@@ -167,13 +162,23 @@
         "dependencies": {
           "Newtonsoft.Json": "[13.0.4, )",
           "Qowaiv": "[11.0.0-rc1, )",
-          "Qowaiv.Validation.DataAnnotations": "[6.2.0, )"
+          "Qowaiv.Validation.DataAnnotations": "[11.0.0-rc.1, )"
         }
       },
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
           "Qowaiv": "[11.0.0-rc1, )"
+        }
+      },
+      "qowaiv.validation.abstractions": {
+        "type": "Project"
+      },
+      "qowaiv.validation.dataannotations": {
+        "type": "Project",
+        "dependencies": {
+          "Qowaiv": "[11.0.0-rc1, )",
+          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
         }
       },
       "specs.shared": {
@@ -188,16 +193,6 @@
         "requested": "[13.0.4, )",
         "resolved": "13.0.4",
         "contentHash": "pdgNNMai3zv51W5aq268sujXUyx7SNdE2bj1wZcWjAQrKMFZV260lbqYop1d2GM67JI1huLRwxo9ZqnfF/lC6A=="
-      },
-      "Qowaiv.Validation.DataAnnotations": {
-        "type": "CentralTransitive",
-        "requested": "[6.2.0, )",
-        "resolved": "6.2.0",
-        "contentHash": "QaHlcfZBdrktzyfBBbJwhN0AO/WwOWw0a0Cv6l+0BnuAe/kO3+fg370A4fNByBJhu+CSEGppxeY1mnd3U+XEeg==",
-        "dependencies": {
-          "Qowaiv": "8.2.0",
-          "Qowaiv.Validation.Abstractions": "2.1.0"
-        }
       }
     }
   }

@@ -396,7 +396,7 @@ internal static partial class Guard
     [DebuggerStepThrough]
     public static FileInfo Exists([ValidatedNotNull] FileInfo? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => NotNull(parameter).Exists
-        ? parameter!
+        ? parameter
         : throw new ArgumentException(string.Format(Messages.ArgumentException_NotExists, parameter!.FullName), paramName);
 
     /// <summary>Messages class to group the constants.</summary>

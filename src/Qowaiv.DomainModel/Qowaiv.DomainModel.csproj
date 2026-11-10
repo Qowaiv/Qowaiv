@@ -1,0 +1,95 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageId>Qowaiv.DomainModel</PackageId>
+    <IncludeDiagnostics>true</IncludeDiagnostics>
+    <IncludeGuard>true</IncludeGuard>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="QowaivDomainModelMessages.Designer.cs" DependentUpon="QowaivDomainModelMessages.resx" DesignTime="true" AutoGen="true" />
+    <EmbeddedResource Update="QowaivDomainModelMessages.resx" LastGenOutput="QowaivDomainModelMessages.Designer.cs" Generator="PublicResXFileCodeGenerator" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
+    <ProjectReference Include="../Qowaiv.Validation.Guarding/Qowaiv.Validation.Guarding.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>11.0.0-rc.1</Version>
+    <PackageValidationBaselineVersion>3.0.0</PackageValidationBaselineVersion>
+    <ToBeReleased>
+      <![CDATA[
+v3.*
+-
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
+      <![CDATA[
+v3.0.0
+- Add .NET 10.0 target.
+- Drop NET9.0 targets. (BREAKING)
+- Drop obsolete AggregateRoot. (BREAKING)
+V2.0.0
+- Add .NET 9.0 target.
+- Drop .NET 5.0, NET6.0, NET7.0 targets. (BREAKING)
+v1.1.2
+- Aggregate: PreProcessEvent in applied scope. #44
+v1.1.1
+- CommandProcessor made thread-safe. #42
+v1.1.0
+- Expose supported event types via Aggregate.SupportedEventTypes(). #41
+- Publish .NET 8.0.
+v1.0.1
+- Reintroduce If() on Then(). #40
+v1.0.0
+- Renamed AggregateRoot to Aggregate. #35 (breaking)
+- Re-implemented ImmutableCollection. #34 (breaking)
+- EventBuffer and Aggregate Version are of type long. #39 (breaking)
+- EventBuffer as struct. #34 (breaking)
+- EventBuffer implements IReadOnlyCollection<object> and ICollection<object>. #36
+- EventDispatcher without dynamics. #34 (breaking)
+- Enable annotations. #31
+- Publish .NET 7.0. #29
+v0.2.0
+- Support pre-processing of events before applying them. #28
+v0.1.7
+- Introduction of the non-generic DynamicEventDispatcher. #27 
+v0.1.6
+- Enumerables added to the immutable collection should be resolved. #24
+v0.1.5
+- Extend aggregate with Must guarding constraints. #21
+v0.1.4
+- Support optional cancellation token on command handler. #20
+v0.1.3
+- Introduction of CommandHandler<TReturnType>. #16
+- Decorate pure methods with attribute. #17
+v0.1.2
+- Fix issue with iterating EventBuffer.SelectUncommitted multiple times. #16 
+- Improved API for EventBuffer<T>. #15
+v0.1.1
+- Bug fix AggregateRoot.FromStorage. #14
+v0.1.0
+- Update to Qowaiv.Validation.Abstractions v0.1.0.
+- AggregateRoot is immutable. #11
+v0.0.3
+- Conditionally built Event Collection moved to Collections.ImmutableCollection. (breaking)
+- EventBuffer made Immutable (potentially breaking)
+v0.0.2
+- Conditionally built Event Collection
+v0.0.1
+- Initial release
+]]>
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>

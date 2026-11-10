@@ -54,7 +54,7 @@ internal static class Cast
     {
         >= Dbl.DecimalMax => decimal.MaxValue,
         <= Dbl.DecimalMin => decimal.MinValue,
-        _ => (decimal)value,
+        _ => value.ToDecimal(),
     };
 
     /// <summary>Casts a <see cref="double" /> to <see cref="int" /> for the SVO.</summary>

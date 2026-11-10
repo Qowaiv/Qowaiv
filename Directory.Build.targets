@@ -11,4 +11,8 @@
     <Compile Include="../../shared/Guard.cs" Link="Properties/Guard.cs" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(IncludeLock)' == 'true'">
+    <Compile Include="../../shared/Lock.cs" Link="Properties/Lock.cs" />
+  </ItemGroup>
+
 </Project>

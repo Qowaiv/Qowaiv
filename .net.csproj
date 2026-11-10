@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net11.0</TargetFramework>
     <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
     <IncludeDiagnostics>false</IncludeDiagnostics>
     <IncludeGuard>false</IncludeGuard>
+    <IncludeLock>false</IncludeLock>
   </PropertyGroup>
   
   <ItemGroup>

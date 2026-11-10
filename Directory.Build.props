@@ -69,6 +69,7 @@ inside and outside a Domain-driven context.
   <PropertyGroup Label="Include variables">
     <IncludeDiagnostics>true</IncludeDiagnostics>
     <IncludeGuard>true</IncludeGuard>
+    <IncludeLock>true</IncludeLock>
   </PropertyGroup>
 
   <PropertyGroup Label="Signing">

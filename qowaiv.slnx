@@ -2,6 +2,7 @@
   <Folder Name="/analyzers/">
     <Project Path="src/Qowaiv.CodeGeneration.SingleValueObjects/Qowaiv.CodeGeneration.SingleValueObjects.csproj" />
     <Project Path="src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" />
+    <Project Path="tools/Qowaiv.SvoGenerator/Qowaiv.SvoGenerator.csproj" />
   </Folder>
   <Folder Name="/examples/">
     <Project Path="example/ConquerClub.Domain/ConquerClub.Domain.csproj" />
@@ -43,5 +44,4 @@
   <Project Path="src/Specs.Validation.TestData/Specs.Validation.TestData.csproj" />
   <Project Path="src/Specs.Validation/Specs.Validation.csproj" />
   <Project Path="src/Specs/Specs.csproj" />
-  <Project Path="tools/Qowaiv.SvoGenerator/Qowaiv.SvoGenerator.csproj" />
 </Solution>

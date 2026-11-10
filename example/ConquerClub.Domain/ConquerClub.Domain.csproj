@@ -1,11 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/nopackage.props" />
 
   <PropertyGroup>
     <TargetFramework>net11.0</TargetFramework>
     <NoWarn>CA1861;QW0016</NoWarn>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

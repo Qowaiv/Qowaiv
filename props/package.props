@@ -22,7 +22,6 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Qowaiv/Qowaiv</RepositoryUrl>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Label="Debug Symbols">

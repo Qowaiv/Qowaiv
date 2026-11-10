@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/nopackage.props" />
 
@@ -6,7 +6,6 @@
     <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
     <LangVersion>12.0</LangVersion>
     <RootNamespace>Specs_Generated</RootNamespace>
-    <Nullable>enable</Nullable>
     <IsTestCode>true</IsTestCode>
     <IncludeDiagnostics>false</IncludeDiagnostics>
     <IncludeGuard>false</IncludeGuard>

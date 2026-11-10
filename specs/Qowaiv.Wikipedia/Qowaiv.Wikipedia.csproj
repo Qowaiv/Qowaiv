@@ -5,7 +5,6 @@
   <PropertyGroup>
     <TargetFramework>net11.0</TargetFramework>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
-    <Nullable>enable</Nullable>
     <IsTestCode>true</IsTestCode>
     <IsTestProject>false</IsTestProject>
     <IsTestingPlatformApplication>false</IsTestingPlatformApplication>

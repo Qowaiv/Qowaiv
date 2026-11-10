@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Diagnostics">
+    <Nullable>enable</Nullable>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <NuGetAudit>true</NuGetAudit>

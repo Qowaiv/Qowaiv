@@ -3,7 +3,7 @@
     <Project Path="example/ConquerClub.Domain/ConquerClub.Domain.csproj" />
     <Project Path="example/Specs.ConquerClub/Specs.ConquerClub.csproj" />
   </Folder>
-  <Folder Name="/examples/depdencies/">
+  <Folder Name="/examples/dependencies/">
     <Project Path="src/Qowaiv.CodeGeneration.SingleValueObjects/Qowaiv.CodeGeneration.SingleValueObjects.csproj" />
     <Project Path="src/Qowaiv.Validation.Fluent/Qowaiv.Validation.Fluent.csproj" />
     <Project Path="src/Qowaiv.Validation.Messages/Qowaiv.Validation.Messages.csproj" />

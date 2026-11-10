@@ -3,71 +3,15 @@
 <Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:AwesomeAssertions.QowaivDomainModelAwesomeAssertions</Target>
-    <Left>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Left>
-    <Right>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:FluentAssertions.QowaivDomainModelFluentAssertions</Target>
-    <Left>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Left>
-    <Right>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.DomainModel.TestTools.EventBufferAssertions`1</Target>
-    <Left>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Left>
-    <Right>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.DomainModel.TestTools.FluentAssertions.EventBufferAssertions`1</Target>
-    <Left>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Left>
-    <Right>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Right>
+    <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute</Target>
+    <Left>lib/net10.0/Qowaiv.DomainModel.TestTools.dll</Left>
+    <Right>lib/net10.0/Qowaiv.DomainModel.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute</Target>
     <Left>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Left>
-    <Right>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:AwesomeAssertions.QowaivDomainModelAwesomeAssertions</Target>
-    <Left>lib/net9.0/Qowaiv.DomainModel.TestTools.dll</Left>
-    <Right>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:FluentAssertions.QowaivDomainModelFluentAssertions</Target>
-    <Left>lib/net9.0/Qowaiv.DomainModel.TestTools.dll</Left>
-    <Right>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.DomainModel.TestTools.EventBufferAssertions`1</Target>
-    <Left>lib/net9.0/Qowaiv.DomainModel.TestTools.dll</Left>
-    <Right>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.DomainModel.TestTools.FluentAssertions.EventBufferAssertions`1</Target>
-    <Left>lib/net9.0/Qowaiv.DomainModel.TestTools.dll</Left>
-    <Right>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute</Target>
-    <Left>lib/net9.0/Qowaiv.DomainModel.TestTools.dll</Left>
     <Right>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
@@ -85,34 +29,6 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:AwesomeAssertions.QowaivDomainModelAwesomeAssertions</Target>
-    <Left>lib/netstandard2.0/Qowaiv.DomainModel.TestTools.dll</Left>
-    <Right>lib/netstandard2.0/Qowaiv.DomainModel.TestTools.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:FluentAssertions.QowaivDomainModelFluentAssertions</Target>
-    <Left>lib/netstandard2.0/Qowaiv.DomainModel.TestTools.dll</Left>
-    <Right>lib/netstandard2.0/Qowaiv.DomainModel.TestTools.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.DomainModel.TestTools.EventBufferAssertions`1</Target>
-    <Left>lib/netstandard2.0/Qowaiv.DomainModel.TestTools.dll</Left>
-    <Right>lib/netstandard2.0/Qowaiv.DomainModel.TestTools.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.DomainModel.TestTools.FluentAssertions.EventBufferAssertions`1</Target>
-    <Left>lib/netstandard2.0/Qowaiv.DomainModel.TestTools.dll</Left>
-    <Right>lib/netstandard2.0/Qowaiv.DomainModel.TestTools.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute</Target>
     <Left>lib/netstandard2.0/Qowaiv.DomainModel.TestTools.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.DomainModel.TestTools.dll</Right>
@@ -120,21 +36,21 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0003</DiagnosticId>
-    <Target>Qowaiv.DomainModel.TestTools, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Target>Qowaiv.DomainModel.TestTools, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Left>lib/net10.0/Qowaiv.DomainModel.TestTools.dll</Left>
+    <Right>lib/net10.0/Qowaiv.DomainModel.TestTools.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0003</DiagnosticId>
+    <Target>Qowaiv.DomainModel.TestTools, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
     <Left>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Left>
     <Right>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0003</DiagnosticId>
-    <Target>Qowaiv.DomainModel.TestTools, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
-    <Left>lib/net9.0/Qowaiv.DomainModel.TestTools.dll</Left>
-    <Right>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0003</DiagnosticId>
-    <Target>Qowaiv.DomainModel.TestTools, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
+    <Target>Qowaiv.DomainModel.TestTools, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc</Target>
     <Left>lib/netstandard2.0/Qowaiv.DomainModel.TestTools.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.DomainModel.TestTools.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>

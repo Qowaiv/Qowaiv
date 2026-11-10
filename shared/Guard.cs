@@ -29,9 +29,17 @@ internal static partial class Guard
     /// The guarded parameter.
     /// </returns>
     [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T NotNull<T>([ValidatedNotNull] T? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         where T : class
-        => parameter ?? throw new ArgumentNullException(paramName);
+#if NET10_0_OR_GREATER
+    {
+        ArgumentNullException.ThrowIfNull(parameter, paramName);
+        return parameter;
+    }
+#else
+    => parameter ?? throw new ArgumentNullException(paramName);
+#endif
 
     /// <summary>Throws an ArgumentException if the nullable parameter has no value, otherwise the parameter value is passed.</summary>
     /// <typeparam name="T">The type to guard; must be a structure.</typeparam>

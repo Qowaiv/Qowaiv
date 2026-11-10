@@ -2,7 +2,7 @@
 ### Event sourced DDD example
 
 On the [Conquer Club](https://www.conquerclub.com/) website you can play a game
-that is inspired by the board game RISK™. In this demo, (most of) the rules of
+that is inspired by the board game RISKâ„¢. In this demo, (most of) the rules of
 that game have been implemented using Qowaiv's Aggregate, to give an
 impression on how a (not trivial) event sourced DDD solution could look like.
 
@@ -13,9 +13,9 @@ via the constructor:
  public Game(GameId id) : base(id, new GameValidator()) { }
 ```
 
-The `[GameValidator](ConquerClub.Domain/Validation/GameValidator.cs)` uses
-[Qowaiv.Validation.Fluent](https://github.com/Qowaiv/qowaiv-validation), an
-extension on [FluentValadation](https://fluentvalidation.net).
+The [GameValidator](ConquerClub.Domain/Validation/GameValidator.cs) uses
+[Qowaiv.Validation.Fluent](../docs/validation/Fluent.md), an
+extension on [FluentValidation](https://fluentvalidation.net).
 
 ``` C#
 internal class GameValidator : ModelValidator<Game>
@@ -25,7 +25,7 @@ internal class GameValidator : ModelValidator<Game>
         RuleFor(g => g.Settings).Required();
         RuleFor(g => g.Countries).Required();
         RuleFor(g => g.Phase).IsInEnum().NotEmpty();
-        RuleFor(g => g.Round).LessThanOrEqualTo(game => game.Settings?.RoundLimit);
+        RuleFor(g => g.Round).LessThanOrEqualTo(game => game.Settings.RoundLimit);
         RuleFor(g => g.ActivePlayer).NotEmptyOrUnknown();
 
         RuleForEach(g => g.Countries).SetValidator(new CountryValidator());
@@ -38,19 +38,19 @@ any of them fail, the change is not applied.
 
 ## Pre-conditions
 Some conditions should be checked before changing the state. There are two major
-reasons to that (instead of defining the constraints in a validator):
-1. the constraint can be checked afterwards.
+reasons for that (instead of defining the constraints in a validator):
+1. the constraint cannot be checked afterwards.
 2. preventing code from crashing before the state is rejected.
 ```C#
 Result<Game> Deploy(CountryId country, Army army) =>
-    MustBeInPhase(GamePhase.Deploy)
+    Must.BeInPhase(GamePhase.Deploy)
     | (g => g.Must.BeActivePlayer(army.Owner))
     | (g => g.Must.Exist(country))
     | (g => g.Must.BeOwnedBy(country, army.Owner))
-    | (g => g.Must.NotExeedArmyBuffer(army))
+    | (g => g.Must.NotExceedArmyBuffer(army))
     | (g => g.ApplyEvent(new Deployed(country, army)));
 ```
-The `Qowaiv.Validation.Abstractions.Result<T>` allows us to use a | operator
+The `Qowaiv.Validation.Abstractions.Result<T>` allows us to use a | operator
 (as a short for `.Act<T>(Func<T, Result<T>>)`). In short, if any of these lines
 returns a result that is not (longer) valid, the execution is ended, and the 
 error(s) are returned.
@@ -60,7 +60,7 @@ To keep the replay of events as straightforward as possible, it can be a good
 thing to conditionally apply (different) events based on the current state.
 
 In the code below, a successful attack is represented by a `Conquered` event,
-and a unsuccessful one (the country was not conquered) by an `Attacked` event.
+and an unsuccessful one (the country was not conquered) by an `Attacked` event.
 
 ``` C#
 Result<Game> Attack(

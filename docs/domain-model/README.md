@@ -25,7 +25,7 @@ purpose of data changes. When implementing an aggregate there are several steps
 that have to be taken.
 
 First, an aggregate should have a corresponding
-[IValidator<TAggragate>](../validation/Validator.md)
+[IValidator<TAggregate>](../validation/Validator.md)
 implementation of choice. This implementation will safeguard any post conditions
 on the aggregate.
 
@@ -37,14 +37,14 @@ should inherit from one of two possible base classes:
 
 `Aggregate<TAggregate>` is a low level base class that provides a framework
 for handling the application of events. It has no event store of its own. Implementations
-of this class should override the `protected abstract void AddEventsToBuffer(params object[] events)`
+of this class should override the `protected abstract void AddEventsToBuffer(IReadOnlyCollection<object> events)`
 method to achieve persistence of events.
 
 The second option, `Aggregate<TAggregate, TId>`, inherits from
 `Aggregate<TAggregate>`. It has built-in identity support and systems for
 storing events in the integrated `EventBuffer<TId>`. Events that should be
-persisted are added to this buffer, and it can return both the committed as
-well as the uncommitted events it contains.
+persisted are added to this buffer, and it can return both the committed and
+the uncommitted events it contains.
 
 ### Immutability
 As immutability comes with tons of benefits in DDD scenarios, the
@@ -60,9 +60,9 @@ trick. This might be beneficial for aggregate roots that have a lot of events
 
 ## Event dispatcher
 Each aggregate has an event dispatcher that by default uses compiled
-expressions to execute matching non-public `When(@event)` methods. This is
-extremely fast, but if desired, by implementing your own `EventDispatcher`, the
-behavior can be changed.
+expressions to execute matching public and non-public `When(@event)` methods.
+This is extremely fast, but if desired, by implementing your own `EventDispatcher`,
+the behavior can be changed.
 
 ## Example 1
 A (simplified) real life example of a financial entry, using `Aggregate<TAggregate, TId>`:
@@ -73,9 +73,10 @@ public sealed class FinancialEntry : Aggregate<FinancialEntry, Guid>
     // See the implementation of this class below.
     public FinancialEntry(Guid id) : base(id, new FinancialEntryValidator()) { }
 
-     public IReadOnlyCollection<EntryLine> Lines => enties;
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly List<EntryLine> enties = new List<EntryLine>();
+    public IReadOnlyCollection<EntryLine> Lines => entries;
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private readonly List<EntryLine> entries = [];
 
     public Result<FinancialEntry> AddLines(params FinancialEntryLine[] lines)
     {
@@ -93,7 +94,7 @@ public sealed class FinancialEntry : Aggregate<FinancialEntry, Guid>
     // is processed by the ApplyEvents method called from AddLines above.
     internal void When(EntryLineAdded @event)
     {
-        enties.Add(new EntryLine
+        entries.Add(new EntryLine
         {
             GlAccount = @event.GlAccount,
             Date = @event.Date,
@@ -108,7 +109,7 @@ public sealed class FinancialEntry : Aggregate<FinancialEntry, Guid>
 And the implementation of the validator for `FinancialEntry` might look like this:
 
 ``` C#
-public class FinancialEntryValidator : FluentModelValidator<FinancialEntry>
+public class FinancialEntryValidator : ModelValidator<FinancialEntry>
 {
     public FinancialEntryValidator()
     {
@@ -133,7 +134,7 @@ public class FinancialEntryValidator : FluentModelValidator<FinancialEntry>
 
         if (sum.Amount != Amount.Zero)
         {
-            context.AddFailure(nameof(FinancialEntry.Lines), "The lines are note balanced.");
+            context.AddFailure(nameof(FinancialEntry.Lines), "The lines are not balanced.");
         }
     }
 }
@@ -150,7 +151,7 @@ Note that the decision to throw an exception, or to deal with a
 `Result<TAggregate>` gradually, is up to the developer.
 
 ## Example 2
-An advanced example (implementing ConquerClub) can be found at [here](ConquerClub.md).
+An advanced example (implementing ConquerClub) can be found [here](ConquerClub.md).
 
 ## Conditional Events
 When applying changes to an aggregate, you might want to apply a different type
@@ -185,7 +186,7 @@ Alternatively:
 ``` C#
 public Result<Game> Attack(Country attacker, Country defender, AttackResult result)
 {
-    var events = Events.
+    var events = Events;
 
     if (result.IsSuccess)
     {
@@ -211,7 +212,7 @@ public Result<Game> Attack(Country attacker, Country defender, AttackResult resu
         events = events.Add(new PlayerEliminated 
         {
             Player = Countries(defender).Owner 
-        }));
+        });
     }
 
     return Apply(events);
@@ -219,20 +220,20 @@ public Result<Game> Attack(Country attacker, Country defender, AttackResult resu
 ```
 
 ## Event Buffer
-The `EventBuffer<TId>`, as used by `Aggregate<TAggregate, TId>` is an
+The `EventBuffer<TId>`, as used by `Aggregate<TAggregate, TId>`, is an
 immutable collection with the following API:
 
 ``` C#
 // Creation
 var id = NewId();
 var buffer = EventBuffer.Empty(id, version: 5); // version optional.
-var stored = EventBuffer.FromStorage(id, version: 5, storedEvents, (e) => Convert(e));
+var stored = EventBuffer.FromStorage(id, initialVersion: 5, storedEvents, (e) => Convert(e));
 
 // Extending, returning a new instance.
-var updated = buffer.Add(events); // excepts arrays, enumerables or a single event.
+var updated = buffer.Add(events); // accepts arrays, enumerables or a single event.
 
 // Export for storage
-var export = buffer.SelectUncommitted((id, verion, e) => Export(id, version, e));
+var export = buffer.SelectUncommitted((id, version, e) => Export(id, version, e));
 
 // After successful export
 var updated = buffer.MarkAllAsCommitted();
@@ -250,11 +251,11 @@ the registered handler handles the command at hand.
 The (abstract) `Qowaiv.DomainModel.Commands.CommandProcessor<TReturnType>`
 orchestrates command handlers to command (types). To reduce the usage of reflection,
 the actual call is a (one-time) compiled expression, stored in a dictionary. It
-can deal with any (except `void`, including both sync and async) return type,
-and any (generic) command handler interface of preference.
+can deal with any return type (both synchronous and asynchronous, except
+`void`), and any (generic) command handler interface of preference.
 
-If a method with an additional `System.Threading.CancelationToken` parameter is
-available, that method is preferred. If needed, an default token is added, or - if
+If a method with an additional `System.Threading.CancellationToken` parameter is
+available, that method is preferred. If needed, a default token is added, or - if
 provided but not available - ignored.
 
 A typical implementation, using Microsoft's `System.IServiceProvider`,

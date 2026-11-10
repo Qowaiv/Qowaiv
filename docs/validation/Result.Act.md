@@ -1,5 +1,5 @@
 # Result.Act
-Using [`Result<T>`](Result.md) allows to apply _[Monadic](https://en.wikipedia.org/wiki/Monad_(functional_programming))
+Using [`Result<T>`](Result.md) allows applying _[Monadic](https://en.wikipedia.org/wiki/Monad_(functional_programming))
 Composition/Railway Oriented Programming_.  A chain of actions is executed while
 the result is valid, and messages accumulate:
 

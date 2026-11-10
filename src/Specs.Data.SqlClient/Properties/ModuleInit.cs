@@ -1,7 +1,7 @@
 namespace Specs.Properties;
 
-internal static class ModuleInitializer
+internal static class ModuleInit
 {
     [ModuleInitializer]
-    public static void Register() => TUnit.ConventionBasedConverters.Register(typeof(ModuleInitializer).Assembly);
+    public static void Register() => TUnit.ConventionBasedConverters.Register(typeof(ModuleInit).Assembly);
 }

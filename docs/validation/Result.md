@@ -49,7 +49,7 @@ Result<MyModel> implicit = validModel;
 // Explicit: extracts the value, throws if invalid
 MyModel explicit = (MyModel)result;
 
-// Cast: changes the wrapped type (must be a subclass)
+// Cast: changes the wrapped type (the value must be convertible to TOut)
 Result<DerivedModel> casted = result.Cast<DerivedModel>();
 ```
 

@@ -1,0 +1,22 @@
+<Solution>
+  <Folder Name="/examples/">
+    <Project Path="example/ConquerClub.Domain/ConquerClub.Domain.csproj" />
+    <Project Path="example/Specs.ConquerClub/Specs.ConquerClub.csproj" />
+  </Folder>
+  <Folder Name="/examples/dependencies/">
+    <Project Path="src/Qowaiv.CodeGeneration.SingleValueObjects/Qowaiv.CodeGeneration.SingleValueObjects.csproj" />
+    <Project Path="src/Qowaiv.Validation.Fluent/Qowaiv.Validation.Fluent.csproj" />
+    <Project Path="src/Qowaiv.Validation.Messages/Qowaiv.Validation.Messages.csproj" />
+  </Folder>
+  <Project Path=".net.csproj" />
+  <Project Path="src/Bench.DomainModel/Bench.DomainModel.csproj" />
+  <Project Path="src/Qowaiv.DomainModel.TestTools/Qowaiv.DomainModel.TestTools.csproj" />
+  <Project Path="src/Qowaiv.DomainModel/Qowaiv.DomainModel.csproj" />
+  <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
+  <Project Path="src/Qowaiv.Validation.Abstractions/Qowaiv.Validation.Abstractions.csproj" />
+  <Project Path="src/Qowaiv.Validation.Guarding/Qowaiv.Validation.Guarding.csproj" />
+  <Project Path="src/Qowaiv.Validation.TestTools/Qowaiv.Validation.TestTools.csproj" />
+  <Project Path="src/Qowaiv/Qowaiv.csproj" />
+  <Project Path="src/Specs.DomainModel/Specs.DomainModel.csproj" />
+  <Project Path="src/Specs.Shared/Specs.Shared.csproj" />
+</Solution>

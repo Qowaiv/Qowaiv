@@ -4,6 +4,8 @@
   
   <PropertyGroup>
     <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
+    <IncludeGuard>false</IncludeGuard>
+    <IncludeLock>false</IncludeLock>
   </PropertyGroup>
 
   <ItemGroup>

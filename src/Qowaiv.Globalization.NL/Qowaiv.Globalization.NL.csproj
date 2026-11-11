@@ -7,14 +7,12 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DevelopmentDependency>false</DevelopmentDependency>
     <PackageId>Qowaiv.Globalization.NL</PackageId>
+    <IncludeGuard>false</IncludeGuard>
+    <IncludeLock>false</IncludeLock>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="../Qowaiv/Qowaiv.csproj" />
-  </ItemGroup>
-
-  <ItemGroup Label="Code generation and analyzers">
-    <ProjectReference Include="../Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <PropertyGroup>

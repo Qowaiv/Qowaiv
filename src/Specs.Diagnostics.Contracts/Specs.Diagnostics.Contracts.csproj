@@ -6,6 +6,8 @@
     <!-- We need C# 12 for NUnit, the attributes would do with C# 9. -->
     <LangVersion>12.0</LangVersion>
     <RootNamespace>Specs</RootNamespace>
+    <IncludeGuard>false</IncludeGuard>
+    <IncludeLock>false</IncludeLock>
   </PropertyGroup>
 
 </Project>

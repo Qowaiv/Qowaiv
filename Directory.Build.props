@@ -10,8 +10,12 @@
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
-    <IncludeDiagnostics>false</IncludeDiagnostics>
-    <IncludeGuard>false</IncludeGuard>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Shared code">
+    <IncludeGuard>true</IncludeGuard>
+    <IncludeDiagnostics>true</IncludeDiagnostics>
+    <IncludeLock>true</IncludeLock>
   </PropertyGroup>
 
   <PropertyGroup Label="Diagnostics">
@@ -86,16 +90,5 @@ inside and outside a Domain-driven context.
   <PropertyGroup>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
-
-  <ItemGroup Condition="'$(IncludeGuard)' == 'true'">
-    <Compile Include="../../shared/Guard.cs" Link="Properties/Guard.cs" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(IncludeDiagnostics)' == 'true'">
-    <ProjectReference
-      Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj"
-      OutputItemType="Analyzer"
-      ReferenceOutputAssembly="false" />
-  </ItemGroup>
 
 </Project>

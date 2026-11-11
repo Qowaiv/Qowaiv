@@ -49,8 +49,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Shared assembly tags. -->
-    <Compile Include="$(MSBuildThisFileDirectory)../shared/Lock.cs" Link="Properties/Lock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)../shared/ProductInfo.cs" Link="Properties/ProductInfo.cs" />
   </ItemGroup>
 

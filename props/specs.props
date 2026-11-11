@@ -56,13 +56,6 @@
     <ProjectReference Include="../../src/Specs.Shared/Specs.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup Label="Diagnostics contracts code generation">
-    <ProjectReference
-      Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj"
-      OutputItemType="Analyzer"
-      ReferenceOutputAssembly="false" />
-  </ItemGroup>
-
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileFullPath)" Link="Properties/$(MSBuildThisFile)" />
   </ItemGroup>

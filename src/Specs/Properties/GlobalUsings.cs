@@ -22,6 +22,7 @@ global using Qowaiv.TestTools.IO;
 global using Qowaiv.Text;
 global using Qowaiv.Web;
 global using System;
+global using System.Collections;
 global using System.Collections.Generic;
 global using System.ComponentModel;
 global using System.Diagnostics;

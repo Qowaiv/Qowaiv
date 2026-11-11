@@ -26,16 +26,8 @@ v0.0.1
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="../Qowaiv/Qowaiv.csproj" />
     <ProjectReference Include="../Qowaiv.Validation.DataAnnotations/Qowaiv.Validation.DataAnnotations.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup>

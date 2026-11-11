@@ -162,7 +162,6 @@
       "qowaiv.domainmodel.testtools": {
         "type": "Project",
         "dependencies": {
-          "AwesomeAssertions": "[9.6.0, )",
           "Qowaiv.DomainModel": "[11.0.0-rc.1, )"
         }
       },
@@ -393,7 +392,6 @@
       "qowaiv.domainmodel.testtools": {
         "type": "Project",
         "dependencies": {
-          "AwesomeAssertions": "[9.6.0, )",
           "Qowaiv.DomainModel": "[11.0.0-rc.1, )"
         }
       },

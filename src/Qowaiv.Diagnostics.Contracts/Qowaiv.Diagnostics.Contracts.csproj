@@ -18,7 +18,6 @@
     <DevelopmentDependency>true</DevelopmentDependency>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <IncludeSymbols>false</IncludeSymbols>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

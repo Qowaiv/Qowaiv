@@ -4,7 +4,6 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageId>Qowaiv.Bson.MongoDB</PackageId>
     <PackageIcon>package-icon-bson.png</PackageIcon>
   </PropertyGroup>

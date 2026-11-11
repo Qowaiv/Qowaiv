@@ -155,7 +155,7 @@
           "MathNet.Numerics": "[5.0.0, )",
           "Qowaiv": "[11.0.0-rc1, )",
           "Qowaiv.DomainModel": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Fluent": "[4.2.0, )",
+          "Qowaiv.Validation.Fluent": "[11.0.0-rc.1, )",
           "Qowaiv.Validation.Messages": "[11.0.0-rc.1, )"
         }
       },
@@ -166,7 +166,7 @@
         "type": "Project",
         "dependencies": {
           "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Guarding": "[2.2.0, )"
+          "Qowaiv.Validation.Guarding": "[11.0.0-rc.1, )"
         }
       },
       "qowaiv.domainmodel.testtools": {
@@ -218,14 +218,14 @@
         "dependencies": {
           "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )",
           "Qowaiv.Validation.DataAnnotations": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Fluent": "[4.2.0, )"
+          "Qowaiv.Validation.Fluent": "[11.0.0-rc.1, )"
         }
       },
       "specs.shared": {
         "type": "Project",
         "dependencies": {
           "AwesomeAssertions": "[9.6.0, )",
-          "Qowaiv.TestTools": "[11.0.0-rc1, )",
+          "Qowaiv.TestTools": "[11.0.0-rc.1, )",
           "TUnit.Core": "[1.81.16, )"
         }
       },

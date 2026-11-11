@@ -51,7 +51,7 @@
         "type": "Project",
         "dependencies": {
           "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Guarding": "[2.2.0, )"
+          "Qowaiv.Validation.Guarding": "[11.0.0-rc.1, )"
         }
       },
       "qowaiv.validation.abstractions": {

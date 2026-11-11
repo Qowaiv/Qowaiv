@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>11.0.0-rc.1</Version>
     <PackageValidationBaselineVersion>3.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[

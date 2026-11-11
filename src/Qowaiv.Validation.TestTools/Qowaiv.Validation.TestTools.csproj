@@ -14,19 +14,21 @@
   </ItemGroup>
   
   <PropertyGroup>
-    <Version>4.1.0</Version>
+    <VersionMajor>5</VersionMajor>
     <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
-v11.0.0
-- Add .NET 11.0 target.
-- Drop .NET 8.0 targets (BREAKING)
-- BeValid().And.Value and-constraint syntax.
-- Allow Sync Should() an async Results.
+v11.*
+-
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
 <![CDATA[
+v5.0.0
+- Add .NET 11.0 target.
+- Drop .NET 8.0 targets (BREAKING)
+- BeValid().And.Value and-constraint syntax.
+- Allow Sync Should() an async Results
 v4.2.0
 - Update to Qowaiv v8.2.0.
 v4.0.0

@@ -26,9 +26,14 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>11.0.0-rc.1</Version>
     <PackageValidationBaselineVersion>6.2.0</PackageValidationBaselineVersion>
     <ToBeReleased>
+      <![CDATA[
+v11.*
+-
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
       <![CDATA[
 v11.0.0
 - Add .NET 11.0 target.
@@ -40,10 +45,6 @@ v11.0.0
 - [Mandatory], [Length.*], [Count.*], [DefinedEnumValuesOnly] speed improvements.
 - Sign based attributes don't crash on NaN. (BUG)
 - Required keyword on string requires it to be set, but string empty is allowed. (BUG)
-]]>
-    </ToBeReleased>
-    <PackageReleaseNotes>
-      <![CDATA[
 v6.2.0
 - Introduction of [Negative] validation attribute.
 - Introduction of [Positive] validation attribute.

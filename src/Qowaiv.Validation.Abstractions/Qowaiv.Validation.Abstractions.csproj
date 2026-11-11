@@ -20,9 +20,14 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>11.0.0-rc.1</Version>
     <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
+      <![CDATA[
+v11.*
+-
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
       <![CDATA[
 v11.0.0
 - Add .NET 11.0 target.
@@ -34,10 +39,6 @@ v11.0.0
 - Act(Async)(Func<TModel, TOut>) to simplify applying transforms.
 - Validator.Composite<TModel>() creates a composite Ivalidator<<TModel>.
 - IHttpStatusMessage to bind an IValidationMessage to an HTTP status.
-]]>
-    </ToBeReleased>
-    <PackageReleaseNotes>
-      <![CDATA[
 v2.1.0
 - Add notnull constraint to Result.For<T>().
 v2.0.0

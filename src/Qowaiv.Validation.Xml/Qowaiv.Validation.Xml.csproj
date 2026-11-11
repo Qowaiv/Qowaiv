@@ -16,9 +16,14 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>2.1.0</Version>
     <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
+      <![CDATA[
+v11.*
+-
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
       <![CDATA[
 v11.0.0
 - Add .NET 11.0 target.
@@ -27,10 +32,6 @@ v11.0.0
 - SchemaValidator is sealed. (BREAKING)
 - XmlValidationHandler is sealed. (BREAKING)
 - Explicitly prohibited DTD.
-]]>
-    </ToBeReleased>
-    <PackageReleaseNotes>
-      <![CDATA[
 v2.1.0
 - Add notnull constraint to Result.For<T>().
 v2.0.0

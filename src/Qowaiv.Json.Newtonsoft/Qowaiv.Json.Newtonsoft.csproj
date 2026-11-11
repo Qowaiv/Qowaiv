@@ -15,7 +15,6 @@
 
   <PropertyGroup>
     <VersionMajor>6</VersionMajor>
-    <Version>$(VersionMajor).0.0-rc.1</Version>
     <PackageReleaseNotes>
       <![CDATA[
 v6.0.0

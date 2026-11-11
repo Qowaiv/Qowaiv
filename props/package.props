@@ -24,6 +24,11 @@
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
   </PropertyGroup>
 
+  <PropertyGroup Label="Version">
+    <VersionMajor>11</VersionMajor>
+    <Version>$(VersionMajor).0.0-rc.1</Version>
+  </PropertyGroup>
+
   <PropertyGroup Label="Debug Symbols">
     <DebugType>portable</DebugType>
     <IncludeSymbols>true</IncludeSymbols>

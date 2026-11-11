@@ -25,9 +25,15 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>4.2.0</Version>
+    <VersionMajor>5</VersionMajor>
     <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
+      <![CDATA[
+v5.*
+-
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
       <![CDATA[
 v5.0.0
 - Add .NET 11.0 target.
@@ -35,10 +41,7 @@ v5.0.0
 - AsyncResult<TModel>. (BREAKING)
 - Drop FloatingPointValidation (covered by NumberValidation). (BREAKING)
 - Changed namespace from FluentValidation to Qowaiv.Validation.Fluent. (BREAKING)
-]]>
-    </ToBeReleased>
-    <PackageReleaseNotes>
-      <![CDATA[
+
 v4.2.0
 - Add support for ar, de, es, fr, it, ja, ru, zh languages.
 v4.1.0

@@ -14,17 +14,18 @@
   
   <PropertyGroup>
     <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
-    <Version>2.2.0</Version>
     <ToBeReleased>
+      <![CDATA[
+v11.*
+-
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
       <![CDATA[
 v11.0.0
 - Add .NET 11.0 target.
 - Drop .NET 8.0 targets (BREAKING)
 - AsyncResult<TModel>. (BREAKING)
-]]>
-    </ToBeReleased>
-    <PackageReleaseNotes>
-      <![CDATA[
 v2.2.0
 - Update dependencies.
 v2.1.0

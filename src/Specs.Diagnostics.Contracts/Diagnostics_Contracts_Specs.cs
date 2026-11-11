@@ -17,6 +17,7 @@ public class Generator
         .Where(IsGenerated)
         .Should().BeEquivalentTo(
         [
+            typeof(Qowaiv.Diagnostics.Contracts.AssertionAttribute),
             typeof(Qowaiv.Diagnostics.Contracts.CollectionMutationAttribute),
             typeof(Qowaiv.Diagnostics.Contracts.EmptyClassAttribute),
             typeof(Qowaiv.Diagnostics.Contracts.EmptyEnumAttribute),
@@ -27,6 +28,7 @@ public class Generator
             typeof(Qowaiv.Diagnostics.Contracts.EmptyTestInterfaceAttribute),
             typeof(Qowaiv.Diagnostics.Contracts.EmptyTestStructAttribute),
             typeof(Qowaiv.Diagnostics.Contracts.FluentSyntaxAttribute),
+            typeof(Qowaiv.Diagnostics.Contracts.ImmutableAttribute),
             typeof(Qowaiv.Diagnostics.Contracts.ImpureAttribute),
             typeof(Qowaiv.Diagnostics.Contracts.InheritableAttribute),
             typeof(Qowaiv.Diagnostics.Contracts.MutableAttribute),

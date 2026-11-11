@@ -168,7 +168,7 @@
         "type": "Project",
         "dependencies": {
           "AwesomeAssertions": "[9.6.0, )",
-          "Qowaiv.TestTools": "[11.0.0-rc1, )",
+          "Qowaiv.TestTools": "[11.0.0-rc.1, )",
           "TUnit.Core": "[1.81.16, )"
         }
       },
@@ -346,7 +346,7 @@
         "type": "Project",
         "dependencies": {
           "AwesomeAssertions": "[9.6.0, )",
-          "Qowaiv.TestTools": "[11.0.0-rc1, )",
+          "Qowaiv.TestTools": "[11.0.0-rc.1, )",
           "TUnit.Core": "[1.81.16, )"
         }
       },

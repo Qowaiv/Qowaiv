@@ -1,0 +1,18 @@
+<Project>
+
+  <ItemGroup Condition="'$(IncludeDiagnostics)' == 'true'">
+    <ProjectReference
+      Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj"
+      OutputItemType="Analyzer"
+      ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IncludeGuard)' == 'true'">
+    <Compile Include="../../shared/Guard.cs" Link="Properties/Guard.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IncludeLock)' == 'true'">
+    <Compile Include="../../shared/Lock.cs" Link="Properties/Lock.cs" />
+  </ItemGroup>
+
+</Project>

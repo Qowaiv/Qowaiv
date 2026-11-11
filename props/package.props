@@ -7,6 +7,7 @@
 
   <PropertyGroup Label="Package info">
     <IsPackable>true</IsPackable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <EnablePackageValidation>true</EnablePackageValidation>
     <EnableStrictModeForCompatibleFrameworksInPackage>true</EnableStrictModeForCompatibleFrameworksInPackage>
     <EnableStrictModeForBaselineValidation>true</EnableStrictModeForBaselineValidation>
@@ -22,7 +23,11 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Qowaiv/Qowaiv</RepositoryUrl>
     <DefineConstants>CONTRACTS_FULL</DefineConstants>
-    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Version">
+    <VersionMajor>11</VersionMajor>
+    <Version>$(VersionMajor).0.0-rc.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Label="Debug Symbols">
@@ -44,8 +49,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Shared assembly tags. -->
-    <Compile Include="$(MSBuildThisFileDirectory)../shared/Lock.cs" Link="Properties/Lock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)../shared/ProductInfo.cs" Link="Properties/ProductInfo.cs" />
   </ItemGroup>
 

@@ -3,9 +3,9 @@
   <Import Project="../props/package.props" />
   <Import Project="../shared/Qowaiv.Json.Shared/Qowaiv.Json.Shared.props" />
 
-  <PropertyGroup>
-    <IncludeDiagnostics>true</IncludeDiagnostics>
-    <IncludeGuard>true</IncludeGuard>
+  <PropertyGroup Label="Package info">
+    <ProductName>Qowaiv JSON</ProductName>
+    <Description>Provides convention based JSON converters to work with SVOs.</Description>
   </PropertyGroup>
 
   <ItemGroup>

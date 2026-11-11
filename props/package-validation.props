@@ -2,13 +2,9 @@
 
   <Import Project="../props/package.props" />
 
-  <PropertyGroup>
-    <IncludeDiagnostics>true</IncludeDiagnostics>
-    <IncludeGuard>true</IncludeGuard>
-  </PropertyGroup>
-
   <PropertyGroup Label="Package info">
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <ProductName>Qowaiv Validation</ProductName>
+    <Description>Qowaiv Validation supports a generic interface for (domain) model validation.</Description>
     <PackageIcon>package-icon-validation.png</PackageIcon>
   </PropertyGroup>
 

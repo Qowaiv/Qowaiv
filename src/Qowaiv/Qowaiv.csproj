@@ -4,19 +4,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DevelopmentDependency>false</DevelopmentDependency>
     <PackageId>Qowaiv</PackageId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
-  </ItemGroup>
-  
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
     <PackageReference Include="System.Memory" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" />

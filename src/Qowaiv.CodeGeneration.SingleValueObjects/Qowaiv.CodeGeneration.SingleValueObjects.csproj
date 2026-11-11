@@ -15,15 +15,7 @@
     <EmbeddedResource Include="Snippets/*.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference
-        Include="../../src/Qowaiv.Diagnostics.Contracts/Qowaiv.Diagnostics.Contracts.csproj"
-        OutputItemType="Analyzer"
-        ReferenceOutputAssembly="false" />
-  </ItemGroup>
-
   <ItemGroup Label="Qowaiv.CodeGeneration">
-    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
     <Compile Include="../Qowaiv.CodeGeneration/Code.cs" Link="Qowaiv.CodeGeneration/Code.cs" />
     <Compile Include="../Qowaiv.CodeGeneration/Constant.cs" Link="Qowaiv.CodeGeneration/Constant.cs" />
     <Compile Include="../Qowaiv.CodeGeneration/Nill.cs" Link="Qowaiv.CodeGeneration/Nill.cs" />

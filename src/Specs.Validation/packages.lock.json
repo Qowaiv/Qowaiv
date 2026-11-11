@@ -239,7 +239,7 @@
         "dependencies": {
           "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )",
           "Qowaiv.Validation.DataAnnotations": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Fluent": "[4.2.0, )"
+          "Qowaiv.Validation.Fluent": "[11.0.0-rc.1, )"
         }
       },
       "qowaiv.validation.xml": {
@@ -252,7 +252,7 @@
         "type": "Project",
         "dependencies": {
           "AwesomeAssertions": "[9.6.0, )",
-          "Qowaiv.TestTools": "[11.0.0-rc1, )",
+          "Qowaiv.TestTools": "[11.0.0-rc.1, )",
           "TUnit.Core": "[1.81.16, )"
         }
       },
@@ -261,10 +261,10 @@
         "dependencies": {
           "MathNet.Numerics": "[5.0.0, )",
           "Qowaiv.Validation.DataAnnotations": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Fluent": "[4.2.0, )",
-          "Qowaiv.Validation.Guarding": "[2.2.0, )",
+          "Qowaiv.Validation.Fluent": "[11.0.0-rc.1, )",
+          "Qowaiv.Validation.Guarding": "[11.0.0-rc.1, )",
           "Qowaiv.Validation.Messages": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Xml": "[2.1.0, )"
+          "Qowaiv.Validation.Xml": "[11.0.0-rc.1, )"
         }
       },
       "MathNet.Numerics": {
@@ -507,7 +507,7 @@
         "dependencies": {
           "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )",
           "Qowaiv.Validation.DataAnnotations": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Fluent": "[4.2.0, )"
+          "Qowaiv.Validation.Fluent": "[11.0.0-rc.1, )"
         }
       },
       "qowaiv.validation.xml": {
@@ -520,7 +520,7 @@
         "type": "Project",
         "dependencies": {
           "AwesomeAssertions": "[9.6.0, )",
-          "Qowaiv.TestTools": "[11.0.0-rc1, )",
+          "Qowaiv.TestTools": "[11.0.0-rc.1, )",
           "TUnit.Core": "[1.81.16, )"
         }
       },
@@ -529,10 +529,10 @@
         "dependencies": {
           "MathNet.Numerics": "[5.0.0, )",
           "Qowaiv.Validation.DataAnnotations": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Fluent": "[4.2.0, )",
-          "Qowaiv.Validation.Guarding": "[2.2.0, )",
+          "Qowaiv.Validation.Fluent": "[11.0.0-rc.1, )",
+          "Qowaiv.Validation.Guarding": "[11.0.0-rc.1, )",
           "Qowaiv.Validation.Messages": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Xml": "[2.1.0, )"
+          "Qowaiv.Validation.Xml": "[11.0.0-rc.1, )"
         }
       },
       "MathNet.Numerics": {

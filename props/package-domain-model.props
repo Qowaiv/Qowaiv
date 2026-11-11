@@ -1,0 +1,14 @@
+<Project>
+
+  <Import Project="../props/package.props" />
+
+  <PropertyGroup Label="Package info">
+    <ProductName>Qowaiv Domain Model</ProductName>
+    <Description>Qowaiv implements common, universal domain objects. These types form the base of your domain model.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileFullPath)" Link="Properties/$(MSBuildThisFile)" />
+  </ItemGroup>
+
+</Project>

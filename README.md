@@ -1,4 +1,4 @@
-![Qowaiv](https://github.com/Qowaiv/Qowaiv/blob/master/design/qowaiv-logo_linkedin_100x060.jpg)
+![Qowaiv](design/qowaiv-logo_linkedin_100x060.jpg)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/Qowaiv/Qowaiv/blob/master/CODE_OF_CONDUCT.md)
@@ -6,16 +6,25 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Qowaiv_Qowaiv&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Qowaiv_Qowaiv)
 [![Coverage Status](https://coveralls.io/repos/github/Qowaiv/Qowaiv/badge.svg?branch=master)](https://coveralls.io/github/Qowaiv/Qowaiv?branch=master)
 
-| version                                                                               | downloads                                                                    | package                                                                                                            |
-|---------------------------------------------------------------------------------------|------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
-|![v](https://img.shields.io/nuget/v/Qowaiv?color=18C)                                  |![v](https://img.shields.io/nuget/dt/Qowaiv)                                  |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                                                                    |
-|![v](https://img.shields.io/nuget/v/Qowaiv.Data.SqlClient?color=18C)                   |![v](https://img.shields.io/nuget/dt/Qowaiv.Data.SqlClient)                   |[Qowaiv.Data.SqlClient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)                                      |
-|![v](https://img.shields.io/nuget/v/Qowaiv.Diagnostics.Contracts?color=118)            |![v](https://img.shields.io/nuget/dt/Qowaiv.Diagnostics.Contracts)            |[Qowaiv.Diagnostics.Contracts](https://www.nuget.org/packages/Qowaiv.Diagnostics.Contracts/)                        |
-|![v](https://img.shields.io/nuget/v/Qowaiv.TestTools?color=118)                        |![v](https://img.shields.io/nuget/dt/Qowaiv.TestTools)                        |[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)                                                |
-|![v](https://img.shields.io/nuget/v/Qowaiv.CodeGeneration.SingleValueObjects?color=118)|![v](https://img.shields.io/nuget/dt/Qowaiv.CodeGeneration.SingleValueObjects)|[Qowaiv.CodeGeneration.SingleValueObjects](https://www.nuget.org/packages/Qowaiv.CodeGeneration.SingleValueObjects/)|
-|![v](https://img.shields.io/nuget/v/Qowaiv.Json.Newtonsoft?color=18C)                  |![v](https://img.shields.io/nuget/dt/Qowaiv.Json.Newtonsoft)                  |[Qowaiv.Json.Newtonsoft](https://www.nuget.org/packages/Qowaiv.Json.Newtonsoft/)                                    |
-|![v](https://img.shields.io/nuget/v/Qowaiv.Text.Json.Serialization?color=18C)          |![v](https://img.shields.io/nuget/dt/Qowaiv.Text.Json.Serialization)          |[Qowaiv.Text.Json.Serialization](https://www.nuget.org/packages/Qowaiv.Text.Json.Serialization/)                    |
-|![v](https://img.shields.io/nuget/v/Qowaiv.Bson.MongoDB?color=18C)                     |![v](https://img.shields.io/nuget/dt/Qowaiv.Bson.MongoDB)                     |[Qowaiv.Bson.MongoDB](https://www.nuget.org/packages/Qowaiv.Bson.MongoDB/)                                          |
+| Version                                                                               | Downloads                                                                    | Catagory   | Package                                                                                                            |
+|---------------------------------------------------------------------------------------|------------------------------------------------------------------------------|----------- |--------------------------------------------------------------------------------------------------------------------|
+|![v](https://img.shields.io/nuget/v/Qowaiv?color=18C)                                  |![v](https://img.shields.io/nuget/dt/Qowaiv)                                  | Core       |[Qowaiv](https://www.nuget.org/packages/Qowaiv/)                                                                    |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Data.SqlClient?color=118)                   |![v](https://img.shields.io/nuget/dt/Qowaiv.Data.SqlClient)                   | Extended   |[Qowaiv.Data.SqlClient](https://www.nuget.org/packages/Qowaiv.Data.SqlClient/)                                      |
+|![v](https://img.shields.io/nuget/v/Qowaiv.DomainModel?color=118)                      |![v](https://img.shields.io/nuget/dt/Qowaiv.DomainModel)                      | Extended   |[Qowaiv.DomainModel](https://www.nuget.org/packages/Qowaiv.DomainModel/)                                            |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Json.Newtonsoft?color=11C)                  |![v](https://img.shields.io/nuget/dt/Qowaiv.Json.Newtonsoft)                  | JSON/BSON  |[Qowaiv.Json.Newtonsoft](https://www.nuget.org/packages/Qowaiv.Json.Newtonsoft/)                                    |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Text.Json.Serialization?color=11C)          |![v](https://img.shields.io/nuget/dt/Qowaiv.Text.Json.Serialization)          | JSON/BSON  |[Qowaiv.Text.Json.Serialization](https://www.nuget.org/packages/Qowaiv.Text.Json.Serialization/)                    |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Bson.MongoDB?color=11C)                     |![v](https://img.shields.io/nuget/dt/Qowaiv.Bson.MongoDB)                     | JSON/BSON  |[Qowaiv.Bson.MongoDB](https://www.nuget.org/packages/Qowaiv.Bson.MongoDB/)                                          |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Validation.Abstractions?color=35F)          |![v](https://img.shields.io/nuget/dt/Qowaiv.Validation.Abstractions)          | Validation |[Qowaiv.Validation.Abstractions](https://www.nuget.org/packages/Qowaiv.Validation.Abstractions/)                    |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Validation.DataAnnotations?color=35F)       |![v](https://img.shields.io/nuget/dt/Qowaiv.Validation.DataAnnotations)       | Validation |[Qowaiv.Validation.DataAnnotations](https://www.nuget.org/packages/Qowaiv.Validation.DataAnnotations/)              |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Validation.Fluent?color=35F)                |![v](https://img.shields.io/nuget/dt/Qowaiv.Validation.Fluent)                | Validation |[Qowaiv.Validation.Fluent](https://www.nuget.org/packages/Qowaiv.Validation.Fluent/)                                |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Validation.Guarding?color=35F)              |![v](https://img.shields.io/nuget/dt/Qowaiv.Validation.Guarding)              | Validation |[Qowaiv.Validation.Guarding](https://www.nuget.org/packages/Qowaiv.Validation.Guarding/)                            |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Validation.Messages?color=35F)              |![v](https://img.shields.io/nuget/dt/Qowaiv.Validation.Messages)              | Validation |[Qowaiv.Validation.Messages](https://www.nuget.org/packages/Qowaiv.Validation.Messages/)                            |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Validation.Xml?color=35F)                   |![v](https://img.shields.io/nuget/dt/Qowaiv.Validation.Xml)                   | Validation |[Qowaiv.Validation.Xml](https://www.nuget.org/packages/Qowaiv.Validation.Xml/)                                      |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Diagnostics.Contracts?color=0CF)            |![v](https://img.shields.io/nuget/dt/Qowaiv.Diagnostics.Contracts)            | Generator  |[Qowaiv.Diagnostics.Contracts](https://www.nuget.org/packages/Qowaiv.Diagnostics.Contracts/)                        |
+|![v](https://img.shields.io/nuget/v/Qowaiv.CodeGeneration.SingleValueObjects?color=0CF)|![v](https://img.shields.io/nuget/dt/Qowaiv.CodeGeneration.SingleValueObjects)| Generator  |[Qowaiv.CodeGeneration.SingleValueObjects](https://www.nuget.org/packages/Qowaiv.CodeGeneration.SingleValueObjects/)|
+|![v](https://img.shields.io/nuget/v/Qowaiv.TestTools?color=118)                        |![v](https://img.shields.io/nuget/dt/Qowaiv.TestTools)                        | Test Tools |[Qowaiv.TestTools](https://www.nuget.org/packages/Qowaiv.TestTools/)                                                |
+|![v](https://img.shields.io/nuget/v/Qowaiv.DomainModel.TestTools?color=118)            |![v](https://img.shields.io/nuget/dt/Qowaiv.DomainModel.TestTools)            | Test Tools |[Qowaiv.DomainModel.TestTools](https://www.nuget.org/packages/Qowaiv.DomainModel.TestTools/)                        |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Validation.TestTools?color=118)             |![v](https://img.shields.io/nuget/dt/Qowaiv.Validation.TestTools)             | Test Tools |[Qowaiv.Validation.TestTools](https://www.nuget.org/packages/Qowaiv.Validation.TestTools/)                          |
 
 # Qowaiv
 
@@ -81,414 +90,39 @@ If you need a Single Value Object that is not provided by Qowaiv you can build
 your own. How to do that can be read [here](README.Custom.SVO.md).
 
 ## Qowaiv types
-
-### Date
-Represents a date, so without hours (minutes, seconds, milliseconds), opposed to `DateTime`.
-
-``` C#
-var date = new Date(2017, 06, 11);
-var next = date++; // 2017-06-12
-var casted = (Date)new DateTime(2017, 06, 11, 06, 15);
-var (year, month, day) = date; // deconstructs.
-```
-
-As, since .NET 6.0, `System.DateOnly` is available, `Qowaiv.Date` can be cast to (and from)
-this type, if (and only if), the .NET 8.0 version or higher of the package is used.
-
-### Date span
-Represents a date span. As opposed to a `TimeSpan`, its duration is (a bit) resilient;
-Adding one month to a date in January results in adding a different number of days, 
-than adding one month to a date in March.
-
-Date spans are particularly useful in scenarios for defining (and doing calculations on)
-month-based periods, and ages (mostly in years and days).
-
-``` C#
-var span = new DateSpan(years: 3, months: 2, days: -4);
-var age = DateSpan.Age(new Date(2017, 06, 11)); // 2Y+0M+121D on 2019-10-10
-var duration = DateSpan.Subtract(new Date(2019, 06, 10), new Date(2017, 06, 11)); // 1Y+11M+30D
-var date = new Date(2016, 06, 03).Add(age); // 2018-10-02
-var humanizer = 10.Years() + 3.Months() - 5.Days();
-var (years, months, days) = span; // deconstructs.
-```
-
-### Email address
-Represents a (single) email address. Supports:
-* Display names (are stripped)
-* Comments (are removed)
-* IP-based domains (normalized and surrounded by brackets)
-
-Furthermore, the email address is normalized as a lowercase string, making it
-case-insensitive.
-
-``` C#
-var email = EmailAddress.Parse("Test Account <mailto:TEST@qowaiv.org>");
-var quoted = EmailAddress.Parse("\"Joe Smith\" email@qowaiv.org");
-var sld = EmailAddress.Parse("admin@localhost");
-var ip_based = EmailAddress.Parse("test@[172.16.254.1]");
-
-email.ToString(); // test@qowaiv.org
-quoted.ToString(); // email@qowaiv.org
-sld.HasSingleDomainLabel; // true
-ip_based.IsIPBased; // true
-ip_based.WithDisplayName("Jimi Hendrix"); // Jimi Hendrix <test@[172.16.254.1]>
-```
-
-### Stream size
-Represents the size of a file or stream.
-
-``` C#
-StreamSize fromMb = StreamSize.FromMegabytes(14.2);
-StreamSize parsed = StreamSize.Parse("117.2Kb");
-StreamSize humanizer = 142.23.KB(); // Bytes(), KiB(), MB(), MiB(), GB(), GiB()
-
-// Short notation
-new StreamSize(8900).ToString("s") => 8900b
-new StreamSize(238900).ToString("s") => 238.9kb
-new StreamSize(238900).ToString(" S") => 238.9 kB
-new StreamSize(238900).ToString("0000.00 S") => 0238.90 kB
-
-// Full notation
-new StreamSize(8900).ToString("0.0 f") => 8900.0 byte
-new StreamSize(238900).ToString("0 f") => 239 kilobyte
-new StreamSize(1238900).ToString("0.00 F") => 1.24 Megabyte
-
-// Custom
-new StreamSize(8900).ToString("0.0 kb") => 8.9 kb
-new StreamSize(238900).ToString("0.0 MB") => 0.2 MB
-new StreamSize(1238900).ToString("#,##0.00 Kilobyte") => 1,239.00 Kilobyte
-new StreamSize(1238900).ToString("#,##0") => 1,238,900
-```
-
-### House number
-Represents a house number in the range [1-999999999].
-
-### Local Date Time
-Explicitly marked local date time. It allows a clear distinction between local 
-and UTC-based date times.
-
-### Month
-Represents a month in the range [1-12].
-
-``` C#
-Month feb = Month.Parse("February");
-Month may = Month.May;
-Month dec = (Month)12;
-
-feb.ToString("f", new CultureInfo("nl-NL")); // februari
-feb.ToString("s"); // Feb
-feb.ToString("M"); // 02
-feb.ToString("m"); // 2
-
-// Querying on date (time) models.
-new DateTime(2014, 02, 14).IsIn(feb); // true
-```
-
-### Month span
-Is a subset of the date span, so without the days precision.
-
-``` C#
-// Creation
-var ctor = new MonthSpan(years: 5, months: 6); // 69 months.
-var months = MonthSpan.FromMonths(13);
-var years = MonthSpan.FromYears(3); // 36 months.
-var (years, months) = ctor; // deconstructs.
-var humanizer = 5.Years() + 6.Months();
-
-// operations
-var delta = MonthSpan.Subtract(new Date(2020, 04, 01), new Date(2020, 02, 28)); // 1 month.
-var prev = new Date(2017, 06, 11) - MonthSpan.FromMonths(9); // 2016-09-11
-var next = new DateTime(2010, 05, 02).Add(MonthSpan.FromMonths(2)); // 2010-07-02
-```
-
-### Percentage
-Represents a percentage. It supports parsing from per mile and per ten thousand
-too. The basic thought is that `Percentage.Parse("14%")` has the same result
-as `double.Parse("14%")`, which is `0.14`.
-
-``` C#
-// Creation
-var p = Percentage.Parse("3.14");  // Parse: 3.14%;
-var p = Percentage.Parse("3.14%"); // Parse: 3.14%;
-var p = Percentage.Parse("31.4‰"); // Parse: 3.14%;
-var p = 3.14.Percent(); // Extension on double: 3.14%;
-Percentage p = 0.0314m; // Implicit casting from decimal: 3.14%.
-
-// Explicit casting
-var p = (Percentage)0.500; // 50%
-
-// Manipulation
-var p = 13.2.Percent();
-p++; // 14.2%;
-var total = 400;
-total *= 50.Percent(); // Total = 200;
-var value = 50.0;
-value += 10.Percent(); // value 55;
-
-var rounded = 17.56.Percent().Round(1); // 17.6%;
-
-var complement = 25.Percent().Complement(); // 75%
-
-var max = Percentage.Max(1.4.Percent(), 1.8.Percent()); // 1.8%;
-var min = Percentage.Min(1.7.Percent(), 1.9.Percent()); // 1.7%;
-
-var perMille = 15.5.Percent().ToString("PM"); // 155‰
-var perTenThousand = 0.34.Percent().ToString("PT"); // 34‱
-```
-
-### Postal code
-Represents a postal code. It supports validation for all countries.
-
-``` C#
-var dutch = PostalCode.Parse("2624DP");
-dutch.IsValid(Country.NL); // true
-dutch.IsValid(Country.BE); // false
-
-var argentina = PostalCode.Parse("Z1230ABC");
-argentina.ToString("AR"); // Z 1230 ABC
-```
-
-### Sex
-Represents a sex based on an ISO 5218 code.
-
-``` C#
-var sex = Sex.Female;
-var parsed = Sex.Parse("Male");
-
-sex.ToString("s"); // ♀
-sex.ToString("c"); // f
-sex.ToString(string.Empty, new CultureInfo("pt")); // Feminino
-sex.ToString("h", new CultureInfo("en-GB")); // Mrs.
-```
-
-### Week date
-Represents a week based date.
-
-``` C#
-var date = new WeekDate(2017, 23, 7);
-var next = date++; // 2017-W24-1
-var (year, week, day) = date; // deconstructs.
-```
-
-### Year
-Represents a year in the range [1-9999].
-
-``` C#
-Year year = 2017.CE(); // Extension, Common Era
-bool isLeap = year.IsLeapYear;
-
-// behavior similar to double.NaN
-(Year.Empty < 2000.CE()).Should().BeFalse();
-(Year.Empty > 2000.CE()).Should().BeFalse();
-(Year.Unknown < 2000.CE()).Should().BeFalse();
-(Year.Unknown > 2000.CE()).Should().BeFalse();
-
-// Querying on date (time) models.
-new DateTime(2017, 02, 14).IsIn(year); // true
-```
-
-### Year-month
-Represent a date with year and month precision.
-
-``` C#
-var date = new YearMonth(2017, 06);
-var (year, month) = date; // deconstructs.
-
-// Querying
-date.IsIn(2017.CE()); // true
-var addition = date.AddMonths(23); // new YearMonth(2019, 05)
-var next = date++; // new YearMonth(2017, 07)
-MonthSpan age = new YearMonth(2024, 08) - date; // 7 years and 2 months.
-```
-
-### Year span
-Represents a year span.
-
-``` C#
-// Creation
-var span = 17.Years(); // 17 years.
-```
-
-### Yes-no
-A Yes-no is a (bi-)polar that obviously has the values "yes" and "no". It also
-has an "empty"(unset) and "unknown" value. It maps easily with a `boolean`, but
-supports all kinds of formatting (and both empty and unknown) that can not be
-achieved when modeling a property as `bool` instead of a `YesNo`.
-
-``` C#
-// Creation
-var yn = YesNo.Parse("ja", new CultureInfo("nl-NL"));
-var answer = YesNo.Yes;
-
-if (!answer.Known)
-{
-   // Do logic.
-}
-
-if (answer) // Equal to answer.IsYes()
-{
-    // Do logic.
-}
-```
+* [Date](docs/svo/Date.md)
+* [Date span](docs/svo/DateSpan.md)
+* [Email address](docs/svo/EmailAddress.md)
+* [Stream size](docs/svo/StreamSize.md)
+* [House number](docs/svo/HouseNumber.md)
+* [Local Date Time](docs/svo/LocalDateTime.md)
+* [Month](docs/svo/Month.md)
+* [Month span](docs/svo/MonthSpan.md)
+* [Percentage](docs/svo/Percentage.md)
+* [Postal code](docs/svo/PostalCode.md)
+* [Sex](docs/svo/Sex.md)
+* [Week date](docs/svo/WeekDate.md)
+* [Year](docs/svo/Year.md)
+* [Year-month](docs/svo/YearMonth.md)
+* [Year span](docs/svo/YearSpan.md)
+* [Yes-no](docs/svo/YesNo.md)
 
 ## Qowaiv chemistry types
-
-### CAS Registry Number
-A CAS Registry Number, is a unique numerical identifier assigned by the
-Chemical Abstracts Service (CAS), US to every chemical substance described
-in the open scientific literature. It includes all substances described
-from 1957 through the present, plus some substances from as far back as the
-early 1800's.
-
-``` C#
-// Creation
-var fromString = CasRegistryNumber.Parse("7732-18-5");
-var fromInt32 = 7732_18_5.CasNr();
-var fromInt64 = 7732_18_5L.CasNr();
-```
+* [CAS Registry Number](docs/svo/CasRegistryNumber.md)
 
 ## Qowaiv financial types
-
-### Amount
-Represents money without the notion of the actual currency.
-
-### Business Identifier Code (BIC)
-Represents a BIC as specified in ISO 9362.
-
-``` C#
-var bic = BusinessIdentifierCode.Parse("AEGONL2UXXX");
-
-var business = bic.Business; // "AEGO"
-var country = bic.Country;   // Country.NL
-var location = bic.Location; // "2U"
-var branch = bic.Branch;     // "XXX"
-var length = bic.Length;     // 11
-```
-
-### Currency
-Represents a currency based on an ISO 4217 code.
-
-### International Bank Account Number (IBAN)
-Represents an IBAN as specified in ISO 13616.
-
-``` C#
-var iban = InternationalBankAccountNumber.Parse("nl20ingb0001234567");
-
-iban.Country; // Country.NL
-iban.Length; // 18
-iban.ToString("F"); // NL20 INGB 0001 2345 67
-iban.ToString("H"); // NL20 INGB 0001 2345 67 (with non-breaking spaces).
-iban.ToString("O"); // NL20XXXXXXXXXXX567 (obfuscated).
-```
-
-An overview with all supported countries and patterns can be found [here](IBAN.md).
-
-### Money
-Represents the amount and the currency. Technically this is not SVO. However it
-acts identically as a SVO.
-
-``` C#
-Money money = 125.34 + Currency.EUR;
-var sum = (12 + Currency.EUR) + (15 + Currency.USD); // Throws CurrencyMismatchException()
-var rounded = money.Round(0); // EUR 125.00
-var (amount, currency) = money; // deconstructs.
-```
+* [Amount](docs/svo/Amount.md)
+* [Business Identifier Code (BIC)](docs/svo/BusinessIdentifierCode.md)
+* [Currency](docs/svo/Currency.md)
+* [International Bank Account Number (IBAN)](docs/svo/InternationalBankAccountNumber.md)
+* [Money](docs/svo/Money.md)
 
 ## Qowaiv globalization types
-
-### Country
-Represents a country based on an ISO 3166-1 code (or 3166-3 if the country no longer exists).
-
-### CultureInfoScope
-A CultureInfoScope is a class that allows specifying the current (UI) culture for the
-duration/lifetime of the specified scope.
-
-``` C#
-using(new CultureInfoScope("es-ES"))
-{
-    Console.WriteLine(234.12.ToString()); // 234,12
-}
-// or with an extension
-using(new CultureInfo("es-ES").Scoped())
-{
-    // ...
-}
-```
+* [Country](docs/svo/Country.md)
+* [CultureInfoScope](docs/svo/CultureInfoScope.md)
 
 ## Qowaiv mathematical types
-
-### Fraction
-A fraction (from Latin _fractus_, "broken") represents a part of a whole or, more
-generally, any number of equal parts. It can be written as a/b (a divided by b).
-
-It is worth noting that the `default` value of a `Fraction` is `Fraction.Zero`
-and that `NaN` and `Infinity` are not supported.
-
-#### Creation
-Fractions can be created in multiple ways:
-``` C#
-Fraction fluent = 4.DividedBy(13); // Preferred way
-
-Fraction ctor = new(4, 13);
-
-Fraction parsed = Fraction.Parse("4/13");
-Fraction parsed = Fraction.Parse("4½"); // single fraction character
-Fraction parsed = Fraction.Parse("4²³⁄₄₇"); // Unicode super- and subscript
-
-Fraction fromFloating = Fraction.Create(0.3456786754m);
-
-Fraction cast = (Fraction)34;
-Fraction cast = (Fraction)0.3333;
-var (numerator, denominator) = fluent; // deconstructs.
-```
-
-#### Operations
-``` C#
-var add      = 4.DividedBy(3) + 7.DividedBy(4); // 3 1/12
-var subtract = 4.DividedBy(3) - 2.DividedBy(3); // 2/3
-var multiply = 3.DividedBy(5) * 2.DividedBy(3); // 6/15
-var divide   = 3.DividedBy(5) / 2.DividedBy(3); // 9/10
-```
-
-#### Formatting
-There are multiple types of formatting supported. Without
-a fraction bar, the fraction is formatted as a decimal.
-``` C#
-var dec = 17.DividedBy(5).ToString("0.##"); // 3,40
-```
-
-If the whole part should be formatted as such, by adding the preferred formatting
-between brackets.
-``` C#
-var withWhole = 17.DividedBy(5).ToString("[0]0/0"); // 3 2/5
-``` 
-
-To specify fraction bar of choice, just define that one in the format:
-##### Fraction bars
-name           |   c    | code 
----------------|:------:|------
-slash          |   /    | 002F
-colon          |   :    | 003A
-division sign  |   ÷    | 00F7
-fraction slash |   ⁄    | 2044
-division slash |   ∕    | 2215
-short slash    | &0337; | 0337
-long slash     | &0338; | 0338
-
-``` C#
-var customBar = 3.DividedBy(4).ToString("0/÷0"); // 3÷4
-```
-
-Unicode supports super- and subscript, and so does `Fraction`:
-```C#
-var super = -17.DividedBy(5).ToString("[0]super/sub"); // -3²⁄₅
-var super = 5.DividedBy(3).ToString("super/sub"); // ⁵⁄₃
-```
-
-The default format (so if you do not specify anything) is:
-```C#
-var basic = 3.DividedBy(4).ToString("0/0"); // 3/4
-```
+* [Fraction](docs/svo/Fraction.md)
 
 ## Qowaiv identifiers
 
@@ -499,204 +133,35 @@ method, which can lead to nasty bugs.
 
 More info about those generated strongly-typed IDs can be found [here](src/Qowaiv.CodeGeneration.SingleValueObjects/README.md).
 
-### UUID aka GUID
-The UUID (Universally unique identifier), also known as GUID (Globally unique identifier), is an
-extension of System.Guid. It is by default represented by a 22-character string, 
-instead of a 32-character string.
-
-``` C#
-var rnd = Uuid.NewUuid();
-UuidVersion version = rnd.Version; // UuidVersion.Random = 4
-
-var bytes = Encoding.ASCII.GetBytes("Qowaiv");
-var md5 = Uuid.GenerateWithMD5(bytes); //   lmZO_haEOTCwGsCcbIZFFg, UUID Version: 3
-var sha1 = Uuid.GenerateWithSHA1(bytes); // 39h-Y1rR51ym_t78x9h0bA, UUID Version: 5
-```
-
-#### Comparer
-The UUID Comparer can sort both UUIDs and GUIDs. Furthermore, it supports both
-.NET's default way of sorting as well as the sorting of SQL Server or MongoDB.
-
-``` C#
-var uuids = new List<Uuid>();
-uuids.Sort(UuidComparer.SqlServer);
-
-var uuids = new List<Uuid>();
-uuids.Sort(UuidComparer.MongoDb);
-
-var guids = new List<Guid>();
-guids.Sort(UuidComparer.Default);
-```
-
-#### Sequential
-UUIDs are commonly used as the clustered key of a database table. For
-massive databases with many inserts (which normally go hand in hand), this can
-be a performance issue, as by default, generated UUIDs are not sequential, leading to
-a lot of random inserts in the clustered index.
-
-By using a sequential UUID, this problem can be minimized. Obviously, if you can
-fully rely on the sequential UUID generation by your database of choice, you
-should consider that, but in most cases you want to generate the ID upfront.
-In that case, `Uuid.NewSequential()` comes in handy:
-
-``` C#
-var uuid = Uuid.NewSequential(UuidComparer.SqlServer);
-```
-
-As databases might (like SQL Server does) order your UUID/GUIDs differently
-than .NET does, this generator does that too. Also keep in mind that this generated ID
-is not perfectly sequential; first of all because it has a 0.32-nanosecond
-overlap, but more seriously, because some time may elapse between generation and
-storage in the database. Furthermore, these generated UUIDs are not sequential
-once mixed with sequentially generated UUIDs by your database.
+* [UUID aka GUID](docs/svo/Uuid.md)
 
 ## Qowaiv security types
-
-### Secret
-Represents a (text based) secret. It tries to avoid exposing potentially
-sensitive strings to log files or (external) devices. It does not defend
-against sources that have (direct) access to the system memory. Consider
-if this is secure enough for the problem at hand, before using this type.
-
-A secret can be created by parsing, deserializing JSON, or using its type
-converter to convert from string. Serializing to JSON, or converting it
-to another type are not supported, and `ToString()` returns `*****`. The
-only way to access its value is by calling the `Value()` method.
-
-``` C#
-var secret = Secret.Parse("Ken sent me!");
-var encrypted = secret.ComputeHash(sha512);
-```
-
-## Cryptographic Seed
-Represents a byte array based cryptographic seed. It tries to avoid exposing
-potentially sensitive data to log files or (external) devices. It does not
-defend against sources that have (direct) access to the system memory. Consider
-if this is secure enough for the problem at hand, before using this type.
-
-A cryptographic seed can be created by parsing, deserializing JSON, or using
-its type converter to convert from string. Serializing to JSON, or converting
-it to another type are not supported, and `ToString()` returns `*****`. The
-only way to access its value is by calling the `Value()` or `ToByteArray()` method.
-
-``` C#
-var seed = CryptographicSeed.Parse("S2VuIHNlbnQgbWUhIQ=="); // Base64 string
-var seed = sha512.ComputeCryptographicSeed(new byte[]{ 0xD4, 0x1D, 0x8C, 0xD9 });
-```
+* [Secret](docs/svo/Secret.md)
+* [Cryptographic Seed](docs/svo/CryptographicSeed.md)
 
 ## Qowaiv statistical types
-
-### Elo
-Represents an Elo (rating), a method for calculating the relative skill levels of
-players in competitor-versus-competitor games.
-
-``` C#
-var p0 = 1600.Elo();
-var p1 = 1500.Elo();
-var z = Elo.GetZScore(p0, p1); // 0.64 
-```
+* [Elo](docs/svo/Elo.md)
 
 ## Qowaiv sustainability types
-
-### (EU) Energy label
-The energy efficiency of the appliance is rated in terms of a set of energy
-efficiency classes from A++++ to G on the label, A being the most energy
-efficient, G the least efficient.
-
-``` C#
-var a_plusplus = EnergyLabel.A(2);
-var b = EnergyLabel.B;
-var parsed = EnergyLabel.Parse("A++")
-```
+* [(EU) Energy label](docs/svo/EnergyLabel.md)
 
 ## Qowaiv web types
-
-### Internet media type
-Represents an Internet media type (also known as MIME-type and content type).
+* [Internet media type](docs/svo/InternetMediaType.md)
 
 ## Qowaiv complex types
-
-### Wildcard pattern
-Represents a pattern to match strings, using wildcard characters ? and *. It 
-also supports the use of SQL wildcard characters _ and %.
+* [Wildcard pattern](docs/svo/WildcardPattern.md)
 
 ## Extensions on .NET built-in types
 For types that are shipped with the .NET standard library that meet (most) SVO
 criteria, Qowaiv can offer some extensions to improve usage.
 
-### System.DateOnly
-The [`DateOnly`](https://learn.microsoft.com/dotnet/api/system.dateonly) type
-was introduced with .NET 6.0. For previous versions we still
-recommend [`Qowaiv.Date`](#Date). Interaction with Qowaiv SVO's is provided:
-
-``` C#
-var more = new DateOnly(2017, 06, 11) + 3.Months();
-var less = new DateOnly(2017, 06, 11) - 3.Months();
-
-var more = new DateOnly(2017, 06, 11) + DateSpan.FromDays(3);
-var less = new DateOnly(2017, 06, 11) - DateSpan.FromDays(3);
-```
-
-### System.DateTime
-The [`DateTime`](https://learn.microsoft.com/dotnet/api/system.datetime) is the
-type to use when representing date and time. Interaction with Qowaiv SVO's
-is provided:
-
-``` C#
-var more = new DateTime(2017, 06, 11) + 3.Months();
-var less = new DateTime(2017, 06, 11) - 3.Months();
-
-var more = new DateTime(2017, 06, 11) + DateSpan.FromDays(3);
-var less = new DateTime(2017, 06, 11) - DateSpan.FromDays(3);
-```
-
-### System.Globalization.CultureInfo
-The [`CultureInfo`](https://learn.microsoft.com/dotnet/api/system.globalization.cultureinfo)
-lacks a `JsonConverter`:
-* `Qowaiv.Json.Globalization.CultureInfoJsonConverter`
-
-The current culture can be set for a (`IDisposable`) scope using the [`.Scope()`](#CultureInfoScope)
-extension method.
-
-### System.Net.Http.HttpMethod
-The [`HttpMethod`](https://learn.microsoft.com/dotnet/api/system.net.http.httpmethod)
-lacks a `TypeConverter` and a `JsonConverter`:
-* `Qowaiv.Conversion.Web.HttpMethodTypeConverter`
-* `Qowaiv.Json.Web.HttpMethodJsonConverter`
+* [System.DateOnly](docs/svo/system/DateOnly.md)
+* [System.DateTime](docs/svo/system/DateTime.md)
+* [System.Globalization.CultureInfo](docs/svo/system/CultureInfo.md)
+* [System.Net.Http.HttpMethod](docs/svo/system/HttpMethod.md)
 
 ## Qowaiv helpers
-
-### Decimal round
-By default, .NET supports rounding of floating-point numbers (including `decimal`s).
-However, for some domains this support is too limited. To overcome this, Qowaiv
-has the static `DecimalRound` helper class, containing extension methods for rounding.
-
-#### ‘Negative’ decimals
-To round tenfold, hundredfold, etc. precision, a negative amount of decimals
-can be specified:
-``` C#
-var tenfold = 1245.346m.Round(-1); // 1250m
-var hundredfold = 1209m.Round(-2); // 1200m
-```
-
-#### Multiple of
-Rounding to a multiple of is supported:
-``` C#
-var multipleOf = 123.5m.RoundToMultiple(5m); //   125.0m
-var multiple25 = 123.5m.RoundToMultiple(2.5m); // 122.5m
-```
-
-#### Extra rounding methods
-.NET supports rounding to even (Bankers rounding) and away from zero out-of-the-box.
-Rounding methods like ceiling, floor, and truncate have limited support (0 decimals only),
-and many others (to odd, half-way up, half-way down, e.o.) are missing.
-By specifying the `DecimalRounding` 13 ways are supported.
-
-``` c#
-var toOdd = 23.0455m.Round(3, DecimalRounding.ToOdd); // 23.045m
-var towardsZero = 23.5m.Round(DecimalRounding.TowardsZero); // 23m
-var randomTie = 23.5m.Round(DecimalRounding.RandomTieBreaking); // 50% 23, 50% 24
-```
+* [DecimalMath](docs/DecimalMath.md)
 
 ## Serialization
 ### JSON
@@ -839,47 +304,7 @@ a creator function that can be registered. If not specified otherwise the curren
 country will be created (if possible) based on the current culture.
 
 ## Qowaiv clock
-The `Clock` class is an outsider within the Qowaiv library. It is a solution 
-for a problem that is not related to Domain-Driven Design, but to the fact that
-the behavior of `System.DateTime.UtcNow` (and its equivalents) cannot be controlled.
-This can be problematic for writing proper tests that rely on its behavior.
-
-The default way to tackle this problem is by providing a lightweight service 
-like this one:
-``` CSharp
-public interface IClock
-{
-    DateTime UtcNow();
-}
-
-public class Clock : IClock
-{
-    public DateTime UtcNow() => DateTime.UtcNow;
-}
-```
-
-However, providing an IClock all the time when there is time related logic is
-not that elegant at all. The Qowaiv `Clock` helps to overcome this. In code
-you just call `Clock.UtcNow()` or one of its derived methods. In a test you
-change the behaviour, in most cases just for the scope of your current 
-(execution) context:
-
-``` CSharp
-[Test]
-public void TestSomething()
-{
-    using (Clock.SetTimeForCurrentContext(() => new DateTime(2017, 06, 11))
-    {
-        // test code.
-    }
-}
-```
-
-### TimeProvider
-Since .NET 8.0, Microsoft provides a `TimeProvider`. To benefit from both the
-`Qowaiv.Clock` mechanism and this time provider, `Clock.TimeProvider`—a
-singleton which provides access to `Clock.UtcNow()` and `Clock.TimeZone`—has been
-added.
+* [Clock](docs/Clock.md)
 
 # Qowaiv Diagnostics Contracts
 This package contains attributes to define (expected) behavior on code

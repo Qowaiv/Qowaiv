@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net11.0</TargetFramework>
+    <IncludeDiagnostics>false</IncludeDiagnostics>
+    <IncludeGuard>false</IncludeGuard>
+    <IncludeLock>false</IncludeLock>
     <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
   </PropertyGroup>
   

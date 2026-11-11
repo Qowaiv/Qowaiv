@@ -10,10 +10,6 @@
     <TargetFrameworks>net11.0</TargetFrameworks>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="../../shared/Guard.cs" Link="Guard.cs" />
-  </ItemGroup>
-
   <ItemGroup Label="Snippets">
     <Compile Remove="Snippets/*.cs" />
     <EmbeddedResource Include="Snippets/*.cs" />

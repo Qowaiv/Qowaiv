@@ -1,5 +1,4 @@
 using Qowaiv.DomainModel;
-using TUnit.Core.Executors;
 
 namespace Event_buffer_specs;
 
@@ -23,7 +22,7 @@ public class Creation
         var buffer = EventBuffer.FromStorage(Guid.NewGuid(), stored, (@event) => @event);
 
         buffer.Should().HaveCount(3)
-            .And.Subject.As<EventBuffer<Guid>>().CommittedVersion.Should().Be(3);
+            .And.CommittedVersion.Should().Be(3);
     }
 
     [Test]
@@ -33,7 +32,7 @@ public class Creation
         var buffer = EventBuffer.FromStorage(Guid.NewGuid(), initialVersion: 6, stored, (@event) => @event);
 
         buffer.Should().HaveCount(3)
-         .And.Subject.As<EventBuffer<Guid>>().CommittedVersion.Should().Be(9);
+         .And.CommittedVersion.Should().Be(9);
     }
 }
 
@@ -92,7 +91,7 @@ public class Default
 {
     [Test]
     public void can_be_queried()
-        => default(EventBuffer<int>).Should().BeEquivalentTo(Array.Empty<object>());
+        => default(EventBuffer<int>).Should().HaveCount(0);
 
     [Test]
     public void Committed_can_be_queried()
@@ -104,7 +103,7 @@ public class Default
 
     [Test]
     public void can_be_extended()
-        => default(EventBuffer<int>).Add(1).Should().BeEquivalentTo([1]);
+        => default(EventBuffer<int>).Add(1).As<ICollection<object>>().Should().BeEquivalentTo([1]);
 }
 
 public class HasUncommitted

@@ -30,8 +30,8 @@
     <PackageVersion Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
     <PackageVersion Include="System.Security.Cryptography.Pkcs" Version="11.0.0" />
     <PackageVersion Include="System.Text.Json" Version="11.0.0" />
-    <PackageVersion Include="TUnit" Version="1.81.16" />
-    <PackageVersion Include="TUnit.Core" Version="1.81.16" />
+    <PackageVersion Include="TUnit" Version="1.83.0" />
+    <PackageVersion Include="TUnit.Core" Version="1.83.0" />
   </ItemGroup>
   <ItemGroup>
     <GlobalPackageReference Include="AsyncFixer" Version="2.1.0" />

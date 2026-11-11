@@ -2,7 +2,7 @@ using Qowaiv.DomainModel;
 
 namespace Pre_processing_events_specs;
 
-internal class Pre_processing_events_specs
+public class Pre_processing_events_specs
 {
     private static readonly Guid TestId = Guid.Parse("4E54C133-E978-4B98-AFD8-3546044BA380");
     
@@ -13,7 +13,7 @@ internal class Pre_processing_events_specs
         var result = aggregate.Add1().Act(a => a.Add2());
 
         result.Should().BeValid().WithoutMessages()
-            .And.Value.Buffer.Should().BeEquivalentTo(new object[]
+            .And.Value.Buffer.As<ICollection<object>>().Should().BeEquivalentTo(new object[]
             {
                 new Event1(TestId),
                 new Event2(TestId),

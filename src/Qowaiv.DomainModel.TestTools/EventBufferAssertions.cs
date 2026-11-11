@@ -1,7 +1,3 @@
-using AwesomeAssertions;
-using AwesomeAssertions.Collections;
-using AwesomeAssertions.Execution;
-using Qowaiv.DomainModel.TestTools.Diagnostics.Contracts;
 using System.Text;
 
 namespace Qowaiv.DomainModel.TestTools;
@@ -13,14 +9,28 @@ namespace Qowaiv.DomainModel.TestTools;
 [Inheritable]
 [CLSCompliant(false)]
 public class EventBufferAssertions<TId>(EventBuffer<TId> subject)
-    : GenericCollectionAssertions<EventBuffer<TId>, object, EventBufferAssertions<TId>>(subject, AssertionChain.GetOrCreate())
 {
+    /// <summary>The subject under test.</summary>
+    public EventBuffer<TId> Subject { get; } = subject;
+
+    /// <summary>Verifies that the <see cref="Aggregate{TAggregate}"/> has the expected total of events.</summary>
+    /// <param name="count">
+    /// The expected number of messages.
+    /// </param>
+    [Assertion]
+    [DebuggerStepThrough]
+    public EventBufferAssertions<TId> HaveCount(int count)
+        => Subject.Count == count
+        ? this
+        : throw new AssertionFailed($"Expected {count} events, but got {Subject.Count}.");
+
     /// <summary>Verifies that the <see cref="Aggregate{TAggregate}"/> has the expected uncommitted events.</summary>
     /// <param name="uncommitted">
     /// The expected uncommitted event messages.
     /// </param>
     [Assertion]
-    public AndConstraint<EventBufferAssertions<TId>> HaveUncommittedEvents(params object[] uncommitted)
+    [DebuggerStepThrough]
+    public EventBufferAssertions<TId> HaveUncommittedEvents(params object[] uncommitted)
     {
         Guard.HasAny(uncommitted);
 
@@ -45,9 +55,19 @@ public class EventBufferAssertions<TId>(EventBuffer<TId> subject)
 
         return failure
             ? throw new AssertionFailed(sb.Insert(0, "The uncommitted events where different than expected." + Environment.NewLine).ToString())
-            : new(this);
+            : this;
     }
 
-    /// <inheritdoc />
-    protected override string Identifier => "event-buffer";
+    /// <summary>Expose the subject, so that the chain of assertions can be continued.</summary>
+    public AndConstraint And => new() { Subject = Subject };
+
+    /// <summary>Constraint builder.</summary>
+    public sealed class AndConstraint
+    {
+        /// <summary>Expose the subject, so that the chain of assertions can be continued.</summary>
+        public required EventBuffer<TId> Subject { get; init; }
+
+        /// <see cref="EventBuffer{TId}.CommittedVersion" />
+        public long CommittedVersion => Subject.CommittedVersion;
+    }
 }

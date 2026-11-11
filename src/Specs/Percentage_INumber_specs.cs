@@ -1,6 +1,5 @@
 #if NET10_0_OR_GREATER
 
-using Qowaiv.Humanizer;
 using Qowaiv.TestTools.Numerics;
 
 namespace Percentage_specs;
@@ -33,7 +32,7 @@ public class Percentage_as_INumber
     [CombinedDataSources]
     public void Is_canonical_equal_to_decimal([Random(Min, Max, Count)] double d)
     {
-        var n = (decimal)d;
+        var n = d.ToDecimal();
         Number.IsCanonical((Percentage)n).Should().Be(Number.IsCanonical(n));
     }
 
@@ -119,7 +118,7 @@ public class Percentage_as_INumber
     [CombinedDataSources]
     public void is_negative_equal_to_decimal([Random(Min, Max, Count)] double d)
     {
-        var n = (decimal)d;
+        var n = d.ToDecimal();
         Number.IsNegative((Percentage)n).Should().Be(Number.IsNegative(n));
     }
 
@@ -137,7 +136,7 @@ public class Percentage_as_INumber
     [CombinedDataSources]
     public void is_zero_is_false_for_all_but_zero([Random(Min, Max, Count)] double d)
     {
-        var n = (decimal)d;
+        var n = d.ToDecimal();
         Number.IsZero((Percentage)n).Should().BeFalse();
     }
 
@@ -145,7 +144,7 @@ public class Percentage_as_INumber
     [CombinedDataSources]
     public void is_positive_equal_to_decimal([Random(Min, Max, Count)] double d)
     {
-        var n = (decimal)d;
+        var n = d.ToDecimal();
         Number.IsPositive((Percentage)n).Should().Be(Number.IsPositive(n));
     }
 
@@ -162,7 +161,7 @@ public class Percentage_as_INumber
     [CombinedDataSources]
     public void Is_normal_when_not_zero([Random(Min, Max, Count)] double d)
     {
-        var n = (decimal)d;
+        var n = d.ToDecimal();
         Number.IsNormal((Percentage)n).Should().BeTrue();
     }
 
@@ -170,8 +169,8 @@ public class Percentage_as_INumber
     [CombinedDataSources]
     public void max_maginiute_equal_to_decimal([Random(Min, Max, 3)] double x, [Random(Min, Max, 3)] double y)
     {
-        var x_ = (decimal)x;
-        var y_ = (decimal)y;
+        var x_ = x.ToDecimal();
+        var y_ = y.ToDecimal();
 
         Number.MaxMagnitude((Percentage)x_, (Percentage)y_).Should().Be((Percentage)Number.MaxMagnitude(x_, y_));
         Number.MaxMagnitudeNumber((Percentage)x_, (Percentage)y_).Should().Be((Percentage)Number.MaxMagnitudeNumber(x_, y_));
@@ -181,8 +180,8 @@ public class Percentage_as_INumber
     [CombinedDataSources]
     public void min_maginiute_equal_to_decimal([Random(Min, Max, 3)] double x, [Random(Min, Max, 3)] double y)
     {
-        var x_ = (decimal)x;
-        var y_ = (decimal)y;
+        var x_ = x.ToDecimal();
+        var y_ = y.ToDecimal();
 
         Number.MinMagnitude((Percentage)x_, (Percentage)y_).Should().Be((Percentage)Number.MinMagnitude(x_, y_));
         Number.MinMagnitudeNumber((Percentage)x_, (Percentage)y_).Should().Be((Percentage)Number.MinMagnitudeNumber(x_, y_));

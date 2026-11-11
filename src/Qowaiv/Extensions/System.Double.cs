@@ -13,6 +13,7 @@ public static class QowaivDouble
         /// <summary>Casts to a <see cref="decimal" /> keeping all floating point info.</summary>
         [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#pragma warning disable QW0032 // Round converted double values [Justifcation = solves this issue]
         public decimal ToDecimal() => (decimal)value;
 
         /// <summary>
@@ -22,5 +23,6 @@ public static class QowaivDouble
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public decimal ToDecimal(int decimals, DecimalRounding mode)
             => DecimalMath.Round((decimal)value, decimals, mode);
+#pragma warning restore QW0032 // Round converted double values
     }
 }

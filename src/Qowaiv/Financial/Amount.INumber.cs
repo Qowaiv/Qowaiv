@@ -42,7 +42,7 @@ public readonly partial struct Amount
     public static Amount operator *(Amount amount, decimal factor) => new(amount.m_Value * factor);
 
     /// <summary>Multiplies the amount with the factor.</summary>
-    public static Amount operator *(Amount amount, double factor) => new(amount.m_Value * (decimal)factor);
+    public static Amount operator *(Amount amount, double factor) => new(amount.m_Value * factor.ToDecimal());
 
     /// <summary>Multiplies the amount with the factor.</summary>
     public static Amount operator *(Amount amount, float factor) => new(amount.m_Value * (decimal)factor);
@@ -75,7 +75,7 @@ public readonly partial struct Amount
     public static Amount operator /(Amount amount, decimal factor) => new(amount.m_Value / factor);
 
     /// <summary>Divides the amount by the factor.</summary>
-    public static Amount operator /(Amount amount, double factor) => new(amount.m_Value / (decimal)factor);
+    public static Amount operator /(Amount amount, double factor) => new(amount.m_Value / factor.ToDecimal());
 
     /// <summary>Divides the amount by the factor.</summary>
     public static Amount operator /(Amount amount, float factor) => new(amount.m_Value / (decimal)factor);

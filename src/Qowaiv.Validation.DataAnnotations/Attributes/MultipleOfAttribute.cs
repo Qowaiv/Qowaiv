@@ -1,3 +1,4 @@
+using Qowaiv.Extensions;
 using Qowaiv.Financial;
 using Qowaiv.Mathematics;
 
@@ -111,7 +112,7 @@ public sealed class MultipleOfAttribute : ValidationAttribute
     [Pure]
     private static decimal? AsDecimal(double value)
         => value is >= Decimal_MinValue_as_d and <= Decimal_MaxValue_as_d
-        ? ((decimal)value).Round(15) / 1.000000000000000000000000000m
+        ? value.ToDecimal(15, DecimalRounding.ToEven) / 1.000000000000000000000000000m
         : null;
 
     private const double Decimal_MinValue_as_d = (double)decimal.MinValue;

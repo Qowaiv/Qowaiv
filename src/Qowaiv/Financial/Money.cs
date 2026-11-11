@@ -148,7 +148,7 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
     /// The factor to multiply with.
     /// </param>
     [Pure]
-    public Money Multiply(double factor) => Multiply((decimal)factor);
+    public Money Multiply(double factor) => Multiply(factor.ToDecimal());
 
     /// <summary>Multiplies the money with a specified factor.
     /// </summary>
@@ -230,7 +230,7 @@ public readonly partial struct Money : IXmlSerializable, IFormattable, IEquatabl
     /// The factor to multiply with.
     /// </param>
     [Pure]
-    public Money Divide(double factor) => Divide((decimal)factor);
+    public Money Divide(double factor) => Divide(factor.ToDecimal());
 
     /// <summary>Divides the money by a specified factor.
     /// </summary>

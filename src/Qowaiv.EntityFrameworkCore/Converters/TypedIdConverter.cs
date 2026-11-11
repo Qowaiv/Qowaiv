@@ -6,7 +6,7 @@ namespace Qowaiv.EntityFrameworkCore.Converters;
 public static class TypedIdConverter
 {
     [Pure]
-    public static ValueConverter Create<TId>() where TId: struct, INext<TId>
+    public static ValueConverter Create<TId>() where TId : struct, INext<TId>
         => Create(typeof(TId));
 
     [Pure]

@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Testcontainers.PostgreSql" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="../../src/Qowaiv/Qowaiv.csproj" />
   </ItemGroup>
 

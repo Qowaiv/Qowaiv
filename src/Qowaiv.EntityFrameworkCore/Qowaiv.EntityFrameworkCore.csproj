@@ -15,10 +15,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
-    <PackageReference Update="Microsoft.EntityFrameworkCore" VersionOverride="10.0.15" />
-  </ItemGroup>
-
   <ItemGroup Label="Analyzers">
     <PackageReference PrivateAssets="all" Include="Microsoft.EntityFrameworkCore.Analyzers" />
   </ItemGroup>

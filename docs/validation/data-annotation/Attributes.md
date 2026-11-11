@@ -120,7 +120,7 @@ whose type is not an enum, instead of reporting a validation error.
 ## In future
 The `[InFuture]` attribute requires a `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value to be in the future. The current time is resolved
-using [`Qowaiv.Clock`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock):
+using [`Qowaiv.Clock`](https://github.com/Qowaiv/Qowaiv/blob/master/docs/Clock.md):
 `Clock.UtcNow()` for `DateTime`, `Clock.Now()` for `DateTimeOffset`, and
 `Clock.Today()` for `Date`, `DateOnly`, and `Year`.
 
@@ -135,7 +135,7 @@ public class Model
 ## In past
 The `[InPast]` attribute requires a `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value to be in the past. The current time is resolved
-using [`Qowaiv.Clock`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock):
+using [`Qowaiv.Clock`](https://github.com/Qowaiv/Qowaiv/blob/master/docs/Clock.md):
 `Clock.UtcNow()` for `DateTime`, `Clock.Now()` for `DateTimeOffset`, and
 `Clock.Today()` for `Date`, `DateOnly`, and `Year`.
 
@@ -281,7 +281,7 @@ public class Model
 ## Not in future
 The `[NotInFuture]` attribute requires a `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value not to be in the future. The current time is resolved
-using [`Qowaiv.Clock`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock):
+using [`Qowaiv.Clock`](https://github.com/Qowaiv/Qowaiv/blob/master/docs/Clock.md):
 `Clock.UtcNow()` for `DateTime`, `Clock.Now()` for `DateTimeOffset`, and
 `Clock.Today()` for `Date`, `DateOnly`, and `Year`.
 
@@ -296,7 +296,7 @@ public class Model
 ## Not in past
 The `[NotInPast]` attribute requires a `DateTime`, `DateTimeOffset`, `Date`,
 `DateOnly`, or `Year` value not to be in the past. The current time is resolved
-using [`Qowaiv.Clock`](https://github.com/Qowaiv/Qowaiv/blob/master/README.md#qowaiv-clock):
+using [`Qowaiv.Clock`](https://github.com/Qowaiv/Qowaiv/blob/master/docs/Clock.md):
 `Clock.UtcNow()` for `DateTime`, `Clock.Now()` for `DateTimeOffset`, and
 `Clock.Today()` for `Date`, `DateOnly`, and `Year`.
 

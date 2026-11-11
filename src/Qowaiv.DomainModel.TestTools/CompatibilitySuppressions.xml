@@ -256,13 +256,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.DomainModel.TestTools.EventBufferAssertions`1.AndConstraint.get_Value-&gt;Qowaiv.DomainModel.EventBuffer&lt;TId&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Target>M:Qowaiv.DomainModel.TestTools.EventBufferAssertions`1.AndConstraint.get_Subject-&gt;Qowaiv.DomainModel.EventBuffer&lt;TId&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.DomainModel.TestTools.dll</Left>
     <Right>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.DomainModel.TestTools.EventBufferAssertions`1.AndConstraint.set_Value(Qowaiv.DomainModel.EventBuffer{`0})$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Target>M:Qowaiv.DomainModel.TestTools.EventBufferAssertions`1.AndConstraint.set_Subject(Qowaiv.DomainModel.EventBuffer{`0})$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.DomainModel.TestTools.dll</Left>
     <Right>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Right>
   </Suppression>
@@ -316,7 +316,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>P:Qowaiv.DomainModel.TestTools.EventBufferAssertions`1.AndConstraint.Value:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Target>P:Qowaiv.DomainModel.TestTools.EventBufferAssertions`1.AndConstraint.Subject:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.DomainModel.TestTools.dll</Left>
     <Right>lib/net8.0/Qowaiv.DomainModel.TestTools.dll</Right>
   </Suppression>

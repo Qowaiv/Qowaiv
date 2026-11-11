@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/package.props" />
 
@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>2.1.0</Version>
+    <Version>2.2.0</Version>
     <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
@@ -47,6 +47,8 @@ v*
     </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
+v2.2.0
+- Added [Assertion] attribute.
 v2.1.0
 - Added [PrimitiveRequired] attribute.
 - Added [OpenApi.PrimitiveRequired.AllOf] attribute.

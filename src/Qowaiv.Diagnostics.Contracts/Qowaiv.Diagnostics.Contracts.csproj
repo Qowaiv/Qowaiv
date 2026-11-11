@@ -24,16 +24,16 @@
     <EmbeddedResource Include="Attributes/**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Attributes\ImmutableAttribute.cs" />
+  </ItemGroup>
+
   <ItemGroup Label="CompileTimeDependencies">
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup Label="DependencyPackaging">
-    <None
-      Include="$(OutputPath)/netstandard2.0/$(AssemblyName).dll"
-      Pack="true"
-      PackagePath="analyzers/dotnet/cs"
-      Visible="false" />
+    <None Include="$(OutputPath)/netstandard2.0/$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -49,6 +49,7 @@ v*
       <![CDATA[
 v2.2.0
 - Added [Assertion] attribute.
+- Added [Immutable] attribute.
 v2.1.0
 - Added [PrimitiveRequired] attribute.
 - Added [OpenApi.PrimitiveRequired.AllOf] attribute.

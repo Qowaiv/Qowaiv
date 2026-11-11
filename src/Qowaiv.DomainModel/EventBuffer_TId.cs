@@ -28,6 +28,7 @@ public delegate TStoredEvent ConvertToStoredEvent<in TId, out TStoredEvent>(TId 
 /// <typeparam name="TId">
 /// The type of the identifier of the aggregate.
 /// </typeparam>
+[Immutable]
 [DebuggerDisplay("{DebuggerDisplay}")]
 [DebuggerTypeProxy(typeof(CollectionDebugView))]
 public readonly struct EventBuffer<TId> : IReadOnlyCollection<object>, ICollection<object>

@@ -11,11 +11,6 @@
     <ProjectReference Include="../Qowaiv.DomainModel/Qowaiv.DomainModel.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AwesomeAssertions" />
-    <PackageReference Include="AwesomeAssertions.Analyzers" PrivateAssets="all" />
-  </ItemGroup>
-
   <PropertyGroup>
     <PackageValidationBaselineVersion>3.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
@@ -29,6 +24,7 @@ v11.*
 v11.0.0
 - Add support for .NET 11.0.
 - Drop support for .NET 9.0 and 8.0. (BREAKING)
+- Drop awesome assertions depdendency. (BREAKING)
 v3.0.0
 - Add .NET 10.0 target.
 - Drop NET9.0 targets. (BREAKING)

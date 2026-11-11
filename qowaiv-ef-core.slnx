@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path=".net.csproj" />
+  <Project Path="src/Qowaiv.EntityFrameworkCore/Qowaiv.EntityFrameworkCore.csproj" />
+  <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
+  <Project Path="src/Qowaiv/Qowaiv.csproj" />
+  <Project Path="src/Specs.Generated/Specs.Generated.csproj" />
+  <Project Path="src/Specs.Shared/Specs.Shared.csproj" />
+</Solution>

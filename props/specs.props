@@ -3,7 +3,6 @@
   <Import Project="nopackage.props" />
 
   <PropertyGroup>
-    <Nullable>enable</Nullable>
     <IsTestProject>true</IsTestProject>
     <OutputType>exe</OutputType>
     <!--

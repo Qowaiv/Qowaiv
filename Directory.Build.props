@@ -7,6 +7,7 @@
 
   <PropertyGroup Label="Compiler options">
     <LangVersion>15.0</LangVersion>
+    <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
     <IncludeDiagnostics>false</IncludeDiagnostics>

@@ -155,45 +155,10 @@ More info about those generated strongly-typed IDs can be found [here](src/Qowai
 For types that are shipped with the .NET standard library that meet (most) SVO
 criteria, Qowaiv can offer some extensions to improve usage.
 
-### System.DateOnly
-The [`DateOnly`](https://learn.microsoft.com/dotnet/api/system.dateonly) type
-was introduced with .NET 6.0. For previous versions we still
-recommend [`Qowaiv.Date`](docs/svo/Date.md). Interaction with Qowaiv SVO's is provided:
-
-``` C#
-var more = new DateOnly(2017, 06, 11) + 3.Months();
-var less = new DateOnly(2017, 06, 11) - 3.Months();
-
-var more = new DateOnly(2017, 06, 11) + DateSpan.FromDays(3);
-var less = new DateOnly(2017, 06, 11) - DateSpan.FromDays(3);
-```
-
-### System.DateTime
-The [`DateTime`](https://learn.microsoft.com/dotnet/api/system.datetime) is the
-type to use when representing date and time. Interaction with Qowaiv SVO's
-is provided:
-
-``` C#
-var more = new DateTime(2017, 06, 11) + 3.Months();
-var less = new DateTime(2017, 06, 11) - 3.Months();
-
-var more = new DateTime(2017, 06, 11) + DateSpan.FromDays(3);
-var less = new DateTime(2017, 06, 11) - DateSpan.FromDays(3);
-```
-
-### System.Globalization.CultureInfo
-The [`CultureInfo`](https://learn.microsoft.com/dotnet/api/system.globalization.cultureinfo)
-lacks a `JsonConverter`:
-* `Qowaiv.Json.Globalization.CultureInfoJsonConverter`
-
-The current culture can be set for a (`IDisposable`) scope using the [`.Scope()`](docs/svo/CultureInfoScope.md)
-extension method.
-
-### System.Net.Http.HttpMethod
-The [`HttpMethod`](https://learn.microsoft.com/dotnet/api/system.net.http.httpmethod)
-lacks a `TypeConverter` and a `JsonConverter`:
-* `Qowaiv.Conversion.Web.HttpMethodTypeConverter`
-* `Qowaiv.Json.Web.HttpMethodJsonConverter`
+* [System.DateOnly](docs/svo/system/DateOnly.md)
+* [System.DateTime](docs/svo/system/DateTime.md)
+* [System.Globalization.CultureInfo](docs/svo/system/CultureInfo.md)
+* [System.Net.Http.HttpMethod](docs/svo/system/HttpMethod.md)
 
 ## Qowaiv helpers
 

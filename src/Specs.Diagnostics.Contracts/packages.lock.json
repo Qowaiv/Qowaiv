@@ -163,14 +163,14 @@
         "dependencies": {
           "AwesomeAssertions": "[9.6.0, )",
           "Qowaiv.TestTools": "[11.0.0-rc.1, )",
-          "TUnit.Core": "[1.83.0, )"
+          "TUnit.Core": "[1.83.8, )"
         }
       },
       "TUnit.Core": {
         "type": "CentralTransitive",
-        "requested": "[1.83.0, )",
-        "resolved": "1.83.0",
-        "contentHash": "5Pw5jMoM9ZzvKtwEU8jXbqlVqK3nTwFhF/T+BJ5zgo4OCpWfx4Bhn9owapwazi02kO1AV0r6rXZUBTc/j+14Rw=="
+        "requested": "[1.83.8, )",
+        "resolved": "1.83.8",
+        "contentHash": "nAzgKu95BO70kPYp7S/8XZroRKp5EYnuO5cqRKNYQ+dSY97AvdDjnpg5ubazfoSOBcy7VKGkpSwVTLpsblUQbw=="
       }
     },
     "net11.0": {
@@ -335,14 +335,14 @@
         "dependencies": {
           "AwesomeAssertions": "[9.6.0, )",
           "Qowaiv.TestTools": "[11.0.0-rc.1, )",
-          "TUnit.Core": "[1.83.0, )"
+          "TUnit.Core": "[1.83.8, )"
         }
       },
       "TUnit.Core": {
         "type": "CentralTransitive",
-        "requested": "[1.83.0, )",
-        "resolved": "1.83.0",
-        "contentHash": "5Pw5jMoM9ZzvKtwEU8jXbqlVqK3nTwFhF/T+BJ5zgo4OCpWfx4Bhn9owapwazi02kO1AV0r6rXZUBTc/j+14Rw=="
+        "requested": "[1.83.8, )",
+        "resolved": "1.83.8",
+        "contentHash": "nAzgKu95BO70kPYp7S/8XZroRKp5EYnuO5cqRKNYQ+dSY97AvdDjnpg5ubazfoSOBcy7VKGkpSwVTLpsblUQbw=="
       }
     }
   }

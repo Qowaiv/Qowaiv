@@ -16,9 +16,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.19.1, )",
-        "resolved": "1.19.1",
-        "contentHash": "AurPfke1r9v1HJGNE+Yi3ywuLFmOCCaGnnbRUQLPHJSeFtRjKxoQFR2qdpAr400XPQ/VazIuOTNSSXlD8jKayw=="
+        "requested": "[1.20.0, )",
+        "resolved": "1.20.0",
+        "contentHash": "RJJiUWf3HsKeCMLHtcA8f6pcJpK/6VSK4huHbV6Bngaawg1zoj5H1b4BZNdIgtyx0RrI/ZI7oN5/hDxm1ig7TA=="
       },
       "Microsoft.Sbom.Targets": {
         "type": "Direct",
@@ -86,9 +86,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.19.1, )",
-        "resolved": "1.19.1",
-        "contentHash": "AurPfke1r9v1HJGNE+Yi3ywuLFmOCCaGnnbRUQLPHJSeFtRjKxoQFR2qdpAr400XPQ/VazIuOTNSSXlD8jKayw=="
+        "requested": "[1.20.0, )",
+        "resolved": "1.20.0",
+        "contentHash": "RJJiUWf3HsKeCMLHtcA8f6pcJpK/6VSK4huHbV6Bngaawg1zoj5H1b4BZNdIgtyx0RrI/ZI7oN5/hDxm1ig7TA=="
       },
       "Microsoft.Sbom.Targets": {
         "type": "Direct",
@@ -142,9 +142,9 @@
       },
       "DotNetProjectFile.Analyzers": {
         "type": "Direct",
-        "requested": "[1.19.1, )",
-        "resolved": "1.19.1",
-        "contentHash": "AurPfke1r9v1HJGNE+Yi3ywuLFmOCCaGnnbRUQLPHJSeFtRjKxoQFR2qdpAr400XPQ/VazIuOTNSSXlD8jKayw=="
+        "requested": "[1.20.0, )",
+        "resolved": "1.20.0",
+        "contentHash": "RJJiUWf3HsKeCMLHtcA8f6pcJpK/6VSK4huHbV6Bngaawg1zoj5H1b4BZNdIgtyx0RrI/ZI7oN5/hDxm1ig7TA=="
       },
       "Microsoft.Sbom.Targets": {
         "type": "Direct",

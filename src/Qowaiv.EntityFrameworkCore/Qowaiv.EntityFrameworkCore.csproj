@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
+    <PackageId>Qowaiv.EntityFrameworkCore</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Qowaiv/Qowaiv.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+  </ItemGroup>
+
+  <ItemGroup Label="Analyzers">
+    <PackageReference PrivateAssets="all" Include="Microsoft.EntityFrameworkCore.Analyzers" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <!--<PackageValidationBaselineVersion>8.0.0</PackageValidationBaselineVersion>-->
+    <ToBeReleased>
+      <![CDATA[
+v11.*
+-
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
+      <![CDATA[
+v11.0.0
+- Initial version.
+]]>
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>

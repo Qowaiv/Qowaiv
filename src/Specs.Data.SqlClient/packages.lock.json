@@ -331,7 +331,7 @@
         "dependencies": {
           "AwesomeAssertions": "[9.6.0, )",
           "Qowaiv.TestTools": "[11.0.0-rc.1, )",
-          "TUnit.Core": "[1.83.8, )"
+          "TUnit.Core": "[1.84.0, )"
         }
       },
       "Microsoft.Data.SqlClient": {
@@ -364,9 +364,9 @@
       },
       "TUnit.Core": {
         "type": "CentralTransitive",
-        "requested": "[1.83.8, )",
-        "resolved": "1.83.8",
-        "contentHash": "nAzgKu95BO70kPYp7S/8XZroRKp5EYnuO5cqRKNYQ+dSY97AvdDjnpg5ubazfoSOBcy7VKGkpSwVTLpsblUQbw=="
+        "requested": "[1.84.0, )",
+        "resolved": "1.84.0",
+        "contentHash": "njfQ8FhLVpeJ6dWKeF9eHdKkON+fOzmqb1Xcr0WxilsHIdrfkhtTi8ug0VCl8Q330A23tzAH/idW4+/7Iop0Ww=="
       }
     },
     "net11.0": {
@@ -651,7 +651,7 @@
         "dependencies": {
           "AwesomeAssertions": "[9.6.0, )",
           "Qowaiv.TestTools": "[11.0.0-rc.1, )",
-          "TUnit.Core": "[1.83.8, )"
+          "TUnit.Core": "[1.84.0, )"
         }
       },
       "Microsoft.Data.SqlClient": {
@@ -681,9 +681,9 @@
       },
       "TUnit.Core": {
         "type": "CentralTransitive",
-        "requested": "[1.83.8, )",
-        "resolved": "1.83.8",
-        "contentHash": "nAzgKu95BO70kPYp7S/8XZroRKp5EYnuO5cqRKNYQ+dSY97AvdDjnpg5ubazfoSOBcy7VKGkpSwVTLpsblUQbw=="
+        "requested": "[1.84.0, )",
+        "resolved": "1.84.0",
+        "contentHash": "njfQ8FhLVpeJ6dWKeF9eHdKkON+fOzmqb1Xcr0WxilsHIdrfkhtTi8ug0VCl8Q330A23tzAH/idW4+/7Iop0Ww=="
       }
     }
   }

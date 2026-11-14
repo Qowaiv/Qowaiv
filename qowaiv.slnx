@@ -15,6 +15,7 @@
   <Project Path="src/Qowaiv.Data.SqlClient/Qowaiv.Data.SqlClient.csproj" />
   <Project Path="src/Qowaiv.DomainModel.TestTools/Qowaiv.DomainModel.TestTools.csproj" />
   <Project Path="src/Qowaiv.DomainModel/Qowaiv.DomainModel.csproj" />
+  <Project Path="src/Qowaiv.Globalization.NL/Qowaiv.Globalization.NL.csproj" />
   <Project Path="src/Qowaiv.Json.Newtonsoft/Qowaiv.Json.Newtonsoft.csproj" />
   <Project Path="src/Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
   <Project Path="src/Qowaiv.Text.Json.Serialization/Qowaiv.Text.Json.Serialization.csproj" />
@@ -30,6 +31,7 @@
   <Project Path="src/Specs.Diagnostics.Contracts/Specs.Diagnostics.Contracts.csproj" />
   <Project Path="src/Specs.DomainModel/Specs.DomainModel.csproj" />
   <Project Path="src/Specs.Generated/Specs.Generated.csproj" />
+  <Project Path="src/Specs.Globalization/Specs.Globalization.csproj" />
   <Project Path="src/Specs.Json/Specs.Json.csproj" />
   <Project Path="src/Specs.Shared/Specs.Shared.csproj" />
   <Project Path="src/Specs.TestTools/Specs.TestTools.csproj" />

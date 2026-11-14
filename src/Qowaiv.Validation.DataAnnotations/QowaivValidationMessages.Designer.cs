@@ -186,26 +186,26 @@ namespace Qowaiv.Validation.DataAnnotations {
             }
         }
         
-         /// <summary>
-         ///   Looks up a localized string similar to The value of the {0} field is not a multiple of {1}..
-         /// </summary>
-         internal static string MultipleOfAttribute_ValidationError {
-             get {
-                 return ResourceManager.GetString("MultipleOfAttribute_ValidationError", resourceCulture);
-             }
-         }
-         
-         /// <summary>
-         ///   Looks up a localized string similar to The value of the {0} field must be negative..
-         /// </summary>
-         internal static string NegativeAttribute_ValidationError {
-             get {
-                 return ResourceManager.GetString("NegativeAttribute_ValidationError", resourceCulture);
-             }
-         }
-         
-         /// <summary>
-         ///   Looks up a localized string similar to The value of the {0} field should not be in the future..
+        /// <summary>
+        ///   Looks up a localized string similar to The value of the {0} field is not a multiple of {1}..
+        /// </summary>
+        internal static string MultipleOfAttribute_ValidationError {
+            get {
+                return ResourceManager.GetString("MultipleOfAttribute_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of the {0} field must be negative..
+        /// </summary>
+        internal static string NegativeAttribute_ValidationError {
+            get {
+                return ResourceManager.GetString("NegativeAttribute_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of the {0} field should not be in the future..
         /// </summary>
         internal static string NotInFuture {
             get {
@@ -213,53 +213,53 @@ namespace Qowaiv.Validation.DataAnnotations {
             }
         }
         
-         /// <summary>
-         ///   Looks up a localized string similar to The value of the {0} field should not be in the past..
-         /// </summary>
-         internal static string NotInPast {
-             get {
-                 return ResourceManager.GetString("NotInPast", resourceCulture);
-             }
-         }
-         
-         /// <summary>
-         ///   Looks up a localized string similar to The value of the {0} field must not be negative..
-         /// </summary>
-         internal static string NotNegativeAttribute_ValidationError {
-             get {
-                 return ResourceManager.GetString("NotNegativeAttribute_ValidationError", resourceCulture);
-             }
-         }
-         
-         /// <summary>
-         ///   Looks up a localized string similar to The value of the {0} field must not be positive..
-         /// </summary>
-         internal static string NotPositiveAttribute_ValidationError {
-             get {
-                 return ResourceManager.GetString("NotPositiveAttribute_ValidationError", resourceCulture);
-             }
-         }
-         
-         /// <summary>
-         ///   Looks up a localized string similar to The field  {0} must not be unknown..
-         /// </summary>
-         internal static string NotUnknown {
-             get {
-                 return ResourceManager.GetString("NotUnknown", resourceCulture);
-             }
-         }
-         
-         /// <summary>
-         ///   Looks up a localized string similar to The value of the {0} field must be positive..
-         /// </summary>
-         internal static string PositiveAttribute_ValidationError {
-             get {
-                 return ResourceManager.GetString("PositiveAttribute_ValidationError", resourceCulture);
-             }
-         }
-         
-         /// <summary>
-         ///   Looks up a localized string similar to The size of the {0} field should be at least {1: F}..
+        /// <summary>
+        ///   Looks up a localized string similar to The value of the {0} field should not be in the past..
+        /// </summary>
+        internal static string NotInPast {
+            get {
+                return ResourceManager.GetString("NotInPast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of the {0} field must not be negative..
+        /// </summary>
+        internal static string NotNegativeAttribute_ValidationError {
+            get {
+                return ResourceManager.GetString("NotNegativeAttribute_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of the {0} field must not be positive..
+        /// </summary>
+        internal static string NotPositiveAttribute_ValidationError {
+            get {
+                return ResourceManager.GetString("NotPositiveAttribute_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The field {0} must not be unknown..
+        /// </summary>
+        internal static string NotUnknown {
+            get {
+                return ResourceManager.GetString("NotUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of the {0} field must be positive..
+        /// </summary>
+        internal static string PositiveAttribute_ValidationError {
+            get {
+                return ResourceManager.GetString("PositiveAttribute_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The size of the {0} field should be at least {1: F}..
         /// </summary>
         internal static string Size_AtLeast_ValidationError {
             get {

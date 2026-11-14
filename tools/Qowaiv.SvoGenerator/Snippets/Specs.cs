@@ -146,7 +146,7 @@ public class Can_be_parsed
     [Test]
     public void from_valid_input_only_otherwise_throws_on_Parse()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Func<@TSvo> parse = () => @TSvo.Parse("invalid input");
             parse.Should().Throw<FormatException>()
@@ -172,7 +172,7 @@ public class Has_custom_formatting
     [Test]
     public void _default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.@TSvo.ToString().Should().Be("svoValue");
         }
@@ -181,7 +181,7 @@ public class Has_custom_formatting
     [Test]
     public void with_null_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.@TSvo.ToString().Should().Be(Svo.@TSvo.ToString(default(string)));
         }
@@ -190,7 +190,7 @@ public class Has_custom_formatting
     [Test]
     public void with_string_empty_pattern_equal_to_default()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Svo.@TSvo.ToString().Should().Be(Svo.@TSvo.ToString(string.Empty));
         }
@@ -207,7 +207,7 @@ public class Has_custom_formatting
     [Test]
     public void with_empty_format_provider()
     {
-        using (TestCultures.Es_EC.Scoped())
+        using (TestCultures.es_EC.Scoped())
         {
             Svo.@TSvo.ToString(FormatProvider.Empty).Should().Be("svoValue");
         }
@@ -234,11 +234,9 @@ public class Has_custom_formatting
     [Test]
     public void with_current_thread_culture_as_default()
     {
-        using (new CultureInfoScope(
-            culture: TestCultures.Nl_NL,
-            cultureUI: TestCultures.En_GB))
+        using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
         {
-            Svo.@TSvo.ToString(provider: null).Should().Be("svoValue");
+            Assert.AreEqual("svoValue", Svo.@TSvo.ToString(provider: null));
         }
     }
 }
@@ -341,7 +339,7 @@ public class Supports_type_conversion
     [Test]
     public void from_null_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From<string>(null).To<@TSvo>().Should().Be(@TSvo.Empty);
         }
@@ -350,7 +348,7 @@ public class Supports_type_conversion
     [Test]
     public void from_empty_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From(string.Empty).To<@TSvo>().Should().Be(@TSvo.Empty);
         }
@@ -359,7 +357,7 @@ public class Supports_type_conversion
     [Test]
     public void from_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.From("SvoValue").To<@TSvo>().Should().Be(Svo.@TSvo);
         }
@@ -368,7 +366,7 @@ public class Supports_type_conversion
     [Test]
     public void to_string()
     {
-        using (TestCultures.En_GB.Scoped())
+        using (TestCultures.en_GB.Scoped())
         {
             Converting.ToString().From(Svo.@TSvo).Should().Be("SvoValue");
         }
@@ -449,8 +447,8 @@ public class Is_Open_API_data_type
 {
     [Test]
     public void with_info()
-       => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(@TSvo))
-       .Should().Be(new Qowaiv.OpenApi.OpenApiDataType(
+       => OpenApiDataType.FromType(typeof(@TSvo))
+       .Should().Be(new OpenApiDataType(
            dataType: typeof(@TSvo),
            description: "Description",
            example: "example",
@@ -461,7 +459,7 @@ public class Is_Open_API_data_type
     [Test]
     [Arguments("svoValue")]
     public void pattern_matches(string input)
-        => Qowaiv.OpenApi.OpenApiDataType.FromType(typeof(@TSvo))!.Matches(input).Should().BeTrue();
+        => OpenApiDataType.FromType(typeof(@TSvo))!.Matches(input).Should().BeTrue();
 }
 
 public class Debugger

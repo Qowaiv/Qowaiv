@@ -85,6 +85,18 @@ public class Generation_of
             .Should().BeTrue();
     }
 
+    [Test]
+    [Arguments("Burgerservicenummer", typeof(long), "Burgerservicenummer", "Qowaiv.Globalization.NL", SvoFeatures.Default)]
+    public void Qowaiv_Globalization_NL(string name, Type underlying, string fulleName, string ns, SvoFeatures features, string? formatExceptionMessage = null)
+    {
+        var path = $@"{Root}\src\Qowaiv.Globalization.NL\Generated\{name}.generated.cs";
+        var init = $@"{Root}\src\Qowaiv.Globalization.NL\{name}.cs";
+        var json = $@"{Root}\src\Qowaiv.Globalization.NL\Json\{name}JsonConverter.cs";
+        var spec = $@"{Root}\src\Specs.Globalization\NL\{name}_specs.cs".Replace(@"\\", @"\");
+        Generate(name, underlying, fulleName, ns, features, path, init, json, spec, formatExceptionMessage)
+            .Should().BeTrue();
+    }
+
 #pragma warning disable S107 // Methods should not have too many parameters
     private static bool Generate(
         string name,

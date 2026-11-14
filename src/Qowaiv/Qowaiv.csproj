@@ -15,9 +15,6 @@
  
   <ItemGroup>
     <Compile Update="QowaivMessages.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="QowaivMessages.resx" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Update="QowaivMessages.resx" Generator="PublicResXFileCodeGenerator" LastGenOutput="QowaivMessages.Designer.cs" />
   </ItemGroup>
   

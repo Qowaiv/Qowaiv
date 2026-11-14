@@ -6,9 +6,17 @@
     <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
     <DevelopmentDependency>false</DevelopmentDependency>
     <PackageId>Qowaiv.Globalization.NL</PackageId>
-    <IncludeGuard>false</IncludeGuard>
-    <IncludeLock>false</IncludeLock>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../Qowaiv/Diagnostics/DebugDisplay.cs" Link="_shared/Diagnostics/DebugDisplay.cs" />
+    <Compile Include="../Qowaiv/Text/Chars.cs" Link="_shared/Text/Chars.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="QowaivMessages.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="QowaivMessages.resx" />
+    <EmbeddedResource Update="QowaivMessages.resx" Generator="PublicResXFileCodeGenerator" LastGenOutput="QowaivMessages.Designer.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="../Qowaiv/Qowaiv.csproj" />

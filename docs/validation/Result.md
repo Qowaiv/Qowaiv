@@ -15,7 +15,7 @@ A `Result<TModel>` can be turned into a `Task<Result<TModel>>` with `Async()`.
 
 ## Properties
 
-* `Messages` — all [validation messages](ValidationMessage).
+* `Messages` — all [validation messages](ValidationMessage.md).
 * `IsValid` — `true` when there are no error-severity messages.
 * `Errors` / `Warnings` / `Infos` — filtered views by severity.
 

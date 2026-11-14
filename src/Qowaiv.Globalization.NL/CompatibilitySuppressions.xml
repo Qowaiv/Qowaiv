@@ -3,7 +3,7 @@
 <Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:Qowaiv.Globalization.NL.Json.BsnJsonConverter</Target>
+    <Target>T:Qowaiv.Globalization.NL.Json.BurgerservicenummerJsonConverter</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
@@ -21,157 +21,145 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0008</DiagnosticId>
-    <Target>T:Qowaiv.Globalization.NL.Bsn</Target>
+    <Target>T:Qowaiv.Globalization.NL.Burgerservicenummer</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.CompareTo(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.CompareTo(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.Equals(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.Equals(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.Equals(System.Object)$0:[T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.Equals(System.Object)$0:[T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.FromJson(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.FromJson(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.op_Explicit(Qowaiv.Globalization.NL.Bsn)~System.String:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.Parse(System.ReadOnlySpan{System.Char},System.IFormatProvider)$1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.op_Explicit(System.String)~Qowaiv.Globalization.NL.Bsn:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.Parse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.Parse(System.ReadOnlySpan{System.Char},System.IFormatProvider)$1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.Parse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.Parse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.ToJson:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.Parse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.ToString:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.ToJson:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.ToString(System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.ToString:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.ToString(System.IFormatProvider)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.ToString(System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.ToString(System.String,System.IFormatProvider)-&gt;string:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.ToString(System.IFormatProvider)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.ToString(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.ToString(System.String,System.IFormatProvider)-&gt;string:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.ToString(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.ToString(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.ToString(System.String)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.ToString(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)$3:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.ToString(System.String)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.TryParse(System.ReadOnlySpan{System.Char},System.IFormatProvider,Qowaiv.Globalization.NL.Burgerservicenummer@)$1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)$3:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.TryParse(System.String,Qowaiv.Globalization.NL.Burgerservicenummer@):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.TryParse(System.ReadOnlySpan{System.Char},System.IFormatProvider,Qowaiv.Globalization.NL.Bsn@)$1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.TryParse(System.String,System.IFormatProvider,Qowaiv.Globalization.NL.Burgerservicenummer@):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.TryParse(System.String,Qowaiv.Globalization.NL.Bsn@):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.TryParse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.TryParse(System.String,System.IFormatProvider,Qowaiv.Globalization.NL.Bsn@):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Burgerservicenummer.TryParse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.TryParse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Target>M:Qowaiv.Globalization.NL.Conversion.BurgerservicenummerTypeConverter.FromString(System.String,System.Globalization.CultureInfo):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Bsn.TryParse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
-    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>M:Qowaiv.Globalization.NL.Conversion.BsnTypeConverter.FromString(System.String,System.Globalization.CultureInfo):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
-    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>T:Qowaiv.Globalization.NL.Bsn:[T:System.Text.Json.Serialization.JsonConverterAttribute]</Target>
+    <Target>T:Qowaiv.Globalization.NL.Burgerservicenummer:[T:System.Text.Json.Serialization.JsonConverterAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>

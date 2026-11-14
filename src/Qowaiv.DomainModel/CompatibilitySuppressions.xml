@@ -3,26 +3,6 @@
 <Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute</Target>
-    <Left>lib/net10.0/Qowaiv.DomainModel.dll</Left>
-    <Right>lib/net10.0/Qowaiv.DomainModel.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute</Target>
-    <Left>lib/net10.0/Qowaiv.DomainModel.dll</Left>
-    <Right>lib/net11.0/Qowaiv.DomainModel.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute</Target>
-    <Left>lib/net8.0/Qowaiv.DomainModel.dll</Left>
-    <Right>lib/netstandard2.0/Qowaiv.DomainModel.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:System.Runtime.CompilerServices.IsExternalInit</Target>
     <Left>lib/net8.0/Qowaiv.DomainModel.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.DomainModel.dll</Right>
@@ -46,13 +26,6 @@
     <Target>T:System.Runtime.CompilerServices.RequiresLocationAttribute</Target>
     <Left>lib/netstandard2.0/Qowaiv.DomainModel.dll</Left>
     <Right>lib/net10.0/Qowaiv.DomainModel.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0001</DiagnosticId>
-    <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute</Target>
-    <Left>lib/netstandard2.0/Qowaiv.DomainModel.dll</Left>
-    <Right>lib/netstandard2.0/Qowaiv.DomainModel.dll</Right>
-    <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0003</DiagnosticId>
@@ -566,6 +539,27 @@
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
+    <DiagnosticId>CP0015</DiagnosticId>
+    <Target>T:Qowaiv.DomainModel.QowaivDomainModelMessages:[T:System.CodeDom.Compiler.GeneratedCodeAttribute]</Target>
+    <Left>lib/net10.0/Qowaiv.DomainModel.dll</Left>
+    <Right>lib/net10.0/Qowaiv.DomainModel.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0015</DiagnosticId>
+    <Target>T:Qowaiv.DomainModel.QowaivDomainModelMessages:[T:System.CodeDom.Compiler.GeneratedCodeAttribute]</Target>
+    <Left>lib/net8.0/Qowaiv.DomainModel.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.DomainModel.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0015</DiagnosticId>
+    <Target>T:Qowaiv.DomainModel.QowaivDomainModelMessages:[T:System.CodeDom.Compiler.GeneratedCodeAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.DomainModel.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.DomainModel.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>M:Qowaiv.DomainModel.Aggregate.FromStorage``2(Qowaiv.DomainModel.EventBuffer{``1})&lt;0&gt;:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.DomainModel.dll</Left>
@@ -982,18 +976,6 @@
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>T:Qowaiv.DomainModel.Reflection.ExpressionCompilingEventDispatcher`1:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.DomainModel.dll</Left>
-    <Right>lib/net10.0/Qowaiv.DomainModel.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
-    <Left>lib/netstandard2.0/Qowaiv.DomainModel.dll</Left>
-    <Right>lib/net10.0/Qowaiv.DomainModel.dll</Right>
-  </Suppression>
-  <Suppression>
-    <DiagnosticId>CP0016</DiagnosticId>
-    <Target>T:System.Runtime.CompilerServices.IsClosedTypeAttribute:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.DomainModel.dll</Left>
     <Right>lib/net10.0/Qowaiv.DomainModel.dll</Right>
   </Suppression>

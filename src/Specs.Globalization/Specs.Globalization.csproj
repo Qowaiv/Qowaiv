@@ -10,8 +10,8 @@
     <ProjectReference Include="../Qowaiv.Globalization.NL/Qowaiv.Globalization.NL.csproj" />
   </ItemGroup>
 
-  <ItemGroup Label="Code generation and analyzers">
-    <ProjectReference Include="../Qowaiv.TestTools/Qowaiv.TestTools.csproj" />
+  <ItemGroup Label="Test tools">
+    <ProjectReference Include="../Qowaiv.Shared/Qowaiv.Shared.csproj" />
   </ItemGroup>
 
 </Project>

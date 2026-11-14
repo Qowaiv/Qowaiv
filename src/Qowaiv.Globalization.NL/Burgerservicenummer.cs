@@ -85,12 +85,6 @@ public readonly partial struct Burgerservicenummer : IXmlSerializable, IFormatta
     [Pure]
     public static Burgerservicenummer FromJson(long json) => Create(json);
 
-    /// <summary>Casts the Burgerservicenummer to a <see cref="string" />.</summary>
-    public static explicit operator string(Burgerservicenummer val) => val.ToString(CultureInfo.CurrentCulture);
-
-    /// <summary>Casts a <see cref="string" /> to a Burgerservicenummer.</summary>
-    public static explicit operator Burgerservicenummer(string str) => Parse(str, CultureInfo.CurrentCulture);
-
     /// <summary>Casts the Burgerservicenummer to a <see cref="ulong" />.</summary>
     public static explicit operator long(Burgerservicenummer val) => val.m_Value;
 

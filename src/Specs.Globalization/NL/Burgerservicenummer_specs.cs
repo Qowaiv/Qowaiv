@@ -28,6 +28,13 @@ public class With_domain_logic
     [Arguments(false, "")]
     public void IsUnknown_returns(bool result, Burgerservicenummer svo)
         => svo.IsUnknown().Should().Be(result);
+
+    [Test]
+    [Arguments(true, 1234_56_782L)]
+    [Arguments(false, "?")]
+    [Arguments(false, "")]
+    public void IsKnown_returns(bool result, Burgerservicenummer svo)
+        => svo.IsKnown.Should().Be(result);
 }
 
 public class Has_constant
@@ -122,6 +129,17 @@ public class Can_be_parsed
         => Burgerservicenummer.TryParse("invalid input").Should().BeNull();
 
     [Test]
+    public void from_invalid_as_null_with_TryParse_and_provider()
+        => Burgerservicenummer.TryParse("invalid input", CultureInfo.InvariantCulture).Should().BeNull();
+
+    [Test]
+    public void from_invalid_span_throws_on_Parse()
+    {
+        var parse = () => Burgerservicenummer.Parse("invalid input".AsSpan(), provider: null);
+        parse.Should().Throw<FormatException>();
+    }
+
+    [Test]
     public void with_TryParse_returns_SVO()
         => Burgerservicenummer.TryParse("123456782").Should().Be(Svo.Burgerservicenummer);
 }
@@ -198,6 +216,15 @@ public class Has_custom_formatting
             Svo.Burgerservicenummer.ToString(provider: null).Should().Be("123456782");
         }
     }
+
+    [Test]
+    public void with_destination_too_small()
+    {
+        var destination = new char[10];
+
+        Svo.Burgerservicenummer.TryFormat(destination, out var charsWritten, "F", provider: null).Should().BeFalse();
+        charsWritten.Should().Be(0);
+    }
 }
 
 public class Is_comparable
@@ -212,9 +239,12 @@ public class Is_comparable
         Svo.Burgerservicenummer.CompareTo(obj).Should().Be(0);
     }
 
-    //[Test]
-    //public void to_Burgerservicenummer_only()
-    //    => Assert.Throws<ArgumentException>(() => Svo.Burgerservicenummer.CompareTo(new object()));
+    [Test]
+    public void to_Burgerservicenummer_only()
+    {
+        var compare = () => Svo.Burgerservicenummer.CompareTo(new object());
+        compare.Should().Throw<ArgumentException>();
+    }
 
     [Test]
     public void can_be_sorted_using_compare()
@@ -254,9 +284,9 @@ public class Casts
 
 public class Supports_type_conversion
 {
-    //[Test]
-    //public void via_TypeConverter_registered_with_attribute()
-    //    => typeof(Burgerservicenummer).Should().HaveTypeConverterDefined();
+    [Test]
+    public void via_TypeConverter_registered_with_attribute()
+        => typeof(Burgerservicenummer).Should().HaveTypeConverterDefined();
 
     [Test]
     public void from_null_string()
@@ -305,8 +335,22 @@ public class Supports_type_conversion
 
 public class Supports_JSON_serialization
 {
+#if NET10_0_OR_GREATER
+    [Test]
+    [Arguments("?", "?")]
+    [Arguments(1234_56_782L, "1234.56.782")]
+    public void System_Text_JSON_deserialization(object json, Burgerservicenummer svo)
+        => JsonTester.Read_System_Text_JSON<Burgerservicenummer>(json).Should().Be(svo);
+
+    [Test]
+    [Arguments(null, null)]
+    [Arguments("1234.56.782", "123456782")]
+    public void System_Text_JSON_serialization(Burgerservicenummer svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
     [Test]
     [Arguments("?", "unknown")]
+    [Arguments(1234_56_782L, 1234_56_782L)]
     public void convention_based_deserialization(Burgerservicenummer svo, object json)
         => JsonTester.Read<Burgerservicenummer>(json).Should().Be(svo);
 
@@ -385,11 +429,12 @@ public class Is_Open_API_data_type
         => OpenApiDataType.FromType(typeof(Burgerservicenummer))!.Matches(input).Should().BeTrue();
 }
 
-//public class Debugger
-//{
-//    [Arguments("{empty}", "")]
-//    [Arguments("{unknown}", "?")]
-//    [Arguments("DebuggerDisplay", "svoValue")]
-//    public void has_custom_display(object display, Burgerservicenummer svo)
-//        => svo.Should().HaveDebuggerDisplay(display);
-//}
+public class Debugger
+{
+    [Test]
+    [Arguments("{empty}", "")]
+    [Arguments("{unknown}", "?")]
+    [Arguments("1234.56.782", 1234_56_782L)]
+    public void has_custom_display(object display, Burgerservicenummer svo)
+        => svo.Should().HaveDebuggerDisplay(display);
+}

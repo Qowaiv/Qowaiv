@@ -41,6 +41,38 @@ internal class Markdown_file
 
     [Explicit]
     [Test]
+    public void Generate_BBAN_Random()
+    {
+        var test = new Regex("[ac]{4}");
+
+        var writer = new StringBuilder();
+
+        foreach(var info in Infos.OrderBy(i => i.Country))
+        {
+            writer.Append($"new(Country.{info.Country}, \"{info.Country}");
+
+            var pattern = info.LookupPattern[2..];
+
+            if (info.WithCurrency)
+                pattern = pattern[..^3] + "EUR";
+
+            pattern = test.Replace(pattern, "TEST", 1);
+
+            if (info.CheckSum is null)
+                writer.Append("kk").Append(pattern[2..]);
+            else
+                writer.Append(pattern[..^2]).Append("kk");
+
+            writer.AppendLine("\"),");
+        }
+
+        Console.WriteLine(writer);
+
+        Skip.Test("Copy output to code file.");
+    }
+
+    [Explicit]
+    [Test]
     public void Generate_JS_RegEx_Pattern()
     {
         foreach (var info in Infos.OrderBy(i => i.Example))
@@ -209,6 +241,8 @@ internal sealed record IbanInfo(Country Country, int Length, string Bban, int? C
         }
     }
 
+    public bool WithCurrency => Fields[^1] is 'm';
+
     public string BbanData()
     {
         var sb = new StringBuilder()
@@ -223,7 +257,7 @@ internal sealed record IbanInfo(Country Country, int Length, string Bban, int? C
 
         sb.Append($"{bban}]");
 
-        if (Fields.EndsWith('m'))
+        if (WithCurrency)
             sb.Append(", true");
 
         sb.Append("), // ");

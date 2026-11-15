@@ -49,6 +49,7 @@ v11.0.0
 - Introduction of IEnumerated<TSelf> and IEnumerated, with DefinedValues.
 - OpenApiDataType resolves its enum from the defined values (and unknown) of IEnumerated<TSelf> types.
 - ModifyTypeInfo.IgnoreEmptySvos performance improvements.
+- Add extensions on Random to generate a char and an InternationalBankAccountNumber.
 v8.*
 - Extended language support.
 - IBAN supports Mongolia and Falkland Islands.

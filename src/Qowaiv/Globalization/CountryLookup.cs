@@ -46,4 +46,15 @@ internal readonly struct CountryLookup<T>(params T[] lookup) : IEnumerable<T>
     /// <inheritdoc />
     [Pure]
     IEnumerator IEnumerable.GetEnumerator() => Lookup.GetEnumerator();
+
+    [Pure]
+    public static CountryLookup<T> New(IEnumerable<KeyValuePair<Country, T>> items)
+    {
+        var lookup = new T[CountryId.MaxSize];
+
+        foreach (var kvp in items)
+            lookup[(int)CountryId.New(kvp.Key)] = kvp.Value;
+
+        return new(lookup);
+    }
 }

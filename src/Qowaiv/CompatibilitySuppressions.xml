@@ -115,6 +115,13 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Extensions.QowaivRandom</Target>
+    <Left>lib/net10.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Extensions.QowaivStream</Target>
     <Left>lib/net10.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
@@ -710,6 +717,13 @@
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Extensions.QowaivIFormattable</Target>
+    <Left>lib/net8.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Extensions.QowaivRandom</Target>
     <Left>lib/net8.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -1347,6 +1361,13 @@
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Extensions.QowaivIFormattable</Target>
+    <Left>lib/net9.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Extensions.QowaivRandom</Target>
     <Left>lib/net9.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -2032,6 +2053,13 @@
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Qowaiv.Extensions.QowaivIFormattable</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/netstandard2.0/Qowaiv.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Extensions.QowaivRandom</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/netstandard2.0/Qowaiv.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -21929,6 +21957,18 @@
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
     <Target>T:Qowaiv.Extensions.QowaivIFormattable:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.Extensions.QowaivRandom:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.dll</Left>
+    <Right>lib/net10.0/Qowaiv.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.Extensions.QowaivRandom:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.dll</Left>
     <Right>lib/net10.0/Qowaiv.dll</Right>
   </Suppression>

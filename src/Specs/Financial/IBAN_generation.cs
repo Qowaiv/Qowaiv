@@ -43,7 +43,10 @@ internal class Markdown_file
     [Test]
     public void Generate_BBAN_Random()
     {
-        var test = new Regex("[ac]{4}");
+        var test4 = new Regex("[ac]{4}");
+        var test3 = new Regex("[ac]{3}");
+        var test2 = new Regex("[ac]{2}nn");
+
 
         var writer = new StringBuilder();
 
@@ -56,7 +59,12 @@ internal class Markdown_file
             if (info.WithCurrency)
                 pattern = pattern[..^3] + "EUR";
 
-            pattern = test.Replace(pattern, "TEST", 1);
+            pattern = test4.Replace(pattern, "TEST", 1);
+
+            if (!pattern.Contains("TEST"))
+                pattern = test3.Replace(pattern, "TST", 1);
+            if (!pattern.Contains("TST"))
+                pattern = test2.Replace(pattern, "TT00", 1);
 
             if (info.CheckSum is null)
                 writer.Append("kk").Append(pattern[2..]);

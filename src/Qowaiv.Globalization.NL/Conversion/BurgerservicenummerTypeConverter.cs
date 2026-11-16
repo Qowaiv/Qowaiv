@@ -1,6 +1,6 @@
 namespace Qowaiv.Globalization.NL.Conversion;
 
-/// <summary>Provides a conversion for an email address.</summary>
+/// <summary>Provides a conversion for a Burgerservicenummer.</summary>
 [Inheritable]
 public class BurgerservicenummerTypeConverter : NumericTypeConverter<Burgerservicenummer, long>
 {

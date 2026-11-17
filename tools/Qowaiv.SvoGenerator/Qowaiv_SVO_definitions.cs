@@ -93,7 +93,7 @@ public class Generation_of
         var init = $@"{Root}\src\Qowaiv.Globalization.NL\{name}.cs";
         var json = $@"{Root}\src\Qowaiv.Globalization.NL\Json\{name}JsonConverter.cs";
         var spec = $@"{Root}\src\Specs.Globalization\NL\{name}_specs.cs".Replace(@"\\", @"\");
-        Generate(name, underlying, fulleName, ns, features, path, init, json, spec, formatExceptionMessage)
+        Generate(name, underlying, fullName, ns, features, path, init, json, spec, formatExceptionMessage)
             .Should().BeTrue();
     }
 

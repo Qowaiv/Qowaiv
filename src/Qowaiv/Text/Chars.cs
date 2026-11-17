@@ -18,7 +18,7 @@ internal static class Chars
         public int Digit => ch - '0';
 
         /// <summary>Gets the upper case char (only valid for [a-z]).</summary>
-        public char To_Upper_ASCII => (char)(ch & 0x5F);
+        public char ASCII_Upper => (char)(ch & 0x5F);
 
         public Categories Categories => Cat(ch);
 
@@ -34,7 +34,7 @@ internal static class Chars
         public bool Is_a_z => (uint)(ch - 'a') <= 'z' - 'a';
 
         /// <summary>True if [a-zA-Z].</summary>
-        public bool is_a_zA_Z => ch.To_Upper_ASCII.Is_A_Z;
+        public bool is_a_zA_Z => ch.ASCII_Upper.Is_A_Z;
 
         /// <summary>True if markup (including whitespace).</summary>
         public bool Is_Markup => ch <= 127
@@ -62,9 +62,8 @@ internal static class Chars
             if (span.IsEmpty)
                 return string.Empty;
 
-#if NETSTANDARD2_0
-            return span.ToString().ToUpperInvariant();
-#else
+#if NET10_0_OR_GREATER
+
             if (span.Length <= 256)
             {
                 Span<char> buffer = stackalloc char[span.Length];
@@ -83,6 +82,8 @@ internal static class Chars
             {
                 ArrayPool<char>.Shared.Return(rented);
             }
+#else
+            return span.ToString().ToUpperInvariant();
 #endif
         }
     }

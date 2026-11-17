@@ -357,6 +357,20 @@ public class Supports_JSON_serialization
     public void convention_based_serialization(object json, @TSvo svo)
         => JsonTester.Write(svo).Should().Be(json);
 
+#if NET10_0_OR_GREATER
+    [Test]
+    [Arguments("svoValue", "svoValue")]
+    [Arguments("?", "?")]
+    public void System_Text_JSON_deserialization(object json, @TSvo svo)
+        => JsonTester.Read_System_Text_JSON<@TSvo>(json).Should().Be(svo);
+
+    [Test]
+    [Arguments("svoValue", "svoValue")]
+    [Arguments("?", "?")]
+    public void System_Text_JSON_serialization(@TSvo svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
+
     [Test]
     [Arguments("Invalid input", typeof(FormatException))]
     [Arguments("2017-06-11", typeof(FormatException))]

@@ -215,6 +215,31 @@ public class Has_custom_formatting
             Svo.KadastraleGemeente.ToString(provider: null).Should().Be("DEL00");
         }
     }
+
+    [Test]
+    public void TryFormat_empty_as_empty_string()
+    {
+        Span<char> destination = stackalloc char[5];
+        KadastraleGemeente.Empty.TryFormat(destination, out var charsWritten, default, null).Should().BeTrue();
+        charsWritten.Should().Be(0);
+    }
+
+    [Test]
+    public void TryFormat_writes_value()
+    {
+        Span<char> destination = stackalloc char[5];
+        Svo.KadastraleGemeente.TryFormat(destination, out var charsWritten, default, null).Should().BeTrue();
+        charsWritten.Should().Be(5);
+        destination.ToString().Should().Be("DEL00");
+    }
+
+    [Test]
+    public void TryFormat_returns_false_if_destination_too_small()
+    {
+        Span<char> destination = stackalloc char[4];
+        Svo.KadastraleGemeente.TryFormat(destination, out var charsWritten, default, null).Should().BeFalse();
+        charsWritten.Should().Be(0);
+    }
 }
 
 public class Is_comparable
@@ -306,6 +331,20 @@ public class Supports_JSON_serialization
     [Arguments(null, "")]
     public void convention_based_serialization(object json, KadastraleGemeente svo)
         => JsonTester.Write(svo).Should().Be(json);
+
+#if NET10_0_OR_GREATER
+    [Test]
+    [Arguments("DEL00", "DEL00")]
+    [Arguments("?", "?")]
+    public void System_Text_JSON_deserialization(object json, KadastraleGemeente svo)
+        => JsonTester.Read_System_Text_JSON<KadastraleGemeente>(json).Should().Be(svo);
+
+    [Test]
+    [Arguments("DEL00", "DEL00")]
+    [Arguments("?", "?")]
+    public void System_Text_JSON_serialization(KadastraleGemeente svo, object json)
+        => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
+#endif
 
     [Test]
     [Arguments("Invalid input", typeof(FormatException))]

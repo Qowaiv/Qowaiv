@@ -54,12 +54,6 @@ public readonly partial struct KadastraleGemeente : IXmlSerializable, IFormattab
     [Pure]
     public string? ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Casts the kadastrale gemeente to a <see cref="string" />.</summary>
-    public static explicit operator string(KadastraleGemeente val) => val.ToString(CultureInfo.CurrentCulture);
-
-    /// <summary>Casts a <see cref="string" /> to a kadastrale gemeente.</summary>
-    public static explicit operator KadastraleGemeente(string str) => Parse(str, CultureInfo.CurrentCulture);
-
     /// <summary>Converts the <see cref="string" /> to <see cref="KadastraleGemeente" />.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>

@@ -285,7 +285,7 @@ public readonly partial struct Burgerservicenummer : ISpanParsable<Burgerservice
         {
             c = span[pos--];
 
-            // Not more then 9 digits
+            // Not more than 9 digits
             if (c.Is_0_9 && ++length <= 9)
             {
                 var digit = c.Digit;

@@ -24,10 +24,6 @@
     <EmbeddedResource Include="Attributes/**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Attributes\ImmutableAttribute.cs" />
-  </ItemGroup>
-
   <ItemGroup Label="CompileTimeDependencies">
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
   </ItemGroup>

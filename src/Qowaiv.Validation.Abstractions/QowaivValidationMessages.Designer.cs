@@ -19,7 +19,7 @@ namespace Qowaiv.Validation.Abstractions {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class QowaivValidationMessages {
@@ -68,18 +68,16 @@ namespace Qowaiv.Validation.Abstractions {
                 return ResourceManager.GetString("InvalidModel", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///  The result of the operation is invalid.
+        ///   Looks up a localized string similar to The result of the operation is invalid..
         /// </summary>
-        internal static string InvalidOperationException
-        {
-            get
-            {
+        internal static string InvalidOperationException {
+            get {
                 return ResourceManager.GetString("InvalidOperationException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The value of the Result&lt;T&gt; can not be null..
         /// </summary>

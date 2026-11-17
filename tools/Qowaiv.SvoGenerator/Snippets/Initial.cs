@@ -17,11 +17,8 @@ namespace @Namespace;
 #endif
 public readonly partial struct @TSvo : IXmlSerializable, IFormattable, IEquatable<@TSvo>, IComparable, IComparable<@TSvo>
 {
-    /// <summary>Represents an empty/not set @FullName.</summary>
-    public static readonly @TSvo Empty;
-
     /// <summary>Represents an unknown (but set) @FullName.</summary>
-    public static readonly @TSvo Unknown = new @TSvo(default);
+    public static @TSvo Unknown => new @TSvo(default);
 
     /// <summary>Gets the number of characters of @FullName.</summary>
     public int Length => m_Value == null ? 0 : m_Value.Length;
@@ -108,7 +105,7 @@ public readonly partial struct @TSvo : IXmlSerializable, IFormattable, IEquatabl
     /// <param name="s">
     /// A string containing the @FullName to convert.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <param name="result">
@@ -118,14 +115,14 @@ public readonly partial struct @TSvo : IXmlSerializable, IFormattable, IEquatabl
     /// True if the string was converted successfully, otherwise false.
     /// </returns>
     [Pure]
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out @TSvo result)
+    public static bool TryParse(string? s, IFormatProvider? provider, out @TSvo result)
     {
         result = default;
         if (string.IsNullOrEmpty(s))
         {
             return true;
         }
-        if (Qowaiv.Unknown.IsUnknown(s, formatProvider as CultureInfo))
+        if (Qowaiv.Unknown.IsUnknown(s, provider as CultureInfo))
         {
             result = Unknown;
             return true;

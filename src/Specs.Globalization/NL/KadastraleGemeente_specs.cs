@@ -132,6 +132,26 @@ public class Can_be_parsed
     [Test]
     public void with_TryParse_returns_SVO()
         => KadastraleGemeente.TryParse("DEL00").Should().Be(Svo.KadastraleGemeente);
+
+    [Test]
+    public void from_span()
+        => KadastraleGemeente.Parse("DEL00".AsSpan(), null).Should().Be(Svo.KadastraleGemeente);
+
+    [Test]
+    public void from_invalid_span_throws()
+    {
+        Func<KadastraleGemeente> parse = () => KadastraleGemeente.Parse("invalid input".AsSpan(), null);
+        parse.Should().Throw<FormatException>()
+            .WithMessage("Not a valid kadastrale gemeente");
+    }
+
+    [Test]
+    public void with_TryParse_and_provider_returns_SVO()
+        => KadastraleGemeente.TryParse("DEL00", CultureInfo.InvariantCulture).Should().Be(Svo.KadastraleGemeente);
+
+    [Test]
+    public void with_TryParse_and_provider_returns_null_for_invalid_input()
+        => KadastraleGemeente.TryParse("invalid input", CultureInfo.InvariantCulture).Should().BeNull();
 }
 
 public class Has_custom_formatting

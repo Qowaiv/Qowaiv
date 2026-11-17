@@ -34,7 +34,7 @@ internal static class Chars
         public bool Is_a_z => (uint)(ch - 'a') <= 'z' - 'a';
 
         /// <summary>True if [a-zA-Z].</summary>
-        public bool is_A_Za_z => ch.Is_a_z || ch.Is_A_Z;
+        public bool is_a_zA_Z => ch.Is_a_z || ch.Is_A_Z;
 
         /// <summary>True if markup (including whitespace).</summary>
         public bool Is_Markup => ch <= 127

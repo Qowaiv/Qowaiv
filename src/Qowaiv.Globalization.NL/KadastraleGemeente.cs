@@ -151,9 +151,9 @@ public readonly partial struct KadastraleGemeente : ISpanParsable<KadastraleGeme
         }
         else if (s is
         [
-            { is_A_Za_z: true },
-            { is_A_Za_z: true },
-            { is_A_Za_z: true },
+            { is_a_zA_Z: true },
+            { is_a_zA_Z: true },
+            { is_a_zA_Z: true },
             { Is_0_9: true },
             { Is_0_9: true },
         ])
@@ -184,7 +184,7 @@ public readonly partial struct KadastraleGemeente : ISpanParsable<KadastraleGeme
     /// </exception>
     [Pure]
     public static KadastraleGemeente Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
-        => TryParse(s, provider, out var bsn)
-        ? bsn
-        : throw Unparsable.ForValue<KadastraleGemeente>(s.ToString(), QowaivMessages.FormatExceptionBurgerservicenummer);
+        => TryParse(s, provider, out var svo)
+        ? svo
+        : throw Unparsable.ForValue<KadastraleGemeente>(s.ToString(), QowaivMessages.FormatExceptionKadastraleGemeente);
 }

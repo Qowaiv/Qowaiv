@@ -10,7 +10,11 @@ namespace @Namespace;
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(@type))]
-[OpenApiDataType(description: "@FullName", type: "@TSvo", format: "@TSvo", example: "ABC")]
+[OpenApiDataType(
+    description: "@FullName",
+    type: "string",
+    format: "@TSvo",
+    example: "ABC")]
 [TypeConverter(typeof(Conversion.@TSvoTypeConverter))]
 #if NET10_0_OR_GREATER
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.@TSvoJsonConverter))]

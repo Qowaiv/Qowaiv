@@ -87,6 +87,7 @@ public class Generation_of
 
     [Test]
     [Arguments("Burgerservicenummer", typeof(long), "Burgerservicenummer", "Qowaiv.Globalization.NL", SvoFeatures.Default)]
+    [Arguments("KadastraleGemeente", typeof(string), "Kadastrale Gemeente", "Qowaiv.Globalization.NL", SvoFeatures.Default)]
     public void Qowaiv_Globalization_NL(string name, Type underlying, string fullName, string ns, SvoFeatures features, string? formatExceptionMessage = null)
     {
         var path = $@"{Root}\src\Qowaiv.Globalization.NL\Generated\{name}.generated.cs";

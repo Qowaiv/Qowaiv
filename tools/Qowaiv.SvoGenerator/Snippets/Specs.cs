@@ -35,42 +35,6 @@ public class With_domain_logic
         => svo.IsUnknown().Should().Be(result);
 }
 
-[Obsolete("Will be dropped")]
-public class Is_valid_for
-{
-    [Test]
-    [Arguments("?")]
-    [Arguments("unknown")]
-    public void strings_representing_unknown(string input)
-        => @TSvo.IsValid(input).Should().BeTrue();
-
-    [Test]
-    [Arguments("svoValue", "nl")]
-    [Arguments("svoValue", "nl")]
-    public void strings_representing_SVO(string input, CultureInfo culture)
-        => @TSvo.IsValid(input, culture).Should().BeTrue();
-}
-
-[Obsolete("Will be dropped")]
-public class Is_not_valid_for
-{
-    [Test]
-    public void string_empty()
-        => @TSvo.IsValid(string.Empty).Should().BeFalse();
-
-    [Test]
-    public void string_null()
-        => @TSvo.IsValid(null).Should().BeFalse();
-
-    [Test]
-    public void whitespace()
-        => @TSvo.IsValid(" ").Should().BeFalse();
-
-    [Test]
-    public void garbage()
-        => @TSvo.IsValid("garbage").Should().BeFalse();
-}
-
 public class Has_constant
 {
     [Test]
@@ -236,7 +200,7 @@ public class Has_custom_formatting
     {
         using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
         {
-            Assert.AreEqual("svoValue", Svo.@TSvo.ToString(provider: null));
+            Svo.@TSvo.ToString(provider: null).Should().Be("svoValue");
         }
     }
 }
@@ -410,13 +374,13 @@ public class Supports_XML_serialization
     public void using_XmlSerializer_to_serialize()
     {
         var xml = Serialize.Xml(Svo.@TSvo);
-        xml.Should().Be("xmlValue");
+        xml.Should().Be("DEL00");
     }
 
     [Test]
     public void using_XmlSerializer_to_deserialize()
     {
-        var svo = Deserialize.Xml<@TSvo>("xmlValue");
+        var svo = Deserialize.Xml<@TSvo>("DEL00");
         svo.Should().Be(Svo.@TSvo);
     }
 

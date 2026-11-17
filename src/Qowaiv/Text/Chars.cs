@@ -1,3 +1,6 @@
+using System.Buffers;
+using System.Text;
+
 namespace Qowaiv.Text;
 
 /// <summary>Char extension to help with parsing.</summary>
@@ -30,6 +33,9 @@ internal static class Chars
         /// <summary>True if [a-z].</summary>
         public bool Is_a_z => (uint)(ch - 'a') <= 'z' - 'a';
 
+        /// <summary>True if [a-zA-Z].</summary>
+        public bool is_A_Za_z => ch.Is_a_z || ch.Is_A_Z;
+
         /// <summary>True if markup (including whitespace).</summary>
         public bool Is_Markup => ch <= 127
             ? (Cat(ch) & (Categories.Markup | Categories.Whitespace)) is not 0
@@ -45,6 +51,40 @@ internal static class Chars
         public bool Is_EMAIL_TopDomain => ch > 127 || (Cat(ch) & Categories.Email_TopDomain) is not 0;
 
         public bool Is_EMAIL_Punycode => ch <= 127 && (Cat(ch) & Categories.Email_Punycode) is not 0;
+    }
+
+    extension(ReadOnlySpan<char> span)
+    {
+        /// <summary>Uppercase characters in the ASCII range.</summary>
+        [Pure]
+        public string ASCII_Upper()
+        {
+            if (span.IsEmpty)
+                return string.Empty;
+
+#if NETSTANDARD2_0
+            return span.ToString().ToUpperInvariant();
+#else
+            if (span.Length <= 256)
+            {
+                Span<char> buffer = stackalloc char[span.Length];
+                Ascii.ToUpper(span, buffer, out _);
+                return new string(buffer);
+            }
+
+            char[] rented = ArrayPool<char>.Shared.Rent(span.Length);
+            try
+            {
+                Span<char> buffer = rented.AsSpan(0, span.Length);
+                Ascii.ToUpper(span, buffer, out _);
+                return new string(buffer);
+            }
+            finally
+            {
+                ArrayPool<char>.Shared.Return(rented);
+            }
+#endif
+        }
     }
 
     [Pure]

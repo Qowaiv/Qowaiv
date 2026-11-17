@@ -276,7 +276,7 @@ public readonly partial struct Burgerservicenummer : ISpanParsable<Burgerservice
 
         if (!c.Is_0_9) return false;
 
-        // Laatste digit is * -1;
+        // Last digit is * -1;
         var check = -value;
 
         // By reading from right to left we can both parse the number and

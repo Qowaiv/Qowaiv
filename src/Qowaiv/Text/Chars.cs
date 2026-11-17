@@ -7,6 +7,7 @@ namespace Qowaiv.Text;
 /// <remarks>
 /// The _ after the Is ensures that we do not collide with methods on <see cref="char"/>.
 /// </remarks>
+[ExcludeFromCodeCoverage]
 internal static class Chars
 {
     /// <summary>ASCII " (34 | 0x22).</summary>

@@ -9,6 +9,12 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Qowaiv.Globalization.NL.Json.KadastraleGemeenteJsonConverter</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:System.Runtime.CompilerServices.IsExternalInit</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
@@ -22,6 +28,12 @@
   <Suppression>
     <DiagnosticId>CP0008</DiagnosticId>
     <Target>T:Qowaiv.Globalization.NL.Burgerservicenummer</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0008</DiagnosticId>
+    <Target>T:Qowaiv.Globalization.NL.KadastraleGemeente</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>
@@ -159,7 +171,145 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.Conversion.KadastraleGemeenteTypeConverter.FromString(System.String,System.Globalization.CultureInfo):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.CompareTo(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.Equals(System.Object):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.Equals(System.Object)$0:[T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.FromJson(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.Parse(System.ReadOnlySpan{System.Char},System.IFormatProvider)$1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.Parse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.Parse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.ToJson:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.ToString:[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.ToString(System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.ToString(System.IFormatProvider)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.ToString(System.String,System.IFormatProvider)-&gt;string:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.ToString(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.ToString(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.ToString(System.String)$0:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)$3:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.TryParse(System.ReadOnlySpan{System.Char},System.IFormatProvider,Qowaiv.Globalization.NL.KadastraleGemeente@)$1:[T:System.Runtime.CompilerServices.NullableAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.TryParse(System.String,Qowaiv.Globalization.NL.KadastraleGemeente@):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.TryParse(System.String,System.IFormatProvider,Qowaiv.Globalization.NL.KadastraleGemeente@):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.TryParse(System.String,System.IFormatProvider):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>M:Qowaiv.Globalization.NL.KadastraleGemeente.TryParse(System.String):[T:System.Runtime.CompilerServices.NullableContextAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
     <Target>T:Qowaiv.Globalization.NL.Burgerservicenummer:[T:System.Text.Json.Serialization.JsonConverterAttribute]</Target>
+    <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
+    <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0016</DiagnosticId>
+    <Target>T:Qowaiv.Globalization.NL.KadastraleGemeente:[T:System.Text.Json.Serialization.JsonConverterAttribute]</Target>
     <Left>lib/netstandard2.0/Qowaiv.Globalization.NL.dll</Left>
     <Right>lib/net10.0/Qowaiv.Globalization.NL.dll</Right>
   </Suppression>

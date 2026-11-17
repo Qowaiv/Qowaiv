@@ -181,7 +181,7 @@
         "dependencies": {
           "AwesomeAssertions": "[9.6.0, )",
           "Qowaiv.TestTools": "[11.0.0-rc.1, )",
-          "TUnit.Core": "[1.85.0, )"
+          "TUnit.Core": "[1.86.0, )"
         }
       },
       "Newtonsoft.Json": {
@@ -192,9 +192,9 @@
       },
       "TUnit.Core": {
         "type": "CentralTransitive",
-        "requested": "[1.85.0, )",
-        "resolved": "1.85.0",
-        "contentHash": "TSnafVDag4AC7OZwjxNxwozfuqdcq6dJhUv+B2HLAa/oDOylCXJcwdK6rekNH+SfSaF+sQaNiESzjlaX5NHxIQ=="
+        "requested": "[1.86.0, )",
+        "resolved": "1.86.0",
+        "contentHash": "usapmeq2CduBbWkYGizajQqdwPvCT8JEQodx1ddV0TEOQNEq0Jn3Gy8fjSQQyP5ZuVwIR2Gh8iMqscThg1yvmQ=="
       }
     }
   }

@@ -8,7 +8,7 @@ residents. It is equal to the former sofinummer, but has a broader legal basis.
 var bsn = Burgerservicenummer.Parse("123456782");
 var created = Burgerservicenummer.Create(1234_56_782L);
 var fromLong = 1234_56_782L.BSN(); // humanizer extension
-var casted = (Burgerservicenummer)1234_56_782L;
+var cast = (Burgerservicenummer)1234_56_782L;
 
 bsn.ToString();    // 123456782
 bsn.ToString("F"); // 1234.56.782

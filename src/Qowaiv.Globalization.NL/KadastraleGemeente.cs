@@ -2,11 +2,9 @@
 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
 // See README.md => Sortable
 
-using Qowaiv.Text;
-
 namespace Qowaiv.Globalization.NL;
 
-/// <summary>Represents a Kadastrale Gemeente.</summary>
+/// <summary>Represents a Kadastrale Gemeente via its AKR-code.</summary>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(ulong))]

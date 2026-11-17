@@ -123,10 +123,12 @@ public readonly struct ValidationMessages : IReadOnlyCollection<IValidationMessa
     /// </exception>
     [Pure]
     [OverloadResolutionPriority(1)]
-    public static ValidationMessages New(IEnumerable<IValidationMessage?> messages)
-        => messages is null
-        ? None
-        : New(messages, [], 0, 0, 0);
+    public static ValidationMessages New(IEnumerable<IValidationMessage?> messages) => messages switch
+    {
+        null => None,
+        ValidationMessages typed => typed,
+        _ => New(messages, [], 0, 0, 0),
+    };
 
     /// <summary>Helper to reduce allocations for addition.</summary>
     [Pure]

@@ -10,16 +10,17 @@ namespace Benchmarks;
 [MemoryDiagnoser]
 [GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByParams)]
 [HideColumns(Column.StdDev, Column.Error, Column.Median, Column.RatioSD)]
-public class Data_Annotations
+public  partial class Validators
 {
     internal static readonly IDictionary<string, string[]> Empty = new Dictionary<string, string[]>();
 
     [SimpleJob(RuntimeMoniker.Net10_0)]
     [SimpleJob(RuntimeMoniker.Net11_0)]
-    public class Validate_small
+    public partial class Validate_small
     {
         internal readonly BenchmarkModelValidator FluentValidator = new();
-        internal BenchmarkModel Model = new(); 
+        internal BenchmarkModel Model = new();
+
 
         [IterationSetup]
         public void Setup() => Model = BenchmarkModel.New(Count);
@@ -39,5 +40,8 @@ public class Data_Annotations
             => MiniValidation.MiniValidator.TryValidate(Model, out var errors)
             ? Empty
             : errors;
+
+
     }
+
 }

@@ -1,29 +1,29 @@
-.bdn/
 .nuget/
 .temp/
+
 packages/
 
-#################
-## Visual Studio
-#################
+# Benmarks
+.bdn/
+BenchmarkDotNet.Artifacts/
+
 # User-specific files
 .vs
 *.suo
 *.user
 *.sln.docstates
 
-# Build results
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
 
+# Build results
 [Dd]ebug/
 [Rr]elease/
 x64/
 build/
 [Bb]in/
 [Oo]bj/
-
-# MSTest test Results
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
 
 *_i.c
 *_p.c

@@ -117,7 +117,7 @@ public class Can_be_parsed
         {
             Func<KadastraleGemeente> parse = () => KadastraleGemeente.Parse("invalid input");
             parse.Should().Throw<FormatException>()
-                .WithMessage("Not a valid Kadastrale Gemeente");
+                .WithMessage("Not a valid kadastrale gemeente");
         }
     }
 
@@ -344,7 +344,7 @@ public class Is_Open_API_data_type
        => OpenApiDataType.FromType(typeof(KadastraleGemeente))
        .Should().Be(new OpenApiDataType(
            dataType: typeof(KadastraleGemeente),
-           description: "Kadastrale Gemeente (in the Netherlands)",
+           description: "kadastrale gemeente (in the Netherlands)",
            example: "DEL00",
            type: "string",
            format: "akr-code",

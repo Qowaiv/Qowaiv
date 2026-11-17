@@ -4,7 +4,7 @@ using Qowaiv.Json;
 
 namespace Qowaiv.Globalization.NL.Json;
 
-/// <summary>Provides a JSON conversion for a Kadastrale Gemeente.</summary>
+/// <summary>Provides a JSON conversion for a kadastrale gemeente.</summary>
 public sealed class KadastraleGemeenteJsonConverter : SvoJsonConverter<KadastraleGemeente>
 {
     /// <inheritdoc />

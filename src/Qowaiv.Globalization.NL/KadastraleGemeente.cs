@@ -4,33 +4,33 @@
 
 namespace Qowaiv.Globalization.NL;
 
-/// <summary>Represents a Kadastrale Gemeente via its AKR-code.</summary>
+/// <summary>Represents a kadastrale gemeente via its AKR-code.</summary>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(ulong))]
 [OpenApiDataType(
-    description: "Kadastrale Gemeente (in the Netherlands)",
+    description: "kadastrale gemeente (in the Netherlands)",
     type: "string",
     format: "akr-code",
     example: "DEL00",
     pattern: "[A-Z]{3}[0-9]{2}")]
 [TypeConverter(typeof(Conversion.KadastraleGemeenteTypeConverter))]
-#if NET10_0_OR_GREATER
+#if !NETSTANDARD2_0
 [System.Text.Json.Serialization.JsonConverter(typeof(Json.KadastraleGemeenteJsonConverter))]
 #endif
 public readonly partial struct KadastraleGemeente : IXmlSerializable, IFormattable, IEquatable<KadastraleGemeente>, IComparable, IComparable<KadastraleGemeente>
 {
-    /// <summary>Represents an unknown (but set) Kadastrale Gemeente.</summary>
+    /// <summary>Represents an unknown (but set) kadastrale gemeente.</summary>
     public static KadastraleGemeente Unknown => new("?");
 
-    /// <summary>Gets the number of characters of Kadastrale Gemeente.</summary>
+    /// <summary>Gets the number of characters of kadastrale gemeente.</summary>
     public int Length => IsKnown ? m_Value!.Length : 0;
 
-    /// <summary>Returns a <see cref="string" /> that represents the Kadastrale Gemeente for DEBUG purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the kadastrale gemeente for DEBUG purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:F}");
 
-    /// <summary>Returns a formatted <see cref="string" /> that represents the Kadastrale Gemeente.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the kadastrale gemeente.</summary>
     /// <param name="format">
     /// The format that this describes the formatting.
     /// </param>
@@ -43,28 +43,28 @@ public readonly partial struct KadastraleGemeente : IXmlSerializable, IFormattab
         ? formatted
         : m_Value ?? string.Empty;
 
-    /// <summary>Gets an XML string representation of the Kadastrale Gemeente.</summary>
+    /// <summary>Gets an XML string representation of the kadastrale gemeente.</summary>
     [Pure]
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Serializes the Kadastrale Gemeente to a JSON node.</summary>
+    /// <summary>Serializes the kadastrale gemeente to a JSON node.</summary>
     /// <returns>
     /// The serialized JSON string.
     /// </returns>
     [Pure]
     public string? ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Casts the Kadastrale Gemeente to a <see cref="string" />.</summary>
+    /// <summary>Casts the kadastrale gemeente to a <see cref="string" />.</summary>
     public static explicit operator string(KadastraleGemeente val) => val.ToString(CultureInfo.CurrentCulture);
 
-    /// <summary>Casts a <see cref="string" /> to a Kadastrale Gemeente.</summary>
+    /// <summary>Casts a <see cref="string" /> to a kadastrale gemeente.</summary>
     public static explicit operator KadastraleGemeente(string str) => Parse(str, CultureInfo.CurrentCulture);
 
     /// <summary>Converts the <see cref="string" /> to <see cref="KadastraleGemeente" />.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">
-    /// A string containing the Kadastrale Gemeente to convert.
+    /// A string containing the kadastrale gemeente to convert.
     /// </param>
     /// <param name="provider">
     /// The specified format provider.

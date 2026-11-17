@@ -15,36 +15,36 @@ public partial struct KadastraleGemeente
 {
     private KadastraleGemeente(string? value) => m_Value = value;
 
-    /// <summary>The inner value of the Kadastrale Gemeente.</summary>
+    /// <summary>The inner value of the kadastrale gemeente.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly string? m_Value;
 }
 
 public partial struct KadastraleGemeente : IEmpty<KadastraleGemeente>
 {
-    /// <summary>Represents an empty/not set Kadastrale Gemeente.</summary>
+    /// <summary>Represents an empty/not set kadastrale gemeente.</summary>
     public static KadastraleGemeente Empty => default;
 
-    /// <summary>False if the Kadastrale Gemeente is empty, otherwise true.</summary>
+    /// <summary>False if the kadastrale gemeente is empty, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>Returns true if the Kadastrale Gemeente is empty, otherwise false.</summary>
+    /// <summary>Returns true if the kadastrale gemeente is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
 
 public partial struct KadastraleGemeente : IUnknown<KadastraleGemeente>
 {
-    /// <summary>False if the Kadastrale Gemeente is empty or unknown, otherwise true.</summary>
+    /// <summary>False if the kadastrale gemeente is empty or unknown, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
 
-    /// <summary>Returns true if the Kadastrale Gemeente is unknown, otherwise false.</summary>
+    /// <summary>Returns true if the kadastrale gemeente is unknown, otherwise false.</summary>
     [Pure]
     public bool IsUnknown() => m_Value == Unknown.m_Value;
 
-    /// <summary>Returns true if the Kadastrale Gemeente is empty or unknown, otherwise false.</summary>
+    /// <summary>Returns true if the kadastrale gemeente is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
@@ -58,7 +58,7 @@ public partial struct KadastraleGemeente : IEquatable<KadastraleGemeente>
     [Pure]
     public override bool Equals([NotNullWhen(true)] object? obj) => obj is KadastraleGemeente other && Equals(other);
 
-    /// <summary>Returns true if this instance and the other Kadastrale Gemeente are equal, otherwise false.</summary>
+    /// <summary>Returns true if this instance and the other kadastrale gemeente are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="KadastraleGemeente" /> to compare with.</param>
     [Pure]
     public bool Equals(KadastraleGemeente other) => m_Value == other.m_Value;
@@ -96,18 +96,18 @@ public partial struct KadastraleGemeente : IComparable, IComparable<KadastraleGe
 }
 public partial struct KadastraleGemeente : IFormattable
 {
-    /// <summary>Returns a <see cref="string" /> that represents the Kadastrale Gemeente.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the kadastrale gemeente.</summary>
     [Pure]
     public override string ToString() => ToString(format: null, formatProvider: null);
 
-    /// <summary>Returns a formatted <see cref="string" /> that represents the Kadastrale Gemeente.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the kadastrale gemeente.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
     public string ToString(string? format) => ToString(format, formatProvider: null);
 
-    /// <summary>Returns a formatted <see cref="string" /> that represents the Kadastrale Gemeente.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the kadastrale gemeente.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
@@ -116,26 +116,26 @@ public partial struct KadastraleGemeente : IFormattable
 }
 public partial struct KadastraleGemeente
 {
-    /// <summary>Creates the Kadastrale Gemeente from a JSON string.</summary>
+    /// <summary>Creates the kadastrale gemeente from a JSON string.</summary>
     /// <param name="json">
     /// The JSON string to deserialize.
     /// </param>
     /// <returns>
-    /// The deserialized Kadastrale Gemeente.
+    /// The deserialized kadastrale gemeente.
     /// </returns>
     [Pure]
     public static KadastraleGemeente FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
 public partial struct KadastraleGemeente : IXmlSerializable
 {
-    /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the Kadastrale Gemeente.</summary>
+    /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the kadastrale gemeente.</summary>
     /// <remarks>
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
     XmlSchema? IXmlSerializable.GetSchema() => (XmlSchema?)null;
 
-    /// <summary>Reads the Kadastrale Gemeente from an <see href="XmlReader" />.</summary>
+    /// <summary>Reads the kadastrale gemeente from an <see href="XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
     void IXmlSerializable.ReadXml(XmlReader reader)
     {
@@ -144,7 +144,7 @@ public partial struct KadastraleGemeente : IXmlSerializable
         System.Runtime.CompilerServices.Unsafe.AsRef(in this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
-    /// <summary>Writes the Kadastrale Gemeente to an <see href="XmlWriter" />.</summary>
+    /// <summary>Writes the kadastrale gemeente to an <see href="XmlWriter" />.</summary>
     /// <remarks>
     /// Uses <see cref="ToXmlString()" />.
     /// </remarks>
@@ -159,10 +159,10 @@ public partial struct KadastraleGemeente
 {
     /// <summary>Converts the <see cref="string" /> to <see cref="KadastraleGemeente" />.</summary>
     /// <param name="s">
-    /// A string containing the Kadastrale Gemeente to convert.
+    /// A string containing the kadastrale gemeente to convert.
     /// </param>
     /// <returns>
-    /// The parsed Kadastrale Gemeente.
+    /// The parsed kadastrale gemeente.
     /// </returns>
     /// <exception cref="FormatException">
     /// <paramref name="s" /> is not in the correct format.
@@ -175,13 +175,13 @@ public partial struct KadastraleGemeente
 
     /// <summary>Converts the <see cref="string" /> to <see cref="KadastraleGemeente" />.</summary>
     /// <param name="s">
-    /// A string containing the Kadastrale Gemeente to convert.
+    /// A string containing the kadastrale gemeente to convert.
     /// </param>
     /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
-    /// The parsed Kadastrale Gemeente.
+    /// The parsed kadastrale gemeente.
     /// </returns>
     /// <exception cref="FormatException">
     /// <paramref name="s" /> is not in the correct format.
@@ -194,10 +194,10 @@ public partial struct KadastraleGemeente
 
     /// <summary>Converts the <see cref="string" /> to <see cref="KadastraleGemeente" />.</summary>
     /// <param name="s">
-    /// A string containing the Kadastrale Gemeente to convert.
+    /// A string containing the kadastrale gemeente to convert.
     /// </param>
     /// <returns>
-    /// The Kadastrale Gemeente if the string was converted successfully, otherwise default.
+    /// The kadastrale gemeente if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
     public static KadastraleGemeente? TryParse(string? s)
@@ -207,13 +207,13 @@ public partial struct KadastraleGemeente
 
     /// <summary>Converts the <see cref="string" /> to <see cref="KadastraleGemeente" />.</summary>
     /// <param name="s">
-    /// A string containing the Kadastrale Gemeente to convert.
+    /// A string containing the kadastrale gemeente to convert.
     /// </param>
     /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
-    /// The Kadastrale Gemeente if the string was converted successfully, otherwise default.
+    /// The kadastrale gemeente if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
     public static KadastraleGemeente? TryParse(string? s, IFormatProvider? provider)
@@ -225,7 +225,7 @@ public partial struct KadastraleGemeente
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">
-    /// A string containing the Kadastrale Gemeente to convert.
+    /// A string containing the kadastrale gemeente to convert.
     /// </param>
     /// <param name="result">
     /// The result of the parsing.

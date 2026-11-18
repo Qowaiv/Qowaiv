@@ -35,7 +35,6 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T NotNull<T>([ValidatedNotNull] T? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         where T : class

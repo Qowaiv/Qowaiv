@@ -1,4 +1,6 @@
 #if !NET48
+using Specs;
+
 namespace Financial.IBAN_generation;
 
 internal class Markdown_file
@@ -144,7 +146,7 @@ internal class Markdown_file
     [Arguments("CIkkaannnnnnnnnnnnnnnnnnnnnn")]
     public void Generate_IBAN(string bban, string? because = null)
     {
-        var rnd = new Random(bban.GetHashCode());
+        var rnd = Rnd.New(bban.GetHashCode());
         string? iban = Generate(bban, rnd);
 
         iban.Should().NotBeNull(because);

@@ -1,3 +1,5 @@
+#pragma warning disable S4790 // Fine as tests data generator
+
 namespace Security.Cryptography.CryptographicSeed_specs;
 
 public class Computed

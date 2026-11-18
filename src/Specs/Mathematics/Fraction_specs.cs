@@ -1,3 +1,5 @@
+using Specs;
+
 namespace Mathematics.Fraction_specs;
 
 public class Defines
@@ -615,7 +617,7 @@ public class Can_be_created
     [Arguments(100)]
     public void from_decimals_without_precision_loss(int runs)
     {
-        var rnd = new Random();
+        var rnd = Rnd.Shared;
         var failures = new List<Fraction>(runs);
 
         foreach (var fraction in Enumerable.Range(0, runs).Select(i => rnd.Next(int.MinValue, int.MaxValue).DividedBy(rnd.Next(3, int.MaxValue))))

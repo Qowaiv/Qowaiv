@@ -4,6 +4,7 @@
 //    See: https://github.com/Corniel/Grenadiers/blob/master/LICENSE.md
 // </copyright>
 //-----------------------------------------------------------------------
+#pragma warning disable IDE0005
 using System;
 using System.Collections;
 using System.Collections.Generic;

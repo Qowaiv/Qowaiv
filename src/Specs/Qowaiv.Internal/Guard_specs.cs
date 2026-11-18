@@ -20,8 +20,8 @@ public class Stacktrace
             method.Should().BeEquivalentTo(
                 new
                 {
-                    Name = "NotNull",
-                    DeclaringType = new { Name = "Guard" },
+                    Name = "Throw",
+                    DeclaringType = new { Name = "ArgumentNullException" },
                 });
 
             x.StackTrace.Should().NotContain("NotNull");

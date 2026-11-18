@@ -1,7 +1,6 @@
 <Project>
 
-  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  <PropertyGroup Condition="'$(_IsPacking)' == 'true'">
     <GenerateSBOM>true</GenerateSBOM>
   </PropertyGroup>
 

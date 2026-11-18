@@ -41,3 +41,4 @@ global using System.Threading.Tasks;
 global using System.Xml.Serialization;
 global using TUnit.Core;
 global using Svo = Qowaiv.TestTools.Svo;
+global using static Specs.Statics;

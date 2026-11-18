@@ -1,4 +1,6 @@
 #if !NET48
+using Specs;
+
 namespace Financial.IBAN_generation;
 
 internal class Markdown_file
@@ -43,9 +45,9 @@ internal class Markdown_file
     [Test]
     public void Generate_BBAN_Random()
     {
-        var test4 = new Regex("[ac]{4}");
-        var test3 = new Regex("[ac]{3}");
-        var test2 = new Regex("[ac]{2}nn");
+        var test4 = regex("[ac]{4}");
+        var test3 = regex("[ac]{3}");
+        var test2 = regex("[ac]{2}nn");
 
 
         var writer = new StringBuilder();
@@ -144,7 +146,7 @@ internal class Markdown_file
     [Arguments("CIkkaannnnnnnnnnnnnnnnnnnnnn")]
     public void Generate_IBAN(string bban, string? because = null)
     {
-        var rnd = new Random(bban.GetHashCode());
+        var rnd = Rnd.New(bban.GetHashCode());
         string? iban = Generate(bban, rnd);
 
         iban.Should().NotBeNull(because);

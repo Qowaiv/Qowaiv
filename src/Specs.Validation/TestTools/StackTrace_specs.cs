@@ -33,7 +33,7 @@ public class Hides
     }
 }
 
-file class Model
+file sealed class Model
 {
     [Required]
     public string? Prop { get; init; }

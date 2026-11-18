@@ -34,9 +34,9 @@
       },
       "MongoDB.Bson": {
         "type": "Direct",
-        "requested": "[3.13.0, )",
-        "resolved": "3.13.0",
-        "contentHash": "jb4fGQIS1bTFSK2336FP3rBHDQ+UiVKdTAZcoWHeed1xlxvmclnHA8Y4CAQa+Y2KWw3Fz9OIAkXH/KXJL9yRGg==",
+        "requested": "[3.14.0, )",
+        "resolved": "3.14.0",
+        "contentHash": "JrfJx2od1ly90rECMNC8z58NQtnOd76nzp8osX3nkI/F8DUjf6sp6CtFJhIIMrrNR6qxuRvn1yly6f45GiJZqQ==",
         "dependencies": {
           "System.Memory": "4.5.5",
           "System.Runtime.CompilerServices.Unsafe": "5.0.0"
@@ -141,9 +141,9 @@
       },
       "MongoDB.Bson": {
         "type": "Direct",
-        "requested": "[3.13.0, )",
-        "resolved": "3.13.0",
-        "contentHash": "jb4fGQIS1bTFSK2336FP3rBHDQ+UiVKdTAZcoWHeed1xlxvmclnHA8Y4CAQa+Y2KWw3Fz9OIAkXH/KXJL9yRGg=="
+        "requested": "[3.14.0, )",
+        "resolved": "3.14.0",
+        "contentHash": "JrfJx2od1ly90rECMNC8z58NQtnOd76nzp8osX3nkI/F8DUjf6sp6CtFJhIIMrrNR6qxuRvn1yly6f45GiJZqQ=="
       },
       "PolySharp": {
         "type": "Direct",
@@ -203,9 +203,9 @@
       },
       "MongoDB.Bson": {
         "type": "Direct",
-        "requested": "[3.13.0, )",
-        "resolved": "3.13.0",
-        "contentHash": "jb4fGQIS1bTFSK2336FP3rBHDQ+UiVKdTAZcoWHeed1xlxvmclnHA8Y4CAQa+Y2KWw3Fz9OIAkXH/KXJL9yRGg=="
+        "requested": "[3.14.0, )",
+        "resolved": "3.14.0",
+        "contentHash": "JrfJx2od1ly90rECMNC8z58NQtnOd76nzp8osX3nkI/F8DUjf6sp6CtFJhIIMrrNR6qxuRvn1yly6f45GiJZqQ=="
       },
       "PolySharp": {
         "type": "Direct",

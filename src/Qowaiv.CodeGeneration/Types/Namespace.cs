@@ -56,7 +56,7 @@ public readonly struct Namespace(string name) : IEquatable<Namespace>
     /// <summary>Creates a collection of global namespaces based on file.</summary>
     [Pure]
     public static IEnumerable<Namespace> Globals(FileInfo file)
-        => Globals(Guard.Exists(file).OpenRead());
+        => Globals(Guard.NotNull(file).OpenRead());
 
     /// <summary>Creates a collection of global namespaces based on stream.</summary>
     [Pure]

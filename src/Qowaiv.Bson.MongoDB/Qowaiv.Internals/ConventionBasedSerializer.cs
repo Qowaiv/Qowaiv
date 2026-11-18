@@ -6,7 +6,7 @@ internal partial class ConventionBasedSerializer<TSvo> : SerializerBase<TSvo>
     [Pure]
     public override TSvo Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
     {
-        Guard.NotNull(context, nameof(context));
+        Guard.NotNull(context);
 
         var reader = context.Reader;
         var bsonType = reader.GetCurrentBsonType();
@@ -58,7 +58,7 @@ internal partial class ConventionBasedSerializer<TSvo> : SerializerBase<TSvo>
     /// <inheritdoc/>
     public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, TSvo value)
     {
-        Guard.NotNull(context, nameof(context));
+        Guard.NotNull(context);
 
         var writer = context.Writer;
         var obj = ToJson(value);

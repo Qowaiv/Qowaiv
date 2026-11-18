@@ -4,7 +4,14 @@
 //    See: https://github.com/Corniel/Grenadiers/blob/master/LICENSE.md
 // </copyright>
 //-----------------------------------------------------------------------
+#pragma warning disable IDE0005
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Qowaiv;
@@ -17,6 +24,7 @@ namespace Qowaiv;
 /// * Add specific Guard methods if you software needs them.
 /// * Keep the checks cheap so that you also can run them in production code.
 /// </remarks>
+[DebuggerStepThrough]
 [ExcludeFromCodeCoverage]
 [StackTraceHidden]
 internal static partial class Guard
@@ -28,10 +36,17 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T NotNull<T>([ValidatedNotNull] T? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         where T : class
-        => parameter ?? throw new ArgumentNullException(paramName);
+#if NET10_0_OR_GREATER
+    {
+        ArgumentNullException.ThrowIfNull(parameter);
+        return parameter;
+    }
+#else
+    => parameter ?? throw new ArgumentNullException(paramName);
+#endif
 
     /// <summary>Throws an ArgumentException if the nullable parameter has no value, otherwise the parameter value is passed.</summary>
     /// <typeparam name="T">The type to guard; must be a structure.</typeparam>
@@ -40,7 +55,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T HasValue<T>(T? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         where T : struct
         => parameter ?? throw new ArgumentException(Messages.ArgumentException_NullableMustHaveValue, paramName);
@@ -55,7 +70,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T NotDefault<T>(T? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         where T : struct => NotDefault(HasValue(parameter, paramName), paramName);
 
@@ -66,7 +81,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T NotDefault<T>(T parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         where T : struct
         => parameter.Equals(default(T))
@@ -83,7 +98,7 @@ internal static partial class Guard
     /// <remarks>
     /// That <typeparamref name="T" /> is an enum is implicitly guard by <see cref="Enum.IsDefined(Type, object)" />.
     /// </remarks>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T DefinedEnum<T>(T parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         where T : struct
         => Enum.IsDefined(typeof(T), parameter)
@@ -101,7 +116,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T IsInstanceOf<T>([ValidatedNotNull] object? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => NotNull(parameter, paramName) is T guarded
         ? guarded
@@ -114,7 +129,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T HasAny<T>([ValidatedNotNull] T? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         where T : class, ICollection
         => NotNull(parameter, paramName) is var guarded && guarded.Count == 0
@@ -128,7 +143,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IEnumerable<T> HasAny<T>([ValidatedNotNull] IEnumerable<T>? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => NotNull(parameter, paramName) is var guarded && guarded.Any()
         ? guarded
@@ -140,7 +155,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string NotNullOrEmpty([ValidatedNotNull] string? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => NotNull(parameter, paramName) is { Length: > 0 } guarded
         ? guarded
@@ -152,7 +167,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Guid NotEmpty(Guid? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => NotEmpty(HasValue(parameter, paramName), paramName);
 
@@ -162,7 +177,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Guid NotEmpty(Guid parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => parameter == Guid.Empty
         ? throw new ArgumentException(Messages.ArgumentException_GuidEmpty, paramName)
@@ -174,7 +189,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int Positive(int? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => Positive(HasValue(parameter, paramName), paramName);
 
@@ -184,7 +199,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int Positive(int parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => parameter <= 0
         ? throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_NotPositive)
@@ -196,8 +211,9 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
-    public static long Positive(long? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null) => Positive(HasValue(parameter, paramName), paramName);
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static long Positive(long? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
+        => Positive(HasValue(parameter, paramName), paramName);
 
     /// <summary>Throws an ArgumentOutOfRangeException if the parameter is not positive, otherwise the parameter is passed.</summary>
     /// <param name="parameter">The parameter to guard.</param>
@@ -205,7 +221,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static long Positive(long parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => parameter <= 0
         ? throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_NotPositive)
@@ -217,7 +233,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static double Positive(double? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => Positive(HasValue(parameter, paramName), paramName);
 
@@ -227,7 +243,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static double Positive(double parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => parameter <= 0
         ? throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_NotPositive)
@@ -239,7 +255,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static decimal Positive(decimal? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => Positive(HasValue(parameter, paramName), paramName);
 
@@ -249,7 +265,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static decimal Positive(decimal parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => parameter <= 0
         ? throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_NotPositive)
@@ -261,7 +277,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static TimeSpan Positive(TimeSpan? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => Positive(HasValue(parameter, paramName), paramName);
 
@@ -271,7 +287,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static TimeSpan Positive(TimeSpan parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => parameter <= TimeSpan.Zero
         ? throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_NotPositive)
@@ -283,7 +299,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int NotNegative(int? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => NotNegative(HasValue(parameter, paramName), paramName);
 
@@ -293,7 +309,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int NotNegative(int parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => parameter < 0
         ? throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_Negative)
@@ -305,7 +321,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static long NotNegative(long? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => NotNegative(HasValue(parameter, paramName), paramName);
 
@@ -315,7 +331,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static long NotNegative(long parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => parameter < 0
         ? throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_Negative)
@@ -327,7 +343,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static double NotNegative(double? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => NotNegative(HasValue(parameter, paramName), paramName);
 
@@ -337,7 +353,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static double NotNegative(double parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => parameter < 0
         ? throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_Negative)
@@ -349,7 +365,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static decimal NotNegative(decimal? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => NotNegative(HasValue(parameter, paramName), paramName);
 
@@ -359,7 +375,7 @@ internal static partial class Guard
     /// <returns>
     /// The guarded parameter.
     /// </returns>
-    [DebuggerStepThrough]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static decimal NotNegative(decimal parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
         => parameter < 0
         ? throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_Negative)
@@ -387,18 +403,6 @@ internal static partial class Guard
         ? throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_Negative)
         : parameter;
 
-    /// <summary>Throws an ArgumentException if the parameter is negative, otherwise the parameter is passed.</summary>
-    /// <param name="parameter">The parameter to guard.</param>
-    /// <param name="paramName">The name of the parameter.</param>
-    /// <returns>
-    /// The guarded parameter.
-    /// </returns>
-    [DebuggerStepThrough]
-    public static FileInfo Exists([ValidatedNotNull] FileInfo? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
-        => NotNull(parameter).Exists
-        ? parameter
-        : throw new ArgumentException(string.Format(Messages.ArgumentException_NotExists, parameter!.FullName), paramName);
-
     /// <summary>Messages class to group the constants.</summary>
     private static class Messages
     {
@@ -406,7 +410,6 @@ internal static partial class Guard
         public const string ArgumentException_GuidEmpty = "Argument cannot be an empty GUID.";
         public const string ArgumentException_IsDefaultValue = "Argument is the not initialized/default value.";
         public const string ArgumentException_NotAnInstanceOf = "Argument is not an instance of {0}.";
-        public const string ArgumentException_NotExists = "Argument '{0}'does not exist.";
         public const string ArgumentException_NullableMustHaveValue = "Nullable argument must have a value.";
         public const string ArgumentException_StringEmpty = "Argument cannot be an empty string.";
         public const string ArgumentOutOfRangeException_DefinedEnum = "Argument {0} is not a defined value of {1}.";

@@ -64,9 +64,9 @@
       },
       "TUnit.Core": {
         "type": "Direct",
-        "requested": "[1.85.0, )",
-        "resolved": "1.85.0",
-        "contentHash": "TSnafVDag4AC7OZwjxNxwozfuqdcq6dJhUv+B2HLAa/oDOylCXJcwdK6rekNH+SfSaF+sQaNiESzjlaX5NHxIQ==",
+        "requested": "[1.87.0, )",
+        "resolved": "1.87.0",
+        "contentHash": "YxDHsrdAOIXukw1xyAO9Ix4N4P5suIDCCbHBFyqXCMFEaMESWTv8WTa5AQTDeMs3mkQDV5r+mnkOXatbwNmdzg==",
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "9.0.10",
           "Microsoft.CSharp": "4.7.0",
@@ -238,9 +238,9 @@
       },
       "TUnit.Core": {
         "type": "Direct",
-        "requested": "[1.85.0, )",
-        "resolved": "1.85.0",
-        "contentHash": "TSnafVDag4AC7OZwjxNxwozfuqdcq6dJhUv+B2HLAa/oDOylCXJcwdK6rekNH+SfSaF+sQaNiESzjlaX5NHxIQ=="
+        "requested": "[1.87.0, )",
+        "resolved": "1.87.0",
+        "contentHash": "YxDHsrdAOIXukw1xyAO9Ix4N4P5suIDCCbHBFyqXCMFEaMESWTv8WTa5AQTDeMs3mkQDV5r+mnkOXatbwNmdzg=="
       },
       "qowaiv": {
         "type": "Project"
@@ -303,9 +303,9 @@
       },
       "TUnit.Core": {
         "type": "Direct",
-        "requested": "[1.85.0, )",
-        "resolved": "1.85.0",
-        "contentHash": "TSnafVDag4AC7OZwjxNxwozfuqdcq6dJhUv+B2HLAa/oDOylCXJcwdK6rekNH+SfSaF+sQaNiESzjlaX5NHxIQ=="
+        "requested": "[1.87.0, )",
+        "resolved": "1.87.0",
+        "contentHash": "YxDHsrdAOIXukw1xyAO9Ix4N4P5suIDCCbHBFyqXCMFEaMESWTv8WTa5AQTDeMs3mkQDV5r+mnkOXatbwNmdzg=="
       },
       "qowaiv": {
         "type": "Project"

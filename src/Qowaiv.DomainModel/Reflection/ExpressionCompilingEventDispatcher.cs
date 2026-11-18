@@ -22,7 +22,7 @@ namespace Qowaiv.DomainModel.Reflection;
 public class ExpressionCompilingEventDispatcher<TDispatcher>(TDispatcher dispatcher) : EventDispatcher
     where TDispatcher : class
 {
-    private readonly TDispatcher dispatcher = Guard.NotNull(dispatcher, nameof(dispatcher));
+    private readonly TDispatcher dispatcher = Guard.NotNull(dispatcher);
 
     /// <inheritdoc />
     public void When(object? @event)

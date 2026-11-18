@@ -11,8 +11,8 @@ internal partial class ConventionBasedSerializer<TSvo> : JsonConverter
     [Impure]
     public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
     {
-        Guard.NotNull(reader, nameof(reader));
-        Guard.NotNull(objectType, nameof(objectType));
+        Guard.NotNull(reader);
+        Guard.NotNull(objectType);
 
         var type = objectType;
         var isNullable = type != objectType || objectType.IsClass;

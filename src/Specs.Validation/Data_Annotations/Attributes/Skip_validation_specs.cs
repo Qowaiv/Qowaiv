@@ -19,14 +19,14 @@ public class Skips
         .WithoutMessages();
 }
 
-file class DeocratedProperty
+file sealed class DeocratedProperty
 {
     [SkipValidation("Should ingore the required modifier")]
     public required string Property { get; init; }
 }
 
 [SkipValidation("Should ingore the required modifier")]
-file class DecoratedType
+file sealed class DecoratedType
 {
     public required string Property { get; init; }
 }

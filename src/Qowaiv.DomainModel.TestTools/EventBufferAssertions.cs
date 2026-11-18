@@ -67,7 +67,7 @@ public class EventBufferAssertions<TId>(EventBuffer<TId> subject)
         /// <summary>Expose the subject, so that the chain of assertions can be continued.</summary>
         public required EventBuffer<TId> Subject { get; init; }
 
-        /// <see cref="EventBuffer{TId}.CommittedVersion" />
+        /// <inheritdoc cref="EventBuffer{TId}.CommittedVersion" />
         public long CommittedVersion => Subject.CommittedVersion;
     }
 }

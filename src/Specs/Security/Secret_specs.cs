@@ -1,3 +1,4 @@
+#pragma warning disable S4790 // MD5 is just a data generator here
 namespace Security.Secret_specs;
 
 public class Cryptographic_seed_can_be_created

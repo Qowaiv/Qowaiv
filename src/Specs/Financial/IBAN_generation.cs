@@ -43,9 +43,9 @@ internal class Markdown_file
     [Test]
     public void Generate_BBAN_Random()
     {
-        var test4 = new Regex("[ac]{4}");
-        var test3 = new Regex("[ac]{3}");
-        var test2 = new Regex("[ac]{2}nn");
+        var test4 = regex("[ac]{4}");
+        var test3 = regex("[ac]{3}");
+        var test2 = regex("[ac]{2}nn");
 
 
         var writer = new StringBuilder();

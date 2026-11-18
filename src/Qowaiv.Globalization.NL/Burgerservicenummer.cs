@@ -115,7 +115,7 @@ public readonly partial struct Burgerservicenummer : IXmlSerializable, IFormatta
     /// The number describing a Burgerservicenummer.
     /// </param>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// Not a Burgerservicenummer. 
+    /// Not a Burgerservicenummer.
     /// </exception>
     [Pure]
     public static Burgerservicenummer Create(long value)

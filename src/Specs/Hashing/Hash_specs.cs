@@ -90,6 +90,6 @@ public class To_string
     public void displays_the_hash()
     {
         var hash = Hash.Code(12);
-        hash.ToString().Should().Match(s => Regex.IsMatch(s, "-?[0-9]+"));
+        hash.ToString().Should().Match(s => regex("-?[0-9]+").IsMatch(s));
     }
 }

@@ -12,7 +12,7 @@ public static class QowaivBsonConverter
     /// </param>
     public static void RegisterAssembly(Assembly assembly)
     {
-        foreach (var type in TypeHelper.GetCandidateTypes(Guard.NotNull(assembly, nameof(assembly)).GetExportedTypes()))
+        foreach (var type in TypeHelper.GetCandidateTypes(Guard.NotNull(assembly).GetExportedTypes()))
         {
             if (CreateConverter(type) is var converter && TypeIsSupported(converter))
             {
@@ -27,7 +27,7 @@ public static class QowaivBsonConverter
     /// </param>
     public static void RegisterTypes(params Type[] types)
     {
-        foreach (var type in Guard.HasAny(types, nameof(types)))
+        foreach (var type in Guard.HasAny(types))
         {
             RegisterType(type);
         }
@@ -39,7 +39,7 @@ public static class QowaivBsonConverter
     /// </param>
     public static void RegisterType(Type type)
     {
-        Guard.NotNull(type, nameof(type));
+        Guard.NotNull(type);
         var converter = CreateConverter(type);
         BsonSerializer.RegisterSerializer(type, GuardType(converter));
     }

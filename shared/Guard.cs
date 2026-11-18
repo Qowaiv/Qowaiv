@@ -4,7 +4,13 @@
 //    See: https://github.com/Corniel/Grenadiers/blob/master/LICENSE.md
 // </copyright>
 //-----------------------------------------------------------------------
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Qowaiv;
@@ -387,18 +393,6 @@ internal static partial class Guard
         ? throw new ArgumentOutOfRangeException(paramName, Messages.ArgumentOutOfRangeException_Negative)
         : parameter;
 
-    /// <summary>Throws an ArgumentException if the parameter is negative, otherwise the parameter is passed.</summary>
-    /// <param name="parameter">The parameter to guard.</param>
-    /// <param name="paramName">The name of the parameter.</param>
-    /// <returns>
-    /// The guarded parameter.
-    /// </returns>
-    [DebuggerStepThrough]
-    public static FileInfo Exists([ValidatedNotNull] FileInfo? parameter, [CallerArgumentExpression(nameof(parameter))] string? paramName = null)
-        => NotNull(parameter).Exists
-        ? parameter
-        : throw new ArgumentException(string.Format(Messages.ArgumentException_NotExists, parameter!.FullName), paramName);
-
     /// <summary>Messages class to group the constants.</summary>
     private static class Messages
     {
@@ -406,7 +400,6 @@ internal static partial class Guard
         public const string ArgumentException_GuidEmpty = "Argument cannot be an empty GUID.";
         public const string ArgumentException_IsDefaultValue = "Argument is the not initialized/default value.";
         public const string ArgumentException_NotAnInstanceOf = "Argument is not an instance of {0}.";
-        public const string ArgumentException_NotExists = "Argument '{0}'does not exist.";
         public const string ArgumentException_NullableMustHaveValue = "Nullable argument must have a value.";
         public const string ArgumentException_StringEmpty = "Argument cannot be an empty string.";
         public const string ArgumentOutOfRangeException_DefinedEnum = "Argument {0} is not a defined value of {1}.";

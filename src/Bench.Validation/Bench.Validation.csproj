@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/nopackage.props" />
 
@@ -18,6 +18,15 @@
     <ProjectReference Include="../Qowaiv.Validation.DataAnnotations/Qowaiv.Validation.DataAnnotations.csproj" />
     <ProjectReference Include="../Qowaiv.Validation.Fluent/Qowaiv.Validation.Fluent.csproj" />
     <ProjectReference Include="../Specs.Validation.TestData/Specs.Validation.TestData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net11.0'">
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="Microsoft.Extensions.Validation" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net11.0'">
+    <ProjectReference Include="../Qowaiv.Validation.Microsoft/Qowaiv.Validation.Microsoft.csproj" />
   </ItemGroup>
 
 </Project>

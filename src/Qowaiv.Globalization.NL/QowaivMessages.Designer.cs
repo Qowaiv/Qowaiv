@@ -79,7 +79,7 @@ namespace Qowaiv.Globalization.NL {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Not a valid kadastrale gemeente.
+        ///   Looks up a localized string similar to Not a valid KvK number.
         /// </summary>
         public static string FormatExceptionKvkNummer
         {

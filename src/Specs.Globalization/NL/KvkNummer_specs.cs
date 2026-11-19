@@ -415,7 +415,7 @@ public class Is_Open_API_data_type
        .Should().Be(new OpenApiDataType(
            dataType: typeof(KvkNummer),
            description: "KvK-nummer (Kamer van Koophandel)",
-           example: "8543897",
+           example: "08543897",
            type: "string",
            format: "kvknr",
            pattern: "[0-9]{8}"));

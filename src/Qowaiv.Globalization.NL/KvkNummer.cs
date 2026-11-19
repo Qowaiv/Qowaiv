@@ -12,7 +12,7 @@ namespace Qowaiv.Globalization.NL;
     description: "KvK-nummer (Kamer van Koophandel)",
     type: "string",
     format: "kvknr",
-    example: "8543897",
+    example: "08543897",
     pattern: "[0-9]{8}")]
 [TypeConverter(typeof(Conversion.KvkNummerTypeConverter))]
 #if NET10_0_OR_GREATER
@@ -20,19 +20,19 @@ namespace Qowaiv.Globalization.NL;
 #endif
 public readonly partial struct KvkNummer : IXmlSerializable, IFormattable, IEquatable<KvkNummer>, IComparable, IComparable<KvkNummer>
 {
-    /// <summary>Represents an unknown (but set) KvK-nr.</summary>
+    /// <summary>Represents an unknown (but set) KvK-nummer.</summary>
     public static KvkNummer Unknown => new(int.MaxValue);
 
-    /// <summary>Gets the number of characters of KvK-nr.</summary>
+    /// <summary>Gets the number of characters of the KvK-nummer (8 when known, 0 otherwise).</summary>
     public int Length => IsKnown ? 8 : 0;
 
-    /// <summary>Returns a <see cref="string" /> that represents the KvK-nr for DEBUG purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the KvK-nummer for DEBUG purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:F}");
 
-    /// <summary>Returns a formatted <see cref="string" /> that represents the KvK-nr.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the KvK-nummer.</summary>
     /// <param name="format">
-    /// The format that this describes the formatting.
+    /// The format that describes the formatting.
     /// </param>
     /// <param name="formatProvider">
     /// The format provider.
@@ -52,44 +52,44 @@ public readonly partial struct KvkNummer : IXmlSerializable, IFormattable, IEqua
         }
     }
 
-    /// <summary>Gets an XML string representation of the KvK-nr.</summary>
+    /// <summary>Gets an XML string representation of the KvK-nummer.</summary>
     [Pure]
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Serializes the KvK-nr to a JSON node.</summary>
+    /// <summary>Serializes the KvK-nummer to a JSON node.</summary>
     /// <returns>
     /// The serialized JSON string.
     /// </returns>
     [Pure]
     public string? ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Deserializes the KvK-nr from a JSON number.</summary>
+    /// <summary>Deserializes the KvK-nummer from a JSON number.</summary>
     /// <param name="json">
     /// The JSON number to deserialize.
     /// </param>
     /// <returns>
-    /// The deserialized KvK-nr.
+    /// The deserialized KvK-nummer.
     /// </returns>
     [Pure]
     public static KvkNummer FromJson(long json) => Create(Cast.ToInt<KvkNummer>(json));
 
-    /// <summary>Casts the KvK-nr to a <see cref="string" />.</summary>
+    /// <summary>Casts the KvK-nummer to a <see cref="string" />.</summary>
     public static explicit operator string(KvkNummer val) => val.ToString(CultureInfo.CurrentCulture);
 
-    /// <summary>Casts a <see cref="string" /> to a KvK-nr.</summary>
+    /// <summary>Casts a <see cref="string" /> to a KvK-nummer.</summary>
     public static explicit operator KvkNummer(string str) => Parse(str, CultureInfo.CurrentCulture);
 
-    /// <summary>Casts the KvK-nr to a <see cref="int" />.</summary>
+    /// <summary>Casts the KvK-nummer to a nullable <see cref="int" />; null when not known.</summary>
     public static explicit operator int?(KvkNummer val) => val.IsKnown ? val.m_Value : null;
 
-    /// <summary>Casts a <see cref="int" /> to a KvK-nr.</summary>
+    /// <summary>Casts a nullable <see cref="int" /> to a KvK-nummer.</summary>
     public static explicit operator KvkNummer(int? val) => Create(val);
 
     /// <summary>Converts the <see cref="string" /> to <see cref="KvkNummer" />.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">
-    /// A string containing the KvK-nr to convert.
+    /// A string containing the KvK-nummer to convert.
     /// </param>
     /// <param name="provider">
     /// The specified format provider.
@@ -104,24 +104,27 @@ public readonly partial struct KvkNummer : IXmlSerializable, IFormattable, IEqua
     public static bool TryParse(string? s, IFormatProvider? provider, out KvkNummer result)
         => TryParse(s.AsSpan(), provider, out result);
 
-    /// <summary>Creates a KvK-nr from an <see cref="int" />.</summary>
+    /// <summary>Creates a KvK-nummer from an <see cref="int" />.</summary>
     /// <param name="val">
-    /// A number describing a KvK-nr.
+    /// A number describing a KvK-nummer.
     /// </param>
     /// <returns>
-    /// A KvK-nr if the creation was successfully, otherwise null.
+    /// The created KvK-nummer.
     /// </returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// <paramref name="val"/> is not a valid KvK-nummer.
+    /// </exception>
     [Pure]
     public static KvkNummer Create(int? val)
         => TryCreate(val)
         ?? throw new ArgumentOutOfRangeException(nameof(val), QowaivMessages.FormatExceptionKvkNummer);
 
-    /// <summary>Creates a KvK-nr from an <see cref="int" />.</summary>
+    /// <summary>Creates a KvK-nummer from an <see cref="int" />.</summary>
     /// <param name="val">
-    /// A number describing a KvK-nr.
+    /// A number describing a KvK-nummer.
     /// </param>
     /// <returns>
-    /// A KvK-nr if the creation was successfully, otherwise null.
+    /// The created KvK-nummer, or null if <paramref name="val"/> is not a valid KvK-nummer.
     /// </returns>
     [Pure]
     public static KvkNummer? TryCreate(int? val) => val switch
@@ -222,9 +225,9 @@ public readonly partial struct KvkNummer : ISpanParsable<KvkNummer>, ISpanFormat
     /// When this method returns, contains the result of successfully parsing s, or an
     /// undefined value on failure.
     /// </param>
-    /// <returs>
+    /// <returns>
     /// true if s was successfully parsed; otherwise, false.
-    /// </returs>
+    /// </returns>
     public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out KvkNummer result)
     {
         result = default;
@@ -269,7 +272,7 @@ public readonly partial struct KvkNummer : ISpanParsable<KvkNummer>, ISpanFormat
     /// The span of characters to parse.
     /// </param>
     /// <param name="provider">
-    /// An object that provides culture-specific formatting information a.
+    /// An object that provides culture-specific formatting information about s.
     /// </param>
     /// <returns>
     /// The result of parsing s.

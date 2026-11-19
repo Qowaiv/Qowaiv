@@ -105,6 +105,15 @@ public class Can_be_parsed
         => KvkNummer.Parse("?").Should().Be(KvkNummer.Unknown);
 
     [Test]
+    [Arguments("123456", "6 digits")]
+    [Arguments("1234567", "7 digits")]
+    [Arguments("12345678", "8 digits")]
+    [Arguments("01234567", "1 leading zero")]
+    [Arguments("00123456", "2 leading zeros")]
+    public void from(string str, string because)
+        => KvkNummer.TryParse(str).Should().NotBeNull(because);
+
+    [Test]
     [Arguments("en", "87640540")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
@@ -136,6 +145,19 @@ public class Can_be_parsed
     [Test]
     public void with_TryParse_returns_SVO()
         => KvkNummer.TryParse("87640540").Should().Be(Svo.KvkNummer);
+}
+
+public class Can_not_parse
+{
+    [Test]
+    [Arguments("12345", "5 digits")]
+    [Arguments("123456789", "9 digits")]
+    [Arguments("012345678", "9 digits wiht leading zeros")]
+    [Arguments("012345", "6 digits with 1 leading zero")]
+    [Arguments("00012345", "3 leading zeros")]
+    public void from(string str, string because)
+        => KvkNummer.TryParse(str).Should().BeNull(because);
+
 }
 
 public class Has_custom_formatting

@@ -18,4 +18,7 @@
   <data name="FormatExceptionKadastraleGemeente">
     <value>Not a valid kadastrale gemeente</value>
   </data>
+  <data name="FormatExceptionKvkNummer">
+    <value>Not a valid KvK number</value>
+  </data>
 </root>

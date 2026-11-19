@@ -388,13 +388,13 @@ public class Supports_XML_serialization
     public void using_XmlSerializer_to_serialize()
     {
         var xml = Serialize.Xml(Svo.@TSvo);
-        xml.Should().Be("DEL00");
+        xml.Should().Be("svoValue");
     }
 
     [Test]
     public void using_XmlSerializer_to_deserialize()
     {
-        var svo = Deserialize.Xml<@TSvo>("DEL00");
+        var svo = Deserialize.Xml<@TSvo>("svoValue");
         svo.Should().Be(Svo.@TSvo);
     }
 

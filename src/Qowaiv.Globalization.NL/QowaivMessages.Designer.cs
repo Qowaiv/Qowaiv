@@ -77,5 +77,17 @@ namespace Qowaiv.Globalization.NL {
                 return ResourceManager.GetString("FormatExceptionKadastraleGemeente", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Not a valid kadastrale gemeente.
+        /// </summary>
+        public static string FormatExceptionKvkNummer
+        {
+            get
+            {
+                return ResourceManager.GetString("FormatExceptionKvkNummer", resourceCulture);
+            }
+        }
+        
     }
 }

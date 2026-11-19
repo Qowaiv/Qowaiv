@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/package.props" />
 
@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="../Qowaiv/Cast.cs" Link="_shared/Cast.cs" />
     <Compile Include="../Qowaiv/Diagnostics/DebugDisplay.cs" Link="_shared/Diagnostics/DebugDisplay.cs" />
+    <Compile Include="../Qowaiv/Exceptions.cs" Link="_shared/Exceptions.cs" />
     <Compile Include="../Qowaiv/Text/Chars.cs" Link="_shared/Text/Chars.cs" />
   </ItemGroup>
 

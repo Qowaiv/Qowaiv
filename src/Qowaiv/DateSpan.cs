@@ -417,7 +417,7 @@ public readonly partial struct DateSpan : IXmlSerializable, IFormattable, IEquat
     /// <summary>Returns true if the combination of months and days can not be processed.</summary>
     [Pure]
     private static bool IsOutOfRange(long months, long days, double totalDays)
-        => !months.IsInRange(MinValue.TotalMonths, MaxValue.TotalMonths)
-        || !days.IsInRange(-MaxDays, +MaxDays)
+        => days is < -MaxDays or > +MaxDays
+        || !months.IsInRange(MinValue.TotalMonths, MaxValue.TotalMonths)
         || !totalDays.IsInRange(MinValue.TotalDays, MaxValue.TotalDays);
 }

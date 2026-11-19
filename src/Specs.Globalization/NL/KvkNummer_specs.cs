@@ -90,6 +90,39 @@ public class Is_equal_by_value
         .For(Svo.KvkNummer, default).Should().BeConsistent();
 }
 
+public class Can_be_created
+{
+    [Test]
+    [Arguments(100_000, "minimum")]
+    [Arguments(87_640_540, "eight digits")]
+    [Arguments(99_999_999, "maximum")]
+    public void from_valid_int(int value, string because)
+        => KvkNummer.TryCreate(value).Should().NotBeNull(because);
+
+    [Test]
+    [Arguments(99_999, "below minimum")]
+    [Arguments(100_000_000, "above maximum")]
+    public void from_invalid_int(int value, string because)
+        => KvkNummer.TryCreate(value).Should().BeNull(because);
+
+    [Test]
+    public void from_null_represents_Empty()
+        => KvkNummer.TryCreate(null).Should().Be(KvkNummer.Empty);
+
+    [Test]
+    [Arguments(100_000, "00100000")]
+    [Arguments(99_999_999, "99999999")]
+    public void Create_retains_leading_zeros(int value, string formatted)
+        => KvkNummer.Create(value).ToString().Should().Be(formatted);
+
+    [Test]
+    public void Create_throws_for_invalid_int()
+    {
+        Func<KvkNummer> create = () => KvkNummer.Create(int.MaxValue);
+        create.Should().Throw<ArgumentOutOfRangeException>();
+    }
+}
+
 public class Can_be_parsed
 {
     [Test]
@@ -112,6 +145,18 @@ public class Can_be_parsed
     [Arguments("00123456", "2 leading zeros")]
     public void from(string str, string because)
         => KvkNummer.TryParse(str).Should().NotBeNull(because);
+
+    [Test]
+    [Arguments("87640540")]
+    [Arguments("8764\u00A00540")]
+    [Arguments("87 64 05 40")]
+    [Arguments("  87640540  ")]
+    public void from_string_with_markup(string input)
+        => KvkNummer.Parse(input).Should().Be(Svo.KvkNummer);
+
+    [Test]
+    public void round_trips_its_formatted_representation()
+        => KvkNummer.Parse(Svo.KvkNummer.ToString("F")).Should().Be(Svo.KvkNummer);
 
     [Test]
     [Arguments("en", "87640540")]
@@ -152,7 +197,7 @@ public class Can_not_parse
     [Test]
     [Arguments("12345", "5 digits")]
     [Arguments("123456789", "9 digits")]
-    [Arguments("012345678", "9 digits wiht leading zeros")]
+    [Arguments("012345678", "9 digits with leading zeros")]
     [Arguments("012345", "6 digits with 1 leading zero")]
     [Arguments("00012345", "3 leading zeros")]
     public void from(string str, string because)
@@ -221,6 +266,59 @@ public class Has_custom_formatting
             Svo.KvkNummer.ToString(provider: null).Should().Be("87640540");
         }
     }
+
+    [Test]
+    public void TryFormat_empty_as_empty_string()
+    {
+        Span<char> destination = stackalloc char[9];
+        KvkNummer.Empty.TryFormat(destination, out var charsWritten, default, null).Should().BeTrue();
+        charsWritten.Should().Be(0);
+    }
+
+    [Test]
+    public void TryFormat_writes_value()
+    {
+        Span<char> destination = stackalloc char[9];
+        Svo.KvkNummer.TryFormat(destination, out var charsWritten, default, null).Should().BeTrue();
+        charsWritten.Should().Be(8);
+        destination[..charsWritten].ToString().Should().Be("87640540");
+    }
+
+    [Test]
+    public void TryFormat_writes_grouped_value()
+    {
+        Span<char> destination = stackalloc char[9];
+        Svo.KvkNummer.TryFormat(destination, out var charsWritten, "F", null).Should().BeTrue();
+        charsWritten.Should().Be(9);
+        destination[..charsWritten].ToString().Should().Be("8764\u00A00540");
+    }
+
+    [Test]
+    public void TryFormat_returns_false_if_destination_too_small()
+    {
+        Span<char> destination = stackalloc char[8];
+        Svo.KvkNummer.TryFormat(destination, out var charsWritten, "F", null).Should().BeFalse();
+        charsWritten.Should().Be(0);
+
+        Svo.KvkNummer.TryFormat(new char[7], out charsWritten, default, null).Should().BeFalse();
+        charsWritten.Should().Be(0);
+    }
+
+    [Test]
+    public void TryFormat_writes_unknown()
+    {
+        Span<char> destination = stackalloc char[1];
+        KvkNummer.Unknown.TryFormat(destination, out var charsWritten, default, null).Should().BeTrue();
+        charsWritten.Should().Be(1);
+        destination[0].Should().Be('?');
+    }
+
+    [Test]
+    public void TryFormat_unknown_with_empty_destination_returns_false()
+    {
+        KvkNummer.Unknown.TryFormat(Span<char>.Empty, out var charsWritten, default, null).Should().BeFalse();
+        charsWritten.Should().Be(0);
+    }
 }
 
 public class Is_comparable
@@ -278,6 +376,14 @@ public class Casts
         var casted = (int?)kvk;
         casted.Should().Be(result);
     }
+
+    [Test]
+    public void explicitly_from_string()
+        => ((KvkNummer)"87640540").Should().Be(Svo.KvkNummer);
+
+    [Test]
+    public void explicitly_to_string()
+        => ((string)Svo.KvkNummer).Should().Be("87640540");
 }
 
 public class Supports_type_conversion
@@ -329,6 +435,17 @@ public class Supports_type_conversion
     [Test]
     public void to_int()
         => Converting.To<int>().From(Svo.KvkNummer).Should().Be(87640540);
+
+    [Test]
+    public void to_int_from_empty_as_zero()
+        => Converting.To<int>().From(KvkNummer.Empty).Should().Be(0);
+
+    [Test]
+    public void to_int_from_unknown_is_not_supported()
+    {
+        Func<int?> convert = () => Converting.To<int>().From(KvkNummer.Unknown);
+        convert.Should().Throw<InvalidOperationException>();
+    }
 }
 
 public class Supports_JSON_serialization
@@ -337,6 +454,10 @@ public class Supports_JSON_serialization
     [Arguments("?", "unknown")]
     public void convention_based_deserialization(KvkNummer svo, object json)
         => JsonTester.Read<KvkNummer>(json).Should().Be(svo);
+
+    [Test]
+    public void convention_based_deserialization_from_number()
+        => JsonTester.Read<KvkNummer>(87640540L).Should().Be(Svo.KvkNummer);
 
     [Test]
     [Arguments(null, "")]
@@ -351,6 +472,15 @@ public class Supports_JSON_serialization
         => JsonTester.Read_System_Text_JSON<KvkNummer>(json).Should().Be(svo);
 
     [Test]
+    [Arguments(87640540L, "87640540")]
+    public void System_Text_JSON_deserialization_from_number(object json, KvkNummer svo)
+        => JsonTester.Read_System_Text_JSON<KvkNummer>(json).Should().Be(svo);
+
+    [Test]
+    public void System_Text_JSON_deserialization_from_decimal()
+        => JsonTester.Read_System_Text_JSON<KvkNummer>(87640540.0).Should().Be(Svo.KvkNummer);
+
+    [Test]
     [Arguments("87640540", "87640540")]
     [Arguments("?", "?")]
     public void System_Text_JSON_serialization(KvkNummer svo, object json)
@@ -360,6 +490,7 @@ public class Supports_JSON_serialization
     [Test]
     [Arguments("Invalid input", typeof(FormatException))]
     [Arguments(12345L, typeof(ArgumentOutOfRangeException))]
+    [Arguments(2147483647L, typeof(ArgumentOutOfRangeException))]
     [Arguments(12345678902342L, typeof(InvalidCastException))]
     public void throws_for_invalid_json(object json, Type exceptionType)
     {

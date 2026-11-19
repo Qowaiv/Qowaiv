@@ -5,6 +5,7 @@ namespace Qowaiv.Globalization.NL.Conversion;
 public class KadastraleGemeenteTypeConverter : SvoTypeConverter<KadastraleGemeente>
 {
     /// <inheritdoc />
+    [Pure]
     protected override KadastraleGemeente FromString(string? str, CultureInfo? culture)
         => KadastraleGemeente.Parse(str);
 }

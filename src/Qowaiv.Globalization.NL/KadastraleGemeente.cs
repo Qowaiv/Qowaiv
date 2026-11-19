@@ -7,7 +7,7 @@ namespace Qowaiv.Globalization.NL;
 /// <summary>Represents a kadastrale gemeente via its AKR-code.</summary>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [Serializable]
-[SingleValueObject(SingleValueStaticOptions.All, typeof(ulong))]
+[SingleValueObject(SingleValueStaticOptions.All, typeof(string))]
 [OpenApiDataType(
     description: "kadastrale gemeente (in the Netherlands)",
     type: "string",

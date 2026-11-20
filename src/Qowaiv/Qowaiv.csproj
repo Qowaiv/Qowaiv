@@ -22,9 +22,14 @@
   </ItemGroup>
   
   <PropertyGroup>
-    <Version>11.0.0-rc1</Version>
     <PackageValidationBaselineVersion>8.2.0</PackageValidationBaselineVersion>
     <ToBeReleased>
+      <![CDATA[
+v11.*
+- ?
+]]>
+    </ToBeReleased>
+    <PackageReleaseNotes>
       <![CDATA[
 v11.0.0
 - Add support for .NET 11.0.
@@ -50,7 +55,6 @@ v11.0.0
 - OpenApiDataType resolves its enum from the defined values (and unknown) of IEnumerated<TSelf> types.
 - ModifyTypeInfo.IgnoreEmptySvos performance improvements.
 - Add extensions on Random to generate a char and an InternationalBankAccountNumber.
-v8.*
 - Extended language support.
 - IBAN supports Mongolia and Falkland Islands.
 - IBAN parser skips allocation for normalized input.
@@ -62,10 +66,6 @@ v8.*
 - LocalizedValues (for parsing) initalization and thread safety has been improved.
 - Unify string input only on stack when it fits.
 - Add EmailAddress.HasSingleLabelDomain.
-]]>
-    </ToBeReleased>
-    <PackageReleaseNotes>
-      <![CDATA[
 v8.2.0
 - Add Percentage.Complement().
 - Bulgaria (BG) uses EUR, instead of BGN since 2026-01-01. (BUG)

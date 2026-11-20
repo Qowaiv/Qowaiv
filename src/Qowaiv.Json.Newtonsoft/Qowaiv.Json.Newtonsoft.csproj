@@ -1,5 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <VersionMajor>6</VersionMajor>
+  </PropertyGroup>
+
   <Import Project="../../props/package-json.props" />
 
   <PropertyGroup>
@@ -13,7 +17,6 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <VersionMajor>6</VersionMajor>
     <PackageReleaseNotes>
       <![CDATA[
 v6.0.0

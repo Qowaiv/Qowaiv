@@ -44,7 +44,7 @@
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc1, )"
+          "Qowaiv": "[11.0.0-rc.1, )"
         }
       }
     }

@@ -25,7 +25,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Version">
-    <VersionMajor>11</VersionMajor>
+    <VersionMajor Condition="'$(VersionMajor)' == ''">11</VersionMajor>
     <Version>$(VersionMajor).0.0-rc.1</Version>
   </PropertyGroup>
 

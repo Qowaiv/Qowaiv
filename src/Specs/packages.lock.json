@@ -155,13 +155,13 @@
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc1, )"
+          "Qowaiv": "[11.0.0-rc.1, )"
         }
       },
       "specs.generated": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc1, )"
+          "Qowaiv": "[11.0.0-rc.1, )"
         }
       },
       "specs.shared": {
@@ -333,13 +333,13 @@
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc1, )"
+          "Qowaiv": "[11.0.0-rc.1, )"
         }
       },
       "specs.generated": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc1, )"
+          "Qowaiv": "[11.0.0-rc.1, )"
         }
       },
       "specs.shared": {

@@ -316,14 +316,14 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Data.SqlClient": "[7.1.2, )",
-          "Qowaiv": "[11.0.0-rc1, )",
+          "Qowaiv": "[11.0.0-rc.1, )",
           "System.Security.Cryptography.Pkcs": "[11.0.0, )"
         }
       },
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc1, )"
+          "Qowaiv": "[11.0.0-rc.1, )"
         }
       },
       "specs.shared": {
@@ -636,14 +636,14 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Data.SqlClient": "[7.1.2, )",
-          "Qowaiv": "[11.0.0-rc1, )",
+          "Qowaiv": "[11.0.0-rc.1, )",
           "System.Security.Cryptography.Pkcs": "[11.0.0, )"
         }
       },
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc1, )"
+          "Qowaiv": "[11.0.0-rc.1, )"
         }
       },
       "specs.shared": {

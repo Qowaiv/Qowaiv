@@ -59,7 +59,7 @@
       "qowaiv.validation.dataannotations": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc1, )",
+          "Qowaiv": "[11.0.0-rc.1, )",
           "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
         }
       },
@@ -67,7 +67,7 @@
         "type": "Project",
         "dependencies": {
           "FluentValidation": "[12.2.0, )",
-          "Qowaiv": "[11.0.0-rc1, )",
+          "Qowaiv": "[11.0.0-rc.1, )",
           "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
         }
       },
@@ -136,7 +136,7 @@
       "qowaiv.validation.dataannotations": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc1, )",
+          "Qowaiv": "[11.0.0-rc.1, )",
           "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
         }
       },
@@ -144,7 +144,7 @@
         "type": "Project",
         "dependencies": {
           "FluentValidation": "[12.2.0, )",
-          "Qowaiv": "[11.0.0-rc1, )",
+          "Qowaiv": "[11.0.0-rc.1, )",
           "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
         }
       },

@@ -37,7 +37,7 @@
     <GlobalPackageReference Include="DotNetProjectFile.Analyzers" Version="1.20.0" />
     <GlobalPackageReference Include="PolySharp" Version="1.17.1" />
     <GlobalPackageReference Include="Qowaiv.Analyzers.CSharp" Version="2.8.0" />
-    <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="10.36.0.15337" />
+    <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="10.37.0.15768" />
   </ItemGroup>
   <ItemGroup>
     <ThirdPartyLicense Include="Microsoft.Data.*" Hash="cIjQ_8Sqlg6H63E6ArliXg" />

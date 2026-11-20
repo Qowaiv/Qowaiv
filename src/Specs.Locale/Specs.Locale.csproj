@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../../props/specs.props" />
+
+  <ItemGroup Label="Projects under test">
+    <ProjectReference Include="../Qowaiv.Locale.NL/Qowaiv.Locale.NL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="Test tools">
+    <ProjectReference Include="../Specs.Shared/Specs.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

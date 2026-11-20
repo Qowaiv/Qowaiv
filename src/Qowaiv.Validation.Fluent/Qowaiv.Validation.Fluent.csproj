@@ -1,5 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <VersionMajor>5</VersionMajor>
+  </PropertyGroup>
+
   <Import Project="../../props/package-validation.props" />
 
   <PropertyGroup>
@@ -25,7 +29,6 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <VersionMajor>5</VersionMajor>
     <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[

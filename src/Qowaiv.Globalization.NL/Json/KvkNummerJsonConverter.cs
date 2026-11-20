@@ -4,7 +4,7 @@ using Qowaiv.Json;
 
 namespace Qowaiv.Globalization.NL.Json;
 
-/// <summary>Provides a JSON conversion for a KvK-nr.</summary>
+/// <summary>Provides a JSON conversion for a KvK-nummer.</summary>
 public sealed class KvkNummerJsonConverter : SvoJsonConverter<KvkNummer>
 {
     /// <inheritdoc />

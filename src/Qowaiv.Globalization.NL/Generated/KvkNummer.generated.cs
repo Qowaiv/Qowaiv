@@ -15,36 +15,36 @@ public partial struct KvkNummer
 {
     private KvkNummer(int value) => m_Value = value;
 
-    /// <summary>The inner value of the KvK-nr.</summary>
+    /// <summary>The inner value of the KvK-nummer.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private readonly int m_Value;
 }
 
 public partial struct KvkNummer : IEmpty<KvkNummer>
 {
-    /// <summary>Represents an empty/not set KvK-nr.</summary>
+    /// <summary>Represents an empty/not set KvK-nummer.</summary>
     public static KvkNummer Empty => default;
 
-    /// <summary>False if the KvK-nr is empty, otherwise true.</summary>
+    /// <summary>False if the KvK-nummer is empty, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasValue => m_Value != default;
 
-    /// <summary>Returns true if the KvK-nr is empty, otherwise false.</summary>
+    /// <summary>Returns true if the KvK-nummer is empty, otherwise false.</summary>
     [Pure]
     public bool IsEmpty() => !HasValue;
 }
 
 public partial struct KvkNummer : IUnknown<KvkNummer>
 {
-    /// <summary>False if the KvK-nr is empty or unknown, otherwise true.</summary>
+    /// <summary>False if the KvK-nummer is empty or unknown, otherwise true.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool IsKnown => m_Value != default && m_Value != Unknown.m_Value;
 
-    /// <summary>Returns true if the KvK-nr is unknown, otherwise false.</summary>
+    /// <summary>Returns true if the KvK-nummer is unknown, otherwise false.</summary>
     [Pure]
     public bool IsUnknown() => m_Value == Unknown.m_Value;
 
-    /// <summary>Returns true if the KvK-nr is empty or unknown, otherwise false.</summary>
+    /// <summary>Returns true if the KvK-nummer is empty or unknown, otherwise false.</summary>
     [Pure]
     public bool IsEmptyOrUnknown() => IsEmpty() || IsUnknown();
 }
@@ -58,7 +58,7 @@ public partial struct KvkNummer : IEquatable<KvkNummer>
     [Pure]
     public override bool Equals([NotNullWhen(true)] object? obj) => obj is KvkNummer other && Equals(other);
 
-    /// <summary>Returns true if this instance and the other KvK-nr are equal, otherwise false.</summary>
+    /// <summary>Returns true if this instance and the other KvK-nummer are equal, otherwise false.</summary>
     /// <param name="other">The <see cref="KvkNummer" /> to compare with.</param>
     [Pure]
     public bool Equals(KvkNummer other) => m_Value == other.m_Value;
@@ -96,18 +96,18 @@ public partial struct KvkNummer : IComparable, IComparable<KvkNummer>
 }
 public partial struct KvkNummer : IFormattable
 {
-    /// <summary>Returns a <see cref="string" /> that represents the KvK-nr.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the KvK-nummer.</summary>
     [Pure]
     public override string ToString() => ToString(format: null, formatProvider: null);
 
-    /// <summary>Returns a formatted <see cref="string" /> that represents the KvK-nr.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the KvK-nummer.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
     [Pure]
     public string ToString(string? format) => ToString(format, formatProvider: null);
 
-    /// <summary>Returns a formatted <see cref="string" /> that represents the KvK-nr.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the KvK-nummer.</summary>
     /// <param name="provider">
     /// The format provider.
     /// </param>
@@ -116,26 +116,26 @@ public partial struct KvkNummer : IFormattable
 }
 public partial struct KvkNummer
 {
-    /// <summary>Creates the KvK-nr from a JSON string.</summary>
+    /// <summary>Creates the KvK-nummer from a JSON string.</summary>
     /// <param name="json">
     /// The JSON string to deserialize.
     /// </param>
     /// <returns>
-    /// The deserialized KvK-nr.
+    /// The deserialized KvK-nummer.
     /// </returns>
     [Pure]
     public static KvkNummer FromJson(string? json) => Parse(json, CultureInfo.InvariantCulture);
 }
 public partial struct KvkNummer : IXmlSerializable
 {
-    /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the KvK-nr.</summary>
+    /// <summary>Gets the <see href="XmlSchema" /> to XML (de)serialize the KvK-nummer.</summary>
     /// <remarks>
     /// Returns null as no schema is required.
     /// </remarks>
     [Pure]
     XmlSchema? IXmlSerializable.GetSchema() => (XmlSchema?)null;
 
-    /// <summary>Reads the KvK-nr from an <see href="XmlReader" />.</summary>
+    /// <summary>Reads the KvK-nummer from an <see href="XmlReader" />.</summary>
     /// <param name="reader">An XML reader.</param>
     void IXmlSerializable.ReadXml(XmlReader reader)
     {
@@ -144,7 +144,7 @@ public partial struct KvkNummer : IXmlSerializable
         System.Runtime.CompilerServices.Unsafe.AsRef(in this) = Parse(xml, CultureInfo.InvariantCulture);
     }
 
-    /// <summary>Writes the KvK-nr to an <see href="XmlWriter" />.</summary>
+    /// <summary>Writes the KvK-nummer to an <see href="XmlWriter" />.</summary>
     /// <remarks>
     /// Uses <see cref="ToXmlString()" />.
     /// </remarks>
@@ -159,10 +159,10 @@ public partial struct KvkNummer
 {
     /// <summary>Converts the <see cref="string" /> to <see cref="KvkNummer" />.</summary>
     /// <param name="s">
-    /// A string containing the KvK-nr to convert.
+    /// A string containing the KvK-nummer to convert.
     /// </param>
     /// <returns>
-    /// The parsed KvK-nr.
+    /// The parsed KvK-nummer.
     /// </returns>
     /// <exception cref="FormatException">
     /// <paramref name="s" /> is not in the correct format.
@@ -175,13 +175,13 @@ public partial struct KvkNummer
 
     /// <summary>Converts the <see cref="string" /> to <see cref="KvkNummer" />.</summary>
     /// <param name="s">
-    /// A string containing the KvK-nr to convert.
+    /// A string containing the KvK-nummer to convert.
     /// </param>
     /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
-    /// The parsed KvK-nr.
+    /// The parsed KvK-nummer.
     /// </returns>
     /// <exception cref="FormatException">
     /// <paramref name="s" /> is not in the correct format.
@@ -194,10 +194,10 @@ public partial struct KvkNummer
 
     /// <summary>Converts the <see cref="string" /> to <see cref="KvkNummer" />.</summary>
     /// <param name="s">
-    /// A string containing the KvK-nr to convert.
+    /// A string containing the KvK-nummer to convert.
     /// </param>
     /// <returns>
-    /// The KvK-nr if the string was converted successfully, otherwise default.
+    /// The KvK-nummer if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
     public static KvkNummer? TryParse(string? s)
@@ -207,13 +207,13 @@ public partial struct KvkNummer
 
     /// <summary>Converts the <see cref="string" /> to <see cref="KvkNummer" />.</summary>
     /// <param name="s">
-    /// A string containing the KvK-nr to convert.
+    /// A string containing the KvK-nummer to convert.
     /// </param>
     /// <param name="provider">
     /// The specified format provider.
     /// </param>
     /// <returns>
-    /// The KvK-nr if the string was converted successfully, otherwise default.
+    /// The KvK-nummer if the string was converted successfully, otherwise default.
     /// </returns>
     [Pure]
     public static KvkNummer? TryParse(string? s, IFormatProvider? provider)
@@ -225,7 +225,7 @@ public partial struct KvkNummer
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">
-    /// A string containing the KvK-nr to convert.
+    /// A string containing the KvK-nummer to convert.
     /// </param>
     /// <param name="result">
     /// The result of the parsing.

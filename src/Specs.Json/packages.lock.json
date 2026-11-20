@@ -46,9 +46,9 @@
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
-        "requested": "[10.36.0.15337, )",
-        "resolved": "10.36.0.15337",
-        "contentHash": "jGLAZUjheSURfe0T/dJYGUrMOrLt1fxaInpChq75YJvrywsxFoUKK/EM6PSfTjkt4pbaq2ywIQjgQzhrmmj5Ow=="
+        "requested": "[10.37.0.15768, )",
+        "resolved": "10.37.0.15768",
+        "contentHash": "73Qo5UF1HSCwUGqiZ9XOKXWNRAe3WN8dfsj3pWIi5oIuenY1Uo9WuMinGibs3up9zcJ5CFk5Ex/Ei/S17mcBvg=="
       },
       "TUnit": {
         "type": "Direct",
@@ -268,9 +268,9 @@
       },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
-        "requested": "[10.36.0.15337, )",
-        "resolved": "10.36.0.15337",
-        "contentHash": "jGLAZUjheSURfe0T/dJYGUrMOrLt1fxaInpChq75YJvrywsxFoUKK/EM6PSfTjkt4pbaq2ywIQjgQzhrmmj5Ow=="
+        "requested": "[10.37.0.15768, )",
+        "resolved": "10.37.0.15768",
+        "contentHash": "73Qo5UF1HSCwUGqiZ9XOKXWNRAe3WN8dfsj3pWIi5oIuenY1Uo9WuMinGibs3up9zcJ5CFk5Ex/Ei/S17mcBvg=="
       },
       "TUnit": {
         "type": "Direct",

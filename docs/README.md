@@ -96,6 +96,7 @@ your own. How to do that can be read [here](../README.Custom.SVO.md).
 ## Qowaiv globalization NL types
 * [Burgerservicenummer](globalization/nl/Burgerservicenummer.md)
 * [Kadastrale gemeente](globalization/nl/KadastraleGemeente.md)
+* [Kvk-nummer](globalization/nl/KvkNummer.md)
 
 ## Qowaiv mathematical types
 * [Fraction](svo/Fraction.md)

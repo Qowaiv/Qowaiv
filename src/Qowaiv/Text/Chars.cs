@@ -1,9 +1,13 @@
+using System.Buffers;
+using System.Text;
+
 namespace Qowaiv.Text;
 
 /// <summary>Char extension to help with parsing.</summary>
 /// <remarks>
 /// The _ after the Is ensures that we do not collide with methods on <see cref="char"/>.
 /// </remarks>
+[ExcludeFromCodeCoverage]
 internal static class Chars
 {
     /// <summary>ASCII " (34 | 0x22).</summary>
@@ -15,7 +19,7 @@ internal static class Chars
         public int Digit => ch - '0';
 
         /// <summary>Gets the upper case char (only valid for [a-z]).</summary>
-        public char To_Upper_ASCII => (char)(ch & 0x5F);
+        public char ASCII_Upper => (char)(ch & 0x5F);
 
         public Categories Categories => Cat(ch);
 
@@ -29,6 +33,9 @@ internal static class Chars
 
         /// <summary>True if [a-z].</summary>
         public bool Is_a_z => (uint)(ch - 'a') <= 'z' - 'a';
+
+        /// <summary>True if [a-zA-Z].</summary>
+        public bool is_a_zA_Z => ch.ASCII_Upper.Is_A_Z;
 
         /// <summary>True if markup (including whitespace).</summary>
         public bool Is_Markup => ch <= 127
@@ -45,6 +52,41 @@ internal static class Chars
         public bool Is_EMAIL_TopDomain => ch > 127 || (Cat(ch) & Categories.Email_TopDomain) is not 0;
 
         public bool Is_EMAIL_Punycode => ch <= 127 && (Cat(ch) & Categories.Email_Punycode) is not 0;
+    }
+
+    extension(ReadOnlySpan<char> span)
+    {
+        /// <summary>Uppercase characters in the ASCII range.</summary>
+        [Pure]
+        public string ASCII_Upper()
+        {
+            if (span.IsEmpty)
+                return string.Empty;
+
+#if NET10_0_OR_GREATER
+
+            if (span.Length <= 256)
+            {
+                Span<char> buffer = stackalloc char[span.Length];
+                Ascii.ToUpper(span, buffer, out _);
+                return new string(buffer);
+            }
+
+            char[] rented = ArrayPool<char>.Shared.Rent(span.Length);
+            try
+            {
+                Span<char> buffer = rented.AsSpan(0, span.Length);
+                Ascii.ToUpper(span, buffer, out _);
+                return new string(buffer);
+            }
+            finally
+            {
+                ArrayPool<char>.Shared.Return(rented);
+            }
+#else
+            return span.ToString().ToUpperInvariant();
+#endif
+        }
     }
 
     [Pure]

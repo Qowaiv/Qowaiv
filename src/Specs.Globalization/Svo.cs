@@ -6,4 +6,7 @@ public static class Svo
 {
     /// <summary>1234.56.782</summary>
     public static Burgerservicenummer Burgerservicenummer => 1234_56_782L.BSN();
+
+    /// <summary>DEL00 (Delft)</summary>
+    public static KadastraleGemeente KadastraleGemeente => KadastraleGemeente.Parse("DEL00");
 }

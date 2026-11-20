@@ -93,6 +93,10 @@ your own. How to do that can be read [here](../README.Custom.SVO.md).
 * [Country](svo/Country.md)
 * [CultureInfoScope](svo/CultureInfoScope.md)
 
+## Qowaiv globalization NL types
+* [Burgerservicenummer](globalization/nl/Burgerservicenummer.md)
+* [Kadastrale gemeente](globalization/nl/KadastraleGemeente.md)
+
 ## Qowaiv mathematical types
 * [Fraction](svo/Fraction.md)
 

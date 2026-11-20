@@ -15,4 +15,7 @@
   <data name="FormatExceptionBurgerservicenummer">
     <value>Geen geldig Burgerservicenummer</value>
   </data>
+  <data name="FormatExceptionKadastraleGemeente">
+    <value>Geen geldige kadastrale gemeente</value>
+  </data>
 </root>

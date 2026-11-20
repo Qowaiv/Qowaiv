@@ -86,15 +86,15 @@ public class Generation_of
     }
 
     [Test]
-    [Arguments("Burgerservicenummer", typeof(long), "Burgerservicenummer", "Qowaiv.Globalization.NL", SvoFeatures.Default)]
-    [Arguments("KadastraleGemeente", typeof(string), "kadastrale gemeente", "Qowaiv.Globalization.NL", SvoFeatures.Default)]
-    [Arguments("KvkNummer", typeof(int), "KvK-nummer", "Qowaiv.Globalization.NL", SvoFeatures.Default)]
-    public void Qowaiv_Globalization_NL(string name, Type underlying, string fullName, string ns, SvoFeatures features, string? formatExceptionMessage = null)
+    [Arguments("Burgerservicenummer", typeof(long), "Burgerservicenummer", "Qowaiv.Locale.NL", SvoFeatures.Default)]
+    [Arguments("KadastraleGemeente", typeof(string), "kadastrale gemeente", "Qowaiv.Locale.NL", SvoFeatures.Default)]
+    [Arguments("KvkNummer", typeof(int), "KvK-nummer", "Qowaiv.Locale.NL", SvoFeatures.Default)]
+    public void Qowaiv_Locale_NL(string name, Type underlying, string fullName, string ns, SvoFeatures features, string? formatExceptionMessage = null)
     {
-        var path = $@"{Root}\src\Qowaiv.Globalization.NL\Generated\{name}.generated.cs";
-        var init = $@"{Root}\src\Qowaiv.Globalization.NL\{name}.cs";
-        var json = $@"{Root}\src\Qowaiv.Globalization.NL\Json\{name}JsonConverter.cs";
-        var spec = $@"{Root}\src\Specs.Globalization\NL\{name}_specs.cs".Replace(@"\\", @"\");
+        var path = $@"{Root}\src\Qowaiv.Locale.NL\Generated\{name}.generated.cs";
+        var init = $@"{Root}\src\Qowaiv.Locale.NL\{name}.cs";
+        var json = $@"{Root}\src\Qowaiv.Locale.NL\Json\{name}JsonConverter.cs";
+        var spec = $@"{Root}\src\Specs.Locale\NL\{name}_specs.cs".Replace(@"\\", @"\");
         Generate(name, underlying, fullName, ns, features, path, init, json, spec, formatExceptionMessage)
             .Should().BeTrue();
     }

@@ -148,7 +148,7 @@ public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEq
             result = new(number);
             return true;
         }
-        if (Qowaiv.Unknown.TryParse(s, provider, out _))
+        if (s.IsUnknown(provider))
         {
             result = Unknown;
             return true;

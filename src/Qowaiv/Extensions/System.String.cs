@@ -89,6 +89,7 @@ public static class QowaivString
         internal bool IsEmpty() => str is not { Length: > 0 };
 
         [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal bool IsUnknown(IFormatProvider? formatProvider)
             => Unknown.TryParse(str, formatProvider, out _);
 

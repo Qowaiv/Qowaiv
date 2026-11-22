@@ -169,7 +169,7 @@ public readonly partial struct InternetMediaType : IXmlSerializable, IFormattabl
             result = new InternetMediaType(s.ToLowerInvariant());
             return true;
         }
-        else if (Qowaiv.Unknown.TryParse(s, provider, out _))
+        else if (s.IsUnknown(provider))
         {
             result = Unknown;
             return true;

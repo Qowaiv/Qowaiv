@@ -112,7 +112,7 @@ public readonly partial struct CasRegistryNumber : IXmlSerializable, IFormattabl
         {
             return TryCreate(number, out result);
         }
-        else if (Qowaiv.Unknown.TryParse(str, provider, out _))
+        else if (str.IsUnknown(provider))
         {
             result = Unknown;
             return true;

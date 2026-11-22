@@ -139,7 +139,7 @@ public readonly partial struct Year : IXmlSerializable, IFormattable, IEquatable
             result = new(year);
             return true;
         }
-        else if (Qowaiv.Unknown.TryParse(s, provider, out _))
+        else if (s.IsUnknown(provider))
         {
             result = Unknown;
             return true;

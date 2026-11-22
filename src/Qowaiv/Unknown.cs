@@ -86,7 +86,7 @@ public readonly partial struct Unknown : IEquatable<Unknown>
 #pragma warning disable S1121 // Improves the readability in this case.
     private sealed class UnknownValues : ConcurrentDictionary<CultureInfo, FrozenSet<string>>
     {
-        private readonly FrozenSet<string> Invariant = frozen_case_insensitive("?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN");
+        private readonly FrozenSet<string> Invariant = frozen_case_insensitive("UNKNOWN", "NOT KNOWN", "NOTKNOWN");
 
         [Impure]
         public bool Contains(IFormatProvider? formatProvider, string value)
@@ -206,6 +206,7 @@ public readonly partial struct Unknown : ISpanParsable<Unknown>
     public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out Unknown result)
     {
         result = default;
-        return ParseValues.Contains(provider, s.ToString());
+        return (s is { Length: 1 } && s[0] is '?')
+            || ParseValues.Contains(provider, s.ToString());
     }
 }

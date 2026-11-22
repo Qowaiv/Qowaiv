@@ -13,7 +13,7 @@ internal static class ResourceManagerExtensions
             => manager.GetString(key, provider as CultureInfo ?? CultureInfo.CurrentCulture)
             ?? string.Empty;
 
-        /// <summary>Check if the managers contains resources for the specified culture.</summary>
+        /// <summary>Checks if the manager contains resources for the specified culture.</summary>
         [Pure]
         public bool Contains(CultureInfo culture)
             => manager.GetResourceSet(culture, createIfNotExists: true, tryParents: false) is not null;

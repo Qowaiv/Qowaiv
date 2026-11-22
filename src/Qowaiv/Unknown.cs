@@ -5,10 +5,9 @@ namespace Qowaiv;
 
 /// <summary>Helps handling the unknown status of Single Value Objects.</summary>
 /// <remarks>
-/// The 'unknown' case differences from the 'empty' case. Where 'empty' just means:
-/// Not set (yet), this is an unset (default) value, 'unknown' means that the user
-/// has set the value, saying, there must be some value, but I just don't know
-/// which value it should be.
+/// The 'unknown' case differs from the 'empty' case. 'Empty' means not set
+/// (yet), i.e. an unset (default) value; 'unknown' means that the user has set
+/// the value, saying there must be some value but they don't know which.
 ///
 /// Note that not all scenarios that support 'empty' support 'unknown' too.
 /// </remarks>
@@ -33,7 +32,7 @@ public readonly partial struct Unknown : IEquatable<Unknown>
 
     /// <summary>Gets the value that represents set but unknown.</summary>
     /// <param name="type">
-    /// The type that should could have an unknown value.
+    /// The type that could have an unknown value.
     /// </param>
     /// <returns>
     /// null, if not defined, otherwise the unknown value for a type.
@@ -42,7 +41,7 @@ public readonly partial struct Unknown : IEquatable<Unknown>
     /// if type is not a value type.
     /// </exception>
     /// <remarks>
-    /// The unknown value is expected to be static field or property of the type with the name "Unknown".
+    /// The unknown value is expected to be a static field or property of the type with the name "Unknown".
     /// </remarks>
     [Pure]
     public static object? Value(Type? type)
@@ -84,7 +83,7 @@ public readonly partial struct Unknown : IEquatable<Unknown>
 
     private static readonly UnknownValues ParseValues = new();
 
-#pragma warning disable S1121 // improves the readabillity in this case.
+#pragma warning disable S1121 // Improves the readability in this case.
     private sealed class UnknownValues : ConcurrentDictionary<CultureInfo, FrozenSet<string>>
     {
         private readonly FrozenSet<string> Invariant = frozen_case_insensitive("?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN");

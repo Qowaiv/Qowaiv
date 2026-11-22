@@ -90,7 +90,7 @@ public static class QowaivString
 
         [Pure]
         internal bool IsUnknown(IFormatProvider? formatProvider)
-            => Unknown.IsUnknown(str, formatProvider as CultureInfo);
+            => Unknown.TryParse(str, formatProvider, out _);
 
         [Pure]
         internal CharSpan CharSpan() => new(str ?? string.Empty);

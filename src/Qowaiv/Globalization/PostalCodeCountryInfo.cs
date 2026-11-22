@@ -71,7 +71,7 @@ public sealed partial class PostalCodeCountryInfo
         { } when IsValid(postalcode)
             => FormattingSearchPattern.Replace(postalcode, FormattingReplacePattern ?? string.Empty),
 
-        _ when Unknown.IsUnknown(postalcode, CultureInfo.InvariantCulture)
+        _ when Unknown.TryParse(postalcode, CultureInfo.InvariantCulture, out _)
             => "?",
 
         _ => postalcode ?? string.Empty,

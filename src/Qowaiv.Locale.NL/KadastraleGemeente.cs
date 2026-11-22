@@ -155,7 +155,7 @@ public readonly partial struct KadastraleGemeente : ISpanParsable<KadastraleGeme
             result = new(s.ASCII_Upper());
             return true;
         }
-        else if (Qowaiv.Unknown.IsUnknown(s.ToString()))
+        else if (Qowaiv.Unknown.TryParse(s, provider, out _))
         {
             result = Unknown;
             return true;

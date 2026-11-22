@@ -106,7 +106,9 @@ public readonly partial struct Unknown : IEquatable<Unknown>
         {
             if (culture == CultureInfo.InvariantCulture) return Invariant;
 
-            var translations = Ancestors(culture.Parent);
+            var translations = TryGetValue(culture, out var existing)
+                ? existing
+                : Ancestors(culture.Parent);
 
             if (Translations(culture) is { } current)
                 translations = frozen_case_insensitive([.. translations, .. current]);

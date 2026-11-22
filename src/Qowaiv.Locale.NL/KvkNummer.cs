@@ -242,7 +242,7 @@ public readonly partial struct KvkNummer : ISpanParsable<KvkNummer>, ISpanFormat
             result = new KvkNummer(value);
             return true;
         }
-        else if (Qowaiv.Unknown.IsUnknown(s.ToString()))
+        else if (Qowaiv.Unknown.TryParse(s, provider, out _))
         {
             result = Unknown;
             return true;

@@ -21,6 +21,15 @@ public class Can_be_parsed
     }
 }
 
+public class Can_not_be_parsed
+{
+    [Test]
+    public void from_valid_input()
+        => "invalid input".Invoking(s => Unknown.Parse(s, null))
+            .Should().Throw<FormatException>()
+            .WithMessage("Not a valid unknown");
+}
+
 public class Is_unknown
 {
     [Test]

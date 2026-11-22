@@ -189,7 +189,7 @@ public readonly partial struct Unknown : ISpanParsable<Unknown>
     public static Unknown Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
         => TryParse(s, provider, out var result)
         ? result
-        : throw Unparsable.ForValue<Unknown>(s.ToString(), "");
+        : throw Unparsable.ForValue<Unknown>(s.ToString(), QowaivMessages.FormatExceptionUnknown);
 
     /// <summary>Tries to parse a string into unknown.</summary>
     /// <param name="s">

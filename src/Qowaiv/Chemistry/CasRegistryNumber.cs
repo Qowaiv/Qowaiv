@@ -108,12 +108,16 @@ public readonly partial struct CasRegistryNumber : IXmlSerializable, IFormattabl
         {
             return true;
         }
-        else if (Qowaiv.Unknown.IsUnknown(str, provider as CultureInfo))
+        else if (long.TryParse(str, out var number))
+        {
+            return TryCreate(number, out result);
+        }
+        else if (Qowaiv.Unknown.TryParse(str, provider, out _))
         {
             result = Unknown;
             return true;
         }
-        else return long.TryParse(str, out var number) && TryCreate(number, out result);
+        else return false;
     }
 
     /// <summary>Creates a CAS Registry Number from a long.

@@ -2,6 +2,7 @@ using Qowaiv.Financial;
 using System.Collections.Immutable;
 using Qowaiv.Mathematics;
 using Qowaiv.Humanizer;
+using Qowaiv.Extensions;
 
 namespace Bench;
 
@@ -1052,6 +1053,19 @@ internal static class Data
         public static readonly ImmutableArray<string> String = [.. Svo.Select(p => p.ToJson())];
     }
 
+    public static class Unknown
+    {
+        public static readonly ImmutableArray<string> Values =
+        [
+            .. Enumerable.Repeat("?", 8000)
+            .Concat(Enumerable.Repeat("Unknown", 1000))
+            .Concat(Enumerable.Repeat("not known", 500))
+            .Concat(Enumerable.Repeat("UNKNOWN", 250))
+            .Concat(Enumerable.Repeat("NotKnown", 250))
+            .Concat(Enumerable.Range(0, 990_000).Select(_ => Rnd.NextInternationalBankAccountNumber().ToString()))
+            .OrderBy(_ => Rnd.Next())
+        ];
+    }
     public static class YN
     {
         public static readonly ImmutableArray<YesNo> Svo =

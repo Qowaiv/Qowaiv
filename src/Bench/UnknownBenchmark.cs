@@ -17,7 +17,7 @@ public class UnknownBenchmark
         private readonly FrozenSet<string> Frozen = new HashSet<string>(["?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN"]).ToFrozenSet(StringComparer.OrdinalIgnoreCase);
         private readonly SearchValues<string> Search = System.Buffers.SearchValues.Create(["?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN"], StringComparison.OrdinalIgnoreCase);
 
-        [Benchmark(OperationsPerInvoke = Iterations)]
+        [Benchmark(Baseline = true, OperationsPerInvoke = Iterations)]
         public bool FrozenSet()
         {
             var o = true;

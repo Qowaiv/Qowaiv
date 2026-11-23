@@ -73,6 +73,10 @@ public readonly struct AowLeeftijd :
         .And(Leeftijd)
         .And(Definitief);
 
+    /// <inheritdoc />
+    [Pure]
+    public override string ToString() => $"Van = {Van}, Tot = {Tot}, Leeftijd = {Leeftijd}, Definitief = {Definitief}";
+
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay
     {
@@ -84,7 +88,7 @@ public readonly struct AowLeeftijd :
                 1 => $"{Leeftijd.Years} jaar en {Leeftijd.Months} maand",
                 _ => $"{Leeftijd.Years} jaar en {Leeftijd.Months} maanden",
             };
-            return $"[{Van} .. {Tot}] = {leeftijd}{(Definitief ? string.Empty : "*")}";
+            return $"[{Van:yyyy-MM}, {Tot:yyyy-MM}] = {leeftijd}{(Definitief ? string.Empty : "*")}";
         }
     }
 

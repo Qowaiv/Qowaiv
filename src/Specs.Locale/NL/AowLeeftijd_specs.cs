@@ -4,6 +4,12 @@ using Qowaiv.Locale.NL;
 
 namespace Specs.Locale.NL.AowLeeftijd_specs;
 
+public class UpToDate
+{
+    [Test]
+    public void Tot() => (Clock.Today() <= new Date(2027, 11, 01)).Should().BeTrue();
+}
+
 public class Defines
 {
     public static IReadOnlyCollection<AowLeeftijd> DefinedValues() => AowLeeftijd.DefinedValues;
@@ -25,13 +31,11 @@ public class Selects
     public void For_geboortedatum_returns_entry()
     {
         var aow = AowLeeftijd.Geboortedatum(new(1980, 02, 14));
-        aow.Should().BeEquivalentTo(new
-        {
-            Van = new Date(1978, 10, 01),
-            Tot = new Date(1982, 06, 30),
-            Leeftijd = 68.Years() + 6.Months(),
-            Definitief = YesNo.No,
-        });
+        aow.Should().Be(new AowLeeftijd(
+            van: new(1978, 10, 01),
+            tot: new(1982, 06, 30),
+            leeftijd:  68.Years() + 6.Months(),
+            definitief: YesNo.No));
     }
 
     [Test]
@@ -50,4 +54,38 @@ public class Selects
             Leeftijd = leeftijd,
             Definitief = definitief,
         });
+}
+
+public class Is_equal_by_value
+{
+    [Test]
+    public void not_equal_to_null()
+        => Svo.AowLeeftijd.Equals(null).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_other_type()
+        => Svo.AowLeeftijd.Equals(new object()).Should().BeFalse();
+
+    [Test]
+    public void not_equal_to_different_value()
+        => Svo.AowLeeftijd.Equals(AowLeeftijd.Geboortedatum(new(1944, 10, 13))).Should().BeFalse();
+
+    [Test]
+    public void equal_to_same_value()
+        => Svo.AowLeeftijd.Equals(AowLeeftijd.Geboortedatum(new(1964, 10, 13))).Should().BeTrue();
+
+    [Test]
+    public void hash_code_is_value_based()
+        => HashCodes.For(AowLeeftijd.DefinedValues).Should().BeConsistent();
+}
+
+public class DebuggerExperience
+{
+    [Test]
+    [Arguments("70Y+0M", true, "[2000-01, 2000-11] = 70 jaar")]
+    [Arguments("70Y+1M", true, "[2000-01, 2000-11] = 70 jaar en 1 maand")]
+    [Arguments("70Y+4M", false, "[2000-01, 2000-11] = 70 jaar en 4 maanden*")]
+    public void Displays(MonthSpan leeftijd, YesNo definitief, string display)
+        => new AowLeeftijd(new(2000, 01, 01), new(2000, 11, 30), leeftijd, definitief)
+        .Should().HaveDebuggerDisplay(display);
 }

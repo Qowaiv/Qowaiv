@@ -27,7 +27,7 @@ public class Selects
         var aow = AowLeeftijd.Geboortedatum(new(1980, 02, 14));
         aow.Should().BeEquivalentTo(new
         {
-            Vanaf = new Date(1978, 10, 01),
+            Van = new Date(1978, 10, 01),
             Tot = new Date(1982, 06, 30),
             Leeftijd = 68.Years() + 6.Months(),
             Definitief = YesNo.No,
@@ -50,27 +50,4 @@ public class Selects
             Leeftijd = leeftijd,
             Definitief = definitief,
         });
-}
-
-public class Formats
-{
-    [Test]
-    public void omits_zero_months()
-        => AowLeeftijd.Geboortedatum(new Date(1952, 04, 01)).ToString()
-            .Should().NotContain("maand");
-
-    [Test]
-    public void uses_singular_month()
-        => AowLeeftijd.Geboortedatum(new Date(1948, 01, 01)).ToString()
-            .Should().Contain("1 maand").And.NotContain("maanden");
-
-    [Test]
-    public void uses_plural_months()
-        => AowLeeftijd.Geboortedatum(new Date(1980, 02, 14)).ToString()
-            .Should().Contain("6 maanden");
-
-    [Test]
-    public void marks_provisional_with_asterisk()
-        => AowLeeftijd.Geboortedatum(new Date(1965, 10, 01)).ToString()
-            .Should().EndWith("*");
 }

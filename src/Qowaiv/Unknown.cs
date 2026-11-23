@@ -5,21 +5,20 @@ namespace Qowaiv;
 
 /// <summary>Helps handling the unknown status of Single Value Objects.</summary>
 /// <remarks>
-/// The 'unknown' case differences from the 'empty' case. Where 'empty' just means:
-/// Not set (yet), this is an unset (default) value, 'unknown' means that the user
-/// has set the value, saying, there must be some value, but I just don't know
-/// which value it should be.
+/// The 'unknown' case differs from the 'empty' case. 'Empty' means not set
+/// (yet), i.e. an unset (default) value; 'unknown' means that the user has set
+/// the value, saying there must be some value but they don't know which.
 ///
 /// Note that not all scenarios that support 'empty' support 'unknown' too.
 /// </remarks>
-public static class Unknown
+public readonly partial struct Unknown : IEquatable<Unknown>
 {
     /// <summary>Returns true if the string represents unknown, otherwise false.</summary>
     /// <param name="val">
     /// The string value to test.
     /// </param>
     [Pure]
-    public static bool IsUnknown(string? val) => IsUnknown(val, null);
+    public static bool IsUnknown(string? val) => TryParse(val, null, out _);
 
     /// <summary>Returns true if the string represents unknown, otherwise false.</summary>
     /// <param name="val">
@@ -29,13 +28,11 @@ public static class Unknown
     /// The culture to test for.
     /// </param>
     [Pure]
-    public static bool IsUnknown(string? val, CultureInfo? culture)
-        => val is { Length: > 0 }
-        && ParseValues.Contains(culture ?? CultureInfo.CurrentCulture, val);
+    public static bool IsUnknown(string? val, CultureInfo? culture) => TryParse(val, culture, out _);
 
     /// <summary>Gets the value that represents set but unknown.</summary>
     /// <param name="type">
-    /// The type that should could have an unknown value.
+    /// The type that could have an unknown value.
     /// </param>
     /// <returns>
     /// null, if not defined, otherwise the unknown value for a type.
@@ -44,7 +41,7 @@ public static class Unknown
     /// if type is not a value type.
     /// </exception>
     /// <remarks>
-    /// The unknown value is expected to be static field or property of the type with the name "Unknown".
+    /// The unknown value is expected to be a static field or property of the type with the name "Unknown".
     /// </remarks>
     [Pure]
     public static object? Value(Type? type)
@@ -65,68 +62,151 @@ public static class Unknown
         else return null;
     }
 
+    /// <inheritdoc />
+    [Pure]
+    public override string ToString() => "?";
+
+    /// <inheritdoc />
+    [Pure]
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is Unknown;
+
+    /// <inheritdoc />
+    [Pure]
+    public bool Equals(Unknown other) => true;
+
+    /// <inheritdoc />
+    [Pure]
+    public override int GetHashCode() => 0;
+
     /// <summary>The resource manager managing the culture based string values.</summary>
     private static readonly ResourceManager ResourceManager = new("Qowaiv.UnknownLabels", typeof(Unknown).Assembly);
 
     private static readonly UnknownValues ParseValues = new();
 
-#pragma warning disable S1121 // improves the readabillity in this case.
+#pragma warning disable S1121 // Improves the readability in this case.
     private sealed class UnknownValues : ConcurrentDictionary<CultureInfo, FrozenSet<string>>
     {
-        private readonly FrozenSet<string> Invariant = frozen_case_insensitive("?", "UNKNOWN", "NOT KNOWN", "NOTKNOWN");
-
-        /// <summary>Adds a culture to the parsings.</summary>
-        /// <param name="culture">
-        /// The culture to add.
-        /// </param>
-        [Pure]
-        private static HashSet<string> AddCulture(CultureInfo culture)
-            => ResourceManager.Contains(culture)
-            && ResourceManager.GetString("Values", culture) is { Length: > 0 } values
-            ? [with([.. values.Split(';').Select(v => v.ToUpper(culture))])]
-            : [];
+        private readonly FrozenSet<string> Invariant = frozen_case_insensitive("UNKNOWN", "NOT KNOWN", "NOTKNOWN");
 
         [Impure]
         public bool Contains(IFormatProvider? formatProvider, string value)
-            => (formatProvider != CultureInfo.InvariantCulture
-            && Local(formatProvider as CultureInfo ?? CultureInfo.CurrentCulture).Contains(value))
-            || Invariant.Contains(value);
+            => (formatProvider ?? CultureInfo.CurrentCulture) is CultureInfo { Name.Length: > 0 } culture
+            ? Local(culture).Contains(value)
+            : Invariant.Contains(value);
 
         [Impure]
-        private FrozenSet<string> Local(CultureInfo culture) => true switch
-        {
-            _ when TryGetValue(culture, out var existing) => existing,
-            _ when frozen_case_insensitive(AddCulture(culture)) is { Count: > 0 } localized => this[culture] = localized,
-            _ => Ancestors(culture),
-        };
+        private FrozenSet<string> Local(CultureInfo culture)
+            => TryGetValue(culture, out var existing)
+            ? existing
+            : Ancestors(culture);
 
         [Impure]
         private FrozenSet<string> Ancestors(CultureInfo culture)
         {
-            var ancestor = culture.Parent;
+            if (culture == CultureInfo.InvariantCulture) return Invariant;
 
-            while (ancestor != CultureInfo.InvariantCulture)
-            {
-                if (TryGetValue(ancestor, out var existing))
-                {
-                    // Ancestor and culture have the same existing localization.
-                    this[culture] = existing;
-                    return existing;
-                }
-                else if (frozen_case_insensitive(AddCulture(ancestor)) is { Count: > 0 } localized)
-                {
-                    // Ancestor and culture have the same localization.
-                    this[ancestor] = localized;
-                    this[culture] = localized;
-                    return localized;
-                }
-                else ancestor = ancestor.Parent;
-            }
+            var translations = TryGetValue(culture, out var existing)
+                ? existing
+                : Ancestors(culture.Parent);
 
-            // No localization for this culture.
-            var empty = FrozenSet<string>.Empty;
-            this[culture] = empty;
-            return empty;
+            if (Translations(culture) is { } current)
+                translations = frozen_case_insensitive([.. translations, .. current]);
+
+            this[culture] = translations;
+            return translations;
         }
+
+        [Pure]
+        private static string[]? Translations(CultureInfo culture)
+            => ResourceManager.Contains(culture)
+            && ResourceManager.GetString("Values", culture) is { Length: > 0 } values
+            ? [.. values.Split(';').Select(v => v.ToUpper(culture))]
+            : null;
+    }
+}
+
+#if NETSTANDARD2_0
+public readonly partial struct Unknown
+#else
+public readonly partial struct Unknown : IParsable<Unknown>
+#endif
+{
+    /// <summary>Parses a string into unknown.</summary>
+    /// <param name="s">
+    /// The string to parse.
+    /// </param>
+    /// <param name="provider">
+    /// An object that provides culture-specific formatting information about <paramref name="s" />.
+    /// </param>
+    /// <returns>
+    /// The result of parsing <paramref name="s" />.
+    /// </returns>
+    /// <exception cref="FormatException">
+    /// <paramref name="s" /> is not in the correct format.
+    /// </exception>
+    [Pure]
+    public static Unknown Parse(string s, IFormatProvider? provider)
+        => Parse(s.AsSpan(), provider);
+
+    /// <summary>Tries to parse a string into unknown.</summary>
+    /// <param name="s">
+    /// The string to parse.
+    /// </param>
+    /// <param name="provider">
+    /// An object that provides culture-specific formatting information about <paramref name="s" />.
+    /// </param>
+    /// <param name="result">
+    /// The parse result.
+    /// </param>
+    /// <returns>
+    /// <c>true</c> if <paramref name="s" /> was successfully parsed; otherwise, <c>false</c>.
+    /// </returns>
+    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out Unknown result)
+        => TryParse(s.AsSpan(), provider, out result);
+}
+
+#if NETSTANDARD2_0
+public readonly partial struct Unknown
+#else
+public readonly partial struct Unknown : ISpanParsable<Unknown>
+#endif
+{
+    /// <summary>Parses a string into unknown.</summary>
+    /// <param name="s">
+    /// The string to parse.
+    /// </param>
+    /// <param name="provider">
+    /// An object that provides culture-specific formatting information about <paramref name="s" />.
+    /// </param>
+    /// <returns>
+    /// The result of parsing <paramref name="s" />.
+    /// </returns>
+    /// <exception cref="FormatException">
+    /// <paramref name="s" /> is not in the correct format.
+    /// </exception>
+    [Pure]
+    public static Unknown Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
+        => TryParse(s, provider, out var result)
+        ? result
+        : throw Unparsable.ForValue<Unknown>(s.ToString(), QowaivMessages.FormatExceptionUnknown);
+
+    /// <summary>Tries to parse a string into unknown.</summary>
+    /// <param name="s">
+    /// The string to parse.
+    /// </param>
+    /// <param name="provider">
+    /// An object that provides culture-specific formatting information about <paramref name="s" />.
+    /// </param>
+    /// <param name="result">
+    /// The parse result.
+    /// </param>
+    /// <returns>
+    /// <c>true</c> if <paramref name="s" /> was successfully parsed; otherwise, <c>false</c>.
+    /// </returns>
+    public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out Unknown result)
+    {
+        result = default;
+        return (s is { Length: 1 } && s[0] is '?')
+            || ParseValues.Contains(provider, s.ToString());
     }
 }

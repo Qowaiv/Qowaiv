@@ -93,6 +93,9 @@
   <data name="FormatExceptionTimestamp">
     <value>無効なSQLタイムスタンプ</value>
   </data>
+  <data name="FormatExceptionUnknown">
+    <value>無効な不明な値</value>
+  </data>
   <data name="FormatExceptionUuid">
     <value>無効なGUID</value>
   </data>

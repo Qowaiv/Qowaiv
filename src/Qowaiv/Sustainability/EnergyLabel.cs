@@ -208,7 +208,7 @@ public readonly partial struct EnergyLabel :
         {
             return true;
         }
-        else if (Qowaiv.Unknown.IsUnknown(str, provider as CultureInfo))
+        else if (str.IsUnknown(provider))
         {
             result = Unknown;
             return true;

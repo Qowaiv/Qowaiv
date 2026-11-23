@@ -93,6 +93,9 @@
   <data name="FormatExceptionTimestamp">
     <value>Недопустимая метка времени SQL</value>
   </data>
+  <data name="FormatExceptionUnknown">
+    <value>Недопустимое неизвестное значение</value>
+  </data>
   <data name="FormatExceptionUuid">
     <value>Недопустимый GUID</value>
   </data>

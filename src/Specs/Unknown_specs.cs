@@ -1,5 +1,35 @@
 namespace Unknown_specs;
 
+public class Can_be_parsed
+{
+    [Test]
+    [Arguments("?", "")]
+    [Arguments("?", "nl")]
+    [Arguments("?", "nl-NL")]
+    [Arguments("?", "nl-BE")]
+    [Arguments("Unknown", "")]
+    [Arguments("Unknown", "nl")]
+    [Arguments("Unknown", "en-UK")]
+    [Arguments("onbekend", "nl")]
+    [Arguments("onbekend", "nl-BE")]
+    public void From(string str, CultureInfo culture)
+    {
+        using (culture.Scoped())
+        {
+            Unknown.TryParse(str, null, out _).Should().BeTrue();
+        }
+    }
+}
+
+public class Can_not_be_parsed
+{
+    [Test]
+    public void from_valid_input()
+        => "invalid input".Invoking(s => Unknown.Parse(s, null))
+            .Should().Throw<FormatException>()
+            .WithMessage("Not a valid unknown");
+}
+
 public class Is_unknown
 {
     [Test]

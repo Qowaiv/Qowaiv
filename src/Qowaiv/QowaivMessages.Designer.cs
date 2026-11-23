@@ -466,6 +466,15 @@ namespace Qowaiv {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid unknown.
+        /// </summary>
+        public static string FormatExceptionUnknown {
+            get {
+                return ResourceManager.GetString("FormatExceptionUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid GUID.
         /// </summary>
         public static string FormatExceptionUuid {

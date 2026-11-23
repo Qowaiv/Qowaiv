@@ -93,6 +93,9 @@
   <data name="FormatExceptionTimestamp">
     <value>Carimbo de data/hora SQL inválido</value>
   </data>
+  <data name="FormatExceptionUnknown">
+    <value>Valor desconhecido inválido</value>
+  </data>
   <data name="FormatExceptionUuid">
     <value>GUID inválido</value>
   </data>

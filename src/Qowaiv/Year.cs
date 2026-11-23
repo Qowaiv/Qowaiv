@@ -132,16 +132,16 @@ public readonly partial struct Year : IXmlSerializable, IFormattable, IEquatable
         {
             return true;
         }
-        else if (Qowaiv.Unknown.IsUnknown(s, provider as CultureInfo ?? CultureInfo.InvariantCulture))
-        {
-            result = Unknown;
-            return true;
-        }
         else if (short.TryParse(s, NumberStyles.None, provider, out var year)
             && year >= MinValue.m_Value
             && year <= MaxValue.m_Value)
         {
             result = new(year);
+            return true;
+        }
+        else if (s.IsUnknown(provider))
+        {
+            result = Unknown;
             return true;
         }
         else return false;

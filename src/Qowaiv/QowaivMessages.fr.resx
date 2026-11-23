@@ -93,6 +93,9 @@
   <data name="FormatExceptionTimestamp">
     <value>Horodatage SQL non valide</value>
   </data>
+  <data name="FormatExceptionUnknown">
+    <value>Valeur inconnue non valide</value>
+  </data>
   <data name="FormatExceptionUuid">
     <value>GUID non valide</value>
   </data>

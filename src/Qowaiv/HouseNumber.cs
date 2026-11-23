@@ -143,15 +143,14 @@ public readonly partial struct HouseNumber : IXmlSerializable, IFormattable, IEq
         {
             return true;
         }
-        var culture = provider as CultureInfo ?? CultureInfo.InvariantCulture;
-        if (Qowaiv.Unknown.IsUnknown(s, culture))
-        {
-            result = Unknown;
-            return true;
-        }
-        else if (int.TryParse(s, NumberStyles.None, culture, out var number) && IsValid(number))
+        else if (int.TryParse(s, NumberStyles.None, provider, out var number) && IsValid(number))
         {
             result = new(number);
+            return true;
+        }
+        if (s.IsUnknown(provider))
+        {
+            result = Unknown;
             return true;
         }
         else return false;

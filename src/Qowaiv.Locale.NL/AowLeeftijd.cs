@@ -2,27 +2,37 @@ using Qowaiv.Humanizer;
 
 namespace Qowaiv.Locale.NL;
 
-/// <summary>Representeert de AOW-leeftijd.</summary>
+/// <summary>Represents the Dutch state pension (AOW) age that applies to a date of birth.</summary>
 /// <remarks>
-/// Published by https://www.svb.nl/nl/aow/aow-leeftijd/uw-aow-leeftijd.
+/// The AOW age depends on the date of birth and is set by the Sociale Verzekeringsbank (SVB).
+/// For people born on or after 1 October 1965 the age has not been finalized; it may change
+/// due to legislation.
 /// </remarks>
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 public readonly struct AowLeeftijd :
     IEquatable<AowLeeftijd>,
     IEmpty<AowLeeftijd>,
     IEnumerated
 {
-    /// <summary>Een niet-gezette/onbekende AOW-leeftijd.</summary>
+    /// <summary>An unset or unknown AOW age.</summary>
     public static AowLeeftijd Empty => default;
 
-    /// <summary>Gets all defined values.</summary>
+    /// <summary>Gets all defined AOW ages, ordered by <see cref="Van"/>.</summary>
     public static IReadOnlyCollection<AowLeeftijd> DefinedValues => [.. Entries];
 
     /// <summary>Initializes a new instance of the <see cref="AowLeeftijd"/> struct.</summary>
-    public AowLeeftijd(Date vanaf, Date tot, MonthSpan leeftijd, YesNo definitief)
+    /// <param name="van">The first birth date (inclusive) for which the age applies.</param>
+    /// <param name="tot">The last birth date (inclusive) for which the age applies.</param>
+    /// <param name="leeftijd">The AOW age that applies to this birth-date interval.</param>
+    /// <param name="definitief">Whether the age has been definitively established.</param>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// <paramref name="tot"/> is not after <paramref name="van"/>.
+    /// </exception>
+    public AowLeeftijd(Date van, Date tot, MonthSpan leeftijd, YesNo definitief)
     {
-        if (tot <= vanaf) throw new ArgumentOutOfRangeException(nameof(tot), $"{nameof(tot)} should be after {nameof(vanaf)}.");
+        if (tot <= van) throw new ArgumentOutOfRangeException(nameof(tot), $"{nameof(tot)} should be after {nameof(van)}.");
 
-        Vanaf = vanaf;
+        Van = van;
         Tot = tot;
         Leeftijd = leeftijd;
         Definitief = definitief;
@@ -31,22 +41,17 @@ public readonly struct AowLeeftijd :
     /// <inheritdoc />
     public bool HasValue => !Equals(Empty);
 
-    /// <summary>De minimale geboortedatum waarvoor deze AOW-leeftijd geldt.</summary>
-    public Date Vanaf { get; }
+    /// <summary>The earliest birth date (inclusive) for which this AOW age applies.</summary>
+    public Date Van { get; }
 
-    /// <summary>De maximale geboortedatum waarvoor deze AOW-leeftijd geldt.</summary>
+    /// <summary>The latest birth date (inclusive) for which this AOW age applies.</summary>
     public Date Tot { get; }
 
-    /// <summary>De vastgestelde AOW-leeftijd.</summary>
+    /// <summary>The AOW age that applies to this birth-date interval.</summary>
     public MonthSpan Leeftijd { get; }
 
-    /// <summary>Geeft aan of de vasstelling definitief is.</summary>
+    /// <summary>Whether the AOW age has been definitively established.</summary>
     public YesNo Definitief { get; }
-
-    /// <inheritdoc />
-    [Pure]
-    public override string ToString()
-        => $"[{Vanaf} .. {Tot}] = {Leeftijd.Years} jaar en {Leeftijd.Months} maand(en){(Definitief ? string.Empty : "*")}";
 
     /// <inheritdoc />
     [Pure]
@@ -55,7 +60,7 @@ public readonly struct AowLeeftijd :
     /// <inheritdoc />
     [Pure]
     public bool Equals(AowLeeftijd other)
-        => Vanaf == other.Vanaf
+        => Van == other.Van
         && Tot == other.Tot
         && Leeftijd == other.Leeftijd
         && Definitief == other.Definitief;
@@ -63,10 +68,25 @@ public readonly struct AowLeeftijd :
     /// <inheritdoc />
     [Pure]
     public override int GetHashCode() => Hash
-        .Code(Vanaf)
+        .Code(Van)
         .And(Tot)
         .And(Leeftijd)
         .And(Definitief);
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private string DebuggerDisplay
+    {
+        get
+        {
+            var leeftijd = Leeftijd.Months switch
+            {
+                0 => $"{Leeftijd.Years} jaar",
+                1 => $"{Leeftijd.Years} jaar en {Leeftijd.Months} maand",
+                _ => $"{Leeftijd.Years} jaar en {Leeftijd.Months} maanden",
+            };
+            return $"[{Van} .. {Tot}] = {leeftijd}{(Definitief ? string.Empty : "*")}";
+        }
+    }
 
     private static readonly AowLeeftijd[] Entries = [..Init(
         new Entry(1947, 12, 31, 65.Years() + 00.Months(), true),
@@ -75,6 +95,7 @@ public readonly struct AowLeeftijd :
         new Entry(1950, 09, 30, 65.Years() + 03.Months(), true),
         new Entry(1951, 06, 30, 65.Years() + 06.Months(), true),
         new Entry(1952, 03, 31, 65.Years() + 09.Months(), true),
+        new Entry(1952, 12, 31, 66.Years() + 00.Months(), true),
         new Entry(1955, 08, 31, 66.Years() + 04.Months(), true),
         new Entry(1956, 05, 31, 66.Years() + 07.Months(), true),
         new Entry(1957, 02, 28, 66.Years() + 10.Months(), true),
@@ -95,28 +116,39 @@ public readonly struct AowLeeftijd :
         new Entry(9999, 12, 31, 70.Years() + 00.Months()))
     ];
 
-    /// <summary>Geeft de AOW-leeftijd voor de gevraagde geboortedatum.</summary>
+    /// <summary>Gets the AOW age that applies to the given date of birth.</summary>
+    /// <param name="geboortedatum">The date of birth for which to determine the AOW age.</param>
+    /// <returns>
+    /// The corresponding <see cref="AowLeeftijd"/>. Every date within the range of <see cref="Date"/>
+    /// falls within one of the defined intervals.
+    /// </returns>
+    /// <example>
+    /// <code>
+    /// var aow = AowLeeftijd.Geboortedatum(new Date(1980, 02, 14)); // 68 jaar en 6 maanden
+    /// </code>
+    /// </example>
     [Pure]
     public static AowLeeftijd Geboortedatum(Date geboortedatum)
         => Entries[Entries.AsSpan().BinarySearch(new Comparer(geboortedatum))];
 
+    /// <summary>Builds contiguous, inclusive date ranges from the table entries.</summary>
     [Pure]
     private static IEnumerable<AowLeeftijd> Init(params Entry[] entries)
     {
         var vanaf = Date.MinValue;
         foreach (var entry in entries)
         {
-            var aow = new AowLeeftijd(vanaf, new(entry.Jaar, entry.Maand, entry.Dag), entry.Leeftijd, entry.Definitief ? YesNo.Yes : YesNo.No);
+            var aow = new AowLeeftijd(vanaf, new(entry.Year, entry.Month, entry.Day), entry.Leeftijd, entry.Definitief ? YesNo.Yes : YesNo.No);
             yield return aow;
 
             if (aow.Tot != Date.MaxValue) vanaf = aow.Tot.AddDays(1);
         }
     }
 
-    /// <summary>Entry only exists to simplify initialization of the table.</summary>
-    private readonly record struct Entry(int Jaar, int Maand, int Dag, MonthSpan Leeftijd, bool Definitief = false);
+    /// <summary>Helper record to declare the table concisely.</summary>
+    private readonly record struct Entry(int Year, int Month, int Day, MonthSpan Leeftijd, bool Definitief = false);
 
-    /// <summary>Allows binary-search on records.</summary>
+    /// <summary>Compares a date with the inclusive range of a defined value, for binary search.</summary>
     private readonly struct Comparer(Date date) : IComparable<AowLeeftijd>
     {
         private readonly Date Date = date;
@@ -126,7 +158,7 @@ public readonly struct AowLeeftijd :
         public int CompareTo(AowLeeftijd other) => true switch
         {
             _ when Date > other.Tot => +1,
-            _ when Date < other.Vanaf => -1,
+            _ when Date < other.Van => -1,
             _ => 0,
         };
     }

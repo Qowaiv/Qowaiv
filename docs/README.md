@@ -94,6 +94,7 @@ your own. How to do that can be read [here](../README.Custom.SVO.md).
 * [CultureInfoScope](svo/CultureInfoScope.md)
 
 ## Qowaiv locale NL types
+* [AOW-leeftijd](locale/nl/AowLeeftijd.md)
 * [Burgerservicenummer](locale/nl/Burgerservicenummer.md)
 * [Kadastrale gemeente](locale/nl/KadastraleGemeente.md)
 * [Kvk-nummer](locale/nl/KvkNummer.md)

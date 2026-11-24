@@ -131,33 +131,9 @@ public readonly partial struct Burgerservicenummer : IXmlSerializable, IFormatta
     /// </returns>
     [Pure]
     public static Burgerservicenummer? TryCreate(long value)
-        => IsValid(value)
+        => ElfProef.IsValid(value)
         ? new(value)
         : null;
-
-    /// <summary>Valideert een Burgerservicenummer.</summary>
-    /// <remarks>
-    /// Het burgerservicenummer bestaat uit 9 cijfers en voldoet aan een variant
-    /// op de zogenaamde elfproef: Als het burgerservicenummer wordt voorgesteld
-    /// door ABCDEFGHI, dan moet gelden:
-    /// (9*A + 8*B + 7*C + 6*D + 5*E + 4*F + 3*G + 2*H - 1*I) % 11 = 0.
-    /// </remarks>
-    [Pure]
-    private static bool IsValid(long bsn)
-    {
-        if (bsn is < 0010_00_000 or > 9999_99_999) return false;
-
-        var cur = bsn / 10;
-        var sum = (cur * 10) - bsn;
-
-        for (var pos = 2; pos <= 9; pos++)
-        {
-            var nxt = cur / 10;
-            sum += (cur - (nxt * 10)) * pos;
-            cur = nxt;
-        }
-        return sum % 11 == 0;
-    }
 }
 
 #if NETSTANDARD2_0
@@ -188,46 +164,7 @@ public readonly partial struct Burgerservicenummer : ISpanParsable<Burgerservice
     /// true if the formatting was successful; otherwise, false.
     /// </returns>
     public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
-    {
-        if (m_Value is 0)
-        {
-            charsWritten = 0;
-            return true;
-        }
-
-        charsWritten = format.Equals("F", StringComparison.OrdinalIgnoreCase) ? 11 : 9;
-
-        if (destination.Length < charsWritten)
-        {
-            charsWritten = 0;
-            return false;
-        }
-        else
-        {
-            TryFormat(destination, charsWritten);
-            return true;
-        }
-    }
-
-    private void TryFormat(Span<char> destination, int charsWritten)
-    {
-        var curr = m_Value;
-
-        for (var i = charsWritten - 1; i >= 0; i--)
-        {
-            if (charsWritten is 11 && i is 4 or 7)
-            {
-                destination[i] = '.';
-            }
-            else
-            {
-                var next = curr / 10;
-                var d = curr - (next * 10);
-                destination[i] = (char)(d + '0');
-                curr = next;
-            }
-        }
-    }
+        => ElfProef.TryFormat(m_Value, destination, out charsWritten, format, provider);
 
     /// <summary>Tries to parse a span of characters into a Burgerservicenummer.</summary>
     /// <param name="s">
@@ -252,7 +189,7 @@ public readonly partial struct Burgerservicenummer : ISpanParsable<Burgerservice
         {
             return true;
         }
-        else if (TryBurgerservicenummer(s, out var value))
+        else if (ElfProef.TryParse(s, out var value))
         {
             result = new Burgerservicenummer(value);
             return true;
@@ -263,40 +200,6 @@ public readonly partial struct Burgerservicenummer : ISpanParsable<Burgerservice
             return true;
         }
         else return false;
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool TryBurgerservicenummer(ReadOnlySpan<char> span, out long value)
-    {
-        var length = 1;
-        var pos = span.Length - 1;
-        var factor = 10;
-        var c = span[pos--];
-        value = c.Digit;
-
-        if (!c.Is_0_9) return false;
-
-        // Last digit is * -1;
-        var check = -value;
-
-        // By reading from right to left we can both parse the number and
-        // create the checksum at the same time.
-        while (pos >= 0)
-        {
-            c = span[pos--];
-
-            // Not more than 9 digits
-            if (c.Is_0_9 && ++length <= 9)
-            {
-                var digit = c.Digit;
-                value += digit * factor;
-                check += digit * length;
-                factor *= 10;
-            }
-            else if (!c.Is_Markup) return false;
-        }
-        return value >= 0010_00_000
-            && (check % 11 is 0 || check is 9999_99_999);
     }
 
     /// <summary>Parses a span of characters into a Burgerservicenummer.</summary>

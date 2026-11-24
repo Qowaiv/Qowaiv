@@ -8,7 +8,7 @@ public static class QowaivRandom
 {
     extension(Random rnd)
     {
-        /// <summary>Creates an unbounded (pseudo) random sequance.</summary>
+        /// <summary>Creates an unbounded (pseudo) random sequence.</summary>
         /// <param name="next">
         /// The selector of a single random item.
         /// </param>
@@ -92,7 +92,7 @@ public static class QowaivRandom
 
             char A() => rnd.NextChar('A', 'Z');
             char N() => rnd.NextChar('0', '9');
-            char C() => rnd.Next() > 0.5 ? A() : N();
+            char C() => rnd.NextDouble() > 0.5 ? A() : N();
 
             static int Checksum(ReadOnlySpan<char> iban)
                 => 98 - ((Mod97(iban) * 100) % 97);

@@ -45,7 +45,7 @@ public class With_domain_logic
 public class Has_constant
 {
     [Test]
-    public void Empty() => KvkNummer.Empty.Should().Be(default(KvkNummer));
+    public void Empty() => KvkNummer.Empty.Should().Be(default);
 
     [Test]
     public void Unknown() => KvkNummer.Unknown.Should().Be(KvkNummer.Parse("?"));
@@ -316,7 +316,7 @@ public class Has_custom_formatting
     [Test]
     public void TryFormat_unknown_with_empty_destination_returns_false()
     {
-        KvkNummer.Unknown.TryFormat(Span<char>.Empty, out var charsWritten, default, null).Should().BeFalse();
+        KvkNummer.Unknown.TryFormat([], out var charsWritten, default, null).Should().BeFalse();
         charsWritten.Should().Be(0);
     }
 }
@@ -335,20 +335,20 @@ public class Is_comparable
 
     [Test]
     public void to_KvkNummer_only()
-        => Assert.Throws<ArgumentException>(() => Svo.KvkNummer.CompareTo(new object()));
+        => new object().Invoking(Svo.KvkNummer.CompareTo).Should().Throw<ArgumentException>();
 
     [Test]
     public void can_be_sorted_using_compare()
     {
-        KvkNummer[] sorted = new KvkNummer[]
-        {
+        KvkNummer[] sorted =
+        [
             default,
             default,
            01234567.KvK(),
            41234659.KvK(),
            81230067.KvK(),
             KvkNummer.Unknown,
-        };
+        ];
 
         var list = new List<KvkNummer> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
         list.Sort();
@@ -397,7 +397,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From<string>(null).To<KvkNummer>().Should().Be(KvkNummer.Empty);
+            Converting.FromNull<string>().To<KvkNummer>().Should().Be(KvkNummer.Empty);
         }
     }
 

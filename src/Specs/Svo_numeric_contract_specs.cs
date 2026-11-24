@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Qowaiv.UnitTestsSVO_numeric_contract_specs;
 
 public class Numeric_SVOs_Define
@@ -337,15 +339,7 @@ public class Numeric_SVOs_Define
 internal static class NumericSvoTestExtensions
 {
     public static IEnumerable<MethodInfo> ExcludeObsolete(this IEnumerable<MethodInfo> infos)
-    {
-        foreach (var info in infos)
-        {
-            if (info.GetCustomAttribute<ObsoleteAttribute>() is null)
-            {
-                yield return info;
-            }
-        }
-    }
+        => infos.Where(info => info.GetCustomAttribute<ObsoleteAttribute>() is null);
 
     internal static IEnumerable<MethodInfo> Returns(this IEnumerable<MethodInfo> infos, Type returnType)
         => infos.Where(info => info.ReturnType == returnType);

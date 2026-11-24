@@ -7,7 +7,7 @@ namespace Qowaiv.Customization;
 public abstract class SvoBehavior : TypeConverter, IComparer<string>
 {
     /// <summary>The string to store the unknown state internally.</summary>
-    internal const string unknown = "\uFFFF";
+    private const string Unknown = "\uFFFF";
 
     /// <summary>Defines the minimum length the string representation of the Single Value Object may be.</summary>
     /// <remarks>
@@ -32,7 +32,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// The optional format provider.
     /// </param>
     [Pure]
-    public virtual bool IsUnknown(string str, IFormatProvider? formatProvider) => Unknown.TryParse(str, formatProvider, out _);
+    public virtual bool IsUnknown(string str, IFormatProvider? formatProvider) => Qowaiv.Unknown.TryParse(str, formatProvider, out _);
 
     /// <summary>Validates if the input <see cref="string" /> is valid given its format provider.</summary>
     /// <param name="str">
@@ -106,7 +106,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     public virtual string? ToJson(string? str) => str switch
     {
         null => null,
-        unknown => FormatUnknown(default, CultureInfo.InvariantCulture),
+        Unknown => FormatUnknown(default, CultureInfo.InvariantCulture),
         _ => str,
     };
 
@@ -118,7 +118,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     public virtual string? ToXml(string? str) => str switch
     {
         null => null,
-        unknown => FormatUnknown(default, CultureInfo.InvariantCulture),
+        Unknown => FormatUnknown(default, CultureInfo.InvariantCulture),
         _ => str,
     };
 
@@ -187,7 +187,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
         }
         else if (IsUnknown(normalized, formatProvider))
         {
-            validated = unknown;
+            validated = Unknown;
             return true;
         }
         else if (WithinSize(normalized)
@@ -226,7 +226,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     {
         _ when StringFormatter.TryApplyCustomFormatter(format, str!, formatProvider, out string formatted) => formatted,
         null => string.Empty,
-        unknown => FormatUnknown(format, formatProvider),
+        Unknown => FormatUnknown(format, formatProvider),
         _ => Format(str, format, formatProvider),
     };
 }

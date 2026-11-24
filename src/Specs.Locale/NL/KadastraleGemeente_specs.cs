@@ -41,7 +41,7 @@ public class With_domain_logic
 public class Has_constant
 {
     [Test]
-    public void Empty() => KadastraleGemeente.Empty.Should().Be(default(KadastraleGemeente));
+    public void Empty() => KadastraleGemeente.Empty.Should().Be(default);
 
     [Test]
     public void Unknown() => KadastraleGemeente.Unknown.Should().Be(KadastraleGemeente.Parse("?"));
@@ -256,20 +256,20 @@ public class Is_comparable
 
     [Test]
     public void to_KadastraleGemeente_only()
-        => Assert.Throws<ArgumentException>(() => Svo.KadastraleGemeente.CompareTo(new object()));
+        => new object().Invoking(Svo.KadastraleGemeente.CompareTo).Should().Throw<ArgumentException>();
 
     [Test]
     public void can_be_sorted_using_compare()
     {
-        var sorted = new KadastraleGemeente[]
-        {
+        KadastraleGemeente[] sorted =
+        [
             default,
             default,
             KadastraleGemeente.Parse("DEL00"),
             KadastraleGemeente.Parse("DEL01"),
             KadastraleGemeente.Parse("EEX00"),
             KadastraleGemeente.Unknown,
-        };
+        ];
 
         var list = new List<KadastraleGemeente> { sorted[3], sorted[4], sorted[5], sorted[2], sorted[0], sorted[1] };
         list.Sort();
@@ -288,7 +288,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From<string>(null).To<KadastraleGemeente>().Should().Be(KadastraleGemeente.Empty);
+            Converting.FromNull<string>().To<KadastraleGemeente>().Should().Be(KadastraleGemeente.Empty);
         }
     }
 

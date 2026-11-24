@@ -8,6 +8,14 @@ public static class QowaivRandom
 {
     extension(Random rnd)
     {
+        /// <summary>Creates an unbounded (pseudo) random sequance.</summary>
+        /// <param name="next">
+        /// The selector of a single random item.
+        /// </param>
+        [Impure]
+        public IEnumerable<T> NextSequence<T>(Func<Random, T> next) where T : notnull
+            => new RandomSequence<T>(rnd, Guard.NotNull(next));
+
         /// <summary>Returns a <see cref="char"/>.</summary>
         /// <param name="values">
         /// The values to pick from.
@@ -98,6 +106,34 @@ public static class QowaivRandom
                 return mod;
             }
         }
+    }
+
+    private readonly record struct RandomSequence<T>(Random Rnd, Func<Random, T> Next) : IEnumerator<T>, IEnumerable<T> where T : notnull
+    {
+        /// <inheritdoc />
+        public T Current => Next(Rnd);
+
+        /// <inheritdoc />
+        object IEnumerator.Current => Current;
+
+        /// <inheritdoc />
+        [Impure]
+        public bool MoveNext() => true;
+
+        /// Returns an enumerator that iterates through a collection.An enumerator that can be used to iterate through the collection.The method is not implemented.
+        [Pure]
+        public IEnumerator<T> GetEnumerator() => this;
+
+        /// <inheritdoc />
+        [Pure]
+        IEnumerator IEnumerable.GetEnumerator() => this;
+
+        /// <inheritdoc />
+        [DoesNotReturn]
+        public void Reset() => throw new NotSupportedException();
+
+        /// <inheritdoc />
+        public void Dispose() {/* Nothing to dispose. */}
     }
 
     private static readonly CountryLookup<string?> Bbans = CountryLookup<string?>.New(

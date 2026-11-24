@@ -5,6 +5,18 @@ namespace Extensions.QowaivRandom_specs;
 
 public class Next
 {
+    public class Sequence
+    {
+        [Test]
+        public void Iterates()
+        {
+            int[] thousend = [.. Rnd.New().NextSequence(r => r.Next()).Take(1000)];
+
+            thousend.Should().HaveCount(1000)
+                .And.OnlyHaveUniqueItems();
+        }
+    }
+
 	public class Char
 	{
 		[Test]

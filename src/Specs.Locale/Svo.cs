@@ -4,6 +4,9 @@ namespace Specs.Locale;
 
 public static class Svo
 {
+    /// <summary>AOW-leeftijd voor 1964-10-13</summary>
+    public static AowLeeftijd AowLeeftijd => Qowaiv.Locale.NL.AowLeeftijd.Geboortedatum(new(1964, 10, 13));
+
     /// <summary>1234.56.782</summary>
     public static Burgerservicenummer Burgerservicenummer => 1234_56_782L.BSN();
 

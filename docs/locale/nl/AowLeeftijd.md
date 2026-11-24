@@ -1,9 +1,9 @@
 # AOW-leeftijd
 
 Represents the Dutch state pension age ([AOW-leeftijd](https://nl.wikipedia.org/wiki/AOW-leeftijd))
-that applies to a date of birth. The Sociale Verzekeringsbank (SVB) defines the
-age as a table of inclusive birth-date ranges; this value object exposes one
-value per range.
+that applies to a date of birth. The [Sociale Verzekeringsbank (SVB)](https://nl.wikipedia.org/wiki/Sociale_Verzekeringsbank)
+defines the age as a table of inclusive birth-date ranges; this value object
+exposes one value per range.
 
 The AOW age has been definitively established for birth dates before 1 October 1965.
 From 1 October 1965 onwards it is an expected age that can change when the SVB updates

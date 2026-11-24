@@ -138,6 +138,7 @@ criteria, Qowaiv can offer some extensions to improve usage.
 * [System.DateTime](svo/system/DateTime.md)
 * [System.Globalization.CultureInfo](svo/system/CultureInfo.md)
 * [System.Net.Http.HttpMethod](svo/system/HttpMethod.md)
+* [System.Random](svo/system/Random.md)
 
 ## Qowaiv helpers
 * [DecimalMath](DecimalMath.md)

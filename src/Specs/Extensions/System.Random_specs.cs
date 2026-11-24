@@ -10,9 +10,9 @@ public class Next
         [Test]
         public void Iterates()
         {
-            int[] thousend = [.. Rnd.New().NextSequence(r => r.Next()).Take(1000)];
+            int[] thousand = [.. Rnd.New().NextSequence(r => r.Next()).Take(1000)];
 
-            thousend.Should().HaveCount(1000)
+            thousand.Should().HaveCount(1000)
                 .And.OnlyHaveUniqueItems();
         }
     }

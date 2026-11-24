@@ -21,4 +21,7 @@
   <data name="FormatExceptionKvkNummer">
     <value>Geen geldig KvK-nummer</value>
   </data>
+  <data name="FormatExceptionRsin">
+    <value>Geen geldig RSIN</value>
+  </data>
 </root>

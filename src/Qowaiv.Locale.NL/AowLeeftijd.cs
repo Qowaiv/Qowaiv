@@ -106,7 +106,7 @@ public readonly struct AowLeeftijd :
     public override string ToString() => $"Van = {Van}, Tot = {Tot}, Leeftijd = {Leeftijd}, Definitief = {Definitief}";
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    [ExcludeFromCodeCoverage(/*Justification = Debugger experience only*/)]
+    [ExcludeFromCodeCoverage]
     private string DebuggerDisplay
     {
         get

@@ -19,10 +19,11 @@ public partial class IbanBenchmark
             => JsonSerializer.Serialize(Stream1, Data.Iban.String, options: Default);
 
         [Benchmark(Baseline = true)]
+        [IterationCount(Data.Iban.Iterations)]
         public string[]? String()
             => JsonSerializer.Deserialize<string[]>(Stream1, options: Default);
 
-        [Benchmark]
+        [Benchmark(OperationsPerInvoke = Data.Iban.Iterations)]
         public Iban[]? Iban()
             => JsonSerializer.Deserialize<Iban[]>(Stream1, options: Default);
     }
@@ -31,14 +32,14 @@ public partial class IbanBenchmark
     [SimpleJob(RuntimeMoniker.Net11_0)]
     public class IBAN_write_JSON : JsonWriterBenchmark
     {
-        [Benchmark(Baseline = true)]
+        [Benchmark(Baseline = true, OperationsPerInvoke = Data.Iban.Iterations)]
         public Stream String()
         {
             JsonSerializer.Serialize(Writer1, Data.Iban.String, options: Default);
             return Stream1;
         }
 
-        [Benchmark]
+        [Benchmark(OperationsPerInvoke = Data.Iban.Iterations)]
         public Stream Iban()
         {
             JsonSerializer.Serialize(Writer1, Data.Iban.Svo, options: Default);
@@ -52,15 +53,14 @@ public partial class IbanBenchmark
     [MinColumn]
     public class IBAN_Parse : IbanBenchmark
     {
-        public const int Iterations = 1000;
-        public readonly string?[] Outputs = new string?[Iterations];
-        public readonly Iban[] Ibans = new Iban[Iterations];
-        public readonly IbanObject?[] IbanObjects = new IbanObject?[Iterations];
-        public readonly string?[] Strings = new string?[Iterations];
+        public readonly string?[] Outputs = new string?[Data.Iban.Iterations];
+        public readonly Iban[] Ibans = new Iban[Data.Iban.Iterations];
+        public readonly IbanObject?[] IbanObjects = new IbanObject?[Data.Iban.Iterations];
+        public readonly string?[] Strings = new string?[Data.Iban.Iterations];
 
         private static readonly IbanParser IbanParser = new(IbanRegistry.Default);
 
-        [Benchmark(Description = "Qowaiv", Baseline = true)]
+        [Benchmark(Description = "Qowaiv", Baseline = true, OperationsPerInvoke = Data.Iban.Iterations)]
         [BenchmarkCategory("machine readable")]
         public Iban[] Qowaiv_MachineReadable()
         {
@@ -74,7 +74,7 @@ public partial class IbanBenchmark
             return Ibans;
         }
 
-        [Benchmark(Description = "Iban.NET")]
+        [Benchmark(Description = "Iban.NET", OperationsPerInvoke = Data.Iban.Iterations)]
         [BenchmarkCategory("machine readable")]
         public IbanObject?[] IbanNet_MachineReadable()
         {
@@ -88,7 +88,7 @@ public partial class IbanBenchmark
             return IbanObjects;
         }
 
-        [Benchmark(Description = "Regex")]
+        [Benchmark(Description = "Regex", OperationsPerInvoke = Data.Iban.Iterations)]
         [BenchmarkCategory("machine readable")]
         public string?[] Regex_MachineReadable()
         {
@@ -101,7 +101,7 @@ public partial class IbanBenchmark
             return Strings;
         }
 
-        [Benchmark(Description = "Qowaiv", Baseline = true)]
+        [Benchmark(Description = "Qowaiv", Baseline = true, OperationsPerInvoke = Data.Iban.Iterations)]
         [BenchmarkCategory("human readable")]
         public Iban[] Qowaiv_HumanReadable()
         {
@@ -115,7 +115,7 @@ public partial class IbanBenchmark
             return Ibans;
         }
 
-        [Benchmark(Description = "Iban.NET")]
+        [Benchmark(Description = "Iban.NET", OperationsPerInvoke = Data.Iban.Iterations)]
         [BenchmarkCategory("human readable")]
         public IbanObject?[] IbanNet_HumanReadable()
         {
@@ -129,7 +129,7 @@ public partial class IbanBenchmark
             return IbanObjects;
         }
 
-        [Benchmark(Description = "Regex")]
+        [Benchmark(Description = "Regex", OperationsPerInvoke = Data.Iban.Iterations)]
         [BenchmarkCategory("human readable")]
         public string?[] Regex_HumanReadable()
         {

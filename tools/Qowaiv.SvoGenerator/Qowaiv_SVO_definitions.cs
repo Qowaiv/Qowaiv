@@ -89,6 +89,7 @@ public class Generation_of
     [Arguments("Burgerservicenummer", typeof(long), "Burgerservicenummer", "Qowaiv.Locale.NL", SvoFeatures.Default)]
     [Arguments("KadastraleGemeente", typeof(string), "kadastrale gemeente", "Qowaiv.Locale.NL", SvoFeatures.Default)]
     [Arguments("KvkNummer", typeof(int), "KvK-nummer", "Qowaiv.Locale.NL", SvoFeatures.Default)]
+    [Arguments("Rsin", typeof(long), "RSIN", "Qowaiv.Locale.NL", SvoFeatures.Default)]
     public void Qowaiv_Locale_NL(string name, Type underlying, string fullName, string ns, SvoFeatures features, string? formatExceptionMessage = null)
     {
         var path = $@"{Root}\src\Qowaiv.Locale.NL\Generated\{name}.generated.cs";

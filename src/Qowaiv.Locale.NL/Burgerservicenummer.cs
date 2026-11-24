@@ -4,29 +4,28 @@
 
 namespace Qowaiv.Locale.NL;
 
-/// <summary>Representeert een Burgerservicenummer (BSN).</summary>
+/// <summary>Represents a Burgerservicenummer (BSN).</summary>
 /// <remarks>
-/// Het Burgerservicenummer (BSN) is op 26 november 2007 ingevoerd
-/// in Nederland. Het BSN is een uniek persoonsnummer dat als nummer gelijk
-/// is aan het sofinummer. Het heeft echter een ander wettelijk kader
-/// waardoor een breder gebruik mogelijk is.
+/// The Burgerservicenummer (BSN) was introduced in the Netherlands on
+/// 26 November 2007. It is a unique personal number that is numerically equal
+/// to the former sofinummer, but has a different legal basis that allows for
+/// broader use.
 ///
-/// Het burgerservicenummer bestaat uit 9 cijfers en voldoet aan een variant
-/// op de zogenaamde elfproef: Als het burgerservicenummer wordt voorgesteld
-/// door ABCDEFGHI, dan moet gelden:<br/>
+/// A Burgerservicenummer consists of nine digits and satisfies a variant of
+/// the elfproef (eleven test): if the Burgerservicenummer is represented by
+/// ABCDEFGHI, then:<br/>
 /// (9*A + 8*B + 7*C + 6*D + 5*E + 4*F + 3*G + 2*H - 1*I) % 11 = 0
 ///
-/// Indien bij de communicatie tussen burger en overheid een persoonsgebonden
-/// nummer wordt gebruikt dan mag dat alleen het BSN zijn.
+/// When a personal number is used in communications between a citizen and the
+/// government, it may only be the BSN.
 ///
-/// Iedereen die een meervoudige relatie met de overheid heeft, goed te
-/// identificeren is en opgenomen is in de Gemeentelijke Basisadministratie
-/// Persoonsgegevens (GBA) of in de (nog te realiseren) Registratie Niet
-/// Ingezetenen (RNI) krijgt een BSN.
+/// Everyone with a multiple relationship with the government who can be
+/// identified and is registered in the Municipal Personal Records Database
+/// (GBA) or the (yet to be realised) Registration of Non-Residents (RNI)
+/// receives a BSN.
 ///
-/// Bij gegevensuitwisseling tussen overheden mag alleen het BSN worden
-/// gebruikt (met uitzondering van het A-nummer bij de uitwisseling van
-/// GBA-gegevens).
+/// When exchanging data between government organisations, only the BSN may be
+/// used (except for the A-number when exchanging GBA data).
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [Serializable]
@@ -131,33 +130,9 @@ public readonly partial struct Burgerservicenummer : IXmlSerializable, IFormatta
     /// </returns>
     [Pure]
     public static Burgerservicenummer? TryCreate(long value)
-        => IsValid(value)
+        => Elfproef.IsValid(value)
         ? new(value)
         : null;
-
-    /// <summary>Valideert een Burgerservicenummer.</summary>
-    /// <remarks>
-    /// Het burgerservicenummer bestaat uit 9 cijfers en voldoet aan een variant
-    /// op de zogenaamde elfproef: Als het burgerservicenummer wordt voorgesteld
-    /// door ABCDEFGHI, dan moet gelden:
-    /// (9*A + 8*B + 7*C + 6*D + 5*E + 4*F + 3*G + 2*H - 1*I) % 11 = 0.
-    /// </remarks>
-    [Pure]
-    private static bool IsValid(long bsn)
-    {
-        if (bsn is < 0010_00_000 or > 9999_99_999) return false;
-
-        var cur = bsn / 10;
-        var sum = (cur * 10) - bsn;
-
-        for (var pos = 2; pos <= 9; pos++)
-        {
-            var nxt = cur / 10;
-            sum += (cur - (nxt * 10)) * pos;
-            cur = nxt;
-        }
-        return sum % 11 == 0;
-    }
 }
 
 #if NETSTANDARD2_0
@@ -188,46 +163,7 @@ public readonly partial struct Burgerservicenummer : ISpanParsable<Burgerservice
     /// true if the formatting was successful; otherwise, false.
     /// </returns>
     public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
-    {
-        if (m_Value is 0)
-        {
-            charsWritten = 0;
-            return true;
-        }
-
-        charsWritten = format.Equals("F", StringComparison.OrdinalIgnoreCase) ? 11 : 9;
-
-        if (destination.Length < charsWritten)
-        {
-            charsWritten = 0;
-            return false;
-        }
-        else
-        {
-            TryFormat(destination, charsWritten);
-            return true;
-        }
-    }
-
-    private void TryFormat(Span<char> destination, int charsWritten)
-    {
-        var curr = m_Value;
-
-        for (var i = charsWritten - 1; i >= 0; i--)
-        {
-            if (charsWritten is 11 && i is 4 or 7)
-            {
-                destination[i] = '.';
-            }
-            else
-            {
-                var next = curr / 10;
-                var d = curr - (next * 10);
-                destination[i] = (char)(d + '0');
-                curr = next;
-            }
-        }
-    }
+        => Elfproef.TryFormat(m_Value, destination, out charsWritten, format, provider);
 
     /// <summary>Tries to parse a span of characters into a Burgerservicenummer.</summary>
     /// <param name="s">
@@ -252,7 +188,7 @@ public readonly partial struct Burgerservicenummer : ISpanParsable<Burgerservice
         {
             return true;
         }
-        else if (TryBurgerservicenummer(s, out var value))
+        else if (Elfproef.TryParse(s, out var value))
         {
             result = new Burgerservicenummer(value);
             return true;
@@ -263,40 +199,6 @@ public readonly partial struct Burgerservicenummer : ISpanParsable<Burgerservice
             return true;
         }
         else return false;
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static bool TryBurgerservicenummer(ReadOnlySpan<char> span, out long value)
-    {
-        var length = 1;
-        var pos = span.Length - 1;
-        var factor = 10;
-        var c = span[pos--];
-        value = c.Digit;
-
-        if (!c.Is_0_9) return false;
-
-        // Last digit is * -1;
-        var check = -value;
-
-        // By reading from right to left we can both parse the number and
-        // create the checksum at the same time.
-        while (pos >= 0)
-        {
-            c = span[pos--];
-
-            // Not more than 9 digits
-            if (c.Is_0_9 && ++length <= 9)
-            {
-                var digit = c.Digit;
-                value += digit * factor;
-                check += digit * length;
-                factor *= 10;
-            }
-            else if (!c.Is_Markup) return false;
-        }
-        return value >= 0010_00_000
-            && (check % 11 is 0 || check is 9999_99_999);
     }
 
     /// <summary>Parses a span of characters into a Burgerservicenummer.</summary>

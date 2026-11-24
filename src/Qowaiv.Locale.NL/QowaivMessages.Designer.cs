@@ -89,5 +89,13 @@ namespace Qowaiv.Locale.NL {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to Not a valid RSIN.
+        /// </summary>
+        public static string FormatExceptionRsin {
+            get {
+                return ResourceManager.GetString("FormatExceptionRsin", resourceCulture);
+            }
+        }
     }
 }

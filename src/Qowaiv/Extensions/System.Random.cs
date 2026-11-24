@@ -8,6 +8,18 @@ public static class QowaivRandom
 {
     extension(Random rnd)
     {
+        /// <summary>Creates an unbounded (pseudo) random sequence.</summary>
+        /// <param name="next">
+        /// The selector of a single random item.
+        /// </param>
+        /// <remarks>
+        /// Values are generated lazily while enumerating. As with any random
+        /// sequence, values may repeat.
+        /// </remarks>
+        [Impure]
+        public IEnumerable<T> NextSequence<T>(Func<Random, T> next) where T : notnull
+            => new RandomSequence<T>(rnd, Guard.NotNull(next));
+
         /// <summary>Returns a <see cref="char"/>.</summary>
         /// <param name="values">
         /// The values to pick from.
@@ -80,7 +92,7 @@ public static class QowaivRandom
 
             char A() => rnd.NextChar('A', 'Z');
             char N() => rnd.NextChar('0', '9');
-            char C() => rnd.Next() > 0.5 ? A() : N();
+            char C() => rnd.NextDouble() > 0.5 ? A() : N();
 
             static int Checksum(ReadOnlySpan<char> iban)
                 => 98 - ((Mod97(iban) * 100) % 97);
@@ -98,6 +110,41 @@ public static class QowaivRandom
                 return mod;
             }
         }
+    }
+
+    private struct RandomSequence<T>(Random rnd, Func<Random, T> next) : IEnumerator<T>, IEnumerable<T> where T : notnull
+    {
+        private readonly Random Rnd = rnd;
+        private readonly Func<Random, T> Next = next;
+
+        /// <inheritdoc />
+        public T Current { get; private set; } = default!;
+
+        /// <inheritdoc />
+        readonly object IEnumerator.Current => Current;
+
+        /// <inheritdoc />
+        [Impure]
+        public bool MoveNext()
+        {
+            Current = Next(Rnd);
+            return true;
+        }
+
+        /// <inheritdoc />
+        [Pure]
+        public readonly IEnumerator<T> GetEnumerator() => this;
+
+        /// <inheritdoc />
+        [Pure]
+        readonly IEnumerator IEnumerable.GetEnumerator() => this;
+
+        /// <inheritdoc />
+        [DoesNotReturn]
+        public void Reset() => throw new NotSupportedException();
+
+        /// <inheritdoc />
+        public void Dispose() { /* Nothing to dispose. */ }
     }
 
     private static readonly CountryLookup<string?> Bbans = CountryLookup<string?>.New(

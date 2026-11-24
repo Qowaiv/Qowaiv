@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../props/package.props" />
 
@@ -30,7 +30,6 @@
       <![CDATA[
 v11.*
 - ?
-
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
@@ -40,6 +39,7 @@ v11.0.0
 - Introduction of Burgerservicenummer.
 - Introduction of KadastraleGemeente.
 - Introduction of KvkNummer.
+- Introduction of RSIN.
 ]]>
     </PackageReleaseNotes>
   </PropertyGroup>

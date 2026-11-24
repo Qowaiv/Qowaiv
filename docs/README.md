@@ -98,6 +98,7 @@ your own. How to do that can be read [here](../README.Custom.SVO.md).
 * [Burgerservicenummer](locale/nl/Burgerservicenummer.md)
 * [Kadastrale gemeente](locale/nl/KadastraleGemeente.md)
 * [Kvk-nummer](locale/nl/KvkNummer.md)
+* [RSIN](locale/nl/RSIN.md)
 
 ## Qowaiv mathematical types
 * [Fraction](svo/Fraction.md)
@@ -137,6 +138,7 @@ criteria, Qowaiv can offer some extensions to improve usage.
 * [System.DateTime](svo/system/DateTime.md)
 * [System.Globalization.CultureInfo](svo/system/CultureInfo.md)
 * [System.Net.Http.HttpMethod](svo/system/HttpMethod.md)
+* [System.Random](svo/system/Random.md)
 
 ## Qowaiv helpers
 * [DecimalMath](DecimalMath.md)

@@ -165,7 +165,7 @@
       "qowaiv.bson.mongodb": {
         "type": "Project",
         "dependencies": {
-          "MongoDB.Bson": "[3.14.0, )"
+          "MongoDB.Bson": "[3.14.1, )"
         }
       },
       "qowaiv.json.newtonsoft": {
@@ -196,9 +196,9 @@
       },
       "MongoDB.Bson": {
         "type": "CentralTransitive",
-        "requested": "[3.14.0, )",
-        "resolved": "3.14.0",
-        "contentHash": "JrfJx2od1ly90rECMNC8z58NQtnOd76nzp8osX3nkI/F8DUjf6sp6CtFJhIIMrrNR6qxuRvn1yly6f45GiJZqQ=="
+        "requested": "[3.14.1, )",
+        "resolved": "3.14.1",
+        "contentHash": "ljmATiszGAAQC1nYudvdCTBJF96x2nOy1c4CBDw7vfUggDTL9NOdO93b2C8t7IAycerWNveDLwsfeELYRDxhjw=="
       },
       "Newtonsoft.Json": {
         "type": "CentralTransitive",
@@ -377,7 +377,7 @@
       "qowaiv.bson.mongodb": {
         "type": "Project",
         "dependencies": {
-          "MongoDB.Bson": "[3.14.0, )"
+          "MongoDB.Bson": "[3.14.1, )"
         }
       },
       "qowaiv.json.newtonsoft": {
@@ -405,9 +405,9 @@
       },
       "MongoDB.Bson": {
         "type": "CentralTransitive",
-        "requested": "[3.14.0, )",
-        "resolved": "3.14.0",
-        "contentHash": "JrfJx2od1ly90rECMNC8z58NQtnOd76nzp8osX3nkI/F8DUjf6sp6CtFJhIIMrrNR6qxuRvn1yly6f45GiJZqQ=="
+        "requested": "[3.14.1, )",
+        "resolved": "3.14.1",
+        "contentHash": "ljmATiszGAAQC1nYudvdCTBJF96x2nOy1c4CBDw7vfUggDTL9NOdO93b2C8t7IAycerWNveDLwsfeELYRDxhjw=="
       },
       "Newtonsoft.Json": {
         "type": "CentralTransitive",

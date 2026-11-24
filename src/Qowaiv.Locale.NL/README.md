@@ -1,3 +1,2 @@
 # Qowaiv Locale NL
-Contains Single Value Objects that ar bound to the Netherlands. Due to its
-nature, the code and documentation of this is in Dutch.
+Contains single value objects (SVOs) that are bound to the Netherlands.

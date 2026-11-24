@@ -93,6 +93,9 @@
   <data name="FormatExceptionTimestamp">
     <value>Geen geldige SQL timestamp</value>
   </data>
+  <data name="FormatExceptionUnknown">
+    <value>Geen geldige onbekende waarde</value>
+  </data>
   <data name="FormatExceptionUuid">
     <value>Geen geldig GUID</value>
   </data>

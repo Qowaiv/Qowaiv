@@ -32,7 +32,7 @@ public abstract class SvoBehavior : TypeConverter, IComparer<string>
     /// The optional format provider.
     /// </param>
     [Pure]
-    public virtual bool IsUnknown(string str, IFormatProvider? formatProvider) => Unknown.IsUnknown(str, formatProvider as CultureInfo);
+    public virtual bool IsUnknown(string str, IFormatProvider? formatProvider) => Unknown.TryParse(str, formatProvider, out _);
 
     /// <summary>Validates if the input <see cref="string" /> is valid given its format provider.</summary>
     /// <param name="str">

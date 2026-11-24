@@ -179,7 +179,7 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
             result = new EmailAddress(email);
             return true;
         }
-        else if (Qowaiv.Unknown.IsUnknown(s, provider as CultureInfo))
+        else if (s.IsUnknown(provider))
         {
             result = Unknown;
             return true;

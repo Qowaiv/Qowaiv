@@ -164,6 +164,19 @@ Reading or writen an array of 1000 items, mean is a single operation.
 | Percentage | .NET 11.0 |  39.46 ns |  1.00 |      32 B |
 | YesNo      | .NET 11.0 |  66.55 ns |  1.69 |      32 B |
 
+### Unknown
+Benchmarks is FrozenSet of SearchValues is the best way to
+store the different values.
+
+| Contains     | Runtime   | Mean      | Ratio |
+|------------- |---------- |----------:|------:|
+| FrozenSet    | .NET 10.0 |  10.99 ns |  1.00 |
+| SearchValues | .NET 10.0 | 115.68 ns | 10.53 |
+|              |           |           |       |
+| FrozenSet    | .NET 11.0 |  10.64 ns |  1.00 |
+| SearchValues | .NET 11.0 | 112.27 ns | 10.56 |
+
+
 ### Yes/No
 | Read       | Runtime   | Mean      | Ratio | Allocated |
 |----------- |---------- |----------:|------:|----------:|

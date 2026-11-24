@@ -93,6 +93,9 @@
   <data name="FormatExceptionTimestamp">
     <value>无效的 SQL 时间戳记</value>
   </data>
+  <data name="FormatExceptionUnknown">
+    <value>无效的未知值</value>
+  </data>
   <data name="FormatExceptionUuid">
     <value>无效的 GUID</value>
   </data>

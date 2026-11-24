@@ -93,6 +93,9 @@
   <data name="FormatExceptionTimestamp">
     <value>No es una marca de tiempo SQL válida</value>
   </data>
+  <data name="FormatExceptionUnknown">
+    <value>No es un valor desconocido válido</value>
+  </data>
   <data name="FormatExceptionUuid">
     <value>No es un GUID válido</value>
   </data>

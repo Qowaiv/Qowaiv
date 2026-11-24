@@ -164,14 +164,14 @@ public readonly partial struct InternetMediaType : IXmlSerializable, IFormattabl
         {
             return true;
         }
-        else if (Qowaiv.Unknown.IsUnknown(s, provider as CultureInfo))
-        {
-            result = Unknown;
-            return true;
-        }
         else if (Pattern.IsMatch(s))
         {
             result = new InternetMediaType(s.ToLowerInvariant());
+            return true;
+        }
+        else if (s.IsUnknown(provider))
+        {
+            result = Unknown;
             return true;
         }
         else return false;

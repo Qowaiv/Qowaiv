@@ -93,6 +93,9 @@
   <data name="FormatExceptionTimestamp">
     <value>طابع زمني SQL غير صالح</value>
   </data>
+  <data name="FormatExceptionUnknown">
+    <value>قيمة غير معروفة غير صالحة</value>
+  </data>
   <data name="FormatExceptionUuid">
     <value>GUID غير صالح</value>
   </data>

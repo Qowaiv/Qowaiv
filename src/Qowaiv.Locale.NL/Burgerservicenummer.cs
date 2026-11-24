@@ -257,7 +257,7 @@ public readonly partial struct Burgerservicenummer : ISpanParsable<Burgerservice
             result = new Burgerservicenummer(value);
             return true;
         }
-        else if (Qowaiv.Unknown.IsUnknown(s.ToString()))
+        else if (Qowaiv.Unknown.TryParse(s, provider, out _))
         {
             result = Unknown;
             return true;

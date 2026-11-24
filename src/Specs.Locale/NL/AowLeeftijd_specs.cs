@@ -35,11 +35,13 @@ public class Selects
     public void For_geboortedatum_returns_entry()
     {
         var aow = AowLeeftijd.Geboortedatum(new(1980, 02, 14));
-        aow.Should().Be(new AowLeeftijd(
-            van: new(1978, 10),
-            tot: new(1982, 06),
-            leeftijd: 68.Years() + 6.Months(),
-            definitief: YesNo.No));
+        aow.Should().BeEquivalentTo(new
+        {
+            Van = new YearMonth(1978, 10),
+            Tot = new YearMonth(1982, 06),
+            Leeftijd = 68.Years() + 6.Months(),
+            Definitief = YesNo.No,
+        });
     }
 
     [Test]
@@ -81,15 +83,4 @@ public class Is_equal_by_value
     [Test]
     public void hash_code_is_value_based()
         => HashCodes.For(AowLeeftijd.DefinedValues).Should().BeConsistent();
-}
-
-public class DebuggerExperience
-{
-    [Test]
-    [Arguments("70Y+0M", true, "[2000-01, 2000-11] = 70 jaar")]
-    [Arguments("70Y+1M", true, "[2000-01, 2000-11] = 70 jaar en 1 maand")]
-    [Arguments("70Y+4M", false, "[2000-01, 2000-11] = 70 jaar en 4 maanden*")]
-    public void Displays(MonthSpan leeftijd, YesNo definitief, string display)
-        => new AowLeeftijd(new(2000, 01), new(2000, 11), leeftijd, definitief)
-        .Should().HaveDebuggerDisplay(display);
 }

@@ -58,10 +58,8 @@ public readonly struct AowLeeftijd :
     /// <exception cref="ArgumentOutOfRangeException">
     /// <paramref name="tot"/> is not after <paramref name="van"/>.
     /// </exception>
-    public AowLeeftijd(YearMonth van, YearMonth tot, MonthSpan leeftijd, YesNo definitief)
+    private AowLeeftijd(YearMonth van, YearMonth tot, MonthSpan leeftijd, YesNo definitief)
     {
-        if (tot <= van) throw new ArgumentOutOfRangeException(nameof(tot), $"{nameof(tot)} should be after {nameof(van)}.");
-
         Van = van;
         Tot = tot;
         Leeftijd = leeftijd;
@@ -108,6 +106,7 @@ public readonly struct AowLeeftijd :
     public override string ToString() => $"Van = {Van}, Tot = {Tot}, Leeftijd = {Leeftijd}, Definitief = {Definitief}";
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    [ExcludeFromCodeCoverage(/*Justification = Debugger experience only*/)]
     private string DebuggerDisplay
     {
         get

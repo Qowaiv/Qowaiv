@@ -9,13 +9,13 @@ public class Is_valid_for
     public void Not_empty_collection(object model)
        => new OptionalAttribute().IsValid(model).Should().BeTrue();
 
-    public static IEnumerable<object?> Models()
-    {
-        yield return null;
-        yield return string.Empty;
-        yield return Array.Empty<int>();
-        yield return new[] { 42 };
-        yield return "some string";
-        yield return new object();
-    }
+    public static IEnumerable<object?> Models() =>
+    [
+        null,
+        string.Empty,
+        Array.Empty<int>(),
+        new[] { 42 },
+        "some string",
+        new object(),
+    ];
 }

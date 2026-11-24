@@ -32,7 +32,7 @@ public class Open_API_data_type
     [Arguments("Hello, world!")]
     [Arguments("Qowaiv")]
     public void Match_null_regex_is_always_true(string? value)
-        => new OpenApiDataType(typeof(int), "descrption", "type", null, pattern: null).Matches(value).Should().BeTrue();
+        => new OpenApiDataType(typeof(int), "descrption", "type", null, pattern: Nil.String).Matches(value).Should().BeTrue();
 
     [Test]
     public void DebuggerDisplay_shows_minimum() => new OpenApiDataType(typeof(int), "descrption", "type", null)

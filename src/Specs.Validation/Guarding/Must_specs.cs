@@ -80,5 +80,4 @@ public class ToString_as_type
     }
 }
 
-
 internal class TestModel { }

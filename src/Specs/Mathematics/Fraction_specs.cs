@@ -449,7 +449,7 @@ public class Is_equal_by_value
     [Test]
     public void hash_code_is_value_based_for_zero()
     {
-        var zero = 17.DividedBy(42) - 17.DividedBy(42);
+        var zero = 17.DividedBy(42) - 34.DividedBy(84);
         zero.GetHashCode().Should().Be(Fraction.Zero.GetHashCode());
     }
 }

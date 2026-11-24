@@ -146,14 +146,14 @@ public class Does_not_support
         => value.Invoking(v => new MultipleOfAttribute(10).IsValid(v))
         .Should().Throw<UnsupportedType>();
 
-    public static IEnumerable<object?> NotSupportedIConvertables()
-    {
-        yield return true;
-        yield return "Hello, World!";
-        yield return 'C';
-        yield return new DateTime(2017, 06, 11, 06, 15, 00, DateTimeKind.Local);
-        yield return DBNull.Value;
-    }
+    public static IEnumerable<object?> NotSupportedIConvertables() =>
+    [
+         true,
+         "Hello, World!",
+         'C',
+         new DateTime(2017, 06, 11, 06, 15, 00, DateTimeKind.Local),
+         DBNull.Value,
+    ];
 }
 
 public class Initialization

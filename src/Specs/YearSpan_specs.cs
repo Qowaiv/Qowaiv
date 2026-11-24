@@ -417,7 +417,7 @@ public class Has_custom_formatting
                example: 17,
                type: "integer",
                format: "year-span",
-               pattern: null));
+               pattern: Nil.String));
     }
 
     public class Debugger

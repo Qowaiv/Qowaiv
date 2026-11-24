@@ -490,7 +490,7 @@ public class Is_equal_by_value
 {
     [Test]
     public void not_equal_to_null()
-        => Svo.Country.Equals(null).Should().BeFalse();
+        => Svo.Country.Equals(Nil.Object).Should().BeFalse();
 
     [Test]
     public void not_equal_to_other_type()

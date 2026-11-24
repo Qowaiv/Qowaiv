@@ -59,4 +59,5 @@ aow.Definitief; // No
 | 1995-07 - 1999-03 | 69 jaar en 9 maanden  | nee  |
 | 1999-04 - 2000-12 | 70 jaar               | nee  |
 | 2001-01 <=        | 70 jaar               | nee  |
+
 *bron: [svb.nl](https://www.svb.nl/nl/aow/aow-leeftijd/uw-aow-leeftijd)*

@@ -1,4 +1,3 @@
-using Qowaiv.Extensions;
 using Qowaiv.Locale.NL;
 using Qowaiv.TestTools;
 using Qowaiv.TestTools.Globalization;
@@ -9,28 +8,28 @@ namespace NL.Rsin_specs;
 public class With_domain_logic
 {
     [Test]
-    [Arguments(false, 1234_56_782L)]
+    [Arguments(false, 1112_22_333L)]
     [Arguments(false, "?")]
     [Arguments(true, "")]
     public void IsEmpty_returns(bool result, Rsin svo)
         => svo.IsEmpty().Should().Be(result);
 
     [Test]
-    [Arguments(false, 1234_56_782L)]
+    [Arguments(false, 1112_22_333L)]
     [Arguments(true, "?")]
     [Arguments(true, "")]
     public void IsEmptyOrUnknown_returns(bool result, Rsin svo)
         => svo.IsEmptyOrUnknown().Should().Be(result);
 
     [Test]
-    [Arguments(false, 1234_56_782L)]
+    [Arguments(false, 1112_22_333L)]
     [Arguments(true, "?")]
     [Arguments(false, "")]
     public void IsUnknown_returns(bool result, Rsin svo)
         => svo.IsUnknown().Should().Be(result);
 
     [Test]
-    [Arguments(true, 1234_56_782L)]
+    [Arguments(true, 1112_22_333L)]
     [Arguments(false, "?")]
     [Arguments(false, "")]
     public void IsKnown_returns(bool result, Rsin svo)
@@ -58,27 +57,27 @@ public class Is_equal_by_value
 
     [Test]
     public void not_equal_to_different_value()
-        => Svo.Rsin.Equals(1112_22_333L.BSN()).Should().BeFalse();
+        => Svo.Rsin.Equals(Rsin.Create(1234_56_782)).Should().BeFalse();
 
     [Test]
     public void equal_to_same_value()
-        => Svo.Rsin.Equals(1234_56_782L.BSN()).Should().BeTrue();
+        => Svo.Rsin.Equals(Rsin.Create(1112_22_333)).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_true_for_same_values()
-        => (Svo.Rsin == 1234_56_782L.BSN()).Should().BeTrue();
+        => (Svo.Rsin == Rsin.Create(1112_22_333)).Should().BeTrue();
 
     [Test]
     public void equal_operator_returns_false_for_different_values()
-        => (Svo.Rsin == 1112_22_333L.BSN()).Should().BeFalse();
+        => (Svo.Rsin == Rsin.Create(1234_56_782)).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_false_for_same_values()
-        => (Svo.Rsin != 1234_56_782L.BSN()).Should().BeFalse();
+        => (Svo.Rsin != Rsin.Create(1112_22_333)).Should().BeFalse();
 
     [Test]
     public void not_equal_operator_returns_true_for_different_values()
-        => (Svo.Rsin != 1112_22_333L.BSN()).Should().BeTrue();
+        => (Svo.Rsin != Rsin.Create(1234_56_782)).Should().BeTrue();
 
     [Test]
     public void hash_code_is_value_based()
@@ -100,7 +99,7 @@ public class Can_be_parsed
         => Rsin.Parse("?").Should().Be(Rsin.Unknown);
 
     [Test]
-    [Arguments("en", "1234.56.782")]
+    [Arguments("en", "1112.22.333")]
     public void from_string_with_different_formatting_and_cultures(CultureInfo culture, string input)
     {
         using (culture.Scoped())
@@ -116,7 +115,7 @@ public class Can_be_parsed
         {
             Func<Rsin> parse = () => Rsin.Parse("invalid input");
             parse.Should().Throw<FormatException>()
-                .WithMessage("Not a valid Rsin");
+                .WithMessage("Not a valid RSIN");
         }
     }
 
@@ -141,7 +140,7 @@ public class Can_be_parsed
 
     [Test]
     public void with_TryParse_returns_SVO()
-        => Rsin.TryParse("123456782").Should().Be(Svo.Rsin);
+        => Rsin.TryParse("111222333").Should().Be(Svo.Rsin);
 }
 
 public class Has_custom_formatting
@@ -151,7 +150,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Svo.Rsin.ToString().Should().Be("123456782");
+            Svo.Rsin.ToString().Should().Be("111222333");
         }
     }
 
@@ -186,7 +185,7 @@ public class Has_custom_formatting
     {
         using (TestCultures.es_EC.Scoped())
         {
-            Svo.Rsin.ToString(FormatProvider.Empty).Should().Be("123456782");
+            Svo.Rsin.ToString(FormatProvider.Empty).Should().Be("111222333");
         }
     }
 
@@ -194,12 +193,12 @@ public class Has_custom_formatting
     public void custom_format_provider_is_applied()
     {
         var formatted = Svo.Rsin.ToString("F", FormatProvider.CustomFormatter);
-        formatted.Should().Be("Unit Test Formatter, value: '1234.56.782', format: 'F'");
+        formatted.Should().Be("Unit Test Formatter, value: '1112.22.333', format: 'F'");
     }
 
     [Test]
-    [Arguments("en-GB", null, 1234_56_782L, "123456782")]
-    [Arguments("nl-BE", "f", 1234_56_782L, "1234.56.782")]
+    [Arguments("en-GB", null, 1112_22_333L, "111222333")]
+    [Arguments("nl-BE", "f", 1112_22_333L, "1112.22.333")]
     public void culture_dependent(CultureInfo culture, string format, Rsin svo, string formatted)
     {
         using (culture.Scoped())
@@ -213,7 +212,7 @@ public class Has_custom_formatting
     {
         using (new CultureInfoScope(culture: TestCultures.nl_NL, cultureUI: TestCultures.en_GB))
         {
-            Svo.Rsin.ToString(provider: null).Should().Be("123456782");
+            Svo.Rsin.ToString(provider: null).Should().Be("111222333");
         }
     }
 
@@ -253,9 +252,9 @@ public class Is_comparable
         [
             default,
             default,
-            1112_22_333L.BSN(),
-            1234_56_782L.BSN(),
-            2607_74_881L.BSN(),
+            Rsin.Create(1112_22_333),
+            Rsin.Create(1234_56_782),
+            Rsin.Create(2607_74_881),
             Rsin.Unknown,
         ];
 
@@ -270,7 +269,7 @@ public class Casts
     [Test]
     public void explicitly_from_long()
     {
-        var casted = (Rsin)1234_56_782L;
+        var casted = (Rsin)1112_22_333L;
         casted.Should().Be(Svo.Rsin);
     }
 
@@ -278,7 +277,7 @@ public class Casts
     public void explicitly_to_long()
     {
         var casted = (long)Svo.Rsin;
-        casted.Should().Be(1234_56_782L);
+        casted.Should().Be(1112_22_333L);
     }
 }
 
@@ -311,7 +310,7 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.From("123456782").To<Rsin>().Should().Be(Svo.Rsin);
+            Converting.From("111222333").To<Rsin>().Should().Be(Svo.Rsin);
         }
     }
 
@@ -320,17 +319,17 @@ public class Supports_type_conversion
     {
         using (TestCultures.en_GB.Scoped())
         {
-            Converting.ToString().From(Svo.Rsin).Should().Be("123456782");
+            Converting.ToString().From(Svo.Rsin).Should().Be("111222333");
         }
     }
 
     [Test]
     public void from_long()
-        => Converting.From(123456782L).To<Rsin>().Should().Be(Svo.Rsin);
+        => Converting.From(111222333L).To<Rsin>().Should().Be(Svo.Rsin);
 
     [Test]
     public void to_long()
-        => Converting.To<long>().From(Svo.Rsin).Should().Be(123456782);
+        => Converting.To<long>().From(Svo.Rsin).Should().Be(111222333);
 }
 
 public class Supports_JSON_serialization
@@ -338,19 +337,19 @@ public class Supports_JSON_serialization
 #if NET10_0_OR_GREATER
     [Test]
     [Arguments("?", "?")]
-    [Arguments(1234_56_782L, "1234.56.782")]
+    [Arguments(1112_22_333L, "1112.22.333")]
     public void System_Text_JSON_deserialization(object json, Rsin svo)
         => JsonTester.Read_System_Text_JSON<Rsin>(json).Should().Be(svo);
 
     [Test]
     [Arguments(null, null)]
-    [Arguments("1234.56.782", "123456782")]
+    [Arguments("1112.22.333", "111222333")]
     public void System_Text_JSON_serialization(Rsin svo, object json)
         => JsonTester.Write_System_Text_JSON(svo).Should().Be(json);
 #endif
     [Test]
     [Arguments("?", "unknown")]
-    [Arguments(1234_56_782L, 1234_56_782L)]
+    [Arguments(1112_22_333L, 1112_22_333L)]
     public void convention_based_deserialization(Rsin svo, object json)
         => JsonTester.Read<Rsin>(json).Should().Be(svo);
 
@@ -376,13 +375,13 @@ public class Supports_XML_serialization
     public void using_XmlSerializer_to_serialize()
     {
         var xml = Serialize.Xml(Svo.Rsin);
-        xml.Should().Be("123456782");
+        xml.Should().Be("111222333");
     }
 
     [Test]
     public void using_XmlSerializer_to_deserialize()
     {
-        var svo = Deserialize.Xml<Rsin>("123456782");
+        var svo = Deserialize.Xml<Rsin>("111222333");
         svo.Should().Be(Svo.Rsin);
     }
 
@@ -416,15 +415,15 @@ public class Is_Open_API_data_type
        => OpenApiDataType.FromType(typeof(Rsin))
        .Should().Be(new OpenApiDataType(
            dataType: typeof(Rsin),
-           description: "Rsin",
+           description: "RSIN (Rechtspersonen en Samenwerkingsverbanden Informatie Nummer)",
            example: "111222333",
            type: "string",
-           format: "bsn",
+           format: "rsin",
            pattern: "[0-9]{8,9}"));
 
     [Test]
-    [Arguments("33360030")]
-    [Arguments("033360030")]
+    [Arguments("11122233")]
+    [Arguments("111222333")]
     public void pattern_matches(string input)
         => OpenApiDataType.FromType(typeof(Rsin))!.Matches(input).Should().BeTrue();
 }
@@ -434,7 +433,7 @@ public class Debugger
     [Test]
     [Arguments("{empty}", "")]
     [Arguments("{unknown}", "?")]
-    [Arguments("1234.56.782", 1234_56_782L)]
+    [Arguments("1112.22.333", 1112_22_333L)]
     public void has_custom_display(object display, Rsin svo)
         => svo.Should().HaveDebuggerDisplay(display);
 }

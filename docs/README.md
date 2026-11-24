@@ -98,6 +98,7 @@ your own. How to do that can be read [here](../README.Custom.SVO.md).
 * [Burgerservicenummer](locale/nl/Burgerservicenummer.md)
 * [Kadastrale gemeente](locale/nl/KadastraleGemeente.md)
 * [Kvk-nummer](locale/nl/KvkNummer.md)
+* [RSIN](locale/nl/RSIN.md)
 
 ## Qowaiv mathematical types
 * [Fraction](svo/Fraction.md)

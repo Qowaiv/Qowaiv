@@ -4,29 +4,28 @@
 
 namespace Qowaiv.Locale.NL;
 
-/// <summary>Representeert een Burgerservicenummer (BSN).</summary>
+/// <summary>Represents a Burgerservicenummer (BSN).</summary>
 /// <remarks>
-/// Het Burgerservicenummer (BSN) is op 26 november 2007 ingevoerd
-/// in Nederland. Het BSN is een uniek persoonsnummer dat als nummer gelijk
-/// is aan het sofinummer. Het heeft echter een ander wettelijk kader
-/// waardoor een breder gebruik mogelijk is.
+/// The Burgerservicenummer (BSN) was introduced in the Netherlands on
+/// 26 November 2007. It is a unique personal number that is numerically equal
+/// to the former sofinummer, but has a different legal basis that allows for
+/// broader use.
 ///
-/// Het burgerservicenummer bestaat uit 9 cijfers en voldoet aan een variant
-/// op de zogenaamde elfproef: Als het burgerservicenummer wordt voorgesteld
-/// door ABCDEFGHI, dan moet gelden:<br/>
+/// A Burgerservicenummer consists of nine digits and satisfies a variant of
+/// the elfproef (eleven test): if the Burgerservicenummer is represented by
+/// ABCDEFGHI, then:<br/>
 /// (9*A + 8*B + 7*C + 6*D + 5*E + 4*F + 3*G + 2*H - 1*I) % 11 = 0
 ///
-/// Indien bij de communicatie tussen burger en overheid een persoonsgebonden
-/// nummer wordt gebruikt dan mag dat alleen het BSN zijn.
+/// When a personal number is used in communications between a citizen and the
+/// government, it may only be the BSN.
 ///
-/// Iedereen die een meervoudige relatie met de overheid heeft, goed te
-/// identificeren is en opgenomen is in de Gemeentelijke Basisadministratie
-/// Persoonsgegevens (GBA) of in de (nog te realiseren) Registratie Niet
-/// Ingezetenen (RNI) krijgt een BSN.
+/// Everyone with a multiple relationship with the government who can be
+/// identified and is registered in the Municipal Personal Records Database
+/// (GBA) or the (yet to be realised) Registration of Non-Residents (RNI)
+/// receives a BSN.
 ///
-/// Bij gegevensuitwisseling tussen overheden mag alleen het BSN worden
-/// gebruikt (met uitzondering van het A-nummer bij de uitwisseling van
-/// GBA-gegevens).
+/// When exchanging data between government organisations, only the BSN may be
+/// used (except for the A-number when exchanging GBA data).
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [Serializable]
@@ -131,7 +130,7 @@ public readonly partial struct Burgerservicenummer : IXmlSerializable, IFormatta
     /// </returns>
     [Pure]
     public static Burgerservicenummer? TryCreate(long value)
-        => ElfProef.IsValid(value)
+        => Elfproef.IsValid(value)
         ? new(value)
         : null;
 }
@@ -164,7 +163,7 @@ public readonly partial struct Burgerservicenummer : ISpanParsable<Burgerservice
     /// true if the formatting was successful; otherwise, false.
     /// </returns>
     public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
-        => ElfProef.TryFormat(m_Value, destination, out charsWritten, format, provider);
+        => Elfproef.TryFormat(m_Value, destination, out charsWritten, format, provider);
 
     /// <summary>Tries to parse a span of characters into a Burgerservicenummer.</summary>
     /// <param name="s">
@@ -189,7 +188,7 @@ public readonly partial struct Burgerservicenummer : ISpanParsable<Burgerservice
         {
             return true;
         }
-        else if (ElfProef.TryParse(s, out var value))
+        else if (Elfproef.TryParse(s, out var value))
         {
             result = new Burgerservicenummer(value);
             return true;

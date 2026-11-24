@@ -6,30 +6,30 @@ namespace Qowaiv.Locale.NL;
 
 /// <summary>Represents a Rechtspersonen en Samenwerkingsverbanden Informatie Nummer (RSIN).</summary>
 /// <remarks>
-/// The RSIN number (Rechtspersonen en Samenwerkingsverbanden Informatie Nummer
-/// in Dutch) is an identification number for legal entities and partnerships.
+/// The RSIN is an identification number for legal entities and partnerships.
 /// Dutch government organisations such as the Netherlands Tax Administration,
 /// the Land Registry Office (Kadaster), and municipalities use it to exchange
-/// information about businesses.
+/// information about businesses. It consists of nine digits that satisfy the
+/// elfproef (eleven test).
 /// </remarks>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 [Serializable]
 [SingleValueObject(SingleValueStaticOptions.All, typeof(long))]
 [OpenApiDataType(description: "RSIN (Rechtspersonen en Samenwerkingsverbanden Informatie Nummer)", type: "string", format: "rsin", example: "111222333", pattern: "[0-9]{8,9}")]
-[TypeConverter(typeof(Conversion.BurgerservicenummerTypeConverter))]
+[TypeConverter(typeof(Conversion.RsinTypeConverter))]
 #if NET10_0_OR_GREATER
-[System.Text.Json.Serialization.JsonConverter(typeof(Json.BurgerservicenummerJsonConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Json.RsinJsonConverter))]
 #endif
 public readonly partial struct Rsin : IXmlSerializable, IFormattable, IEquatable<Rsin>, IComparable, IComparable<Rsin>
 {
-    /// <summary>Represents an unknown (but set) Burgerservicenummer (9999.99.999).</summary>
+    /// <summary>Represents an unknown (but set) RSIN (9999.99.999).</summary>
     public static Rsin Unknown => new(9999_99_999);
 
-    /// <summary>Returns a <see cref="string" /> that represents the Burgerservicenummer for DEBUG purposes.</summary>
+    /// <summary>Returns a <see cref="string" /> that represents the RSIN for DEBUG purposes.</summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:F}");
 
-    /// <summary>Returns a formatted <see cref="string" /> that represents the Burgerservicenummer.</summary>
+    /// <summary>Returns a formatted <see cref="string" /> that represents the RSIN.</summary>
     /// <param name="format">
     /// The format that describes the formatting.
     /// </param>
@@ -48,38 +48,38 @@ public readonly partial struct Rsin : IXmlSerializable, IFormattable, IEquatable
         return s[..written].ToString();
     }
 
-    /// <summary>Gets an XML string representation of the Burgerservicenummer.</summary>
+    /// <summary>Gets an XML string representation of the RSIN.</summary>
     [Pure]
     private string ToXmlString() => ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Serializes the Burgerservicenummer to a JSON node.</summary>
+    /// <summary>Serializes the RSIN to a JSON node.</summary>
     /// <returns>
     /// The serialized JSON string.
     /// </returns>
     [Pure]
     public string? ToJson() => m_Value == default ? null : ToString(CultureInfo.InvariantCulture);
 
-    /// <summary>Deserializes the Burgerservicenummer from a JSON number.</summary>
+    /// <summary>Deserializes the RSIN from a JSON number.</summary>
     /// <param name="json">
     /// The JSON number to deserialize.
     /// </param>
     /// <returns>
-    /// The deserialized Burgerservicenummer.
+    /// The deserialized RSIN.
     /// </returns>
     [Pure]
     public static Rsin FromJson(long json) => Create(json);
 
-    /// <summary>Casts the Burgerservicenummer to a <see cref="ulong" />.</summary>
+    /// <summary>Casts the RSIN to a <see cref="long" />.</summary>
     public static explicit operator long(Rsin val) => val.m_Value;
 
-    /// <summary>Casts a <see cref="ulong" /> to a Burgerservicenummer.</summary>
+    /// <summary>Casts a <see cref="long" /> to an RSIN.</summary>
     public static explicit operator Rsin(long val) => Create(val);
 
     /// <summary>Converts the <see cref="string" /> to <see cref="Rsin" />.
     /// A return value indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">
-    /// A string containing the Burgerservicenummer to convert.
+    /// A string containing the RSIN to convert.
     /// </param>
     /// <param name="provider">
     /// The specified format provider.
@@ -94,28 +94,28 @@ public readonly partial struct Rsin : IXmlSerializable, IFormattable, IEquatable
     public static bool TryParse(string? s, IFormatProvider? provider, out Rsin result)
         => TryParse(s.AsSpan(), provider, out result);
 
-    /// <summary>Tries to create a Burgerservicenummer.</summary>
+    /// <summary>Tries to create an RSIN.</summary>
     /// <param name="value">
-    /// The number describing a Burgerservicenummer.
+    /// The number describing an RSIN.
     /// </param>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// Not a Burgerservicenummer.
+    /// Not an RSIN.
     /// </exception>
     [Pure]
     public static Rsin Create(long value)
         => TryCreate(value)
-        ?? throw new ArgumentOutOfRangeException(nameof(value), QowaivMessages.FormatExceptionBurgerservicenummer);
+        ?? throw new ArgumentOutOfRangeException(nameof(value), QowaivMessages.FormatExceptionRsin);
 
-    /// <summary>Tries to create a Burgerservicenummer.</summary>
+    /// <summary>Tries to create an RSIN.</summary>
     /// <param name="value">
-    /// The number describing a Burgerservicenummer.
+    /// The number describing an RSIN.
     /// </param>
     /// <returns>
-    /// A Burgerservicenummer when valid, otherwise null.
+    /// An RSIN when valid, otherwise null.
     /// </returns>
     [Pure]
     public static Rsin? TryCreate(long value)
-        => ElfProef.IsValid(value)
+        => Elfproef.IsValid(value)
         ? new(value)
         : null;
 }
@@ -148,9 +148,9 @@ public readonly partial struct Rsin : ISpanParsable<Rsin>, ISpanFormattable
     /// true if the formatting was successful; otherwise, false.
     /// </returns>
     public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
-        => ElfProef.TryFormat(m_Value, destination, out charsWritten, format, provider);
+        => Elfproef.TryFormat(m_Value, destination, out charsWritten, format, provider);
 
-    /// <summary>Tries to parse a span of characters into a Burgerservicenummer.</summary>
+    /// <summary>Tries to parse a span of characters into an RSIN.</summary>
     /// <param name="s">
     /// The span of characters to parse.
     /// </param>
@@ -161,9 +161,9 @@ public readonly partial struct Rsin : ISpanParsable<Rsin>, ISpanFormattable
     /// When this method returns, contains the result of successfully parsing s, or an
     /// undefined value on failure.
     /// </param>
-    /// <returs>
+    /// <returns>
     /// true if s was successfully parsed; otherwise, false.
-    /// </returs>
+    /// </returns>
     public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out Rsin result)
     {
         result = default;
@@ -173,9 +173,9 @@ public readonly partial struct Rsin : ISpanParsable<Rsin>, ISpanFormattable
         {
             return true;
         }
-        else if (ElfProef.TryParse(s, out var value))
+        else if (Elfproef.TryParse(s, out var value))
         {
-            result = new Rsin(value);
+            result = new(value);
             return true;
         }
         else if (Qowaiv.Unknown.IsUnknown(s.ToString()))
@@ -186,7 +186,7 @@ public readonly partial struct Rsin : ISpanParsable<Rsin>, ISpanFormattable
         else return false;
     }
 
-    /// <summary>Parses a span of characters into a Burgerservicenummer.</summary>
+    /// <summary>Parses a span of characters into an RSIN.</summary>
     /// <param name="s">
     /// The span of characters to parse.
     /// </param>
@@ -201,7 +201,7 @@ public readonly partial struct Rsin : ISpanParsable<Rsin>, ISpanFormattable
     /// </exception>
     [Pure]
     public static Rsin Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
-        => TryParse(s, provider, out var bsn)
-        ? bsn
-        : throw Unparsable.ForValue<Rsin>(s.ToString(), QowaivMessages.FormatExceptionBurgerservicenummer);
+        => TryParse(s, provider, out var rsin)
+        ? rsin
+        : throw Unparsable.ForValue<Rsin>(s.ToString(), QowaivMessages.FormatExceptionRsin);
 }

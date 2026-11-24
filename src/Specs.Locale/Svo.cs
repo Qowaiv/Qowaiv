@@ -16,6 +16,6 @@ public static class Svo
     /// <summary>Kvk: 8764 0540</summary>
     public static KvkNummer KvkNummer => KvkNummer.Create(8764_0540);
 
-    /// <summary>RSIN: 234.56.782</summary>
-    public static Rsin Rsin => Rsin.Create(1234_56_782);
+    /// <summary>RSIN: 1112.22.333</summary>
+    public static Rsin Rsin => Rsin.Create(1112_22_333);
 }

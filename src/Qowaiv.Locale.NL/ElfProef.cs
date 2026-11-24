@@ -1,19 +1,20 @@
 namespace Qowaiv.Locale.NL;
 
-internal static class ElfProef
+internal static class Elfproef
 {
-    /// <summary>Validates a 9-digit identifier.</summary>
+    /// <summary>Validates a 9-digit identifier using the elfproef (eleven test).</summary>
     /// <remarks>
-    /// ABCDEFGHI:
+    /// This checksum is shared by the Burgerservicenummer and the RSIN. When the
+    /// identifier is represented by ABCDEFGHI, the following must hold:
     /// (9*A + 8*B + 7*C + 6*D + 5*E + 4*F + 3*G + 2*H - 1*I) % 11 = 0.
     /// </remarks>
     [Pure]
-    public static bool IsValid(long num)
+    public static bool IsValid(long value)
     {
-        if (num is < 0010_00_000 or > 9999_99_999) return false;
+        if (value is < 0010_00_000 or > 9999_99_999) return false;
 
-        var cur = num / 10;
-        var sum = (cur * 10) - num;
+        var cur = value / 10;
+        var sum = (cur * 10) - value;
 
         for (var pos = 2; pos <= 9; pos++)
         {
@@ -24,6 +25,7 @@ internal static class ElfProef
         return sum % 11 == 0;
     }
 
+    /// <summary>Tries to format a 9-digit identifier, grouping with <c>F</c> as dddd.dd.ddd.</summary>
     public static bool TryFormat(long value, Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
     {
         if (value is 0)
@@ -66,7 +68,7 @@ internal static class ElfProef
         }
     }
 
-    /// <summary>Tries to parse a 9-digit identifier.</summary>
+    /// <summary>Tries to parse a 9-digit identifier that satisfies the elfproef.</summary>
     public static bool TryParse(ReadOnlySpan<char> span, out long value)
     {
         var length = 1;
@@ -77,7 +79,7 @@ internal static class ElfProef
 
         if (!c.Is_0_9) return false;
 
-        // Last digit is * -1;
+        // The last digit has a weight of -1.
         var check = -value;
 
         // By reading from right to left we can both parse the number and

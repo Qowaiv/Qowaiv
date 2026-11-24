@@ -2,7 +2,7 @@ namespace Qowaiv.Locale.NL.Conversion;
 
 /// <summary>Provides a conversion for an RSIN.</summary>
 [Inheritable]
-public class RsinypeConverter : NumericTypeConverter<Rsin, long>
+public class RsinTypeConverter : NumericTypeConverter<Rsin, long>
 {
     /// <inheritdoc/>
     [Pure]

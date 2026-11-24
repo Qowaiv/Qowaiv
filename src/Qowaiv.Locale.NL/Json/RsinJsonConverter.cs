@@ -4,7 +4,7 @@ using Qowaiv.Json;
 
 namespace Qowaiv.Locale.NL.Json;
 
-/// <summary>Provides a JSON conversion for a RSIN.</summary>
+/// <summary>Provides a JSON conversion for an RSIN.</summary>
 public sealed class RsinJsonConverter : SvoJsonConverter<Rsin>
 {
     /// <inheritdoc />

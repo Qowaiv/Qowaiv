@@ -32,7 +32,7 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     public int Length => m_Value is { Length: > 1 } ? m_Value.Length : 0;
 
     /// <summary>Gets the local part of the Email Address.</summary>
-    public string Local => m_Value is { Length: > 1 } ? m_Value[..m_Value.IndexOf('@')] : string.Empty;
+    public string Local => m_Value is { Length: > 1 } ? m_Value[..m_Value.LastIndexOf('@')] : string.Empty;
 
     /// <summary>Gets the domain part of the Email Address.</summary>
     public string Domain => GetDomain().ToString();
@@ -79,7 +79,7 @@ public readonly partial struct EmailAddress : IXmlSerializable, IFormattable, IE
     [Pure]
     private ReadOnlySpan<char> GetDomain()
         => m_Value is { Length: > 1 }
-        ? m_Value.AsSpan(m_Value.IndexOf('@') + 1)
+        ? m_Value.AsSpan(m_Value.LastIndexOf('@') + 1)
         : string.Empty;
 
     /// <summary>Gets the email address with a (prefix) display name.</summary>

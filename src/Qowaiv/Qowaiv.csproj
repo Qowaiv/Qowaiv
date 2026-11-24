@@ -68,6 +68,7 @@ v11.0.0
 - Unify string input only on stack when it fits.
 - Add EmailAddress.HasSingleLabelDomain.
 - Unknown not only a helper but also an SVO.
+- EmailAddres Local and Domain parts based on LastIndexOf(@). (BUG)
 v8.2.0
 - Add Percentage.Complement().
 - Bulgaria (BG) uses EUR, instead of BGN since 2026-01-01. (BUG)

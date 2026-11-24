@@ -57,10 +57,12 @@ public class With_domain_logic
     [Test]
     [Arguments(true, "info@localhost")]
     [Arguments(true, "info.qowaiv@localhost")]
+    [Arguments(true, @"""local part with @ in it""@localhost")]
     [Arguments(false, "info@qowaiv.org")]
     [Arguments(false, "info@sub.qowaiv.org")]
     [Arguments(false, "info@[192.0.2.1]")]
     [Arguments(false, "info@[IPv6:2001:0db8:0000:0000:0000:ff00:0042:8329]")]
+    [Arguments(false, @"""local part with @ in it""@qowaiv.org")]
     [Arguments(false, "?")]
     [Arguments(false, "")]
     public void HasSingleLabelDomain_returns(bool result, EmailAddress svo)
@@ -77,6 +79,7 @@ public class With_domain_logic
     [Arguments("info", "info@qowaiv.org")]
     [Arguments("", "?")]
     [Arguments("", "")]
+    [Arguments(@"""local part with @ in it""", @"""local part with @ in it""@qowaiv.org")]
     public void Local_part_returns(string local, EmailAddress email)
         => email.Local.Should().Be(local);
 
@@ -85,6 +88,7 @@ public class With_domain_logic
     [Arguments("[192.0.2.1]", "info@192.0.2.1")]
     [Arguments("", "?")]
     [Arguments("", "")]
+    [Arguments("qowaiv.org", @"""local part with @ in it""@qowaiv.org")]
     public void Domain_part_returns(string local, EmailAddress email)
         => email.Domain.Should().Be(local);
 }

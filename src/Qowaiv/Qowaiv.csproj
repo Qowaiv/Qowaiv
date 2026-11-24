@@ -66,6 +66,7 @@ v11.0.0
 - LocalizedValues (for parsing) initalization and thread safety has been improved.
 - Unify string input only on stack when it fits.
 - Add EmailAddress.HasSingleLabelDomain.
+- EmailAddres Local and Domain parts based on LastIndexOf(@). (BUG)
 v8.2.0
 - Add Percentage.Complement().
 - Bulgaria (BG) uses EUR, instead of BGN since 2026-01-01. (BUG)

@@ -11,4 +11,4 @@ iban.ToString("H"); // NL20 INGB 0001 2345 67 (with non-breaking spaces).
 iban.ToString("O"); // NL20XXXXXXXXXXX567 (obfuscated).
 ```
 
-An overview with all supported countries and patterns can be found [here](../../IBAN.md).
+An overview with all supported countries and patterns can be found [here](https://github.com/Qowaiv/Qowaiv/blob/main/IBAN.md).

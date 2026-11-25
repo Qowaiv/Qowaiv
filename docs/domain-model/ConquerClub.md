@@ -13,7 +13,7 @@ via the constructor:
  public Game(GameId id) : base(id, new GameValidator()) { }
 ```
 
-The [GameValidator](../../example/ConquerClub.Domain/Validation/GameValidator.cs) uses
+The [GameValidator](https://github.com/Qowaiv/Qowaiv/blob/main/example/ConquerClub.Domain/Validation/GameValidator.cs) uses
 [Qowaiv.Validation.Fluent](../validation/Fluent.md), an
 extension on [FluentValidation](https://fluentvalidation.net).
 

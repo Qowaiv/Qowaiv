@@ -59,7 +59,7 @@ they are considered part of system, rather then a specific domain.
 
 ## Building your own
 If you need a Single Value Object that is not provided by Qowaiv you can build
-your own. How to do that can be read [here](../README.Custom.SVO.md).
+your own. How to do that can be read [here](https://github.com/Qowaiv/Qowaiv/blob/main/README.Custom.SVO.md).
 
 ## Qowaiv types
 * [Date](svo/Date.md)
@@ -111,7 +111,7 @@ Primitive Obsession is a common issue when dealing with identifiers. It is quite
 common to provide two or even more identifiers (of different identities) to a
 method, which can lead to nasty bugs.
 
-More info about those generated strongly-typed IDs can be found [here](../src/Qowaiv.CodeGeneration.SingleValueObjects/README.md).
+More info about those generated strongly-typed IDs can be found [here](https://github.com/Qowaiv/Qowaiv/blob/main/src/Qowaiv.CodeGeneration.SingleValueObjects/README.md).
 
 * [UUID aka GUID](svo/Uuid.md)
 
@@ -238,4 +238,4 @@ country will be created (if possible) based on the current culture.
 
 # Qowaiv Diagnostics Contracts
 This package contains attributes to define (expected) behavior on code
-[(..)](../src/Qowaiv.Diagnostics.Contracts/README.md)
+[(..)](https://github.com/Qowaiv/Qowaiv/blob/main/src/Qowaiv.Diagnostics.Contracts/README.md)

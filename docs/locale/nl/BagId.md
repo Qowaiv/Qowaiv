@@ -6,6 +6,18 @@ en Gebouwen (BAG).
 The number is composed of a four-digit municipality code (`gggg`), a two-digit
 object type code (`tt`), and a ten-digit object sequence number (`nnnnnnnnnn`).
 
+## Object type
+There are a limited set of valid object types:
+
+| Label            | Code |
+|------------------|------|
+| Verblijfsobject  |  01  |
+| Ligplaats        |  02  |
+| Standplaats      |  03  |
+| Pand             |  10  |
+| Nummeraanduiding |  20  }
+| Openbare ruimte  |  30  |
+
 ## usage
 ``` C#
 var bagId = BagId.Parse("0363010123456789");

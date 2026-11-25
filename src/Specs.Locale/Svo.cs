@@ -5,7 +5,10 @@ namespace Specs.Locale;
 public static class Svo
 {
     /// <summary>AOW-leeftijd voor 1964-10-13</summary>
-    public static AowLeeftijd AowLeeftijd => Qowaiv.Locale.NL.AowLeeftijd.Geboortedatum(new(1964, 10, 13));
+    public static AowLeeftijd AowLeeftijd => AowLeeftijd.Geboortedatum(new(1964, 10, 13));
+
+    /// <summary>BAG: 0363.01.0123456789</summary>
+    public static BagId BagId => 0363_01_0123456789.BagId();
 
     /// <summary>1234.56.782</summary>
     public static Burgerservicenummer Burgerservicenummer => 1234_56_782L.BSN();
@@ -14,8 +17,8 @@ public static class Svo
     public static KadastraleGemeente KadastraleGemeente => KadastraleGemeente.Parse("DEL00");
 
     /// <summary>Kvk: 8764 0540</summary>
-    public static KvkNummer KvkNummer => KvkNummer.Create(8764_0540);
+    public static KvkNummer KvkNummer => 8764_0540.KvK();
 
     /// <summary>RSIN: 1112.22.333</summary>
-    public static Rsin Rsin => Rsin.Create(1112_22_333);
+    public static Rsin Rsin => 1112_22_333L.RSIN();
 }

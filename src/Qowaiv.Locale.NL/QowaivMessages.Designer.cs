@@ -61,6 +61,15 @@ namespace Qowaiv.Locale.NL {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not a valid BAG-identificatienummer.
+        /// </summary>
+        public static string FormatExceptionBagId {
+            get {
+                return ResourceManager.GetString("FormatExceptionBagId", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Not a valid Burgerservicenummer.
         /// </summary>
         public static string FormatExceptionBurgerservicenummer {

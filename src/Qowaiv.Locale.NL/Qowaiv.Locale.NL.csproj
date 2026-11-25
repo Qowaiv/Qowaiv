@@ -36,6 +36,7 @@ v11.*
       <![CDATA[
 v11.0.0
 - Introduction of AowLeeftijd.
+- Introduction of BagId.
 - Introduction of Burgerservicenummer.
 - Introduction of KadastraleGemeente.
 - Introduction of KvkNummer.

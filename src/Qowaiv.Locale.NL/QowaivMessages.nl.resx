@@ -12,6 +12,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
   </resheader>
+  <data name="FormatExceptionBagId">
+    <value>Geen geldig BAG-identificatienummer</value>
+  </data>
   <data name="FormatExceptionBurgerservicenummer">
     <value>Geen geldig Burgerservicenummer</value>
   </data>

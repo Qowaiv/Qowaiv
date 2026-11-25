@@ -93,7 +93,7 @@ public readonly partial struct Fraction
     [Pure]
     private Fraction Multiply(Fraction factor)
     {
-        if (IsZero() || factor.IsZero()) return Zero;
+        if (IsZero || factor.IsZero) return Zero;
         else
         {
             var sign = Sign() * factor.Sign();
@@ -113,8 +113,8 @@ public readonly partial struct Fraction
     [Pure]
     private Fraction Add(Fraction other)
     {
-        if (IsZero()) return other;
-        else if (other.IsZero()) return this;
+        if (IsZero) return other;
+        else if (other.IsZero) return this;
         else
         {
             long d0 = denominator;
@@ -137,9 +137,9 @@ public readonly partial struct Fraction
     [Pure]
     private Fraction Modulo(Fraction divider)
     {
-        if (divider.IsZero()) throw new DivideByZeroException();
+        if (divider.IsZero) throw new DivideByZeroException();
 
-        if (IsZero()) return Zero;
+        if (IsZero) return Zero;
         else
         {
             long d0 = denominator;

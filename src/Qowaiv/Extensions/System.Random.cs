@@ -37,6 +37,26 @@ public static class QowaivRandom
         [Impure]
         public char NextChar(char minValue, char maxValue) => (char)rnd.Next(minValue, maxValue + 1);
 
+        /// <summary>Returns a <see cref="Fraction"/>.</summary>
+        [Impure]
+        public Fraction NextFraction()
+            => rnd.NextFraction(Fraction.Zero, Fraction.One, int.MaxValue);
+
+        /// <summary>Returns a <see cref="Fraction"/>.</summary>
+        [Impure]
+        public Fraction NextFraction(Fraction minValue, Fraction maxValue, int maxDenominator)
+        {
+            Guard.Positive(maxDenominator);
+            var denominator = rnd.Next(maxDenominator) + 1L;
+
+            var minNumerator = (minValue.Numerator * denominator) / minValue.Denominator;
+            var maxNumerator = (maxValue.Numerator * denominator) / maxValue.Denominator;
+
+            var numerator = rnd.NextInt64(minNumerator, maxNumerator);
+
+            return numerator.DividedBy(denominator);
+        }
+
         /// <summary>Returns an <see cref="InternationalBankAccountNumber"/>.</summary>
         [Impure]
         public InternationalBankAccountNumber NextInternationalBankAccountNumber()
@@ -109,6 +129,32 @@ public static class QowaivRandom
                 }
                 return mod;
             }
+        }
+
+        /// <summary>Returns an <see cref="long"/>.</summary>
+        [Impure]
+        private long NextInt64()
+        {
+            var buffer = new byte[8];
+
+            rnd.NextBytes(buffer);
+            var candidate = BitConverter.ToInt64(buffer, 0);
+
+            // wrap negative numbers around, mapping every negative number to a distinct nonnegative number
+            // MinValue -> 0, -1 -> MaxValue
+            candidate &= long.MaxValue;
+
+            // skip candidate if it is MaxValue. Recursive since rare.
+            return (candidate == long.MaxValue) ? rnd.NextInt64() : candidate;
+        }
+
+        /// <summary>Returns an <see cref="long"/>.</summary>
+        [Impure]
+        private long NextInt64(long minValue, long maxValue)
+        {
+            var number = rnd.NextInt64();
+            var delta = maxValue - minValue;
+            return minValue + number % delta;
         }
     }
 

@@ -86,6 +86,7 @@ public class Generation_of
     }
 
     [Test]
+    [Arguments("BagId", typeof(long), "BAG-identificatienummer", "Qowaiv.Locale.NL", SvoFeatures.Default)]
     [Arguments("Burgerservicenummer", typeof(long), "Burgerservicenummer", "Qowaiv.Locale.NL", SvoFeatures.Default)]
     [Arguments("KadastraleGemeente", typeof(string), "kadastrale gemeente", "Qowaiv.Locale.NL", SvoFeatures.Default)]
     [Arguments("KvkNummer", typeof(int), "KvK-nummer", "Qowaiv.Locale.NL", SvoFeatures.Default)]

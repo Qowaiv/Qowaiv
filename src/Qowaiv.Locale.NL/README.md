@@ -5,6 +5,7 @@ documentation are in English.
 
 ## Package
 This package contains the following Single Value Objects:
+- BAG-identificatienummer (BagId)
 - Burgerservicenummer (BSN)
 - Kadastrale gemeente
 - Kvk-nummer

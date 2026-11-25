@@ -5,10 +5,17 @@ public static class Humanize
 {
     extension(long value)
     {
+        /// <summary>Creates a <see cref="NL.BagId" />.</summary>
+        [Pure]
+        public BagId BagId() => NL.BagId.Create(value);
 
         /// <summary>Creates a <see cref="Burgerservicenummer" />.</summary>
         [Pure]
         public Burgerservicenummer BSN() => Burgerservicenummer.Create(value);
+
+        /// <summary>Creates a <see cref="Rsin" />.</summary>
+        [Pure]
+        public Rsin RSIN() => Rsin.Create(value);
     }
 
     extension(int value)

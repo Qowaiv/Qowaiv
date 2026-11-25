@@ -83,7 +83,7 @@ messages.Infos;     // only the info messages
 ## Messages that are exceptions
 The `Qowaiv.Validation.Messages` package provides `IValidationMessage`
 implementations that are also exceptions. See the
-[Messages README](../../src/Qowaiv.Validation.Messages/README.md) for details.
+[Messages README](https://github.com/Qowaiv/Qowaiv/blob/main/src/Qowaiv.Validation.Messages/README.md) for details.
 
 | Message              | Derives from                      | HTTP status                |
 |----------------------|-----------------------------------|----------------------------|

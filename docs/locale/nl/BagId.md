@@ -5,7 +5,6 @@ en Gebouwen (BAG).
 
 The number is composed of a four-digit municipality code (`gggg`), a two-digit
 object type code (`tt`), and a ten-digit object sequence number (`nnnnnnnnnn`).
-There is no checksum.
 
 ## Object type
 The nested `BagId.ObjectType` enum maps the object type code to its meaning:

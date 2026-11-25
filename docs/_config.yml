@@ -1,6 +1,6 @@
 theme: jekyll-theme-primer
 title: Qowaiv
 description: Documentation for the Qowaiv (Single) Value Object library
-url: https://qowaiv.github.io
+url: https://qowaiv.org
 baseurl: ""
 permalink: pretty

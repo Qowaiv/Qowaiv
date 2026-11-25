@@ -8,7 +8,7 @@ public class Next
 	{
 		[Test]
 		public void Generates_valid_numbers()
-			=> Rnd.Shared.NextSequence(r => r.NextBurgerservicenummer()).Take(100)
+			=> Rnd.New().NextSequence(r => r.NextBurgerservicenummer()).Take(100)
             .Should().OnlyHaveUniqueItems()
             .And.AllSatisfy(v => v.IsKnown.Should().BeTrue());
     }
@@ -17,7 +17,7 @@ public class Next
 	{
 		[Test]
 		public void Generates_valid_numbers()
-			=> Rnd.Shared.NextSequence(r => r.NextRsin()).Take(100)
+			=> Rnd.New().NextSequence(r => r.NextRsin()).Take(100)
             .Should().OnlyHaveUniqueItems()
             .And.AllSatisfy(v => v.IsKnown.Should().BeTrue());
 	}

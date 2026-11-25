@@ -4,14 +4,14 @@ namespace Qowaiv.Text;
 internal static class RegOptions
 {
 #if DEBUG
-    public const int TimeoutMilliseconds = 50;
+    public const int TimeoutMilliseconds = 250;
 #else
-    public const int TimeoutMilliseconds = 100;
+    public const int TimeoutMilliseconds = 500;
 #endif
 
     /// <summary>
     /// To prevent DoS attacks exploiting regular expressions on user input,
-    /// the match time-out is set 50 ms.
+    /// the match time-out is limited.
     /// </summary>
     public static readonly TimeSpan Timeout = TimeSpan.FromMilliseconds(TimeoutMilliseconds);
 

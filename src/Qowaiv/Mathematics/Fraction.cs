@@ -120,10 +120,10 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     public long Numerator => numerator;
 
     /// <summary>Gets the denominator of the fraction.</summary>
-    public long Denominator => IsZero() ? 1 : denominator;
+    public long Denominator => IsZero ? 1 : denominator;
 
     /// <summary>Get whole of the fraction.</summary>
-    public long Whole => IsZero() ? 0 : numerator / denominator;
+    public long Whole => IsZero ? 0 : numerator / denominator;
 
     /// <summary>Deconstructs the fraction in a numerator and denominator.</summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -137,14 +137,13 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     /// <remarks>
     /// The remainder is expressed as an absolute value.
     /// </remarks>
-    public long Remainder => IsZero() ? 0 : (numerator % denominator).Abs();
+    public long Remainder => IsZero ? 0 : (numerator % denominator).Abs();
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private string DebuggerDisplay => this.DebuggerDisplay("{0:super⁄sub} = {0:0.########}");
 
-    /// <summary>Returns true if the fraction is zero.</summary>
-    [Pure]
-    public bool IsZero() => numerator == 0;
+    /// <summary>True if the fraction is zero.</summary>
+    public bool IsZero => numerator == 0;
 
     /// <summary>Gets the sign of the fraction.</summary>
     [Pure]
@@ -160,7 +159,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     /// </exception>
     [Pure]
     public Fraction Inverse()
-        => IsZero()
+        => IsZero
         ? throw new DivideByZeroException()
         : New(Sign() * denominator, numerator.Abs());
 
@@ -255,13 +254,13 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     /// <inheritdoc/>
     [Pure]
     public bool Equals(Fraction other)
-        => (IsZero() && other.IsZero())
+        => (IsZero && other.IsZero)
         || (denominator == other.denominator && numerator == other.numerator);
 
     /// <inheritdoc/>
     [Pure]
     public override int GetHashCode()
-        => IsZero()
+        => IsZero
         ? Hash.Code(0)
         : Hash.Code(denominator).And(numerator);
 
@@ -269,7 +268,7 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
     [Pure]
     public int CompareTo(Fraction other)
     {
-        if (denominator == other.denominator || IsZero() || other.IsZero())
+        if (denominator == other.denominator || IsZero || other.IsZero)
         {
             return numerator.CompareTo(other.numerator);
         }
@@ -321,11 +320,11 @@ public readonly partial struct Fraction : IXmlSerializable, IFormattable, IEquat
 
     /// <summary>Casts the fraction to a <see cref="decimal" />.</summary>
     [Pure]
-    private decimal ToDecimal() => IsZero() ? decimal.Zero : numerator / (decimal)denominator;
+    private decimal ToDecimal() => IsZero ? decimal.Zero : numerator / (decimal)denominator;
 
     /// <summary>Casts the fraction to a <see cref="double" />.</summary>
     [Pure]
-    private double ToDouble() => IsZero() ? 0d : numerator / (double)denominator;
+    private double ToDouble() => IsZero ? 0d : numerator / (double)denominator;
 
     /// <summary>Casts a <see cref="decimal" /> to a fraction.</summary>
     [Pure]

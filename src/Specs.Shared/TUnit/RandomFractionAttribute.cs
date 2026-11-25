@@ -1,4 +1,4 @@
-using Qowaiv.Humanizer;
+using Qowaiv.Extensions;
 using Qowaiv.Mathematics;
 using Specs;
 
@@ -20,13 +20,10 @@ public sealed class RandomFractionAttribute(int count, bool includeZero = false)
 
     private object?[] Next()
     {
-        var num = Rnd.Shared.Next(-255, 255) * Rnd.Shared.Next(255);
-        
-        while (num == 0 && !includeZero)
-            num = Rnd.Shared.Next(-255, 255) * Rnd.Shared.Next(255);
-
-        var den = Rnd.Shared.Next(1, 255) * Rnd.Shared.Next(1, 255);
-
-        return [num.DividedBy(den)];
+        while(true)
+        {
+            var num = Rnd.Shared.NextFraction(-Fraction.One, +Fraction.One, 256);
+            if (!num.IsZero || includeZero) return [num];
+        }
     }
 }

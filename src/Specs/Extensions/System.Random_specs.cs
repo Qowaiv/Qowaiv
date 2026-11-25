@@ -47,6 +47,23 @@ public class Next
 		}
 	}
 
+    public class Fractions
+    {
+        [Test]
+        public void InRange()
+        {
+            Fraction[] fractions = [.. Rnd.Shared.NextSequence(r => r.NextFraction(-23.DividedBy(7), 84.DividedBy(13), 1024)).Take(100)];
+            fractions.Should().AllSatisfy(f => f.Should().BeInRange(-23.DividedBy(7), 84.DividedBy(13)));
+        }
+
+        [Test]
+        public void Unique()
+        {
+            Fraction[] fractions = [.. Rnd.New().NextSequence(r => r.NextFraction()).Take(1000)];
+            fractions.Should().OnlyHaveUniqueItems();
+        }
+    }
+
 	public class IBAN
 	{
 		[Test]

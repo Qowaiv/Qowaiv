@@ -48,10 +48,27 @@ public class With_domain_logic
 
     [Test]
     [Arguments(BagId.ObjectType.Verblijfsobject, "0363010123456789")]
+    [Arguments(BagId.ObjectType.Ligplaats, "0363020123456789")]
+    [Arguments(BagId.ObjectType.Standplaats, "0363030123456789")]
+    [Arguments(BagId.ObjectType.Pand, "0363100123456789")]
+    [Arguments(BagId.ObjectType.Nummeraanduiding, "0363200123456789")]
+    [Arguments(BagId.ObjectType.OpenbareRuimte, "0363300123456789")]
     [Arguments(BagId.ObjectType.Unknown, "?")]
     [Arguments(BagId.ObjectType.None, "")]
     public void Object_type(BagId.ObjectType type, BagId svo)
         => svo.Object.Should().Be(type);
+
+    [Test]
+    [Arguments(BagId.ObjectType.None, 00)]
+    [Arguments(BagId.ObjectType.Verblijfsobject, 01)]
+    [Arguments(BagId.ObjectType.Ligplaats, 02)]
+    [Arguments(BagId.ObjectType.Standplaats, 03)]
+    [Arguments(BagId.ObjectType.Pand, 10)]
+    [Arguments(BagId.ObjectType.Nummeraanduiding, 20)]
+    [Arguments(BagId.ObjectType.OpenbareRuimte, 30)]
+    [Arguments(BagId.ObjectType.Unknown, 99)]
+    public void ObjectType_has_expected_code(BagId.ObjectType type, int code)
+        => ((int)type).Should().Be(code);
 
     [Test]
     [Arguments(8_123_456_789, "0363018123456789")]
@@ -118,12 +135,27 @@ public class Can_be_created
         => BagId.TryCreate(value).Should().NotBeNull(because);
 
     [Test]
-    [Arguments(0L, "zero")]
+    public void from_zero_represents_Empty()
+        => BagId.TryCreate(0L).Should().Be(BagId.Empty);
+
+    [Test]
+    public void from_unknown_value_represents_Unknown()
+        => BagId.TryCreate(9_999_999_999_999_999L).Should().Be(BagId.Unknown);
+
+    [Test]
     [Arguments(-1L, "negative")]
-    [Arguments(9_999_999_999_999_999L, "object type 99")]
+    [Arguments(363_990_123_456_789L, "object type 99")]
     [Arguments(long.MaxValue, "too large")]
     public void from_invalid_long(long value, string because)
         => BagId.TryCreate(value).Should().BeNull(because);
+
+    [Test]
+    public void Create_zero_represents_Empty()
+        => BagId.Create(0L).Should().Be(BagId.Empty);
+
+    [Test]
+    public void Create_unknown_value_represents_Unknown()
+        => BagId.Create(9_999_999_999_999_999L).Should().Be(BagId.Unknown);
 
     [Test]
     public void Create_retains_leading_zeros()
@@ -150,6 +182,10 @@ public class Can_be_parsed
     [Test]
     public void from_question_mark_represents_Unknown()
         => BagId.Parse("?").Should().Be(BagId.Unknown);
+
+    [Test]
+    public void from_unknown_value_represents_Unknown()
+        => BagId.Parse("9999999999999999").Should().Be(BagId.Unknown);
 
     [Test]
     [Arguments("0363010123456789", "verblijfsobject")]
@@ -255,6 +291,10 @@ public class Has_custom_formatting
     [Test]
     public void unknown_value_is_represented_as_unknown()
         => BagId.Unknown.ToString().Should().Be("?");
+
+    [Test]
+    public void unknown_value_is_represented_as_unknown_when_grouped()
+        => BagId.Unknown.ToString("F").Should().Be("?");
 
     [Test]
     public void with_empty_format_provider()

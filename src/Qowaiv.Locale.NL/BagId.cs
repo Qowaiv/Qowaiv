@@ -31,13 +31,13 @@ public readonly partial struct BagId : IXmlSerializable, IFormattable, IEquatabl
     /// <summary>Gets the number of characters of the BAG-identificatienummer (16 when known, 0 otherwise).</summary>
     public int Length => IsKnown ? 16 : 0;
 
-    /// <summary>Gets the Gemeente(code) (first 4 digits).</summary>
+    /// <summary>Gets the gemeentecode (first four digits).</summary>
     public int Gemeente => (int)(m_Value / 1_000_000_000_000L);
 
-    /// <summary>Gets the object (5th and 6th digiy).</summary>
+    /// <summary>Gets the object type (fifth and sixth digits).</summary>
     public ObjectType Object => (ObjectType)((m_Value / 10_000_000_000L) % 100);
 
-    /// <summary>Get the (uniek) volgnummer (last 10 digits).</summary>
+    /// <summary>Gets the volgnummer (last ten digits).</summary>
     public long Volgnummer => m_Value % 10_000_000_000;
 
     /// <summary>Returns a <see cref="string" /> that represents the BAG-identificatienummer for DEBUG purposes.</summary>
@@ -140,20 +140,26 @@ public readonly partial struct BagId : IXmlSerializable, IFormattable, IEquatabl
 
     private static bool TryCreate(long value, out BagId result)
     {
-        if (value is >= 0_001_010_000_000_000 and < 9_999_999_999_999_999L
+        if (value is 0)
+        {
+            result = Empty;
+            return true;
+        }
+        else if (value is 9_999_999_999_999_999)
+        {
+            result = Unknown;
+            return true;
+        }
+        else if (value is >= 0_001_010_000_000_000 and < 9_999_999_999_999_999
             && IsValidObject((ObjectType)((value / 10_000_000_000L) % 100)))
         {
             result = new(value);
             return true;
         }
-        else if (value is 9_999_999_999_999_999L)
-        {
-            result = Unknown;
-            return true;
-        }
+        else
         {
             result = Empty;
-            return value is 0;
+            return false;
         }
     }
 }
@@ -192,7 +198,7 @@ public readonly partial struct BagId : ISpanParsable<BagId>, ISpanFormattable
         {
             return true;
         }
-        if (m_Value is long.MaxValue)
+        if (m_Value is 9_999_999_999_999_999)
         {
             if (destination.Length is 0)
             {
@@ -268,16 +274,11 @@ public readonly partial struct BagId : ISpanParsable<BagId>, ISpanFormattable
     {
         value = 0;
         var length = 0;
-        var objectType = 0;
 
         foreach (var c in span)
         {
             if (c.Is_0_9 && length < 16)
             {
-                if (length is 4 or 5)
-                {
-                    objectType = (objectType * 10) + c.Digit;
-                }
                 value = (value * 10) + c.Digit;
                 length++;
             }

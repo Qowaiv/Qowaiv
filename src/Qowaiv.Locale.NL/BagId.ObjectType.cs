@@ -1,29 +1,34 @@
-using System.Collections.Frozen;
+#pragma warning disable S1210
+// "Equals" and the comparison operators should be overridden when implementing "IComparable"
+// See README.md => Sortable
 
 namespace Qowaiv.Locale.NL;
 
 public readonly partial struct BagId
 {
-    /// <summary>TODO.</summary>
+    /// <summary>The type of BAG object identified by the number.</summary>
     public enum ObjectType
     {
         /// <summary>None/empty.</summary>
         None = 00,
 
-        /// <summary>Veblijfsobject (Translation).</summary>
-        Verblijfsobject /*..*/ = 01,
+        /// <summary>Verblijfsobject (residential object).</summary>
+        Verblijfsobject = 01,
 
-        /// <summary>Ligplaats (Translation).</summary>
-        Ligplaats /*........*/ = 02,
+        /// <summary>Ligplaats (mooring).</summary>
+        Ligplaats = 02,
 
-        /// <summary>Standplaats (Translation).</summary>
-        Standplaats /*......*/ = 03,
+        /// <summary>Standplaats (pitch).</summary>
+        Standplaats = 03,
 
-        /// <summary>Pand (Translation).</summary>
-        Pand /*.............*/ = 10,
+        /// <summary>Pand (building).</summary>
+        Pand = 10,
 
-        /// <summary>Nummeraanduiding (Translation).</summary>
-        Nummeraanduiding /*.*/ = 20,
+        /// <summary>Nummeraanduiding (address designation).</summary>
+        Nummeraanduiding = 20,
+
+        /// <summary>Openbare ruimte (public space).</summary>
+        OpenbareRuimte = 30,
 
         /// <summary>Unknown.</summary>
         Unknown = 99,
@@ -35,6 +40,6 @@ public readonly partial struct BagId
         or ObjectType.Ligplaats
         or ObjectType.Standplaats
         or ObjectType.Pand
-        or ObjectType.Nummeraanduiding;
-
+        or ObjectType.Nummeraanduiding
+        or ObjectType.OpenbareRuimte;
 }

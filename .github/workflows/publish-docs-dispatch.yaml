@@ -1,0 +1,17 @@
+name: Publish docs
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+  workflow_dispatch:
+jobs:
+  dispatch:
+    name: Dispatch docs deployment
+    runs-on: ubuntu-26.04
+    steps:
+      - name: Trigger GitHub Pages deployment
+        env:
+          GH_TOKEN: ${{ secrets.PAGES_DISPATCH_TOKEN }}
+        run: gh api repos/Qowaiv/qowaiv.github.io/dispatches -f event_type=docs-updated

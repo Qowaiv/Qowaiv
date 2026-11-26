@@ -48,6 +48,7 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: write # Needed to create the GitHub release
+      id-token: write # Needed for NuGet trusted publishing
     needs: build
     steps:
       - name: Download Artifact
@@ -55,9 +56,16 @@ jobs:
         with:
           name: nupkg
 
+      - name: NuGet Login
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        id: login
+        with:
+          # NuGet matches the policy creator's account, not the policy owner (the Qowaiv org).
+          user: Corniel.Nobel
+
       - name: DotNet NuGet Push
         env:
-          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+          NUGET_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
         run: dotnet nuget push "*.nupkg" --source "$NUGET_FEED" --api-key "$NUGET_KEY" --skip-duplicate
 
       - name: Create GitHub Release

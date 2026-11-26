@@ -9,6 +9,8 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <None Include="*.cmd" />
+    <None Include="*.ps1" />
     <None Include="*.rsp" />
     <None Include="build/**" />
     <None Include="design/**" />

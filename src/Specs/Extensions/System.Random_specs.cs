@@ -1,5 +1,4 @@
 using Specs;
-using System.Xml;
 
 namespace Extensions.QowaivRandom_specs;
 
@@ -50,29 +49,22 @@ public class Next
     public class Fractions
     {
         [Test]
-        public void InRange()
-        {
-            Fraction[] fractions = [.. Rnd.Shared.NextSequence(r => r.NextFraction(-23.DividedBy(7), 84.DividedBy(13), 1024)).Take(100)];
-            fractions.Should().AllSatisfy(f => f.Should().BeInRange(-23.DividedBy(7), 84.DividedBy(13)));
-        }
+        public void InRange() => Rnd.New()
+            .NextSequence(r => r.NextFraction(-23.DividedBy(7), 84.DividedBy(13), 1024)).Take(1000)
+            .Should().AllSatisfy(f => f.Should().BeInRange(-23.DividedBy(7), 84.DividedBy(13)));
 
         [Test]
-        public void Unique()
-        {
-            Fraction[] fractions = [.. Rnd.New().NextSequence(r => r.NextFraction()).Take(1000)];
-            fractions.Should().OnlyHaveUniqueItems();
-        }
+        public void Unique() => Rnd.New()
+            .NextSequence(r => r.NextFraction()).Take(1000)
+            .Should().OnlyHaveUniqueItems();
     }
 
 	public class IBAN
 	{
 		[Test]
-		public void For_country_with_checksum_at_start()
-		{
-			var rnd = Rnd.New();
-			var ibans = Enumerable.Range(0, 10_000).Select(_ => rnd.NextInternationalBankAccountNumber(Country.NL)).ToArray();
-			ibans.Should().OnlyHaveUniqueItems();
-		}
+		public void For_country_with_checksum_at_start() => Rnd.New()
+            .NextSequence(r => r.NextInternationalBankAccountNumber(Country.NL)).Take(10_000)
+            .Should().OnlyHaveUniqueItems();
 
         [Test]
         [Arguments("ME")]
@@ -80,29 +72,19 @@ public class Next
         [Arguments("PT")]
         [Arguments("RS")]
         [Arguments("TN")]
-        public void For_country_with_checksum_at_end(Country country)
-        {
-            var rnd = Rnd.New();
-            var ibans = Enumerable.Range(0, 10_000).Select(_ => rnd.NextInternationalBankAccountNumber(country)).ToArray();
-            ibans.Should().OnlyHaveUniqueItems();
-        }
+        public void For_country_with_checksum_at_end(Country country) => Rnd.New()
+            .NextSequence(r => r.NextInternationalBankAccountNumber(country)).Take(10_000)
+            .Should().OnlyHaveUniqueItems();
 
         [Test]
-        public void For_country_without_IBAN()
-        {
-            var rnd = Rnd.New();
-            var ibans = Enumerable.Range(0, 10_000).Select(_ => rnd.NextInternationalBankAccountNumber(Country.US)).ToArray();
-            ibans.Should().OnlyHaveUniqueItems();
-        }
-
+        public void For_country_without_IBAN() => Rnd.New()
+            .NextSequence(r => r.NextInternationalBankAccountNumber(Country.US)).Take(10_000)
+            .Should().OnlyHaveUniqueItems();
 
         [Test]
-        public void For_random_country()
-        {
-            var rnd = Rnd.New();
-            var ibans = Enumerable.Range(0, 100_000).Select(_ => rnd.NextInternationalBankAccountNumber()).ToArray();
-            ibans.Should().OnlyHaveUniqueItems();
-        }
+        public void For_random_country() => Rnd.New()
+            .NextSequence(r => r.NextInternationalBankAccountNumber()).Take(10_000)
+            .Should().OnlyHaveUniqueItems();
 
         [Test]
         [Arguments("", "empty")]

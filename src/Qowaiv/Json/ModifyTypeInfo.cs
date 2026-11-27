@@ -18,21 +18,12 @@ public static class ModifyTypeInfo
 
         foreach (var prop in info.Properties.Where(IsApplicable))
         {
-            prop.ShouldSerialize = ShouldSerialize(prop.PropertyType);
+            prop.ShouldSerialize = ShouldSerialize;
         }
     }
 
-    /// <summary>True when the propValue is not equal to the empty/default value.</summary>
     [Pure]
-    private static Func<object, object?, bool> ShouldSerialize(Type propertyType)
-    {
-        var model = Parameter(typeof(object), "_");
-        var prop = Parameter(typeof(object), "prop");
-        var cast = Convert(prop, propertyType);
-        var empty = Default(propertyType);
-        var body = NotEqual(cast, empty);
-        return Lambda<Func<object, object?, bool>>(body, model, prop).Compile();
-    }
+    private static bool ShouldSerialize(object _, object? prop) => ((IEmpty)prop!).HasValue;
 
     /// <summary>Is applicable for structs implementing <see cref="IEmpty{TSelf}"/>.</summary>
     [Pure]

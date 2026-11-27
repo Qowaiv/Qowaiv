@@ -26,7 +26,7 @@
     <ToBeReleased>
       <![CDATA[
 v11.*
-- ?
+- ModifyTypeInfo.IgnoreEmptySvos uses HasValue instead of comparing with default.
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>

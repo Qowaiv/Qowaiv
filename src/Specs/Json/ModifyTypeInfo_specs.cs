@@ -1,7 +1,5 @@
 #if !NET48
 
-using AwesomeAssertions;
-using Qowaiv.Financial;
 using Qowaiv.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;

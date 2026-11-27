@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>2.2.0</Version>
+    <Version>2.2.1</Version>
     <PackageValidationBaselineVersion>2.0.0</PackageValidationBaselineVersion>
     <ToBeReleased>
       <![CDATA[
@@ -43,6 +43,8 @@ v*
     </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
+v2.2.1
+- Depend on Microsoft.CodeAnalysis.CSharp 5.9.0.
 v2.2.0
 - Added [Assertion] attribute.
 - Added [Immutable] attribute.

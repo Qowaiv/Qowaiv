@@ -16,18 +16,18 @@ public static class ModifyTypeInfo
     {
         Guard.NotNull(info);
 
-        foreach (var prop in info.Properties.Where(IsApplicable))
+        foreach (var prop in info.Properties.Where(ImplementsIEmpty))
         {
-            prop.ShouldSerialize = ShouldSerialize;
+            prop.ShouldSerialize = HasValue;
         }
     }
 
     [Pure]
-    private static bool ShouldSerialize(object _, object? prop) => ((IEmpty)prop!).HasValue;
+    private static bool HasValue(object _, object? prop) => ((IEmpty)prop!).HasValue;
 
     /// <summary>Is applicable for structs implementing <see cref="IEmpty{TSelf}"/>.</summary>
     [Pure]
-    private static bool IsApplicable(JsonPropertyInfo prop)
+    private static bool ImplementsIEmpty(JsonPropertyInfo prop)
         => prop.PropertyType is { IsValueType: true, IsGenericType: false }
         && prop.PropertyType.GetInterfaces().Contains(typeof(IEmpty));
 }

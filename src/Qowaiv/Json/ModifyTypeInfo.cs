@@ -1,7 +1,6 @@
 #if NET10_0_OR_GREATER
 
 using System.Text.Json.Serialization.Metadata;
-using static System.Linq.Expressions.Expression;
 
 namespace Qowaiv.Json;
 
@@ -23,7 +22,7 @@ public static class ModifyTypeInfo
     }
 
     [Pure]
-    private static bool HasValue(object _, object? prop) => ((IEmpty)prop!).HasValue;
+    private static bool HasValue(object parent, object? prop) => ((IEmpty)prop!).HasValue;
 
     /// <summary>Is applicable for structs implementing <see cref="IEmpty{TSelf}"/>.</summary>
     [Pure]

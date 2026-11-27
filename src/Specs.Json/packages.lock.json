@@ -177,7 +177,7 @@
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc.1, )"
+          "Qowaiv": "[11.0.0, )"
         }
       },
       "qowaiv.text.json.serialization": {
@@ -190,7 +190,7 @@
         "type": "Project",
         "dependencies": {
           "AwesomeAssertions": "[9.6.0, )",
-          "Qowaiv.TestTools": "[11.0.0-rc.1, )",
+          "Qowaiv.TestTools": "[11.0.0, )",
           "TUnit.Core": "[1.87.12, )"
         }
       },
@@ -389,7 +389,7 @@
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc.1, )"
+          "Qowaiv": "[11.0.0, )"
         }
       },
       "qowaiv.text.json.serialization": {
@@ -399,7 +399,7 @@
         "type": "Project",
         "dependencies": {
           "AwesomeAssertions": "[9.6.0, )",
-          "Qowaiv.TestTools": "[11.0.0-rc.1, )",
+          "Qowaiv.TestTools": "[11.0.0, )",
           "TUnit.Core": "[1.87.12, )"
         }
       },

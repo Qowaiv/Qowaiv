@@ -24,6 +24,13 @@ public class IgnoreEmptySvos
     }
 
     [Test]
+    public void ignores_empty_svos_without_equals_operator()
+    {
+        var json = JsonSerializer.Serialize(new Container<NoEquals>(default), Options);
+        json.Should().Be("{}");
+    }
+
+    [Test]
     public void serializes_generic_structs()
     {
         var json = JsonSerializer.Serialize(new Container<Generic<int>>(new(42)), Options);
@@ -40,6 +47,11 @@ public class IgnoreEmptySvos
     private sealed record Container<T>(T Val);
 
     private readonly record struct Generic<T>(T Val) where T : struct;
+
+    private readonly struct NoEquals(bool hasValue) : IEmpty
+    {
+        public bool HasValue { get; } = hasValue;
+    }
 }
 
 #endif

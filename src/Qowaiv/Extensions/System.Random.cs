@@ -46,15 +46,23 @@ public static class QowaivRandom
         [Impure]
         public Fraction NextFraction(Fraction minValue, Fraction maxValue, int maxDenominator)
         {
-            Guard.Positive(maxDenominator);
+            if (maxValue <= minValue) throw new ArgumentOutOfRangeException(nameof(maxValue), "The max value should be bigger than the min value.");
+            if (maxDenominator < 2) throw new ArgumentOutOfRangeException(nameof(maxDenominator), "The Max denominator should be [2, ..].");
+
             var denominator = rnd.Next(maxDenominator) + 1L;
 
-            var minNumerator = (minValue.Numerator * denominator) / minValue.Denominator;
-            var maxNumerator = (maxValue.Numerator * denominator) / maxValue.Denominator;
+            var minNumerator = Round(minValue.Numerator * denominator, minValue.Denominator, +1);
+            var maxNumerator = Round(maxValue.Numerator * denominator, maxValue.Denominator, -1) + 1;
 
             var numerator = rnd.NextInt64(minNumerator, maxNumerator);
 
             return numerator.DividedBy(denominator);
+
+            static long Round(long dividend, long divisor, long add)
+            {
+                var quotient = dividend / divisor;
+                return dividend % divisor < 0 ? quotient + add : quotient;
+            }
         }
 
         /// <summary>Returns an <see cref="InternationalBankAccountNumber"/>.</summary>

@@ -37,7 +37,11 @@ public static class QowaivRandom
         [Impure]
         public char NextChar(char minValue, char maxValue) => (char)rnd.Next(minValue, maxValue + 1);
 
-        /// <summary>Returns a <see cref="Fraction"/>.</summary>
+        /// <summary>Returns a random <see cref="Fraction"/>.</summary>
+        /// <remarks>
+        /// The defaults are <see cref="Fraction.Zero"/> (inclusive), <see cref="Fraction.One"/>
+        /// (exclusive), and <see cref="int.MaxValue"/> as the maximum denominator.
+        /// </remarks>
         [Impure]
         public Fraction NextFraction()
             => rnd.NextFraction(Fraction.Zero, Fraction.One, int.MaxValue);
@@ -52,6 +56,11 @@ public static class QowaivRandom
         /// <param name="maxDenominator">
         /// The maximum denominator to pick from (included).
         /// </param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="maxValue"/> is less than or equal to <paramref name="minValue"/>,
+        /// <paramref name="maxDenominator"/> is less than 2, or no fraction within the boundaries
+        /// can be represented with a denominator up to <paramref name="maxDenominator"/>.
+        /// </exception>
         [Impure]
         public Fraction NextFraction(Fraction minValue, Fraction maxValue, int maxDenominator)
         {
@@ -60,17 +69,50 @@ public static class QowaivRandom
 
             var denominator = rnd.Next(maxDenominator) + 1L;
 
-            var minNumerator = Round(minValue.Numerator * denominator, minValue.Denominator, +1);
-            var maxNumerator = Round(maxValue.Numerator * denominator, maxValue.Denominator, -1) + 1;
+            if (!Numerators(denominator, out var minNumerator, out var maxNumeratorExclusive)
+                && !Fallback(out denominator, out minNumerator, out maxNumeratorExclusive))
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(maxDenominator),
+                    $"No fraction in [{minValue}, {maxValue}) can be represented with a denominator up to {maxDenominator}.");
+            }
 
-            var numerator = rnd.NextInt64(minNumerator, maxNumerator);
+            var numerator = rnd.NextInt64(minNumerator, maxNumeratorExclusive);
 
             return numerator.DividedBy(denominator);
 
-            static long Round(long dividend, long divisor, long add)
+            bool Fallback(out long fallbackDenominator, out long min, out long maxExclusive)
+            {
+                var width = maxValue - minValue;
+                var requiredDenominator = Ceiling(width.Denominator, width.Numerator);
+
+                foreach (var candidate in new[] { minValue.Denominator, maxValue.Denominator, requiredDenominator, maxDenominator })
+                {
+                    if (candidate <= maxDenominator
+                        && Numerators(candidate, out min, out maxExclusive))
+                    {
+                        fallbackDenominator = candidate;
+                        return true;
+                    }
+                }
+
+                fallbackDenominator = default;
+                min = default;
+                maxExclusive = default;
+                return false;
+            }
+
+            bool Numerators(long candidate, out long min, out long max)
+            {
+                min = Ceiling(minValue.Numerator * candidate, minValue.Denominator);
+                max = Ceiling(maxValue.Numerator * candidate, maxValue.Denominator);
+                return min < max;
+            }
+
+            static long Ceiling(long dividend, long divisor)
             {
                 var quotient = dividend / divisor;
-                return dividend % divisor < 0 ? quotient + add : quotient;
+                return dividend % divisor > 0 ? quotient + 1 : quotient;
             }
         }
 

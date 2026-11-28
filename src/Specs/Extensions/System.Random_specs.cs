@@ -57,6 +57,12 @@ public class Next
             .Should().Throw<ArgumentOutOfRangeException>().WithMessage("The Max denominator should be [2, ..].*");
 
         [Test]
+        public void Does_not_allow_unrepresentable_ranges()
+            => Rnd.Shared.Invoking(r => r.NextFraction(1.DividedBy(3), 1.DividedBy(2), 2))
+            .Should().Throw<ArgumentOutOfRangeException>()
+            .WithMessage("No fraction in [1/3, 1/2) can be represented with a denominator up to 2.*");
+
+        [Test]
         [Arguments("-1/12", "23/12")]
         [Arguments("-1000/12", "-50/12")]
         [Arguments("0", "1000")]

@@ -18,6 +18,14 @@ foreach (var value in rnd.NextSequence(r => r.Next()))
 Values are drawn while enumerating; the sequence never ends, and values may
 repeat.
 
+## [Fraction](../Fraction.md)
+`NextFraction()` returns a random fraction.
+
+``` C#
+var fraction = rnd.NextFraction();
+var fraction = rnd.NextFraction(minValue: 1.DividedBy(3), maxValue: 2.DividedBy(3), maxDenominator: 256);
+```
+
 ## [International Bank Account Number](../InternationalBankAccountNumber.md)
 ``` C#
 // Generates an IBAN for a random supported country.

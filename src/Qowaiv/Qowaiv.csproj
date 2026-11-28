@@ -26,13 +26,14 @@
     <ToBeReleased>
       <![CDATA[
 v11.*
-- ModifyTypeInfo.IgnoreEmptySvos uses HasValue instead of comparing with default.
+- ?
 ]]>
     </ToBeReleased>
     <PackageReleaseNotes>
       <![CDATA[
 v11.0.1
 - ModifyTypeInfo.IgnoreEmptySvos uses HasValue instead of comparing with default. (BUG)
+- NextFraction() stays within its specified boundaries. (BUG)
 v11.0.0
 - Add support for .NET 11.0.
 - Drop support for .NET 9.0 and 8.0. (BREAKING)

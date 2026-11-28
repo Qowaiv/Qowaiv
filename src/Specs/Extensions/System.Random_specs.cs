@@ -49,9 +49,27 @@ public class Next
     public class Fractions
     {
         [Test]
-        public void InRange() => Rnd.New()
-            .NextSequence(r => r.NextFraction(-23.DividedBy(7), 84.DividedBy(13), 1024)).Take(1000)
-            .Should().AllSatisfy(f => f.Should().BeInRange(-23.DividedBy(7), 84.DividedBy(13)));
+        [Arguments(-1)]
+        [Arguments(+0)]
+        [Arguments(+1)]
+        public void Does_not_allow_denominators_below_2(int maxDenominator)
+            => maxDenominator.Invoking(d => Rnd.Shared.NextFraction(Fraction.Zero, Fraction.One, maxDenominator))
+            .Should().Throw<ArgumentOutOfRangeException>().WithMessage("The Max denominator should be [2, ..].*");
+
+        [Test]
+        public void Does_not_allow_unrepresentable_ranges()
+            => Rnd.Shared.Invoking(r => r.NextFraction(1.DividedBy(3), 1.DividedBy(2), 2))
+            .Should().Throw<ArgumentOutOfRangeException>()
+            .WithMessage("No fraction in [1/3, 1/2) can be represented with a denominator up to 2.*");
+
+        [Test]
+        [Arguments("-1/12", "23/12")]
+        [Arguments("-1000/12", "-50/12")]
+        [Arguments("0", "1000")]
+        [Arguments("1/2024", "1/3")]
+        public void InRange(Fraction min, Fraction max) => Rnd.New()
+            .NextSequence(r => r.NextFraction(min, max, 1024)).Take(1000)
+            .Should().AllSatisfy(f => f.Should().BeInRange(min, max));
 
         [Test]
         public void Unique() => Rnd.New()

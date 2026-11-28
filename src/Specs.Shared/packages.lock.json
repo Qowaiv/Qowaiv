@@ -145,7 +145,7 @@
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc.1, )"
+          "Qowaiv": "[11.0.0, )"
         }
       },
       "Microsoft.CSharp": {
@@ -248,7 +248,7 @@
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc.1, )"
+          "Qowaiv": "[11.0.0, )"
         }
       }
     },
@@ -313,7 +313,7 @@
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc.1, )"
+          "Qowaiv": "[11.0.0, )"
         }
       }
     }

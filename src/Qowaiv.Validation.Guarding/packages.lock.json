@@ -83,7 +83,7 @@
       "qowaiv.validation.messages": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       },
       "System.Memory": {
@@ -159,7 +159,7 @@
       "qowaiv.validation.messages": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       }
     },
@@ -218,7 +218,7 @@
       "qowaiv.validation.messages": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       }
     }

@@ -65,8 +65,8 @@
       "qowaiv.validation.dataannotations": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv": "[11.0.0, )",
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       }
     },
@@ -134,8 +134,8 @@
       "qowaiv.validation.dataannotations": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv": "[11.0.0, )",
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       }
     }

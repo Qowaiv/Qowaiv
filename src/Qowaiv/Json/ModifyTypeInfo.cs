@@ -1,7 +1,6 @@
 #if NET10_0_OR_GREATER
 
 using System.Text.Json.Serialization.Metadata;
-using static System.Linq.Expressions.Expression;
 
 namespace Qowaiv.Json;
 
@@ -16,27 +15,18 @@ public static class ModifyTypeInfo
     {
         Guard.NotNull(info);
 
-        foreach (var prop in info.Properties.Where(IsApplicable))
+        foreach (var prop in info.Properties.Where(ImplementsIEmpty))
         {
-            prop.ShouldSerialize = ShouldSerialize(prop.PropertyType);
+            prop.ShouldSerialize = HasValue;
         }
     }
 
-    /// <summary>True when the propValue is not equal to the empty/default value.</summary>
     [Pure]
-    private static Func<object, object?, bool> ShouldSerialize(Type propertyType)
-    {
-        var model = Parameter(typeof(object), "_");
-        var prop = Parameter(typeof(object), "prop");
-        var cast = Convert(prop, propertyType);
-        var empty = Default(propertyType);
-        var body = NotEqual(cast, empty);
-        return Lambda<Func<object, object?, bool>>(body, model, prop).Compile();
-    }
+    private static bool HasValue(object parent, object? prop) => ((IEmpty)prop!).HasValue;
 
     /// <summary>Is applicable for structs implementing <see cref="IEmpty{TSelf}"/>.</summary>
     [Pure]
-    private static bool IsApplicable(JsonPropertyInfo prop)
+    private static bool ImplementsIEmpty(JsonPropertyInfo prop)
         => prop.PropertyType is { IsValueType: true, IsGenericType: false }
         && prop.PropertyType.GetInterfaces().Contains(typeof(IEmpty));
 }

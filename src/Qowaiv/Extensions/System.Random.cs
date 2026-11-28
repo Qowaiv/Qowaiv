@@ -43,6 +43,15 @@ public static class QowaivRandom
             => rnd.NextFraction(Fraction.Zero, Fraction.One, int.MaxValue);
 
         /// <summary>Returns a <see cref="Fraction"/>.</summary>
+        /// <param name="minValue">
+        /// The minimum fraction to pick from.
+        /// </param>
+        /// <param name="maxValue">
+        /// The maximum fraction to pick from (excluded).
+        /// </param>
+        /// <param name="maxDenominator">
+        /// The maximum denominator to pick from (included).
+        /// </param>
         [Impure]
         public Fraction NextFraction(Fraction minValue, Fraction maxValue, int maxDenominator)
         {

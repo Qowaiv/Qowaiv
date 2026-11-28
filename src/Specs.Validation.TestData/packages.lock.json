@@ -53,35 +53,35 @@
       "qowaiv.validation.dataannotations": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv": "[11.0.0, )",
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       },
       "qowaiv.validation.fluent": {
         "type": "Project",
         "dependencies": {
           "FluentValidation": "[12.2.0, )",
-          "Qowaiv": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv": "[11.0.0, )",
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       },
       "qowaiv.validation.guarding": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Messages": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )",
+          "Qowaiv.Validation.Messages": "[11.0.0, )"
         }
       },
       "qowaiv.validation.messages": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       },
       "qowaiv.validation.xml": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       },
       "FluentValidation": {
@@ -143,35 +143,35 @@
       "qowaiv.validation.dataannotations": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv": "[11.0.0, )",
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       },
       "qowaiv.validation.fluent": {
         "type": "Project",
         "dependencies": {
           "FluentValidation": "[12.2.0, )",
-          "Qowaiv": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv": "[11.0.0, )",
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       },
       "qowaiv.validation.guarding": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Messages": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )",
+          "Qowaiv.Validation.Messages": "[11.0.0, )"
         }
       },
       "qowaiv.validation.messages": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       },
       "qowaiv.validation.xml": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       },
       "FluentValidation": {

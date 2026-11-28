@@ -78,8 +78,8 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.CSharp": "[4.7.0, )",
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Guarding": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )",
+          "Qowaiv.Validation.Guarding": "[11.0.0, )"
         }
       },
       "qowaiv.validation.abstractions": {
@@ -91,14 +91,14 @@
       "qowaiv.validation.guarding": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Messages": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )",
+          "Qowaiv.Validation.Messages": "[11.0.0, )"
         }
       },
       "qowaiv.validation.messages": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       },
       "Microsoft.CSharp": {
@@ -177,8 +177,8 @@
       "qowaiv.domainmodel": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Guarding": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )",
+          "Qowaiv.Validation.Guarding": "[11.0.0, )"
         }
       },
       "qowaiv.validation.abstractions": {
@@ -187,14 +187,14 @@
       "qowaiv.validation.guarding": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Messages": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )",
+          "Qowaiv.Validation.Messages": "[11.0.0, )"
         }
       },
       "qowaiv.validation.messages": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       }
     },
@@ -250,8 +250,8 @@
       "qowaiv.domainmodel": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Guarding": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )",
+          "Qowaiv.Validation.Guarding": "[11.0.0, )"
         }
       },
       "qowaiv.validation.abstractions": {
@@ -260,14 +260,14 @@
       "qowaiv.validation.guarding": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Messages": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )",
+          "Qowaiv.Validation.Messages": "[11.0.0, )"
         }
       },
       "qowaiv.validation.messages": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       }
     }

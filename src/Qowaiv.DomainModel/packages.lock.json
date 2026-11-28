@@ -89,14 +89,14 @@
       "qowaiv.validation.guarding": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Messages": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )",
+          "Qowaiv.Validation.Messages": "[11.0.0, )"
         }
       },
       "qowaiv.validation.messages": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       },
       "System.Memory": {
@@ -172,14 +172,14 @@
       "qowaiv.validation.guarding": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Messages": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )",
+          "Qowaiv.Validation.Messages": "[11.0.0, )"
         }
       },
       "qowaiv.validation.messages": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       }
     },
@@ -238,14 +238,14 @@
       "qowaiv.validation.guarding": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Messages": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )",
+          "Qowaiv.Validation.Messages": "[11.0.0, )"
         }
       },
       "qowaiv.validation.messages": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       }
     }

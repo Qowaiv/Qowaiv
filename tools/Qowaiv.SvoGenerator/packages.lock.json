@@ -156,14 +156,14 @@
         "type": "Project",
         "dependencies": {
           "Newtonsoft.Json": "[13.0.4, )",
-          "Qowaiv": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.DataAnnotations": "[11.0.0-rc.1, )"
+          "Qowaiv": "[11.0.0, )",
+          "Qowaiv.Validation.DataAnnotations": "[11.0.0, )"
         }
       },
       "qowaiv.testtools": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc.1, )"
+          "Qowaiv": "[11.0.0, )"
         }
       },
       "qowaiv.validation.abstractions": {
@@ -172,15 +172,15 @@
       "qowaiv.validation.dataannotations": {
         "type": "Project",
         "dependencies": {
-          "Qowaiv": "[11.0.0-rc.1, )",
-          "Qowaiv.Validation.Abstractions": "[11.0.0-rc.1, )"
+          "Qowaiv": "[11.0.0, )",
+          "Qowaiv.Validation.Abstractions": "[11.0.0, )"
         }
       },
       "specs.shared": {
         "type": "Project",
         "dependencies": {
           "AwesomeAssertions": "[9.6.0, )",
-          "Qowaiv.TestTools": "[11.0.0-rc.1, )",
+          "Qowaiv.TestTools": "[11.0.0, )",
           "TUnit.Core": "[1.87.12, )"
         }
       },
